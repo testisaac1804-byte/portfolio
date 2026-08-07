@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiplayer Arena</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#111;color:#fff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;overflow:hidden;display:flex;justify-content:center;align-items:center;height:100vh}
+canvas{display:block;cursor:crosshair}
+#join-screen{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;background:rgba(0,0,0,0.85);z-index:100}
+#join-box{background:#1a1a2e;padding:40px;border-radius:12px;text-align:center;width:340px;border:1px solid #333}
+#join-box h2{color:#4488ff;margin-bottom:20px;font-size:22px}
+#join-box input{display:block;width:100%;padding:12px;margin:8px 0;border-radius:6px;border:1px solid #333;background:#222;color:#fff;font-size:16px;text-align:center}
+#join-box input:focus{outline:none;border-color:#4488ff}
+#join-box button{width:100%;padding:12px;margin-top:16px;border-radius:6px;border:none;background:#4488ff;color:#fff;font-size:16px;font-weight:600;cursor:pointer}
+#join-box button:hover{background:#5599ff}
+#join-box .error{color:#ff4444;font-size:13px;margin-top:10px;min-height:20px}
+#join-box .hint{color:#666;font-size:12px;margin-top:8px}
+#hud{position:fixed;top:10px;left:10px;font-size:13px;color:#aaa;font-family:monospace;pointer-events:none;z-index:10;line-height:1.6}
+#hud .hp{color:#ff4444;font-weight:bold}
+#hud .ping{color:#44ff44}
+#minimap{position:fixed;bottom:10px;right:10px;width:160px;height:90px;background:rgba(0,0,0,0.6);border:1px solid #333;border-radius:4px;pointer-events:none;z-index:10}
+#damage-flash{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:50;opacity:0;transition:opacity 0.1s}
+#chat-box{position:fixed;bottom:110px;left:10px;z-index:10;font-family:monospace;font-size:12px;color:#888;pointer-events:none;max-height:100px;overflow:hidden;width:300px}
+.chat-msg{line-height:1.5}
+/* Mobile touch controls */
+#touch-controls{display:none;position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:20}
+#joystick-zone{position:absolute;bottom:40px;left:40px;width:140px;height:140px;pointer-events:auto;touch-action:none}
+#joystick-base{width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.3);position:relative}
+#joystick-stick{width:60px;height:60px;border-radius:50%;background:rgba(68,136,255,0.6);border:2px solid rgba(68,136,255,0.9);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);transition:none}
+#fire-btn{position:absolute;bottom:60px;right:60px;width:100px;height:100px;border-radius:50%;background:rgba(255,68,68,0.4);border:3px solid rgba(255,68,68,0.8);pointer-events:auto;touch-action:none;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:bold;color:#fff;user-select:none}
+#fire-btn.active{background:rgba(255,68,68,0.7)}
+@media (hover:none) and (pointer:coarse){#touch-controls{display:block}}
+</style>
+</head>
+<body>
+
+<div id="join-screen">
+  <div id="join-box">
+    <h2>🎮 Arena</h2>
+    <input id="name-field" type="text" placeholder="Enter your name" maxlength="20" autofocus>
+    <input id="password-field" type="password" placeholder="Game password (if required)">
+    <div id="join-error" class="error"></div>
+    <button id="join-btn">Join Game</button>
+    <div class="hint">WASD / Arrows to move · Mouse to aim · Click to shoot</div>
+  </div>
+</div>
+
+<div id="damage-flash"></div>
+<div id="touch-controls">
+  <div id="joystick-zone">
+    <div id="joystick-base">
+      <div id="joystick-stick"></div>
+    </div>
+  </div>
+  <div id="fire-btn">FIRE</div>
+</div>
+<div id="hud">
+  <div class="hp">HP: <span id="hp-display">0</span>/<span id="mhp-display">0</span></div>
+  <div>Ping: <span class="ping" id="ping-display">0</span>ms</div>
+  <div>FPS: <span id="fps-display">0</span></div>
+  <div>Players: <span id="players-display">0</span></div>
+</div>
+<canvas id="game-canvas"></canvas>
+<div id="minimap"><canvas id="minimap-canvas" width="160" height="90"></canvas></div>
+<div id="chat-box"></div>
+
+<script>
+// ── Configuration ──────────────────────────────────────────────────────
+const WS_URL = `/ws`;
+
+// ── DOM Elements ───────────────────────────────────────────────────────
+const canvas = document.getElementById('game-canvas');
+const ctx = canvas.getContext('2d');
+const minimapCanvas = document.getElementById('minimap-canvas');
+const minimapCtx = minimapCanvas.getContext('2d');
+const joinScreen = document.getElementById('join-screen');
+const nameField = document.getElementById('name-field');
+const passwordField = document.getElementById('password-field');
+const joinBtn = document.getElementById('join-btn');
+const joinError = document.getElementById('join-error');
+const hpDisplay = document.getElementById('hp-display');
+const mhpDisplay = document.getElementById('mhp-display');
+const pingDisplay = document.getElementById('ping-display');
+const fpsDisplay = document.getElementById('fps-display');
+const playersDisplay = document.getElementById('players-display');
+const damageFlash = document.getElementById('damage-flash');
+const chatBox = document.getElementById('chat-box');
+
+// ── State ──────────────────────────────────────────────────────────────
+const keys = {};
+let mouseX = 0, mouseY = 0;
+let mouseDown = false;
+let myEntityId = null;
+let worldW = 1600, worldH = 900;
+let tickRate = 30;
+let entities = {};
+let prevHp = 100;
+let damageFlashTimer = 0;
+
+// Network
+let ws = null;
+let pingSeq = 0;
+let pingStart = 0;
+let currentPing = 0;
+let connected = false;
+
+// Performance
+let frameCount = 0;
+let fpsTime = 0;
+let currentFps = 0;
+
+// Camera
+let camX = 0, camY = 0;
+
+// ── Canvas Resize ──────────────────────────────────────────────────────
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// ── Input ──────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  keys[e.key.toLowerCase()] = true;
+  if (e.key === ' ') e.preventDefault();
+});
+document.addEventListener('keyup', e => {
+  keys[e.key.toLowerCase()] = false;
+});
+
+canvas.addEventListener('mousemove', e => {
+  const rect = canvas.getBoundingClientRect();
+  mouseX = e.clientX - rect.left;
+  mouseY = e.clientY - rect.top;
+});
+canvas.addEventListener('mousedown', () => { mouseDown = true; });
+canvas.addEventListener('mouseup', () => { mouseDown = false; });
+
+// ── Touch Controls ─────────────────────────────────────────────────────
+const joystickZone = document.getElementById('joystick-zone');
+const joystickStick = document.getElementById('joystick-stick');
+const fireBtn = document.getElementById('fire-btn');
+let joystickActive = false;
+let joystickX = 0, joystickY = 0;
+let touchAimX = 0, touchAimY = 0;
+let touchFireActive = false;
+let isTouchDevice = false;
+
+// Joystick touch handling
+joystickZone.addEventListener('touchstart', e => {
+  e.preventDefault();
+  joystickActive = true;
+  handleJoystickMove(e.touches[0]);
+});
+
+joystickZone.addEventListener('touchmove', e => {
+  e.preventDefault();
+  if (joystickActive) {
+    handleJoystickMove(e.touches[0]);
+  }
+});
+
+joystickZone.addEventListener('touchend', e => {
+  e.preventDefault();
+  joystickActive = false;
+  joystickX = 0;
+  joystickY = 0;
+  joystickStick.style.transform = 'translate(-50%,-50%)';
+});
+
+function handleJoystickMove(touch) {
+  const rect = joystickZone.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  const deltaX = touch.clientX - centerX;
+  const deltaY = touch.clientY - centerY;
+  const distance = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), 50);
+  const angle = Math.atan2(deltaY, deltaX);
+  
+  joystickX = Math.cos(angle) * distance / 50;
+  joystickY = Math.sin(angle) * distance / 50;
+  
+  const stickX = Math.cos(angle) * distance;
+  const stickY = Math.sin(angle) * distance;
+  joystickStick.style.transform = `translate(calc(-50% + ${stickX}px), calc(-50% + ${stickY}px))`;
+}
+
+// Fire button touch handling
+fireBtn.addEventListener('touchstart', e => {
+  e.preventDefault();
+  touchFireActive = true;
+  fireBtn.classList.add('active');
+});
+
+fireBtn.addEventListener('touchend', e => {
+  e.preventDefault();
+  touchFireActive = false;
+  fireBtn.classList.remove('active');
+});
+
+// Touch aim: tap anywhere on canvas to aim
+canvas.addEventListener('touchstart', e => {
+  // Only prevent default if we're in the game (join screen is hidden)
+  if (joinScreen.style.display === 'none') {
+    e.preventDefault();
+  }
+  isTouchDevice = true;
+  const touch = e.touches[0];
+  const rect = canvas.getBoundingClientRect();
+  touchAimX = touch.clientX - rect.left;
+  touchAimY = touch.clientY - rect.top;
+});
+
+canvas.addEventListener('touchmove', e => {
+  // Only prevent default if we're in the game (join screen is hidden)
+  if (joinScreen.style.display === 'none') {
+    e.preventDefault();
+  }
+  isTouchDevice = true;
+  const touch = e.touches[0];
+  const rect = canvas.getBoundingClientRect();
+  touchAimX = touch.clientX - rect.left;
+  touchAimY = touch.clientY - rect.top;
+});
+
+// Also track touches on the entire document for mobile aiming
+document.addEventListener('touchstart', e => {
+  isTouchDevice = true;
+  // Only update aim if not touching joystick, fire button, or UI elements
+  if (!e.target.closest('#joystick-zone') && !e.target.closest('#fire-btn') && !e.target.closest('#join-screen') && !e.target.closest('#hud')) {
+    const touch = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    touchAimX = touch.clientX - rect.left;
+    touchAimY = touch.clientY - rect.top;
+  }
+}, { passive: true });
+
+document.addEventListener('touchmove', e => {
+  // Only update aim if not touching joystick, fire button, or UI elements
+  if (!e.target.closest('#joystick-zone') && !e.target.closest('#fire-btn') && !e.target.closest('#join-screen') && !e.target.closest('#hud')) {
+    const touch = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    touchAimX = touch.clientX - rect.left;
+    touchAimY = touch.clientY - rect.top;
+  }
+}, { passive: true });
+
+// ── URL Parameters ─────────────────────────────────────────────────────
+const urlParams = new URLSearchParams(window.location.search);
+const urlName = urlParams.get('name') || '';
+const urlPassword = urlParams.get('password') || '';
+if (urlName) nameField.value = urlName;
+if (urlPassword) passwordField.value = urlPassword;
+
+// Auto-join if password is in URL
+if (urlPassword && urlName) {
+  setTimeout(() => joinBtn.click(), 300);
+}
+
+// ── WebSocket ──────────────────────────────────────────────────────────
+function connect(name, password) {
+  ws = new WebSocket(WS_URL);
+
+  ws.onopen = () => {
+    const msg = { type: 'join', name: name || 'Player' };
+    if (password) msg.password = password;
+    ws.send(JSON.stringify(msg));
+  };
+
+  ws.onmessage = (event) => {
+    try {
+      const msg = JSON.parse(event.data);
+      handleMessage(msg);
+    } catch (e) {
+      console.error('Parse error:', e);
+    }
+  };
+
+  ws.onclose = () => {
+    connected = false;
+    joinError.textContent = 'Disconnected from server';
+    joinScreen.style.display = 'flex';
+    ws = null;
+    setTimeout(() => {
+      if (!connected) {
+        const name = nameField.value || 'Player';
+        const pass = passwordField.value;
+        connect(name, pass);
+      }
+    }, 2000);
+  };
+
+  ws.onerror = () => {
+    joinError.textContent = 'Connection error — is the server running?';
+  };
+}
+
+// ── Message Handler ────────────────────────────────────────────────────
+let lastHp = 100;
+
+function handleMessage(msg) {
+  switch (msg.type) {
+    case 'welcome':
+      myEntityId = msg.entity_id;
+      tickRate = msg.tick_rate || 30;
+      worldW = msg.world.width;
+      worldH = msg.world.height;
+      entities = {};
+      for (const e of (msg.state?.state?.entities || msg.state?.entities || [])) {
+        entities[e.id] = e;
+      }
+      connected = true;
+      joinScreen.style.display = 'none';
+      lastHp = 100;
+      break;
+
+    case 'state':
+      const state = msg.state || {};
+      if (state.entities) {
+        for (const e of state.entities) {
+          entities[e.id] = e;
+        }
+        // Clean up removed entities
+        const alive = new Set(state.entities.map(e => e.id));
+        for (const id in entities) {
+          if (!alive.has(parseInt(id))) {
+            delete entities[id];
+          }
+        }
+      }
+      if (msg.tick) {
+        // Update HUD
+        const me = entities[myEntityId];
+        if (me) {
+          hpDisplay.textContent = me.hp || 0;
+          mhpDisplay.textContent = me.mhp || 100;
+          if (me.hp !== undefined && me.hp < lastHp) {
+            damageFlash.style.opacity = '0.3';
+            damageFlashTimer = 0.2;
+          }
+          lastHp = me.hp;
+        }
+        playersDisplay.textContent = Object.values(entities).filter(e => e.t === 'player').length;
+      }
+      break;
+
+    case 'destroyed':
+      delete entities[msg.id];
+      break;
+
+    case 'pong':
+      currentPing = Math.round(performance.now() - pingStart);
+      pingDisplay.textContent = currentPing;
+      break;
+
+    case 'error':
+      joinError.textContent = msg.message || 'Error';
+      break;
+
+    case 'player_joined':
+      addChat(`${msg.name} joined`, '#4488ff');
+      break;
+
+    case 'player_left':
+      addChat(`Player left`, '#888');
+      break;
+  }
+}
+
+function addChat(text, color) {
+  const div = document.createElement('div');
+  div.className = 'chat-msg';
+  div.style.color = color || '#888';
+  div.textContent = text;
+  chatBox.appendChild(div);
+  if (chatBox.children.length > 8) {
+    chatBox.removeChild(chatBox.firstChild);
+  }
+}
+
+// ── Input Sender (20 Hz) ──────────────────────────────────────────────
+function sendInput() {
+  if (!ws || ws.readyState !== WebSocket.OPEN) return;
+
+  // Determine movement: use joystick on mobile, keyboard on desktop
+  const useTouch = isTouchDevice;
+
+  // Calculate aim direction (world-space)
+  let aimX = 0, aimY = 1;
+  const me = entities[myEntityId];
+  if (me) {
+    if (useTouch) {
+      // On mobile: if actively using joystick, aim in joystick direction
+      if (joystickActive && (Math.abs(joystickX) > 0.1 || Math.abs(joystickY) > 0.1)) {
+        aimX = joystickX;
+        aimY = joystickY;
+      } else if (isTouchDevice && (touchAimX !== 0 || touchAimY !== 0)) {
+        // Otherwise, use touch position if available
+        const worldAimX = touchAimX + camX;
+        const worldAimY = touchAimY + camY;
+        aimX = worldAimX - me.x;
+        aimY = worldAimY - me.y;
+      } else {
+        // Default: aim in last known direction
+        aimX = Math.cos(me.r || 0);
+        aimY = Math.sin(me.r || 0);
+      }
+    } else {
+      // Desktop: use mouse position
+      const worldAimX = mouseX + camX;
+      const worldAimY = mouseY + camY;
+      aimX = worldAimX - me.x;
+      aimY = worldAimY - me.y;
+    }
+    const len = Math.hypot(aimX, aimY);
+    if (len > 0) { aimX /= len; aimY /= len; }
+  }
+
+  let up = false, down = false, left = false, right = false;
+  
+  if (useTouch) {
+    // Convert joystick values to movement flags
+    up = joystickY < -0.3;
+    down = joystickY > 0.3;
+    left = joystickX < -0.3;
+    right = joystickX > 0.3;
+  } else {
+    up = keys['w'] || keys['arrowup'];
+    down = keys['s'] || keys['arrowdown'];
+    left = keys['a'] || keys['arrowleft'];
+    right = keys['d'] || keys['arrowright'];
+  }
+
+  ws.send(JSON.stringify({
+    type: 'input',
+    input: {
+      up,
+      down,
+      left,
+      right,
+      shoot: mouseDown || keys[' '] || touchFireActive,
+      aim_x: aimX,
+      aim_y: aimY,
+    }
+  }));
+}
+
+// Ping sender (every 2s)
+function sendPing() {
+  if (!ws || ws.readyState !== WebSocket.OPEN) return;
+  pingSeq = performance.now();
+  pingStart = pingSeq;
+  ws.send(JSON.stringify({ type: 'ping', seq: pingSeq }));
+}
+
+// ── Rendering ──────────────────────────────────────────────────────────
+const PLAYER_COLORS = {
+  '#ff4444': '#ff4444', '#44ff44': '#44ff44', '#4488ff': '#4488ff',
+  '#ffff44': '#ffff44', '#ff44ff': '#ff44ff', '#44ffff': '#44ffff',
+  '#ff8844': '#ff8844', '#88ff44': '#88ff44', '#ff4488': '#ff4488',
+  '#44ff88': '#44ff88', '#8844ff': '#8844ff', '#ffaa44': '#ffaa44',
+};
+
+function render(timestamp) {
+  // FPS counter
+  frameCount++;
+  if (timestamp - fpsTime >= 1000) {
+    currentFps = frameCount;
+    frameCount = 0;
+    fpsTime = timestamp;
+    fpsDisplay.textContent = currentFps;
+  }
+
+  // Damage flash decay
+  if (damageFlashTimer > 0) {
+    damageFlashTimer -= 1/60;
+    if (damageFlashTimer <= 0) {
+      damageFlash.style.opacity = '0';
+    }
+  }
+
+  const me = entities[myEntityId];
+  if (me) {
+    // Smooth camera follow (lerp 0.1)
+    const targetCamX = me.x - canvas.width / 2;
+    const targetCamY = me.y - canvas.height / 2;
+    camX += (targetCamX - camX) * 0.1;
+    camY += (targetCamY - camY) * 0.1;
+  }
+
+  // Clamp camera to world
+  camX = Math.max(0, Math.min(worldW - canvas.width, camX));
+  camY = Math.max(0, Math.min(worldH - canvas.height, camY));
+
+  // Clear
+  ctx.fillStyle = '#1a1a2e';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Grid
+  ctx.strokeStyle = '#222244';
+  ctx.lineWidth = 1;
+  const gridSize = 80;
+  const startX = -(camX % gridSize);
+  const startY = -(camY % gridSize);
+  for (let x = startX; x < canvas.width; x += gridSize) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, canvas.height);
+    ctx.stroke();
+  }
+  for (let y = startY; y < canvas.height; y += gridSize) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(canvas.width, y);
+    ctx.stroke();
+  }
+
+  // World border
+  ctx.strokeStyle = '#4488ff';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(-camX, -camY, worldW, worldH);
+
+  // Sort entities by z_index
+  const sorted = Object.values(entities).sort((a, b) => (a.s || 0) - (b.s || 0));
+
+  for (const e of sorted) {
+    const sx = e.x - camX;
+    const sy = e.y - camY;
+
+    // View culling
+    const margin = 100;
+    if (sx < -margin || sx > canvas.width + margin ||
+        sy < -margin || sy > canvas.height + margin) continue;
+
+    const hw = e.hw || 28;
+    const hh = e.hh || 28;
+    const color = e.c || '#ffffff';
+    const shape = e.s || 'rect';
+
+    ctx.save();
+    ctx.translate(sx, sy);
+
+    // Draw entity based on shape
+    ctx.fillStyle = color;
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 2;
+
+    switch (shape) {
+      case 'circle':
+        ctx.beginPath();
+        ctx.arc(0, 0, Math.min(hw, hh), 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        break;
+      case 'diamond':
+        ctx.beginPath();
+        ctx.moveTo(0, -hh);
+        ctx.lineTo(hw, 0);
+        ctx.lineTo(0, hh);
+        ctx.lineTo(-hw, 0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        break;
+      case 'triangle':
+        ctx.beginPath();
+        ctx.moveTo(hw, 0);
+        ctx.lineTo(-hw, hh);
+        ctx.lineTo(-hw, -hh);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        break;
+      default: // rect
+        ctx.fillRect(-hw, -hh, hw * 2, hh * 2);
+        ctx.strokeRect(-hw, -hh, hw * 2, hh * 2);
+        break;
+    }
+
+    // Direction indicator for players
+    if (e.t === 'player') {
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(Math.cos(e.r || 0) * (hw + 10), Math.sin(e.r || 0) * (hh + 10));
+      ctx.stroke();
+
+      // Name label
+      if (e.n) {
+        ctx.fillStyle = '#fff';
+        ctx.font = '12px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText(e.n, 0, -hh - 12);
+      }
+    }
+
+    // HP bar for players (and projectiles with owner)
+    if (e.hp !== undefined && e.mhp !== undefined) {
+      const barW = hw * 2;
+      const barH = 4;
+      const barY = -hh - 6;
+      ctx.fillStyle = '#333';
+      ctx.fillRect(-barW/2, barY, barW, barH);
+      const hpRatio = Math.max(0, e.hp / e.mhp);
+      ctx.fillStyle = hpRatio > 0.5 ? '#44ff44' : hpRatio > 0.25 ? '#ffaa44' : '#ff4444';
+      ctx.fillRect(-barW/2, barY, barW * hpRatio, barH);
+    }
+
+    ctx.restore();
+  }
+
+  // Mini-map
+  minimapCtx.fillStyle = 'rgba(0,0,0,0.6)';
+  minimapCtx.fillRect(0, 0, 160, 90);
+  const scaleX = 160 / worldW;
+  const scaleY = 90 / worldH;
+  for (const e of Object.values(entities)) {
+    const mx = e.x * scaleX;
+    const my = e.y * scaleY;
+    const size = e.t === 'player' ? 3 : 2;
+    minimapCtx.fillStyle = e.c || '#fff';
+    minimapCtx.fillRect(mx - size/2, my - size/2, size, size);
+  }
+  // Self highlight
+  if (me) {
+    minimapCtx.fillStyle = '#fff';
+    minimapCtx.beginPath();
+    minimapCtx.arc(me.x * scaleX, me.y * scaleY, 4, 0, Math.PI * 2);
+    minimapCtx.fill();
+  }
+
+  requestAnimationFrame(render);
+}
+
+// ── Join Button ────────────────────────────────────────────────────────
+joinBtn.addEventListener('click', () => {
+  const name = nameField.value.trim() || 'Player';
+  const password = passwordField.value;
+  joinError.textContent = '';
+  connect(name, password);
+});
+
+nameField.addEventListener('keydown', e => {
+  if (e.key === 'Enter') joinBtn.click();
+});
+passwordField.addEventListener('keydown', e => {
+  if (e.key === 'Enter') joinBtn.click();
+});
+
+// ── Start ──────────────────────────────────────────────────────────────
+setInterval(sendInput, 50);    // 20 Hz
+setInterval(sendPing, 2000);   // 2 Hz
+requestAnimationFrame(render);
+</script>
+</body>
+</html>
