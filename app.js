@@ -1,4 +1,4 @@
-var ADMIN_PASS='isaac2026',editMode=false;
+var ADMIN_PASS='Isaac1804',editMode=false;
 // Theme toggle
 function toggleTheme(){
  var h=document.documentElement;
