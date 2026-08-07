@@ -20,6 +20,12 @@ function F(c){
 }
 function toggleV(btn){btn.classList.toggle("open");btn.nextElementSibling.classList.toggle("expanded")}
 function W(u){window.open(u,"_blank")}
+function copyLink(cat,idx,btn){
+ var qs='?p='+cat+'-'+idx;
+ var url=location.origin+location.pathname+qs;
+ try{navigator.clipboard.writeText(url)}catch(e){}
+ var old=btn.textContent;btn.textContent='✓';setTimeout(function(){btn.textContent=old},1500);
+}
 function randomProj(){
  var all=[];for(var k in D)D[k].forEach(function(p,i){all.push({cat:k,idx:i})});
  var pick=all[Math.floor(Math.random()*all.length)];
@@ -179,7 +185,7 @@ function rebuild(){
 function R(p,cat,idx){
  var emojis={sw:'💻',hw:'🔧',f3d:'📐',des:'📄'};
  var em=emojis[cat]||'📦';
- var h='<div class="card'+(editMode?' editing':'')+'" data-cat="'+cat+'" data-idx="'+idx+'"><div class="ch"><div class="ctitle">'+em+' '+p.t+'</div><span class="status '+p.s+'">'+p.s+'</span></div>';
+ var h='<div class="card'+(editMode?' editing':'')+'" data-cat="'+cat+'" data-idx="'+idx+'"><div class="ch"><div class="ctitle">'+em+' '+p.t+'</div><div style="display:flex;gap:6px;align-items:center"><button class="copybtn" onclick="copyLink(\''+cat+'\','+idx+',this)" title="Copy link">🔗</button><span class="status '+p.s+'">'+p.s+'</span></div></div>';
  h+='<div class="cdesc">'+p.d+'</div>';
  if(p.g){h+='<div class="tags">';p.g.forEach(function(x){h+='<span class="tag'+(x.c?' '+x.c:'')+'">'+x.l+'</span>'});h+='</div>'}
  if(p.v&&p.v.length){h+='<button class="vtoggle" onclick="toggleV(this)"><span class="arr">\u25b6</span> Version history ('+p.v.length+' steps)</button><div class="versions">';p.v.forEach(function(x){h+='<div class="vitem"><span class="vbadge'+(x.L?' latest':'')+'">'+x.n+'</span><div class="vinfo">'+x.i+'</div></div>'});h+='</div>'}
@@ -192,7 +198,27 @@ function saveData(){try{localStorage.setItem('isaac-projects',JSON.stringify({sw
 // Load saved edits (after D defined)
 try{var saved=localStorage.getItem('isaac-projects');if(saved){var sd=JSON.parse(saved);for(var k in sd)for(var i=0;i<sd[k].length;i++)if(D[k]&&D[k][i]){D[k][i].t=sd[k][i].t||D[k][i].t;D[k][i].d=sd[k][i].d||D[k][i].d;D[k][i].s=sd[k][i].s||D[k][i].s}}}catch(e){}
 rebuild();
-function search(q){q=q.toLowerCase();document.querySelectorAll('.card').forEach(function(c){var t=c.querySelector('.ctitle'),d=c.querySelector('.cdesc');c.style.display=(!q||(t&&t.textContent.toLowerCase().indexOf(q)>=0)||(d&&d.textContent.toLowerCase().indexOf(q)>=0))?'':'none'})}
+// Deep link support: open ?p=cat-idx
+(function(){
+ var m=location.search.match(/[?&]p=(\w+)-(\d+)/);
+ if(m){
+  var cat=m[1],idx=parseInt(m[2]);
+  var key={sw:'sw',hw:'hw',f3d:'f3d',des:'des'}[cat]||cat;
+  if(D[key]&&D[key][idx]){
+   setTimeout(function(){
+    F({sw:'software',hw:'hardware',f3d:'fusion',des:'design'}[key]);
+    var sec=document.getElementById(key);
+    var card=sec?sec.querySelector('.card[data-idx="'+idx+'"]'):null;
+    if(card){card.scrollIntoView({behavior:'smooth',block:'center'});card.style.boxShadow='0 0 0 2px var(--ab)';setTimeout(function(){card.style.boxShadow=''},3000)}
+   },300);
+  }
+ }
+})();
+function search(q){q=q.toLowerCase();document.querySelectorAll('.card').forEach(function(c){
+ var t=c.querySelector('.ctitle'),d=c.querySelector('.cdesc'),tags=c.querySelector('.tags');
+ var t2=t?t.textContent.toLowerCase():'',d2=d?d.textContent.toLowerCase():'',g2=tags?tags.textContent.toLowerCase():'';
+ c.style.display=(!q||t2.indexOf(q)>=0||d2.indexOf(q)>=0||g2.indexOf(q)>=0)?'':'none';
+})}
 window.addEventListener('scroll',function(){document.getElementById('btt').classList.toggle('show',window.scrollY>500)});
 // Scroll reveal + stat count-up
 (function(){
