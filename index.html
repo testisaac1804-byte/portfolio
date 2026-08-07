@@ -88,6 +88,10 @@ header nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;height
 .btt.show{display:flex}.btt:hover{background:var(--ac);color:#fff;border-color:var(--ac);transform:translateY(-2px)}
 footer{text-align:center;padding:48px 24px;border-top:1px solid var(--bd);color:var(--t4);font-size:12px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+.hero{position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse,rgba(99,102,241,0.12),transparent 60%);pointer-events:none}
 @media(max-width:768px){.hero h1{font-size:34px}.grid{grid-template-columns:1fr}.stats{gap:24px}.stat .num{font-size:28px}.search-bar input{width:120px}.search-bar input:focus{width:140px}}
 </style></head><body>
 <header><nav><div class="logo">Isaac<span>.</span>dev</div><div class="search-bar"><input type="text" placeholder="Search projects..." id="search" oninput="search(this.value)"><button class="admin-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button><button class="admin-btn" onclick="showAdmin()">Admin</button></div></nav></header>

@@ -178,6 +178,23 @@ try{var saved=localStorage.getItem('isaac-projects');if(saved){var sd=JSON.parse
 rebuild();
 function search(q){q=q.toLowerCase();document.querySelectorAll('.card').forEach(function(c){var t=c.querySelector('.ctitle'),d=c.querySelector('.cdesc');c.style.display=(!q||(t&&t.textContent.toLowerCase().indexOf(q)>=0)||(d&&d.textContent.toLowerCase().indexOf(q)>=0))?'':'none'})}
 window.addEventListener('scroll',function(){document.getElementById('btt').classList.toggle('show',window.scrollY>500)});
+// Scroll reveal + stat count-up
+(function(){
+ var els=document.querySelectorAll('.stitle,.ssub');
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:0.1});
+ els.forEach(function(el){el.classList.add('reveal');io.observe(el)});
+ var nums=document.querySelectorAll('.stat .num');
+ var targets=[120,24,5,60,20];
+ var io2=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(e.isIntersecting){
+   var idx=[].indexOf.call(nums,e.target),target=targets[idx]||0,dur=1200,t0=null;
+   function tick(t){if(!t0)t0=t;var p=Math.min((t-t0)/dur,1);e.target.textContent=Math.floor(target*p)+'+';if(p<1)requestAnimationFrame(tick)}
+   requestAnimationFrame(tick);
+   io2.unobserve(e.target);
+  }
+ })},{threshold:0.5});
+ nums.forEach(function(n){io2.observe(n)});
+})();
 
 document.addEventListener('click',function(e){
  var btn=e.target.closest('.abtn');if(!btn)return;
