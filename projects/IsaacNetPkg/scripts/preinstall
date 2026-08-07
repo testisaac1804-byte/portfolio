@@ -1,0 +1,22 @@
+#!/bin/bash
+# IsaacNet Pre-Install Script
+# Kill running IsaacNet processes before installation
+
+/usr/sbin/lsof -ti :8540 -sTCP:LISTEN 2>/dev/null | /usr/bin/xargs kill -9 2>/dev/null
+/usr/sbin/lsof -ti :8541 -sTCP:LISTEN 2>/dev/null | /usr/bin/xargs kill -9 2>/dev/null
+
+# Remove immutable flags from previous installation so we can overwrite
+if [ -d "/Applications/IsaacNet.app" ]; then
+    chflags -R nouchg "/Applications/IsaacNet.app" 2>/dev/null
+    rm -rf "/Applications/IsaacNet.app" 2>/dev/null
+fi
+if [ -d "/Applications/IsaacNet" ]; then
+    chflags -R nouchg "/Applications/IsaacNet" 2>/dev/null
+    rm -rf "/Applications/IsaacNet" 2>/dev/null
+fi
+if [ -d "/Applications/Uninstall IsaacNet.app" ]; then
+    chflags -R nouchg "/Applications/Uninstall IsaacNet.app" 2>/dev/null
+    rm -rf "/Applications/Uninstall IsaacNet.app" 2>/dev/null
+fi
+
+exit 0

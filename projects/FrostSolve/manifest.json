@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "FrostSolve",
+  "version": "3.0",
+  "description": "...",
+  "permissions": ["activeTab", "cookies", "management", "tabs", "storage"],
+  "host_permissions": [
+    "https://*.drfrostmaths.com/*",
+    "https://*.drfrost.org/*",
+    "https://*.frostsolve.com/*",
+    "https://api.slikc.me/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.drfrostmaths.com/*",
+        "https://*.drfrost.org/*",
+        "https://*.frostsolve.com/*"
+      ],
+      "js": ["scripts/contentscript.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["scripts/injector.js", "static/frostsans.ttf"],
+      "matches": [
+        "https://*.drfrostmaths.com/*",
+        "https://*.drfrost.org/*",
+        "https://*.frostsolve.com/*"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://*.drfrostmaths.com/*",
+      "https://api.slikc.me/*",
+      "https://*.drfrost.org/*",
+      "https://*.frostsolve.com/*"
+    ]
+  }
+}

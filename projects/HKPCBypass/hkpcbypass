@@ -1,0 +1,144 @@
+#!/usr/bin/env python3
+"""
+HKPC Bypass CLI — Launch the HKPC WiFi bypass browser.
+"""
+import os, sys, json, socket, signal, subprocess, argparse, time
+
+APP_DIR = "/Users/isaac/HKPCBypass"
+APP_SCRIPT = os.path.join(APP_DIR, "native_app.py")
+API_PORT = 8560
+PROXY_PORT = 8561
+
+
+def _is_running():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(1)
+        result = s.connect_ex(('127.0.0.1', API_PORT))
+        s.close()
+        return result == 0
+    except: return False
+
+
+def cmd_launch(args):
+    if _is_running():
+        print("  [i] HKPC Bypass is already running.")
+        script = '''
+        tell application "System Events"
+            if exists (process "HKPC Bypass") then
+                set frontmost of process "HKPC Bypass" to true
+            end if
+        end tell
+        '''
+        subprocess.run(["osascript", "-e", script], capture_output=True, timeout=5)
+        return
+
+    print("""
+\033[96m╔══════════════════════════════════════════════╗
+║        HKPC BYPASS — WiFi Escape Tunnel       ║
+╚══════════════════════════════════════════════╝\033[0m""")
+    print("  \033[92m🛡️  DoH DNS:\033[0m       Encrypted — bypasses DNS interception")
+    print("  \033[92m🕳️  CONNECT Proxy:\033[0m  127.0.0.1:%d" % PROXY_PORT)
+    print("  \033[92m🌐 Browser:\033[0m         WKWebView — all traffic tunneled")
+    print("  \033[92m🔄 Auto-restore:\033[0m     Close window → network returns to normal\n")
+
+    proc = subprocess.Popen(
+        [sys.executable, APP_SCRIPT],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+    )
+
+    for i in range(30):
+        if _is_running():
+            print("  \033[92m[✓]\033[0m HKPC Bypass started (PID: %d)" % proc.pid)
+            print("  \033[92m[✓]\033[0m API: 127.0.0.1:%d | Proxy: 127.0.0.1:%d" % (API_PORT, PROXY_PORT))
+            print("  \033[92m[✓]\033[0m \033[93mHKPC WiFi bypass ACTIVE — close window to disable\033[0m")
+            return
+        time.sleep(0.3)
+
+    if proc.poll() is not None:
+        stdout, _ = proc.communicate(timeout=2)
+        print("  \033[91m[✗]\033[0m HKPC Bypass failed to start. Exit code: %d" % proc.returncode)
+        if stdout:
+            print("  Output: %s" % stdout[-500:])
+    else:
+        print("  \033[92m[✓]\033[0m HKPC Bypass PID: %d" % proc.pid)
+
+
+def cmd_kill(args):
+    found = False
+    for proc_name in ['native_app.py', 'HKPC Bypass']:
+        try:
+            r = subprocess.run(["pkill", "-f", proc_name],
+                              capture_output=True, timeout=5)
+            if r.returncode == 0:
+                found = True
+        except: pass
+
+    # Restore system proxy
+    try:
+        r = subprocess.run(["networksetup", "-listallnetworkservices"],
+                          capture_output=True, text=True, timeout=5)
+        for s in r.stdout.strip().split('\n'):
+            s = s.strip()
+            if not s or s.startswith('An') or 'VPN' in s: continue
+            try:
+                subprocess.run(["networksetup", "-setwebproxystate", s, "off"],
+                              capture_output=True, timeout=3)
+                subprocess.run(["networksetup", "-setsecurewebproxystate", s, "off"],
+                              capture_output=True, timeout=3)
+            except: pass
+    except: pass
+
+    if found:
+        print("  [✓] HKPC Bypass stopped. Proxy disabled. Network restored.")
+    else:
+        print("  [i] No HKPC Bypass processes found.")
+
+
+def cmd_status(args):
+    if _is_running():
+        print("  \033[92m[✓]\033[0m HKPC Bypass is RUNNING")
+        print(f"      API: 127.0.0.1:{API_PORT}  |  Proxy: 127.0.0.1:{PROXY_PORT}")
+        try:
+            import urllib.request
+            resp = urllib.request.urlopen(f"http://127.0.0.1:{API_PORT}/api/status", timeout=3)
+            data = json.loads(resp.read())
+            print(f"      Mode:  {data.get('mode', 'unknown')}")
+            print(f"      DoH:   {data.get('doh', 'unknown')}")
+            print(f"      Proxy: {data.get('proxy', 'unknown')}")
+            print(f"      \033[92m{data.get('message', '')}\033[0m")
+        except Exception as e:
+            print(f"      (API unreachable: {e})")
+    else:
+        print("  [ ] HKPC Bypass is NOT running")
+        print("      Run 'hkpcbypass' to launch")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="HKPC Bypass — WiFi escape tunnel browser",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""Examples:
+  hkpcbypass           Launch HKPC Bypass browser (or bring to front)
+  hkpcbypass kill      Stop bypass and restore network
+  hkpcbypass status    Check if bypass is active
+""")
+    parser.add_argument("command", nargs="?", default="launch",
+                        choices=["launch", "start", "kill", "stop", "status"])
+    parser.add_argument("--no-proxy", action="store_true", help="Launch without proxy (direct only)")
+
+    args = parser.parse_args()
+
+    cmd = args.command
+    if cmd in ("launch", "start"):
+        cmd_launch(args)
+    elif cmd in ("kill", "stop"):
+        cmd_kill(args)
+    elif cmd == "status":
+        cmd_status(args)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,10 @@
+# IsaacOS Builder with embedded build script
+
+ARG ARCH=arm64
+
+FROM isaacos-builder-${ARCH}
+
+COPY --chown=builder:builder build-isaacos.sh /build/build-isaacos.sh
+RUN chmod +x /build/build-isaacos.sh
+
+ENTRYPOINT ["/bin/bash", "/build/build-isaacos.sh"]

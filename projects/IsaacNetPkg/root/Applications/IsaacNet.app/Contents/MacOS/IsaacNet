@@ -1,0 +1,14 @@
+#!/bin/bash
+# IsaacNet — Standalone Native macOS Browser
+# All traffic routes through IsaacNet's CONNECT proxy (DoH DNS + raw TCP tunnel)
+
+/usr/sbin/lsof -ti :8540 -sTCP:LISTEN 2>/dev/null | /usr/bin/xargs kill -9 2>/dev/null
+/usr/sbin/lsof -ti :8541 -sTCP:LISTEN 2>/dev/null | /usr/bin/xargs kill -9 2>/dev/null
+
+cd "/Applications/IsaacNet" || exit 1
+
+PYTHON="/Library/Frameworks/Python.framework/Versions/3.14/bin/python3.14"
+[ -x "$PYTHON" ] || PYTHON="/usr/bin/python3"
+[ -x "$PYTHON" ] || PYTHON=$(which python3 2>/dev/null)
+
+exec "$PYTHON" native_app.py
