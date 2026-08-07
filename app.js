@@ -19,6 +19,14 @@ function F(c){
 }
 function toggleV(btn){btn.classList.toggle("open");btn.nextElementSibling.classList.toggle("expanded")}
 function W(u){window.open(u,"_blank")}
+function randomProj(){
+ var all=[];for(var k in D)D[k].forEach(function(p,i){all.push({cat:k,idx:i})});
+ var pick=all[Math.floor(Math.random()*all.length)];
+ var sec=document.getElementById(pick.cat);
+ if(sec){F({sw:'software',hw:'hardware',f3d:'fusion',des:'design'}[pick.cat]);
+  var card=sec.querySelector('.card[data-idx="'+pick.idx+'"]');
+  if(card){card.scrollIntoView({behavior:'smooth',block:'center'});card.style.boxShadow='0 0 0 2px var(--ab),0 8px 24px rgba(99,102,241,0.3)';setTimeout(function(){card.style.boxShadow=''},2500)}}
+}
 
 var D={sw:[
 {t:"MacAdBlock",s:"done",d:"macOS DNS ad-blocker daemon on :8053.",a:[{l:"Open Folder",o:1,u:"./projects/adblockers/"}],g:[{c:"ac",l:"macOS"},{l:"DNS"},{l:"Python"},{l:"launchd"}],v:[{n:"V1",i:"Basic hosts file."},{n:"V2",i:"Daemon mode: launchd, auto-start."},{n:"V3",L:1,i:"System-wide: blocks ads in EVERY app."}]},
