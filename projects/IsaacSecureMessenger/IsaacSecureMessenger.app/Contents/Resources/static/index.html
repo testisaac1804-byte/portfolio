@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Isaac Secure Messenger</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">&#x1f512;</div>
+            <div class="title">Isaac Messenger</div>
+            <span class="status-dot" id="statusDot" title="Status"></span>
+        </div>
+        <div class="sidebar-user">
+            <div id="selfFingerprint">Loading...</div>
+            <div style="margin-top:4px;">
+                <input type="text" id="displayNameInput" placeholder="Your display name"
+                       style="background:var(--bg-input);border:1px solid var(--border);border-radius:4px;padding:4px 8px;color:var(--text-primary);font-size:12px;width:100%;outline:none;">
+            </div>
+        </div>
+        <div class="peers-header">&#x1f465; Peers</div>
+        <div class="peers-list" id="peersList">
+            <div class="empty-state">Waiting for peers to appear...</div>
+        </div>
+    </div>
+
+    <!-- Main pane -->
+    <div class="main-pane">
+        <!-- Chat header -->
+        <div class="chat-header" id="chatHeader" style="display:none;">
+            <div class="peer-avatar" id="chatAvatar">?</div>
+            <div>
+                <div class="peer-name" id="chatPeerName">Peer</div>
+                <div class="peer-status" id="chatPeerStatus">&#x1f512; Signal Protocol (X3DH + Double Ratchet)</div>
+            </div>
+        </div>
+
+        <!-- Messages area -->
+        <div class="chat-messages" id="chatMessages">
+            <div class="no-conversation" id="noConvo">
+                <div class="big-icon">&#x1f4ac;</div>
+                <h2>Isaac Secure Messenger</h2>
+                <p>Select a peer to start an encrypted conversation</p>
+                <p style="font-size:12px;color:var(--text-muted);font-family:var(--mono);" id="fpDisplay"></p>
+            </div>
+        </div>
+
+        <!-- Input area -->
+        <div class="chat-input" id="chatInput" style="display:none;">
+            <div class="input-tools">
+                <button class="input-btn" id="attachBtn" title="Send file">&#x1f4ce;</button>
+                <button class="input-btn" id="voiceBtn" title="Voice note">&#x1f3a4;</button>
+                <div class="timer-selector" id="timerSelector">
+                    <span>&#x23f1;</span>
+                    <select id="timerSelect">
+                        <option value="0">Off</option>
+                        <option value="5">5s</option>
+                        <option value="30">30s</option>
+                        <option value="60">1m</option>
+                        <option value="300">5m</option>
+                        <option value="3600">1h</option>
+                        <option value="86400">24h</option>
+                    </select>
+                </div>
+            </div>
+            <textarea id="msgInput" rows="1" placeholder="Type a message..." maxlength="10000"></textarea>
+            <button class="input-btn send-btn" id="sendBtn">&#x27a4;</button>
+        </div>
+
+        <!-- Status bar -->
+        <div class="status-bar">
+            <span id="statusFp">Initializing...</span>
+            <span id="proxyStatus">Proxy: Checking...</span>
+        </div>
+    </div>
+</div>
+
+<!-- Hidden file input -->
+<input type="file" id="fileInput" style="display:none;" multiple>
+
+<!-- Settings/Info popup -->
+<div class="popup-overlay" id="infoPopup">
+    <div class="popup">
+        <h3>&#x1f512; Isaac Secure Messenger</h3>
+        <label>Your Fingerprint</label>
+        <input type="text" id="popupFingerprint" readonly>
+        <label>Display Name</label>
+        <input type="text" id="popupName" placeholder="Your display name">
+        <label>Proxy</label>
+        <select id="popupProxy">
+            <option value="auto">Auto-detect</option>
+            <option value="on">Force enabled</option>
+            <option value="off">Disabled</option>
+        </select>
+        <div class="btn-row">
+            <button class="btn btn-secondary" onclick="closePopup()">Close</button>
+            <button class="btn btn-primary" onclick="saveSettings()">Save</button>
+        </div>
+    </div>
+</div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>

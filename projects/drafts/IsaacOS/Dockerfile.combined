@@ -1,0 +1,18 @@
+# IsaacOS Combined Builder
+# Includes the build script and auto-runs on container start
+
+FROM isaacos-builder-arm64 AS build-arm64
+
+COPY --chown=builder:builder build-isaacos.sh /build/build-isaacos.sh
+RUN chmod +x /build/build-isaacos.sh
+
+ENTRYPOINT ["/bin/bash", "/build/build-isaacos.sh"]
+CMD ["arm64"]
+
+FROM isaacos-builder-amd64 AS build-amd64
+
+COPY --chown=builder:builder build-isaacos.sh /build/build-isaacos.sh
+RUN chmod +x /build/build-isaacos.sh
+
+ENTRYPOINT ["/bin/bash", "/build/build-isaacos.sh"]
+CMD ["amd64"]

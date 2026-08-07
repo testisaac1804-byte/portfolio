@@ -1,0 +1,71 @@
+#!/bin/bash
+# IsaacNet Post-Install Script
+# Locks down the app: root ownership, immutable flags, uninstaller
+
+APP_BUNDLE="/Applications/IsaacNet.app"
+APP_DATA="/Applications/IsaacNet"
+
+# ── 1. Set root:wheel ownership ────────────────────────────
+chown -R root:wheel "$APP_BUNDLE" "$APP_DATA"
+
+# ── 2. Set permissions (readable, executable, not writable) ─
+chmod -R 755 "$APP_BUNDLE"
+find "$APP_DATA" -type d -exec chmod 755 {} \;
+find "$APP_DATA" -type f -exec chmod 644 {} \;
+find "$APP_DATA" -name '*.py' -exec chmod 755 {} \;
+find "$APP_DATA" -name '*.applescript' -exec chmod 644 {} \;
+
+# ── 3. Set immutable flag (user-level) ─────────────────────
+chflags -R uchg "$APP_BUNDLE"
+chflags -R uchg "$APP_DATA"
+
+# ── 4. Create Uninstall .app bundle ────────────────────────
+UNINSTALL_APP="/Applications/Uninstall IsaacNet.app"
+mkdir -p "$UNINSTALL_APP/Contents/MacOS"
+mkdir -p "$UNINSTALL_APP/Contents/Resources"
+
+cat > "$UNINSTALL_APP/Contents/Info.plist" << PLIST_EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleExecutable</key>
+    <string>UninstallIsaacNet</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.isaac.uninstall-isaacnet</string>
+    <key>CFBundleName</key>
+    <string>Uninstall IsaacNet</string>
+    <key>CFBundleDisplayName</key>
+    <string>Uninstall IsaacNet</string>
+    <key>CFBundleVersion</key>
+    <string>1.0</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>12.0</string>
+    <key>LSUIElement</key>
+    <false/>
+</dict>
+</plist>
+PLIST_EOF
+
+cat > "$UNINSTALL_APP/Contents/MacOS/UninstallIsaacNet" << EXEC_EOF
+#!/bin/bash
+exec osascript "/Applications/IsaacNet/uninstall.applescript"
+EXEC_EOF
+
+chmod 755 "$UNINSTALL_APP/Contents/MacOS/UninstallIsaacNet"
+chown -R root:wheel "$UNINSTALL_APP"
+chflags -R uchg "$UNINSTALL_APP"
+
+# ── 5. Create uninstall.sh (runs the applescript) ──────────
+cat > "$APP_DATA/uninstall.sh" << 'SH_EOF'
+#!/bin/bash
+exec osascript "/Applications/IsaacNet/uninstall.applescript"
+SH_EOF
+chmod 755 "$APP_DATA/uninstall.sh"
+
+echo "Postinstall complete — IsaacNet locked down with password protection."
+exit 0
