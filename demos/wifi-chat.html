@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>WiFi Chat</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0d0d0d; --surface: #1a1a1a; --surface2: #222;
+  --text: #e0e0e0; --text-dim: #888; --accent: #6c8cff; --accent2: #4a6ce0;
+  --danger: #ff5566; --border: #2a2a2a; --system: #555; --radius: 10px;
+  --font: -apple-system, BlinkMacSystemFont, 'SF Pro', 'Segoe UI', Roboto, sans-serif;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+html, body { height: 100%; height: -webkit-fill-available; background: var(--bg); color: var(--text); font-family: var(--font); overflow: hidden; -webkit-tap-highlight-color: transparent; }
+
+#app { height: 100%; display: flex; flex-direction: column; max-width: 900px; margin: 0 auto; }
+
+/* HEADER */
+#header { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--surface); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+#header .title { font-size: 15px; font-weight: 700; }
+#header .dot { width: 8px; height: 8px; border-radius: 50%; background: #44cc66; flex-shrink: 0; }
+#header .dot.off { background: #cc4444; }
+#header .count { font-size: 12px; color: var(--text-dim); margin-left: auto; }
+#header .btn { background: none; border: 1px solid var(--border); color: var(--text); padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+#header .btn:hover { background: var(--surface2); }
+#header .btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* LINK BAR */
+#link-bar { display: flex; align-items: center; gap: 6px; padding: 7px 12px; background: var(--surface2); flex-shrink: 0; font-size: 12px; border-bottom: 1px solid var(--border); overflow: hidden; }
+#link-bar .label { color: var(--text-dim); flex-shrink: 0; }
+#link-bar .link { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--accent); font-family: monospace; font-size: 11px; }
+#link-bar .copy-btn { background: var(--accent); border: none; color: #fff; padding: 4px 10px; border-radius: 5px; cursor: pointer; font-size: 11px; flex-shrink: 0; }
+
+/* MESSAGES */
+#messages { flex: 1; overflow-y: auto; padding: 8px 10px; display: flex; flex-direction: column; gap: 3px; -webkit-overflow-scrolling: touch; }
+.msg { padding: 5px 8px; border-radius: 8px; max-width: 85%; word-break: break-word; line-height: 1.35; font-size: 14px; }
+.msg.system { align-self: center; background: transparent; color: var(--system); font-size: 11px; padding: 2px 6px; }
+.msg.chat { align-self: flex-start; background: var(--surface); }
+.msg.chat .author { font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 1px; }
+.msg.mine { align-self: flex-end; background: var(--accent); }
+.msg.mine .author { font-size: 11px; color: rgba(255,255,255,0.7); font-weight: 600; margin-bottom: 1px; }
+.msg.mine .body { color: #fff; }
+.msg .time { font-size: 9px; color: var(--text-dim); margin-top: 2px; }
+/* FILE MESSAGES */
+.msg.file-msg { align-self: flex-start; background: var(--surface); padding: 8px 10px; }
+.msg.file-msg.mine { align-self: flex-end; background: var(--accent); }
+.msg.file-msg .author { font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 3px; }
+.msg.file-msg.mine .author { color: rgba(255,255,255,0.7); }
+.msg.file-msg .file-info { display: flex; align-items: center; gap: 6px; }
+.msg.file-msg .file-icon { font-size: 24px; }
+.msg.file-msg .file-name { font-size: 13px; font-weight: 600; word-break: break-all; }
+.msg.file-msg .file-size { font-size: 10px; color: var(--text-dim); }
+.msg.file-msg.mine .file-size { color: rgba(255,255,255,0.5); }
+.msg.file-msg img.preview { max-width: 240px; max-height: 200px; border-radius: 6px; margin-top: 4px; cursor: pointer; }
+.msg.file-msg a { color: var(--accent); text-decoration: none; }
+.msg.file-msg.mine a { color: #fff; }
+/* Upload spinner */
+.uploading { opacity: 0.5; pointer-events: none; }
+/* CHAT ENDED OVERLAY */
+#ended-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; align-items: center; justify-content: center; flex-direction: column; gap: 12px; }
+#ended-overlay.show { display: flex; }
+#ended-overlay h2 { font-size: 22px; color: #fff; }
+#ended-overlay p { font-size: 14px; color: var(--text-dim); }
+
+/* ADMIN PANEL — redesigned */
+#admin-panel { display: none; flex-shrink: 0; background: var(--surface); border-top: 1px solid var(--border); padding: 10px 12px; max-height: 45vh; overflow-y: auto; }
+#admin-panel.show { display: block; }
+#admin-panel h3 { font-size: 12px; color: var(--text-dim); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .5px; }
+.user-row { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.user-row:last-child { border-bottom: none; }
+.user-row .device-icon { font-size: 22px; flex-shrink: 0; width: 36px; text-align: center; }
+.user-row .info { flex: 1; min-width: 0; }
+.user-row .info .device { font-weight: 700; font-size: 14px; }
+.user-row .info .meta { font-size: 11px; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-row .info .named { font-size: 11px; color: var(--accent); }
+
+/* INPUT */
+#input-area { display: flex; gap: 6px; padding: 8px 10px; padding-bottom: calc(8px + var(--safe-bottom)); background: var(--surface); border-top: 1px solid var(--border); flex-shrink: 0; }
+#input-area input { flex: 1; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 9px 12px; border-radius: 18px; font-size: 14px; outline: none; -webkit-appearance: none; }
+#input-area input:focus { border-color: var(--accent); }
+#input-area .send-btn { background: var(--accent); border: none; color: #fff; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 16px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+
+/* SETTINGS */
+#settings-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+#settings-overlay.show { display: flex; }
+#settings-modal { background: var(--surface); padding: 20px; border-radius: 14px; width: 100%; max-width: 320px; border: 1px solid var(--border); }
+#settings-modal h2 { font-size: 16px; margin-bottom: 8px; }
+#settings-modal p { font-size: 12px; color: var(--text-dim); margin-bottom: 10px; }
+#settings-modal input { width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 8px; font-size: 14px; margin-bottom: 10px; outline: none; -webkit-appearance: none; }
+#settings-modal input:focus { border-color: var(--accent); }
+#settings-modal .actions { display: flex; gap: 8px; justify-content: flex-end; }
+#settings-modal .actions button { padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 13px; }
+#settings-modal .save-btn { background: var(--accent); color: #fff; }
+#settings-modal .cancel-btn { background: var(--surface2); color: var(--text); }
+
+/* Mobile tweaks */
+@media (max-width: 480px) {
+  #header { padding: 8px 10px; }
+  #header .title { font-size: 14px; }
+  .msg { font-size: 14px; }
+  #input-area input { font-size: 16px; } /* prevent iOS zoom */
+  .user-row .info .device { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="header">
+    <span class="dot" id="status-dot"></span>
+    <span class="title">WiFi Chat</span>
+    <span class="count" id="user-count">0 online</span>
+    <button class="btn" id="users-btn" title="Users">👥</button>
+    <button class="btn" id="settings-btn" title="Settings">⚙</button>
+  </div>
+
+  <div id="link-bar">
+    <span class="label">🔗</span>
+    <span class="link" id="share-link">—</span>
+    <button class="copy-btn" id="copy-btn">Copy</button>
+  </div>
+
+  <div id="messages"></div>
+
+  <div id="admin-panel">
+    <h3>👑 Connected Users</h3>
+    <div id="admin-list"></div>
+  </div>
+
+  <div id="input-area">
+    <input type="file" id="file-input" style="display:none" multiple>
+    <button class="send-btn" id="file-btn" title="Attach file" style="background:var(--surface2);font-size:14px">📎</button>
+    <input type="text" id="msg-input" placeholder="Message..." maxlength="2000" autocomplete="off" enterkeyhint="send">
+    <button class="send-btn" id="send-btn">➤</button>
+  </div>
+</div>
+
+<div id="ended-overlay">
+  <h2>Chat Ended</h2>
+  <p id="ended-text">The host has left.</p>
+</div>
+
+<div id="settings-overlay">
+  <div id="settings-modal">
+    <h2>⚙ Your Name</h2>
+    <p>Set a display name (optional). Leave blank to stay anonymous.</p>
+    <input type="text" id="name-input" placeholder="e.g. Isaac" maxlength="30">
+    <div class="actions">
+      <button class="cancel-btn" id="settings-cancel">Cancel</button>
+      <button class="save-btn" id="settings-save">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let mySession = '', myName = '', isHost = false, usersOnline = 0, reconnectTimer = null;
+let ws = null, connected = false;
+const hostToken = new URLSearchParams(location.search).get('host') || '';
+const shareUrl = new URLSearchParams(location.search).get('share') || '';
+
+const $msgs = document.getElementById('messages');
+const $input = document.getElementById('msg-input');
+const $count = document.getElementById('user-count');
+const $dot = document.getElementById('status-dot');
+const $link = document.getElementById('share-link');
+const $usersBtn = document.getElementById('users-btn');
+const $adminPanel = document.getElementById('admin-panel');
+const $adminList = document.getElementById('admin-list');
+
+function connect() {
+  if (ws) { ws.close(); }
+  const proto = location.protocol === 'https:' ? 'wss' : 'ws';
+  ws = new WebSocket(`${proto}://${location.host}/ws`);
+
+  ws.onopen = () => {
+    connected = true;
+    $dot.classList.remove('off');
+    const saved = localStorage.getItem('wifi-chat-name');
+    if (saved) { myName = saved; ws.send(JSON.stringify({type:'set_name',name:saved})); }
+    if (hostToken) { ws.send(JSON.stringify({type:'claim_host',token:hostToken})); }
+    if (shareUrl) { $link.textContent = shareUrl; }
+    else { fetch('/link').then(r=>r.json()).then(d=>{ $link.textContent = d.link; }).catch(()=>{}); }
+  };
+
+  ws.onmessage = (e) => {
+    const msg = JSON.parse(e.data);
+    switch (msg.type) {
+      case 'welcome':
+        mySession = msg.session_id; usersOnline = msg.user_count;
+        isHost = msg.is_host || false; updateHostUI(); updateCount(); break;
+      case 'system':
+        addSystem(msg.text);
+        if (msg.user_count !== undefined) { usersOnline = msg.user_count; updateCount(); }
+        break;
+      case 'message':
+        addChat(msg.from, msg.text, msg.from_session === mySession); break;
+      case 'admin_users':
+        renderAdmin(msg.users); break;
+      case 'host_granted':
+        isHost = true; updateHostUI(); break;
+      case 'chat_ended':
+        showChatEnded(msg.text); break;
+      case 'host_returned':
+        hideChatEnded(); break;
+      case 'file_share':
+        addFile(msg.from, msg.from_session, msg); break;
+    }
+  };
+
+  ws.onclose = () => {
+    connected = false; $dot.classList.add('off');
+    addSystem('Disconnected. Reconnecting…');
+    reconnectTimer = setTimeout(connect, 2000);
+  };
+}
+
+function addSystem(text) {
+  const el = document.createElement('div');
+  el.className = 'msg system'; el.textContent = text;
+  $msgs.appendChild(el); scrollBottom();
+}
+function addChat(author, text, isMine) {
+  const el = document.createElement('div');
+  el.className = `msg chat${isMine ? ' mine' : ''}`;
+  const t = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  el.innerHTML = `<div class="author">${esc(author)}</div><div class="body">${esc(text)}</div><div class="time">${t}</div>`;
+  $msgs.appendChild(el); scrollBottom();
+}
+
+function addFile(author, sessionId, data) {
+  const isMine = sessionId === mySession;
+  const el = document.createElement('div');
+  el.className = `msg file-msg${isMine ? ' mine' : ''}`;
+  const t = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  const icon = data.mime?.startsWith('image/') ? '🖼️' : data.mime?.startsWith('video/') ? '🎬' : '📄';
+  const sizeStr = data.size > 1024*1024 ? `${(data.size/1024/1024).toFixed(1)}MB` : `${(data.size/1024).toFixed(1)}KB`;
+  let preview = '';
+  if (data.mime?.startsWith('image/')) {
+    preview = `<img class="preview" src="${esc(data.url)}" alt="${esc(data.name)}" onclick="window.open('${esc(data.url)}')">`;
+  }
+  el.innerHTML = `<div class="author">${esc(author)}</div>
+    <div class="file-info">
+      <span class="file-icon">${icon}</span>
+      <div>
+        <a href="${esc(data.url)}" target="_blank" class="file-name">${esc(data.name)}</a>
+        <div class="file-size">${sizeStr}</div>
+      </div>
+    </div>
+    ${preview}
+    <div class="time">${t}</div>`;
+  $msgs.appendChild(el); scrollBottom();
+}
+
+function renderAdmin(users) {
+  const icons = { iPhone:'📱', 'Android Phone':'🤖', iPad:'📱', Mac:'💻', Windows:'🖥', Linux:'🐧', 'Android Tablet':'📱' };
+  $adminList.innerHTML = users.map(u => {
+    const dev = u.device_type || 'unknown';
+    const brand = u.device_brand ? ` (${u.device_brand})` : '';
+    const icon = icons[dev] || '❓';
+    const name = u.name !== 'Anonymous' ? u.name : 'Anonymous';
+    const headline = u.name !== 'Anonymous' ? u.name : dev;
+    return `<div class="user-row">
+      <span class="device-icon">${icon}</span>
+      <div class="info">
+        <div class="device">${esc(headline)}</div>
+        <div class="named">${icon} ${esc(dev)}${brand} — ${esc(name)}</div>
+        <div class="meta">${esc(u.os)} · ${esc(u.browser)}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updateCount() { $count.textContent = `${usersOnline} online`; }
+function updateHostUI() {
+  if (isHost) { $usersBtn.style.display = ''; }
+  else { $usersBtn.style.display = 'none'; $adminPanel.classList.remove('show'); }
+}
+
+function showChatEnded(text) {
+  document.getElementById('ended-text').textContent = text || 'The host has left.';
+  document.getElementById('ended-overlay').classList.add('show');
+  $input.disabled = true;
+}
+
+function hideChatEnded() {
+  document.getElementById('ended-overlay').classList.remove('show');
+  $input.disabled = false;
+}
+function scrollBottom() { requestAnimationFrame(() => { $msgs.scrollTop = $msgs.scrollHeight; }); }
+function esc(s) { const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
+
+function sendMessage() {
+  const text = $input.value.trim();
+  if (!text || !connected) return;
+  ws.send(JSON.stringify({type:'message',text}));
+  $input.value = ''; $input.focus();
+}
+
+document.getElementById('send-btn').addEventListener('click', sendMessage);
+$input.addEventListener('keydown', e => { if (e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendMessage(); } });
+
+// File upload
+const $fileInput = document.getElementById('file-input');
+const $fileBtn = document.getElementById('file-btn');
+$fileBtn.addEventListener('click', () => $fileInput.click());
+$fileInput.addEventListener('change', () => {
+  for (const file of $fileInput.files) uploadFile(file);
+  $fileInput.value = '';
+});
+
+async function uploadFile(file) {
+  if (file.size > 50*1024*1024) { alert('File too large (max 50MB)'); return; }
+  $fileBtn.classList.add('uploading');
+  const form = new FormData();
+  form.append('file', file);
+  try {
+    const resp = await fetch('/upload', { method: 'POST', body: form });
+    const data = await resp.json();
+    if (data.ok) {
+      ws.send(JSON.stringify({ type: 'file_share', ...data }));
+    }
+  } catch(e) {}
+  $fileBtn.classList.remove('uploading');
+}
+
+// Add file_share handler in handleMessage switch
+// (patched below)
+document.getElementById('copy-btn').addEventListener('click', () => {
+  const l = $link.textContent;
+  if (l && l!=='—') { navigator.clipboard.writeText(l).then(()=>{
+    const b=document.getElementById('copy-btn'); b.textContent='✓'; setTimeout(()=>b.textContent='Copy',1500);
+  });}
+});
+$usersBtn.addEventListener('click', () => { $adminPanel.classList.toggle('show'); $usersBtn.classList.toggle('active'); });
+
+// Settings
+document.getElementById('settings-btn').addEventListener('click', () => {
+  document.getElementById('name-input').value = myName;
+  document.getElementById('settings-overlay').classList.add('show');
+});
+document.getElementById('settings-cancel').addEventListener('click', () => {
+  document.getElementById('settings-overlay').classList.remove('show');
+});
+document.getElementById('settings-save').addEventListener('click', () => {
+  const n = document.getElementById('name-input').value.trim();
+  myName = n;
+  if (n) { localStorage.setItem('wifi-chat-name', n); ws.send(JSON.stringify({type:'set_name',name:n})); }
+  else { localStorage.removeItem('wifi-chat-name'); ws.send(JSON.stringify({type:'set_name',name:''})); }
+  document.getElementById('settings-overlay').classList.remove('show');
+});
+document.getElementById('settings-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove('show');
+});
+
+connect();
+</script>
+</body>
+</html>
