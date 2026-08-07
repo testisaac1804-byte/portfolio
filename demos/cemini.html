@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cemini Workspace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-color: #f0f4f9;
+            --chat-bg: #ffffff;
+            --text-color: #1f1f1f;
+            --user-bubble: #e3e3e3;
+            --border-color: #e3e3e3;
+            --sidebar-bg: #f0f4f9;
+            --sidebar-hover: #e2e7ec;
+            --card-bg: #f0f4f9;
+            --card-hover: #e2e7ec;
+            --input-bg: #f0f4f9;
+            --gemini-gradient: linear-gradient(74deg, #4285f4 0%, #9b72cb 25%, #d96570 50%, #4285f4 100%);
+        }
+
+        body.dark-theme {
+            --bg-color: #131314;
+            --chat-bg: #131314;
+            --text-color: #e3e3e3;
+            --user-bubble: #2a2b2d;
+            --border-color: #444746;
+            --sidebar-bg: #1e1f20;
+            --sidebar-hover: #333538;
+            --card-bg: #1e1f20;
+            --card-hover: #333538;
+            --input-bg: #1e1f20;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', -apple-system, sans-serif;
+            background-color: var(--chat-bg);
+            color: var(--text-color);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            transition: background-color 0.3s;
+        }
+
+        .app-container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        aside {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+            box-sizing: border-box;
+            border-right: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        aside.collapsed {
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+            border-right: none;
+        }
+
+        .new-chat-btn {
+            background: rgba(0,0,0,0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 12px 16px;
+            border-radius: 24px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+            transition: background-color 0.2s;
+            font-size: 15px;
+        }
+        body.dark-theme .new-chat-btn { background: rgba(255,255,255,0.04); }
+        .new-chat-btn:hover { background-color: var(--sidebar-hover); }
+
+        .history-list {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .history-item {
+            padding: 10px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .history-item:hover, .history-item.active {
+            background-color: var(--sidebar-hover);
+        }
+
+        .history-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 80%;
+        }
+
+        .delete-history-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 2px;
+            opacity: 0.6;
+        }
+        .delete-history-btn:hover { opacity: 1; }
+        .delete-history-btn svg { fill: var(--text-color); width: 16px; height: 16px; }
+
+        .sidebar-footer {
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Workspace Panels */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            background-color: var(--chat-bg);
+        }
+
+        header {
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--chat-bg);
+            z-index: 5;
+            border-bottom: 1px solid transparent;
+        }
+
+        .header-left { display: flex; align-items: center; gap: 16px; }
+        .menu-toggle-btn { background: transparent; border: none; cursor: pointer; padding: 6px; border-radius: 50%; }
+        .menu-toggle-btn:hover { background-color: var(--sidebar-hover); }
+        .menu-toggle-btn svg { fill: var(--text-color); width: 24px; height: 24px; }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 500;
+            background: var(--gemini-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Model Selector Styling */
+        .model-selector-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .model-dropdown {
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            outline: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .model-dropdown:hover {
+            background-color: var(--sidebar-hover);
+        }
+
+        /* Dashboard Suggestion Cards */
+        #welcome-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 850px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .greeting {
+            font-size: 40px;
+            font-weight: 500;
+            text-align: left;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        .greeting span {
+            background: linear-gradient(90deg, #4285f4, #9b72cb, #d96570);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .suggestions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            width: 100%;
+        }
+
+        .suggestion-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background-color 0.2s, transform 0.2s;
+            position: relative;
+            min-height: 120px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .suggestion-card:hover { background-color: var(--card-hover); transform: translateY(-2px); }
+        .suggestion-card .icon { align-self: flex-end; width: 24px; height: 24px; fill: var(--text-color); opacity: 0.8; }
+
+        /* Output Canvas Area */
+        #chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .chat-wrapper {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+            padding-bottom: 60px;
+        }
+
+        .message { display: flex; flex-direction: column; font-size: 16px; line-height: 1.6; }
+        .message.user {
+            align-self: flex-end;
+            background-color: var(--user-bubble);
+            padding: 14px 22px;
+            border-radius: 24px 24px 4px 24px;
+            max-width: 75%;
+        }
+        .message.cemini { align-self: flex-start; width: 100%; }
+        
+        .message .sender {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 17px;
+        }
+        .message.cemini .sender {
+            background: var(--gemini-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .msg-actions { display: flex; gap: 8px; margin-top: 10px; opacity: 0.6; }
+        .msg-actions:hover { opacity: 1; }
+        .action-btn { background: transparent; border: none; cursor: pointer; padding: 6px; border-radius: 50%; display: flex; align-items: center; }
+        .action-btn:hover { background-color: var(--sidebar-hover); }
+        .action-btn svg { fill: var(--text-color); width: 18px; height: 18px; }
+
+        /* Content Markdown Elements */
+        .content p { margin-top: 0; margin-bottom: 12px; }
+        .content p:last-child { margin-bottom: 0; }
+        .content ul, .content ol { margin-top: 0; margin-bottom: 12px; padding-left: 20px; }
+        .content pre { background-color: rgba(0,0,0,0.05); padding: 16px; border-radius: 12px; overflow-x: auto; font-family: monospace; }
+        body.dark-theme .content pre { background-color: rgba(255,255,255,0.05); }
+
+        /* Text Input controls */
+        #input-container { width: 100%; max-width: 840px; margin: 0 auto; padding: 0 20px 24px 20px; box-sizing: border-box; }
+        .input-box { display: flex; background-color: var(--input-bg); border-radius: 32px; padding: 10px 18px; align-items: flex-end; border: 1px solid transparent; }
+        .input-box:focus-within { border-color: rgba(66, 133, 244, 0.4); }
+        
+        textarea {
+            flex: 1; border: none; background: transparent; resize: none; padding: 10px; font-size: 16px;
+            font-family: inherit; color: var(--text-color); outline: none; max-height: 180px; min-height: 24px;
+        }
+
+        .input-controls { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+        .control-btn { background: transparent; border: none; cursor: pointer; padding: 10px; border-radius: 50%; display: flex; align-items: center; }
+        .control-btn:hover { background-color: var(--sidebar-hover); }
+        .control-btn svg { fill: var(--text-color); width: 22px; height: 22px; }
+        
+        .toggle-wrapper { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; opacity: 0.8; }
+        .switch { position: relative; display: inline-block; width: 36px; height: 20px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .3s; border-radius: 20px; }
+        .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
+        input:checked + .slider { background: var(--gemini-gradient); }
+        input:checked + .slider:before { transform: translateX(16px); }
+
+        .streaming-loader { display: inline-block; width: 8px; height: 18px; background: var(--text-color); animation: blink 0.8s infinite; vertical-align: middle; }
+        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+
+        @media (max-width: 768px) {
+            .suggestions-grid { grid-template-columns: 1fr; }
+            aside { position: absolute; z-index: 100; height: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <aside id="sidebar">
+            <button class="new-chat-btn" onclick="startNewChat()">
+                <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                New Chat
+            </button>
+            <div class="history-list" id="history-list"></div>
+            <div class="sidebar-footer">
+                <div class="toggle-wrapper">
+                    <label class="switch">
+                        <input type="checkbox" id="theme-toggle" onchange="toggleTheme()">
+                        <span class="slider"></span>
+                    </label>
+                    <span>Dark Theme</span>
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <header>
+                <div class="header-left">
+                    <button class="menu-toggle-btn" onclick="toggleSidebar()" title="Toggle Menu">
+                        <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+                    </button>
+                    <div class="logo">✦ Cemini</div>
+                </div>
+                <div class="header-right">
+                    <div class="model-selector-container">
+                        <select id="model-select" class="model-dropdown" onchange="handleModelChange()">
+                            <option value="cemini-flash">✦ Cemini Flash</option>
+                            <option value="cemini-pro">✦ Cemini Pro</option>
+                            <option value="cemini-pro-max">✦ Cemini Pro Max</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <div id="welcome-section">
+                <div class="greeting">Hello, I'm <span>Cemini</span></div>
+                <div class="suggestions-grid">
+                    <div class="suggestion-card" onclick="runSuggestion('Draft a professional email asking for deadline extensions')">
+                        <span>Draft a professional email asking for variations on deadlines.</span>
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    </div>
+                    <div class="suggestion-card" onclick="runSuggestion('Write an optimized JavaScript function to debounce search input arrays')">
+                        <span>Write an optimized frontend function to debounce modern search arrays.</span>
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                    </div>
+                    <div class="suggestion-card" onclick="runSuggestion('Explain quantum physics computing systems in everyday analogies')">
+                        <span>Explain complex quantum processing grids using structural analogies.</span>
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                    </div>
+                    <div class="suggestion-card" onclick="runSuggestion('Brainstorm cohesive naming schemes for an ecosystem tracking app')">
+                        <span>Brainstorm cohesive brand concepts for a new mobile ecosystem tracker.</span>
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-1.3l-.85-.6A4.997 4.997 0 0 1 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.06-2.15 3.9z"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div id="chat-container">
+                <div class="chat-wrapper" id="chat-wrapper"></div>
+            </div>
+
+            <div id="input-container">
+                <div class="input-box">
+                    <textarea id="user-input" placeholder="Ask Cemini..." rows="1" oninput="autoGrowInput(this)"></textarea>
+                    <div class="input-controls">
+                        <button class="control-btn" id="mic-btn" onclick="triggerVoiceInput()" title="Voice Input">
+                            <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>
+                        </button>
+                        <button class="control-btn" onclick="handleSend()" title="Send Message">
+                            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Get API key from localStorage or prompt user — never hardcode keys
+        let API_KEY = localStorage.getItem('cemini_api_key') || '';
+        if (!API_KEY) {
+            API_KEY = prompt('Enter your DeepSeek API key (stored locally, never sent to any server):');
+            if (API_KEY) localStorage.setItem('cemini_api_key', API_KEY);
+        }
+        const API_URL = 'https://api.deepseek.com/chat/completions';
+
+        let chats = JSON.parse(localStorage.getItem('cemini_vault_chats')) || {};
+        let currentChatId = null;
+        let syntheticSpeech = window.speechSynthesis;
+
+        window.onload = function() {
+            renderSidebarList();
+            startNewChat();
+            if(localStorage.getItem('cemini_dark_mode') === 'enabled') {
+                document.body.classList.add('dark-theme');
+                document.getElementById('theme-toggle').checked = true;
+            }
+        };
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+        }
+
+        function toggleTheme() {
+            const darkOn = document.getElementById('theme-toggle').checked;
+            if(darkOn) {
+                document.body.classList.add('dark-theme');
+                localStorage.setItem('cemini_dark_mode', 'enabled');
+            } else {
+                document.body.classList.remove('dark-theme');
+                localStorage.setItem('cemini_dark_mode', 'disabled');
+            }
+        }
+
+        function autoGrowInput(element) {
+            element.style.height = 'auto';
+            element.style.height = element.scrollHeight + 'px';
+        }
+
+        function handleModelChange() {
+            // Persist model preference across user actions if desired
+            const selector = document.getElementById('model-select');
+        }
+
+        function startNewChat() {
+            currentChatId = null;
+            document.getElementById('chat-wrapper').innerHTML = '';
+            document.getElementById('chat-container').style.display = 'none';
+            document.getElementById('welcome-section').style.display = 'flex';
+            document.querySelectorAll('.history-item').forEach(i => i.classList.remove('active'));
+        }
+
+        function selectChat(id) {
+            currentChatId = id;
+            document.getElementById('welcome-section').style.display = 'none';
+            document.getElementById('chat-container').style.display = 'flex';
+            
+            document.querySelectorAll('.history-item').forEach(i => i.classList.remove('active'));
+            const activeItem = document.getElementById(`item_${id}`);
+            if(activeItem) activeItem.classList.add('active');
+
+            renderChatMessages();
+        }
+
+        function deleteChat(id, event) {
+            event.stopPropagation();
+            delete chats[id];
+            localStorage.setItem('cemini_vault_chats', JSON.stringify(chats));
+            renderSidebarList();
+            if(currentChatId === id) {
+                startNewChat();
+            }
+        }
+
+        function renderSidebarList() {
+            const list = document.getElementById('history-list');
+            list.innerHTML = '';
+            const sortedIds = Object.keys(chats).sort((a,b) => b - a);
+
+            sortedIds.forEach(id => {
+                const div = document.createElement('div');
+                div.className = `history-item ${id === currentChatId ? 'active' : ''}`;
+                div.id = `item_${id}`;
+                div.setAttribute('onclick', `selectChat('${id}')`);
+
+                div.innerHTML = `
+                    <div class="history-title">💬 ${chats[id].title}</div>
+                    <button class="delete-history-btn" onclick="deleteChat('${id}', event)">
+                        <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                    </button>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function renderChatMessages() {
+            const wrapper = document.getElementById('chat-wrapper');
+            wrapper.innerHTML = '';
+            if(!currentChatId || !chats[currentChatId]) return;
+
+            chats[currentChatId].history.forEach(msg => {
+                if(msg.role === 'system') return;
+                appendMessageNode(msg.role, msg.content);
+            });
+            setTimeout(() => { document.getElementById('chat-container').scrollTop = document.getElementById('chat-container').scrollHeight; }, 50);
+        }
+
+        function appendMessageNode(role, text) {
+            const wrapper = document.getElementById('chat-wrapper');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${role}`;
+
+            const sender = document.createElement('div');
+            sender.className = 'sender';
+            sender.innerHTML = role === 'user' ? 'You' : '<span>✦</span> Cemini';
+            msgDiv.appendChild(sender);
+
+            const content = document.createElement('div');
+            content.className = 'content';
+            
+            if(role === 'cemini') {
+                content.innerHTML = DOMPurify.sanitize(marked.parse(text));
+                msgDiv.appendChild(content);
+                
+                const actions = document.createElement('div');
+                actions.className = 'msg-actions';
+                actions.innerHTML = `
+                    <button class="action-btn" onclick="speakText(this, \`${text.replace(/`/g, '\\`').replace(/\n/g, ' ')}\`)" title="Listen">
+                        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    </button>
+                `;
+                msgDiv.appendChild(actions);
+            } else {
+                content.innerText = text;
+                msgDiv.appendChild(content);
+            }
+
+            wrapper.appendChild(msgDiv);
+        }
+
+        function runSuggestion(promptText) {
+            document.getElementById('user-input').value = promptText;
+            handleSend();
+        }
+
+        async function handleSend() {
+            const inputField = document.getElementById('user-input');
+            const text = inputField.value.trim();
+            if (!text) return;
+
+            if (!currentChatId) {
+                currentChatId = Date.now().toString();
+                chats[currentChatId] = {
+                    title: text.length > 24 ? text.substring(0, 24) + '...' : text,
+                    history: [{ role: "system", content: "You are Cemini, a professional and helpful AI assistant." }]
+                };
+                renderSidebarList();
+            }
+
+            document.getElementById('welcome-section').style.display = 'none';
+            document.getElementById('chat-container').style.display = 'flex';
+
+            appendMessageNode('user', text);
+            chats[currentChatId].history.push({ role: "user", content: text });
+            
+            inputField.value = '';
+            inputField.style.height = 'auto';
+            
+            const chatContainer = document.getElementById('chat-container');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            const wrapper = document.getElementById('chat-wrapper');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message cemini';
+            
+            const sender = document.createElement('div');
+            sender.className = 'sender';
+            sender.innerHTML = '<span>✦</span> Cemini';
+            msgDiv.appendChild(sender);
+
+            const content = document.createElement('div');
+            content.className = 'content';
+            content.innerHTML = '<span class="streaming-loader"></span>';
+            msgDiv.appendChild(content);
+            wrapper.appendChild(msgDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            try {
+                // Read current drop down value to map processing parameters
+                const currentSelection = document.getElementById('model-select').value;
+                let targetModel = "deepseek-v4-flash";
+                let requestPayloadModifiers = {};
+
+                if (currentSelection === "cemini-pro") {
+                    targetModel = "deepseek-v4-pro";
+                } else if (currentSelection === "cemini-pro-max") {
+                    targetModel = "deepseek-v4-pro";
+                    requestPayloadModifiers = {
+                        thinking: { type: "enabled" },
+                        reasoning_effort: "max"
+                    };
+                }
+
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: targetModel,
+                        messages: chats[currentChatId].history,
+                        stream: true,
+                        ...requestPayloadModifiers
+                    })
+                });
+
+                if(!response.ok) throw new Error(`Status ${response.status}`);
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder("utf-8");
+                let fullResponse = '';
+                let buffer = '';
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    buffer += decoder.decode(value, { stream: true });
+                    let lines = buffer.split('\n');
+                    buffer = lines.pop();
+
+                    for (let line of lines) {
+                        line = line.trim();
+                        if (!line || line === 'data: [DONE]') continue;
+                        if (line.startsWith('data: ')) {
+                            try {
+                                const json = JSON.parse(line.slice(6));
+                                const delta = json.choices[0].delta.content || '';
+                                fullResponse += delta;
+                                content.innerHTML = DOMPurify.sanitize(marked.parse(fullResponse)) + '<span class="streaming-loader"></span>';
+                                chatContainer.scrollTop = chatContainer.scrollHeight;
+                            } catch(e){}
+                        }
+                    }
+                }
+                
+                const dynamicLoader = content.querySelector('.streaming-loader');
+                if (dynamicLoader) dynamicLoader.remove();
+                content.innerHTML = DOMPurify.sanitize(marked.parse(fullResponse));
+
+                const actions = document.createElement('div');
+                actions.className = 'msg-actions';
+                actions.innerHTML = `
+                    <button class="action-btn" onclick="speakText(this, \`${fullResponse.replace(/`/g, '\\`').replace(/\n/g, ' ')}\`)" title="Listen">
+                        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    </button>
+                `;
+                msgDiv.appendChild(actions);
+
+                chats[currentChatId].history.push({ role: "assistant", content: fullResponse });
+                localStorage.setItem('cemini_vault_chats', JSON.stringify(chats));
+
+            } catch(err) {
+                content.innerHTML = `<span style="color:#d96570;">**Cemini Engine Connection Exception:** Infrastructure response failure (${err.message}).</span>`;
+            }
+        }
+
+        function triggerVoiceInput() {
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRec) {
+                alert("Native Speech Recognition is unavailable in this environment.");
+                return;
+            }
+            const micBtn = document.getElementById('mic-btn');
+            const recognition = new SpeechRec();
+            recognition.lang = 'en-US';
+
+            recognition.onstart = () => { micBtn.style.background = 'rgba(217,101,112,0.3)'; };
+            recognition.onend = () => { micBtn.style.background = 'transparent'; };
+            recognition.onerror = () => { micBtn.style.background = 'transparent'; };
+            
+            recognition.onresult = (event) => {
+                const voiceContent = event.results[0][0].transcript;
+                document.getElementById('user-input').value = voiceContent;
+                autoGrowInput(document.getElementById('user-input'));
+            };
+            recognition.start();
+        }
+
+        function speakText(btnElement, targetString) {
+            if (!syntheticSpeech) return;
+            if (syntheticSpeech.speaking) {
+                syntheticSpeech.cancel();
+                return;
+            }
+
+            const cleanText = targetString.replace(/[\*\#\_\`\-]/g, '');
+            const vocalUtterance = new SpeechSynthesisUtterance(cleanText);
+            
+            vocalUtterance.onstart = () => { btnElement.style.transform = "scale(1.2)"; btnElement.style.opacity = "1"; };
+            vocalUtterance.onend = () => { btnElement.style.transform = "none"; btnElement.style.opacity = ""; };
+            
+            syntheticSpeech.speak(vocalUtterance);
+        }
+
+        document.getElementById('user-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
+            }
+        });
+    </script>
+</body>
+</html>
