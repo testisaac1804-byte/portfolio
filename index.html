@@ -103,9 +103,9 @@ footer{text-align:center;padding:48px 24px;border-top:1px solid var(--bd);color:
 <div class="stats"><div class="stat"><div class="num">120+</div><div class="label">Total Projects</div></div><div class="stat"><div class="num">24</div><div class="label">Software</div></div><div class="stat"><div class="num">5</div><div class="label">Hardware</div></div><div class="stat"><div class="num">60+</div><div class="label">Fusion 360</div></div><div class="stat"><div class="num">20+</div><div class="label">Design</div></div></div>
 <div class="filters"><button class="fbtn active" onclick="F('all')">All</button><button class="fbtn" onclick="F('software')">Software</button><button class="fbtn" onclick="F('hardware')">Hardware</button><button class="fbtn" onclick="F('fusion')">Fusion 360</button><button class="fbtn" onclick="F('design')">Design &amp; Docs</button></div>
 <div class="admin-overlay" id="aOverlay" onclick="hideAdmin()"></div>
-<div class="admin-panel" id="aPanel"><h3>Admin Login</h3><input type="password" id="aPass" placeholder="Password" onkeydown="if(event.key==='Enter')login()"><button onclick="login()">Unlock Edit Mode</button><div class="err" id="aErr"></div></div>
+<div class="admin-panel" id="aPanel"><h3>Admin Login</h3><input type="password" id="aPass" placeholder="Password" onkeydown="if(event.key==='Enter')login()"><button onclick="login()">Unlock Edit Mode</button><button onclick="exportData()" style="margin-left:8px;background:var(--sf);color:var(--t2);border:1px solid var(--bd)">Export JSON</button><div class="err" id="aErr"></div></div>
 <div id="app"></div>
 <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-<footer>Built by Isaac · Island School · Hong Kong · 2026</footer>
-<script src="app.js?v=5"></script>
+<footer>Built by Isaac · Island School · Hong Kong · 2026 · <a href="https://github.com/testisaac1804-byte/portfolio" style="color:var(--t3)">GitHub</a> · <a href="mailto:isaac_cs.chan@online.island.edu.hk" style="color:var(--t3)">Contact</a></footer>
+<script src="app.js?v=6"></script>
 </body></html>

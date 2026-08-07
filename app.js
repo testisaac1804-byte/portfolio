@@ -11,6 +11,7 @@ try{var th=localStorage.getItem('isaac-theme');if(th){document.documentElement.s
 function showAdmin(){document.getElementById('aOverlay').classList.add('show');document.getElementById('aPanel').classList.add('show');document.getElementById('aPass').focus()}
 function hideAdmin(){document.getElementById('aOverlay').classList.remove('show');document.getElementById('aPanel').classList.remove('show');document.getElementById('aErr').textContent=''}
 function login(){var p=document.getElementById('aPass').value;if(p===ADMIN_PASS){editMode=true;hideAdmin();rebuild();document.getElementById('aPass').value=''}else{document.getElementById('aErr').textContent='Wrong password'}}
+function exportData(){var a=document.createElement('a');a.href='data:application/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(D,null,2));a.download='isaac-projects.json';document.body.appendChild(a);a.click();a.remove()}
 
 function F(c){
  var b=document.querySelectorAll(".fbtn");for(var i=0;i<b.length;i++)b[i].classList.remove("active");
