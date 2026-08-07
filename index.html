@@ -1,12 +1,15 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html><html lang="en" data-theme="dark"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Isaac's Projects</title>
+<title>Isaac's Projects — 120+ Designs, CAD, Software</title>
+<meta name="description" content="Interactive portfolio of 120+ projects: software, hardware, Fusion 360 CAD, laser-cut designs, and documents with 3D previews.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/controls/OrbitControls.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/STLLoader.js"></script>
 <style>
 :root{--bg:#050508;--sf:#0d0e12;--t1:#f0f0f5;--t2:#c8ccd6;--t3:#6b7080;--t4:#3d4150;--ac:#6366f1;--ab:#818cf8;--ag:#10b981;--ar:#ef4444;--bd:rgba(255,255,255,0.06);--bs:rgba(255,255,255,0.03);--grad:linear-gradient(135deg,#6366f1,#8b5cf6,#06b6d4)}
+html[data-theme="light"]{--bg:#f6f7fb;--sf:#ffffff;--t1:#111827;--t2:#374151;--t3:#6b7280;--t4:#9ca3af;--bd:rgba(17,24,39,0.1);--bs:rgba(17,24,39,0.05);--grad:linear-gradient(135deg,#4f46e5,#7c3aed,#0891b2)}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--t2);font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
 .hidden{display:none!important}
@@ -67,6 +70,8 @@ header nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;height
 .modal-body{width:100%;height:calc(100% - 57px);position:relative}.modal-body canvas{display:block}
 .modal-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:13px;flex-direction:column;gap:10px}
 .modal-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--t4);background:rgba(0,0,0,0.7);padding:4px 12px;border-radius:9999px;pointer-events:none}
+.vctrl{width:30px;height:30px;border-radius:8px;border:1px solid var(--bd);background:rgba(255,255,255,0.03);color:var(--t3);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:inherit}
+.vctrl:hover{background:rgba(99,102,241,0.15);color:var(--ab);border-color:rgba(99,102,241,0.3)}
 .admin-panel{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:28px;z-index:2000;display:none;min-width:320px;box-shadow:0 24px 64px rgba(0,0,0,0.5)}
 .admin-panel.show{display:block}
 .admin-panel h3{color:var(--t1);margin-bottom:14px;font-size:17px;font-weight:600}
@@ -85,7 +90,7 @@ footer{text-align:center;padding:48px 24px;border-top:1px solid var(--bd);color:
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:768px){.hero h1{font-size:34px}.grid{grid-template-columns:1fr}.stats{gap:24px}.stat .num{font-size:28px}.search-bar input{width:120px}.search-bar input:focus{width:140px}}
 </style></head><body>
-<header><nav><div class="logo">Isaac<span>.</span>dev</div><div class="search-bar"><input type="text" placeholder="Search projects..." id="search" oninput="search(this.value)"><button class="admin-btn" onclick="showAdmin()">Admin</button></div></nav></header>
+<header><nav><div class="logo">Isaac<span>.</span>dev</div><div class="search-bar"><input type="text" placeholder="Search projects..." id="search" oninput="search(this.value)"><button class="admin-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button><button class="admin-btn" onclick="showAdmin()">Admin</button></div></nav></header>
 <section class="hero"><h1>Every project I've built</h1><p>Interactive catalog with 3D previews, version timelines, and every design documented.</p></section>
 <div class="stats"><div class="stat"><div class="num">120+</div><div class="label">Total Projects</div></div><div class="stat"><div class="num">24</div><div class="label">Software</div></div><div class="stat"><div class="num">5</div><div class="label">Hardware</div></div><div class="stat"><div class="num">60+</div><div class="label">Fusion 360</div></div><div class="stat"><div class="num">20+</div><div class="label">Design</div></div></div>
 <div class="filters"><button class="fbtn active" onclick="F('all')">All</button><button class="fbtn" onclick="F('software')">Software</button><button class="fbtn" onclick="F('hardware')">Hardware</button><button class="fbtn" onclick="F('fusion')">Fusion 360</button><button class="fbtn" onclick="F('design')">Design &amp; Docs</button></div>

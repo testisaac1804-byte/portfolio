@@ -1,5 +1,13 @@
 var ADMIN_PASS='isaac2026',editMode=false;
-try{var saved=localStorage.getItem('isaac-projects');if(saved){var sd=JSON.parse(saved);for(var k in sd)for(var i=0;i<sd[k].length;i++)if(D[k][i]){D[k][i].t=sd[k][i].t||D[k][i].t;D[k][i].d=sd[k][i].d||D[k][i].d;D[k][i].s=sd[k][i].s||D[k][i].s}}}catch(e){}
+// Theme toggle
+function toggleTheme(){
+ var h=document.documentElement;
+ var isDark=h.getAttribute('data-theme')!=='light';
+ h.setAttribute('data-theme',isDark?'light':'dark');
+ document.getElementById('themeBtn').textContent=isDark?'☀️':'🌙';
+ try{localStorage.setItem('isaac-theme',isDark?'light':'dark')}catch(e){}
+}
+try{var th=localStorage.getItem('isaac-theme');if(th){document.documentElement.setAttribute('data-theme',th);document.getElementById('themeBtn').textContent=th==='light'?'☀️':'🌙'}}catch(e){}
 function showAdmin(){document.getElementById('aOverlay').classList.add('show');document.getElementById('aPanel').classList.add('show');document.getElementById('aPass').focus()}
 function hideAdmin(){document.getElementById('aOverlay').classList.remove('show');document.getElementById('aPanel').classList.remove('show');document.getElementById('aErr').textContent=''}
 function login(){var p=document.getElementById('aPass').value;if(p===ADMIN_PASS){editMode=true;hideAdmin();rebuild();document.getElementById('aPass').value=''}else{document.getElementById('aErr').textContent='Wrong password'}}
@@ -144,9 +152,18 @@ function rebuild(){
   html+='</div></div>';
  }
  document.getElementById('app').innerHTML=html;
+ // Update filter counts
+ var counts={all:0,software:D.sw.length,hardware:D.hw.length,fusion:D.f3d.length,design:D.des.length};
+ for(var k2 in counts)counts.all+=counts[k2];
+ document.querySelectorAll('.fbtn').forEach(function(b){
+  var m=b.getAttribute('onclick').match(/F\('(\w+)'\)/);
+  if(m&&counts[m[1]]!==undefined)b.textContent=b.textContent.replace(/\s*\(\d+\)/,'')+' ('+counts[m[1]]+')';
+ });
 }
 function R(p,cat,idx){
- var h='<div class="card'+(editMode?' editing':'')+'" data-cat="'+cat+'" data-idx="'+idx+'"><div class="ch"><div class="ctitle">'+p.t+'</div><span class="status '+p.s+'">'+p.s+'</span></div>';
+ var emojis={sw:'💻',hw:'🔧',f3d:'📐',des:'📄'};
+ var em=emojis[cat]||'📦';
+ var h='<div class="card'+(editMode?' editing':'')+'" data-cat="'+cat+'" data-idx="'+idx+'"><div class="ch"><div class="ctitle">'+em+' '+p.t+'</div><span class="status '+p.s+'">'+p.s+'</span></div>';
  h+='<div class="cdesc">'+p.d+'</div>';
  if(p.g){h+='<div class="tags">';p.g.forEach(function(x){h+='<span class="tag'+(x.c?' '+x.c:'')+'">'+x.l+'</span>'});h+='</div>'}
  if(p.v&&p.v.length){h+='<button class="vtoggle" onclick="toggleV(this)"><span class="arr">\u25b6</span> Version history ('+p.v.length+' steps)</button><div class="versions">';p.v.forEach(function(x){h+='<div class="vitem"><span class="vbadge'+(x.L?' latest':'')+'">'+x.n+'</span><div class="vinfo">'+x.i+'</div></div>'});h+='</div>'}
@@ -156,6 +173,8 @@ function R(p,cat,idx){
 }
 function editCard(cat,idx,field,val){D[cat][idx][field]=val;rebuild();saveData()}
 function saveData(){try{localStorage.setItem('isaac-projects',JSON.stringify({sw:D.sw,hw:D.hw,f3d:D.f3d,des:D.des}))}catch(e){}}
+// Load saved edits (after D defined)
+try{var saved=localStorage.getItem('isaac-projects');if(saved){var sd=JSON.parse(saved);for(var k in sd)for(var i=0;i<sd[k].length;i++)if(D[k]&&D[k][i]){D[k][i].t=sd[k][i].t||D[k][i].t;D[k][i].d=sd[k][i].d||D[k][i].d;D[k][i].s=sd[k][i].s||D[k][i].s}}}catch(e){}
 rebuild();
 function search(q){q=q.toLowerCase();document.querySelectorAll('.card').forEach(function(c){var t=c.querySelector('.ctitle'),d=c.querySelector('.cdesc');c.style.display=(!q||(t&&t.textContent.toLowerCase().indexOf(q)>=0)||(d&&d.textContent.toLowerCase().indexOf(q)>=0))?'':'none'})}
 window.addEventListener('scroll',function(){document.getElementById('btt').classList.toggle('show',window.scrollY>500)});
@@ -176,11 +195,21 @@ function show3D(t){
  var th='<span>'+t+'</span>';
  if(cv.length>1){th+=' <span style="color:var(--t3);font-size:11px">Version:</span> <select id="vs_" onchange="swV(this.value)" style="padding:6px 12px;border-radius:6px;border:1px solid var(--ab);background:var(--sf);color:var(--t2);font-size:13px;cursor:pointer;min-width:140px;font-weight:500">'+cv.map(function(x,i){return'<option value="'+i+'">'+x.l+'</option>'}).join('')+'</select>'}
  var m=document.createElement('div');m.className='modal active';m.id='_3d';
- m.innerHTML='<div class="modal-inner"><div class="modal-h"><h3>'+th+'</h3><button class="modal-close" onclick="closeM(\'_3d\')">X</button></div><div class="modal-body" id="_3db"><div class="modal-loading" id="_3dl">Loading 3D engine...</div><div class="modal-hint">Drag to rotate | Scroll to zoom</div></div></div>';
+ m.innerHTML='<div class="modal-inner"><div class="modal-h"><h3>'+th+'</h3><div style="display:flex;gap:4px;align-items:center">'+
+  '<button class="vctrl" onclick="toggleWire()" title="Wireframe">⬚</button>'+
+  '<button class="vctrl" onclick="toggleRotate()" title="Auto-rotate">⟳</button>'+
+  '<button class="vctrl" onclick="toggleFull()" title="Fullscreen">⛶</button>'+
+  '<button class="vctrl" onclick="downloadSTL()" title="Download STL">⬇</button>'+
+  '<button class="modal-close" onclick="closeM(\'_3d\')">X</button></div></div>'+
+  '<div class="modal-body" id="_3db"><div class="modal-loading" id="_3dl">Loading 3D engine...</div><div class="modal-hint">Drag to rotate | Scroll to zoom | Click model to pause rotation</div></div></div>';
  document.body.appendChild(m);
  m.addEventListener('click',function(e){if(e.target===m)closeM('_3d')});
  load3D(cv[0].p)
 }
+function toggleWire(){if(_mesh){_mesh.material.wireframe=!_mesh.material.wireframe}}
+function toggleRotate(){if(_ctrl){_ctrl.autoRotate=!_ctrl.autoRotate}}
+function toggleFull(){var m=document.getElementById('_3d');if(!m)return;if(document.fullscreenElement){document.exitFullscreen()}else{m.querySelector('.modal-inner').requestFullscreen().catch(function(){})}}
+function downloadSTL(){var a=document.createElement('a');a.href=EP(cv[0].p);a.download=cv[0].p.split('/').pop().split('%20').join('_');document.body.appendChild(a);a.click();a.remove()}
 function load3D(p){
  var vl=document.getElementById('_3dl'),vb=document.getElementById('_3db');
  if(!_scene){
@@ -232,7 +261,7 @@ function showDXF(t){
  var th='<span>'+t+'</span>';
  if(dxfV.length>1){th+=' <span style="color:var(--t3);font-size:11px">Version:</span> <select id="dxf_vs" onchange="dxfSw(this.value)" style="padding:6px 12px;border-radius:6px;border:1px solid var(--gn);background:var(--sf);color:var(--t2);font-size:13px;cursor:pointer;min-width:140px;font-weight:500">'+dxfV.map(function(x,i){return'<option value="'+i+'">'+x.l+'</option>'}).join('')+'</select>'}
  var m=document.createElement('div');m.className='modal active';m.id='_dxf';
- m.innerHTML='<div class="modal-inner"><div class="modal-h"><h3>'+th+'</h3><button class="modal-close" onclick="closeM(\'_dxf\')">X</button></div><div class="modal-body" id="_dxfb"><div class="modal-loading" id="_dxfl">Loading DXF...</div></div></div>';
+ m.innerHTML='<div class="modal-inner"><div class="modal-h"><h3>'+th+'</h3><div style="display:flex;gap:4px;align-items:center"><button class="vctrl" onclick="downloadDXF()" title="Download DXF">⬇</button><button class="modal-close" onclick="closeM(\'_dxf\')">X</button></div></div><div class="modal-body" id="_dxfb"><div class="modal-loading" id="_dxfl">Loading DXF...</div></div></div>';
  document.body.appendChild(m);
  m.addEventListener('click',function(e){if(e.target===m)closeM('_dxf')});
  drawDXF(dxfV[0].p)
@@ -277,4 +306,14 @@ async function drawDXF(p){
  }catch(e){vl.innerHTML='<p style="color:var(--red)">DXF failed</p><p style="font-size:11px;color:var(--t4)">'+e.message+'</p>'}
 }
 function dxfSw(i){var vl=document.getElementById('_dxfl');vl.style.display='flex';document.getElementById('_dxfb').querySelectorAll('canvas').forEach(function(c){c.remove()});drawDXF(dxfV[i].p)}
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeM('_3d');closeM('_dxf')}});
+function downloadDXF(){var a=document.createElement('a');a.href=EP(dxfV[0].p);a.download=dxfV[0].p.split('/').pop();document.body.appendChild(a);a.click();a.remove()}
+document.addEventListener('keydown',function(e){
+ if(e.key==='Escape'){closeM('_3d');closeM('_dxf');return}
+ // Arrow keys switch versions when viewer is open
+ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+  var s=document.getElementById('vs_');
+  if(s){var idx=parseInt(s.value)+(e.key==='ArrowRight'?1:-1);if(idx>=0&&idx<cv.length){s.value=idx;swV(idx)}}
+  var d=document.getElementById('dxf_vs');
+  if(d){var di=parseInt(d.value)+(e.key==='ArrowRight'?1:-1);if(di>=0&&di<dxfV.length){d.value=di;dxfSw(di)}}
+ }
+});
