@@ -105,7 +105,7 @@ var D={sw:[
 {t:"Masterball",s:"done",d:"Pokemon Masterball replica. 2-part printable.",a:[{c:"p3d",l:"View 3D",o:2,p:"./Downloads/masterball new.stl"}],g:[{c:"ac",l:"Pokemon"},{l:"Replica"}]},
 {t:"Halo Helmet V2",s:"done",d:"Wearable. V2 dowels for assembly.",a:[{c:"p3d",l:"View 3D",o:2,p:"./Documents/f1/f1 print/Self Modified/Halo Helmet f1 car.stl"}],g:[{c:"ac",l:"Halo"},{l:"Helmet"},{l:"Cosplay"}],v:[{n:"V1",i:"Too big."},{n:"V2",L:1,i:"Split with dowels."}]},
 {t:"Family Keychain Set",s:"done",d:"Laser-cut keychains - Arcadi + individual.",g:[{l:"Keychain"},{l:"Laser"},{l:"DXF"}],a:[{c:"p2d",l:"View DXF",o:5,p:"./Documents/family keychain/family keychain.dxf"}]},
-{t:"Dura Block",s:"done",d:"Sanding block replica. Text + plain.",a:[{l:"Open Folder",o:1,u:"./Downloads/Dura Block Hand Sanding Block/"}],g:[{l:"Sanding"},{l:"Tool"}],v:[{n:"Text",i:"Branded."},{n:"Plain",L:1,i:"Cleaner."}]},
+{t:"Dura Block",s:"done",d:"Sanding block replica. Text + plain.",a:[{l:"Open Folder",o:1,u:"./Downloads/Dura+Block+Hand+Sanding+Block/"}],g:[{l:"Sanding"},{l:"Tool"}],v:[{n:"Text",i:"Branded."},{n:"Plain",L:1,i:"Cleaner."}]},
 {t:"Isaac Chan Atom",s:"done",d:"Laser engraving - name with orbital rings.",g:[{l:"Laser"},{l:"DXF"},{l:"Personal"}],a:[{c:"p2d",l:"View DXF",o:5,p:"./Documents/family keychain/isaac.dxf"}]},
 {t:"Chill Out Sign",s:"done",d:"Laser-cut cardboard sign.",g:[{l:"Laser"},{l:"DXF"},{l:"Sign"}],a:[{c:"p2d",l:"View DXF",o:5,p:"./Documents/chill out resized on cardboard.dxf"}]},
 {t:"Music Sheet Holder",s:"done",d:"100% scale - 6 iterations.",g:[{l:"Music"},{l:"Stand"},{l:"DXF"}],a:[{c:"p2d",l:"View DXF",o:5,p:"./Downloads/100 music sheet holder 0.6.dxf"}],v:[{n:"V1-5",i:"Fit iterations."},{n:"V6",L:1,i:"Production."}]},
