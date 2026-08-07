@@ -147,7 +147,14 @@ function rebuild(){
  var subs={sw:'24 applications from network bypass to AI chat',hw:'5 projects from micro RC to auto-clamping vises',f3d:'60+ original designs from F1 parts to practical tools',des:'20+ posters, presentations, portfolios, and graphic design'};
  var html='';
  for(var k in cats){
-  html+='<div class="container cat-section" data-cat="'+map[k]+'" id="'+k+'"><div class="stitle">'+cats[k]+'</div><div class="ssub">'+subs[k]+'</div><div class="grid">';
+  var p3d=0,p2d=0,pdf=0,live=0;
+  D[k].forEach(function(p){p.a&&p.a.forEach(function(a){if(a.o===2||a.o===3)p3d++;else if(a.o===4||a.o===5)p2d++;else if(a.o===6)pdf++;else if(a.o===7)live++})});
+  var badges='';
+  if(p3d)badges+='<span class="secbadge p3d">🔍 '+p3d+' 3D</span>';
+  if(p2d)badges+='<span class="secbadge p2d">📐 '+p2d+' DXF</span>';
+  if(pdf)badges+='<span class="secbadge">📖 '+pdf+' PDF</span>';
+  if(live)badges+='<span class="secbadge">▶ '+live+' Demo</span>';
+  html+='<div class="container cat-section" data-cat="'+map[k]+'" id="'+k+'"><div class="stitle">'+cats[k]+'</div><div class="ssub">'+subs[k]+'</div>'+(badges?'<div class="secbadges">'+badges+'</div>':'')+'<div class="grid">';
   D[k].forEach(function(p,i){html+=R(p,k,i)});
   html+='</div></div>';
  }
