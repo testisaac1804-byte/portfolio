@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware Library</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/TransformControls.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono&display=swap');
+        
+        body { margin: 0; background: #020617; color: #f8fafc; font-family: 'Inter', sans-serif; overflow: hidden; }
+        
+        .glass-panel { 
+            background: rgba(7, 10, 25, 0.95); 
+            backdrop-filter: blur(20px); 
+            border-right: 1px solid rgba(255,255,255,0.05); 
+            border-left: 1px solid rgba(255,255,255,0.05); 
+        }
+
+        .numeric { font-family: 'JetBrains Mono', monospace; }
+        
+        input[type="number"], input[type="text"], select {
+            width: 100%; background: #0f172a; border: 1px solid #334155; color: #38bdf8;
+            border-radius: 6px; padding: 8px; font-size: 11px; font-weight: 600; outline: none;
+            transition: all 0.2s;
+        }
+        input:focus, select:focus { border-color: #0ea5e9; box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2); }
+        
+        .section-card { @apply bg-white/5 border border-white/10 rounded-xl p-4 mb-4; }
+        .label-caps { @apply text-[10px] font-black text-slate-500 uppercase tracking-[0.15em] mb-3 block; }
+        
+        .jog-btn { 
+            @apply flex items-center justify-center bg-slate-800 hover:bg-sky-600 rounded-lg border border-slate-700 transition-all active:scale-95 text-[10px] font-bold py-2.5;
+        }
+        
+        .step-btn {
+            @apply px-2 py-1.5 bg-slate-900 border border-slate-800 rounded text-[9px] font-bold hover:bg-slate-700 transition-colors text-slate-400 min-w-[32px];
+        }
+        .step-active { @apply bg-sky-500 border-sky-400 text-white hover:bg-sky-400; }
+        
+        .design-item {
+            @apply flex items-center justify-between bg-slate-900/60 p-3 mb-2 rounded-lg border border-white/5 text-[11px] font-medium hover:border-purple-500/50 transition-colors cursor-pointer;
+        }
+        .design-item.selected-layer {
+            @apply bg-white/10 border-purple-500 ring-1 ring-purple-500/50;
+        }
+
+        .custom-scroll::-webkit-scrollbar { width: 5px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        
+        #debug-log {
+            position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); font-size: 10px; color: #64748b; font-family: 'JetBrains Mono'; pointer-events: none; z-index: 100;
+        }
+
+        .upload-row { @apply flex items-center gap-2 mb-2; }
+        .upload-btn { 
+            @apply flex-1 bg-slate-800/50 hover:bg-slate-700 text-[10px] font-bold py-2 rounded-lg border-2 border-transparent text-slate-400 transition-all;
+        }
+        .upload-btn.active-tool { border-color: #38bdf8; background: rgba(56, 189, 248, 0.15); color: #fff; }
+        .upload-btn.active-bed { border-color: #94a3b8; background: rgba(148, 163, 184, 0.15); color: #fff; }
+        .upload-btn.active-stock { border-color: #fb923c; background: rgba(251, 146, 60, 0.15); color: #fff; }
+
+        .header-icon {
+            @apply w-12 h-12 rounded-2xl flex items-center justify-center shadow-2xl border border-white/10;
+        }
+
+        .group-title {
+            @apply flex items-center gap-2 mb-4 pb-2 border-b border-white/5;
+        }
+
+        /* Framing for Jog Group */
+        .jog-group-frame {
+            @apply bg-black/20 border border-white/5 rounded-lg p-1;
+        }
+        
+        .panel-transition {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .shape-grid-btn {
+            @apply flex flex-col items-center justify-center gap-1.5 p-2 bg-slate-900/40 hover:bg-purple-600/20 border border-white/5 hover:border-purple-500/50 rounded-lg transition-all active:scale-95 group;
+        }
+        .shape-icon {
+            @apply text-slate-400 group-hover:text-purple-400 text-lg transition-colors;
+        }
+        .shape-label {
+            @apply text-[9px] font-bold text-slate-500 group-hover:text-purple-300 uppercase tracking-wider;
+        }
+        
+        .color-swatch {
+            @apply w-full h-6 rounded border border-white/10 cursor-pointer hover:scale-110 transition-transform;
+        }
+        .swatch-selected {
+            @apply ring-2 ring-white scale-110;
+        }
+
+        .tool-mode-btn {
+            @apply flex-1 py-1.5 bg-slate-800 rounded text-[9px] font-bold text-slate-400 hover:text-white hover:bg-slate-700 border border-transparent transition-all;
+        }
+        .tool-mode-active {
+            @apply bg-purple-600 text-white border-purple-400 shadow-lg shadow-purple-900/50;
+        }
+    </style>
+</head>
+<body class="flex justify-between w-screen h-screen overflow-hidden">
+
+    <div id="canvas-container" class="absolute inset-0"></div>
+    <div id="debug-log">SYSTEM ONLINE</div>
+
+    <!-- LEFT PANEL: MACHINE CONTROLS -->
+    <div id="left-panel" class="relative z-10 w-80 h-full glass-panel flex flex-col shadow-2xl panel-transition shrink-0">
+        
+        <!-- Toggle Button Left -->
+        <button onclick="toggleLeft()" class="absolute -right-5 top-1/2 -translate-y-1/2 w-5 h-16 bg-slate-800 hover:bg-sky-600 rounded-r-lg flex items-center justify-center text-slate-500 hover:text-white transition-colors shadow-xl border-y border-r border-white/10 outline-none z-50 cursor-pointer">
+            <i class="fa-solid fa-chevron-left text-[10px]" id="left-arrow-icon"></i>
+        </button>
+
+        <!-- Brand Header -->
+        <div class="p-6 border-b border-white/5 bg-slate-900/40 flex items-center gap-4">
+            <div class="header-icon bg-gradient-to-tr from-sky-500 to-blue-800">
+                <i class="fa-solid fa-microchip text-white text-2xl"></i>
+            </div>
+            <div>
+                <h1 class="text-sm font-black uppercase tracking-widest leading-none">Hardware</h1>
+                <span class="text-[10px] text-sky-400 font-bold uppercase tracking-tighter opacity-80">v2.5 Simulation Eng.</span>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-4 custom-scroll">
+            
+            <!-- GROUP 1: PHYSICAL SETUP -->
+            <div class="group-title">
+                <i class="fa-solid fa-screwdriver-wrench text-sky-500 text-[10px]"></i>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Machine Setup</span>
+            </div>
+
+            <div class="section-card">
+                <label class="label-caps">Machine Ecosystem</label>
+                <select id="machine-type" onchange="onMachineTypeChange()" class="mb-4">
+                    <optgroup label="Subtractive (Lasers)">
+                        <option value="co2_50w">CO2 Laser 50W (Desktop)</option>
+                        <option value="co2_100w">CO2 Laser 100W (Pro)</option>
+                        <option value="co2_150w">CO2 Laser 150W (Ind.)</option>
+                        <option value="fiber_20w">Fiber Laser 20W (Marking)</option>
+                        <option value="fiber_50w">Fiber Laser 50W (Deep)</option>
+                        <option value="fiber_1kw">Fiber Laser 1kW (Cutting)</option>
+                        <option value="fiber_4kw">Fiber Laser 4kW (Heavy)</option>
+                        <option value="uv_laser">UV Laser (Micro)</option>
+                        <option value="green_laser">Green Laser (Cold)</option>
+                        <option value="pico_laser">Picosecond Laser</option>
+                        <option value="femto_laser">Femtosecond Laser</option>
+                        <option value="excimer">Excimer Laser</option>
+                        <option value="yag_pulse">Nd:YAG Pulsed</option>
+                        <option value="diode_5w">Diode Laser 5W (DIY)</option>
+                        <option value="diode_20w">Diode Laser 20W (High)</option>
+                        <option value="galvo_co2">Galvo CO2 Scanhead</option>
+                        <option value="galvo_fiber">Galvo Fiber Scanhead</option>
+                    </optgroup>
+                    <optgroup label="Subtractive (Mechanical)">
+                        <option value="cnc_3018">CNC 3018 (Hobby)</option>
+                        <option value="cnc_router_wood">CNC Router (Wood)</option>
+                        <option value="cnc_router_stone">CNC Router (Stone)</option>
+                        <option value="cnc_mill_3">3-Axis Vertical Mill</option>
+                        <option value="cnc_mill_4">4-Axis Mill (Rotary)</option>
+                        <option value="cnc_mill_5">5-Axis Simultaneous</option>
+                        <option value="cnc_lathe">CNC Lathe (Turning)</option>
+                        <option value="cnc_swiss">Swiss Type Lathe</option>
+                        <option value="cnc_vtl">Vertical Turret Lathe</option>
+                        <option value="cnc_boring">Horizontal Boring Mill</option>
+                        <option value="surface_grinder">Surface Grinder CNC</option>
+                        <option value="cylindrical_grinder">Cylindrical Grinder</option>
+                        <option value="edm_wire">Wire EDM (Precision)</option>
+                        <option value="edm_sinker">Sinker EDM (Die)</option>
+                        <option value="plasma_1">Plasma Cutter (Air)</option>
+                        <option value="plasma_2">Plasma Cutter (HD)</option>
+                        <option value="waterjet_3">Waterjet (3-Axis)</option>
+                        <option value="waterjet_5">Waterjet (5-Axis)</option>
+                    </optgroup>
+                    <optgroup label="Additive (Polymer)">
+                        <option value="fdm_pla">FDM (PLA Optimized)</option>
+                        <option value="fdm_abs">FDM (Enclosed ABS)</option>
+                        <option value="fdm_peek">FDM (High-Temp PEEK)</option>
+                        <option value="fdm_large">FDM (Large Scale)</option>
+                        <option value="sla_lcd">SLA/MSLA (LCD)</option>
+                        <option value="sla_laser">SLA (Laser Based)</option>
+                        <option value="dlp_dental">DLP (Dental/Jewelry)</option>
+                        <option value="sls_nylon_11">SLS (Nylon 11)</option>
+                        <option value="sls_nylon_12">SLS (Nylon 12)</option>
+                        <option value="mjf_hp">Multi Jet Fusion (HP)</option>
+                        <option value="polyjet">PolyJet (Multi-material)</option>
+                        <option value="fff_composite">FFF (Carbon Fiber)</option>
+                        <option value="lom_paper">LOM (Paper/Sheet)</option>
+                        <option value="pam_pellet">PAM (Pellet Extrusion)</option>
+                    </optgroup>
+                    <optgroup label="Additive (Metal/Tech)">
+                        <option value="slm_steel">SLM (Tool Steel)</option>
+                        <option value="slm_al">SLM (Aluminum)</option>
+                        <option value="slm_ti">SLM (Titanium)</option>
+                        <option value="dmls_cobalt">DMLS (Cobalt Chrome)</option>
+                        <option value="ebm_ti">EBM (Electron Beam)</option>
+                        <option value="binder_jet">Metal Binder Jetting</option>
+                        <option value="ded_powder">DED (Powder Fed)</option>
+                        <option value="ded_wire">DED (Wire Fed)</option>
+                        <option value="waam">WAAM (Large Metal)</option>
+                        <option value="nanoparticle">Nanoparticle Jetting</option>
+                        <option value="bio_print">3D Bioprinter</option>
+                        <option value="food_print">Chocolate/Food Printer</option>
+                        <option value="concrete_print">Large Concrete 3D</option>
+                    </optgroup>
+                    <optgroup label="Robotics & Special">
+                        <option value="robot_6_axis">6-Axis Industrial Arm</option>
+                        <option value="robot_7_axis">7-Axis Cobot</option>
+                        <option value="scara">SCARA Robot</option>
+                        <option value="delta_robot">Delta Pick & Place</option>
+                        <option value="parallel_kin">Parallel Kinematics</option>
+                        <option value="smt_mounter">SMT Component Mounter</option>
+                        <option value="automatic_welder">Automated Welder</option>
+                        <option value="pick_place">Standard Pick & Place</option>
+                        <option value="vinyl_cutter">Vinyl Blade Cutter</option>
+                        <option value="oscillating_knife">Oscillating Knife</option>
+                        <option value="ultrasonic_cut">Ultrasonic Cutter</option>
+                        <option value="inspection_cv">Vision Inspection Rig</option>
+                        <option value="cmm_probe">CMM Measuring Machine</option>
+                        <option value="laser_tracker">Laser Tracker System</option>
+                        <option value="sand_blaster">CNC Sand Blaster</option>
+                        <option value="shot_peening">Shot Peening CNC</option>
+                    </optgroup>
+                    <optgroup label="Foundry & Forming">
+                        <option value="injection_cnc">CNC Injection Mold</option>
+                        <option value="die_cast">Die Casting Automation</option>
+                        <option value="press_brake">CNC Press Brake</option>
+                        <option value="tube_bender">CNC Tube Bender</option>
+                        <option value="spin_forming">CNC Metal Spinning</option>
+                        <option value="roll_former">CNC Roll Forming</option>
+                        <option value="electro_form">Electroforming Cell</option>
+                        <option value="hydro_form">Hydroforming Unit</option>
+                    </optgroup>
+                    <optgroup label="Textile & Print">
+                        <option value="embroidery">Multi-head Embroidery</option>
+                        <option value="digital_textile">Digital Textile Print</option>
+                        <option value="flatbed_uv">Flatbed UV Printer</option>
+                        <option value="screen_print">Automated Screen Print</option>
+                        <option value="weaving_cnc">CNC Weaving Loom</option>
+                        <option value="leather_cut">Leather Laser Cutter</option>
+                    </optgroup>
+                    <optgroup label="Experimental">
+                        <option value="nano_fab">Nano-fabrication Lab</option>
+                        <option value="glass_blow">CNC Glass Blowing</option>
+                        <option value="clay_print">Ceramic/Clay Printer</option>
+                        <option value="carbon_dls">Carbon DLS (Resin)</option>
+                        <option value="acoustic_lev">Acoustic Levitation</option>
+                        <option value="mems_etch">MEMS Etching Station</option>
+                    </optgroup>
+                </select>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <span class="text-[9px] text-slate-500 font-bold mb-1.5 block">Bed X (mm)</span>
+                        <input type="number" id="bed-w" value="600" onchange="updateSim()" class="numeric">
+                    </div>
+                    <div>
+                        <span class="text-[9px] text-slate-500 font-bold mb-1.5 block">Bed Y (mm)</span>
+                        <input type="number" id="bed-h" value="400" onchange="updateSim()" class="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <!-- GROUP 2: MOTION & POSITION -->
+            <div class="group-title">
+                <i class="fa-solid fa-compass text-emerald-500 text-[10px]"></i>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Movement</span>
+            </div>
+
+            <div class="section-card">
+                <div class="flex justify-between items-center mb-4">
+                    <label class="label-caps !mb-0">Jog Interface</label>
+                    <div class="flex gap-1 overflow-x-auto pb-1">
+                        <button onclick="setStep(0.1)" class="step-btn" id="step-0.1">  0.1 | </button>
+                        <button onclick="setStep(0.2)" class="step-btn" id="step-0.2">  0.2 | </button>
+                        <button onclick="setStep(1)" class="step-btn step-active" id="step-1">  1 | </button>
+                        <button onclick="setStep(10)" class="step-btn" id="step-10">  10 | </button>
+                        <button onclick="setStep(100)" class="step-btn" id="step-100">  100 | </button>
+                    </div>
+                </div>
+                
+                <!-- JOG PAD WITH RECTANGULAR FRAMING -->
+                <div class="grid grid-cols-3 gap-1.5 max-w-[200px] mx-auto mb-4 p-1 bg-black/10 rounded-xl border border-white/5">
+                    <!-- Row 1 -->
+                    <div class="jog-group-frame flex items-center justify-center">
+                        <button onclick="goHome()" class="jog-btn w-full !bg-amber-950/30 !text-amber-500 border-amber-900/40" title="Machine Home"><i class="fa-solid fa-house"></i></button>
+                    </div>
+                    <div class="jog-group-frame flex items-center justify-center">
+                        <button onclick="jog('y', 1)" class="jog-btn w-full" title="Y+"><i class="fa-solid fa-chevron-up"></i></button>
+                    </div>
+                    <div class="jog-group-frame flex items-center justify-center">
+                        <button onclick="jog('z', 1)" class="jog-btn w-full bg-emerald-950/30 text-emerald-500 border-emerald-900/40" title="Z+"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="jog-group-frame flex items-center justify-center">
+                        <button onclick="jog('x', -1)" class="jog-btn w-full" title="X-"><i class="fa-solid fa-chevron-left"></i></button>
+                    </div>
+                    <!-- CENTER BUTTONS GROUP (Home & Origin) -->
+                    <div class="grid grid-cols-1 grid-rows-2 gap-1 p-0.5 bg-sky-950/20 rounded-lg border border-sky-900/30">
+                         <button onclick="goHome()" class="hover:bg-amber-500/10 text-amber-500 rounded text-[9px] flex items-center justify-center py-1" title="Home"><i class="fa-solid fa-house text-[8px]"></i></button>
+                         <button onclick="setOrigin()" class="hover:bg-sky-500/10 text-sky-400 rounded text-[9px] flex items-center justify-center py-1" title="Set Origin"><i class="fa-solid fa-crosshairs text-[8px]"></i></button>
+                    </div>
+                    <div class="jog-group-frame flex items-center justify-center">
+                        <button onclick="jog('x', 1)" class="jog-btn w-full" title="X+"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                    
+                    <!-- Row 3 -->
+                    <div class="opacity-20 flex items-center justify-center"><i class="fa-solid fa-circle-dot text-[4px]"></i></div>
+                    <div class="jog-group-frame flex items-center justify-center">
+                        <button onclick="jog('y', -1)" class="jog-btn w-full" title="Y-"><i class="fa-solid fa-chevron-down"></i></button>
+                    </div>
+                    <div class="jog-group-frame flex items-center justify-center">
+                        <button onclick="jog('z', -1)" class="jog-btn w-full bg-emerald-950/30 text-emerald-500 border-emerald-900/40" title="Z-"><i class="fa-solid fa-minus"></i></button>
+                    </div>
+                </div>
+
+                <!-- DRO Display WITH RECTANGULAR FRAMES -->
+                <div class="grid grid-cols-3 gap-2 numeric mt-2">
+                    <div class="text-center bg-black/40 py-2.5 rounded-lg border border-white/10 shadow-inner">
+                        <div class="text-[8px] text-slate-600 mb-0.5 font-black uppercase">X-Pos</div>
+                        <div id="x-dro" class="text-xs font-bold text-sky-400">0.00</div>
+                    </div>
+                    <div class="text-center bg-black/40 py-2.5 rounded-lg border border-white/10 shadow-inner">
+                        <div class="text-[8px] text-slate-600 mb-0.5 font-black uppercase">Y-Pos</div>
+                        <div id="y-dro" class="text-xs font-bold text-sky-400">0.00</div>
+                    </div>
+                    <div class="text-center bg-black/40 py-2.5 rounded-lg border border-white/10 shadow-inner">
+                        <div class="text-[8px] text-slate-600 mb-0.5 font-black uppercase">Z-Pos</div>
+                        <div id="z-dro" class="text-xs font-bold text-emerald-400">0.00</div>
+                    </div>
+                </div>
+
+                <!-- Speed Control Slider -->
+                <div class="mt-4">
+                    <div class="flex justify-between items-center mb-1.5">
+                        <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider">Sim Speed</span>
+                    </div>
+                    <input type="range" id="sim-speed" min="50" max="5000" value="1000" class="w-full accent-sky-500 bg-slate-800 h-1.5 rounded-lg appearance-none cursor-pointer hover:bg-slate-700 transition-colors">
+                </div>
+            </div>
+
+            <!-- GROUP 3: CUSTOMIZATION -->
+            <div class="group-title">
+                <i class="fa-solid fa-palette text-amber-500 text-[10px]"></i>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Visual Appearance</span>
+            </div>
+
+            <div class="section-card">
+                <label class="label-caps">Workpiece Volume</label>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <input type="number" id="mat-x" value="200" onchange="updateSim()" class="numeric" placeholder="W">
+                    <input type="number" id="mat-y" value="200" onchange="updateSim()" class="numeric" placeholder="D">
+                    <input type="number" id="mat-z" value="10" onchange="updateSim()" class="numeric" placeholder="H">
+                </div>
+
+                <!-- Material Presets -->
+                <label class="label-caps">Material Presets</label>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <button onclick="setMaterialPreset('wood')" class="p-2 bg-amber-900/20 border border-amber-700/50 rounded hover:bg-amber-800/40 text-[9px] text-amber-500 font-bold uppercase tracking-wider transition-all">Wood</button>
+                    <button onclick="setMaterialPreset('metal')" class="p-2 bg-slate-700/20 border border-slate-600/50 rounded hover:bg-slate-600/40 text-[9px] text-slate-400 font-bold uppercase tracking-wider transition-all">Metal</button>
+                    <button onclick="setMaterialPreset('acrylic')" class="p-2 bg-cyan-900/20 border border-cyan-700/50 rounded hover:bg-cyan-800/40 text-[9px] text-cyan-400 font-bold uppercase tracking-wider transition-all">Acrylic</button>
+                </div>
+
+                <label class="label-caps">Custom Skins</label>
+                <div class="upload-row">
+                    <button id="btn-tool" onclick="triggerUpload('tool')" class="upload-btn">TOOL</button>
+                    <button id="btn-bed" onclick="triggerUpload('bed')" class="upload-btn">BED</button>
+                    <button id="btn-stock" onclick="triggerUpload('stock')" class="upload-btn">STOCK</button>
+                </div>
+                <input type="file" id="tex-tool" class="hidden" accept="image/*" onchange="handleTex(event, 'tool')">
+                <input type="file" id="tex-bed" class="hidden" accept="image/*" onchange="handleTex(event, 'bed')">
+                <input type="file" id="tex-stock" class="hidden" accept="image/*" onchange="handleTex(event, 'stock')">
+            </div>
+
+        </div>
+
+        <div class="p-6 bg-slate-950/80 border-t border-white/10">
+            <!-- Time Estimate Display -->
+            <div class="flex justify-between items-end mb-3">
+                <span class="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Est. Runtime</span>
+                <span id="est-time" class="text-xs font-mono font-bold text-emerald-400">0m 0s</span>
+            </div>
+            <button id="process-btn" onclick="toggleProcess()" class="w-full py-4 bg-sky-600 hover:bg-sky-500 text-white rounded-xl font-black text-[11px] uppercase tracking-[0.2em] shadow-xl transition-all">
+                Execute Process
+            </button>
+        </div>
+    </div>
+
+    <!-- RIGHT PANEL: DESIGN & PATHS -->
+    <div id="right-panel" class="relative z-10 w-80 h-full glass-panel flex flex-col shadow-2xl panel-transition shrink-0">
+        
+        <!-- Toggle Button Right -->
+        <button onclick="toggleRight()" class="absolute -left-5 top-1/2 -translate-y-1/2 w-5 h-16 bg-slate-800 hover:bg-purple-600 rounded-l-lg flex items-center justify-center text-slate-500 hover:text-white transition-colors shadow-xl border-y border-l border-white/10 outline-none z-50 cursor-pointer">
+            <i class="fa-solid fa-chevron-right text-[10px]" id="right-arrow-icon"></i>
+        </button>
+
+        <div class="p-6 border-b border-white/5 bg-slate-900/40 flex items-center gap-4">
+            <div class="header-icon bg-gradient-to-tr from-purple-500 to-indigo-800">
+                <i class="fa-solid fa-pen-nib text-white text-2xl"></i>
+            </div>
+            <div>
+                <h1 class="text-sm font-black uppercase tracking-widest leading-none text-purple-300">Designer</h1>
+                <span class="text-[10px] text-slate-500 font-bold uppercase tracking-tighter opacity-80">Path Generation</span>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-4 custom-scroll">
+            
+            <!-- LAYER SETTINGS -->
+            <div class="group-title flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-pink-500 text-[10px]"></i>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Layer Settings</span>
+                </div>
+                <!-- Deselect Button (hidden by default) -->
+                <button id="deselect-btn" onclick="deselectLayer()" class="hidden text-[9px] text-slate-500 hover:text-white uppercase font-bold px-2 py-0.5 rounded bg-slate-800 border border-slate-700">Deselect</button>
+            </div>
+            
+            <!-- Transform Tools Controls (Only visible when layer selected) -->
+            <div id="transform-tools" class="section-card hidden">
+                <label class="label-caps">Layout Tools</label>
+                <div class="flex gap-2 mb-2">
+                    <button onclick="setTransformMode('translate')" id="mode-translate" class="tool-mode-btn tool-mode-active">
+                        <i class="fa-solid fa-arrows-up-down-left-right mr-1"></i> MOVE
+                    </button>
+                    <button onclick="setTransformMode('rotate')" id="mode-rotate" class="tool-mode-btn">
+                        <i class="fa-solid fa-rotate mr-1"></i> ROTATE
+                    </button>
+                    <button onclick="setTransformMode('scale')" id="mode-scale" class="tool-mode-btn">
+                        <i class="fa-solid fa-expand mr-1"></i> SCALE
+                    </button>
+                </div>
+                <div class="text-[9px] text-slate-500 italic text-center">
+                    Drag handles in 3D view to adjust
+                </div>
+            </div>
+
+            <div class="section-card">
+                <label class="label-caps">Layer Color</label>
+                <div class="grid grid-cols-10 gap-1 mb-4" id="color-palette">
+                    <!-- Colors injected by JS -->
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                    <div>
+                        <span class="text-[9px] text-slate-500 font-bold mb-1 block">Speed (mm/min)</span>
+                        <input type="number" id="layer-speed" value="1000" class="numeric" onchange="updateActiveLayerParam()">
+                    </div>
+                    <div>
+                        <span class="text-[9px] text-slate-500 font-bold mb-1 block">Power (%)</span>
+                        <input type="number" id="layer-power" value="100" class="numeric" onchange="updateActiveLayerParam()">
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <div>
+                        <span class="text-[9px] text-slate-500 font-bold mb-1 block">Passes</span>
+                        <input type="number" id="layer-pass" value="1" class="numeric" onchange="updateActiveLayerParam()">
+                    </div>
+                     <div>
+                        <span class="text-[9px] text-slate-500 font-bold mb-1 block">Max (%)</span>
+                        <input type="number" id="layer-pmax" value="100" class="numeric" onchange="updateActiveLayerParam()">
+                    </div>
+                     <div>
+                        <span class="text-[9px] text-slate-500 font-bold mb-1 block">Min (%)</span>
+                        <input type="number" id="layer-pmin" value="0" class="numeric" onchange="updateActiveLayerParam()">
+                    </div>
+                </div>
+            </div>
+
+            <div class="group-title">
+                <i class="fa-solid fa-plus text-purple-500 text-[10px]"></i>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Object Creation</span>
+            </div>
+
+            <div class="section-card">
+                <label class="label-caps">Text Path</label>
+                <div class="flex flex-col gap-2">
+                    <input type="text" id="text-input" placeholder="Enter Label..." class="h-10 px-3">
+                    <button onclick="addText()" class="bg-purple-600 hover:bg-purple-500 py-2.5 rounded-lg text-[10px] font-black uppercase transition-colors">Generate Text</button>
+                </div>
+                
+                <div class="mt-4">
+                    <label class="label-caps">Primitives</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="addShape('rect')" class="shape-grid-btn">
+                            <i class="fa-regular fa-square shape-icon"></i>
+                            <span class="shape-label">Rect</span>
+                        </button>
+                        <button onclick="addShape('circle')" class="shape-grid-btn">
+                            <i class="fa-regular fa-circle shape-icon"></i>
+                            <span class="shape-label">Circle</span>
+                        </button>
+                        <button onclick="addShape('triangle')" class="shape-grid-btn">
+                            <i class="fa-solid fa-play shape-icon -rotate-90 text-[14px]"></i>
+                            <span class="shape-label">Tri</span>
+                        </button>
+                        <button onclick="addShape('hexagon')" class="shape-grid-btn">
+                            <i class="fa-solid fa-cube shape-icon"></i>
+                            <span class="shape-label">Hex</span>
+                        </button>
+                        <button onclick="addShape('star')" class="shape-grid-btn">
+                            <i class="fa-regular fa-star shape-icon"></i>
+                            <span class="shape-label">Star</span>
+                        </button>
+                        <button onclick="addShape('spiral')" class="shape-grid-btn">
+                            <i class="fa-solid fa-spinner shape-icon"></i>
+                            <span class="shape-label">Spiral</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group-title">
+                <i class="fa-solid fa-layer-group text-indigo-500 text-[10px]"></i>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Vector Stack</span>
+            </div>
+
+            <div id="layers-list" class="flex flex-col">
+                <div class="text-[10px] text-slate-600 italic text-center py-10 opacity-50">Empty Canvas</div>
+            </div>
+        </div>
+
+        <!-- Export G-Code Footer -->
+        <div class="p-6 bg-slate-950/80 border-t border-white/10 mt-auto flex gap-2">
+            <select id="export-ext" class="w-24 bg-slate-900 border border-slate-700 text-slate-300 rounded-lg text-[10px] font-bold px-2 focus:border-purple-500 outline-none cursor-pointer">
+                <option value=".nc">.nc</option>
+                <option value=".gcode">.gcode</option>
+                <option value=".tap">.tap</option>
+                <option value=".cnc">.cnc</option>
+            </select>
+            <button onclick="exportGcode()" class="flex-1 py-4 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-black text-[11px] uppercase tracking-[0.2em] shadow-xl transition-all">
+                Export G-Code
+            </button>
+        </div>
+    </div>
+
+<script>
+let scene, camera, renderer, controls, clock, transformControl;
+let toolGroup, bed, stock, grid, toolHead;
+let laserLineGroup = new THREE.Group();
+let pathPreviewGroup = new THREE.Group();
+let isRunning = false;
+let pathProgress = 0;
+let waypoints = [];
+let originOffset = { x: 0, y: 0, z: 0 };
+let currentStepSize = 1.0;
+let designLayers = [];
+let selectedLayerId = null;
+
+// Default Layer Settings
+let currentLayerSettings = {
+    color: '#ef4444',
+    speed: 1000,
+    power: 100,
+    pass: 1,
+    pmax: 100,
+    pmin: 0
+};
+
+const layerColors = [
+    '#ef4444', '#f97316', '#f59e0b', '#84cc16', '#10b981', 
+    '#06b6d4', '#3b82f6', '#6366f1', '#a855f7', '#ec4899'
+];
+
+const texLoader = new THREE.TextureLoader();
+
+function init() {
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x020617);
+    clock = new THREE.Clock();
+
+    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 50000);
+    camera.position.set(400, -400, 400);
+    camera.up.set(0, 0, 1);
+
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+
+    // Transform Control Setup
+    transformControl = new THREE.TransformControls(camera, renderer.domElement);
+    transformControl.addEventListener('dragging-changed', function (event) {
+        controls.enabled = !event.value;
+        if(!event.value) {
+            // Drag end - Update path waypoints for simulation/export
+            generateMachineWaypoints(); 
+        }
+    });
+    scene.add(transformControl);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+    const pl = new THREE.PointLight(0xffffff, 0.8);
+    pl.position.set(200, 200, 1000);
+    scene.add(pl);
+
+    initLayerPalette();
+    setupScene();
+    animate();
+}
+
+function initLayerPalette() {
+    const p = document.getElementById('color-palette');
+    p.innerHTML = layerColors.map(c => 
+        `<div onclick="selectLayerColor('${c}')" class="color-swatch ${c === currentLayerSettings.color ? 'swatch-selected' : ''}" style="background-color: ${c}"></div>`
+    ).join('');
+}
+
+function selectLayerColor(c) {
+    currentLayerSettings.color = c;
+    initLayerPalette();
+    
+    if(selectedLayerId) {
+        const layer = designLayers.find(l => l.id === selectedLayerId);
+        if(layer) {
+            layer.settings.color = c;
+            updateLayerVisuals(layer);
+            renderLayers();
+        }
+    }
+}
+
+function updateActiveLayerParam() {
+    currentLayerSettings.speed = parseFloat(document.getElementById('layer-speed').value) || 1000;
+    currentLayerSettings.power = parseFloat(document.getElementById('layer-power').value) || 100;
+    currentLayerSettings.pass = parseInt(document.getElementById('layer-pass').value) || 1;
+    currentLayerSettings.pmax = parseFloat(document.getElementById('layer-pmax').value) || 100;
+    currentLayerSettings.pmin = parseFloat(document.getElementById('layer-pmin').value) || 0;
+
+    if(selectedLayerId) {
+        const layer = designLayers.find(l => l.id === selectedLayerId);
+        if(layer) {
+            layer.settings = { ...currentLayerSettings };
+            renderLayers();
+            // No need to redraw geometry for params, but need to regen export data
+            generateMachineWaypoints(); 
+        }
+    }
+}
+
+function selectLayer(id) {
+    selectedLayerId = id;
+    const layer = designLayers.find(l => l.id === id);
+    if(layer) {
+        currentLayerSettings = { ...layer.settings };
+        
+        document.getElementById('layer-speed').value = currentLayerSettings.speed;
+        document.getElementById('layer-power').value = currentLayerSettings.power;
+        document.getElementById('layer-pass').value = currentLayerSettings.pass;
+        document.getElementById('layer-pmax').value = currentLayerSettings.pmax;
+        document.getElementById('layer-pmin').value = currentLayerSettings.pmin;
+        
+        initLayerPalette();
+        renderLayers();
+        
+        document.getElementById('deselect-btn').classList.remove('hidden');
+        document.getElementById('transform-tools').classList.remove('hidden');
+
+        // Attach Transform Controls
+        if(layer.meshGroup) {
+            transformControl.attach(layer.meshGroup);
+        }
+    }
+}
+
+function deselectLayer() {
+    selectedLayerId = null;
+    transformControl.detach();
+    renderLayers();
+    document.getElementById('deselect-btn').classList.add('hidden');
+    document.getElementById('transform-tools').classList.add('hidden');
+}
+
+function setTransformMode(mode) {
+    transformControl.setMode(mode);
+    document.querySelectorAll('.tool-mode-btn').forEach(b => b.classList.remove('tool-mode-active'));
+    document.getElementById(`mode-${mode}`).classList.add('tool-mode-active');
+}
+
+function setupScene() {
+    bed = new THREE.Mesh(
+        new THREE.BoxGeometry(1, 1, 1), 
+        new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.8 })
+    );
+    scene.add(bed);
+
+    grid = new THREE.GridHelper(1, 20, 0x334155, 0x1e293b);
+    grid.rotation.x = Math.PI/2;
+    scene.add(grid);
+
+    stock = new THREE.Mesh(
+        new THREE.BoxGeometry(1, 1, 1), 
+        new THREE.MeshStandardMaterial({ color: 0x78350f, roughness: 0.7 })
+    );
+    scene.add(stock);
+
+    toolGroup = new THREE.Group();
+    toolHead = new THREE.Mesh(
+        new THREE.CylinderGeometry(8, 8, 40, 16), 
+        new THREE.MeshStandardMaterial({ color: 0xef4444 }) 
+    );
+    toolHead.rotation.x = Math.PI/2;
+    toolGroup.add(toolHead);
+    
+    const tip = new THREE.Mesh(new THREE.ConeGeometry(3, 8, 8), new THREE.MeshStandardMaterial({ color: 0x020617 }));
+    tip.rotation.x = -Math.PI/2;
+    tip.position.z = -24;
+    toolGroup.add(tip);
+
+    toolGroup.position.set(0, 0, 100);
+    scene.add(toolGroup);
+    scene.add(laserLineGroup);
+    scene.add(pathPreviewGroup);
+
+    updateSim();
+    onMachineTypeChange();
+}
+
+function updateSim() {
+    const bw = parseFloat(document.getElementById('bed-w').value) || 600;
+    const bh = parseFloat(document.getElementById('bed-h').value) || 400;
+    const sx = parseFloat(document.getElementById('mat-x').value) || 200;
+    const sy = parseFloat(document.getElementById('mat-y').value) || 200;
+    const sz = parseFloat(document.getElementById('mat-z').value) || 5;
+
+    bed.scale.set(bw, bh, 2);
+    bed.position.z = -1.1;
+    grid.scale.set(bw, bh, 1);
+    grid.position.z = -0.05;
+    stock.scale.set(sx, sy, sz);
+    stock.position.set(0, 0, sz/2);
+}
+
+function setStep(val) {
+    currentStepSize = val;
+    document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('step-active'));
+    document.getElementById(`step-${val}`).classList.add('step-active');
+}
+
+function jog(axis, dir) {
+    if (isRunning) return;
+    toolGroup.position[axis] += (dir * currentStepSize);
+}
+
+function setOrigin() {
+    originOffset.x = toolGroup.position.x;
+    originOffset.y = toolGroup.position.y;
+    originOffset.z = toolGroup.position.z;
+    document.getElementById('debug-log').innerText = `WORK ORIGIN OFFSET: X${originOffset.x} Y${originOffset.y}`;
+}
+
+function goHome() {
+    if (isRunning) return;
+    toolGroup.position.set(0, 0, 100);
+    document.getElementById('debug-log').innerText = "MACHINE HOMED";
+}
+
+function triggerUpload(type) {
+    document.querySelectorAll('.upload-btn').forEach(btn => btn.classList.remove('active-tool', 'active-bed', 'active-stock'));
+    document.getElementById(`btn-${type}`).classList.add(`active-${type}`);
+    document.getElementById(`tex-${type}`).click();
+}
+
+function handleTex(event, type) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        texLoader.load(e.target.result, (tex) => {
+            tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+            if (type === 'tool') toolHead.material = new THREE.MeshStandardMaterial({ map: tex });
+            else if (type === 'bed') bed.material = new THREE.MeshStandardMaterial({ map: tex });
+            else if (type === 'stock') stock.material = new THREE.MeshStandardMaterial({ map: tex });
+            document.getElementById('debug-log').innerText = `${type.toUpperCase()} SKIN UPDATED`;
+        });
+    };
+    reader.readAsDataURL(file);
+}
+
+function setMaterialPreset(type) {
+    let matParams = {};
+    if (type === 'wood') matParams = { color: 0x78350f, roughness: 0.7, metalness: 0.1 };
+    if (type === 'metal') matParams = { color: 0x94a3b8, roughness: 0.2, metalness: 0.8 };
+    if (type === 'acrylic') matParams = { color: 0xe0f2fe, roughness: 0.0, metalness: 0.1, transparent: true, opacity: 0.7 };
+    
+    stock.material = new THREE.MeshStandardMaterial(matParams);
+    document.getElementById('debug-log').innerText = `MATERIAL PRESET: ${type.toUpperCase()}`;
+}
+
+function createLayerMesh(layer) {
+    // Create a Three.js Group for this layer to hold the visual lines
+    const group = new THREE.Group();
+    const sz = stock.scale.z + 0.1;
+    const pts = layer.originalWaypoints;
+    const mat = new THREE.LineBasicMaterial({ color: layer.settings.color, transparent: true, opacity: 0.9 });
+    
+    // Draw the shape relative to group origin (0,0)
+    for (let i = 0; i < pts.length - 1; i++) {
+        if (!pts[i+1].t) {
+            const geo = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(pts[i].x, pts[i].y, sz), 
+                new THREE.Vector3(pts[i+1].x, pts[i+1].y, sz)
+            ]);
+            group.add(new THREE.Line(geo, mat));
+        }
+    }
+    
+    // Add invisible hit plane for easier selecting/dragging? (Optional, handled by TransformControl)
+    return group;
+}
+
+function updateLayerVisuals(layer) {
+    // Update color
+    layer.meshGroup.children.forEach(line => {
+        line.material.color.set(layer.settings.color);
+    });
+}
+
+function addShape(type) {
+    const id = Date.now();
+    let name = 'Shape';
+    let path = [];
+    
+    if (type === 'rect') {
+        name = 'Rectangle';
+        const w = 50, h = 50;
+        path = [{x:-w/2, y:-h/2, t:true}, {x:w/2, y:-h/2, t:false}, {x:w/2, y:h/2, t:false}, {x:-w/2, y:h/2, t:false}, {x:-w/2, y:-h/2, t:false}];
+    } 
+    else if (type === 'circle') {
+        name = 'Circle';
+        const r = 30;
+        for (let a=0; a<=360; a+=10) {
+            const rad = a * Math.PI / 180;
+            path.push({x: Math.cos(rad)*r, y: Math.sin(rad)*r, t: a===0});
+        }
+    }
+    else if (type === 'triangle') {
+        name = 'Triangle';
+        const r = 30;
+        for (let i = 0; i <= 3; i++) {
+            const rad = (i * 2 * Math.PI / 3) - Math.PI/2; 
+            path.push({x: Math.cos(rad)*r, y: Math.sin(rad)*r, t: i===0});
+        }
+    }
+    else if (type === 'hexagon') {
+        name = 'Hexagon';
+        const r = 30;
+        for (let i = 0; i <= 6; i++) {
+            const rad = i * 2 * Math.PI / 6;
+            path.push({x: Math.cos(rad)*r, y: Math.sin(rad)*r, t: i===0});
+        }
+    }
+    else if (type === 'star') {
+        name = 'Star';
+        const rOuter = 30;
+        const rInner = 12;
+        const points = 5;
+        for (let i = 0; i <= points * 2; i++) {
+            const r = (i % 2 === 0) ? rOuter : rInner;
+            // -Math.PI/2 to start pointing up
+            const a = (i * Math.PI / points) - Math.PI/2;
+            path.push({ x: Math.cos(a) * r, y: Math.sin(a) * r, t: i===0 });
+        }
+    }
+    else if (type === 'spiral') {
+        name = 'Spiral';
+        const loops = 4;
+        const spacing = 3;
+        for (let a = 0; a <= loops * 360; a+=10) {
+            const rad = a * Math.PI / 180;
+            const r = (spacing * rad) / (2*Math.PI);
+            path.push({ x: Math.cos(rad) * r, y: Math.sin(rad) * r, t: a===0 });
+        }
+    }
+
+    const newLayer = { 
+        id, 
+        name, 
+        originalWaypoints: path,
+        settings: { ...currentLayerSettings } 
+    };
+    
+    // Create Mesh Group
+    newLayer.meshGroup = createLayerMesh(newLayer);
+    pathPreviewGroup.add(newLayer.meshGroup);
+    
+    designLayers.push(newLayer);
+    
+    // Auto-select
+    selectLayer(id);
+    generateMachineWaypoints();
+    renderLayers();
+}
+
+function addText() {
+    const val = document.getElementById('text-input').value || "CNC";
+    const size = 40;
+    const id = Date.now();
+    let path = [];
+    let ox = 0;
+    val.toUpperCase().split('').forEach(char => {
+        const s = size;
+        if (char === 'C') path.push({x:ox+s*.5, y:s, t:true}, {x:ox, y:s, t:false}, {x:ox, y:0, t:false}, {x:ox+s*.5, y:0, t:false});
+        else if (char === 'N') path.push({x:ox, y:0, t:true}, {x:ox, y:s, t:false}, {x:ox+s*.5, y:0, t:false}, {x:ox+s*.5, y:s, t:false});
+        else if (char === 'F') path.push({x:ox, y:0, t:true}, {x:ox, y:s, t:false}, {x:ox+s*.5, y:s, t:false}, {x:ox, y:s*.5, t:true}, {x:ox+s*.4, y:s*.5, t:false});
+        else path.push({x:ox, y:0, t:true}, {x:ox, y:s, t:false}, {x:ox+s*.5, y:s, t:false}, {x:ox+s*.5, y:0, t:false}, {x:ox, y:0, t:false});
+        ox += size * 0.7;
+    });
+    const tw = ox - (size*0.2);
+    path = path.map(p => ({...p, x: p.x - tw/2, y: p.y - size/2}));
+    
+    const newLayer = { 
+        id, 
+        name: `Vector: ${val}`, 
+        originalWaypoints: path,
+        settings: { ...currentLayerSettings }
+    };
+
+    newLayer.meshGroup = createLayerMesh(newLayer);
+    pathPreviewGroup.add(newLayer.meshGroup);
+    designLayers.push(newLayer);
+    
+    selectLayer(id);
+    generateMachineWaypoints();
+    renderLayers();
+}
+
+function renderLayers() {
+    const list = document.getElementById('layers-list');
+    list.innerHTML = designLayers.length ? designLayers.map(l => `
+        <div onclick="selectLayer(${l.id})" class="design-item border-l-4 ${l.id === selectedLayerId ? 'selected-layer' : ''}" style="border-left-color: ${l.settings.color}">
+            <div class="flex-1 overflow-hidden">
+                <span class="truncate pr-2 block font-bold">${l.name}</span>
+                <span class="text-[9px] text-slate-400 block">
+                    S:${l.settings.speed} P:${l.settings.power}% x${l.settings.pass}
+                </span>
+            </div>
+            <button onclick="event.stopPropagation(); removeLayer(${l.id})" class="text-slate-600 hover:text-red-400 transition-colors ml-2"><i class="fa-solid fa-trash-can"></i></button>
+        </div>`).join('') : '<div class="text-[10px] text-slate-600 italic text-center py-10 opacity-50">Empty Canvas</div>';
+}
+
+function removeLayer(id) {
+    if(selectedLayerId === id) deselectLayer();
+    const layer = designLayers.find(l => l.id === id);
+    if(layer && layer.meshGroup) {
+        pathPreviewGroup.remove(layer.meshGroup);
+    }
+    designLayers = designLayers.filter(l => l.id !== id);
+    renderLayers();
+    generateMachineWaypoints();
+}
+
+function calculateEstTime() {
+    let totalTime = 0;
+    let cx = 0, cy = 0; 
+    const rapidSpeed = 5000; 
+    const rapidPPS = rapidSpeed / 60;
+
+    waypoints.forEach(p => {
+        const dx = p.x - cx;
+        const dy = p.y - cy;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        
+        if (p.t) {
+            totalTime += (dist / rapidPPS) + 0.5; 
+        } else {
+            const cutPPS = (p.speed || 1000) / 60;
+            totalTime += dist / cutPPS;
+        }
+        cx = p.x;
+        cy = p.y;
+    });
+
+    const m = Math.floor(totalTime / 60);
+    const s = Math.floor(totalTime % 60);
+    document.getElementById('est-time').innerText = `${m}m ${s}s`;
+}
+
+// Generates the final global toolpath based on the current Transforms of layer groups
+function generateMachineWaypoints() {
+    waypoints = [];
+    
+    designLayers.forEach(layer => {
+        // We need to apply the group's matrixWorld to the original points
+        layer.meshGroup.updateMatrixWorld(true);
+        const matrix = layer.meshGroup.matrixWorld;
+
+        const passes = layer.settings.pass;
+        for (let p=0; p < passes; p++) {
+            layer.originalWaypoints.forEach(pt => {
+                // Apply Transform
+                const vec = new THREE.Vector3(pt.x, pt.y, 0);
+                vec.applyMatrix4(matrix);
+
+                waypoints.push({
+                    x: vec.x,
+                    y: vec.y,
+                    t: pt.t,
+                    speed: layer.settings.speed,
+                    color: layer.settings.color,
+                    power: layer.settings.power
+                });
+            });
+        }
+    });
+
+    calculateEstTime();
+}
+
+function exportGcode() {
+    generateMachineWaypoints(); // Ensure fresh data
+    if (designLayers.length === 0) {
+         document.getElementById('debug-log').innerText = "ERROR: NO PATH TO EXPORT";
+         return;
+    }
+    
+    const ext = document.getElementById('export-ext').value;
+    
+    let gcode = "G21 ; Metric\nG90 ; Absolute positioning\nG17 ; XY Plane\n";
+    gcode += "G0 Z5 ; Safe Height\n";
+    
+    // We iterate global waypoints, but maybe better to iterate per layer to add comments
+    // Let's iterate layers and transform individually for cleaner G-code structure
+    
+    designLayers.forEach(layer => {
+        gcode += `; Layer: ${layer.name}\n`;
+        const sVal = Math.floor((layer.settings.power / 100) * 1000);
+        const passes = layer.settings.pass;
+        
+        // Matrix for this layer
+        layer.meshGroup.updateMatrixWorld(true);
+        const matrix = layer.meshGroup.matrixWorld;
+
+        for(let p=0; p<passes; p++) {
+            gcode += `; Pass ${p+1}/${passes}\n`;
+            layer.originalWaypoints.forEach(pt => {
+                const vec = new THREE.Vector3(pt.x, pt.y, 0);
+                vec.applyMatrix4(matrix);
+                
+                const x = vec.x.toFixed(3);
+                const y = vec.y.toFixed(3);
+                
+                if (pt.t) {
+                     gcode += `G0 X${x} Y${y}\n`;
+                } else {
+                     gcode += `G1 X${x} Y${y} F${layer.settings.speed} S${sVal}\n`;
+                }
+            });
+        }
+    });
+
+    gcode += "G0 Z5 ; Lift Tool\nM30 ; End Program";
+    
+    const blob = new Blob([gcode], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `project_toolpath${ext}`;
+    a.click();
+    URL.revokeObjectURL(url);
+    document.getElementById('debug-log').innerText = `EXPORTED: PROJECT_TOOLPATH${ext.toUpperCase()}`;
+}
+
+function onMachineTypeChange() {
+    const select = document.getElementById('machine-type');
+    const opt = select.options[select.selectedIndex];
+    const cat = opt.parentElement.label;
+    
+    let color = 0x38bdf8;
+    if (cat.includes('Laser')) color = 0xef4444;
+    else if (cat.includes('Mechanical')) color = 0xfacc15;
+    else if (cat.includes('Polymer')) color = 0x38bdf8;
+    else if (cat.includes('Robotics')) color = 0xa855f7;
+
+    if (!toolHead.material.map) toolHead.material.color.set(color);
+    document.getElementById('debug-log').innerText = `MODE: ${opt.text.toUpperCase()}`;
+}
+
+function toggleProcess() {
+    if(!isRunning) {
+        // Ensure waypoints are fresh before running
+        generateMachineWaypoints();
+        
+        if(waypoints.length === 0) {
+            document.getElementById('debug-log').innerText = "ERROR: NO TOOLPATH DATA";
+            return;
+        }
+        pathProgress = 0;
+        laserLineGroup.clear();
+        document.getElementById('debug-log').innerText = "EXECUTING JOB...";
+    } else {
+        document.getElementById('debug-log').innerText = "JOB ABORTED BY USER";
+    }
+    isRunning = !isRunning;
+    const btn = document.getElementById('process-btn');
+    btn.innerText = isRunning ? "ABORT OPERATION" : "EXECUTE PROCESS";
+    btn.className = isRunning ? "w-full py-4 bg-red-600 text-white rounded-xl font-black text-[11px] uppercase tracking-[0.2em]" : "w-full py-4 bg-sky-600 text-white rounded-xl font-black text-[11px] uppercase tracking-[0.2em]";
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    const dt = clock.getDelta();
+
+    if(isRunning && pathProgress < waypoints.length) {
+        const target = waypoints[pathProgress];
+        
+        // Simulation speed scalar (global modifier)
+        const simScale = (parseFloat(document.getElementById('sim-speed').value) || 1000) / 1000;
+        
+        // Use layer specific speed if cutting, otherwise fast travel
+        let currentSpeed = target.t ? 5000 : (target.speed || 1000);
+        
+        // Apply sim scaling
+        const moveSpeed = currentSpeed * simScale; 
+        
+        const stepSize = moveSpeed * dt;
+        
+        const toolOffset = 28;
+        const safeZ = stock.scale.z + toolOffset + 20;  
+        const cutZ = stock.scale.z + toolOffset;       
+        const tz = target.t ? safeZ : cutZ; 
+        
+        const dx = target.x - toolGroup.position.x;
+        const dy = target.y - toolGroup.position.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+
+        if(dist > stepSize) {
+            const ox = toolGroup.position.x;
+            const oy = toolGroup.position.y;
+            toolGroup.position.x += (dx/dist) * stepSize;
+            toolGroup.position.y += (dy/dist) * stepSize;
+            toolGroup.position.z = tz;
+            if(!target.t) {
+                const drawZ = stock.scale.z + 0.2; 
+                const geo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(ox, oy, drawZ), new THREE.Vector3(toolGroup.position.x, toolGroup.position.y, drawZ)]);
+                // Use the specific layer color stored in waypoint
+                const mat = new THREE.LineBasicMaterial({ color: target.color || 0xffffff });
+                laserLineGroup.add(new THREE.Line(geo, mat));
+            }
+        } else {
+            toolGroup.position.x = target.x;
+            toolGroup.position.y = target.y;
+            toolGroup.position.z = tz;
+            pathProgress++;
+            if(pathProgress >= waypoints.length) {
+                document.getElementById('debug-log').innerText = "JOB COMPLETED SUCCESSFULLY";
+                toggleProcess();
+            }
+        }
+    }
+
+    // Update DRO display
+    document.getElementById('x-dro').innerText = (toolGroup.position.x - originOffset.x).toFixed(2);
+    document.getElementById('y-dro').innerText = (toolGroup.position.y - originOffset.y).toFixed(2);
+    document.getElementById('z-dro').innerText = (toolGroup.position.z - (stock.scale.z + 28)).toFixed(2);
+
+    controls.update();
+    renderer.render(scene, camera);
+}
+
+// Panel Toggle Logic
+function toggleLeft() {
+    const p = document.getElementById('left-panel');
+    const icon = document.getElementById('left-arrow-icon');
+    
+    p.classList.toggle('-translate-x-full');
+    
+    if (p.classList.contains('-translate-x-full')) {
+        icon.classList.remove('fa-chevron-left');
+        icon.classList.add('fa-chevron-right');
+    } else {
+        icon.classList.add('fa-chevron-left');
+        icon.classList.remove('fa-chevron-right');
+    }
+}
+
+function toggleRight() {
+    const p = document.getElementById('right-panel');
+    const icon = document.getElementById('right-arrow-icon');
+    
+    p.classList.toggle('translate-x-full');
+    
+    if (p.classList.contains('translate-x-full')) {
+        icon.classList.remove('fa-chevron-right');
+        icon.classList.add('fa-chevron-left');
+    } else {
+        icon.classList.add('fa-chevron-right');
+        icon.classList.remove('fa-chevron-left');
+    }
+}
+
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+window.addEventListener('keydown', function(event) {
+    if(!selectedLayerId) return;
+    switch (event.key.toLowerCase()) {
+        case 'g': setTransformMode('translate'); break;
+        case 'r': setTransformMode('rotate'); break;
+        case 's': setTransformMode('scale'); break;
+        case 'delete': removeLayer(selectedLayerId); break;
+    }
+});
+
+window.onload = init;
+</script>
+</body>
+</html>

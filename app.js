@@ -50,7 +50,7 @@ var D={sw:[
 {t:"IsaacKing Browser",s:"done",pt:"prompts/isaacking-browser-prompt.md",d:"Whitelist-only browser. PyObjC + WKWebView .app.",a:[{l:"Open Folder",o:1,u:"./projects/"}],g:[{c:"ac",l:"macOS"},{l:"WKWebView"},{l:"PyObjC"},{l:"Browser"}],v:[{n:"V1",i:"White screen bug."},{n:"V2",L:1,i:"Fixed: HTML string direct load."}]},
 {t:"IsaacBrowser",s:"done",pt:"prompts/isaacbrowser-prompt.md",d:"Variant browser - category-based whitelist.",a:[{l:"Open Folder",o:1,u:"./projects/"}],g:[{c:"ac",l:"macOS"},{l:"Browser"},{l:"PyObjC"}],v:[{n:"V1",i:"IsaacKing fork."},{n:"V2",L:1,i:"Independent codebase."}]},
 {t:"IsaacNet",s:"done",pt:"prompts/isaacnet-prompt.md",d:"Layered bypass. TLS-wrapped, multi-tunnel auto-fallback.",a:[{l:"Open Folder",o:1,u:"./projects/"}],g:[{c:"ac",l:"Networking"},{l:"Proxy"},{l:"Python"},{l:"Bypass"}],v:[{n:"V1",i:"Single TCP tunnel."},{n:"V2",i:"TLS wrapping."},{n:"V3",L:1,i:"Layered: CONNECT+SOCKS5+WS."}]},
-{t:"Manufacturing Explorer",s:"done",pt:"prompts/manufacturing-explorer-prompt.md",d:"200-method 3D manufacturing explorer. Three.js + Flask.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/game-server.html"}],g:[{c:"ac",l:"Three.js"},{l:"Flask"},{l:"3D"},{l:"G-code"}],v:[{n:"V1",i:"112 methods."},{n:"V2",i:"Collapsible panels."},{n:"V3",L:1,i:"200 methods."}]},
+{t:"Manufacturing Explorer",s:"done",pt:"prompts/manufacturing-explorer-prompt.md",d:"200-method 3D manufacturing explorer. Three.js + Flask.",a:[{l:"Open Folder",o:1,u:"./projects/manufacturing-explorer/"}],g:[{c:"ac",l:"Three.js"},{l:"Flask"},{l:"3D"},{l:"G-code"}],v:[{n:"V1",i:"112 methods."},{n:"V2",i:"Collapsible panels."},{n:"V3",L:1,i:"200 methods."}]},
 {t:"IsaacCombo",s:"done",pt:"prompts/isaaccombo-prompt.md",d:"Multi-app .pkg - user selects apps.",a:[{l:"Open Folder",o:1,u:"./projects/"}],g:[{c:"ac",l:"macOS"},{l:"pkgbuild"},{l:"Installer"}],v:[{n:"V1",i:"All-or-nothing."},{n:"V2",L:1,i:"Fixed: choice dialog."}]},
 {t:"Macro Typer",s:"done",pt:"prompts/macro-typer-prompt.md",d:"Types text char-by-char - bypasses Google Docs history.",a:[{l:"Open Folder",o:1,u:"./projects/"}],g:[{c:"ac",l:"Python"},{l:"pyautogui"},{l:"Tkinter"},{l:"macOS"}],v:[{n:"V1-4",i:"Invisible app."},{n:"V5",L:1,i:"Fixed: launch notification."}]},
 {t:"Godzilla AI Chat",s:"done",pt:"prompts/godzilla-ai-chat-prompt.md",d:"Godzilla-themed AI roleplay. TUI + GUI. Native .app.",a:[{l:"Open Folder",o:1,u:"./projects/"}],g:[{c:"ac",l:"AI"},{l:"macOS"},{l:"Chat"},{l:"TUI"}],v:[{n:"V1",i:"Terminal TUI."},{n:"V2",i:"GUI with history."},{n:"V3",L:1,i:"Native .app. Themed UI."}]},
@@ -59,11 +59,11 @@ var D={sw:[
 {t:"IsaacAppLaunchers",s:"done",pt:"prompts/isaacapplaunchers-prompt.md",d:"Quick-launch scripts for the Isaac ecosystem.",a:[{l:"Open Folder",o:1,u:"./projects/"}],g:[{c:"ac",l:"macOS"},{l:"Scripting"},{l:"Automation"}],v:[{n:"V1",i:"Individual scripts."},{n:"V2",L:1,i:"Unified launcher."}]},
 {t:"IsaacOS",s:"draft",pt:"prompts/isaacos-prompt.md",d:"Custom OS concept - bootable with all Isaac tools.",a:[{l:"Open Folder",o:1,u:"./projects/drafts/"}],g:[{l:"OS"},{l:"Concept"},{l:"System Design"}],v:[{n:"V1",i:"Concept phase."}]},
 {t:"IsaacSystem-All",s:"draft",pt:"prompts/isaacsystem-all-prompt.md",d:"Monolithic tool - all Isaac apps in one binary.",a:[{l:"Open Folder",o:1,u:"./projects/drafts/"}],g:[{l:"System"},{l:"Unified"},{l:"Meta-project"}],v:[{n:"V1",i:"Concept phase."}]},
-{t:"Laser Cutting Simulator",s:"done",pt:"prompts/laser-cutting-simulator-prompt.md",d:"Browser laser simulator - 9+ versions. G-code export.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/game-server.html"}],g:[{c:"ac",l:"React"},{l:"DXF"},{l:"Simulation"},{l:"Web App"}],v:[{n:"V1-3",i:"Basic canvas."},{n:"V4-6",i:"3D isometric."},{n:"V7-9",L:1,i:"True 3D orbital, G-code."}]}
+{t:"Laser Cutting Simulator",s:"done",pt:"prompts/laser-cutting-simulator-prompt.md",d:"Browser laser simulator - 9+ versions. G-code export.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/laser-cutting-simulator.html"}],g:[{c:"ac",l:"React"},{l:"DXF"},{l:"Simulation"},{l:"Web App"}],v:[{n:"V1-3",i:"Basic canvas."},{n:"V4-6",i:"3D isometric."},{n:"V7-9",L:1,i:"True 3D orbital, G-code."}]}
 ],hw:[
 {t:"Auto-Clamping Vise",s:"wip",pt:"prompts/auto-clamping-vise-prompt.md",d:"Arduino Nano + NEMA 17 + ACS712 sensor. 3D printed. ~$32.",a:[{l:"Open Folder",o:1,u:"./projects/auto-vise/"}],g:[{c:"ac",l:"Arduino"},{l:"Stepper"},{l:"3D Printed"},{l:"Current Sense"}],v:[{n:"V1",i:"Concept."},{n:"V2",i:"ACS712 current detection."},{n:"V3",L:1,i:"Calibrating."}]},
 {t:"Clip-On Thermometer",s:"done",pt:"prompts/clip-thermometer-prompt.md",d:"ESP32-C3 hot wire cutter temp sensor. MAX6675 K-type probe + OLED + WiFi dashboard.",a:[{l:"Open Folder",o:1,u:"./projects/clip-thermometer/"}],g:[{c:"ac",l:"ESP32-C3"},{l:"Sensor"},{l:"PlatformIO"},{l:"MAX6675"},{l:"OLED"},{l:"WiFi"}],v:[{n:"V1",i:"Breadboard + OLED."},{n:"V2",i:"WiFi AP dashboard."},{n:"V3",L:1,i:"°C/°F, graph, buzzer, targets."}]},
-{t:"Optical Center Punch",s:"done",pt:"prompts/optical-center-punch-prompt.md",d:"DIY $10 punch vs $30-60 commercial. 3D printed + lens.",g:[{c:"ac",l:"3D Printed"},{l:"Precision"},{l:"Optical"},{l:"Tool"}],a:[{c:"p3d",l:"View 3D",o:2,p:"./Desktop/optical-punch-body.stl"}],v:[{n:"V1",i:"Research phase."},{n:"V2",L:1,i:"Built with steel tip."}]},
+{t:"Optical Center Punch",s:"done",pt:"prompts/optical-center-punch-prompt.md",d:"DIY $10 punch vs $30-60 commercial. 3D printed + lens.",g:[{c:"ac",l:"3D Printed"},{l:"Precision"},{l:"Optical"},{l:"Tool"}],v:[{n:"V1",i:"Research phase."},{n:"V2",L:1,i:"Built with steel tip."}]},
 {t:"Micro RC Car",s:"wip",pt:"prompts/micro-rc-car-prompt.md",d:"1/64-1/32 scale high-speed. No-solder Dupont build.",a:[{l:"Open Folder",o:1,u:"./projects/"}],g:[{c:"ac",l:"RC"},{l:"Micro"},{l:"No-solder"},{l:"Speed"}],v:[{n:"V1",i:"Design phase."}]},
 {t:"BLE Scanner",s:"wip",pt:"prompts/ble-scanner-prompt.md",d:"ESP32 BLE device scanner - detect, log, dashboard.",a:[{l:"Open Folder",o:1,u:"./projects/"}],g:[{c:"ac",l:"ESP32"},{l:"BLE"},{l:"Scanner"},{l:"IoT"}],v:[{n:"V1",i:"Research phase."}]}
 ],f3d:[
@@ -153,8 +153,70 @@ var D={sw:[
 {t:"Kinetic Industries",s:"done",pt:"prompts/kinetic-industries-prompt.md",d:"Branding/logo. 1.5 MB PNG.",g:[{c:"gr",l:"Branding"},{l:"Logo"}],a:[{l:"View Image",o:6,p:"./Downloads/Kinetic Industries.png"}]},
 {t:"Storyboard",s:"done",pt:"prompts/storyboard-prompt.md",d:"2.2 MB visual plan.",g:[{c:"gr",l:"Storyboard"}],a:[{l:"View Image",o:6,p:"./Downloads/Storyboard.png"}]},
 {t:"Humanities Essay",s:"done",pt:"prompts/humanities-essay-prompt.md",d:"26 MB Industrial Revolution research.",g:[{l:"Humanities"},{l:"History"}],a:[{l:"Open PDF",o:6,p:"./Downloads/humanities industrial revolution.pdf"}]},
-{t:"Photo Holder V3",s:"done",pt:"prompts/photo-holder-v3-prompt.md",d:"3-version photo display stand.",g:[{l:"Design"},{l:"Holder"}],a:[{l:"Open PDF",o:6,p:"./Documents/family keychain/"}]}
+{t:"Photo Holder V3",s:"done",pt:"prompts/photo-holder-v3-prompt.md",d:"3-version photo display stand.",g:[{l:"Design"},{l:"Holder"}],a:[{l:"Open Folder",o:1,u:"./Documents/family keychain/"}]}
 ]};
+
+// ==== Enrichment: how-it-works, materials/sources, file folder ====
+function dirname(p){var i=p.lastIndexOf('/');return i<0?'':p.slice(0,i)}
+var EXTRA={
+"Clip-On Thermometer":{how:"An ESP32-C3 reads a K-type thermocouple through a MAX6675 amplifier (over SPI) and shows the temperature on an SSD1306 OLED, while also hosting a WiFi access-point dashboard. A buzzer alerts when the hot-wire cutter passes the target temperature.",src:"ESP32-C3 SuperMini, MAX6675 module, SSD1306 OLED, K-type thermocouple, buzzer, TP4056 + LiPo battery. PlatformIO (Arduino framework). No soldering: breadboard + dupont wires."},
+"Auto-Clamping Vise":{how:"A NEMA17 stepper (driven by an A4988) turns an M8 threaded rod that acts as the lead screw, pushing the moving jaw forward. An ACS712 current sensor watches motor current: when the jaw grips something the current spikes and the Arduino stops, so it clamps automatically.",src:"Arduino Nano, NEMA17 stepper, A4988 driver, ACS712 current sensor, M8 threaded rod, LM8UU bearings, 3D-printed frame. ~$32."},
+"MacAdBlock":{how:"A Python DNS server runs on localhost:8053 as a launchd daemon. It loads a blocklist of ad/tracker domains and answers their lookups with 0.0.0.0, so ads never load system-wide.",src:"Python, launchd (auto-start daemon), custom + banned blocklists, .pkg installer."},
+"ESP32-C3 AdBlock":{how:"The ESP32 acts as a network DNS sinkhole. Devices point their DNS at the ESP32, which returns 0.0.0.0 for known ad domains, blocking ads for every device on the WiFi.",src:"ESP32 (WROOM-32D), PlatformIO, C++. Note: the C3 SuperMini was incompatible with the RT-AC58U's WPA2, so the WROOM-32D was used instead."},
+"IsaacSecureMessenger":{how:"End-to-end encrypted chat using the X3DH key-agreement protocol and AES-256-GCM for messages, with double-ratchet forward secrecy, QR pairing, disappearing messages, voice notes and file transfer.",src:"Python, PyObjC (native macOS .app), X3DH, AES-256-GCM, double ratchet."},
+"Multiplayer Game Server":{how:"A FastAPI backend manages WebSocket rooms. Players join with a room code; the server broadcasts moves, keeps state in sync, and supports spectators plus reconnects.",src:"Python, FastAPI, WebSocket (real-time)."},
+"HKPCBypass":{how:"Layered network bypass: DNS-over-HTTPS encrypts lookups, then traffic tunnels through SOCKS5 / HTTP CONNECT with automatic fallback between layers.",src:"Python, DoH, SOCKS5, HTTP CONNECT."},
+"WiFi Chat":{how:"A Flask + WebSocket LAN chat that works with no internet. Devices on the same WiFi exchange messages and can share DXF/SVG files.",src:"Flask, WebSocket, JavaScript."},
+"WiFi Monitor":{how:"The ESP32 scans surrounding WiFi networks and devices, graphing signal strength and tracking MAC addresses on a live dashboard.",src:"ESP32, C++, WebSocket dashboard."},
+"FrostSolve":{how:"A macOS desktop app packaged as a real .app bundle with a manifest structure, so it launches from Finder/Dock like a native app.",src:"JavaScript, macOS .app bundle."},
+"IsaacNetPkg":{how:"A password-protected macOS .pkg installer that bundles IsaacNet and includes an AppleScript uninstaller.",src:"pkgbuild, AppleScript, launchd."},
+"Laser Cutting Simulator":{how:"A browser simulator that renders laser-cut designs and exports G-code for a real cutter.",src:"React, Canvas, DXF."},
+"Manufacturing Explorer":{how:"A Three.js explorer documenting 200 manufacturing methods with an interactive 3D interface.",src:"Three.js, Flask."},
+"Scam Mirror":{how:"Clones phishing sites (full wget mirror) to preserve evidence and generates registrar takedown reports.",src:"wget, Python, registrar abuse contacts."},
+"326929.pw Mirror":{how:"A full mirror of a phishing site saved as evidence for takedown.",src:"wget mirror (all assets)."},
+"Optical Center Punch":{how:"A DIY $10 center punch with a 3D-printed body and lens, versus $30-60 commercial versions.",src:"3D printed body, lens, steel tip."},
+"Micro RC Car":{how:"A 1/64-1/32 scale high-speed RC car built no-solder with Dupont wires.",src:"Dupont wires, no-solder build."},
+"BLE Scanner":{how:"An ESP32 BLE scanner that detects nearby devices, logs them and shows them on a dashboard.",src:"ESP32, BLE."},
+"IsaacKing Browser":{how:"A whitelist-only browser built with PyObjC + WKWebView, packaged as a .app.",src:"PyObjC, WKWebView, macOS .app."},
+"IsaacBrowser":{how:"A category-based whitelist browser (independent codebase fork of IsaacKing).",src:"PyObjC, WKWebView, macOS .app."},
+"IsaacNet":{how:"Layered bypass with TLS-wrapped tunnels and multi-tunnel automatic fallback.",src:"Python, TLS, SOCKS5, CONNECT, WebSocket."},
+"IsaacCombo":{how:"A multi-app .pkg installer where the user selects which apps to install via a choice dialog.",src:"pkgbuild, AppleScript choice dialog."},
+"Macro Typer":{how:"Types text character-by-character to bypass Google Docs version history.",src:"Python, pyautogui, Tkinter, macOS."},
+"Godzilla AI Chat":{how:"A Godzilla-themed AI roleplay chat, available as a terminal TUI and a native GUI .app.",src:"AI API, macOS .app, TUI + GUI."},
+"Isaac AI":{how:"An AI chat assistant with multi-personality and memory, packaged as a native WKWebView .app.",src:"AI API, WKWebView, macOS .app."},
+"F1 Car Net":{how:"A laser-cut F1 car net refined across 46 DXF versions, re-measured for correct hole positions.",src:"Fusion 360, laser cutter, balsa/cardboard, DXF."},
+"F1 Model Block Jig":{how:"A precision CNC jig for the F1 car, with left/right bases and inserts iterated over 6 versions.",src:"Fusion 360, CNC mill, STL."},
+"VEX IQ Box Inserts":{how:"Laser-cut acrylic inserts to organise VEX IQ parts, scaled and refined over 34 DXF iterations.",src:"Fusion 360, laser cutter, acrylic."}
+};
+function synthHow(p){
+ if(p.v&&p.v.length){
+  var f=p.v[0],l=p.v[p.v.length-1];
+  if(p.v.length===1)return p.t+" is built and refined iteratively. Current version: "+(f.i||"").replace(/\.$/,"")+".";
+  return p.t+" was built and refined iteratively. It started as \""+(f.i||"").replace(/\.$/,"")+"\" and evolved to \""+(l.i||"").replace(/\.$/,"")+"\" across "+p.v.length+" iterations.";
+ }
+ return p.d;
+}
+function synthSrc(p){
+ if(p.g&&p.g.length)return "Built with: "+p.g.map(function(x){return x.l}).join(", ")+".";
+ return null;
+}
+function computeFolder(p){
+ if(p.a){
+  for(var i=0;i<p.a.length;i++){var a=p.a[i];if(a.o===1&&a.u&&a.u.indexOf('://')<0)return a.u.replace(/\/+$/,'')}
+  for(var j=0;j<p.a.length;j++){var b=p.a[j];if(b.p)return dirname(b.p);if(b.vs&&b.vs.length&&b.vs[0].p)return dirname(b.vs[0].p)}
+ }
+ return null;
+}
+function enrich(){
+ ['sw','hw','f3d','des'].forEach(function(k){D[k].forEach(function(p){
+  var ex=EXTRA[p.t];if(ex){if(ex.how){p.how=ex.how;p.howR=1}if(ex.src)p.src=ex.src;}
+  if(!p.how)p.how=synthHow(p);
+  if(!p.src)p.src=synthSrc(p);
+  p.fl=computeFolder(p);
+  if(p.a)p.a.forEach(function(a){if(a.o===6&&a.p&&/\.(png|jpe?g|gif|webp|svg|ico)$/i.test(a.p))a.o=8});
+ })});
+}
+enrich();
 
 function rebuild(){
  var map={sw:'software',hw:'hardware',f3d:'fusion',des:'design'};
@@ -171,9 +233,11 @@ function rebuild(){
   if(live)badges+='<span class="secbadge">▶ '+live+' Demo</span>';
   html+='<div class="container cat-section" data-cat="'+map[k]+'" id="'+k+'"><div class="stitle">'+cats[k]+'</div><div class="ssub">'+subs[k]+'</div>'+(badges?'<div class="secbadges">'+badges+'</div>':'')+'<div class="grid">';
   D[k].forEach(function(p,i){html+=R(p,k,i)});
+  if(editMode)html+='<button class="abtn addbtn" onclick="addProj(\''+k+'\')">＋ Add project</button>';
   html+='</div></div>';
  }
  document.getElementById('app').innerHTML=html;
+ updStats();
  // Update filter counts
  var counts={all:0,software:D.sw.length,hardware:D.hw.length,fusion:D.f3d.length,design:D.des.length};
  for(var k2 in counts)counts.all+=counts[k2];
@@ -187,16 +251,35 @@ function R(p,cat,idx){
  var em=emojis[cat]||'📦';
  var h='<div class="card'+(editMode?' editing':'')+'" data-cat="'+cat+'" data-idx="'+idx+'"><div class="ch"><div class="ctitle">'+em+' '+p.t+'</div><div style="display:flex;gap:6px;align-items:center"><button class="copybtn" onclick="copyLink(\''+cat+'\','+idx+',this)" title="Copy link">🔗</button><span class="status '+p.s+'">'+p.s+'</span></div></div>';
  h+='<div class="cdesc">'+p.d+'</div>';
+ if(p.howR&&p.how&&p.how!==p.d){h+='<div class="howline" onclick="openDetails(\''+cat+'\','+idx+')" title="How it works / how it was made">'+trunc(p.how,150)+'</div>'}
  if(p.g){h+='<div class="tags">';p.g.forEach(function(x){h+='<span class="tag'+(x.c?' '+x.c:'')+'">'+x.l+'</span>'});h+='</div>'}
  if(p.v&&p.v.length){h+='<button class="vtoggle" onclick="toggleV(this)"><span class="arr">\u25b6</span> Version history ('+p.v.length+' steps)</button><div class="versions">';p.v.forEach(function(x){h+='<div class="vitem"><span class="vbadge'+(x.L?' latest':'')+'">'+x.n+'</span><div class="vinfo">'+x.i+'</div></div>'});h+='</div>'}
- if((p.a&&p.a.length)||p.pt){h+='<div class="actions">';if(p.a)p.a.forEach(function(x,i){h+='<button class="abtn'+(x.c?' '+x.c:'')+'" data-t="'+p.t.replace(/"/g,'&quot;')+'" data-i="'+i+'">'+x.l+'</button>'});if(p.pt)h+='<button class="abtn ac" data-pt="'+p.pt+'" data-ptt="'+p.t.replace(/"/g,'&quot;')+'">📄 Prompt</button>';h+='</div>'}
- if(editMode){h+='<div style="margin-top:8px"><input class="edit-input show" value="'+p.t.replace(/"/g,'&quot;')+'" onchange="editCard(\''+cat+'\','+idx+',\'t\',this.value)"><input class="edit-input show" value="'+p.d.replace(/"/g,'&quot;')+'" onchange="editCard(\''+cat+'\','+idx+',\'d\',this.value)"><select class="edit-input show" onchange="editCard(\''+cat+'\','+idx+',\'s\',this.value)" style="color:var(--t1)"><option value="done"'+(p.s==='done'?' selected':'')+'>Done</option><option value="wip"'+(p.s==='wip'?' selected':'')+'>WIP</option><option value="draft"'+(p.s==='draft'?' selected':'')+'>Draft</option></select></div>'}
+ h+='<div class="actions">';
+ if(p.a)p.a.forEach(function(x,i){h+='<button class="abtn'+(x.c?' '+x.c:'')+'" data-t="'+p.t.replace(/"/g,'&quot;')+'" data-i="'+i+'">'+x.l+'</button>'});
+ h+='<button class="abtn ac" onclick="openDetails(\''+cat+'\','+idx+')">🔍 Details</button>';
+ if(p.fl)h+='<button class="abtn" onclick="openFilesFrom(\''+cat+'\','+idx+')">📂 Files</button>';
+ h+='</div>';
+ if(editMode){h+='<div class="editbox">'+
+  '<label>Title</label><input class="edit-input show" value="'+p.t.replace(/"/g,'&quot;')+'" onchange="editCard(\''+cat+'\','+idx+',\'t\',this.value)">'+
+  '<label>Description</label><input class="edit-input show" value="'+p.d.replace(/"/g,'&quot;')+'" onchange="editCard(\''+cat+'\','+idx+',\'d\',this.value)">'+
+  '<label>How it works / how it was made</label><textarea class="edit-input show" rows="2" onchange="editCard(\''+cat+'\','+idx+',\'how\',this.value)">'+(p.how||'').replace(/</g,'&lt;')+'</textarea>'+
+  '<label>Materials / tools / sources</label><input class="edit-input show" value="'+(p.src||'').replace(/"/g,'&quot;')+'" onchange="editCard(\''+cat+'\','+idx+',\'src\',this.value)">'+
+  '<label>Tags (comma separated)</label><input class="edit-input show" value="'+(p.g?p.g.map(function(x){return x.l}).join(', '):'')+'" onchange="editCard(\''+cat+'\','+idx+',\'g\',this.value)">'+
+  '<div style="display:flex;gap:6px;align-items:center;margin-top:4px"><select class="edit-input show" onchange="editCard(\''+cat+'\','+idx+',\'s\',this.value)" style="color:var(--t1);width:auto"><option value="done"'+(p.s==='done'?' selected':'')+'>Done</option><option value="wip"'+(p.s==='wip'?' selected':'')+'>WIP</option><option value="draft"'+(p.s==='draft'?' selected':'')+'>Draft</option></select>'+
+  '<button class="abtn" style="color:var(--ar);border-color:rgba(239,68,68,0.3)" onclick="delProj(\''+cat+'\','+idx+')">🗑 Delete</button></div></div>'}
  h+='</div>';return h
 }
-function editCard(cat,idx,field,val){D[cat][idx][field]=val;rebuild();saveData()}
-function saveData(){try{localStorage.setItem('isaac-projects',JSON.stringify({sw:D.sw,hw:D.hw,f3d:D.f3d,des:D.des}))}catch(e){}}
-// Load saved edits (after D defined)
-try{var saved=localStorage.getItem('isaac-projects');if(saved){var sd=JSON.parse(saved);for(var k in sd)for(var i=0;i<sd[k].length;i++)if(D[k]&&D[k][i]){D[k][i].t=sd[k][i].t||D[k][i].t;D[k][i].d=sd[k][i].d||D[k][i].d;D[k][i].s=sd[k][i].s||D[k][i].s}}}catch(e){}
+function trunc(s,n){s=s||'';return s.length>n?s.slice(0,n-1)+'\u2026':s}
+function editCard(cat,idx,field,val){
+ var p=D[cat][idx];
+ if(field==='g'){val=val.split(',').map(function(x){return{l:x.trim()}}).filter(function(x){return x.l});p.g=val}
+ else p[field]=val;
+ if(field==='how')p.howR=1;
+ rebuild();saveData()
+}
+function saveData(){try{localStorage.setItem('isaac-projects-v2',JSON.stringify({sw:D.sw,hw:D.hw,f3d:D.f3d,des:D.des}))}catch(e){}}
+// Load saved edits (after D defined + enriched)
+try{var saved=localStorage.getItem('isaac-projects-v2');if(saved){var sd=JSON.parse(saved);for(var k in sd)for(var i=0;i<sd[k].length;i++)if(D[k]&&D[k][i]){for(var f in sd[k][i])if(sd[k][i][f]!==undefined)D[k][i][f]=sd[k][i][f]}}}catch(e){}
 rebuild();
 // Deep link support: open ?p=cat-idx
 (function(){
@@ -226,11 +309,10 @@ window.addEventListener('scroll',function(){document.getElementById('btt').class
  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:0.1});
  els.forEach(function(el){el.classList.add('reveal');io.observe(el)});
  var nums=document.querySelectorAll('.stat .num');
- var targets=[120,24,5,60,20];
  var io2=new IntersectionObserver(function(es){es.forEach(function(e){
   if(e.isIntersecting){
-   var idx=[].indexOf.call(nums,e.target),target=targets[idx]||0,dur=1200,t0=null;
-   function tick(t){if(!t0)t0=t;var p=Math.min((t-t0)/dur,1);e.target.textContent=Math.floor(target*p)+'+';if(p<1)requestAnimationFrame(tick)}
+   var target=parseInt(e.target.getAttribute('data-target'))||0,suffix=e.target.getAttribute('data-suffix')||'+',dur=1200,t0=null;
+   function tick(t){if(!t0)t0=t;var p=Math.min((t-t0)/dur,1);e.target.textContent=Math.floor(target*p)+suffix;if(p<1)requestAnimationFrame(tick)}
    requestAnimationFrame(tick);
    io2.unobserve(e.target);
   }
@@ -245,8 +327,17 @@ document.addEventListener('click',function(e){
  for(var a=0;a<all.length;a++)for(var b=0;b<all[a].length;b++)if(all[a][b].t===title){found=all[a][b];break}
  if(!found||!found.a||!found.a[idx])return;
  var act=found.a[idx];
- if(act.o===1)W(act.u);else if(act.o===2)open3D(act.p);else if(act.o===3)open3DM(found.t,act.vs);else if(act.o===4)openDXFM(found.t,act.vs);else if(act.o===5)openDXF(act.p);else if(act.o===6)W(act.p);else if(act.o===7)showIframe(found.t,act.u);
+ if(act.o===1)W(act.u);
+ else if(act.o===2)open3D(act.p);
+ else if(act.o===3)open3DM(found.t,act.vs);
+ else if(act.o===4)openDXFM(found.t,act.vs);
+ else if(act.o===5)openDXF(act.p);
+ else if(act.o===6){if(isImg(act.p))showImage(act.p);else W(act.p)}
+ else if(act.o===7)showIframe(found.t,act.u);
+ else if(act.o===8)showImage(act.p);
+ else if(act.o===9)openFiles(act.u);
 });
+function isImg(p){return p&&/\.(png|jpe?g|gif|webp|svg|ico|bmp)$/i.test(p)}
 
 var cv=[],_scene,_cam,_rend,_ctrl,_mesh,_anim;
 function open3D(p){cv=[{l:'Model',p:p}];show3D('3D Preview')}
@@ -385,3 +476,124 @@ document.addEventListener('keydown',function(e){
   if(d){var di=parseInt(d.value)+(e.key==='ArrowRight'?1:-1);if(di>=0&&di<dxfV.length){d.value=di;dxfSw(di)}}
  }
 });
+
+// ==================== NEW: helpers ====================
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function escAttr(s){return esc(s).replace(/'/g,'&#39;')}
+function toast(msg){var t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.classList.add('show')},10);setTimeout(function(){t.classList.remove('show');setTimeout(function(){t.remove()},300)},2600)}
+
+// ==================== NEW: dynamic stats ====================
+function updStats(){
+ var c={t:D.sw.length+D.hw.length+D.f3d.length+D.des.length,sw:D.sw.length,hw:D.hw.length,f3d:D.f3d.length,des:D.des.length};
+ function set(id,v,suf){var el=document.getElementById(id);if(el){el.setAttribute('data-target',v);el.setAttribute('data-suffix',suf);el.textContent=v+suf}}
+ set('statTotal',c.t,'+');set('statSW',c.sw,'');set('statHW',c.hw,'');set('statF3d',c.f3d,'+');set('statDes',c.des,'+');
+}
+
+// ==================== NEW: admin add/delete ====================
+function addProj(cat){
+ var p={t:'New Project',s:'draft',d:'Describe this project...',g:[],v:[],a:[],how:'',src:'',howR:1};
+ D[cat].push(p);rebuild();saveData();
+ var sec=document.getElementById(cat);
+ var card=sec?sec.querySelector('.card[data-idx="'+(D[cat].length-1)+'"]'):null;
+ if(card)card.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function delProj(cat,idx){if(!confirm('Delete "'+D[cat][idx].t+'"?'))return;D[cat].splice(idx,1);rebuild();saveData()}
+
+// ==================== NEW: file browser ====================
+var FB=null,FINDEX={},FB_CUR='';
+function idxTree(n){if(n.path!==undefined)FINDEX[n.path]=n;(n.children||[]).forEach(idxTree)}
+function loadFiles(cb){
+ if(FB){cb&&cb();return}
+ fetch('files.json').then(function(r){return r.json()}).then(function(j){
+  FB=j.root;idxTree(FB);if(cb)cb();
+ }).catch(function(){toast('Could not load file index')});
+}
+function openFilesFrom(cat,idx){var p=D[cat][idx];if(p&&p.fl)openFiles(p.fl);else openFiles('')}
+function openFiles(folder){
+ folder=(folder||'').replace(/^\.\//,'').replace(/\/+$/,'');
+ var m=document.createElement('div');m.className='modal active';m.id='_fb';
+ m.innerHTML='<div class="modal-inner fb-inner"><div class="modal-h"><h3>📂 Files</h3>'+
+  '<div class="fb-search"><input id="_fbs" placeholder="Search files…" oninput="fbSearch(this.value)"></div>'+
+  '<button class="modal-close" onclick="closeM(\'_fb\')">X</button></div>'+
+  '<div class="fb-bc" id="_fbbc"></div><div class="modal-body fb-body" id="_fbb"><div class="modal-loading">Loading files…</div></div></div>';
+ document.body.appendChild(m);
+ m.addEventListener('click',function(e){if(e.target===m)closeM('_fb')});
+ loadFiles(function(){fbNav(folder)});
+}
+function fbNav(path){
+ path=path||'';
+ var n=FINDEX[path];
+ if(!n){document.getElementById('_fbb').innerHTML='<div class="fb-empty">Folder not found in index</div>';return}
+ FB_CUR=path;
+ var parts=path?path.split('/'):[];
+ var bc='<a href="javascript:void(0)" onclick="fbNav(\'\')">🏠 root</a>';
+ var acc='';
+ parts.forEach(function(seg,i){acc+=(acc?'/':'')+seg;var last=i===parts.length-1;
+  bc+=last?'<span class="sep">/</span><span class="cur">'+esc(seg)+'</span>':'<span class="sep">/</span><a href="javascript:void(0)" onclick="fbNav(\''+escAttr(acc)+'\')">'+esc(seg)+'</a>';
+ });
+ document.getElementById('_fbbc').innerHTML=bc;
+ var kids=(n.children||[]).slice();
+ kids.sort(function(a,b){if(a.type!==b.type)return a.type==='dir'?-1:1;return a.name.toLowerCase()<b.name.toLowerCase()?-1:1});
+ var h='';
+ if(path)h+='<div class="fbrow up" onclick="fbNav(\''+escAttr(path.split('/').slice(0,-1).join('/'))+'\')"><span class="fi">⬆</span><span class="fn">Parent folder</span><span class="fz"></span></div>';
+ if(!kids.length)h+='<div class="fb-empty">This folder is empty</div>';
+ kids.forEach(function(k){
+  if(k.type==='dir')h+='<div class="fbrow dir" onclick="fbNav(\''+escAttr(k.path)+'\')"><span class="fi">📁</span><span class="fn">'+esc(k.name)+'</span><span class="fz"></span></div>';
+  else{var icon={'image':'🖼','stl':'🧊','dxf':'📐','pdf':'📕','text':'📄','binary':'📦'}[k.kind]||'📄';
+   h+='<div class="fbrow file" onclick="fbOpen(\''+escAttr(k.path)+'\',\''+k.kind+'\')"><span class="fi">'+icon+'</span><span class="fn">'+esc(k.name)+'</span><span class="fz">'+(k.sizeH||'')+'</span></div>';}
+ });
+ document.getElementById('_fbb').innerHTML=h;
+}
+function fbSearch(q){q=(q||'').toLowerCase();document.querySelectorAll('#_fbb .fbrow').forEach(function(r){var fn=r.querySelector('.fn');var n=fn?fn.textContent.toLowerCase():'';r.style.display=(!q||n.indexOf(q)>=0)?'':'none'})}
+function fbOpen(path,kind){
+ if(kind==='image'){closeM('_fb');showImage(path)}
+ else if(kind==='stl'){closeM('_fb');open3D(path)}
+ else if(kind==='dxf'){closeM('_fb');openDXF(path)}
+ else if(kind==='pdf'){W(path)}
+ else if(kind==='text'){fbViewText(path)}
+ else{W(path)}
+}
+function fbViewText(path){
+ var m=document.createElement('div');m.className='modal active';m.id='_txt';
+ m.innerHTML='<div class="modal-inner fb-inner"><div class="modal-h"><h3>📄 '+esc(path.split('/').pop())+'</h3><div style="display:flex;gap:6px;align-items:center"><a class="vctrl" href="'+EP(path)+'" target="_blank" title="Open raw">↗</a><a class="vctrl" href="'+EP(path)+'" download title="Download">⬇</a><button class="modal-close" onclick="closeM(\'_txt\')">X</button></div></div><div class="modal-body fb-body"><div class="modal-loading">Loading…</div></div></div>';
+ document.body.appendChild(m);
+ m.addEventListener('click',function(e){if(e.target===m)closeM('_txt')});
+ fetch(EP(path)).then(function(r){return r.text()}).then(function(tx){
+  var b=document.querySelector('#_txt .modal-body');
+  var isMd=/\.md$/i.test(path);
+  if(isMd)b.innerHTML='<div class="mdbody">'+md(tx)+'</div>';
+  else b.innerHTML='<pre class="codeview">'+esc(tx)+'</pre>';
+ }).catch(function(){var b=document.querySelector('#_txt .modal-body');if(b)b.innerHTML='<div class="fb-empty">Could not read file (maybe binary)</div>'});
+}
+
+// ==================== NEW: details modal ====================
+function openDetails(cat,idx){
+ var p=D[cat][idx];
+ var em={'sw':'💻','hw':'🔧','f3d':'📐','des':'📄'}[cat]||'📦';
+ var m=document.createElement('div');m.className='modal active';m.id='_det';
+ var h='<div class="modal-inner det-inner"><div class="modal-h"><h3>'+em+' '+esc(p.t)+'</h3><div style="display:flex;gap:8px;align-items:center"><span class="status '+p.s+'">'+p.s+'</span><button class="modal-close" onclick="closeM(\'_det\')">X</button></div></div>';
+ h+='<div class="det-body">';
+ h+='<p class="det-desc">'+esc(p.d)+'</p>';
+ if(p.how){h+='<h4>⚙️ How it works / how it was made</h4><p class="det-how">'+esc(p.how)+'</p>'}
+ if(p.src){h+='<h4>🧰 Materials, tools &amp; sources</h4><p class="det-src">'+esc(p.src)+'</p>'}
+ if(p.v&&p.v.length){h+='<h4>🕰 Version history</h4><div class="det-ver">';p.v.forEach(function(x){h+='<div class="vitem"><span class="vbadge'+(x.L?' latest':'')+'">'+esc(x.n)+'</span><div class="vinfo">'+esc(x.i)+'</div></div>'});h+='</div>'}
+ if(p.g&&p.g.length){h+='<h4>🏷 Tags</h4><div class="tags">';p.g.forEach(function(x){h+='<span class="tag'+(x.c?' '+x.c:'')+'">'+esc(x.l)+'</span>'});h+='</div>'}
+ h+='<div class="actions" style="margin-top:18px">';
+ if(p.a)p.a.forEach(function(x,i){h+='<button class="abtn'+(x.c?' '+x.c:'')+'" data-t="'+escAttr(p.t)+'" data-i="'+i+'">'+esc(x.l)+'</button>'});
+ if(p.fl)h+='<button class="abtn" onclick="openFiles(\''+escAttr(p.fl)+'\')">📂 View all files</button>';
+ if(p.pt)h+='<button class="abtn ac" data-pt="'+escAttr(p.pt)+'" data-ptt="'+escAttr(p.t)+'">📄 Build spec</button>';
+ h+='</div>';
+ if(editMode)h+='<p class="det-hint">✏️ Edit mode is on — change fields directly on the card, or delete it there.</p>';
+ h+='</div></div>';
+ m.innerHTML=h;
+ document.body.appendChild(m);
+ m.addEventListener('click',function(e){if(e.target===m)closeM('_det')});
+}
+
+// ==================== NEW: image lightbox ====================
+function showImage(p){
+ var m=document.createElement('div');m.className='modal active';m.id='_img';
+ m.innerHTML='<div class="modal-inner img-inner"><div class="modal-h"><h3>🖼 '+esc(p.split('/').pop())+'</h3><div style="display:flex;gap:6px;align-items:center"><a class="vctrl" href="'+EP(p)+'" download title="Download">⬇</a><button class="modal-close" onclick="closeM(\'_img\')">X</button></div></div><div class="modal-body img-body"><img src="'+EP(p)+'" alt=""></div></div>';
+ document.body.appendChild(m);
+ m.addEventListener('click',function(e){if(e.target===m)closeM('_img')});
+}

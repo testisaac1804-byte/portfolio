@@ -100,15 +100,56 @@ footer{text-align:center;padding:48px 24px;border-top:1px solid var(--bd);color:
 .hero{position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse,rgba(99,102,241,0.12),transparent 60%);pointer-events:none}
 @media(max-width:768px){.hero h1{font-size:34px}.grid{grid-template-columns:1fr}.stats{gap:24px}.stat .num{font-size:28px}.search-bar input{width:120px}.search-bar input:focus{width:140px}}
+.howline{font-size:11.5px;color:var(--t3);border-left:2px solid rgba(99,102,241,0.4);padding:4px 10px;margin:0 0 10px;background:rgba(99,102,241,0.04);border-radius:0 6px 6px 0;cursor:pointer;line-height:1.5}
+.howline:hover{color:var(--t2);background:rgba(99,102,241,0.08)}
+.editbox{margin-top:8px;border-top:1px dashed var(--bd);padding-top:8px}
+.editbox label{display:block;font-size:10px;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;margin:6px 0 2px;font-weight:600}
+.addbtn{margin:8px 0 0;width:100%;justify-content:center;border-style:dashed}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--sf);border:1px solid var(--bd);color:var(--t1);padding:10px 18px;border-radius:8px;font-size:13px;z-index:3000;opacity:0;transition:all .25s;box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.fb-inner{width:92vw;max-width:900px;height:80vh}
+.fb-search input{width:160px;padding:6px 12px;border-radius:9999px;border:1px solid var(--bd);background:rgba(255,255,255,0.03);color:var(--t1);font-family:inherit;font-size:12px;outline:none}
+.fb-search input:focus{border-color:var(--ab)}
+.fb-bc{display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:8px 20px;border-bottom:1px solid var(--bd);font-size:12px;color:var(--t3);background:rgba(255,255,255,0.02)}
+.fb-bc a{color:var(--ab);text-decoration:none}.fb-bc a:hover{text-decoration:underline}
+.fb-bc .sep{color:var(--t4)}.fb-bc .cur{color:var(--t2);font-weight:600}
+.fb-body{height:calc(100% - 94px);overflow-y:auto;padding:10px}
+.fbrow{display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid transparent;border-radius:6px;cursor:pointer;font-size:13px;color:var(--t2)}
+.fbrow:hover{background:rgba(99,102,241,0.08);border-color:rgba(99,102,241,0.2)}
+.fbrow .fi{width:20px;text-align:center}
+.fbrow .fn{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fbrow .fz{color:var(--t4);font-size:11px}
+.fbrow.up{color:var(--ab)}
+.fb-empty{color:var(--t4);font-size:13px;padding:24px;text-align:center}
+.codeview{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;line-height:1.5;color:#d0d6e0;background:rgba(0,0,0,0.2);padding:16px;border-radius:8px;white-space:pre-wrap;word-break:break-word;margin:0}
+.mdbody{font-size:14px;color:var(--t2);line-height:1.7;padding:4px 2px}
+.mdbody h1,.mdbody h2,.mdbody h3,.mdbody h4{color:var(--t1);margin:16px 0 8px;font-weight:600}
+.mdbody h1{font-size:20px}.mdbody h2{font-size:17px}.mdbody h3{font-size:15px}.mdbody h4{font-size:13px}
+.mdbody p{margin:6px 0}
+.mdbody ul,.mdbody ol{margin:6px 0 6px 20px}
+.mdbody li{margin:3px 0}
+.mdbody code{background:rgba(99,102,241,0.12);color:var(--ab);padding:1px 6px;border-radius:4px;font-size:12.5px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.mdbody blockquote{border-left:2px solid var(--ac);padding:4px 12px;margin:8px 0;color:var(--t3)}
+.det-inner{width:92vw;max-width:720px;height:82vh}
+.det-body{height:calc(100% - 57px);overflow-y:auto;padding:20px 22px}
+.det-desc{font-size:15px;color:var(--t2);margin-bottom:6px}
+.det-body h4{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--t4);margin:18px 0 6px;font-weight:700}
+.det-how{font-size:14px;color:var(--t2);line-height:1.65;background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.15);border-radius:8px;padding:12px 14px}
+.det-src{font-size:14px;color:var(--t2);line-height:1.65;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.15);border-radius:8px;padding:12px 14px}
+.det-ver{margin-top:4px}
+.det-hint{font-size:11px;color:var(--t4);margin-top:14px;font-style:italic}
+.img-inner{width:92vw;max-width:1000px;height:85vh}
+.img-body{height:calc(100% - 57px);display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,0.3)}
+.img-body img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px}
 </style></head><body>
 <header><nav><div class="logo">Isaac<span>.</span>dev</div><div class="search-bar"><input type="text" placeholder="Search projects..." id="search" oninput="search(this.value)"><button class="admin-btn" onclick="randomProj()" title="Random project">🎲</button><button class="admin-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button><button class="admin-btn" onclick="showAdmin()">Admin</button></div></nav></header>
 <section class="hero"><h1>Every project I've built</h1><p>Interactive catalog with 3D previews, version timelines, and every design documented.</p></section>
-<div class="stats"><div class="stat"><div class="num">120+</div><div class="label">Total Projects</div></div><div class="stat"><div class="num">24</div><div class="label">Software</div></div><div class="stat"><div class="num">5</div><div class="label">Hardware</div></div><div class="stat"><div class="num">60+</div><div class="label">Fusion 360</div></div><div class="stat"><div class="num">20+</div><div class="label">Design</div></div></div>
+<div class="stats"><div class="stat"><div class="num" id="statTotal">120+</div><div class="label">Total Projects</div></div><div class="stat"><div class="num" id="statSW">24</div><div class="label">Software</div></div><div class="stat"><div class="num" id="statHW">5</div><div class="label">Hardware</div></div><div class="stat"><div class="num" id="statF3d">60+</div><div class="label">Fusion 360</div></div><div class="stat"><div class="num" id="statDes">20+</div><div class="label">Design</div></div></div>
 <div class="filters"><button class="fbtn active" onclick="F('all')">All</button><button class="fbtn" onclick="F('software')">Software</button><button class="fbtn" onclick="F('hardware')">Hardware</button><button class="fbtn" onclick="F('fusion')">Fusion 360</button><button class="fbtn" onclick="F('design')">Design &amp; Docs</button></div>
 <div class="admin-overlay" id="aOverlay" onclick="hideAdmin()"></div>
 <div class="admin-panel" id="aPanel"><h3>Admin Login</h3><input type="password" id="aPass" placeholder="Password" onkeydown="if(event.key==='Enter')login()"><button onclick="login()">Unlock Edit Mode</button><button onclick="exportData()" style="margin-left:8px;background:var(--sf);color:var(--t2);border:1px solid var(--bd)">Export JSON</button><div class="err" id="aErr"></div></div>
 <div id="app"></div>
 <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-<footer>Built by Isaac · Island School · Hong Kong · 2026 · <a href="https://github.com/testisaac1804-byte/portfolio" style="color:var(--t3)">GitHub</a> · <a href="mailto:isaac_cs.chan@online.island.edu.hk" style="color:var(--t3)">Contact</a></footer>
-<script src="app.js?v=8"></script>
+<footer>Built by Isaac · Island School · Hong Kong · 2026 · <a href="https://github.com/testisaac1804-byte/portfolio" style="color:var(--t3)">GitHub</a> · <a href="https://github.com/testisaac1804-byte/portfolio/blob/main/LICENSE" style="color:var(--t3)">Open Source (MIT)</a> · <a href="mailto:isaac_cs.chan@online.island.edu.hk" style="color:var(--t3)">Contact</a></footer>
+<script src="app.js?v=10"></script>
 </body></html>
