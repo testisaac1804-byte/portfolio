@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><style>body{margin:0;background:#0d1117}canvas{display:block}</style></head>
+<body>
+<script type="importmap">
+{"imports":{"three":"/static/three.module.js","three/addons/":"/static/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+
+const S=new THREE.Scene(); S.background=new THREE.Color(0x0d1117);
+const C=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,1,2000);
+C.position.set(200,160,250); C.lookAt(75,10,75);
+const R=new THREE.WebGLRenderer({antialias:true});
+R.setSize(innerWidth,innerHeight); R.shadowMap.enabled=true;
+document.body.appendChild(R.domElement);
+new OrbitControls(C,R.domElement);
+
+S.add(new THREE.AmbientLight(0x404060,1.5));
+const kl=new THREE.DirectionalLight(0xffffff,3); kl.position.set(200,300,200); kl.castShadow=true; S.add(kl);
+S.add(new THREE.PolarGridHelper(300,60,30,128,0x30363d,0x21262d));
+
+// Machine base
+const steel=new THREE.MeshStandardMaterial({color:0x4a5568,roughness:0.4,metalness:0.9});
+S.add(new THREE.Mesh(new THREE.BoxGeometry(180,8,180),steel).translateY(-4).translateX(90).translateZ(90));
+S.add(new THREE.Mesh(new THREE.BoxGeometry(150,5,150),new THREE.MeshStandardMaterial({color:0x2d3748,roughness:0.6,metalness:0.5})).translateY(5).translateX(90).translateZ(90));
+// Gantry
+const alum=new THREE.MeshStandardMaterial({color:0x8b9dc3,roughness:0.3,metalness:0.7});
+for(let z of[15,165])S.add(new THREE.Mesh(new THREE.BoxGeometry(8,150,8),alum).translateY(79).translateX(20).translateZ(z));
+S.add(new THREE.Mesh(new THREE.BoxGeometry(8,8,170),alum).translateY(154).translateX(20).translateZ(90));
+// Nozzle
+S.add(new THREE.Mesh(new THREE.BoxGeometry(10,8,10),alum).translateY(142).translateX(90).translateZ(90));
+S.add(new THREE.Mesh(new THREE.ConeGeometry(2,8,16),new THREE.MeshStandardMaterial({color:0xd4a017,roughness:0.2,metalness:0.9})).translateY(134).translateX(90).translateZ(90));
+// Workpiece
+S.add(new THREE.Mesh(new THREE.BoxGeometry(100,10,100),new THREE.MeshStandardMaterial({color:0xddccaa,roughness:0.5,transparent:true,opacity:0.85})).translateY(13).translateX(65).translateZ(65));
+
+function anim(){requestAnimationFrame(anim);R.render(S,C)}
+anim();
+</script>
+</body></html>

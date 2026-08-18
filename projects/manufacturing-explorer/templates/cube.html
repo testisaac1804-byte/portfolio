@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><body style="margin:0;background:#0d1117">
+<script type="importmap">
+{"imports":{"three":"/static/three.module.js","three/addons/":"/static/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+const S=new THREE.Scene(); S.background=new THREE.Color(0x0d1117);
+const C=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,1,1000);
+C.position.z=5;
+const R=new THREE.WebGLRenderer({antialias:true});
+R.setSize(innerWidth,innerHeight); document.body.appendChild(R.domElement);
+S.add(new THREE.Mesh(new THREE.BoxGeometry(1,1,1),new THREE.MeshStandardMaterial({color:0xff4400})));
+S.add(new THREE.AmbientLight(0xffffff,1));
+function a(){requestAnimationFrame(a);R.render(S,C)}a();
+</script>
+</body></html>
