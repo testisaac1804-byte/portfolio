@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGCSE Tutor — Isaac's Personal Teacher</title>
+<style>
+:root{--bg:#0a0e17;--card:#111827;--border:#1e293b;--txt:#e2e8f0;--dim:#94a3b8;--acc:#38bdf8;--good:#34d399;--bad:#f87171;--gold:#fbbf24}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.6;padding:16px;max-width:960px;margin:0 auto}
+h1{font-size:26px;margin:10px 0 4px}
+.sub{color:var(--dim);font-size:14px;margin-bottom:16px}
+nav{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0}
+nav button{background:var(--card);color:var(--txt);border:1px solid var(--border);border-radius:8px;padding:9px 14px;cursor:pointer;font-size:14px;transition:.15s}
+nav button:hover{border-color:var(--acc)}
+nav button.active{background:#0ea5e9;border-color:#0ea5e9;color:#000;font-weight:700}
+.mode{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}
+.mode button{background:var(--card);border:1px solid var(--border);color:var(--dim);border-radius:20px;padding:6px 16px;cursor:pointer;font-size:13px}
+.mode button.active{background:var(--acc);color:#000;border-color:var(--acc);font-weight:700}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;margin:14px 0}
+.flash{min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;user-select:none}
+.flash .q{font-size:20px;font-weight:700;margin-bottom:10px}
+.flash .hint{color:var(--dim);font-size:12px;margin-top:16px}
+.actions{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:10px 20px;cursor:pointer;font-size:14px;font-weight:600}
+.btn.good{background:#059669}.btn.bad{background:#dc2626}.btn.ghost{background:transparent;border:1px solid var(--border);color:var(--txt)}
+.quiz-q{font-size:18px;font-weight:600;margin-bottom:14px}
+.opt{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;margin:8px 0;cursor:pointer;color:var(--txt);font-size:14px;transition:.15s}
+.opt:hover{border-color:var(--acc)}
+.opt.correct{background:#065f46;border-color:var(--good)}
+.opt.wrong{background:#7f1d1d;border-color:var(--bad)}
+.explain{background:#0f172a;border-left:3px solid var(--gold);padding:12px;border-radius:0 8px 8px 0;margin-top:12px;font-size:14px}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.stats div{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:13px}
+.stats b{color:var(--acc);font-size:16px}
+.topic{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin:6px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.topic:hover{border-color:var(--acc)}
+.topic .done{color:var(--good)}
+h2{font-size:18px;margin:20px 0 8px;color:var(--acc)}
+.lesson{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin:12px 0}
+.lesson h3{color:var(--gold);margin-bottom:8px}
+.lesson p,.lesson li{font-size:15px;color:#cbd5e1}
+.lesson ul{padding-left:20px;margin:8px 0}
+.tag{display:inline-block;background:#0f172a;border:1px solid var(--border);border-radius:12px;padding:2px 10px;font-size:11px;color:var(--dim);margin:2px}
+</style>
+</head>
+<body>
+
+<h1>🎓 IGCSE Tutor</h1>
+<p class="sub">Your personal teacher — flashcards, quizzes, and step-by-step lessons. All data saved locally.</p>
+
+<nav id="subjNav"></nav>
+
+<div class="mode" id="modeNav">
+  <button class="active" data-mode="flash">🃏 Flashcards</button>
+  <button data-mode="quiz">❓ Quiz</button>
+  <button data-mode="learn">📖 Learn (step-by-step)</button>
+</div>
+
+<div id="content"></div>
+
+<script>
+// ============ COURSE DATA ============
+var SUBJECTS = {
+  econ: {name:"📈 Economics (0455)", data:[
+    // flashcards: [question, answer]
+    {q:"What is scarcity?", a:"Unlimited wants but limited resources. The fundamental economic problem."},
+    {q:"What is opportunity cost?", a:"The next best alternative you give up when making a choice."},
+    {q:"Name the 4 factors of production + their rewards", a:"Land (rent), Labour (wages), Capital (interest), Enterprise (profit)."},
+    {q:"What is the law of demand?", a:"As price falls, quantity demanded rises (inverse relationship, ceteris paribus)."},
+    {q:"Movement along the demand curve is caused by…?", a:"A change in the good's OWN price only."},
+    {q:"What shifts the demand curve?", a:"Non-price factors: income, tastes, price of substitutes/complements, population, advertising."},
+    {q:"What is the law of supply?", a:"As price rises, quantity supplied rises (firms are profit-motivated)."},
+    {q:"What is equilibrium price?", a:"Where quantity demanded equals quantity supplied. Markets naturally move toward it."},
+    {q:"What is PED?", a:"Price elasticity of demand = %change in Qd ÷ %change in price. Measures responsiveness."},
+    {q:"Elastic vs inelastic demand", a:"Elastic (>1): demand responds a lot to price. Inelastic (<1): demand barely responds."},
+    {q:"A firm with elastic demand should…?", a:"Cut prices to raise total revenue (quantity rises more than price falls)."},
+    {q:"What is a public good?", a:"Non-rival and non-excludable (e.g. street lights, defence). Market won't provide them."},
+    {q:"What is a negative externality?", a:"A cost to a third party (e.g. pollution) not included in the market price."},
+    {q:"What is inflation?", a:"A sustained rise in the general price level. Money buys less."},
+    {q:"Demand-pull vs cost-push inflation", a:"Demand-pull = too much spending. Cost-push = production costs rise (e.g. oil)."},
+    {q:"Fiscal vs monetary policy", a:"Fiscal = government spending & taxes. Monetary = central bank controls interest rates/money supply."},
+    {q:"What happens when a currency weakens?", a:"Exports get cheaper (good for exporters), imports get more expensive (bad for consumers)."}
+  ], learn:[
+    {title:"1. Scarcity → the whole subject", body:"Everything starts here. You have limited money/time but unlimited wants. <b>Scarcity</b> = not enough to go around. Because things are scarce, you must <b>choose</b>, and every choice has an <b>opportunity cost</b> (the next best thing you gave up).<br><br><b>Example:</b> You have $50. Buy a game OR go to the cinema. If you buy the game, your opportunity cost is the cinema trip."},
+    {title:"2. Factors of production", body:"How does anything get made? Using 4 resources:<br>• <b>Land</b> — natural resources (reward: rent)<br>• <b>Labour</b> — human effort (reward: wages)<br>• <b>Capital</b> — machines/tools (reward: interest)<br>• <b>Enterprise</b> — the risk-taker who organises it (reward: profit)"},
+    {title:"3. Demand & Supply — the core diagram", body:"<b>Demand</b> = how much people WANT at each price (slopes down). <b>Supply</b> = how much firms will SELL at each price (slopes up).<br><br>Where they cross = <b>equilibrium price</b>.<br><br>⚠️ Golden rule: a change in the good's OWN price = <b>movement along</b> the curve. Anything else (income, costs, trends) = <b>shift</b> the whole curve."},
+    {title:"4. Elasticity — the money question", body:"<b>PED</b> = how much less people buy when price goes up.<br><br>• Petrol = <b>inelastic</b> (people need it, few substitutes)<br>• Cinema = <b>elastic</b> (Netflix exists)<br><br>Elastic → cut price to earn more. Inelastic → raise price to earn more. More substitutes = more elastic."},
+    {title:"5. Market failure & government", body:"Sometimes the free market gets it wrong:<br>• <b>Externalities</b> — costs/benefits to others (pollution, education)<br>• <b>Public goods</b> — no one will pay (street lights)<br>• <b>Monopolies</b> — one firm dominates<br><br>Government fixes it with taxes, subsidies, regulation, or providing the good itself."}
+  ]},
+  dt: {name:"🛠️ Design & Technology", data:[
+    {q:"What are the main material categories?", a:"Woods, metals, polymers (plastics), ceramics, composites, smart materials."},
+    {q:"Hardwood vs softwood", a:"Hardwood = from deciduous (leaf-losing) trees, slower growing, denser (oak, beech). Softwood = conifers, faster growing (pine, cedar)."},
+    {q:"What's a ferrous metal?", a:"Contains iron (steel, cast iron). Most rust. Non-ferrous = no iron (aluminium, copper, brass)."},
+    {q:"Thermoplastic vs thermoset", a:"Thermoplastic: can be re-heated and reshaped (acrylic, PVC, ABS). Thermoset: sets permanently, can't re-melt (epoxy, melamine)."},
+    {q:"What is a composite material?", a:"Two or more materials combined for better properties (fibreglass, carbon fibre, plywood)."},
+    {q:"What is a smart material?", a:"Changes properties in response to its environment (shape-memory alloy, thermochromic ink)."},
+    {q:"Name 3 ways to join wood", a:"Nails, screws, dowels, glue (PVA), mortise & tenon, dovetail joints."},
+    {q:"What is injection moulding used for?", a:"Mass-producing plastic parts (bottle caps, Lego). Melted plastic forced into a mould."},
+    {q:"What is CAD/CAM?", a:"CAD = Computer-Aided Design (design on computer). CAM = Computer-Aided Manufacture (machines make it, e.g. laser cutter, 3D printer)."},
+    {q:"What does 'sustainable design' mean?", a:"Designing to reduce environmental impact — recyclable materials, less waste, renewable resources, long product life."},
+    {q:"Name the 6 Rs of sustainability", a:"Reduce, Reuse, Recycle, Rethink, Refuse, Repair."},
+    {q:"What is the design process order?", a:"Research → Design brief → Specification → Generate ideas → Develop → Model/test → Evaluate → Manufacture."}
+  ], learn:[
+    {title:"1. The design process (for your NEA)", body:"Your coursework is 50% of the grade. The process examiners want:<br>1. <b>Identify a problem</b> (real users, real need)<br>2. <b>Research</b> (interview real people, existing products)<br>3. <b>Specification</b> (measurable criteria)<br>4. <b>Ideas</b> (multiple, annotated sketches)<br>5. <b>Develop</b> (test, refine, show WHY you changed things)<br>6. <b>Make</b> (prototype)<br>7. <b>Evaluate</b> (against your spec)<br><br>⚠️ Document EVERYTHING — failed tests are good evidence if you explain what you learned."},
+    {title:"2. Materials — know the families", body:"<b>Woods:</b> hardwood (dense, slow) vs softwood (fast, cheap).<br><b>Metals:</b> ferrous (has iron, rusts) vs non-ferrous (no rust, lighter).<br><b>Plastics:</b> thermoPLASTIC (re-meltable) vs thermoSET (permanent).<br><b>Composites:</b> 2+ materials combined (carbon fibre, plywood).<br><br>Exam tip: when choosing a material, always say the <b>property</b> that makes it right + a <b>specific product</b>."},
+    {title:"3. Common manufacturing processes", body:"• <b>Injection moulding</b> — plastic, mass production<br>• <b>Vacuum forming</b> — thin plastic sheets into shapes<br>• <b>3D printing</b> — additive, prototypes, complex shapes<br>• <b>Laser cutting</b> — precise 2D cutting/engraving<br>• <b>CNC routing</b> — computer-controlled cutting<br>• <b>Casting</b> — molten metal into a mould<br><br>Match process to: material, quantity (one-off vs mass), and cost."}
+  ]},
+  maths: {name:"🧮 Maths (Edexcel)", data:[
+    {q:"What is a ratio?", a:"A comparison of two or more quantities. 3:2 means for every 3 of one, 2 of the other."},
+    {q:"Simplify 12:8", a:"Divide both by HCF (4) → 3:2"},
+    {q:"Split £60 in the ratio 2:1", a:"Total parts = 3. £60÷3 = £20 per part. So £40 : £20."},
+    {q:"What is a percentage increase?", a:"New = Original × (1 + %/100). E.g. +20% = ×1.2"},
+    {q:"Percentage decrease formula", a:"New = Original × (1 − %/100). E.g. −15% = ×0.85"},
+    {q:"Area of a circle", a:"πr² (pi × radius squared)."},
+    {q:"Circumference of a circle", a:"2πr or πd."},
+    {q:"Pythagoras' theorem", a:"a² + b² = c², where c is the hypotenuse (longest side, opposite the right angle)."},
+    {q:"Area of a triangle", a:"½ × base × height."},
+    {q:"What is a prime number?", a:"A number with exactly 2 factors (1 and itself). E.g. 2, 3, 5, 7, 11."},
+    {q:"Mean vs median vs mode", a:"Mean = total÷count. Median = middle value when sorted. Mode = most common."},
+    {q:"Solve: 3x + 5 = 20", a:"3x = 15 → x = 5."},
+    {q:"Probability = ?", a:"Number of favourable outcomes ÷ total outcomes. Always between 0 and 1."}
+  ], learn:[
+    {title:"1. Ratio — the basics", body:"A ratio compares quantities. <b>3:2</b> means 'for every 3 of A, there are 2 of B'.<br><br><b>To share in a ratio:</b><br>1. Add the parts (3+2 = 5 total parts)<br>2. Divide the total by parts (£60 ÷ 5 = £12 per part)<br>3. Multiply back (3×12 = £36, 2×12 = £24)<br><br><b>To simplify:</b> divide all sides by the highest common factor."},
+    {title:"2. Percentages", body:"<b>Increase by X%:</b> multiply by (1 + X/100). +20% → ×1.2<br><b>Decrease by X%:</b> multiply by (1 − X/100). −15% → ×0.85<br><br><b>Reverse (find original):</b> divide by the multiplier. If price after +20% is £120, original = £120 ÷ 1.2 = £100."},
+    {title:"3. Shapes & formulas to memorise", body:"• Circle area = πr², circumference = 2πr<br>• Triangle = ½bh<br>• Rectangle = l×w<br>• Pythagoras = a²+b²=c²<br>• Volume of cuboid = l×w×h<br>• Volume of cylinder = πr²h<br><br>These come up constantly. Write them on a card and test yourself daily."}
+  ]},
+  physics: {name:"⚛️ Physics (Double Award)", data:[
+    {q:"Scalar vs vector quantity", a:"Scalar = magnitude only (speed, distance, mass, energy). Vector = magnitude AND direction (velocity, displacement, force, acceleration)."},
+    {q:"What is velocity?", a:"Speed in a given direction (a vector). E.g. 50 km/h north."},
+    {q:"What is acceleration?", a:"Rate of change of velocity. a = (final velocity − initial velocity) ÷ time."},
+    {q:"Newton's First Law", a:"An object stays at rest or moves at constant velocity unless acted on by a resultant force."},
+    {q:"Newton's Second Law (equation)", a:"F = ma (force = mass × acceleration). Force in Newtons, mass in kg, a in m/s²."},
+    {q:"Newton's Third Law", a:"Every action has an equal and opposite reaction."},
+    {q:"What is weight vs mass?", a:"Mass = amount of matter (kg, constant). Weight = force of gravity (N, changes with location). W = mg."},
+    {q:"Units of force, energy, power", a:"Force = Newtons (N). Energy = Joules (J). Power = Watts (W)."},
+    {q:"Kinetic energy formula", a:"KE = ½mv² (half × mass × velocity squared)."},
+    {q:"Gravitational potential energy", a:"GPE = mgh (mass × gravity × height)."},
+    {q:"What is speed formula?", a:"speed = distance ÷ time."},
+    {q:"What is density?", a:"density = mass ÷ volume (kg/m³ or g/cm³)."},
+    {q:"Resultant force = zero means…", a:"The object is either stationary or moving at constant velocity (balanced forces)."}
+  ], learn:[
+    {title:"1. Scalars vs Vectors — get this first", body:"<b>Scalar</b> = how much (magnitude only): speed, distance, mass, time, energy.<br><b>Vector</b> = how much + which way: velocity, displacement, force, acceleration.<br><br>💡 'Speed' becomes 'velocity' when you add a direction. This distinction is worth marks on its own."},
+    {title:"2. Forces — Newton's 3 laws", body:"<b>1st Law (inertia):</b> things keep doing what they're doing unless a force acts.<br><b>2nd Law:</b> F = ma. More force = more acceleration. More mass = less acceleration.<br><b>3rd Law:</b> every action has an equal, opposite reaction (rocket pushes gas down → gas pushes rocket up)."},
+    {title:"3. Energy formulas", body:"<b>KE = ½mv²</b> — moving things have kinetic energy. (Note: v is SQUARED, so doubling speed = 4× energy!)<br><b>GPE = mgh</b> — high things have gravitational potential energy.<br><br>Energy is conserved — it changes form but is never created or destroyed."}
+  ]},
+  bio: {name:"🧬 Biology (DAB)", data:[
+    {q:"Name the 7 characteristics of living things", a:"Movement, Respiration, Sensitivity, Growth, Reproduction, Excretion, Nutrition (MRS GREN)."},
+    {q:"What is a cell?", a:"The basic unit of life. All living things are made of cells."},
+    {q:"Animal vs plant cell differences", a:"Plants have: cell wall, chloroplasts, large permanent vacuole. Animals don't."},
+    {q:"What does the nucleus do?", a:"Contains DNA, controls the cell's activities."},
+    {q:"What do mitochondria do?", a:"Site of respiration — release energy from food."},
+    {q:"What is respiration?", a:"The process of releasing energy from glucose. Aerobic needs oxygen; anaerobic doesn't."},
+    {q:"What is a microbe/microorganism?", a:"Tiny living things — bacteria, viruses, fungi. Some cause disease, many are useful."},
+    {q:"Name the 5 kingdoms of classification", a:"Animals, Plants, Fungi, Protists, Bacteria (Monera)."},
+    {q:"What is the cell wall made of in plants?", a:"Cellulose."},
+    {q:"What is diffusion?", a:"Movement of particles from high to low concentration (down the concentration gradient)."},
+    {q:"What does the cell membrane do?", a:"Controls what enters and leaves the cell (selectively permeable)."},
+    {q:"What is cytoplasm?", a:"Jelly-like substance where chemical reactions happen."}
+  ], learn:[
+    {title:"1. The 7 characteristics of life — MRS GREN", body:"Every living thing does ALL of these:<br><b>M</b>ovement, <b>R</b>espiration, <b>S</b>ensitivity, <b>G</b>rowth, <b>R</b>eproduction, <b>E</b>xcretion, <b>N</b>utrition.<br><br>Memorise "MRS GREN" and you can answer any 'is it alive?' question."},
+    {title:"2. Cells — the building blocks", body:"<b>Animal cell:</b> nucleus (controls), cytoplasm (reactions), cell membrane (gatekeeper), mitochondria (energy).<br><br><b>Plant cells ADD:</b> cell wall (cellulose, rigid), chloroplasts (photosynthesis), large vacuole (storage/water).<br><br>💡 The 3 extra plant parts are the classic exam answer."},
+    {title:"3. Microbes & classification", body:"<b>Microbes</b> = bacteria, viruses, fungi. Not all bad — yeast makes bread, bacteria make yoghurt, decomposers recycle nutrients.<br><br><b>5 Kingdoms:</b> Animals, Plants, Fungi, Protists, Bacteria. Classification groups living things by shared features."}
+  ]}
+};
+
+var QUIZ = {
+  econ:[
+    {q:"Which of these is a factor of production?", a:["Money","Enterprise","Government","Inflation"], c:1},
+    {q:"The opportunity cost of a decision is…", a:["The money spent","The next best alternative given up","The total cost","The profit made"], c:1},
+    {q:"A fall in the price of a good causes…", a:["A shift in demand","A movement along the demand curve","A shift in supply","Nothing"], c:1},
+    {q:"If PED is less than 1, demand is…", a:["Elastic","Inelastic","Unit elastic","Perfectly elastic"], c:1},
+    {q:"A firm with inelastic demand should…", a:["Cut price","Raise price","Keep price the same","Exit the market"], c:1},
+    {q:"Which is a public good?", a:["A chocolate bar","Street lighting","A car","A cinema ticket"], c:1},
+    {q:"Demand-pull inflation is caused by…", a:["Rising oil prices","Too much demand in the economy","Higher wages","Falling exports"], c:1},
+    {q:"Monetary policy is controlled by…", a:["The government","The central bank","Consumers","Firms"], c:1}
+  ],
+  dt:[
+    {q:"Which is a hardwood?", a:["Pine","Oak","Cedar","Fir"], c:1},
+    {q:"A ferrous metal…", a:["Contains no iron","Contains iron","Is always light","Never rusts"], c:1},
+    {q:"Which plastic can be re-heated and reshaped?", a:["Thermoset","Thermoplastic","Epoxy","Melamine"], c:1},
+    {q:"Carbon fibre is an example of…", a:["A metal","A composite","A smart material","A hardwood"], c:1},
+    {q:"Injection moulding is best for…", a:["One-off prototypes","Mass-producing plastic parts","Bending wood","Joining metal"], c:1},
+    {q:"Which is NOT one of the 6 Rs?", a:["Reduce","Reuse","Recycle","Reheat"], c:1},
+    {q:"CAD stands for…", a:["Computer-Aided Design","Computer-Aided Drawing","Cutting And Design","Calculated And Drawn"], c:0}
+  ],
+  maths:[
+    {q:"Simplify the ratio 18:12", a:["3:2","9:6","2:3","6:4"], c:0},
+    {q:"Increase £80 by 25%", a:["£85","£100","£105","£120"], c:1},
+    {q:"Area of a circle with radius 4 cm (π=3.14)", a:["25.12 cm²","50.24 cm²","12.56 cm²","16 cm²"], c:1},
+    {q:"Solve 5x − 3 = 22", a:["x = 5","x = 6","x = 25","x = 4"], c:0},
+    {q:"Mean of 2, 4, 6, 8, 10", a:["5","6","8","7"], c:1},
+    {q:"Probability of rolling a 4 on a fair die", a:["1/4","1/6","1/2","4/6"], c:1}
+  ],
+  physics:[
+    {q:"Which is a vector quantity?", a:["Speed","Velocity","Mass","Energy"], c:1},
+    {q:"The unit of force is…", a:["Joule","Watt","Newton","Kilogram"], c:2},
+    {q:"Newton's Second Law is…", a:["F = ma","E = mc²","v = d/t","W = mg"], c:0},
+    {q:"Weight is…", a:["The same as mass","The force of gravity on an object","Measured in kg","Always constant"], c:1},
+    {q:"Kinetic energy = ?", a:["mgh","½mv²","ma","mv"], c:1},
+    {q:"If resultant force is zero, an object…", a:["Must be stationary","Moves at constant velocity or is stationary","Accelerates","Moves in a circle"], c:1}
+  ],
+  bio:[
+    {q:"Which is NOT a characteristic of life?", a:["Respiration","Excretion","Photosynthesis","Growth"], c:2},
+    {q:"The 'M' in MRS GREN stands for…", a:["Movement","Mitochondria","Muscle","Microbe"], c:0},
+    {q:"Which structure is ONLY in plant cells?", a:["Nucleus","Cell wall","Cell membrane","Mitochondria"], c:1},
+    {q:"Mitochondria are the site of…", a:["Photosynthesis","Respiration","Protein synthesis","DNA storage"], c:1},
+    {q:"Diffusion is movement from…", a:["Low to high concentration","High to low concentration","Equal concentrations","Inside to outside only"], c:1},
+    {q:"How many kingdoms are living things classified into?", a:["3","4","5","6"], c:2}
+  ]
+};
+
+// ============ STATE ============
+var subj = 'econ';
+var mode = 'flash';
+var data = JSON.parse(localStorage.getItem('tutor_progress')||'{}'); // {subj: {topic: {known:0, unknown:0}}}
+
+function save(){localStorage.setItem('tutor_progress', JSON.stringify(data));}
+
+// ============ RENDER ============
+function renderNav(){
+  var s = document.getElementById('subjNav'); s.innerHTML='';
+  Object.keys(SUBJECTS).forEach(function(k){
+    var b = document.createElement('button');
+    b.textContent = SUBJECTS[k].name;
+    if(k===subj) b.classList.add('active');
+    b.onclick = function(){subj=k; renderNav(); render();};
+    s.appendChild(b);
+  });
+  document.querySelectorAll('#modeNav button').forEach(function(b){
+    b.classList.toggle('active', b.dataset.mode===mode);
+  });
+}
+
+function knownCount(topic){
+  if(!data[subj]||!data[subj][topic]) return 0;
+  return data[subj][topic].known||0;
+}
+
+function render(){
+  var c = document.getElementById('content');
+  if(mode==='flash') renderFlash(c);
+  else if(mode==='quiz') renderQuiz(c);
+  else renderLearn(c);
+}
+
+// Flashcards
+var fIdx = 0, fFlipped = false;
+function renderFlash(c){
+  var cards = SUBJECTS[subj].data;
+  if(fIdx>=cards.length) fIdx=0;
+  c.innerHTML = '<h2>🃏 Flashcards — '+SUBJECTS[subj].name.split(' ').slice(1).join(' ')+'</h2>'+
+    '<div class="stats"><div>Card <b>'+(fIdx+1)+'</b> / '+cards.length+'</div><div>Known <b>'+(data[subj]&&data[subj]._known||0)+'</b></div><div>Learning <b>'+(data[subj]&&data[subj]._unknown||0)+'</b></div></div>'+
+    '<div class="card flash" id="flashCard"><div class="q">'+cards[fIdx].q+'</div><div class="hint">👆 Tap to reveal answer</div></div>'+
+    '<div class="actions"><button class="btn ghost" onclick="prevCard()">← Back</button><button class="btn good" onclick="mark(true)">✓ Know it</button><button class="btn bad" onclick="mark(false)">✗ Don\'t know</button><button class="btn ghost" onclick="nextCard()">Skip →</button></div>';
+  var fc = document.getElementById('flashCard');
+  fc.onclick = function(){
+    if(fFlipped){ fc.innerHTML='<div class="q">'+cards[fIdx].q+'</div><div class="hint">👆 Tap to reveal answer</div>'; fFlipped=false; }
+    else { fc.innerHTML='<div class="q" style="color:#34d399">'+cards[fIdx].a+'</div><div class="hint">👆 Tap to flip back</div>'; fFlipped=true; }
+  };
+}
+function mark(known){
+  if(!data[subj]) data[subj]={};
+  data[subj][known?'_known':'_unknown'] = (data[subj][known?'_known':'_unknown']||0)+1;
+  save();
+  nextCard();
+}
+function nextCard(){fIdx=(fIdx+1)%SUBJECTS[subj].data.length; fFlipped=false; renderFlash(document.getElementById('content'));}
+function prevCard(){fIdx=(fIdx-1+SUBJECTS[subj].data.length)%SUBJECTS[subj].data.length; fFlipped=false; renderFlash(document.getElementById('content'));}
+
+// Quiz
+var qIdx=0, qScore=0, qAnswered=false, qShuffled=[];
+function renderQuiz(c){
+  var qs = QUIZ[subj]||[];
+  if(qShuffled.length===0){ qShuffled = qs.map(function(_,i){return i}).sort(function(){return Math.random()-0.5}).slice(0,6); qIdx=0; qScore=0; }
+  if(qIdx>=qShuffled.length){ renderQuizResult(c); return; }
+  var q = qs[qShuffled[qIdx]];
+  c.innerHTML = '<h2>❓ Quiz — '+SUBJECTS[subj].name.split(' ').slice(1).join(' ')+'</h2>'+
+    '<div class="stats"><div>Question <b>'+(qIdx+1)+'</b> / '+qShuffled.length+'</div><div>Score <b>'+qScore+'</b></div></div>'+
+    '<div class="card"><div class="quiz-q">'+q.q+'</div><div id="opts"></div><div id="fb"></div></div>';
+  var opts = document.getElementById('opts');
+  q.a.forEach(function(opt,i){
+    var b = document.createElement('button');
+    b.className='opt'; b.textContent=opt;
+    b.onclick=function(){ answer(i,q); };
+    opts.appendChild(b);
+  });
+  qAnswered=false;
+}
+function answer(i,q){
+  if(qAnswered) return; qAnswered=true;
+  var opts = document.querySelectorAll('.opt');
+  opts.forEach(function(b,idx){
+    if(idx===q.c) b.classList.add('correct');
+    if(idx===i && i!==q.c) b.classList.add('wrong');
+    b.disabled=true;
+  });
+  if(i===q.c) qScore++;
+  document.getElementById('fb').innerHTML = '<div class="explain"><b>'+(i===q.c?'✅ Correct!':'❌ Not quite.')+'</b> '+q.a[q.c]+'</div><div class="actions" style="margin-top:12px"><button class="btn" onclick="nextQ()">Next →</button></div>';
+}
+function nextQ(){qIdx++; renderQuiz(document.getElementById('content'));}
+function renderQuizResult(c){
+  var total = qShuffled.length;
+  var pct = Math.round(qScore/total*100);
+  var msg = pct>=80?'🌟 Excellent!':pct>=60?'👍 Good, keep going':pct>=40?'📚 Keep practising':'💪 Needs work — review the flashcards';
+  c.innerHTML = '<h2>❓ Quiz Complete</h2><div class="card" style="text-align:center"><div style="font-size:48px;font-weight:700;color:'+(pct>=60?'#34d399':'#fbbf24')+'">'+pct+'%</div><p>'+qScore+' / '+total+' correct</p><p>'+msg+'</p><div class="actions" style="margin-top:16px"><button class="btn" onclick="qShuffled=[];renderQuiz(document.getElementById(\'content\'))">🔁 Try again</button></div></div>';
+}
+
+// Learn
+function renderLearn(c){
+  var lessons = SUBJECTS[subj].learn||[];
+  var html = '<h2>📖 Learn — step-by-step lessons</h2>';
+  lessons.forEach(function(l,i){
+    html += '<div class="lesson"><h3>'+l.title+'</h3><p>'+l.body+'</p><button class="btn ghost" style="margin-top:10px" onclick="markLesson('+i+')">'+ (knownCount('L'+i)>0?'✓ Completed':'Mark as done') +'</button></div>';
+  });
+  c.innerHTML = html;
+}
+function markLesson(i){
+  if(!data[subj]) data[subj]={};
+  data[subj]['L'+i] = {known:1}; save(); renderLearn(document.getElementById('content'));
+}
+
+// ============ INIT ============
+document.getElementById('modeNav').addEventListener('click', function(e){
+  if(e.target.dataset.mode){ mode=e.target.dataset.mode; fIdx=0; fFlipped=false; qShuffled=[]; renderNav(); render(); }
+});
+renderNav();
+render();
+</script>
+</body>
+</html>

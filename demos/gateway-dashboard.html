@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gateway — Isaac</title>
+    <link rel="icon" href="https://is.tg.esf.edu.hk/theme/image_en/favicon2017Jan.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --esf-red: #B6424f;
+            --esf-blue: #3657aa;
+            --bg: #f2f3f7;
+            --card: #fff;
+            --text: #333;
+            --muted: #888;
+            --border: #e0e0e0;
+            --green: #27ae60;
+            --orange: #e67e22;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* ── Top Bar ── */
+        .topbar {
+            background: linear-gradient(135deg, #1a1a2e, #2d2d44);
+            color: white;
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .topbar .brand {
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+        }
+        .topbar .brand img { height: 28px; }
+        .topbar .user-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.9rem;
+        }
+        .topbar .user-area a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .topbar .user-area a:hover { background: rgba(255,255,255,0.12); color: white; }
+        .topbar .user-area a.logout { color: #ff8a80; }
+        .topbar .user-area a.logout:hover { background: rgba(255,138,128,0.15); }
+
+        /* ── Layout ── */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
+
+        /* ── Cards ── */
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+        }
+        .card h2 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            color: var(--muted);
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .card.wide { grid-column: 1 / -1; }
+
+        /* ── Student Card ── */
+        .student-card {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .student-photo {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #e8ecf1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--muted);
+            flex-shrink: 0;
+            border: 3px solid var(--esf-blue);
+        }
+        .student-info h3 { font-size: 1.2rem; margin-bottom: 2px; }
+        .student-info .meta { font-size: 0.85rem; color: var(--muted); }
+        .student-info .house {
+            display: inline-block;
+            background: var(--esf-blue);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+
+        /* ── Attendance ── */
+        .attendance-row {
+            display: flex;
+            gap: 6px;
+            margin: 14px 0;
+            flex-wrap: wrap;
+        }
+        .att-day {
+            flex: 1;
+            min-width: 50px;
+            text-align: center;
+            padding: 8px 4px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            font-size: 0.75rem;
+        }
+        .att-day .date { font-weight: 600; font-size: 0.7rem; color: var(--muted); }
+        .att-day .status { margin-top: 4px; font-weight: 600; font-size: 0.8rem; }
+        .att-day.holiday .status { color: var(--muted); }
+        .att-day.absent .status { color: var(--orange); }
+        .att-day.present .status { color: var(--green); }
+
+        /* ── Quick links ── */
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+        }
+        .link-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.15s;
+            border: 1px solid transparent;
+        }
+        .link-btn:hover {
+            background: #eef2ff;
+            border-color: #c5cef0;
+            color: var(--esf-blue);
+        }
+        .link-btn i { font-size: 1.1rem; width: 20px; text-align: center; }
+
+        /* ── Empty state ── */
+        .empty {
+            text-align: center;
+            padding: 20px;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+        .empty i { font-size: 2rem; display: block; margin-bottom: 8px; opacity: 0.4; }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ TOP BAR ═══ -->
+<header class="topbar">
+    <a href="#" class="brand">
+        <span style="font-size:1.3rem;">🏫</span> ESF Gateway
+    </a>
+    <div class="user-area">
+        <span>👤 Isaac</span>
+        <a href="https://is.tg.esf.edu.hk/changePassword.php">Account</a>
+        <a href="https://sites.google.com/esfcentre.edu.hk/parent-userguide" target="_blank">Help</a>
+        <a href="https://is.tg.esf.edu.hk/src2/module/mnet/auth/mnet/jump.php?HostID=9" target="_blank">ISLE →</a>
+        <a href="https://is.tg.esf.edu.hk/logout7.php" class="logout">Logout</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- Student Profile -->
+    <div class="card">
+        <h2>👨‍🎓 Student</h2>
+        <div class="student-card">
+            <div class="student-photo">🧑</div>
+            <div class="student-info">
+                <h3>Isaac CHAN <span class="house">House E</span></h3>
+                <div class="meta">Roll Group: 10EG · Year 10 · Island School</div>
+            </div>
+        </div>
+        <div class="attendance-row" style="margin-top:16px;">
+            <div class="att-day holiday">
+                <div class="date">Fri 07/08</div>
+                <div class="status">Holiday</div>
+            </div>
+            <div class="att-day holiday">
+                <div class="date">Sat 08/08</div>
+                <div class="status">Holiday</div>
+            </div>
+            <div class="att-day holiday">
+                <div class="date">Sun 09/08</div>
+                <div class="status">Holiday</div>
+            </div>
+            <div class="att-day holiday">
+                <div class="date">Mon 10/08</div>
+                <div class="status">Holiday</div>
+            </div>
+            <div class="att-day holiday">
+                <div class="date">Tue 11/08</div>
+                <div class="status">Holiday 🎉</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="card">
+        <h2>🔗 Quick Links</h2>
+        <div class="link-grid">
+            <a href="https://is.tg.esf.edu.hk/src2/module/attendance/index.php?action=/report4" class="link-btn"><i class="fas fa-calendar-check"></i> Attendance</a>
+            <a href="https://is.tg.esf.edu.hk/src2/module/time_tables/time_tables_parent.php?action=/student" class="link-btn"><i class="fas fa-table"></i> Timetable</a>
+            <a href="https://is.tg.esf.edu.hk/src2/module/cas/register.php" class="link-btn"><i class="fas fa-running"></i> Activities</a>
+            <a href="https://is.tg.esf.edu.hk/src2/module/notice/notice_parent.php?action=/list" class="link-btn"><i class="fas fa-bell"></i> eNotices</a>
+            <a href="https://is.tg.esf.edu.hk/src2/module/bulletin/index_m.php" class="link-btn"><i class="fas fa-bullhorn"></i> Bulletin</a>
+            <a href="https://is.tg.esf.edu.hk/src2/module/calendar/index.php" class="link-btn"><i class="fas fa-calendar"></i> Calendar</a>
+            <a href="https://is.tg.esf.edu.hk/src2/module/document_repository/index.php?View=Manage&Site=IS" class="link-btn"><i class="fas fa-folder"></i> School Docs</a>
+            <a href="https://is.tg.esf.edu.hk/src2/module/student_option/student_option_student.php?action=/form" class="link-btn"><i class="fas fa-tasks"></i> Options</a>
+        </div>
+    </div>
+
+    <!-- eNotices -->
+    <div class="card">
+        <h2>📬 eNotices</h2>
+        <div class="empty"><i class="fas fa-inbox"></i> No new notices</div>
+    </div>
+
+    <!-- Bulletin -->
+    <div class="card">
+        <h2>📢 Bulletin</h2>
+        <div class="empty"><i class="fas fa-newspaper"></i> No updates</div>
+    </div>
+
+    <!-- Calendar -->
+    <div class="card wide">
+        <h2>📅 Calendar</h2>
+        <div style="display:flex;align-items:center;justify-content:center;padding:30px;">
+            <a href="https://is.tg.esf.edu.hk/src2/module/calendar/index.php" 
+               style="color:var(--esf-blue);text-decoration:none;font-weight:600;font-size:1rem;">
+                → Open Full Calendar
+            </a>
+            <span style="margin:0 16px;color:var(--muted);">or</span>
+            <a href="https://is.tg.esf.edu.hk/src2/module/calendar/index.php" 
+               style="color:var(--esf-blue);text-decoration:none;font-weight:600;font-size:0.9rem;">
+                📥 Sync to Google Calendar
+            </a>
+        </div>
+    </div>
+
+    <!-- Staff Search -->
+    <div class="card wide">
+        <h2>🔍 Staff Directory</h2>
+        <div style="display:flex;align-items:center;justify-content:center;padding:20px;">
+            <a href="https://is.tg.esf.edu.hk/index2.php" 
+               style="color:var(--esf-blue);text-decoration:none;font-weight:600;font-size:1rem;">
+                → Search Staff on Gateway
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    ESF Gateway · Island School · 
+    <a href="https://is.tg.esf.edu.hk/" style="color:var(--esf-blue);">Open Gateway</a>
+</footer>
+
+</body>
+</html>

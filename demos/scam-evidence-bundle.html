@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>📦 SF Express 騙案 — 完整證據包 | Evidence Bundle</title>
+<style>
+:root{--bg:#0a0e14;--card:#131820;--border:#1e293b;--red:#f85149;--orange:#d2991d;--green:#3fb950;--blue:#58a6ff;--text:#c9d1d9;--muted:#6e7681}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang HK",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding:20px}
+.container{max-width:1000px;margin:0 auto}
+h1{font-size:28px;margin-bottom:4px}h2{font-size:18px;color:var(--orange);margin:24px 0 8px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin:12px 0}
+.tag{display:inline-block;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:600;margin:2px}
+.tr{background:rgba(248,81,73,.15);color:var(--red)}.to{background:rgba(210,153,29,.15);color:var(--orange)}.tb{background:rgba(88,166,255,.15);color:var(--blue)}.tg{background:rgba(63,185,80,.15);color:var(--green)}
+.alert{background:rgba(248,81,73,.1);border:1px solid rgba(248,81,73,.3);border-radius:8px;padding:14px;margin:10px 0}
+.alert strong{color:var(--red)}
+.transcript{background:#000;color:var(--green);padding:15px;border-radius:8px;font-family:'SF Mono',Menlo,monospace;font-size:12px;max-height:500px;overflow-y:auto;line-height:1.8}
+.transcript .ts{color:var(--muted)}
+.transcript .scammer{color:var(--orange)}
+.transcript .victim{color:var(--blue)}
+.transcript .key{color:var(--red);font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--border)}th{color:var(--muted);font-size:11px}
+img{max-width:100%;border-radius:8px;margin:8px 0}
+.evidence-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.evidence-grid img{width:100%;height:300px;object-fit:cover;border:1px solid var(--border);border-radius:6px}
+.btn{display:inline-block;padding:8px 16px;border-radius:6px;font-size:13px;cursor:pointer;border:none;font-weight:600;margin:4px;text-decoration:none;color:#fff}
+.btn-r{background:var(--red)}.btn-b{background:var(--blue)}.btn-g{background:var(--green)}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📦 SF Express 騙案 — 完整證據包</h1>
+<p style="color:var(--muted)">Case #SF-2026-0804 | 2026年8月4日</p>
+
+<div class="card">
+  <h2>📋 案件摘要</h2>
+  <table>
+    <tr><th>項目</th><th>詳情</th></tr>
+    <tr><td>騙案類型</td><td>假冒順豐速運 + WhatsApp + 螢幕共享 + 付款詐騙</td></tr>
+    <tr><td>日期時間</td><td>2026年8月4日 下午3:22</td></tr>
+    <tr><td>通話時長</td><td>24分鐘</td></tr>
+    <tr><td>受害者</td><td>14歲未成年人</td></tr>
+    <tr><td>損失金額</td><td><span class="tag tr">HK$103</span>（騙徒稱為「認證代碼」）</td></tr>
+    <tr><td>釣魚網站</td><td><code>326939.cc</code>（2026-08-04註冊，NameSilo）</td></tr>
+    <tr><td>伺服器IP</td><td>103.42.147.27 (Skycloud TW) / 103.183.198.25 (SYVC TW)</td></tr>
+    <tr><td>詐騙電話</td><td>WhatsApp: 44360687 / 64935240</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>🎥 證據檔案清單</h2>
+  <table>
+    <tr><th>檔案</th><th>大小</th><th>描述</th></tr>
+    <tr><td>📹 ScreenRecording...mp4</td><td>187MB / 16分鐘</td><td>完整螢幕錄影 (1440x1920)</td></tr>
+    <tr><td>🎙️ Cheung Sha Wan Road 2.m4a</td><td>11MB / 24分鐘</td><td>完整通話錄音</td></tr>
+    <tr><td>🖼️ Screenshot...png</td><td>675KB</td><td>螢幕截圖</td></tr>
+    <tr><td>📝 transcript.txt</td><td>~20KB</td><td>AI 轉錄全文 (faster-whisper)</td></tr>
+    <tr><td>🖼️ 17 frames</td><td>~2MB</td><td>關鍵畫面截圖</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>🔍 完整詐騙流程 (從錄音/螢幕錄影重建)</h2>
+  
+  <h3>第一階段：假冒順豐SMS → WhatsApp</h3>
+  <div class="alert">受害者收到假冒順豐SMS → 聯絡WhatsApp「客服」→ 騙徒冒充順豐客服主任</div>
+  
+  <h3>第二階段：建立信任 + 假遺失報告</h3>
+  <div class="alert">騙徒聲稱包裹在快遞過程中遺失 → 詢問貨品價值 → 說明「$500以下賠$500」→ 提供參考編號 6447573</div>
+
+  <h3>第三階段：引導至釣魚網站 (326939.cc)</h3>
+  <div class="alert"><strong>關鍵時間點 [07:09]：</strong>騙徒說出釣魚域名 <code>326939.cc</code> → 引導受害者打開網站 → 點擊「線上客服」→ 要求輸入中文姓名</div>
+
+  <h3>第四階段：螢幕共享 + Alipay操作</h3>
+  <div class="alert">騙徒要求開螢幕共享 → 睇到受害者Alipay畫面 → 發現受害者沒有香港銀行戶口(14歲) → 引導開通「企業收款服務」</div>
+
+  <h3>第五階段：HK$103「認證」付款</h3>
+  <div class="alert"><strong>⚠️ 關鍵詐騙手法：</strong>騙徒發送Alipay付款QR碼 → 聲稱輸入「認證代碼 103」→ 實際上是 HK$103 付款 → 受害者付款後騙徒說「你輸錯了」</div>
+
+  <div class="transcript">
+<span class="ts">[20:02]</span> <span class="victim">所以我是不是要給103？</span>
+<span class="ts">[20:08]</span> <span class="scammer">不用你過數出去！聽明白了沒有？</span>
+<span class="ts">[20:49]</span> <span class="victim key">他沒有談出來 直接就過數了</span>
+<span class="ts">[21:00]</span> <span class="scammer">你剛剛因為你是這邊的話，過數的這個大碼輸錯了</span>
+  </div>
+</div>
+
+<div class="card">
+  <h2>📝 完整對話轉錄 (節錄)</h2>
+  <div class="transcript" id="transcript-preview">
+    <p style="color:var(--muted)">載入中...</p>
+  </div>
+  <p style="margin-top:8px"><a class="btn btn-b" href="file:///tmp/scam-evidence/transcript.txt" target="_blank">📄 查看完整轉錄</a></p>
+</div>
+
+<div class="card">
+  <h2>🖼️ 螢幕錄影關鍵畫面</h2>
+  <div class="evidence-grid" id="frames-grid"></div>
+</div>
+
+<div class="card">
+  <h2>🚨 舉報狀態</h2>
+  <table>
+    <tr><th>機構</th><th>狀態</th><th>詳情</th></tr>
+    <tr><td>Cloudflare</td><td><span class="tag tg">✅ 已完成</span></td><td>326929.pw 保護已移除 (Report #44b834a2051c7512)</td></tr>
+    <tr><td>NameSilo</td><td><span class="tag to">🔄 已提交</span></td><td>326929.pw + 326939.cc + bwkf003.cc</td></tr>
+    <tr><td>HK Police ADCC</td><td><span class="tag to">🔄 已致電</span></td><td>18222 — 需補充此證據包</td></tr>
+    <tr><td>Skycloud TW</td><td><span class="tag to">🔄 已發送</span></td><td>cliff@skycloud.com.tw</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>📧 發送證據給ADCC</h2>
+  <div class="alert">
+    致電 <strong>18222</strong> 後，可將以下證據電郵至警方：<br><br>
+    • 完整通話錄音 (24分鐘)<br>
+    • 螢幕錄影 (16分鐘)<br>
+    • AI轉錄全文<br>
+    • 釣魚網站截圖 + 域名註冊資料<br>
+    • 騙徒WhatsApp號碼: 44360687, 64935240<br>
+    • 釣魚域名: 326929.pw, 326939.cc<br>
+    • 伺服器IP: 103.42.147.27, 103.183.198.25
+  </div>
+</div>
+
+</div>
+
+<script>
+// Load transcript
+fetch('file:///tmp/scam-evidence/transcript.txt')
+  .then(r => r.text())
+  .then(t => {
+    document.getElementById('transcript-preview').innerHTML = t.split('\n').map(line => {
+      if(line.startsWith('===')) return `<div style="color:var(--orange);margin-top:10px;font-weight:700">${line}</div>`;
+      if(line.match(/^\s*$/)) return '<br>';
+      return `<div>${line}</div>`;
+    }).join('');
+  })
+  .catch(() => document.getElementById('transcript-preview').innerHTML = '<p style="color:var(--muted)">轉錄檔案需從本地載入。請打開 /tmp/scam-evidence/transcript.txt</p>');
+
+// Load frames
+let framesHtml = '';
+for(let i=1; i<=17; i++){
+  let ts = [10,30,60,120,180,300,420,540,660,780,900,480,600,720,840,960,120][i-1] || i*60;
+  framesHtml += `<div><img src="file:///tmp/scam-evidence/frames/frame_${ts}s.jpg" onerror="this.parentElement.innerHTML='<div style=background:#1a1a2e;height:300px;display:flex;align-items:center;justify-content:center;color:var(--muted)>🖼️ ${Math.floor(ts/60)}:${String(ts%60).padStart(2,\"0\")}</div>'"><div style="font-size:10px;color:var(--muted);text-align:center">${Math.floor(ts/60)}:${String(ts%60).padStart(2,'0')}</div></div>`;
+}
+document.getElementById('frames-grid').innerHTML = framesHtml;
+</script>
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>326929.pw — 完整诈骗流程复现 | Full Scam Flow Replica</title>
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, "Microsoft JhengHei", "PingFang TC", sans-serif; background: #1a1a2e; color: #e0e0e0; }
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+/* ===== ANALYSIS HEADER ===== */
+.analysis-header { background: linear-gradient(135deg, #c0392b, #e74c3c); padding: 30px; border-radius: 12px; margin-bottom: 20px; }
+.analysis-header h1 { font-size: 28px; margin-bottom: 10px; }
+.analysis-header .meta { font-size: 13px; opacity: 0.85; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 700; margin-right: 6px; }
+.badge-danger { background: #fff; color: #c0392b; }
+.badge-info { background: #3498db; color: #fff; }
+.badge-warn { background: #f39c12; color: #fff; }
+.badge-dead { background: #555; color: #999; }
+
+/* ===== SECTION ===== */
+.section { background: #16213e; border-radius: 10px; padding: 25px; margin-bottom: 20px; border-left: 4px solid #e74c3c; }
+.section h2 { color: #e74c3c; font-size: 20px; margin-bottom: 15px; }
+.section h3 { color: #f39c12; font-size: 16px; margin: 15px 0 8px; }
+.section p, .section li { line-height: 1.7; font-size: 14px; margin-bottom: 6px; }
+.section ul { padding-left: 20px; }
+
+/* ===== TABLE ===== */
+.info-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+.info-table th, .info-table td { border: 1px solid #2a2a4a; padding: 8px 12px; text-align: left; }
+.info-table th { background: #1a1a3e; color: #e74c3c; font-weight: 700; }
+.info-table tr:hover { background: rgba(231,76,60,0.08); }
+.info-table a { color: #3498db; word-break: break-all; }
+
+/* ===== FLOW STEPS ===== */
+.flow-steps { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+.flow-step { flex: 1; min-width: 180px; background: #1a1a3e; border-radius: 8px; padding: 15px; text-align: center; position: relative; }
+.flow-step .step-num { width: 30px; height: 30px; border-radius: 50%; background: #e74c3c; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+.flow-step .step-title { font-weight: 700; color: #f39c12; margin-bottom: 5px; }
+.flow-step .step-desc { font-size: 12px; color: #aaa; }
+.flow-arrow { display: flex; align-items: center; color: #e74c3c; font-size: 20px; }
+
+/* ===== PHISHING UI SIMULATION ===== */
+.phish-ui { background: #fff; color: #333; border-radius: 8px; overflow: hidden; margin: 15px 0; border: 2px solid #e74c3c; }
+.phish-ui-header { background: #1a3a5c; color: #fff; padding: 10px 15px; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
+.phish-ui-header .url-bar { background: #fff; color: #333; padding: 4px 10px; border-radius: 4px; font-size: 12px; }
+.phish-ui-body { padding: 0; max-height: 500px; overflow-y: auto; }
+.phish-ui-body img { max-width: 100%; }
+
+/* ===== INSURANCE FORM (保单) ===== */
+.insurance-doc { background: #fff; color: #333; padding: 20px; font-size: 13px; line-height: 2; }
+.insurance-doc .doc-title { text-align: center; font-size: 18px; font-weight: 700; margin: 15px 0; }
+.insurance-doc .doc-header-img { text-align: center; }
+.insurance-doc .doc-header-img img { width: 120px; }
+.insurance-doc .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 20px; margin: 10px 0; }
+.insurance-doc .info-item { display: flex; }
+.insurance-doc .info-item .label { font-weight: 700; }
+.insurance-doc .info-item .value { color: #e74c3c; font-weight: 700; }
+.insurance-doc .danger-text { color: #e74c3c; font-weight: 700; }
+.insurance-doc .stamp-area { text-align: right; margin-top: 15px; }
+.insurance-doc .stamp-area img { width: 80px; }
+
+/* ===== FORM ELEMENTS ===== */
+.scam-form { padding: 20px; }
+.scam-form input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; margin-bottom: 12px; }
+.scam-form .btn { display: block; width: 100%; padding: 12px; background: #f1a841; color: #fff; border: none; border-radius: 4px; font-size: 16px; font-weight: 700; cursor: pointer; text-align: center; }
+.scam-form .btn:hover { background: #e09630; }
+.scam-form .btn-red { background: #c0392b; }
+.scam-form .btn-red:hover { background: #a93226; }
+.scam-form .btn-green { background: #27ae60; }
+.scam-form .btn-green:hover { background: #219a52; }
+
+/* ===== CHAT SIMULATION ===== */
+.chat-window { background: #f5f5f5; border-radius: 8px; overflow: hidden; margin: 10px 0; }
+.chat-header { background: #1a3a5c; color: #fff; padding: 12px 15px; font-weight: 700; }
+.chat-messages { padding: 15px; min-height: 200px; max-height: 350px; overflow-y: auto; }
+.chat-msg { margin-bottom: 12px; display: flex; gap: 10px; }
+.chat-msg.agent { flex-direction: row; }
+.chat-msg.victim { flex-direction: row-reverse; }
+.chat-msg .avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.chat-msg.agent .avatar { background: #3498db; color: #fff; }
+.chat-msg.victim .avatar { background: #27ae60; color: #fff; }
+.chat-msg .bubble { max-width: 75%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.5; }
+.chat-msg.agent .bubble { background: #fff; border: 1px solid #e0e0e0; }
+.chat-msg.victim .bubble { background: #3498db; color: #fff; }
+.chat-input-area { display: flex; padding: 10px; border-top: 1px solid #e0e0e0; background: #fff; }
+.chat-input-area input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 20px; font-size: 13px; }
+.chat-input-area .send-btn { margin-left: 8px; padding: 10px 20px; background: #3498db; color: #fff; border: none; border-radius: 20px; cursor: pointer; font-size: 13px; }
+
+/* ===== API MOCK ===== */
+.api-box { background: #0d1117; color: #58a6ff; padding: 15px; border-radius: 6px; font-family: 'SF Mono', 'Monaco', 'Menlo', monospace; font-size: 12px; line-height: 1.6; margin: 10px 0; overflow-x: auto; }
+.api-box .method { color: #f39c12; font-weight: 700; }
+.api-box .endpoint { color: #58a6ff; }
+.api-box .key { color: #79c0ff; }
+.api-box .string { color: #a5d6ff; }
+.api-box .comment { color: #8b949e; }
+
+/* ===== CODE BLOCK ===== */
+.code-block { background: #0d1117; color: #e0e0e0; padding: 15px; border-radius: 6px; font-family: 'SF Mono', 'Monaco', 'Menlo', monospace; font-size: 12px; line-height: 1.6; margin: 10px 0; overflow-x: auto; }
+
+/* ===== ANNOTATION ===== */
+.annotation { background: rgba(231,76,60,0.1); border: 1px dashed #e74c3c; padding: 10px 15px; border-radius: 6px; margin: 10px 0; font-size: 12px; }
+.annotation strong { color: #e74c3c; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .flow-steps { flex-direction: column; }
+  .flow-arrow { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ===== HEADER ===== -->
+<div class="analysis-header">
+  <h1>🔴 326929.pw — 完整诈骗流程分析 &amp; 复现</h1>
+  <div class="meta">
+    <span class="badge badge-danger">活跃钓鱼网站</span>
+    <span class="badge badge-info">注册时间: 2026-08-03</span>
+    <span class="badge badge-warn">NameSilo + Cloudflare</span>
+    <span class="badge badge-info">IP: 103.42.147.27 / 103.183.198.25 (台湾)</span>
+  </div>
+</div>
+
+<!-- ===== OVERVIEW ===== -->
+<div class="section">
+  <h2>📋 诈骗概述</h2>
+  <p><strong>类型：</strong>假冒银联 + 虚假保险取消 + 身份信息窃取 复合式钓鱼诈骗</p>
+  <p><strong>目标：</strong>繁体中文用户（台湾/香港地区）</p>
+  <p><strong>核心恐吓手段：</strong>声称受害者有「百万保障保险」即将自动扣费（¥96,000/10年），不取消将从所有银行账户强制扣款，无需密码验证</p>
+  <p><strong>窃取信息：</strong>姓名、身份证号码、工号验证（社交工程增强可信度）</p>
+
+  <h3>诈骗流程</h3>
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="step-num">1</div>
+      <div class="step-title">恐吓</div>
+      <div class="step-desc">受害者看到伪造银联官网，弹出"保单查询"窗口，声称即将自动扣费</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="step-num">2</div>
+      <div class="step-title">验证</div>
+      <div class="step-desc">输入"客服工号"，后端API返回假客服照片+姓名，增强可信度</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="step-num">3</div>
+      <div class="step-title">收集</div>
+      <div class="step-desc">输入姓名+身份证号，显示伪造保单（信息被填入）</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="step-num">4</div>
+      <div class="step-title">客服接管</div>
+      <div class="step-desc">引导至在线客服系统（CRMEB），真人骗子继续诈骗</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PHISHING PAGE REPLICA ===== -->
+<div class="section">
+  <h2>🎭 钓鱼页面完整复现</h2>
+  <p>以下是 <code>326929.pw</code> 实际呈现的完整钓鱼流程（基于真实HTML源码重建）：</p>
+
+  <div class="phish-ui">
+    <div class="phish-ui-header">
+      <span>🔒 https://326929.pw</span>
+      <span class="url-bar">⚠️ 仿冒银联官网 (cn.unionpay.com)</span>
+    </div>
+    <div class="phish-ui-body" style="background:#fff; min-height:400px;">
+
+      <!-- FAKE UNIONPAY HEADER -->
+      <div style="background:#1a3a5c; color:#fff; padding:10px 20px; display:flex; justify-content:space-between; align-items:center;">
+        <div style="font-size:18px; font-weight:700;">UnionPay 银联</div>
+        <div style="display:flex; gap:15px; font-size:13px;">
+          <span>個人業務</span><span>商戶業務</span><span>機構業務</span>
+          <span>新聞中心</span><span>了解銀聯</span><span>銀聯國際</span>
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT AREA -->
+      <div style="padding:20px; text-align:center; position:relative; min-height:300px;">
+        <div style="background:#f0f4f8; border-radius:8px; padding:40px; margin:20px 0;">
+          <h2 style="color:#1a3a5c;">中國銀聯 — 首頁</h2>
+          <p style="color:#666; margin:10px 0;">銀聯行動支付 | 卡產品與權益 | 安全與科普 | 生活便民服務</p>
+        </div>
+
+        <!-- OVERLAY: POLICY LOOKUP BUTTONS -->
+        <div style="position:absolute; bottom:20px; right:20px; display:flex; flex-direction:column; gap:8px;">
+          <button onclick="document.getElementById('popup-agent').style.display='block'" style="background:#f1a841; color:#fff; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; font-size:14px; font-weight:700; box-shadow:0 2px 10px rgba(0,0,0,0.2);">
+            🔍 保單查詢
+          </button>
+          <button onclick="document.getElementById('popup-verify').style.display='block'" style="background:#3498db; color:#fff; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; font-size:14px; font-weight:700; box-shadow:0 2px 10px rgba(0,0,0,0.2);">
+            👤 服務人員查驗
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <strong>🔍 分析：</strong>页面伪装成银联官网，右下角两个按钮是钓鱼入口。注意页面内的图片资源（CSS文件夹内有200+张UnionPay官方图片）都是从 <code>cn.unionpay.com</code> 热链接或本地克隆的，使页面看起来完全真实。
+  </div>
+</div>
+
+<!-- ===== POPUP 1: AGENT VERIFICATION ===== -->
+<div class="section" id="popup-verify" style="display:block;">
+  <h2>👤 弹窗1：服務人員查驗（Agent Verification）</h2>
+  <p>受害者点击"服務人員查驗"后出现的弹窗。输入工号 → 后端API返回假客服信息。</p>
+
+  <div class="phish-ui" style="max-width:450px; margin:15px auto;">
+    <div class="phish-ui-header">微保管家 — 服務人員驗證 <span onclick="this.parentElement.parentElement.style.display='none'" style="cursor:pointer;">✕</span></div>
+    <div class="phish-ui-body">
+      <div class="scam-form">
+        <h3 style="text-align:center; color:#333; margin-bottom:15px;">服務人員驗證</h3>
+        <input type="text" id="agent-id-input" placeholder="請輸入服務人員工號碼" class="job_number">
+        <button class="btn" onclick="verifyAgent()">立即驗證</button>
+
+        <!-- RESULT (hidden by default) -->
+        <div id="agent-result" style="display:none; text-align:center; margin-top:15px; padding:15px; border:1px solid #e8d598; border-radius:8px;">
+          <p style="color:#333; font-size:13px; margin-bottom:10px;">尊敬的用戶，您輸入的工號驗證結果</p>
+          <div style="width:70px; height:70px; border-radius:50%; background:#3498db; color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:28px; margin:10px 0;">👨‍💼</div>
+          <p style="color:#333;"><b>姓名：</b><span id="agent-name">陳志明</span></p>
+          <p style="color:#333;"><b>職務：</b><span id="agent-role">高級客戶經理</span></p>
+          <p style="color:#333;"><b>職業證編號：</b><span id="agent-cert">HK-2024-08856</span></p>
+          <p style="color:#333;"><b>業務機構：</b><span id="agent-org">中國人民財產保險股份有限公司</span></p>
+          <p style="color:#dea930; font-size:12px; margin-top:10px;">隨時歡迎您的諮詢，我將為您提供一站式的保險服務！</p>
+          <button class="btn btn-red" style="margin-top:12px;" onclick="showPolicyForm()">查詢我的保單 →</button>
+        </div>
+
+        <div style="text-align:center; margin-top:15px;">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='30'%3E%3Crect fill='%233498db' width='120' height='30' rx='4'/%3E%3Ctext fill='white' x='60' y='20' text-anchor='middle' font-size='12'%3E微保官方保險代理平台%3C/text%3E%3C/svg%3E" alt="微保" style="width:180px;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <strong>🔍 分析：</strong>后端API <code>GET /api/Getstaff?sid={工号}</code> 返回JSON：<code>{title: "姓名", des: "职务", url: "证书编号", des2: "机构", image: "/头像路径"}</code>。这些数据由诈骗团伙后台管理（CRMEB客服系统），可以随时添加/修改假客服信息。
+  </div>
+
+  <!-- API mock display -->
+  <div class="api-box">
+    <span class="comment">// 真实API请求（326929.pw 源码第2662行）</span><br>
+    <span class="method">GET</span> <span class="endpoint">/api/Getstaff?sid=12345</span><br>
+    <span class="comment">// 预期返回：</span><br>
+    {<br>
+    &nbsp;&nbsp;<span class="key">"title"</span>: <span class="string">"陳志明"</span>,<br>
+    &nbsp;&nbsp;<span class="key">"des"</span>: <span class="string">"高級客戶經理"</span>,<br>
+    &nbsp;&nbsp;<span class="key">"url"</span>: <span class="string">"HK-2024-08856"</span>,<br>
+    &nbsp;&nbsp;<span class="key">"des2"</span>: <span class="string">"中國人民財產保險股份有限公司"</span>,<br>
+    &nbsp;&nbsp;<span class="key">"image"</span>: <span class="string">"/uploads/agent_001.jpg"</span><br>
+    }
+  </div>
+</div>
+
+<!-- ===== POPUP 2: INSURANCE POLICY ===== -->
+<div class="section" id="popup-policy">
+  <h2>📄 弹窗2：伪造保单 —「中國人保百萬保障保單」</h2>
+  <p>受害者输入姓名+身份证号后显示此保单。这是诈骗的核心——让受害者相信真有一份保险在扣费。</p>
+
+  <div class="phish-ui" style="max-width:550px; margin:15px auto;">
+    <div class="phish-ui-header">保單查詢 <span style="cursor:pointer;">✕</span></div>
+    <div class="insurance-doc">
+      <div class="doc-header-img">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='40'%3E%3Crect fill='%23c0392b' width='110' height='40' rx='4'/%3E%3Ctext fill='white' x='55' y='25' text-anchor='middle' font-size='12'%3EPICC 中國人保%3C/text%3E%3C/svg%3E" alt="PICC">
+      </div>
+      <div class="doc-title">中國人保百萬保障保單（電子保單）</div>
+
+      <div class="info-grid">
+        <div class="info-item"><span class="label">投保人：</span><span class="value" id="doc-name">________</span></div>
+        <div class="info-item"><span class="label">身分證字號：</span><span class="value" id="doc-id">________</span></div>
+        <div class="info-item"><span class="label">保單流水號碼：</span><span class="value">BWBZ2023111310510511</span></div>
+        <div class="info-item"><span class="label">保單號碼：</span><span class="value">BWBZ2023050745879</span></div>
+      </div>
+
+      <div style="border-top:1px solid #999; border-bottom:1px solid #999; padding:8px 0; margin:10px 0; font-size:12px;">
+        請仔細閱讀本保單，以確保其內容與投保人的投保要求一致。
+      </div>
+
+      <p>本保險契約由保險條款、投保單、保險單或其他保險憑證、批單組成。</p>
+      <p><b>保險額度</b> 100萬</p>
+      <p><b>保障費用</b> 800元/月 9600元/年 96000元/拾年 註：（當前暫未扣費，繳費方式：按年/按月/全繳清）。</p>
+      <p><b>保障範圍</b> 個人支付帳戶（銀行卡、零錢、零錢通、理財通、銀行儲蓄、分付、銀聯網貸額度）</p>
+      <p><b>保障查詢</b> 提供第三方支付平台辦理業務查詢保險業務（微信，支付寶，微保，京東等）</p>
+      <p><b>保障說明</b> 個人支付帳戶因被詐騙或他人盜用而導致的資金損失，按損失金額承諾賠付，不限賠付次數，每年累計賠付金額最高100萬。</p>
+      <p><b>重要提示</b> 百萬保障保險業務如沒在規定時間內關閉，會從您名下銀聯帳戶，微信，支付寶餘額裡扣除保險費用，保險費用是一次性繳清人民幣96000元，扣滿拾年後您就成為了百萬保障的一名保險用戶。</p>
+
+      <p class="danger-text">扣費說明：若您同意繼續使用銀聯中心按照商家扣費指令有權從您名下銀聯帳戶逐一扣費（儲蓄卡，信用卡）以及您的第三方金融賬戶（支付寶，微信，貸款賬戶）且後續簡訊無需驗證您的付款密碼，並配合工作人員註銷所有銀聯違規網貸，下修年利率！不下調會造成個人徵信不良，產生高額手續費滯納金！</p>
+
+      <p>鑑於本保單明細表中列明的投保人向中國人民財產保險股份有限公司提交投保資訊。（該投保申請及資料被視為本保險契約的有效組成部分），投保人同意依本保險契約的約定承擔責任。特立本保單為憑證</p>
+      <p>簽發機構：中國人民財產保險股份有限公司</p>
+      <p>郵遞區號：550081</p>
+      <p>協辦監管：微保百萬保障（中國人保財險）</p>
+      <p>製單：吳曉晗</p>
+
+      <div class="stamp-area">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='38' fill='none' stroke='%23c0392b' stroke-width='2'/%3E%3Ctext fill='%23c0392b' x='40' y='34' text-anchor='middle' font-size='10'%3E中國人民保險%3C/text%3E%3Ctext fill='%23c0392b' x='40' y='50' text-anchor='middle' font-size='10'%3E集團股份有限公司%3C/text%3E%3C/svg%3E" alt="stamp">
+        <p style="font-size:11px; margin-top:5px;">企業信用稅號：91100000710931483R</p>
+        <p style="font-size:11px;">中國人民保險集團股份有限公司</p>
+        <p style="font-size:11px;">核驗日期：2024/10/2</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data entry form -->
+  <div class="phish-ui" style="max-width:450px; margin:15px auto;">
+    <div class="phish-ui-header">查詢保單 — 輸入您的資料 <span style="cursor:pointer;">✕</span></div>
+    <div class="scam-form">
+      <h3 style="text-align:center; color:#333; margin-bottom:15px;">查詢保單</h3>
+      <input type="text" id="input-name" placeholder="姓名">
+      <input type="text" id="input-idnum" placeholder="身分證號碼">
+      <button class="btn btn-red" onclick="fillPolicy()">查詢</button>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <strong>🔍 分析：</strong>姓名和身份证号被JavaScript填入保单模板的 <code>#fullname</code> 和 <code>#id_num</code> 元素中，显示为红色文字，让受害者觉得"系统里真有我的保单"。实际上这些数据可能也被POST到后端保存用于后续诈骗。
+  </div>
+
+  <div class="code-block">
+<span style="color:#8b949e;">// 326929.pw 源码第2681-2699行 — check1()函数</span>
+<span style="color:#ff7b72;">function</span> <span style="color:#d2a8ff;">check1</span>() {
+  <span style="color:#ff7b72;">var</span> fullname = $(<span style="color:#a5d6ff;">'.fullname'</span>).val();
+  <span style="color:#ff7b72;">var</span> id_num = $(<span style="color:#a5d6ff;">'.id_num'</span>).val();
+  <span style="color:#ff7b72;">if</span> (fullname == <span style="color:#a5d6ff;">''</span>) { alert(<span style="color:#a5d6ff;">'請輸入姓名'</span>); <span style="color:#ff7b72;">return</span>; }
+  <span style="color:#ff7b72;">if</span> (id_num == <span style="color:#a5d6ff;">''</span>) { alert(<span style="color:#a5d6ff;">'請輸入身分證字號'</span>); <span style="color:#ff7b72;">return</span>; }
+  $(<span style="color:#a5d6ff;">'#fullname'</span>).text(fullname);    <span style="color:#8b949e;">// ← 填入保单</span>
+  $(<span style="color:#a5d6ff;">'#id_num'</span>).text(id_num);        <span style="color:#8b949e;">// ← 填入保单</span>
+  $(<span style="color:#a5d6ff;">'.sdoc'</span>).show();               <span style="color:#8b949e;">// ← 显示伪造保单</span>
+}
+  </div>
+</div>
+
+<!-- ===== CUSTOMER SERVICE CHAT SYSTEM ===== -->
+<div class="section">
+  <h2>💬 在线客服系统 (CRMEB 客服后台)</h2>
+  <p>诈骗团伙使用完整的 <code>CRMEB</code> 客服系统（基于 ThinkPHP + iView-admin）管理受害者对话。以下是系统架构模拟：</p>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+
+    <!-- Victim's View -->
+    <div>
+      <h3 style="color:#27ae60; text-align:center;">受害者看到的聊天窗口</h3>
+      <div class="chat-window" style="max-width:380px; margin:0 auto;">
+        <div class="chat-header">💬 微保官方客服 — 陳志明 (高級客戶經理)</div>
+        <div class="chat-messages">
+          <div class="chat-msg agent">
+            <div class="avatar">陳</div>
+            <div class="bubble">您好，我是中國人保客服專員陳志明。系統顯示您名下有一份百萬保障保單需要處理，請問您是要取消這份保單嗎？</div>
+          </div>
+          <div class="chat-msg victim">
+            <div class="avatar">我</div>
+            <div class="bubble">對，我要取消！為什麼會有這份保單？</div>
+          </div>
+          <div class="chat-msg agent">
+            <div class="avatar">陳</div>
+            <div class="bubble">這是由於您之前使用微信支付時勾選了免費試用保險服務。現在試用期已過，如果不取消將會自動扣費。我可以幫您辦理取消，請提供您的姓名和身份證號碼核實身份。</div>
+          </div>
+          <div class="chat-msg victim">
+            <div class="avatar">我</div>
+            <div class="bubble">張小明 A123456789</div>
+          </div>
+          <div class="chat-msg agent">
+            <div class="avatar">陳</div>
+            <div class="bubble">已核實，張小明先生您好。現在需要您下載銀聯安全認證APP來完成取消手續，請點擊我發給您的鏈接下載...</div>
+          </div>
+        </div>
+        <div class="chat-input-area">
+          <input type="text" placeholder="輸入訊息...">
+          <button class="send-btn">發送</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scammer's Admin Panel -->
+    <div>
+      <h3 style="color:#e74c3c; text-align:center;">骗子后台管理界面 (CRMEB)</h3>
+      <div style="background:#1a1a2e; border-radius:8px; overflow:hidden; font-size:11px;">
+        <div style="background:#0d1117; color:#58a6ff; padding:8px 12px;">CRMEB 客服管理系统 v4.x — iView-admin</div>
+        <div style="padding:10px; color:#aaa;">
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
+            <span style="background:#238636; padding:3px 8px; border-radius:3px; color:#fff;">🚀 在线用户: 12</span>
+            <span style="background:#30363d; padding:3px 8px; border-radius:3px;">📋 待处理: 5</span>
+            <span style="background:#30363d; padding:3px 8px; border-radius:3px;">📝 话术库: 23条</span>
+          </div>
+          <div style="background:#0d1117; padding:8px; border-radius:4px; margin:5px 0; font-family:monospace;">
+            <span style="color:#f39c12;">[会话列表]</span><br>
+            ├─ 🟢 张小明 (台湾IP) — 保单取消 — <span style="color:#58a6ff;">进行中</span><br>
+            ├─ 🟡 李美玲 (香港IP) — 身份核实 — <span style="color:#f39c12;">等待回复</span><br>
+            ├─ 🟢 王志强 (台湾IP) — APP下载引导 — <span style="color:#58a6ff;">进行中</span><br>
+            └─ 🔴 陈大文 — 已转账 — <span style="color:#e74c3c;">已完成</span>
+          </div>
+          <div style="background:#0d1117; padding:8px; border-radius:4px; margin:5px 0; font-family:monospace;">
+            <span style="color:#f39c12;">[话术快捷回复]</span><br>
+            ├─ "您好，我是中國人保客服..."<br>
+            ├─ "系統檢測到您有一份保單需要..."<br>
+            ├─ "請下載銀聯安全APP完成..."<br>
+            └─ "您的取消申請已提交，3-5工作日..."
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px;">CRMEB 系统关键API端点</h3>
+  <div class="api-box">
+<span class="comment">// 从 bwkf003.cc 的 app.js (122KB) + chunk-vendors.js (3.1MB) 提取的API路由：</span><br><br>
+<span class="method">POST</span> <span class="endpoint">/login</span>              <span class="comment">// 客服登录</span><br>
+<span class="method">GET</span>  <span class="endpoint">/service/info</span>       <span class="comment">// 客服信息</span><br>
+<span class="method">GET</span>  <span class="endpoint">/tourist/chat</span>       <span class="comment">// 访客聊天记录</span><br>
+<span class="method">POST</span> <span class="endpoint">/service/send_message</span> <span class="comment">// 发送消息 (含WebSocket)</span><br>
+<span class="method">POST</span> <span class="endpoint">/service/recall_message</span> <span class="comment">// 撤回消息</span><br>
+<span class="method">GET</span>  <span class="endpoint">/service/speechcraft</span> <span class="comment">// 话术库（预设诈骗话术！）</span><br>
+<span class="method">GET</span>  <span class="endpoint">/order/list/:id</span>    <span class="comment">// 订单列表</span><br>
+<span class="method">GET</span>  <span class="endpoint">/user/record</span>        <span class="comment">// 用户记录</span><br>
+<span class="method">GET</span>  <span class="endpoint">/user/info/:id</span>      <span class="comment">// 用户详细信息</span><br>
+<span class="method">POST</span> <span class="endpoint">/user/label/:id</span>     <span class="comment">// 给用户打标签</span><br>
+<span class="method">GET</span>  <span class="endpoint">/config</span>             <span class="comment">// 系统配置</span><br>
+<span class="method">GET</span>  <span class="endpoint">/key</span>                <span class="comment">// WebSocket密钥</span><br>
+<span class="method">GET</span>  <span class="endpoint">/chat/reply</span>         <span class="comment">// 聊天回复记录</span><br>
+<span class="method">PUT</span>  <span class="endpoint">/setting/update_admin</span> <span class="comment">// 更新管理员设置</span>
+  </div>
+
+  <div class="annotation">
+    <strong>🔍 关键发现：</strong><code>/service/speechcraft</code>（话术库）端点证明这是一个专业操作的诈骗团伙——他们预设了标准对话脚本，客服人员只需选择对应话术即可回复受害者。这大大提高了诈骗效率。
+  </div>
+</div>
+
+<!-- ===== INFRASTRUCTURE ===== -->
+<div class="section">
+  <h2>🌐 完整基础设施分析</h2>
+
+  <table class="info-table">
+    <tr><th>域名</th><th>角色</th><th>状态</th><th>注册商</th><th>注册时间</th><th>DNS/IP</th></tr>
+    <tr>
+      <td><code>326929.pw</code></td>
+      <td>🔴 前端钓鱼页面</td>
+      <td><span class="badge badge-danger">活跃</span></td>
+      <td>NameSilo (US)</td>
+      <td>2026-08-03 (今天!)</td>
+      <td>Cloudflare → 103.42.147.27 (Skycloud TW) / 103.183.198.25 (SYVC TW)</td>
+    </tr>
+    <tr>
+      <td><code>bwkf003.cc</code></td>
+      <td>🔴 在线客服后台</td>
+      <td><span class="badge badge-danger">活跃</span></td>
+      <td>NameSilo (US)</td>
+      <td>2026-08-01 (2天前)</td>
+      <td>Cloudflare (同326929.pw的NS!)</td>
+    </tr>
+    <tr>
+      <td><code>25744611.cc</code></td>
+      <td>🟡 原始钓鱼模板</td>
+      <td><span class="badge badge-warn">已替换为广告</span></td>
+      <td>Gname.com (SG)</td>
+      <td>2025-08-15</td>
+      <td>Cloudflare → 广告停放页</td>
+    </tr>
+    <tr>
+      <td><code>2984561.cc</code></td>
+      <td>⚫ 管理后台</td>
+      <td><span class="badge badge-dead">已失效</span></td>
+      <td>-</td>
+      <td>-</td>
+      <td>DNS不解析</td>
+    </tr>
+    <tr>
+      <td><code>202403081641.shop</code></td>
+      <td>⚫ 后端API</td>
+      <td><span class="badge badge-dead">已失效</span></td>
+      <td>-</td>
+      <td>2024-03-08</td>
+      <td>DNS不解析</td>
+    </tr>
+  </table>
+
+  <h3>基础设施关系图</h3>
+  <div class="code-block">
+<span style="color:#e74c3c;">                    同一操作者 (NameSilo + 相同CF NS)</span>
+                              │
+          ┌───────────────────┼───────────────────┐
+          │                   │                   │
+          ▼                   ▼                   ▼
+┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
+│  <span style="color:#58a6ff;">326929.pw</span>      │ │  <span style="color:#58a6ff;">bwkf003.cc</span>     │ │  <span style="color:#8b949e;">25744611.cc</span>    │
+│  前端钓鱼页面     │ │  在线客服后台     │ │  原始模板(已废)   │
+│  nginx + CDN    │ │  ThinkPHP+Vue   │ │  Cloudflare      │
+│  注册: 今天!     │ │  注册: 2天前      │ │  CN注册人        │
+└────────┬────────┘ └────────┬────────┘ └─────────────────┘
+         │                   │
+         ▼                   ▼
+┌─────────────────┐ ┌─────────────────┐
+│ <span style="color:#f39c12;">Skycloud 台湾</span>   │ │ <span style="color:#8b949e;">bwkf003.cc CDN</span>  │
+│ 103.42.147.27  │ │ (未解析原始IP)    │
+│ <span style="color:#f39c12;">SYVC Ltd 台湾</span>    │ │                 │
+│ 103.183.198.25 │ │                 │
+└─────────────────┘ └─────────────────┘
+  </div>
+
+  <h3>时间线</h3>
+  <table class="info-table">
+    <tr><th>时间</th><th>事件</th></tr>
+    <tr><td>2024-03-08</td><td>后端域名 202403081641.shop 创建 → 诈骗活动开始（至少17个月前）</td></tr>
+    <tr><td>2025-08-15</td><td>25744611.cc 注册 — 原始钓鱼模板（注册国: CN）</td></tr>
+    <tr><td>2026-08-01</td><td>bwkf003.cc 注册 — 新一代客服后台上线</td></tr>
+    <tr><td>2026-08-03</td><td><strong>326929.pw 注册 — 今天！最新钓鱼域名上线</strong></td></tr>
+  </table>
+</div>
+
+<!-- ===== TECHNICAL DETAILS ===== -->
+<div class="section">
+  <h2>⚙️ 技术栈详解</h2>
+  <table class="info-table">
+    <tr><th>层</th><th>技术</th><th>详情</th></tr>
+    <tr><td>前端框架</td><td>Vue.js 2.x + Vant UI</td><td>移动端适配框架</td></tr>
+    <tr><td>前端辅助</td><td>jQuery, bxSlider, ScrollMagic</td><td>轮播图、滚动动画</td></tr>
+    <tr><td>后端</td><td>nginx + PHP (ThinkPHP)</td><td>API 路由 + 客服系统</td></tr>
+    <tr><td>客服系统</td><td>CRMEB v4.x (iView-admin)</td><td>完整客服管理后台，含WebSocket</td></tr>
+    <tr><td>CDN/保护</td><td>Cloudflare</td><td>所有活跃域名均使用CF</td></tr>
+    <tr><td>前端克隆工具</td><td>HTTrack Website Copier 3.x</td><td>从 25744611.cc 镜像银联网站</td></tr>
+    <tr><td>IP定位</td><td>pv.sohu.com/cityjson</td><td>搜狐IP定位服务（客服系统用）</td></tr>
+  </table>
+</div>
+
+<!-- ===== ABUSE CONTACTS ===== -->
+<div class="section">
+  <h2>📧 举报联系方式</h2>
+  <table class="info-table">
+    <tr><th>目标</th><th>联系方式</th><th>作用</th></tr>
+    <tr><td>NameSilo 滥用部门</td><td><a href="mailto:abuse@namesilo.com">abuse@namesilo.com</a></td><td>暂停 326929.pw + bwkf003.cc</td></tr>
+    <tr><td>Gname 滥用部门</td><td><a href="mailto:complaint@gname.com">complaint@gname.com</a></td><td>暂停 25744611.cc</td></tr>
+    <tr><td>Skycloud 滥用部门</td><td><a href="mailto:cliff@skycloud.com.tw">cliff@skycloud.com.tw</a></td><td>关闭主机 103.42.147.27</td></tr>
+    <tr><td>SYVC 滥用部门</td><td><a href="mailto:nt@syvc.cc">nt@syvc.cc</a></td><td>关闭主机 103.183.198.25</td></tr>
+    <tr><td>Cloudflare 滥用</td><td><a href="https://www.cloudflare.com/abuse/">cloudflare.com/abuse</a></td><td>移除CDN保护</td></tr>
+    <tr><td>Radix (.pw注册局)</td><td><a href="mailto:admin@radixregistry.com">admin@radixregistry.com</a></td><td>撤销.pw域名</td></tr>
+    <tr><td>Google Safe Browsing</td><td><a href="https://reporturl.google.com/">reporturl.google.com</a></td><td>Chrome浏览器拦截</td></tr>
+  </table>
+</div>
+
+<!-- ===== VERDICT ===== -->
+<div class="section" style="border-left-color: #27ae60;">
+  <h2 style="color:#27ae60;">✅ 最终判定</h2>
+  <p><strong>这是一个成熟的、已运营超过17个月的钓鱼诈骗集团。</strong></p>
+  <p>使用模块化基础设施：钓鱼前端 (326929.pw) + 独立客服后台 (bwkf003.cc) + 预设话术库。域名在 NameSilo 批量注册，Cloudflare 统一保护，台湾主机托管。</p>
+  <p><strong>诈骗数据流：</strong>受害者信息 (姓名+身份证号) → 前端JS处理 → 显示伪造保单 → 同时可能POST到后端保存 → 客服系统实时对接 → 继续诈骗（诱导下载恶意APP/转账/远程控制）</p>
+  <p style="margin-top:15px;"><em>本分析基于 326929.pw 的实际HTML源码、JavaScript代码、CSS样式以及关联域名的真实WHOIS/DNS数据。所有UI元素均从原始代码重建。客服系统(CRMEB)的API端点从 bwkf003.cc 的 3.1MB JavaScript bundle 中提取。</em></p>
+</div>
+
+</div>
+
+<!-- ===== INTERACTIVE JS ===== -->
+<script>
+function verifyAgent() {
+  var jobNumber = document.getElementById('agent-id-input').value;
+  if (!jobNumber) { alert('請輸入服務人員工號碼'); return; }
+  document.getElementById('agent-result').style.display = 'block';
+}
+
+function showPolicyForm() {
+  document.getElementById('popup-policy').scrollIntoView({behavior: 'smooth'});
+}
+
+function fillPolicy() {
+  var name = document.getElementById('input-name').value;
+  var idnum = document.getElementById('input-idnum').value;
+  if (!name) { alert('請輸入姓名'); return; }
+  if (!idnum) { alert('請輸入身分證字號'); return; }
+  document.getElementById('doc-name').textContent = name;
+  document.getElementById('doc-id').textContent = idnum;
+  document.getElementById('popup-policy').scrollIntoView({behavior: 'smooth'});
+}
+</script>
+
+</body>
+</html>
