@@ -153,7 +153,7 @@ var D={sw:[
 {t:"Kinetic Industries",s:"done",pt:"prompts/kinetic-industries-prompt.md",d:"Branding/logo. 1.5 MB PNG.",g:[{c:"gr",l:"Branding"},{l:"Logo"}],a:[{l:"View Image",o:6,p:"./Downloads/Kinetic Industries.png"}]},
 {t:"Storyboard",s:"done",pt:"prompts/storyboard-prompt.md",d:"2.2 MB visual plan.",g:[{c:"gr",l:"Storyboard"}],a:[{l:"View Image",o:6,p:"./Downloads/Storyboard.png"}]},
 {t:"Humanities Essay",s:"done",pt:"prompts/humanities-essay-prompt.md",d:"26 MB Industrial Revolution research.",g:[{l:"Humanities"},{l:"History"}],a:[{l:"Open PDF",o:6,p:"./Downloads/humanities industrial revolution.pdf"}]},
-{t:"Photo Holder V3",s:"done",pt:"prompts/photo-holder-v3-prompt.md",d:"3-version photo display stand.",g:[{l:"Design"},{l:"Holder"}],a:[{l:"Open Folder",o:1,u:"./Documents/family keychain/"}]}
+{t:"Photo Holder V3",s:"done",pt:"prompts/photo-holder-v3-prompt.md",d:"3-version photo display stand.",g:[{l:"Design"},{l:"Holder"}],a:[{l:"View 3D",o:2,p:"./Downloads/photo holder.stl"},{l:"View Render",o:6,p:"./Downloads/photo holder v3 (2).jpg"}]}
 ]};
 
 // ==== Enrichment: how-it-works, materials/sources, file folder ====
