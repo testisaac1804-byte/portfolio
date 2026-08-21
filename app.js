@@ -507,51 +507,167 @@ function showDXF(t){
  var th='<span>'+t+'</span>';
  if(dxfV.length>1){th+=' <span style="color:var(--t3);font-size:11px">Version:</span> <select id="dxf_vs" onchange="dxfSw(this.value)" style="padding:6px 12px;border-radius:6px;border:1px solid var(--gn);background:var(--sf);color:var(--t2);font-size:13px;cursor:pointer;min-width:140px;font-weight:500">'+dxfV.map(function(x,i){return'<option value="'+i+'">'+x.l+'</option>'}).join('')+'</select>'}
  var m=document.createElement('div');m.className='modal active';m.id='_dxf';
- m.innerHTML='<div class="modal-inner"><div class="modal-h"><h3>'+th+'</h3><div style="display:flex;gap:4px;align-items:center"><button class="vctrl" onclick="downloadDXF()" title="Download DXF">⬇</button><button class="modal-close" onclick="closeM(\'_dxf\')">X</button></div></div><div class="modal-body" id="_dxfb"><div class="modal-loading" id="_dxfl">Loading DXF...</div></div></div>';
+ m.innerHTML='<div class="modal-inner"><div class="modal-h"><h3>'+th+'</h3><div style="display:flex;gap:4px;align-items:center"><button class="vctrl" onclick="downloadDXF()" title="Download DXF">⬇</button><button class="modal-close" onclick="closeM(\'_dxf\')">X</button></div></div><div class="modal-body" id="_dxfb"></div></div>';
  document.body.appendChild(m);
  m.addEventListener('click',function(e){if(e.target===m)closeM('_dxf')});
  drawDXF(dxfV[0].p)
 }
-function parseDXFEntity(lines,i){
- var d={};i+=2;
- while(i<lines.length-1){
-  var c2=parseInt(lines[i].trim()),v2=lines[i+1]?lines[i+1].trim():'';
-  if(isNaN(c2)||c2===0)break;
-  d[c2]=v2;i+=2;
- }
- return {data:d,next:i};
+/* ---------- DXF geometry helpers ---------- */
+function _d2r(a){return a*Math.PI/180}
+function _readPairs(lines,i){var pairs=[];i+=2;while(i<lines.length-1){if(lines[i].trim()==='0')break;var c=parseInt(lines[i].trim()),v=(lines[i+1]||'').trim();if(!isNaN(c))pairs.push([lines[i].trim(),v]);i+=2}return {pairs:pairs,next:i}}
+function _gv(pairs,code){for(var i=pairs.length-1;i>=0;i--)if(pairs[i][0]===code)return pairs[i][1];return undefined}
+function _gvf(pairs,code){var v=_gv(pairs,code);return v===undefined?NaN:parseFloat(v)}
+function _all(pairs,code){var r=[];for(var i=0;i<pairs.length;i++)if(pairs[i][0]===code)r.push(pairs[i][1]);return r}
+function _arcPts(cx,cy,r,a0,a1,ccw){
+ var total=ccw?((a1<a0?a1+2*Math.PI:a1)-a0):((a0<a1?a0+2*Math.PI:a0)-a1);
+ var steps=Math.max(8,Math.ceil(Math.abs(total)/(Math.PI/48)));
+ var out=[];
+ for(var i=0;i<=steps;i++){var a=a0+(ccw?total:-total)*i/steps;out.push({x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)})}
+ return out;
+}
+function _bulgeSeg(p1,p2,b,out){
+ if(Math.abs(b)<1e-9){out.push({x:p2.x,y:p2.y});return}
+ var c=Math.hypot(p2.x-p1.x,p2.y-p1.y);
+ if(c<1e-9){out.push({x:p2.x,y:p2.y});return}
+ var R=c*(1+b*b)/(4*Math.abs(b));
+ var ap=R-Math.abs(b*c/2),sg=b>0?1:-1;
+ var dx=p2.x-p1.x,dy=p2.y-p1.y;
+ var cx=(p1.x+p2.x)/2+(-dy/c)*ap*sg,cy=(p1.y+p2.y)/2+(dx/c)*ap*sg;
+ var a0=Math.atan2(p1.y-cy,p1.x-cx),a1=Math.atan2(p2.y-cy,p2.x-cx);
+ var pts=_arcPts(cx,cy,R,a0,a1,b>0);
+ for(var i=1;i<pts.length;i++)out.push(pts[i]);
+}
+function _ellipsePts(cx,cy,mx,my,ratio,a0,a1){
+ var full=Math.abs(a1-a0)>=2*Math.PI-1e-6;
+ var a1e=full?2*Math.PI:a1;
+ var steps=Math.max(24,Math.ceil(Math.abs(a1e-a0)/(Math.PI/48)));
+ var out=[];
+ for(var i=0;i<=steps;i++){var t=a0+(a1e-a0)*i/steps,ct=Math.cos(t),st=Math.sin(t);out.push({x:cx+mx*ct-my*ratio*st,y:cy+my*ct+mx*ratio*st})}
+ return out;
+}
+function _deBoor(t,p,kn,c){
+ var n=c.length-1;
+ if(t<=kn[p])t=kn[p]+1e-9;if(t>=kn[n+1])t=kn[n+1]-1e-9;
+ var s=p;while(s<kn.length-1&&!(kn[s]<=t&&t<kn[s+1]))s++;
+ var d=[];for(var j=0;j<=p;j++)d.push([c[s-p+j][0],c[s-p+j][1]]);
+ for(var r=1;r<=p;r++)for(var j=p;j>=r;j--){var den=kn[s+j-r+1]-kn[s-p+j],al=den?(t-kn[s-p+j])/den:0;d[j][0]=(1-al)*d[j-1][0]+al*d[j][0];d[j][1]=(1-al)*d[j-1][1]+al*d[j][1];}
+ return d[p];
 }
 async function drawDXF(p){
  p=EP(p);
- var vl=document.getElementById('_dxfl'),vb=document.getElementById('_dxfb');
+ var vb=document.getElementById('_dxfb');
+ var holder=document.createElement('div');holder.style.cssText='position:relative;width:100%;height:100%;overflow:hidden;background:#151617;border-radius:10px;cursor:grab;touch-action:none';
+ var cv=document.createElement('canvas');cv.style.cssText='position:absolute;left:0;top:0;display:block';
+ holder.appendChild(cv);
+ var note=document.createElement('div');note.style.cssText='position:absolute;left:10px;bottom:8px;color:#9aa0a8;font-size:11px;font-family:Inter,sans-serif;pointer-events:none;background:rgba(0,0,0,.45);padding:2px 8px;border-radius:6px';
+ holder.appendChild(note);
+ vb.innerHTML='';vb.appendChild(holder);
+ var ctx=cv.getContext('2d');
+ var polys=[],ents=0;
+ function addPoly(pts,closed){if(pts.length>1)polys.push({p:pts,c:!!closed})}
  try{
-  var r=await fetch(p),tx=await r.text();vl.style.display='none';
-  var cv=document.createElement('canvas'),ctx=cv.getContext('2d');
-  cv.width=vb.clientWidth;cv.height=vb.clientHeight;vb.appendChild(cv);
-  ctx.fillStyle='#191a1b';ctx.fillRect(0,0,cv.width,cv.height);
-  var lines=tx.split(/\r?\n/),i=0,dc=[],minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
-  while(i<lines.length&&lines[i].trim().toUpperCase()!=='ENTITIES')i++;i++;
+  var r=await fetch(p);if(!r.ok)throw new Error('HTTP '+r.status);
+  var tx=await r.text();
+  var lines=tx.split(/\r?\n/),i=0;
+  while(i<lines.length&&lines[i].trim().toUpperCase()!=='ENTITIES')i++;
+  i++;
+  var minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+  function box(x,y){if(x<minX)minX=x;if(x>maxX)maxX=x;if(y<minY)minY=y;if(y>maxY)maxY=y}
   while(i<lines.length-1){
    var ln=lines[i].trim();
    if(ln.toUpperCase()==='ENDSEC')break;
    if(ln==='0'){
-    var etype=(lines[i+1]||'').trim(),res=parseDXFEntity(lines,i),d=res.data;i=res.next;
-    if(etype==='LINE'){var x1=parseFloat(d[10]),y1=parseFloat(d[20]),x2=parseFloat(d[11]),y2=parseFloat(d[21]);if(!isNaN(x1)){dc.push({x1:x1,y1:y1,x2:x2,y2:y2});minX=Math.min(minX,x1,x2);maxX=Math.max(maxX,x1,x2);minY=Math.min(minY,y1,y2);maxY=Math.max(maxY,y1,y2)}}
-    else if(etype==='CIRCLE'){var cx=parseFloat(d[10]),cy=parseFloat(d[20]),cr=parseFloat(d[40]);if(!isNaN(cx)){dc.push({cx:cx,cy:cy,r:cr});minX=Math.min(minX,cx-cr);maxX=Math.max(maxX,cx+cr);minY=Math.min(minY,cy-cr);maxY=Math.max(maxY,cy+cr)}}
-    else if(etype==='POLYLINE'){var verts=[];while(i<lines.length-1){if(lines[i].trim()==='0'){var vt=(lines[i+1]||'').trim();if(vt==='VERTEX'){var vr=parseDXFEntity(lines,i),vd=vr.data;i=vr.next;var vx=parseFloat(vd[10]),vy=parseFloat(vd[20]);if(!isNaN(vx))verts.push({x:vx,y:vy})}else if(vt==='SEQEND'){i+=2;break}else{i+=2}}else{i++}}for(var vi=1;vi<verts.length;vi++){dc.push({x1:verts[vi-1].x,y1:verts[vi-1].y,x2:verts[vi].x,y2:verts[vi].y});minX=Math.min(minX,verts[vi].x);maxX=Math.max(maxX,verts[vi].x);minY=Math.min(minY,verts[vi].y);maxY=Math.max(maxY,verts[vi].y)}}
-    else if(etype==='SPLINE'){var ctrl=[],nk=parseInt(d[74])||0;for(var si=0;si<nk;si++){var sx=parseFloat(d[10+si]),sy=parseFloat(d[20+si]);if(!isNaN(sx)){ctrl.push({x:sx,y:sy});minX=Math.min(minX,sx);maxX=Math.max(maxX,sx);minY=Math.min(minY,sy);maxY=Math.max(maxY,sy)}}for(var si=1;si<ctrl.length;si++)dc.push({x1:ctrl[si-1].x,y1:ctrl[si-1].y,x2:ctrl[si].x,y2:ctrl[si].y})}
+    var etype=(lines[i+1]||'').trim();
+    var rp=_readPairs(lines,i),pairs=rp.pairs;i=rp.next;
+    if(etype==='LINE'){
+     var x1=_gvf(pairs,'10'),y1=_gvf(pairs,'20'),x2=_gvf(pairs,'11'),y2=_gvf(pairs,'21');
+     if(!isNaN(x1)&&!isNaN(x2)){ents++;addPoly([{x:x1,y:y1},{x:x2,y:y2}],false);box(x1,y1);box(x2,y2)}
+    }else if(etype==='CIRCLE'){
+     var cx=_gvf(pairs,'10'),cy=_gvf(pairs,'20'),cr=_gvf(pairs,'40');
+     if(!isNaN(cx)&&!isNaN(cr)){ents++;var pc=_arcPts(cx,cy,cr,0,2*Math.PI,true);addPoly(pc,true);box(cx-cr,cy-cr);box(cx+cr,cy+cr)}
+    }else if(etype==='ARC'){
+     var ax=_gvf(pairs,'10'),ay=_gvf(pairs,'20'),ar=_gvf(pairs,'40'),a0=_d2r(_gvf(pairs,'50')||0),a1=_d2r(_gvf(pairs,'51')||0);
+     if(!isNaN(ax)&&!isNaN(ar)){ents++;var pa=_arcPts(ax,ay,ar,a0,a1,true);addPoly(pa,false);for(var q=0;q<pa.length;q++)box(pa[q].x,pa[q].y)}
+    }else if(etype==='ELLIPSE'){
+     var ex=_gvf(pairs,'10'),ey=_gvf(pairs,'20'),emx=_gvf(pairs,'11'),emy=_gvf(pairs,'21'),er=_gvf(pairs,'40')||1;
+     if(!isNaN(ex)&&!isNaN(emx)){ents++;var pe=_ellipsePts(ex,ey,emx,emy,er,_gvf(pairs,'41')||0,_gvf(pairs,'42')||0);addPoly(pe,true);for(var q=0;q<pe.length;q++)box(pe[q].x,pe[q].y)}
+    }else if(etype==='LWPOLYLINE'){
+     var closed=(parseInt(_gv(pairs,'70'))||0)&1;
+     var xs=_all(pairs,'10'),ys=_all(pairs,'20'),bs=_all(pairs,'42');
+     if(xs.length>1){
+      var verts=[];for(var j=0;j<xs.length;j++)verts.push({x:parseFloat(xs[j]),y:parseFloat(ys[j])||0,b:parseFloat(bs[j])||0});
+      var vpts=[{x:verts[0].x,y:verts[0].y}];
+      for(var j=1;j<verts.length;j++)_bulgeSeg(vpts[vpts.length-1],{x:verts[j].x,y:verts[j].y},verts[j].b,vpts);
+      if(closed)_bulgeSeg(vpts[vpts.length-1],{x:verts[0].x,y:verts[0].y},verts[0].b,vpts);
+      addPoly(vpts,closed);ents++;
+     }
+    }else if(etype==='POLYLINE'){
+     var closedP=(parseInt(_gv(pairs,'70'))||0)&1;
+     var pverts=[];
+     while(i<lines.length-1&&lines[i].trim()==='0'){
+      var vt=(lines[i+1]||'').trim();
+      if(vt==='SEQEND'){i+=2;break}
+      if(vt==='VERTEX'){var vrp=_readPairs(lines,i),vpairs=vrp.pairs;i=vrp.next;
+       var vx=_gvf(vpairs,'10'),vy=_gvf(vpairs,'20');
+       if(!isNaN(vx)){pverts.push({x:vx,y:vy,b:_gvf(vpairs,'42')||0});box(vx,vy)}}
+      else i+=2;
+     }
+     if(pverts.length>1){var pvpts=[{x:pverts[0].x,y:pverts[0].y}];for(var j=1;j<pverts.length;j++)_bulgeSeg(pvpts[pvpts.length-1],{x:pverts[j].x,y:pverts[j].y},pverts[j].b,pvpts);if(closedP)_bulgeSeg(pvpts[pvpts.length-1],{x:pverts[0].x,y:pverts[0].y},pverts[0].b,pvpts);addPoly(pvpts,closedP);ents++}
+    }else if(etype==='SPLINE'){
+     var fitX=_all(pairs,'11'),fitY=_all(pairs,'21'),sp=null;
+     if(fitX.length>1){sp=[];for(var j=0;j<fitX.length;j++)sp.push({x:parseFloat(fitX[j]),y:parseFloat(fitY[j])||0})}
+     else{
+      var ctrlX=_all(pairs,'10'),ctrlY=_all(pairs,'20'),deg=parseInt(_gv(pairs,'71'))||3;
+      if(ctrlX.length>deg){
+       var ctrl=[];for(var j=0;j<ctrlX.length;j++)ctrl.push([parseFloat(ctrlX[j]),parseFloat(ctrlY[j])||0]);
+       var knots=_all(pairs,'40').map(parseFloat);
+       if(knots.length>=ctrl.length+deg+1){var pts=[];var lo=knots[deg],hi=knots[ctrl.length];var steps=Math.max(32,ctrl.length*8);for(var s2=0;s2<=steps;s2++){var tt=lo+(hi-lo)*s2/steps;var bp=_deBoor(tt,deg,knots,ctrl);pts.push({x:bp[0],y:bp[1]})}sp=pts}
+       else sp=ctrl.map(function(cc){return {x:cc[0],y:cc[1]}});
+      }
+     }
+     if(sp&&sp.length>1){ents++;addPoly(sp,false);for(var q=0;q<sp.length;q++)box(sp[q].x,sp[q].y)}
+    }
    }else{i++}
   }
-  if(dc.length>0){
-   var pd=50,w=cv.width-pd*2,h=cv.height-pd*2,sc=Math.min(w/((maxX-minX)||1),h/((maxY-minY)||1));
-   var ox=pd+(w-(maxX-minX)*sc)/2,oy=pd+(h-(maxY-minY)*sc)/2;
-   ctx.strokeStyle='#7170ff';ctx.lineWidth=1;
-   for(var k=0;k<dc.length;k++){ctx.beginPath();var c=dc[k];if(c.x1!==undefined){ctx.moveTo(ox+(c.x1-minX)*sc,cv.height-(oy+(c.y1-minY)*sc));ctx.lineTo(ox+(c.x2-minX)*sc,cv.height-(oy+(c.y2-minY)*sc))}else{ctx.arc(ox+(c.cx-minX)*sc,cv.height-(oy+(c.cy-minY)*sc),c.r*sc,0,Math.PI*2)}ctx.stroke()}
-   ctx.fillStyle='#62666d';ctx.font='11px Inter,sans-serif';ctx.fillText(dc.length+' entities',12,cv.height-12)
-  }else{ctx.fillStyle='#8a8f98';ctx.font='13px Inter,sans-serif';ctx.textAlign='center';ctx.fillText((tx.length/1024).toFixed(0)+'KB - 0 entities',cv.width/2,cv.height/2)}
- }catch(e){vl.innerHTML='<p style="color:var(--red)">DXF failed</p><p style="font-size:11px;color:var(--t4)">'+e.message+'</p>'}
+  if(ents===0)throw new Error('No supported entities found');
+  var view={px:0,py:0,s:1};
+  function layout(){
+   var dpr=window.devicePixelRatio||1;
+   var W=holder.clientWidth||600,H=holder.clientHeight||420;
+   cv.width=Math.max(1,Math.round(W*dpr));cv.height=Math.max(1,Math.round(H*dpr));
+   cv.style.width=W+'px';cv.style.height=H+'px';
+   var pad=44;
+   var s=Math.min((W-pad*2)/((maxX-minX)||1),(H-pad*2)/((maxY-minY)||1));
+   view.s=s;view.px=(W-(maxX-minX)*s)/2;view.py=(H-(maxY-minY)*s)/2;
+   draw();
+  }
+  function draw(){
+   var dpr=window.devicePixelRatio||1;
+   ctx.setTransform(dpr,0,0,dpr,0,0);
+   ctx.clearRect(0,0,cv.width/dpr,cv.height/dpr);
+   ctx.fillStyle='#151617';ctx.fillRect(0,0,cv.width/dpr,cv.height/dpr);
+   ctx.save();
+   ctx.translate(view.px,view.py);ctx.scale(view.s,view.s);ctx.translate(-minX,-minY);
+   ctx.strokeStyle='#7c7bff';ctx.lineWidth=1.4/view.s;ctx.lineJoin='round';ctx.lineCap='round';
+   ctx.beginPath();
+   for(var k=0;k<polys.length;k++){var pp=polys[k].p;ctx.moveTo(pp[0].x,pp[0].y);for(var q=1;q<pp.length;q++)ctx.lineTo(pp[q].x,pp[q].y);if(pp.length>2&&polys[k].c)ctx.closePath()}
+   ctx.stroke();
+   ctx.restore();
+   note.textContent=ents+' entities · '+polys.length+' paths · scroll=zoom · drag=pan';
+  }
+  var dragging=false,lx=0,ly=0;
+  holder.addEventListener('wheel',function(e){e.preventDefault();var f=e.deltaY<0?1.1:1/1.1;var mx=e.offsetX,my=e.offsetY;var wx=(mx-view.px)/view.s+minX,wy=(my-view.py)/view.s+minY;view.s*=f;view.px=mx-(wx-minX)*view.s;view.py=my-(wy-minY)*view.s;draw()},{passive:false});
+  holder.addEventListener('mousedown',function(e){dragging=true;lx=e.clientX;ly=e.clientY;holder.style.cursor='grabbing'});
+  window.addEventListener('mousemove',function(e){if(dragging){view.px+=e.clientX-lx;view.py+=e.clientY-ly;lx=e.clientX;ly=e.clientY;draw()}});
+  window.addEventListener('mouseup',function(){dragging=false;holder.style.cursor='grab'});
+  holder.addEventListener('touchstart',function(e){if(e.touches.length===1){dragging=true;lx=e.touches[0].clientX;ly=e.touches[0].clientY}});
+  holder.addEventListener('touchmove',function(e){if(dragging&&e.touches.length===1){e.preventDefault();view.px+=e.touches[0].clientX-lx;view.py+=e.touches[0].clientY-ly;lx=e.touches[0].clientX;ly=e.touches[0].clientY;draw()}},{passive:false});
+  holder.addEventListener('touchend',function(){dragging=false});
+  var ro=new ResizeObserver(function(){layout()});ro.observe(holder);
+  layout();
+ }catch(e){vb.innerHTML='<div class="modal-loading"><p style="color:var(--red)">DXF failed to load</p><p style="font-size:11px;color:var(--t4)">'+e.message+'</p></div>'}
 }
-function dxfSw(i){var vl=document.getElementById('_dxfl');vl.style.display='flex';document.getElementById('_dxfb').querySelectorAll('canvas').forEach(function(c){c.remove()});drawDXF(dxfV[i].p)}
+function dxfSw(i){drawDXF(dxfV[i].p)}
 function downloadDXF(){var a=document.createElement('a');a.href=EP(dxfV[0].p);a.download=dxfV[0].p.split('/').pop();document.body.appendChild(a);a.click();a.remove()}
 document.addEventListener('keydown',function(e){
  if(e.key==='Escape'){closeM('_3d');closeM('_dxf');return}
