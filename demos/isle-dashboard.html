@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISLE — Isaac's Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --esf-red: #890033;
+            --esf-dark: #1a1a2e;
+            --esf-nav: #16213e;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-muted: #636e72;
+            --border: #e0e0e0;
+            --accent: #43567f;
+            --green: #27ae60;
+            --orange: #e67e22;
+            --blue: #2980b9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f6fa;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ── Header ── */
+        .navbar {
+            background: var(--esf-red);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .navbar .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .navbar .brand img { height: 36px; }
+        .nav-links {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .nav-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+        .nav-links a i { margin-right: 6px; }
+
+        /* ── Main layout ── */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 24px;
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+        }
+        .card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .curriculum-nav details { margin-bottom: 2px; }
+        .curriculum-nav details summary {
+            padding: 10px 12px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--accent);
+            transition: background 0.15s;
+            list-style: none;
+        }
+        .curriculum-nav details summary::-webkit-details-marker { display: none; }
+        .curriculum-nav details summary::before {
+            content: '▸';
+            display: inline-block;
+            width: 18px;
+            font-size: 0.7rem;
+            transition: transform 0.2s;
+        }
+        .curriculum-nav details[open] > summary::before { transform: rotate(90deg); }
+        .curriculum-nav details summary:hover { background: #f0f4ff; }
+        .curriculum-nav details details { margin-left: 16px; }
+        .curriculum-nav details details summary {
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 8px 10px;
+        }
+        .curriculum-nav a {
+            display: block;
+            padding: 6px 12px;
+            font-size: 0.82rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 2px 0;
+            transition: background 0.15s;
+        }
+        .curriculum-nav a:hover { background: #f0f4ff; color: var(--accent); }
+        .curriculum-nav a i { font-size: 0.7rem; margin-right: 6px; color: var(--text-muted); }
+
+        /* ── Main content ── */
+        .main-content { display: flex; flex-direction: column; gap: 20px; }
+        .greeting {
+            background: linear-gradient(135deg, var(--esf-red), #b30044);
+            color: white;
+            border-radius: 12px;
+            padding: 28px 32px;
+        }
+        .greeting h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
+        .greeting .sub { opacity: 0.85; font-size: 0.95rem; }
+
+        /* Timetable */
+        .timetable {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+        }
+        .timetable h3 { margin-bottom: 14px; font-size: 1rem; color: var(--text); }
+        .tt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+        }
+        .tt-slot {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 14px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .tt-slot:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .tt-slot .period {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .tt-slot .subject {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--esf-dark);
+        }
+        .tt-slot .room {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .tt-slot .room::before { content: '📍 '; }
+
+        /* Quick tools */
+        .quick-tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        .tool-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            transition: all 0.2s;
+        }
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+        .tool-card i { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+        .tool-card .label { font-size: 0.85rem; font-weight: 600; }
+
+        /* Quick links row */
+        .quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .quick-links a {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.15s;
+        }
+        .quick-links a:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 32px;
+        }
+        footer a { color: var(--accent); text-decoration: none; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; padding: 12px; }
+            .nav-links a span { display: none; }
+            .nav-links a { padding: 10px; }
+        }
+
+        /* Security badge */
+        .security-note {
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 0.8rem;
+            color: #2e7d32;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<nav class="navbar">
+    <a href="#" class="brand">
+        <span>🏫</span> ISLE Dashboard
+    </a>
+    <div class="nav-links">
+        <a href="https://isle.island.edu.hk/local/mis/students/summary.php"><i class="fas fa-user"></i> <span>Profile</span></a>
+        <a href="https://lookerstudio.google.com/reporting/26583943-0eaa-49b1-969e-5442e246c505" target="_blank"><i class="fas fa-id-card"></i> <span>Reports</span></a>
+        <a href="https://www.appsheet.com/start/1b5530a9-e732-446b-a482-f1831492b5db" target="_blank"><i class="fas fa-mobile-alt"></i> <span>Student App</span></a>
+        <a href="https://mail.google.com/a/online.island.edu.hk/" target="_blank"><i class="fas fa-envelope"></i> <span>Gmail</span></a>
+        <a href="https://calendar.google.com/a/online.island.edu.hk/" target="_blank"><i class="fas fa-calendar"></i> <span>Calendar</span></a>
+        <a href="https://drive.google.com/a/online.island.edu.hk/" target="_blank"><i class="fas fa-folder"></i> <span>Drive</span></a>
+        <a href="https://isle.island.edu.hk/login/logout.php"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- ═══════════════ SIDEBAR ═══════════════ -->
+    <aside class="sidebar">
+
+        <div class="security-note">
+            <i class="fas fa-shield-halved"></i>
+            All links use HTTPS — no mixed content
+        </div>
+
+        <!-- Quick Tools -->
+        <div class="card">
+            <h3>⚡ Quick Tools</h3>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+                <a href="https://forms.gle/yR75adkRjzCiVfb46" target="_blank" style="color:var(--text);text-decoration:none;padding:6px 0;">🩺 Wellbeing Pulse</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4MFqlzF8pgT_mF6r7_S1GhWmdu-WBCux67FTtFbkKFvdw9g/viewform" target="_blank" style="color:var(--text);text-decoration:none;padding:6px 0;">💬 TFL Form</a>
+                <a href="https://www.appsheet.com/start/9053c388-648e-432a-af3d-f1c9af1f16a0" target="_blank" style="color:var(--text);text-decoration:none;padding:6px 0;">📋 IB Core App</a>
+                <a href="https://isle.island.edu.hk/local/mis/bulletin/bulletin.php" style="color:var(--text);text-decoration:none;padding:6px 0;">📌 Bulletin Board</a>
+                <a href="https://sites.google.com/online.island.edu.hk/questweek/home" target="_blank" style="color:var(--text);text-decoration:none;padding:6px 0;">🧭 Quest Week</a>
+                <a href="https://sites.google.com/online.island.edu.hk/islandschool-careers" target="_blank" style="color:var(--text);text-decoration:none;padding:6px 0;">🎓 Higher Education</a>
+                <a href="https://sites.google.com/online.island.edu.hk/approaches-to-learning/accueil" target="_blank" style="color:var(--text);text-decoration:none;padding:6px 0;">📖 ATL</a>
+                <a href="https://sites.google.com/a/online.island.edu.hk/island-ayp/" target="_blank" style="color:var(--text);text-decoration:none;padding:6px 0;">🏕 AYP</a>
+            </div>
+        </div>
+
+        <!-- Curriculum -->
+        <div class="card curriculum-nav">
+            <h3>📚 Curriculum</h3>
+
+            <details>
+                <summary>Design &amp; Technology</summary>
+                <details><summary>IB Computer Science (Y12)</summary>
+                    <a href="https://sites.google.com/online.island.edu.hk/computerscience/home">SL Overview</a>
+                    <a href="https://sites.google.com/online.island.edu.hk/computerscience/home">HL Overview</a>
+                </details>
+                <details><summary>IB Design Tech</summary>
+                    <a href="https://docs.google.com/spreadsheets/d/1acqd4_OlFptmiE8l9X-Z8pfYCVAoh82ovZccSwcaUpM/edit">Y12 Overview</a>
+                    <a href="https://docs.google.com/spreadsheets/d/1tLR5EDqA7_sl4DC43n1bogUJ1mfvL6F8JKnf_WAW9aU/edit">Y13 Overview</a>
+                </details>
+                <details><summary>IGCSE Engineering</summary>
+                    <a href="https://docs.google.com/document/d/1oczcpCfUB9ejO8j3eMvgD-5pOuk7ApNYyNLqJNtNr8o/edit">Y10 Theory</a>
+                    <a href="https://docs.google.com/document/d/1oczcpCfUB9ejO8j3eMvgD-5pOuk7ApNYyNLqJNtNr8o/edit">Y11 Coursework</a>
+                </details>
+                <details><summary>MYP Design</summary>
+                    <a href="https://docs.google.com/document/d/1_vct_F55CDlRxY-S6f4G5Qqhvxx9pTQT85mDo92zS4M/edit">Y9 Control Systems</a>
+                    <a href="https://docs.google.com/document/d/1cTf8DaqrAjAHyJ8rZwyx-ooT76OSXMiv1X5FeGcpp0g/edit">Y9 Product Design</a>
+                </details>
+            </details>
+
+            <details>
+                <summary>English</summary>
+                <a href="https://docs.google.com/document/d/1cWZFfwjO2qpbvxGgWl_qZG50qmp0UUN3ixs-QZJPLpU/edit">Y10 Overview</a>
+                <a href="https://isle.island.edu.hk/course/index.php?categoryid=4254">Y10 Unit Outlines</a>
+                <a href="https://docs.google.com/document/d/1CgKZnqtkzqiKFOrqHZYIBNJHZahEX5QFP8LQJwzNiX8/edit">Y11 Overview</a>
+            </details>
+
+            <details>
+                <summary>Mathematics</summary>
+                <a href="https://docs.google.com/spreadsheets/d/15BX18vC0pwl68vuXg-qYIzUBbVMMR08VFM8sRnqzQYI/edit#gid=716884803">Y10 Overview</a>
+                <a href="https://isle.island.edu.hk/course/view.php?id=1052">Y10 Resources</a>
+                <a href="https://docs.google.com/spreadsheets/d/15BX18vC0pwl68vuXg-qYIzUBbVMMR08VFM8sRnqzQYI/edit#gid=1411322816">Y11 Overview</a>
+                <a href="https://isle.island.edu.hk/course/view.php?id=1284">Y11 Resources</a>
+            </details>
+
+            <details>
+                <summary>Sciences</summary>
+                <details><summary>IGCSE Biology</summary>
+                    <a href="https://docs.google.com/document/d/1BXtc9fYMefa-MLIreb99j0fbM2mVDw38CnkOmfuCwto/edit">Overview</a>
+                    <a href="https://isle.island.edu.hk/course/view.php?id=147">Unit Outlines</a>
+                </details>
+                <details><summary>IGCSE Chemistry</summary>
+                    <a href="https://docs.google.com/document/d/1n4S06Ep6K0CJwje6uc8-Shdx_a_x_BWd7SV689IIMQU/edit">Overview</a>
+                    <a href="https://isle.island.edu.hk/course/view.php?id=50">Unit Outlines</a>
+                </details>
+                <details><summary>IGCSE Physics</summary>
+                    <a href="https://drive.google.com/file/d/1h8-mI2WxuapncsATBy3z4FQALSlYTMx0/view">Overview</a>
+                    <a href="https://isle.island.edu.hk/course/view.php?id=128">Unit Outlines</a>
+                </details>
+            </details>
+
+            <details>
+                <summary>Chinese</summary>
+                <a href="https://sites.google.com/online.island.edu.hk/island-school-chinese/home">Chinese Resources</a>
+            </details>
+
+            <details>
+                <summary>Individuals &amp; Society</summary>
+                <a href="http://islandschoolexploration.weebly.com/">Explorations</a>
+                <a href="https://islandschoolgeographyblog.weebly.com/">Geography</a>
+                <a href="https://islandschoolbe.weebly.com/">Business</a>
+            </details>
+
+            <details>
+                <summary>PE &amp; Health</summary>
+                <a href="https://docs.google.com/document/d/1UNN8OlnT8oaCI9f2Giqt5aA4aPAy4araLtzkEJ8QSrQ/edit">Y10 Overview</a>
+                <a href="https://docs.google.com/document/d/1pq95m2pzfyhggBpt7oEwqGf6pI0g0UJ3e6Raz3J9J9c/edit">PE &amp; Games</a>
+            </details>
+        </div>
+    </aside>
+
+    <!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+    <main class="main-content">
+
+        <!-- Greeting -->
+        <div class="greeting">
+            <h1>👋 Good afternoon, Isaac</h1>
+            <div class="sub">Year 10 · Egerton House · Tomorrow is Week 1 Wednesday</div>
+        </div>
+
+        <!-- Timetable -->
+        <div class="timetable">
+            <h3>📅 Tomorrow's Timetable</h3>
+            <div class="tt-grid">
+                <div class="tt-slot">
+                    <div class="period">Period 1</div>
+                    <div class="subject">Design Technology</div>
+                    <div class="room">Room 410</div>
+                </div>
+                <div class="tt-slot">
+                    <div class="period">Period 2</div>
+                    <div class="subject">English</div>
+                    <div class="room">Room G05</div>
+                </div>
+                <div class="tt-slot">
+                    <div class="period">Period 3</div>
+                    <div class="subject">Chinese First Lang</div>
+                    <div class="room">Room 110</div>
+                </div>
+                <div class="tt-slot">
+                    <div class="period">Period 4</div>
+                    <div class="subject">Elements</div>
+                    <div class="room">Room 403</div>
+                </div>
+                <div class="tt-slot" style="opacity:0.6;">
+                    <div class="period">LT / Lunch</div>
+                    <div class="subject">Study Period</div>
+                    <div class="room">—</div>
+                </div>
+                <div class="tt-slot">
+                    <div class="period">Period 5</div>
+                    <div class="subject">Elements</div>
+                    <div class="room">Room 403</div>
+                </div>
+            </div>
+            <div style="margin-top:14px;">
+                <a href="https://isle.island.edu.hk/local/mis/calendar/fulltimetable.php?sid=8165" style="color:var(--accent);text-decoration:none;font-weight:600;font-size:0.9rem;">→ Full timetable</a>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="card">
+            <h3>🔗 Your Courses</h3>
+            <div class="quick-links">
+                <a href="https://isle.island.edu.hk/local/mis/misc/index.php?course=09DT1">DT (09DT104)</a>
+                <a href="https://isle.island.edu.hk/local/mis/misc/index.php?course=09EN1">English (09EN102)</a>
+                <a href="https://isle.island.edu.hk/local/mis/misc/index.php?course=09CX1">Chinese (09CX101)</a>
+                <a href="https://isle.island.edu.hk/local/mis/misc/index.php?course=09EL7">Elements (09EL708)</a>
+                <a href="https://isle.island.edu.hk/local/mis/students/summary.php">Student Summary</a>
+                <a href="https://isle.island.edu.hk/local/mis/reports/unitview.php">Assessment</a>
+                <a href="https://isle.island.edu.hk/course/view.php?id=483">Y10 Revision</a>
+                <a href="https://isle.island.edu.hk/login/change_password.php">Change Password</a>
+            </div>
+        </div>
+
+        <!-- Google Tools -->
+        <div class="card">
+            <h3>🔧 Google Workspace</h3>
+            <div class="quick-tools">
+                <a href="https://mail.google.com/a/online.island.edu.hk/" target="_blank" class="tool-card">
+                    <i class="fas fa-envelope" style="color:#ea4335;"></i>
+                    <span class="label">Gmail</span>
+                </a>
+                <a href="https://drive.google.com/a/online.island.edu.hk/" target="_blank" class="tool-card">
+                    <i class="fas fa-cloud" style="color:#4285f4;"></i>
+                    <span class="label">Drive</span>
+                </a>
+                <a href="https://calendar.google.com/a/online.island.edu.hk/" target="_blank" class="tool-card">
+                    <i class="fas fa-calendar-alt" style="color:#34a853;"></i>
+                    <span class="label">Calendar</span>
+                </a>
+                <a href="https://sites.google.com/a/online.island.edu.hk/" target="_blank" class="tool-card">
+                    <i class="fas fa-globe" style="color:#fbbc04;"></i>
+                    <span class="label">Sites</span>
+                </a>
+                <a href="https://docs.google.com/a/online.island.edu.hk/" target="_blank" class="tool-card">
+                    <i class="fas fa-file-alt" style="color:#4285f4;"></i>
+                    <span class="label">Docs</span>
+                </a>
+                <a href="https://classroom.google.com/a/online.island.edu.hk/" target="_blank" class="tool-card">
+                    <i class="fas fa-chalkboard-teacher" style="color:#1967d2;"></i>
+                    <span class="label">Classroom</span>
+                </a>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<footer>
+    Island School · ESF · <a href="https://isle.island.edu.hk/">Open ISLE</a> ·
+    <a href="https://island.edu.hk/">School Website</a>
+    <br>
+    <small style="color:#aaa;">Local dashboard — all links use HTTPS. No session data exposed.</small>
+</footer>
+
+</body>
+</html>

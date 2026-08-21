@@ -59,7 +59,18 @@ var D={sw:[
 {t:"IsaacAppLaunchers",s:"done",pt:"prompts/isaacapplaunchers-prompt.md",d:"Quick-launch scripts for the Isaac ecosystem.",a:[{l:"Open Folder",o:1,u:"./projects/"}],g:[{c:"ac",l:"macOS"},{l:"Scripting"},{l:"Automation"}],v:[{n:"V1",i:"Individual scripts."},{n:"V2",L:1,i:"Unified launcher."}]},
 {t:"IsaacOS",s:"draft",pt:"prompts/isaacos-prompt.md",d:"Custom OS concept - bootable with all Isaac tools.",a:[{l:"Open Folder",o:1,u:"./projects/drafts/"}],g:[{l:"OS"},{l:"Concept"},{l:"System Design"}],v:[{n:"V1",i:"Concept phase."}]},
 {t:"IsaacSystem-All",s:"draft",pt:"prompts/isaacsystem-all-prompt.md",d:"Monolithic tool - all Isaac apps in one binary.",a:[{l:"Open Folder",o:1,u:"./projects/drafts/"}],g:[{l:"System"},{l:"Unified"},{l:"Meta-project"}],v:[{n:"V1",i:"Concept phase."}]},
-{t:"Laser Cutting Simulator",s:"done",pt:"prompts/laser-cutting-simulator-prompt.md",d:"Browser laser simulator - 9+ versions. G-code export.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/laser-cutting-simulator.html"}],g:[{c:"ac",l:"React"},{l:"DXF"},{l:"Simulation"},{l:"Web App"}],v:[{n:"V1-3",i:"Basic canvas."},{n:"V4-6",i:"3D isometric."},{n:"V7-9",L:1,i:"True 3D orbital, G-code."}]}
+{t:"Laser Cutting Simulator",s:"done",pt:"prompts/laser-cutting-simulator-prompt.md",d:"Browser laser simulator - 9+ versions. G-code export.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/laser-cutting-simulator.html"}],g:[{c:"ac",l:"React"},{l:"DXF"},{l:"Simulation"},{l:"Web App"}],v:[{n:"V1-3",i:"Basic canvas."},{n:"V4-6",i:"3D isometric."},{n:"V7-9",L:1,i:"True 3D orbital, G-code."}]},
+{t:"Library Kiosk",s:"done",pt:"prompts/library-kiosk-prompt.md",d:"Locked-down public-library kiosk sim — ticket/HKID auth, guest browsers, session timer, data wipe on logout.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/library-kiosk.html"}],g:[{c:"ac",l:"Kiosk"},{l:"HTML"},{l:"JS"},{l:"Auth"}]},
+{t:"IGCSE Tutor",s:"done",pt:"prompts/igcse-tutor-prompt.md",d:"Interactive personal tutor for IGCSE revision — quizzes and guided explanations.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/igcse-tutor.html"}],g:[{c:"ac",l:"Education"},{l:"HTML"},{l:"JS"},{l:"IGCSE"}]},
+{t:"QuickCAM Pro",s:"done",pt:"prompts/quickcam-pro-prompt.md",d:"Advanced milling CAM simulation — toolpaths, workholding, G-code preview.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/quickcam-pro.html"}],g:[{c:"ac",l:"CAM"},{l:"CNC"},{l:"Simulation"},{l:"HTML"}]},
+{t:"VR CNC Milling",s:"done",pt:"prompts/vr-cnc-milling-prompt.md",d:"Denford-style VR CNC milling simulation for DT practice.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/vr-cnc-milling.html"}],g:[{c:"ac",l:"CNC"},{l:"VR"},{l:"Simulation"},{l:"DT"}]},
+{t:"ISLE Dashboard",s:"done",pt:"prompts/isle-dashboard-prompt.md",d:"Personal dashboard (ISLE) — widgets, links and shortcuts in one page.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/isle-dashboard.html"}],g:[{c:"ac",l:"Dashboard"},{l:"HTML"},{l:"Widgets"}]},
+{t:"Gateway Dashboard",s:"done",pt:"prompts/gateway-dashboard-prompt.md",d:"Gateway start-page dashboard with quick links and tools.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/gateway-dashboard.html"}],g:[{c:"ac",l:"Dashboard"},{l:"HTML"},{l:"Start page"}]},
+{t:"Cemini Workspace",s:"done",pt:"prompts/cemeni-prompt.md",d:"Cemini workspace web app — notes and task interface.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/cemini.html"}],g:[{c:"ac",l:"Web App"},{l:"HTML"},{l:"Workspace"}]},
+{t:"326929.pw Scam Flow Replica",s:"done",pt:"prompts/scam-flow-replica-prompt.md",d:"Step-by-step replica of the 326929.pw scam flow (Chinese) for evidence and education.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/scam-flow-replica.html"}],g:[{c:"gr",l:"Security"},{l:"Phishing"},{l:"Evidence"}]},
+{t:"SF Express Scam Evidence Bundle",s:"done",pt:"prompts/scam-evidence-bundle-prompt.md",d:"Complete evidence bundle for an SF Express scam — timeline, screenshots, contacts.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/scam-evidence-bundle.html"}],g:[{c:"gr",l:"Security"},{l:"Scam"},{l:"Evidence"}]},
+{t:"CC Chat Admin",s:"done",pt:"prompts/cc-chat-admin-prompt.md",d:"Scam chat admin panel reconstruction for takedown research.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/cc-chat-admin.html"}],g:[{c:"gr",l:"Security"},{l:"Scam"},{l:"Research"}]},
+{t:"CMail",s:"wip",pt:"prompts/cmail-prompt.md",d:"Full-stack email client (Node.js + Google OAuth) — server + web UI.",a:[{l:"Open Folder",o:1,u:"./projects/cmail-app/"}],g:[{c:"ac",l:"Full-stack"},{l:"Node.js"},{l:"OAuth"},{l:"Email"}]}
 ],hw:[
 {t:"Auto-Clamping Vise",s:"wip",pt:"prompts/auto-clamping-vise-prompt.md",d:"Arduino Nano + NEMA 17 + ACS712 sensor. 3D printed. ~$32.",a:[{l:"Open Folder",o:1,u:"./projects/auto-vise/"}],g:[{c:"ac",l:"Arduino"},{l:"Stepper"},{l:"3D Printed"},{l:"Current Sense"}],v:[{n:"V1",i:"Concept."},{n:"V2",i:"ACS712 current detection."},{n:"V3",L:1,i:"Calibrating."}]},
 {t:"Clip-On Thermometer",s:"done",pt:"prompts/clip-thermometer-prompt.md",d:"ESP32-C3 hot wire cutter temp sensor. MAX6675 K-type probe + OLED + WiFi dashboard.",a:[{l:"Open Folder",o:1,u:"./projects/clip-thermometer/"}],g:[{c:"ac",l:"ESP32-C3"},{l:"Sensor"},{l:"PlatformIO"},{l:"MAX6675"},{l:"OLED"},{l:"WiFi"}],v:[{n:"V1",i:"Breadboard + OLED."},{n:"V2",i:"WiFi AP dashboard."},{n:"V3",L:1,i:"°C/°F, graph, buzzer, targets."}]},
@@ -153,7 +164,9 @@ var D={sw:[
 {t:"Kinetic Industries",s:"done",pt:"prompts/kinetic-industries-prompt.md",d:"Branding/logo. 1.5 MB PNG.",g:[{c:"gr",l:"Branding"},{l:"Logo"}],a:[{l:"View Image",o:6,p:"./Downloads/Kinetic Industries.png"}]},
 {t:"Storyboard",s:"done",pt:"prompts/storyboard-prompt.md",d:"2.2 MB visual plan.",g:[{c:"gr",l:"Storyboard"}],a:[{l:"View Image",o:6,p:"./Downloads/Storyboard.png"}]},
 {t:"Humanities Essay",s:"done",pt:"prompts/humanities-essay-prompt.md",d:"26 MB Industrial Revolution research.",g:[{l:"Humanities"},{l:"History"}],a:[{l:"Open PDF",o:6,p:"./Downloads/humanities industrial revolution.pdf"}]},
-{t:"Photo Holder V3",s:"done",pt:"prompts/photo-holder-v3-prompt.md",d:"3-version photo display stand.",g:[{l:"Design"},{l:"Holder"}],a:[{l:"View 3D",o:2,p:"./Downloads/photo holder.stl"},{l:"View Render",o:6,p:"./Downloads/photo holder v3 (2).jpg"}]}
+{t:"Photo Holder V3",s:"done",pt:"prompts/photo-holder-v3-prompt.md",d:"3-version photo display stand.",g:[{l:"Design"},{l:"Holder"}],a:[{l:"View 3D",o:2,p:"./Downloads/photo holder.stl"},{l:"View Render",o:6,p:"./Downloads/photo holder v3 (2).jpg"}]},
+{t:"Y10–11 IGCSE Guide",s:"done",pt:"prompts/igcse-guide-prompt.md",d:"Complete Y10–11 IGCSE study guide — DT & Economics, Island School.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/igcse-guide.html"}],g:[{c:"gr",l:"Study Guide"},{l:"IGCSE"},{l:"DT"},{l:"Economics"}]},
+{t:"Toddle Class Portfolio",s:"done",pt:"prompts/toddle-class-portfolio-prompt.md",d:"Higher Education Class of 2030 portfolio (saved from Toddle LMS).",a:[{l:"Open Folder",o:1,u:"./toddle-class-portfolio/"}],g:[{c:"gr",l:"Portfolio"},{l:"Higher Ed"},{l:"Toddle"}]}
 ]};
 
 // ==== Enrichment: how-it-works, materials/sources, file folder ====
@@ -252,7 +265,7 @@ function R(p,cat,idx){
  var h='<div class="card'+(editMode?' editing':'')+'" data-cat="'+cat+'" data-idx="'+idx+'"><div class="ch"><div class="ctitle">'+em+' '+p.t+'</div><div style="display:flex;gap:6px;align-items:center"><button class="copybtn" onclick="copyLink(\''+cat+'\','+idx+',this)" title="Copy link">🔗</button><span class="status '+p.s+'">'+p.s+'</span></div></div>';
  h+='<div class="cdesc">'+p.d+'</div>';
  if(p.howR&&p.how&&p.how!==p.d){h+='<div class="howline" onclick="openDetails(\''+cat+'\','+idx+')" title="How it works / how it was made">'+trunc(p.how,150)+'</div>'}
- if(p.g){h+='<div class="tags">';p.g.forEach(function(x){h+='<span class="tag'+(x.c?' '+x.c:'')+'">'+x.l+'</span>'});h+='</div>'}
+ if(p.g){h+='<div class="tags">';p.g.forEach(function(x){h+='<span class="tag'+(x.c?' '+x.c:'')+'" onclick="event.stopPropagation();filterTag(this)">'+x.l+'</span>'});h+='</div>'}
  if(p.v&&p.v.length){h+='<button class="vtoggle" onclick="toggleV(this)"><span class="arr">\u25b6</span> Version history ('+p.v.length+' steps)</button><div class="versions">';p.v.forEach(function(x){h+='<div class="vitem"><span class="vbadge'+(x.L?' latest':'')+'">'+x.n+'</span><div class="vinfo">'+x.i+'</div></div>'});h+='</div>'}
  h+='<div class="actions">';
  if(p.a)p.a.forEach(function(x,i){h+='<button class="abtn'+(x.c?' '+x.c:'')+'" data-t="'+p.t.replace(/"/g,'&quot;')+'" data-i="'+i+'">'+x.l+'</button>'});
@@ -297,11 +310,28 @@ rebuild();
   }
  }
 })();
-function search(q){q=q.toLowerCase();document.querySelectorAll('.card').forEach(function(c){
- var t=c.querySelector('.ctitle'),d=c.querySelector('.cdesc'),tags=c.querySelector('.tags');
- var t2=t?t.textContent.toLowerCase():'',d2=d?d.textContent.toLowerCase():'',g2=tags?tags.textContent.toLowerCase():'';
- c.style.display=(!q||t2.indexOf(q)>=0||d2.indexOf(q)>=0||g2.indexOf(q)>=0)?'':'none';
-})}
+var curTag='';
+function filterTag(el){var t=(el.textContent||'').trim().toLowerCase();curTag=(curTag===t)?'':t;applySearch();highlightTags();}
+function clearTag(){curTag='';applySearch();highlightTags();}
+function applySearch(){
+ var q=(document.getElementById('search').value||'').toLowerCase();
+ document.querySelectorAll('.card').forEach(function(c){
+  var t=c.querySelector('.ctitle'),d=c.querySelector('.cdesc'),tags=c.querySelector('.tags');
+  var t2=t?t.textContent.toLowerCase():'',d2=d?d.textContent.toLowerCase():'',g2=tags?tags.textContent.toLowerCase():'';
+  var qOk=!q||t2.indexOf(q)>=0||d2.indexOf(q)>=0||g2.indexOf(q)>=0;
+  var tagOk=!curTag||g2.indexOf(curTag)>=0;
+  c.style.display=(qOk&&tagOk)?'':'none';
+ });
+}
+function highlightTags(){
+ document.querySelectorAll('.card .tag').forEach(function(t){
+  var on=(t.textContent||'').trim().toLowerCase()===curTag;
+  t.classList.toggle('tag-on',!!(on&&curTag));
+ });
+ var chip=document.getElementById('tagChip');
+ if(chip){chip.style.display=curTag?'inline-flex':'none';if(curTag)chip.querySelector('b').textContent=curTag;}
+}
+function search(q){applySearch();}
 window.addEventListener('scroll',function(){document.getElementById('btt').classList.toggle('show',window.scrollY>500)});
 // Scroll reveal + stat count-up
 (function(){

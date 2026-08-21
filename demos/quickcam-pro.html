@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickCAM Pro — Advanced Milling CAM Software</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #0d1117; color: #c9d1d9; font-size: 13px; line-height: 1.5; }
+:root { --bg: #0d1117; --bg-panel: #161b22; --bg-accent: #21262d; --border: #30363d; --text: #c9d1d9; --text-primary: #f0f6fc; --text-secondary: #8b949e; --text-muted: #484f58; --accent: #1f6feb; --accent-hover: #58a6ff; --success: #238636; --warning: #d29922; --error: #f85149; --green: #7ee787; }
+#app-header { display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #161b22 0%, #0d1117 100%); border-bottom: 1px solid var(--border); padding: 0 20px; height: 56px; flex-shrink: 0; }
+.logo-block { display: flex; flex-direction: column; }
+.logo { font-size: 20px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px; }
+.logo span { color: var(--accent); }
+.subtitle { font-size: 11px; color: var(--text-secondary); margin-top: -2px; }
+#tabs { display: flex; gap: 2px; }
+.tab { background: transparent; color: var(--text-secondary); border: none; padding: 8px 18px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; }
+.tab:hover { background: var(--bg-accent); color: var(--text); }
+.tab.active { background: var(--accent); color: #fff; }
+#main { display: flex; flex: 1; height: calc(100vh - 56px); overflow: hidden; }
+#left-panel { width: 280px; min-width: 280px; max-width: 280px; background: var(--bg-panel); border-right: 1px solid var(--border); overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+.panel-title { font-size: 11px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.info-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 12px; }
+.info-row span { color: var(--text-secondary); }
+.info-row b { color: var(--text-primary); font-weight: 600; }
+.tool-btn { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; background: var(--bg-accent); color: var(--text); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.15s; margin-bottom: 6px; }
+.tool-btn:hover { background: var(--border); color: var(--text-primary); }
+.tool-btn.primary { background: var(--success); color: #fff; border-color: var(--success); }
+.tool-btn.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+.drop-zone { border: 2px dashed var(--border); border-radius: 8px; padding: 24px 16px; text-align: center; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; margin-bottom: 12px; }
+.drop-zone:hover, .drop-zone.dragover { border-color: var(--accent); background: rgba(31,111,235,0.05); }
+.drop-zone .icon { font-size: 32px; margin-bottom: 8px; display: block; }
+.drop-zone p { font-size: 12px; margin-bottom: 4px; }
+.toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; }
+.toggle-row span { font-size: 12px; color: var(--text); }
+.switch { position: relative; display: inline-block; width: 36px; height: 20px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider-sw { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: var(--border); border-radius: 20px; transition: 0.2s; }
+.slider-sw::before { position: absolute; content: ''; height: 14px; width: 14px; left: 3px; bottom: 3px; background: var(--text-secondary); border-radius: 50%; transition: 0.2s; }
+.switch input:checked + .slider-sw { background: var(--success); }
+.switch input:checked + .slider-sw::before { transform: translateX(16px); background: #fff; }
+.full-select { width: 100%; padding: 8px 12px; background: var(--bg); color: var(--text-primary); border: 1px solid var(--border); border-radius: 6px; font-size: 13px; cursor: pointer; }
+.swatches { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.swatch { width: 28px; height: 28px; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: 0.15s; }
+.swatch:hover { transform: scale(1.1); }
+.swatch.active { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(31,111,235,0.3); }
+#center-panel { flex: 1; display: flex; flex-direction: column; position: relative; background: var(--bg); }
+#glcanvas { width: 100%; height: 100%; display: block; cursor: grab; }
+#glcanvas:active { cursor: grabbing; }
+#viewer-overlay { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+#viewer-hint { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); background: rgba(13,17,23,0.8); color: var(--text-secondary); padding: 6px 16px; border-radius: 20px; font-size: 11px; pointer-events: none; z-index: 10; border: 1px solid var(--border); }
+.view-btn { background: rgba(22,27,34,0.9); color: var(--text-secondary); border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: 500; transition: all 0.15s; }
+.view-btn:hover { background: var(--bg-accent); color: var(--text); }
+.view-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+#sim-controls { position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%); display: none; gap: 8px; align-items: center; z-index: 10; background: rgba(22,27,34,0.95); padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border); }
+.sim-btn { background: var(--bg-accent); color: var(--text); border: 1px solid var(--border); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+.sim-btn.primary { background: var(--success); color: #fff; border-color: var(--success); }
+#right-panel { width: 320px; min-width: 320px; max-width: 320px; background: var(--bg-panel); border-left: 1px solid var(--border); overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+.param-group { margin-bottom: 16px; }
+.param-group h4 { font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+.param-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; }
+.param-row label { font-size: 12px; color: var(--text); }
+.param-row input[type="number"] { width: 70px; padding: 4px 8px; background: var(--bg); color: var(--text-primary); border: 1px solid var(--border); border-radius: 4px; font-size: 12px; }
+.param-row select { padding: 4px 8px; background: var(--bg); color: var(--text-primary); border: 1px solid var(--border); border-radius: 4px; font-size: 12px; }
+.wizard-dots { display: flex; justify-content: center; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
+.wizard-dot { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; transition: all 0.3s; cursor: pointer; }
+.wizard-dot.pending { background: var(--bg-accent); color: var(--text-muted); border: 2px solid var(--border); }
+.wizard-dot.active { background: var(--accent); color: #fff; border: 2px solid var(--accent); box-shadow: 0 0 0 3px rgba(31,111,235,0.2); }
+.wizard-dot.completed { background: var(--success); color: #fff; border: 2px solid var(--success); }
+.wizard-content { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+.wizard-content h3 { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 16px; }
+.wizard-nav { display: flex; justify-content: space-between; margin-top: 20px; }
+#modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; }
+#modal { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; max-width: 500px; width: 90%; max-height: 80vh; overflow: hidden; }
+#modal-title { padding: 16px 20px; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 15px; color: var(--text-primary); }
+#modal-body { padding: 20px; max-height: 50vh; overflow-y: auto; }
+#modal-buttons { padding: 12px 20px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 8px; }
+#toast { position: fixed; bottom: 20px; right: 20px; padding: 12px 20px; border-radius: 8px; font-size: 13px; font-weight: 500; z-index: 2000; opacity: 0; transform: translateY(20px); transition: all 0.3s ease; pointer-events: none; }
+#toast.show { opacity: 1; transform: translateY(0); }
+#toast.success { background: var(--success); color: #fff; }
+#toast.error { background: var(--error); color: #fff; }
+#toast.warning { background: var(--warning); color: #000; }
+#toast.info { background: var(--accent); color: #fff; }
+.gcode-editor { background: var(--bg); color: var(--green); font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 11px; line-height: 1.6; padding: 12px; border-radius: 8px; border: 1px solid var(--border); white-space: pre; overflow-x: auto; max-height: 400px; overflow-y: auto; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+.plan-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; cursor: pointer; transition: 0.15s; }
+.plan-item:hover { border-color: var(--accent); }
+.plan-item.active { border-color: var(--accent); background: rgba(31,111,235,0.05); }
+.plan-item .plan-color { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+.plan-item .plan-name { flex: 1; font-size: 12px; font-weight: 500; }
+.plan-item .plan-type { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+.plan-type.roughing { background: rgba(210,153,34,0.15); color: var(--warning); }
+.plan-type.finishing { background: rgba(31,111,235,0.15); color: var(--accent); }
+.plan-type.fine { background: rgba(161,113,247,0.15); color: #a371f7; }
+.tool-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 4px; cursor: pointer; transition: 0.15s; }
+.tool-item:hover { border-color: var(--accent); }
+.tool-item.active { border-color: var(--accent); background: rgba(31,111,235,0.05); }
+.tool-item .tool-icon { width: 24px; height: 24px; border-radius: 50%; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
+.tool-item .tool-info { flex: 1; }
+.tool-item .tool-name { font-size: 11px; font-weight: 500; }
+.tool-item .tool-desc { font-size: 10px; color: var(--text-secondary); }
+@media (max-width: 1200px) { #left-panel { width: 240px; min-width: 240px; } #right-panel { width: 280px; min-width: 280px; } }
+@media (max-width: 1024px) { #left-panel, #right-panel { display: none; } }
+</style>
+</head>
+<body>
+
+<header id="app-header">
+  <div class="logo-block">
+    <div class="logo">QuickCAM <span>Pro</span></div>
+    <div class="subtitle">Advanced Milling CAM Software</div>
+  </div>
+  <nav id="tabs">
+    <button class="tab active" data-tab="home" onclick="switchTab('home')">Home</button>
+    <button class="tab" data-tab="wizard" onclick="switchTab('wizard')">F1 Car Wizard</button>
+    <button class="tab" data-tab="plans" onclick="switchTab('plans')">Machining Plans</button>
+    <button class="tab" data-tab="tools" onclick="switchTab('tools')">Tools</button>
+    <button class="tab" data-tab="simulation" onclick="switchTab('simulation')">Simulation</button>
+    <button class="tab" data-tab="gcode" onclick="switchTab('gcode')">G-Code</button>
+  </nav>
+  <div class="header-right">
+    <span id="machine-badge">Denford F1 Router</span>
+  </div>
+</header>
+
+<div id="main">
+  <aside id="left-panel">
+    <div class="panel-title">Project</div>
+    <div id="project-info" style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+      <div class="info-row"><span>Model:</span><b id="pi-model">— none —</b></div>
+      <div class="info-row"><span>Triangles:</span><b id="pi-tris">0</b></div>
+      <div class="info-row"><span>Billet:</span><b id="pi-billet">223 × 50 × 65</b></div>
+      <div class="info-row"><span>Scale:</span><b id="pi-scale">100%</b></div>
+      <div class="info-row"><span>Plans:</span><b id="pi-plans">0</b></div>
+      <div class="info-row"><span>Tool:</span><b id="pi-tool">1/4" Ball Nose (6.35mm)</b></div>
+    </div>
+
+    <div class="panel-title">Import</div>
+    <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
+      <span class="icon">📂</span>
+      <p>Drop STL or Image File</p>
+      <small>or click to browse</small>
+    </div>
+    <input type="file" id="file-input" accept=".stl,.STL,.jpg,.jpeg,.bmp,.ico,.emf,.wmf,.png" style="display:none" onchange="handleFileSelect(event)">
+
+    <div class="panel-title">Tools</div>
+    <button class="tool-btn" onclick="loadSampleModel()">🧩 Sample F1 Car</button>
+    <button class="tool-btn primary" onclick="switchTab('wizard')">🧙 F1 Car Wizard</button>
+    <button class="tool-btn" onclick="calculateToolpath()">⚙ Calculate</button>
+    <button class="tool-btn" onclick="generateGCode()">📄 Generate G-Code</button>
+    <button class="tool-btn" onclick="exportNC()">💾 Export .NC</button>
+
+    <div class="panel-title">View</div>
+    <div class="view-controls">
+      <label class="toggle-row"><span>Shaded</span><label class="switch"><input type="checkbox" id="view-shaded" checked onchange="updateView()"><span class="slider-sw"></span></label></label>
+      <label class="toggle-row"><span>Wireframe</span><label class="switch"><input type="checkbox" id="view-wire" onchange="updateView()"><span class="slider-sw"></span></label></label>
+      <label class="toggle-row"><span>Billet</span><label class="switch"><input type="checkbox" id="view-billet" checked onchange="updateView()"><span class="slider-sw"></span></label></label>
+      <label class="toggle-row"><span>Toolpath</span><label class="switch"><input type="checkbox" id="view-toolpath" checked onchange="updateView()"><span class="slider-sw"></span></label></label>
+      <label class="toggle-row"><span>Boundary</span><label class="switch"><input type="checkbox" id="view-boundary" checked onchange="updateView()"><span class="slider-sw"></span></label></label>
+      <label class="toggle-row"><span>Cut Plane</span><label class="switch"><input type="checkbox" id="view-cutplane" checked onchange="updateView()"><span class="slider-sw"></span></label></label>
+    </div>
+
+    <div class="panel-title">Material</div>
+    <select id="material-select" class="full-select" onchange="updateMaterial()">
+      <option value="balsa">Balsa Wood</option>
+      <option value="hardwood">Hardwood</option>
+      <option value="aluminium">Aluminium</option>
+      <option value="acrylic">Acrylic</option>
+      <option value="foam">F1 Model Block (Foam)</option>
+    </select>
+    <div class="swatches" id="material-swatches">
+      <div class="swatch active" style="background:#d4a574" data-material="balsa" onclick="selectMaterial(this,'balsa')"></div>
+      <div class="swatch" style="background:#8b6914" data-material="hardwood" onclick="selectMaterial(this,'hardwood')"></div>
+      <div class="swatch" style="background:#c0c0c0" data-material="aluminium" onclick="selectMaterial(this,'aluminium')"></div>
+      <div class="swatch" style="background:#e8e8e8" data-material="acrylic" onclick="selectMaterial(this,'acrylic')"></div>
+      <div class="swatch" style="background:#f0e6d2" data-material="foam" onclick="selectMaterial(this,'foam')"></div>
+    </div>
+  </aside>
+
+  <section id="center-panel">
+    <canvas id="glcanvas"></canvas>
+    <div id="viewer-hint">Click + drag to rotate · Shift+drag to pan · Scroll to zoom</div>
+    <div id="viewer-overlay">
+      <button class="view-btn" onclick="setView('top')">Top</button>
+      <button class="view-btn" onclick="setView('front')">Front</button>
+      <button class="view-btn" onclick="setView('side')">Side</button>
+      <button class="view-btn" onclick="setView('iso')">Iso</button>
+      <button class="view-btn" onclick="toggleSimulation()">Sim</button>
+      <button class="view-btn" onclick="resetView()">Reset</button>
+    </div>
+    <div id="sim-controls">
+      <button id="sim-play" class="sim-btn primary" onclick="playSimulation()">▶ Play</button>
+      <button id="sim-pause" class="sim-btn" onclick="pauseSimulation()">⏸ Pause</button>
+      <button id="sim-stop" class="sim-btn" onclick="stopSimulation()">⏹ Stop</button>
+      <label>Speed <input type="range" id="sim-speed" min="1" max="20" value="5" onchange="updateSimSpeed()"></label>
+      <span id="sim-progress">0%</span>
+    </div>
+  </section>
+
+  <aside id="right-panel">
+    <div id="right-content"></div>
+  </aside>
+</div>
+
+<div id="modal-backdrop" onclick="if(event.target===this)closeModal()">
+  <div id="modal">
+    <div id="modal-title">Title</div>
+    <div id="modal-body">Body</div>
+    <div id="modal-buttons"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ============================================
+// DENFORD F1 ROUTER TOOL LIBRARY
+// Per F1 in Schools Design Guide (821581509)
+// ============================================
+const TOOL_LIBRARY = [
+  // Per F1 guide: "The Manufacturing Centre will use a 1/4" (6.35mm) Ball Nose cutter"
+  { id: 'T01', name: '1/4" Ball Nose', diameter: 6.35, radius: 3.175, type: 'ball', desc: 'Standard finishing tool (per F1 guide)', slot: 1, default: true },
+  { id: 'T02', name: '6mm Ball Nose', diameter: 6.0, radius: 3.0, type: 'ball', desc: 'Metric equivalent ball nose', slot: 2 },
+  { id: 'T03', name: '3mm Ball Nose', diameter: 3.0, radius: 1.5, type: 'ball', desc: 'Fine finishing detail work', slot: 3 },
+  { id: 'T04', name: '6mm End Mill', diameter: 6.0, radius: 0, type: 'end', desc: 'Flat bottom roughing', slot: 4 },
+  { id: 'T05', name: '4mm End Mill', diameter: 4.0, radius: 0, type: 'end', desc: 'Medium roughing', slot: 5 },
+  { id: 'T06', name: '2mm End Mill', diameter: 2.0, radius: 0, type: 'end', desc: 'Fine detail roughing', slot: 6 },
+  { id: 'T07', name: '1mm V-Bit', diameter: 1.0, radius: 0, type: 'vbit', desc: 'Engraving / chamfer', slot: 7 },
+  { id: 'T08', name: '90° V-Bit', diameter: 6.0, radius: 0, type: 'vbit', desc: 'Chamfering edges', slot: 8 },
+  { id: 'T09', name: '6.35mm Drill', diameter: 6.35, radius: 0, type: 'drill', desc: 'Axle hole drilling (per F1 guide)', slot: 9 },
+  { id: 'T10', name: '3mm Drill', diameter: 3.0, radius: 0, type: 'drill', desc: 'Pilot holes', slot: 10 },
+  { id: 'T11', name: '1.5mm Engraver', diameter: 1.5, radius: 0, type: 'engrave', desc: 'Fine text/detail', slot: 11 },
+  { id: 'T12', name: '8mm Face Mill', diameter: 8.0, radius: 0, type: 'face', desc: 'Facing / leveling', slot: 12 }
+];
+
+// ============================================
+// MACHINING PLANS (Per F1 in Schools Design Guide)
+// MACHINING PLANS (Per official Denford QuickCAM Pro)
+// Roughing: Raster Roughing 270°, Raster Roughing 90° (per F1 guide)
+// Finishing: Raster Finishing 270°, Raster Finishing 90°
+// All 12 plans from the official Denford specification
+const MACHINING_PLANS = [
+  // --- Roughing (3) ---
+  { name: 'Roughing X-Axis', type: 'roughing', angle: null, stepover: 50, stepdown: 100, tool: 'T04', desc: 'Parallel passes along X axis, 6mm end mill, 50% stepover, 100% stepdown' },
+  { name: 'Roughing Y-Axis', type: 'roughing', angle: null, stepover: 50, stepdown: 100, tool: 'T04', desc: 'Parallel passes along Y axis, 6mm end mill, 50% stepover, 100% stepdown' },
+  { name: 'Roughing Z-Axis', type: 'roughing', angle: null, stepover: 50, stepdown: 100, tool: 'T04', desc: 'Horizontal roughing along Z axis' },
+  // --- Finishing (6) ---
+  { name: 'X Parallel Pass', type: 'finishing', angle: 0, stepover: 15, stepdown: 5, tool: 'T01', desc: 'Parallel finishing along X, 15% stepover (per F1 guide)' },
+  { name: 'Y Parallel Pass', type: 'finishing', angle: 90, stepover: 15, stepdown: 5, tool: 'T01', desc: 'Parallel finishing along Y, 15% stepover' },
+  { name: 'Raster Pass', type: 'finishing', angle: 270, stepover: 15, stepdown: 5, tool: 'T01', desc: 'Raster finishing 270°, 15% stepover (per F1 guide)' },
+  { name: 'Radial Pass', type: 'finishing', angle: null, stepover: 12, stepdown: 5, tool: 'T01', desc: 'Radial pattern from center outward' },
+  { name: 'Spiral Pass', type: 'finishing', angle: null, stepover: 12, stepdown: 5, tool: 'T01', desc: 'Spiral pattern from center outward' },
+  { name: 'Contour Follow', type: 'finishing', angle: null, stepover: 8, stepdown: 5, tool: 'T03', desc: 'Contour following, 8% stepover, 3mm ball nose' },
+  // --- Fine Finishing (3) ---
+  { name: 'Fine X Parallel', type: 'fine', angle: 0, stepover: 5, stepdown: 2, tool: 'T03', desc: 'Fine parallel X, 5% stepover, 3mm ball nose' },
+  { name: 'Fine Y Parallel', type: 'fine', angle: 90, stepover: 5, stepdown: 2, tool: 'T03', desc: 'Fine parallel Y, 5% stepover, 3mm ball nose' },
+  { name: 'Fine Raster', type: 'fine', angle: 270, stepover: 5, stepdown: 2, tool: 'T03', desc: 'Fine raster 270°, 5% stepover, 3mm ball nose' }
+];
+
+const state = {
+  mesh: null, toolpath: [], simulation: { running: false, paused: false, progress: 0, speed: 5 },
+  currentTab: 'home', wizardStep: 1, completedSteps: new Set(),
+  billet: { x: 223, y: 50, z: 65 }, scale: 100, material: 'balsa',
+  plans: [], view: { rotX: -30, rotY: 45, zoom: 1, panX: 0, panY: 0 },
+  customBoundary: { xMin: 0, xMax: 223, yMin: 0, yMax: 50, zMin: 0, zMax: 65 },
+  cutter: TOOL_LIBRARY[0], // Default to 1/4" Ball Nose (per F1 guide)
+  showShaded: true, showWireframe: false, showBillet: true, showToolpath: true, showBoundary: true, showCutPlane: true,
+  cutDepth: -35.675, modelPosition: { x: 0, y: 0, z: 0 },
+  modelRotation: { x: 0, y: 0, z: 0 },
+  meshBounds: { minX: 0, maxX: 0, minY: 0, maxY: 0, minZ: 0, maxZ: 0 },
+  selectedTools: [],
+  sideB: false, // Side B flip mode
+  cutMap: null, heightmap: null, heightmapRes: 100, heightmapCellW: 0, heightmapCellH: 0,
+  axleHoles: { rearX: 180, rearY: 25, frontX: 40 },
+};
+
+const canvas = document.getElementById('glcanvas');
+const ctx = canvas.getContext('2d');
+let animId;
+
+function resizeCanvas() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width; canvas.height = rect.height;
+  requestRender();
+}
+window.addEventListener('resize', resizeCanvas);
+
+let cam = { rotX: -25, rotY: 45, zoom: 1, panX: 0, panY: 0 };
+let isDragging = false, lastMouse = { x: 0, y: 0 }, dragMode = 'rotate';
+
+canvas.addEventListener('mousedown', e => { isDragging = true; lastMouse = { x: e.clientX, y: e.clientY }; dragMode = e.shiftKey ? 'pan' : 'rotate'; });
+window.addEventListener('mouseup', () => isDragging = false);
+canvas.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  const dx = e.clientX - lastMouse.x, dy = e.clientY - lastMouse.y;
+  if (dragMode === 'rotate') { cam.rotY += dx * 0.5; cam.rotX -= dy * 0.5; cam.rotX = Math.max(-89, Math.min(89, cam.rotX)); }
+  else { cam.panX += dx; cam.panY += dy; }
+  lastMouse = { x: e.clientX, y: e.clientY }; requestRender();
+});
+canvas.addEventListener('wheel', e => { e.preventDefault(); cam.zoom *= e.deltaY > 0 ? 0.9 : 1.1; cam.zoom = Math.max(0.1, Math.min(10, cam.zoom)); requestRender(); }, { passive: false });
+
+let renderPending = false;
+function requestRender() {
+  if (renderPending) return;
+  renderPending = true;
+  requestAnimationFrame(() => { renderPending = false; render(); });
+}
+
+function render() {
+  const w = canvas.width, h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = '#0d1117'; ctx.fillRect(0, 0, w, h);
+  drawGrid(w, h);
+  drawAxes(w, h);
+  if (state.showBillet) drawBillet(w, h);
+  if (state.showCutPlane) {
+    drawCutPlane(w, h);
+    drawCutDepthIndicator(w, h);
+    drawSafeHeightIndicator(w, h);
+  }
+  if (state.mesh && state.mesh.triangles) {
+    drawMesh(w, h);
+    if (state.showWireframe) drawWireframe(w, h);
+  }
+  if (state.showToolpath && state.toolpath.length > 0) drawToolpath(w, h);
+  if (state.showBoundary) drawBoundary(w, h);
+  if (state.simulation.running) {
+    drawSimulation(w, h);
+    drawCutter(w, h);
+  }
+  drawOrientationCube(w, h);
+  drawCoordinateDisplay(w, h);
+  drawStatusBar(w, h);
+}
+
+function project(v, w, h) {
+  const rx = cam.rotX * Math.PI / 180, ry = cam.rotY * Math.PI / 180;
+  const cosX = Math.cos(rx), sinX = Math.sin(rx), cosY = Math.cos(ry), sinY = Math.sin(ry);
+  const x1 = v[0] * cosY - v[2] * sinY;
+  const z1 = v[0] * sinY + v[2] * cosY;
+  const y1 = v[1] * cosX - z1 * sinX;
+  const z2 = v[1] * sinX + z1 * cosX;
+  const s = Math.min(w, h) * 0.4 * cam.zoom / 300;
+  return [w/2 + x1 * s + cam.panX, h/2 - y1 * s + cam.panY, z2];
+}
+
+function drawGrid(w, h) {
+  ctx.strokeStyle = 'rgba(48,54,61,0.5)'; ctx.lineWidth = 0.5;
+  const s = Math.min(w, h) * 0.4 * cam.zoom / 300;
+  const cx = w/2 + cam.panX, cy = h/2 + cam.panY;
+  for (let i = -10; i <= 10; i++) {
+    ctx.beginPath(); ctx.moveTo(cx + i*40*s, cy - 200*s); ctx.lineTo(cx + i*40*s, cy + 200*s); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx - 200*s, cy + i*40*s); ctx.lineTo(cx + 200*s, cy + i*40*s); ctx.stroke();
+  }
+}
+
+function drawAxes(w, h) {
+  // Draw XYZ axes at origin
+  const origin = project([0, 0, 0], w, h);
+  const xEnd = project([50, 0, 0], w, h);
+  const yEnd = project([0, 50, 0], w, h);
+  const zEnd = project([0, 0, 50], w, h);
+  
+  // X axis - red
+  ctx.strokeStyle = '#ff4444'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(origin[0], origin[1]); ctx.lineTo(xEnd[0], xEnd[1]); ctx.stroke();
+  ctx.fillStyle = '#ff4444'; ctx.font = 'bold 12px monospace';
+  ctx.fillText('X', xEnd[0] + 5, xEnd[1]);
+  
+  // Y axis - green
+  ctx.strokeStyle = '#44ff44'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(origin[0], origin[1]); ctx.lineTo(yEnd[0], yEnd[1]); ctx.stroke();
+  ctx.fillStyle = '#44ff44';
+  ctx.fillText('Y', yEnd[0] + 5, yEnd[1]);
+  
+  // Z axis - blue
+  ctx.strokeStyle = '#4444ff'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(origin[0], origin[1]); ctx.lineTo(zEnd[0], zEnd[1]); ctx.stroke();
+  ctx.fillStyle = '#4444ff';
+  ctx.fillText('Z', zEnd[0] + 5, zEnd[1]);
+}
+
+function drawOrientationCube(w, h) {
+  // Small orientation cube in top-right corner
+  const size = 60;
+  const cx = w - size - 20;
+  const cy = size + 20;
+  
+  // Background
+  ctx.fillStyle = 'rgba(22, 27, 34, 0.9)';
+  ctx.strokeStyle = '#30363d';
+  ctx.lineWidth = 1;
+  ctx.fillRect(cx - size/2 - 10, cy - size/2 - 10, size + 20, size + 20);
+  ctx.strokeRect(cx - size/2 - 10, cy - size/2 - 10, size + 20, size + 20);
+  
+  // Title
+  ctx.fillStyle = '#8b949e';
+  ctx.font = '10px sans-serif';
+  ctx.fillText('Orientation', cx - size/2 - 5, cy - size/2 - 15);
+  
+  // Draw mini axes
+  const rx = cam.rotX * Math.PI / 180;
+  const ry = cam.rotY * Math.PI / 180;
+  
+  const axes = [
+    { dir: [1, 0, 0], color: '#ff4444', label: 'X' },
+    { dir: [0, 1, 0], color: '#44ff44', label: 'Y' },
+    { dir: [0, 0, 1], color: '#4444ff', label: 'Z' }
+  ];
+  
+  axes.forEach(axis => {
+    // Apply rotation
+    let x = axis.dir[0], y = axis.dir[1], z = axis.dir[2];
+    
+    // Rotate around Y
+    let x1 = x * Math.cos(ry) + z * Math.sin(ry);
+    let z1 = -x * Math.sin(ry) + z * Math.cos(ry);
+    x = x1; z = z1;
+    
+    // Rotate around X
+    let y1 = y * Math.cos(rx) - z * Math.sin(rx);
+    let z2 = y * Math.sin(rx) + z * Math.cos(rx);
+    y = y1; z = z2;
+    
+    const len = 25;
+    const ex = cx + x * len;
+    const ey = cy - y * len;
+    
+    ctx.strokeStyle = axis.color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(ex, ey);
+    ctx.stroke();
+    
+    ctx.fillStyle = axis.color;
+    ctx.font = 'bold 11px sans-serif';
+    ctx.fillText(axis.label, ex + 3, ey + 3);
+  });
+}
+
+function drawCoordinateDisplay(w, h) {
+  // Display current view angles and zoom
+  ctx.fillStyle = 'rgba(22, 27, 34, 0.9)';
+  ctx.strokeStyle = '#30363d';
+  ctx.lineWidth = 1;
+  ctx.fillRect(10, 10, 180, 70);
+  ctx.strokeRect(10, 10, 180, 70);
+  
+  ctx.fillStyle = '#8b949e';
+  ctx.font = '10px monospace';
+  ctx.fillText('View Info', 20, 25);
+  
+  ctx.fillStyle = '#c9d1d9';
+  ctx.font = '11px monospace';
+  ctx.fillText(`RotX: ${cam.rotX.toFixed(1)}°`, 20, 42);
+  ctx.fillText(`RotY: ${cam.rotY.toFixed(1)}°`, 20, 57);
+  ctx.fillText(`Zoom: ${(cam.zoom * 100).toFixed(0)}%`, 20, 72);
+}
+
+function drawStatusBar(w, h) {
+  // Bottom status bar
+  const barHeight = 28;
+  const barY = h - barHeight;
+  
+  ctx.fillStyle = 'rgba(22, 27, 34, 0.95)';
+  ctx.fillRect(0, barY, w, barHeight);
+  ctx.strokeStyle = '#30363d';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(0, barY);
+  ctx.lineTo(w, barY);
+  ctx.stroke();
+  
+  ctx.fillStyle = '#8b949e';
+  ctx.font = '11px sans-serif';
+  
+  let x = 15;
+  
+  // Model info
+  if (state.mesh && state.mesh.triangles) {
+    ctx.fillStyle = '#44ff44';
+    ctx.fillText('●', x, barY + 18);
+    x += 15;
+    ctx.fillStyle = '#c9d1d9';
+    ctx.fillText(`Model: ${state.mesh.triangles.length.toLocaleString()} triangles`, x, barY + 18);
+    x += 180;
+  } else {
+    ctx.fillStyle = '#8b949e';
+    ctx.fillText('○ No model loaded', x, barY + 18);
+    x += 150;
+  }
+  
+  // Toolpath info
+  if (state.toolpath.length > 0) {
+    ctx.fillStyle = '#58a6ff';
+    ctx.fillText('●', x, barY + 18);
+    x += 15;
+    ctx.fillStyle = '#c9d1d9';
+    ctx.fillText(`Toolpath: ${state.toolpath.length} points`, x, barY + 18);
+    x += 160;
+  }
+  
+  // Material
+  ctx.fillStyle = '#8b949e';
+  ctx.fillText(`Material: ${state.material}`, x, barY + 18);
+  x += 120;
+  
+  // Scale
+  ctx.fillText(`Scale: ${state.scale}%`, x, barY + 18);
+}
+
+function drawBillet(w, h) {
+  const b = state.billet;
+  const verts = [[0,0,0],[b.x,0,0],[b.x,b.y,0],[0,b.y,0],[0,0,b.z],[b.x,0,b.z],[b.x,b.y,b.z],[0,b.y,b.z]];
+  const faces = [[0,1,2,3],[4,5,6,7],[0,1,5,4],[2,3,7,6],[0,3,7,4],[1,2,6,5]];
+  ctx.fillStyle = 'rgba(161,113,247,0.08)'; ctx.strokeStyle = 'rgba(161,113,247,0.3)'; ctx.lineWidth = 1;
+  faces.forEach(f => {
+    const p = f.map(i => project(verts[i], w, h));
+    ctx.beginPath(); ctx.moveTo(p[0][0], p[0][1]); for (let i = 1; i < p.length; i++) ctx.lineTo(p[i][0], p[i][1]); ctx.closePath(); ctx.fill(); ctx.stroke();
+  });
+  
+  // Draw dimension labels
+  ctx.fillStyle = '#a371f7';
+  ctx.font = '11px monospace';
+  
+  // X dimension (bottom front)
+  const xLabelPos = project([b.x/2, -5, 0], w, h);
+  ctx.fillText(`${b.x.toFixed(1)}mm`, xLabelPos[0] - 20, xLabelPos[1]);
+  
+  // Y dimension (left front)
+  const yLabelPos = project([-5, b.y/2, 0], w, h);
+  ctx.fillText(`${b.y.toFixed(1)}mm`, yLabelPos[0] - 40, yLabelPos[1]);
+  
+  // Z dimension (left back)
+  const zLabelPos = project([-5, 0, b.z/2], w, h);
+  ctx.fillText(`${b.z.toFixed(1)}mm`, zLabelPos[0] - 40, zLabelPos[1]);
+}
+
+function drawCutter(w, h) {
+  if (!state.cutter) return;
+  
+  // Draw cutter at current toolpath position or at origin
+  let cutterPos = [0, 0, 0];
+  if (state.simulation.running && state.toolpath.length > 0) {
+    const idx = Math.floor(state.simulation.progress / 100 * (state.toolpath.length - 1));
+    cutterPos = state.toolpath[idx];
+  }
+  
+  const toolRadius = state.cutter.radius;
+  const toolLength = 50; // Visual length
+  
+  // Draw tool holder (cylinder)
+  const top = project([cutterPos[0], cutterPos[1], cutterPos[2] + toolLength], w, h);
+  const bottom = project([cutterPos[0], cutterPos[1], cutterPos[2]], w, h);
+  
+  ctx.strokeStyle = '#ffa500';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(top[0], top[1]);
+  ctx.lineTo(bottom[0], bottom[1]);
+  ctx.stroke();
+  
+  // Draw tool tip (circle)
+  ctx.fillStyle = 'rgba(255, 165, 0, 0.6)';
+  ctx.strokeStyle = '#ffa500';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(bottom[0], bottom[1], toolRadius * 2, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+  
+  // Label
+  ctx.fillStyle = '#ffa500';
+  ctx.font = '10px monospace';
+  ctx.fillText(`T${state.cutter.id.replace('T', '')}: ${state.cutter.name}`, top[0] + 10, top[1]);
+}
+
+function drawCutDepthIndicator(w, h) {
+  if (!state.mesh) return;
+  
+  const cutZ = Math.abs(state.cutDepth);
+  const b = state.billet;
+  
+  // Draw cut depth plane
+  const verts = [[0, 0, cutZ], [b.x, 0, cutZ], [b.x, b.y, cutZ], [0, b.y, cutZ]];
+  const p = verts.map(v => project(v, w, h));
+  
+  ctx.fillStyle = 'rgba(255, 100, 100, 0.1)';
+  ctx.strokeStyle = 'rgba(255, 100, 100, 0.5)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath();
+  ctx.moveTo(p[0][0], p[0][1]);
+  for (let i = 1; i < p.length; i++) ctx.lineTo(p[i][0], p[i][1]);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.setLineDash([]);
+  
+  // Label
+  ctx.fillStyle = '#ff6464';
+  ctx.font = '11px monospace';
+  const labelPos = project([b.x + 5, b.y/2, cutZ], w, h);
+  ctx.fillText(`Cut: ${cutZ.toFixed(2)}mm`, labelPos[0], labelPos[1]);
+}
+
+function drawSafeHeightIndicator(w, h) {
+  if (!state.mesh) return;
+  
+  const safeZ = state.billet.z + 10;
+  const b = state.billet;
+  
+  // Draw safe height plane
+  const verts = [[0, 0, safeZ], [b.x, 0, safeZ], [b.x, b.y, safeZ], [0, b.y, safeZ]];
+  const p = verts.map(v => project(v, w, h));
+  
+  ctx.fillStyle = 'rgba(100, 255, 100, 0.05)';
+  ctx.strokeStyle = 'rgba(100, 255, 100, 0.3)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([3, 3]);
+  ctx.beginPath();
+  ctx.moveTo(p[0][0], p[0][1]);
+  for (let i = 1; i < p.length; i++) ctx.lineTo(p[i][0], p[i][1]);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.setLineDash([]);
+  
+  // Label
+  ctx.fillStyle = '#64ff64';
+  ctx.font = '11px monospace';
+  const labelPos = project([b.x + 5, b.y/2, safeZ], w, h);
+  ctx.fillText(`Safe: ${safeZ.toFixed(1)}mm`, labelPos[0], labelPos[1]);
+}
+
+function drawCutPlane(w, h) {
+  const b = state.billet;
+  const cutZ = Math.abs(state.cutDepth);
+  if (cutZ < 0 || cutZ > b.z) return;
+  const verts = [[0,0,cutZ],[b.x,0,cutZ],[b.x,b.y,cutZ],[0,b.y,cutZ]];
+  const p = verts.map(v => project(v, w, h));
+  ctx.fillStyle = 'rgba(31,111,235,0.15)'; ctx.strokeStyle = 'rgba(31,111,235,0.5)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(p[0][0], p[0][1]); for (let i = 1; i < p.length; i++) ctx.lineTo(p[i][0], p[i][1]); ctx.closePath(); ctx.fill(); ctx.stroke();
+}
+
+// ============================================
+// FIXED: Model orientation with proper rotation
+// ============================================
+function transformVertex(v) {
+  let x = v[0], y = v[1], z = v[2];
+  
+  // Translate to mesh center first, so rotation pivots around mesh center
+  const cx = (state.meshBounds.minX + state.meshBounds.maxX) / 2;
+  const cy = (state.meshBounds.minY + state.meshBounds.maxY) / 2;
+  const cz = (state.meshBounds.minZ + state.meshBounds.maxZ) / 2;
+  x -= cx; y -= cy; z -= cz;
+  
+  // Apply model rotation (X, Y, Z axes)
+  const rx = state.modelRotation.x * Math.PI / 180;
+  const ry = state.modelRotation.y * Math.PI / 180;
+  const rz = state.modelRotation.z * Math.PI / 180;
+  
+  // Rotate around X
+  let y1 = y * Math.cos(rx) - z * Math.sin(rx);
+  let z1 = y * Math.sin(rx) + z * Math.cos(rx);
+  y = y1; z = z1;
+  
+  // Rotate around Y
+  let x1 = x * Math.cos(ry) + z * Math.sin(ry);
+  let z2 = -x * Math.sin(ry) + z * Math.cos(ry);
+  x = x1; z = z2;
+  
+  // Rotate around Z
+  let x2 = x * Math.cos(rz) - y * Math.sin(rz);
+  let y2 = x * Math.sin(rz) + y * Math.cos(rz);
+  x = x2; y = y2;
+  
+  // Apply scale
+  const scale = state.scale / 100;
+  
+  // Apply position offset to place at billet center
+  return [
+    x * scale + state.modelPosition.x,
+    y * scale + state.modelPosition.y,
+    z * scale + state.modelPosition.z
+  ];
+}
+
+// ============================================
+// NEW: Auto-fit mesh to billet on load
+// ============================================
+function autoFitMesh() {
+  if (!state.mesh || !state.mesh.triangles) return;
+  
+  // Calculate bounds from actual mesh data
+  let minX = Infinity, maxX = -Infinity;
+  let minY = Infinity, maxY = -Infinity;
+  let minZ = Infinity, maxZ = -Infinity;
+  
+  state.mesh.triangles.forEach(tri => {
+    tri.slice(0, 3).forEach(v => {
+      minX = Math.min(minX, v[0]); maxX = Math.max(maxX, v[0]);
+      minY = Math.min(minY, v[1]); maxY = Math.max(maxY, v[1]);
+      minZ = Math.min(minZ, v[2]); maxZ = Math.max(maxZ, v[2]);
+    });
+  });
+  
+  state.meshBounds = { minX, maxX, minY, maxY, minZ, maxZ };
+  
+  // Set to 1:1 scale (actual size)
+  state.scale = 100;
+  
+  // transformVertex now centers mesh at origin before rotation,
+  // so position offset just needs to place it at billet center
+  const b = state.billet;
+  state.modelPosition.x = b.x / 2;
+  state.modelPosition.y = b.y / 2;
+  state.modelPosition.z = b.z / 2;
+  
+  showToast('Model loaded at 1:1 scale (actual size)', 'info');
+}
+
+function drawMesh(w, h) {
+  if (!state.mesh || !state.mesh.triangles) return;
+  const matColors = { balsa: [212,165,116], hardwood: [139,105,20], aluminium: [192,192,192], acrylic: [232,232,232], foam: [240,230,210] };
+  const mc = matColors[state.material] || [200,200,200];
+  const lightDir = [0.3, 0.5, 0.8];
+  
+  // Get model rotation for transforming normals
+  const mrx = state.modelRotation.x * Math.PI / 180;
+  const mry = state.modelRotation.y * Math.PI / 180;
+  const mrz = state.modelRotation.z * Math.PI / 180;
+  const cosX = Math.cos(mrx), sinX = Math.sin(mrx);
+  const cosY = Math.cos(mry), sinY = Math.sin(mry);
+  const cosZ = Math.cos(mrz), sinZ = Math.sin(mrz);
+  
+  // Get camera direction for backface culling
+  const rx = cam.rotX * Math.PI / 180, ry = cam.rotY * Math.PI / 180;
+  const camDir = [Math.sin(ry) * Math.cos(rx), Math.sin(rx), Math.cos(ry) * Math.cos(rx)];
+  let totalFaces = 0, visibleFaces = 0;
+  
+  state.mesh.triangles.forEach(tri => {
+    const v0 = tri[0], v1 = tri[1], v2 = tri[2];
+    // Compute normal from original vertices
+    let nx = (v1[1]-v0[1])*(v2[2]-v0[2])-(v1[2]-v0[2])*(v2[1]-v0[1]);
+    let ny = (v1[2]-v0[2])*(v2[0]-v0[0])-(v1[0]-v0[0])*(v2[2]-v0[2]);
+    let nz = (v1[0]-v0[0])*(v2[1]-v0[1])-(v1[1]-v0[1])*(v2[0]-v0[0]);
+    const len = Math.sqrt(nx*nx+ny*ny+nz*nz); if (len < 0.001) return;
+    nx /= len; ny /= len; nz /= len;
+    totalFaces++;
+    
+    // Rotate normal by model rotation (same as transformVertex does to vertices)
+    // Rotate around X
+    let ny1 = ny * cosX - nz * sinX;
+    let nz1 = ny * sinX + nz * cosX;
+    ny = ny1; nz = nz1;
+    // Rotate around Y
+    let nx1 = nx * cosY + nz * sinY;
+    let nz2 = -nx * sinY + nz * cosY;
+    nx = nx1; nz = nz2;
+    // Rotate around Z
+    let nx2 = nx * cosZ - ny * sinZ;
+    let ny2 = nx * sinZ + ny * cosZ;
+    nx = nx2; ny = ny2;
+    
+    // Backface culling: compare rotated normal against camera direction
+    const dotCam = nx*camDir[0] + ny*camDir[1] + nz*camDir[2];
+    if (dotCam > 0) return; // Face points away from camera
+    visibleFaces++;
+    
+    const dot = Math.max(0, nx*lightDir[0]+ny*lightDir[1]+nz*lightDir[2]);
+    const shade = 0.3 + dot * 0.7;
+    const r = Math.min(255, Math.floor(mc[0]*shade)), g = Math.min(255, Math.floor(mc[1]*shade)), b = Math.min(255, Math.floor(mc[2]*shade));
+    
+    const tv0 = transformVertex(v0);
+    const tv1 = transformVertex(v1);
+    const tv2 = transformVertex(v2);
+    
+    const p0 = project(tv0, w, h), p1 = project(tv1, w, h), p2 = project(tv2, w, h);
+    ctx.fillStyle = `rgb(${r},${g},${b})`; ctx.strokeStyle = `rgba(${r*0.7},${g*0.7},${b*0.7},0.3)`; ctx.lineWidth = 0.3;
+    ctx.beginPath(); ctx.moveTo(p0[0], p0[1]); ctx.lineTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.closePath(); ctx.fill(); ctx.stroke();
+  });
+  
+  // Store stats for display
+  state._renderStats = { total: totalFaces, visible: visibleFaces };
+}
+
+function drawWireframe(w, h) {
+  if (!state.mesh || !state.mesh.triangles) return;
+  ctx.strokeStyle = 'rgba(88,166,255,0.3)'; ctx.lineWidth = 0.5;
+  state.mesh.triangles.forEach(tri => {
+    const tv0 = transformVertex(tri[0]);
+    const tv1 = transformVertex(tri[1]);
+    const tv2 = transformVertex(tri[2]);
+    const p0 = project(tv0, w, h), p1 = project(tv1, w, h), p2 = project(tv2, w, h);
+    ctx.beginPath(); ctx.moveTo(p0[0], p0[1]); ctx.lineTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.closePath(); ctx.stroke();
+  });
+}
+
+function drawToolpath(w, h) {
+  if (state.toolpath.length < 2) return;
+  ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 1.5; ctx.globalAlpha = 0.7;
+  ctx.beginPath(); let first = true;
+  state.toolpath.forEach(pt => {
+    const p = project(pt, w, h);
+    if (first) { ctx.moveTo(p[0], p[1]); first = false; } else { ctx.lineTo(p[0], p[1]); }
+  });
+  ctx.stroke(); ctx.globalAlpha = 1;
+}
+
+function drawBoundary(w, h) {
+  const b = state.customBoundary;
+  const verts = [[b.xMin,b.yMin,b.zMin],[b.xMax,b.yMin,b.zMin],[b.xMax,b.yMax,b.zMin],[b.xMin,b.yMax,b.zMin],
+                 [b.xMin,b.yMin,b.zMax],[b.xMax,b.yMin,b.zMax],[b.xMax,b.yMax,b.zMax],[b.xMin,b.yMax,b.zMax]];
+  const edges = [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+  ctx.strokeStyle = 'rgba(31,111,235,0.4)'; ctx.lineWidth = 1; ctx.setLineDash([5,5]);
+  edges.forEach(e => {
+    const p0 = project(verts[e[0]], w, h), p1 = project(verts[e[1]], w, h);
+    ctx.beginPath(); ctx.moveTo(p0[0], p0[1]); ctx.lineTo(p1[0], p1[1]); ctx.stroke();
+  });
+  ctx.setLineDash([]);
+}
+
+function drawSimulation(w, h) {
+  const prog = state.simulation.progress;
+  if (state.toolpath.length < 2 || prog <= 0) return;
+  
+  const currentIdx = Math.floor((state.toolpath.length - 1) * prog / 100);
+  const toolRadius = state.cutter ? state.cutter.radius : 3.175;
+  const b = state.billet;
+  const res = state.heightmapRes || 100;
+  const cellW = state.heightmapCellW || (b.x / res);
+  const cellH = state.heightmapCellH || (b.y / res);
+  
+  // Update cut map based on toolpath progress
+  if (state.cutMap && state._lastSimIdx !== currentIdx) {
+    state._lastSimIdx = currentIdx;
+    
+    // Only process points up to currentIdx
+    for (let i = Math.max(0, state._prevSimIdx || 0); i <= currentIdx; i++) {
+      const pt = state.toolpath[i];
+      const gx = Math.floor(pt[0] / cellW);
+      const gy = Math.floor(pt[1] / cellH);
+      if (gx >= 0 && gx < res && gy >= 0 && gy < res) {
+        const radius = Math.ceil(toolRadius / cellW);
+        for (let dy = -radius; dy <= radius; dy++) {
+          for (let dx = -radius; dx <= radius; dx++) {
+            if (dx*dx + dy*dy <= radius*radius) {
+              const cx = gx + dx, cy = gy + dy;
+              if (cx >= 0 && cx < res && cy >= 0 && cy < res) {
+                const idx = cy * res + cx;
+                // The cut Z at this grid cell is the Z of the toolpath point
+                if (pt[2] < state.cutMap[idx]) {
+                  state.cutMap[idx] = pt[2];
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    state._prevSimIdx = currentIdx;
+  }
+  
+  // Draw billet as 3D surface - show ALL cells, not just carved ones
+  for (let gy = 0; gy < res - 1; gy++) {
+    for (let gx = 0; gx < res - 1; gx++) {
+      const idx00 = gy * res + gx;
+      const idx01 = gy * res + (gx + 1);
+      const idx10 = (gy + 1) * res + gx;
+      const idx11 = (gy + 1) * res + (gx + 1);
+      
+      const z00 = state.cutMap[idx00];
+      const z01 = state.cutMap[idx01];
+      const z10 = state.cutMap[idx10];
+      const z11 = state.cutMap[idx11];
+      
+      // Skip every other cell for performance
+      if (res > 50 && (gx % 2 !== 0 || gy % 2 !== 0)) continue;
+      
+      const x0 = gx * cellW;
+      const x1 = (gx + 1) * cellW;
+      const y0 = gy * cellH;
+      const y1 = (gy + 1) * cellH;
+      
+      // Average height for this quad
+      const avgZ = (z00 + z01 + z10 + z11) / 4;
+      const depthRatio = 1 - (avgZ / b.z);
+      
+      // Color: uncut = light purple, cut = darker orange/brown based on depth
+      let r, g, bb;
+      if (avgZ >= b.z - 0.5) {
+        // Uncut billet - light purple
+        r = 161; g = 113; bb = 247;
+      } else {
+        // Cut area - color based on depth
+        r = 180 + Math.floor(depthRatio * 75);
+        g = 120 - Math.floor(depthRatio * 50);
+        bb = 80 - Math.floor(depthRatio * 40);
+      }
+      
+      const p0 = project([x0, y0, z00], w, h);
+      const p1 = project([x1, y0, z01], w, h);
+      const p2 = project([x1, y1, z11], w, h);
+      const p3 = project([x0, y1, z10], w, h);
+      
+      ctx.fillStyle = `rgb(${r},${g},${bb})`;
+      ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+      ctx.lineWidth = 0.3;
+      ctx.beginPath();
+      ctx.moveTo(p0[0], p0[1]);
+      ctx.lineTo(p1[0], p1[1]);
+      ctx.lineTo(p2[0], p2[1]);
+      ctx.lineTo(p3[0], p3[1]);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    }
+  }
+  
+  // Draw cutter at current position
+  const pt = state.toolpath[Math.min(currentIdx, state.toolpath.length - 1)];
+  const p = project(pt, w, h);
+  
+  // Cutter glow
+  ctx.fillStyle = 'rgba(255,165,0,0.3)';
+  ctx.beginPath();
+  ctx.arc(p[0], p[1], toolRadius * 5, 0, Math.PI*2);
+  ctx.fill();
+  
+  // Cutter body
+  ctx.fillStyle = '#ffa500';
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(p[0], p[1], toolRadius * 3, 0, Math.PI*2);
+  ctx.fill();
+  ctx.stroke();
+  
+  // Toolpath trail (only sample every Nth point for performance)
+  ctx.strokeStyle = 'rgba(255,255,0,0.15)';
+  ctx.lineWidth = 0.5;
+  ctx.beginPath();
+  const step = Math.max(1, Math.floor(currentIdx / 500));
+  for (let i = 0; i <= currentIdx; i += step) {
+    const tp = project(state.toolpath[i], w, h);
+    i === 0 ? ctx.moveTo(tp[0], tp[1]) : ctx.lineTo(tp[0], tp[1]);
+  }
+  ctx.stroke();
+}
+function parseSTL(data, onProgress) {
+  const view = new DataView(data);
+  const header = new Uint8Array(data, 0, 80);
+  
+  // Robust binary detection: check file size matches expected binary layout
+  const numTriangles = view.getUint32(80, true);
+  const expectedBinarySize = 84 + numTriangles * 50;
+  let isBinary = (data.byteLength === expectedBinarySize);
+  
+  // If size doesn't match, check for null bytes in header (binary indicator)
+  if (!isBinary) {
+    let hasNullByte = false;
+    for (let i = 0; i < 80; i++) { if (header[i] === 0) { hasNullByte = true; break; } }
+    if (hasNullByte) isBinary = true;
+  }
+  
+  // If still not sure, try to detect ASCII by checking if content starts with "solid"
+  if (!isBinary) {
+    const headerStr = String.fromCharCode.apply(null, header.slice(0, 80));
+    if (headerStr.trim().startsWith('solid')) isBinary = false;
+  }
+  
+  if (isBinary) return parseBinarySTL(view, numTriangles, onProgress);
+  return parseASCIISTL(data, onProgress);
+}
+
+function parseBinarySTL(view, numTriangles, onProgress) {
+  const triangles = new Array(numTriangles);
+  for (let i = 0; i < numTriangles; i++) {
+    const off = 84 + i * 50;
+    const normal = [view.getFloat32(off, true), view.getFloat32(off+4, true), view.getFloat32(off+8, true)];
+    const v0 = [view.getFloat32(off+12, true), view.getFloat32(off+16, true), view.getFloat32(off+20, true)];
+    const v1 = [view.getFloat32(off+24, true), view.getFloat32(off+28, true), view.getFloat32(off+32, true)];
+    const v2 = [view.getFloat32(off+36, true), view.getFloat32(off+40, true), view.getFloat32(off+44, true)];
+    triangles[i] = [v0, v1, v2, normal];
+    if (onProgress && i % 5000 === 0) onProgress(i / numTriangles * 100, i, numTriangles);
+  }
+  if (onProgress) onProgress(100, numTriangles, numTriangles);
+  return { triangles, numTriangles };
+}
+
+function parseASCIISTL(data, onProgress) {
+  const text = new TextDecoder().decode(data);
+  const lines = text.split('\n');
+  const triangles = [];
+  let currentFacet = null;
+  let vertices = [];
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (line.startsWith('facet normal')) {
+      const parts = line.split(/\s+/);
+      currentFacet = [parseFloat(parts[2]), parseFloat(parts[3]), parseFloat(parts[4])];
+      vertices = [];
+    } else if (line.startsWith('vertex')) {
+      const parts = line.split(/\s+/);
+      vertices.push([parseFloat(parts[1]), parseFloat(parts[2]), parseFloat(parts[3])]);
+      if (vertices.length === 3) {
+        triangles.push([vertices[0], vertices[1], vertices[2], currentFacet || [0,0,1]]);
+        vertices = [];
+      }
+    }
+    if (onProgress && i % 1000 === 0) onProgress(i / lines.length * 100, i, lines.length);
+  }
+  if (onProgress) onProgress(100, lines.length, lines.length);
+  return { triangles, numTriangles: triangles.length };
+}
+
+function imageToHeightmap(file, callback) {
+  const img = new Image();
+  img.onload = () => {
+    const cvs = document.createElement('canvas');
+    const w = Math.min(img.width, 256), h = Math.min(img.height, 256);
+    cvs.width = w; cvs.height = h;
+    const c = cvs.getContext('2d');
+    c.drawImage(img, 0, 0, w, h);
+    const data = c.getImageData(0, 0, w, h).data;
+    const triangles = [];
+    for (let y = 0; y < h - 1; y++) {
+      for (let x = 0; x < w - 1; x++) {
+        const i = (y * w + x) * 4;
+        const z = (data[i] + data[i+1] + data[i+2]) / 3 / 255 * 20;
+        const z2 = (data[i+4] + data[i+5] + data[i+6]) / 3 / 255 * 20;
+        const z3 = (data[(y+1)*w*4 + x*4] + data[(y+1)*w*4 + x*4+1] + data[(y+1)*w*4 + x*4+2]) / 3 / 255 * 20;
+        const v0 = [x, y, z], v1 = [x+1, y, z2], v2 = [x, y+1, z3];
+        const nx = (v1[1]-v0[1])*(v2[2]-v0[2])-(v1[2]-v0[2])*(v2[1]-v0[1]);
+        const ny = (v1[2]-v0[2])*(v2[0]-v0[0])-(v1[0]-v0[0])*(v2[2]-v0[2]);
+        const nz = (v1[0]-v0[0])*(v2[1]-v0[1])-(v1[1]-v0[1])*(v2[0]-v0[0]);
+        const len = Math.sqrt(nx*nx+ny*ny+nz*nz);
+        const normal = len > 0 ? [nx/len, ny/len, nz/nz] : [0,0,1];
+        triangles.push([v0, v1, v2, normal]);
+      }
+    }
+    callback({ triangles, numTriangles: triangles.length });
+  };
+  const reader = new FileReader();
+  reader.onload = e => { img.src = e.target.result; };
+  reader.readAsDataURL(file);
+}
+
+function handleFileSelect(event) {
+  const file = event.target.files[0]; if (!file) return;
+  processFile(file);
+}
+
+function processFile(file) {
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (ext === 'stl') {
+    showToast('Loading STL...', 'info');
+    const reader = new FileReader();
+    reader.onload = e => {
+      showToast('Parsing STL...', 'info');
+      const mesh = parseSTL(e.target.result, (percent, current, total) => {
+        if (current % 5000 === 0) {
+          showToast(`Parsing: ${Math.floor(percent)}% (${current.toLocaleString()} / ${total.toLocaleString()})`, 'info');
+        }
+      });
+      
+      // Process bounds
+      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, minZ = Infinity, maxZ = -Infinity;
+      mesh.triangles.forEach(tri => {
+        tri.slice(0, 3).forEach(v => {
+          minX = Math.min(minX, v[0]); maxX = Math.max(maxX, v[0]);
+          minY = Math.min(minY, v[1]); maxY = Math.max(maxY, v[1]);
+          minZ = Math.min(minZ, v[2]); maxZ = Math.max(maxZ, v[2]);
+        });
+      });
+      state.meshBounds = { minX, maxX, minY, maxY, minZ, maxZ };
+      state.mesh = mesh;
+    
+      // Auto-fit mesh to billet
+      autoFitMesh();
+      
+      // Update UI
+      document.getElementById('pi-scale').textContent = '100% (1:1)';
+    
+      document.getElementById('pi-model').textContent = file.name;
+      document.getElementById('pi-tris').textContent = mesh.numTriangles.toLocaleString();
+      showToast('STL loaded: ' + file.name + ' (' + mesh.numTriangles.toLocaleString() + ' triangles)', 'success');
+      requestRender();
+    };
+    reader.onerror = () => showToast('Error reading STL file', 'error');
+    reader.readAsArrayBuffer(file);
+  } else if (['jpg','jpeg','bmp','ico','emf','wmf','png'].includes(ext)) {
+    imageToHeightmap(file, mesh => {
+      state.mesh = mesh;
+      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, minZ = Infinity, maxZ = -Infinity;
+      mesh.triangles.forEach(tri => {
+        tri.slice(0, 3).forEach(v => {
+          minX = Math.min(minX, v[0]); maxX = Math.max(maxX, v[0]);
+          minY = Math.min(minY, v[1]); maxY = Math.max(maxY, v[1]);
+          minZ = Math.min(minZ, v[2]); maxZ = Math.max(maxZ, v[2]);
+        });
+      });
+      state.meshBounds = { minX, maxX, minY, maxY, minZ, maxZ };
+      
+      // Auto-fit mesh to billet
+      autoFitMesh();
+      
+      // Update UI
+      document.getElementById('pi-scale').textContent = '100% (1:1)';
+      
+      document.getElementById('pi-model').textContent = file.name;
+      document.getElementById('pi-tris').textContent = mesh.numTriangles.toLocaleString();
+      showToast('Image loaded: ' + file.name, 'success');
+      requestRender();
+    });
+  }
+}
+
+document.getElementById('drop-zone').addEventListener('dragover', e => { e.preventDefault(); e.currentTarget.classList.add('dragover'); });
+document.getElementById('drop-zone').addEventListener('dragleave', e => { e.currentTarget.classList.remove('dragover'); });
+document.getElementById('drop-zone').addEventListener('drop', e => {
+  e.preventDefault(); e.currentTarget.classList.remove('dragover');
+  const file = e.dataTransfer.files[0]; if (file) processFile(file);
+});
+
+function loadSampleModel() {
+  const triangles = [];
+  const addTri = (v0, v1, v2) => {
+    const nx = (v1[1]-v0[1])*(v2[2]-v0[2])-(v1[2]-v0[2])*(v2[1]-v0[1]);
+    const ny = (v1[2]-v0[2])*(v2[0]-v0[0])-(v1[0]-v0[0])*(v2[2]-v0[2]);
+    const nz = (v1[0]-v0[0])*(v2[1]-v0[1])-(v1[1]-v0[1])*(v2[0]-v0[0]);
+    const len = Math.sqrt(nx*nx+ny*ny+nz*nz);
+    const normal = len > 0 ? [nx/len, ny/len, nz/len] : [0,0,1];
+    triangles.push([v0, v1, v2, normal]);
+  };
+  const body = [[0,0,10],[200,0,10],[200,30,10],[0,30,10],[50,15,25],[150,15,25]];
+  addTri(body[0], body[1], body[4]); addTri(body[1], body[5], body[4]);
+  addTri(body[1], body[2], body[5]); addTri(body[2], body[3], body[5]);
+  addTri(body[3], body[0], body[4]); addTri(body[3], body[4], body[5]);
+  addTri(body[0], body[4], body[1]); addTri(body[2], body[3], body[5]);
+  state.mesh = { triangles, numTriangles: triangles.length };
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, minZ = Infinity, maxZ = -Infinity;
+  triangles.forEach(tri => {
+    tri.slice(0, 3).forEach(v => {
+      minX = Math.min(minX, v[0]); maxX = Math.max(maxX, v[0]);
+      minY = Math.min(minY, v[1]); maxY = Math.max(maxY, v[1]);
+      minZ = Math.min(minZ, v[2]); maxZ = Math.max(maxZ, v[2]);
+    });
+  });
+  state.meshBounds = { minX, maxX, minY, maxY, minZ, maxZ };
+  
+  // Auto-fit sample model to billet
+  autoFitMesh();
+  
+  document.getElementById('pi-model').textContent = 'Sample F1 Car';
+  document.getElementById('pi-tris').textContent = triangles.length.toLocaleString();
+  showToast('Sample F1 car loaded', 'success');
+  requestRender();
+}
+
+function setView(view) {
+  switch(view) {
+    case 'top': cam.rotX = -90; cam.rotY = 0; break;
+    case 'front': cam.rotX = 0; cam.rotY = 0; break;
+    case 'side': cam.rotX = 0; cam.rotY = 90; break;
+    case 'iso': cam.rotX = -30; cam.rotY = 45; break;
+  }
+  requestRender();
+}
+function resetView() { cam = { rotX: -25, rotY: 45, zoom: 1, panX: 0, panY: 0 }; requestRender(); }
+function updateView() {
+  state.showShaded = document.getElementById('view-shaded').checked;
+  state.showWireframe = document.getElementById('view-wire').checked;
+  state.showBillet = document.getElementById('view-billet').checked;
+  state.showToolpath = document.getElementById('view-toolpath').checked;
+  state.showBoundary = document.getElementById('view-boundary').checked;
+  state.showCutPlane = document.getElementById('view-cutplane').checked;
+  requestRender();
+}
+
+let simInterval;
+function toggleSimulation() {
+  const el = document.getElementById('sim-controls');
+  el.style.display = el.style.display === 'none' || !el.style.display ? 'flex' : 'none';
+}
+function playSimulation() {
+  if (state.simulation.running) return;
+  state.simulation.running = true; state.simulation.paused = false;
+  simInterval = setInterval(() => {
+    if (state.simulation.paused) return;
+    state.simulation.progress += state.simulation.speed * 0.1;
+    if (state.simulation.progress >= 100) { state.simulation.progress = 100; state.simulation.running = false; clearInterval(simInterval); }
+    document.getElementById('sim-progress').textContent = Math.floor(state.simulation.progress) + '%';
+    if (document.getElementById('sim-progress-right')) document.getElementById('sim-progress-right').textContent = Math.floor(state.simulation.progress) + '%';
+    if (document.getElementById('sim-progress-stat')) document.getElementById('sim-progress-stat').textContent = Math.floor(state.simulation.progress) + '%';
+    requestRender();
+  }, 50);
+}
+function pauseSimulation() { state.simulation.paused = !state.simulation.paused; }
+function stopSimulation() { 
+  state.simulation.running = false; state.simulation.paused = false; state.simulation.progress = 0; 
+  clearInterval(simInterval); 
+  document.getElementById('sim-progress').textContent = '0%';
+  if (document.getElementById('sim-progress-right')) document.getElementById('sim-progress-right').textContent = '0%';
+  if (document.getElementById('sim-progress-stat')) document.getElementById('sim-progress-stat').textContent = '0%';
+  // Reset cut map to uncut state
+  if (state.cutMap) {
+    const b = state.billet;
+    for (let i = 0; i < state.cutMap.length; i++) state.cutMap[i] = b.z;
+  }
+  state._lastSimIdx = -1;
+  state._prevSimIdx = 0;
+  requestRender(); 
+}
+function updateSimSpeed() { state.simulation.speed = parseInt(document.getElementById('sim-speed').value); }
+
+function updateMaterial() { state.material = document.getElementById('material-select').value; requestRender(); }
+function selectMaterial(el, mat) {
+  document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+  el.classList.add('active'); state.material = mat;
+  document.getElementById('material-select').value = mat;
+  requestRender();
+}
+
+function switchTab(tab) {
+  state.currentTab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  renderRightPanel();
+}
+function renderRightPanel() {
+  const panel = document.getElementById('right-content');
+  switch(state.currentTab) {
+    case 'home': renderHomePanel(panel); break;
+    case 'wizard': renderWizardPanel(panel); break;
+    case 'plans': renderPlansPanel(panel); break;
+    case 'tools': renderToolsPanel(panel); break;
+    case 'simulation': renderSimulationPanel(panel); break;
+    case 'gcode': renderGCodePanel(panel); break;
+  }
+}
+
+function renderHomePanel(panel) {
+  panel.innerHTML = `
+    <div class="param-group"><h4>Quick Start</h4>
+      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Import an STL file or use the F1 Car Wizard to get started.</p>
+      <button class="tool-btn primary" style="margin-bottom:8px;" onclick="document.getElementById('file-input').click()">📂 Import 3D Model</button>
+      <button class="tool-btn accent" onclick="switchTab('wizard')">🧙 Start F1 Car Wizard</button>
+    </div>
+    <div class="param-group"><h4>VR CNC Milling 6</h4>
+      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Launch the realistic 3D CNC simulation with Denford VR5 machine visualization.</p>
+      <button class="tool-btn primary" onclick="launchVRCNC()">🎮 Launch VR CNC Milling 6</button>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:8px;">Generates G-code and opens the VR simulation with your toolpath loaded.</p>
+    </div>
+    <div class="param-group"><h4>Recent Files</h4>
+      <div style="padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text-muted);font-size:12px;text-align:center;">No recent files</div>
+    </div>
+    <div class="param-group"><h4>Quick Tips</h4>
+      <ul style="font-size:12px;color:var(--text-secondary);padding-left:16px;line-height:2;">
+        <li>Import STL or image to begin</li>
+        <li>Use the F1 Car Wizard for racing cars</li>
+        <li>Add machining plans before generating G-code</li>
+        <li>Run simulation to verify toolpaths</li>
+      </ul>
+    </div>`;
+}
+
+function renderWizardPanel(panel) {
+  const wizardSteps = [
+    'Start QuickCAM', 'Load STL File', 'Orientate Model', 'Set Cut Depth',
+    'Set Billet Size', 'Set Model Size', 'Set Model Position', 'Set Boundary',
+    'Setup Tools', 'Machining Plans', 'Plan Parameters', 'Create Toolpath',
+    'Simulate Toolpath', 'CNC File Output', 'Side B Machining', 'Axle Holes',
+    'Top Machining', 'Image Import', 'Advanced Boundary', 'Material Setup',
+    'Custom Tools', 'Datum Position', 'Final Review', 'Export'
+  ];
+  let dots = '';
+  wizardSteps.forEach((s, i) => {
+    const cls = i + 1 === state.wizardStep ? 'active' : i + 1 < state.wizardStep ? 'completed' : 'pending';
+    dots += `<div class="wizard-dot ${cls}" title="${s}" onclick="goToWizardStep(${i+1})">${i + 1}</div>`;
+  });
+  let content = '';
+  switch(state.wizardStep) {
+    case 1: content = `<h3>Step 1: START QUICKCAM</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Launch QuickCAM Pro. The main interface appears with the F1 Car Wizard. Click "Next" to begin loading your 3D model.</p>`; break;
+    case 2: content = `<h3>Step 2: LOAD STL FILE</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Click "3D Model" button to open the file browser. Select your .STL file (exported from SolidWorks, Solid Edge, or Pro/Desktop). The model loads in the 3D viewer.</p><button class="tool-btn" style="margin-bottom:8px;" onclick="document.getElementById('file-input').click()">📂 Import STL</button><button class="tool-btn" onclick="loadSampleModel()">🧩 Use F1 Template</button>`; break;
+    case 3: content = `<h3>Step 3: ORIENTATE MODEL (CRITICAL)</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">One of the most important steps. Rotate until the red arrow (cutter) points DOWN. The arrow represents the cutter in the CNC Router. Use up/down arrows next to X, Y, Z values. Canister hole should face LEFT. Bottom of car should face AWAY from viewer.</p><div class="param-row"><label>X Rotation (°)</label><input type="number" value="${state.modelRotation.x}" onchange="state.modelRotation.x=parseFloat(this.value);requestRender();renderRightPanel();"></div><div class="param-row"><label>Y Rotation (°)</label><input type="number" value="${state.modelRotation.y}" onchange="state.modelRotation.y=parseFloat(this.value);requestRender();renderRightPanel();"></div><div class="param-row"><label>Z Rotation (°)</label><input type="number" value="${state.modelRotation.z}" onchange="state.modelRotation.z=parseFloat(this.value);requestRender();renderRightPanel();"></div>`; break;
+    case 4: content = `<h3>Step 4: SET CUT DEPTH</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Default: 32.5mm (half balsa blank width). CHANGE to account for cutter radius. 6mm ball nose (radius 3mm) = set to 35.5mm NEGATIVE. The blue plane shows cut depth through the model.</p><div class="param-row"><label>Cut Depth (mm)</label><input type="number" value="${state.cutDepth}" onchange="state.cutDepth=parseFloat(this.value);requestRender();renderRightPanel();"></div>`; break;
+    case 5: content = `<h3>Step 5: SET BILLET SIZE</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Exact balsa blank size: X = 223.000, Y = 50.000 (side) OR 65.000 (top/bottom), Z = 65.000 (side) OR 50.000 (top/bottom).</p><div class="param-row"><label>Billet X (mm)</label><input type="number" value="${state.billet.x}" onchange="state.billet.x=parseFloat(this.value);updateBilletInfo();requestRender();renderRightPanel();"></div><div class="param-row"><label>Billet Y (mm)</label><input type="number" value="${state.billet.y}" onchange="state.billet.y=parseFloat(this.value);updateBilletInfo();requestRender();renderRightPanel();"></div><div class="param-row"><label>Billet Z (mm)</label><input type="number" value="${state.billet.z}" onchange="state.billet.z=parseFloat(this.value);updateBilletInfo();requestRender();renderRightPanel();"></div>`; break;
+    case 6: content = `<h3>Step 6: SET MODEL SIZE (SCALE CHECK)</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">CRITICAL: Scale must be 100%. If not 100%, risk machining fixture. Auto-scales down if too large. If auto-scaled, must go back to CAD and fix.</p><div class="param-row"><label>Scale (%)</label><input type="number" value="${state.scale}" onchange="state.scale=parseFloat(this.value);updateScaleInfo();requestRender();renderRightPanel();"></div>`; break;
+    case 7: content = `<h3>Step 7: SET MODEL POSITION</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Position relative to billet. QuickCAM Billet Locator ensures correct position. Z Position must be zero in top cell. Usually no changes needed.</p><div class="param-row"><label>X Position</label><input type="number" value="${state.modelPosition.x}" onchange="state.modelPosition.x=parseFloat(this.value);requestRender();renderRightPanel();"></div><div class="param-row"><label>Y Position</label><input type="number" value="${state.modelPosition.y}" onchange="state.modelPosition.y=parseFloat(this.value);requestRender();renderRightPanel();"></div><div class="param-row"><label>Z Position</label><input type="number" value="${state.modelPosition.z}" onchange="state.modelPosition.z=parseFloat(this.value);requestRender();renderRightPanel();"></div>`; break;
+    case 8: content = `<h3>Step 8: SET BOUNDARY</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Extend Y value from 0 to 4. Allows cutter to reach outer extremities. 4 = 3mm radius + 1mm clearance. Visual: transparent box around model.</p><div class="param-row"><label>Boundary Y (mm)</label><input type="number" value="4" onchange=""></div>`; break;
+    case 9: content = `<h3>Step 9: SETUP TOOLS</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Tool library displayed. Default: 6.35mm (1/4") Ball Nose in slot 1 (per F1 guide). Select correct tool for each operation.</p><div class="param-row"><label>Slot 1</label><select onchange="selectTool(this.value)"><option value='T01' selected>1/4" Ball Nose (6.35mm)</option><option value='T02'>6mm Ball Nose</option><option value='T03'>3mm Ball Nose</option><option value='T04'>6mm End Mill</option><option value='T05'>4mm End Mill</option><option value='T06'>2mm End Mill</option><option value='T07'>1mm V-Bit</option><option value='T08'>90° V-Bit</option><option value='T09'>6.35mm Drill</option><option value='T10'>3mm Drill</option><option value='T11'>1.5mm Engraver</option><option value='T12'>8mm Face Mill</option></select></div>`; break;
+    case 10: content = `<h3>Step 10: MACHINING PLANS</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Click "Add" button. Plan selection window opens (all 12 plans). Select plan (e.g., "Roughing X-Axis" or "Raster Pass"). Right-click for help/information.</p><button class="tool-btn" onclick="switchTab('plans')">📋 Open Plan Selector</button>`; break;
+    case 11: content = `<h3>Step 11: MACHINING PLAN PARAMETERS</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Parameters window opens. Settings: Raster Angle: 270° (per F1 guide). Stepover: 80% roughing, 15% finishing. Stepdown: 100% (6.35mm).</p><div class="param-row"><label>Raster Angle</label><select><option>270°</option><option>90°</option><option>0°</option><option>180°</option></select></div><div class="param-row"><label>Stepover (%)</label><input type="number" value="15" onchange=""></div><div class="param-row"><label>Stepdown (%)</label><input type="number" value="100" onchange=""></div>`; break;
+    case 12: content = `<h3>Step 12: CREATE TOOLPATH</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Click "Calculate" to generate toolpaths. White lines appear over model. Wait for calculation to complete. Purple = needs recalculation after parameter changes.</p><button class="tool-btn primary" onclick="calculateToolpath()">⚙ Calculate Toolpath</button>`; break;
+    case 13: content = `<h3>Step 13: SIMULATE TOOLPATH</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Simulation window opens. Purple block = balsa blank. Press Play to start. Adjust speed slider to speed up. Camera icon captures screenshots. Check: cutter starts at rear, moves forward.</p><button class="tool-btn primary" onclick="playSimulation()">▶ Play Simulation</button>`; break;
+    case 14: content = `<h3>Step 14: CNC FILE OUTPUT</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Save CNC file. Post processor: "Denford Metric Milling". Format: .fnc (Denford VR5). File is checked for invalid G/M codes.</p><button class="tool-btn primary" onclick="generateGCode();exportNC()">💾 Export .fnc File</button><div id="gcode-preview" style="margin-top:12px;max-height:200px;overflow-y:auto;background:var(--bg);padding:8px;border-radius:4px;font-family:monospace;font-size:10px;"></div>`; break;
+    case 15: content = `<h3>Step 15: SIDE B MACHINING</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Flip block over to machine the other side. M71 mirrors the program in the Y axis.</p><button class="tool-btn ${state.sideB ? 'accent' : 'primary'}" onclick="toggleSideB();renderWizardPanel(document.getElementById('right-content'))">${state.sideB ? '🔄 Side B Active (Click to Flip Back)' : '🔃 Flip to Side B'}</button>${state.sideB ? '<p style="font-size:11px;color:#ffa500;margin-top:8px;">⚠ Y-axis mirrored. M71 will be added to G-code.</p>' : ''}`; break;
+    case 16: content = `<h3>Step 16: AXLE HOLES</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Drill axle holes before machining second/third sides. Use pillar drill for accuracy.</p><div class="param-row"><label>Rear Axle X Position (mm)</label><input type="number" id="rear-axle-x" value="180" step="0.1" onchange="state.axleHoles.rearX=parseFloat(this.value)"></div><div class="param-row"><label>Rear Axle Y Position (mm)</label><input type="number" id="rear-axle-y" value="25" step="0.1" onchange="state.axleHoles.rearY=parseFloat(this.value)"></div><div class="param-row"><label>Front Axle X Position (mm)</label><input type="number" id="front-axle-x" value="40" step="0.1" onchange="state.axleHoles.frontX=parseFloat(this.value)"></div><button class="tool-btn primary" style="margin-top:12px;" onclick="drillAxleHoles()">🔩 Generate Axle Hole G-Code</button>`; break;
+    case 17: content = `<h3>Step 17: TOP MACHINING</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Different billet orientation for top machining. Update billet dimensions and repeat wizard.</p><div class="param-row"><label>New Billet X (mm)</label><input type="number" value="223" step="1" onchange="state.billet.x=parseFloat(this.value)"></div><div class="param-row"><label>New Billet Y (mm)</label><input type="number" value="65" step="1" onchange="state.billet.y=parseFloat(this.value)"></div><div class="param-row"><label>New Billet Z (mm)</label><input type="number" value="50" step="1" onchange="state.billet.z=parseFloat(this.value)"></div><button class="tool-btn primary" style="margin-top:12px;" onclick="goToWizardStep(3)">🔄 Restart Wizard with New Orientation</button>`; break;
+    case 18: content = `<h3>Step 18: IMAGE IMPORT (LITHOPHANES)</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Import JPG, BMP, ICO, EMF, WMF images. Convert to 3D height maps for lithophane machining.</p><button class="tool-btn primary" onclick="document.getElementById('image-input').click()">🖼️ Import Image</button><input type="file" id="image-input" accept="image/*" style="display:none;" onchange="importImage(event)"><div id="image-preview" style="margin-top:12px;"></div>`; break;
+    case 19: content = `<h3>Step 19: ADVANCED CUSTOM BOUNDARY</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">X/Y/Z min/max all adjustable. Choose between Billet boundary or Model boundary. Visual bounding box feedback. Extends Y from 0 to 4mm for cutter clearance.</p><div class="param-row"><label>X Max (mm)</label><input type="number" value="${state.customBoundary.xMax}" onchange="state.customBoundary.xMax=parseFloat(this.value);requestRender();renderRightPanel();"></div><div class="param-row"><label>Y Max (mm)</label><input type="number" value="${state.customBoundary.yMax}" onchange="state.customBoundary.yMax=parseFloat(this.value);requestRender();renderRightPanel();"></div>`; break;
+    case 20: content = `<h3>Step 20: MATERIAL SETUP</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Select material. Affects feeds/speeds/cutting depth. Presets: Balsa, Hardwood, Aluminium, Acrylic, F1 Model Block (Foam). Simulation renders in selected material colour.</p>`; break;
+    case 21: content = `<h3>Step 21: CUSTOM TOOLS</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Define custom tool sizes in the tool table. Tool length and diameter affect simulation accuracy. Default: 1/4" Ball Nose (6.35mm) per F1 guide.</p><button class="tool-btn" onclick="switchTab('tools')">📋 Open Tool Library</button>`; break;
+    case 22: content = `<h3>Step 22: DATUM POSITION</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Set machining origin. Side machining: center of CO2 hole on back face. Use reference plate to set datum. Post processor: "Denford Metric Milling". Default: front-left-top of balsa block.</p><div class="param-row"><label>X Datum</label><input type="number" value="0" onchange=""></div><div class="param-row"><label>Y Datum</label><input type="number" value="21" onchange=""></div><div class="param-row"><label>Z Datum</label><input type="number" value="-32.5" onchange=""></div>`; break;
+    case 23: content = `<h3>Step 23: FINAL REVIEW</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Summary of all settings. Estimated machining time. Tool list. Plan list. Verify everything before generating final G-code. Check scale is 100%.</p><div class="info-row"><span>Model:</span><b>${state.mesh ? 'Loaded' : 'None'}</b></div><div class="info-row"><span>Plans:</span><b>${state.plans.length}</b></div><div class="info-row"><span>Tool:</span><b>${state.cutter ? state.cutter.name : 'None'}</b></div><div class="info-row"><span>Scale:</span><b>${state.scale}%</b></div><div class="info-row"><span>Material:</span><b>${state.material}</b></div>`; break;
+    case 24: content = `<h3>Step 24: EXPORT</h3><p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Generate and export final CNC file. Format: .fnc (Denford VR5). Post processor: Denford Metric Milling. File includes G21/G17/G90/G40/G49/G80/G54 header, tool changes, spindle commands, and M30 end.</p><button class="tool-btn primary" onclick="generateGCode();showToast('G-code generated!','success')">⚙ Generate Final G-Code</button><button class="tool-btn" onclick="exportNC()">💾 Export .FNC</button>`; break;
+  }
+  panel.innerHTML = `<div class="wizard-dots">${dots}</div><div class="wizard-content">${content}</div><div class="wizard-nav"><button class="tool-btn" ${state.wizardStep===1?'disabled':''} onclick="goToWizardStep(state.wizardStep-1)">← Previous</button><button class="tool-btn primary" onclick="goToWizardStep(state.wizardStep+1)">${state.wizardStep===24?'Finish':'Next →'}</button></div>`;
+}
+
+function goToWizardStep(step) {
+  if (step < 1 || step > 24) return;
+  state.wizardStep = step;
+  renderRightPanel();
+}
+
+function updateBilletInfo() {
+  document.getElementById('pi-billet').textContent = `${state.billet.x} × ${state.billet.y} × ${state.billet.z}`;
+}
+
+function updateScaleInfo() {
+  document.getElementById('pi-scale').textContent = '100% (1:1)';
+}
+
+function selectTool(toolId) {
+  const tool = TOOL_LIBRARY.find(t => t.id === toolId);
+  if (tool) {
+    state.cutter = tool;
+    document.getElementById('pi-tool').textContent = tool.name;
+    showToast('Selected: ' + tool.name, 'success');
+  }
+}
+
+function renderToolsPanel(panel) {
+  let html = '<div class="param-group"><h4>Denford F1 Tool Library</h4><p style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">Click to select tool for machining.</p>';
+  TOOL_LIBRARY.forEach(tool => {
+    const active = state.cutter && state.cutter.id === tool.id ? 'active' : '';
+    html += `<div class="tool-item ${active}" onclick="selectTool('${tool.id}');renderRightPanel()">
+      <div class="tool-icon">${tool.type === 'ball' ? '🔵' : tool.type === 'end' ? '⬛' : tool.type === 'vbit' ? '🔺' : tool.type === 'drill' ? '🔩' : '🔧'}</div>
+      <div class="tool-info">
+        <div class="tool-name">${tool.name}</div>
+        <div class="tool-desc">${tool.desc}</div>
+      </div>
+      <div style="font-size:10px;color:var(--text-secondary);">Slot ${tool.slot}</div>
+    </div>`;
+  });
+  html += '</div>';
+  panel.innerHTML = html;
+}
+
+function renderPlansPanel(panel) {
+  let html = '<div class="param-group"><h4>Machining Plans</h4><p style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">Click to add plans to your job. Per F1 guide: use Raster Roughing 270° then Raster Finish 270°.</p>';
+  
+  // Group by type
+  const roughing = MACHINING_PLANS.filter(p => p.type === 'roughing');
+  const finishing = MACHINING_PLANS.filter(p => p.type === 'finishing');
+  const fine = MACHINING_PLANS.filter(p => p.type === 'fine');
+  
+  html += '<div style="font-size:11px;font-weight:600;color:var(--warning);margin:8px 0;">ROUGHING</div>';
+  roughing.forEach(p => {
+    const active = state.plans.includes(p.name) ? 'active' : '';
+    html += `<div class="plan-item ${active}" onclick="togglePlan(this,'${p.name}')">
+      <div class="plan-color" style="background:var(--warning)"></div>
+      <div class="plan-name">${p.name}</div>
+      <div class="plan-type roughing">Roughing</div>
+    </div>`;
+  });
+  
+  html += '<div style="font-size:11px;font-weight:600;color:var(--accent);margin:8px 0;">FINISHING</div>';
+  finishing.forEach(p => {
+    const active = state.plans.includes(p.name) ? 'active' : '';
+    html += `<div class="plan-item ${active}" onclick="togglePlan(this,'${p.name}')">
+      <div class="plan-color" style="background:var(--accent)"></div>
+      <div class="plan-name">${p.name}</div>
+      <div class="plan-type finishing">Finishing</div>
+    </div>`;
+  });
+  
+  html += '<div style="font-size:11px;font-weight:600;color:#a371f7;margin:8px 0;">FINE</div>';
+  fine.forEach(p => {
+    const active = state.plans.includes(p.name) ? 'active' : '';
+    html += `<div class="plan-item ${active}" onclick="togglePlan(this,'${p.name}')">
+      <div class="plan-color" style="background:#a371f7"></div>
+      <div class="plan-name">${p.name}</div>
+      <div class="plan-type fine">Fine</div>
+    </div>`;
+  });
+  
+  html += '</div>';
+  
+  // Selected plans summary
+  if (state.plans.length > 0) {
+    html += `<div class="param-group"><h4>Selected Plans (${state.plans.length})</h4>`;
+    state.plans.forEach(p => {
+      const plan = MACHINING_PLANS.find(mp => mp.name === p);
+      html += `<div style="font-size:11px;padding:4px 0;border-bottom:1px solid var(--border);"><b>${p}</b> - ${plan ? plan.desc : ''}</div>`;
+    });
+    html += '</div>';
+  }
+  
+  panel.innerHTML = html;
+}
+
+function togglePlan(el, name) {
+  el.classList.toggle('active');
+  if (el.classList.contains('active')) { if (!state.plans.includes(name)) state.plans.push(name); }
+  else { state.plans = state.plans.filter(p => p !== name); }
+  document.getElementById('pi-plans').textContent = state.plans.length;
+}
+
+function renderSimulationPanel(panel) {
+  panel.innerHTML = `
+    <div class="param-group"><h4>Simulation Controls</h4>
+      <button class="tool-btn primary" style="margin-bottom:8px;" onclick="playSimulation()">▶ Play</button>
+      <button class="tool-btn" style="margin-bottom:8px;" onclick="pauseSimulation()">⏸ Pause</button>
+      <button class="tool-btn" style="margin-bottom:8px;" onclick="stopSimulation()">⏹ Stop</button>
+      <div class="param-row"><label>Speed</label><input type="range" min="1" max="20" value="5" onchange="state.simulation.speed=parseInt(this.value)"></div>
+      <div class="param-row"><label>Progress</label><span id="sim-progress-right">0%</span></div>
+    </div>
+    <div class="param-group"><h4>Side B Machining</h4>
+      <p style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">Flip billet to machine the other side (M71 mirror)</p>
+      <button class="tool-btn ${state.sideB ? 'accent' : ''}" style="margin-bottom:8px;" onclick="toggleSideB()">${state.sideB ? '🔄 Side B Active' : '🔃 Flip to Side B'}</button>
+      ${state.sideB ? '<p style="font-size:11px;color:#ffa500;margin-top:4px;">⚠ Y-axis mirrored. M71 will be added to G-code.</p>' : ''}
+    </div>
+    <div class="param-group"><h4>Stats</h4>
+      <div class="info-row"><span>Time:</span><b id="sim-time">0:00</b></div>
+      <div class="info-row"><span>Distance:</span><b id="sim-dist">0m</b></div>
+      <div class="info-row"><span>Tool:</span><b>${state.cutter ? state.cutter.name : 'None'}</b></div>
+      <div class="info-row"><span>Progress:</span><b id="sim-progress-stat">0%</b></div>
+    </div>`;
+}
+
+function toggleSideB() {
+  state.sideB = !state.sideB;
+  if (state.sideB) {
+    // Flip model around Y axis
+    state.modelRotation.y += 180;
+    showToast('Side B active - Y-axis mirrored', 'info');
+  } else {
+    // Flip back
+    state.modelRotation.y -= 180;
+    showToast('Side A active - normal orientation', 'info');
+  }
+  renderRightPanel();
+  requestRender();
+}
+
+function drillAxleHoles() {
+  const holes = state.axleHoles;
+  showToast(`Axle holes: Rear(${holes.rearX},${holes.rearY}) Front(${holes.frontX},${holes.rearY})`, 'info');
+}
+
+function importImage(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('image-preview').innerHTML = `<img src="${e.target.result}" style="max-width:100%;border-radius:4px;">`;
+    showToast('Image imported - convert to mesh for machining', 'info');
+  };
+  reader.readAsDataURL(file);
+}
+
+function renderGCodePanel(panel) {
+  const gcode = generateGCodeText();
+  panel.innerHTML = `
+    <div class="param-group"><h4>G-Code Output</h4>
+      <div class="gcode-editor">${escapeHtml(gcode)}</div>
+      <button class="tool-btn primary" style="margin-top:12px;" onclick="exportNC()">💾 Export .NC</button>
+      <button class="tool-btn" style="margin-top:8px;" onclick="copyGCode()">📋 Copy to Clipboard</button>
+    </div>`;
+}
+
+// Material properties: feeds, speeds, cut depths
+const MATERIAL_PROPS = {
+  balsa:    { feedRate: 2000, spindleSpeed: 8000, cutDepth: 35.675, name: 'Balsa Wood' },
+  hardwood: { feedRate: 1200, spindleSpeed: 10000, cutDepth: 30.0, name: 'Hardwood' },
+  aluminium:{ feedRate: 600, spindleSpeed: 12000, cutDepth: 15.0, name: 'Aluminium' },
+  acrylic:  { feedRate: 800, spindleSpeed: 10000, cutDepth: 20.0, name: 'Acrylic' },
+  foam:     { feedRate: 3000, spindleSpeed: 6000, cutDepth: 40.0, name: 'F1 Model Block (Foam)' }
+};
+
+function calculateToolpath() {
+  if (!state.mesh) { showToast('Import a model first', 'warning'); return; }
+  
+  showToast('Calculating toolpath...', 'info');
+  
+  // Use setTimeout to allow UI to update
+  setTimeout(() => {
+    state.toolpath = [];
+    const b = state.billet;
+    const toolRadius = state.cutter ? state.cutter.radius : 3.175;
+    const cutZ = Math.abs(state.cutDepth);
+    const safeZ = b.z + 10;
+    
+    // Reduced resolution for better performance
+    const gridRes = 50; // 50x50 instead of 100x100
+    const cellW = b.x / gridRes;
+    const cellH = b.y / gridRes;
+    const heightmap = new Float32Array(gridRes * gridRes).fill(-Infinity);
+    
+    // Rasterize mesh triangles into heightmap
+    const mb = state.meshBounds;
+    const meshCX = (mb.minX + mb.maxX) / 2;
+    const meshCY = (mb.minY + mb.maxY) / 2;
+    
+    state.mesh.triangles.forEach(tri => {
+      const v0 = tri[0], v1 = tri[1], v2 = tri[2];
+      const xs = [v0[0] - meshCX, v1[0] - meshCX, v2[0] - meshCX];
+      const ys = [v0[1] - meshCY, v1[1] - meshCY, v2[1] - meshCY];
+      const zs = [v0[2], v1[2], v2[2]];
+      
+      const minX = Math.max(0, Math.floor((Math.min(...xs) + b.x/2) / cellW));
+      const maxX = Math.min(gridRes - 1, Math.ceil((Math.max(...xs) + b.x/2) / cellW));
+      const minY = Math.max(0, Math.floor((Math.min(...ys) + b.y/2) / cellH));
+      const maxY = Math.min(gridRes - 1, Math.ceil((Math.max(...ys) + b.y/2) / cellH));
+      
+      for (let gy = minY; gy <= maxY; gy++) {
+        for (let gx = minX; gx <= maxX; gx++) {
+          const px = (gx + 0.5) * cellW - b.x/2;
+          const py = (gy + 0.5) * cellH - b.y/2;
+          const ax = xs[1] - xs[0], ay = ys[1] - ys[0];
+          const bx = xs[2] - xs[0], by = ys[2] - ys[0];
+          const cx = px - xs[0], cy = py - ys[0];
+          const d = ax * by - ay * bx;
+          if (Math.abs(d) < 0.0001) continue;
+          const u = (cx * by - cy * bx) / d;
+          const v = (ax * cy - ay * cx) / d;
+          if (u >= 0 && v >= 0 && u + v <= 1) {
+            const z = zs[0] + u * (zs[1] - zs[0]) + v * (zs[2] - zs[0]);
+            const idx = gy * gridRes + gx;
+            if (z > heightmap[idx]) heightmap[idx] = z;
+          }
+        }
+      }
+    });
+    
+    // Store heightmap for simulation
+    state.heightmap = heightmap;
+    state.heightmapRes = gridRes;
+    state.heightmapCellW = cellW;
+    state.heightmapCellH = cellH;
+    
+    // Initialize cut map
+    state.cutMap = new Float32Array(gridRes * gridRes);
+    for (let i = 0; i < state.cutMap.length; i++) {
+      state.cutMap[i] = b.z;
+    }
+    
+    // Reduced passes for better performance
+    const stepover = Math.max(1.0, toolRadius * 0.8); // Larger stepover
+    const layerDepth = Math.max(1.0, toolRadius * 0.5); // Fewer layers
+    
+    const yStart = state.sideB ? b.y - toolRadius : toolRadius;
+    const yEnd = state.sideB ? toolRadius : b.y - toolRadius;
+    const yStep = state.sideB ? -stepover : stepover;
+    
+    // Only 2-3 roughing layers instead of many
+    const numLayers = Math.min(3, Math.ceil((b.z - cutZ) / layerDepth));
+    
+    for (let layer = 0; layer < numLayers; layer++) {
+      const layerZ = b.z - (layer * layerDepth);
+      const zLevel = Math.max(layerZ, cutZ);
+      
+      for (let y = yStart; state.sideB ? y >= yEnd : y <= yEnd; y += yStep) {
+        const gy = Math.floor(y / cellH);
+        if (gy < 0 || gy >= gridRes) continue;
+        
+        const passIdx = Math.abs(Math.round((y - yStart) / yStep));
+        const forward = passIdx % 2 === 0;
+        const xStart = forward ? toolRadius : b.x - toolRadius;
+        const xEnd = forward ? b.x - toolRadius : toolRadius;
+        const xStep = forward ? stepover : -stepover;
+        
+        // Only add rapid move at start of each Y pass
+        state.toolpath.push([xStart, y, safeZ, 'rapid']);
+        
+        for (let x = xStart; forward ? x <= xEnd : x >= xEnd; x += xStep) {
+          const gx = Math.floor(x / cellW);
+          if (gx < 0 || gx >= gridRes) continue;
+          const idx = gy * gridRes + gx;
+          const surfZ = heightmap[idx];
+          
+          if (surfZ > -Infinity) {
+            const targetZ = Math.max(surfZ + toolRadius, zLevel);
+            const cutAtZ = Math.max(targetZ, 0);
+            
+            // Only add cut points, not rapid/plunge for every point
+            state.toolpath.push([x, y, cutAtZ, 'cut']);
+          }
+        }
+      }
+    }
+    
+    // Single finishing pass with larger stepover
+    const fineStep = Math.max(0.8, toolRadius * 0.4);
+    for (let y = yStart; state.sideB ? y >= yEnd : y <= yEnd; y += fineStep) {
+      const gy = Math.floor(y / cellH);
+      if (gy < 0 || gy >= gridRes) continue;
+      
+      const passIdx = Math.abs(Math.round((y - yStart) / fineStep));
+      const forward = passIdx % 2 === 0;
+      const xStart = forward ? toolRadius : b.x - toolRadius;
+      const xEnd = forward ? b.x - toolRadius : toolRadius;
+      const xStep = forward ? fineStep : -fineStep;
+      
+      state.toolpath.push([xStart, y, safeZ, 'rapid']);
+      
+      for (let x = xStart; forward ? x <= xEnd : x >= xEnd; x += xStep) {
+        const gx = Math.floor(x / cellW);
+        if (gx < 0 || gx >= gridRes) continue;
+        const idx = gy * gridRes + gx;
+        const surfZ = heightmap[idx];
+        
+        if (surfZ > -Infinity) {
+          const finishZ = Math.max(surfZ + toolRadius * 0.3, cutZ);
+          state.toolpath.push([x, y, finishZ, 'cut']);
+        }
+      }
+    }
+    
+    document.getElementById('pi-plans').textContent = state.plans.length;
+    showToast('Toolpath calculated: ' + state.toolpath.length + ' points', 'success');
+    requestRender();
+  }, 10);
+}
+
+function generateGCode() {
+  calculateToolpath();
+  showToast('G-code generated', 'success');
+  if (state.currentTab === 'gcode') renderRightPanel();
+}
+
+function generateGCodeText() {
+  const mat = MATERIAL_PROPS[state.material] || MATERIAL_PROPS.balsa;
+  const date = new Date().toISOString().split('T')[0];
+  const toolName = state.cutter ? state.cutter.name : '1/4" Ball Nose';
+  const toolId = state.cutter ? state.cutter.id : 'T01';
+  const feed = mat.feedRate;
+  const spindle = mat.spindleSpeed;
+  
+  let gcode = `%\n`;
+  gcode += `N0010 O1001 (F1_MODEL_BLOCK)\n`;
+  gcode += `N0020 (Generated by QuickCAM Pro Clone)\n`;
+  gcode += `N0030 (Date: ${date})\n`;
+  gcode += `N0040 (Material: ${mat.name})\n`;
+  gcode += `N0050 (Tool: ${toolName})\n`;
+  gcode += `N0060 (Post: Denford Metric Milling)\n`;
+  gcode += `N0070 \n`;
+  gcode += `N0080 G21 (Metric units)\n`;
+  gcode += `N0090 G17 (XY plane)\n`;
+  gcode += `N0100 G90 (Absolute positioning)\n`;
+  gcode += `N0110 G40 (Cancel cutter compensation)\n`;
+  gcode += `N0120 G49 (Cancel tool length offset)\n`;
+  gcode += `N0130 G80 (Cancel canned cycles)\n`;
+  gcode += `N0140 G54 (Work coordinate system)\n`;
+  gcode += `N0150 \n`;
+  
+  if (state.plans.length > 0 || state.toolpath.length > 0) {
+    // Tool change
+    gcode += `N0160 (TOOL CHANGE: ${toolName})\n`;
+    gcode += `N0170 G00 Z50 (Rapid to safe height)\n`;
+    gcode += `N0180 M05 (Spindle stop)\n`;
+    gcode += `N0190 M06 ${toolId} (${toolName})\n`;
+    gcode += `N0200 S${spindle} M03 (Spindle on CW)\n`;
+    gcode += `N0210 G04 P2000 (Dwell 2s)\n`;
+    gcode += `N0220 \n`;
+    
+    // Toolpath
+    if (state.toolpath.length > 0) {
+      // Write each plan as a section
+      if (state.plans.length > 0) {
+        state.plans.forEach((planName, pi) => {
+          const plan = MACHINING_PLANS.find(p => p.name === planName);
+          gcode += `N${(230 + pi * 10).toString().padStart(4,'0')} (${planName.toUpperCase()})\n`;
+        });
+      } else {
+        gcode += `N0230 (ROUGHING PASS)\n`;
+      }
+      gcode += `N0240 \n`;
+      
+      state.toolpath.forEach((pt, i) => {
+        const lineNum = 250 + i;
+        const cmd = i === 0 ? 'G00' : 'G01';
+        const feedStr = i === 0 ? '' : ` F${feed}`;
+        gcode += `N${lineNum.toString().padStart(4,'0')} ${cmd} X${pt[0].toFixed(3)} Y${pt[1].toFixed(3)} Z${pt[2].toFixed(3)}${feedStr}\n`;
+      });
+    }
+  }
+  
+  // End
+  gcode += `N9990 G00 Z50 (Safe height)\n`;
+  gcode += `N9991 M05 (Spindle stop)\n`;
+  gcode += `N9992 G91 G28 Z0 (Return Z home)\n`;
+  gcode += `N9993 G28 X0 Y0 (Return XY home)\n`;
+  gcode += `N9994 M30 (Program end)\n`;
+  gcode += `N9995 %\n`;
+  
+  return gcode;
+}
+
+function exportNC(withMirror) {
+  if (state.toolpath.length === 0) {
+    showToast('No toolpath to export', 'error');
+    return;
+  }
+  
+  const gcode = generateGCodeText(withMirror);
+  const blob = new Blob([gcode], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'f1_car.nc';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('G-code exported', 'success');
+}
+
+function launchVRCNC() {
+  if (state.toolpath.length === 0) {
+    showToast('Generate toolpath first', 'error');
+    return;
+  }
+  
+  const gcode = generateGCodeText();
+  const encoded = encodeURIComponent(gcode);
+  const url = `VR_CNC_Milling_6.html?gcode=${encoded}`;
+  window.open(url, '_blank');
+  showToast('VR CNC Milling 6 launched', 'success');
+}
+
+function copyGCode() {
+  navigator.clipboard.writeText(generateGCodeText()).then(() => showToast('G-code copied to clipboard', 'success'));
+}
+
+function showToast(msg, type = 'info') {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg; toast.className = 'show ' + type;
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function escapeHtml(text) { return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function openModal(title, body, buttons) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-body').innerHTML = body;
+  document.getElementById('modal-buttons').innerHTML = buttons || '<button class="tool-btn" onclick="closeModal()">Close</button>';
+  document.getElementById('modal-backdrop').style.display = 'flex';
+}
+
+function closeModal() { document.getElementById('modal-backdrop').style.display = 'none'; }
+
+window.addEventListener('DOMContentLoaded', () => {
+  resizeCanvas();
+  renderRightPanel();
+  requestRender();
+  showToast('QuickCAM Pro ready — Import a model to begin', 'success');
+});
+</script>
+</body>
+</html>
