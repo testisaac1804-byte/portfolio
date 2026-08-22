@@ -4,14 +4,14 @@ Password-protected personal cloud file server. Drop files in `~/NAS/` and they'r
 
 ## Stack
 - **Backend**: FastAPI + uvicorn (Python 3.14)
-- **Auth**: Session-based cookie auth, password Isaac1804
+- **Auth**: Session-based cookie auth
 - **UI**: Single-page dark-themed file browser (HTML/CSS/JS inline)
 - **Tunnel**: localhost.run SSH reverse proxy for internet access
 - **Redirect**: GitHub Pages meta-refresh → da.gd shortlink
 - **Daemon**: macOS LaunchAgent (com.isaac.nas), auto-starts on login
 
 ## Features
-- Password login (Isaac1804)
+- Password login
 - Directory browsing with breadcrumbs
 - File download (direct link)
 - File upload (multipart form)
