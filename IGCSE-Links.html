@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGCSE Resource Hub — Island School Y10</title>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--border:#334155;--txt:#e2e8f0;--dim:#94a3b8;--acc:#38bdf8;--gold:#fbbf24;--green:#34d399;--red:#f87171;--pink:#f472b6}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6}
+h1{font-size:1.6rem;color:#f1f5f9;margin-bottom:2px}
+.subtitle{color:var(--dim);font-size:.8rem;margin-bottom:14px}
+h2{color:var(--acc);font-size:1.15rem;margin:22px 0 8px;border-bottom:1px solid var(--border);padding-bottom:6px}
+h3{color:#a5f3fc;font-size:.95rem;margin:14px 0 5px}
+p,li{color:#cbd5e1;font-size:.88rem}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Radio-button tabs */
+input[type=radio].tab-radio{display:none}
+.tab-nav{display:flex;flex-wrap:wrap;gap:1px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:3px;position:sticky;top:8px;z-index:100;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab-nav label{padding:9px 14px;font-size:.78rem;font-weight:600;color:var(--dim);cursor:pointer;border-radius:7px;white-space:nowrap;transition:.15s;user-select:none}
+.tab-nav label:hover{color:var(--txt);background:rgba(56,189,248,.08)}
+#tab-home:checked~.tab-nav label[for=tab-home],
+#tab-chem:checked~.tab-nav label[for=tab-chem],
+#tab-econ:checked~.tab-nav label[for=tab-econ],
+#tab-dt:checked~.tab-nav label[for=tab-dt],
+#tab-math:checked~.tab-nav label[for=tab-math],
+#tab-eng:checked~.tab-nav label[for=tab-eng],
+#tab-all:checked~.tab-nav label[for=tab-all]{color:var(--acc);background:rgba(56,189,248,.12)}
+
+.tab-panel{display:none}
+#tab-home:checked~.container #panel-home,
+#tab-chem:checked~.container #panel-chem,
+#tab-econ:checked~.container #panel-econ,
+#tab-dt:checked~.container #panel-dt,
+#tab-math:checked~.container #panel-math,
+#tab-eng:checked~.container #panel-eng,
+#tab-all:checked~.container #panel-all{display:block}
+
+.container{max-width:1100px;margin:0 auto;padding:14px 16px}
+
+/* Cards */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:10px 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:15px}
+.card h3{color:var(--acc);font-size:.88rem;margin-top:0}
+.card .tag{display:inline-block;background:rgba(56,189,248,.12);color:var(--acc);padding:2px 8px;border-radius:10px;font-size:.65rem;font-weight:600;margin-bottom:6px}
+.card p{font-size:.82rem;color:var(--dim)}
+.card a.btn{display:inline-block;margin-top:8px}
+
+/* Buttons */
+.btn{display:inline-block;padding:7px 14px;background:#1e40af;color:#e2e8f0!important;text-decoration:none;border-radius:6px;font-size:.78rem;font-weight:600;transition:.15s;margin:2px 2px 2px 0}
+.btn:hover{background:#2563eb;text-decoration:none}
+.btn-sm{padding:4px 10px;font-size:.72rem}
+.btn-gold{background:#854d0e}.btn-gold:hover{background:#a16207}
+.btn-green{background:#064e3b}.btn-green:hover{background:#065f46}
+.btn-red{background:#7f1d1d}.btn-red:hover{background:#991b1b}
+
+/* Link rows */
+.link-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--card);border:1px solid var(--border);border-radius:8px;margin:6px 0;flex-wrap:wrap}
+.link-row .icon{font-size:1.2rem;flex-shrink:0}
+.link-row .desc{flex:1;min-width:180px}
+.link-row .desc strong{display:block;font-size:.85rem;color:var(--txt)}
+.link-row .desc span{font-size:.75rem;color:var(--dim)}
+.link-row .btns{display:flex;gap:5px;flex-wrap:wrap}
+
+/* Accordion (lazy-load iframes) */
+.accordion{margin:10px 0}
+.accordion-hdr{background:var(--card);border:1px solid var(--border);padding:11px 14px;width:100%;text-align:left;color:var(--txt);font-size:.85rem;font-weight:600;cursor:pointer;border-radius:8px;display:flex;justify-content:space-between;align-items:center;font-family:inherit}
+.accordion-hdr:hover{background:#273548}
+.accordion-hdr::after{content:'▸';color:var(--acc);font-size:.7rem;transition:transform .2s}
+.accordion-hdr.open::after{transform:rotate(90deg)}
+.accordion-body{display:none;padding:0;background:var(--bg);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;margin-bottom:6px;overflow:hidden}
+.accordion-body.open{display:block}
+.accordion-body iframe{width:100%;height:420px;border:none;display:block}
+
+/* Stats */
+.stat-row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 15px;text-align:center;min-width:90px}
+.stat .val{font-size:1.3rem;font-weight:800;color:var(--acc)}
+.stat .lbl{font-size:.6rem;color:var(--dim);text-transform:uppercase}
+
+/* Timetable */
+.tt{width:100%;border-collapse:collapse;font-size:.72rem;margin:10px 0}
+.tt th{background:var(--border);color:var(--acc);padding:6px;text-align:center;font-size:.65rem;text-transform:uppercase}
+.tt td{padding:6px;border:1px solid var(--border);text-align:center;vertical-align:top}
+.tt .subj{font-weight:700;color:var(--txt)}
+.tt .room{color:var(--dim);font-size:.65rem}
+.tt .teacher{color:var(--dim);font-size:.62rem}
+.tt .break{background:#1a2332;color:var(--dim);font-style:italic}
+
+/* Tip/warn boxes */
+.tip{background:var(--card);border-left:3px solid var(--acc);padding:10px 14px;margin:8px 0;border-radius:0 7px 7px 0;font-size:.84rem}
+.warn{background:var(--card);border-left:3px solid var(--red);padding:10px 14px;margin:8px 0;border-radius:0 7px 7px 0;font-size:.84rem}
+
+/* Copy button */
+.copy-btn{background:var(--border);border:none;color:var(--dim);cursor:pointer;padding:4px 8px;border-radius:4px;font-size:.7rem}
+.copy-btn:hover{color:var(--txt)}
+
+/* Search */
+.search-box{width:100%;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--txt);font-size:.85rem;margin:10px 0;outline:none;font-family:inherit}
+.search-box:focus{border-color:var(--acc)}
+.search-box::placeholder{color:var(--dim)}
+
+@media(max-width:640px){
+  .container{padding:8px}
+  .tab-nav label{padding:7px 10px;font-size:.7rem}
+  .card-grid{grid-template-columns:1fr}
+  .link-row{flex-direction:column;align-items:flex-start}
+  .tt{font-size:.62rem}
+  .tt td{padding:3px}
+}
+</style>
+</head>
+<body>
+
+<!-- Tab radio buttons (hidden) -->
+<input type="radio" name="tabs" class="tab-radio" id="tab-home" checked>
+<input type="radio" name="tabs" class="tab-radio" id="tab-chem">
+<input type="radio" name="tabs" class="tab-radio" id="tab-econ">
+<input type="radio" name="tabs" class="tab-radio" id="tab-dt">
+<input type="radio" name="tabs" class="tab-radio" id="tab-math">
+<input type="radio" name="tabs" class="tab-radio" id="tab-eng">
+<input type="radio" name="tabs" class="tab-radio" id="tab-all">
+
+<!-- Sticky tab navigation -->
+<div class="tab-nav">
+  <label for="tab-home">🏠 Home</label>
+  <label for="tab-chem">🧪 Chemistry</label>
+  <label for="tab-econ">📊 Economics</label>
+  <label for="tab-dt">🔧 Design & Tech</label>
+  <label for="tab-math">📐 Mathematics</label>
+  <label for="tab-eng">📝 English</label>
+  <label for="tab-all">📚 All Resources</label>
+</div>
+
+<div class="container">
+
+<!-- ==================== HOME TAB ==================== -->
+<div class="tab-panel" id="panel-home">
+<h1>🎓 IGCSE Resource Hub</h1>
+<p class="subtitle">Island School — Year 10 (2025–2026) — All the links you need, in one place</p>
+
+<div class="tip"><strong>💡 Tip:</strong> Click any subject tab above to jump to subject-specific resources. Use the <strong>All Resources</strong> tab to search everything.</div>
+
+<h2>📅 Weekly Timetable (Week B)</h2>
+<div style="overflow-x:auto">
+<table class="tt">
+<tr><th></th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th></tr>
+<tr><td><strong>8:00</strong></td><td class="break" colspan="5">Registration — 10EG (G. Cawson) — Room 107</td></tr>
+<tr><td><strong>8:15</strong></td>
+  <td><span class="subj">Chemistry</span><br><span class="room">106</span><br><span class="teacher">W. Ma</span></td>
+  <td><span class="subj">English</span><br><span class="room">310</span><br><span class="teacher">D. Shen</span></td>
+  <td><span class="subj">Chemistry</span><br><span class="room">106</span><br><span class="teacher">W. Ma</span></td>
+  <td><span class="subj">DT</span><br><span class="room">326</span><br><span class="teacher">G. Cawson</span></td>
+  <td><span class="subj">DT</span><br><span class="room">404</span><br><span class="teacher">S. VANDRE</span></td>
+</tr>
+<tr><td><strong>9:25</strong></td>
+  <td><span class="subj">DT</span><br><span class="room">318</span><br><span class="teacher">S. Robertson</span></td>
+  <td><span class="subj">DT</span><br><span class="room">422</span><br><span class="teacher">A. Skitt</span></td>
+  <td><span class="subj">English</span><br><span class="room">310</span><br><span class="teacher">D. Shen</span></td>
+  <td><span class="subj">English</span><br><span class="room">226</span><br><span class="teacher">N. Boon</span></td>
+  <td><span class="subj">DT</span><br><span class="room">326</span><br><span class="teacher">G. Cawson</span></td>
+</tr>
+<tr><td><strong>10:30</strong></td><td class="break" colspan="5">Break</td></tr>
+<tr><td><strong>10:50</strong></td>
+  <td><span class="subj">Maths</span><br><span class="room">G012</span><br><span class="teacher">A. Dhokia</span></td>
+  <td><span class="subj">DT</span><br><span class="room">410</span><br><span class="teacher">S. VANDRE</span></td>
+  <td><span class="subj">DT</span><br><span class="room">422</span><br><span class="teacher">A. Skitt</span></td>
+  <td><span class="subj">Maths</span><br><span class="room">G012</span><br><span class="teacher">A. Dhokia</span></td>
+  <td><span class="subj">Maths</span><br><span class="room">G012</span><br><span class="teacher">A. Dhokia</span></td>
+</tr>
+<tr><td><strong>12:00</strong></td>
+  <td><span class="subj">English</span><br><span class="room">226</span><br><span class="teacher">N. Boon</span></td>
+  <td><span class="subj">Maths</span><br><span class="room">G012</span><br><span class="teacher">A. Dhokia</span></td>
+  <td><span class="subj">DT (EL7)</span><br><span class="room">406</span><br><span class="teacher">S. McGill</span></td>
+  <td><span class="subj">English</span><br><span class="room">310</span><br><span class="teacher">D. Shen</span></td>
+  <td><span class="subj">English</span><br><span class="room">310</span><br><span class="teacher">D. Shen</span></td>
+</tr>
+<tr><td><strong>13:05</strong></td><td class="break" colspan="5">Lunch</td></tr>
+<tr><td><strong>13:55</strong></td>
+  <td><span class="subj">DT</span><br><span class="room">404</span><br><span class="teacher">S. VANDRE</span></td>
+  <td><span class="subj">HW (Health)</span><br><span class="room">214</span><br><span class="teacher">M. Sexton</span></td>
+  <td><span class="subj">DT (EL7)</span><br><span class="room">406</span><br><span class="teacher">S. McGill</span></td>
+  <td><span class="subj">Tutorial</span><br><span class="room">203</span><br><span class="teacher">S. Kawano</span></td>
+  <td class="break">—</td>
+</tr>
+</table>
+</div>
+
+<h2>📋 Your IGCSE Subjects</h2>
+<div class="card-grid">
+<div class="card">
+  <div class="tag">Cambridge 0620</div>
+  <h3>🧪 Chemistry</h3>
+  <p>Teacher: <strong>W. Ma</strong> — Room 106<br>3 periods/week</p>
+  <a href="#" class="btn btn-sm" onclick="document.getElementById('tab-chem').checked=true;return false">View Resources →</a>
+</div>
+<div class="card">
+  <div class="tag">Cambridge 0455</div>
+  <h3>📊 Economics</h3>
+  <p>Teacher: <strong>N. Mirpuri</strong> — Room 206<br>4 periods/week</p>
+  <a href="#" class="btn btn-sm" onclick="document.getElementById('tab-econ').checked=true;return false">View Resources →</a>
+</div>
+<div class="card">
+  <div class="tag">Cambridge 0445</div>
+  <h3>🔧 Design & Technology</h3>
+  <p>Teachers: <strong>Robertson, Skitt, Cawson, VANDRE, McGill</strong><br>9 periods/week (incl. EL7)</p>
+  <a href="#" class="btn btn-sm" onclick="document.getElementById('tab-dt').checked=true;return false">View Resources →</a>
+</div>
+<div class="card">
+  <div class="tag">Edexcel 4MA1</div>
+  <h3>📐 Mathematics</h3>
+  <p>Teacher: <strong>A. Dhokia</strong> — Room G012<br>4 periods/week</p>
+  <a href="#" class="btn btn-sm" onclick="document.getElementById('tab-math').checked=true;return false">View Resources →</a>
+</div>
+<div class="card">
+  <div class="tag">Cambridge 0500</div>
+  <h3>📝 English (First Language)</h3>
+  <p>Teachers: <strong>D. Shen, G. Cawson, N. Boon</strong><br>4 periods/week</p>
+  <a href="#" class="btn btn-sm" onclick="document.getElementById('tab-eng').checked=true;return false">View Resources →</a>
+</div>
+</div>
+
+<h2>🔗 Quick Links</h2>
+<div class="link-row">
+  <div class="icon">🏫</div>
+  <div class="desc"><strong>Island School Portal</strong><span>island.edu.hk — Google Classroom, timetable, announcements</span></div>
+  <div class="btns"><a href="https://www.island.edu.hk" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📋</div>
+  <div class="desc"><strong>Cambridge International — IGCSE Subjects</strong><span>All subject syllabi, past papers, grade boundaries</span></div>
+  <div class="btns"><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse/subjects/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📝</div>
+  <div class="desc"><strong>PapaCambridge</strong><span>Past papers, mark schemes, syllabi for all subjects</span></div>
+  <div class="btns"><a href="https://pastpapers.papacambridge.com/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📖</div>
+  <div class="desc"><strong>SaveMyExams</strong><span>Revision notes, topic questions, past papers by topic</span></div>
+  <div class="btns"><a href="https://www.savemyexams.com/igcse/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">🎓</div>
+  <div class="desc"><strong>ZNotes</strong><span>Free student-written revision notes for all IGCSE subjects</span></div>
+  <div class="btns"><a href="https://znotes.org/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">🧮</div>
+  <div class="desc"><strong>Physics & Maths Tutor</strong><span>Past papers, revision notes, worksheets (Maths, Sciences)</span></div>
+  <div class="btns"><a href="https://www.physicsandmathstutor.com/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📚</div>
+  <div class="desc"><strong>GCE Guide</strong><span>Past papers & mark schemes directory</span></div>
+  <div class="btns"><a href="https://papers.gceguide.com/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">🔧</div>
+  <div class="desc"><strong>Mr McGill's DT Site</strong><span>IGCSE DT resources, materials, processes, Fusion 360</span></div>
+  <div class="btns"><a href="https://sites.google.com/view/dtmcgill" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+</div>
+
+<!-- ==================== CHEMISTRY TAB ==================== -->
+<div class="tab-panel" id="panel-chem">
+<h1>🧪 Chemistry — Cambridge IGCSE 0620</h1>
+<p class="subtitle">Teacher: W. Ma — Room 106 — 3 periods/week</p>
+
+<div class="stat-row">
+  <div class="stat"><div class="val">3</div><div class="lbl">Papers</div></div>
+  <div class="stat"><div class="val">50%</div><div class="lbl">Multiple Choice</div></div>
+  <div class="stat"><div class="val">50%</div><div class="lbl">Theory</div></div>
+  <div class="stat"><div class="val">0%</div><div class="lbl">Coursework</div></div>
+</div>
+
+<h2>📋 Official Resources</h2>
+<div class="link-row">
+  <div class="icon">📋</div>
+  <div class="desc"><strong>Cambridge 0620 Syllabus (2025–2027)</strong><span>Official syllabus document — topics, assessment, practical skills</span></div>
+  <div class="btns"><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-chemistry-0620/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📝</div>
+  <div class="desc"><strong>Past Papers — PapaCambridge</strong><span>0620 past papers, mark schemes, examiner reports</span></div>
+  <div class="btns"><a href="https://pastpapers.papacambridge.com/?query=0620" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📚</div>
+  <div class="desc"><strong>Past Papers — GCE Guide</strong><span>Organised by year and paper</span></div>
+  <div class="btns"><a href="https://papers.gceguide.com/Cambridge%20IGCSE/Chemistry%20(0620)/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+
+<h2>📖 Revision & Notes</h2>
+<div class="link-row">
+  <div class="icon">📖</div>
+  <div class="desc"><strong>SaveMyExams — Chemistry CIE</strong><span>Topic-by-topic revision notes, worked examples, past paper questions</span></div>
+  <div class="btns"><a href="https://www.savemyexams.com/igcse/chemistry/cie/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">🎓</div>
+  <div class="desc"><strong>ZNotes — Chemistry 0620</strong><span>Free concise revision notes, all topics covered</span></div>
+  <div class="btns"><a href="https://znotes.org/caie/igcse/chemistry-0620/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">🧮</div>
+  <div class="desc"><strong>PMT — IGCSE Chemistry (CIE)</strong><span>Revision notes, flashcards, past papers by topic</span></div>
+  <div class="btns"><a href="https://www.physicsandmathstutor.com/chemistry-revision/igcse-cie/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📺</div>
+  <div class="desc"><strong>Cognito — Chemistry IGCSE</strong><span>Video lessons + quizzes for every topic</span></div>
+  <div class="btns"><a href="https://cognitoedu.org/coursesubject/chemistry-igcse-cie/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+
+<h2>📺 YouTube Channels</h2>
+<div class="link-row">
+  <div class="icon">▶️</div>
+  <div class="desc"><strong>Science with Hazel</strong><span>IGCSE Chemistry revision videos, past paper walkthroughs</span></div>
+  <div class="btns"><a href="https://www.youtube.com/@SciencewithHazel" target="_blank" class="btn btn-sm">YouTube</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">▶️</div>
+  <div class="desc"><strong>Cognito</strong><span>GCSE/IGCSE chemistry explained visually</span></div>
+  <div class="btns"><a href="https://www.youtube.com/@Cognitoedu" target="_blank" class="btn btn-sm">YouTube</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">▶️</div>
+  <div class="desc"><strong>Freesciencelessons</strong><span>Short, exam-focused chemistry videos</span></div>
+  <div class="btns"><a href="https://www.youtube.com/@Freesciencelessons" target="_blank" class="btn btn-sm">YouTube</a></div>
+</div>
+
+<h2>📚 Free Textbooks</h2>
+<div class="link-row">
+  <div class="icon">📘</div>
+  <div class="desc"><strong>Cambridge IGCSE Chemistry Coursebook (4th ed)</strong><span>Internet Archive — full textbook</span></div>
+  <div class="btns"><a href="https://archive.org/details/cambridge-igcse-chemistry-coursebook" target="_blank" class="btn btn-sm">Read</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📘</div>
+  <div class="desc"><strong>Complete Chemistry for Cambridge IGCSE</strong><span>Internet Archive</span></div>
+  <div class="btns"><a href="https://archive.org/search?query=cambridge+igcse+chemistry" target="_blank" class="btn btn-sm">Search</a></div>
+</div>
+
+<h2>🎯 Embedded Resources</h2>
+<div class="accordion">
+  <button class="accordion-hdr" onclick="var b=this;b.classList.toggle('open');b.nextElementSibling.classList.toggle('open');var f=b.nextElementSibling.querySelector('iframe');if(f&&!f.src){f.src=f.getAttribute('data-src')}">📋 Past Papers — PapaCambridge Embed</button>
+  <div class="accordion-body"><iframe data-src="https://pastpapers.papacambridge.com/?query=0620" allowfullscreen loading="lazy"></iframe></div>
+</div>
+<div class="accordion">
+  <button class="accordion-hdr" onclick="var b=this;b.classList.toggle('open');b.nextElementSibling.classList.toggle('open');var f=b.nextElementSibling.querySelector('iframe');if(f&&!f.src){f.src=f.getAttribute('data-src')}">📖 ZNotes — Chemistry 0620</button>
+  <div class="accordion-body"><iframe data-src="https://znotes.org/caie/igcse/chemistry-0620/" allowfullscreen loading="lazy"></iframe></div>
+</div>
+</div>
+
+<!-- ==================== ECONOMICS TAB ==================== -->
+<div class="tab-panel" id="panel-econ">
+<h1>📊 Economics — Cambridge IGCSE 0455</h1>
+<p class="subtitle">Teacher: N. Mirpuri — Room 206 — 4 periods/week</p>
+
+<div class="stat-row">
+  <div class="stat"><div class="val">2</div><div class="lbl">Papers</div></div>
+  <div class="stat"><div class="val">30%</div><div class="lbl">MCQ (P1)</div></div>
+  <div class="stat"><div class="val">70%</div><div class="lbl">Structured (P2)</div></div>
+  <div class="stat"><div class="val">0%</div><div class="lbl">Coursework</div></div>
+</div>
+
+<h2>📋 Official Resources</h2>
+<div class="link-row">
+  <div class="icon">📋</div>
+  <div class="desc"><strong>Cambridge 0455 Syllabus (2025–2027)</strong><span>Official syllabus, assessment objectives, topic list</span></div>
+  <div class="btns"><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-economics-0455/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📝</div>
+  <div class="desc"><strong>Past Papers — PapaCambridge</strong><span>0455 past papers, mark schemes, examiner reports</span></div>
+  <div class="btns"><a href="https://pastpapers.papacambridge.com/?query=0455" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📚</div>
+  <div class="desc"><strong>Past Papers — GCE Guide</strong><span>Organised by year and paper</span></div>
+  <div class="btns"><a href="https://papers.gceguide.com/Cambridge%20IGCSE/Economics%20(0455)/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+
+<h2>📖 Revision & Notes</h2>
+<div class="link-row">
+  <div class="icon">📖</div>
+  <div class="desc"><strong>SaveMyExams — Economics CIE</strong><span>Detailed revision notes, topic questions, model answers</span></div>
+  <div class="btns"><a href="https://www.savemyexams.com/igcse/economics/cie/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">🎓</div>
+  <div class="desc"><strong>ZNotes — Economics 0455</strong><span>Free concise revision notes covering all 6 units</span></div>
+  <div class="btns"><a href="https://znotes.org/caie/igcse/economics-0455/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📺</div>
+  <div class="desc"><strong>EconplusDal (YouTube)</strong><span>IGCSE & A-Level economics explained with diagrams</span></div>
+  <div class="btns"><a href="https://www.youtube.com/@EconplusDal" target="_blank" class="btn btn-sm">YouTube</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📺</div>
+  <div class="desc"><strong>Jacob Clifford (YouTube)</strong><span>Crash Course Economics — engaging, exam-focused</span></div>
+  <div class="btns"><a href="https://www.youtube.com/@ACDCLeadership" target="_blank" class="btn btn-sm">YouTube</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📊</div>
+  <div class="desc"><strong>Tutor2u — Economics</strong><span>Study notes, revision quizzes, real-world examples</span></div>
+  <div class="btns"><a href="https://www.tutor2u.net/economics/reference" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">🏛️</div>
+  <div class="desc"><strong>IGCSE Economics — Smart Exam Resources</strong><span>Topic questions, model answers, revision packs</span></div>
+  <div class="btns"><a href="https://www.smartexamresources.com/igcse-economics" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+
+<h2>📚 Free Textbooks</h2>
+<div class="link-row">
+  <div class="icon">📘</div>
+  <div class="desc"><strong>Cambridge IGCSE Economics Coursebook</strong><span>Internet Archive</span></div>
+  <div class="btns"><a href="https://archive.org/search?query=cambridge+igcse+economics+0455" target="_blank" class="btn btn-sm">Search</a></div>
+</div>
+
+<h2>🎯 Embedded Resources</h2>
+<div class="accordion">
+  <button class="accordion-hdr" onclick="var b=this;b.classList.toggle('open');b.nextElementSibling.classList.toggle('open');var f=b.nextElementSibling.querySelector('iframe');if(f&&!f.src){f.src=f.getAttribute('data-src')}">📋 Past Papers — PapaCambridge Embed</button>
+  <div class="accordion-body"><iframe data-src="https://pastpapers.papacambridge.com/?query=0455" allowfullscreen loading="lazy"></iframe></div>
+</div>
+<div class="accordion">
+  <button class="accordion-hdr" onclick="var b=this;b.classList.toggle('open');b.nextElementSibling.classList.toggle('open');var f=b.nextElementSibling.querySelector('iframe');if(f&&!f.src){f.src=f.getAttribute('data-src')}">📖 ZNotes — Economics 0455</button>
+  <div class="accordion-body"><iframe data-src="https://znotes.org/caie/igcse/economics-0455/" allowfullscreen loading="lazy"></iframe></div>
+</div>
+<div class="accordion">
+  <button class="accordion-hdr" onclick="var b=this;b.classList.toggle('open');b.nextElementSibling.classList.toggle('open');var f=b.nextElementSibling.querySelector('iframe');if(f&&!f.src){f.src=f.getAttribute('data-src')}">▶️ EconplusDal — IGCSE Economics Playlist</button>
+  <div class="accordion-body"><iframe data-src="https://www.youtube.com/embed/videoseries?list=PLWe3DmwvDAydG6Iq_tq8E2FqJyqS3VubR" allowfullscreen loading="lazy"></iframe></div>
+</div>
+</div>
+
+<!-- ==================== DT TAB ==================== -->
+<div class="tab-panel" id="panel-dt">
+<h1>🔧 Design & Technology — Cambridge IGCSE 0445</h1>
+<p class="subtitle">Teachers: Robertson, Skitt, Cawson, VANDRE, McGill — 9 periods/week (incl. EL7)</p>
+
+<div class="stat-row">
+  <div class="stat"><div class="val">3</div><div class="lbl">Papers</div></div>
+  <div class="stat"><div class="val">50%</div><div class="lbl">Theory (P1)</div></div>
+  <div class="stat"><div class="val">50%</div><div class="lbl">Coursework (NEA)</div></div>
+  <div class="stat"><div class="val">P3</div><div class="lbl">Resistant Materials</div></div>
+</div>
+
+<h2>📋 Official Resources</h2>
+<div class="link-row">
+  <div class="icon">📋</div>
+  <div class="desc"><strong>Cambridge 0445 Syllabus (2025–2027)</strong><span>Official syllabus, coursework guidelines, assessment criteria</span></div>
+  <div class="btns"><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-design-and-technology-0445/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📝</div>
+  <div class="desc"><strong>Past Papers — PapaCambridge</strong><span>0445 past papers, mark schemes, examiner reports</span></div>
+  <div class="btns"><a href="https://pastpapers.papacambridge.com/?query=0445" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📚</div>
+  <div class="desc"><strong>Past Papers — GCE Guide</strong><span>Organised by year and paper</span></div>
+  <div class="btns"><a href="https://papers.gceguide.com/Cambridge%20IGCSE/Design%20and%20Technology%20(0445)/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+
+<h2>👨‍🏫 Island School DT Resources</h2>
+<div class="link-row">
+  <div class="icon">🔧</div>
+  <div class="desc"><strong>Mr McGill's DT Site</strong><span>IGCSE materials, manufacturing processes, CAD/CAM, Fusion 360</span></div>
+  <div class="btns"><a href="https://sites.google.com/view/dtmcgill" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📝</div>
+  <div class="desc"><strong>Island School DT — Google Classroom</strong><span>Class assignments, project briefs, submission links</span></div>
+  <div class="btns"><a href="https://classroom.google.com/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+
+<h2>📖 Revision & Notes</h2>
+<div class="link-row">
+  <div class="icon">📖</div>
+  <div class="desc"><strong>SaveMyExams — DT CIE</strong><span>Topic-by-topic revision notes, past paper questions</span></div>
+  <div class="btns"><a href="https://www.savemyexams.com/igcse/design-and-technology/cie/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">🎓</div>
+  <div class="desc"><strong>ZNotes — DT 0445</strong><span>Free concise revision notes (all topics)</span></div>
+  <div class="btns"><a href="https://znotes.org/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📺</div>
+  <div class="desc"><strong>DT Resources — Mr DT (YouTube)</strong><span>Manufacturing processes, materials, exam technique</span></div>
+  <div class="btns"><a href="https://www.youtube.com/@MrDT" target="_blank" class="btn btn-sm">YouTube</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📺</div>
+  <div class="desc"><strong>Technology Student</strong><span>Comprehensive DT reference: materials, processes, electronics</span></div>
+  <div class="btns"><a href="https://technologystudent.com/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+
+<h2>🛠️ Tools & Software</h2>
+<div class="link-row">
+  <div class="icon">🔧</div>
+  <div class="desc"><strong>Fusion 360 (Autodesk)</strong><span>CAD/CAM software — free for students</span></div>
+  <div class="btns"><a href="https://www.autodesk.com/education/edu-software/overview" target="_blank" class="btn btn-sm">Free Download</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📐</div>
+  <div class="desc"><strong>Onshape</strong><span>Browser-based CAD — free for students</span></div>
+  <div class="btns"><a href="https://www.onshape.com/en/education/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">🖨️</div>
+  <div class="desc"><strong>Bambu Lab</strong><span>3D printing slicer reference</span></div>
+  <div class="btns"><a href="https://bambulab.com/en" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+
+<h2>📚 Free Textbooks</h2>
+<div class="link-row">
+  <div class="icon">📘</div>
+  <div class="desc"><strong>Cambridge IGCSE DT Coursebook</strong><span>Internet Archive</span></div>
+  <div class="btns"><a href="https://archive.org/search?query=cambridge+igcse+design+technology+0445" target="_blank" class="btn btn-sm">Search</a></div>
+</div>
+
+<h2>🎯 Embedded Resources</h2>
+<div class="accordion">
+  <button class="accordion-hdr" onclick="var b=this;b.classList.toggle('open');b.nextElementSibling.classList.toggle('open');var f=b.nextElementSibling.querySelector('iframe');if(f&&!f.src){f.src=f.getAttribute('data-src')}">📋 Past Papers — PapaCambridge Embed</button>
+  <div class="accordion-body"><iframe data-src="https://pastpapers.papacambridge.com/?query=0445" allowfullscreen loading="lazy"></iframe></div>
+</div>
+<div class="accordion">
+  <button class="accordion-hdr" onclick="var b=this;b.classList.toggle('open');b.nextElementSibling.classList.toggle('open');var f=b.nextElementSibling.querySelector('iframe');if(f&&!f.src){f.src=f.getAttribute('data-src')}">🛠️ Technology Student — Materials & Processes</button>
+  <div class="accordion-body"><iframe data-src="https://technologystudent.com/" allowfullscreen loading="lazy"></iframe></div>
+</div>
+</div>
+
+<!-- ==================== MATHS TAB ==================== -->
+<div class="tab-panel" id="panel-math">
+<h1>📐 Mathematics — Edexcel IGCSE (4MA1)</h1>
+<p class="subtitle">Teacher: A. Dhokia — Room G012 — 4 periods/week</p>
+
+<div class="stat-row">
+  <div class="stat"><div class="val">2</div><div class="lbl">Papers</div></div>
+  <div class="stat"><div class="val">50%</div><div class="lbl">Paper 1</div></div>
+  <div class="stat"><div class="val">50%</div><div class="lbl">Paper 2</div></div>
+  <div class="stat"><div class="val">Higher</div><div class="lbl">Tier</div></div>
+</div>
+
+<h2>📋 Official Resources</h2>
+<div class="link-row">
+  <div class="icon">📋</div>
+  <div class="desc"><strong>Edexcel IGCSE Maths A (4MA1) Specification</strong><span>Official specification, topic list, formula sheet</span></div>
+  <div class="btns"><a href="https://qualifications.pearson.com/en/qualifications/edexcel-international-gcses/international-gcse-mathematics-a.html" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📝</div>
+  <div class="desc"><strong>Past Papers — PMT</strong><span>Edexcel IGCSE Maths past papers, mark schemes, model answers</span></div>
+  <div class="btns"><a href="https://www.physicsandmathstutor.com/maths-revision/igcse-edexcel/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📝</div>
+  <div class="desc"><strong>Past Papers — SaveMyExams</strong><span>Organised by topic and year</span></div>
+  <div class="btns"><a href="https://www.savemyexams.com/igcse/maths/edexcel/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+
+<h2>📖 Revision & Practice</h2>
+<div class="link-row">
+  <div class="icon">🧮</div>
+  <div class="desc"><strong>Physics & Maths Tutor — IGCSE Edexcel</strong><span>Topic questions, revision notes, past papers</span></div>
+  <div class="btns"><a href="https://www.physicsandmathstutor.com/maths-revision/igcse-edexcel/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📖</div>
+  <div class="desc"><strong>SaveMyExams — Edexcel IGCSE Maths</strong><span>Revision notes, worked examples, topic questions</span></div>
+  <div class="btns"><a href="https://www.savemyexams.com/igcse/maths/edexcel/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📺</div>
+  <div class="desc"><strong>Maths Genie — IGCSE Edexcel</strong><span>Video lessons, practice questions, past papers</span></div>
+  <div class="btns"><a href="https://www.mathsgenie.co.uk/igcse.html" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📺</div>
+  <div class="desc"><strong>Corbettmaths</strong><span>5-a-day practice, video tutorials, textbook exercises</span></div>
+  <div class="btns"><a href="https://corbettmaths.com/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📺</div>
+  <div class="desc"><strong>The GCSE Maths Tutor (YouTube)</strong><span>Full IGCSE Edexcel topic walkthroughs</span></div>
+  <div class="btns"><a href="https://www.youtube.com/@TheGCSEMathsTutor" target="_blank" class="btn btn-sm">YouTube</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📊</div>
+  <div class="desc"><strong>Dr Frost Maths</strong><span>Interactive practice, topic tests, progress tracking</span></div>
+  <div class="btns"><a href="https://www.drfrost.org/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+
+<h2>📚 Free Textbooks</h2>
+<div class="link-row">
+  <div class="icon">📘</div>
+  <div class="desc"><strong>Edexcel IGCSE Maths A Student Book</strong><span>Internet Archive</span></div>
+  <div class="btns"><a href="https://archive.org/search?query=edexcel+igcse+mathematics+A+student+book" target="_blank" class="btn btn-sm">Search</a></div>
+</div>
+
+<h2>🎯 Embedded Resources</h2>
+<div class="accordion">
+  <button class="accordion-hdr" onclick="var b=this;b.classList.toggle('open');b.nextElementSibling.classList.toggle('open');var f=b.nextElementSibling.querySelector('iframe');if(f&&!f.src){f.src=f.getAttribute('data-src')}">📝 PMT — Edexcel IGCSE Past Papers</button>
+  <div class="accordion-body"><iframe data-src="https://www.physicsandmathstutor.com/maths-revision/igcse-edexcel/" allowfullscreen loading="lazy"></iframe></div>
+</div>
+<div class="accordion">
+  <button class="accordion-hdr" onclick="var b=this;b.classList.toggle('open');b.nextElementSibling.classList.toggle('open');var f=b.nextElementSibling.querySelector('iframe');if(f&&!f.src){f.src=f.getAttribute('data-src')}">📐 Maths Genie — IGCSE Revision</button>
+  <div class="accordion-body"><iframe data-src="https://www.mathsgenie.co.uk/igcse.html" allowfullscreen loading="lazy"></iframe></div>
+</div>
+</div>
+
+<!-- ==================== ENGLISH TAB ==================== -->
+<div class="tab-panel" id="panel-eng">
+<h1>📝 English (First Language) — Cambridge IGCSE 0500</h1>
+<p class="subtitle">Teachers: D. Shen, G. Cawson, N. Boon — 4 periods/week</p>
+
+<div class="stat-row">
+  <div class="stat"><div class="val">2</div><div class="lbl">Papers</div></div>
+  <div class="stat"><div class="val">50%</div><div class="lbl">Reading (P1)</div></div>
+  <div class="stat"><div class="val">50%</div><div class="lbl">Writing (P2)</div></div>
+  <div class="stat"><div class="val">0%</div><div class="lbl">Coursework</div></div>
+</div>
+
+<h2>📋 Official Resources</h2>
+<div class="link-row">
+  <div class="icon">📋</div>
+  <div class="desc"><strong>Cambridge 0500 Syllabus (2025–2027)</strong><span>Official syllabus, assessment objectives, text types</span></div>
+  <div class="btns"><a href="https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-first-language-english-0500/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📝</div>
+  <div class="desc"><strong>Past Papers — PapaCambridge</strong><span>0500 past papers, mark schemes, examiner reports</span></div>
+  <div class="btns"><a href="https://pastpapers.papacambridge.com/?query=0500" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📚</div>
+  <div class="desc"><strong>Past Papers — GCE Guide</strong><span>Organised by year and paper</span></div>
+  <div class="btns"><a href="https://papers.gceguide.com/Cambridge%20IGCSE/English%20-%20First%20Language%20(0500)/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+
+<h2>📖 Revision & Practice</h2>
+<div class="link-row">
+  <div class="icon">📖</div>
+  <div class="desc"><strong>SaveMyExams — English Language CIE</strong><span>Revision notes, exam technique, model answers</span></div>
+  <div class="btns"><a href="https://www.savemyexams.com/igcse/english-language/cie/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">🎓</div>
+  <div class="desc"><strong>ZNotes — English 0500</strong><span>Free concise revision notes, writing guides</span></div>
+  <div class="btns"><a href="https://znotes.org/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📝</div>
+  <div class="desc"><strong>IGCSE English — Revision World</strong><span>Past papers, writing tips, exam advice</span></div>
+  <div class="btns"><a href="https://revisionworld.com/gcse-revision/english" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📺</div>
+  <div class="desc"><strong>Mr Bruff (YouTube)</strong><span>English Language exam technique, model answers</span></div>
+  <div class="btns"><a href="https://www.youtube.com/@mrbruff" target="_blank" class="btn btn-sm">YouTube</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📺</div>
+  <div class="desc"><strong>Mr Salles Teaches English (YouTube)</strong><span>Top-grade writing techniques, exam walkthroughs</span></div>
+  <div class="btns"><a href="https://www.youtube.com/@MrSallesTeachesEnglish" target="_blank" class="btn btn-sm">YouTube</a></div>
+</div>
+<div class="link-row">
+  <div class="icon">📝</div>
+  <div class="desc"><strong>Grammarly</strong><span>Free writing assistant — grammar, clarity, tone</span></div>
+  <div class="btns"><a href="https://www.grammarly.com/" target="_blank" class="btn btn-sm">Open</a></div>
+</div>
+
+<h2>📚 Free Textbooks</h2>
+<div class="link-row">
+  <div class="icon">📘</div>
+  <div class="desc"><strong>Cambridge IGCSE First Language English Coursebook</strong><span>Internet Archive</span></div>
+  <div class="btns"><a href="https://archive.org/search?query=cambridge+igcse+first+language+english+0500" target="_blank" class="btn btn-sm">Search</a></div>
+</div>
+
+<h2>🎯 Embedded Resources</h2>
+<div class="accordion">
+  <button class="accordion-hdr" onclick="var b=this;b.classList.toggle('open');b.nextElementSibling.classList.toggle('open');var f=b.nextElementSibling.querySelector('iframe');if(f&&!f.src){f.src=f.getAttribute('data-src')}">📝 Past Papers — PapaCambridge Embed</button>
+  <div class="accordion-body"><iframe data-src="https://pastpapers.papacambridge.com/?query=0500" allowfullscreen loading="lazy"></iframe></div>
+</div>
+<div class="accordion">
+  <button class="accordion-hdr" onclick="var b=this;b.classList.toggle('open');b.nextElementSibling.classList.toggle('open');var f=b.nextElementSibling.querySelector('iframe');if(f&&!f.src){f.src=f.getAttribute('data-src')}">▶️ Mr Bruff — English Language Exam Tips</button>
+  <div class="accordion-body"><iframe data-src="https://www.youtube.com/embed/videoseries?list=PLqGFsWf-P-cA1n4loqJqIq2hN2qpi0XBm" allowfullscreen loading="lazy"></iframe></div>
+</div>
+</div>
+
+<!-- ==================== ALL RESOURCES TAB ==================== -->
+<div class="tab-panel" id="panel-all">
+<h1>📚 All Resources — Search & Browse</h1>
+<p class="subtitle">Every link on this page, searchable and organised by subject</p>
+
+<input type="text" class="search-box" placeholder="🔍 Search all resources... (e.g. 'past papers chemistry', 'economics notes', 'fusion 360')" oninput="S.filter(this.value)">
+
+<div id="all-results"></div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+// Lazy-load accordion iframes
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.accordion-hdr').forEach(function(h){
+    h.addEventListener('click',function(){
+      var self=this;
+      self.classList.toggle('open');
+      var body=self.nextElementSibling;
+      body.classList.toggle('open');
+      var f=body.querySelector('iframe');
+      if(f&&!f.src){
+        f.src=f.getAttribute('data-src');
+      }
+    });
+  });
+});
+
+// All Resources search
+var ALL_LINKS = [
+  {s:'Chemistry',c:'Official',t:'Cambridge 0620 Syllabus',d:'Official syllabus, topics, assessment',u:'https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-chemistry-0620/'},
+  {s:'Chemistry',c:'Past Papers',t:'PapaCambridge — 0620',d:'Past papers, mark schemes, examiner reports',u:'https://pastpapers.papacambridge.com/?query=0620'},
+  {s:'Chemistry',c:'Past Papers',t:'GCE Guide — 0620',d:'Past papers organised by year',u:'https://papers.gceguide.com/Cambridge%20IGCSE/Chemistry%20(0620)/'},
+  {s:'Chemistry',c:'Revision',t:'SaveMyExams — Chemistry CIE',d:'Topic notes, worked examples, questions',u:'https://www.savemyexams.com/igcse/chemistry/cie/'},
+  {s:'Chemistry',c:'Revision',t:'ZNotes — Chemistry 0620',d:'Free concise revision notes',u:'https://znotes.org/caie/igcse/chemistry-0620/'},
+  {s:'Chemistry',c:'Revision',t:'PMT — IGCSE Chemistry CIE',d:'Revision notes, flashcards, past papers',u:'https://www.physicsandmathstutor.com/chemistry-revision/igcse-cie/'},
+  {s:'Chemistry',c:'Revision',t:'Cognito — Chemistry IGCSE',d:'Video lessons + quizzes',u:'https://cognitoedu.org/coursesubject/chemistry-igcse-cie/'},
+  {s:'Chemistry',c:'YouTube',t:'Science with Hazel',d:'IGCSE Chemistry revision videos',u:'https://www.youtube.com/@SciencewithHazel'},
+  {s:'Chemistry',c:'YouTube',t:'Cognito',d:'GCSE/IGCSE chemistry explained visually',u:'https://www.youtube.com/@Cognitoedu'},
+  {s:'Chemistry',c:'YouTube',t:'Freesciencelessons',d:'Short, exam-focused videos',u:'https://www.youtube.com/@Freesciencelessons'},
+  {s:'Chemistry',c:'Textbook',t:'Cambridge IGCSE Chemistry Coursebook',d:'Internet Archive — full textbook',u:'https://archive.org/details/cambridge-igcse-chemistry-coursebook'},
+  {s:'Economics',c:'Official',t:'Cambridge 0455 Syllabus',d:'Official syllabus, assessment objectives',u:'https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-economics-0455/'},
+  {s:'Economics',c:'Past Papers',t:'PapaCambridge — 0455',d:'Past papers, mark schemes, examiner reports',u:'https://pastpapers.papacambridge.com/?query=0455'},
+  {s:'Economics',c:'Past Papers',t:'GCE Guide — 0455',d:'Past papers organised by year',u:'https://papers.gceguide.com/Cambridge%20IGCSE/Economics%20(0455)/'},
+  {s:'Economics',c:'Revision',t:'SaveMyExams — Economics CIE',d:'Detailed revision notes, topic questions',u:'https://www.savemyexams.com/igcse/economics/cie/'},
+  {s:'Economics',c:'Revision',t:'ZNotes — Economics 0455',d:'Free concise revision notes, all 6 units',u:'https://znotes.org/caie/igcse/economics-0455/'},
+  {s:'Economics',c:'Revision',t:'Tutor2u — Economics',d:'Study notes, revision quizzes, examples',u:'https://www.tutor2u.net/economics/reference'},
+  {s:'Economics',c:'Revision',t:'Smart Exam Resources — Economics',d:'Topic questions, model answers, packs',u:'https://www.smartexamresources.com/igcse-economics'},
+  {s:'Economics',c:'YouTube',t:'EconplusDal',d:'IGCSE & A-Level economics with diagrams',u:'https://www.youtube.com/@EconplusDal'},
+  {s:'Economics',c:'YouTube',t:'Jacob Clifford (Crash Course)',d:'Engaging economics videos',u:'https://www.youtube.com/@ACDCLeadership'},
+  {s:'Economics',c:'Textbook',t:'Cambridge IGCSE Economics Coursebook',d:'Internet Archive',u:'https://archive.org/search?query=cambridge+igcse+economics+0455'},
+  {s:'DT',c:'Official',t:'Cambridge 0445 Syllabus',d:'Official syllabus, coursework guidelines',u:'https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-design-and-technology-0445/'},
+  {s:'DT',c:'Past Papers',t:'PapaCambridge — 0445',d:'Past papers, mark schemes, examiner reports',u:'https://pastpapers.papacambridge.com/?query=0445'},
+  {s:'DT',c:'Past Papers',t:'GCE Guide — 0445',d:'Past papers organised by year',u:'https://papers.gceguide.com/Cambridge%20IGCSE/Design%20and%20Technology%20(0445)/'},
+  {s:'DT',c:'Revision',t:'SaveMyExams — DT CIE',d:'Topic notes, past paper questions',u:'https://www.savemyexams.com/igcse/design-and-technology/cie/'},
+  {s:'DT',c:'Revision',t:'Technology Student',d:'Comprehensive DT reference',u:'https://technologystudent.com/'},
+  {s:'DT',c:'Tools',t:'Fusion 360 (Autodesk)',d:'CAD/CAM — free for students',u:'https://www.autodesk.com/education/edu-software/overview'},
+  {s:'DT',c:'Tools',t:'Onshape',d:'Browser-based CAD — free for students',u:'https://www.onshape.com/en/education/'},
+  {s:'DT',c:'Tools',t:'Bambu Lab',d:'3D printing slicer reference',u:'https://bambulab.com/en'},
+  {s:'DT',c:'School',t:'Mr McGill DT Site',d:'IGCSE DT resources, materials, CAD',u:'https://sites.google.com/view/dtmcgill'},
+  {s:'DT',c:'School',t:'Google Classroom',d:'Class assignments, project briefs',u:'https://classroom.google.com/'},
+  {s:'DT',c:'YouTube',t:'Mr DT',d:'Manufacturing processes, materials',u:'https://www.youtube.com/@MrDT'},
+  {s:'DT',c:'Textbook',t:'Cambridge IGCSE DT Coursebook',d:'Internet Archive',u:'https://archive.org/search?query=cambridge+igcse+design+technology+0445'},
+  {s:'Maths',c:'Official',t:'Edexcel IGCSE Maths A (4MA1)',d:'Official specification, topic list',u:'https://qualifications.pearson.com/en/qualifications/edexcel-international-gcses/international-gcse-mathematics-a.html'},
+  {s:'Maths',c:'Past Papers',t:'PMT — Edexcel IGCSE',d:'Past papers, mark schemes, model answers',u:'https://www.physicsandmathstutor.com/maths-revision/igcse-edexcel/'},
+  {s:'Maths',c:'Past Papers',t:'SaveMyExams — Edexcel Maths',d:'Past papers by topic and year',u:'https://www.savemyexams.com/igcse/maths/edexcel/'},
+  {s:'Maths',c:'Revision',t:'Maths Genie — IGCSE',d:'Video lessons, practice questions',u:'https://www.mathsgenie.co.uk/igcse.html'},
+  {s:'Maths',c:'Revision',t:'Corbettmaths',d:'5-a-day practice, video tutorials',u:'https://corbettmaths.com/'},
+  {s:'Maths',c:'Revision',t:'Dr Frost Maths',d:'Interactive practice, progress tracking',u:'https://www.drfrost.org/'},
+  {s:'Maths',c:'YouTube',t:'The GCSE Maths Tutor',d:'Full topic walkthroughs',u:'https://www.youtube.com/@TheGCSEMathsTutor'},
+  {s:'Maths',c:'Textbook',t:'Edexcel IGCSE Maths A Student Book',d:'Internet Archive',u:'https://archive.org/search?query=edexcel+igcse+mathematics+A+student+book'},
+  {s:'English',c:'Official',t:'Cambridge 0500 Syllabus',d:'Official syllabus, text types',u:'https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-igcse-first-language-english-0500/'},
+  {s:'English',c:'Past Papers',t:'PapaCambridge — 0500',d:'Past papers, mark schemes, examiner reports',u:'https://pastpapers.papacambridge.com/?query=0500'},
+  {s:'English',c:'Past Papers',t:'GCE Guide — 0500',d:'Past papers organised by year',u:'https://papers.gceguide.com/Cambridge%20IGCSE/English%20-%20First%20Language%20(0500)/'},
+  {s:'English',c:'Revision',t:'SaveMyExams — English CIE',d:'Revision notes, exam technique',u:'https://www.savemyexams.com/igcse/english-language/cie/'},
+  {s:'English',c:'Revision',t:'Revision World — English',d:'Past papers, writing tips, exam advice',u:'https://revisionworld.com/gcse-revision/english'},
+  {s:'English',c:'Tools',t:'Grammarly',d:'Free writing assistant',u:'https://www.grammarly.com/'},
+  {s:'English',c:'YouTube',t:'Mr Bruff',d:'English Language exam technique',u:'https://www.youtube.com/@mrbruff'},
+  {s:'English',c:'YouTube',t:'Mr Salles Teaches English',d:'Top-grade writing techniques',u:'https://www.youtube.com/@MrSallesTeachesEnglish'},
+  {s:'English',c:'Textbook',t:'Cambridge IGCSE FLE Coursebook',d:'Internet Archive',u:'https://archive.org/search?query=cambridge+igcse+first+language+english+0500'},
+  {s:'General',c:'School',t:'Island School Portal',d:'School website, announcements',u:'https://www.island.edu.hk/'},
+  {s:'General',c:'School',t:'Google Classroom',d:'All class assignments',u:'https://classroom.google.com/'},
+  {s:'General',c:'Past Papers',t:'PapaCambridge',d:'All subjects past papers',u:'https://pastpapers.papacambridge.com/'},
+  {s:'General',c:'Past Papers',t:'GCE Guide',d:'Past papers directory',u:'https://papers.gceguide.com/'},
+  {s:'General',c:'Revision',t:'SaveMyExams',d:'All IGCSE subjects',u:'https://www.savemyexams.com/igcse/'},
+  {s:'General',c:'Revision',t:'ZNotes',d:'Free student-written notes',u:'https://znotes.org/'},
+  {s:'General',c:'Revision',t:'Physics & Maths Tutor',d:'Past papers, notes, worksheets',u:'https://www.physicsandmathstutor.com/'},
+  {s:'General',c:'Revision',t:'Cognito',d:'Video lessons + quizzes',u:'https://cognitoedu.org/'},
+  {s:'General',c:'Textbook',t:'Internet Archive',d:'Free textbooks search',u:'https://archive.org/'}
+];
+
+var S = {
+  filter: function(q){
+    var out=document.getElementById('all-results');
+    q=q.toLowerCase().trim();
+    if(!q){
+      out.innerHTML='<p style="color:var(--dim);margin-top:20px">Type above to search, or browse by subject below.</p><div class="card-grid" style="margin-top:12px">'+this.renderSubjectCards()+S.renderAllSubjectGroups()+'</div>';
+      return;
+    }
+    var matches=ALL_LINKS.filter(function(l){
+      return l.t.toLowerCase().indexOf(q)!==-1||l.d.toLowerCase().indexOf(q)!==-1||l.s.toLowerCase().indexOf(q)!==-1||l.c.toLowerCase().indexOf(q)!==-1;
+    });
+    if(!matches.length){out.innerHTML='<p style="color:var(--dim);margin-top:20px">No results found for "'+q+'". Try a different search.</p>';return;}
+    var h='<p style="color:var(--dim);margin:10px 0">'+matches.length+' result'+(matches.length===1?'':'s')+'</p>';
+    matches.forEach(function(l){
+      h+='<div class="link-row"><div class="icon">'+S.subjectIcon(l.s)+'</div><div class="desc"><strong>'+l.t+'</strong><span>'+l.s+' · '+l.c+' — '+l.d+'</span></div><div class="btns"><a href="'+l.u+'" target="_blank" class="btn btn-sm">Open</a></div></div>';
+    });
+    out.innerHTML=h;
+  },
+  subjectIcon: function(s){
+    if(s==='Chemistry')return'🧪';if(s==='Economics')return'📊';if(s==='DT')return'🔧';if(s==='Maths')return'📐';if(s==='English')return'📝';return'📚';
+  },
+  renderSubjectCards: function(){
+    var subjects=['Chemistry','Economics','DT','Maths','English','General'];
+    var h='';
+    subjects.forEach(function(s){
+      var count=ALL_LINKS.filter(function(l){return l.s===s;}).length;
+      h+='<div class="card" style="cursor:pointer" onclick="document.getElementById(\'tab-'+S.tabId(s)+'\').checked=true"><div class="tag">'+count+' links</div><h3>'+S.subjectIcon(s)+' '+s+'</h3><p>Click to view all '+s+' resources</p></div>';
+    });
+    return h;
+  },
+  tabId: function(s){
+    if(s==='Chemistry')return'chem';if(s==='Economics')return'econ';if(s==='DT')return'dt';if(s==='Maths')return'math';if(s==='English')return'eng';return'home';
+  },
+  renderAllSubjectGroups: function(){
+    var subjects=['General','Chemistry','Economics','DT','Maths','English'];
+    var h='';
+    subjects.forEach(function(s){
+      var links=ALL_LINKS.filter(function(l){return l.s===s;});
+      h+='<div style="margin-top:24px"><h2>'+S.subjectIcon(s)+' '+s+'</h2>';
+      links.forEach(function(l){
+        h+='<div class="link-row"><div class="icon">'+S.categoryIcon(l.c)+'</div><div class="desc"><strong>'+l.t+'</strong><span>'+l.d+'</span></div><div class="btns"><a href="'+l.u+'" target="_blank" class="btn btn-sm">Open</a></div></div>';
+      });
+      h+='</div>';
+    });
+    return h;
+  },
+  categoryIcon: function(c){
+    if(c==='Official')return'📋';if(c==='Past Papers')return'📝';if(c==='Revision')return'📖';if(c==='YouTube')return'▶️';if(c==='Textbook')return'📘';if(c==='School')return'🏫';if(c==='Tools')return'🛠️';return'📎';
+  }
+};
+
+// Init All Resources tab
+(function(){
+  var out=document.getElementById('all-results');
+  out.innerHTML='<p style="color:var(--dim);margin-top:20px">Type above to search, or browse by subject below.</p><div class="card-grid" style="margin-top:12px">'+S.renderSubjectCards()+'</div>'+S.renderAllSubjectGroups();
+})();
+</script>
+
+</body>
+</html>
