@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IsaacSuite</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;height:100vh;display:flex;flex-direction:column}
+.titlebar{height:40px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#161b22;border-bottom:1px solid #21262d}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.titlebar span{margin-left:8px;font-size:13px;color:#8b949e}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,90px);gap:18px;max-width:720px;justify-content:center}
+.app{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer}
+.icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:30px;background:linear-gradient(135deg,#6366f1,#8b5cf6);box-shadow:0 6px 18px rgba(99,102,241,.35);transition:transform .15s}
+.app:hover .icon{transform:scale(1.08)}
+.app b{font-size:12px;text-align:center;font-weight:500}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#6366f1;color:#fff;padding:10px 20px;border-radius:999px;font-size:13px;opacity:0;transition:all .3s}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="titlebar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><span>IsaacSuite — Unified Launcher</span></div>
+<main><div class="grid" id="grid"></div></main>
+<div id="toast"></div>
+<script>
+const apps=[
+ ['❄️','FrostSolve','#60a5fa'],['🔒','SecureMsg','#34d399'],['🌐','IsaacNet','#22c55e'],
+ ['🧠','Isaac AI','#a78bfa'],['🛡️','MacAdBlock','#f87171'],['⌨️','Macro Typer','#fbbf24'],
+ ['📧','CMail','#38bdf8'],['📚','IGCSE Tutor','#f472b6'],['🖥','IsaacBrowser','#94a3b8']
+];
+const grid=document.getElementById('grid');
+apps.forEach(([e,n,c])=>{
+ const d=document.createElement('div');d.className='app';
+ d.innerHTML=`<div class="icon" style="background:linear-gradient(135deg,${c},#6366f1)">${e}</div><b>${n}</b>`;
+ d.onclick=()=>{const t=document.getElementById('toast');t.textContent=`Launching ${n}…`;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600)};
+ grid.appendChild(d);
+});
+</script>
+</body>
+</html>

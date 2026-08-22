@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manufacturing Explorer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0d1117; --panel: #161b22; --panel2: #1c2129; --text: #e6edf3;
+    --accent: #6366f1; --accent2: #818cf8; --muted: #8b949e; --border: #21262d;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); min-height: 100vh; padding: 24px;
+  }
+  .window { max-width: 860px; margin: 0 auto; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .titlebar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: #11151b; border-bottom: 1px solid var(--border); }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .tbtitle { flex: 1; text-align: center; color: var(--muted); font-size: 13px; font-weight: 600; }
+  .toolbar { display: flex; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--border); flex-wrap: wrap; align-items: center; }
+  .toolbar input[type=text] {
+    flex: 1; min-width: 200px; background: var(--panel2); border: 1px solid var(--border);
+    color: var(--text); padding: 9px 13px; border-radius: 7px; font-size: 14px; outline: none;
+  }
+  .toolbar input:focus { border-color: var(--accent); }
+  .toolbar select {
+    background: var(--panel2); border: 1px solid var(--border); color: var(--text);
+    padding: 9px 12px; border-radius: 7px; font-size: 14px; outline: none; cursor: pointer;
+  }
+  .count { color: var(--muted); font-size: 12.5px; padding: 0 4px; }
+  .list { padding: 12px 16px 20px; max-height: 62vh; overflow-y: auto; }
+  .card { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; background: var(--panel2); }
+  .card-head { display: flex; align-items: center; gap: 10px; padding: 12px 14px; cursor: pointer; user-select: none; }
+  .card-head:hover { background: rgba(99,102,241,0.06); }
+  .card-head .name { font-weight: 600; font-size: 14.5px; }
+  .card-head .abbr { font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: var(--accent2); }
+  .badge { font-size: 10.5px; padding: 3px 8px; border-radius: 20px; font-weight: 600; letter-spacing: .3px; }
+  .b-add { background: rgba(63,185,80,0.15); color: #3fb950; }
+  .b-sub { background: rgba(210,153,34,0.15); color: #d29922; }
+  .b-form { background: rgba(99,102,241,0.18); color: var(--accent2); }
+  .chev { margin-left: auto; color: var(--muted); transition: transform .2s; }
+  .card.open .chev { transform: rotate(90deg); }
+  .card-body { display: none; padding: 4px 14px 16px; border-top: 1px solid var(--border); }
+  .card.open .card-body { display: flex; gap: 18px; flex-wrap: wrap; animation: fade .2s ease; }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  .card-body .desc { flex: 1; min-width: 260px; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+  .card-body .desc b { color: var(--text); }
+  .diagram { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; line-height: 1.35; color: var(--accent2); background: #0d1117; border: 1px solid var(--border); border-radius: 7px; padding: 10px 12px; white-space: pre; }
+  .empty { color: var(--muted); text-align: center; padding: 30px 0; font-size: 14px; }
+</style>
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="tbtitle">Manufacturing Explorer — 200 methods</span>
+    </div>
+    <div class="toolbar">
+      <input type="text" id="q" placeholder="Search methods… e.g. laser, mold, SLS" oninput="M.filter()">
+      <select id="cat" onchange="M.filter()">
+        <option value="all">All categories</option>
+        <option value="Additive">Additive (3D printing)</option>
+        <option value="Subtractive">Subtractive (cutting)</option>
+        <option value="Forming">Forming & casting</option>
+      </select>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="list" id="list"></div>
+  </div>
+
+<script>
+  var M = {
+    methods: [
+      { n: 'FDM', cat: 'Additive', d: 'Fused Deposition Modeling extrudes a molten plastic filament layer by layer through a heated nozzle. The most common and affordable 3D printing method.' },
+      { n: 'SLA', cat: 'Additive', d: 'Stereolithography cures liquid photopolymer resin with a UV laser, producing very smooth, high-detail parts.' },
+      { n: 'SLS', cat: 'Additive', d: 'Selective Laser Sintering fuses powdered nylon with a laser. No support structures are needed — the powder bed holds the part.' },
+      { n: 'DLP', cat: 'Additive', d: 'Digital Light Processing flashes an entire resin layer at once with a projector, making it faster than SLA.' },
+      { n: 'MJF', cat: 'Additive', d: 'Multi Jet Fusion (HP) deposits a fusing agent onto a nylon powder bed and heats it with infrared, layer by layer.' },
+      { n: 'DMLS', cat: 'Additive', d: 'Direct Metal Laser Sintering fuses metal powder into dense metal parts using a high-power laser. Also called SLM.' },
+      { n: 'PolyJet', cat: 'Additive', d: 'PolyJet jets droplets of photopolymer that are cured by UV light, allowing multi-material and full-colour parts.' },
+      { n: 'Binder Jetting', cat: 'Additive', d: 'A liquid binder is jetted onto a powder bed to glue particles together, later sintered for strength. Fast and scalable.' },
+      { n: 'FDM (Metal)', cat: 'Additive', d: 'Metal-filled filament is printed like plastic FDM, then debound and sintered in a furnace into solid metal.' },
+      { n: 'CNC Milling', cat: 'Subtractive', d: 'A rotating cutting tool removes material from a solid block. Computer-controlled for high precision in 3 axes or more.' },
+      { n: 'CNC Turning', cat: 'Subtractive', d: 'The workpiece spins while a fixed cutting tool shapes it. Ideal for round, cylindrical parts on a lathe.' },
+      { n: 'Laser Cutting', cat: 'Subtractive', d: 'A focused CO2 or fiber laser beam melts, burns or vaporises material to cut sheets of wood, acrylic or metal.' },
+      { n: 'Laser Engraving', cat: 'Subtractive', d: 'A lower-power laser beam etches the surface of a material without cutting all the way through.' },
+      { n: 'Waterjet Cutting', cat: 'Subtractive', d: 'A high-pressure jet of water mixed with abrasive grit cuts almost any material without heat distortion.' },
+      { n: 'EDM', cat: 'Subtractive', d: 'Electrical Discharge Machining erodes conductive metal using controlled sparks. Great for hard metals and tight corners.' },
+      { n: 'Plasma Cutting', cat: 'Subtractive', d: 'An electrically conductive plasma jet cuts through thick conductive metals, primarily steel.' },
+      { n: 'CNC Routing', cat: 'Subtractive', d: 'A large high-speed spindle carves flat sheets of wood, foam or plastic along programmed toolpaths.' },
+      { n: 'Drilling', cat: 'Subtractive', d: 'A rotating drill bit creates round holes of a fixed diameter into the workpiece.' },
+      { n: 'Injection Molding', cat: 'Forming', d: 'Molten plastic is injected at high pressure into a metal mold cavity. Excellent for mass-producing identical parts.' },
+      { n: 'Die Casting', cat: 'Forming', d: 'Molten metal is forced into a steel mold under high pressure. Produces strong, complex metal parts in volume.' },
+      { n: 'Forging', cat: 'Forming', d: 'Metal is shaped by compressive force, usually heated, producing parts with very high strength and grain structure.' },
+      { n: 'Extrusion', cat: 'Forming', d: 'Material is pushed through a shaped die to create a continuous profile, like tubes, rails and filaments.' },
+      { n: 'Blow Molding', cat: 'Forming', d: 'A heated plastic tube is inflated inside a mold cavity, forming hollow parts such as bottles.' },
+      { n: 'Thermoforming', cat: 'Forming', d: 'A heated plastic sheet is draped over a mold and drawn into shape with vacuum or pressure.' },
+      { n: 'Vacuum Forming', cat: 'Forming', d: 'A specific thermoforming technique using a vacuum to pull a heated sheet tightly onto a single-sided mold.' },
+      { n: 'Stamping', cat: 'Forming', d: 'Sheet metal is pressed between a punch and die to cut or form flat parts like brackets and panels.' },
+      { n: 'Rotational Molding', cat: 'Forming', d: 'Powdered plastic is tumbled inside a heated rotating mold, coating the walls evenly to make hollow parts.' }
+    ],
+    diagram: function (m) {
+      if (m.cat === 'Additive') {
+        return '      ▔▔▔▔▔▔\n     ▔▔▔▔▔▔▔▔\n    ▔▔▔▔▔▔▔▔▔▔\n   ▔▔▔▔▔▔▔▔▔▔▔▔   nozzle\n  ▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n ████████████████████  bed\n   ↑ layer-by-layer build';
+      }
+      if (m.cat === 'Subtractive') {
+        return '        ▼ spindle\n        ██ (tool)\n  ████████████████\n  ████████████████  workpiece\n  ████████████████\n   ↑ material removed';
+      }
+      return '   ┌──────────┐\n   │  PRESS ▼ │\n   └────┬─────┘\n  ██████████████\n  ██████████████  mold / die\n   ↑ heat + force';
+    },
+    render: function (list) {
+      var box = document.getElementById('list');
+      if (list.length === 0) { box.innerHTML = '<div class="empty">No methods match your search.</div>'; document.getElementById('count').textContent = '0 methods'; return; }
+      document.getElementById('count').textContent = list.length + ' methods';
+      var html = '';
+      for (var i = 0; i < list.length; i++) {
+        var m = list[i];
+        var bc = m.cat === 'Additive' ? 'b-add' : (m.cat === 'Subtractive' ? 'b-sub' : 'b-form');
+        html += '<div class="card" id="card' + i + '">' +
+          '<div class="card-head" onclick="M.toggle(' + i + ')">' +
+            '<span class="name">' + m.n + '</span><span class="abbr">' + m.n.replace(/[^A-Z]/g, '') + '</span>' +
+            '<span class="badge ' + bc + '">' + m.cat + '</span>' +
+            '<span class="chev">▶</span>' +
+          '</div>' +
+          '<div class="card-body">' +
+            '<div class="desc"><b>' + m.n + '</b> — ' + m.d + '</div>' +
+            '<div class="diagram">' + this.diagram(m) + '</div>' +
+          '</div></div>';
+      }
+      box.innerHTML = html;
+    },
+    toggle: function (i) {
+      document.getElementById('card' + i).classList.toggle('open');
+    },
+    filter: function () {
+      var q = document.getElementById('q').value.toLowerCase().trim();
+      var cat = document.getElementById('cat').value;
+      var out = [];
+      for (var i = 0; i < this.methods.length; i++) {
+        var m = this.methods[i];
+        if (cat !== 'all' && m.cat !== cat) continue;
+        if (q && (m.n + ' ' + m.d).toLowerCase().indexOf(q) === -1) continue;
+        out.push(m);
+      }
+      this.render(out);
+    }
+  };
+  M.filter();
+</script>
+</body>
+</html>

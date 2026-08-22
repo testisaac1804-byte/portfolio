@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IsaacNetPkg — Installer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0d1117; --panel: #161b22; --panel2: #1c2129; --text: #e6edf3;
+    --accent: #6366f1; --accent2: #818cf8; --muted: #8b949e; --border: #21262d;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); min-height: 100vh;
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+  }
+  .window {
+    width: 100%; max-width: 560px; background: var(--panel);
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .titlebar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: #11151b; border-bottom: 1px solid var(--border); }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .tbtitle { flex: 1; text-align: center; color: var(--muted); font-size: 13px; font-weight: 600; }
+  .content { padding: 28px 30px; }
+  .step { display: none; animation: fade .3s ease; }
+  .step.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .icon { font-size: 44px; margin-bottom: 12px; }
+  h1 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  p { color: var(--muted); font-size: 14px; line-height: 1.55; margin-bottom: 12px; }
+  .accent { color: var(--accent2); }
+  .btnrow { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+  .btn {
+    background: var(--accent); color: #fff; border: none; padding: 10px 20px;
+    border-radius: 7px; font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: background .15s;
+  }
+  .btn:hover { background: var(--accent2); }
+  .btn.ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .btn.ghost:hover { color: var(--text); border-color: var(--muted); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+  input[type=password], input[type=text] {
+    width: 100%; background: var(--panel2); border: 1px solid var(--border);
+    color: var(--text); padding: 11px 13px; border-radius: 7px; font-size: 14px; outline: none;
+  }
+  input:focus { border-color: var(--accent); }
+  .hint { font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+  .err { color: #f85149; font-size: 13px; margin-top: 8px; display: none; }
+  .err.show { display: block; animation: shake .3s; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+  .license {
+    width: 100%; height: 190px; background: var(--panel2); border: 1px solid var(--border);
+    border-radius: 7px; padding: 14px; color: var(--muted); font-size: 12.5px; line-height: 1.6;
+    overflow-y: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap;
+  }
+  .progress-wrap { height: 8px; background: var(--panel2); border-radius: 5px; overflow: hidden; margin: 20px 0 12px; }
+  .progress { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 5px; transition: width .3s; }
+  .status { font-size: 13px; color: var(--muted); min-height: 20px; }
+  .status b { color: var(--text); }
+  .done-box { text-align: center; padding: 10px 0; }
+  .done-box .big { font-size: 48px; }
+  .uninstall {
+    margin-top: 16px; background: #16120f; border: 1px solid #3d2c1c; border-radius: 7px;
+    padding: 12px 14px; font-size: 12.5px; color: #d9a05b; font-family: ui-monospace, Menlo, monospace;
+  }
+</style>
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="tbtitle">IsaacNetPkg — Installer</span>
+    </div>
+    <div class="content">
+
+      <!-- STEP 0: Welcome -->
+      <div class="step active" id="s0">
+        <div class="icon">📦</div>
+        <h1>Install IsaacNet</h1>
+        <p>This will install <span class="accent">IsaacNet</span> v1.4.2 on your Mac. IsaacNet is a secure multi-layer proxy / network utility built for macOS.</p>
+        <p>You will be guided through the steps needed to install the software.</p>
+        <div class="btnrow">
+          <button class="btn" onclick="W.go(1)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 1: Password -->
+      <div class="step" id="s1">
+        <div class="icon">🔐</div>
+        <h2>Administrator Password</h2>
+        <p>Enter the administrator password to continue installing the IsaacNet package.</p>
+        <input type="password" id="pw" placeholder="Password" onkeydown="if(event.key==='Enter')W.check()">
+        <div class="hint">Hint: your first name + the app name (no spaces, case-sensitive).</div>
+        <div class="err" id="pwErr">Incorrect password. Try the hint again.</div>
+        <div class="btnrow">
+          <button class="btn ghost" onclick="W.go(0)">← Back</button>
+          <button class="btn" onclick="W.check()">Unlock</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: License -->
+      <div class="step" id="s2">
+        <div class="icon">📜</div>
+        <h2>Software License Agreement</h2>
+        <p>To continue installing the software you must agree to the terms of the software license agreement.</p>
+        <div class="license">ISAACNET END USER LICENSE AGREEMENT
+
+1. GRANT OF LICENSE — IsaacNet is licensed, not sold. You may install and use one copy for personal, non-commercial use.
+
+2. RESTRICTIONS — You may not reverse-engineer, redistribute, or resell the software or its components.
+
+3. DISCLAIMER — The software is provided "AS IS" without warranty of any kind. The author is not liable for any damage arising from its use.
+
+4. TERMINATION — This license terminates automatically if you violate any term.
+
+5. GOVERNING LAW — This agreement is governed by the laws of your jurisdiction.
+
+By clicking "Agree" you accept all terms above.</div>
+        <div class="btnrow">
+          <button class="btn ghost" onclick="W.go(1)">Disagree</button>
+          <button class="btn" onclick="W.go(3)">Agree</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Install progress -->
+      <div class="step" id="s3">
+        <div class="icon">⚙️</div>
+        <h2>Installing IsaacNet</h2>
+        <p>Writing files to disk. This may take a few moments…</p>
+        <div class="progress-wrap"><div class="progress" id="bar"></div></div>
+        <div class="status" id="status">Preparing installation…</div>
+        <div class="btnrow">
+          <button class="btn ghost" id="cancelBtn" onclick="W.cancel()">Cancel</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Done -->
+      <div class="step" id="s4">
+        <div class="done-box">
+          <div class="big">✅</div>
+          <h1>Installation Successful</h1>
+          <p>IsaacNet v1.4.2 was installed on your Mac.</p>
+        </div>
+        <div class="uninstall">To uninstall later, run the AppleScript uninstaller:
+$ osascript ~/.isaacnet/uninstall.scpt</div>
+        <div class="btnrow">
+          <button class="btn" onclick="W.reset()">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+  var W = {
+    step: 0,
+    pw: 'IsaacNet',
+    statuses: ['Preparing installation…', 'Copying package files…', 'Registering LaunchAgents…', 'Codesigning the bundle…', 'Verifying permissions…', 'Finishing up…'],
+    go: function (n) {
+      var steps = document.querySelectorAll('.step');
+      for (var i = 0; i < steps.length; i++) steps[i].classList.remove('active');
+      document.getElementById('s' + n).classList.add('active');
+      this.step = n;
+      if (n === 3) this.runInstall();
+    },
+    check: function () {
+      var v = document.getElementById('pw').value;
+      if (v === this.pw) { document.getElementById('pwErr').classList.remove('show'); this.go(2); }
+      else { document.getElementById('pwErr').classList.add('show'); }
+    },
+    runInstall: function () {
+      var bar = document.getElementById('bar');
+      var st = document.getElementById('status');
+      var i = 0, p = 0;
+      var t = setInterval(function () {
+        p += Math.floor(Math.random() * 9) + 3;
+        if (p >= 100) p = 100;
+        bar.style.width = p + '%';
+        var idx = Math.min(Math.floor(p / 17), W.statuses.length - 1);
+        st.innerHTML = '<b>' + W.statuses[idx] + '</b> ' + p + '%';
+        if (p >= 100) { clearInterval(t); setTimeout(function () { W.go(4); }, 450); }
+      }, 160);
+    },
+    cancel: function () { this.go(0); },
+    reset: function () {
+      document.getElementById('pw').value = '';
+      this.go(0);
+    }
+  };
+</script>
+</body>
+</html>

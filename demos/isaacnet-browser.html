@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IsaacNet Browser</title>
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2128;--text:#e6edf3;--muted:#8b949e;--accent:#6366f1;--accentdim:rgba(99,102,241,.15);--border:#30363d;--green:#22c55e;--amber:#f0883e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.win{width:100%;max-width:760px;background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+.tb{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#10151c;border-bottom:1px solid var(--border)}
+.dots{display:flex;gap:7px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.tb .t{flex:1;text-align:center;font-size:12.5px;color:var(--muted);letter-spacing:.3px}
+.tb .side{width:44px}
+.nav{display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--panel);border-bottom:1px solid var(--border)}
+.navbtn{width:32px;height:32px;border-radius:7px;background:var(--panel2);border:1px solid var(--border);color:var(--muted);cursor:pointer;font-size:14px;flex-shrink:0}
+.navbtn:hover{color:var(--text)}
+.urlbar{flex:1;display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:6px 10px}
+.urlbar .lock{font-size:12px;flex-shrink:0}
+.urlbar input{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-size:13px;font-family:ui-monospace,Menlo,monospace}
+.go{padding:6px 14px;border-radius:7px;background:var(--accent);color:#fff;border:none;font-weight:700;cursor:pointer;font-size:12.5px;flex-shrink:0}
+.go:hover{filter:brightness(1.1)}
+.chain{display:flex;align-items:center;gap:6px;padding:10px 16px;background:var(--panel2);border-bottom:1px solid var(--border);font-size:11px;font-family:ui-monospace,Menlo,monospace;overflow-x:auto;white-space:nowrap}
+.chain .badge{color:var(--green);border:1px solid rgba(34,197,94,.4);background:rgba(34,197,94,.12);padding:2px 8px;border-radius:12px;font-weight:700;flex-shrink:0}
+.chain .hop{color:var(--muted)}
+.chain .arr{color:#484f58}
+.chain .hop.hl{color:var(--text)}
+.page{min-height:360px;padding:26px;background:var(--bg)}
+.page .loading{color:var(--muted);font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:2}
+.page .loading b{color:var(--accent)}
+.article{max-width:620px;margin:0 auto}
+.article .site{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.article h2{font-size:24px;font-weight:800;line-height:1.3;margin-bottom:12px}
+.article p{font-size:14px;color:#c9d1d9;line-height:1.7;margin-bottom:12px}
+.article .tag{display:inline-block;font-size:11px;color:var(--accent);background:var(--accentdim);padding:3px 9px;border-radius:6px;margin-right:6px;margin-bottom:6px}
+.foot{font-size:11px;color:var(--muted);font-family:ui-monospace,Menlo,monospace;padding:10px 16px;border-top:1px solid var(--border);display:flex;justify-content:space-between}
+.foot b{color:var(--green)}
+</style>
+</head>
+<body>
+<div class="win">
+  <div class="tb">
+    <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <div class="t">IsaacNet Browser</div>
+    <div class="side"></div>
+  </div>
+
+  <div class="nav">
+    <button class="navbtn">←</button>
+    <button class="navbtn">→</button>
+    <button class="navbtn" onclick="A.reload()">⟳</button>
+    <div class="urlbar">
+      <span class="lock" id="lock">🔒</span>
+      <input id="url" value="https://en.wikipedia.org/wiki/TCP/IP" onkeydown="if(event.key==='Enter')A.load()">
+    </div>
+    <button class="go" onclick="A.load()">Go</button>
+  </div>
+
+  <div class="chain" id="chain"></div>
+
+  <div class="page" id="page"></div>
+
+  <div class="foot">
+    <span>Route: <b>🛡️ Proxied</b> · exit 185.199.108.77</span>
+    <span id="lat">—</span>
+  </div>
+</div>
+<script>
+var A = {
+  hops: ["You", "DoH", "SOCKS5", "CONNECT", "TLS", "Exit"],
+  loading: false,
+  load: function(){
+    if (A.loading) return;
+    A.loading = true;
+    var url = document.getElementById("url").value.trim();
+    if (!url) url = "https://en.wikipedia.org/wiki/TCP/IP";
+    if (url.indexOf("://") === -1) url = "https://" + url;
+    document.getElementById("url").value = url;
+    A.renderChain(true);
+    A.renderLoading(url);
+    var steps = 0;
+    var iv = setInterval(function(){
+      steps++;
+      A.renderChain(true, steps);
+      if (steps >= 6) {
+        clearInterval(iv);
+        A.loading = false;
+        A.renderChain(false);
+        A.renderPage(url);
+        document.getElementById("lat").textContent = (Math.round(Math.random() * 40 + 48)) + "ms total";
+      }
+    }, 180);
+  },
+  reload: function(){ A.load(); },
+  renderChain: function(active, steps){
+    var html = '<span class="badge">🛡️ Proxied</span>';
+    for (var i = 0; i < A.hops.length; i++) {
+      var hl = active && steps !== undefined && i < steps ? " hl" : "";
+      html += '<span class="arr">→</span><span class="hop' + hl + '">' + A.hops[i] + '</span>';
+    }
+    document.getElementById("chain").innerHTML = html;
+  },
+  renderLoading: function(url){
+    document.getElementById("page").innerHTML =
+      '<div class="loading">Establishing secure tunnel via <b>DoH → SOCKS5 → CONNECT</b>…<br>' +
+      '· Resolving host over encrypted DNS<br>' +
+      '· Negotiating SOCKS5 handshake<br>' +
+      '· Wrapping stream in TLS<br>' +
+      '· Fetching <b>' + url + '</b></div>';
+  },
+  renderPage: function(url){
+    var host = url.replace(/^https?:\/\//, "").split("/")[0];
+    document.getElementById("page").innerHTML =
+      '<div class="article">' +
+      '<div class="site">🔒 ' + host + '</div>' +
+      '<h2>' + (host.indexOf("wikipedia") !== -1 ? "TCP/IP — the protocol stack behind every request" :
+                "Securely proxied: " + host) + '</h2>' +
+      '<p>This page was fetched end-to-end through the IsaacNet proxy chain. Your DNS query was ' +
+      'encrypted via <b>DNS-over-HTTPS</b>, the connection was relayed through a <b>SOCKS5</b> tunnel, ' +
+      'established with <b>HTTP CONNECT</b>, and wrapped in <b>TLS</b> so only the exit node knows the destination.</p>' +
+      '<p>Every layer left the network operator seeing nothing but opaque, encrypted traffic on port 443.</p>' +
+      '<div><span class="tag">DoH</span><span class="tag">SOCKS5</span><span class="tag">CONNECT</span><span class="tag">TLS 1.3</span></div>' +
+      '</div>';
+  },
+  init: function(){
+    A.renderChain(false);
+    A.renderPage("https://en.wikipedia.org/wiki/TCP/IP");
+  }
+};
+A.init();
+</script>
+</body>
+</html>

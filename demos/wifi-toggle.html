@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WiFi Toggle</title>
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2128;--text:#e6edf3;--muted:#8b949e;--accent:#22c55e;--accentdim:rgba(34,197,94,.14);--border:#30363d;--blue:#58a6ff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.win{width:100%;max-width:560px;background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+.tb{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#10151c;border-bottom:1px solid var(--border)}
+.dots{display:flex;gap:7px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.tb .t{flex:1;text-align:center;font-size:12.5px;color:var(--muted);letter-spacing:.3px}
+.tb .side{width:44px}
+.body{padding:34px 26px;text-align:center}
+.iconwrap{position:relative;width:110px;height:110px;margin:0 auto 22px}
+.ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--border);animation:spin 8s linear infinite}
+.ring .dot{position:absolute;top:-4px;left:50%;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-left:-4px;box-shadow:0 0 8px var(--accent)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px}
+.win.off .ring{animation:none;border-color:#30363d}
+.win.off .ring .dot{background:#484f58;box-shadow:none}
+.win.off .icon{filter:grayscale(1);opacity:.5}
+h1{font-size:22px;font-weight:800;margin-bottom:6px}
+.sub{font-size:13px;color:var(--muted);margin-bottom:28px}
+.sw{position:relative;display:inline-block;width:150px;height:74px;margin-bottom:22px}
+.sw input{opacity:0;width:0;height:0}
+.sl{position:absolute;inset:0;background:#21262d;border:2px solid var(--border);border-radius:50px;cursor:pointer;transition:.3s}
+.sl:before{content:"";position:absolute;height:56px;width:56px;left:7px;bottom:7px;background:#e6edf3;border-radius:50%;transition:.3s;box-shadow:0 3px 8px rgba(0,0,0,.4)}
+.sw input:checked + .sl{background:var(--accent);border-color:var(--accent)}
+.sw input:checked + .sl:before{transform:translateX(76px);background:#fff}
+.status{font-size:18px;font-weight:800;letter-spacing:.3px;margin-bottom:8px;transition:.3s}
+.status.on{color:var(--accent)}
+.status.off{color:var(--muted)}
+.info{font-size:12.5px;color:var(--muted);font-family:ui-monospace,Menlo,monospace;line-height:1.7}
+.info b{color:var(--text);font-weight:600}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px;transition:.3s}
+.badge.on{color:var(--accent);background:var(--accentdim);border:1px solid rgba(34,197,94,.4)}
+.badge.off{color:var(--muted);background:#21262d;border:1px solid var(--border)}
+</style>
+</head>
+<body>
+<div class="win" id="win">
+  <div class="tb">
+    <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <div class="t">WiFi Toggle</div>
+    <div class="side"></div>
+  </div>
+  <div class="body">
+    <div class="iconwrap">
+      <div class="ring"><span class="dot"></span></div>
+      <div class="icon" id="icon">📶</div>
+    </div>
+
+    <div class="badge on" id="badge">● CONNECTED</div>
+    <h1>WiFi Toggle</h1>
+    <div class="sub">One-click control for your wireless radio</div>
+
+    <label class="sw">
+      <input type="checkbox" id="power" checked onchange="A.toggle(this.checked)">
+      <span class="sl"></span>
+    </label>
+
+    <div class="status on" id="status">WiFi: Connected</div>
+    <div class="info" id="info">
+      SSID&nbsp;&nbsp;&nbsp;<b>HomeNet-5G</b><br>
+      IP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>192.168.1.42</b><br>
+      Signal&nbsp;&nbsp;<b>-52 dBm</b> · Channel <b>36</b>
+    </div>
+  </div>
+</div>
+<script>
+var A = {
+  on: true,
+  toggle: function(v){
+    A.on = v;
+    document.getElementById("power").checked = v;
+    var win = document.getElementById("win");
+    var status = document.getElementById("status");
+    var badge = document.getElementById("badge");
+    var info = document.getElementById("info");
+    if (v) {
+      win.className = "win";
+      status.textContent = "WiFi: Connected";
+      status.className = "status on";
+      badge.textContent = "● CONNECTED";
+      badge.className = "badge on";
+      info.innerHTML = 'SSID&nbsp;&nbsp;&nbsp;<b>HomeNet-5G</b><br>' +
+        'IP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>192.168.1.42</b><br>' +
+        'Signal&nbsp;&nbsp;<b>-52 dBm</b> · Channel <b>36</b>';
+    } else {
+      win.className = "win off";
+      status.textContent = "WiFi: Disabled";
+      status.className = "status off";
+      badge.textContent = "● DISABLED";
+      badge.className = "badge off";
+      info.innerHTML = 'Radio is <b>off</b><br>No network available<br>Toggle to reconnect';
+    }
+  }
+};
+</script>
+</body>
+</html>
