@@ -36,6 +36,7 @@ function randomProj(){
 }
 
 var D={sw:[
+{t:"DT Site Copy",s:"done",pt:"prompts/dt-site-copy-prompt.md",d:"Full 74-page copy of the DT Google Site, rebranded to Isaac.",a:[{c:"ac",l:"Live Site",o:7,u:"https://testisaac1804-byte.github.io/isaac-dt/"}],g:[{c:"ac",l:"Web"},{l:"Google Sites"},{l:"Static"},{l:"Python"}],v:[{n:"V1",i:"Finishing page copy."},{n:"V2",i:"Full site: 49 nav pages."},{n:"V3",i:"74 pages incl. hidden IGCSE coursework section."}]},
 {t:"MacAdBlock",s:"done",pt:"prompts/macadblock-prompt.md",d:"macOS DNS ad-blocker daemon on :8053.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/macadblock.html"}],g:[{c:"ac",l:"macOS"},{l:"DNS"},{l:"Python"},{l:"launchd"}],v:[{n:"V1",i:"Basic hosts file."},{n:"V2",i:"Daemon mode: launchd, auto-start."},{n:"V3",L:1,i:"System-wide: blocks ads in EVERY app."}]},
 {t:"ESP32-C3 AdBlock",s:"done",pt:"prompts/esp32-c3-adblock-prompt.md",d:"Network DNS sinkhole on ESP32. Blocks ads for all WiFi devices.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/esp32-c3-adblock.html"}],g:[{c:"ac",l:"ESP32"},{l:"C"},{l:"DNS"},{l:"IoT"}],v:[{n:"Note",i:"C3 incompatible with RT-AC58U WPA2. Used WROOM-32D."}]},
 {t:"FrostSolve",s:"done",pt:"prompts/frostsolve-prompt.md",d:"macOS desktop app with manifest structure and full .app bundle.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/frostsolve.html"}],g:[{c:"ac",l:"macOS"},{l:"App"},{l:"JavaScript"}],v:[{n:"V1",i:"Standalone script."},{n:"V2",L:1,i:"App bundle: Finder/Dock launchable."}]},
