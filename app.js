@@ -36,6 +36,7 @@ function randomProj(){
 }
 
 var D={sw:[
+{t:"Hong Kong Tour",s:"done",pt:"prompts/hongkong-tour-prompt.md",d:"Interactive Hong Kong tour guide app — Flask + HTML, native macOS .app bundle with photo gallery and tour routes.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/hongkong-tour.html"}],g:[{c:"ac",l:"Flask"},{l:"HTML"},{l:"Tour"},{l:"macOS .app"}],v:[{n:"V1",i:"Photo gallery, tour routes, ratings."}]},
 
 {t:"macOS Simulator",s:"done",pt:"prompts/macos-simulator-prompt.md",d:"Full interactive macOS desktop simulator with menubar, dock, windows, and dark/light theme.",a:[{c:"ac",l:"Live Demo",o:7,u:"./projects/mac-simulator.html"}],g:[{c:"ac",l:"HTML"},{l:"CSS"},{l:"JS"},{l:"Simulator"}],v:[{n:"V1",i:"Menubar, dock, windows, themes."}]},
 {t:"DT Site Copy",s:"done",pt:"prompts/dt-site-copy-prompt.md",d:"Full 74-page copy of the DT Google Site, rebranded to Isaac.",a:[{c:"ac",l:"Live Site",o:7,u:"https://testisaac1804-byte.github.io/isaac-dt/"}],g:[{c:"ac",l:"Web"},{l:"Google Sites"},{l:"Static"},{l:"Python"}],v:[{n:"V1",i:"Finishing page copy."},{n:"V2",i:"Full site: 49 nav pages."},{n:"V3",i:"74 pages incl. hidden IGCSE coursework section."}]},
@@ -91,8 +92,8 @@ var D={sw:[
 {t:"BLE Scanner",s:"wip",pt:"prompts/ble-scanner-prompt.md",d:"ESP32 BLE device scanner - detect, log, dashboard.",a:[{l:"Open Folder",o:1,u:"./projects/"}],g:[{c:"ac",l:"ESP32"},{l:"BLE"},{l:"Scanner"},{l:"IoT"}],v:[{n:"V1",i:"Research phase."}]}
 ],f3d:[
 
-{t:"Robot Arm (3D Print)",s:"done",d:"6-axis robot arm STL models — modern body, legs, arms, and head. 3D printed hobby project.",a:[{c:"ac",l:"View 3D",o:1,u:"./hobby/prints/robot-arm/modern-body.stl"},{c:"ac",l:"📂 Files",o:2,u:"./hobby/prints/robot-arm/"}],g:[{c:"ac",l:"3D Print"},{l:"STL"},{l:"Robot"}],v:[{n:"V1",i:"5 parts: body, arms, legs, head, limb."}]},
-{t:"Doraemon 3D Prints",s:"done",d:"Doraemon (哆啦A梦) 3D printable STL models — 2 multi-part assemblies.",a:[{c:"ac",l:"View 3D",o:1,u:"./hobby/prints/doraemon/obj_1_组合体.stl"},{c:"ac",l:"📂 Files",o:2,u:"./hobby/prints/doraemon/"}],g:[{c:"ac",l:"3D Print"},{l:"STL"},{l:"Hobby"}],v:[{n:"V1",i:"2 Doraemon assemblies."}]},
+{t:"Robot Arm (3D Print)",s:"done",d:"6-axis robot arm STL models — modern body, legs, arms, and head. 3D printed hobby project.",a:[{c:"ac",l:"View 3D",o:2,p:"./hobby/prints/robot-arm/modern-body.stl"},{c:"ac",l:"📂 Files",o:9,u:"./hobby/prints/robot-arm/"}],g:[{c:"ac",l:"3D Print"},{l:"STL"},{l:"Robot"}],v:[{n:"V1",i:"5 parts: body, arms, legs, head, limb."}]},
+{t:"Doraemon 3D Prints",s:"done",d:"Doraemon (哆啦A梦) 3D printable STL models — 2 multi-part assemblies.",a:[{c:"ac",l:"View 3D",o:2,p:"./hobby/prints/doraemon/obj_1_组合体.stl"},{c:"ac",l:"📂 Files",o:9,u:"./hobby/prints/doraemon/"}],g:[{c:"ac",l:"3D Print"},{l:"STL"},{l:"Hobby"}],v:[{n:"V1",i:"2 Doraemon assemblies."}]},
 {t:"F1 Model Block Jig",s:"done",pt:"prompts/f1-model-block-jig-prompt.md",d:"Precision CNC jig. 6 versions, 15+ STL components.",g:[{c:"ac",l:"F1 In Schools"},{l:"CNC"},{l:"Jig"},{l:"Precision"}],a:[{c:"p3d",l:"View 3D (18 combos)",o:3,vs:[
 {l:"V3 Left Base",p:"./Documents/Model Block Jig/version bravoprodigy/v3 (click fit bearing)/Left Jig Base.stl"},
 {l:"V4 Left Base",p:"./Documents/Model Block Jig/v4/Left Jig Base.stl"},
@@ -229,6 +230,7 @@ var D={sw:[
 {t:"Vinyl Sticker Design (Y7)",s:"done",pt:"prompts/vinyl-sticker-y7-prompt.md",d:"Year 7 vinyl-cut sticker designs.",a:[{c:"p2d",l:"View DXF (2 vers)",o:4,vs:[{l:"V1",p:"./school/dt-y7/isaac-duck.dxf"},{l:"V2",p:"./school/dt-y7/isaac-chan-darkblue.dxf"}]}],g:[{l:"Vinyl"},{l:"Sticker"},{l:"DXF"},{l:"Y7"}]},
 {t:"Organise Me Insert (Y7)",s:"done",pt:"prompts/organise-me-insert-y7-prompt.md",d:"Year 7 CNC router 'Organise Me' insert design.",a:[{c:"p2d",l:"View DXF",o:5,p:"./school/dt-y7/isaac-insert.dxf"}],g:[{l:"CNC"},{l:"Insert"},{l:"DXF"},{l:"Y7"}]},
 ],des:[
+{t:"Master Fusion Workbook",s:"done",pt:"prompts/master-fusion-workbook-prompt.md",d:"Complete interactive Fusion 360 workbook — 14.6 MB self-contained HTML with tutorials, exercises, and reference.",a:[{c:"ac",l:"Open Workbook",o:6,p:"./Desktop/Master_Fusion_Workbook_copy/Master_Fusion_Workbook_interactive.html"}],g:[{c:"ac",l:"Fusion 360"},{l:"Tutorial"},{l:"Workbook"},{l:"Interactive"}],v:[{n:"V1",i:"Complete interactive workbook."}]},
 {t:"F1 Design Portfolio",s:"done",pt:"prompts/f1-design-portfolio-prompt.md",d:"Official F1 design portfolio - CAD, CFD. 5.5 MB.",g:[{c:"ac",l:"F1"},{l:"Portfolio"},{l:"PDF"}],a:[{l:"Open PDF",o:6,p:"./Downloads/F1InSchools-main/documents/Design portfolio.pdf"}]},
 {t:"F1 Enterprise Portfolio",s:"done",pt:"prompts/f1-enterprise-portfolio-prompt.md",d:"F1 business - branding, budget. 6.5 MB.",g:[{c:"ac",l:"F1"},{l:"Business"},{l:"PDF"}],a:[{l:"Open PDF",o:6,p:"./Downloads/F1InSchools-main/documents/Enterprise portfolio.pdf"}]},
 {t:"F1 Verbal Presentation",s:"done",pt:"prompts/f1-verbal-presentation-prompt.md",d:"Nationals pitch. 3.9 MB.",g:[{c:"ac",l:"F1"},{l:"Presentation"},{l:"PDF"}],a:[{l:"Open PDF",o:6,p:"./Downloads/F1InSchools-main/documents/Verbal Presentation Nationals.pdf"}]},
