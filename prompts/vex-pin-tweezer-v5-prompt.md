@@ -1,9 +1,9 @@
-# VEX PIN TWEEZER V5
+# VEX Pin Tweezer V5
 
 **Category:** Fusion 360 CAD · **Status:** Done
 
-Specialized VEX pin tool.
+VEX pin tweezer tool - V5.
 
-**Stack / Tools:** VEX, Tool
+**Stack / Tools:** VEX, Tool, V5, Fusion 360
 
-**Location:** `~/projects/`
+**Location:** `/Users/isaac/Downloads/VEX+PIN+TWEEZER+v5.f3d`
