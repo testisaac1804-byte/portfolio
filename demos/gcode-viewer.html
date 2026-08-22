@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G-Code Viewer & Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #1a1a1a; color: #e5e5e5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        #canvas-container { width: 100%; height: 100vh; position: absolute; top: 0; left: 0; z-index: 1; }
+        
+        #ui-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; display: flex; }
+        
+        #sidebar {
+            width: 350px;
+            background: rgba(24, 24, 24, 0.98);
+            backdrop-filter: blur(10px);
+            height: 100%;
+            border-right: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            pointer-events: auto;
+            transform: translateX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        #sidebar.collapsed { transform: translateX(-350px); }
+
+        .section-header {
+            padding: 10px 15px;
+            background: #111;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #666;
+            font-weight: bold;
+            border-top: 1px solid #222;
+        }
+
+        #code-viewer {
+            flex: 1;
+            overflow-y: auto;
+            font-family: 'Consolas', monospace;
+            font-size: 12px;
+            white-space: pre;
+            padding: 10px;
+            color: #888;
+            background: #0a0a0a;
+        }
+
+        #debug-log {
+            height: 60px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 10px;
+            background: #000;
+            color: #4ade80;
+            padding: 8px;
+            border-top: 1px solid #333;
+        }
+        
+        #sim-controls, #stock-controls {
+            padding: 15px;
+            background: #181818;
+        }
+        
+        input[type=range] {
+            width: 100%;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            background: #3b82f6;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .input-dark {
+            background: #222;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            width: 100%; /* Changed from fixed width to fluid */
+            font-size: 12px;
+        }
+
+        #drop-zone {
+            border: 2px dashed #333;
+            margin: 15px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            background: #111;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        #drop-zone:hover { border-color: #3b82f6; background: #1a1a1a; }
+        
+        #stats-panel { padding: 12px 15px; font-size: 12px; color: #777; }
+        .stat-row { display: flex; justify-content: space-between; margin-bottom: 2px; }
+        .stat-val { color: #bbb; font-weight: 500; }
+
+        #controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            pointer-events: auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            background: #222;
+            border: 1px solid #333;
+            color: #ccc;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .btn:hover { background: #333; color: #fff; }
+        .btn-primary { background: #2563eb; border-color: #1d4ed8; color: white; }
+
+        #toggle-sidebar {
+            position: absolute;
+            top: 50%;
+            left: 350px;
+            transform: translateY(-50%);
+            background: #222;
+            border: 1px solid #333;
+            border-left: none;
+            color: #fff;
+            padding: 12px 4px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            pointer-events: auto;
+            z-index: 20;
+            transition: left 0.3s ease;
+        }
+        #sidebar.collapsed + #toggle-sidebar { left: 0; }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <div id="ui-layer">
+        <div id="sidebar">
+            <div class="p-4 border-b border-gray-900">
+                <h1 class="text-lg font-bold text-white flex items-center gap-2">
+                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
+                    G-Code Simulator
+                </h1>
+            </div>
+
+            <div class="section-header">Simulation</div>
+            <div id="sim-controls">
+                <div class="flex gap-2 mb-3">
+                    <button id="btn-play" class="btn btn-primary flex-1" onclick="togglePlay()">Play</button>
+                    <button id="btn-reset" class="btn flex-1" onclick="stopSim()">Stop</button>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <div class="flex justify-between text-[10px] text-gray-500 uppercase font-bold">
+                        <span>Speed</span>
+                        <span id="speed-val">10x</span>
+                    </div>
+                    <input type="range" id="sim-speed" min="1" max="200" value="10">
+                    
+                    <div class="flex justify-between text-[10px] text-gray-500 uppercase font-bold mt-2">
+                        <span>Progress</span>
+                        <span id="progress-val">0%</span>
+                    </div>
+                    <input type="range" id="sim-progress" min="0" max="100" value="0" step="0.1">
+                </div>
+            </div>
+
+            <div class="section-header">Stock Material</div>
+            <div id="stock-controls">
+                <div class="flex items-center gap-2 mb-3 text-xs">
+                    <input type="checkbox" id="chk-show-stock" checked onchange="updateStockGeometry()">
+                    <label for="chk-show-stock">Show Workpiece</label>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[10px] text-gray-500">Width (X)</label>
+                        <input type="number" id="stock-w" class="input-dark" value="100" oninput="updateStockGeometry()">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[10px] text-gray-500">Depth (Y)</label>
+                        <input type="number" id="stock-d" class="input-dark" value="100" oninput="updateStockGeometry()">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-[10px] text-gray-500">Height (Z)</label>
+                        <input type="number" id="stock-h" class="input-dark" value="20" oninput="updateStockGeometry()">
+                    </div>
+                </div>
+                <button class="btn w-full mt-3 text-xs" onclick="autoFitStock()">Auto-Fit to G-Code</button>
+            </div>
+
+            <div class="section-header">Statistics</div>
+            <div id="stats-panel">
+                <div class="stat-row"><span>Status</span> <span id="sim-status" class="stat-val text-blue-400">Idle</span></div>
+                <div class="stat-row"><span>Bounds X</span> <span id="stat-x" class="stat-val">-</span></div>
+                <div class="stat-row"><span>Bounds Y</span> <span id="stat-y" class="stat-val">-</span></div>
+                <div class="stat-row"><span>Bounds Z</span> <span id="stat-z" class="stat-val">-</span></div>
+            </div>
+
+            <div id="drop-zone">
+                <p class="text-xs text-gray-400">Drag & Drop .gcode file</p>
+                <input type="file" id="file-input" accept=".nc,.gcode,.tap,.txt" class="hidden">
+            </div>
+
+            <div id="debug-log"></div>
+            <div id="code-viewer"></div>
+        </div>
+
+        <button id="toggle-sidebar" title="Toggle Sidebar">‹</button>
+
+        <div id="controls">
+            <button class="btn" onclick="resetCamera()">Reset View</button>
+            <button class="btn" onclick="toggleGrid()">Grid</button>
+        </div>
+    </div>
+
+<script>
+    let scene, camera, renderer, controls;
+    let toolpathGroup, stockMesh, toolMesh, gridHelper;
+    let isSidebarOpen = true;
+
+    let simData = []; 
+    let simPlaying = false;
+    let simIndex = 0; 
+    let simT = 0; 
+    let simSpeed = 10;
+    
+    let cutLine, ghostLine; 
+    let gCodeBounds = { minX:0, maxX:0, minY:0, maxY:0, minZ:0, maxZ:0 };
+
+    function log(msg) {
+        const div = document.getElementById('debug-log');
+        const entry = document.createElement('div');
+        entry.textContent = `> ${msg}`;
+        div.appendChild(entry);
+        div.scrollTop = div.scrollHeight;
+    }
+
+    function init() {
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0a0a0a);
+
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 20000);
+        camera.position.set(150, 150, 150);
+
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        
+        gridHelper = new THREE.GridHelper(400, 40, 0x222222, 0x111111);
+        scene.add(gridHelper);
+        
+        toolpathGroup = new THREE.Group();
+        scene.add(toolpathGroup);
+
+        createTool();
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(50, 100, 50);
+        scene.add(dirLight);
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        document.getElementById('sim-speed').addEventListener('input', (e) => {
+            simSpeed = parseInt(e.target.value);
+            document.getElementById('speed-val').innerText = simSpeed + 'x';
+        });
+        
+        document.getElementById('sim-progress').addEventListener('input', (e) => {
+            if(simData.length) {
+                const pct = parseFloat(e.target.value);
+                simIndex = Math.floor((pct/100) * simData.length);
+                simT = 0;
+                updateToolPosition();
+            }
+        });
+
+        initFileHandlers();
+        
+        document.getElementById('toggle-sidebar').onclick = () => {
+            isSidebarOpen = !isSidebarOpen;
+            const sidebar = document.getElementById('sidebar');
+            const btn = document.getElementById('toggle-sidebar');
+            if(isSidebarOpen) {
+                sidebar.classList.remove('collapsed');
+                btn.style.left = '350px';
+                btn.innerText = '‹';
+            } else {
+                sidebar.classList.add('collapsed');
+                btn.style.left = '0';
+                btn.innerText = '›';
+            }
+            setTimeout(() => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }, 300);
+        };
+
+        log("Ready.");
+        animate();
+    }
+
+    function createTool() {
+        toolMesh = new THREE.Group();
+        const flute = new THREE.Mesh(
+            new THREE.CylinderGeometry(1.5, 1.5, 20, 16),
+            new THREE.MeshStandardMaterial({ color: 0x999999, metalness: 0.9 })
+        );
+        flute.position.y = 10;
+        toolMesh.add(flute);
+        
+        const holder = new THREE.Mesh(
+            new THREE.CylinderGeometry(4, 4, 15, 16),
+            new THREE.MeshStandardMaterial({ color: 0x333333 })
+        );
+        holder.position.y = 27.5;
+        toolMesh.add(holder);
+
+        toolMesh.visible = false;
+        scene.add(toolMesh);
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        if (simPlaying && simData.length > 0) updateSimulationStep();
+        controls.update();
+        renderer.render(scene, camera);
+    }
+
+    function updateSimulationStep() {
+        let moveDist = simSpeed * 0.2; 
+        while (moveDist > 0 && simIndex < simData.length) {
+            const seg = simData[simIndex];
+            const remaining = seg.dist * (1 - simT);
+            if (moveDist >= remaining) {
+                moveDist -= remaining;
+                simT = 0;
+                simIndex++;
+            } else {
+                simT += moveDist / seg.dist;
+                moveDist = 0;
+            }
+        }
+        updateToolPosition();
+        updateProgressUI();
+        if (simIndex >= simData.length) {
+            simPlaying = false;
+            document.getElementById('btn-play').innerText = "Restart";
+            document.getElementById('sim-status').innerText = "Done";
+        }
+    }
+
+    function updateToolPosition() {
+        if (!toolMesh.visible) toolMesh.visible = true;
+        if (simIndex < simData.length) {
+            const seg = simData[simIndex];
+            toolMesh.position.lerpVectors(
+                new THREE.Vector3(seg.p1.x, seg.p1.y, seg.p1.z),
+                new THREE.Vector3(seg.p2.x, seg.p2.y, seg.p2.z),
+                simT
+            );
+        } else if (simData.length > 0) {
+            const last = simData[simData.length - 1];
+            toolMesh.position.set(last.p2.x, last.p2.y, last.p2.z);
+        }
+        if (cutLine) {
+            cutLine.geometry.setDrawRange(0, (simIndex + 1) * 2);
+        }
+    }
+
+    function togglePlay() {
+        if (!simData.length) return;
+        if (simIndex >= simData.length) { 
+            simIndex = 0; 
+            simT = 0; 
+            updateToolPosition();
+        }
+        simPlaying = !simPlaying;
+        document.getElementById('btn-play').innerText = simPlaying ? "Pause" : "Play";
+        document.getElementById('sim-status').innerText = simPlaying ? "Cutting..." : "Paused";
+    }
+
+    function stopSim() {
+        simPlaying = false;
+        simIndex = 0; simT = 0;
+        updateToolPosition();
+        updateProgressUI();
+        document.getElementById('btn-play').innerText = "Play";
+        document.getElementById('sim-status').innerText = "Stopped";
+    }
+
+    function updateProgressUI() {
+        const pct = simData.length ? (simIndex / simData.length) * 100 : 0;
+        document.getElementById('sim-progress').value = pct;
+        document.getElementById('progress-val').innerText = pct.toFixed(1) + '%';
+    }
+
+    function updateStockGeometry() {
+        if (stockMesh) { scene.remove(stockMesh); stockMesh = null; }
+        if (!document.getElementById('chk-show-stock').checked) return;
+
+        const w = parseFloat(document.getElementById('stock-w').value) || 100;
+        const d = parseFloat(document.getElementById('stock-d').value) || 100;
+        const h = parseFloat(document.getElementById('stock-h').value) || 20;
+
+        // Create box
+        const geo = new THREE.BoxGeometry(w, h, d);
+        
+        // Pivot shift: Move geometry so origin is at TOP-CENTER
+        // Box origin is center. Shifting Y by -h/2 puts the top face at local Y=0.
+        geo.translate(0, -h / 2, 0);
+
+        const mat = new THREE.MeshPhongMaterial({ 
+            color: 0x3b82f6, 
+            transparent: true, 
+            opacity: 0.25, 
+            side: THREE.DoubleSide,
+            depthWrite: false 
+        });
+        
+        stockMesh = new THREE.Mesh(geo, mat);
+
+        // ALIGNMENT FIX:
+        // Position the Stock Top (Mesh Origin) at Z=0.
+        // In our scene, G-Code Z is mapped to Y axis, centered around 'cz'.
+        // Z=0 corresponds to Y = 0 - cz.
+        const cz = (gCodeBounds.minZ + gCodeBounds.maxZ) / 2;
+        stockMesh.position.y = -cz;
+
+        scene.add(stockMesh);
+    }
+
+    function autoFitStock() {
+        if (!simData.length) return;
+        document.getElementById('stock-w').value = Math.ceil(gCodeBounds.maxX - gCodeBounds.minX) + 10;
+        document.getElementById('stock-d').value = Math.ceil(gCodeBounds.maxY - gCodeBounds.minY) + 10;
+        
+        // Heuristic: Stock height usually just needs to cover the cut depth.
+        // We assume top is Z0. Depth is abs(minZ). Add 5mm safety.
+        // If maxZ is huge (retract), it doesn't affect stock size.
+        // Using maxZ - minZ + 5 is also safe and covers everything.
+        document.getElementById('stock-h').value = Math.ceil(gCodeBounds.maxZ - gCodeBounds.minZ) + 5;
+        
+        updateStockGeometry();
+    }
+
+    function initFileHandlers() {
+        const drop = document.getElementById('drop-zone');
+        drop.addEventListener('dragover', (e) => { e.preventDefault(); drop.style.borderColor = "#3b82f6"; });
+        drop.addEventListener('dragleave', () => { drop.style.borderColor = "#333"; });
+        drop.addEventListener('drop', (e) => {
+            e.preventDefault();
+            drop.style.borderColor = "#333";
+            if (e.dataTransfer.files.length) parseFile(e.dataTransfer.files[0]);
+        });
+        document.getElementById('file-input').addEventListener('change', (e) => {
+            if (e.target.files.length) parseFile(e.target.files[0]);
+        });
+        drop.onclick = () => document.getElementById('file-input').click();
+    }
+
+    function parseFile(file) {
+        log(`Loading ${file.name}...`);
+        const reader = new FileReader();
+        reader.onload = (e) => parseGCode(e.target.result);
+        reader.readAsText(file);
+    }
+
+    function parseGCode(text) {
+        stopSim();
+        while(toolpathGroup.children.length > 0) toolpathGroup.remove(toolpathGroup.children[0]);
+        
+        const lines = text.split('\n');
+        let x=0, y=0, z=0, abs=true, started=false;
+        let minX=Infinity, maxX=-Infinity, minY=Infinity, maxY=-Infinity, minZ=Infinity, maxZ=-Infinity;
+        
+        let rawMoves = [];
+        const coordRegex = /([XYZ])\s*([+-]?\d*(?:\.\d+)?)/gi;
+
+        lines.forEach(line => {
+            if(line.includes('G90')) abs = true;
+            if(line.includes('G91')) abs = false;
+            
+            let move = {x, y, z}, found=false;
+            const matches = [...line.matchAll(coordRegex)];
+            matches.forEach(m => {
+                found = true;
+                const v = parseFloat(m[2]);
+                if(m[1].toUpperCase()==='X') move.x = abs ? v : x+v;
+                if(m[1].toUpperCase()==='Y') move.y = abs ? v : y+v;
+                if(m[1].toUpperCase()==='Z') move.z = abs ? v : z+v;
+            });
+
+            if(found) {
+                if(!started) { started=true; x=move.x; y=move.y; z=move.z; }
+                else {
+                    rawMoves.push({p1:{x,y,z}, p2:{x:move.x, y:move.y, z:move.z}});
+                    x=move.x; y=move.y; z=move.z;
+                }
+                minX=Math.min(minX,x); maxX=Math.max(maxX,x);
+                minY=Math.min(minY,y); maxY=Math.max(maxY,y);
+                minZ=Math.min(minZ,z); maxZ=Math.max(maxZ,z);
+            }
+        });
+
+        if(!rawMoves.length) { log("No path found."); return; }
+
+        gCodeBounds = { minX, maxX, minY, maxY, minZ, maxZ };
+        const cx = (minX + maxX)/2, cy = (minY + maxY)/2, cz = (minZ + maxZ)/2;
+        
+        simData = [];
+        const pathVerts = [];
+        rawMoves.forEach(m => {
+            // Mapping: X -> X, Z -> Y (UP), Y -> -Z (BACK)
+            const p1 = { x: m.p1.x - cx, y: m.p1.z - cz, z: -(m.p1.y - cy) };
+            const p2 = { x: m.p2.x - cx, y: m.p2.z - cz, z: -(m.p2.y - cy) };
+            const dist = Math.sqrt(Math.pow(p2.x-p1.x,2)+Math.pow(p2.y-p1.y,2)+Math.pow(p2.z-p1.z,2));
+            simData.push({p1, p2, dist});
+            pathVerts.push(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
+        });
+
+        ghostLine = new THREE.LineSegments(
+            new THREE.BufferGeometry().setAttribute('position', new THREE.Float32BufferAttribute(pathVerts, 3)),
+            new THREE.LineBasicMaterial({ color: 0x333333, transparent: true, opacity: 0.25 })
+        );
+        toolpathGroup.add(ghostLine);
+
+        cutLine = new THREE.LineSegments(
+            ghostLine.geometry.clone(),
+            new THREE.LineBasicMaterial({ color: 0x4ade80, linewidth: 2 })
+        );
+        cutLine.geometry.setDrawRange(0, 0);
+        toolpathGroup.add(cutLine);
+
+        document.getElementById('stat-x').innerText = (maxX-minX).toFixed(1);
+        document.getElementById('stat-y').innerText = (maxY-minY).toFixed(1);
+        document.getElementById('stat-z').innerText = (maxZ-minZ).toFixed(1);
+        
+        autoFitStock();
+        
+        simIndex = 0;
+        simT = 0;
+        updateToolPosition();
+        
+        resetCamera();
+        log(`Parsed ${rawMoves.length} moves.`);
+    }
+
+    function resetCamera() {
+        const box = new THREE.Box3().setFromObject(toolpathGroup);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z) || 100;
+        camera.position.set(center.x + maxDim, center.y + maxDim, center.z + maxDim);
+        controls.target.copy(center);
+        controls.update();
+    }
+
+    function toggleGrid() { gridHelper.visible = !gridHelper.visible; }
+
+    init();
+</script>
+</body>
+</html>

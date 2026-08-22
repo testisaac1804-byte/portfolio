@@ -36,6 +36,10 @@ function randomProj(){
 }
 
 var D={sw:[
+{t:"Windows 1.01 Simulator",s:"done",d:"Classic Windows 1.01 simulator running in the browser.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/windows-101.html"}],g:[{c:"ac",l:"HTML"},{l:"Simulator"},{l:"Retro"}],v:[{n:"V1",i:"Windows 1.01 simulation."}]},
+{t:"Gemini Chat",s:"done",d:"AI chat interface — Gemini-powered conversation app.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/gemini-chat.html"}],g:[{c:"ac",l:"AI"},{l:"Chat"}],v:[{n:"V1",i:"Chat interface."}]},
+{t:"RGB Color Calculator",s:"done",d:"Interactive RGB color picker and calculator.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/rgb-calculator.html"}],g:[{c:"gr",l:"HTML"},{l:"Tool"}],v:[{n:"V1",i:"Color picker."}]},
+{t:"Gcode Viewer",s:"done",d:"Browser-based G-code viewer for CNC toolpath visualization.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/gcode-viewer.html"}],g:[{c:"ac",l:"CNC"},{l:"G-code"}],v:[{n:"V1",i:"Toolpath viewer."}]},
 {t:"Hong Kong Tour",s:"done",pt:"prompts/hongkong-tour-prompt.md",d:"Interactive Hong Kong tour guide app — Flask + HTML, native macOS .app bundle with photo gallery and tour routes.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/hongkong-tour.html"}],g:[{c:"ac",l:"Flask"},{l:"HTML"},{l:"Tour"},{l:"macOS .app"}],v:[{n:"V1",i:"Photo gallery, tour routes, ratings."}]},
 
 {t:"macOS Simulator",s:"done",pt:"prompts/macos-simulator-prompt.md",d:"Full interactive macOS desktop simulator with menubar, dock, windows, and dark/light theme.",a:[{c:"ac",l:"Live Demo",o:7,u:"./projects/mac-simulator.html"}],g:[{c:"ac",l:"HTML"},{l:"CSS"},{l:"JS"},{l:"Simulator"}],v:[{n:"V1",i:"Menubar, dock, windows, themes."}]},
@@ -230,6 +234,7 @@ var D={sw:[
 {t:"Vinyl Sticker Design (Y7)",s:"done",pt:"prompts/vinyl-sticker-y7-prompt.md",d:"Year 7 vinyl-cut sticker designs.",a:[{c:"p2d",l:"View DXF (2 vers)",o:4,vs:[{l:"V1",p:"./school/dt-y7/isaac-duck.dxf"},{l:"V2",p:"./school/dt-y7/isaac-chan-darkblue.dxf"}]}],g:[{l:"Vinyl"},{l:"Sticker"},{l:"DXF"},{l:"Y7"}]},
 {t:"Organise Me Insert (Y7)",s:"done",pt:"prompts/organise-me-insert-y7-prompt.md",d:"Year 7 CNC router 'Organise Me' insert design.",a:[{c:"p2d",l:"View DXF",o:5,p:"./school/dt-y7/isaac-insert.dxf"}],g:[{l:"CNC"},{l:"Insert"},{l:"DXF"},{l:"Y7"}]},
 ],des:[
+{t:"Utilitarianism Guide",s:"done",d:"School philosophy project — interactive utilitarianism ethics study guide.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/utilitarianism-guide.html"}],g:[{c:"gr",l:"HTML"},{l:"School"},{l:"Philosophy"}],v:[{n:"V1",i:"Interactive study guide."}]},
 {t:"Master Fusion Workbook",s:"done",pt:"prompts/master-fusion-workbook-prompt.md",d:"Complete interactive Fusion 360 workbook — 14.6 MB self-contained HTML with tutorials, exercises, and reference.",a:[{c:"ac",l:"Open Workbook",o:6,p:"./Desktop/Master_Fusion_Workbook_copy/Master_Fusion_Workbook_interactive.html"}],g:[{c:"ac",l:"Fusion 360"},{l:"Tutorial"},{l:"Workbook"},{l:"Interactive"}],v:[{n:"V1",i:"Complete interactive workbook."}]},
 {t:"F1 Design Portfolio",s:"done",pt:"prompts/f1-design-portfolio-prompt.md",d:"Official F1 design portfolio - CAD, CFD. 5.5 MB.",g:[{c:"ac",l:"F1"},{l:"Portfolio"},{l:"PDF"}],a:[{l:"Open PDF",o:6,p:"./Downloads/F1InSchools-main/documents/Design portfolio.pdf"}]},
 {t:"F1 Enterprise Portfolio",s:"done",pt:"prompts/f1-enterprise-portfolio-prompt.md",d:"F1 business - branding, budget. 6.5 MB.",g:[{c:"ac",l:"F1"},{l:"Business"},{l:"PDF"}],a:[{l:"Open PDF",o:6,p:"./Downloads/F1InSchools-main/documents/Enterprise portfolio.pdf"}]},
