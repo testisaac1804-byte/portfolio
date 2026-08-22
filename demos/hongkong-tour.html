@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hong Kong Tour</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #12121a;
+  --surface: #1a1a28;
+  --surface2: #22223a;
+  --border: #2a2a45;
+  --text: #e8e8f0;
+  --text2: #9898b8;
+  --accent: #ff6b35;
+  --accent2: #e74c3c;
+  --rating: #f1c40f;
+  --shadow: rgba(0,0,0,0.4);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg); color: var(--text); 
+  overflow: hidden; height: 100vh;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text2); }
+
+/* Layout */
+.app-container { display: flex; height: 100vh; overflow: hidden; }
+
+/* Sidebar */
+.sidebar {
+  width: 280px; min-width: 280px;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.sidebar-header {
+  padding: 20px 16px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+}
+.sidebar-header h1 {
+  font-size: 18px; font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), #f39c12);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.sidebar-header p { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.search-box {
+  margin: 12px 16px;
+  position: relative;
+}
+.search-box input {
+  width: 100%; padding: 10px 14px 10px 38px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text);
+  font-size: 13px; outline: none; transition: border-color 0.2s;
+}
+.search-box input:focus { border-color: var(--accent); }
+.search-box input::placeholder { color: var(--text2); }
+.search-box .icon {
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  color: var(--text2); font-size: 15px;
+}
+
+/* Region nav */
+.region-nav { flex: 1; overflow-y: auto; padding: 4px 0; }
+.region-item {
+  cursor: pointer; padding: 10px 16px; margin: 2px 8px;
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; gap: 10px;
+  transition: background 0.15s, transform 0.15s;
+}
+.region-item:hover { background: var(--surface); }
+.region-item.active { background: var(--surface2); box-shadow: inset 3px 0 0 var(--accent); }
+.region-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+}
+.region-info { flex: 1; min-width: 0; }
+.region-name { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.region-count { font-size: 11px; color: var(--text2); }
+
+/* Main content */
+.main {
+  flex: 1; display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.main-header {
+  padding: 20px 28px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.main-header h2 { font-size: 22px; font-weight: 700; }
+.main-header .subtitle { font-size: 12px; color: var(--text2); }
+.filter-bar {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.filter-btn {
+  padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border);
+  background: transparent; color: var(--text2); font-size: 11px;
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+}
+.filter-btn:hover { border-color: var(--accent); color: var(--text); }
+.filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* Content area */
+.content {
+  flex: 1; overflow-y: auto; padding: 20px 28px;
+}
+
+/* Area section */
+.area-section { margin-bottom: 32px; }
+.area-header {
+  margin-bottom: 14px;
+  display: flex; align-items: baseline; gap: 12px;
+}
+.area-header h3 { font-size: 20px; font-weight: 600; }
+.area-header .area-name-cn { font-size: 13px; color: var(--text2); }
+.area-desc { 
+  font-size: 13px; color: var(--text2); 
+  margin-bottom: 16px; line-height: 1.5;
+  max-width: 800px;
+}
+
+/* Spot cards grid */
+.spots-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+/* Spot card */
+.spot-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.spot-card:hover { 
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--shadow);
+}
+.spot-card.expanded { 
+  grid-column: 1 / -1;
+  cursor: default;
+}
+.spot-img {
+  width: 100%; height: 180px; object-fit: cover;
+  display: block; background: var(--surface2);
+}
+.spot-card.expanded .spot-img { height: 280px; }
+.spot-body { padding: 14px 16px; }
+.spot-card-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 8px; margin-bottom: 6px;
+}
+.spot-name { font-size: 16px; font-weight: 600; }
+.spot-name-cn { font-size: 12px; color: var(--text2); font-weight: 400; }
+.spot-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.spot-category {
+  font-size: 10px; padding: 2px 8px; border-radius: 12px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  font-weight: 600; background: var(--surface2); color: var(--text2);
+}
+.spot-rating {
+  display: flex; align-items: center; gap: 3px;
+  font-size: 12px; color: var(--rating);
+}
+.spot-category.landmark { background: #2c3e5033; color: #5dade2; }
+.spot-category.beach { background: #1a527633; color: #48c9b0; }
+.spot-category.temple { background: #6c348333; color: #c39bd3; }
+.spot-category.market { background: #7e510933; color: #f4d03f; }
+.spot-category.shopping { background: #c0392b33; color: #ec7063; }
+.spot-category.museum { background: #1a3e4c33; color: #76d7c4; }
+.spot-category.neighbourhood { background: #1b4f7233; color: #85c1e9; }
+.spot-category.park { background: #1e844933; color: #58d68d; }
+.spot-category.nightlife { background: #4a235a33; color: #bb8fce; }
+.spot-category.hiking { background: #0e625133; color: #52be80; }
+.spot-category.entertainment { background: #b03a2e33; color: #f1948a; }
+.spot-category.food { background: #93511633; color: #f0b27a; }
+.spot-category.scenic { background: #15436033; color: #aed6f1; }
+.spot-category.arts_culture { background: #512e5f33; color: #a569bd; }
+.spot-desc {
+  font-size: 13px; line-height: 1.6;
+  color: var(--text2); margin-top: 4px;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.spot-card.expanded .spot-desc {
+  -webkit-line-clamp: unset; overflow: visible;
+}
+.spot-expanded-content {
+  display: none; margin-top: 14px;
+  padding-top: 14px; border-top: 1px solid var(--border);
+}
+.spot-card.expanded .spot-expanded-content { display: block; }
+.spot-expanded-content .info-line {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 13px; color: var(--text2); margin-bottom: 8px;
+  line-height: 1.5;
+}
+.spot-expanded-content .info-line strong { color: var(--text); min-width: 70px; }
+.map-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 12px; padding: 8px 16px;
+  background: var(--accent); color: #fff;
+  border-radius: var(--radius-sm); text-decoration: none;
+  font-size: 13px; font-weight: 600; transition: opacity 0.2s;
+}
+.map-link:hover { opacity: 0.85; }
+
+/* Welcome screen */
+.welcome {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  height: 100%; text-align: center;
+  padding: 40px;
+}
+.welcome h1 {
+  font-size: 36px; font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), #f39c12, #e74c3c);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+.welcome .subtitle { font-size: 15px; color: var(--text2); margin-bottom: 24px; }
+.welcome .stats {
+  display: flex; gap: 32px; margin-top: 24px;
+}
+.welcome .stat-item { text-align: center; }
+.welcome .stat-num {
+  font-size: 32px; font-weight: 700; color: var(--accent);
+}
+.welcome .stat-label { font-size: 12px; color: var(--text2); }
+.welcome .start-hint {
+  margin-top: 32px; padding: 12px 24px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); font-size: 13px; color: var(--text2);
+}
+
+/* Search results */
+.search-results { padding: 0; }
+.search-result-item {
+  padding: 16px; border-bottom: 1px solid var(--border);
+  cursor: pointer; transition: background 0.15s;
+  display: flex; gap: 14px;
+}
+.search-result-item:hover { background: var(--surface); }
+.search-result-img {
+  width: 80px; height: 80px; border-radius: var(--radius-sm);
+  object-fit: cover; background: var(--surface2); flex-shrink: 0;
+}
+.search-result-info { flex: 1; min-width: 0; }
+.search-result-info h4 { font-size: 15px; margin-bottom: 3px; }
+.search-result-info .result-meta { font-size: 11px; color: var(--text2); }
+.search-result-info .result-desc {
+  font-size: 12px; color: var(--text2);
+  margin-top: 4px; display: -webkit-box;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+
+/* Loading state */
+.loading {
+  display: flex; align-items: center; justify-content: center;
+  height: 200px; color: var(--text2); font-size: 13px;
+}
+.spinner {
+  width: 24px; height: 24px; border: 3px solid var(--border);
+  border-top-color: var(--accent); border-radius: 50%;
+  animation: spin 0.8s linear infinite; margin-right: 10px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Utility */
+.hidden { display: none !important; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .sidebar { width: 200px; min-width: 200px; }
+  .spots-grid { grid-template-columns: 1fr; }
+  .content { padding: 16px; }
+  .main-header { padding: 14px 16px; }
+}
+</style>
+</head>
+<body>
+<div class="app-container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h1>🇭🇰 香港旅遊</h1>
+      <p>Hong Kong Tour Guide</p>
+    </div>
+    <div class="search-box">
+      <span class="icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search spots..." oninput="doSearch(this.value)">
+    </div>
+    <div class="region-nav" id="regionNav">
+      <div class="loading"><div class="spinner"></div>Loading regions...</div>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="main-header" id="mainHeader">
+      <div>
+        <h2 id="pageTitle">Hong Kong Tour</h2>
+        <div class="subtitle" id="pageSubtitle">Explore every corner of Hong Kong</div>
+      </div>
+      <div class="filter-bar" id="filterBar"></div>
+    </div>
+    <div class="content" id="contentArea">
+      <div class="welcome" id="welcomeScreen">
+        <h1>🇭🇰 香港</h1>
+        <div class="subtitle">Discover the hidden gems and iconic landmarks of Hong Kong</div>
+        <div class="stats" id="statsDisplay">
+          <div class="stat-item"><div class="stat-num" id="statRegions">—</div><div class="stat-label">Regions</div></div>
+          <div class="stat-item"><div class="stat-num" id="statAreas">—</div><div class="stat-label">Areas</div></div>
+          <div class="stat-item"><div class="stat-num" id="statSpots">—</div><div class="stat-label">Spots</div></div>
+        </div>
+        <div class="start-hint">← Select a region from the sidebar to begin exploring</div>
+      </div>
+      <div id="regionContent" class="hidden"></div>
+      <div id="searchContent" class="hidden"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// State
+let allData = null;
+let currentRegion = null;
+let currentAreas = [];
+let currentFilter = 'all';
+let searchTimeout = null;
+
+// Init
+window.addEventListener('DOMContentLoaded', init);
+
+async function init() {
+  await loadData();
+  renderSidebar();
+  renderWelcomeStats();
+}
+
+async function loadData() {
+  try {
+    allData = {"hong_kong_island": {"name": "香港島 Hong Kong Island", "name_cn": "香港島", "description": "The historic and commercial heart of Hong Kong, home to the iconic skyline, colonial heritage, vibrant nightlife, and world-class shopping districts.", "color": "#E74C3C", "areas": [{"name": "中環 Central", "name_cn": "中環", "description": "The central business district — a blend of towering skyscrapers, historic landmarks, luxury shopping, and trendy nightlife.", "spots": [{"name": "太平山頂 Victoria Peak", "name_cn": "太平山頂", "category": "landmark", "description": "The highest point on Hong Kong Island, offering breathtaking panoramic views of the skyline, Victoria Harbour, and the outlying islands. Take the historic Peak Tram (since 1888) for the steepest funic", "location": "Victoria Gap, The Peak", "rating": 4.8, "tips": "Visit at sunset for golden hour + night views. The Peak Tram can have 30-60min queues — book tickets online. Alternatively hike up via the Morning Tra"}, {"name": "中環至半山自動扶梯 Central-Mid-Levels Escalator", "name_cn": "中環至半山自動扶梯", "category": "landmark", "description": "The world's longest outdoor covered escalator system (over 800m). Connects Central to the Mid-Levels residential area, cutting through SoHo and passing trendy bars, restaurants, antique shops, and str", "location": "Starts at Central Market, runs through SoHo to Conduit Road", "rating": 4.5, "tips": "Best visited after 10am when going up. Hop on/off at different points to explore side streets. Great for people-watching and discovering hidden bars."}, {"name": "蘭桂坊 Lan Kwai Fong", "name_cn": "蘭桂坊", "category": "nightlife", "description": "Hong Kong's most famous nightlife district — a small L-shaped alley packed with over 90 bars, clubs, and restaurants. Comes alive after 9pm with expats, tourists, and young locals. Hosts massive stree", "location": "Between D'Aguilar Street and Wyndham Street, Central", "rating": 4.2, "tips": "Happy hour 5-8pm for cheaper drinks. Weekends get extremely crowded. Try the side streets (Wo On Lane, Wing Wah Lane) for quieter pub vibes."}]}, {"name": "上環 Sheung Wan", "name_cn": "上環", "description": "A fascinating blend of old and new — traditional dried seafood shops, antique streets, and hipster cafes coexist in this historic neighbourhood west of Central.", "spots": [{"name": "海味街 Dried Seafood Street (Des Voeux Road West)", "name_cn": "海味街", "category": "market", "description": "A street lined with shops selling dried seafood — abalone, sea cucumber, shark fin, dried scallops, fish maw, and exotic ingredients. The pungent aroma, bustling atmosphere, and shop owners repacking ", "location": "Des Voeux Road West, Sheung Wan", "rating": 4.0, "tips": "Best visited in the morning when deliveries arrive. Not all shops welcome browsing — many cater to wholesale buyers. Combine with a walk to the Wester"}, {"name": "荷李活道古董街 Hollywood Road Antique Shops", "name_cn": "荷李活道古董街", "category": "shopping", "description": "One of the oldest streets in Hong Kong, famous for its antique shops selling Chinese ceramics, furniture, jade, calligraphy, and curios. Ranges from high-end galleries to cluttered treasure troves. Th", "location": "Hollywood Road, Sheung Wan to Central", "rating": 4.2, "tips": "Bargaining is expected in smaller shops. Be wary of fakes in lower-end shops. High-end galleries near the Eastern end are pricier but authentic."}, {"name": "西港城 Western Market", "name_cn": "西港城", "category": "landmark", "description": "A beautiful Edwardian-style building (built 1906) that originally served as the North Point Ferry Pier. Now a shopping arcade housing fabric and tailor shops, craft stores, and a restaurant. The red-b", "location": "323 Des Voeux Road Central, Sheung Wan", "rating": 3.8, "tips": "Free to explore. The fabric shops on the upper floors are great for custom tailoring. The building connects to Sheung Wan MTR station."}]}]}, "kowloon": {"name": "九龍 Kowloon", "name_cn": "九龍", "description": "The bustling peninsula opposite Hong Kong Island — a sensory explosion of neon lights, street markets, dim sum palaces, and some of the most vibrant urban landscapes on Earth.", "color": "#3498DB", "areas": [{"name": "尖沙咀 Tsim Sha Tsui", "name_cn": "尖沙咀", "description": "The most tourist-friendly district in Kowloon — world-class museums, the harbour promenade, luxury shopping, and the famous Star Ferry terminal.", "spots": [{"name": "維多利亞港及星光大道 Victoria Harbour & Avenue of Stars", "name_cn": "維多利亞港及星光大道", "category": "landmark", "description": "One of the most famous harbour views in the world. The Avenue of Stars is the TST promenade lined with handprints of Hong Kong movie stars (Bruce Lee, Jackie Chan, Wong Kar-wai). Evening 'A Symphony o", "location": "Tsim Sha Tsui Promenade, Salisbury Road", "rating": 4.7, "tips": "Best views of the Hong Kong Island skyline. The Symphony of Lights show starts at 8pm daily. Arrive by 7:30pm for a good spot. The Bruce Lee statue is"}, {"name": "香港文化中心 Hong Kong Cultural Centre", "name_cn": "香港文化中心", "category": "arts_culture", "description": "A striking curved building housing the Concert Hall, Grand Theatre, and Studio Theatre. Hosts world-class performances by the Hong Kong Philharmonic, Chinese opera, ballet, and international artists. ", "location": "10 Salisbury Road, Tsim Sha Tsui", "rating": 4.3, "tips": "Check the performance schedule in advance. The building's architecture is worth photographing even if you don't attend a show. Free exhibitions often "}, {"name": "鐘樓 Clock Tower", "name_cn": "鐘樓", "category": "landmark", "description": "The only remaining structure of the original Kowloon-Canton Railway terminus (1915). This 44m-high clock tower is a declared monument and one of Hong Kong's most photographed landmarks. It stands at t", "location": "Salisbury Road, Tsim Sha Tsui, near Star Ferry", "rating": 4.2, "tips": "The clock tower is illuminated at night. Best photographed from across the harbour or from the Star Ferry. Combine with a walk along the TST promenade"}]}, {"name": "佐敦及油麻地 Jordan & Yau Ma Tei", "name_cn": "佐敦及油麻地", "description": "The heart of old Kowloon — night markets, temples, neon signs, and the gritty, authentic energy that Hong Kong is famous for.", "spots": [{"name": "廟街夜市 Temple Street Night Market", "name_cn": "廟街夜市", "category": "market", "description": "Hong Kong's most famous night market — a sensory overload of neon-lit stalls selling clothes, watches, electronics, antiques, and souvenirs. Fortune tellers, street performers, dai pai dong (open-air ", "location": "Temple Street, Jordan to Yau Ma Tei", "rating": 4.3, "tips": "Best visited after 7pm when fully active. Bargain hard (start at 30-40% of asking price). Try the claypot rice and curry fish balls at the dai pai don"}, {"name": "廟街 Tin Hau Temple (Yau Ma Tei)", "name_cn": "廟街天后廟", "category": "temple", "description": "Built in 1865, this is the largest of Hong Kong's Tin Hau temples and the namesake of Temple Street. A peaceful oasis amid the market chaos. The complex includes a See Yee Koon (community hall) and a ", "location": "Market Street & Temple Street, Yau Ma Tei", "rating": 4.0, "tips": "Free entry. Open daily 8am-5pm. Visit during the day when the market is quiet for a more spiritual experience."}, {"name": "玉器市場 Jade Market", "name_cn": "玉器市場", "category": "market", "description": "A covered market with over 400 stalls selling jade jewellery, ornaments, and raw jade stones. Open since the 1960s. Even if you're not buying, the variety of green hues and the lively bargaining atmos", "location": "Kansu Street & Battery Street, Yau Ma Tei", "rating": 3.7, "tips": "Open daily 10am-5pm. Genuine jade is expensive — learn the basics of spotting fakes. The adjacent Yau Ma Tei Fruit Market (1913) is worth a look for t"}]}]}};
+  } catch(e) {
+    console.error('Failed to load data:', e);
+  }
+}
+
+function renderSidebar() {
+  const nav = document.getElementById('regionNav');
+  let html = '';
+  let totalSpots = 0;
+  
+  for (const [key, region] of Object.entries(allData)) {
+    let areaCount = 0;
+    let spotCount = 0;
+    for (const area of (region.areas || [])) {
+      if (area.spots) areaCount++;
+      spotCount += (area.spots || []).length;
+    }
+    totalSpots += spotCount;
+    
+    html += `
+      <div class="region-item" data-region="${key}" onclick="selectRegion('${key}')">
+        <div class="region-dot" style="background:${region.color}"></div>
+        <div class="region-info">
+          <div class="region-name">${region.name}</div>
+          <div class="region-count">${spotCount} spots · ${areaCount} areas</div>
+        </div>
+      </div>
+    `;
+  }
+  
+  nav.innerHTML = html;
+  document.getElementById('statSpots').textContent = totalSpots;
+  document.getElementById('statRegions').textContent = Object.keys(allData).length;
+  
+  let totalAreas = 0;
+  for (const r of Object.values(allData)) totalAreas += (r.areas || []).length;
+  document.getElementById('statAreas').textContent = totalAreas;
+}
+
+function renderWelcomeStats() {
+  // Already done in renderSidebar
+}
+
+function selectRegion(regionKey) {
+  currentRegion = regionKey;
+  currentFilter = 'all';
+  
+  // Update sidebar
+  document.querySelectorAll('.region-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.region === regionKey);
+  });
+  
+  // Show/hide content
+  document.getElementById('welcomeScreen').classList.add('hidden');
+  document.getElementById('searchContent').classList.add('hidden');
+  document.getElementById('regionContent').classList.remove('hidden');
+  
+  const region = allData[regionKey];
+  
+  // Update header
+  document.getElementById('pageTitle').textContent = region.name;
+  document.getElementById('pageSubtitle').textContent = region.description;
+  
+  // Build filter bar
+  renderFilters(region);
+  
+  // Render region content
+  renderRegion(region, regionKey);
+}
+
+function renderFilters(region) {
+  const bar = document.getElementById('filterBar');
+  const categories = new Set();
+  
+  for (const area of (region.areas || [])) {
+    for (const spot of (area.spots || [])) {
+      if (spot.category) categories.add(spot.category);
+    }
+  }
+  
+  let html = `<button class="filter-btn active" data-cat="all" onclick="setFilter('all')">All</button>`;
+  
+  const catNames = {
+    landmark: 'Landmarks', beach: 'Beaches', temple: 'Temples', market: 'Markets',
+    shopping: 'Shopping', museum: 'Museums', neighbourhood: 'Villages',
+    park: 'Parks', nightlife: 'Nightlife', hiking: 'Hiking', 
+    entertainment: 'Entertainment', food: 'Food', scenic: 'Scenic',
+    arts_culture: 'Arts & Culture'
+  };
+  
+  for (const cat of [...categories].sort()) {
+    html += `<button class="filter-btn" data-cat="${cat}" onclick="setFilter('${cat}')">${catNames[cat] || cat}</button>`;
+  }
+  
+  bar.innerHTML = html;
+}
+
+function setFilter(cat) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.cat === cat);
+  });
+  
+  // Re-render with filter
+  if (currentRegion) {
+    renderRegion(allData[currentRegion], currentRegion);
+  }
+}
+
+function renderRegion(region, regionKey) {
+  const container = document.getElementById('regionContent');
+  let html = '';
+  
+  for (const area of (region.areas || [])) {
+    const spots = currentFilter === 'all' 
+      ? (area.spots || [])
+      : (area.spots || []).filter(s => s.category === currentFilter);
+    
+    if (spots.length === 0 && currentFilter !== 'all') continue;
+    
+    html += `
+      <div class="area-section">
+        <div class="area-header">
+          <h3>${area.name}</h3>
+          <span class="area-name-cn">${area.name_cn || ''}</span>
+        </div>
+        <div class="area-desc">${area.description || ''}</div>
+        <div class="spots-grid" id="spots-${area.name.replace(/\s+/g, '_')}">
+    `;
+    
+    for (const spot of spots) {
+      html += renderSpotCard(spot, regionKey);
+    }
+    
+    html += `</div></div>`;
+  }
+  
+  if (!html) {
+    html = `<div class="loading" style="height:300px">No spots match this filter.</div>`;
+  }
+  
+  container.innerHTML = html;
+}
+
+function renderSpotCard(spot, regionKey) {
+  const ratingStars = '★'.repeat(Math.floor(spot.rating || 0)) + 
+    ((spot.rating || 0) % 1 >= 0.5 ? '½' : '');
+  const ratingNum = (spot.rating || 0).toFixed(1);
+  
+  const img = spot.image || `https://via.placeholder.com/400x200/1a1a28/9898b8?text=${encodeURIComponent(spot.name)}`;
+  
+  const spotId = `spot-${regionKey}-${spot.name.replace(/[^a-zA-Z0-9]/g, '_')}`;
+  
+  return `
+    <div class="spot-card" id="${spotId}" onclick="toggleExpand('${spotId}')">
+      <img onerror="this.style.display='none'" class="spot-img" src="${img}" alt="${spot.name}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22><rect fill=%22%231a1a28%22 width=%22400%22 height=%22200%22/><text fill=%22%239898b8%22 font-size=%2216%22 text-anchor=%22middle%22 x=%22200%22 y=%22110%22>${encodeURIComponent(spot.name)}</text></svg>'">
+      <div class="spot-body">
+        <div class="spot-card-header">
+          <div>
+            <div class="spot-name">${spot.name}</div>
+            <div class="spot-name-cn">${spot.name_cn || ''}</div>
+          </div>
+          <div class="spot-rating" title="${ratingNum}/5">${ratingStars} <span style="margin-left:2px">${ratingNum}</span></div>
+        </div>
+        <div class="spot-meta">
+          <span class="spot-category ${spot.category || 'other'}">${spot.category || 'other'}</span>
+          <span style="font-size:11px;color:var(--text2)">📍 ${spot.area || ''}</span>
+        </div>
+        <div class="spot-desc">${spot.description || ''}</div>
+        <div class="spot-expanded-content">
+          <div class="info-line"><strong>Location:</strong> ${spot.location || ''}</div>
+          <div class="info-line"><strong>💡 Tips:</strong> ${spot.tips || ''}</div>
+          <a class="map-link" href="${spot.google_maps || '#'}" target="_blank" onclick="event.stopPropagation()">
+            📍 View on Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function toggleExpand(spotId) {
+  const card = document.getElementById(spotId);
+  if (!card) return;
+  card.classList.toggle('expanded');
+  
+  // Scroll to card if expanding
+  if (card.classList.contains('expanded')) {
+    setTimeout(() => {
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 50);
+  }
+}
+
+async function doSearch(query) {
+  clearTimeout(searchTimeout);
+  
+  const val = query.trim();
+  if (!val) {
+    document.getElementById('searchContent').classList.add('hidden');
+    if (currentRegion) {
+      document.getElementById('regionContent').classList.remove('hidden');
+    } else {
+      document.getElementById('welcomeScreen').classList.remove('hidden');
+    }
+    return;
+  }
+  
+  searchTimeout = setTimeout(async () => {
+    try {
+      const r = await fetch(`/api/search?q=${encodeURIComponent(val)}`);
+      const results = await r.json();
+      showSearchResults(results, val);
+    } catch(e) {
+      console.error('Search failed:', e);
+    }
+  }, 200);
+}
+
+function showSearchResults(results, query) {
+  document.getElementById('welcomeScreen').classList.add('hidden');
+  document.getElementById('regionContent').classList.add('hidden');
+  
+  const container = document.getElementById('searchContent');
+  container.classList.remove('hidden');
+  
+  if (results.length === 0) {
+    container.innerHTML = `
+      <div class="loading" style="height:300px;flex-direction:column">
+        <div style="font-size:36px;margin-bottom:12px">🔍</div>
+        <div>No results found for "${query}"</div>
+        <div style="font-size:12px;color:var(--text2);margin-top:4px">Try searching for a place, category, or area</div>
+      </div>
+    `;
+    return;
+  }
+  
+  document.getElementById('pageTitle').textContent = `Search: "${query}"`;
+  document.getElementById('pageSubtitle').textContent = `${results.length} spot${results.length > 1 ? 's' : ''} found`;
+  document.getElementById('filterBar').innerHTML = '';
+  
+  let html = `<div class="search-results">`;
+  
+  for (const spot of results) {
+    const img = spot.image || '';
+    html += `
+      <div class="search-result-item" onclick="goToSpot('${spot.region_key}', '${encodeURIComponent(spot.name)}')">
+        <img onerror="this.style.display='none'" class="search-result-img" src="${img}" alt="${spot.name}" loading="lazy" onerror="this.style.display='none'">
+        <div class="search-result-info">
+          <h4>${spot.name}</h4>
+          <div class="result-meta">${spot.region} · ${spot.area} · <span class="spot-category ${spot.category || 'other'}">${spot.category || ''}</span></div>
+          <div class="result-desc">${(spot.description || '').substring(0, 200)}</div>
+        </div>
+      </div>
+    `;
+  }
+  
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+function goToSpot(regionKey, spotName) {
+  // Clear search
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchContent').classList.add('hidden');
+  
+  // Select region
+  selectRegion(regionKey);
+  
+  // Find and expand the spot
+  const decoded = decodeURIComponent(spotName);
+  const spotId = `spot-${regionKey}-${decoded.replace(/[^a-zA-Z0-9]/g, '_')}`;
+  
+  setTimeout(() => {
+    const card = document.getElementById(spotId);
+    if (card) {
+      card.classList.add('expanded');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 200);
+}
+</script>
+</body>
+</html>
