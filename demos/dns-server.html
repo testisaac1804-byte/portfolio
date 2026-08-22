@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DNS Server</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0d1117;color:#c9d1d9;padding:24px;min-height:100vh}
+h1{color:#58a6ff;font-size:1.4em;margin-bottom:4px}
+.sub{color:#8b949e;font-size:0.85em;margin-bottom:20px}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.stat{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px 18px;text-align:center;min-width:90px}
+.stat .n{font-size:1.6em;font-weight:700;color:#58a6ff}
+.stat .l{font-size:0.7em;color:#8b949e;text-transform:uppercase}
+.server{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px;margin-bottom:16px;font-family:monospace;font-size:0.8em}
+.server span{color:#58a6ff}
+table{width:100%;border-collapse:collapse;font-size:0.78em}
+th{text-align:left;padding:7px 10px;border-bottom:2px solid #30363d;color:#8b949e;font-weight:500}
+td{padding:6px 10px;border-bottom:1px solid #21262d}
+.fwd{color:#3fb950}
+.cached{color:#d2991d}
+.t{color:#8b949e}
+</style>
+</head>
+<body>
+<h1>🧬 DNS Server</h1>
+<div class="sub">Recursive resolver — LAN devices set DNS to 192.168.1.251</div>
+
+<div class="stats">
+  <div class="stat"><div class="n">847</div><div class="l">Queries</div></div>
+  <div class="stat"><div class="n">612</div><div class="l">Cache Hits</div></div>
+  <div class="stat"><div class="n">203</div><div class="l">Forwarded</div></div>
+  <div class="stat"><div class="n">32</div><div class="l">Blocked</div></div>
+  <div class="stat"><div class="n">104</div><div class="l">Cached</div></div>
+</div>
+
+<div class="server">
+  <span>DNS:</span> 192.168.1.251:53 &nbsp;|&nbsp; <span>Upstream:</span> 1.1.1.1:53 &nbsp;|&nbsp; <span>Web:</span> :8055
+</div>
+
+<table>
+<tr><th>Time</th><th>Client</th><th>Domain</th><th>Type</th><th>Source</th></tr>
+<tr><td class="t">01:04:05</td><td>192.168.1.165</td><td>github.com</td><td>A</td><td class="fwd">🌐 forwarded</td></tr>
+<tr><td class="t">01:04:05</td><td>192.168.1.165</td><td>google.com</td><td>A</td><td class="fwd">🌐 forwarded</td></tr>
+<tr><td class="t">01:04:05</td><td>192.168.1.165</td><td>news.ycombinator.com</td><td>A</td><td class="fwd">🌐 forwarded</td></tr>
+<tr><td class="t">01:04:05</td><td>192.168.1.165</td><td>github.com</td><td>A</td><td class="cached">📦 cached</td></tr>
+<tr><td class="t">01:04:06</td><td>192.168.1.200</td><td>youtube.com</td><td>A</td><td class="fwd">🌐 forwarded</td></tr>
+<tr><td class="t">01:04:06</td><td>192.168.1.200</td><td>google.com</td><td>A</td><td class="cached">📦 cached</td></tr>
+<tr><td class="t">01:04:07</td><td>192.168.1.165</td><td>reddit.com</td><td>A</td><td class="fwd">🌐 forwarded</td></tr>
+<tr><td class="t">01:04:07</td><td>192.168.1.200</td><td>doubleclick.net</td><td>A</td><td style="color:#f85149">🚫 blocked</td></tr>
+<tr><td class="t">01:04:08</td><td>192.168.1.165</td><td>github.com</td><td>A</td><td class="cached">📦 cached</td></tr>
+<tr><td class="t">01:04:08</td><td>192.168.1.200</td><td>cloudflare.com</td><td>A</td><td class="fwd">🌐 forwarded</td></tr>
+</table>
+</body>
+</html>
