@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>macOS Simulator</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#1e1e2e;--surface:#2a2a3c;--glass:rgba(30,30,46,.88);--border:rgba(255,255,255,.08);
+  --text:#e0e0e0;--text2:#999;--accent:#007AFF;--accent2:#5856D6;--red:#FF3B30;--orange:#FF9500;
+  --yellow:#FFCC00;--green:#34C759;--teal:#5AC8FA;--blue:#007AFF;--purple:#AF52DE;
+  --dock-bg:rgba(30,30,46,.75);--menubar-bg:rgba(30,30,46,.88);--wp-gradient:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);
+  --radius:10px;--radius-sm:6px;--radius-lg:14px;--shadow:0 8px 32px rgba(0,0,0,.4);
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;--mono:'SF Mono',Monaco,Menlo,monospace;
+}
+[data-theme="light"]{
+  --bg:#f0f0f0;--surface:#fff;--glass:rgba(255,255,255,.82);--border:rgba(0,0,0,.1);
+  --text:#1d1d1f;--text2:#86868b;--dock-bg:rgba(255,255,255,.7);--menubar-bg:rgba(255,255,255,.85);
+  --wp-gradient:linear-gradient(135deg,#667eea,#764ba2);--shadow:0 8px 32px rgba(0,0,0,.15);
+}
+[data-theme="dark"]{
+  --bg:#1e1e2e;--surface:#2a2a3c;--glass:rgba(30,30,46,.88);--border:rgba(255,255,255,.08);
+  --text:#e0e0e0;--text2:#999;--dock-bg:rgba(30,30,46,.75);--menubar-bg:rgba(30,30,46,.88);
+  --wp-gradient:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);--shadow:0 8px 32px rgba(0,0,0,.4);
+}
+html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font);background:var(--bg);color:var(--text);user-select:none}
+#menubar{position:fixed;top:0;left:0;right:0;height:28px;z-index:1000;background:var(--menubar-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;align-items:center;padding:0 8px;font-size:13px;gap:0;border-bottom:1px solid var(--border)}
+.menu-item{padding:0 10px;height:28px;display:flex;align-items:center;cursor:default;border-radius:4px;position:relative;white-space:nowrap}
+.menu-item:hover{background:var(--accent);color:#fff}
+.menu-item .apple{font-size:16px;padding:0 4px}
+.menu-right{margin-left:auto;display:flex;align-items:center;gap:2px}
+.menu-right .menu-item{font-size:12px;padding:0 8px}
+.menu-dropdown{display:none;position:fixed;top:28px;z-index:1001;background:var(--glass);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:6px;padding:4px;min-width:220px;box-shadow:0 8px 32px rgba(0,0,0,.3);font-size:13px}
+.menu-dropdown.show{display:block}
+.menu-dropdown .mi{padding:4px 12px;border-radius:4px;cursor:default;display:flex;align-items:center;justify-content:space-between;gap:16px;white-space:nowrap}
+.menu-dropdown .mi:hover{background:var(--accent);color:#fff}
+.menu-dropdown .mi.disabled{opacity:.4;pointer-events:none}
+.menu-dropdown .mi .shortcut{color:var(--text2);font-size:12px;margin-left:24px}
+.menu-dropdown .mi:hover .shortcut{color:rgba(255,255,255,.7)}
+.menu-dropdown .sep{height:1px;background:var(--border);margin:4px 8px}
+
+#desktop{position:fixed;top:28px;left:0;right:0;bottom:48px;background:var(--wp-gradient);z-index:0;overflow:hidden}
+#desktop::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(120,140,255,.04),transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(100,200,255,.03),transparent 50%);pointer-events:none}
+.desk-icon{position:absolute;display:flex;flex-direction:column;align-items:center;width:80px;padding:8px 4px;border-radius:6px;cursor:default;text-align:center;font-size:12px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.desk-icon:hover{background:rgba(255,255,255,.1)}
+.desk-icon .dico{font-size:44px;margin-bottom:2px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.3))}
+.desk-icon.selected{background:rgba(255,255,255,.15);border-radius:6px}
+
+#dock{position:fixed;bottom:8px;left:50%;transform:translateX(-50%);z-index:900;display:flex;align-items:flex-end;gap:0;background:var(--dock-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;padding:4px 6px;box-shadow:0 4px 24px rgba(0,0,0,.3)}
+.dock-icon{width:50px;height:50px;display:flex;align-items:center;justify-content:center;font-size:30px;cursor:default;border-radius:12px;position:relative;transition:all .15s;margin:0 2px}
+.dock-icon:hover{transform:scale(1.3);margin:0 8px;background:rgba(255,255,255,.08)}
+.dock-icon .dlabel{display:none;position:absolute;bottom:60px;background:rgba(0,0,0,.75);color:#fff;padding:4px 10px;border-radius:6px;font-size:12px;white-space:nowrap;pointer-events:none}
+.dock-icon:hover .dlabel{display:block}
+.dock-icon .dot{position:absolute;bottom:2px;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.5);display:none}
+.dock-icon.open .dot{display:block}
+.dock-sep{width:1px;height:40px;background:var(--border);margin:0 4px}
+
+.app-window{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden;min-width:280px;min-height:200px;animation:winOpen .2s ease;z-index:100}
+.app-window.focused{box-shadow:0 12px 48px rgba(0,0,0,.5);border-color:rgba(255,255,255,.12)}
+.app-window.maximized{border-radius:0;inset:28px 0 48px 0!important;width:auto!important;height:auto!important;resize:none}
+.app-window.minimized{display:none}
+.app-window.closing{animation:winClose .15s ease forwards;pointer-events:none}
+@keyframes winOpen{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes winClose{from{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(.92)}}
+.titlebar{display:flex;align-items:center;padding:12px 12px 8px;cursor:grab;flex-shrink:0;background:var(--surface)}
+.titlebar .dots{display:flex;gap:6px;margin-right:12px;flex-shrink:0}
+.titlebar .dot{width:12px;height:12px;border-radius:50%;cursor:default}
+.titlebar .dot.red{background:var(--red)}
+.titlebar .dot.yellow{background:var(--orange)}
+.titlebar .dot.green{background:var(--green)}
+.titlebar .title{flex:1;text-align:center;font-size:13px;font-weight:600;color:var(--text);pointer-events:none}
+.titlebar .spacer{width:52px;flex-shrink:0}
+.window-body{flex:1;overflow:auto;display:flex;flex-direction:column}
+.window-body.no-pad{padding:0}
+.window-body.pad{padding:12px}
+
+/* Finder */
+.finder-sidebar{width:180px;background:rgba(0,0,0,.1);padding:8px;flex-shrink:0;overflow-y:auto;font-size:13px}
+.finder-sidebar .fs-item{padding:4px 8px;border-radius:4px;cursor:default;display:flex;align-items:center;gap:6px}
+.finder-sidebar .fs-item:hover{background:rgba(255,255,255,.06)}
+.finder-sidebar .fs-item.active{background:var(--accent);color:#fff}
+.finder-sidebar .fs-section{font-size:11px;font-weight:700;color:var(--text2);padding:8px 8px 4px;text-transform:uppercase}
+.finder-content{flex:1;display:flex;flex-wrap:wrap;align-content:flex-start;padding:12px;gap:4px;overflow-y:auto}
+.finder-file{width:80px;padding:8px 4px;border-radius:6px;cursor:default;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px}
+.finder-file:hover{background:rgba(255,255,255,.05)}
+.finder-file .ficon{font-size:36px}
+.finder-file.selected{background:rgba(255,255,255,.1)}
+
+/* Safari */
+.browser-toolbar{display:flex;align-items:center;gap:6px;padding:8px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
+.browser-toolbar button{width:28px;height:28px;border-radius:6px;border:none;background:transparent;color:var(--text);cursor:default;font-size:14px;display:flex;align-items:center;justify-content:center}
+.browser-toolbar button:hover{background:rgba(255,255,255,.08)}
+.browser-toolbar button:disabled{opacity:.3}
+.browser-url{flex:1;padding:6px 10px;border-radius:8px;border:1px solid var(--border);background:rgba(0,0,0,.15);color:var(--text);font-size:13px;outline:none;font-family:var(--font)}
+.browser-url:focus{border-color:var(--accent)}
+.browser-frame{flex:1;border:none;background:#fff}
+
+/* Settings */
+.settings-layout{display:flex;height:100%}
+.settings-sidebar{width:180px;background:rgba(0,0,0,.05);padding:8px;flex-shrink:0;overflow-y:auto}
+.settings-sidebar .ss-item{padding:8px 12px;border-radius:6px;cursor:default;font-size:13px;display:flex;align-items:center;gap:8px}
+.settings-sidebar .ss-item:hover{background:rgba(255,255,255,.06)}
+.settings-sidebar .ss-item.active{background:var(--accent);color:#fff}
+.settings-panel{flex:1;padding:20px;overflow-y:auto}
+.settings-panel h2{font-size:20px;margin-bottom:16px;font-weight:600}
+.settings-panel h3{font-size:14px;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.settings-group{background:rgba(0,0,0,.08);border-radius:var(--radius);padding:2px;margin-bottom:20px}
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);font-size:13px}
+.settings-row:last-child{border-bottom:none}
+.settings-row .sr-label{flex:1}
+.settings-row .sr-label .sr-desc{font-size:12px;color:var(--text2)}
+.settings-row select,.settings-row input[type=text]{padding:4px 8px;border-radius:4px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13px}
+.settings-row input[type=range]{width:100px}
+.settings-row button{padding:6px 14px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:13px;cursor:default}
+.settings-row button:hover{opacity:.9}
+.settings-row button.danger{background:var(--red)}
+
+/* Terminal */
+.terminal-body{background:#1a1a1a;color:#0f0;font-family:var(--mono);font-size:13px;padding:12px;flex:1;overflow-y:auto;white-space:pre-wrap;line-height:1.5}
+.terminal-body .prompt{color:#0f0}
+.terminal-body .output{color:#ccc}
+.terminal-body .error{color:#f66}
+.terminal-input{display:flex;padding:8px;background:#1a1a1a;border-top:1px solid #333}
+.terminal-input .t-prompt{color:#0f0;font-family:var(--mono);font-size:13px;padding:4px 0}
+.terminal-input input{flex:1;background:transparent;border:none;color:#0f0;font-family:var(--mono);font-size:13px;outline:none;caret-color:#0f0}
+
+/* Calculator */
+.calc-display{font-size:36px;text-align:right;padding:20px;font-family:var(--mono);background:rgba(0,0,0,.05);min-height:80px;display:flex;align-items:flex-end;justify-content:flex-end;word-break:break-all}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;padding:1px;flex:1}
+.calc-btn{padding:16px;border:none;font-size:20px;background:var(--surface);color:var(--text);cursor:default;display:flex;align-items:center;justify-content:center;transition:background .1s}
+.calc-btn:hover{background:rgba(255,255,255,.06)}
+.calc-btn.op{background:var(--accent);color:#fff}
+.calc-btn.op:hover{background:var(--accent2)}
+.calc-btn.equals{background:var(--accent);color:#fff;font-size:24px}
+.calc-btn.equals:hover{background:var(--accent2)}
+.calc-btn.func{font-size:16px;color:var(--text2)}
+
+/* Calendar */
+.cal-header{display:flex;align-items:center;justify-content:space-between;padding:12px;flex-shrink:0}
+.cal-header .month{font-size:18px;font-weight:600}
+.cal-header button{width:28px;height:28px;border-radius:6px;border:none;background:transparent;color:var(--text);cursor:default;font-size:16px}
+.cal-header button:hover{background:rgba(255,255,255,.08)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);flex:1;padding:0 4px 4px}
+.cal-day-header{text-align:center;font-size:11px;color:var(--text2);padding:8px;font-weight:600}
+.cal-day{text-align:center;padding:8px;border-radius:6px;cursor:default;font-size:13px;position:relative}
+.cal-day:hover{background:rgba(255,255,255,.06)}
+.cal-day.today{background:var(--accent);color:#fff}
+.cal-day.other{color:var(--text2);opacity:.5}
+
+/* Notes */
+.notes-list{width:200px;background:rgba(0,0,0,.05);flex-shrink:0;overflow-y:auto;padding:8px}
+.notes-list .note-item{padding:8px 12px;border-radius:6px;cursor:default;font-size:13px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notes-list .note-item:hover{background:rgba(255,255,255,.06)}
+.notes-list .note-item.active{background:var(--accent);color:#fff}
+.notes-editor{flex:1;display:flex;flex-direction:column}
+.notes-editor textarea{flex:1;border:none;background:transparent;color:var(--text);font-family:var(--font);font-size:14px;padding:16px;resize:none;outline:none;line-height:1.6}
+.notes-toolbar{padding:8px;border-bottom:1px solid var(--border);display:flex;gap:4px;flex-shrink:0}
+.notes-toolbar button{padding:4px 10px;border-radius:4px;border:none;background:transparent;color:var(--text);cursor:default;font-size:13px}
+.notes-toolbar button:hover{background:rgba(255,255,255,.08)}
+
+/* Mail */
+.mail-sidebar{width:180px;background:rgba(0,0,0,.05);flex-shrink:0;padding:8px;overflow-y:auto}
+.mail-sidebar .ms-item{padding:6px 10px;border-radius:6px;cursor:default;font-size:13px;display:flex;align-items:center;gap:8px}
+.mail-sidebar .ms-item:hover{background:rgba(255,255,255,.06)}
+.mail-sidebar .ms-item.active{background:var(--accent);color:#fff}
+.mail-list{flex:1;overflow-y:auto}
+.mail-item{padding:10px 16px;border-bottom:1px solid var(--border);cursor:default;display:flex;align-items:center;gap:10px}
+.mail-item:hover{background:rgba(255,255,255,.03)}
+.mail-item .from{font-weight:600;font-size:13px;min-width:100px}
+.mail-item .subject{font-size:13px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mail-item .date{font-size:12px;color:var(--text2);white-space:nowrap}
+
+/* Toast */
+#toast-container{position:fixed;top:36px;right:16px;z-index:2000;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:10px;padding:10px 16px;font-size:13px;box-shadow:0 4px 20px rgba(0,0,0,.3);animation:toastIn .3s ease;display:flex;align-items:center;gap:8px;pointer-events:auto}
+.toast.removing{animation:toastOut .3s ease forwards}
+@keyframes toastIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes toastOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(40px)}}
+
+/* Context Menu */
+#ctx-menu{display:none;position:fixed;z-index:9999;background:var(--glass);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:8px;padding:4px;min-width:180px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+#ctx-menu .ci{padding:6px 12px;border-radius:4px;cursor:default;font-size:13px;display:flex;align-items:center;gap:8px}
+#ctx-menu .ci:hover{background:var(--accent);color:#fff}
+#ctx-menu .ci.disabled{opacity:.4;pointer-events:none}
+#ctx-menu .ci-sep{height:1px;background:var(--border);margin:4px 8px}
+
+/* Notification Center */
+#notif-center{display:none;position:fixed;top:28px;right:8px;z-index:1001;width:360px;max-height:500px;background:var(--glass);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.4);overflow:hidden;flex-direction:column}
+#notif-center.show{display:flex}
+#notif-center .nh{padding:12px 16px;font-weight:700;font-size:15px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+#notif-center .nh button{background:transparent;border:none;color:var(--accent);cursor:default;font-size:13px}
+#notif-center .nl{flex:1;overflow-y:auto;padding:8px}
+.notif-item{padding:10px 12px;border-radius:8px;font-size:13px;margin-bottom:4px;background:rgba(0,0,0,.05);display:flex;gap:8px;align-items:flex-start}
+.notif-item .nicon{font-size:20px;margin-top:2px}
+.notif-item .ntitle{font-weight:600}
+.notif-item .nbody{color:var(--text2);font-size:12px;margin-top:2px}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.25)}
+
+/* Hidden */
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div id="menubar">
+  <div class="menu-item" onclick="M.toggleMenu('apple')"><span class="apple"></span></div>
+  <div class="menu-item" onclick="M.toggleMenu('finder-menu')">Finder</div>
+  <div class="menu-item" onclick="M.toggleMenu('file-menu')">File</div>
+  <div class="menu-item" onclick="M.toggleMenu('edit-menu')">Edit</div>
+  <div class="menu-item" onclick="M.toggleMenu('view-menu')">View</div>
+  <div class="menu-item" onclick="M.toggleMenu('go-menu')">Go</div>
+  <div class="menu-item" onclick="M.toggleMenu('window-menu')">Window</div>
+  <div class="menu-item" onclick="M.toggleMenu('help-menu')">Help</div>
+  <div class="menu-right">
+    <div class="menu-item" id="battery-icon" onclick="M.toggleNotifCenter()">🔋 100%</div>
+    <div class="menu-item" id="wifi-icon">📶</div>
+    <div class="menu-item" id="menubar-clock" onclick="M.toggleNotifCenter()"></div>
+  </div>
+</div>
+
+<div id="apple-menu" class="menu-dropdown"></div>
+<div id="finder-menu" class="menu-dropdown"></div>
+<div id="file-menu" class="menu-dropdown"></div>
+<div id="edit-menu" class="menu-dropdown"></div>
+<div id="view-menu" class="menu-dropdown"></div>
+<div id="go-menu" class="menu-dropdown"></div>
+<div id="window-menu" class="menu-dropdown"></div>
+<div id="help-menu" class="menu-dropdown"></div>
+
+<div id="desktop">
+  <div class="desk-icon" style="top:20px;left:20px" ondblclick="M.openWindow('finder')">
+    <div class="dico">💻</div><div>Macintosh HD</div>
+  </div>
+  <div class="desk-icon" style="top:120px;left:20px" ondblclick="M.openWindow('finder')">
+    <div class="dico">📁</div><div>Documents</div>
+  </div>
+  <div class="desk-icon" style="top:220px;left:20px" ondblclick="M.openWindow('finder')">
+    <div class="dico">📥</div><div>Downloads</div>
+  </div>
+  <div class="desk-icon" style="top:320px;left:20px" ondblclick="M.openWindow('safari')">
+    <div class="dico">🌐</div><div>Safari</div>
+  </div>
+  <div class="desk-icon" style="top:20px;right:20px" ondblclick="M.openWindow('trash')">
+    <div class="dico">🗑️</div><div>Trash</div>
+  </div>
+  <div class="desk-icon" style="top:120px;right:20px" ondblclick="M.openWindow('notes')">
+    <div class="dico">📝</div><div>Notes</div>
+  </div>
+</div>
+
+<div id="dock">
+  <div class="dock-icon" onclick="M.openWindow('finder')" id="dock-finder"><span>💻</span><div class="dlabel">Finder</div><div class="dot"></div></div>
+  <div class="dock-icon" onclick="M.openWindow('safari')" id="dock-safari"><span>🧭</span><div class="dlabel">Safari</div><div class="dot"></div></div>
+  <div class="dock-icon" onclick="M.openWindow('mail')" id="dock-mail"><span>📧</span><div class="dlabel">Mail</div><div class="dot"></div></div>
+  <div class="dock-icon" onclick="M.openWindow('notes')" id="dock-notes"><span>📝</span><div class="dlabel">Notes</div><div class="dot"></div></div>
+  <div class="dock-icon" onclick="M.openWindow('calendar')" id="dock-calendar"><span>📅</span><div class="dlabel">Calendar</div><div class="dot"></div></div>
+  <div class="dock-sep"></div>
+  <div class="dock-icon" onclick="M.openWindow('settings')" id="dock-settings"><span>⚙️</span><div class="dlabel">System Settings</div><div class="dot"></div></div>
+  <div class="dock-icon" onclick="M.openWindow('terminal')" id="dock-terminal"><span>⬛</span><div class="dlabel">Terminal</div><div class="dot"></div></div>
+  <div class="dock-icon" onclick="M.openWindow('calculator')" id="dock-calculator"><span>🔢</span><div class="dlabel">Calculator</div><div class="dot"></div></div>
+  <div class="dock-icon" style="opacity:.5" onclick="M.openWindow('trash')" id="dock-trash"><span>🗑️</span><div class="dlabel">Trash</div><div class="dot"></div></div>
+</div>
+
+<div id="ctx-menu"></div>
+<div id="toast-container"></div>
+
+<div id="notif-center">
+  <div class="nh"><span>Notifications</span><button onclick="M.clearNotifs()">Clear All</button></div>
+  <div class="nl" id="notif-list"></div>
+</div>
+
+<script>
+var M = {};
+
+/* ========== STATE ========== */
+M.state = {
+  wallpaper: 'default',
+  accentColor: '#007AFF',
+  appearance: 'dark',
+  dockPosition: 'bottom',
+  dockMagnification: false,
+  wifiName: 'MyWiFi',
+  batteryPercent: 85,
+  charging: true,
+  openApps: {},
+  windowZIndex: 100,
+  currentMenu: null,
+  notifOpen: false,
+  notifs: [],
+  notes: [{id:0,title:'Welcome Note',content:'Welcome to macOS Simulator!\n\nThis is your first note. You can edit it, create new notes, or delete them.\n\nAll changes are saved automatically to your browser\'s local storage.'}],
+  nextNoteId: 1,
+  activeNoteId: 0,
+  finderLocation: 'desktop',
+  finderFiles: {
+    desktop: [{name:'Macintosh HD',type:'drive',icon:'💻'},{name:'Documents',type:'folder',icon:'📁'},{name:'Downloads',type:'folder',icon:'📥'},{name:'Pictures',type:'folder',icon:'🖼️'},{name:'Music',type:'folder',icon:'🎵'},{name:'Movies',type:'folder',icon:'🎬'}],
+    documents: [{name:'Resume.pdf',type:'file',icon:'📄'},{name:'Budget.xlsx',type:'file',icon:'📊'},{name:'Project Plan.docx',type:'file',icon:'📝'},{name:'Presentation.pptx',type:'file',icon:'📽️'}],
+    downloads: [{name:'installer.dmg',type:'file',icon:'💿'},{name:'photo.jpg',type:'file',icon:'🖼️'},{name:'archive.zip',type:'file',icon:'📦'},{name:'readme.txt',type:'file',icon:'📃'}],
+    pictures: [{name:'Vacation',type:'folder',icon:'📁'},{name:'Family',type:'folder',icon:'📁'},{name:'Screenshot.png',type:'file',icon:'🖼️'},{name:'Selfie.jpg',type:'file',icon:'📷'}],
+    music: [{name:'Playlist.m3u',type:'file',icon:'🎵'},{name:'song.mp3',type:'file',icon:'🎶'}],
+    movies: [{name:'movie.mp4',type:'file',icon:'🎬'}]
+  },
+  trashItems: [],
+  mailMessages: [
+    {id:0,from:'Apple',subject:'Your Apple ID was used to sign in',date:'Today',read:true,body:'Your Apple ID was used to sign in to iCloud on a new device.'},
+    {id:1,from:'GitHub',subject:'[user/repo] New pull request #42',date:'Today',read:false,body:'A new pull request has been opened in your repository.'},
+    {id:2,from:'Netflix',subject:'New arrivals this week',date:'Yesterday',read:false,body:'Check out what\'s new on Netflix this week.'},
+    {id:3,from:'Amazon',subject:'Your order has shipped',date:'Yesterday',read:true,body:'Your recent order #12345 has shipped and is on its way.'},
+    {id:4,from:'Spotify',subject:'Your 2026 Wrapped is here',date:'Monday',read:false,body:'Discover your top songs and artists of the year.'}
+  ],
+  nextMailId: 5,
+  activeMailFolder: 'inbox',
+  safariTabs: [{url:'',history:[''],historyIdx:0}],
+  safariActiveTab: 0,
+  savedUrls: {0:'https://www.google.com'}
+};
+
+/* ========== PERSISTENCE ========== */
+M.save = function(){
+  var s = JSON.parse(JSON.stringify(M.state));
+  delete s.openApps;
+  delete s.currentMenu;
+  delete s.notifOpen;
+  localStorage.setItem('mac_sim_state', JSON.stringify(s));
+};
+M.load = function(){
+  try{
+    var d = JSON.parse(localStorage.getItem('mac_sim_state'));
+    if(d){
+      Object.keys(d).forEach(function(k){
+        if(M.state.hasOwnProperty(k) && k !== 'openApps' && k !== 'currentMenu' && k !== 'notifOpen'){
+          M.state[k] = d[k];
+        }
+      });
+    }
+  }catch(e){}
+};
+M.load();
+
+/* ========== THEME ========== */
+M.applyTheme = function(){
+  document.documentElement.setAttribute('data-theme', M.state.appearance);
+  document.documentElement.style.setProperty('--accent', M.state.accentColor);
+  document.documentElement.style.setProperty('--accent2', M.state.accentColor+'CC');
+};
+M.applyTheme();
+
+/* ========== TOAST ========== */
+M.toast = function(msg, duration){
+  duration = duration || 3000;
+  var c = document.getElementById('toast-container');
+  var el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = '<span>'+msg+'</span>';
+  c.appendChild(el);
+  setTimeout(function(){el.classList.add('removing');setTimeout(function(){el.remove()},300);}, duration);
+};
+
+/* ========== NOTIFICATION ========== */
+M.addNotif = function(title, body){
+  M.state.notifs.unshift({title:title,body:body,time:new Date().toLocaleTimeString(),id:Date.now()});
+  if(M.state.notifs.length > 50) M.state.notifs.length = 50;
+  M.renderNotifs();
+  M.save();
+};
+M.clearNotifs = function(){
+  M.state.notifs = [];
+  M.renderNotifs();
+  M.save();
+  document.getElementById('notif-center').classList.remove('show');
+  M.state.notifOpen = false;
+};
+M.renderNotifs = function(){
+  var list = document.getElementById('notif-list');
+  if(M.state.notifs.length === 0){
+    list.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">No notifications</div>';
+    return;
+  }
+  list.innerHTML = M.state.notifs.map(function(n){
+    return '<div class="notif-item"><div class="nicon">🔔</div><div><div class="ntitle">'+n.title+'</div><div class="nbody">'+n.body+'</div><div style="font-size:11px;color:var(--text2);margin-top:4px">'+n.time+'</div></div></div>';
+  }).join('');
+};
+M.toggleNotifCenter = function(){
+  M.state.notifOpen = !M.state.notifOpen;
+  var nc = document.getElementById('notif-center');
+  if(M.state.notifOpen){nc.classList.add('show');M.renderNotifs();}else{nc.classList.remove('show');}
+};
+
+/* ========== MENUS ========== */
+M.menuContent = {
+  'apple': [
+    {label:'About This Mac',action:function(){M.toast('macOS Simulator v1.0')}},
+    {sep:true},
+    {label:'System Settings...',action:function(){M.openWindow('settings')},shortcut:'⌘,'},
+    {sep:true},
+    {label:'App Store...',action:function(){M.toast('App Store')}},
+    {sep:true},
+    {label:'Recent Items',disabled:true},
+    {sep:true},
+    {label:'Force Quit...',action:function(){M.toast('Force Quit')}},
+    {sep:true},
+    {label:'Sleep',action:function(){M.toast('Good night! 💤')}},
+    {label:'Restart...',action:function(){M.restart()}},
+    {label:'Shut Down...',action:function(){M.shutdown()}},
+    {sep:true},
+    {label:'Lock Screen',action:function(){M.toast('Screen locked 🔒')}},
+    {label:'Log Out...',action:function(){M.shutdown()}}
+  ],
+  'finder-menu': [
+    {label:'About Finder',action:function(){M.toast('Finder v1.0')}},
+    {sep:true},
+    {label:'Settings...',action:function(){M.openWindow('settings')},shortcut:'⌘,'},
+    {sep:true},
+    {label:'Empty Trash...',action:function(){M.emptyTrash()},shortcut:'⇧⌘⌫'},
+    {sep:true},
+    {label:'Hide Finder',action:function(){M.closeWindow('finder')},shortcut:'⌘H'},
+    {label:'Hide Others',action:function(){M.hideAll()}},
+    {label:'Show All',action:function(){M.showAll()}}
+  ],
+  'file-menu': [
+    {label:'New Finder Window',action:function(){M.openWindow('finder')},shortcut:'⌘N'},
+    {label:'New Folder',action:function(){M.newFolder()},shortcut:'⇧⌘N'},
+    {label:'New Note',action:function(){M.newNote()},shortcut:'⌘N'},
+    {sep:true},
+    {label:'Open...',action:function(){M.openWindow('finder')},shortcut:'⌘O'},
+    {label:'Open With...',disabled:true},
+    {sep:true},
+    {label:'Close Window',action:function(){M.closeTopWindow()},shortcut:'⌘W'},
+    {sep:true},
+    {label:'Get Info',action:function(){M.toast('Get Info')},shortcut:'⌘I'},
+    {sep:true},
+    {label:'Move to Trash',action:function(){M.toast('Moved to Trash')},shortcut:'⌘⌫'},
+    {label:'Eject',disabled:true},
+    {sep:true},
+    {label:'Find...',action:function(){M.toast('Find')},shortcut:'⌘F'}
+  ],
+  'edit-menu': [
+    {label:'Undo',action:function(){M.toast('Undo')},shortcut:'⌘Z'},
+    {label:'Redo',action:function(){M.toast('Redo')},shortcut:'⇧⌘Z'},
+    {sep:true},
+    {label:'Cut',action:function(){M.toast('Cut')},shortcut:'⌘X'},
+    {label:'Copy',action:function(){M.toast('Copy')},shortcut:'⌘C'},
+    {label:'Paste',action:function(){M.toast('Paste')},shortcut:'⌘V'},
+    {label:'Select All',action:function(){M.toast('Select All')},shortcut:'⌘A'},
+    {sep:true},
+    {label:'Find',disabled:true},
+    {label:'Spelling and Grammar',disabled:true},
+    {sep:true},
+    {label:'Start Dictation',disabled:true},
+    {label:'Emoji & Symbols',action:function(){M.toast('😀🎉✨')}}
+  ],
+  'view-menu': [
+    {label:'as Icons',action:function(){M.toast('Icon view')}},
+    {label:'as List',action:function(){M.toast('List view')}},
+    {label:'as Columns',action:function(){M.toast('Column view')}},
+    {label:'as Gallery',action:function(){M.toast('Gallery view')}},
+    {sep:true},
+    {label:'Show Toolbar',action:function(){M.toast('Toolbar toggled')}},
+    {label:'Show Sidebar',action:function(){M.toast('Sidebar toggled')}},
+    {label:'Show Preview',action:function(){M.toast('Preview toggled')}},
+    {sep:true},
+    {label:'Enter Full Screen',action:function(){M.toast('Full screen')}},
+    {label:'Exit Full Screen',disabled:true}
+  ],
+  'go-menu': [
+    {label:'Back',action:function(){M.toast('Back')},shortcut:'⌘['},
+    {label:'Forward',action:function(){M.toast('Forward')},shortcut:'⌘]'},
+    {label:'Enclosing Folder',action:function(){M.toast('Enclosing')},shortcut:'⌘↑'},
+    {sep:true},
+    {label:'Desktop',action:function(){M.openWindow('finder')}},
+    {label:'Documents',action:function(){M.openWindow('finder')}},
+    {label:'Downloads',action:function(){M.openWindow('finder')}},
+    {sep:true},
+    {label:'Home',action:function(){M.toast('Home')}},
+    {label:'Computer',action:function(){M.openWindow('finder')}},
+    {sep:true},
+    {label:'Go to Folder...',action:function(){M.toast('Go to Folder')},shortcut:'⇧⌘G'},
+    {label:'Connect to Server...',action:function(){M.toast('Connect')},shortcut:'⌘K'}
+  ],
+  'window-menu': [
+    {label:'Minimize',action:function(){M.toast('Minimize')},shortcut:'⌘M'},
+    {label:'Zoom',action:function(){M.toast('Zoom')}},
+    {sep:true},
+    {label:'Show Previous Tab',disabled:true},
+    {label:'Show Next Tab',disabled:true},
+    {sep:true},
+    {label:'Move Window to Left',action:function(){M.snapLeft()}},
+    {label:'Move Window to Right',action:function(){M.snapRight()}},
+    {sep:true},
+    {label:'Bring All to Front',action:function(){M.bringAllToFront()}}
+  ],
+  'help-menu': [
+    {label:'macOS Help',action:function(){M.toast('Help is on the way!')}},
+    {sep:true},
+    {label:'Keyboard Shortcuts',action:function(){M.toast('⌘ = Command, ⌥ = Option, ⌃ = Control, ⇧ = Shift')}},
+    {label:'What\'s New',action:function(){M.toast('Welcome to macOS Simulator!')}},
+    {sep:true},
+    {label:'About This Simulator',action:function(){M.toast('A full macOS desktop simulator built with HTML/CSS/JS. All changes are saved to localStorage.')}}
+  ]
+};
+
+M.buildMenus = function(){
+  Object.keys(M.menuContent).forEach(function(key){
+    var el = document.getElementById(key === 'apple' ? 'apple-menu' : key+'-menu');
+    if(!el) return;
+    var items = M.menuContent[key];
+    el.innerHTML = items.map(function(item){
+      if(item.sep) return '<div class="sep"></div>';
+      var cls = item.disabled ? 'mi disabled' : 'mi';
+      var sc = item.shortcut ? '<span class="shortcut">'+item.shortcut+'</span>' : '';
+      var act = item.action ? ' onclick="M.closeAllMenus();('+item.action.toString()+')()"' : '';
+      return '<div class="'+cls+'"'+act+'>'+item.label+sc+'</div>';
+    }).join('');
+  });
+};
+M.buildMenus();
+
+M.toggleMenu = function(menuId){
+  var el = document.getElementById(menuId === 'apple' ? 'apple-menu' : menuId+'-menu');
+  if(!el) return;
+  if(M.state.currentMenu === menuId){M.closeAllMenus();return;}
+  M.closeAllMenus();
+  M.state.currentMenu = menuId;
+  el.classList.add('show');
+  var trigger = document.querySelector('.menu-item[onclick*="'+menuId+'"]');
+  if(trigger){
+    var rect = trigger.getBoundingClientRect();
+    el.style.left = rect.left + 'px';
+  }
+};
+M.closeAllMenus = function(){
+  document.querySelectorAll('.menu-dropdown').forEach(function(el){el.classList.remove('show');});
+  M.state.currentMenu = null;
+};
+
+/* ========== WINDOW MANAGER ========== */
+M.openWindow = function(app){
+  if(M.state.openApps[app]){
+    var w = M.state.openApps[app];
+    if(w.minimized){
+      w.minimized = false;
+      w.el.classList.remove('minimized');
+    }
+    M.focusWindow(app);
+    return;
+  }
+  var cfg = M.windowConfigs[app];
+  if(!cfg) return;
+  var win = document.createElement('div');
+  win.className = 'app-window focused';
+  win.id = 'window-'+app;
+  win.style.cssText = 'left:'+cfg.x+'px;top:'+cfg.y+'px;width:'+cfg.w+'px;height:'+cfg.h+'px;z-index:'+(++M.state.windowZIndex);
+  if(cfg.resize===false) win.style.resize = 'none';
+
+  var bodyHTML = typeof cfg.body === 'function' ? cfg.body() : cfg.body;
+
+  win.innerHTML = '<div class="titlebar" data-app="'+app+'">'+
+    '<div class="dots">'+
+      '<div class="dot red" onclick="M.closeWindow(\''+app+'\')"></div>'+
+      '<div class="dot yellow" onclick="M.minimizeWindow(\''+app+'\')"></div>'+
+      '<div class="dot green" onclick="M.maximizeWindow(\''+app+'\')"></div>'+
+    '</div>'+
+    '<div class="title">'+cfg.title+'</div>'+
+    '<div class="spacer"></div>'+
+  '</div>'+
+  '<div class="window-body" id="body-'+app+'">'+bodyHTML+'</div>';
+
+  document.getElementById('desktop').appendChild(win);
+  M.state.openApps[app] = {el:win, minimized:false, maximized:false, _prevStyle:''};
+  M.makeDraggable(win.querySelector('.titlebar'), win, app);
+  M.focusWindow(app);
+  M.updateDock(app, true);
+  M.save();
+
+  setTimeout(function(){
+    if(app === 'safari') M.initSafari();
+    if(app === 'finder') M.renderFinder();
+    if(app === 'settings') M.initSettings();
+    if(app === 'notes') M.renderNotesList();
+    if(app === 'calendar') M.renderCalendar();
+    if(app === 'terminal') M.initTerminal();
+    if(app === 'mail') M.renderMail();
+  }, 50);
+};
+
+M.closeWindow = function(app){
+  var w = M.state.openApps[app];
+  if(!w) return;
+  w.el.classList.add('closing');
+  setTimeout(function(){
+    w.el.remove();
+    delete M.state.openApps[app];
+    M.updateDock(app, false);
+    M.save();
+  }, 140);
+};
+
+M.minimizeWindow = function(app){
+  var w = M.state.openApps[app];
+  if(!w) return;
+  w.el.classList.add('minimized');
+  w.minimized = true;
+  M.updateDock(app, false);
+};
+
+M.maximizeWindow = function(app){
+  var w = M.state.openApps[app];
+  if(!w) return;
+  if(w.maximized){
+    w.el.classList.remove('maximized');
+    w.el.style.cssText = w._prevStyle || '';
+    w.maximized = false;
+  } else {
+    w._prevStyle = w.el.style.cssText;
+    w.el.classList.add('maximized');
+    w.maximized = true;
+  }
+};
+
+M.focusWindow = function(app){
+  var w = M.state.openApps[app];
+  if(!w) return;
+  w.el.style.zIndex = ++M.state.windowZIndex;
+  w.el.classList.add('focused');
+  Object.keys(M.state.openApps).forEach(function(k){
+    if(k !== app && M.state.openApps[k] && M.state.openApps[k].el){
+      M.state.openApps[k].el.classList.remove('focused');
+    }
+  });
+  M.updateDock(app, true);
+};
+
+M.makeDraggable = function(titlebar, win, app){
+  var ox, oy, sx, sy, dragging = false;
+  titlebar.addEventListener('mousedown', function(e){
+    if(e.target.classList.contains('dot')) return;
+    if(M.state.openApps[app] && (M.state.openApps[app].maximized || M.state.openApps[app].minimized)) return;
+    dragging = true;
+    ox = e.clientX; oy = e.clientY;
+    sx = win.offsetLeft; sy = win.offsetTop;
+    document.body.style.cursor = 'grabbing';
+  });
+  document.addEventListener('mousemove', function(e){
+    if(!dragging) return;
+    win.style.left = (sx + e.clientX - ox) + 'px';
+    win.style.top = (sy + e.clientY - oy) + 'px';
+  });
+  document.addEventListener('mouseup', function(){
+    if(!dragging) return;
+    dragging = false;
+    document.body.style.cursor = '';
+  });
+};
+
+M.updateDock = function(app, open){
+  var dockEl = document.getElementById('dock-'+app);
+  if(dockEl){
+    if(open) dockEl.classList.add('open');
+    else if(!M.state.openApps[app] || M.state.openApps[app].minimized) dockEl.classList.remove('open');
+    else dockEl.classList.add('open');
+  }
+};
+
+M.closeTopWindow = function(){
+  var apps = Object.keys(M.state.openApps);
+  if(apps.length === 0) return;
+  var top = apps.reduce(function(a,b){
+    return (M.state.openApps[a].el.style.zIndex > M.state.openApps[b].el.style.zIndex) ? a : b;
+  });
+  M.closeWindow(top);
+};
+
+M.hideAll = function(){
+  Object.keys(M.state.openApps).forEach(function(app){
+    M.minimizeWindow(app);
+  });
+};
+
+M.showAll = function(){
+  Object.keys(M.state.openApps).forEach(function(app){
+    var w = M.state.openApps[app];
+    if(w.minimized){
+      w.el.classList.remove('minimized');
+      w.minimized = false;
+    }
+    M.updateDock(app, true);
+  });
+};
+
+M.snapLeft = function(){
+  var apps = Object.keys(M.state.openApps);
+  if(apps.length === 0) return;
+  var top = apps.reduce(function(a,b){return (M.state.openApps[a].el.style.zIndex > M.state.openApps[b].el.style.zIndex) ? a : b;});
+  var w = M.state.openApps[top];
+  if(w.maximized){w.el.classList.remove('maximized');w.maximized=false;}
+  w.el.style.cssText = 'inset:28px 50% 48px 0!important;width:auto!important;height:auto!important;border-radius:0;z-index:'+(++M.state.windowZIndex);
+};
+
+M.snapRight = function(){
+  var apps = Object.keys(M.state.openApps);
+  if(apps.length === 0) return;
+  var top = apps.reduce(function(a,b){return (M.state.openApps[a].el.style.zIndex > M.state.openApps[b].el.style.zIndex) ? a : b;});
+  var w = M.state.openApps[top];
+  if(w.maximized){w.el.classList.remove('maximized');w.maximized=false;}
+  w.el.style.cssText = 'inset:28px 0 48px 50%!important;width:auto!important;height:auto!important;border-radius:0;z-index:'+(++M.state.windowZIndex);
+};
+
+M.bringAllToFront = function(){
+  Object.keys(M.state.openApps).forEach(function(app){
+    M.state.openApps[app].el.style.zIndex = ++M.state.windowZIndex;
+    M.state.openApps[app].el.classList.add('focused');
+  });
+};
+
+M.restart = function(){
+  M.toast('Restarting...');
+  setTimeout(function(){
+    Object.keys(M.state.openApps).forEach(function(app){
+      var w = M.state.openApps[app];
+      if(w && w.el) w.el.remove();
+    });
+    M.state.openApps = {};
+    M.toast('Restarted!');
+  }, 500);
+};
+
+M.shutdown = function(){
+  M.toast('Shutting down...');
+  setTimeout(function(){
+    Object.keys(M.state.openApps).forEach(function(app){
+      var w = M.state.openApps[app];
+      if(w && w.el) w.el.remove();
+    });
+    M.state.openApps = {};
+    document.getElementById('desktop').style.background = '#000';
+    document.getElementById('desktop').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#fff;font-size:24px;flex-direction:column;gap:16px"><div style="font-size:64px"></div><div>macOS Simulator</div><div style="font-size:14px;color:#999;cursor:pointer" onclick="location.reload()">Click to restart</div></div>';
+  }, 500);
+};
+
+/* ========== WINDOW CONFIGS ========== */
+M.windowConfigs = {
+  finder: {title:'Finder',x:80,y:60,w:700,h:500,body:function(){return M.finderBody();}},
+  safari: {title:'Safari',x:120,y:80,w:900,h:550,body:function(){return M.safariBody();}},
+  settings: {title:'System Settings',x:180,y:60,w:680,h:520,body:function(){return M.settingsBody();}},
+  terminal: {title:'Terminal',x:200,y:100,w:600,h:400,body:function(){return M.terminalBody();}},
+  notes: {title:'Notes',x:200,y:100,w:650,h:450,body:function(){return M.notesBody();}},
+  calculator: {title:'Calculator',x:500,y:150,w:280,h:420,body:function(){return M.calculatorBody();},resize:false},
+  calendar: {title:'Calendar',x:250,y:80,w:600,h:450,body:function(){return M.calendarBody();}},
+  mail: {title:'Mail',x:160,y:70,w:800,h:520,body:function(){return M.mailBody();}},
+  trash: {title:'Trash',x:300,y:150,w:500,h:400,body:function(){return M.trashBody();}}
+};
+
+/* ========== FINDER ========== */
+M.finderBody = function(){
+  var s = '<div style="display:flex;height:100%">';
+  s += '<div class="finder-sidebar" id="finder-sidebar">';
+  s += '<div class="fs-section">Favorites</div>';
+  var favs = [
+    {id:'desktop',label:'Desktop',icon:'🖥️'},
+    {id:'documents',label:'Documents',icon:'📁'},
+    {id:'downloads',label:'Downloads',icon:'📥'},
+    {id:'pictures',label:'Pictures',icon:'🖼️'},
+    {id:'music',label:'Music',icon:'🎵'},
+    {id:'movies',label:'Movies',icon:'🎬'}
+  ];
+  favs.forEach(function(f){
+    s += '<div class="fs-item'+(M.state.finderLocation===f.id?' active':'')+'" onclick="M.setFinderLocation(\''+f.id+'\')">'+f.icon+' '+f.label+'</div>';
+  });
+  s += '<div class="fs-section">iCloud</div>';
+  s += '<div class="fs-item">☁️ iCloud Drive</div>';
+  s += '<div class="fs-item">📸 Photos</div>';
+  s += '<div class="fs-section">Locations</div>';
+  s += '<div class="fs-item">💻 Macintosh HD</div>';
+  s += '<div class="fs-item" onclick="M.openWindow(\'trash\')">🗑️ Trash</div>';
+  s += '</div>';
+  s += '<div class="finder-content" id="finder-content"></div>';
+  s += '</div>';
+  return s;
+};
+
+M.setFinderLocation = function(loc){
+  M.state.finderLocation = loc;
+  var sidebar = document.getElementById('finder-sidebar');
+  if(sidebar){
+    sidebar.querySelectorAll('.fs-item').forEach(function(el){el.classList.remove('active');});
+    sidebar.querySelector('.fs-item[onclick*="'+loc+'"]').classList.add('active');
+  }
+  M.renderFinderFiles();
+};
+
+M.renderFinder = function(){
+  M.renderFinderFiles();
+};
+
+M.renderFinderFiles = function(){
+  var content = document.getElementById('finder-content');
+  if(!content) return;
+  var loc = M.state.finderLocation;
+  var files = M.state.finderFiles[loc] || [];
+  content.innerHTML = files.map(function(f){
+    return '<div class="finder-file" ondblclick="M.openFinderItem(\''+loc+'\',\''+f.name+'\')">'+
+      '<div class="ficon">'+f.icon+'</div><div>'+f.name+'</div></div>';
+  }).join('');
+};
+
+M.openFinderItem = function(loc, name){
+  var files = M.state.finderFiles[loc] || [];
+  var file = files.find(function(f){return f.name === name;});
+  if(file && file.type === 'folder'){
+    M.state.finderLocation = file.name.toLowerCase();
+    M.setFinderLocation(file.name.toLowerCase());
+  } else {
+    M.toast('Opening '+name+'...');
+    M.addNotif('Opened', 'Opened '+name);
+  }
+};
+
+M.newFolder = function(){
+  var loc = M.state.finderLocation;
+  var name = 'New Folder';
+  var i = 1;
+  var files = M.state.finderFiles[loc] || [];
+  while(files.some(function(f){return f.name === name;})){name = 'New Folder '+(++i);}
+  M.state.finderFiles[loc].push({name:name,type:'folder',icon:'📁'});
+  M.renderFinderFiles();
+  M.save();
+  M.toast('Created "'+name+'"');
+};
+
+M.emptyTrash = function(){
+  M.state.trashItems = [];
+  M.toast('Trash emptied');
+  M.save();
+};
+
+/* ========== SAFARI ========== */
+M.safariBody = function(){
+  var s = '<div class="browser-toolbar">';
+  s += '<button onclick="M.safariBack()" id="safari-back" disabled>◀</button>';
+  s += '<button onclick="M.safariForward()" id="safari-fwd" disabled>▶</button>';
+  s += '<button onclick="M.safariRefresh()">↻</button>';
+  s += '<input class="browser-url" id="safari-url" value="https://www.google.com" onkeydown="if(event.key===\'Enter\')M.safariNavigate()" placeholder="Search or enter website name">';
+  s += '<button onclick="M.safariGo()">→</button>';
+  s += '</div>';
+  s += '<iframe class="browser-frame" id="safari-frame" src="about:blank"></iframe>';
+  return s;
+};
+
+M.initSafari = function(){
+  var url = M.state.savedUrls[M.state.safariActiveTab] || 'https://www.google.com';
+  document.getElementById('safari-url').value = url;
+  M.navigateSafariFrame(url);
+};
+
+M.navigateSafariFrame = function(url){
+  var frame = document.getElementById('safari-frame');
+  if(!frame) return;
+  if(!url.startsWith('http://') && !url.startsWith('https://')){
+    if(url.includes('.') && !url.includes(' ')) url = 'https://' + url;
+    else url = 'https://www.google.com/search?q=' + encodeURIComponent(url);
+  }
+  document.getElementById('safari-url').value = url;
+  M.state.savedUrls[M.state.safariActiveTab] = url;
+  try{frame.src = url;}catch(e){M.toast('Cannot load that page');}
+  M.save();
+};
+
+M.safariNavigate = function(){
+  var url = document.getElementById('safari-url').value.trim();
+  if(!url) return;
+  M.navigateSafariFrame(url);
+};
+
+M.safariGo = function(){M.safariNavigate();};
+M.safariBack = function(){M.toast('Back');};
+M.safariForward = function(){M.toast('Forward');};
+M.safariRefresh = function(){
+  var frame = document.getElementById('safari-frame');
+  if(frame) frame.src = frame.src;
+};
+
+/* ========== SETTINGS ========== */
+M.settingsTabs = ['appearance','wallpaper','dock','desktop','wifi','battery','about'];
+M.settingsActiveTab = 'appearance';
+
+M.settingsBody = function(){
+  var s = '<div class="settings-layout">';
+  s += '<div class="settings-sidebar" id="settings-sidebar">';
+  var tabs = [
+    {id:'appearance',label:'Appearance',icon:'🎨'},
+    {id:'wallpaper',label:'Wallpaper',icon:'🖼️'},
+    {id:'dock',label:'Dock',icon:'📌'},
+    {id:'desktop',label:'Desktop',icon:'🖥️'},
+    {id:'wifi',label:'Wi-Fi',icon:'📶'},
+    {id:'battery',label:'Battery',icon:'🔋'},
+    {id:'about',label:'About',icon:'ℹ️'}
+  ];
+  tabs.forEach(function(t){
+    s += '<div class="ss-item'+(M.settingsActiveTab===t.id?' active':'')+'" onclick="M.switchSettingsTab(\''+t.id+'\')">'+t.icon+' '+t.label+'</div>';
+  });
+  s += '</div>';
+  s += '<div class="settings-panel" id="settings-panel"></div>';
+  s += '</div>';
+  return s;
+};
+
+M.initSettings = function(){
+  M.switchSettingsTab(M.settingsActiveTab);
+};
+
+M.switchSettingsTab = function(tabId){
+  M.settingsActiveTab = tabId;
+  var sidebar = document.getElementById('settings-sidebar');
+  if(sidebar){
+    sidebar.querySelectorAll('.ss-item').forEach(function(el){el.classList.remove('active');});
+    var items = sidebar.querySelectorAll('.ss-item');
+    items.forEach(function(el){
+      if(el.getAttribute('onclick') && el.getAttribute('onclick').indexOf(tabId) !== -1) el.classList.add('active');
+    });
+  }
+  var panel = document.getElementById('settings-panel');
+  if(!panel) return;
+  switch(tabId){
+    case 'appearance':
+      panel.innerHTML = '<h2>Appearance</h2>'+
+        '<div class="settings-group">'+
+          '<div class="settings-row"><div class="sr-label"><div>Appearance</div><div class="sr-desc">Choose between light and dark mode</div></div>'+
+            '<select onchange="M.setAppearance(this.value)"><option value="dark"'+(M.state.appearance==='dark'?' selected':'')+'>Dark</option><option value="light"'+(M.state.appearance==='light'?' selected':'')+'>Light</option></select></div>'+
+          '<div class="settings-row"><div class="sr-label"><div>Accent Color</div><div class="sr-desc">Choose a highlight color for buttons and menus</div></div>'+
+            '<select onchange="M.setAccentColor(this.value)">'+
+              '<option value="#007AFF"'+(M.state.accentColor==='#007AFF'?' selected':'')+'>Blue</option>'+
+              '<option value="#FF3B30"'+(M.state.accentColor==='#FF3B30'?' selected':'')+'>Red</option>'+
+              '<option value="#34C759"'+(M.state.accentColor==='#34C759'?' selected':'')+'>Green</option>'+
+              '<option value="#FF9500"'+(M.state.accentColor==='#FF9500'?' selected':'')+'>Orange</option>'+
+              '<option value="#AF52DE"'+(M.state.accentColor==='#AF52DE'?' selected':'')+'>Purple</option>'+
+              '<option value="#FFCC00"'+(M.state.accentColor==='#FFCC00'?' selected':'')+'>Yellow</option>'+
+            '</select></div>'+
+        '</div>';
+      break;
+    case 'wallpaper':
+      panel.innerHTML = '<h2>Wallpaper</h2>'+
+        '<div class="settings-group">'+
+          '<div class="settings-row"><div class="sr-label"><div>Desktop Wallpaper</div><div class="sr-desc">Choose a background for your desktop</div></div>'+
+            '<select onchange="M.setWallpaper(this.value)">'+
+              '<option value="default"'+(M.state.wallpaper==='default'?' selected':'')+'>Default (Dark Blue)</option>'+
+              '<option value="aurora"'+(M.state.wallpaper==='aurora'?' selected':'')+'>Aurora</option>'+
+              '<option value="sunset"'+(M.state.wallpaper==='sunset'?' selected':'')+'>Sunset</option>'+
+              '<option value="ocean"'+(M.state.wallpaper==='ocean'?' selected':'')+'>Ocean</option>'+
+              '<option value="forest"'+(M.state.wallpaper==='forest'?' selected':'')+'>Forest</option>'+
+              '<option value="space"'+(M.state.wallpaper==='space'?' selected':'')+'>Space</option>'+
+            '</select></div>'+
+        '</div>';
+      break;
+    case 'dock':
+      panel.innerHTML = '<h2>Dock</h2>'+
+        '<div class="settings-group">'+
+          '<div class="settings-row"><div class="sr-label"><div>Position</div><div class="sr-desc">Choose where the Dock appears</div></div>'+
+            '<select onchange="M.setDockPosition(this.value)"><option value="bottom"'+(M.state.dockPosition==='bottom'?' selected':'')+'>Bottom</option><option value="left"'+(M.state.dockPosition==='left'?' selected':'')+'>Left</option><option value="right"'+(M.state.dockPosition==='right'?' selected':'')+'>Right</option></select></div>'+
+          '<div class="settings-row"><div class="sr-label"><div>Magnification</div><div class="sr-desc">Enlarge icons when hovering</div></div>'+
+            '<select onchange="M.setDockMagnification(this.value)"><option value="no"'+(M.state.dockMagnification?'':' selected')+'>Off</option><option value="yes"'+(M.state.dockMagnification?' selected':'')+'>On</option></select></div>'+
+        '</div>';
+      break;
+    case 'desktop':
+      panel.innerHTML = '<h2>Desktop</h2>'+
+        '<div class="settings-group">'+
+          '<div class="settings-row"><div class="sr-label"><div>Show Hard Disks</div><div class="sr-desc">Show hard disk icons on desktop</div></div><select onchange="M.toast(\'Saved\')"><option>On</option><option>Off</option></select></div>'+
+          '<div class="settings-row"><div class="sr-label"><div>Show External Disks</div></div><select onchange="M.toast(\'Saved\')"><option>On</option><option>Off</option></select></div>'+
+          '<div class="settings-row"><div class="sr-label"><div>Show Connected Servers</div></div><select onchange="M.toast(\'Saved\')"><option>On</option><option>Off</option></select></div>'+
+        '</div>';
+      break;
+    case 'wifi':
+      panel.innerHTML = '<h2>Wi-Fi</h2>'+
+        '<div class="settings-group">'+
+          '<div class="settings-row"><div class="sr-label"><div>Wi-Fi</div><div class="sr-desc">Turn Wi-Fi on or off</div></div><select onchange="M.toggleWifi(this.value)"><option value="on" selected>On</option><option value="off">Off</option></select></div>'+
+          '<div class="settings-row"><div class="sr-label"><div>Network</div><div class="sr-desc">Currently connected to</div></div><input type="text" value="'+M.state.wifiName+'" onchange="M.state.wifiName=this.value;M.save();M.toast(\'Wi-Fi name updated\')"></div>'+
+          '<div class="settings-row"><div class="sr-label"><div>Other Networks</div></div><button onclick="M.toast(\'Scanning...\')">Scan</button></div>'+
+        '</div>';
+      break;
+    case 'battery':
+      panel.innerHTML = '<h2>Battery</h2>'+
+        '<div class="settings-group">'+
+          '<div class="settings-row"><div class="sr-label"><div>Battery Level</div><div class="sr-desc">Current charge</div></div><div>'+M.state.batteryPercent+'%</div></div>'+
+          '<div class="settings-row"><div class="sr-label"><div>Charging</div></div><div>'+(M.state.charging?'Yes ⚡':'No')+'</div></div>'+
+          '<div class="settings-row"><div class="sr-label"><div>Set Battery Level</div></div><input type="range" min="0" max="100" value="'+M.state.batteryPercent+'" oninput="M.setBattery(this.value)"> <span>'+M.state.batteryPercent+'%</span></div>'+
+        '</div>';
+      break;
+    case 'about':
+      panel.innerHTML = '<h2>About</h2>'+
+        '<div style="text-align:center;padding:20px"><div style="font-size:64px"></div><div style="font-size:20px;font-weight:600;margin-top:8px">macOS Simulator</div><div style="color:var(--text2);margin-top:4px">Version 1.0</div></div>'+
+        '<div class="settings-group">'+
+          '<div class="settings-row"><div class="sr-label"><div>Browser</div></div><div>'+navigator.userAgent.split(' ').slice(-1)[0]+'</div></div>'+
+          '<div class="settings-row"><div class="sr-label"><div>Storage</div></div><div>localStorage</div></div>'+
+          '<div class="settings-row"><div class="sr-label"><div>All changes saved</div></div><div>✅ Yes</div></div>'+
+        '</div>'+
+        '<div class="settings-group">'+
+          '<div class="settings-row"><button class="danger" onclick="M.resetAll()">Reset All Settings & Data</button></div>'+
+        '</div>';
+      break;
+  }
+};
+
+M.setAppearance = function(v){
+  M.state.appearance = v;
+  M.applyTheme();
+  M.save();
+  M.toast('Appearance: ' + v);
+};
+
+M.setAccentColor = function(v){
+  M.state.accentColor = v;
+  M.applyTheme();
+  M.save();
+  M.toast('Accent color updated');
+};
+
+M.setWallpaper = function(v){
+  M.state.wallpaper = v;
+  var gradients = {
+    'default':'linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)',
+    'aurora':'linear-gradient(135deg,#0c1445,#1a3a5c,#2d1b69)',
+    'sunset':'linear-gradient(135deg,#ff6b6b,#ee5a24,#f0932b)',
+    'ocean':'linear-gradient(135deg,#0a3d62,#3c6382,#82ccdd)',
+    'forest':'linear-gradient(135deg,#1e3c1e,#2d5a27,#4a7c3f)',
+    'space':'linear-gradient(135deg,#0a0a1a,#1a0533,#0d1b3e)'
+  };
+  document.getElementById('desktop').style.background = gradients[v] || gradients['default'];
+  M.save();
+  M.toast('Wallpaper: ' + v);
+};
+
+M.setDockPosition = function(v){
+  M.state.dockPosition = v;
+  var dock = document.getElementById('dock');
+  if(v === 'bottom'){
+    dock.style.bottom = '8px';dock.style.left='50%';dock.style.right='';dock.style.top='';
+    dock.style.transform='translateX(-50%)';dock.style.flexDirection='row';
+  } else if(v === 'left'){
+    dock.style.bottom='';dock.style.left='8px';dock.style.right='';dock.style.top='50%';
+    dock.style.transform='translateY(-50%)';dock.style.flexDirection='column';
+  } else {
+    dock.style.bottom='';dock.style.left='';dock.style.right='8px';dock.style.top='50%';
+    dock.style.transform='translateY(-50%)';dock.style.flexDirection='column';
+  }
+  M.save();
+  M.toast('Dock position: ' + v);
+};
+
+M.setDockMagnification = function(v){
+  M.state.dockMagnification = (v === 'yes');
+  M.save();
+  M.toast('Dock magnification: ' + (v==='yes'?'On':'Off'));
+};
+
+M.toggleWifi = function(v){
+  var icon = document.getElementById('wifi-icon');
+  if(v === 'off'){icon.textContent = '❌';M.toast('Wi-Fi turned off');}else{icon.textContent = '📶';M.toast('Wi-Fi turned on');}
+};
+
+M.setBattery = function(v){
+  M.state.batteryPercent = parseInt(v);
+  document.getElementById('battery-icon').textContent = (M.state.charging?'⚡':'🔋')+' '+M.state.batteryPercent+'%';
+  M.save();
+};
+
+M.resetAll = function(){
+  if(confirm('This will reset ALL settings and data. Are you sure?')){
+    localStorage.removeItem('mac_sim_state');
+    location.reload();
+  }
+};
+
+/* ========== TERMINAL ========== */
+M.terminalBody = function(){
+  return '<div class="terminal-body" id="terminal-output"><div><span class="prompt">Last login: '+new Date().toLocaleString()+'</span></div><div><span class="prompt">user@Mac ~ % </span><span class="output">Welcome to macOS Terminal</span></div><div style="color:#0f0">Type "help" for available commands.</div></div>'+
+    '<div class="terminal-input"><span class="t-prompt">% </span><input id="terminal-input" onkeydown="if(event.key===\'Enter\')M.terminalExec()" autofocus></div>';
+};
+
+M.initTerminal = function(){
+  setTimeout(function(){
+    var inp = document.getElementById('terminal-input');
+    if(inp) inp.focus();
+  }, 100);
+};
+
+M.terminalExec = function(){
+  var inp = document.getElementById('terminal-input');
+  var out = document.getElementById('terminal-output');
+  if(!inp || !out) return;
+  var cmd = inp.value.trim();
+  if(!cmd) return;
+  out.innerHTML += '<div><span class="prompt">% </span>'+cmd+'</div>';
+  inp.value = '';
+
+  var resp = '';
+  var parts = cmd.split(/\s+/);
+  var main = parts[0].toLowerCase();
+
+  if(main === 'help'){
+    resp = 'Available commands:\n  help     - Show this help\n  ls       - List files\n  pwd      - Print working directory\n  date     - Show current date/time\n  whoami   - Show current user\n  clear    - Clear terminal\n  echo     - Print text\n  open     - Open an app (finder, safari, settings, etc.)\n  say      - Show a notification\n  cal      - Show calendar\n  uptime   - Show system uptime\n  df       - Show disk usage\n  ps       - List running processes\n  neofetch - System info\n  exit     - Close terminal';
+  } else if(main === 'ls'){
+    var loc = M.state.finderLocation;
+    var files = M.state.finderFiles[loc] || [];
+    resp = files.map(function(f){return f.icon+' '+f.name;}).join('\n');
+  } else if(main === 'pwd'){
+    resp = '/Users/user/' + (M.state.finderLocation === 'desktop' ? 'Desktop' : M.state.finderLocation.charAt(0).toUpperCase()+M.state.finderLocation.slice(1));
+  } else if(main === 'date'){
+    resp = new Date().toString();
+  } else if(main === 'whoami'){
+    resp = 'user';
+  } else if(main === 'clear'){
+    out.innerHTML = '';
+    return;
+  } else if(main === 'echo'){
+    resp = parts.slice(1).join(' ');
+  } else if(main === 'open'){
+    var app = parts[1];
+    if(app && M.windowConfigs[app]){M.openWindow(app);resp = 'Opening '+app+'...';}
+    else resp = 'Usage: open <app> (finder, safari, settings, terminal, notes, calculator, calendar, mail)';
+  } else if(main === 'say'){
+    M.addNotif('Terminal', parts.slice(1).join(' '));
+    resp = 'Notification sent';
+  } else if(main === 'cal'){
+    resp = '   '+new Date().toLocaleString('default',{month:'long',year:'numeric'})+'\nSu Mo Tu We Th Fr Sa\n'+M.getCalendarGrid();
+  } else if(main === 'uptime'){
+    resp = 'up ' + Math.floor((Date.now() - performance.timeOrigin)/1000) + ' seconds';
+  } else if(main === 'df'){
+    resp = 'Filesystem     Size   Used  Avail Capacity\n/dev/disk1    256GB   45GB   211GB    18%';
+  } else if(main === 'ps'){
+    resp = '  PID TTY      TIME CMD\n    1 ??     0:00.01 launchd\n  123 ??     0:00.05 WindowServer\n  456 ??     0:00.02 Finder\n  789 ??     0:00.03 Terminal';
+  } else if(main === 'neofetch'){
+      resp = '       .:,\n    .:;:;;;;;:;\n  .:;;;;;;;:;:;:;..     user@Mac\n .:;;;;;;;;:;:;:;:;:    OS: macOS Simulator\n :;:;:;:;:;:;:;:;:;:    Kernel: HTML5/CSS/JS\n :;:;:;:;:;:;:;:;:;:    Shell: zsh\n :;:;:;:;:;:;:;:;:;:    Resolution: '+window.innerWidth+'x'+window.innerHeight+'\n .:;:;:;:;:;:;:;:;:;    Theme: '+M.state.appearance+'\n  .:;:;:;:;:;:;:;:;     Uptime: '+Math.floor((Date.now()-performance.timeOrigin)/1000)+'s\n    .:;:;:;:;:;:;:;\n      .:;:;:;:;:;\n        .:;:;:;\n          .:;';
+  } else if(main === 'exit'){
+    M.closeWindow('terminal');
+    return;
+  } else {
+    resp = 'zsh: command not found: '+cmd;
+  }
+
+  out.innerHTML += '<div class="output">'+resp.replace(/\n/g,'<br>')+'</div>';
+  out.scrollTop = out.scrollHeight;
+};
+
+M.getCalendarGrid = function(){
+  var now = new Date();
+  var year = now.getFullYear();
+  var month = now.getMonth();
+  var firstDay = new Date(year, month, 1).getDay();
+  var daysInMonth = new Date(year, month+1, 0).getDate();
+  var grid = '';
+  for(var i = 0; i < firstDay; i++) grid += '   ';
+  for(var d = 1; d <= daysInMonth; d++){
+    grid += (d < 10 ? ' ' : '') + d + ' ';
+    if((firstDay + d) % 7 === 0) grid += '\n';
+  }
+  return grid;
+};
+
+/* ========== NOTES ========== */
+M.notesBody = function(){
+  return '<div style="display:flex;height:100%">'+
+    '<div class="notes-list" id="notes-list"></div>'+
+    '<div class="notes-editor">'+
+      '<div class="notes-toolbar">'+
+        '<button onclick="M.newNote()">＋ New Note</button>'+
+        '<button onclick="M.deleteNote()">🗑 Delete</button>'+
+      '</div>'+
+      '<textarea id="notes-editor-text" oninput="M.saveNoteContent()" placeholder="Start typing..."></textarea>'+
+    '</div>'+
+  '</div>';
+};
+
+M.renderNotesList = function(){
+  var list = document.getElementById('notes-list');
+  if(!list) return;
+  list.innerHTML = M.state.notes.map(function(n){
+    var preview = n.content.substring(0, 40).replace(/\n/g,' ') + (n.content.length > 40 ? '...' : '');
+    return '<div class="note-item'+(n.id===M.state.activeNoteId?' active':'')+'" onclick="M.selectNote('+n.id+')">'+
+      '<div style="font-weight:600">'+n.title+'</div>'+
+      '<div style="font-size:11px;color:var(--text2);margin-top:2px">'+preview+'</div>'+
+    '</div>';
+  }).join('');
+  var editor = document.getElementById('notes-editor-text');
+  if(editor){
+    var active = M.state.notes.find(function(n){return n.id === M.state.activeNoteId;});
+    if(active) editor.value = active.content;
+  }
+};
+
+M.selectNote = function(id){
+  M.state.activeNoteId = id;
+  var active = M.state.notes.find(function(n){return n.id === id;});
+  var editor = document.getElementById('notes-editor-text');
+  if(editor && active) editor.value = active.content;
+  M.renderNotesList();
+};
+
+M.newNote = function(){
+  var n = {id:M.state.nextNoteId++, title:'New Note', content:''};
+  M.state.notes.push(n);
+  M.state.activeNoteId = n.id;
+  M.renderNotesList();
+  M.save();
+  M.toast('New note created');
+};
+
+M.saveNoteContent = function(){
+  var editor = document.getElementById('notes-editor-text');
+  if(!editor) return;
+  var active = M.state.notes.find(function(n){return n.id === M.state.activeNoteId;});
+  if(active){
+    active.content = editor.value;
+    var firstLine = editor.value.split('\n')[0].trim();
+    if(firstLine) active.title = firstLine.substring(0, 50);
+    M.renderNotesList();
+    M.save();
+  }
+};
+
+M.deleteNote = function(){
+  if(M.state.notes.length <= 1){M.toast('Cannot delete the last note');return;}
+  M.state.notes = M.state.notes.filter(function(n){return n.id !== M.state.activeNoteId;});
+  M.state.activeNoteId = M.state.notes[0].id;
+  M.renderNotesList();
+  M.save();
+  M.toast('Note deleted');
+};
+
+/* ========== CALCULATOR ========== */
+M.calcExpr = '';
+M.calcDisplayVal = '0';
+
+M.calculatorBody = function(){
+  var btns = [
+    ['AC','±','%','÷'],
+    ['7','8','9','×'],
+    ['4','5','6','−'],
+    ['1','2','3','+'],
+    ['0','','.','=']
+  ];
+  var s = '<div class="calc-display" id="calc-display">0</div><div class="calc-grid">';
+  btns.forEach(function(row){
+    row.forEach(function(btn){
+      if(!btn){s += '<div></div>';return;}
+      var cls = 'calc-btn';
+      if(btn==='÷'||btn==='×'||btn==='−'||btn==='+') cls += ' op';
+      if(btn==='=') cls += ' equals';
+      if(btn==='AC'||btn==='±'||btn==='%') cls += ' func';
+      var op = btn;
+      if(op==='×') op = '*';
+      if(op==='÷') op = '/';
+      if(op==='−') op = '-';
+      s += '<button class="'+cls+'" onclick="M.calcPress(\''+op+'\',\''+btn+'\')">'+btn+'</button>';
+    });
+  });
+  s += '</div>';
+  return s;
+};
+
+M.calcPress = function(op, display){
+  if(display === 'AC'){
+    M.calcExpr = '';
+    M.calcDisplayVal = '0';
+  } else if(display === '±'){
+    if(M.calcDisplayVal !== '0' && M.calcDisplayVal !== 'Error'){
+      if(M.calcDisplayVal.startsWith('-')) M.calcDisplayVal = M.calcDisplayVal.substring(1);
+      else M.calcDisplayVal = '-' + M.calcDisplayVal;
+    }
+  } else if(display === '%'){
+    try{
+      M.calcDisplayVal = String(parseFloat(M.calcDisplayVal) / 100);
+    }catch(e){M.calcDisplayVal = 'Error';}
+  } else if(display === '='){
+    try{
+      M.calcDisplayVal = String(Function('"use strict";return ('+M.calcExpr+')')());
+      M.calcExpr = M.calcDisplayVal;
+    }catch(e){M.calcDisplayVal = 'Error';M.calcExpr = '';}
+  } else {
+    if(M.calcExpr === '' && M.calcDisplayVal !== '0'){
+      M.calcExpr = M.calcDisplayVal;
+    }
+    M.calcExpr += op;
+    M.calcDisplayVal = '';
+  }
+  var displayEl = document.getElementById('calc-display');
+  if(displayEl) displayEl.textContent = M.calcDisplayVal || M.calcExpr || '0';
+};
+
+/* ========== CALENDAR ========== */
+M.calYear = new Date().getFullYear();
+M.calMonth = new Date().getMonth();
+
+M.calendarBody = function(){
+  return '<div class="cal-header">'+
+    '<button onclick="M.calPrev()">◀</button>'+
+    '<div class="month" id="cal-month-label"></div>'+
+    '<button onclick="M.calNext()">▶</button>'+
+    '<button onclick="M.calToday()">Today</button>'+
+  '</div>'+
+  '<div class="cal-grid" id="cal-grid">'+
+    '<div class="cal-day-header">Sun</div><div class="cal-day-header">Mon</div><div class="cal-day-header">Tue</div><div class="cal-day-header">Wed</div><div class="cal-day-header">Thu</div><div class="cal-day-header">Fri</div><div class="cal-day-header">Sat</div>'+
+  '</div>';
+};
+
+M.renderCalendar = function(){
+  var label = document.getElementById('cal-month-label');
+  var grid = document.getElementById('cal-grid');
+  if(!label || !grid) return;
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  label.textContent = months[M.calMonth] + ' ' + M.calYear;
+
+  var firstDay = new Date(M.calYear, M.calMonth, 1).getDay();
+  var daysInMonth = new Date(M.calYear, M.calMonth+1, 0).getDate();
+  var today = new Date();
+  var todayStr = today.getFullYear()+'-'+today.getMonth()+'-'+today.getDate();
+  var calStr = today.getFullYear()+'-'+M.calMonth+'-';
+
+  var html = '<div class="cal-day-header">Sun</div><div class="cal-day-header">Mon</div><div class="cal-day-header">Tue</div><div class="cal-day-header">Wed</div><div class="cal-day-header">Thu</div><div class="cal-day-header">Fri</div><div class="cal-day-header">Sat</div>';
+  for(var i = 0; i < firstDay; i++) html += '<div class="cal-day other"></div>';
+  for(var d = 1; d <= daysInMonth; d++){
+    var cls = 'cal-day';
+    if(calStr+d === todayStr) cls += ' today';
+    html += '<div class="'+cls+'" onclick="M.toast(\''+months[M.calMonth]+' '+d+', '+M.calYear+'\')">'+d+'</div>';
+  }
+  grid.innerHTML = html;
+};
+
+M.calPrev = function(){
+  M.calMonth--;
+  if(M.calMonth < 0){M.calMonth = 11; M.calYear--;}
+  M.renderCalendar();
+};
+
+M.calNext = function(){
+  M.calMonth++;
+  if(M.calMonth > 11){M.calMonth = 0; M.calYear++;}
+  M.renderCalendar();
+};
+
+M.calToday = function(){
+  var now = new Date();
+  M.calYear = now.getFullYear();
+  M.calMonth = now.getMonth();
+  M.renderCalendar();
+};
+
+/* ========== MAIL ========== */
+M.mailBody = function(){
+  return '<div style="display:flex;height:100%">'+
+    '<div class="mail-sidebar" id="mail-sidebar">'+
+      '<div class="ms-item active" onclick="M.selectMailFolder(\'inbox\')">📥 Inbox</div>'+
+      '<div class="ms-item" onclick="M.selectMailFolder(\'sent\')">📤 Sent</div>'+
+      '<div class="ms-item" onclick="M.selectMailFolder(\'drafts\')">📝 Drafts</div>'+
+      '<div class="ms-item" onclick="M.selectMailFolder(\'trash\')">🗑️ Trash</div>'+
+    '</div>'+
+    '<div class="mail-list" id="mail-list"></div>'+
+  '</div>';
+};
+
+M.renderMail = function(){
+  M.renderMailList();
+};
+
+M.renderMailList = function(){
+  var list = document.getElementById('mail-list');
+  if(!list) return;
+  list.innerHTML = M.state.mailMessages.map(function(m){
+    return '<div class="mail-item" onclick="M.openMail('+m.id+')">'+
+      '<div class="from" style="'+(m.read?'':'font-weight:700')+'">'+m.from+'</div>'+
+      '<div class="subject" style="'+(m.read?'':'font-weight:700')+'">'+m.subject+'</div>'+
+      '<div class="date">'+m.date+'</div>'+
+    '</div>';
+  }).join('');
+};
+
+M.openMail = function(id){
+  var m = M.state.mailMessages.find(function(x){return x.id === id;});
+  if(m){
+    m.read = true;
+    M.renderMailList();
+    M.save();
+    M.toast('From: '+m.from+'\n'+m.body);
+  }
+};
+
+M.selectMailFolder = function(folder){
+  M.state.activeMailFolder = folder;
+  var sidebar = document.getElementById('mail-sidebar');
+  if(sidebar){
+    sidebar.querySelectorAll('.ms-item').forEach(function(el){el.classList.remove('active');});
+  }
+  M.toast('Mail folder: ' + folder);
+};
+
+/* ========== TRASH ========== */
+M.trashBody = function(){
+  var s = '<div style="padding:20px;text-align:center;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">';
+  s += '<div style="font-size:64px">🗑️</div>';
+  s += '<div style="font-size:16px;font-weight:600">Trash</div>';
+  s += '<div style="color:var(--text2)">' + (M.state.trashItems.length === 0 ? 'Trash is empty' : M.state.trashItems.length + ' item(s) in Trash') + '</div>';
+  if(M.state.trashItems.length > 0){
+    s += '<button onclick="M.emptyTrash()" style="padding:8px 20px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:14px;cursor:default">Empty Trash</button>';
+  }
+  s += '</div>';
+  return s;
+};
+
+/* ========== CLOCK ========== */
+M.updateClock = function(){
+  var now = new Date();
+  var h = now.getHours();
+  var m = now.getMinutes();
+  var ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  var timeStr = h + ':' + (m < 10 ? '0' : '') + m + ' ' + ampm;
+  var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var dateStr = days[now.getDay()] + ' ' + months[now.getMonth()] + ' ' + now.getDate();
+  var clockEl = document.getElementById('menubar-clock');
+  if(clockEl) clockEl.textContent = dateStr + ' ' + timeStr;
+};
+setInterval(M.updateClock, 1000);
+M.updateClock();
+
+/* ========== CONTEXT MENU ========== */
+document.addEventListener('contextmenu', function(e){
+  e.preventDefault();
+  var ctx = document.getElementById('ctx-menu');
+  ctx.style.display = 'block';
+  ctx.style.left = Math.min(e.clientX, window.innerWidth - 200) + 'px';
+  ctx.style.top = Math.min(e.clientY, window.innerHeight - 200) + 'px';
+  ctx.innerHTML = '<div class="ci" onclick="M.toast(\'Copy\');M.closeCtx()">📋 Copy</div>'+
+    '<div class="ci" onclick="M.toast(\'Paste\');M.closeCtx()">📌 Paste</div>'+
+    '<div class="ci" onclick="M.toast(\'Cut\');M.closeCtx()">✂️ Cut</div>'+
+    '<div class="ci-sep"></div>'+
+    '<div class="ci" onclick="M.openWindow(\'finder\');M.closeCtx()">📁 New Finder Window</div>'+
+    '<div class="ci" onclick="M.newFolder();M.closeCtx()">📁 New Folder</div>'+
+    '<div class="ci" onclick="M.newNote();M.closeCtx()">📝 New Note</div>'+
+    '<div class="ci-sep"></div>'+
+    '<div class="ci" onclick="M.openWindow(\'settings\');M.closeCtx()">⚙️ System Settings</div>'+
+    '<div class="ci" onclick="M.restart();M.closeCtx()">🔄 Restart</div>';
+});
+
+M.closeCtx = function(){
+  document.getElementById('ctx-menu').style.display = 'none';
+};
+
+document.addEventListener('click', function(e){
+  if(document.getElementById('ctx-menu').style.display === 'block'){
+    if(!document.getElementById('ctx-menu').contains(e.target)){
+      M.closeCtx();
+    }
+  }
+  if(M.state.notifOpen && e.target.closest('#notif-center') === null && e.target.closest('.menu-item[onclick*="toggleNotifCenter"]') === null){
+    document.getElementById('notif-center').classList.remove('show');
+    M.state.notifOpen = false;
+  }
+});
+
+/* ========== KEYBOARD SHORTCUTS ========== */
+document.addEventListener('keydown', function(e){
+  if(e.metaKey || e.ctrlKey){
+    if(e.key === ',' && !e.shiftKey){
+      e.preventDefault();
+      M.openWindow('settings');
+    }
+    if(e.key === 'n' && !e.shiftKey){
+      e.preventDefault();
+      M.newNote();
+    }
+  }
+  if(e.key === 'Escape'){
+    M.closeCtx();
+    M.closeAllMenus();
+  }
+});
+
+/* ========== INITIAL LOAD ========== */
+M.applyTheme();
+M.setWallpaper(M.state.wallpaper);
+M.renderNotifs();
+M.updateDockPositions();
+
+M.updateDockPositions = function(){
+  // already called from setDockPosition which is called on load
+};
+
+/* ========== INIT ========== */
+(function(){
+  M.setWallpaper(M.state.wallpaper);
+  document.getElementById('battery-icon').textContent = (M.state.charging?'⚡':'🔋')+' '+M.state.batteryPercent+'%';
+})();
+
+console.log('macOS Simulator v1.0 ready');
+console.log('All changes are saved to localStorage');
+console.log('Double-click desktop icons to open apps');
+console.log('Right-click for context menu');
+console.log('Click  menu for system options');
+</script>
+
+</body>
+</html>

@@ -36,6 +36,8 @@ function randomProj(){
 }
 
 var D={sw:[
+
+{t:"macOS Simulator",s:"done",pt:"prompts/macos-simulator-prompt.md",d:"Full interactive macOS desktop simulator with menubar, dock, windows, and dark/light theme.",a:[{c:"ac",l:"Live Demo",o:7,u:"./projects/mac-simulator.html"}],g:[{c:"ac",l:"HTML"},{l:"CSS"},{l:"JS"},{l:"Simulator"}],v:[{n:"V1",i:"Menubar, dock, windows, themes."}]},
 {t:"DT Site Copy",s:"done",pt:"prompts/dt-site-copy-prompt.md",d:"Full 74-page copy of the DT Google Site, rebranded to Isaac.",a:[{c:"ac",l:"Live Site",o:7,u:"https://testisaac1804-byte.github.io/isaac-dt/"}],g:[{c:"ac",l:"Web"},{l:"Google Sites"},{l:"Static"},{l:"Python"}],v:[{n:"V1",i:"Finishing page copy."},{n:"V2",i:"Full site: 49 nav pages."},{n:"V3",i:"74 pages incl. hidden IGCSE coursework section."}]},
 {t:"MacAdBlock",s:"done",pt:"prompts/macadblock-prompt.md",d:"macOS DNS ad-blocker daemon on :8053.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/macadblock.html"}],g:[{c:"ac",l:"macOS"},{l:"DNS"},{l:"Python"},{l:"launchd"}],v:[{n:"V1",i:"Basic hosts file."},{n:"V2",i:"Daemon mode: launchd, auto-start."},{n:"V3",L:1,i:"System-wide: blocks ads in EVERY app."}]},
 {t:"ESP32-C3 AdBlock",s:"done",pt:"prompts/esp32-c3-adblock-prompt.md",d:"Network DNS sinkhole on ESP32. Blocks ads for all WiFi devices.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/esp32-c3-adblock.html"}],g:[{c:"ac",l:"ESP32"},{l:"C"},{l:"DNS"},{l:"IoT"}],v:[{n:"Note",i:"C3 incompatible with RT-AC58U WPA2. Used WROOM-32D."}]},
@@ -88,6 +90,9 @@ var D={sw:[
 {t:"Micro RC Car",s:"wip",pt:"prompts/micro-rc-car-prompt.md",d:"1/64-1/32 scale high-speed. No-solder Dupont build.",a:[{l:"Open Folder",o:1,u:"./projects/"}],g:[{c:"ac",l:"RC"},{l:"Micro"},{l:"No-solder"},{l:"Speed"}],v:[{n:"V1",i:"Design phase."}]},
 {t:"BLE Scanner",s:"wip",pt:"prompts/ble-scanner-prompt.md",d:"ESP32 BLE device scanner - detect, log, dashboard.",a:[{l:"Open Folder",o:1,u:"./projects/"}],g:[{c:"ac",l:"ESP32"},{l:"BLE"},{l:"Scanner"},{l:"IoT"}],v:[{n:"V1",i:"Research phase."}]}
 ],f3d:[
+
+{t:"Robot Arm (3D Print)",s:"done",d:"6-axis robot arm STL models — modern body, legs, arms, and head. 3D printed hobby project.",a:[{c:"ac",l:"View 3D",o:1,u:"./hobby/prints/robot-arm/modern-body.stl"},{c:"ac",l:"📂 Files",o:2,u:"./hobby/prints/robot-arm/"}],g:[{c:"ac",l:"3D Print"},{l:"STL"},{l:"Robot"}],v:[{n:"V1",i:"5 parts: body, arms, legs, head, limb."}]},
+{t:"Doraemon 3D Prints",s:"done",d:"Doraemon (哆啦A梦) 3D printable STL models — 2 multi-part assemblies.",a:[{c:"ac",l:"View 3D",o:1,u:"./hobby/prints/doraemon/obj_1_组合体.stl"},{c:"ac",l:"📂 Files",o:2,u:"./hobby/prints/doraemon/"}],g:[{c:"ac",l:"3D Print"},{l:"STL"},{l:"Hobby"}],v:[{n:"V1",i:"2 Doraemon assemblies."}]},
 {t:"F1 Model Block Jig",s:"done",pt:"prompts/f1-model-block-jig-prompt.md",d:"Precision CNC jig. 6 versions, 15+ STL components.",g:[{c:"ac",l:"F1 In Schools"},{l:"CNC"},{l:"Jig"},{l:"Precision"}],a:[{c:"p3d",l:"View 3D (18 combos)",o:3,vs:[
 {l:"V3 Left Base",p:"./Documents/Model Block Jig/version bravoprodigy/v3 (click fit bearing)/Left Jig Base.stl"},
 {l:"V4 Left Base",p:"./Documents/Model Block Jig/v4/Left Jig Base.stl"},

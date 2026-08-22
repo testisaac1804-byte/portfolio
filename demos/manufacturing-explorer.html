@@ -3,151 +3,699 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manufacturing Explorer</title>
+<title>Manufacturing Explorer — 200+ Methods</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --bg: #0d1117; --panel: #161b22; --panel2: #1c2129; --text: #e6edf3;
-    --accent: #6366f1; --accent2: #818cf8; --muted: #8b949e; --border: #21262d;
-  }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    background: var(--bg); color: var(--text); min-height: 100vh; padding: 24px;
-  }
-  .window { max-width: 860px; margin: 0 auto; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
-  .titlebar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: #11151b; border-bottom: 1px solid var(--border); }
-  .dot { width: 12px; height: 12px; border-radius: 50%; }
-  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
-  .tbtitle { flex: 1; text-align: center; color: var(--muted); font-size: 13px; font-weight: 600; }
-  .toolbar { display: flex; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--border); flex-wrap: wrap; align-items: center; }
-  .toolbar input[type=text] {
-    flex: 1; min-width: 200px; background: var(--panel2); border: 1px solid var(--border);
-    color: var(--text); padding: 9px 13px; border-radius: 7px; font-size: 14px; outline: none;
-  }
-  .toolbar input:focus { border-color: var(--accent); }
-  .toolbar select {
-    background: var(--panel2); border: 1px solid var(--border); color: var(--text);
-    padding: 9px 12px; border-radius: 7px; font-size: 14px; outline: none; cursor: pointer;
-  }
-  .count { color: var(--muted); font-size: 12.5px; padding: 0 4px; }
-  .list { padding: 12px 16px 20px; max-height: 62vh; overflow-y: auto; }
-  .card { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; background: var(--panel2); }
-  .card-head { display: flex; align-items: center; gap: 10px; padding: 12px 14px; cursor: pointer; user-select: none; }
-  .card-head:hover { background: rgba(99,102,241,0.06); }
-  .card-head .name { font-weight: 600; font-size: 14.5px; }
-  .card-head .abbr { font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: var(--accent2); }
-  .badge { font-size: 10.5px; padding: 3px 8px; border-radius: 20px; font-weight: 600; letter-spacing: .3px; }
-  .b-add { background: rgba(63,185,80,0.15); color: #3fb950; }
-  .b-sub { background: rgba(210,153,34,0.15); color: #d29922; }
-  .b-form { background: rgba(99,102,241,0.18); color: var(--accent2); }
-  .chev { margin-left: auto; color: var(--muted); transition: transform .2s; }
-  .card.open .chev { transform: rotate(90deg); }
-  .card-body { display: none; padding: 4px 14px 16px; border-top: 1px solid var(--border); }
-  .card.open .card-body { display: flex; gap: 18px; flex-wrap: wrap; animation: fade .2s ease; }
-  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-  .card-body .desc { flex: 1; min-width: 260px; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
-  .card-body .desc b { color: var(--text); }
-  .diagram { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; line-height: 1.35; color: var(--accent2); background: #0d1117; border: 1px solid var(--border); border-radius: 7px; padding: 10px 12px; white-space: pre; }
-  .empty { color: var(--muted); text-align: center; padding: 30px 0; font-size: 14px; }
+:root{--bg:#0d1117;--pn:#161b22;--pn2:#1c2129;--tx:#e6edf3;--ac:#6366f1;--a2:#818cf8;--mu:#8b949e;--bd:#21262d}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--tx);height:100vh;overflow:hidden;display:flex}
+/* Left panel: methods list */
+.left{width:420px;min-width:320px;display:flex;flex-direction:column;border-right:1px solid var(--bd);background:var(--pn)}
+.titlebar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#11151b;border-bottom:1px solid var(--bd)}
+.dot{width:11px;height:11px;border-radius:50%}
+.dr{background:#ff5f57}.dy{background:#febc2e}.dg{background:#28c840}
+.tb-title{flex:1;text-align:center;color:var(--mu);font-size:12.5px;font-weight:600}
+.toolbar{display:flex;gap:8px;padding:10px 12px;border-bottom:1px solid var(--bd);flex-wrap:wrap}
+.toolbar input{flex:1;min-width:140px;background:var(--pn2);border:1px solid var(--bd);color:var(--tx);padding:7px 10px;border-radius:6px;font-size:13px;outline:none}
+.toolbar input:focus{border-color:var(--ac)}
+.toolbar select{background:var(--pn2);border:1px solid var(--bd);color:var(--tx);padding:7px 10px;border-radius:6px;font-size:13px;outline:none;cursor:pointer}
+.count{color:var(--mu);font-size:11.5px;padding:0 4px;white-space:nowrap}
+.list{flex:1;overflow-y:auto;padding:8px 10px}
+.card{border:1px solid var(--bd);border-radius:7px;margin-bottom:6px;overflow:hidden;background:var(--pn2);transition:border-color .15s}
+.card:hover{border-color:rgba(99,102,241,.3)}
+.card.sel{border-color:var(--ac);background:rgba(99,102,241,.08)}
+.card-head{display:flex;align-items:center;gap:8px;padding:10px 12px;cursor:pointer;user-select:none}
+.card-head:hover{background:rgba(99,102,241,.04)}
+.card-head .icon{font-size:16px;width:22px;text-align:center}
+.card-head .name{font-weight:600;font-size:13.5px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.badge{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:600;letter-spacing:.2px;white-space:nowrap}
+.b-add{background:rgba(63,185,80,.15);color:#3fb950}
+.b-sub{background:rgba(210,153,34,.15);color:#d29922}
+.b-form{background:rgba(99,102,241,.18);color:var(--a2)}
+.b-join{background:rgba(255,123,114,.15);color:#ff7b72}
+.b-cast{background:rgba(163,113,247,.15);color:#a371f7}
+.b-fin{background:rgba(86,211,100,.15);color:#56d364}
+.b-hyb{background:rgba(242,201,76,.15);color:#f2c94c}
+.card-body{display:none;padding:6px 12px 14px;border-top:1px solid var(--bd);font-size:13px;line-height:1.6;color:var(--mu)}
+.card.open .card-body{display:block;animation:fade .2s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.card-body .desc{margin-bottom:8px}
+.card-body .desc b{color:var(--tx)}
+.card-body .act{display:inline-block;margin-top:4px;padding:5px 12px;background:var(--ac);color:#fff;border:none;border-radius:5px;font-size:12px;cursor:pointer;font-weight:600}
+.card-body .act:hover{background:var(--a2)}
+.empty{color:var(--mu);text-align:center;padding:40px 0;font-size:14px}
+/* Right panel: 3D viewport */
+.right{flex:1;display:flex;flex-direction:column;background:var(--bg);position:relative;min-width:0}
+.view3d{flex:1;position:relative}
+.view3d canvas{display:block}
+.view3d .overlay{position:absolute;top:12px;left:12px;background:rgba(22,27,34,.9);border:1px solid var(--bd);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--mu);pointer-events:none}
+.view3d .overlay b{color:var(--tx)}
+/* Param panel */
+.params{display:none;border-top:1px solid var(--bd);background:var(--pn);padding:12px 16px;max-height:200px;overflow-y:auto}
+.params.visible{display:block}
+.params h3{font-size:13px;color:var(--tx);margin-bottom:8px}
+.param-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:12px}
+.param-row label{width:110px;color:var(--mu);flex-shrink:0;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.param-row input[type=range]{flex:1;accent-color:var(--ac)}
+.param-row .val{width:50px;color:var(--a2);font-family:ui-monospace,monospace;text-align:right;flex-shrink:0}
+.param-row select{background:var(--pn2);border:1px solid var(--bd);color:var(--tx);padding:3px 6px;border-radius:4px;font-size:11px;flex:1;max-width:150px}
+.gen-btn{display:block;margin:8px 0 0;padding:6px 16px;background:var(--ac);color:#fff;border:none;border-radius:5px;font-size:12px;cursor:pointer;font-weight:600}
+.gen-btn:hover{background:var(--a2)}
+/* Resize handle */
+.resize{width:4px;cursor:col-resize;background:transparent;flex-shrink:0;transition:background .2s}
+.resize:hover{background:var(--ac)}
+/* Responsive */
+@media(max-width:768px){body{flex-direction:column}.left{width:100%;min-width:0;max-height:45vh}.right{height:55vh}.resize{display:none}}
 </style>
 </head>
 <body>
-  <div class="window">
-    <div class="titlebar">
-      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-      <span class="tbtitle">Manufacturing Explorer — 200 methods</span>
-    </div>
-    <div class="toolbar">
-      <input type="text" id="q" placeholder="Search methods… e.g. laser, mold, SLS" oninput="M.filter()">
-      <select id="cat" onchange="M.filter()">
-        <option value="all">All categories</option>
-        <option value="Additive">Additive (3D printing)</option>
-        <option value="Subtractive">Subtractive (cutting)</option>
-        <option value="Forming">Forming & casting</option>
-      </select>
-      <span class="count" id="count"></span>
-    </div>
-    <div class="list" id="list"></div>
+<div class="left">
+  <div class="titlebar"><span class="dot dr"></span><span class="dot dy"></span><span class="dot dg"></span><span class="tb-title">Manufacturing Explorer — 209 methods</span></div>
+  <div class="toolbar">
+    <input type="text" id="q" placeholder="Search methods… e.g. laser, mold, SLS" oninput="filter()">
+    <select id="cat" onchange="filter()">
+      <option value="all">All</option>
+      <option value="Additive">Additive</option>
+      <option value="Subtractive">Subtractive</option>
+      <option value="Forming">Forming</option>
+      <option value="Joining">Joining</option>
+      <option value="Casting">Casting</option>
+      <option value="Finishing">Finishing</option>
+      <option value="Hybrid">Hybrid</option>
+    </select>
+    <span class="count" id="count"></span>
   </div>
+  <div class="list" id="list"></div>
+</div>
+<div class="resize" id="resize"></div>
+<div class="right">
+  <div class="view3d" id="view3d">
+    <div class="overlay" id="overlay"><b>Select a method</b> to view 3D simulation</div>
+  </div>
+  <div class="params" id="params"></div>
+</div>
 
-<script>
-  var M = {
-    methods: [
-      { n: 'FDM', cat: 'Additive', d: 'Fused Deposition Modeling extrudes a molten plastic filament layer by layer through a heated nozzle. The most common and affordable 3D printing method.' },
-      { n: 'SLA', cat: 'Additive', d: 'Stereolithography cures liquid photopolymer resin with a UV laser, producing very smooth, high-detail parts.' },
-      { n: 'SLS', cat: 'Additive', d: 'Selective Laser Sintering fuses powdered nylon with a laser. No support structures are needed — the powder bed holds the part.' },
-      { n: 'DLP', cat: 'Additive', d: 'Digital Light Processing flashes an entire resin layer at once with a projector, making it faster than SLA.' },
-      { n: 'MJF', cat: 'Additive', d: 'Multi Jet Fusion (HP) deposits a fusing agent onto a nylon powder bed and heats it with infrared, layer by layer.' },
-      { n: 'DMLS', cat: 'Additive', d: 'Direct Metal Laser Sintering fuses metal powder into dense metal parts using a high-power laser. Also called SLM.' },
-      { n: 'PolyJet', cat: 'Additive', d: 'PolyJet jets droplets of photopolymer that are cured by UV light, allowing multi-material and full-colour parts.' },
-      { n: 'Binder Jetting', cat: 'Additive', d: 'A liquid binder is jetted onto a powder bed to glue particles together, later sintered for strength. Fast and scalable.' },
-      { n: 'FDM (Metal)', cat: 'Additive', d: 'Metal-filled filament is printed like plastic FDM, then debound and sintered in a furnace into solid metal.' },
-      { n: 'CNC Milling', cat: 'Subtractive', d: 'A rotating cutting tool removes material from a solid block. Computer-controlled for high precision in 3 axes or more.' },
-      { n: 'CNC Turning', cat: 'Subtractive', d: 'The workpiece spins while a fixed cutting tool shapes it. Ideal for round, cylindrical parts on a lathe.' },
-      { n: 'Laser Cutting', cat: 'Subtractive', d: 'A focused CO2 or fiber laser beam melts, burns or vaporises material to cut sheets of wood, acrylic or metal.' },
-      { n: 'Laser Engraving', cat: 'Subtractive', d: 'A lower-power laser beam etches the surface of a material without cutting all the way through.' },
-      { n: 'Waterjet Cutting', cat: 'Subtractive', d: 'A high-pressure jet of water mixed with abrasive grit cuts almost any material without heat distortion.' },
-      { n: 'EDM', cat: 'Subtractive', d: 'Electrical Discharge Machining erodes conductive metal using controlled sparks. Great for hard metals and tight corners.' },
-      { n: 'Plasma Cutting', cat: 'Subtractive', d: 'An electrically conductive plasma jet cuts through thick conductive metals, primarily steel.' },
-      { n: 'CNC Routing', cat: 'Subtractive', d: 'A large high-speed spindle carves flat sheets of wood, foam or plastic along programmed toolpaths.' },
-      { n: 'Drilling', cat: 'Subtractive', d: 'A rotating drill bit creates round holes of a fixed diameter into the workpiece.' },
-      { n: 'Injection Molding', cat: 'Forming', d: 'Molten plastic is injected at high pressure into a metal mold cavity. Excellent for mass-producing identical parts.' },
-      { n: 'Die Casting', cat: 'Forming', d: 'Molten metal is forced into a steel mold under high pressure. Produces strong, complex metal parts in volume.' },
-      { n: 'Forging', cat: 'Forming', d: 'Metal is shaped by compressive force, usually heated, producing parts with very high strength and grain structure.' },
-      { n: 'Extrusion', cat: 'Forming', d: 'Material is pushed through a shaped die to create a continuous profile, like tubes, rails and filaments.' },
-      { n: 'Blow Molding', cat: 'Forming', d: 'A heated plastic tube is inflated inside a mold cavity, forming hollow parts such as bottles.' },
-      { n: 'Thermoforming', cat: 'Forming', d: 'A heated plastic sheet is draped over a mold and drawn into shape with vacuum or pressure.' },
-      { n: 'Vacuum Forming', cat: 'Forming', d: 'A specific thermoforming technique using a vacuum to pull a heated sheet tightly onto a single-sided mold.' },
-      { n: 'Stamping', cat: 'Forming', d: 'Sheet metal is pressed between a punch and die to cut or form flat parts like brackets and panels.' },
-      { n: 'Rotational Molding', cat: 'Forming', d: 'Powdered plastic is tumbled inside a heated rotating mold, coating the walls evenly to make hollow parts.' }
-    ],
-    diagram: function (m) {
-      if (m.cat === 'Additive') {
-        return '      ▔▔▔▔▔▔\n     ▔▔▔▔▔▔▔▔\n    ▔▔▔▔▔▔▔▔▔▔\n   ▔▔▔▔▔▔▔▔▔▔▔▔   nozzle\n  ▔▔▔▔▔▔▔▔▔▔▔▔▔▔\n ████████████████████  bed\n   ↑ layer-by-layer build';
-      }
-      if (m.cat === 'Subtractive') {
-        return '        ▼ spindle\n        ██ (tool)\n  ████████████████\n  ████████████████  workpiece\n  ████████████████\n   ↑ material removed';
-      }
-      return '   ┌──────────┐\n   │  PRESS ▼ │\n   └────┬─────┘\n  ██████████████\n  ██████████████  mold / die\n   ↑ heat + force';
-    },
-    render: function (list) {
-      var box = document.getElementById('list');
-      if (list.length === 0) { box.innerHTML = '<div class="empty">No methods match your search.</div>'; document.getElementById('count').textContent = '0 methods'; return; }
-      document.getElementById('count').textContent = list.length + ' methods';
-      var html = '';
-      for (var i = 0; i < list.length; i++) {
-        var m = list[i];
-        var bc = m.cat === 'Additive' ? 'b-add' : (m.cat === 'Subtractive' ? 'b-sub' : 'b-form');
-        html += '<div class="card" id="card' + i + '">' +
-          '<div class="card-head" onclick="M.toggle(' + i + ')">' +
-            '<span class="name">' + m.n + '</span><span class="abbr">' + m.n.replace(/[^A-Z]/g, '') + '</span>' +
-            '<span class="badge ' + bc + '">' + m.cat + '</span>' +
-            '<span class="chev">▶</span>' +
-          '</div>' +
-          '<div class="card-body">' +
-            '<div class="desc"><b>' + m.n + '</b> — ' + m.d + '</div>' +
-            '<div class="diagram">' + this.diagram(m) + '</div>' +
-          '</div></div>';
-      }
-      box.innerHTML = html;
-    },
-    toggle: function (i) {
-      document.getElementById('card' + i).classList.toggle('open');
-    },
-    filter: function () {
-      var q = document.getElementById('q').value.toLowerCase().trim();
-      var cat = document.getElementById('cat').value;
-      var out = [];
-      for (var i = 0; i < this.methods.length; i++) {
-        var m = this.methods[i];
-        if (cat !== 'all' && m.cat !== cat) continue;
-        if (q && (m.n + ' ' + m.d).toLowerCase().indexOf(q) === -1) continue;
-        out.push(m);
-      }
-      this.render(out);
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+
+// ── METHODS DATA ──
+const METHODS = [["fdm", "FDM", "Fused Deposition Modeling", "Additive", "Extrudes thermoplastic filament through a heated nozzle onto a build plate.", "🖨️", {"nozzle_temp": {"l": "Nozzle Temp (°C)", "t": "range", "d": 210, "mn": 150, "mx": 450, "s": 5}, "bed_temp": {"l": "Bed Temp (°C)", "t": "range", "d": 60, "mn": 0, "mx": 150, "s": 5}, "print_speed": {"l": "Print Speed (mm/s)", "t": "range", "d": 60, "mn": 10, "mx": 300, "s": 5}, "layer_height": {"l": "Layer Height (mm)", "t": "range", "d": 0.2, "mn": 0.05, "mx": 0.8, "s": 0.05}, "nozzle_diameter": {"l": "Nozzle (mm)", "t": "select", "d": 0.4, "o": [0.2, 0.4, 0.6, 0.8, 1.0]}, "infill": {"l": "Infill (%)", "t": "range", "d": 20, "mn": 0, "mx": 100, "s": 5}, "retraction": {"l": "Retraction (mm)", "t": "range", "d": 5, "mn": 0, "mx": 15, "s": 0.5}, "material": {"l": "Material", "t": "select", "d": "PLA", "o": ["PLA", "ABS", "PETG", "TPU", "ASA", "Nylon", "PC", "PP"]}, "fan_speed": {"l": "Fan Speed (%)", "t": "range", "d": 100, "mn": 0, "mx": 100, "s": 5}, "wall_count": {"l": "Wall Lines", "t": "range", "d": 3, "mn": 1, "mx": 10, "s": 1}, "top_layers": {"l": "Top Layers", "t": "range", "d": 4, "mn": 1, "mx": 20, "s": 1}, "bottom_layers": {"l": "Bottom Layers", "t": "range", "d": 4, "mn": 1, "mx": 20, "s": 1}, "brim_width": {"l": "Brim Width (mm)", "t": "range", "d": 5, "mn": 0, "mx": 30, "s": 1}, "z_hop": {"l": "Z Hop (mm)", "t": "range", "d": 0.2, "mn": 0, "mx": 2, "s": 0.1}, "combing": {"l": "Combing", "t": "select", "d": "Within Infill", "o": ["Off", "All", "Within Infill", "Not on Skin"]}, "wall_thickness": {"l": "Wall Thk (mm)", "t": "range", "d": 1.2, "mn": 0.4, "mx": 3, "s": 0.2}, "top_bottom_thickness": {"l": "Top/Bot Thk (mm)", "t": "range", "d": 1.2, "mn": 0.4, "mx": 3, "s": 0.2}, "support_density": {"l": "Support Density (%)", "t": "range", "d": 15, "mn": 0, "mx": 50, "s": 5}, "ironing": {"l": "Ironing", "t": "select", "d": "Off", "o": ["Off", "Top Only", "All Layers"]}, "bridge_speed": {"l": "Bridge Speed (mm/s)", "t": "range", "d": 30, "mn": 5, "mx": 100, "s": 5}, "coasting_volume": {"l": "Coasting (mm³)", "t": "range", "d": 0.064, "mn": 0, "mx": 1, "s": 0.02}, "print_acceleration": {"l": "Accel (mm/s²)", "t": "range", "d": 1000, "mn": 100, "mx": 10000, "s": 100}, "jerk": {"l": "Jerk (mm/s³)", "t": "range", "d": 8, "mn": 1, "mx": 50, "s": 1}, "flow_rate": {"l": "Flow Rate (%)", "t": "range", "d": 100, "mn": 50, "mx": 150, "s": 5}, "adaptive_layer": {"l": "Adaptive Layers", "t": "select", "d": "Off", "o": ["Off", "Quality", "Speed", "Balanced"]}}], ["sla", "SLA", "Stereolithography", "Additive", "UV laser cures liquid photopolymer resin in a vat.", "💡", {"layer_height": {"l": "Layer Height (μm)", "t": "range", "d": 50, "mn": 25, "mx": 200, "s": 25}, "exposure_time": {"l": "Exposure (s)", "t": "range", "d": 6, "mn": 1, "mx": 30, "s": 0.5}, "lift_speed": {"l": "Lift Speed (mm/min)", "t": "range", "d": 100, "mn": 30, "mx": 300, "s": 10}, "laser_power": {"l": "Laser (mW)", "t": "range", "d": 250, "mn": 50, "mx": 1000, "s": 50}}], ["sls", "SLS", "Selective Laser Sintering", "Additive", "Laser fuses powdered nylon/TPU in a powder bed.", "🏜️", {"laser_power": {"l": "Laser Power (W)", "t": "range", "d": 50, "mn": 10, "mx": 200, "s": 5}, "scan_speed": {"l": "Scan Speed (mm/s)", "t": "range", "d": 7500, "mn": 1000, "mx": 15000, "s": 500}, "layer_height": {"l": "Layer (μm)", "t": "range", "d": 100, "mn": 60, "mx": 150, "s": 10}, "bed_temp": {"l": "Bed Temp (°C)", "t": "range", "d": 170, "mn": 80, "mx": 200, "s": 5}}], ["dlp", "DLP", "Digital Light Processing", "Additive", "Projects UV light to cure entire layers of resin at once.", "📽️", {"layer_height": {"l": "Layer (μm)", "t": "range", "d": 50, "mn": 25, "mx": 200, "s": 25}, "exposure_time": {"l": "Exposure (s)", "t": "range", "d": 3, "mn": 1, "mx": 20, "s": 0.5}, "light_intensity": {"l": "Intensity (%)", "t": "range", "d": 100, "mn": 50, "mx": 100, "s": 5}}], ["mjf", "MJF", "Multi Jet Fusion", "Additive", "HP powder-bed fusion with fusing/detailing agents + IR lamps.", "💧", {"layer_height": {"l": "Layer (μm)", "t": "range", "d": 80, "mn": 70, "mx": 120, "s": 10}, "fusing_temp": {"l": "Fusing Temp (°C)", "t": "range", "d": 190, "mn": 140, "mx": 220, "s": 5}}], ["polyjet", "PolyJet", "Material Jetting", "Additive", "UV-curable resin droplets jetted and instantly cured — full color.", "🖌️", {"layer_height": {"l": "Layer (μm)", "t": "range", "d": 28, "mn": 14, "mx": 55, "s": 14}, "resolution_dpi": {"l": "Resolution (DPI)", "t": "select", "d": 600, "o": [300, 600, 1200]}}], ["dmls", "DMLS", "Direct Metal Laser Sintering", "Additive", "Laser fuses metal powder — titanium, aluminum, steel for aerospace.", "🔩", {"laser_power": {"l": "Laser (W)", "t": "range", "d": 400, "mn": 100, "mx": 1000, "s": 50}, "scan_speed": {"l": "Scan (mm/s)", "t": "range", "d": 2000, "mn": 500, "mx": 7000, "s": 250}, "layer_height": {"l": "Layer (μm)", "t": "range", "d": 40, "mn": 20, "mx": 100, "s": 10}, "chamber_temp": {"l": "Chamber (°C)", "t": "range", "d": 200, "mn": 80, "mx": 500, "s": 10}}], ["ebm", "EBM", "Electron Beam Melting", "Additive", "Electron beam melts metal powder in vacuum — Ti-6Al-4V for implants.", "⚡", {"beam_power": {"l": "Beam (W)", "t": "range", "d": 3000, "mn": 500, "mx": 6000, "s": 500}, "scan_speed": {"l": "Scan (m/s)", "t": "range", "d": 2000, "mn": 100, "mx": 8000, "s": 500}, "layer_height": {"l": "Layer (μm)", "t": "range", "d": 100, "mn": 50, "mx": 200, "s": 10}}], ["binder_jetting", "Binder Jetting", "Binder Jetting", "Additive", "Liquid binder deposited onto powder bed — metal/sand/ceramic.", "🧱", {"layer_height": {"l": "Layer (μm)", "t": "range", "d": 100, "mn": 50, "mx": 200, "s": 10}, "binder_saturation": {"l": "Binder (%)", "t": "range", "d": 100, "mn": 50, "mx": 150, "s": 5}}], ["lens", "LENS", "Laser Engineered Net Shaping", "Additive", "Metal powder blown into laser melt pool — repair and cladding.", "🔫", {"laser_power": {"l": "Laser (W)", "t": "range", "d": 1000, "mn": 200, "mx": 4000, "s": 100}, "feed_rate": {"l": "Powder Feed (g/min)", "t": "range", "d": 10, "mn": 1, "mx": 50, "s": 1}, "traverse_speed": {"l": "Traverse (mm/min)", "t": "range", "d": 500, "mn": 100, "mx": 2000, "s": 50}}], ["waam", "WAAM", "Wire Arc Additive Manufacturing", "Additive", "Arc welding robot deposits metal wire layer by layer.", "🔌", {"voltage": {"l": "Voltage (V)", "t": "range", "d": 25, "mn": 10, "mx": 40, "s": 1}, "current": {"l": "Current (A)", "t": "range", "d": 200, "mn": 50, "mx": 400, "s": 10}, "wire_feed": {"l": "Wire Feed (m/min)", "t": "range", "d": 8, "mn": 1, "mx": 20, "s": 0.5}, "travel_speed": {"l": "Travel (mm/min)", "t": "range", "d": 500, "mn": 100, "mx": 1500, "s": 50}}], ["cdlp", "cDLP", "Continuous DLP", "Additive", "Continuous printing with oxygen-permeable membrane — ultra fast.", "🎞️", {"print_speed": {"l": "Speed (mm/hr)", "t": "range", "d": 100, "mn": 10, "mx": 500, "s": 10}, "light_intensity": {"l": "Intensity (mW/cm²)", "t": "range", "d": 5, "mn": 1, "mx": 20, "s": 1}}], ["lom", "LOM", "Laminated Object Manufacturing", "Additive", "Sheets bonded and cut layer by layer — paper, plastic, metal.", "📄", {"layer_height": {"l": "Sheet (mm)", "t": "range", "d": 0.1, "mn": 0.05, "mx": 0.5, "s": 0.05}, "cut_speed": {"l": "Cut (mm/s)", "t": "range", "d": 200, "mn": 50, "mx": 500, "s": 25}, "roller_temp": {"l": "Roller (°C)", "t": "range", "d": 150, "mn": 80, "mx": 250, "s": 10}}], ["material_extrusion_paste", "Paste Extrusion (Clay/Ceramic)", "Paste Extrusion (Clay/Ceramic)", "Additive", "Pneumatic/mechanical extrusion of clay, ceramic paste, food.", "🏺", {"extrusion_pressure": {"l": "Pressure (bar)", "t": "range", "d": 4, "mn": 1, "mx": 10, "s": 0.5}, "nozzle_diameter": {"l": "Nozzle (mm)", "t": "select", "d": 2.0, "o": [0.8, 1.2, 2.0, 3.0, 5.0]}, "print_speed": {"l": "Speed (mm/s)", "t": "range", "d": 40, "mn": 10, "mx": 100, "s": 5}}], ["bioprinting", "Bioprinting", "Bioprinting", "Additive", "Extrusion of bio-inks with living cells — tissue engineering.", "🧬", {"extrusion_pressure": {"l": "Pressure (kPa)", "t": "range", "d": 50, "mn": 5, "mx": 200, "s": 5}, "nozzle_diameter": {"l": "Nozzle (μm)", "t": "select", "d": 200, "o": [100, 200, 400, 800]}, "print_speed": {"l": "Speed (mm/s)", "t": "range", "d": 10, "mn": 1, "mx": 50, "s": 1}, "temperature": {"l": "Temp (°C)", "t": "range", "d": 20, "mn": 4, "mx": 37, "s": 1}}], ["concrete_printing", "Concrete 3D Printing", "Concrete 3D Printing", "Additive", "Large-scale gantry extruding concrete — houses and infrastructure.", "🏗️", {"flow_rate": {"l": "Flow (L/min)", "t": "range", "d": 10, "mn": 1, "mx": 30, "s": 1}, "nozzle_diameter": {"l": "Nozzle (mm)", "t": "select", "d": 40, "o": [20, 30, 40, 50, 60]}, "print_speed": {"l": "Speed (mm/s)", "t": "range", "d": 150, "mn": 50, "mx": 500, "s": 25}}], ["ebf3", "EBF³", "Electron Beam Freeform", "Additive", "NASA tech — electron beam + metal wire in vacuum.", "🛰️", {"beam_power": {"l": "Beam (kW)", "t": "range", "d": 7, "mn": 1, "mx": 20, "s": 1}, "wire_feed": {"l": "Wire (mm/min)", "t": "range", "d": 1500, "mn": 100, "mx": 5000, "s": 100}}], ["cold_spray", "Cold Spray AM", "Cold Spray AM", "Additive", "Metal particles accelerated to supersonic — bond on impact.", "💨", {"gas_pressure": {"l": "Pressure (bar)", "t": "range", "d": 30, "mn": 10, "mx": 50, "s": 5}, "gas_temp": {"l": "Gas Temp (°C)", "t": "range", "d": 600, "mn": 200, "mx": 1000, "s": 50}, "feed_rate": {"l": "Feed (g/min)", "t": "range", "d": 30, "mn": 5, "mx": 100, "s": 5}}], ["nano_jet", "NanoParticle Jetting", "NanoParticle Jetting", "Additive", "Nano-scale metal particles in suspension jetted + sintered.", "🔬", {"layer_height": {"l": "Layer (μm)", "t": "range", "d": 5, "mn": 2, "mx": 20, "s": 1}, "resolution": {"l": "DPI", "t": "select", "d": 2400, "o": [1200, 2400, 4800]}}], ["melt_electrospinning", "Melt Electrospinning Writing", "Melt Electrospinning Writing", "Additive", "Electrostatic drawing of polymer melt fibers — sub-micron scaffolds.", "🕸️", {"voltage": {"l": "Voltage (kV)", "t": "range", "d": 10, "mn": 1, "mx": 30, "s": 1}, "collector_distance": {"l": "Distance (mm)", "t": "range", "d": 10, "mn": 1, "mx": 50, "s": 1}, "flow_rate": {"l": "Flow (μL/hr)", "t": "range", "d": 15, "mn": 1, "mx": 100, "s": 5}, "temperature": {"l": "Temp (°C)", "t": "range", "d": 120, "mn": 50, "mx": 300, "s": 10}}], ["two_photon", "Two-Photon Polymerization", "Two-Photon Polymerization", "Additive", "Femtosecond laser polymerizes at focal point — nano-scale.", "🔦", {"laser_power": {"l": "Laser (mW)", "t": "range", "d": 25, "mn": 1, "mx": 100, "s": 5}, "scan_speed": {"l": "Scan (mm/s)", "t": "range", "d": 20, "mn": 1, "mx": 100, "s": 5}, "voxel_size": {"l": "Voxel (nm)", "t": "range", "d": 200, "mn": 50, "mx": 500, "s": 50}}], ["ujp", "UAM", "Ultrasonic AM", "Additive", "Ultrasonic welding bonds metal foils at low temp — embed electronics.", "🔊", {"amplitude": {"l": "Amplitude (μm)", "t": "range", "d": 20, "mn": 5, "mx": 50, "s": 5}, "force": {"l": "Force (N)", "t": "range", "d": 2000, "mn": 500, "mx": 5000, "s": 250}, "travel_speed": {"l": "Speed (mm/s)", "t": "range", "d": 75, "mn": 20, "mx": 200, "s": 5}}], ["slm", "SLM", "Selective Laser Melting", "Additive", "Full melting of metal powder — dense aluminum, titanium, Inconel.", "🔩", {"laser_power": {"l": "Laser (W)", "t": "range", "d": 350, "mn": 100, "mx": 1000, "s": 25}, "scan_speed": {"l": "Scan (mm/s)", "t": "range", "d": 1500, "mn": 500, "mx": 5000, "s": 250}, "layer_height": {"l": "Layer (μm)", "t": "range", "d": 50, "mn": 20, "mx": 100, "s": 5}, "hatch_spacing": {"l": "Hatch (μm)", "t": "range", "d": 100, "mn": 50, "mx": 200, "s": 10}}], ["fdm_industrial", "FDM Industrial (Stratasys)", "FDM Industrial (Stratasys)", "Additive", "Heated chamber FDM for ULTEM, PEEK, PC, ABS.", "🏭", {"nozzle_temp": {"l": "Nozzle (°C)", "t": "range", "d": 380, "mn": 250, "mx": 500, "s": 10}, "chamber_temp": {"l": "Chamber (°C)", "t": "range", "d": 120, "mn": 60, "mx": 200, "s": 10}, "layer_height": {"l": "Layer (mm)", "t": "select", "d": 0.254, "o": [0.127, 0.178, 0.254, 0.33]}}], ["cbam", "CBAM", "Composite-Based AM", "Additive", "Carbon fiber/fiberglass sheets bonded + cut — strongest polymer parts.", "📜", {"layer_height": {"l": "Sheet (μm)", "t": "range", "d": 100, "mn": 50, "mx": 250, "s": 25}, "compaction_pressure": {"l": "Compaction (bar)", "t": "range", "d": 10, "mn": 1, "mx": 30, "s": 1}}], ["inkjet_printing", "Industrial Inkjet / 3DP", "Industrial Inkjet / 3DP", "Additive", "Full-color gypsum/polymer powder — architectural models.", "🖨️", {"layer_height": {"l": "Layer (μm)", "t": "range", "d": 100, "mn": 80, "mx": 150, "s": 10}, "color_resolution": {"l": "Color DPI", "t": "select", "d": 600, "o": [300, 600, 1200]}}], ["peek_printing", "PEEK / PEKK High-Temp 3D Printing", "PEEK / PEKK High-Temp 3D Printing", "Additive", "Extreme-temp FDM (400°C+) for aerospace polymer parts.", "🚀", {"nozzle_temp": {"l": "Nozzle (°C)", "t": "range", "d": 420, "mn": 350, "mx": 500, "s": 10}, "bed_temp": {"l": "Bed (°C)", "t": "range", "d": 180, "mn": 120, "mx": 230, "s": 10}, "chamber_temp": {"l": "Chamber (°C)", "t": "range", "d": 140, "mn": 70, "mx": 200, "s": 10}, "print_speed": {"l": "Speed (mm/s)", "t": "range", "d": 25, "mn": 5, "mx": 60, "s": 5}}], ["rapid_liquid_printing", "Rapid Liquid Printing (RLP)", "Rapid Liquid Printing (RLP)", "Additive", "Extrudes into gel suspension — no supports, large flexible parts.", "🫧", {"extrusion_speed": {"l": "Extrusion (mm/s)", "t": "range", "d": 100, "mn": 20, "mx": 400, "s": 20}, "nozzle_diameter": {"l": "Nozzle (mm)", "t": "select", "d": 1.0, "o": [0.5, 1.0, 2.0, 4.0]}}], ["additive_friction_stir", "Additive Friction Stir Deposition", "Additive Friction Stir Deposition", "Additive", "Solid-state AM — rotating tool plasticizes and deposits metal.", "🔀", {"rotation_speed": {"l": "Rotation (RPM)", "t": "range", "d": 600, "mn": 200, "mx": 2000, "s": 100}, "feed_rate": {"l": "Feed (mm/min)", "t": "range", "d": 150, "mn": 25, "mx": 500, "s": 25}, "actuator_force": {"l": "Force (kN)", "t": "range", "d": 10, "mn": 1, "mx": 50, "s": 1}}], ["cnc_mill_3axis", "CNC Mill", "3-Axis", "Subtractive", "Rotating cutting tool removes material — X/Y/Z linear motion.", "⚙️", {"spindle_speed": {"l": "Spindle (RPM)", "t": "range", "d": 10000, "mn": 500, "mx": 30000, "s": 500}, "feed_rate": {"l": "Feed (mm/min)", "t": "range", "d": 800, "mn": 50, "mx": 5000, "s": 50}, "depth_of_cut": {"l": "DOC (mm)", "t": "range", "d": 1, "mn": 0.1, "mx": 10, "s": 0.1}, "tool_diameter": {"l": "Tool (mm)", "t": "select", "d": 6, "o": [0.5, 1, 2, 3, 6, 10, 12, 20]}, "stepover": {"l": "Stepover (%)", "t": "range", "d": 40, "mn": 5, "mx": 95, "s": 5}, "coolant": {"l": "Coolant", "t": "select", "d": "Flood", "o": ["Off", "Mist", "Flood", "Through-Tool", "MQL"]}, "material": {"l": "Material", "t": "select", "d": "Aluminum", "o": ["Aluminum", "Steel", "Stainless", "Brass", "Titanium", "Acrylic", "Wood", "Foam"]}, "tool_type": {"l": "Tool Type", "t": "select", "d": "Flat End Mill", "o": ["Flat End Mill", "Ball Nose", "V-Bit", "Chamfer", "Drill", "Face Mill"]}, "ramp_angle": {"l": "Ramp Angle (°)", "t": "range", "d": 5, "mn": 1, "mx": 30, "s": 1}, "roughing_stepover": {"l": "Rough Stepover (%)", "t": "range", "d": 50, "mn": 10, "mx": 90, "s": 5}, "finish_pass": {"l": "Finish Pass", "t": "select", "d": "Yes", "o": ["Yes", "No"]}, "finish_doc": {"l": "Finish DOC (mm)", "t": "range", "d": 0.2, "mn": 0.05, "mx": 2, "s": 0.05}, "rpm_override": {"l": "RPM Override (%)", "t": "range", "d": 100, "mn": 50, "mx": 150, "s": 5}, "plunge_rate": {"l": "Plunge Rate (mm/min)", "t": "range", "d": 400, "mn": 50, "mx": 3000, "s": 50}, "retract_height": {"l": "Retract Ht (mm)", "t": "range", "d": 5, "mn": 1, "mx": 25, "s": 1}, "tolerance": {"l": "Tolerance (mm)", "t": "range", "d": 0.01, "mn": 0.001, "mx": 0.5, "s": 0.005}, "direction": {"l": "Cut Direction", "t": "select", "d": "Climb", "o": ["Climb", "Conventional", "Mixed"]}, "lead_in_radius": {"l": "Lead-In Radius (mm)", "t": "range", "d": 3, "mn": 0, "mx": 20, "s": 1}, "chip_load": {"l": "Chip Load (mm/tooth)", "t": "range", "d": 0.1, "mn": 0.01, "mx": 0.5, "s": 0.01}, "tool_number": {"l": "Tool #", "t": "select", "d": 1, "o": [1, 2, 3, 4, 5, 6, 8, 10]}, "stepdown": {"l": "Stepdown (mm)", "t": "range", "d": 2, "mn": 0.1, "mx": 10, "s": 0.1}}], ["cnc_mill_5axis", "CNC Mill", "5-Axis", "Subtractive", "5-axis simultaneous — complex geometries, turbine blades.", "⭐", {"spindle_speed": {"l": "Spindle (RPM)", "t": "range", "d": 15000, "mn": 1000, "mx": 40000, "s": 1000}, "feed_rate": {"l": "Feed (mm/min)", "t": "range", "d": 2000, "mn": 100, "mx": 10000, "s": 100}, "tool_diameter": {"l": "Tool (mm)", "t": "select", "d": 6, "o": [1, 2, 4, 6, 10, 16]}, "a_axis_limit": {"l": "A-Axis (°)", "t": "range", "d": 120, "mn": 30, "mx": 360, "s": 10}}], ["cnc_router", "CNC Router", "CNC Router", "Subtractive", "Gantry-style — wood, plastics, aluminum sheet, large format.", "🪚", {"spindle_speed": {"l": "Spindle (RPM)", "t": "range", "d": 16000, "mn": 5000, "mx": 24000, "s": 1000}, "feed_rate": {"l": "Feed (mm/min)", "t": "range", "d": 3000, "mn": 500, "mx": 15000, "s": 250}, "depth_per_pass": {"l": "Depth/Pass (mm)", "t": "range", "d": 3, "mn": 0.5, "mx": 15, "s": 0.5}, "tool_diameter": {"l": "Tool (mm)", "t": "select", "d": 6.35, "o": [3.175, 6, 6.35, 12.7]}}], ["laser_cutting", "Laser Cutting", "Laser Cutting", "Subtractive", "CO₂/fiber laser cuts sheet — steel, acrylic, wood, fabric.", "💥", {"laser_power": {"l": "Laser (W)", "t": "range", "d": 150, "mn": 10, "mx": 12000, "s": 10}, "cut_speed": {"l": "Cut Speed (mm/s)", "t": "range", "d": 50, "mn": 1, "mx": 1000, "s": 5}, "passes": {"l": "Passes", "t": "range", "d": 1, "mn": 1, "mx": 10, "s": 1}, "focal_length": {"l": "Focal (mm)", "t": "select", "d": 50.8, "o": [38.1, 50.8, 63.5, 76.2, 101.6]}, "gas_assist": {"l": "Gas", "t": "select", "d": "Air", "o": ["None", "Air", "N₂", "O₂"]}, "material": {"l": "Material", "t": "select", "d": "Acrylic", "o": ["Acrylic", "Plywood", "MDF", "Cardboard", "Leather", "Anodized Alum", "Stainless (fiber)"]}, "material_thickness": {"l": "Thickness (mm)", "t": "range", "d": 3, "mn": 0.5, "mx": 25, "s": 0.5}, "kerf_offset": {"l": "Kerf Offset (mm)", "t": "range", "d": 0.1, "mn": 0, "mx": 0.5, "s": 0.01}, "corner_power": {"l": "Corner Power (%)", "t": "range", "d": 80, "mn": 50, "mx": 100, "s": 5}, "air_assist": {"l": "Air Assist", "t": "select", "d": "High", "o": ["Off", "Low", "High"]}, "pulse_frequency": {"l": "Pulse Freq (Hz)", "t": "range", "d": 5000, "mn": 100, "mx": 50000, "s": 500}, "min_power": {"l": "Min Power (%)", "t": "range", "d": 10, "mn": 1, "mx": 50, "s": 1}, "acceleration": {"l": "Acceleration (mm/s²)", "t": "range", "d": 1000, "mn": 100, "mx": 5000, "s": 100}, "z_offset": {"l": "Z Offset (mm)", "t": "range", "d": 0, "mn": -10, "mx": 10, "s": 0.5}, "beam_diameter": {"l": "Beam Ø (mm)", "t": "range", "d": 0.2, "mn": 0.05, "mx": 0.5, "s": 0.05}, "overscan": {"l": "Overscan (%)", "t": "range", "d": 2, "mn": 0, "mx": 20, "s": 1}, "gas_type": {"l": "Assist Gas", "t": "select", "d": "Air", "o": ["Air", "N₂", "O₂", "Ar", "He", "None"]}, "gas_pressure": {"l": "Gas Pressure (bar)", "t": "range", "d": 5, "mn": 0.5, "mx": 20, "s": 0.5}, "nozzle_diameter": {"l": "Nozzle Ø (mm)", "t": "select", "d": 1.5, "o": [0.8, 1.0, 1.5, 2.0, 2.5, 3.0]}, "pierce_time": {"l": "Pierce Time (ms)", "t": "range", "d": 200, "mn": 10, "mx": 2000, "s": 50}}], ["laser_engraving", "Laser Engraving", "Laser Engraving", "Subtractive", "Laser removes surface material for marking/etching.", "✨", {"laser_power": {"l": "Power (%)", "t": "range", "d": 40, "mn": 5, "mx": 100, "s": 5}, "engrave_speed": {"l": "Speed (mm/s)", "t": "range", "d": 500, "mn": 50, "mx": 2000, "s": 50}, "dpi": {"l": "DPI", "t": "select", "d": 318, "o": [127, 254, 318, 508, 635]}}], ["plasma_cutting", "Plasma Cutting", "Plasma Cutting", "Subtractive", "Ionized gas cuts conductive metals — steel up to 50mm.", "☄️", {"current": {"l": "Current (A)", "t": "range", "d": 85, "mn": 20, "mx": 400, "s": 5}, "cut_speed": {"l": "Cut (mm/min)", "t": "range", "d": 1500, "mn": 100, "mx": 6000, "s": 100}, "pierce_height": {"l": "Pierce (mm)", "t": "range", "d": 3.8, "mn": 1, "mx": 10, "s": 0.5}, "cut_height": {"l": "Cut Ht (mm)", "t": "range", "d": 1.5, "mn": 0.5, "mx": 5, "s": 0.1}, "gas_pressure": {"l": "Gas (bar)", "t": "range", "d": 5.5, "mn": 3, "mx": 10, "s": 0.5}, "material": {"l": "Material", "t": "select", "d": "Mild Steel", "o": ["Mild Steel", "Stainless", "Aluminum", "Copper"]}, "material_thickness": {"l": "Thickness (mm)", "t": "range", "d": 6, "mn": 1, "mx": 50, "s": 1}, "kerf_width": {"l": "Kerf (mm)", "t": "range", "d": 1.5, "mn": 0.5, "mx": 5, "s": 0.1}, "lead_in": {"l": "Lead-In Type", "t": "select", "d": "Arc", "o": ["Arc", "Line", "None"]}, "thc_enabled": {"l": "Torch Height Ctrl", "t": "select", "d": "On", "o": ["On", "Off"]}}], ["waterjet", "Waterjet Cutting", "Waterjet Cutting", "Subtractive", "Ultra-high-pressure water (60k+ PSI) with abrasive — any material.", "🌊", {"pressure": {"l": "Pressure (PSI)", "t": "range", "d": 60000, "mn": 20000, "mx": 90000, "s": 5000}, "cut_speed": {"l": "Cut (mm/min)", "t": "range", "d": 250, "mn": 10, "mx": 2000, "s": 25}, "abrasive_flow": {"l": "Abrasive (g/min)", "t": "range", "d": 400, "mn": 100, "mx": 800, "s": 50}, "nozzle_diameter": {"l": "Nozzle (mm)", "t": "select", "d": 0.35, "o": [0.25, 0.35, 0.5, 0.75, 1.0]}, "standoff": {"l": "Standoff (mm)", "t": "range", "d": 3, "mn": 1, "mx": 10, "s": 0.5}, "material": {"l": "Material", "t": "select", "d": "Steel", "o": ["Steel", "Stainless", "Aluminum", "Titanium", "Glass", "Stone", "Composite", "Rubber"]}, "material_thickness": {"l": "Thickness (mm)", "t": "range", "d": 10, "mn": 1, "mx": 200, "s": 1}, "quality": {"l": "Quality", "t": "select", "d": "Q3 Production", "o": ["Q1 Rough", "Q3 Production", "Q5 Fine"]}, "taper_compensation": {"l": "Taper Comp", "t": "select", "d": "Auto", "o": ["None", "Auto", "Manual"]}, "pierce_time": {"l": "Pierce (s)", "t": "range", "d": 5, "mn": 1, "mx": 30, "s": 1}, "garnet_mesh": {"l": "Garnet Mesh", "t": "select", "d": "#80", "o": ["#50", "#80", "#120", "#220"]}, "mixing_tube": {"l": "Mix Tube Ø (mm)", "t": "select", "d": 0.75, "o": [0.5, 0.75, 1.0, 1.25]}, "vacuum_assist": {"l": "Vacuum Assist", "t": "select", "d": "Off", "o": ["On", "Off"]}, "lead_in_speed": {"l": "Lead-In Speed (%)", "t": "range", "d": 50, "mn": 10, "mx": 100, "s": 10}, "kerf_compensation": {"l": "Kerf Comp (mm)", "t": "range", "d": 0.3, "mn": 0, "mx": 2, "s": 0.05}}], ["edm_sinker", "EDM", "Sinker/Die-Sinking", "Subtractive", "Shaped electrode erodes via electrical discharges — mold cavities.", "⚡", {"voltage": {"l": "Voltage (V)", "t": "range", "d": 120, "mn": 40, "mx": 300, "s": 10}, "current": {"l": "Current (A)", "t": "range", "d": 25, "mn": 1, "mx": 100, "s": 5}, "pulse_on": {"l": "Pulse On (μs)", "t": "range", "d": 100, "mn": 1, "mx": 2000, "s": 50}, "pulse_off": {"l": "Pulse Off (μs)", "t": "range", "d": 50, "mn": 1, "mx": 2000, "s": 25}, "gap": {"l": "Spark Gap (μm)", "t": "range", "d": 50, "mn": 10, "mx": 200, "s": 10}}], ["edm_wire", "EDM", "Wire", "Subtractive", "Thin brass wire cuts thick metal — ±2μm precision.", "🪡", {"voltage": {"l": "Voltage (V)", "t": "range", "d": 100, "mn": 50, "mx": 300, "s": 10}, "wire_speed": {"l": "Wire (mm/s)", "t": "range", "d": 10, "mn": 1, "mx": 30, "s": 1}, "wire_diameter": {"l": "Wire Ø (mm)", "t": "select", "d": 0.25, "o": [0.1, 0.15, 0.2, 0.25, 0.3]}, "flush_pressure": {"l": "Flush (bar)", "t": "range", "d": 8, "mn": 1, "mx": 30, "s": 1}}], ["drill_press", "Drill Press / Bench Drill", "Drill Press / Bench Drill", "Subtractive", "Fixed vertical drilling — holes, countersinking, reaming.", "🕳️", {"spindle_speed": {"l": "Spindle (RPM)", "t": "range", "d": 1500, "mn": 200, "mx": 4000, "s": 100}, "feed_rate": {"l": "Feed (mm/rev)", "t": "range", "d": 0.1, "mn": 0.05, "mx": 0.5, "s": 0.05}, "drill_diameter": {"l": "Bit (mm)", "t": "select", "d": 4, "o": [0.5, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16]}, "peck_depth": {"l": "Peck (mm)", "t": "range", "d": 5, "mn": 1, "mx": 20, "s": 1}}], ["lathe", "CNC Lathe / Turning", "CNC Lathe / Turning", "Subtractive", "Workpiece rotates, tool moves — shafts, bushings, threads.", "🌀", {"spindle_speed": {"l": "Spindle (RPM)", "t": "range", "d": 1500, "mn": 100, "mx": 5000, "s": 100}, "feed_rate": {"l": "Feed (mm/rev)", "t": "range", "d": 0.15, "mn": 0.02, "mx": 2, "s": 0.02}, "depth_of_cut": {"l": "DOC (mm)", "t": "range", "d": 2, "mn": 0.1, "mx": 10, "s": 0.1}, "tool_nose_radius": {"l": "Nose (mm)", "t": "select", "d": 0.8, "o": [0.2, 0.4, 0.8, 1.2, 1.6]}}], ["broaching", "Broaching", "Broaching", "Subtractive", "Multi-tooth tool pushed through — keyways, splines.", "🪥", {"cutting_speed": {"l": "Cut (m/min)", "t": "range", "d": 5, "mn": 1, "mx": 15, "s": 0.5}, "rise_per_tooth": {"l": "Rise/tooth (μm)", "t": "range", "d": 50, "mn": 10, "mx": 200, "s": 10}}], ["grinding", "Surface Grinding", "Surface Grinding", "Subtractive", "Abrasive wheel for precision flat surfaces — ±1μm.", "🪨", {"wheel_speed": {"l": "Wheel (RPM)", "t": "range", "d": 3000, "mn": 1000, "mx": 6000, "s": 250}, "feed_rate": {"l": "Feed (mm/min)", "t": "range", "d": 300, "mn": 50, "mx": 1000, "s": 25}, "depth_per_pass": {"l": "Depth (μm)", "t": "range", "d": 10, "mn": 2, "mx": 50, "s": 2}, "grit": {"l": "Grit", "t": "select", "d": 80, "o": [46, 60, 80, 100, 120, 180, 240]}}], ["honing", "Honing", "Honing", "Subtractive", "Abrasive stones expand inside bores — perfect cylinder finish.", "🔧", {"rotation_speed": {"l": "Rotation (RPM)", "t": "range", "d": 200, "mn": 50, "mx": 500, "s": 25}, "stroke_speed": {"l": "Stroke (m/min)", "t": "range", "d": 15, "mn": 5, "mx": 30, "s": 1}, "grit": {"l": "Grit", "t": "select", "d": 220, "o": [80, 120, 180, 220, 320, 400]}}], ["electrochemical_machining", "ECM", "Electrochemical", "Subtractive", "Electrolytic dissolution — no wear, no heat, mirror finish.", "🔋", {"voltage": {"l": "Voltage (V)", "t": "range", "d": 15, "mn": 5, "mx": 30, "s": 1}, "current_density": {"l": "Current (A/cm²)", "t": "range", "d": 150, "mn": 10, "mx": 500, "s": 10}, "feed_rate": {"l": "Feed (mm/min)", "t": "range", "d": 1, "mn": 0.1, "mx": 5, "s": 0.1}}], ["ultrasonic_machining", "Ultrasonic Machining", "Ultrasonic Machining", "Subtractive", "Ultrasonic vibration + abrasive slurry — glass, ceramic, silicon.", "🔊", {"frequency": {"l": "Freq (kHz)", "t": "range", "d": 20, "mn": 15, "mx": 40, "s": 5}, "amplitude": {"l": "Amplitude (μm)", "t": "range", "d": 40, "mn": 5, "mx": 100, "s": 5}, "grit": {"l": "Grit", "t": "select", "d": 400, "o": [240, 320, 400, 600, 800]}}], ["waterjet_milling", "Abrasive Waterjet Milling", "Abrasive Waterjet Milling", "Subtractive", "Controlled-depth waterjet erosion — 3D surfaces.", "💦", {"pressure": {"l": "Pressure (PSI)", "t": "range", "d": 30000, "mn": 10000, "mx": 60000, "s": 5000}, "traverse_speed": {"l": "Traverse (mm/s)", "t": "range", "d": 25, "mn": 5, "mx": 100, "s": 5}, "stepover": {"l": "Stepover (mm)", "t": "range", "d": 0.5, "mn": 0.1, "mx": 5, "s": 0.1}}], ["micro_machining", "Micro-Machining", "Micro-Machining", "Subtractive", "Ultra-precision micro-milling — medical devices, MEMS.", "🔬", {"spindle_speed": {"l": "Spindle (RPM)", "t": "range", "d": 80000, "mn": 20000, "mx": 200000, "s": 10000}, "feed_rate": {"l": "Feed (mm/min)", "t": "range", "d": 50, "mn": 1, "mx": 500, "s": 10}, "tool_diameter": {"l": "Tool (μm)", "t": "select", "d": 200, "o": [50, 100, 200, 500, 1000]}, "depth_of_cut": {"l": "DOC (μm)", "t": "range", "d": 10, "mn": 1, "mx": 100, "s": 1}}], ["kuka_robotic_milling", "Robotic Arm Milling", "Robotic Arm Milling", "Subtractive", "6-axis industrial robot with spindle — large foam/wood/composites.", "🦾", {"spindle_speed": {"l": "Spindle (RPM)", "t": "range", "d": 12000, "mn": 3000, "mx": 24000, "s": 1000}, "feed_rate": {"l": "Feed (mm/min)", "t": "range", "d": 3000, "mn": 500, "mx": 10000, "s": 250}, "tool_diameter": {"l": "Tool (mm)", "t": "select", "d": 10, "o": [6, 10, 16, 25, 40]}, "reach": {"l": "Reach (m)", "t": "select", "d": 2.1, "o": [1.4, 1.8, 2.1, 2.5, 3.1]}}], ["chemical_milling", "Chemical Milling / Etching", "Chemical Milling / Etching", "Subtractive", "Masked metal in chemical etchant — aerospace skins, PCBs.", "🧪", {"etchant_temp": {"l": "Etchant (°C)", "t": "range", "d": 45, "mn": 30, "mx": 60, "s": 5}, "etch_rate": {"l": "Etch (μm/min)", "t": "range", "d": 40, "mn": 10, "mx": 100, "s": 5}, "mask_material": {"l": "Mask", "t": "select", "d": "Photoresist", "o": ["Photoresist", "Vinyl", "Silk Screen", "Tape"]}}], ["gear_hobbing", "Gear Hobbing", "Gear Hobbing", "Subtractive", "Rotating hob cutter generates gear teeth — spur, helical.", "⚙️", {"hob_speed": {"l": "Hob (RPM)", "t": "range", "d": 200, "mn": 50, "mx": 400, "s": 25}, "feed_rate": {"l": "Feed (mm/rev)", "t": "range", "d": 2, "mn": 0.5, "mx": 5, "s": 0.25}, "module": {"l": "Module (mm)", "t": "select", "d": 2, "o": [0.5, 1, 1.5, 2, 3, 4, 6, 8]}}], ["edm_hole_drilling", "EDM Hole Drilling", "EDM Hole Drilling", "Subtractive", "Rotating hollow electrode — turbine blade cooling holes.", "🕳️", {"voltage": {"l": "Voltage (V)", "t": "range", "d": 120, "mn": 60, "mx": 300, "s": 10}, "current": {"l": "Current (A)", "t": "range", "d": 20, "mn": 5, "mx": 50, "s": 5}, "electrode_diameter": {"l": "Electrode (mm)", "t": "select", "d": 1.0, "o": [0.3, 0.5, 1.0, 2.0, 3.0]}, "rotation_speed": {"l": "Rotation (RPM)", "t": "range", "d": 500, "mn": 100, "mx": 1000, "s": 50}}], ["photochemical_machining", "Photochemical Machining", "Photochemical Machining", "Subtractive", "UV-exposed photoresist + etchant — precision thin metal parts.", "📸", {"etch_rate": {"l": "Etch (μm/min)", "t": "range", "d": 25, "mn": 5, "mx": 50, "s": 5}, "etchant": {"l": "Etchant", "t": "select", "d": "Ferric Chloride", "o": ["Ferric Chloride", "Cupric Chloride", "Nitric Acid"]}, "material_thickness": {"l": "Max Thk (mm)", "t": "range", "d": 1, "mn": 0.01, "mx": 2.5, "s": 0.1}}], ["diamond_turning", "Single-Point Diamond Turning", "Single-Point Diamond Turning", "Subtractive", "Diamond tool on ultra-precision lathe — optical surfaces.", "💎", {"spindle_speed": {"l": "Spindle (RPM)", "t": "range", "d": 2000, "mn": 500, "mx": 5000, "s": 250}, "feed_rate": {"l": "Feed (μm/rev)", "t": "range", "d": 10, "mn": 1, "mx": 50, "s": 1}, "depth_of_cut": {"l": "DOC (μm)", "t": "range", "d": 10, "mn": 1, "mx": 100, "s": 1}, "tool_radius": {"l": "Tool (mm)", "t": "select", "d": 0.5, "o": [0.1, 0.25, 0.5, 1.0, 1.5]}}], ["injection_molding", "Injection Molding", "Injection Molding", "Forming", "Molten plastic injected into steel mold — mass production.", "💉", {"melt_temp": {"l": "Melt (°C)", "t": "range", "d": 230, "mn": 150, "mx": 400, "s": 10}, "mold_temp": {"l": "Mold (°C)", "t": "range", "d": 60, "mn": 20, "mx": 150, "s": 5}, "injection_pressure": {"l": "Pressure (bar)", "t": "range", "d": 1500, "mn": 500, "mx": 3000, "s": 100}, "injection_speed": {"l": "Speed (mm/s)", "t": "range", "d": 80, "mn": 10, "mx": 200, "s": 10}, "cooling_time": {"l": "Cooling (s)", "t": "range", "d": 25, "mn": 5, "mx": 120, "s": 5}, "material": {"l": "Material", "t": "select", "d": "ABS", "o": ["ABS", "PC", "PP", "PA66", "POM", "PMMA", "TPE", "PEEK"]}, "mold_steel": {"l": "Mold Steel", "t": "select", "d": "P20", "o": ["P20", "H13", "S136", "NAK80", "420SS"]}, "cavities": {"l": "Cavities", "t": "range", "d": 4, "mn": 1, "mx": 128, "s": 1}, "runner_type": {"l": "Runner", "t": "select", "d": "Cold", "o": ["Cold", "Hot", "Insulated"]}, "gate_type": {"l": "Gate Type", "t": "select", "d": "Edge", "o": ["Edge", "Pin", "Submarine", "Fan", "Diaphragm"]}, "holding_pressure": {"l": "Hold Press (bar)", "t": "range", "d": 800, "mn": 200, "mx": 2000, "s": 50}, "holding_time": {"l": "Hold Time (s)", "t": "range", "d": 8, "mn": 1, "mx": 30, "s": 1}}], ["blow_molding", "Blow Molding", "Blow Molding", "Forming", "Air inflates heated plastic tube in mold — bottles, containers.", "🎈", {"parison_temp": {"l": "Parison (°C)", "t": "range", "d": 190, "mn": 140, "mx": 260, "s": 10}, "blow_pressure": {"l": "Blow (bar)", "t": "range", "d": 8, "mn": 3, "mx": 15, "s": 1}, "mold_temp": {"l": "Mold (°C)", "t": "range", "d": 30, "mn": 10, "mx": 80, "s": 5}}], ["thermoforming", "Thermoforming (Vacuum)", "Thermoforming (Vacuum)", "Forming", "Heated plastic sheet formed over mold by vacuum — packaging, trays, blisters.", "🫙", {"sheet_temp": {"l": "Sheet (°C)", "t": "range", "d": 160, "mn": 120, "mx": 200, "s": 10}, "vacuum_level": {"l": "Vacuum (mbar)", "t": "range", "d": 500, "mn": 100, "mx": 900, "s": 50}, "sheet_thickness": {"l": "Thick (mm)", "t": "range", "d": 1, "mn": 0.2, "mx": 10, "s": 0.25}}], ["rotational_molding", "Rotational Molding (Rotomolding)", "Rotational Molding (Rotomolding)", "Forming", "Powder melted in rotating mold — large hollow parts, kayaks, tanks.", "🔄", {"mold_temp": {"l": "Mold (°C)", "t": "range", "d": 260, "mn": 180, "mx": 350, "s": 10}, "rotation_speed": {"l": "Speed (RPM)", "t": "range", "d": 8, "mn": 2, "mx": 20, "s": 1}, "cycle_time": {"l": "Cycle (min)", "t": "range", "d": 25, "mn": 10, "mx": 60, "s": 5}}], ["compression_molding", "Compression Molding", "Compression Molding", "Forming", "Preheated material compressed in heated mold — SMC/BMC automotive panels.", "🗜️", {"mold_temp": {"l": "Mold (°C)", "t": "range", "d": 150, "mn": 140, "mx": 180, "s": 5}, "pressure": {"l": "Pressure (bar)", "t": "range", "d": 100, "mn": 50, "mx": 200, "s": 25}, "cure_time": {"l": "Cure (min)", "t": "range", "d": 3, "mn": 1, "mx": 15, "s": 1}}], ["heat_press", "Heat Press / Sublimation", "Heat Press / Sublimation", "Forming", "Heat + pressure transfers designs — fabric, mugs, plates.", "🔥", {"temperature": {"l": "Temp (°C)", "t": "range", "d": 190, "mn": 100, "mx": 250, "s": 5}, "pressure": {"l": "Pressure (kg)", "t": "range", "d": 5, "mn": 1, "mx": 20, "s": 1}, "press_time": {"l": "Time (s)", "t": "range", "d": 45, "mn": 5, "mx": 180, "s": 5}}], ["metal_stamping", "Metal Stamping", "Metal Stamping", "Forming", "Sheet metal formed between punch and die — automotive panels.", "🔨", {"press_force": {"l": "Force (ton)", "t": "range", "d": 100, "mn": 5, "mx": 2000, "s": 10}, "stroke_rate": {"l": "Strokes/min", "t": "range", "d": 200, "mn": 10, "mx": 1200, "s": 50}, "material_thickness": {"l": "Thickness (mm)", "t": "range", "d": 1, "mn": 0.1, "mx": 10, "s": 0.1}}], ["deep_drawing", "Deep Drawing", "Deep Drawing", "Forming", "Sheet metal drawn into die cavity — cans, sinks, pots.", "🥫", {"blankholder_force": {"l": "Blankholder (kN)", "t": "range", "d": 200, "mn": 10, "mx": 1000, "s": 10}, "punch_speed": {"l": "Punch (mm/s)", "t": "range", "d": 20, "mn": 1, "mx": 100, "s": 5}, "draw_ratio": {"l": "Draw Ratio", "t": "range", "d": 1.8, "mn": 1.2, "mx": 3.0, "s": 0.1}}], ["extrusion", "Plastic Extrusion", "Plastic Extrusion", "Forming", "Molten plastic pushed through die — pipes, profiles, filament.", "🍝", {"barrel_temp": {"l": "Barrel (°C)", "t": "range", "d": 210, "mn": 150, "mx": 350, "s": 10}, "screw_speed": {"l": "Screw (RPM)", "t": "range", "d": 80, "mn": 10, "mx": 200, "s": 10}, "die_temp": {"l": "Die (°C)", "t": "range", "d": 220, "mn": 150, "mx": 350, "s": 5}, "pull_speed": {"l": "Pull (m/min)", "t": "range", "d": 10, "mn": 0.5, "mx": 50, "s": 1}}], ["metal_extrusion", "Metal Extrusion", "Metal Extrusion", "Forming", "Heated metal billet forced through die — aluminum profiles.", "🏭", {"billet_temp": {"l": "Billet (°C)", "t": "range", "d": 450, "mn": 300, "mx": 600, "s": 25}, "ram_speed": {"l": "Ram (mm/s)", "t": "range", "d": 20, "mn": 1, "mx": 100, "s": 5}, "extrusion_ratio": {"l": "Ratio", "t": "range", "d": 50, "mn": 5, "mx": 200, "s": 5}}], ["forging", "Drop Forging", "Drop Forging", "Forming", "Heated metal shaped by repeated hammer blows — wrenches, gears.", "⚒️", {"forging_temp": {"l": "Temp (°C)", "t": "range", "d": 1100, "mn": 800, "mx": 1300, "s": 50}, "hammer_energy": {"l": "Energy (kJ)", "t": "range", "d": 50, "mn": 5, "mx": 500, "s": 10}, "blow_rate": {"l": "Blows/min", "t": "range", "d": 100, "mn": 30, "mx": 300, "s": 10}}], ["roll_forming", "Roll Forming", "Roll Forming", "Forming", "Continuous bending of metal strips — roofing, rails.", "〰️", {"line_speed": {"l": "Line (m/min)", "t": "range", "d": 20, "mn": 1, "mx": 60, "s": 1}, "roll_diameter": {"l": "Roll (mm)", "t": "range", "d": 200, "mn": 50, "mx": 500, "s": 25}, "number_of_stands": {"l": "Stands", "t": "range", "d": 16, "mn": 6, "mx": 40, "s": 2}}], ["spinning", "Metal Spinning", "Metal Spinning", "Forming", "Disc rotated and formed over mandrel — lampshades, cones.", "🏺", {"spindle_speed": {"l": "Spindle (RPM)", "t": "range", "d": 800, "mn": 200, "mx": 3000, "s": 100}, "feed_rate": {"l": "Feed (mm/rev)", "t": "range", "d": 0.5, "mn": 0.1, "mx": 3, "s": 0.1}, "roller_diameter": {"l": "Roller (mm)", "t": "select", "d": 38, "o": [15, 25, 38, 50]}}], ["superplastic_forming", "Superplastic Forming (SPF)", "Superplastic Forming (SPF)", "Forming", "Fine-grain metal stretches like gum at high temp — complex Ti/Al panels.", "🫠", {"temperature": {"l": "Temp (°C)", "t": "range", "d": 900, "mn": 800, "mx": 950, "s": 25}, "strain_rate": {"l": "Strain Rate (1/s)", "t": "range", "d": 0.001, "mn": 0.0001, "mx": 0.01, "s": 0.0005}, "gas_pressure": {"l": "Pressure (bar)", "t": "range", "d": 20, "mn": 5, "mx": 50, "s": 5}}], ["hydroforming", "Hydroforming (Sheet/ Tube)", "Hydroforming (Sheet/ Tube)", "Forming", "Fluid pressure forms metal against die — complex shapes, automotive frames.", "🌊", {"fluid_pressure": {"l": "Pressure (bar)", "t": "range", "d": 1500, "mn": 200, "mx": 4000, "s": 250}, "material": {"l": "Material", "t": "select", "d": "Aluminum", "o": ["Aluminum", "Steel", "Stainless", "Titanium", "Copper"]}, "blank_thickness": {"l": "Thick (mm)", "t": "range", "d": 1.5, "mn": 0.5, "mx": 6, "s": 0.25}}], ["isostatic_pressing", "Isostatic Pressing", "Isostatic Pressing", "Forming", "Uniform pressure via fluid/gas — powder, ceramic densification.", "📦", {"pressure": {"l": "Pressure (bar)", "t": "range", "d": 1000, "mn": 200, "mx": 5000, "s": 100}, "temperature": {"l": "Temp (°C)", "t": "range", "d": 1100, "mn": 20, "mx": 2000, "s": 50}, "hold_time": {"l": "Hold (h)", "t": "range", "d": 4, "mn": 1, "mx": 24, "s": 1}}], ["sheet_bending", "CNC Press Brake", "CNC Press Brake", "Forming", "Precision bending between punch and V-die — enclosures.", "📐", {"bend_angle": {"l": "Angle (°)", "t": "range", "d": 90, "mn": 15, "mx": 165, "s": 5}, "bend_force": {"l": "Force (ton)", "t": "range", "d": 50, "mn": 5, "mx": 500, "s": 5}, "die_opening": {"l": "V-Die (mm)", "t": "select", "d": 12, "o": [6, 8, 10, 12, 16, 24, 32]}, "backgauge": {"l": "Backgauge (mm)", "t": "range", "d": 50, "mn": 5, "mx": 500, "s": 1}}], ["tube_bending", "CNC Tube Bending", "CNC Tube Bending", "Forming", "Mandrel/rotary-draw tube bending — exhausts, roll cages.", "〽️", {"bend_radius": {"l": "Radius (mm)", "t": "range", "d": 50, "mn": 10, "mx": 500, "s": 5}, "bend_angle": {"l": "Angle (°)", "t": "range", "d": 90, "mn": 5, "mx": 180, "s": 5}, "tube_diameter": {"l": "Tube OD (mm)", "t": "select", "d": 25, "o": [6, 10, 16, 25, 38, 50, 76]}, "wall_thickness": {"l": "Wall (mm)", "t": "select", "d": 1.5, "o": [0.5, 1, 1.5, 2, 3]}}], ["filament_winding", "Filament Winding", "Filament Winding", "Forming", "Resin-impregnated fibers wound on rotating mandrel — pressure vessels, pipes.", "🧵", {"winding_angle": {"l": "Angle (°)", "t": "range", "d": 55, "mn": 5, "mx": 85, "s": 5}, "mandrel_speed": {"l": "RPM", "t": "range", "d": 60, "mn": 10, "mx": 200, "s": 10}, "tension": {"l": "Tension (N)", "t": "range", "d": 50, "mn": 10, "mx": 200, "s": 10}}], ["pultrusion", "Pultrusion", "Pultrusion", "Forming", "Fibers pulled through resin bath and heated die — constant cross-section profiles.", "📏", {"pull_speed": {"l": "Speed (m/min)", "t": "range", "d": 0.5, "mn": 0.1, "mx": 3, "s": 0.1}, "die_temp": {"l": "Die (°C)", "t": "range", "d": 160, "mn": 120, "mx": 200, "s": 10}, "fiber_fraction": {"l": "Fiber Vol (%)", "t": "range", "d": 55, "mn": 30, "mx": 70, "s": 5}}], ["transfer_molding", "Transfer Molding", "Transfer Molding", "Forming", "Material preheated in pot then forced into mold — thermosets, electronics encapsulation.", "🫗", {"pot_temp": {"l": "Pot (°C)", "t": "range", "d": 90, "mn": 70, "mx": 120, "s": 5}, "transfer_pressure": {"l": "Pressure (bar)", "t": "range", "d": 80, "mn": 20, "mx": 200, "s": 20}, "mold_temp": {"l": "Mold (°C)", "t": "range", "d": 175, "mn": 150, "mx": 200, "s": 5}}], ["autoclave_cure", "Autoclave Composite Cure", "Autoclave Composite Cure", "Forming", "Vacuum-bagged prepreg cured — carbon fiber aerospace.", "🛸", {"temperature": {"l": "Temp (°C)", "t": "range", "d": 180, "mn": 100, "mx": 400, "s": 10}, "pressure": {"l": "Pressure (bar)", "t": "range", "d": 7, "mn": 3, "mx": 15, "s": 1}, "cure_time": {"l": "Cure (h)", "t": "range", "d": 4, "mn": 1, "mx": 24, "s": 1}, "ramp_rate": {"l": "Ramp (°C/min)", "t": "range", "d": 2, "mn": 0.5, "mx": 5, "s": 0.5}}], ["electroforming", "Electroforming", "Electroforming", "Finishing", "Thick metal deposition on mandrel — nickel screens, mold inserts, precision cavities.", "🔋", {"current_density": {"l": "Current (A/dm²)", "t": "range", "d": 5, "mn": 1, "mx": 20, "s": 1}, "bath_temp": {"l": "Bath (°C)", "t": "range", "d": 45, "mn": 20, "mx": 65, "s": 5}, "deposition_rate": {"l": "Rate (μm/h)", "t": "range", "d": 25, "mn": 5, "mx": 100, "s": 5}}], ["mig_welding", "MIG Welding (GMAW)", "MIG Welding (GMAW)", "Joining", "Continuous wire electrode + shielding gas — steel, aluminum.", "🔌", {"voltage": {"l": "Voltage (V)", "t": "range", "d": 22, "mn": 15, "mx": 40, "s": 0.5}, "wire_feed": {"l": "Wire Feed (m/min)", "t": "range", "d": 10, "mn": 2, "mx": 25, "s": 0.5}, "travel_speed": {"l": "Travel (mm/s)", "t": "range", "d": 8, "mn": 2, "mx": 20, "s": 0.5}, "gas_flow": {"l": "Gas (L/min)", "t": "range", "d": 15, "mn": 5, "mx": 30, "s": 1}, "wire_diameter": {"l": "Wire (mm)", "t": "select", "d": 1.0, "o": [0.6, 0.8, 1.0, 1.2, 1.6]}, "base_material": {"l": "Base Material", "t": "select", "d": "Mild Steel", "o": ["Mild Steel", "Stainless 304", "Stainless 316", "Aluminum 5052", "Aluminum 6061"]}, "material_thickness": {"l": "Thickness (mm)", "t": "range", "d": 6, "mn": 1, "mx": 25, "s": 1}, "joint_type": {"l": "Joint Type", "t": "select", "d": "Butt", "o": ["Butt", "Fillet", "Lap", "Corner", "Edge"]}, "position": {"l": "Position", "t": "select", "d": "Flat", "o": ["Flat", "Horizontal", "Vertical Up", "Overhead"]}, "shielding_gas": {"l": "Shielding Gas", "t": "select", "d": "75% Ar / 25% CO₂", "o": ["100% CO₂", "75% Ar / 25% CO₂", "90% Ar / 10% CO₂", "98% Ar / 2% O₂", "100% Ar"]}, "stickout": {"l": "Stickout (mm)", "t": "range", "d": 12, "mn": 6, "mx": 25, "s": 1}}], ["tig_welding", "TIG Welding (GTAW)", "TIG Welding (GTAW)", "Joining", "Tungsten electrode + separate filler rod — precision aerospace.", "🪄", {"current": {"l": "Current (A)", "t": "range", "d": 120, "mn": 5, "mx": 350, "s": 5}, "gas_flow": {"l": "Argon (L/min)", "t": "range", "d": 10, "mn": 5, "mx": 25, "s": 1}, "electrode_diameter": {"l": "Electrode (mm)", "t": "select", "d": 2.4, "o": [1.0, 1.6, 2.4, 3.2, 4.0]}, "pulse_freq": {"l": "Pulse (Hz)", "t": "range", "d": 100, "mn": 0.5, "mx": 500, "s": 10}, "material": {"l": "Material", "t": "select", "d": "Stainless", "o": ["Stainless", "Mild Steel", "Aluminum", "Titanium", "Inconel", "Copper", "Magnesium"]}, "tungsten_type": {"l": "Tungsten", "t": "select", "d": "2% Lanthanated", "o": ["2% Thoriated", "2% Lanthanated", "2% Ceriated", "Pure (green)", "Zirconiated"]}, "ac_balance": {"l": "AC Balance (%)", "t": "range", "d": 65, "mn": 10, "mx": 90, "s": 5}, "pulse_mode": {"l": "Pulse Mode", "t": "select", "d": "Off", "o": ["Off", "Slow (0.5-10Hz)", "Fast (10-500Hz)"]}, "filler_diameter": {"l": "Filler (mm)", "t": "select", "d": 1.6, "o": [0.8, 1.0, 1.6, 2.0, 2.4, 3.2]}}], ["stick_welding", "Stick Welding (SMAW)", "Stick Welding (SMAW)", "Joining", "Flux-coated electrode — construction, pipelines, outdoor.", "🪨", {"current": {"l": "Current (A)", "t": "range", "d": 120, "mn": 40, "mx": 300, "s": 10}, "electrode_diameter": {"l": "Electrode (mm)", "t": "select", "d": 3.2, "o": [2.0, 2.5, 3.2, 4.0, 5.0]}, "arc_force": {"l": "Arc Force (%)", "t": "range", "d": 30, "mn": 0, "mx": 100, "s": 10}}], ["laser_welding", "Laser Beam Welding", "Laser Beam Welding", "Joining", "Focused laser — narrow deep welds, automotive, battery tabs.", "🔆", {"laser_power": {"l": "Laser (W)", "t": "range", "d": 2000, "mn": 100, "mx": 10000, "s": 100}, "welding_speed": {"l": "Speed (mm/s)", "t": "range", "d": 50, "mn": 5, "mx": 200, "s": 5}, "focal_length": {"l": "Focal (mm)", "t": "select", "d": 150, "o": [100, 150, 200, 300]}, "shield_gas": {"l": "Gas", "t": "select", "d": "Ar", "o": ["Ar", "He", "N₂", "None"]}}], ["spot_welding", "Resistance Spot Welding", "Resistance Spot Welding", "Joining", "Electric current + pressure — car bodies, sheet metal.", "⚡", {"current": {"l": "Current (kA)", "t": "range", "d": 10, "mn": 2, "mx": 30, "s": 1}, "weld_time": {"l": "Weld (ms)", "t": "range", "d": 150, "mn": 40, "mx": 500, "s": 10}, "electrode_force": {"l": "Force (kN)", "t": "range", "d": 3, "mn": 0.5, "mx": 8, "s": 0.5}}], ["friction_welding", "Friction Welding", "Friction Welding", "Joining", "Rotating part pressed against stationary — friction bond.", "🔄", {"rotation_speed": {"l": "Speed (RPM)", "t": "range", "d": 2000, "mn": 500, "mx": 5000, "s": 250}, "friction_pressure": {"l": "Friction (bar)", "t": "range", "d": 80, "mn": 20, "mx": 200, "s": 10}, "forge_pressure": {"l": "Forge (bar)", "t": "range", "d": 150, "mn": 50, "mx": 400, "s": 25}, "burnoff": {"l": "Burnoff (mm)", "t": "range", "d": 5, "mn": 1, "mx": 25, "s": 1}}], ["friction_stir", "Friction Stir Welding", "Friction Stir Welding", "Joining", "Rotating pin plasticizes metal — aluminum panels, rockets.", "🌀", {"rotation_speed": {"l": "Rotation (RPM)", "t": "range", "d": 800, "mn": 200, "mx": 3000, "s": 100}, "traverse_speed": {"l": "Traverse (mm/min)", "t": "range", "d": 300, "mn": 50, "mx": 1000, "s": 25}, "pin_diameter": {"l": "Pin (mm)", "t": "select", "d": 5, "o": [3, 4, 5, 6, 8]}, "tilt_angle": {"l": "Tilt (°)", "t": "range", "d": 2, "mn": 0, "mx": 5, "s": 0.5}}], ["ultrasonic_welding", "Ultrasonic Welding", "Ultrasonic Welding", "Joining", "HF vibration bonds thermoplastics/metals — electronics.", "🔊", {"frequency": {"l": "Freq (kHz)", "t": "range", "d": 20, "mn": 15, "mx": 70, "s": 5}, "amplitude": {"l": "Amplitude (μm)", "t": "range", "d": 45, "mn": 10, "mx": 100, "s": 5}, "weld_time": {"l": "Weld (ms)", "t": "range", "d": 500, "mn": 50, "mx": 2000, "s": 50}, "trigger_force": {"l": "Force (N)", "t": "range", "d": 300, "mn": 50, "mx": 1000, "s": 25}}], ["soldering", "Wave / Reflow Soldering", "Wave / Reflow Soldering", "Joining", "Molten solder joins components to PCBs — wave or reflow.", "🫠", {"solder_temp": {"l": "Solder (°C)", "t": "range", "d": 250, "mn": 180, "mx": 300, "s": 5}, "conveyor_speed": {"l": "Conveyor (cm/min)", "t": "range", "d": 100, "mn": 20, "mx": 200, "s": 10}, "preheat_temp": {"l": "Preheat (°C)", "t": "range", "d": 150, "mn": 100, "mx": 200, "s": 10}}], ["brazing", "Brazing", "Brazing", "Joining", "Filler metal flows by capillary action — HVAC, jewelry.", "🔥", {"flame_temp": {"l": "Flame (°C)", "t": "range", "d": 900, "mn": 600, "mx": 1200, "s": 50}, "filler_metal": {"l": "Filler", "t": "select", "d": "Silver", "o": ["Silver", "Brass", "Copper-Phos", "Aluminum"]}, "flux": {"l": "Flux", "t": "select", "d": "Paste", "o": ["Paste", "Powder", "Coated Rod", "None"]}}], ["adhesive_bonding", "Structural Adhesive Bonding", "Structural Adhesive Bonding", "Joining", "Epoxy, CA, PU adhesives — composites, automotive, aerospace.", "🩹", {"bead_width": {"l": "Bead (mm)", "t": "range", "d": 3, "mn": 0.5, "mx": 10, "s": 0.5}, "dispense_speed": {"l": "Speed (mm/s)", "t": "range", "d": 50, "mn": 5, "mx": 200, "s": 5}, "cure_time": {"l": "Cure (min)", "t": "range", "d": 60, "mn": 5, "mx": 1440, "s": 5}, "adhesive_type": {"l": "Type", "t": "select", "d": "Epoxy", "o": ["Epoxy", "Cyanoacrylate", "Polyurethane", "Acrylic", "Silicone"]}}], ["riveting", "Riveting", "Riveting", "Joining", "Mechanical fastener — aircraft, construction, sheet metal.", "📌", {"rivet_diameter": {"l": "Rivet (mm)", "t": "select", "d": 4.0, "o": [2.4, 3.2, 4.0, 4.8, 6.4]}, "rivet_material": {"l": "Material", "t": "select", "d": "Aluminum", "o": ["Aluminum", "Steel", "Stainless", "Copper", "Monel"]}, "grip_range": {"l": "Grip (mm)", "t": "range", "d": 6, "mn": 1, "mx": 20, "s": 1}}], ["clinching", "Clinching / Press Joining", "Clinching / Press Joining", "Joining", "Cold-formed mechanical interlock — no fasteners, no heat.", "🔗", {"press_force": {"l": "Force (kN)", "t": "range", "d": 35, "mn": 10, "mx": 100, "s": 5}, "punch_diameter": {"l": "Punch (mm)", "t": "select", "d": 6, "o": [5, 6, 7, 8, 10]}, "die_depth": {"l": "Die (mm)", "t": "range", "d": 1.5, "mn": 0.5, "mx": 3, "s": 0.1}}], ["diffusion_bonding", "Diffusion Bonding", "Diffusion Bonding", "Joining", "Heat + pressure bonds at atomic level — titanium, no filler.", "🤝", {"temperature": {"l": "Temp (°C)", "t": "range", "d": 900, "mn": 500, "mx": 1200, "s": 25}, "pressure": {"l": "Pressure (bar)", "t": "range", "d": 50, "mn": 10, "mx": 200, "s": 10}, "hold_time": {"l": "Hold (h)", "t": "range", "d": 4, "mn": 1, "mx": 24, "s": 1}}], ["explosive_welding", "Explosive Welding", "Explosive Welding", "Joining", "Explosive force bonds dissimilar metals — clad plates.", "💣", {"standoff": {"l": "Standoff (mm)", "t": "range", "d": 5, "mn": 1, "mx": 20, "s": 1}, "explosive_load": {"l": "Load (g/cm²)", "t": "range", "d": 3, "mn": 0.5, "mx": 10, "s": 0.5}, "detonation_velocity": {"l": "Velocity (m/s)", "t": "range", "d": 2500, "mn": 1500, "mx": 3500, "s": 250}}], ["sand_casting", "Sand Casting", "Sand Casting", "Casting", "Molten metal poured into sand mold — engine blocks.", "🏖️", {"pour_temp": {"l": "Pour (°C)", "t": "range", "d": 1450, "mn": 600, "mx": 1700, "s": 50}, "mold_hardness": {"l": "Hardness (GF)", "t": "range", "d": 85, "mn": 60, "mx": 95, "s": 5}, "cooling_time": {"l": "Cooling (h)", "t": "range", "d": 6, "mn": 1, "mx": 48, "s": 1}}], ["investment_casting", "Investment Casting", "Investment Casting", "Casting", "Wax pattern + ceramic shell — jewelry, turbine blades.", "🕯️", {"pour_temp": {"l": "Pour (°C)", "t": "range", "d": 1200, "mn": 800, "mx": 1700, "s": 25}, "shell_layers": {"l": "Shell", "t": "range", "d": 7, "mn": 4, "mx": 15, "s": 1}, "dewax_temp": {"l": "Dewax (°C)", "t": "range", "d": 180, "mn": 100, "mx": 300, "s": 10}}], ["die_casting", "High-Pressure Die Casting", "High-Pressure Die Casting", "Casting", "Molten metal injected into steel die — Al/Zn/Mg parts.", "🏋️", {"injection_pressure": {"l": "Pressure (bar)", "t": "range", "d": 800, "mn": 200, "mx": 2000, "s": 50}, "metal_temp": {"l": "Metal (°C)", "t": "range", "d": 650, "mn": 380, "mx": 750, "s": 25}, "die_temp": {"l": "Die (°C)", "t": "range", "d": 220, "mn": 150, "mx": 300, "s": 10}, "shot_speed": {"l": "Shot (m/s)", "t": "range", "d": 4, "mn": 1, "mx": 10, "s": 0.5}}], ["centrifugal_casting", "Centrifugal Casting", "Centrifugal Casting", "Casting", "Molten metal poured into rotating mold — pipes, rings.", "🎡", {"rotation_speed": {"l": "Speed (RPM)", "t": "range", "d": 800, "mn": 100, "mx": 2000, "s": 50}, "pour_temp": {"l": "Pour (°C)", "t": "range", "d": 1400, "mn": 600, "mx": 1600, "s": 50}}], ["continuous_casting", "Continuous Casting", "Continuous Casting", "Casting", "Molten steel continuously solidifies — billets, slabs.", "🏗️", {"casting_speed": {"l": "Speed (m/min)", "t": "range", "d": 2, "mn": 0.5, "mx": 5, "s": 0.1}, "mold_oscillation": {"l": "Osc (cpm)", "t": "range", "d": 150, "mn": 50, "mx": 300, "s": 10}, "cooling_water": {"l": "Water (L/min)", "t": "range", "d": 4000, "mn": 1000, "mx": 10000, "s": 500}}], ["anodizing", "Anodizing", "Anodizing", "Finishing", "Electrochemical oxide on aluminum — color, corrosion resistance.", "🎨", {"current_density": {"l": "Current (A/ft²)", "t": "range", "d": 24, "mn": 12, "mx": 48, "s": 2}, "voltage": {"l": "Voltage (V)", "t": "range", "d": 15, "mn": 12, "mx": 24, "s": 1}, "bath_temp": {"l": "Bath (°C)", "t": "range", "d": 20, "mn": 0, "mx": 25, "s": 1}, "duration": {"l": "Time (min)", "t": "range", "d": 45, "mn": 20, "mx": 120, "s": 5}}], ["powder_coating", "Powder Coating", "Powder Coating", "Finishing", "Electrostatic powder cured in oven — durable, any color.", "🖌️", {"cure_temp": {"l": "Cure (°C)", "t": "range", "d": 190, "mn": 140, "mx": 220, "s": 5}, "cure_time": {"l": "Cure (min)", "t": "range", "d": 20, "mn": 10, "mx": 60, "s": 5}, "voltage": {"l": "Gun (kV)", "t": "range", "d": 70, "mn": 30, "mx": 100, "s": 5}}], ["electroplating", "Electroplating", "Electroplating", "Finishing", "Metal ions deposited — chrome, nickel, gold, zinc plating.", "🪙", {"current_density": {"l": "Current (A/dm²)", "t": "range", "d": 3, "mn": 0.5, "mx": 10, "s": 0.5}, "bath_temp": {"l": "Bath (°C)", "t": "range", "d": 50, "mn": 20, "mx": 65, "s": 5}, "plating_time": {"l": "Time (min)", "t": "range", "d": 30, "mn": 5, "mx": 120, "s": 5}, "metal": {"l": "Metal", "t": "select", "d": "Nickel", "o": ["Nickel", "Chrome", "Zinc", "Gold", "Silver", "Copper", "Tin"]}}], ["sandblasting", "Sandblasting / Media Blasting", "Sandblasting / Media Blasting", "Finishing", "High-speed abrasive — clean, texture, matte finish.", "💨", {"pressure": {"l": "Air (PSI)", "t": "range", "d": 90, "mn": 50, "mx": 150, "s": 10}, "media_type": {"l": "Media", "t": "select", "d": "Aluminum Oxide", "o": ["Aluminum Oxide", "Glass Bead", "Walnut Shell", "Silicon Carbide", "Steel Grit"]}, "standoff": {"l": "Standoff (mm)", "t": "range", "d": 200, "mn": 50, "mx": 400, "s": 25}, "grit": {"l": "Grit", "t": "select", "d": 100, "o": [60, 80, 100, 120, 180, 220]}}], ["vibratory_finishing", "Vibratory Finishing", "Vibratory Finishing", "Finishing", "Parts vibrated with media — deburring, polishing, radiusing.", "🪨", {"amplitude": {"l": "Amplitude (mm)", "t": "range", "d": 2, "mn": 0.5, "mx": 6, "s": 0.5}, "frequency": {"l": "Freq (Hz)", "t": "range", "d": 30, "mn": 25, "mx": 50, "s": 5}, "duration": {"l": "Time (h)", "t": "range", "d": 8, "mn": 1, "mx": 48, "s": 1}, "media": {"l": "Media", "t": "select", "d": "Ceramic", "o": ["Ceramic", "Plastic", "Steel", "Corn Cob", "Walnut"]}}], ["electropolishing", "Electropolishing", "Electropolishing", "Finishing", "Reverse electroplating — mirror finish, deburring.", "✨", {"current_density": {"l": "Current (A/dm²)", "t": "range", "d": 20, "mn": 5, "mx": 50, "s": 5}, "bath_temp": {"l": "Bath (°C)", "t": "range", "d": 65, "mn": 40, "mx": 90, "s": 5}, "duration": {"l": "Time (min)", "t": "range", "d": 5, "mn": 1, "mx": 30, "s": 1}}], ["chemical_vapor_deposition", "CVD", "Chemical Vapor Deposition", "Finishing", "Gaseous precursors react on substrate — diamond, TiN coatings.", "🌫️", {"temperature": {"l": "Temp (°C)", "t": "range", "d": 800, "mn": 200, "mx": 1200, "s": 50}, "pressure": {"l": "Pressure (Torr)", "t": "range", "d": 10, "mn": 0.1, "mx": 760, "s": 1}, "deposition_rate": {"l": "Rate (μm/h)", "t": "range", "d": 5, "mn": 0.1, "mx": 100, "s": 1}, "coating": {"l": "Coating", "t": "select", "d": "TiN", "o": ["TiN", "TiCN", "Al₂O₃", "DLC", "Diamond", "Si₃N₄"]}}], ["pvd", "PVD", "Physical Vapor Deposition", "Finishing", "Material vaporized in vacuum — TiN drill bits, decorative.", "🔮", {"temperature": {"l": "Substrate (°C)", "t": "range", "d": 350, "mn": 100, "mx": 600, "s": 25}, "vacuum_level": {"l": "Vacuum (mbar)", "t": "range", "d": 0.001, "mn": 1e-06, "mx": 0.1, "s": 1}, "deposition_time": {"l": "Time (min)", "t": "range", "d": 30, "mn": 5, "mx": 120, "s": 5}, "coating": {"l": "Coating", "t": "select", "d": "TiN (Gold)", "o": ["TiN (Gold)", "CrN (Silver)", "AlTiN (Black)", "TiCN (Gray-Blue)", "ZrN (Brass)"]}}], ["shot_peening", "Shot Peening", "Shot Peening", "Finishing", "Spherical media bombardment — compressive stress, fatigue.", "💣", {"intensity": {"l": "Almen (A mm)", "t": "range", "d": 0.2, "mn": 0.05, "mx": 0.6, "s": 0.05}, "coverage": {"l": "Coverage (%)", "t": "range", "d": 200, "mn": 100, "mx": 300, "s": 25}, "shot_size": {"l": "Shot (mm)", "t": "select", "d": 0.7, "o": [0.3, 0.5, 0.7, 1.0, 1.4]}}], ["laser_texturing", "Laser Surface Texturing", "Laser Surface Texturing", "Finishing", "Femtosecond laser micro patterns — hydrophobicity.", "🔲", {"pulse_energy": {"l": "Energy (μJ)", "t": "range", "d": 50, "mn": 1, "mx": 200, "s": 5}, "pulse_duration": {"l": "Duration", "t": "select", "d": "fs", "o": ["fs", "ps", "ns"]}, "scan_speed": {"l": "Scan (mm/s)", "t": "range", "d": 200, "mn": 10, "mx": 1000, "s": 25}, "pattern_type": {"l": "Pattern", "t": "select", "d": "LIPSS", "o": ["Dimples", "Grooves", "Grid", "LIPSS", "Hierarchical"]}}], ["abrasive_flow", "Abrasive Flow Machining", "Abrasive Flow Machining", "Finishing", "Viscous abrasive media through passages — internal deburring.", "💧", {"extrusion_pressure": {"l": "Pressure (bar)", "t": "range", "d": 70, "mn": 10, "mx": 200, "s": 10}, "number_of_cycles": {"l": "Cycles", "t": "range", "d": 20, "mn": 1, "mx": 100, "s": 5}, "media_viscosity": {"l": "Viscosity", "t": "select", "d": "Medium", "o": ["Low", "Medium", "High", "Extra High"]}}], ["thermal_spray", "Thermal Spray Coating", "Thermal Spray Coating", "Finishing", "Molten particles sprayed — wear resistance, thermal barriers.", "🌋", {"spray_distance": {"l": "Distance (mm)", "t": "range", "d": 150, "mn": 50, "mx": 300, "s": 25}, "feed_rate": {"l": "Feed (g/min)", "t": "range", "d": 60, "mn": 10, "mx": 150, "s": 10}, "coating_thickness": {"l": "Thick (μm)", "t": "range", "d": 300, "mn": 50, "mx": 2000, "s": 50}, "process": {"l": "Process", "t": "select", "d": "HVOF", "o": ["HVOF", "Plasma", "Arc Spray", "Flame Spray", "Cold Spray"]}}], ["laser_peening", "Laser Shock Peening", "Laser Shock Peening", "Finishing", "High-energy laser pulses create plasma shockwave — deep compressive stress for jet engine blades.", "💥", {"laser_energy": {"l": "Energy (J)", "t": "range", "d": 30, "mn": 5, "mx": 100, "s": 5}, "pulse_width": {"l": "Pulse (ns)", "t": "range", "d": 15, "mn": 5, "mx": 30, "s": 2}, "spot_size": {"l": "Spot (mm)", "t": "range", "d": 4, "mn": 1, "mx": 10, "s": 1}}], ["induction_heating", "Induction Heat Treating", "Induction Heat Treating", "Finishing", "Electromagnetic induction — case hardening, tempering.", "🧲", {"frequency": {"l": "Freq (kHz)", "t": "range", "d": 100, "mn": 1, "mx": 500, "s": 10}, "power": {"l": "Power (kW)", "t": "range", "d": 25, "mn": 1, "mx": 200, "s": 5}, "target_temp": {"l": "Target (°C)", "t": "range", "d": 850, "mn": 700, "mx": 1200, "s": 25}, "quench": {"l": "Quench", "t": "select", "d": "Oil", "o": ["Water", "Oil", "Polymer", "Air", "None"]}}], ["microwave_sintering", "Microwave Sintering", "Microwave Sintering", "Finishing", "Microwave energy sinters ceramics — faster, finer grain.", "📡", {"power": {"l": "Power (kW)", "t": "range", "d": 5, "mn": 1, "mx": 30, "s": 1}, "temperature": {"l": "Sinter (°C)", "t": "range", "d": 1400, "mn": 800, "mx": 1800, "s": 50}, "hold_time": {"l": "Hold (min)", "t": "range", "d": 30, "mn": 5, "mx": 120, "s": 5}}], ["hybrid_additive_subtractive", "Hybrid AM + CNC", "Hybrid AM + CNC", "Hybrid", "FDM/WAAM + CNC milling alternated — add then machine.", "🔄", {"print_speed": {"l": "Print (mm/s)", "t": "range", "d": 50, "mn": 10, "mx": 150, "s": 5}, "spindle_speed": {"l": "Mill (RPM)", "t": "range", "d": 15000, "mn": 5000, "mx": 30000, "s": 1000}, "layer_height": {"l": "Layer (mm)", "t": "range", "d": 0.3, "mn": 0.1, "mx": 1, "s": 0.1}, "finish_pass_depth": {"l": "Finish (mm)", "t": "range", "d": 0.2, "mn": 0.1, "mx": 1, "s": 0.1}}], ["metal_injection_molding", "Metal Injection Molding (MIM)", "Metal Injection Molding (MIM)", "Forming", "Fine metal powder + binder molded then sintered — small complex steel parts.", "🔩", {"binder_type": {"l": "Binder", "t": "select", "d": "Wax-Polymer", "o": ["Wax-Polymer", "POM-Based", "Water-Soluble"]}, "injection_temp": {"l": "Melt (°C)", "t": "range", "d": 170, "mn": 150, "mx": 200, "s": 10}, "sinter_temp": {"l": "Sinter (°C)", "t": "range", "d": 1300, "mn": 1200, "mx": 1400, "s": 50}}], ["cold_forging", "Cold Forging", "Cold Forging", "Forming", "Metal shaped at room temperature — superior surface finish and tighter tolerances than hot forging.", "❄️", {"material": {"l": "Material", "t": "select", "d": "Low Carbon Steel", "o": ["Low Carbon Steel", "Aluminum 6061", "Copper", "Brass", "Stainless 304"]}, "press_force": {"l": "Force (ton)", "t": "range", "d": 500, "mn": 50, "mx": 3000, "s": 50}, "lubricant": {"l": "Lubricant", "t": "select", "d": "Zinc Phosphate", "o": ["Zinc Phosphate", "MoS₂", "Oil", "Polymer Coating"]}, "strain_hardening": {"l": "Strain Hardening (%)", "t": "range", "d": 25, "mn": 5, "mx": 60, "s": 5}}], ["vacuum_casting", "Vacuum Casting (Polyurethane)", "Vacuum Casting (Polyurethane)", "Casting", "Silicone mold + vacuum-poured PU resin — small-batch plastic parts, prototyping.", "🫙", {"material": {"l": "Resin", "t": "select", "d": "PU Rigid", "o": ["PU Rigid", "PU Flexible", "PU Clear", "PU ABS-like", "PU PP-like"]}, "vacuum_level": {"l": "Vacuum (mbar)", "t": "range", "d": 10, "mn": 1, "mx": 100, "s": 5}, "pot_life": {"l": "Pot Life (min)", "t": "range", "d": 7, "mn": 1, "mx": 30, "s": 1}, "cure_temp": {"l": "Cure Temp (°C)", "t": "range", "d": 70, "mn": 25, "mx": 120, "s": 5}, "cure_time": {"l": "Cure Time (h)", "t": "range", "d": 4, "mn": 1, "mx": 24, "s": 1}, "mold_life": {"l": "Mold Life (parts)", "t": "range", "d": 25, "mn": 5, "mx": 50, "s": 5}}], ["electron_beam_welding", "Electron Beam Welding (EBW)", "Electron Beam Welding (EBW)", "Joining", "High-vacuum electron beam — deep narrow welds, reactive metals, aerospace.", "⚛️", {"beam_power": {"l": "Power (kW)", "t": "range", "d": 15, "mn": 1, "mx": 100, "s": 5}, "beam_current": {"l": "Current (mA)", "t": "range", "d": 100, "mn": 1, "mx": 500, "s": 25}, "vacuum_level": {"l": "Pressure (mbar)", "t": "range", "d": 0.0001, "mn": 1e-05, "mx": 1, "s": 0.0001}}], ["submerged_arc_welding", "Submerged Arc Welding (SAW)", "Submerged Arc Welding (SAW)", "Joining", "Arc beneath granular flux blanket — heavy fabrication, shipbuilding, thick sections.", "🏊", {"current": {"l": "Current (A)", "t": "range", "d": 800, "mn": 200, "mx": 2000, "s": 50}, "voltage": {"l": "Voltage (V)", "t": "range", "d": 35, "mn": 25, "mx": 45, "s": 1}, "travel_speed": {"l": "Travel (mm/s)", "t": "range", "d": 15, "mn": 5, "mx": 40, "s": 2}, "wire_diameter": {"l": "Wire (mm)", "t": "select", "d": 4.0, "o": [2.4, 3.2, 4.0, 4.8, 6.4]}, "flux_type": {"l": "Flux Type", "t": "select", "d": "Neutral", "o": ["Neutral", "Active", "Alloying"]}, "deposition_rate": {"l": "Deposition (kg/h)", "t": "range", "d": 15, "mn": 5, "mx": 30, "s": 2}}], ["plasma_transferred_arc", "PTA Welding / Cladding", "PTA Welding / Cladding", "Joining", "Plasma transferred arc for wear-resistant overlays — valve seats, mining equipment.", "🔥", {"current": {"l": "Current (A)", "t": "range", "d": 150, "mn": 50, "mx": 300, "s": 10}, "powder_feed": {"l": "Powder Feed (g/min)", "t": "range", "d": 60, "mn": 10, "mx": 150, "s": 10}, "oscillation_width": {"l": "Osc Width (mm)", "t": "range", "d": 15, "mn": 2, "mx": 40, "s": 2}, "cladding_material": {"l": "Material", "t": "select", "d": "Stellite 6", "o": ["Stellite 6", "Stellite 21", "Inconel 625", "Colmonoy 6", "Tribaloy T-800"]}, "dilution": {"l": "Dilution (%)", "t": "range", "d": 8, "mn": 2, "mx": 20, "s": 1}}], ["orbital_welding", "Orbital Welding", "Orbital Welding", "Joining", "Automated TIG welding rotating around tube/pipe — semiconductor, pharma, food grade.", "🛞", {"current": {"l": "Current (A)", "t": "range", "d": 80, "mn": 10, "mx": 200, "s": 5}, "rotation_speed": {"l": "Rotation (rpm)", "t": "range", "d": 1, "mn": 0.1, "mx": 5, "s": 0.1}, "tube_diameter": {"l": "Tube OD (mm)", "t": "select", "d": 25, "o": [6, 12, 25, 50, 100, 150]}, "wall_thickness": {"l": "Wall (mm)", "t": "select", "d": 1.5, "o": [0.5, 1.0, 1.5, 2.0, 3.0]}, "shield_gas_purge": {"l": "Purge Gas", "t": "select", "d": "Argon", "o": ["Argon", "Ar/He", "Ar/H₂", "N₂"]}, "pulse_sync": {"l": "Pulse Sync", "t": "select", "d": "Position Synced", "o": ["Off", "Position Synced", "Time Synced"]}}], ["resistance_seam_welding", "Resistance Seam Welding", "Resistance Seam Welding", "Joining", "Continuous spot welds with rotating wheels — fuel tanks, pipes, cans.", "〰️", {"current": {"l": "Current (kA)", "t": "range", "d": 15, "mn": 5, "mx": 30, "s": 1}, "wheel_speed": {"l": "Speed (m/min)", "t": "range", "d": 2, "mn": 0.5, "mx": 5, "s": 0.25}, "pulse_time": {"l": "Pulse (ms)", "t": "range", "d": 50, "mn": 10, "mx": 200, "s": 10}}], ["electroforming_nano", "Nano-Electroforming (LIGA)", "Nano-Electroforming (LIGA)", "Forming", "X-ray lithography + electroforming for high-aspect-ratio microstructures — MEMS, microfluidics.", "🧫", {"aspect_ratio": {"l": "Aspect Ratio", "t": "range", "d": 100, "mn": 10, "mx": 500, "s": 10}, "feature_size": {"l": "Feature (μm)", "t": "range", "d": 50, "mn": 1, "mx": 500, "s": 10}, "plating_metal": {"l": "Metal", "t": "select", "d": "Nickel", "o": ["Nickel", "Copper", "Gold", "Ni-Fe Alloy"]}, "plating_time": {"l": "Plating (h)", "t": "range", "d": 12, "mn": 1, "mx": 72, "s": 1}, "substrate": {"l": "Substrate", "t": "select", "d": "Silicon", "o": ["Silicon", "Glass", "Polymer", "Ceramic"]}}], ["ultrasonic_knife_cutting", "Ultrasonic Knife Cutting", "Ultrasonic Knife Cutting", "Subtractive", "Oscillating blade at 20-40kHz — clean cuts through rubber, composites, food, textiles.", "🔪", {"frequency": {"l": "Frequency (kHz)", "t": "range", "d": 30, "mn": 20, "mx": 40, "s": 5}, "amplitude": {"l": "Amplitude (μm)", "t": "range", "d": 60, "mn": 10, "mx": 100, "s": 10}, "cut_speed": {"l": "Speed (mm/s)", "t": "range", "d": 150, "mn": 10, "mx": 500, "s": 25}, "blade_angle": {"l": "Blade Angle (°)", "t": "select", "d": 30, "o": [15, 30, 45, 60]}, "cooling": {"l": "Blade Cooling", "t": "select", "d": "Air", "o": ["None", "Air", "Mist"]}}], ["electrospinning", "Electrospinning (Nanofiber)", "Electrospinning (Nanofiber)", "Additive", "Electric field draws polymer solution into nanofibers — filtration membranes, tissue scaffolds.", "🕷️", {"voltage": {"l": "Voltage (kV)", "t": "range", "d": 20, "mn": 5, "mx": 50, "s": 5}, "flow_rate": {"l": "Flow (mL/h)", "t": "range", "d": 1, "mn": 0.1, "mx": 10, "s": 0.5}, "collector_distance": {"l": "Distance (cm)", "t": "range", "d": 15, "mn": 5, "mx": 30, "s": 2}, "fiber_diameter": {"l": "Fiber (nm)", "t": "range", "d": 300, "mn": 50, "mx": 2000, "s": 50}, "polymer": {"l": "Polymer", "t": "select", "d": "PCL", "o": ["PVA", "PCL", "PLA", "PAN", "PVDF", "Nylon-6"]}, "collector_type": {"l": "Collector", "t": "select", "d": "Flat Plate", "o": ["Flat Plate", "Rotating Drum", "Parallel Bars"]}}], ["direct_energy_deposition", "DED", "Directed Energy Deposition", "Additive", "Laser/EB + powder/wire blown through nozzle — large part repair and feature addition.", "🔫", {"energy_source": {"l": "Source", "t": "select", "d": "Laser", "o": ["Laser", "Electron Beam", "Plasma Arc"]}, "laser_power": {"l": "Laser (W)", "t": "range", "d": 2500, "mn": 500, "mx": 10000, "s": 250}, "feedstock": {"l": "Feedstock", "t": "select", "d": "Powder", "o": ["Powder", "Wire"]}, "deposition_rate": {"l": "Rate (g/min)", "t": "range", "d": 30, "mn": 5, "mx": 200, "s": 10}, "layer_width": {"l": "Bead Width (mm)", "t": "range", "d": 3, "mn": 1, "mx": 10, "s": 0.5}, "shield_gas": {"l": "Shield Gas", "t": "select", "d": "Argon", "o": ["Argon", "Helium", "N₂", "None"]}}], ["binder_jet_metal", "Binder Jet Metal (Sinter-Based)", "Binder Jet Metal (Sinter-Based)", "Additive", "Binder jetting + sintering for production-scale metal parts — automotive, consumer goods.", "🧱", {"material": {"l": "Powder", "t": "select", "d": "316L SS", "o": ["316L SS", "17-4PH", "Inconel 625", "Copper", "Tungsten Carbide"]}, "layer_height": {"l": "Layer (μm)", "t": "range", "d": 80, "mn": 30, "mx": 200, "s": 10}, "binder_drop_size": {"l": "Drop (pL)", "t": "range", "d": 30, "mn": 6, "mx": 80, "s": 5}, "sintering_temp": {"l": "Sintering (°C)", "t": "range", "d": 1380, "mn": 1200, "mx": 1600, "s": 25}, "green_density": {"l": "Green Density (%)", "t": "range", "d": 55, "mn": 40, "mx": 70, "s": 5}, "shrinkage_x": {"l": "Shrinkage X (%)", "t": "range", "d": 16, "mn": 10, "mx": 25, "s": 1}}], ["plasma_electrolytic_oxidation", "PEO", "Plasma Electrolytic Oxidation", "Finishing", "Micro-arc oxidation creates hard ceramic layer on light metals — aerospace, biomedical.", "⚡", {"voltage": {"l": "Voltage (V)", "t": "range", "d": 450, "mn": 200, "mx": 800, "s": 50}, "current_density": {"l": "Current (A/dm²)", "t": "range", "d": 10, "mn": 1, "mx": 30, "s": 2}, "electrolyte": {"l": "Electrolyte", "t": "select", "d": "Silicate", "o": ["Silicate", "Phosphate", "Aluminate", "Mixed"]}, "coating_thickness": {"l": "Thickness (μm)", "t": "range", "d": 50, "mn": 5, "mx": 200, "s": 10}, "hardness": {"l": "Hardness (HV)", "t": "range", "d": 1500, "mn": 500, "mx": 2500, "s": 100}, "duty_cycle": {"l": "Duty Cycle (%)", "t": "range", "d": 50, "mn": 10, "mx": 90, "s": 10}}], ["chemical_vapor_infiltration", "CVI", "Chemical Vapor Infiltration", "Finishing", "Gas-phase infiltration of porous preforms — ceramic matrix composites, C/SiC, SiC/SiC.", "💨", {"temperature": {"l": "Temp (°C)", "t": "range", "d": 1050, "mn": 800, "mx": 1400, "s": 50}, "pressure": {"l": "Pressure (kPa)", "t": "range", "d": 5, "mn": 0.1, "mx": 100, "s": 5}, "precursor": {"l": "Precursor", "t": "select", "d": "MTS (SiC)", "o": ["MTS (SiC)", "CH₄ (C)", "BCl₃ (BN)", "TiCl₄ (TiN)"]}, "infiltration_time": {"l": "Time (h)", "t": "range", "d": 100, "mn": 10, "mx": 500, "s": 10}, "porosity_target": {"l": "Porosity (%)", "t": "range", "d": 10, "mn": 5, "mx": 30, "s": 2}}], ["magnetic_abrasive_finishing", "Magnetic Abrasive Finishing", "Magnetic Abrasive Finishing", "Finishing", "Magnetic field holds abrasive particles — internal polishing of tubes, complex geometry.", "🧲", {"magnetic_flux": {"l": "Flux (T)", "t": "range", "d": 0.4, "mn": 0.1, "mx": 1, "s": 0.1}, "abrasive_size": {"l": "Abrasive (μm)", "t": "select", "d": 15, "o": [1, 3, 6, 15, 30, 60]}, "polishing_time": {"l": "Time (min)", "t": "range", "d": 10, "mn": 2, "mx": 30, "s": 2}}], ["cold_isostatic_pressing", "Cold Isostatic Pressing (CIP)", "Cold Isostatic Pressing (CIP)", "Forming", "Uniform pressure via liquid at room temp — ceramic powder compacts, PTFE billets.", "📦", {"pressure": {"l": "Pressure (bar)", "t": "range", "d": 2500, "mn": 500, "mx": 6000, "s": 250}, "hold_time": {"l": "Hold (min)", "t": "range", "d": 10, "mn": 1, "mx": 60, "s": 2}, "medium": {"l": "Medium", "t": "select", "d": "Water", "o": ["Water", "Oil", "Water + Inhibitor"]}, "bag_material": {"l": "Bag Material", "t": "select", "d": "Polyurethane", "o": ["Polyurethane", "Latex", "Silicone"]}, "green_density": {"l": "Green Density (%)", "t": "range", "d": 62, "mn": 50, "mx": 75, "s": 2}}], ["hot_isostatic_pressing", "Hot Isostatic Pressing (HIP)", "Hot Isostatic Pressing (HIP)", "Forming", "High temp + uniform gas pressure — eliminate porosity in castings, AM parts, PM.", "♨️", {"temperature": {"l": "Temp (°C)", "t": "range", "d": 1150, "mn": 500, "mx": 2200, "s": 50}, "pressure": {"l": "Pressure (bar)", "t": "range", "d": 1200, "mn": 500, "mx": 3000, "s": 100}, "hold_time": {"l": "Hold (h)", "t": "range", "d": 4, "mn": 1, "mx": 8, "s": 1}, "gas": {"l": "Gas", "t": "select", "d": "Argon", "o": ["Argon", "Nitrogen", "Helium"]}, "cooling_rate": {"l": "Cool Rate (°C/min)", "t": "range", "d": 10, "mn": 1, "mx": 50, "s": 2}, "material": {"l": "Material", "t": "select", "d": "Ti-6Al-4V", "o": ["Ti-6Al-4V", "Inconel 718", "CoCr", "316L", "AlSi10Mg"]}}], ["laser_powder_bed_diffusion", "Laser Powder Bed Diffusion Bonding", "Laser Powder Bed Diffusion Bonding", "Additive", "Selective laser heating bonds powder layers without full melting — porous implants, filters.", "🔗", {"laser_power": {"l": "Laser (W)", "t": "range", "d": 150, "mn": 20, "mx": 500, "s": 25}, "scan_speed": {"l": "Scan (mm/s)", "t": "range", "d": 500, "mn": 50, "mx": 2000, "s": 100}, "spot_size": {"l": "Spot (μm)", "t": "range", "d": 200, "mn": 50, "mx": 500, "s": 25}, "layer_height": {"l": "Layer (μm)", "t": "range", "d": 80, "mn": 30, "mx": 200, "s": 10}, "porosity_target": {"l": "Porosity (%)", "t": "range", "d": 35, "mn": 15, "mx": 70, "s": 5}, "powder_material": {"l": "Material", "t": "select", "d": "Ti-6Al-4V", "o": ["Ti-6Al-4V", "316L", "CoCr", "Tantalum", "NiTi"]}}], ["cryogenic_machining", "Cryogenic Machining", "Cryogenic Machining", "Subtractive", "LN₂ or CO₂ cooling during cutting — harder materials, better finish, eco-friendly.", "🥶", {"coolant_type": {"l": "Coolant", "t": "select", "d": "LN₂", "o": ["LN₂", "LCO₂", "LN₂ + MQL", "LCO₂ + MQL"]}, "flow_rate": {"l": "Flow (L/min)", "t": "range", "d": 1, "mn": 0.1, "mx": 5, "s": 0.25}, "spindle_speed": {"l": "Spindle (RPM)", "t": "range", "d": 8000, "mn": 500, "mx": 30000, "s": 500}, "feed_rate": {"l": "Feed (mm/min)", "t": "range", "d": 500, "mn": 50, "mx": 3000, "s": 50}, "material": {"l": "Material", "t": "select", "d": "Titanium", "o": ["Titanium", "Inconel", "Hardened Steel", "CFRP", "Magnesium"]}, "tool_coating": {"l": "Tool Coating", "t": "select", "d": "TiAlN", "o": ["Uncoated", "TiAlN", "AlCrN", "Diamond", "CBN"]}}], ["abrasive_waterjet_milling2", "Abrasive Waterjet Pocket Milling", "Abrasive Waterjet Pocket Milling", "Subtractive", "Controlled-depth waterjet for pockets, chamfers, and 3D surfaces in any material.", "🌊", {"pressure": {"l": "Pressure (PSI)", "t": "range", "d": 45000, "mn": 10000, "mx": 90000, "s": 5000}, "standoff": {"l": "Standoff (mm)", "t": "range", "d": 2, "mn": 0.5, "mx": 10, "s": 0.5}, "stepover": {"l": "Stepover (mm)", "t": "range", "d": 0.3, "mn": 0.05, "mx": 2, "s": 0.05}, "traverse_speed": {"l": "Traverse (mm/s)", "t": "range", "d": 80, "mn": 10, "mx": 300, "s": 10}, "depth_per_layer": {"l": "Depth/Layer (mm)", "t": "range", "d": 0.2, "mn": 0.05, "mx": 2, "s": 0.05}, "abrasive_mesh": {"l": "Abrasive Mesh", "t": "select", "d": "#80", "o": ["#50", "#80", "#120", "#220"]}}], ["electro_slag_welding", "Electroslag Welding (ESW)", "Electroslag Welding (ESW)", "Joining", "Molten slag conducts current for single-pass thick plate welding — shipbuilding, pressure vessels.", "⚡", {"current": {"l": "Current (A)", "t": "range", "d": 700, "mn": 400, "mx": 1500, "s": 50}, "voltage": {"l": "Voltage (V)", "t": "range", "d": 40, "mn": 30, "mx": 55, "s": 2}, "wire_feed": {"l": "Wire Feed (m/min)", "t": "range", "d": 4, "mn": 1, "mx": 10, "s": 0.5}, "slag_depth": {"l": "Slag Depth (mm)", "t": "range", "d": 40, "mn": 25, "mx": 75, "s": 5}, "plate_thickness": {"l": "Thickness (mm)", "t": "range", "d": 100, "mn": 50, "mx": 500, "s": 25}}], ["thermite_welding", "Thermite Welding (Aluminothermic)", "Thermite Welding (Aluminothermic)", "Joining", "Exothermic reaction between aluminum and iron oxide — rail welding, heavy castings.", "🌋", {"ignition_temp": {"l": "Ignition (°C)", "t": "range", "d": 2000, "mn": 1200, "mx": 2500, "s": 100}, "reaction_time": {"l": "Reaction (s)", "t": "range", "d": 25, "mn": 10, "mx": 60, "s": 5}, "mold_preheat": {"l": "Mold Preheat (°C)", "t": "range", "d": 350, "mn": 200, "mx": 600, "s": 50}, "aluminum_purity": {"l": "Al Purity (%)", "t": "range", "d": 97, "mn": 90, "mx": 99.9, "s": 1}}], ["gas_metal_arc_brazing", "GMA Brazing (MIG Brazing)", "GMA Brazing (MIG Brazing)", "Joining", "Low-temp brazing with CuSi/CuAl wire + MIG torch — automotive, galvanized steel.", "🔥", {"current": {"l": "Current (A)", "t": "range", "d": 100, "mn": 40, "mx": 200, "s": 10}, "voltage": {"l": "Voltage (V)", "t": "range", "d": 18, "mn": 14, "mx": 24, "s": 0.5}, "wire_feed": {"l": "Wire Feed (m/min)", "t": "range", "d": 6, "mn": 3, "mx": 12, "s": 0.5}, "wire_type": {"l": "Wire Type", "t": "select", "d": "CuSi3", "o": ["CuSi3", "CuAl8", "CuSn", "CuZn"]}}], ["magnetic_pulse_welding", "Magnetic Pulse Welding", "Magnetic Pulse Welding", "Joining", "Electromagnetic force drives metals together at high speed — dissimilar metals, no heat.", "🧲", {"energy": {"l": "Energy (kJ)", "t": "range", "d": 30, "mn": 5, "mx": 100, "s": 5}, "standoff": {"l": "Standoff (mm)", "t": "range", "d": 1.5, "mn": 0.5, "mx": 5, "s": 0.25}, "impact_velocity": {"l": "Velocity (m/s)", "t": "range", "d": 350, "mn": 200, "mx": 500, "s": 25}}], ["laser_hybrid_welding", "Laser-Hybrid Welding (Laser+MIG)", "Laser-Hybrid Welding (Laser+MIG)", "Joining", "Combined laser and MIG arc — deep penetration + gap tolerance, shipbuilding panels.", "🔆", {"laser_power": {"l": "Laser (kW)", "t": "range", "d": 8, "mn": 2, "mx": 20, "s": 1}, "mig_current": {"l": "MIG Current (A)", "t": "range", "d": 250, "mn": 100, "mx": 400, "s": 25}, "welding_speed": {"l": "Speed (m/min)", "t": "range", "d": 2, "mn": 0.5, "mx": 5, "s": 0.25}, "gap_bridge": {"l": "Gap Bridge (mm)", "t": "range", "d": 0.5, "mn": 0, "mx": 2, "s": 0.1}}], ["stud_welding", "Stud Welding (Drawn Arc)", "Stud Welding (Drawn Arc)", "Joining", "Arc ignites between stud and workpiece — instant attachment, construction, automotive.", "📌", {"current": {"l": "Current (A)", "t": "range", "d": 600, "mn": 200, "mx": 2000, "s": 50}, "weld_time": {"l": "Weld (ms)", "t": "range", "d": 300, "mn": 50, "mx": 1000, "s": 50}, "stud_diameter": {"l": "Stud Ø (mm)", "t": "select", "d": 12, "o": [6, 8, 10, 12, 16, 20, 25]}, "lift_height": {"l": "Lift (mm)", "t": "range", "d": 2, "mn": 1, "mx": 5, "s": 0.5}}], ["induction_brazing", "Induction Brazing", "Induction Brazing", "Joining", "Precise localized heating via induction coil — HVAC fittings, carbide tool tips.", "🔘", {"frequency": {"l": "Frequency (kHz)", "t": "range", "d": 100, "mn": 10, "mx": 500, "s": 25}, "power": {"l": "Power (kW)", "t": "range", "d": 10, "mn": 1, "mx": 50, "s": 2}, "cycle_time": {"l": "Cycle (s)", "t": "range", "d": 30, "mn": 5, "mx": 120, "s": 5}, "filler": {"l": "Filler", "t": "select", "d": "Silver", "o": ["Silver", "Copper-Phos", "Al-Si", "Nickel"]}}], ["plasma_welding", "Plasma Arc Welding (PAW)", "Plasma Arc Welding (PAW)", "Joining", "Constricted plasma arc for narrow deep welds — aerospace, electronics enclosures.", "☄️", {"current": {"l": "Current (A)", "t": "range", "d": 100, "mn": 10, "mx": 300, "s": 10}, "plasma_gas": {"l": "Plasma Gas (L/min)", "t": "range", "d": 1.5, "mn": 0.2, "mx": 5, "s": 0.25}, "orifice_diameter": {"l": "Orifice (mm)", "t": "select", "d": 1.5, "o": [0.5, 1.0, 1.5, 2.0, 3.0]}, "keyhole_mode": {"l": "Keyhole", "t": "select", "d": "Off", "o": ["On", "Off"]}}], ["cold_welding", "Cold Welding (Contact)", "Cold Welding (Contact)", "Joining", "Metals bond at room temp under pressure — wire splicing, semiconductor packaging.", "🤝", {"pressure": {"l": "Pressure (MPa)", "t": "range", "d": 500, "mn": 100, "mx": 2000, "s": 50}, "deformation": {"l": "Deformation (%)", "t": "range", "d": 40, "mn": 10, "mx": 80, "s": 5}, "surface_prep": {"l": "Surface Prep", "t": "select", "d": "Wire Brush", "o": ["Wire Brush", "Chemical", "Plasma", "None"]}}], ["slush_casting", "Slush Casting", "Slush Casting", "Casting", "Hollow casting by pouring out excess metal — decorative items, toys, chocolate.", "🍫", {"pour_temp": {"l": "Pour (°C)", "t": "range", "d": 350, "mn": 200, "mx": 500, "s": 25}, "dwell_time": {"l": "Dwell (s)", "t": "range", "d": 15, "mn": 5, "mx": 60, "s": 5}, "mold_temp": {"l": "Mold (°C)", "t": "range", "d": 60, "mn": 20, "mx": 150, "s": 10}, "wall_thickness": {"l": "Wall (mm)", "t": "range", "d": 3, "mn": 1, "mx": 10, "s": 0.5}}], ["squeeze_casting", "Squeeze Casting", "Squeeze Casting", "Casting", "Molten metal solidified under high pressure — zero porosity, automotive components.", "🗜️", {"pressure": {"l": "Pressure (MPa)", "t": "range", "d": 100, "mn": 50, "mx": 200, "s": 10}, "melt_temp": {"l": "Melt (°C)", "t": "range", "d": 700, "mn": 600, "mx": 800, "s": 25}, "die_temp": {"l": "Die (°C)", "t": "range", "d": 250, "mn": 150, "mx": 350, "s": 25}, "pressure_duration": {"l": "Duration (s)", "t": "range", "d": 20, "mn": 5, "mx": 60, "s": 5}}], ["thixocasting", "Thixocasting (Semi-Solid)", "Thixocasting (Semi-Solid)", "Casting", "Semi-solid metal injected — near-net shape, low porosity, aluminum/magnesium.", "🍯", {"solid_fraction": {"l": "Solid (%)", "t": "range", "d": 45, "mn": 30, "mx": 60, "s": 5}, "injection_speed": {"l": "Speed (m/s)", "t": "range", "d": 2, "mn": 0.5, "mx": 5, "s": 0.5}, "billet_temp": {"l": "Billet (°C)", "t": "range", "d": 580, "mn": 560, "mx": 620, "s": 10}}], ["vacuum_investment_casting", "Vacuum Investment Casting", "Vacuum Investment Casting", "Casting", "Vacuum-assisted investment casting — fine detail jewelry, dental, aerospace.", "🕯️", {"vacuum_level": {"l": "Vacuum (mbar)", "t": "range", "d": 100, "mn": 10, "mx": 500, "s": 25}, "flask_temp": {"l": "Flask (°C)", "t": "range", "d": 550, "mn": 300, "mx": 800, "s": 50}, "pour_temp": {"l": "Pour (°C)", "t": "range", "d": 1100, "mn": 900, "mx": 2000, "s": 50}}], ["low_pressure_casting", "Low Pressure Die Casting", "Low Pressure Die Casting", "Casting", "Gas pressure pushes metal up into die — wheels, cylinder heads, low turbulence.", "🌡️", {"pressure": {"l": "Pressure (bar)", "t": "range", "d": 0.8, "mn": 0.3, "mx": 2, "s": 0.1}, "fill_time": {"l": "Fill Time (s)", "t": "range", "d": 20, "mn": 5, "mx": 60, "s": 5}, "metal_temp": {"l": "Metal (°C)", "t": "range", "d": 700, "mn": 650, "mx": 750, "s": 10}}], ["permanent_mold_casting", "Permanent Mold (Gravity Die)", "Permanent Mold (Gravity Die)", "Casting", "Reusable metal mold filled by gravity — aluminum/copper alloys, medium volume.", "🏋️", {"pour_temp": {"l": "Pour (°C)", "t": "range", "d": 720, "mn": 650, "mx": 800, "s": 25}, "mold_temp": {"l": "Mold (°C)", "t": "range", "d": 280, "mn": 150, "mx": 400, "s": 25}, "coating": {"l": "Coating", "t": "select", "d": "Graphite", "o": ["Graphite", "Ceramic", "None"]}}], ["copper_electroforming", "Copper Electroforming", "Copper Electroforming", "Forming", "Thick copper electrodeposited on mandrel — EMI shielding, heat sinks, artwork.", "🪞", {"current_density": {"l": "Current (A/dm²)", "t": "range", "d": 5, "mn": 1, "mx": 15, "s": 1}, "bath_temp": {"l": "Bath (°C)", "t": "range", "d": 35, "mn": 20, "mx": 60, "s": 5}, "deposition_rate": {"l": "Rate (μm/h)", "t": "range", "d": 50, "mn": 10, "mx": 200, "s": 10}, "brightener": {"l": "Brightener", "t": "select", "d": "Level 2", "o": ["None", "Level 1", "Level 2", "Level 3"]}}], ["injection_blow_molding", "Injection Blow Molding", "Injection Blow Molding", "Forming", "Injection molded preform then blown — pharmaceutical bottles, high precision.", "💊", {"injection_temp": {"l": "Injection (°C)", "t": "range", "d": 270, "mn": 200, "mx": 320, "s": 10}, "blow_pressure": {"l": "Blow (bar)", "t": "range", "d": 10, "mn": 5, "mx": 20, "s": 2.5}, "preform_temp": {"l": "Preform (°C)", "t": "range", "d": 110, "mn": 90, "mx": 130, "s": 5}}], ["stretch_blow_molding", "Stretch Blow Molding", "Stretch Blow Molding", "Forming", "Biaxial stretching + blowing — PET bottles, superior clarity and strength.", "🍾", {"stretch_ratio": {"l": "Stretch Ratio", "t": "range", "d": 3.5, "mn": 2, "mx": 6, "s": 0.5}, "preform_temp": {"l": "Preform (°C)", "t": "range", "d": 105, "mn": 95, "mx": 115, "s": 5}, "blow_pressure": {"l": "Pressure (bar)", "t": "range", "d": 35, "mn": 20, "mx": 40, "s": 5}}], ["calendering", "Calendering", "Calendering", "Forming", "Material passed through heated rollers — plastic sheets, rubber, textiles.", "🎞️", {"roll_temp": {"l": "Roll (°C)", "t": "range", "d": 160, "mn": 80, "mx": 250, "s": 10}, "roll_speed": {"l": "Speed (m/min)", "t": "range", "d": 30, "mn": 1, "mx": 100, "s": 5}, "gap": {"l": "Gap (mm)", "t": "range", "d": 1, "mn": 0.1, "mx": 10, "s": 0.1}, "number_of_rolls": {"l": "Rolls", "t": "select", "d": 4, "o": [2, 3, 4, 5]}}], ["pad_printing", "Pad Printing (Tampography)", "Pad Printing (Tampography)", "Forming", "Silicone pad transfers 2D image to 3D surface — logos, keycaps, golf balls.", "🖨️", {"pad_hardness": {"l": "Pad (Shore A)", "t": "range", "d": 6, "mn": 0, "mx": 20, "s": 1}, "ink_viscosity": {"l": "Ink Viscosity", "t": "select", "d": "Medium", "o": ["Low", "Medium", "High"]}, "cycle_time": {"l": "Cycle (s)", "t": "range", "d": 3, "mn": 1, "mx": 10, "s": 0.5}}], ["in_mold_decoration", "In-Mold Decoration (IMD)", "In-Mold Decoration (IMD)", "Forming", "Pre-printed film inserted before injection — durable graphics, automotive interiors.", "🎨", {"film_type": {"l": "Film", "t": "select", "d": "PC", "o": ["PC", "PET", "PMMA", "ABS"]}, "film_thickness": {"l": "Film (μm)", "t": "range", "d": 125, "mn": 25, "mx": 500, "s": 25}, "injection_temp": {"l": "Temp (°C)", "t": "range", "d": 260, "mn": 200, "mx": 320, "s": 10}}], ["coextrusion", "Coextrusion (Multi-Layer)", "Coextrusion (Multi-Layer)", "Forming", "Multiple polymers extruded simultaneously — barrier packaging, multi-color profiles.", "🍝", {"layers": {"l": "Layers", "t": "range", "d": 3, "mn": 2, "mx": 11, "s": 1}, "layer_ratio": {"l": "Layer Ratio", "t": "range", "d": 0.3, "mn": 0.1, "mx": 0.9, "s": 0.1}, "line_speed": {"l": "Speed (m/min)", "t": "range", "d": 20, "mn": 1, "mx": 100, "s": 5}}], ["micro_injection_molding", "Micro Injection Molding", "Micro Injection Molding", "Forming", "Sub-gram plastic parts with micron features — medical microfluidics, watch gears.", "🔬", {"shot_weight": {"l": "Shot (mg)", "t": "range", "d": 50, "mn": 1, "mx": 1000, "s": 10}, "injection_speed": {"l": "Speed (mm/s)", "t": "range", "d": 500, "mn": 100, "mx": 1000, "s": 50}, "mold_temp": {"l": "Mold (°C)", "t": "range", "d": 130, "mn": 80, "mx": 200, "s": 10}}], ["gas_assist_molding", "Gas-Assisted Injection Molding", "Gas-Assisted Injection Molding", "Forming", "Nitrogen gas cores out thick sections — hollow handles, large panels, no sink marks.", "💨", {"gas_pressure": {"l": "N₂ Pressure (bar)", "t": "range", "d": 150, "mn": 50, "mx": 300, "s": 25}, "gas_delay": {"l": "Delay (s)", "t": "range", "d": 2, "mn": 0.5, "mx": 10, "s": 0.5}, "gas_time": {"l": "Gas Time (s)", "t": "range", "d": 10, "mn": 2, "mx": 30, "s": 2}}], ["water_assist_molding", "Water-Assisted Injection", "Water-Assisted Injection", "Forming", "Water cores out thick sections faster than gas — large hollow parts, automotive ducts.", "💧", {"water_pressure": {"l": "Pressure (bar)", "t": "range", "d": 200, "mn": 50, "mx": 500, "s": 50}, "water_temp": {"l": "Water (°C)", "t": "range", "d": 25, "mn": 10, "mx": 80, "s": 10}, "injection_time": {"l": "Time (s)", "t": "range", "d": 5, "mn": 1, "mx": 20, "s": 1}}], ["reaction_injection_molding", "Reaction Injection Molding (RIM)", "Reaction Injection Molding (RIM)", "Forming", "Two liquid components mix and react in mold — automotive bumpers, large PU parts.", "🧪", {"mix_ratio": {"l": "Mix Ratio (A:B)", "t": "range", "d": 1, "mn": 0.5, "mx": 2, "s": 0.1}, "mold_temp": {"l": "Mold (°C)", "t": "range", "d": 65, "mn": 40, "mx": 90, "s": 5}, "demold_time": {"l": "Demold (s)", "t": "range", "d": 120, "mn": 30, "mx": 300, "s": 15}}], ["shell_molding", "Shell Molding (Croning)", "Shell Molding (Croning)", "Casting", "Resin-coated sand forms thin shell mold — better surface finish than sand casting.", "🐚", {"pattern_temp": {"l": "Pattern (°C)", "t": "range", "d": 250, "mn": 200, "mx": 300, "s": 10}, "shell_thickness": {"l": "Shell (mm)", "t": "range", "d": 12, "mn": 6, "mx": 25, "s": 2}, "pour_temp": {"l": "Pour (°C)", "t": "range", "d": 1480, "mn": 1300, "mx": 1600, "s": 50}}], ["plaster_mold_casting", "Plaster Mold Casting", "Plaster Mold Casting", "Casting", "Plaster of Paris mold — smooth finish, aluminum/zinc/magnesium, prototyping.", "🏺", {"plaster_type": {"l": "Plaster", "t": "select", "d": "High-Strength", "o": ["Regular", "High-Strength", "Permeable"]}, "mold_temp": {"l": "Mold (°C)", "t": "range", "d": 60, "mn": 20, "mx": 120, "s": 10}, "pour_temp": {"l": "Pour (°C)", "t": "range", "d": 600, "mn": 400, "mx": 700, "s": 25}}], ["ceramic_mold_casting", "Ceramic Mold Casting", "Ceramic Mold Casting", "Casting", "Ceramic slurry mold — high-temp alloys, precision, aerospace turbine components.", "🏺", {"slurry_layers": {"l": "Slurry Layers", "t": "range", "d": 8, "mn": 4, "mx": 20, "s": 2}, "firing_temp": {"l": "Firing (°C)", "t": "range", "d": 1000, "mn": 800, "mx": 1200, "s": 50}, "pour_temp": {"l": "Pour (°C)", "t": "range", "d": 1550, "mn": 1200, "mx": 1700, "s": 50}}], ["electro_chemical_grinding", "Electrochemical Grinding (ECG)", "Electrochemical Grinding (ECG)", "Subtractive", "Combines electrochemical removal with abrasive grinding — hard alloys, burr-free.", "⚡", {"voltage": {"l": "Voltage (V)", "t": "range", "d": 8, "mn": 4, "mx": 15, "s": 1}, "current_density": {"l": "Current (A/cm²)", "t": "range", "d": 150, "mn": 50, "mx": 300, "s": 25}, "wheel_speed": {"l": "Wheel (RPM)", "t": "range", "d": 3000, "mn": 1000, "mx": 5000, "s": 250}, "electrolyte": {"l": "Electrolyte", "t": "select", "d": "NaNO₃", "o": ["NaNO₃", "NaCl", "KNO₃", "Mixed"]}}], ["shaper", "Shaper / Planer", "Shaper / Planer", "Subtractive", "Linear cutting tool removes material in a straight line — keyways, flat surfaces.", "🪚", {"cutting_speed": {"l": "Speed (m/min)", "t": "range", "d": 20, "mn": 5, "mx": 50, "s": 5}, "feed_per_stroke": {"l": "Feed/Stroke (mm)", "t": "range", "d": 0.5, "mn": 0.1, "mx": 3, "s": 0.1}, "depth_of_cut": {"l": "DOC (mm)", "t": "range", "d": 3, "mn": 0.5, "mx": 15, "s": 0.5}}], ["gun_drilling", "Gun Drilling (Deep Hole)", "Gun Drilling (Deep Hole)", "Subtractive", "Long straight holes with high L/D ratio — gun barrels, crankshafts, mold cooling.", "🔫", {"drill_diameter": {"l": "Bit (mm)", "t": "select", "d": 5, "o": [1, 2, 3, 5, 8, 12, 20, 30]}, "depth": {"l": "Depth (mm)", "t": "range", "d": 200, "mn": 50, "mx": 2000, "s": 50}, "rpm": {"l": "Speed (RPM)", "t": "range", "d": 3000, "mn": 500, "mx": 12000, "s": 500}, "coolant_pressure": {"l": "Coolant (bar)", "t": "range", "d": 60, "mn": 20, "mx": 150, "s": 10}}], ["jig_boring", "Jig Boring", "Jig Boring", "Subtractive", "Ultra-precise boring (±2μm) — jigs, fixtures, dies, aerospace components.", "🎯", {"spindle_speed": {"l": "Speed (RPM)", "t": "range", "d": 2000, "mn": 500, "mx": 6000, "s": 250}, "bore_diameter": {"l": "Bore (mm)", "t": "select", "d": 20, "o": [3, 5, 10, 20, 50, 100]}, "feed_rate": {"l": "Feed (mm/rev)", "t": "range", "d": 0.05, "mn": 0.01, "mx": 0.2, "s": 0.01}}], ["lapping", "Lapping", "Lapping", "Finishing", "Loose abrasive between workpiece and lap plate — sub-micron flatness, optical surfaces.", "🪨", {"abrasive": {"l": "Abrasive", "t": "select", "d": "Diamond", "o": ["Al₂O₃", "SiC", "Diamond", "CBN"]}, "grit": {"l": "Grit (μm)", "t": "select", "d": 6, "o": [1, 3, 6, 9, 15, 30]}, "pressure": {"l": "Pressure (kPa)", "t": "range", "d": 30, "mn": 5, "mx": 100, "s": 5}, "speed": {"l": "Speed (RPM)", "t": "range", "d": 60, "mn": 20, "mx": 200, "s": 10}}], ["burnishing", "Burnishing (Roller)", "Burnishing (Roller)", "Finishing", "Hardened roller smooths surface by plastic deformation — mirror finish, work hardening.", "✨", {"roller_pressure": {"l": "Pressure (N)", "t": "range", "d": 200, "mn": 50, "mx": 500, "s": 25}, "feed_rate": {"l": "Feed (mm/rev)", "t": "range", "d": 0.15, "mn": 0.05, "mx": 0.5, "s": 0.05}, "roller_diameter": {"l": "Roller (mm)", "t": "select", "d": 15, "o": [6, 10, 15, 25]}}], ["black_oxide", "Black Oxide Coating", "Black Oxide Coating", "Finishing", "Chemical conversion coating — corrosion resistance, reduced glare, no dimension change.", "⬛", {"bath_temp": {"l": "Bath (°C)", "t": "range", "d": 141, "mn": 130, "mx": 150, "s": 2}, "immersion_time": {"l": "Time (min)", "t": "range", "d": 15, "mn": 5, "mx": 30, "s": 2}, "post_treatment": {"l": "Post-Treat", "t": "select", "d": "Oil", "o": ["Oil", "Wax", "Lacquer", "None"]}}], ["passivation", "Passivation (Stainless Steel)", "Passivation (Stainless Steel)", "Finishing", "Nitric/citric acid removes free iron — enhances natural corrosion resistance of SS.", "🛡️", {"acid_type": {"l": "Acid", "t": "select", "d": "Citric 10%", "o": ["Nitric 20%", "Nitric 50%", "Citric 10%", "Citric 25%"]}, "bath_temp": {"l": "Temp (°C)", "t": "range", "d": 35, "mn": 20, "mx": 60, "s": 5}, "time": {"l": "Time (min)", "t": "range", "d": 30, "mn": 10, "mx": 60, "s": 5}}], ["chrome_plating", "Hard Chrome Plating", "Hard Chrome Plating", "Finishing", "Thick chromium layer — extreme wear resistance, hydraulic rods, molds, rolls.", "🪩", {"current_density": {"l": "Current (A/dm²)", "t": "range", "d": 50, "mn": 20, "mx": 80, "s": 5}, "bath_temp": {"l": "Bath (°C)", "t": "range", "d": 55, "mn": 45, "mx": 65, "s": 2}, "thickness": {"l": "Thickness (μm)", "t": "range", "d": 50, "mn": 5, "mx": 500, "s": 25}, "catalyst": {"l": "Catalyst", "t": "select", "d": "Sulfate", "o": ["Sulfate", "Fluoride", "Mixed"]}}], ["electroless_nickel", "Electroless Nickel Plating", "Electroless Nickel Plating", "Finishing", "Auto-catalytic Ni-P deposition — uniform thickness, no electricity, complex shapes.", "🪙", {"phosphorus": {"l": "P Content (%)", "t": "select", "d": "Med (5-9%)", "o": ["Low (1-4%)", "Med (5-9%)", "High (10-13%)"]}, "bath_temp": {"l": "Bath (°C)", "t": "range", "d": 88, "mn": 82, "mx": 93, "s": 2}, "deposition_rate": {"l": "Rate (μm/h)", "t": "range", "d": 15, "mn": 5, "mx": 25, "s": 2}, "thickness": {"l": "Thickness (μm)", "t": "range", "d": 25, "mn": 5, "mx": 100, "s": 5}}], ["galvanizing", "Hot-Dip Galvanizing", "Hot-Dip Galvanizing", "Finishing", "Steel dipped in molten zinc — structural steel, guardrails, fasteners, decades of protection.", "🔗", {"zinc_temp": {"l": "Zinc (°C)", "t": "range", "d": 450, "mn": 440, "mx": 460, "s": 2}, "immersion_time": {"l": "Time (min)", "t": "range", "d": 5, "mn": 2, "mx": 15, "s": 1}, "coating_weight": {"l": "Weight (g/m²)", "t": "range", "d": 500, "mn": 200, "mx": 1000, "s": 50}}], ["thermal_spray_ceramic", "Ceramic Thermal Spray", "Ceramic Thermal Spray", "Finishing", "Plasma-sprayed ceramic coatings — thermal barriers, wear resistance, electrical insulation.", "🌡️", {"coating": {"l": "Coating", "t": "select", "d": "Al₂O₃", "o": ["Al₂O₃", "Cr₂O₃", "ZrO₂-Y₂O₃", "TiO₂", "WC-Co"]}, "spray_distance": {"l": "Distance (mm)", "t": "range", "d": 100, "mn": 50, "mx": 150, "s": 10}, "thickness": {"l": "Thickness (μm)", "t": "range", "d": 300, "mn": 50, "mx": 2000, "s": 50}, "power": {"l": "Power (kW)", "t": "range", "d": 40, "mn": 20, "mx": 80, "s": 5}}], ["laser_cleaning", "Laser Cleaning / Ablation", "Laser Cleaning / Ablation", "Finishing", "Pulsed laser removes rust, paint, oxides — no media, no chemicals, precision.", "✨", {"laser_power": {"l": "Power (W)", "t": "range", "d": 200, "mn": 20, "mx": 1000, "s": 50}, "pulse_frequency": {"l": "Freq (kHz)", "t": "range", "d": 100, "mn": 10, "mx": 400, "s": 25}, "scan_width": {"l": "Width (mm)", "t": "range", "d": 70, "mn": 10, "mx": 200, "s": 10}, "cleaning_speed": {"l": "Speed (cm²/min)", "t": "range", "d": 100, "mn": 10, "mx": 500, "s": 25}}], ["chemical_mechanical_polishing", "CMP", "Chemical Mechanical Polishing", "Finishing", "Combined chemical + mechanical planarization — semiconductor wafers, optics.", "💎", {"slurry_type": {"l": "Slurry", "t": "select", "d": "Silica", "o": ["Silica", "Ceria", "Alumina", "Diamond"]}, "pad_type": {"l": "Pad", "t": "select", "d": "Medium", "o": ["Hard", "Medium", "Soft"]}, "pressure": {"l": "Pressure (psi)", "t": "range", "d": 4, "mn": 1, "mx": 10, "s": 0.5}, "removal_rate": {"l": "Rate (nm/min)", "t": "range", "d": 200, "mn": 10, "mx": 1000, "s": 50}}], ["plastic_welding_ultrasonic", "Ultrasonic Plastic Welding", "Ultrasonic Plastic Welding", "Joining", "HF vibration melts thermoplastics at joint — electronics housings, medical devices.", "🔊", {"frequency": {"l": "Freq (kHz)", "t": "range", "d": 20, "mn": 15, "mx": 40, "s": 5}, "amplitude": {"l": "Amplitude (μm)", "t": "range", "d": 50, "mn": 10, "mx": 100, "s": 10}, "weld_time": {"l": "Weld (ms)", "t": "range", "d": 400, "mn": 50, "mx": 2000, "s": 50}, "material": {"l": "Material", "t": "select", "d": "ABS", "o": ["ABS", "PC", "PP", "PA", "PMMA", "POM"]}}], ["hot_plate_welding", "Hot Plate Welding", "Hot Plate Welding", "Joining", "Heated platen melts surfaces then pressed together — large plastic parts, automotive.", "🔥", {"plate_temp": {"l": "Plate (°C)", "t": "range", "d": 250, "mn": 180, "mx": 350, "s": 10}, "heating_time": {"l": "Heat (s)", "t": "range", "d": 20, "mn": 5, "mx": 60, "s": 5}, "joining_pressure": {"l": "Pressure (bar)", "t": "range", "d": 3, "mn": 1, "mx": 10, "s": 1}}], ["spin_welding", "Spin Welding (Plastic)", "Spin Welding (Plastic)", "Joining", "Rotational friction melts circular joint — filters, valves, cylindrical parts.", "🌀", {"rotation_speed": {"l": "Speed (RPM)", "t": "range", "d": 2000, "mn": 500, "mx": 5000, "s": 250}, "weld_time": {"l": "Weld (s)", "t": "range", "d": 3, "mn": 1, "mx": 10, "s": 0.5}, "pressure": {"l": "Pressure (N)", "t": "range", "d": 400, "mn": 100, "mx": 1000, "s": 50}}], ["vibration_welding", "Vibration Welding (Linear)", "Vibration Welding (Linear)", "Joining", "Linear friction at 100-240Hz — large irregular plastic parts, intake manifolds.", "〰️", {"frequency": {"l": "Freq (Hz)", "t": "range", "d": 200, "mn": 100, "mx": 240, "s": 20}, "amplitude": {"l": "Amplitude (mm)", "t": "range", "d": 1.5, "mn": 0.5, "mx": 3, "s": 0.25}, "weld_time": {"l": "Weld (s)", "t": "range", "d": 8, "mn": 2, "mx": 20, "s": 1}}], ["laser_plastic_welding", "Laser Plastic Welding", "Laser Plastic Welding", "Joining", "Laser passes through transparent layer, absorbed by dark layer — clean, no particles.", "🔆", {"laser_power": {"l": "Power (W)", "t": "range", "d": 60, "mn": 10, "mx": 200, "s": 10}, "weld_speed": {"l": "Speed (mm/s)", "t": "range", "d": 50, "mn": 5, "mx": 200, "s": 10}, "spot_size": {"l": "Spot (mm)", "t": "range", "d": 1.5, "mn": 0.5, "mx": 5, "s": 0.25}}], ["infrared_welding", "Infrared Welding (Plastic)", "Infrared Welding (Plastic)", "Joining", "IR radiation melts surfaces contactlessly — clean, no sticking to heating element.", "🔴", {"ir_power": {"l": "Power (%)", "t": "range", "d": 70, "mn": 20, "mx": 100, "s": 10}, "heating_time": {"l": "Heat (s)", "t": "range", "d": 20, "mn": 5, "mx": 60, "s": 5}, "distance": {"l": "Distance (mm)", "t": "range", "d": 3, "mn": 1, "mx": 10, "s": 1}}], ["solvent_welding", "Solvent Welding (Plastic)", "Solvent Welding (Plastic)", "Joining", "Solvent softens surfaces then pressed — PVC pipes, acrylic displays.", "🧪", {"solvent": {"l": "Solvent", "t": "select", "d": "MEK", "o": ["MEK", "Acetone", "THF", "Cyclohexanone"]}, "cure_time": {"l": "Cure (h)", "t": "range", "d": 24, "mn": 1, "mx": 48, "s": 4}, "application": {"l": "Method", "t": "select", "d": "Brush", "o": ["Brush", "Dip", "Capillary", "Spray"]}}], ["induction_skull_melting", "Induction Skull Melting", "Induction Skull Melting", "Casting", "Water-cooled crucible with skull of same material — reactive metals, no contamination.", "💀", {"frequency": {"l": "Freq (kHz)", "t": "range", "d": 10, "mn": 1, "mx": 50, "s": 5}, "power": {"l": "Power (kW)", "t": "range", "d": 50, "mn": 10, "mx": 200, "s": 10}, "material": {"l": "Material", "t": "select", "d": "Titanium", "o": ["Titanium", "Zirconium", "Niobium", "Hafnium"]}}], ["spray_forming", "Spray Forming (Osprey)", "Spray Forming (Osprey)", "Forming", "Molten metal atomized and deposited — fine grain, near-net billets, no segregation.", "💨", {"atomization_gas": {"l": "Gas", "t": "select", "d": "N₂", "o": ["N₂", "Ar", "He"]}, "gas_pressure": {"l": "Pressure (bar)", "t": "range", "d": 15, "mn": 5, "mx": 30, "s": 2.5}, "deposition_rate": {"l": "Rate (kg/min)", "t": "range", "d": 10, "mn": 1, "mx": 50, "s": 5}, "melt_temp": {"l": "Melt (°C)", "t": "range", "d": 750, "mn": 600, "mx": 1700, "s": 50}}], ["vapor_polishing", "Vapor Polishing", "Vapor Polishing", "Finishing", "Solvent vapor smooths plastic surfaces — optically clear acrylic, 3D printed parts.", "💨", {"solvent": {"l": "Solvent", "t": "select", "d": "Acetone", "o": ["Acetone", "MEK", "THF", "Ethyl Acetate"]}, "exposure": {"l": "Exposure (s)", "t": "range", "d": 30, "mn": 5, "mx": 120, "s": 5}, "chamber_temp": {"l": "Temp (°C)", "t": "range", "d": 45, "mn": 30, "mx": 60, "s": 5}}], ["explosion_welding", "Explosion Welding (EXW)", "Explosion Welding (EXW)", "Joining", "Explosive drives metals together — cladding dissimilar metals, transition joints.", "💥", {"explosive_ratio": {"l": "Explosive Ratio", "t": "range", "d": 0.8, "mn": 0.2, "mx": 2, "s": 0.1}, "standoff": {"l": "Standoff (mm)", "t": "range", "d": 6, "mn": 1, "mx": 30, "s": 2}, "impact_velocity": {"l": "Velocity (m/s)", "t": "range", "d": 450, "mn": 200, "mx": 800, "s": 50}}], ["diffusion_welding", "Diffusion Welding (DFW)", "Diffusion Welding (DFW)", "Joining", "Heat + pressure in controlled atmosphere — dissimilar metals, no melting.", "🔗", {"temperature": {"l": "Temp (°C)", "t": "range", "d": 800, "mn": 400, "mx": 1200, "s": 50}, "pressure": {"l": "Pressure (MPa)", "t": "range", "d": 10, "mn": 1, "mx": 30, "s": 2}, "time": {"l": "Time (h)", "t": "range", "d": 2, "mn": 0.5, "mx": 8, "s": 0.5}}], ["resin_transfer_molding", "Resin Transfer Molding (RTM)", "Resin Transfer Molding (RTM)", "Forming", "Resin injected into closed mold with dry fibers — complex composites, automotive.", "🫗", {"injection_pressure": {"l": "Pressure (bar)", "t": "range", "d": 5, "mn": 1, "mx": 20, "s": 1}, "mold_temp": {"l": "Mold (°C)", "t": "range", "d": 80, "mn": 50, "mx": 150, "s": 10}, "cure_time": {"l": "Cure (min)", "t": "range", "d": 30, "mn": 5, "mx": 120, "s": 5}}], ["pressure_thermoforming", "Pressure Thermoforming", "Pressure Thermoforming", "Forming", "Positive air pressure forms plastic sheet — sharper detail than vacuum alone.", "💨", {"sheet_temp": {"l": "Sheet (°C)", "t": "range", "d": 180, "mn": 130, "mx": 220, "s": 10}, "air_pressure": {"l": "Pressure (bar)", "t": "range", "d": 6, "mn": 2, "mx": 15, "s": 1}, "plug_assist": {"l": "Plug Assist", "t": "select", "d": "Mechanical", "o": ["None", "Mechanical", "Air Cushion"]}}], ["electro_spark_deposition", "Electrospark Deposition (ESD)", "Electrospark Deposition (ESD)", "Finishing", "Pulsed micro-welding deposits thin coatings — hard facing, edge repair, no HAZ.", "⚡", {"voltage": {"l": "Voltage (V)", "t": "range", "d": 80, "mn": 20, "mx": 150, "s": 10}, "frequency": {"l": "Freq (Hz)", "t": "range", "d": 500, "mn": 100, "mx": 1000, "s": 100}, "coating_thickness": {"l": "Thick (μm)", "t": "range", "d": 50, "mn": 5, "mx": 200, "s": 10}}], ["shot_creep_forming", "Shot Peen Forming", "Shot Peen Forming", "Forming", "High-speed shot impacts induce compressive stress that curves panels — aircraft wings.", "💪", {"shot_size": {"l": "Shot Size", "t": "select", "d": "S170", "o": ["S70", "S110", "S170", "S230", "S330"]}, "intensity": {"l": "Intensity (A)", "t": "range", "d": 0.012, "mn": 0.004, "mx": 0.024, "s": 0.002}, "coverage": {"l": "Coverage (%)", "t": "range", "d": 100, "mn": 50, "mx": 200, "s": 25}}], ["coining", "Coining", "Coining", "Forming", "Extreme pressure cold-forms metal into die — coins, medals, precision gears.", "🪙", {"pressure": {"l": "Pressure (tons)", "t": "range", "d": 200, "mn": 50, "mx": 1000, "s": 50}, "material_hardness": {"l": "Hardness", "t": "select", "d": "Soft", "o": ["Soft", "Half-Hard", "Hard", "Spring"]}, "lubrication": {"l": "Lube", "t": "select", "d": "Oil", "o": ["None", "Oil", "Soap", "MoS₂", "PTFE"]}}], ["hobbing", "Hobbing (Mold Making)", "Hobbing (Mold Making)", "Forming", "Hardened master pressed into soft steel to create mold cavity — plastic molds.", "🔨", {"hob_hardness": {"l": "Hob (HRC)", "t": "range", "d": 62, "mn": 58, "mx": 68, "s": 1}, "blank_hardness": {"l": "Blank (HRB)", "t": "range", "d": 85, "mn": 70, "mx": 100, "s": 5}, "pressure": {"l": "Pressure (tons)", "t": "range", "d": 500, "mn": 100, "mx": 2000, "s": 100}}], ["swaging", "Swaging (Rotary Forging)", "Swaging (Rotary Forging)", "Forming", "Rotating dies hammer workpiece to reduce diameter — tubes, cables, fittings.", "🗜️", {"die_rpm": {"l": "Die RPM", "t": "range", "d": 600, "mn": 100, "mx": 2000, "s": 100}, "reduction": {"l": "Reduction (%)", "t": "range", "d": 25, "mn": 5, "mx": 60, "s": 5}, "material": {"l": "Material", "t": "select", "d": "Steel", "o": ["Steel", "Stainless", "Aluminum", "Copper", "Titanium"]}}], ["extrusion_blow_molding", "Extrusion Blow Molding", "Extrusion Blow Molding", "Forming", "Continuous tube (parison) pinched in mold and blown — bottles, containers.", "🍶", {"parison_temp": {"l": "Parison (°C)", "t": "range", "d": 200, "mn": 170, "mx": 230, "s": 10}, "blow_pressure": {"l": "Pressure (bar)", "t": "range", "d": 8, "mn": 4, "mx": 12, "s": 1}, "cycle_time": {"l": "Cycle (s)", "t": "range", "d": 30, "mn": 10, "mx": 120, "s": 5}}], ["electrohydraulic_forming", "Electrohydraulic Forming", "Electrohydraulic Forming", "Forming", "Underwater spark creates shockwave — high-speed sheet forming, complex geometries.", "⚡", {"energy": {"l": "Energy (kJ)", "t": "range", "d": 50, "mn": 5, "mx": 200, "s": 10}, "standoff": {"l": "Standoff (mm)", "t": "range", "d": 40, "mn": 10, "mx": 100, "s": 10}, "material_thickness": {"l": "Thick (mm)", "t": "range", "d": 1, "mn": 0.2, "mx": 4, "s": 0.25}}], ["knurling", "Knurling", "Knurling", "Forming", "Patterned roller cold-forms diamond/straight pattern — grips, handles, press fits.", "🔧", {"pattern": {"l": "Pattern", "t": "select", "d": "Diamond", "o": ["Diamond", "Straight", "Diagonal L", "Diagonal R", "Cross"]}, "pitch": {"l": "Pitch (TPI)", "t": "select", "d": 20, "o": [8, 12, 16, 20, 25, 33, 50]}, "material_hardness": {"l": "Max HRC", "t": "range", "d": 32, "mn": 20, "mx": 45, "s": 2}}], ["cold_heading", "Cold Heading", "Cold Heading", "Forming", "Wire upset at room temp — bolts, screws, rivets at high speed.", "🔩", {"wire_diameter": {"l": "Wire Ø (mm)", "t": "select", "d": 6, "o": [2, 3, 4, 5, 6, 8, 10, 12, 16]}, "upset_ratio": {"l": "Upset Ratio", "t": "range", "d": 2.5, "mn": 1.5, "mx": 4.5, "s": 0.25}, "production_rate": {"l": "Rate (ppm)", "t": "range", "d": 150, "mn": 50, "mx": 400, "s": 25}}], ["thread_rolling", "Thread Rolling", "Thread Rolling", "Forming", "Cold forming threads by pressure — stronger than cut threads, no material waste.", "🌀", {"thread_pitch": {"l": "Pitch (mm)", "t": "select", "d": 1.5, "o": [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.5, 3]}, "blank_diameter": {"l": "Blank Ø (mm)", "t": "range", "d": 10, "mn": 2, "mx": 50, "s": 1}, "material": {"l": "Material", "t": "select", "d": "Steel", "o": ["Steel", "Stainless", "Aluminum", "Brass", "Titanium"]}}], ["orbital_riveting", "Orbital Riveting", "Orbital Riveting", "Joining", "Rotating peen tool forms rivet head — low force, quiet, precise assembly.", "🔘", {"orbital_rpm": {"l": "RPM", "t": "range", "d": 1500, "mn": 500, "mx": 3000, "s": 250}, "rivet_diameter": {"l": "Rivet Ø (mm)", "t": "select", "d": 4, "o": [1, 2, 3, 4, 5, 6, 8, 10]}, "cycle_time": {"l": "Cycle (s)", "t": "range", "d": 3, "mn": 1, "mx": 10, "s": 0.5}}], ["refill_friction_stir_spot_welding", "Refill FSW Spot", "Refill FSW Spot", "Joining", "FSW variant that refills the exit hole — aircraft fuselage spot joints.", "🌀", {"tool_rpm": {"l": "Tool RPM", "t": "range", "d": 2000, "mn": 500, "mx": 4000, "s": 250}, "plunge_depth": {"l": "Plunge (mm)", "t": "range", "d": 2, "mn": 0.5, "mx": 5, "s": 0.25}, "dwell_time": {"l": "Dwell (s)", "t": "range", "d": 3, "mn": 1, "mx": 10, "s": 1}}], ["abrasive_flow_machining", "Abrasive Flow Machining (AFM)", "Abrasive Flow Machining (AFM)", "Finishing", "Viscous abrasive media extruded through passages — deburr, polish, radius internal.", "🌊", {"media_viscosity": {"l": "Viscosity", "t": "select", "d": "Medium", "o": ["Low", "Medium", "High", "Extra High"]}, "extrusion_pressure": {"l": "Pressure (bar)", "t": "range", "d": 70, "mn": 10, "mx": 200, "s": 10}, "cycles": {"l": "Cycles", "t": "range", "d": 10, "mn": 1, "mx": 50, "s": 2}}], ["peening", "Shot Peening", "Shot Peening", "Finishing", "Bombardment with spherical media — compressive stress, fatigue life improvement.", "💪", {"media": {"l": "Media", "t": "select", "d": "Steel Shot", "o": ["Steel Shot", "Glass Bead", "Ceramic", "Cut Wire", "Stainless"]}, "intensity": {"l": "Intensity (A)", "t": "range", "d": 0.01, "mn": 0.004, "mx": 0.024, "s": 0.002}, "coverage": {"l": "Coverage (%)", "t": "range", "d": 100, "mn": 50, "mx": 200, "s": 25}}], ["cryogenic_deburring", "Cryogenic Deburring", "Cryogenic Deburring", "Finishing", "Parts frozen then tumbled — rubber/plastic flash becomes brittle, clean removal.", "❄️", {"temperature": {"l": "Temp (°C)", "t": "range", "d": -120, "mn": -196, "mx": -50, "s": 10}, "cycle_time": {"l": "Time (min)", "t": "range", "d": 5, "mn": 2, "mx": 20, "s": 1}, "media": {"l": "Media", "t": "select", "d": "Polycarbonate", "o": ["Polycarbonate", "Nylon", "Steel", "None"]}}], ["ceramic_injection_molding", "Ceramic Injection Molding (CIM)", "Ceramic Injection Molding (CIM)", "Forming", "Ceramic powder + binder molded — spark plug insulators, bioceramics, fiber ferrules.", "🏺", {"ceramic_type": {"l": "Ceramic", "t": "select", "d": "Al₂O₃", "o": ["Al₂O₃", "ZrO₂", "Si₃N", "SiC", "PZT"]}, "injection_temp": {"l": "Melt (°C)", "t": "range", "d": 150, "mn": 130, "mx": 180, "s": 10}, "sinter_temp": {"l": "Sinter (°C)", "t": "range", "d": 1600, "mn": 1400, "mx": 1800, "s": 50}}], ["powder_bed_electron_beam", "Electron Beam Melting (EBM)", "Electron Beam Melting (EBM)", "Additive", "Electron beam melts metal powder in vacuum — orthopedic implants, turbine blades.", "⚛️", {"beam_power": {"l": "Power (kW)", "t": "range", "d": 3, "mn": 1, "mx": 6, "s": 0.5}, "beam_speed": {"l": "Scan (m/s)", "t": "range", "d": 4000, "mn": 100, "mx": 8000, "s": 500}, "preheat": {"l": "Preheat (°C)", "t": "range", "d": 700, "mn": 600, "mx": 1100, "s": 50}}], ["binder_jetting_metal", "Metal Binder Jetting", "Metal Binder Jetting", "Additive", "Binder deposited on metal powder bed then sintered — production-scale metal AM.", "🖨️", {"layer_height": {"l": "Layer (μm)", "t": "range", "d": 50, "mn": 30, "mx": 100, "s": 10}, "binder_saturation": {"l": "Saturation (%)", "t": "range", "d": 100, "mn": 50, "mx": 150, "s": 10}, "sinter_temp": {"l": "Sinter (°C)", "t": "range", "d": 1380, "mn": 1200, "mx": 1450, "s": 50}}], ["hybrid_ded", "Hybrid DED + CNC", "Hybrid DED + CNC", "Hybrid", "Directed Energy Deposition with in-situ CNC machining — repair + finish in one setup.", "🔧", {"deposition_power": {"l": "Laser (kW)", "t": "range", "d": 2, "mn": 0.5, "mx": 5, "s": 0.5}, "machining_spindle": {"l": "Spindle (RPM)", "t": "range", "d": 4000, "mn": 500, "mx": 12000, "s": 500}, "tool_change": {"l": "Auto Change", "t": "select", "d": "Full CNC", "o": ["Manual", "Semi-Auto", "Full CNC"]}}]];
+
+// ── G-CODE GENERATOR (ported from app.py) ──
+function genGcode(mid, params, wp) {
+  const w = wp.w || 100, h = wp.h || 100, d = wp.d || 10;
+  const method = METHODS.find(m => m[0] === mid);
+  if (!method) return {gcode: '; Unknown method', toolpath: []};
+  const cat = method[3];
+  let lines = [`; ${method[2]} | ${cat}`, `; Workpiece: ${w}x${h}x${d}mm`, ''];
+  for (const [k, v] of Object.entries(params)) { lines.push(`; ${k} = ${v}`); }
+  lines.push('');
+
+  if (cat === 'Additive') lines.push(...additive(mid, params, w, h, d));
+  else if (cat === 'Subtractive') lines.push(...subtractive(mid, params, w, h, d));
+  else if (cat === 'Forming') lines.push(...forming(mid, params, w, h, d));
+  else if (cat === 'Joining') lines.push(...joining(mid, params, w, h, d));
+  else if (cat === 'Casting') lines.push(...casting(mid, params, w, h, d));
+  else if (cat === 'Finishing') lines.push(...finishing(mid, params, w, h, d));
+  else lines.push(...generic(mid, params, w, h, d));
+
+  return {gcode: lines.join('\n'), toolpath: parseToolpath(lines)};
+}
+
+function parseToolpath(lines) {
+  const moves = [];
+  let cur = {x:0, y:0, z:10, f:1000};
+  let rapid = false;
+  for (const line of lines) {
+    const l = line.split(';')[0].trim();
+    if (!l) continue;
+    const parts = l.toUpperCase().split(/\s+/);
+    const cmd = parts[0];
+    if (cmd === 'G0') rapid = true;
+    else if (cmd === 'G1') rapid = false;
+    else { const hasCoords = parts.slice(1).some(p => p.length > 1 && 'XYZ'.includes(p[0])); if (!hasCoords) continue; }
+    const np = {...cur};
+    for (const p of parts.slice(1)) {
+      if (p.length < 2) continue;
+      const letter = p[0], val = parseFloat(p.slice(1));
+      if (isNaN(val)) continue;
+      if ('XYZEF'.includes(letter)) np[letter.toLowerCase()] = val;
+      else if (letter === 'F') np.f = val;
     }
-  };
-  M.filter();
+    const dx = Math.abs(np.x - cur.x), dy = Math.abs(np.y - cur.y), dz = Math.abs(np.z - cur.z);
+    if (dx > 0.001 || dy > 0.001 || dz > 0.001) {
+      moves.push({x:np.x, y:np.y, z:np.z, f:np.f, rapid, type: rapid ? 'travel' : 'cut'});
+      cur = np;
+    }
+  }
+  return moves;
+}
+
+function additive(mid, p, w, h, d) {
+  const L = ['G90', 'G21', ''];
+  const nt = p.nozzle_temp || 210, bt = p.bed_temp || 60;
+  let sp = (p.print_speed || 60); if (mid.includes('fdm')) sp *= 60; else sp = p.scan_speed || 1500;
+  const lh = p.layer_height || 0.2, nd = p.nozzle_diameter || 0.4;
+  if (['fdm','fdm_industrial','peek_printing'].includes(mid)) {
+    L.push(`M104 S${nt}`, `M140 S${bt}`, `M109 S${nt}`, `M190 S${bt}`, 'G28', 'G92 E0', '');
+    L.push('; Prime', 'G1 Z5 F300', 'G1 X10 Y10 F3000', `G1 Z0.3 F300`, `G1 X${w-10} E${(0.02*w).toFixed(2)} F${sp}`, 'G92 E0', '');
+    const nl = Math.max(1, Math.floor(d / lh));
+    const inc = d / nl;
+    for (let lyr = 0; lyr < nl; lyr++) {
+      const z = inc * (lyr + 1);
+      L.push(`G1 Z${z.toFixed(3)} F300`);
+      if (lyr === 0 || lyr === nl - 1) {
+        for (let y = 0; y < h; y += Math.max(1, nd * 2)) {
+          L.push(`G1 X5 Y${y.toFixed(1)} F${sp}`, `G1 X${w-5} Y${y.toFixed(1)} E${(0.01*w).toFixed(3)} F${sp}`);
+        }
+      } else {
+        const ip = p.infill || 20;
+        const spc = Math.max(nd * 2, w / Math.max(1, ip / 100 * w / nd));
+        if (lyr % 2 === 0) {
+          for (let y = 0; y < h; y += Math.max(1, Math.floor(spc))) {
+            L.push(`G1 X5 Y${y.toFixed(1)} E0.5 F${sp}`, `G1 X${w-5} Y${y.toFixed(1)} E${(0.01*w).toFixed(3)} F${sp}`);
+          }
+        } else {
+          for (let x = 0; x < w; x += Math.max(1, Math.floor(spc))) {
+            L.push(`G1 X${x.toFixed(1)} Y5 E0.5 F${sp}`, `G1 X${x.toFixed(1)} Y${h-5} E${(0.01*h).toFixed(3)} F${sp}`);
+          }
+        }
+      }
+    }
+  } else if (['sla','dlp','cdlp','two_photon'].includes(mid)) {
+    L.push('G28');
+    const nl = Math.max(1, Math.floor(d * 1000 / (p.layer_height || 50)));
+    const exp = p.exposure_time || 6;
+    for (let lyr = 0; lyr < Math.min(nl, 20); lyr++) {
+      const z = (lyr + 1) * 0.05;
+      L.push(`G1 Z${(-z).toFixed(3)} F100`, `G4 P${exp*1000}`, 'G1 Z5 F200');
+    }
+  } else if (['sls','slm','dmls','ebm'].includes(mid)) {
+    L.push('G28');
+    const nl = Math.max(1, Math.floor(d * 1000 / (p.layer_height || 100)));
+    for (let lyr = 0; lyr < Math.min(nl, 15); lyr++) {
+      const z = (lyr + 1) * 0.1;
+      L.push(`G1 Z${z.toFixed(3)} F100`);
+      for (let sy = 0; sy < h; sy += 5) {
+        L.push(`G1 X5 Y${sy} F${sp}`, `G1 X${w-5} Y${sy} F${sp}`);
+      }
+    }
+  } else if (mid === 'waam') {
+    const tv = p.travel_speed || 500;
+    for (let lyr = 0; lyr < Math.min(Math.floor(d / 2), 10); lyr++) {
+      const z = (lyr + 1) * 2;
+      L.push(`G1 Z${z.toFixed(1)} F200`);
+      for (let y = 0; y < h; y += 10) {
+        L.push(`G1 X5 Y${y.toFixed(1)} F${tv}`, `G1 X${w-5} Y${y.toFixed(1)} F${tv}`);
+      }
+    }
+  } else {
+    L.push('G28');
+    for (let lyr = 0; lyr < Math.min(d, 10); lyr++) {
+      L.push(`G1 Z${(lyr+1).toFixed(1)} F200`, 'G1 X0 Y0 F500', `G1 X${w} Y${h} F500`);
+    }
+  }
+  L.push('', 'G1 Z20 F300', 'M104 S0', 'M140 S0', 'M84', 'M30');
+  return L;
+}
+
+function subtractive(mid, p, w, h, d) {
+  const L = [];
+  const sr = p.spindle_speed || 10000, fr = p.feed_rate || 800;
+  const dc = p.depth_of_cut || p.depth_per_pass || 1;
+  L.push('G90 G21 G17 G40 G49 G80', '', 'T1 M6', 'G43 H1', `M3 S${sr}`, 'G54', '', 'G0 Z10', 'G0 X0 Y0', '');
+  if (['cnc_mill_3axis','cnc_mill_5axis','cnc_router','micro_machining','kuka_robotic_milling'].includes(mid)) {
+    const np = Math.max(1, Math.floor(d / dc));
+    const pd = d / np;
+    const td = p.tool_diameter || 6;
+    const so = td * (p.stepover || 40) / 100;
+    const coolant = p.coolant || 'Flood';
+    if (coolant === 'Flood') L.push('M8'); else if (coolant === 'Mist') L.push('M7');
+    for (let pn = 0; pn < np; pn++) {
+      const z = -pd * (pn + 1);
+      L.push('G0 Z1', `G1 Z${z.toFixed(2)} F${fr*0.5}`);
+      for (let y = 5; y < h - 5; y += Math.max(1, Math.floor(so))) {
+        L.push(`G1 X5 Y${y.toFixed(1)} F${fr}`, `G1 X${w-5} Y${y.toFixed(1)} F${fr}`);
+      }
+      L.push(`G1 X5 Y5 F${fr}`, `G1 X${w-5} Y5 F${fr}`, `G1 X${w-5} Y${h-5} F${fr}`, `G1 X5 Y${h-5} F${fr}`, `G1 X5 Y5 F${fr}`);
+    }
+    L.push('M9');
+  } else if (mid === 'laser_cutting') {
+    const pas = p.passes || 1, cs = p.cut_speed || 50;
+    for (let pp = 0; pp < pas; pp++) {
+      L.push(`M3 S${p.laser_power || 150}`);
+      L.push(`G1 X5 Y5 F${cs*60}`, `G1 X${w-5} Y5 F${cs*60}`, `G1 X${w-5} Y${h-5} F${cs*60}`, `G1 X5 Y${h-5} F${cs*60}`, `G1 X5 Y5 F${cs*60}`);
+      L.push('M5');
+    }
+  } else if (mid === 'laser_engraving') {
+    const es = p.engrave_speed || 500;
+    L.push(`M3 S${(p.laser_power||40)*10}`);
+    for (let y = 0; y < h; y += 2) {
+      L.push(`G1 X5 Y${y} F${es}`, `G1 X${w-5} Y${y} F${es}`);
+    }
+    L.push('M5');
+  } else if (mid === 'waterjet') {
+    const cs = p.cut_speed || 250;
+    L.push('M7', 'G4 P2');
+    L.push(`G1 X5 Y5 F${cs}`, `G1 X${w-5} Y5 F${cs}`, `G1 X${w-5} Y${h-5} F${cs}`, `G1 X5 Y${h-5} F${cs}`, `G1 X5 Y5 F${cs}`);
+    L.push('M9');
+  } else if (mid === 'plasma_cutting') {
+    const cs = p.cut_speed || 1500, ph = p.pierce_height || 3.8, ch = p.cut_height || 1.5;
+    L.push(`G0 Z${ph.toFixed(1)}`, 'M3', 'G4 P0.5', `G1 Z${ch.toFixed(1)} F500`);
+    L.push(`G1 X5 Y5 F${cs}`, `G1 X${w-5} Y5 F${cs}`, `G1 X${w-5} Y${h-5} F${cs}`, `G1 X5 Y${h-5} F${cs}`, `G1 X5 Y5 F${cs}`);
+    L.push('M5', 'G0 Z10');
+  } else if (['edm_sinker','edm_wire','edm_hole_drilling'].includes(mid)) {
+    L.push('M60');
+    if (mid === 'edm_wire') {
+      L.push('M62');
+      L.push('G1 X5 Y5 F2', `G1 X${w-5} Y5 F2`, `G1 X${w-5} Y${h-5} F2`, `G1 X5 Y${h-5} F2`);
+      L.push('M63');
+    } else {
+      L.push(`G1 Z-${d} F0.5`, 'G4 P1', 'G1 Z10 F5');
+    }
+    L.push('M61');
+  } else if (mid === 'drill_press') {
+    L.push('G81');
+    L.push(`G99 G81 X${(w/2).toFixed(1)} Y${(h/2).toFixed(1)} Z-${d.toFixed(1)} R2 F100`);
+    for (const xp of [w*0.2, w*0.5, w*0.8]) {
+      for (const yp of [h*0.2, h*0.5, h*0.8]) {
+        L.push(`G81 X${xp.toFixed(1)} Y${yp.toFixed(1)} Z-${d.toFixed(1)} R2 F100`);
+      }
+    }
+    L.push('G80');
+  } else if (mid === 'lathe') {
+    L.push('G18', 'G96 S150');
+    L.push(`G0 X${(w+10).toFixed(1)} Z2`);
+    for (let zc = 0; zc < h; zc += Math.max(1, Math.floor(dc*10))) {
+      const z = Math.min(zc/10, h);
+      L.push(`G1 X${(w-2*dc).toFixed(1)} Z-${z.toFixed(1)} F200`);
+    }
+    L.push(`G0 X${(w+10).toFixed(1)} Z10`);
+  } else if (mid === 'grinding') {
+    L.push(`M3 S${sr}`, 'M8');
+    const dpp = (p.depth_per_pass || 10) / 1000;
+    const np = Math.max(1, Math.floor(d / dpp));
+    for (let pn = 0; pn < np; pn++) {
+      const z = -dpp * (pn + 1);
+      L.push(`G1 Z${z.toFixed(4)} F50`);
+      for (let y = 0; y < h; y += 2) {
+        L.push(`G1 X5 Y${y} F${fr}`, `G1 X${w-5} Y${y} F${fr}`);
+      }
+    }
+    L.push('M9');
+  } else {
+    L.push(`G1 Z-${d} F${fr}`, 'G1 X0 Y0 F' + fr, `G1 X${w} Y0 F${fr}`, `G1 X${w} Y${h} F${fr}`, `G1 X0 Y${h} F${fr}`, 'G1 X0 Y0 F' + fr);
+  }
+  L.push('', 'G0 Z50', 'M5', 'M9', 'G28', 'M30');
+  return L;
+}
+
+function forming(mid, p, w, h, d) {
+  const L = ['G90'];
+  if (['injection_molding','die_casting'].includes(mid)) {
+    L.push('G28', 'M103 S1', 'G4 P2', 'M104 S1', `G4 P${p.cooling_time||25}`, 'M105 S1', 'M106 S1');
+  } else if (mid === 'heat_press') {
+    const t = p.temperature || 190, pt = p.press_time || 45;
+    L.push(`M140 S${t}`, `M190 S${t}`, 'G1 Z0 F100', `G4 P${pt*1000}`, 'G1 Z50 F100');
+  } else if (mid === 'metal_stamping') {
+    L.push('G91');
+    for (let i = 0; i < 5; i++) L.push('G1 Z-20 F2000', 'G1 Z20 F2000');
+    L.push('G90');
+  } else if (mid === 'sheet_bending') {
+    const a = p.bend_angle || 90;
+    const bd = (w/2) * Math.tan(a * Math.PI/180 / 2);
+    L.push('G28', `G1 X${p.backgauge||50} F500`, `G1 Z-${bd.toFixed(1)} F100`, 'G4 P0.5', 'G1 Z10 F200');
+  } else if (mid === 'forging') {
+    L.push('G91');
+    for (let i = 0; i < 8; i++) L.push('G1 Z-15 F1000', 'G1 Z15 F1000');
+    L.push('G90');
+  } else if (mid === 'spinning') {
+    L.push(`M3 S${p.spindle_speed||800}`);
+    for (let a = 10; a < 80; a += 10) {
+      const r = w * (1 - a/90);
+      const rad = a * Math.PI/180;
+      L.push(`G1 X${(r*Math.cos(rad)).toFixed(1)} Z${(-r*Math.sin(rad)).toFixed(1)} F100`);
+    }
+    L.push('M5');
+  } else {
+    L.push('G28', `G1 X0 Y0 Z-${d} F200`, 'G4 P2', 'G1 Z50 F200');
+  }
+  L.push('', 'G28', 'M30');
+  return L;
+}
+
+function joining(mid, p, w, h, d) {
+  const L = ['G90 G21'];
+  const ts = p.travel_speed || p.welding_speed || 8;
+  if (['mig_welding','stick_welding','tig_welding'].includes(mid)) {
+    L.push(`M3 S${(p.current||120)*10}`, 'G4 P1');
+    L.push(`G1 X5 Y${(h/2).toFixed(1)} F${ts*60}`, `G1 X${w-5} Y${(h/2).toFixed(1)} F${ts*60}`, 'M5');
+  } else if (mid === 'laser_welding') {
+    L.push(`M3 S${p.laser_power||2000}`, `G1 X5 Y${(h/2).toFixed(1)} F${ts*60}`, `G1 X${w-5} Y${(h/2).toFixed(1)} F${ts*60}`, 'M5');
+  } else if (mid === 'spot_welding') {
+    for (const x of [w*0.25, w*0.5, w*0.75]) {
+      for (const y of [h*0.25, h*0.5, h*0.75]) {
+        L.push(`G0 X${x.toFixed(1)} Y${y.toFixed(1)}`, 'M3 S100', 'G4 P0.15', 'M5', 'G4 P0.5');
+      }
+    }
+  } else if (mid === 'friction_stir') {
+    L.push(`M3 S${p.rotation_speed||800}`, `G1 Z-${(d/2).toFixed(1)} F20`);
+    L.push(`G1 X5 Y${(h/2).toFixed(1)} F${ts*60}`, `G1 X${w-5} Y${(h/2).toFixed(1)} F${ts*60}`, 'G1 Z20 F50', 'M5');
+  } else if (mid === 'soldering') {
+    L.push(`M140 S${p.solder_temp||250}`, `G1 X5 Y${(h/2).toFixed(1)} F100`, `G1 X${w-5} Y${(h/2).toFixed(1)} F100`);
+  } else if (mid === 'friction_welding') {
+    L.push(`M3 S${p.rotation_speed||2000}`, `G1 Z-${p.burnoff||5} F50`, 'G4 P2', 'M5', 'G4 P1');
+  } else if (mid === 'ultrasonic_welding') {
+    L.push('M3 S1', 'G1 Z-1 F10', `G4 P${(p.weld_time||500)/1000}`, 'M5', 'G1 Z20 F50');
+  } else {
+    L.push('M3 S100', `G1 X5 Y${h/2} F200`, `G1 X${w-5} Y${h/2} F200`, 'M5');
+  }
+  L.push('', 'G0 Z50', 'M30');
+  return L;
+}
+
+function casting(mid, p, w, h, d) {
+  const L = ['G90', `; Pour temp: ${p.pour_temp||1450}°C`, 'G28'];
+  L.push('M103 S1', 'G4 P3', 'M104 S1');
+  L.push(`G4 P${Math.floor((p.cooling_time||6)*3600/60)}`, 'M105 S1', 'M106 S1');
+  L.push('G1 Z50 F200', 'M30');
+  return L;
+}
+
+function finishing(mid, p, w, h, d) {
+  const L = ['G90'];
+  if (mid === 'sandblasting') {
+    L.push('M3 S100', 'M7');
+    for (let y = 0; y < h; y += 2) {
+      L.push(`G1 X5 Y${y} F500`, `G1 X${w-5} Y${y} F500`);
+    }
+    L.push('M9', 'M5');
+  } else if (mid === 'vibratory_finishing') {
+    L.push('M3 S1', `G4 P${(p.cycle_time||30)*60}`, 'M5');
+  } else if (mid === 'painting') {
+    L.push('M7', 'G4 P1');
+    for (let y = 0; y < h; y += 5) {
+      L.push(`G1 X5 Y${y} F200`, `G1 X${w-5} Y${y} F200`);
+    }
+    L.push('M9');
+  } else {
+    L.push('M3 S50', `G1 X0 Y0 F200`, `G1 X${w} Y${h} F200`, 'M5');
+  }
+  L.push('', 'G28', 'M30');
+  return L;
+}
+
+function generic(mid, p, w, h, d) {
+  return ['G90 G21', 'G28', `G1 X0 Y0 Z-${d} F200`, `G1 X${w} Y0 F200`, `G1 X${w} Y${h} F200`, `G1 X0 Y${h} F200`, `G1 X0 Y0 F200`, '', 'G0 Z50', 'M30'];
+}
+
+// ── 3D SCENE ──
+const container = document.getElementById('view3d');
+const overlay = document.getElementById('overlay');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0d1117);
+const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 1, 2000);
+camera.position.set(200, 160, 250);
+camera.lookAt(75, 10, 75);
+const renderer = new THREE.WebGLRenderer({antialias: true});
+renderer.setSize(container.clientWidth, container.clientHeight);
+renderer.shadowMap.enabled = true;
+container.appendChild(renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(75, 10, 75);
+controls.update();
+
+// Lighting
+scene.add(new THREE.AmbientLight(0x404060, 1.5));
+const keyLight = new THREE.DirectionalLight(0xffffff, 3);
+keyLight.position.set(200, 300, 200);
+keyLight.castShadow = true;
+scene.add(keyLight);
+scene.add(new THREE.PolarGridHelper(300, 60, 30, 128, 0x30363d, 0x21262d));
+
+// Machine base
+const steel = new THREE.MeshStandardMaterial({color: 0x4a5568, roughness: 0.4, metalness: 0.9});
+scene.add(new THREE.Mesh(new THREE.BoxGeometry(180, 8, 180), steel).translateY(-4).translateX(90).translateZ(90));
+scene.add(new THREE.Mesh(new THREE.BoxGeometry(150, 5, 150), new THREE.MeshStandardMaterial({color: 0x2d3748, roughness: 0.6, metalness: 0.5})).translateY(5).translateX(90).translateZ(90));
+// Gantry
+const alum = new THREE.MeshStandardMaterial({color: 0x8b9dc3, roughness: 0.3, metalness: 0.7});
+for (const z of [15, 165]) {
+  scene.add(new THREE.Mesh(new THREE.BoxGeometry(8, 150, 8), alum).translateY(79).translateX(20).translateZ(z));
+}
+scene.add(new THREE.Mesh(new THREE.BoxGeometry(8, 8, 170), alum).translateY(154).translateX(20).translateZ(90));
+// Nozzle/spindle
+scene.add(new THREE.Mesh(new THREE.BoxGeometry(10, 8, 10), alum).translateY(142).translateX(90).translateZ(90));
+scene.add(new THREE.Mesh(new THREE.ConeGeometry(2, 8, 16), new THREE.MeshStandardMaterial({color: 0xd4a017, roughness: 0.2, metalness: 0.9})).translateY(134).translateX(90).translateZ(90));
+// Workpiece
+const workpiece = new THREE.Mesh(new THREE.BoxGeometry(100, 10, 100), new THREE.MeshStandardMaterial({color: 0xddccaa, roughness: 0.5, transparent: true, opacity: 0.85}));
+workpiece.position.set(65, 13, 65);
+scene.add(workpiece);
+
+// Toolpath group
+const toolpathGroup = new THREE.Group();
+scene.add(toolpathGroup);
+
+// Tool indicator
+const toolDot = new THREE.Mesh(new THREE.SphereGeometry(3, 8, 8), new THREE.MeshBasicMaterial({color: 0xff3333}));
+toolDot.visible = false;
+scene.add(toolDot);
+
+let currentMethod = null;
+let currentParams = {};
+let animToolpath = [];
+let animIndex = 0;
+let animActive = false;
+
+function clearToolpath() {
+  while (toolpathGroup.children.length > 0) {
+    toolpathGroup.remove(toolpathGroup.children[0]);
+  }
+  toolDot.visible = false;
+  animToolpath = [];
+  animIndex = 0;
+  animActive = false;
+}
+
+function showToolpath(moves) {
+  clearToolpath();
+  if (!moves || moves.length === 0) return;
+
+  // Scale moves to fit the workpiece (100x100x10 at position 65,13,65)
+  // Find bounds
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, minZ = Infinity, maxZ = -Infinity;
+  for (const m of moves) {
+    minX = Math.min(minX, m.x); maxX = Math.max(maxX, m.x);
+    minY = Math.min(minY, m.y); maxY = Math.max(maxY, m.y);
+    minZ = Math.min(minZ, m.z); maxZ = Math.max(maxZ, m.z);
+  }
+  const sx = (maxX - minX) || 1, sy = (maxY - minY) || 1, sz = (maxZ - minZ) || 1;
+  const scaleX = 90 / sx, scaleY = 90 / sy, scaleZ = 8 / Math.max(sz, 0.1);
+
+  // Build line segments
+  const points = [];
+  for (const m of moves) {
+    const x = 20 + (m.x - minX) * scaleX;
+    const y = 18 + (m.z - minZ) * scaleZ; // Z in G-code is vertical in 3D
+    const z = 20 + (m.y - minY) * scaleY;
+    points.push(new THREE.Vector3(x, y, z));
+  }
+
+  if (points.length < 2) {
+    // Single point - just show a dot
+    const dotGeo = new THREE.SphereGeometry(2, 8, 8);
+    const dotMat = new THREE.MeshBasicMaterial({color: 0xff3333});
+    const dot = new THREE.Mesh(dotGeo, dotMat);
+    dot.position.copy(points[0]);
+    toolpathGroup.add(dot);
+    return;
+  }
+
+  // Draw lines
+  for (let i = 0; i < points.length - 1; i++) {
+    const geo = new THREE.BufferGeometry().setFromPoints([points[i], points[i + 1]]);
+    const color = moves[i].type === 'travel' ? 0x58a6ff : 0xf0883e;
+    const mat = new THREE.LineBasicMaterial({color, linewidth: 1});
+    toolpathGroup.add(new THREE.Line(geo, mat));
+  }
+
+  // Store for animation
+  animToolpath = points;
+  toolDot.visible = true;
+  if (points.length > 0) toolDot.position.copy(points[0]);
+  animIndex = 0;
+  animActive = true;
+}
+
+// ── UI ──
+let selectedIdx = -1;
+let filteredList = [];
+let openCards = new Set();
+
+function getBadgeClass(cat) {
+  const map = {Additive:'b-add',Subtractive:'b-sub',Forming:'b-form',Joining:'b-join',Casting:'b-cast',Finishing:'b-fin',Hybrid:'b-hyb'};
+  return map[cat] || 'b-form';
+}
+
+function render(list) {
+  const box = document.getElementById('list');
+  const count = document.getElementById('count');
+  if (list.length === 0) {
+    box.innerHTML = '<div class="empty">No methods match your search.</div>';
+    count.textContent = '0 methods';
+    return;
+  }
+  count.textContent = list.length + ' methods';
+  filteredList = list;
+  let html = '';
+  for (let i = 0; i < list.length; i++) {
+    const m = list[i];
+    const bc = getBadgeClass(m[3]);
+    const sel = (selectedIdx === i) ? ' sel' : '';
+    const open = openCards.has(i) ? ' open' : '';
+    html += `<div class="card${sel}${open}" id="card${i}">
+      <div class="card-head" onclick="selectMethod(${i})">
+        <span class="icon">${m[5]||''}</span>
+        <span class="name">${m[1]}</span>
+        <span class="badge ${bc}">${m[3]}</span>
+      </div>
+      <div class="card-body">
+        <div class="desc"><b>${m[2]}</b> — ${m[4]}</div>
+        <button class="act" onclick="event.stopPropagation();simulate(${i})">▶ Simulate</button>
+      </div>
+    </div>`;
+  }
+  box.innerHTML = html;
+}
+
+function selectMethod(i) {
+  // Toggle open state
+  if (openCards.has(i)) openCards.delete(i);
+  else openCards.add(i);
+  selectedIdx = i;
+  // Re-render with updated open state
+  render(filteredList);
+  // Show params
+  showParams(filteredList[i]);
+}
+
+function filter() {
+  const q = document.getElementById('q').value.toLowerCase().trim();
+  const cat = document.getElementById('cat').value;
+  const out = [];
+  for (const m of METHODS) {
+    if (cat !== 'all' && m[3] !== cat) continue;
+    if (q && (m[1] + ' ' + m[2] + ' ' + m[4]).toLowerCase().indexOf(q) === -1) continue;
+    out.push(m);
+  }
+  selectedIdx = -1;
+  openCards = new Set();
+  render(out);
+  document.getElementById('params').classList.remove('visible');
+  clearToolpath();
+  overlay.innerHTML = '<b>Select a method</b> to view 3D simulation';
+}
+
+function showParams(m) {
+  const paramsDiv = document.getElementById('params');
+  const params = m[6];
+  const keys = Object.keys(params);
+  if (keys.length === 0) {
+    paramsDiv.classList.remove('visible');
+    return;
+  }
+  paramsDiv.classList.add('visible');
+  currentMethod = m;
+  currentParams = {};
+  let html = `<h3>${m[1]} — Parameters</h3>`;
+  for (const [k, pv] of Object.entries(params)) {
+    const dv = pv.d;
+    currentParams[k] = dv;
+    html += `<div class="param-row">`;
+    html += `<label title="${k}">${pv.l}</label>`;
+    if (pv.t === 'select') {
+      html += `<select data-key="${k}" onchange="updateParam(this)">`;
+      for (const o of (pv.o || [])) {
+        html += `<option value="${o}"${o === dv ? ' selected' : ''}>${o}</option>`;
+      }
+      html += `</select>`;
+    } else {
+      html += `<input type="range" data-key="${k}" min="${pv.mn}" max="${pv.mx}" step="${pv.s||1}" value="${dv}" oninput="updateParam(this)">`;
+      html += `<span class="val">${dv}</span>`;
+    }
+    html += `</div>`;
+  }
+  html += `<button class="gen-btn" onclick="simulateSelected()">▶ Generate G-code & Simulate</button>`;
+  paramsDiv.innerHTML = html;
+}
+
+function updateParam(el) {
+  const key = el.dataset.key;
+  const val = el.tagName === 'SELECT' ? el.value : parseFloat(el.value);
+  currentParams[key] = val;
+  if (el.tagName === 'INPUT') {
+    const valSpan = el.nextElementSibling;
+    if (valSpan) valSpan.textContent = val;
+  }
+}
+
+window.updateParam = updateParam;
+
+function simulateSelected() {
+  if (!currentMethod) return;
+  simulateMethod(currentMethod, currentParams);
+}
+
+function simulate(i) {
+  const m = filteredList[i];
+  selectMethod(i);
+  simulateMethod(m, currentParams);
+}
+
+function simulateMethod(m, params) {
+  const result = genGcode(m[0], params, {w: 100, h: 100, d: 10});
+  showToolpath(result.toolpath);
+  overlay.innerHTML = `<b>${m[1]}</b> — ${result.toolpath.length} moves`;
+}
+
+window.simulate = simulate;
+window.simulateSelected = simulateSelected;
+window.selectMethod = selectMethod;
+window.filter = filter;
+
+// ── Animation loop ──
+function anim() {
+  requestAnimationFrame(anim);
+  if (animActive && animToolpath.length > 1) {
+    animIndex = (animIndex + 1) % animToolpath.length;
+    toolDot.position.copy(animToolpath[animIndex]);
+  }
+  renderer.render(scene, camera);
+}
+anim();
+
+// ── Resize ──
+const resizeHandle = document.getElementById('resize');
+const leftPanel = document.querySelector('.left');
+let resizing = false;
+resizeHandle.addEventListener('mousedown', () => { resizing = true; });
+document.addEventListener('mousemove', (e) => {
+  if (!resizing) return;
+  const w = Math.max(280, Math.min(600, e.clientX));
+  leftPanel.style.width = w + 'px';
+});
+document.addEventListener('mouseup', () => { resizing = false; });
+
+window.addEventListener('resize', () => {
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  camera.aspect = container.clientWidth / container.clientHeight;
+  camera.updateProjectionMatrix();
+});
+
+// Initial render
+filter();
 </script>
 </body>
 </html>
