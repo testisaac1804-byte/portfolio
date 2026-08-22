@@ -265,6 +265,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font);backgro
   <div class="dock-icon" onclick="M.openWindow('terminal')" id="dock-terminal"><span>⬛</span><div class="dlabel">Terminal</div><div class="dot"></div></div>
   <div class="dock-icon" onclick="M.openWindow('calculator')" id="dock-calculator"><span>🔢</span><div class="dlabel">Calculator</div><div class="dot"></div></div>
   <div class="dock-icon" style="opacity:.5" onclick="M.openWindow('trash')" id="dock-trash"><span>🗑️</span><div class="dlabel">Trash</div><div class="dot"></div></div>
+  <div class="dock-sep"></div>
+  <div class="dock-icon" onclick="M.openWindow('textedit')" id="dock-textedit"><span>📝</span><div class="dlabel">TextEdit</div><div class="dot"></div></div>
 </div>
 
 <div id="ctx-menu"></div>
@@ -752,7 +754,8 @@ M.windowConfigs = {
   calculator: {title:'Calculator',x:500,y:150,w:280,h:420,body:function(){return M.calculatorBody();},resize:false},
   calendar: {title:'Calendar',x:250,y:80,w:600,h:450,body:function(){return M.calendarBody();}},
   mail: {title:'Mail',x:160,y:70,w:800,h:520,body:function(){return M.mailBody();}},
-  trash: {title:'Trash',x:300,y:150,w:500,h:400,body:function(){return M.trashBody();}}
+  trash: {title:'Trash',x:300,y:150,w:500,h:400,body:function(){return M.trashBody();}},
+  textedit: {title:'TextEdit',x:250,y:120,w:600,h:450,body:function(){return M.textEditBody();}}
 };
 
 /* ========== FINDER ========== */
@@ -1409,6 +1412,44 @@ M.trashBody = function(){
   return s;
 };
 
+/* ========== TEXTEDIT ========== */
+M.textEditBody = function(){
+  var s = '<div style="display:flex;flex-direction:column;height:100%">';
+  s += '<div style="display:flex;gap:6px;padding:8px;border-bottom:1px solid var(--border);align-items:center">';
+  s += '<button onclick="M.textEditOpen()" style="padding:5px 12px;border-radius:5px;border:1px solid var(--border);background:var(--accent);color:#fff;cursor:pointer;font-size:12px">📂 Open File</button>';
+  s += '<span style="font-size:11px;color:var(--text2);margin-left:8px" id="textedit-filename">Untitled.txt</span>';
+  s += '<button onclick="M.textEditSave()" style="margin-left:auto;padding:5px 12px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;font-size:12px">💾 Save</button>';
+  s += '</div>';
+  s += '<textarea id="textedit-area" style="flex:1;background:rgba(0,0,0,.15);color:var(--text);border:none;padding:12px;font-family:var(--mono);font-size:13px;resize:none;outline:none;line-height:1.6" placeholder="Start typing or open a file..."></textarea>';
+  s += '<input type="file" id="textedit-file-input" style="display:none" onchange="M.textEditLoadFile(event)">';
+  s += '</div>';
+  return s;
+};
+M.textEditOpen = function(){
+  document.getElementById('textedit-file-input').click();
+};
+M.textEditLoadFile = function(e){
+  var file = e.target.files[0];
+  if(!file)return;
+  document.getElementById('textedit-filename').textContent = file.name;
+  var reader = new FileReader();
+  reader.onload = function(ev){
+    document.getElementById('textedit-area').value = ev.target.result;
+  };
+  reader.readAsText(file);
+};
+M.textEditSave = function(){
+  var text = document.getElementById('textedit-area').value;
+  var name = document.getElementById('textedit-filename').textContent;
+  var blob = new Blob([text],{type:'text/plain'});
+  var a = document.createElement('a');
+  a.download = name;
+  a.href = URL.createObjectURL(blob);
+  a.click();
+  URL.revokeObjectURL(a.href);
+  M.toast('Saved ' + name);
+};
+
 /* ========== CLOCK ========== */
 M.updateClock = function(){
   var now = new Date();
@@ -1439,7 +1480,8 @@ document.addEventListener('contextmenu', function(e){
     '<div class="ci-sep"></div>'+
     '<div class="ci" onclick="M.openWindow(\'finder\');M.closeCtx()">📁 New Finder Window</div>'+
     '<div class="ci" onclick="M.newFolder();M.closeCtx()">📁 New Folder</div>'+
-    '<div class="ci" onclick="M.newNote();M.closeCtx()">📝 New Note</div>'+
+    '<div class="ci" onclick="M.openWindow(\'textedit\');M.closeCtx()">📝 New TextEdit</div>'+
+    '<div class="ci" onclick="M.openFileDialog();M.closeCtx()">📂 Open File…</div>'+
     '<div class="ci-sep"></div>'+
     '<div class="ci" onclick="M.openWindow(\'settings\');M.closeCtx()">⚙️ System Settings</div>'+
     '<div class="ci" onclick="M.restart();M.closeCtx()">🔄 Restart</div>';
@@ -1494,6 +1536,72 @@ M.updateDockPositions = function(){
   M.setWallpaper(M.state.wallpaper);
   document.getElementById('battery-icon').textContent = (M.state.charging?'⚡':'🔋')+' '+M.state.batteryPercent+'%';
 })();
+
+/* ========== FILE OPENING ========== */
+M.openFileDialog = function(){
+  var inp = document.createElement('input');
+  inp.type = 'file';
+  inp.onchange = function(e){
+    var file = e.target.files[0];
+    if(!file)return;
+    var ext = (file.name.split('.').pop()||'').toLowerCase();
+    if(ext === 'txt' || ext === 'md' || ext === 'js' || ext === 'html' || ext === 'css' || ext === 'py' || ext === 'json' || ext === 'csv'){
+      M.openWindow('textedit');
+      setTimeout(function(){
+        document.getElementById('textedit-filename').textContent = file.name;
+        var reader = new FileReader();
+        reader.onload = function(ev){document.getElementById('textedit-area').value = ev.target.result;};
+        reader.readAsText(file);
+      },300);
+    } else if(ext === 'png' || ext === 'jpg' || ext === 'jpeg' || ext === 'gif' || ext === 'webp' || ext === 'svg'){
+      var reader = new FileReader();
+      reader.onload = function(ev){
+        M.openWindow('safari');
+        setTimeout(function(){
+          var frame = document.querySelector('.browser-frame');
+          if(frame)frame.innerHTML = '<img src="'+ev.target.result+'" style="max-width:100%;max-height:100%">';
+        },300);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      M.toast('Opened: ' + file.name);
+    }
+  };
+  inp.click();
+};
+
+// Drag and drop on desktop
+var desktop = document.getElementById('desktop');
+desktop.addEventListener('dragover',function(e){e.preventDefault();e.stopPropagation();desktop.style.background='radial-gradient(ellipse at 30% 20%,rgba(99,102,241,.1),transparent 50%)'});
+desktop.addEventListener('dragleave',function(e){e.preventDefault();e.stopPropagation();M.setWallpaper(M.state.wallpaper)});
+desktop.addEventListener('drop',function(e){
+  e.preventDefault();e.stopPropagation();
+  M.setWallpaper(M.state.wallpaper);
+  var file = e.dataTransfer.files[0];
+  if(!file)return;
+  var ext = (file.name.split('.').pop()||'').toLowerCase();
+  if(ext === 'txt' || ext === 'md' || ext === 'js' || ext === 'html' || ext === 'css' || ext === 'py' || ext === 'json'){
+    M.openWindow('textedit');
+    setTimeout(function(){
+      document.getElementById('textedit-filename').textContent = file.name;
+      var reader = new FileReader();
+      reader.onload = function(ev){document.getElementById('textedit-area').value = ev.target.result;};
+      reader.readAsText(file);
+    },300);
+  } else if(ext === 'png' || ext === 'jpg' || ext === 'jpeg' || ext === 'gif' || ext === 'webp'){
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      M.openWindow('safari');
+      setTimeout(function(){
+        var frame = document.querySelector('.browser-frame');
+        if(frame)frame.innerHTML = '<img src="'+ev.target.result+'" style="max-width:100%;max-height:100%">';
+      },300);
+    };
+    reader.readAsDataURL(file);
+  } else {
+    M.toast('Dropped: ' + file.name);
+  }
+});
 
 console.log('macOS Simulator v1.0 ready');
 console.log('All changes are saved to localStorage');
