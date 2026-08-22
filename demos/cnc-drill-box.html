@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CNC Drill Box — v1-v3</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0d1117; --panel: #161b22; --panel2: #1c2129; --text: #e6edf3;
+    --accent: #6366f1; --accent2: #818cf8; --muted: #8b949e; --border: #21262d;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); min-height: 100vh; padding: 24px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .window { width: 100%; max-width: 720px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .titlebar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: #11151b; border-bottom: 1px solid var(--border); }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .tbtitle { flex: 1; text-align: center; color: var(--muted); font-size: 13px; font-weight: 600; }
+  .controls { display: flex; align-items: center; gap: 10px; padding: 14px 20px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .controls .lbl { color: var(--muted); font-size: 13px; margin-right: 2px; }
+  .seg { display: flex; background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .seg button { background: none; border: none; color: var(--muted); padding: 8px 16px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .seg button.active { background: var(--accent); color: #fff; }
+  .seg button:not(.active):hover { color: var(--text); }
+  .hint { margin-left: auto; color: var(--muted); font-size: 12px; }
+  .stage { height: 400px; position: relative; perspective: 1100px; background: radial-gradient(circle at 50% 40%, #1a1f27 0%, #0d1117 70%); overflow: hidden; cursor: grab; }
+  .stage:active { cursor: grabbing; }
+  .scene { position: absolute; left: 50%; top: 52%; width: 0; height: 0; transform-style: preserve-3d; }
+  .face { position: absolute; border: 1px solid #2b3a4a; box-sizing: border-box; }
+  .f-top { background: linear-gradient(135deg, #2b3440, #232b36); }
+  .f-bottom { background: #1a212b; }
+  .f-front, .f-back { background: linear-gradient(180deg, #2a323e, #202833); }
+  .f-left, .f-right { background: linear-gradient(180deg, #242c38, #1c232c); }
+  .face-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  .brand { font-size: 15px; font-weight: 700; letter-spacing: 1px; color: #6b7b8d; }
+  .slots { width: 100%; height: 100%; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; padding: 14px; }
+  .slot { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .hole {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #05070a, #0a0f14);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.9), 0 0 0 2px #39434f;
+    border: 1px solid #4a5563;
+  }
+  .slot .lb { font-size: 9px; color: #7d8a99; font-family: ui-monospace, Menlo, monospace; }
+  .info { padding: 16px 20px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .info .spec { font-size: 13px; color: var(--muted); }
+  .info .spec b { color: var(--text); }
+  .info .desc { color: var(--muted); font-size: 12.5px; max-width: 420px; }
+  .info .badge { background: rgba(99,102,241,0.18); color: var(--accent2); font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+</style>
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="tbtitle">CNC Drill Box — Storage Box (v1–v3)</span>
+    </div>
+
+    <div class="controls">
+      <span class="lbl">Version</span>
+      <div class="seg" id="seg">
+        <button onclick="D.setVersion(1)" id="v1">V1 · Single</button>
+        <button onclick="D.setVersion(2)" id="v2" class="active">V2 · Dual</button>
+        <button onclick="D.setVersion(3)" id="v3">V3 · Triple</button>
+      </div>
+      <span class="hint">🖱️ Drag to rotate</span>
+    </div>
+
+    <div class="stage" id="stage">
+      <div class="scene" id="scene">
+        <div class="face f-top" id="topFace"></div>
+        <div class="face f-bottom"></div>
+        <div class="face f-front"><div class="face-inner brand">ISAAC · CNC</div></div>
+        <div class="face f-back"></div>
+        <div class="face f-left"></div>
+        <div class="face f-right"><div class="face-inner brand" style="writing-mode:vertical-rl">DRILL BOX</div></div>
+      </div>
+    </div>
+
+    <div class="info">
+      <span class="badge" id="vb">V2 · Dual Slot</span>
+      <span class="spec" id="spec">12 holes · 2 rows</span>
+      <span class="desc" id="desc">Dual-slot box holds two full metric drill-bit sets with finger grooves for easy removal.</span>
+    </div>
+  </div>
+
+<script>
+  var D = {
+    version: 2,
+    // box dimensions (px)
+    W: 300, H: 56, DEPTH: 190,
+    rx: -28, ry: -38,
+    sizes: [2, 3, 4, 5, 6, 8, 10, 12],
+    meta: [
+      { name: 'V1 · Single Slot', spec: '6 holes · 1 row', desc: 'The original single-slot box: one row of drill bits for a compact starter set.' },
+      { name: 'V2 · Dual Slot', spec: '12 holes · 2 rows', desc: 'Dual-slot box holds two full metric drill-bit sets with finger grooves for easy removal.' },
+      { name: 'V3 · Triple Slot', spec: '18 holes · 3 rows', desc: 'Deluxe triple-slot box with a hinged lid — room for bits, collets and spare screws.' }
+    ],
+    setVersion: function (v) {
+      this.version = v;
+      for (var i = 1; i <= 3; i++) {
+        document.getElementById('v' + i).classList.toggle('active', i === v);
+      }
+      var m = this.meta[v - 1];
+      document.getElementById('vb').textContent = m.name;
+      document.getElementById('spec').textContent = m.spec;
+      document.getElementById('desc').textContent = m.desc;
+      this.buildSlots();
+    },
+    buildSlots: function () {
+      var rows = this.version; // 1, 2 or 3
+      var top = document.getElementById('topFace');
+      var html = '<div class="slots" style="gap:' + (rows === 3 ? 6 : 9) + 'px">';
+      for (var r = 0; r < rows; r++) {
+        for (var s = 0; s < this.sizes.length; s++) {
+          var d = this.sizes[s];
+          html += '<div class="slot"><div class="hole"></div><div class="lb">' + d + 'mm</div></div>';
+        }
+      }
+      html += '</div>';
+      top.innerHTML = html;
+    },
+    layout: function () {
+      var W = this.W, H = this.H, D = this.DEPTH;
+      var faces = [
+        { sel: '.f-top',    w: W, h: D, tr: 'rotateX(90deg)  translateZ(' + (H / 2) + 'px)' },
+        { sel: '.f-bottom', w: W, h: D, tr: 'rotateX(-90deg) translateZ(' + (H / 2) + 'px)' },
+        { sel: '.f-front',  w: W, h: H, tr: 'translateZ(' + (D / 2) + 'px)' },
+        { sel: '.f-back',   w: W, h: H, tr: 'rotateY(180deg) translateZ(' + (D / 2) + 'px)' },
+        { sel: '.f-right',  w: D, h: H, tr: 'rotateY(90deg)  translateZ(' + (W / 2) + 'px)' },
+        { sel: '.f-left',   w: D, h: H, tr: 'rotateY(-90deg) translateZ(' + (W / 2) + 'px)' }
+      ];
+      for (var i = 0; i < faces.length; i++) {
+        var f = faces[i];
+        var el = document.querySelector(f.sel);
+        el.style.width = f.w + 'px';
+        el.style.height = f.h + 'px';
+        el.style.marginLeft = (-f.w / 2) + 'px';
+        el.style.marginTop = (-f.h / 2) + 'px';
+        el.style.transform = f.tr;
+      }
+    },
+    applyRot: function () {
+      document.getElementById('scene').style.transform = 'rotateX(' + this.rx + 'deg) rotateY(' + this.ry + 'deg)';
+    },
+    initDrag: function () {
+      var stage = document.getElementById('stage');
+      var self = this;
+      var dragging = false, sx = 0, sy = 0, baseX = 0, baseY = 0;
+      stage.addEventListener('mousedown', function (e) { dragging = true; sx = e.clientX; sy = e.clientY; baseX = self.rx; baseY = self.ry; e.preventDefault(); });
+      window.addEventListener('mousemove', function (e) {
+        if (!dragging) return;
+        self.ry = baseY + (e.clientX - sx) * 0.5;
+        self.rx = baseX - (e.clientY - sy) * 0.5;
+        self.rx = Math.max(-80, Math.min(80, self.rx));
+        self.applyRot();
+      });
+      window.addEventListener('mouseup', function () { dragging = false; });
+      stage.addEventListener('touchstart', function (e) { dragging = true; sx = e.touches[0].clientX; sy = e.touches[0].clientY; baseX = self.rx; baseY = self.ry; }, { passive: false });
+      stage.addEventListener('touchmove', function (e) {
+        if (!dragging) return;
+        self.ry = baseY + (e.touches[0].clientX - sx) * 0.5;
+        self.rx = baseX - (e.touches[0].clientY - sy) * 0.5;
+        self.rx = Math.max(-80, Math.min(80, self.rx));
+        self.applyRot();
+        e.preventDefault();
+      }, { passive: false });
+      stage.addEventListener('touchend', function () { dragging = false; });
+    }
+  };
+  D.layout();
+  D.buildSlots();
+  D.applyRot();
+  D.initDrag();
+</script>
+</body>
+</html>

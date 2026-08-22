@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>School Shield</title>
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2128;--text:#e6edf3;--muted:#8b949e;--accent:#22c55e;--accentdim:rgba(34,197,94,.14);--border:#30363d;--red:#f85149}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.win{width:100%;max-width:620px;background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55);transition:.3s}
+.win.off{border-color:#484f58}
+.tb{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#10151c;border-bottom:1px solid var(--border)}
+.dots{display:flex;gap:7px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.tb .t{flex:1;text-align:center;font-size:12.5px;color:var(--muted);letter-spacing:.3px}
+.tb .side{width:44px}
+.body{padding:26px;text-align:center}
+.logo{width:64px;height:64px;border-radius:16px;background:var(--accentdim);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 16px;transition:.3s}
+.win.off .logo{background:#21262d;filter:grayscale(.4)}
+h1{font-size:22px;font-weight:800;margin-bottom:4px}
+.sub{font-size:13px;color:var(--muted);margin-bottom:26px}
+.sw{position:relative;display:inline-block;width:170px;height:82px;margin-bottom:18px}
+.sw input{opacity:0;width:0;height:0}
+.sl{position:absolute;inset:0;background:#21262d;border:2px solid var(--border);border-radius:50px;cursor:pointer;transition:.3s}
+.sl:before{content:"";position:absolute;height:62px;width:62px;left:8px;bottom:8px;background:#e6edf3;border-radius:50%;transition:.3s;box-shadow:0 3px 8px rgba(0,0,0,.4)}
+.sw input:checked + .sl{background:var(--accent);border-color:var(--accent)}
+.sw input:checked + .sl:before{transform:translateX(88px);background:#fff}
+.bigstate{font-size:20px;font-weight:800;letter-spacing:.5px;margin-bottom:24px}
+.bigstate.on{color:var(--accent)}
+.bigstate.off{color:var(--muted)}
+.panel{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:left;transition:.3s}
+.panel h3{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.list{display:flex;flex-direction:column;gap:7px}
+.list li{display:flex;align-items:center;gap:9px;font-size:13px;padding:7px 9px;border-radius:6px;background:#21262d}
+.list .ic{flex-shrink:0}
+.list .hit{color:var(--muted);font-size:11px;font-family:ui-monospace,Menlo,monospace;margin-left:auto}
+.list li.dim{opacity:.45;filter:grayscale(.5)}
+.hint{font-size:12px;color:var(--muted);margin-top:18px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="win" id="win">
+  <div class="tb">
+    <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <div class="t">School Shield — Network Filter</div>
+    <div class="side"></div>
+  </div>
+  <div class="body">
+    <div class="logo">🛡️</div>
+    <h1>School Shield</h1>
+    <div class="sub">DNS-level filter for the school network</div>
+
+    <label class="sw">
+      <input type="checkbox" id="power" checked onchange="A.toggle(this.checked)">
+      <span class="sl"></span>
+    </label>
+
+    <div class="bigstate on" id="state">SHIELD ON</div>
+
+    <div class="panel">
+      <h3 id="panelTitle">Blocked while shield is active</h3>
+      <ul class="list" id="list"></ul>
+    </div>
+
+    <div class="hint">Shield filters at the DNS level — every device on the network is protected automatically, no client install required.</div>
+  </div>
+</div>
+<script>
+var A = {
+  items: [
+    {ic:"🎮", n:"Games", hit:"steam.com, epicgames.com"},
+    {ic:"📺", n:"Streaming video", hit:"youtube.com, twitch.tv"},
+    {ic:"📱", n:"Social media", hit:"tiktok.com, instagram.com"},
+    {ic:"🛒", n:"Shopping", hit:"amazon.com, ebay.com"},
+    {ic:"🎰", n:"Gambling", hit:"bet365.com, 888.com"},
+    {ic:"🔞", n:"Adult content", hit:"1,200+ domains"},
+    {ic:"🦠", n:"Malware / phishing", hit:"38,000+ domains"}
+  ],
+  toggle: function(v){
+    document.getElementById("power").checked = v;
+    var st = document.getElementById("state");
+    var win = document.getElementById("win");
+    var list = document.getElementById("list");
+    var title = document.getElementById("panelTitle");
+    if (v) {
+      st.textContent = "SHIELD ON"; st.className = "bigstate on";
+      win.className = "win"; win.style.borderColor = "";
+      title.textContent = "Blocked while shield is active";
+    } else {
+      st.textContent = "SHIELD OFF"; st.className = "bigstate off";
+      win.className = "win off"; win.style.borderColor = "#484f58";
+      title.textContent = "Blocked while shield is active (disabled)";
+    }
+    var items = list.children;
+    for (var i = 0; i < items.length; i++) {
+      items[i].className = v ? "" : "dim";
+    }
+  },
+  render: function(){
+    var html = "";
+    for (var i = 0; i < A.items.length; i++) {
+      var it = A.items[i];
+      html += '<li><span class="ic">' + it.ic + '</span><span>' + it.n +
+        '</span><span class="hit">' + it.hit + '</span></li>';
+    }
+    document.getElementById("list").innerHTML = html;
+  },
+  init: function(){ A.render(); }
+};
+A.init();
+</script>
+</body>
+</html>

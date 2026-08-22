@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IsaacAppLaunchers</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0d1117; --panel: #161b22; --panel2: #1c2129; --text: #e6edf3;
+    --accent: #6366f1; --accent2: #818cf8; --muted: #8b949e; --border: #21262d;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); min-height: 100vh; padding: 24px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .window { width: 100%; max-width: 760px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .titlebar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: #11151b; border-bottom: 1px solid var(--border); }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .tbtitle { flex: 1; text-align: center; color: var(--muted); font-size: 13px; font-weight: 600; }
+  .hero { text-align: center; padding: 26px 20px 14px; }
+  .hero h1 { font-size: 21px; font-weight: 700; }
+  .hero p { color: var(--muted); font-size: 13px; margin-top: 5px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; padding: 8px 22px 26px; }
+  .app {
+    background: var(--panel2); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 10px 14px; text-align: center; cursor: pointer;
+    transition: transform .1s, border-color .15s, background .15s;
+  }
+  .app:hover { transform: translateY(-3px); border-color: var(--accent); background: rgba(99,102,241,0.08); }
+  .app:active { transform: scale(.96); }
+  .app .em { font-size: 34px; }
+  .app .nm { font-weight: 600; font-size: 12.5px; margin-top: 9px; line-height: 1.25; }
+  .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(10px); background: #1f6feb; color: #fff; padding: 11px 20px; border-radius: 9px; font-size: 13.5px; opacity: 0; transition: opacity .22s, transform .22s; pointer-events: none; box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="tbtitle">IsaacAppLaunchers</span>
+    </div>
+    <div class="hero">
+      <h1>🚀 IsaacAppLaunchers</h1>
+      <p>One-click launch scripts for every Isaac app. Click to launch.</p>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+<script>
+  var A = {
+    apps: [
+      { em: '🌐', nm: 'IsaacNet' },
+      { em: '🧊', nm: 'FrostSolve' },
+      { em: '🧭', nm: 'IsaacBrowser' },
+      { em: '⌨️', nm: 'Macro Typer' },
+      { em: '📷', nm: 'QuickCam Pro' },
+      { em: '📬', nm: 'CMail' },
+      { em: '🏭', nm: 'Mfg Explorer' },
+      { em: '🛠️', nm: 'CNC Drill Box' },
+      { em: '💻', nm: 'OS Kernel' },
+      { em: '🎓', nm: 'IGCSE Launcher' },
+      { em: '🔐', nm: 'OTP Generator' },
+      { em: '📦', nm: 'IsaacPkg Maker' },
+      { em: '🎮', nm: 'Game Server' },
+      { em: '📡', nm: 'WiFi Chat' },
+      { em: '🗂️', nm: 'Library Kiosk' },
+      { em: '🔧', nm: 'HKPC Bypass' }
+    ],
+    render: function () {
+      var g = document.getElementById('grid');
+      var html = '';
+      for (var i = 0; i < this.apps.length; i++) {
+        var a = this.apps[i];
+        html += '<div class="app" onclick="A.launch(' + i + ')">' +
+          '<div class="em">' + a.em + '</div><div class="nm">' + a.nm + '</div></div>';
+      }
+      g.innerHTML = html;
+    },
+    launch: function (i) {
+      var a = this.apps[i];
+      this.toast('Launching ' + a.nm + '…');
+    },
+    toast: function (msg) {
+      var t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      clearTimeout(this._tt);
+      this._tt = setTimeout(function () { t.classList.remove('show'); }, 1600);
+    }
+  };
+  A.render();
+</script>
+</body>
+</html>

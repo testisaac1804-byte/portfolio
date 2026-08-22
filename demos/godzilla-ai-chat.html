@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Godzilla AI Chat — King of the Monsters</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2230;--text:#e6edf3;--muted:#8b949e;--accent:#4ade80;--border:#30363d}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.window{background:var(--panel);border:1px solid var(--border);border-radius:12px;width:720px;max-width:100%;box-shadow:0 24px 70px rgba(0,0,0,.55);overflow:hidden}
+.titlebar{display:flex;align-items:center;gap:8px;padding:12px 14px;background:var(--panel2);border-bottom:1px solid var(--border)}
+.dots{display:flex;gap:8px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.title{margin:0 auto;font-size:13px;color:var(--muted);font-weight:600}
+.title .ic{color:var(--accent)}
+.header{display:flex;align-items:center;gap:14px;padding:16px 18px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(74,222,128,.06),transparent)}
+.avatar{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#14532d,#4ade80);display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 0 22px rgba(74,222,128,.35)}
+.header .who{font-weight:700;font-size:16px}
+.header .sub{font-size:12px;color:var(--muted)}
+.tag{background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.3);color:var(--accent);font-size:10px;padding:3px 8px;border-radius:6px;margin-left:auto;white-space:nowrap}
+.msgs{height:400px;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:78%;padding:11px 14px;border-radius:14px;font-size:14px;line-height:1.5;animation:pop .18s ease}
+.msg.in{background:var(--panel2);border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:4px}
+.msg.out{background:rgba(74,222,128,.16);border:1px solid rgba(74,222,128,.35);align-self:flex-end;border-bottom-right-radius:4px}
+.msg .who{font-size:11px;font-weight:700;margin-bottom:3px}
+.msg.in .who{color:var(--accent)}
+.msg.out .who{color:var(--muted)}
+.typing{display:none;align-self:flex-start;font-size:13px;color:var(--muted);padding:4px 6px}
+.typing.on{display:flex;align-items:center;gap:6px}
+.typing .b{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:bounce 1s infinite}
+.typing .b:nth-child(2){animation-delay:.15s}
+.typing .b:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+@keyframes pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.compose{border-top:1px solid var(--border);padding:14px;display:flex;gap:10px}
+.compose input{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:12px 14px;font-size:14px;outline:none}
+.compose input:focus{border-color:var(--accent)}
+.compose button{background:var(--accent);color:#052e16;border:none;border-radius:8px;padding:12px 20px;font-size:14px;font-weight:700;cursor:pointer}
+.compose button:hover{background:#22c55e}
+</style>
+</head>
+<body>
+<div class="window">
+  <div class="titlebar">
+    <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+    <div class="title"><span class="ic">🦖</span> Godzilla AI Chat</div>
+  </div>
+  <div class="header">
+    <div class="avatar">🦖</div>
+    <div>
+      <div class="who">Godzilla — King of the Monsters</div>
+      <div class="sub">Atomic-powered roleplay persona · online</div>
+    </div>
+    <span class="tag">🔥 ROLEPLAY MODE</span>
+  </div>
+  <div class="msgs" id="msgs">
+    <div class="msg in"><div class="who">Godzilla</div>*deep seismic rumble* … SKREEE-ONK. A tiny human dares to message the King? Speak, before I level your city block. 🦖</div>
+  </div>
+  <div class="typing" id="typing"><span class="b"></span><span class="b"></span><span class="b"></span> Godzilla is roaring…</div>
+  <div class="compose">
+    <input type="text" id="txt" placeholder="Message Godzilla…" onkeydown="if(event.key==='Enter')GZ.send()">
+    <button onclick="GZ.send()">Send</button>
+  </div>
+</div>
+<script>
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function pick(arr){return arr[(Math.random()*arr.length)|0];}
+function reply(raw){
+  var t=raw.toLowerCase();
+  if(/hello|hi |hey|greetings|yo /.test(t))return pick([
+    'A greeting! *snorts a puff of radioactive steam* I respect the courage. What does a human want with the King of Monsters?',
+    'SKREEE-ONK! Hello, little one. My voice alone rattles your skyscrapers.'
+  ]);
+  if(/name|who are you|what are you/.test(t))return pick([
+    'I am GODZILLA. King of the Monsters. Destroyer of cities. Casual enjoyer of nuclear radiation and warm coastal waters.',
+    'They call me Godzilla. To my enemies: the atomic nightmare. To my friends… well, there are no friends. 🦖'
+  ]);
+  if(/destroy|attack|smash|city|tokyo|battle|fight|enemy|monster/.test(t))return pick([
+    'YES. I feel the old fire rising. My dorsal fins glow blue — one atomic breath and that city is rubble. Want me to demonstrate? 🔥',
+    '*ROOOAAAR* The ground trembles at the mere mention of battle. King Ghidorah learned what happens when I get angry.'
+  ]);
+  if(/food|eat|hungry|fish|snack|radiation|nuclear|atomic/.test(t))return pick([
+    'Radiation is my breakfast, my lunch, and my dessert. Sometimes a nice deep-sea fish, but mostly atomic energy. ☢️',
+    'I survive on nuclear reactors. Your city\u2019s power grid looks… delicious.'
+  ]);
+  if(/love|like|cool|awesome|fan|amazing/.test(t))return pick([
+    'Flattery? Hmph. …It works. Continue, human. The King is listening.',
+    'A human with taste! Most scream and run. You may live another day.'
+  ]);
+  if(/how are you|how do you feel|mood/.test(t))return pick([
+    'The ocean is warm, the radiation is plentiful, and no overgrown moth has bothered me today. A fine day, all things considered.',
+    '*grumbles contentedly* Restless, as always. Somewhere out there, a city needs reminding who is King.'
+  ]);
+  if(/bye|goodbye|see you|leave/.test(t))return pick([
+    'Go, then. But if you ever need a skyscraper demolished, you know who to call. *turns back to the sea*',
+    'Farewell, tiny human. Try not to get stepped on. 🦖'
+  ]);
+  return pick([
+    '*A low, tectonic rumble* … I do not understand your human words, but I acknowledge them. Speak of battle, radiation, or the sea next time.',
+    'Hmm. *atomic fins flicker* Say that again — but slower, and with more respect for the King.',
+    'You humans and your endless questions. Fine. But know that every word costs me patience, and my patience costs cities.'
+  ]);
+}
+var GZ={
+  send:function(){
+    var t=document.getElementById('txt');var v=t.value.trim();if(!v)return;t.value='';
+    var msgs=document.getElementById('msgs');
+    msgs.insertAdjacentHTML('beforeend','<div class="msg out"><div class="who">You</div>'+esc(v)+'</div>');
+    msgs.scrollTop=msgs.scrollHeight;
+    document.getElementById('typing').className='typing on';
+    var delay=700+((Math.random()*900)|0);
+    setTimeout(function(){
+      document.getElementById('typing').className='typing';
+      msgs.insertAdjacentHTML('beforeend','<div class="msg in"><div class="who">Godzilla</div>'+esc(reply(v))+'</div>');
+      msgs.scrollTop=msgs.scrollHeight;
+    },delay);
+  }
+};
+</script>
+</body>
+</html>

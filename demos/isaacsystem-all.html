@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IsaacSystem-All</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d1117;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;height:100vh;display:flex;flex-direction:column}
+.titlebar{height:40px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#161b22;border-bottom:1px solid #21262d}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.titlebar span{margin-left:8px;font-size:13px;color:#8b949e}
+header{padding:26px;text-align:center}
+header h1{font-size:26px;background:linear-gradient(90deg,#6366f1,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent}
+header p{color:#8b949e;margin-top:6px;font-size:13px}
+main{flex:1;overflow:auto;padding:0 26px 26px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;max-width:1000px;margin:0 auto;width:100%}
+.tool{background:#161b22;border:1px solid #21262d;border-radius:12px;padding:16px;cursor:pointer;transition:border-color .15s,transform .15s}
+.tool:hover{border-color:#6366f1;transform:translateY(-2px)}
+.tool .e{font-size:24px}
+.tool b{display:block;margin:8px 0 4px;font-size:14px}
+.tool p{color:#8b949e;font-size:12px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="titlebar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><span>IsaacSystem-All — everything in one</span></div>
+<header><h1>IsaacSystem</h1><p>One monolithic binary containing every Isaac tool.</p></header>
+<main id="main"></main>
+<script>
+const tools=[
+ ['🛡️','MacAdBlock','Blocks ads system-wide via DNS'],
+ ['🌐','IsaacNet','Layered network bypass'],
+ ['🔒','SecureMessenger','E2E encrypted chat'],
+ ['❄️','FrostSolve','Step-by-step equation solver'],
+ ['🧠','Isaac AI','Multi-personality assistant'],
+ ['⌨️','Macro Typer','Types text char-by-char'],
+ ['📧','CMail','Full-stack email client'],
+ ['🖥','Browser','Whitelist browsing'],
+ ['📚','IGCSE Tutor','Interactive revision']
+];
+const main=document.getElementById('main');
+tools.forEach(([e,n,d])=>{
+ const t=document.createElement('div');t.className='tool';
+ t.innerHTML=`<div class="e">${e}</div><b>${n}</b><p>${d}</p>`;
+ t.onclick=()=>t.style.borderColor='#22c55e';
+ main.appendChild(t);
+});
+</script>
+</body>
+</html>

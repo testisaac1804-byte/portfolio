@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Red Star Browser</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2230;--text:#e6edf3;--muted:#8b949e;--accent:#ef4444;--border:#30363d}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.window{background:var(--panel);border:1px solid var(--border);border-radius:12px;width:860px;max-width:100%;box-shadow:0 24px 70px rgba(0,0,0,.55);overflow:hidden}
+.titlebar{display:flex;align-items:center;gap:8px;padding:12px 14px;background:var(--panel2);border-bottom:1px solid var(--border)}
+.dots{display:flex;gap:8px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.title{margin:0 auto;font-size:13px;color:var(--muted);font-weight:600}
+.title .star{color:var(--accent)}
+.chrome{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--panel2)}
+.navbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:var(--panel);color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.navbtn:hover{border-color:var(--accent)}
+.navbtn:disabled{opacity:.35;cursor:default}
+.urlbar{flex:1;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:0 12px;height:34px}
+.urlbar .star{color:var(--accent);font-size:13px}
+.urlbar input{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-size:13.5px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.go{height:34px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-size:13px;font-weight:600;padding:0 16px;cursor:pointer}
+.go:hover{background:#dc2626}
+.viewport{height:400px;overflow-y:auto;background:var(--bg)}
+.start{max-width:640px;margin:0 auto;padding:44px 24px;text-align:center}
+.logo{font-size:44px;margin-bottom:6px}
+.brand{font-size:26px;font-weight:800;color:var(--text);margin:0}
+.brand .r{color:var(--accent)}
+.tagline{color:var(--muted);font-size:13px;margin:6px 0 26px}
+.search{display:flex;gap:8px;max-width:420px;margin:0 auto 30px}
+.search input{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:999px;color:var(--text);padding:12px 18px;font-size:14px;outline:none}
+.search input:focus{border-color:var(--accent)}
+.bm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.bm{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px 12px;cursor:pointer;transition:all .15s;text-decoration:none}
+.bm:hover{border-color:var(--accent);transform:translateY(-2px)}
+.bm .ic{font-size:26px;margin-bottom:6px}
+.bm .nm{font-size:13px;font-weight:600;color:var(--text)}
+.bm .u{font-size:11px;color:var(--muted);font-family:ui-monospace,Menlo,Consolas,monospace;margin-top:2px}
+.page{max-width:600px;margin:0 auto;padding:34px 24px}
+.page h1{margin:0 0 4px;font-size:24px}
+.page .dom{font-size:12px;color:var(--muted);font-family:ui-monospace,Menlo,Consolas,monospace;margin-bottom:16px}
+.page p{font-size:14px;line-height:1.7;color:var(--text)}
+.page .lnk{color:var(--accent);cursor:pointer}
+.hero{background:linear-gradient(135deg,rgba(239,68,68,.14),transparent);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:18px;margin-bottom:18px}
+.nocontent{text-align:center;padding-top:80px;color:var(--muted)}
+.nocontent .big{font-size:48px;margin-bottom:10px}
+</style>
+</head>
+<body>
+<div class="window">
+  <div class="titlebar">
+    <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+    <div class="title"><span class="star">★</span> Red Star Browser</div>
+  </div>
+  <div class="chrome">
+    <button class="navbtn" id="back" onclick="RS.go(-1)">←</button>
+    <button class="navbtn" id="fwd" onclick="RS.go(1)">→</button>
+    <div class="urlbar">
+      <span class="star">★</span>
+      <input type="text" id="url" placeholder="star://home or enter a URL…" onkeydown="if(event.key==='Enter')RS.navigate()">
+    </div>
+    <button class="go" onclick="RS.navigate()">Go</button>
+  </div>
+  <div class="viewport" id="viewport"></div>
+</div>
+<script>
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+var PAGES={
+  'home':{title:'Home',html:'<div class="hero"><h1>★ Welcome to Red Star</h1><p>Your fast, private macOS browser. This is the <b>home</b> page of the built-in demo site. Use the URL bar or the bookmarks on the start page to move around.</p></div><p>Everything you see is rendered locally inside this single HTML file — no network requests, no trackers, no external resources.</p>'},
+  'about':{title:'About',html:'<h1>About Red Star</h1><div class="dom">star://about</div><p>Red Star Browser is a lightweight, privacy-first web browser for macOS. It ships with a clean start page, instant bookmark navigation, and a focus on speed.</p><p>In this demo, try clicking a bookmark on the start page (<span class="lnk" onclick="RS.navigateTo(\'start\')">★ start page</span>) or typing <b>star://news</b> into the URL bar.</p>'},
+  'news':{title:'News',html:'<h1>Red Star News</h1><div class="dom">star://news</div><p><b>• v1.4 shipped</b> — tab groups and pinned tabs are here.</p><p><b>• Performance</b> — page loads are 22% faster with the new renderer.</p><p><b>• Privacy</b> — tracker blocking is now on by default.</p><p><span class="lnk" onclick="RS.navigateTo(\'about\')">Read more →</span></p>'},
+  'settings':{title:'Settings',html:'<h1>Settings</h1><div class="dom">star://settings</div><p>This is the settings page mockup. Theme: <b>Dark</b> · Search engine: <b>Red Star</b> · Homepage: <b>star://home</b>.</p>'}
+};
+var BOOKMARKS=[
+  {ic:'🏠',nm:'Home',u:'star://home'},
+  {ic:'ℹ️',nm:'About',u:'star://about'},
+  {ic:'📰',nm:'News',u:'star://news'},
+  {ic:'⚙️',nm:'Settings',u:'star://settings'},
+  {ic:'⭐',nm:'GitHub',u:'star://github'},
+  {ic:'📚',nm:'Docs',u:'star://docs'}
+];
+function startHTML(filter){
+  var h='<div class="start"><div class="logo">★</div><h1 class="brand">Red<span class="r">Star</span></h1>'+
+    '<p class="tagline">Your private, fast macOS browser</p>'+
+    '<div class="search"><input type="text" id="q" placeholder="Filter bookmarks…" oninput="RS.filter(this.value)"></div>'+
+    '<div class="bm-grid">';
+  var shown=0;
+  for(var i=0;i<BOOKMARKS.length;i++){
+    var b=BOOKMARKS[i];
+    if(filter&&b.nm.toLowerCase().indexOf(filter.toLowerCase())===-1)continue;
+    h+='<div class="bm" onclick="RS.navigateTo(\''+b.u.slice(7)+'\')"><div class="ic">'+b.ic+'</div><div class="nm">'+esc(b.nm)+'</div><div class="u">'+esc(b.u)+'</div></div>';
+    shown++;
+  }
+  h+='</div>'+(shown===0?'<p style="color:var(--muted);margin-top:16px">No bookmarks match.</p>':'')+'</div>';
+  return h;
+}
+var RS={
+  history:['start'],pos:0,
+  filter:function(v){var s=document.getElementById('viewport');s.innerHTML=startHTML(v);},
+  render:function(){
+    var key=this.history[this.pos];
+    var vp=document.getElementById('viewport');
+    if(key==='start'){vp.innerHTML=startHTML('');}
+    else if(PAGES[key]){var p=PAGES[key];vp.innerHTML='<div class="page">'+p.html+'</div>';}
+    else{vp.innerHTML='<div class="nocontent"><div class="big">★</div><h2>Page not found</h2><p>No page exists at <b>star://'+esc(key)+'</b>. Try the <span class="lnk" onclick="RS.navigateTo(\'start\')">start page</span>.</p></div>';}
+    document.getElementById('url').value='star://'+key;
+    document.getElementById('back').disabled=this.pos===0;
+    document.getElementById('fwd').disabled=this.pos===this.history.length-1;
+  },
+  navigate:function(){
+    var raw=document.getElementById('url').value.trim();
+    var key=raw.toLowerCase();
+    if(key.indexOf('star://')===0)key=key.slice(7);
+    if(key.indexOf('/')!==-1)key=key.slice(0,key.indexOf('/'));
+    if(!key)return;
+    this.history=this.history.slice(0,this.pos+1);this.history.push(key);this.pos++;
+    this.render();
+  },
+  navigateTo:function(k){document.getElementById('url').value='star://'+k;this.navigate();},
+  go:function(delta){
+    var np=this.pos+delta;if(np<0||np>=this.history.length)return;this.pos=np;this.render();
+  }
+};
+RS.render();
+</script>
+</body>
+</html>

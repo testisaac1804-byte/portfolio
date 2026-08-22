@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IsaacCombo — Installer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0d1117; --panel: #161b22; --panel2: #1c2129; --text: #e6edf3;
+    --accent: #6366f1; --accent2: #818cf8; --muted: #8b949e; --border: #21262d;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); min-height: 100vh;
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+  }
+  .window {
+    width: 100%; max-width: 600px; background: var(--panel);
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .titlebar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: #11151b; border-bottom: 1px solid var(--border); }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .tbtitle { flex: 1; text-align: center; color: var(--muted); font-size: 13px; font-weight: 600; }
+  .content { padding: 26px 28px; }
+  .step { display: none; animation: fade .3s ease; }
+  .step.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  h1 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+  h2 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  p { color: var(--muted); font-size: 13.5px; line-height: 1.5; margin-bottom: 12px; }
+  .accent { color: var(--accent2); }
+  .applist { display: flex; flex-direction: column; gap: 8px; margin: 6px 0 4px; }
+  .approw {
+    display: flex; align-items: center; gap: 11px; padding: 11px 13px;
+    background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  .approw:hover { border-color: #30363d; }
+  .approw.checked { border-color: var(--accent); background: rgba(99,102,241,0.08); }
+  .approw input { accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; }
+  .approw .em { font-size: 20px; }
+  .approw .nm { font-weight: 600; font-size: 14px; }
+  .approw .ds { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .approw .sz { margin-left: auto; color: var(--muted); font-size: 12px; white-space: nowrap; }
+  .selectrow { display: flex; gap: 8px; margin-bottom: 8px; }
+  .linkbtn { background: none; border: none; color: var(--accent2); font-size: 12.5px; cursor: pointer; padding: 0; }
+  .linkbtn:hover { text-decoration: underline; }
+  .btnrow { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; }
+  .btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 7px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background .15s; }
+  .btn:hover { background: var(--accent2); }
+  .btn.ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .btn.ghost:hover { color: var(--text); border-color: var(--muted); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+  .progress-wrap { height: 8px; background: var(--panel2); border-radius: 5px; overflow: hidden; margin: 18px 0 12px; }
+  .progress { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 5px; transition: width .25s; }
+  .status { font-size: 13px; color: var(--muted); min-height: 20px; }
+  .status b { color: var(--text); }
+  .summary { margin-top: 14px; }
+  .summary .row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+  .summary .row:last-child { border-bottom: none; }
+  .summary .ok { color: #3fb950; } .summary .no { color: var(--muted); }
+  .big { font-size: 40px; text-align: center; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="tbtitle">IsaacCombo — Installer</span>
+    </div>
+    <div class="content">
+
+      <!-- STEP 0: Choose -->
+      <div class="step active" id="s0">
+        <div class="big">🧰</div>
+        <h1>IsaacCombo</h1>
+        <p>Choose which <span class="accent">Isaac apps</span> you would like to install. You can always run the installer again later to add more.</p>
+        <div class="selectrow">
+          <button class="linkbtn" onclick="C.selectAll()">Select All</button>
+          <span style="color:#30363d">·</span>
+          <button class="linkbtn" onclick="C.selectNone()">Select None</button>
+        </div>
+        <div class="applist" id="applist"></div>
+        <div class="btnrow">
+          <button class="btn" id="installBtn" onclick="C.install()" disabled>Install</button>
+        </div>
+      </div>
+
+      <!-- STEP 1: Progress -->
+      <div class="step" id="s1">
+        <div class="big">⚙️</div>
+        <h2>Installing selected apps</h2>
+        <p>Installing <span class="accent" id="countTxt">0 apps</span>…</p>
+        <div class="progress-wrap"><div class="progress" id="bar"></div></div>
+        <div class="status" id="status">Starting…</div>
+      </div>
+
+      <!-- STEP 2: Summary -->
+      <div class="step" id="s2">
+        <div class="big">✅</div>
+        <h2>Installation Summary</h2>
+        <p>The following packages were processed:</p>
+        <div class="summary" id="summary"></div>
+        <div class="btnrow">
+          <button class="btn" onclick="C.reset()">Done</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+  var C = {
+    apps: [
+      { em: '🌐', nm: 'IsaacNet', ds: 'Multi-layer proxy / network utility', sz: '42 MB' },
+      { em: '🧊', nm: 'FrostSolve', ds: 'Engineering equation solver & calculator', sz: '18 MB' },
+      { em: '🧭', nm: 'IsaacBrowser', ds: 'Privacy-focused web browser', sz: '96 MB' },
+      { em: '⌨️', nm: 'Macro Typer', ds: 'Keyboard macro automation tool', sz: '12 MB' },
+      { em: '📷', nm: 'QuickCam Pro', ds: 'Instant webcam & capture utility', sz: '31 MB' },
+      { em: '📬', nm: 'CMail', ds: 'Full-stack email client', sz: '27 MB' },
+      { em: '🏭', nm: 'Manufacturing Explorer', ds: '200-method manufacturing reference', sz: '15 MB' },
+      { em: '🛠️', nm: 'CNC Drill Box', ds: 'Drill-bit storage companion app', sz: '9 MB' }
+    ],
+    install: function () {
+      var sel = this.selected();
+      if (sel.length === 0) return;
+      document.getElementById('countTxt').textContent = sel.length + (sel.length === 1 ? ' app' : ' apps');
+      this.show(1);
+      this.runProgress(sel);
+    },
+    selected: function () {
+      var out = [];
+      var boxes = document.querySelectorAll('#applist input');
+      for (var i = 0; i < boxes.length; i++) if (boxes[i].checked) out.push(this.apps[i]);
+      return out;
+    },
+    runProgress: function (sel) {
+      var bar = document.getElementById('bar'), st = document.getElementById('status');
+      var p = 0;
+      var t = setInterval(function () {
+        p += Math.floor(Math.random() * 8) + 2;
+        if (p >= 100) p = 100;
+        bar.style.width = p + '%';
+        var cur = sel[Math.min(Math.floor(p / 100 * sel.length), sel.length - 1)];
+        st.innerHTML = '<b>Installing ' + cur.nm + '…</b> ' + p + '%';
+        if (p >= 100) { clearInterval(t); setTimeout(function () { C.summary(sel); C.show(2); }, 400); }
+      }, 140);
+    },
+    summary: function (sel) {
+      var box = document.getElementById('summary');
+      var html = '';
+      for (var i = 0; i < this.apps.length; i++) {
+        var a = this.apps[i];
+        var done = sel.indexOf(a) !== -1;
+        html += '<div class="row"><span>' + a.em + ' ' + a.nm + '</span><span class="' + (done ? 'ok' : 'no') + '">' + (done ? '✓ Installed' : '— Skipped') + '</span></div>';
+      }
+      box.innerHTML = html;
+    },
+    selectAll: function () {
+      var boxes = document.querySelectorAll('#applist input');
+      for (var i = 0; i < boxes.length; i++) { boxes[i].checked = true; this.sync(boxes[i]); }
+      this.updateBtn();
+    },
+    selectNone: function () {
+      var boxes = document.querySelectorAll('#applist input');
+      for (var i = 0; i < boxes.length; i++) { boxes[i].checked = false; this.sync(boxes[i]); }
+      this.updateBtn();
+    },
+    toggle: function (row) {
+      var cb = row.querySelector('input');
+      cb.checked = !cb.checked;
+      this.sync(cb);
+      this.updateBtn();
+    },
+    sync: function (cb) {
+      var row = cb.closest('.approw');
+      if (cb.checked) row.classList.add('checked'); else row.classList.remove('checked');
+    },
+    updateBtn: function () {
+      document.getElementById('installBtn').disabled = this.selected().length === 0;
+    },
+    show: function (n) {
+      var steps = document.querySelectorAll('.step');
+      for (var i = 0; i < steps.length; i++) steps[i].classList.remove('active');
+      document.getElementById('s' + n).classList.add('active');
+    },
+    reset: function () { this.show(0); },
+    render: function () {
+      var list = document.getElementById('applist');
+      var html = '';
+      for (var i = 0; i < this.apps.length; i++) {
+        var a = this.apps[i];
+        html += '<div class="approw" onclick="C.toggle(this)">' +
+          '<input type="checkbox" onchange="C.sync(this);C.updateBtn()">' +
+          '<span class="em">' + a.em + '</span>' +
+          '<span><div class="nm">' + a.nm + '</div><div class="ds">' + a.ds + '</div></span>' +
+          '<span class="sz">' + a.sz + '</span></div>';
+      }
+      list.innerHTML = html;
+    }
+  };
+  C.render();
+</script>
+</body>
+</html>

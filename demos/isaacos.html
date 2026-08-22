@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IsaacOS</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#000;color:#33ff66;font-family:'Courier New',monospace;height:100vh;display:flex;align-items:center;justify-content:center}
+.boot{width:min(680px,92vw);font-size:14px;line-height:1.7;padding:20px}
+.line{white-space:pre-wrap}
+.cursor{display:inline-block;width:9px;height:15px;background:#33ff66;animation:blink 1s steps(1) infinite;vertical-align:middle}
+@keyframes blink{50%{opacity:0}}
+.prompt{color:#33ff66}
+</style>
+</head>
+<body>
+<div class="boot" id="boot"></div>
+<script>
+const lines=[
+ 'ISAAC-OS BIOS v1.0',
+ 'Copyright (C) Isaac Chan — custom OS concept',
+ '',
+ 'Detecting memory… 65536K OK',
+ 'Booting from IDE-0… OK',
+ '',
+ 'Loading kernel [isaacos.bin]……… OK',
+ 'Mounting root filesystem… OK',
+ 'Starting init… OK',
+ '',
+ 'ISAAC-OS v0.1 (kernel) — all Isaac tools built in',
+ 'Type "help" for commands'
+];
+const boot=document.getElementById('boot');
+let i=0;
+function typeLine(cb){
+ if(i>=lines.length){showPrompt();return}
+ const d=document.createElement('div');d.className='line';boot.appendChild(d);
+ let ch=0;const text=lines[i];
+ const iv=setInterval(()=>{d.textContent=text.slice(0,++ch);if(ch>=text.length){clearInterval(iv);i++;setTimeout(typeLine,120)}},12);
+}
+function showPrompt(){
+ const p=document.createElement('div');p.className='prompt';p.innerHTML='isaacos@kernel:~$ <span class="cursor"></span>';
+ const inp=document.createElement('input');inp.style.cssText='background:transparent;border:none;color:#33ff66;font-family:inherit;font-size:14px;outline:none;margin-left:4px;width:300px';
+ p.appendChild(inp);boot.appendChild(p);inp.focus();
+ inp.addEventListener('keydown',e=>{
+  if(e.key==='Enter'){const v=inp.value.trim().toLowerCase();inp.remove();
+   const out=document.createElement('div');
+   if(v==='help')out.textContent='Commands: help, version, echo <text>, clear';
+   else if(v==='version')out.textContent='ISAAC-OS v0.1 (concept)';
+   else if(v==='clear'){boot.innerHTML='';}
+   else if(v.startsWith('echo '))out.textContent=v.slice(5);
+   else if(v)out.textContent=`sh: ${v}: command not found`;
+   boot.appendChild(out);setTimeout(showPrompt,60);
+  }
+ });
+}
+typeLine();
+</script>
+</body>
+</html>

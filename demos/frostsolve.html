@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FrostSolve — Equation Solver</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2230;--text:#e6edf3;--muted:#8b949e;--accent:#6366f1;--border:#30363d;--good:#4ade80}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.window{background:var(--panel);border:1px solid var(--border);border-radius:12px;width:780px;max-width:100%;box-shadow:0 24px 70px rgba(0,0,0,.55);overflow:hidden}
+.titlebar{display:flex;align-items:center;gap:8px;padding:12px 14px;background:var(--panel2);border-bottom:1px solid var(--border)}
+.dots{display:flex;gap:8px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.title{margin:0 auto;font-size:13px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:7px}
+.title .ic{color:var(--accent);font-size:15px}
+.body{padding:20px}
+.hint{font-size:12px;color:var(--muted);margin:0 0 14px}
+.inrow{display:flex;gap:10px;margin-bottom:12px}
+input[type=text]{flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:12px 14px;font-size:15px;font-family:ui-monospace,Menlo,Consolas,monospace;outline:none}
+input[type=text]:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,102,241,.18)}
+button{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:12px 18px;font-size:14px;font-weight:600;cursor:pointer;transition:background .15s,transform .05s}
+button:hover{background:#4f46e5}
+button:active{transform:translateY(1px)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{background:var(--panel2);border:1px solid var(--border);color:var(--muted);border-radius:999px;padding:6px 12px;font-size:12px;cursor:pointer;font-family:ui-monospace,Menlo,Consolas,monospace}
+.chip:hover{border-color:var(--accent);color:var(--text)}
+.result{background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:16px;min-height:80px}
+.result.empty{color:var(--muted);font-style:italic;font-size:13px}
+.step{display:flex;gap:10px;margin:0 0 10px;font-size:14px;color:var(--text)}
+.step:last-child{margin-bottom:0}
+.step .n{flex:0 0 22px;height:22px;border-radius:50%;background:rgba(99,102,241,.18);color:var(--accent);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.step .t{padding-top:2px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5}
+.answer{margin-top:14px;padding:12px 14px;border-radius:8px;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.35);font-size:16px;font-weight:700;color:var(--good);font-family:ui-monospace,Menlo,Consolas,monospace}
+.err{color:#ff5f57;font-size:13px}
+</style>
+</head>
+<body>
+<div class="window">
+  <div class="titlebar">
+    <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+    <div class="title"><span class="ic">❄️</span> FrostSolve</div>
+  </div>
+  <div class="body">
+    <p class="hint">Type an equation (e.g. <b>2x+5=13</b> or <b>x^2-5x+6=0</b>) or a math expression (<b>sqrt(16)+2*3</b>). Supports linear &amp; quadratic equations with full working.</p>
+    <div class="inrow">
+      <input type="text" id="eq" placeholder="e.g. 2x+5=13" onkeydown="if(event.key==='Enter')FS.solve()">
+      <button onclick="FS.solve()">Solve</button>
+    </div>
+    <div class="chips">
+      <span class="chip" onclick="FS.fill('2x+5=13')">2x+5=13</span>
+      <span class="chip" onclick="FS.fill('x^2-5x+6=0')">x^2-5x+6=0</span>
+      <span class="chip" onclick="FS.fill('3x-7=11')">3x-7=11</span>
+      <span class="chip" onclick="FS.fill('2x^2+4x-6=0')">2x^2+4x-6=0</span>
+      <span class="chip" onclick="FS.fill('sqrt(16)+2*3')">sqrt(16)+2*3</span>
+    </div>
+    <div class="result empty" id="out">Solution steps will appear here…</div>
+  </div>
+</div>
+<script>
+function fmt(n){if(!isFinite(n))return String(n);var r=Math.round(n*10000)/10000;if(Object.is(r,-0))r=0;return String(r);}
+function coeffStr(n,sym){if(n===1)return sym;if(n===-1)return '-'+sym;return fmt(n)+sym;}
+function splitTerms(s){var terms=[];var cur='';for(var i=0;i<s.length;i++){var ch=s[i];if((ch==='+'||ch==='-')&&i>0&&cur!==''){terms.push(cur);cur=ch;}else{cur+=ch;}}if(cur!=='')terms.push(cur);return terms;}
+function parseTerm(term){var sign=1;var t=term;if(t[0]==='+')t=t.slice(1);else if(t[0]==='-'){t=t.slice(1);sign=-1;}
+  var isX2=t.indexOf('^2')!==-1;var xi=t.toLowerCase().indexOf('x');var isX=xi!==-1;
+  var numStr=isX?t.slice(0,xi):t;var num=(numStr===''||numStr==='.')?1:parseFloat(numStr);if(isNaN(num))num=1;num*=sign;
+  if(isX2)return{a:num,b:0,c:0};if(isX)return{a:0,b:num,c:0};return{a:0,b:0,c:num};}
+function parsePoly(side){var a=0,b=0,c=0;var terms=splitTerms(side);for(var i=0;i<terms.length;i++){var t=parseTerm(terms[i]);a+=t.a;b+=t.b;c+=t.c;}return{a:a,b:b,c:c};}
+function evaluate(str){var pos=0;
+  function peek(){return str[pos];}
+  function eat(){return str[pos++];}
+  function skipWs(){while(str[pos]===' ')pos++;}
+  function parseExpression(){var v=parseTermE();while(true){skipWs();var c=peek();if(c==='+'){eat();v+=parseTermE();}else if(c==='-'){eat();v-=parseTermE();}else break;}return v;}
+  function parseTermE(){var v=parsePower();while(true){skipWs();var c=peek();if(c==='*'){eat();v*=parsePower();}else if(c==='/'){eat();v=v/parsePower();}else break;}return v;}
+  function parsePower(){var v=parseUnary();skipWs();if(peek()==='^'){eat();v=Math.pow(v,parseUnary());}return v;}
+  function parseUnary(){skipWs();if(peek()==='-'){eat();return -parseUnary();}if(peek()==='+'){eat();return parseUnary();}return parsePrimary();}
+  function parsePrimary(){skipWs();var c=peek();
+    if(c==='('){eat();var v=parseExpression();skipWs();if(peek()===')')eat();return v;}
+    if((c>='0'&&c<='9')||c==='.'){var num='';while((peek()>='0'&&peek()<='9')||peek()==='.')num+=eat();return parseFloat(num);}
+    if(c&&/[a-z]/i.test(c)){var name='';while(peek()&&/[a-z]/i.test(peek()))name+=eat();skipWs();
+      if(peek()==='('){eat();var arg=parseExpression();skipWs();if(peek()===')')eat();
+        if(name==='sqrt')return Math.sqrt(arg);if(name==='abs')return Math.abs(arg);
+        if(name==='sin')return Math.sin(arg);if(name==='cos')return Math.cos(arg);
+        if(name==='tan')return Math.tan(arg);if(name==='log')return Math.log10(arg);if(name==='ln')return Math.log(arg);}
+      if(name==='pi')return Math.PI;return NaN;}
+    return NaN;}
+  return parseExpression();}
+var FS={
+  fill:function(v){document.getElementById('eq').value=v;this.solve();},
+  solve:function(){
+    var out=document.getElementById('out');out.className='result';
+    var raw=document.getElementById('eq').value.trim();
+    if(!raw){out.className='result empty';out.textContent='Solution steps will appear here…';return;}
+    var original=raw;
+    var s=raw.replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-').replace(/²/g,'^2').replace(/\s+/g,'');
+    var steps=[];
+    var html='';
+    try{
+      var eqIdx=s.indexOf('=');
+      if(eqIdx===-1){
+        if(s.toLowerCase().indexOf('x')!==-1){
+          html='<div class="err">That looks like an expression with a variable. Add an <b>=</b> to solve, e.g. <b>2x+5=13</b>.</div>';
+        }else{
+          var val=evaluate(s);
+          if(isNaN(val))throw new Error('Could not evaluate');
+          steps.push('Expression: '+original);
+          steps.push('Evaluating using order of operations (PEMDAS)…');
+          html+='<div class="answer">= '+fmt(val)+'</div>';
+        }
+      }else{
+        var left=s.slice(0,eqIdx), right=s.slice(eqIdx+1);
+        var L=parsePoly(left), R=parsePoly(right);
+        var a=L.a-R.a, b=L.b-R.b, c=L.c-R.c;
+        steps.push('Original equation: '+original);
+        if(a!==0){
+          steps.push('Standard form: '+coeffStr(a,'x²')+' + '+coeffStr(b,'x')+' + '+fmt(c)+' = 0');
+          steps.push('Identify: a = '+fmt(a)+', b = '+fmt(b)+', c = '+fmt(c));
+          var disc=b*b-4*a*c;
+          steps.push('Discriminant Δ = b² − 4ac = ('+fmt(b)+')² − 4('+fmt(a)+')('+fmt(c)+') = '+fmt(disc));
+          if(disc>0){
+            var sq=Math.sqrt(disc);
+            steps.push('Δ > 0 → two distinct real roots');
+            steps.push('x = (−b ± √Δ) / (2a) = (−('+fmt(b)+') ± √'+fmt(disc)+') / (2·'+fmt(a)+')');
+            var x1=(-b+sq)/(2*a), x2=(-b-sq)/(2*a);
+            html+='<div class="answer">x = '+fmt(x1)+'&nbsp;&nbsp;or&nbsp;&nbsp;x = '+fmt(x2)+'</div>';
+          }else if(disc===0){
+            steps.push('Δ = 0 → one repeated real root');
+            var xr=-b/(2*a);
+            html+='<div class="answer">x = '+fmt(xr)+' (repeated root)</div>';
+          }else{
+            steps.push('Δ < 0 → two complex conjugate roots');
+            var re=-b/(2*a), im=Math.sqrt(-disc)/(2*a);
+            html+='<div class="answer">x = '+fmt(re)+' ± '+fmt(im)+'i</div>';
+          }
+        }else if(b!==0){
+          steps.push('Linear equation: '+coeffStr(b,'x')+' + '+fmt(c)+' = 0');
+          steps.push('Subtract '+fmt(c)+' from both sides → '+coeffStr(b,'x')+' = '+fmt(-c));
+          steps.push('Divide both sides by '+fmt(b)+' → x = '+fmt(-c)+' / '+fmt(b));
+          var xv=-c/b;
+          html+='<div class="answer">x = '+fmt(xv)+'</div>';
+        }else{
+          if(c===0)html+='<div class="answer">0 = 0 — infinite solutions (identity)</div>';
+          else html+='<div class="answer">'+fmt(c)+' = 0 — no solution</div>';
+        }
+      }
+    }catch(e){
+      html='<div class="err">⚠️ Couldn\u2019t parse that. Try a linear equation like <b>2x+5=13</b> or a quadratic like <b>x^2-5x+6=0</b>.</div>';
+    }
+    var stepsHtml='';
+    for(var i=0;i<steps.length;i++){stepsHtml+='<div class="step"><span class="n">'+(i+1)+'</span><span class="t">'+steps[i]+'</span></div>';}
+    out.innerHTML=stepsHtml+html;
+  }
+};
+</script>
+</body>
+</html>

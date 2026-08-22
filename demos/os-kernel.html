@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OS Kernel — Boot</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0d1117; --panel: #161b22; --panel2: #1c2129; --text: #e6edf3;
+    --accent: #6366f1; --accent2: #818cf8; --muted: #8b949e; --border: #21262d;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); min-height: 100vh; padding: 24px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .window { width: 100%; max-width: 760px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .titlebar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: #11151b; border-bottom: 1px solid var(--border); }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .tbtitle { flex: 1; text-align: center; color: var(--muted); font-size: 13px; font-weight: 600; }
+  .term {
+    background: #0a0c10; margin: 14px; border: 1px solid var(--border); border-radius: 8px;
+    height: 430px; display: flex; flex-direction: column; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12.5px; line-height: 1.6;
+  }
+  .out { flex: 1; overflow-y: auto; padding: 14px 16px; white-space: pre-wrap; word-break: break-word; }
+  .out .c-grey { color: #8b949e; } .out .c-green { color: #3fb950; }
+  .out .c-cyan { color: #58a6ff; } .out .c-yellow { color: #d29922; }
+  .out .c-white { color: #e6edf3; } .out .c-red { color: #f85149; }
+  .out .c-mag { color: #bc8cff; }
+  .input-row { display: flex; align-items: center; padding: 10px 14px; border-top: 1px solid var(--border); }
+  .prompt { color: #3fb950; font-weight: 700; white-space: nowrap; }
+  .input-row input {
+    flex: 1; background: transparent; border: none; color: var(--text); font-family: inherit;
+    font-size: 12.5px; outline: none; padding-left: 6px; caret-color: #3fb950;
+  }
+  .boot-hint { padding: 0 14px 14px; color: var(--muted); font-size: 12px; text-align: center; }
+</style>
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="tbtitle">OS Kernel — x86 Bootloader (from scratch)</span>
+    </div>
+    <div class="term">
+      <div class="out" id="out"></div>
+      <div class="input-row">
+        <span class="prompt" id="prompt">$</span>
+        <input id="inp" placeholder="type 'help' and press Enter" autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+    <div class="boot-hint">Simulated boot: BIOS → bootloader → kernel → shell. Try <b>help</b>, <b>clear</b>, <b>version</b>, <b>echo</b>, <b>ls</b>, <b>reboot</b>.</div>
+  </div>
+
+<script>
+  var K = {
+    booted: false,
+    lines: [
+      { t: 'IsaacOS BIOS v1.00 — (C) 2026 Isaac Labs', c: 'c-grey' },
+      { t: 'CPU: x86_64 @ 2.4 GHz · Memory: 640K base + 3M extended OK', c: 'c-grey' },
+      { t: '', c: '' },
+      { t: 'Detecting drives… IDE0: OK · IDE1: OK', c: 'c-grey' },
+      { t: 'Loading boot sector from drive 0x80…', c: 'c-cyan' },
+      { t: 'BOOTLOADER: 16-bit stage entered (0x7C00)', c: 'c-yellow' },
+      { t: 'Enabling A20 line… OK', c: 'c-grey' },
+      { t: 'Switching to 32-bit protected mode… OK', c: 'c-grey' },
+      { t: 'Loading kernel.bin into 0x100000…', c: 'c-cyan' },
+      { t: 'KERNEL: initialising GDT, IDT and paging…', c: 'c-yellow' },
+      { t: 'KERNEL: mounting initramfs… OK', c: 'c-grey' },
+      { t: 'KERNEL: starting scheduler… OK', c: 'c-grey' },
+      { t: 'KERNEL: spawning /bin/sh (pid 1)', c: 'c-green' },
+      { t: '', c: '' },
+      { t: 'IsaacOS Kernel v0.1.0 (from scratch) — x86_64', c: 'c-mag' },
+      { t: 'Type "help" for available commands.', c: 'c-grey' },
+      { t: '', c: '' }
+    ],
+    boot: function () {
+      this.booted = false;
+      document.getElementById('out').innerHTML = '';
+      document.getElementById('prompt').textContent = '$';
+      document.getElementById('inp').disabled = true;
+      document.getElementById('inp').value = '';
+      var i = 0;
+      var out = document.getElementById('out');
+      var self = this;
+      var t = setInterval(function () {
+        if (i >= self.lines.length) {
+          clearInterval(t);
+          self.booted = true;
+          document.getElementById('inp').disabled = false;
+          document.getElementById('inp').focus();
+          self.printPrompt();
+          return;
+        }
+        var L = self.lines[i];
+        self.append(L.t, L.c);
+        i++;
+      }, 220);
+    },
+    append: function (text, cls) {
+      var out = document.getElementById('out');
+      if (text === '') { out.innerHTML += '\n'; }
+      else { out.innerHTML += '<span class="' + cls + '">' + text + '</span>\n'; }
+      out.scrollTop = out.scrollHeight;
+    },
+    printPrompt: function () {
+      document.getElementById('prompt').textContent = 'isaac@kernel:~$';
+    },
+    run: function () {
+      var inp = document.getElementById('inp');
+      var cmd = inp.value;
+      if (!cmd) return;
+      var out = document.getElementById('out');
+      out.innerHTML += '<span class="c-green">isaac@kernel:~$</span> <span class="c-white">' + cmd + '</span>\n';
+      this.exec(cmd.trim());
+      inp.value = '';
+      out.scrollTop = out.scrollHeight;
+    },
+    exec: function (raw) {
+      var parts = raw.split(/\s+/);
+      var c = parts[0].toLowerCase();
+      var rest = parts.slice(1).join(' ');
+      var self = this;
+      if (c === 'help') {
+        this.append('Available commands:', 'c-cyan');
+        this.append('  help      show this list', 'c-white');
+        this.append('  version   kernel version', 'c-white');
+        this.append('  echo <x>  print text back', 'c-white');
+        this.append('  ls        list filesystem', 'c-white');
+        this.append('  about     about this project', 'c-white');
+        this.append('  clear     clear the screen', 'c-white');
+        this.append('  reboot    restart the boot sequence', 'c-white');
+      } else if (c === 'version') {
+        this.append('IsaacOS Kernel v0.1.0 (from scratch) — x86_64', 'c-mag');
+        this.append('Built with: NASM + GCC + GNU ld · bootloader in 512 bytes', 'c-grey');
+      } else if (c === 'echo') {
+        this.append(rest || '', 'c-white');
+      } else if (c === 'ls') {
+        this.append('boot/   kernel.bin   initramfs.img   bin/   etc/   home/   usr/', 'c-cyan');
+      } else if (c === 'about') {
+        this.append('This kernel was written from scratch in assembly and C:', 'c-white');
+        this.append('  - 16-bit bootloader that fits in the 512-byte boot sector', 'c-grey');
+        this.append('  - 32-bit protected-mode switch with a custom GDT', 'c-grey');
+        this.append('  - basic VGA text driver and keyboard interrupt handler', 'c-grey');
+      } else if (c === 'clear') {
+        document.getElementById('out').innerHTML = '';
+        return;
+      } else if (c === 'reboot') {
+        this.append('Rebooting…', 'c-yellow');
+        setTimeout(function () { self.boot(); }, 500);
+        return;
+      } else if (c === 'uname') {
+        this.append('IsaacOS', 'c-white');
+      } else {
+        this.append('sh: command not found: ' + c, 'c-red');
+        this.append('Type "help" for a list of commands.', 'c-grey');
+      }
+    }
+  };
+  document.getElementById('inp').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && K.booted) K.run();
+  });
+  K.boot();
+</script>
+</body>
+</html>

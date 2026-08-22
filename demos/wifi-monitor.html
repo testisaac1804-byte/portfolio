@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WiFi Monitor</title>
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2128;--text:#e6edf3;--muted:#8b949e;--accent:#22c55e;--accentdim:rgba(34,197,94,.14);--border:#30363d;--amber:#f0883e;--red:#f85149}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.win{width:100%;max-width:800px;background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+.tb{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#10151c;border-bottom:1px solid var(--border)}
+.dots{display:flex;gap:7px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.tb .t{flex:1;text-align:center;font-size:12.5px;color:var(--muted);letter-spacing:.3px}
+.tb .side{width:44px}
+.body{padding:22px}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.hd h1{font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px}
+.logo{width:34px;height:34px;border-radius:9px;background:var(--accentdim);display:flex;align-items:center;justify-content:center;font-size:18px}
+.btn{font-size:11px;font-weight:700;padding:7px 14px;border-radius:8px;background:var(--accent);color:#fff;border:none;cursor:pointer;letter-spacing:.3px}
+.btn:hover{filter:brightness(1.1)}
+.grid2{display:grid;grid-template-columns:1.1fr 1fr;gap:14px}
+.card{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:14px;overflow:hidden}
+.card h3{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.netlist{display:flex;flex-direction:column;gap:6px}
+.net{display:flex;align-items:center;gap:10px;padding:9px 11px;background:#21262d;border-radius:8px;cursor:pointer;border:1px solid transparent;transition:.15s}
+.net.sel{border-color:var(--accent);background:var(--accentdim)}
+.net .name{flex:1;min-width:0;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.net .meta{font-size:10px;color:var(--muted);font-family:ui-monospace,Menlo,monospace}
+.bars{display:flex;align-items:flex-end;gap:2px;height:14px;width:42px;flex-shrink:0}
+.bars span{flex:1;background:var(--accent);border-radius:1px;min-height:2px}
+.bars span.off{background:#30363d}
+.bars.warn span{background:var(--amber)}
+.bars.low span{background:var(--red)}
+.sec{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sec .n{font-size:14px;font-weight:700}
+.sec .ch{font-size:11px;color:var(--muted);font-family:ui-monospace,Menlo,monospace}
+.gph{height:150px;border-bottom:1px solid var(--border);margin-bottom:4px}
+.gmeta{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);font-family:ui-monospace,Menlo,monospace}
+.row{display:flex;gap:16px;margin-top:12px;font-size:12px;color:var(--muted)}
+.row b{color:var(--text);font-weight:600}
+@media(max-width:620px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="win">
+  <div class="tb">
+    <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <div class="t">WiFi Monitor — ESP32 Scanner</div>
+    <div class="side"></div>
+  </div>
+  <div class="body">
+    <div class="hd">
+      <h1><span class="logo">📡</span> WiFi Monitor</h1>
+      <button class="btn" onclick="A.scan()">↻ Rescan</button>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Detected networks</h3>
+        <div class="netlist" id="netlist"></div>
+      </div>
+
+      <div class="card">
+        <div class="sec">
+          <span class="n" id="selName">—</span>
+          <span class="ch" id="selMeta">—</span>
+        </div>
+        <canvas class="gph" id="gph" width="320" height="150"></canvas>
+        <div class="gmeta"><span>-30s</span><span>signal (dBm)</span><span>now</span></div>
+        <div class="row">
+          <span>Signal <b id="rSig">—</b></span>
+          <span>Channel <b id="rCh">—</b></span>
+          <span>Security <b id="rSec">—</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+var A = {
+  nets: [
+    {name:"HomeNet-5G", ch:36, sec:"WPA2", base:-52},
+    {name:"HomeNet", ch:6, sec:"WPA2", base:-58},
+    {name:"TP-Link_2G", ch:11, sec:"WPA2", base:-70},
+    {name:"xfinitywifi", ch:1, sec:"Open", base:-78},
+    {name:"Linksys", ch:149, sec:"WPA2", base:-84},
+    {name:"CoffeeShop-Guest", ch:3, sec:"Open", base:-90}
+  ],
+  sel: 0,
+  hist: [],
+  seedHist: function(){
+    A.hist = [];
+    var n = A.nets[A.sel];
+    for (var i = 0; i < 60; i++) {
+      A.hist.push(Math.round(n.base + (Math.random() * 14 - 7)));
+    }
+  },
+  barsFor: function(v){
+    var level = Math.min(5, Math.max(0, Math.round((v + 45) / 12)));
+    var cls = level >= 4 ? "" : (level >= 2 ? "warn" : "low");
+    var html = "";
+    for (var i = 0; i < 5; i++) {
+      html += '<span class="' + (i < level ? "" : "off") + '" style="height:' + (4 + i * 2) + 'px"></span>';
+    }
+    return '<div class="bars ' + cls + '">' + html + '</div>';
+  },
+  render: function(){
+    var html = "";
+    for (var i = 0; i < A.nets.length; i++) {
+      var n = A.nets[i];
+      html += '<div class="net' + (i === A.sel ? " sel" : "") + '" onclick="A.select(' + i + ')">' +
+        '<div class="name">' + n.name + '</div>' +
+        '<div class="meta">ch ' + n.ch + '</div>' +
+        A.barsFor(n.base) + '</div>';
+    }
+    document.getElementById("netlist").innerHTML = html;
+  },
+  select: function(i){
+    A.sel = i;
+    A.seedHist();
+    A.render();
+    A.renderDetail();
+    A.draw();
+  },
+  renderDetail: function(){
+    var n = A.nets[A.sel];
+    document.getElementById("selName").textContent = n.name;
+    document.getElementById("selMeta").textContent = "ch " + n.ch + " · " + n.sec;
+    document.getElementById("rSig").textContent = n.base + " dBm";
+    document.getElementById("rCh").textContent = n.ch;
+    document.getElementById("rSec").textContent = n.sec;
+  },
+  draw: function(){
+    var c = document.getElementById("gph");
+    var ctx = c.getContext("2d");
+    var W = c.width, H = c.height;
+    ctx.clearRect(0, 0, W, H);
+    // grid
+    ctx.strokeStyle = "#21262d";
+    ctx.lineWidth = 1;
+    for (var g = 0; g < 5; g++) {
+      var gy = 8 + g * ((H - 16) / 4);
+      ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke();
+    }
+    // line
+    var min = -95, max = -40;
+    ctx.beginPath();
+    ctx.strokeStyle = "#22c55e";
+    ctx.lineWidth = 2;
+    ctx.shadowColor = "#22c55e"; ctx.shadowBlur = 6;
+    for (var i = 0; i < A.hist.length; i++) {
+      var x = (i / (A.hist.length - 1)) * W;
+      var y = 6 + ((A.hist[i] - min) / (max - min)) * (H - 14);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+    // fill
+    ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
+    ctx.fillStyle = "rgba(34,197,94,.12)";
+    ctx.fill();
+  },
+  tick: function(){
+    var n = A.nets[A.sel];
+    A.hist.push(Math.round(n.base + (Math.random() * 14 - 7)));
+    if (A.hist.length > 60) A.hist.shift();
+    A.draw();
+  },
+  scan: function(){
+    for (var i = 0; i < A.nets.length; i++) {
+      A.nets[i].base = Math.max(-92, Math.min(-42, A.nets[i].base + Math.round(Math.random() * 8 - 4)));
+    }
+    A.seedHist();
+    A.render();
+    A.renderDetail();
+    A.draw();
+  },
+  init: function(){
+    A.seedHist();
+    A.render();
+    A.renderDetail();
+    A.draw();
+    setInterval(A.tick, 400);
+  }
+};
+A.init();
+</script>
+</body>
+</html>

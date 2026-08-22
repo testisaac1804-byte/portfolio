@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IsaacNet</title>
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2128;--text:#e6edf3;--muted:#8b949e;--accent:#6366f1;--accentdim:rgba(99,102,241,.15);--border:#30363d;--green:#22c55e;--amber:#f0883e;--red:#f85149}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.win{width:100%;max-width:640px;background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+.tb{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#10151c;border-bottom:1px solid var(--border)}
+.dots{display:flex;gap:7px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.tb .t{flex:1;text-align:center;font-size:12.5px;color:var(--muted);letter-spacing:.3px}
+.tb .side{width:44px}
+.body{padding:22px}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+.hd h1{font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px}
+.logo{width:34px;height:34px;border-radius:9px;background:var(--accentdim);display:flex;align-items:center;justify-content:center;font-size:18px}
+.pill{font-size:11px;font-weight:600;color:var(--muted);background:var(--panel2);border:1px solid var(--border);padding:4px 10px;border-radius:20px;font-family:ui-monospace,Menlo,monospace}
+.pill.on{color:var(--green);border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.12)}
+.stack{display:flex;flex-direction:column;gap:0;margin-bottom:18px}
+.layer{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--panel2);border:1px solid var(--border);position:relative}
+.layer:first-child{border-radius:10px 10px 0 0}
+.layer:last-child{border-radius:0 0 10px 10px}
+.layer + .layer{margin-top:-1px}
+.conn{width:2px;height:10px;background:var(--border);margin:0 auto}
+.dotstat{width:12px;height:12px;border-radius:50%;flex-shrink:0;transition:.3s}
+.dotstat.ok{background:var(--green);box-shadow:0 0 8px var(--green)}
+.dotstat.busy{background:var(--amber);box-shadow:0 0 8px var(--amber);animation:blink .5s infinite}
+.dotstat.idle{background:#484f58}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.lmeta{flex:1;min-width:0}
+.lmeta .n{font-size:14px;font-weight:600}
+.lmeta .d{font-size:11px;color:var(--muted);margin-top:2px}
+.lat{font-size:12px;font-family:ui-monospace,Menlo,monospace;color:var(--muted);flex-shrink:0;text-align:right}
+.lat.ok{color:var(--green)}
+.btn{width:100%;padding:13px;border:none;border-radius:10px;background:var(--accent);color:#fff;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.3px;transition:.15s}
+.btn:hover{filter:brightness(1.12)}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.6;cursor:default;filter:none}
+.res{min-height:56px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;margin-top:14px;padding:14px 16px;font-size:13px;font-family:ui-monospace,Menlo,monospace;color:var(--muted);line-height:1.6}
+.res b{color:var(--text)}
+.res .ok{color:var(--green)}
+@media(max-width:500px){.lat .label{display:none}}
+</style>
+</head>
+<body>
+<div class="win">
+  <div class="tb">
+    <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <div class="t">IsaacNet — Layered Proxy Bypass</div>
+    <div class="side"></div>
+  </div>
+  <div class="body">
+    <div class="hd">
+      <h1><span class="logo">🔐</span> IsaacNet</h1>
+      <span class="pill on" id="statusPill">TUNNEL UP</span>
+    </div>
+
+    <div class="stack" id="stack"></div>
+
+    <button class="btn" id="btn" onclick="A.test()">Run connection test</button>
+    <div class="res" id="res">Click <b>Run connection test</b> to route a probe through every tunnel layer.</div>
+  </div>
+</div>
+<script>
+var A = {
+  layers: [
+    {n:"Local app", d:"Binds 127.0.0.1:1080 · forwards to TLS wrapper", lat:"—"},
+    {n:"TLS wrapper", d:"AES-256-GCM encrypted stream", lat:"—"},
+    {n:"HTTP CONNECT", d:"Establishes tunnel to upstream", lat:"—"},
+    {n:"SOCKS5 proxy", d:"Routes TCP via remote relay", lat:"—"},
+    {n:"DNS over HTTPS", d:"Resolves via Cloudflare 1.1.1.1", lat:"—"},
+    {n:"Destination", d:"Target server (bypass complete)", lat:"—"}
+  ],
+  running: false,
+  setDot: function(i, s){
+    var dots = document.querySelectorAll(".dotstat");
+    if (dots[i]) dots[i].className = "dotstat " + s;
+  },
+  setLat: function(i, v){
+    var lats = document.querySelectorAll(".lat");
+    if (lats[i]) lats[i].textContent = v;
+  },
+  render: function(){
+    var html = "";
+    for (var i = 0; i < A.layers.length; i++) {
+      var l = A.layers[i];
+      html += '<div class="layer"><span class="dotstat idle"></span>' +
+        '<div class="lmeta"><div class="n">' + l.n + '</div>' +
+        '<div class="d">' + l.d + '</div></div>' +
+        '<div class="lat">' + l.lat + '</div></div>';
+    }
+    document.getElementById("stack").innerHTML = html;
+  },
+  test: function(){
+    if (A.running) return;
+    A.running = true;
+    var btn = document.getElementById("btn");
+    btn.disabled = true; btn.textContent = "Testing…";
+    var res = document.getElementById("res");
+    res.innerHTML = "";
+    var i = 0;
+    function step(){
+      if (i > 0) {
+        A.setDot(i - 1, "ok");
+        var ms = (i === A.layers.length - 1) ? Math.round(Math.random() * 20 + 6) :
+                 Math.round(Math.random() * 18 + 4);
+        A.layers[i - 1].lat = ms + "ms";
+        A.setLat(i - 1, ms + "ms");
+        var l = A.layers[i - 1];
+        res.innerHTML += '<div>' + l.n + ' … <span class="ok">OK</span> (' + ms + 'ms)</div>';
+      }
+      if (i < A.layers.length) {
+        A.setDot(i, "busy");
+        i++;
+        setTimeout(step, 380);
+      } else {
+        A.running = false;
+        btn.disabled = false; btn.textContent = "Run connection test";
+        var total = 0;
+        for (var k = 0; k < A.layers.length; k++) {
+          var p = parseInt(A.layers[k].lat, 10);
+          if (!isNaN(p)) total += p;
+        }
+        res.innerHTML += '<div style="margin-top:8px;color:var(--text)">Total route latency: <b>' +
+          total + 'ms</b> · tunnel <span class="ok">healthy</span></div>';
+      }
+    }
+    step();
+  },
+  init: function(){ A.render(); }
+};
+A.init();
+</script>
+</body>
+</html>

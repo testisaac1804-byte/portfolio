@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Macro Typer — Human-Like Typing</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2230;--text:#e6edf3;--muted:#8b949e;--accent:#6366f1;--border:#30363d;--good:#4ade80;--warn:#febc2e}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.window{background:var(--panel);border:1px solid var(--border);border-radius:12px;width:760px;max-width:100%;box-shadow:0 24px 70px rgba(0,0,0,.55);overflow:hidden}
+.titlebar{display:flex;align-items:center;gap:8px;padding:12px 14px;background:var(--panel2);border-bottom:1px solid var(--border)}
+.dots{display:flex;gap:8px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.title{margin:0 auto;font-size:13px;color:var(--muted);font-weight:600}
+.title .ic{color:var(--accent)}
+.body{padding:20px}
+.section-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+textarea{width:100%;height:110px;background:var(--panel2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:12px 14px;font-size:13.5px;font-family:ui-monospace,Menlo,Consolas,monospace;resize:none;outline:none;line-height:1.5}
+textarea:focus{border-color:var(--accent)}
+.controls{display:flex;align-items:center;gap:16px;margin:14px 0}
+.slider-wrap{display:flex;align-items:center;gap:10px;flex:1}
+.slider-wrap label{font-size:12px;color:var(--muted);white-space:nowrap}
+.slider-wrap input[type=range]{flex:1;accent-color:var(--accent)}
+.slider-wrap .val{font-size:12px;color:var(--text);font-family:ui-monospace,Menlo,Consolas,monospace;min-width:44px;text-align:right}
+button{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:11px 20px;font-size:14px;font-weight:600;cursor:pointer}
+button:hover{background:#4f46e5}
+button:active{transform:translateY(1px)}
+button.stop{background:#e5484d}
+button:disabled{opacity:.45;cursor:not-allowed}
+.target{background:var(--panel2);border:1px solid var(--border);border-radius:8px;min-height:130px;padding:14px;font-size:14px;line-height:1.6;position:relative;color:var(--text)}
+.target .placeholder{color:var(--muted);font-style:italic}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--accent);vertical-align:-2px;animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+.statusbar{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:12px;color:var(--muted);min-height:18px}
+.dot-status{width:9px;height:9px;border-radius:50%;background:var(--muted)}
+.dot-status.on{background:var(--good);box-shadow:0 0 8px var(--good)}
+.dot-status.warn{background:var(--warn)}
+.progress{height:4px;background:var(--panel2);border-radius:2px;overflow:hidden;margin-top:8px;display:none}
+.progress .bar{height:100%;width:0;background:var(--accent);transition:width .1s linear}
+</style>
+</head>
+<body>
+<div class="window">
+  <div class="titlebar">
+    <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+    <div class="title"><span class="ic">⌨️</span> Macro Typer</div>
+  </div>
+  <div class="body">
+    <p class="section-label">Text to type</p>
+    <textarea id="src" placeholder="Paste your text here… it will be typed into the target below one character at a time (no copy/paste events, bypasses history tracking)."></textarea>
+    <div class="controls">
+      <div class="slider-wrap">
+        <label>Delay</label>
+        <input type="range" id="delay" min="10" max="400" value="70" oninput="MT.updateDelay()">
+        <span class="val" id="delayval">70 ms</span>
+      </div>
+      <button id="startBtn" onclick="MT.start()">▶ Start typing</button>
+      <button id="stopBtn" class="stop" style="display:none" onclick="MT.stop()">■ Stop</button>
+    </div>
+    <p class="section-label">Target (e.g. Google Docs / any editable field)</p>
+    <div class="target" id="target" contenteditable="true"><span class="placeholder" id="ph">Typed text will appear here…</span></div>
+    <div class="progress" id="prog"><div class="bar" id="bar"></div></div>
+    <div class="statusbar">
+      <span class="dot-status" id="dot"></span>
+      <span id="status">Idle — paste text and press Start.</span>
+    </div>
+  </div>
+</div>
+<script>
+var MT={
+  text:'',idx:0,timer:null,
+  updateDelay:function(){var v=document.getElementById('delay').value;document.getElementById('delayval').textContent=v+' ms';},
+  start:function(){
+    var t=document.getElementById('src').value;
+    if(!t){this.setStatus('warn','Nothing to type — paste some text first.');return;}
+    if(this.timer)return;
+    this.text=t;this.idx=0;
+    var ph=document.getElementById('ph');if(ph)ph.remove();
+    document.getElementById('target').innerHTML='';
+    document.getElementById('startBtn').disabled=true;
+    document.getElementById('stopBtn').style.display='inline-block';
+    document.getElementById('prog').style.display='block';
+    document.getElementById('bar').style.width='0%';
+    this.setStatus('on','⌨️ Typing in progress…');
+    this.tick();
+  },
+  tick:function(){
+    var self=this;
+    var target=document.getElementById('target');
+    if(this.idx<this.text.length){
+      var ch=this.text[this.idx];
+      if(ch==='\n'){target.innerHTML+='<br>';}else{target.innerHTML+=ch.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+      this.idx++;
+      document.getElementById('bar').style.width=Math.round(this.idx/this.text.length*100)+'%';
+      var d=parseInt(document.getElementById('delay').value,10);
+      var jitter=(Math.random()*d*0.5)|0;
+      this.timer=setTimeout(function(){self.tick();},d+jitter);
+    }else{
+      this.finish();
+    }
+  },
+  finish:function(){
+    this.timer=null;
+    document.getElementById('startBtn').disabled=false;
+    document.getElementById('stopBtn').style.display='none';
+    this.setStatus('on','✅ Done — '+this.idx+' characters typed.');
+  },
+  stop:function(){
+    if(this.timer){clearTimeout(this.timer);this.timer=null;}
+    document.getElementById('startBtn').disabled=false;
+    document.getElementById('stopBtn').style.display='none';
+    this.setStatus('warn','⏸ Stopped at '+this.idx+' / '+this.text.length+' characters.');
+  },
+  setStatus:function(kind,msg){
+    var dot=document.getElementById('dot');
+    dot.className='dot-status'+(kind==='on'?' on':(kind==='warn'?' warn':''));
+    document.getElementById('status').textContent=msg;
+  }
+};
+</script>
+</body>
+</html>

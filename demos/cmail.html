@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMail — Inbox</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0d1117; --panel: #161b22; --panel2: #1c2129; --text: #e6edf3;
+    --accent: #6366f1; --accent2: #818cf8; --muted: #8b949e; --border: #21262d;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); height: 100vh; padding: 24px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .window { width: 100%; max-width: 980px; height: 78vh; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .titlebar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: #11151b; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .tbtitle { flex: 1; text-align: center; color: var(--muted); font-size: 13px; font-weight: 600; }
+  .main { display: flex; flex: 1; overflow: hidden; }
+  .sidebar { width: 200px; background: #12161d; border-right: 1px solid var(--border); padding: 14px 10px; flex-shrink: 0; display: flex; flex-direction: column; gap: 4px; }
+  .compose { background: var(--accent); color: #fff; border: none; padding: 10px; border-radius: 16px; font-size: 14px; font-weight: 600; cursor: pointer; margin-bottom: 12px; transition: background .15s; }
+  .compose:hover { background: var(--accent2); }
+  .folder { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 6px; color: var(--muted); font-size: 13.5px; cursor: pointer; }
+  .folder:hover { background: rgba(99,102,241,0.08); }
+  .folder.active { background: rgba(99,102,241,0.16); color: var(--text); font-weight: 600; }
+  .folder .cnt { margin-left: auto; color: var(--muted); font-size: 11.5px; background: var(--panel2); padding: 1px 7px; border-radius: 10px; }
+  .folder.active .cnt { color: var(--accent2); }
+  .folder .em { width: 18px; text-align: center; }
+  .emaillist { width: 320px; border-right: 1px solid var(--border); flex-shrink: 0; overflow-y: auto; }
+  .email { padding: 12px 14px; border-bottom: 1px solid var(--border); cursor: pointer; }
+  .email:hover { background: rgba(99,102,241,0.05); }
+  .email.active { background: rgba(99,102,241,0.14); }
+  .email .top { display: flex; align-items: center; gap: 8px; }
+  .email .from { font-weight: 600; font-size: 13.5px; }
+  .email .time { margin-left: auto; color: var(--muted); font-size: 11.5px; }
+  .email .subj { font-size: 13px; margin: 3px 0; color: var(--text); }
+  .email.unread .subj, .email.unread .from { font-weight: 700; }
+  .email .prev { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dot-unread { width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; }
+  .dot-read { width: 8px; height: 8px; flex-shrink: 0; }
+  .reader { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .reader .empty { flex: 1; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 14px; }
+  .reader .head { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+  .reader .head h2 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .reader .meta { color: var(--muted); font-size: 12.5px; }
+  .reader .meta b { color: var(--text); }
+  .reader .body { padding: 20px 24px; color: #c9d1d9; font-size: 14px; line-height: 1.7; overflow-y: auto; white-space: pre-wrap; }
+  .compose-view { flex: 1; display: flex; flex-direction: column; padding: 20px 24px; overflow-y: auto; }
+  .compose-view h2 { font-size: 17px; margin-bottom: 16px; }
+  .field { display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); padding: 9px 0; }
+  .field label { width: 52px; color: var(--muted); font-size: 13px; }
+  .field input { flex: 1; background: transparent; border: none; color: var(--text); font-size: 14px; outline: none; }
+  .compose-view textarea { flex: 1; background: transparent; border: none; color: var(--text); font-size: 14px; outline: none; resize: none; padding: 12px 0; line-height: 1.6; }
+  .actions { display: flex; gap: 10px; padding: 12px 0; }
+  .btn { background: var(--accent); color: #fff; border: none; padding: 8px 18px; border-radius: 7px; font-size: 13.5px; font-weight: 600; cursor: pointer; }
+  .btn:hover { background: var(--accent2); }
+  .btn.ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .btn.ghost:hover { color: var(--text); }
+  .toast { position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%); background: #1f6feb; color: #fff; padding: 10px 18px; border-radius: 8px; font-size: 13.5px; opacity: 0; transition: opacity .25s; pointer-events: none; }
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="tbtitle">CMail — Inbox (issac@cmail.dev)</span>
+    </div>
+    <div class="main">
+      <div class="sidebar">
+        <button class="compose" onclick="E.compose()">✏️ &nbsp;Compose</button>
+        <div class="folder active" id="f-Inbox" onclick="E.folder('Inbox')"><span class="em">📥</span>Inbox<span class="cnt" id="c-Inbox"></span></div>
+        <div class="folder" id="f-Starred" onclick="E.folder('Starred')"><span class="em">⭐</span>Starred<span class="cnt" id="c-Starred">0</span></div>
+        <div class="folder" id="f-Sent" onclick="E.folder('Sent')"><span class="em">📤</span>Sent<span class="cnt" id="c-Sent">0</span></div>
+        <div class="folder" id="f-Drafts" onclick="E.folder('Drafts')"><span class="em">📝</span>Drafts<span class="cnt" id="c-Drafts">0</span></div>
+        <div class="folder" id="f-Trash" onclick="E.folder('Trash')"><span class="em">🗑️</span>Trash<span class="cnt" id="c-Trash">0</span></div>
+      </div>
+      <div class="emaillist" id="list"></div>
+      <div class="reader" id="reader">
+        <div class="empty">Select an email to read it</div>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+<script>
+  var E = {
+    cur: 'Inbox',
+    emails: [
+      { f: 'Mr. Thompson', s: 'Physics homework — due Friday', p: 'Hi Isaac, just a reminder that the waves worksheet is due…', t: '09:12', read: false, folder: 'Inbox', star: false, body: 'Hi Isaac,\n\nJust a reminder that the Physics waves worksheet is due on Friday. Make sure you complete the refraction diagram question — it is worth the most marks.\n\nLet me know if you need help before then.\n\nBest,\nMr. Thompson' },
+      { f: 'GitHub', s: '[IsaacNet] Action failed: deploy', p: 'Run deploy.yml failed on main branch…', t: '08:47', read: false, folder: 'Inbox', star: true, body: 'GitHub Actions\n\nYour workflow "deploy.yml" failed on the main branch.\n\nError: npm run build exited with code 1.\n\nView the logs for more detail.' },
+      { f: 'Mum', s: 'Pick up milk on the way home', p: 'Could you grab some milk and bread…', t: 'Yesterday', read: true, folder: 'Inbox', star: false, body: 'Could you grab some milk and bread on the way home today?\n\nThanks love x' },
+      { f: 'FrostSolve Updates', s: 'v2.1 released — new solver engine', p: 'We shipped a faster solver and unit converter…', t: 'Yesterday', read: true, folder: 'Inbox', star: false, body: 'FrostSolve v2.1 is out!\n\n- 40% faster solver engine\n- New unit converter\n- Bug fixes for the beam calculator\n\nUpdate from the in-app menu.' },
+      { f: 'Ms. Chen', s: 'DT project: CNC drill box feedback', p: 'Your V2 dual-slot design looks great…', t: 'Mon', read: true, folder: 'Inbox', star: true, body: 'Hi Isaac,\n\nYour CNC drill box V2 design looks great. One suggestion: add finger slots to the lid so it is easier to open.\n\nGreat work on the CAD.\n\nMs. Chen' },
+      { f: 'School Office', s: 'IGCSE exam timetable attached', p: 'Please find your summer exam timetable…', t: 'Mon', read: true, folder: 'Inbox', star: false, body: 'Dear students,\n\nPlease find attached the IGCSE summer examination timetable.\n\nEnsure you arrive 30 minutes before each exam.' }
+    ],
+    sent: [],
+    toast: function (msg) {
+      var t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      clearTimeout(this._tt);
+      this._tt = setTimeout(function () { t.classList.remove('show'); }, 2200);
+    },
+    folder: function (f) {
+      this.cur = f;
+      var folders = document.querySelectorAll('.folder');
+      for (var i = 0; i < folders.length; i++) folders[i].classList.remove('active');
+      document.getElementById('f-' + f).classList.add('active');
+      this.renderList();
+      this.reader(null);
+    },
+    renderList: function () {
+      var box = document.getElementById('list');
+      var pool = this.cur === 'Sent' ? this.sent : this.emails.filter(function (e) { return e.folder === 'Inbox'; });
+      if (this.cur === 'Starred') pool = this.emails.filter(function (e) { return e.star; });
+      if (pool.length === 0) { box.innerHTML = '<div class="empty" style="padding:30px;font-size:13px;color:var(--muted)">No emails here.</div>'; return; }
+      var html = '';
+      for (var i = 0; i < pool.length; i++) {
+        var e = pool[i];
+        html += '<div class="email ' + (e.read ? '' : 'unread') + '" id="em' + i + '" onclick="E.open(' + i + ')">' +
+          '<div class="top"><span class="' + (e.read ? 'dot-read' : 'dot-unread') + '"></span>' +
+          '<span class="from">' + e.f + '</span><span class="time">' + e.t + '</span></div>' +
+          '<div class="subj">' + (e.star ? '⭐ ' : '') + e.s + '</div>' +
+          '<div class="prev">' + e.p + '</div></div>';
+      }
+      box.innerHTML = html;
+      this._pool = pool;
+      document.getElementById('c-Inbox').textContent = this.emails.length;
+      document.getElementById('c-Sent').textContent = this.sent.length;
+    },
+    open: function (i) {
+      var e = this._pool[i];
+      e.read = true;
+      var list = document.querySelectorAll('#list .email');
+      for (var k = 0; k < list.length; k++) list[k].classList.remove('active');
+      list[i].classList.add('active');
+      this.renderList();
+      document.getElementById('reader').innerHTML =
+        '<div class="head"><h2>' + e.s + '</h2>' +
+        '<div class="meta">From <b>' + e.f + '</b> · ' + e.t + '</div></div>' +
+        '<div class="body">' + e.body + '</div>';
+      this.reader(list[i]);
+    },
+    reader: function (node) { /* marker for active state */ },
+    compose: function () {
+      document.getElementById('reader').innerHTML =
+        '<div class="compose-view">' +
+        '<h2>New Message</h2>' +
+        '<div class="field"><label>To</label><input id="cto" placeholder="recipient@example.com"></div>' +
+        '<div class="field"><label>Subject</label><input id="csubj" placeholder="Subject"></div>' +
+        '<textarea id="cbody" placeholder="Write your message…"></textarea>' +
+        '<div class="actions"><button class="btn" onclick="E.send()">Send</button>' +
+        '<button class="btn ghost" onclick="E.cancelCompose()">Discard</button></div></div>';
+    },
+    cancelCompose: function () { this.reader(null); document.getElementById('reader').innerHTML = '<div class="empty">Select an email to read it</div>'; },
+    send: function () {
+      var to = document.getElementById('cto').value || '(no recipient)';
+      var subj = document.getElementById('csubj').value || '(no subject)';
+      var body = document.getElementById('cbody').value || '';
+      this.sent.unshift({ f: 'Me', s: subj, p: body || '…', t: 'Just now', read: true, folder: 'Sent', star: false, body: 'To: ' + to + '\n\n' + body });
+      this.toast('Message sent ✓');
+      this.folder('Sent');
+    }
+  };
+  E.renderList();
+</script>
+</body>
+</html>
