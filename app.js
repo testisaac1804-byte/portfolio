@@ -311,7 +311,7 @@ function enrich(){
   var ex=EXTRA[p.t];if(ex){if(ex.how){p.how=ex.how;p.howR=1}if(ex.src)p.src=ex.src;}
   if(!p.how)p.how=synthHow(p);
   if(!p.src)p.src=synthSrc(p);
-  p.fl=computeFolder(p);
+  if(!p.fl)p.fl=computeFolder(p);
   if(p.a)p.a.forEach(function(a){if(a.o===6&&a.p&&/\.(png|jpe?g|gif|webp|svg|ico)$/i.test(a.p))a.o=8});
  })});
 }
@@ -699,7 +699,7 @@ async function drawDXF(p){
 function dxfSw(i){drawDXF(dxfV[i].p)}
 function downloadDXF(){var a=document.createElement('a');a.href=EP(dxfV[0].p);a.download=dxfV[0].p.split('/').pop();document.body.appendChild(a);a.click();a.remove()}
 document.addEventListener('keydown',function(e){
- if(e.key==='Escape'){closeM('_3d');closeM('_dxf');return}
+ if(e.key==='Escape'){closeM('_3d');closeM('_dxf');closeM('_if');closeM('_fb');closeM('_det');closeM('_img');closeM('_txt');closeM('_pr');return}
  // Arrow keys switch versions when viewer is open
  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
   var s=document.getElementById('vs_');
