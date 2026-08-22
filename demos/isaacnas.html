@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IsaacNAS — Demo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1117; color: #e6edf3; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+         min-height: 100vh; display: flex; flex-direction: column; }
+  .titlebar { background: #11151b; padding: 8px 16px; display: flex; align-items: center; gap: 8px;
+              border-bottom: 1px solid #21262d; }
+  .titlebar .dots { display: flex; gap: 6px; }
+  .titlebar .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .titlebar .dot.r { background: #ff5f57; } .titlebar .dot.y { background: #febc2e; } .titlebar .dot.g { background: #28c840; }
+  .titlebar .title { flex: 1; text-align: center; font-size: 13px; color: #8b949e; }
+  header { background: #161b22; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between;
+           border-bottom: 1px solid #21262d; }
+  header h1 { font-size: 18px; color: #6366f1; }
+  header .logout { background: #21262d; color: #8b949e; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+  .breadcrumb { padding: 10px 24px; font-size: 13px; color: #8b949e; background: #0d1117; border-bottom: 1px solid #161b22; }
+  .breadcrumb span { color: #6366f1; }
+  .list { max-width: 700px; margin: 0 auto; padding: 12px 24px 40px; }
+  .item { display: flex; align-items: center; padding: 10px 12px; border-radius: 8px; gap: 10px; transition: background 0.15s; }
+  .item:hover { background: #161b22; }
+  .item .icon { font-size: 20px; width: 28px; text-align: center; }
+  .item .name { flex: 1; font-size: 14px; }
+  .item .meta { color: #484f58; font-size: 12px; }
+  .upload-area { max-width: 700px; margin: 0 auto; padding: 0 24px 16px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .upload-area .btn { background: #161b22; color: #6366f1; border: 1px solid #21262d; padding: 6px 14px; border-radius: 6px;
+                     cursor: pointer; font-size: 13px; }
+  .upload-area .btn.up { background: #6366f1; color: #fff; border: none; }
+  .upload-area input { background: #0d1117; border: 1px solid #21262d; color: #e6edf3; padding: 6px 12px; border-radius: 6px; font-size: 13px; width: 140px; }
+  hr { border: none; border-top: 1px solid #161b22; max-width: 700px; margin: 0 auto 8px; }
+  .badge { display: inline-block; background: #1a1d2e; color: #6366f1; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin: 0 2px; }
+  .info { max-width: 700px; margin: 20px auto; padding: 12px 24px; background: #161b22; border-radius: 8px; font-size: 13px; color: #8b949e; }
+  .info strong { color: #6366f1; }
+</style>
+</head>
+<body>
+<div class="titlebar">
+  <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+  <div class="title">IsaacNAS — File Browser</div>
+</div>
+<header>
+  <h1>📁 IsaacNAS</h1>
+  <button class="logout">Logout</button>
+</header>
+<div class="breadcrumb">🏠 <span>Home</span></div>
+<div class="upload-area">
+  <button class="btn">📎 Choose Files</button>
+  <button class="btn up">⬆ Upload</button>
+  <input type="text" placeholder="New folder name">
+  <button class="btn">📁 New Folder</button>
+</div>
+<hr>
+<div class="list">
+  <div class="item"><span class="icon">📁</span><span class="name">Documents</span><span class="meta">Aug 23, 2026</span></div>
+  <div class="item"><span class="icon">📁</span><span class="name">Photos</span><span class="meta">Aug 23, 2026</span></div>
+  <div class="item"><span class="icon">📁</span><span class="name">Downloads</span><span class="meta">Aug 23, 2026</span></div>
+  <div class="item"><span class="icon">📄</span><span class="name">README.txt</span><span class="meta">50 B</span></div>
+  <div class="item"><span class="icon">🖼️</span><span class="name">photo.jpg</span><span class="meta">2.1 MB</span></div>
+  <div class="item"><span class="icon">📦</span><span class="name">archive.zip</span><span class="meta">15.4 MB</span></div>
+  <div class="item"><span class="icon">🎬</span><span class="name">video.mp4</span><span class="meta">142 MB</span></div>
+</div>
+<div class="info">
+  <strong>🔐 IsaacNAS</strong> — Password-protected personal cloud.<br>
+  <span class="badge">FastAPI</span> <span class="badge">Python</span> <span class="badge">LaunchAgent</span> <span class="badge">SSH Tunnel</span><br><br>
+  Drop files in <strong>~/NAS/</strong> → instant sync. Access from any device at <strong>da.gd/isaacnas4</strong>.<br>
+  Auto-starts on login, survives reboots. Password: Isaac1804.
+</div>
+</body>
+</html>
