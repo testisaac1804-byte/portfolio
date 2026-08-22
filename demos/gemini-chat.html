@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gemini Chat Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        .scrollbar-thin::-webkit-scrollbar { width: 6px; }
+        .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+        .scrollbar-thin::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 20px; }
+        .dark .scrollbar-thin::-webkit-scrollbar-thumb { background-color: #475569; }
+
+        /* Animation Utilities */
+        .animate-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .slide-in-bottom { animation: slideUp 0.3s ease-out forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* No scrollbar utility */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-white text-[#1f1f1f] transition-colors duration-200 font-sans selection:bg-blue-200 selection:text-black overflow-hidden h-[100dvh] w-full flex">
+
+    <!-- APP CONTAINER -->
+    <div id="app" class="flex w-full h-full relative">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-[280px] transform transition-transform duration-300 ease-in-out bg-[#f0f4f9] dark:bg-[#1e1e1e] flex flex-col border-r border-transparent dark:border-[#2d2d2d] md:relative -translate-x-full md:translate-x-0">
+            <div class="p-4 pt-6">
+                <button id="mobile-menu-close" class="md:hidden mb-6 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-gray-500 dark:text-gray-400">
+                    <i data-lucide="menu" width="20" height="20"></i>
+                </button>
+                
+                <button id="new-chat-btn" class="flex items-center gap-3 px-4 py-3 rounded-full transition-all w-[140px] bg-[#dfe4ea] hover:bg-[#d0d7de] text-[#444746] dark:bg-[#1a1a1a] dark:hover:bg-[#2d2d2d] dark:text-gray-300">
+                    <i data-lucide="plus" width="18" height="18"></i>
+                    <span class="font-medium text-sm tracking-wide">New chat</span>
+                </button>
+            </div>
+
+            <div class="flex-1 overflow-y-auto px-3 py-2 scrollbar-thin">
+                <div class="text-xs font-medium mb-3 px-4 text-gray-500">Recent</div>
+                <div id="recent-chats">
+                    <!-- Recent items will be injected here -->
+                </div>
+            </div>
+
+            <div class="p-4 mt-auto space-y-1">
+                <button id="settings-btn" class="flex items-center gap-3 px-4 py-2.5 w-full rounded-full text-sm transition-colors hover:bg-[#dfe4ea] text-[#444746] dark:hover:bg-[#2d2d2d] dark:text-gray-300">
+                    <i data-lucide="settings" width="18" height="18"></i>
+                    <span>Settings</span>
+                </button>
+                <button id="theme-btn" class="flex items-center gap-3 px-4 py-2.5 w-full rounded-full text-sm transition-colors cursor-pointer hover:bg-[#dfe4ea] text-[#444746] dark:hover:bg-[#2d2d2d] dark:text-gray-300">
+                    <i id="theme-icon" data-lucide="moon" width="18" height="18"></i>
+                    <span id="theme-text">Dark Mode</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- MOBILE OVERLAY -->
+        <div id="mobile-overlay" class="fixed inset-0 bg-black/40 z-30 hidden backdrop-blur-sm md:hidden"></div>
+
+        <!-- MAIN CONTENT -->
+        <main class="flex-1 flex flex-col h-full relative max-w-full min-w-0 bg-white dark:bg-[#131314]">
+            
+            <!-- TOP BAR -->
+            <header class="h-16 flex items-center justify-between px-5 flex-shrink-0 z-10">
+                <div class="flex items-center gap-3">
+                    <button id="mobile-menu-open" class="p-2 rounded-full transition-colors hover:bg-[#f0f4f9] text-[#444746] dark:hover:bg-[#2d2d2d] dark:text-gray-300 md:hidden">
+                        <i data-lucide="menu" width="20" height="20"></i>
+                    </button>
+                    <span class="text-xl text-[#444746] dark:text-gray-200 select-none font-medium">Gemini</span>
+                    <span class="text-xs font-medium px-2 py-0.5 rounded border border-gray-300 dark:border-gray-600 text-gray-500">2.5 Flash</span>
+                </div>
+                <div class="w-9 h-9 rounded-full bg-pink-600 flex items-center justify-center text-white text-sm font-medium shadow-sm">
+                    U
+                </div>
+            </header>
+
+            <!-- CHAT AREA -->
+            <div id="chat-container" class="flex-1 overflow-y-auto scrollbar-thin scroll-smooth pb-4">
+                <div id="chat-content" class="max-w-[850px] mx-auto px-5 pt-6">
+                    <!-- Messages will be injected here -->
+                </div>
+                <div id="messages-end"></div>
+            </div>
+
+            <!-- INPUT AREA -->
+            <div class="flex-shrink-0 bg-white dark:bg-[#131314] pt-2 pb-4 px-4">
+                <div class="max-w-[850px] mx-auto">
+                    
+                    <!-- Image Preview -->
+                    <div id="image-preview-container" class="hidden relative inline-block mb-4 ml-4 animate-in">
+                        <img id="image-preview" src="" alt="Preview" class="h-16 w-16 object-cover rounded-xl border border-gray-200 shadow-sm">
+                        <button id="remove-image-btn" class="absolute -top-2 -right-2 bg-gray-700 text-white rounded-full p-1 shadow-md hover:bg-gray-600">
+                            <i data-lucide="x" width="12" height="12"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex items-end gap-2 p-2 rounded-[32px] transition-colors relative shadow-sm bg-[#f0f4f9] dark:bg-[#1e1e1e] border border-transparent focus-within:bg-white dark:focus-within:bg-[#1e1e1e] focus-within:shadow-md dark:focus-within:border-gray-600">
+                        <button id="upload-btn" class="p-3 rounded-full flex-shrink-0 transition-colors mb-0.5 text-[#444746] hover:bg-[#dfe4ea] dark:text-gray-400 dark:hover:bg-[#2d2d2d]">
+                            <i data-lucide="plus" width="20" height="20"></i>
+                        </button>
+                        <input type="file" id="file-input" class="hidden" accept="image/*">
+
+                        <textarea id="prompt-input" rows="1" placeholder="Enter a prompt here" class="flex-1 bg-transparent resize-none border-none focus:ring-0 py-3.5 px-2 max-h-48 text-[16px] text-[#1f1f1f] dark:text-gray-100 placeholder-[#444746] dark:placeholder-gray-500 outline-none"></textarea>
+
+                        <div class="flex items-center gap-1 mb-1">
+                            <button id="send-btn" disabled class="p-2.5 rounded-full flex-shrink-0 transition-all text-[#444746] dark:text-gray-500 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <i id="send-icon" data-lucide="mic" width="20" height="20"></i>
+                                <i id="loading-icon" data-lucide="loader-2" width="20" height="20" class="animate-spin hidden"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center text-[11px] mt-3 text-[#444746] dark:text-[#c4c7c5] opacity-70">
+                        Gemini may display inaccurate info, including about people, so double-check its responses.
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- SETTINGS MODAL -->
+        <div id="settings-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm hidden animate-in">
+            <div class="w-full max-w-md rounded-[28px] shadow-2xl overflow-hidden transform transition-all bg-white dark:bg-[#1e1e1e]">
+                <div class="px-6 py-4 flex justify-between items-center border-b border-transparent dark:border-[#2d2d2d]">
+                    <h3 class="font-medium text-xl text-[#1f1f1f] dark:text-gray-100">Settings</h3>
+                    <button id="close-settings" class="p-2 rounded-full hover:bg-[#f0f4f9] text-[#444746] dark:hover:bg-[#2d2d2d] dark:text-gray-400">
+                        <i data-lucide="x" width="20" height="20"></i>
+                    </button>
+                </div>
+                <div class="p-6 space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-[#1f1f1f] dark:text-gray-300">Gemini API Key</label>
+                        <div class="relative">
+                            <input type="password" id="api-key-input" placeholder="Enter your API Key" class="w-full px-4 py-3 rounded-xl border outline-none transition-all bg-white border-gray-300 text-gray-800 placeholder-gray-500 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 dark:bg-[#131314] dark:border-[#2d2d2d] dark:text-gray-100 dark:placeholder-gray-600 dark:focus:border-blue-500">
+                        </div>
+                        <p class="text-xs mt-3 text-gray-500 dark:text-gray-400">
+                            Don't have a key? Get one at <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-blue-500 hover:underline">Google AI Studio</a>.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-4 flex justify-end">
+                    <button id="save-settings" class="px-6 py-2.5 bg-transparent text-blue-600 rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/20 font-medium text-sm transition-colors">
+                        Done
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- CONSTANTS & CONFIG ---
+        const ENV_API_KEY = ""; 
+        const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent";
+        
+        const SUGGESTIONS = [
+            { icon: 'compass', text: "Plan a 3-day trip to Tokyo", label: "Travel" },
+            { icon: 'code', text: "Write a React hook for fetching data", label: "Code" },
+            { icon: 'lightbulb', text: "Explain quantum physics simply", label: "Explain" },
+            { icon: 'pen-tool', text: "Draft an email to a recruiter", label: "Write" },
+        ];
+
+        const RECENT_CHATS = ['Tokyo Itinerary', 'React Code Help', 'Email Draft'];
+
+        // --- STATE MANAGEMENT ---
+        const state = {
+            messages: [],
+            isLoading: false,
+            selectedImage: null,
+            apiKey: '',
+            isDark: false,
+            sidebarOpen: window.innerWidth >= 768
+        };
+
+        // --- DOM ELEMENTS ---
+        const els = {
+            sidebar: document.getElementById('sidebar'),
+            mobileOverlay: document.getElementById('mobile-overlay'),
+            chatContent: document.getElementById('chat-content'),
+            promptInput: document.getElementById('prompt-input'),
+            sendBtn: document.getElementById('send-btn'),
+            sendIcon: document.getElementById('send-icon'),
+            loadingIcon: document.getElementById('loading-icon'),
+            imagePreviewContainer: document.getElementById('image-preview-container'),
+            imagePreview: document.getElementById('image-preview'),
+            fileInput: document.getElementById('file-input'),
+            settingsModal: document.getElementById('settings-modal'),
+            apiKeyInput: document.getElementById('api-key-input'),
+            themeIcon: document.getElementById('theme-icon'),
+            themeText: document.getElementById('theme-text'),
+            messagesEnd: document.getElementById('messages-end'),
+            recentChats: document.getElementById('recent-chats')
+        };
+
+        // --- MARKDOWN PARSER ---
+        function parseMarkdown(text) {
+            if (!text) return '';
+            
+            const formatInline = (str) => {
+                return str
+                    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-medium">$1</strong>')
+                    .replace(/`(.*?)`/g, '<code class="bg-black/5 dark:bg-white/10 px-1.5 py-0.5 rounded text-[13px] font-mono">$1</code>');
+            };
+
+            const parts = text.split(/(```[\s\S]*?```)/g);
+            let html = '<div class="text-[16px] leading-7 space-y-4">';
+            
+            parts.forEach((part) => {
+                if (part.startsWith('```')) {
+                    const content = part.replace(/^```\w*\n?/, '').replace(/```$/, '');
+                    const language = part.match(/^```(\w+)/)?.[1] || 'Code';
+                    const safeContent = content.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                    const copyText = content.replace(/`/g, "\\`").replace(/"/g, "&quot;").replace(/\$/g, "\\$");
+
+                    html += `
+                    <div class="bg-[#1e1e1e] rounded-lg overflow-hidden my-4 border border-gray-800 dark:border-gray-700">
+                        <div class="flex justify-between items-center px-4 py-2 bg-[#2d2d2d] text-xs text-gray-400">
+                            <span class="font-sans font-medium">${language}</span>
+                            <button onclick="copyToClipboard(this)" data-code="${encodeURIComponent(content)}" class="hover:text-white flex items-center gap-1.5 transition-colors group">
+                                <i data-lucide="copy" width="14" height="14"></i> Copy code
+                            </button>
+                        </div>
+                        <pre class="p-4 overflow-x-auto text-gray-200 font-mono text-[13px] leading-5"><code>${safeContent}</code></pre>
+                    </div>`;
+                } else {
+                    const lines = part.split('\n');
+                    lines.forEach(line => {
+                        const trimmed = line.trim();
+                        if (!trimmed) return;
+                        
+                        if (trimmed.startsWith('### ')) {
+                            html += `<h3 class="text-lg font-medium mt-6 mb-2">${formatInline(trimmed.slice(4))}</h3>`;
+                        } else if (trimmed.startsWith('## ')) {
+                            html += `<h2 class="text-xl font-medium mt-8 mb-3">${formatInline(trimmed.slice(3))}</h2>`;
+                        } else if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+                            html += `<div class="flex gap-3 ml-1 mb-2"><span class="text-gray-500 mt-2">•</span><span class="flex-1">${formatInline(trimmed.slice(2))}</span></div>`;
+                        } else if (/^\d+\.\s/.test(trimmed)) {
+                            const number = trimmed.match(/^\d+/)[0];
+                            const rest = trimmed.replace(/^\d+\.\s/, '');
+                            html += `<div class="flex gap-3 ml-1 mb-2"><span class="text-gray-500 font-mono text-xs mt-1.5">${number}.</span><span class="flex-1">${formatInline(rest)}</span></div>`;
+                        } else {
+                            html += `<p class="mb-2">${formatInline(line)}</p>`;
+                        }
+                    });
+                }
+            });
+            
+            html += '</div>';
+            return html;
+        }
+
+        window.copyToClipboard = (btn) => {
+            const code = decodeURIComponent(btn.getAttribute('data-code'));
+            navigator.clipboard.writeText(code);
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = `<i data-lucide="check" width="14" height="14"></i> Copied!`;
+            lucide.createIcons();
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                lucide.createIcons();
+            }, 2000);
+        };
+
+        // --- RENDER FUNCTIONS ---
+        function renderMessages() {
+            if (state.messages.length === 0) {
+                // Render Welcome Screen
+                const suggestionHTML = SUGGESTIONS.map(s => `
+                    <button onclick="handleSuggestion('${s.text}')" class="flex-shrink-0 w-48 p-4 rounded-xl text-left transition-all relative group bg-[#f0f4f9] hover:bg-[#dfe4ea] dark:bg-[#1e1e1e] dark:hover:bg-[#2d2d2d]">
+                        <div class="mb-8 p-2 rounded-full w-fit bg-white dark:bg-black/20">
+                            <i data-lucide="${s.icon}" class="text-blue-600 dark:text-blue-400" width="20" height="20"></i>
+                        </div>
+                        <div class="text-sm font-medium absolute bottom-4 left-4 right-4 text-[#444746] dark:text-gray-200">
+                            ${s.text}
+                        </div>
+                    </button>
+                `).join('');
+
+                els.chatContent.innerHTML = `
+                    <div class="mt-12 mb-12 animate-in">
+                        <div class="mb-12">
+                            <h1 class="text-5xl md:text-6xl font-medium tracking-tight mb-2">
+                                <span class="bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 bg-clip-text text-transparent">Hello, User</span>
+                            </h1>
+                            <h2 class="text-5xl md:text-6xl font-medium tracking-tight text-[#c4c7c5] dark:text-[#444746]">
+                                How can I help you today?
+                            </h2>
+                        </div>
+                        <div class="flex overflow-x-auto pb-4 gap-4 no-scrollbar">
+                            ${suggestionHTML}
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Render Messages
+                els.chatContent.innerHTML = state.messages.map(msg => {
+                    const isUser = msg.role === 'user';
+                    const avatar = isUser ? '' : `
+                        <div class="w-8 h-8 flex-shrink-0 flex items-start justify-center mt-1 animate-in">
+                            <i data-lucide="sparkles" class="text-blue-600 dark:text-blue-400" width="20" height="20"></i>
+                        </div>
+                    `;
+                    
+                    const imageHTML = msg.image ? `
+                        <div class="mb-3 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm">
+                            <img src="${msg.image}" alt="Upload" class="max-h-64 object-contain bg-black/5">
+                        </div>
+                    ` : '';
+
+                    const contentClass = isUser 
+                        ? 'py-3 px-5 rounded-[20px] bg-[#f0f4f9] text-[#1f1f1f] dark:bg-[#2d2d2d] dark:text-[#e3e3e3]'
+                        : 'w-full text-[#1f1f1f] dark:text-[#e3e3e3] pl-0 leading-relaxed';
+
+                    const content = isUser 
+                        ? `<p class="whitespace-pre-wrap text-[16px] leading-7">${msg.text}</p>` 
+                        : parseMarkdown(msg.text);
+
+                    const footer = (!isUser && !state.isLoading) ? `
+                        <div class="flex items-center gap-4 mt-2 ml-1 text-gray-400">
+                            <button class="hover:text-gray-600 dark:hover:text-gray-200 transition-colors"><i data-lucide="copy" width="16" height="16"></i></button>
+                            <button class="hover:text-gray-600 dark:hover:text-gray-200 transition-colors"><i data-lucide="thumbs-up" width="16" height="16"></i></button>
+                            <button class="hover:text-gray-600 dark:hover:text-gray-200 transition-colors"><i data-lucide="thumbs-down" width="16" height="16"></i></button>
+                        </div>
+                    ` : '';
+
+                    return `
+                        <div class="flex gap-5 mb-8 w-full ${isUser ? 'justify-end' : 'justify-start'} animate-in">
+                            ${!isUser ? avatar : ''}
+                            <div class="flex flex-col max-w-[90%] md:max-w-[80%] ${isUser ? 'items-end' : 'items-start'}">
+                                ${imageHTML}
+                                <div class="${contentClass}">
+                                    ${content}
+                                </div>
+                                ${footer}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            // Render Loading Indicator
+            if (state.isLoading) {
+                 els.chatContent.innerHTML += `
+                    <div class="flex gap-5 mb-8 w-full animate-pulse">
+                        <div class="w-8 flex justify-center">
+                           <i data-lucide="sparkles" class="text-blue-500" width="20" height="20"></i>
+                        </div>
+                        <div class="flex flex-col gap-2 mt-2 w-full">
+                          <div class="h-4 w-3/4 rounded bg-gray-200 dark:bg-[#2d2d2d]"></div>
+                          <div class="h-4 w-1/2 rounded bg-gray-200 dark:bg-[#2d2d2d]"></div>
+                        </div>
+                    </div>
+                 `;
+            }
+            
+            lucide.createIcons();
+            els.messagesEnd.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updateUI() {
+            // Update Send Button
+            const hasContent = els.promptInput.value.trim().length > 0 || state.selectedImage;
+            els.sendBtn.disabled = (!hasContent && !state.isLoading);
+            
+            if (state.isLoading) {
+                els.sendIcon.classList.add('hidden');
+                els.loadingIcon.classList.remove('hidden');
+            } else if (hasContent) {
+                els.sendIcon.classList.remove('hidden');
+                els.sendIcon.setAttribute('data-lucide', 'send');
+                els.sendBtn.classList.add('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black');
+                els.loadingIcon.classList.add('hidden');
+            } else {
+                els.sendIcon.classList.remove('hidden');
+                els.sendIcon.setAttribute('data-lucide', 'mic');
+                els.sendBtn.classList.remove('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black');
+                els.loadingIcon.classList.add('hidden');
+            }
+
+            // Update Sidebar
+            if (state.sidebarOpen) {
+                els.sidebar.classList.remove('-translate-x-full');
+                els.mobileOverlay.classList.remove('hidden');
+            } else {
+                els.sidebar.classList.add('-translate-x-full');
+                // Only hide overlay on mobile
+                if (window.innerWidth < 768) {
+                    els.mobileOverlay.classList.add('hidden');
+                } else {
+                    els.sidebar.classList.add('md:translate-x-0'); // Reset for desktop
+                }
+            }
+            
+            // Image Preview
+            if (state.selectedImage) {
+                els.imagePreviewContainer.classList.remove('hidden');
+                els.imagePreview.src = state.selectedImage;
+            } else {
+                els.imagePreviewContainer.classList.add('hidden');
+            }
+
+            lucide.createIcons();
+        }
+
+        // --- API CALL ---
+        async function callGemini(prompt, imageBase64) {
+            const key = state.apiKey || ENV_API_KEY;
+            if (!key) throw new Error("API Key missing");
+
+            const payload = {
+                contents: [{
+                    parts: [
+                        { text: prompt },
+                        ...(imageBase64 ? [{ inlineData: { mimeType: "image/png", data: imageBase64.split(',')[1] } }] : [])
+                    ]
+                }]
+            };
+
+            const response = await fetch(`${API_URL}?key=${key}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const err = await response.json().catch(() => ({}));
+                throw new Error(err.error?.message || response.statusText);
+            }
+
+            const data = await response.json();
+            return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
+        }
+
+        // --- HANDLERS ---
+        async function handleSend() {
+            const text = els.promptInput.value.trim();
+            if ((!text && !state.selectedImage) || state.isLoading) return;
+
+            const userMsg = { role: 'user', text, image: state.selectedImage };
+            state.messages.push(userMsg);
+            
+            // Reset input state
+            const currentImage = state.selectedImage;
+            els.promptInput.value = '';
+            els.promptInput.style.height = 'auto';
+            state.selectedImage = null;
+            state.isLoading = true;
+            
+            renderMessages();
+            updateUI();
+
+            try {
+                const response = await callGemini(userMsg.text, currentImage);
+                state.messages.push({ role: 'model', text: response });
+            } catch (error) {
+                state.messages.push({ role: 'model', text: `**Error:** ${error.message}. Please check your API Key in Settings.` });
+            } finally {
+                state.isLoading = false;
+                renderMessages();
+                updateUI();
+            }
+        }
+
+        window.handleSuggestion = (text) => {
+            els.promptInput.value = text;
+            handleSend();
+        };
+
+        // --- EVENT LISTENERS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Render Recent Chats
+            els.recentChats.innerHTML = RECENT_CHATS.map(chat => `
+                <button class="w-full text-left px-4 py-2 rounded-full mb-1 text-sm truncate transition-colors flex items-center gap-3 hover:bg-[#dfe4ea] text-[#444746] dark:hover:bg-[#2d2d2d] dark:text-gray-300">
+                    <i data-lucide="message-square" width="16" height="16"></i>
+                    ${chat}
+                </button>
+            `).join('');
+            
+            // Initial Render
+            renderMessages();
+            updateUI();
+
+            // Input Auto-resize & Logic
+            els.promptInput.addEventListener('input', () => {
+                els.promptInput.style.height = 'auto';
+                els.promptInput.style.height = Math.min(els.promptInput.scrollHeight, 150) + 'px';
+                updateUI();
+            });
+
+            els.promptInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSend();
+                }
+            });
+
+            els.sendBtn.addEventListener('click', handleSend);
+
+            // Image Upload
+            document.getElementById('upload-btn').addEventListener('click', () => els.fileInput.click());
+            els.fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        state.selectedImage = reader.result;
+                        updateUI();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            document.getElementById('remove-image-btn').addEventListener('click', () => {
+                state.selectedImage = null;
+                els.fileInput.value = '';
+                updateUI();
+            });
+
+            // Sidebar Toggle
+            document.getElementById('mobile-menu-open').addEventListener('click', () => {
+                state.sidebarOpen = true;
+                updateUI();
+            });
+            document.getElementById('mobile-menu-close').addEventListener('click', () => {
+                state.sidebarOpen = false;
+                updateUI();
+            });
+            els.mobileOverlay.addEventListener('click', () => {
+                state.sidebarOpen = false;
+                updateUI();
+            });
+
+            // New Chat
+            document.getElementById('new-chat-btn').addEventListener('click', () => {
+                state.messages = [];
+                state.selectedImage = null;
+                state.isLoading = false;
+                els.promptInput.value = '';
+                if(window.innerWidth < 768) state.sidebarOpen = false;
+                renderMessages();
+                updateUI();
+            });
+
+            // Settings
+            document.getElementById('settings-btn').addEventListener('click', () => {
+                els.settingsModal.classList.remove('hidden');
+            });
+            document.getElementById('close-settings').addEventListener('click', () => {
+                els.settingsModal.classList.add('hidden');
+            });
+            document.getElementById('save-settings').addEventListener('click', () => {
+                state.apiKey = els.apiKeyInput.value;
+                els.settingsModal.classList.add('hidden');
+            });
+
+            // Theme Toggle
+            document.getElementById('theme-btn').addEventListener('click', () => {
+                state.isDark = !state.isDark;
+                if (state.isDark) {
+                    document.documentElement.classList.add('dark');
+                    els.themeIcon.setAttribute('data-lucide', 'sun');
+                    els.themeText.innerText = "Light Mode";
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    els.themeIcon.setAttribute('data-lucide', 'moon');
+                    els.themeText.innerText = "Dark Mode";
+                }
+                lucide.createIcons();
+                renderMessages(); // Re-render to update suggestion styles if needed
+            });
+
+            // Window Resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) {
+                    if (!state.sidebarOpen) {
+                        state.sidebarOpen = true;
+                        updateUI();
+                    }
+                } else {
+                    state.sidebarOpen = false;
+                    updateUI();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
