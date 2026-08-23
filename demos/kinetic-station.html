@@ -1697,16 +1697,20 @@ function setMachineState(key, val) {
 
 // ─── PDF ───────────────────────────────────────────
 var MACHINE_SPECS = {
-  cricut: {name:'Cricut Maker 3',specs:['Max cut width: 30.5 cm (12 in)','Max cut force: 5 kg (approx.)','Blade types: Fine point, deep, knife, rotary, scoring, wavy','Materials: Vinyl, cardstock, fabric, leather, balsa, chipboard','Connectivity: Bluetooth, USB','Software: Cricut Design Space, LightBurn compatible']},
-  daja: {name:'Daja A6 Pro',specs:['Laser power: 5.5W diode (450 nm)','Work area: 130x90 mm (A6)','Max material thickness: 12 mm','Focus: Fixed with adjustable Z','Supported: LightBurn, LaserGRBL','Materials: Wood, acrylic, leather, paper, polymer, fabric']},
-  weedo: {name:'Weedo Tina2S',specs:['Build volume: 100x100x90 mm','Filament: 1.75 mm PLA/PETG/TPU','Nozzle: 0.4 mm brass (max 260°C)','Bed: Heated to 80°C','Layer height: 0.1-0.3 mm','Software: Cura, PrusaSlicer, Repetier']},
-  bambulab: {name:'Bambu Lab P2S',specs:['Build volume: 256x256x256 mm','Filament: 1.75 mm wide range','Nozzle: 0.4 mm hardened steel (max 300°C)','Bed: Dual-sided PEI textured, 120°C max','Features: AI spaghetti detection, lidar first-layer scan','Speed: Up to 500 mm/s','Software: Bambu Studio, Orca Slicer']}
+  cricut: {name:'Cricut Maker 3',pdf:'./reference/manuals/Cricut Maker 3 Manual.pdf',specs:['Max cut width: 30.5 cm (12 in)','Max cut force: 5 kg (approx.)','Blade types: Fine point, deep, knife, rotary, scoring, wavy','Materials: Vinyl, cardstock, fabric, leather, balsa, chipboard','Connectivity: Bluetooth, USB','Software: Cricut Design Space, LightBurn compatible']},
+  daja: {name:'Daja A6 Pro',pdf:'./reference/manuals/Daja A6 Pro Manual.pdf',specs:['Laser power: 5.5W diode (450 nm)','Work area: 130x90 mm (A6)','Max material thickness: 12 mm','Focus: Fixed with adjustable Z','Supported: LightBurn, LaserGRBL','Materials: Wood, acrylic, leather, paper, polymer, fabric']},
+  weedo: {name:'Weedo Tina2S',pdf:'./reference/manuals/Weedo Tina2S Manual.pdf',specs:['Build volume: 100x100x90 mm','Filament: 1.75 mm PLA/PETG/TPU','Nozzle: 0.4 mm brass (max 260°C)','Bed: Heated to 80°C','Layer height: 0.1-0.3 mm','Software: Cura, PrusaSlicer, Repetier']},
+  bambulab: {name:'Bambu Lab P2S',pdf:'./reference/manuals/BBL P2S Manual.pdf',specs:['Build volume: 256x256x256 mm','Filament: 1.75 mm wide range','Nozzle: 0.4 mm hardened steel (max 300°C)','Bed: Dual-sided PEI textured, 120°C max','Features: AI spaghetti detection, lidar first-layer scan','Speed: Up to 500 mm/s','Software: Bambu Studio, Orca Slicer']}
 };
 function loadPdf(val) {
   var frame = document.getElementById('pdfDisplayFrameNode');
   var placeholder = document.getElementById('pdfPlaceholder');
   var spec = MACHINE_SPECS[val];
-  if (spec) {
+  if (spec && spec.pdf) {
+    frame.src = spec.pdf;
+    frame.style.display = 'block';
+    placeholder.style.display = 'none';
+  } else if (spec) {
     var html = '<div style="font-size:2.3rem;margin-bottom:0.5rem">📄</div>';
     html += '<h3 style="color:var(--text);margin-bottom:0.5rem;font-size:1.1rem">'+spec.name+'</h3>';
     html += '<div style="text-align:left;max-width:400px;margin:0 auto">';
