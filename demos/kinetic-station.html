@@ -1708,6 +1708,7 @@ function loadPdf(val) {
   var spec = MACHINE_SPECS[val];
   if (spec && spec.pdf) {
     frame.src = spec.pdf;
+    frame.classList.remove('hidden');
     frame.style.display = 'block';
     placeholder.style.display = 'none';
   } else if (spec) {
