@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IsaacSlicer — Multi-Technology 3D Printing Slicer</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0e1a;color:#e8eaed;min-height:100vh;display:flex;flex-direction:column}
+.hero{background:linear-gradient(135deg,#0f1428 0%,#1a1030 50%,#0f1428 100%);padding:60px 40px 40px;text-align:center;border-bottom:1px solid #232d4a}
+.hero .logo{font-size:64px;margin-bottom:16px}
+.hero h1{font-size:36px;font-weight:800;color:#e94560;margin-bottom:8px}
+.hero .sub{font-size:15px;color:#969ba8;max-width:700px;margin:0 auto}
+.hero .badge{display:inline-block;background:#e94560;color:#fff;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;margin-top:16px}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;padding:40px;max-width:1100px;margin:0 auto}
+.card{background:#151b2e;border:1px solid #232d4a;border-radius:12px;padding:24px;transition:border-color .2s}
+.card:hover{border-color:#e94560}
+.card h3{font-size:16px;font-weight:700;color:#e94560;margin-bottom:8px}
+.card p{font-size:13px;color:#969ba8;line-height:1.6}
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;padding:40px;max-width:1100px;margin:0 auto}
+.tech-tag{background:#1a2035;border:1px solid #232d4a;border-radius:8px;padding:10px 14px;font-size:12px;font-weight:600;color:#969ba8;text-align:center}
+.tech-tag.highlight{color:#e94560;border-color:#e9456030;background:#e9456010}
+.footer{text-align:center;padding:40px;color:#5e6370;font-size:12px;border-top:1px solid #232d4a;margin-top:auto}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="logo">🔪</div>
+  <h1>IsaacSlicer</h1>
+  <p class="sub">Multi-technology 3D printing slicer with 14 technologies — more than BambuStudio or OrcaSlicer. PyQt6 + OpenGL desktop app with Bambu Lab MQTT connectivity.</p>
+  <span class="badge">macOS .app Bundle</span>
+</div>
+
+<div class="features">
+  <div class="card">
+    <h3>🎯 14 Technologies</h3>
+    <p>FDM, SLA, DLP, MSLA, SLS, MJF, DMLS, SLM, PolyJet, Binder Jetting, CLIP, EBM, LOM, FGF — more than any other slicer.</p>
+  </div>
+  <div class="card">
+    <h3>🖨 10 Built-in Printers</h3>
+    <p>All 4 Bambu Lab models (X1C, P1S, A1, A1 Mini), Ender 3, Prusa MK4, Elegoo Saturn, Anycubic Photon, Formlabs Form 3, Sinterit Lisa.</p>
+  </div>
+  <div class="card">
+    <h3>🔗 Bambu Lab MQTT</h3>
+    <p>Full printer control via MQTT — start, pause, resume, stop, set temps, camera stream. LAN discovery with SSDP.</p>
+  </div>
+  <div class="card">
+    <h3>🎨 Modern UI</h3>
+    <p>Dark theme (#0a0e1a / #e94560 accent), sidebar navigation, stacked settings pages, splash screen with loading animation.</p>
+  </div>
+  <div class="card">
+    <h3>👁 3D Viewer</h3>
+    <p>OpenGL-rendered STL/OBJ/3MF viewer with orbit, pan, zoom. G-code toolpath preview with layer coloring.</p>
+  </div>
+  <div class="card">
+    <h3>⚙ 11 Settings Panels</h3>
+    <p>Quality, Walls, Infill, Speed, Temperature, Support, Adhesion, Advanced — plus SLA/SLS/DMLS-specific settings.</p>
+  </div>
+</div>
+
+<div class="tech-grid">
+  <div class="tech-tag highlight">FDM</div>
+  <div class="tech-tag highlight">SLA</div>
+  <div class="tech-tag highlight">DLP</div>
+  <div class="tech-tag">MSLA</div>
+  <div class="tech-tag highlight">SLS</div>
+  <div class="tech-tag">MJF</div>
+  <div class="tech-tag">DMLS</div>
+  <div class="tech-tag">SLM</div>
+  <div class="tech-tag">PolyJet</div>
+  <div class="tech-tag">Binder Jetting</div>
+  <div class="tech-tag">CLIP</div>
+  <div class="tech-tag">EBM</div>
+  <div class="tech-tag">LOM</div>
+  <div class="tech-tag">FGF</div>
+</div>
+
+<div class="footer">
+  Built with PyQt6 + OpenGL · 4,013 lines of Python · BambuStudio + PrusaSlicer backends · macOS .app in /Applications
+</div>
+</body>
+</html>
