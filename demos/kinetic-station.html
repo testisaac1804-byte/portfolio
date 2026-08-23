@@ -2543,26 +2543,25 @@ function initKB() {
     var html = '';
     for (var i = 0; i < articles.length; i++) {
       var a = articles[i];
-      html += '<div style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem;cursor:pointer;transition:all var(--transition)" onclick="this.classList.toggle(\'expanded\')">';
-      html += '<div style="font-weight:700;font-size:0.82rem;margin-bottom:0.3rem;display:flex;justify-content:space-between;align-items:center"><span>'+a.title+'</span><span style="font-size:0.7rem;color:var(--text-muted);transition:transform var(--transition)">▶</span></div>';
-      html += '<div style="font-size:0.75rem;color:var(--text-muted);line-height:1.6;max-height:0;overflow:hidden;transition:max-height 0.3s ease">'+a.body+'</div></div>';
+      html += '<div class="kb-card" style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem;cursor:pointer;transition:all var(--transition)" onclick="toggleKB(this)">';
+      html += '<div style="font-weight:700;font-size:0.82rem;margin-bottom:0.3rem;display:flex;justify-content:space-between;align-items:center"><span>'+a.title+'</span><span class="kb-arrow" style="font-size:0.7rem;color:var(--text-muted);transition:transform 0.2s ease">▶</span></div>';
+      html += '<div class="kb-body" style="font-size:0.75rem;color:var(--text-muted);line-height:1.6;max-height:0;overflow:hidden;transition:max-height 0.3s ease">'+a.body+'</div></div>';
     }
     el.innerHTML = html;
   }
-  // Expand/collapse
-  document.addEventListener('click', function(e) {
-    var card = e.target.closest('[style*="cursor:pointer"]');
-    if (!card || !card.classList.contains('expanded') && !card.querySelector('[style*="max-height:0"]')) return;
-    var body = card.querySelector('[style*="max-height"]');
-    var arrow = card.querySelector('[style*="transform"]');
-    if (card.classList.contains('expanded')) {
-      body.style.maxHeight = body.scrollHeight+'px';
-      if (arrow) arrow.style.transform = 'rotate(90deg)';
-    } else {
-      body.style.maxHeight = '0';
-      if (arrow) arrow.style.transform = 'rotate(0deg)';
-    }
-  });
+}
+
+function toggleKB(card) {
+  var body = card.querySelector('.kb-body');
+  var arrow = card.querySelector('.kb-arrow');
+  var expanded = card.classList.toggle('expanded');
+  if (expanded) {
+    body.style.maxHeight = body.scrollHeight + 'px';
+    if (arrow) arrow.style.transform = 'rotate(90deg)';
+  } else {
+    body.style.maxHeight = '0';
+    if (arrow) arrow.style.transform = 'rotate(0deg)';
+  }
 }
 
 // ─── MODAL ─────────────────────────────────────────
