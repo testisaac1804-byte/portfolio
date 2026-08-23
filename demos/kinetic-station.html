@@ -1,0 +1,2728 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinetic Industries · Maker Studio v9.0</title>
+<meta name="description" content="Enterprise maker studio orchestration terminal.">
+<meta name="theme-color" content="#3b82f6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%26%239882%3B%3C/text%3E%3C/svg%3E">
+<style>
+/* ═══════════════════════════════════════════════════
+   KINETIC INDUSTRIES v9.0 — DESIGN SYSTEM
+   ═══════════════════════════════════════════════════ */
+:root {
+  --primary: #3b82f6; --primary-hover: #2563eb; --primary-light: rgba(59,130,246,0.12);
+  --primary-glow: rgba(59,130,246,0.3); --danger: #ef4444; --danger-hover: #dc2626;
+  --success: #22c55e; --success-light: rgba(34,197,94,0.12); --warning: #eab308;
+  --warning-light: rgba(234,179,8,0.12); --accent: #8b5cf6; --accent-light: rgba(139,92,246,0.12);
+  --bg: #0a0e17; --bg-alt: #0f1623; --surface: #131c2e; --surface-hover: #1a2640;
+  --surface-raised: #182238; --border: #1e2d45; --border-light: #263550;
+  --text: #e8edf5; --text-muted: #7b8ba8; --text-dim: #556580;
+  --terminal-bg: #060b14; --terminal-text: #22c55e;
+  --radius: 12px; --radius-sm: 8px; --radius-xs: 5px;
+  --nav-height: 60px; --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3); --shadow: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.5); --glass: rgba(19,28,46,0.85);
+  --font: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono: "SF Mono","Fira Code","Cascadia Code","JetBrains Mono",monospace;
+}
+[data-theme="light"] {
+  --bg: #f1f5f9; --bg-alt: #e8edf2; --surface: #fff; --surface-hover: #f8fafc;
+  --surface-raised: #fff; --border: #dde4ed; --border-light: #e8edf2;
+  --text: #0f172a; --text-muted: #64748b; --text-dim: #94a3b8;
+  --terminal-bg: #090d16; --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+  --shadow: 0 2px 8px rgba(0,0,0,0.08); --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+  --glass: rgba(255,255,255,0.9);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:var(--font);background:var(--bg);color:var(--text);
+  line-height:1.6;padding-top:calc(var(--nav-height) + 0px);
+  transition:background var(--transition),color var(--transition);
+  -webkit-font-smoothing:antialiased;min-height:100vh;
+  background-image:radial-gradient(ellipse at 50% 0%,rgba(59,130,246,0.04) 0%,transparent 60%),
+    radial-gradient(ellipse at 80% 20%,rgba(139,92,246,0.03) 0%,transparent 50%);
+}
+[data-theme="light"] body{background-image:none}
+::selection{background:var(--primary);color:#fff}
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--text-dim)}
+
+/* ═══ NAV ═══ */
+.top-nav{
+  position:fixed;top:0;left:0;width:100%;height:var(--nav-height);
+  background:var(--glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);display:flex;justify-content:space-between;
+  align-items:center;padding:0 1.5rem;z-index:1000;transition:all var(--transition);
+}
+.nav-logo{
+  font-weight:900;font-size:0.95rem;text-transform:uppercase;letter-spacing:2px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;display:flex;align-items:center;gap:0.5rem;
+}
+.nav-logo-dot{width:8px;height:8px;background:var(--success);border-radius:50%;animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,0.4)}50%{opacity:0.7;box-shadow:0 0 0 6px rgba(34,197,94,0)}}
+.nav-clock{
+  font-family:var(--mono);font-size:0.72rem;color:var(--text-muted);font-weight:600;
+  padding:0.25rem 0.6rem;background:var(--bg);border-radius:var(--radius-xs);
+  border:1px solid var(--border);margin-left:0.5rem;
+}
+.nav-links{display:flex;gap:0.15rem;align-items:center}
+.nav-links a,.nav-links button{
+  text-decoration:none;color:var(--text-muted);font-weight:600;font-size:0.7rem;
+  text-transform:uppercase;letter-spacing:0.5px;padding:0.4rem 0.65rem;
+  border-radius:var(--radius-xs);cursor:pointer;transition:all var(--transition);
+  white-space:nowrap;background:none;border:none;font-family:var(--font);
+}
+.nav-links a:hover,.nav-links button:hover{color:var(--primary);background:var(--primary-light)}
+.nav-links .btn-nav-primary{background:var(--primary);color:#fff!important;padding:0.4rem 0.8rem;border-radius:var(--radius-xs);font-weight:700}
+.nav-links .btn-nav-primary:hover{background:var(--primary-hover)}
+.nav-links .btn-nav-logout{background:var(--danger);color:#fff!important;padding:0.35rem 0.7rem;border-radius:var(--radius-xs);font-weight:700;display:none}
+.nav-links .btn-nav-logout:hover{background:var(--danger-hover)}
+.theme-toggle{
+  background:var(--bg);border:1px solid var(--border);padding:0.35rem 0.55rem;
+  border-radius:var(--radius-xs);cursor:pointer;font-size:0.85rem;color:var(--text);
+  transition:all var(--transition);margin-left:0.25rem;
+}
+.theme-toggle:hover{border-color:var(--primary);color:var(--primary);box-shadow:0 0 8px var(--primary-glow)}
+.hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:4px;z-index:1001}
+.hamburger span{display:block;width:20px;height:2px;background:var(--text);border-radius:1px;transition:all var(--transition)}
+.hamburger.active span:nth-child(1){transform:translateY(6px)rotate(45deg)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:translateY(-6px)rotate(-45deg)}
+.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:998;backdrop-filter:blur(4px)}
+.mobile-overlay.open{display:block}
+
+/* ═══ HEADER ═══ */
+.hero{
+  background:linear-gradient(160deg,#060b14 0%,#0f1a30 40%,#131c2e 100%);
+  padding:5rem 1.5rem 4rem;text-align:center;border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(59,130,246,0.08) 0%,transparent 60%),
+    radial-gradient(ellipse at 80% 100%,rgba(139,92,246,0.05) 0%,transparent 50%);
+}
+.hero h1{
+  font-size:clamp(1.8rem,5vw,3rem);text-transform:uppercase;letter-spacing:3px;
+  font-weight:900;position:relative;z-index:1;
+  background:linear-gradient(135deg,#e8edf5,#94a3b8);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero p{color:var(--text-muted);font-size:clamp(0.85rem,1.5vw,1rem);max-width:650px;margin:0.75rem auto 0;position:relative;z-index:1;line-height:1.7}
+.hero .hero-stats{display:flex;gap:2rem;justify-content:center;margin-top:1.5rem;position:relative;z-index:1;flex-wrap:wrap}
+.hero-stat{text-align:center}
+.hero-stat .val{font-size:1.5rem;font-weight:900;color:var(--primary);font-family:var(--mono)}
+.hero-stat .lbl{font-size:0.6rem;text-transform:uppercase;color:var(--text-muted);letter-spacing:1px;margin-top:0.15rem}
+
+/* ═══ CONTAINER ═══ */
+.container{max-width:1320px;margin:2rem auto;padding:0 1.5rem}
+.section-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:2rem;margin-bottom:2rem;
+  transition:border-color var(--transition),box-shadow var(--transition);
+  position:relative;
+}
+.section-card:hover{border-color:var(--border-light)}
+.section-title{
+  text-align:center;margin-bottom:0.3rem;text-transform:uppercase;
+  font-size:clamp(1.1rem,2.5vw,1.5rem);letter-spacing:1.5px;font-weight:800;
+  background:linear-gradient(135deg,var(--text),var(--text-muted));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.section-desc{text-align:center;color:var(--text-muted);margin-bottom:2rem;font-size:0.85rem;max-width:580px;margin:0 auto 2rem}
+
+/* ═══ TABS ═══ */
+.tab-bar{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:1.25rem;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab-bar::-webkit-scrollbar{height:0}
+.tab-btn{
+  padding:0.55rem 1rem;cursor:pointer;border:none;background:none;color:var(--text-muted);
+  font-weight:700;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;
+  border-bottom:2px solid transparent;margin-bottom:-2px;transition:all var(--transition);
+  white-space:nowrap;font-family:var(--font);position:relative;
+}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}
+.tab-panel{display:none;animation:fadeIn 0.25s ease}
+.tab-panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══ CARDS ═══ */
+.machine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem}
+.machine-card{
+  background:var(--surface-raised);border-radius:var(--radius);padding:1.25rem;
+  border:1px solid var(--border);display:flex;flex-direction:column;
+  transition:all var(--transition);position:relative;overflow:hidden;
+}
+.machine-card::before{
+  content:'';position:absolute;top:0;left:0;width:100%;height:3px;
+  background:linear-gradient(90deg,var(--primary),var(--accent));opacity:0;
+  transition:opacity var(--transition);
+}
+.machine-card:hover{transform:translateY(-4px);border-color:var(--primary);box-shadow:var(--shadow-lg)}
+.machine-card:hover::before{opacity:1}
+.machine-card .machine-img{
+  width:100%;height:120px;display:flex;align-items:center;justify-content:center;
+  background:var(--bg);border-radius:var(--radius-sm);padding:8px;margin-bottom:0.85rem;
+  border:1px solid var(--border);
+}
+.machine-card h3{font-size:0.95rem;font-weight:800;margin-bottom:0.25rem}
+.machine-card .machine-desc{font-size:0.78rem;color:var(--text-muted);margin-bottom:0.85rem;flex:1;line-height:1.5}
+.machine-card .machine-meta{display:flex;gap:0.5rem;align-items:center;margin-bottom:0.75rem}
+.status-pill{
+  display:inline-flex;align-items:center;gap:0.3rem;padding:0.25rem 0.6rem;
+  border-radius:20px;font-size:0.6rem;font-weight:800;text-transform:uppercase;
+  border:1px solid transparent;
+}
+.status-pill::before{content:'';width:6px;height:6px;border-radius:50%}
+.status-online{background:var(--success-light);color:var(--success);border-color:rgba(34,197,94,0.2)}
+.status-online::before{background:var(--success)}
+.status-maintenance{background:var(--warning-light);color:var(--warning);border-color:rgba(234,179,8,0.2)}
+.status-maintenance::before{background:var(--warning)}
+.status-offline{background:rgba(239,68,68,0.12);color:var(--danger);border-color:rgba(239,68,68,0.2)}
+.status-offline::before{background:var(--danger)}
+
+/* ═══ BUTTONS ═══ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:0.35rem;
+  background:var(--primary);color:#fff!important;padding:0.55rem 1.1rem;
+  border-radius:var(--radius-xs);font-weight:700;text-transform:uppercase;
+  font-size:0.68rem;letter-spacing:0.5px;text-decoration:none;cursor:pointer;
+  border:none;transition:all var(--transition);font-family:var(--font);
+  position:relative;overflow:hidden;
+}
+.btn:hover{background:var(--primary-hover);box-shadow:0 0 16px var(--primary-glow)}
+.btn:active{transform:scale(0.97)}
+.btn:disabled{opacity:0.4;cursor:not-allowed;box-shadow:none}
+.btn-success{background:var(--success)}.btn-success:hover{background:#16a34a;box-shadow:0 0 16px rgba(34,197,94,0.3)}
+.btn-danger{background:var(--danger)}.btn-danger:hover{background:var(--danger-hover);box-shadow:0 0 16px rgba(239,68,68,0.3)}
+.btn-accent{background:var(--accent)}.btn-accent:hover{background:#7c3aed;box-shadow:0 0 16px rgba(139,92,246,0.3)}
+.btn-outline{background:transparent;color:var(--text)!important;border:1px solid var(--border)}
+.btn-outline:hover{background:var(--bg);border-color:var(--primary);color:var(--primary)!important;box-shadow:none}
+.btn-sm{padding:0.3rem 0.65rem;font-size:0.6rem}
+.btn-xs{padding:0.2rem 0.45rem;font-size:0.55rem}
+.btn-icon{padding:0.35rem;min-width:32px}
+
+/* ═══ TERMINAL ═══ */
+.terminal{
+  background:var(--terminal-bg);border-radius:var(--radius);padding:1rem;
+  font-family:var(--mono);color:var(--terminal-text);border:1px solid #1e293b;
+  box-shadow:inset 0 2px 8px rgba(0,0,0,0.3);
+}
+.terminal-header{
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid #1e293b;padding-bottom:0.4rem;margin-bottom:0.6rem;
+  font-size:0.68rem;color:var(--text-dim);
+}
+.terminal-header .dots{display:flex;gap:6px}
+.terminal-header .dots span{width:10px;height:10px;border-radius:50%}
+.terminal-header .dots span:nth-child(1){background:#ef4444}
+.terminal-header .dots span:nth-child(2){background:#eab308}
+.terminal-header .dots span:nth-child(3){background:#22c55e}
+.terminal-logs{height:140px;overflow-y:auto;font-size:0.76rem;line-height:1.5}
+.terminal-logs>div{padding:1px 0;word-break:break-all}
+.terminal-input-row{display:flex;margin-top:0.6rem;gap:0.35rem}
+.terminal-input-row .prompt{color:var(--accent);font-family:var(--mono);font-size:0.78rem;line-height:2;white-space:nowrap}
+.terminal-input-row input{
+  flex:1;background:transparent;border:none;padding:0.4rem 0;color:#38bdf8;
+  font-family:var(--mono);font-size:0.78rem;outline:none;
+}
+.terminal-input-row input::placeholder{color:var(--text-dim)}
+
+/* ═══ KPI ═══ */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0.75rem;margin-bottom:1rem}
+.kpi-card{
+  background:var(--surface-raised);border:1px solid var(--border);
+  padding:0.85rem;border-radius:var(--radius-sm);text-align:center;
+  transition:all var(--transition);
+}
+.kpi-card:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:var(--shadow)}
+.kpi-card h4{font-size:0.6rem;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.15rem;font-weight:700;letter-spacing:0.5px}
+.kpi-card p{font-size:1.3rem;font-weight:900;color:var(--primary);font-family:var(--mono)}
+
+/* ═══ TABLES ═══ */
+.table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:0.8rem}
+th,td{padding:0.7rem 0.8rem;border-bottom:1px solid var(--border);text-align:left}
+th{
+  background:var(--surface-raised);color:var(--text-muted);text-transform:uppercase;
+  font-size:0.62rem;letter-spacing:0.75px;font-weight:700;position:sticky;top:0;z-index:1;
+}
+tr:hover td{background:var(--surface-hover)}
+tr:last-child td{border-bottom:none}
+
+/* ═══ ID CARD ═══ */
+.id-card{
+  background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);
+  border:1px solid #334155;color:#fff;padding:1.25rem;border-radius:14px;
+  display:flex;justify-content:space-between;align-items:center;
+  position:relative;overflow:hidden;max-width:520px;margin:0 auto;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+.id-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 20%,rgba(59,130,246,0.1) 0%,transparent 50%);
+}
+.id-card-left{display:flex;flex-direction:column;gap:0.5rem;z-index:2}
+.id-card-name{font-size:1.1rem;font-weight:800;text-transform:uppercase;line-height:1.2}
+.id-card-meta{font-family:var(--mono);font-size:0.65rem;color:#94a3b8}
+.id-card-badge{background:var(--primary);color:#fff;padding:0.22rem 0.6rem;font-size:0.6rem;font-weight:800;border-radius:20px;width:fit-content}
+.id-card-qr{display:flex;flex-direction:column;align-items:center;gap:0.4rem;z-index:2;background:#fff;padding:0.55rem;border-radius:10px}
+.id-card-qr canvas{border-radius:4px}
+
+/* ═══ MODAL ═══ */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);
+  display:flex;justify-content:center;align-items:center;z-index:2000;
+  opacity:0;visibility:hidden;transition:opacity 0.25s,visibility 0.25s;padding:1rem;
+}
+.modal-overlay.active{opacity:1;visibility:visible}
+.modal{
+  background:var(--surface);padding:1.75rem;border-radius:var(--radius);width:100%;
+  max-width:650px;max-height:85vh;overflow-y:auto;border:1px solid var(--border);
+  transform:translateY(16px)scale(0.97);transition:transform 0.25s ease;
+  position:relative;box-shadow:var(--shadow-lg);
+}
+.modal-overlay.active .modal{transform:translateY(0)scale(1)}
+.modal-close{
+  position:absolute;top:0.8rem;right:1rem;font-size:1.3rem;cursor:pointer;
+  color:var(--text-muted);background:none;border:none;line-height:1;padding:4px;
+  border-radius:50%;width:28px;height:28px;display:flex;align-items:center;
+  justify-content:center;transition:all var(--transition);
+}
+.modal-close:hover{background:var(--surface-hover);color:var(--danger)}
+.modal h2{font-size:1.1rem;font-weight:800;margin-bottom:1rem;text-transform:uppercase;letter-spacing:1px}
+
+/* ═══ FORMS ═══ */
+.form-group{margin-bottom:0.75rem}
+.form-group label{display:block;margin-bottom:0.2rem;font-weight:700;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)}
+.form-group input,.form-group textarea,.form-group select{
+  width:100%;padding:0.5rem 0.65rem;border:1px solid var(--border);border-radius:var(--radius-xs);
+  font-size:0.82rem;background:var(--bg);color:var(--text);font-family:var(--font);
+  transition:border-color var(--transition),box-shadow var(--transition);
+}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{
+  border-color:var(--primary);outline:none;box-shadow:0 0 0 3px var(--primary-light);
+}
+.form-group input.error,.form-group textarea.error{border-color:var(--danger);box-shadow:0 0 0 3px rgba(239,68,68,0.12)}
+.form-group .error-msg{color:var(--danger);font-size:0.65rem;margin-top:0.2rem;display:none}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+@media(max-width:500px){.form-row{grid-template-columns:1fr}}
+
+/* ═══ TOAST ═══ */
+.toast-container{
+  position:fixed;top:calc(var(--nav-height)+8px);right:12px;z-index:9999;
+  display:flex;flex-direction:column;gap:6px;max-width:360px;width:100%;pointer-events:none;
+}
+.toast{
+  background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius);
+  padding:0.7rem 0.9rem;box-shadow:var(--shadow-lg);display:flex;align-items:flex-start;
+  gap:0.5rem;font-size:0.78rem;line-height:1.4;transform:translateX(120%);opacity:0;
+  animation:toast-in .35s ease forwards;pointer-events:auto;backdrop-filter:blur(12px);
+}
+.toast.removing{animation:toast-out .3s ease forwards}
+@keyframes toast-in{to{transform:translateX(0);opacity:1}}
+@keyframes toast-out{to{transform:translateX(120%);opacity:0}}
+
+/* ═══ PAGINATION ═══ */
+.pagination{display:flex;gap:0.25rem;justify-content:center;align-items:center;margin-top:0.75rem;flex-wrap:wrap}
+.pagination button{
+  padding:0.3rem 0.55rem;border:1px solid var(--border);background:var(--surface);
+  color:var(--text);border-radius:var(--radius-xs);cursor:pointer;font-size:0.7rem;
+  font-weight:600;transition:all var(--transition);min-width:32px;font-family:var(--font);
+}
+.pagination button:hover{border-color:var(--primary);background:var(--primary-light)}
+.pagination button.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.pagination button:disabled{opacity:0.3;cursor:not-allowed}
+.pagination .page-info{font-size:0.7rem;color:var(--text-muted);padding:0 0.5rem}
+
+/* ═══ MISC ═══ */
+.admin-section{border:2px solid var(--danger);box-shadow:0 0 20px rgba(239,68,68,0.08)}
+.badge-admin{background:var(--danger);color:#fff;padding:0.2rem 0.5rem;font-size:0.6rem;font-weight:800;border-radius:20px;display:inline-block}
+.badge-user{background:var(--success);color:#fff;padding:0.2rem 0.5rem;font-size:0.6rem;font-weight:800;border-radius:20px;display:inline-block}
+.chart-bar{background:var(--border);border-radius:4px;height:6px;width:100%;overflow:hidden;margin-top:3px}
+.chart-fill{background:var(--primary);height:100%;transition:width 0.5s ease;border-radius:4px}
+.drop-zone{
+  border:2px dashed var(--border);border-radius:var(--radius-sm);padding:1.25rem;
+  text-align:center;color:var(--text-muted);cursor:pointer;transition:all var(--transition);
+}
+.drop-zone.dragover{border-color:var(--primary);background:var(--primary-light)}
+.setting-row{
+  display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;
+  border-bottom:1px solid var(--border);font-size:0.8rem;
+}
+.setting-row:last-child{border-bottom:none}
+.toggle-switch{position:relative;display:inline-block;width:38px;height:20px;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;cursor:pointer;inset:0;background:var(--border);border-radius:20px;transition:var(--transition)}
+.toggle-slider::before{content:'';position:absolute;height:14px;width:14px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:var(--transition)}
+.toggle-switch input:checked+.toggle-slider{background:var(--primary)}
+.toggle-switch input:checked+.toggle-slider::before{transform:translateX(18px)}
+.hidden{display:none!important}
+.text-mono{font-family:var(--mono)}
+.text-muted{color:var(--text-muted)}
+.text-xs{font-size:0.65rem}
+.text-center{text-align:center}
+.flex-between{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem}
+.gap-sm{display:flex;gap:0.3rem;flex-wrap:wrap}
+.mt-1{margin-top:0.75rem}
+.mb-1{margin-bottom:0.75rem}
+.inv-item{
+  display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;
+  border-bottom:1px solid var(--border);font-size:0.78rem;
+}
+.inv-item:last-child{border-bottom:none}
+.inv-ok{color:var(--success);font-weight:700}
+.inv-warn{color:var(--warning);font-weight:700}
+.inv-low{color:var(--danger);font-weight:700}
+
+/* ═══ CONFETTI ═══ */
+.confetti-container{position:fixed;inset:0;pointer-events:none;z-index:10000}
+.confetti-piece{
+  position:absolute;width:8px;height:8px;animation:confetti-fall linear forwards;
+}
+@keyframes confetti-fall{
+  0%{transform:translateY(-10vh)rotate(0deg);opacity:1}
+  100%{transform:translateY(110vh)rotate(720deg);opacity:0}
+}
+
+/* ═══ FOOTER ═══ */
+footer{
+  text-align:center;padding:2.5rem 1rem;background:var(--terminal-bg);color:var(--text-dim);
+  font-size:0.75rem;margin-top:4rem;border-top:4px solid var(--primary);
+}
+footer .footer-brand{color:var(--primary);font-weight:800}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:768px){
+  .hamburger{display:flex}
+  .nav-links{
+    position:fixed;top:0;right:-280px;width:280px;height:100vh;
+    background:var(--surface);flex-direction:column;padding:5rem 1.5rem 2rem;
+    gap:0.4rem;transition:right var(--transition);z-index:999;
+    border-left:1px solid var(--border);overflow-y:auto;
+  }
+  .nav-links.open{right:0}
+  .nav-links a,.nav-links button{font-size:0.8rem;padding:0.5rem 0.8rem;width:100%}
+  .hero{padding:3rem 1rem 2.5rem}
+  .id-card{flex-direction:column;gap:1rem;text-align:center}
+  .id-card-left{align-items:center}
+  .machine-grid{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .section-card{padding:1.25rem}
+}
+@media(max-width:400px){
+  .kpi-grid{grid-template-columns:1fr}
+  .hero-stats{gap:1rem}
+}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.animate-in{animation:slideUp 0.3s ease forwards}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-logo">
+    <span class="nav-logo-dot"></span>Kinetic Operations
+    <span class="nav-clock" id="navClock">00:00:00</span>
+  </div>
+  <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileNav()"></div>
+  <div class="nav-links" id="navLinks">
+    <a href="#about-us" onclick="closeMobileNav()">About</a>
+    <a href="#pricing-matrix" onclick="closeMobileNav()">Pricing</a>
+    <a href="#machinery-deck" id="navMachineryLink" class="hidden" onclick="closeMobileNav()">Machines</a>
+    <a href="#maintenanceWorkspaceSection" id="navMaintLink" class="hidden" onclick="closeMobileNav()">Diagnostics</a>
+    <a href="#knowledge-base" id="navKBLink" class="hidden" onclick="closeMobileNav()">KB</a>
+    <a href="#manual-hub" id="navManualLink" class="hidden" onclick="closeMobileNav()">Docs</a>
+    <a href="#studio-enquiry" onclick="closeMobileNav()">Support</a>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeToggleLabel" title="Toggle theme">🌙</button>
+    <a onclick="openModal('login')" id="navLoginLink">Sign In</a>
+    <a onclick="openModal('signup')" id="navRegisterLink" class="btn-nav-primary">Join</a>
+    <a onclick="logout()" id="navLogoutLink" class="btn-nav-logout">Log Out</a>
+  </div>
+</nav>
+
+<div class="toast-container" id="toastContainer"></div>
+<div class="confetti-container" id="confettiContainer"></div>
+
+<header class="hero">
+  <h1>Maker Studio Production Workstation</h1>
+  <p>Enterprise layout orchestration terminal with modular processing subsystems — 4 toolheads, live telemetry, material inventory, and collaborative booking.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="val" id="heroMachines">4</div><div class="lbl">Toolheads</div></div>
+    <div class="hero-stat"><div class="val" id="heroMembers">104</div><div class="lbl">Members</div></div>
+    <div class="hero-stat"><div class="val" id="heroJobs">0</div><div class="lbl">Jobs Run</div></div>
+    <div class="hero-stat"><div class="val" id="heroUptime">99.8%</div><div class="lbl">Uptime</div></div>
+  </div>
+</header>
+
+<main class="container">
+
+<!-- ABOUT -->
+<section id="about-us" class="section-card">
+  <h2 class="section-title">About Kinetic Industries</h2>
+  <div style="max-width:760px;margin:0 auto;text-align:center;font-size:0.9rem;line-height:1.8">
+    <p>A multi-disciplinary hardware development accelerator for creators, engineers, and students. Founded in 2025, we operate 4 production nodes with real-time telemetry, material inventory tracking, and collaborative booking — all from a single terminal.</p>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing-matrix" class="section-card">
+  <h2 class="section-title">Membership Clearance Passes</h2>
+  <p class="section-desc">All rates in HKD. Student and partner discounts applied.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Pass</th><th>Standard</th><th>Partner</th><th>Student</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1 Day</strong></td><td>HKD 50</td><td>HKD 50</td><td>HKD 50</td></tr>
+        <tr><td><strong>7 Days</strong></td><td>HKD 650</td><td>HKD 200</td><td>HKD 100</td></tr>
+        <tr><td><strong>1 Month</strong></td><td>HKD 800</td><td>HKD 400</td><td>HKD 200</td></tr>
+        <tr><td><strong>3 Months</strong></td><td>HKD 2,400</td><td>HKD 1,200</td><td>HKD 600</td></tr>
+        <tr><td><strong>6 Months</strong></td><td>HKD 4,800</td><td>HKD 2,400</td><td>HKD 1,200</td></tr>
+        <tr><td><strong>12 Months</strong></td><td>HKD 8,000</td><td>HKD 4,000</td><td>HKD 2,000</td></tr>
+        <tr><td><strong>Permanent</strong></td><td>HKD 15,000</td><td>HKD 7,500</td><td>HKD 3,750</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="memberDashboardWorkspace" class="hidden section-card" style="border:2px solid var(--primary);box-shadow:0 0 24px var(--primary-glow)">
+  <div class="flex-between" style="margin-bottom:0.85rem">
+    <div>
+      <h3 id="memberWelcomeTitle" style="color:var(--primary);font-size:1rem;text-transform:uppercase;font-weight:800">Terminal Synchronized</h3>
+      <p id="mDashNotifCount" style="font-size:0.7rem;color:var(--text-muted)"></p>
+    </div>
+    <div style="background:var(--terminal-bg);color:#f8fafc;padding:0.4rem 0.85rem;border-radius:20px;font-size:0.68rem;font-weight:700;border:1px solid var(--border)">
+      Ledger: <span style="color:var(--success)">Authenticated (HKD)</span>
+    </div>
+  </div>
+
+  <div id="announcementBanner" class="hidden" style="background:var(--warning-light);border:1px solid var(--warning);padding:0.65rem 1rem;border-radius:var(--radius-sm);margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;font-size:0.8rem">
+    <span id="announcementText"></span>
+    <button onclick="dismissAnnouncement()" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1.1rem;padding:2px">&times;</button>
+  </div>
+
+  <div class="tab-bar" id="dashTabs">
+    <button class="tab-btn active" data-tab="dash-overview">Overview</button>
+    <button class="tab-btn" data-tab="dash-telemetry">Telemetry</button>
+    <button class="tab-btn" data-tab="dash-inventory">Inventory</button>
+    <button class="tab-btn" data-tab="dash-bookings">Bookings</button>
+    <button class="tab-btn" data-tab="dash-projects">Projects</button>
+    <button class="tab-btn" data-tab="dash-analytics">Analytics</button>
+    <button class="tab-btn" data-tab="dash-notifications">Notifs</button>
+    <button class="tab-btn" data-tab="dash-favorites">Favorites</button>
+    <button class="tab-btn" data-tab="dash-settings">Settings</button>
+  </div>
+
+  <!-- Overview -->
+  <div class="tab-panel active" id="dash-overview">
+    <div class="kpi-grid">
+      <div class="kpi-card"><h4>Wallet</h4><p>HKD <span id="mDashWalletBalance">350.00</span></p></div>
+      <div class="kpi-card"><h4>Jobs Today</h4><p id="kpiJobsToday">0</p></div>
+      <div class="kpi-card"><h4>Timer</h4><p id="sessionTimerDisplay">00:00</p></div>
+      <div class="kpi-card"><h4>Queue</h4><p id="kpiQueue">&mdash;</p></div>
+    </div>
+
+    <div style="margin-bottom:1.25rem;background:var(--bg);border:1px solid var(--border);padding:1rem;border-radius:var(--radius)">
+      <h4 style="font-size:0.7rem;text-transform:uppercase;margin-bottom:0.65rem;font-weight:700;text-align:center;letter-spacing:1px">Secure Access Module</h4>
+      <div class="id-card">
+        <div class="id-card-left">
+          <div style="font-size:0.6rem;font-weight:900;letter-spacing:2px;color:#38bdf8;text-transform:uppercase">Kinetic Industries</div>
+          <div class="id-card-name" id="idCardHolderName">&mdash;</div>
+          <div class="id-card-meta" id="idCardSerialId">SERIAL: KI-000000</div>
+          <div class="id-card-meta" id="idCardTimestampSync">SYNC: INIT</div>
+          <div class="id-card-badge" id="idCardPermissionTier">&mdash;</div>
+        </div>
+        <div class="id-card-qr">
+          <canvas id="secureStudioDoorQrCanvas" width="90" height="90"></canvas>
+          <div style="display:flex;gap:0.2rem;width:100%">
+            <button class="btn btn-xs" style="width:100%" onclick="doorUnlock()">Door</button>
+            <button class="btn btn-xs btn-outline" style="width:100%" onclick="printIdCard()">Print</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0.75rem;margin-bottom:0.75rem">
+      <div style="background:var(--surface-raised);padding:1rem;border:1px solid var(--border);border-radius:var(--radius-sm)">
+        <h4 style="font-size:0.7rem;text-transform:uppercase;margin-bottom:0.5rem;color:var(--primary);font-weight:700;letter-spacing:0.5px">Wallet</h4>
+        <div style="font-size:1.4rem;font-weight:900;margin-bottom:0.25rem;font-family:var(--mono)">HKD <span id="mDashWalletBalance2">350.00</span></div>
+        <p style="font-size:0.65rem;color:var(--text-muted);margin-bottom:0.55rem">Machine and material fees.</p>
+        <div class="gap-sm">
+          <input type="number" id="walletTopUpInput" placeholder="Amount" min="1" step="0.5" style="flex:1;padding:0.4rem;border:1px solid var(--border);border-radius:var(--radius-xs);background:var(--bg);color:var(--text);font-size:0.78rem;min-width:80px">
+          <button class="btn btn-sm" onclick="walletTopUp()">Add</button>
+        </div>
+      </div>
+      <div style="background:var(--surface-raised);padding:1rem;border:1px solid var(--border);border-radius:var(--radius-sm)">
+        <h4 style="font-size:0.7rem;text-transform:uppercase;margin-bottom:0.5rem;color:var(--success);font-weight:700;letter-spacing:0.5px">Consumables</h4>
+        <select id="materialInventorySelect" style="padding:0.4rem;font-size:0.76rem;width:100%;margin-bottom:0.4rem;border:1px solid var(--border);border-radius:var(--radius-xs);background:var(--bg);color:var(--text)">
+          <option value="120">PLA Filament 1kg — HKD 120</option>
+          <option value="45">Cast Acrylic A4 — HKD 45</option>
+          <option value="30">Vinyl 1m Roll — HKD 30</option>
+          <option value="15">Sanding Pack — HKD 15</option>
+        </select>
+        <button class="btn btn-success btn-sm" style="width:100%" onclick="dispenseMaterial()">Deduct &amp; Dispense</button>
+        <div id="materialLog" style="margin-top:0.3rem;font-size:0.65rem;text-align:center;color:var(--text-muted)"></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.75rem">
+      <div style="background:var(--surface-raised);padding:0.85rem;border:1px solid var(--border);border-radius:var(--radius-sm)">
+        <h4 style="font-size:0.7rem;text-transform:uppercase;margin-bottom:0.4rem;font-weight:700;letter-spacing:0.5px">Session Timer</h4>
+        <p style="font-size:0.65rem;color:var(--text-muted);margin-bottom:0.4rem">Track your active session.</p>
+        <div class="gap-sm">
+          <button class="btn btn-sm" onclick="startSessionTimer()">Start</button>
+          <button class="btn btn-sm btn-outline" onclick="stopSessionTimer()">Stop</button>
+          <button class="btn btn-sm btn-outline" onclick="resetSessionTimer()">Reset</button>
+        </div>
+      </div>
+      <div style="background:var(--surface-raised);padding:0.85rem;border:1px solid var(--border);border-radius:var(--radius-sm)">
+        <h4 style="font-size:0.7rem;text-transform:uppercase;margin-bottom:0.4rem;font-weight:700;letter-spacing:0.5px">Cost Calculator</h4>
+        <div class="gap-sm" style="margin-bottom:0.3rem">
+          <select id="costCalcMachine" style="padding:0.3rem;font-size:0.7rem;flex:1;border:1px solid var(--border);border-radius:var(--radius-xs);background:var(--bg);color:var(--text)">
+            <option value="10">Cricut (HKD 10/h)</option>
+            <option value="15">Bambu P2S (HKD 15/h)</option>
+            <option value="8">Weedo (HKD 8/h)</option>
+            <option value="12">Daja A6 (HKD 12/h)</option>
+          </select>
+          <input type="number" id="costCalcHours" value="1" min="0.5" step="0.5" style="width:60px;padding:0.3rem;border:1px solid var(--border);border-radius:var(--radius-xs);font-size:0.7rem;background:var(--bg);color:var(--text)">
+        </div>
+        <p style="font-size:0.7rem">Estimated: <strong id="costCalcResult">HKD 10.00</strong></p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.5rem;margin-bottom:0.75rem">
+      <div style="background:var(--bg);padding:0.6rem;border:1px solid var(--border);border-radius:var(--radius-sm)">
+        <span style="font-size:0.58rem;color:var(--text-muted);display:block;text-transform:uppercase;font-weight:bold;letter-spacing:0.5px">ID</span>
+        <strong id="mDashId" class="text-mono" style="font-size:0.85rem">&mdash;</strong>
+      </div>
+      <div style="background:var(--bg);padding:0.6rem;border:1px solid var(--border);border-radius:var(--radius-sm)">
+        <span style="font-size:0.58rem;color:var(--text-muted);display:block;text-transform:uppercase;font-weight:bold;letter-spacing:0.5px">Name</span>
+        <strong id="mDashName">&mdash;</strong>
+      </div>
+      <div style="background:var(--bg);padding:0.6rem;border:1px solid var(--border);border-radius:var(--radius-sm)">
+        <span style="font-size:0.58rem;color:var(--text-muted);display:block;text-transform:uppercase;font-weight:bold;letter-spacing:0.5px">Clearance</span>
+        <strong id="mDashTier" style="color:var(--primary)">&mdash;</strong>
+      </div>
+      <div style="background:var(--bg);padding:0.6rem;border:1px solid var(--border);border-radius:var(--radius-sm)">
+        <span style="font-size:0.58rem;color:var(--text-muted);display:block;text-transform:uppercase;font-weight:bold;letter-spacing:0.5px">Duration</span>
+        <strong id="mDashDuration">&mdash;</strong>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1.3fr;gap:0.85rem;background:var(--surface-raised);border:1px solid var(--border);padding:1rem;border-radius:var(--radius-sm);margin-bottom:0.75rem">
+      <div>
+        <h4 style="font-size:0.7rem;text-transform:uppercase;margin-bottom:0.5rem;font-weight:700;letter-spacing:0.5px">Dispatch Project</h4>
+        <div class="form-group"><label>Name</label><input type="text" id="simJobName" value="CHASSIS_V4"></div>
+        <div class="form-group"><label>Node</label>
+          <select id="simJobNode">
+            <option value="Cricut Maker 3">Cricut Maker 3</option>
+            <option value="Bambu Lab P2S">Bambu Lab P2S</option>
+            <option value="Weedo Tina2S">Weedo Tina2S</option>
+            <option value="Daja A6 Pro">Daja A6 Pro</option>
+          </select>
+        </div>
+        <div class="drop-zone" id="projectDropZone" ondragover="hDragOver(event)" ondragleave="hDragLeave(event)" ondrop="hDrop(event)" style="margin-bottom:0.5rem">
+          <div style="font-size:1.6rem;display:block;margin-bottom:0.2rem">📁</div>
+          <span style="font-size:0.7rem">Drop .stl / .svg / .dxf file</span>
+        </div>
+        <button class="btn btn-sm" style="width:100%" onclick="dispatchJob()">Send</button>
+      </div>
+      <div>
+        <h4 style="font-size:0.7rem;text-transform:uppercase;margin-bottom:0.5rem;font-weight:700;letter-spacing:0.5px">Active Stream</h4>
+        <div id="memberJobQueueDisplay" style="display:flex;flex-direction:column;gap:0.4rem;max-height:160px;overflow-y:auto">
+          <div style="padding:0.55rem;background:var(--bg);border-radius:var(--radius-sm);border-left:4px solid var(--warning);font-size:0.7rem">Queue clear.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-header">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <span>MACHINE LINK TERMINAL</span>
+        <span id="terminalStatusIndicator" style="color:var(--success)">IDLE</span>
+      </div>
+      <div class="terminal-logs" id="terminalGCodeLogs">
+        <div><span style="color:var(--text-dim)">[SYSTEM]</span> Console connected. Type <span style="color:var(--warning)">help</span> for commands.</div>
+      </div>
+      <div class="terminal-input-row">
+        <span class="prompt">→</span>
+        <input type="text" id="manualTerminalInput" placeholder="G-code or command..." onkeydown="handleTerminalKey(event)" autocomplete="off">
+        <button class="btn btn-sm" onclick="sendTerminalCmd()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Telemetry -->
+  <div class="tab-panel" id="dash-telemetry">
+    <h4 style="font-size:0.75rem;text-transform:uppercase;margin-bottom:0.6rem;font-weight:700;letter-spacing:0.5px">Live Telemetry <span id="telemetryPulse" style="color:var(--success);font-size:0.6rem;animation:pulse 2s infinite">● LIVE</span></h4>
+    <div class="telemetry-grid" id="telemetryGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.75rem"></div>
+    <div style="margin-top:0.75rem;font-size:0.65rem;color:var(--text-muted);text-align:center">Refreshes every 3 seconds.</div>
+  </div>
+
+  <!-- Inventory -->
+  <div class="tab-panel" id="dash-inventory">
+    <div class="flex-between" style="margin-bottom:0.6rem">
+      <h4 style="font-size:0.75rem;text-transform:uppercase;font-weight:700;letter-spacing:0.5px">Stock Levels</h4>
+      <button class="btn btn-sm btn-success" onclick="openModal('restock')">Restock</button>
+    </div>
+    <div id="inventoryList" style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.6rem 0.85rem"></div>
+    <div style="margin-top:0.6rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.65rem;max-height:130px;overflow-y:auto">
+      <h5 style="font-size:0.62rem;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.35rem;letter-spacing:0.5px">Movements</h5>
+      <div id="stockMovementLog" style="font-size:0.7rem"></div>
+    </div>
+  </div>
+
+  <!-- Bookings -->
+  <div class="tab-panel" id="dash-bookings">
+    <div class="flex-between" style="margin-bottom:0.6rem">
+      <h4 style="font-size:0.75rem;text-transform:uppercase;font-weight:700;letter-spacing:0.5px">Machine Bookings</h4>
+      <div class="gap-sm">
+        <button class="btn btn-sm btn-outline" onclick="shiftWeek(-7)">← Prev</button>
+        <span style="font-size:0.7rem;color:var(--text-muted);font-weight:600" id="bookingWeekLabel">This Week</span>
+        <button class="btn btn-sm btn-outline" onclick="shiftWeek(7)">Next →</button>
+      </div>
+    </div>
+    <div style="margin-bottom:0.5rem;font-size:0.7rem;color:var(--text-muted);text-align:center">
+      Click a day → select machine → book or cancel.
+    </div>
+    <div id="bookingCalendar" style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.75rem"></div>
+  </div>
+
+  <!-- Projects -->
+  <div class="tab-panel" id="dash-projects">
+    <div class="flex-between" style="margin-bottom:0.6rem">
+      <h4 style="font-size:0.75rem;text-transform:uppercase;font-weight:700;letter-spacing:0.5px">Project Library</h4>
+      <div class="gap-sm">
+        <button class="btn btn-sm" onclick="saveCurrentProject()">Save</button>
+        <button class="btn btn-sm btn-outline" onclick="exportMyData()">My Data</button>
+      </div>
+    </div>
+    <div id="projectList" style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);min-height:80px;padding:0.45rem 0.75rem">
+      <div style="padding:0.75rem;font-size:0.78rem;text-align:center;color:var(--text-muted)">No projects yet.</div>
+    </div>
+  </div>
+
+  <!-- Analytics -->
+  <div class="tab-panel" id="dash-analytics">
+    <h4 style="font-size:0.75rem;text-transform:uppercase;margin-bottom:0.5rem;font-weight:700;letter-spacing:0.5px">Personal Usage Analytics</h4>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+      <div style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.75rem">
+        <h5 style="font-size:0.62rem;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.3rem;letter-spacing:0.5px">Jobs Per Day (7d)</h5>
+        <canvas id="jobsChart" height="130" style="width:100%;border-radius:var(--radius-sm);background:var(--bg)"></canvas>
+      </div>
+      <div style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.75rem">
+        <h5 style="font-size:0.62rem;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.3rem;letter-spacing:0.5px">Machine Distribution</h5>
+        <canvas id="machineChart" height="130" style="width:100%;border-radius:var(--radius-sm);background:var(--bg)"></canvas>
+      </div>
+    </div>
+    <div class="kpi-grid" style="margin-top:0.75rem">
+      <div class="kpi-card"><h4>Total Jobs</h4><p id="analyticsTotalJobs">0</p></div>
+      <div class="kpi-card"><h4>Total Hours</h4><p id="analyticsTotalHours">0</p></div>
+      <div class="kpi-card"><h4>Top Machine</h4><p id="analyticsTopMachine" style="font-size:0.8rem">&mdash;</p></div>
+      <div class="kpi-card"><h4>Total Spent</h4><p id="analyticsTotalSpent" style="font-size:0.8rem">HKD 0</p></div>
+    </div>
+  </div>
+
+  <!-- Notifications -->
+  <div class="tab-panel" id="dash-notifications">
+    <div class="flex-between" style="margin-bottom:0.6rem">
+      <h4 style="font-size:0.75rem;text-transform:uppercase;font-weight:700;letter-spacing:0.5px">Notifications <span id="notifBadge" class="hidden" style="background:var(--danger);color:#fff;border-radius:50%;padding:1px 6px;font-size:0.6rem;font-weight:700">0</span></h4>
+      <button class="btn btn-sm btn-outline" onclick="markAllNotifsRead()">Mark All Read</button>
+    </div>
+    <div id="notifList" style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);min-height:80px;padding:0.45rem 0.75rem">
+      <div style="padding:0.75rem;font-size:0.78rem;text-align:center;color:var(--text-muted)">No notifications.</div>
+    </div>
+  </div>
+
+  <!-- Favorites -->
+  <div class="tab-panel" id="dash-favorites">
+    <h4 style="font-size:0.75rem;text-transform:uppercase;margin-bottom:0.5rem;font-weight:700;letter-spacing:0.5px">Quick Favorites</h4>
+    <p style="font-size:0.7rem;color:var(--text-muted);margin-bottom:0.6rem">Save machine + material combos for one-click dispatch.</p>
+    <div id="favoritesList" style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);min-height:60px;padding:0.6rem 0.85rem;margin-bottom:0.65rem">
+      <div style="padding:0.75rem;font-size:0.78rem;text-align:center;color:var(--text-muted)">No favorites yet.</div>
+    </div>
+    <div class="gap-sm">
+      <input type="text" id="favNameInput" placeholder="Project name" style="flex:1;min-width:120px;padding:0.4rem 0.6rem;border:1px solid var(--border);border-radius:var(--radius-xs);font-size:0.78rem;background:var(--bg);color:var(--text)">
+      <select id="favMachineInput" style="padding:0.4rem;border:1px solid var(--border);border-radius:var(--radius-xs);font-size:0.76rem;background:var(--bg);color:var(--text)">
+        <option value="Cricut Maker 3">Cricut</option>
+        <option value="Bambu Lab P2S">Bambu P2S</option>
+        <option value="Weedo Tina2S">Weedo</option>
+        <option value="Daja A6 Pro">Daja A6</option>
+      </select>
+      <button class="btn btn-sm" onclick="saveFavorite()">Save</button>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div class="tab-panel" id="dash-settings">
+    <h4 style="font-size:0.75rem;text-transform:uppercase;margin-bottom:0.5rem;font-weight:700;letter-spacing:0.5px">Preferences</h4>
+    <div style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.75rem 0.85rem">
+      <div class="setting-row">
+        <span>Default machine</span>
+        <select id="settingsDefaultMachine" onchange="saveSettings()" style="padding:0.25rem 0.45rem;border:1px solid var(--border);border-radius:var(--radius-xs);font-size:0.76rem;background:var(--bg);color:var(--text)">
+          <option value="Cricut Maker 3">Cricut Maker 3</option>
+          <option value="Bambu Lab P2S">Bambu Lab P2S</option>
+          <option value="Weedo Tina2S">Weedo Tina2S</option>
+          <option value="Daja A6 Pro">Daja A6 Pro</option>
+        </select>
+      </div>
+      <div class="setting-row"><span>In-app notifications</span><label class="toggle-switch"><input type="checkbox" id="settingsNotify" onchange="saveSettings()"><span class="toggle-slider"></span></label></div>
+      <div class="setting-row"><span>Job completion sound</span><label class="toggle-switch"><input type="checkbox" id="settingsSound" onchange="saveSettings()"><span class="toggle-slider"></span></label></div>
+      <div class="setting-row"><span>Auto-save projects</span><label class="toggle-switch"><input type="checkbox" id="settingsAutoSave" onchange="saveSettings()" checked><span class="toggle-slider"></span></label></div>
+      <div class="setting-row"><span>Compact mode</span><label class="toggle-switch"><input type="checkbox" id="settingsCompact" onchange="saveSettings()"><span class="toggle-slider"></span></label></div>
+      <div class="setting-row"><span>Stats tracking</span><label class="toggle-switch"><input type="checkbox" id="settingsStats" onchange="saveSettings()" checked><span class="toggle-slider"></span></label></div>
+    </div>
+    <h4 style="font-size:0.75rem;text-transform:uppercase;margin:0.75rem 0 0.5rem;font-weight:700;letter-spacing:0.5px">Edit My Profile</h4>
+    <div style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.75rem 0.85rem">
+      <div class="form-row">
+        <div class="form-group"><label>Name</label><input type="text" id="profileEditName"></div>
+        <div class="form-group"><label>Phone</label><input type="text" id="profileEditPhone"></div>
+      </div>
+      <div class="form-group"><label>Company / School</label><input type="text" id="profileEditCompany"></div>
+      <div class="form-group"><label>Project Details</label><textarea id="profileEditProject" rows="2"></textarea></div>
+      <button class="btn btn-sm" onclick="saveMyProfile()">Update Profile</button>
+    </div>
+  </div>
+</section>
+
+<!-- MACHINE DECK -->
+<section id="machinery-deck" class="hidden">
+  <h2 class="section-title">Production Toolhead Nodes</h2>
+  <p class="section-desc">Active hardware clusters with live status.</p>
+  <div class="machine-grid">
+    <div class="machine-card">
+      <div class="machine-meta"><span id="machStatus-cricut" class="status-pill status-online">Operational</span></div>
+      <div class="machine-img"><svg viewBox="0 0 180 100"><rect x="10" y="10" width="160" height="75" rx="6" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/><rect x="30" y="28" width="120" height="6" rx="2" fill="#3b82f6"/><rect x="40" y="40" width="100" height="6" rx="2" fill="#38bdf8"/><rect x="50" y="52" width="80" height="6" rx="2" fill="#3b82f6" opacity=".6"/><circle cx="90" cy="78" r="6" fill="#22c55e"/><text x="90" y="6" text-anchor="middle" fill="#64748b" font-size="6">Cricut Maker 3</text></svg></div>
+      <h3>Cricut Maker 3</h3>
+      <p class="machine-desc">High-torque blade plotter for precision vinyl and composites. 30.5cm cut width, 5kg force.</p>
+      <a href="https://calendly.com/isaacchan1804/cricut-maker-3-vinyl-cutter-bookin" target="_blank" rel="noopener" class="btn btn-sm">Reserve</a>
+    </div>
+    <div class="machine-card">
+      <div class="machine-meta"><span id="machStatus-bambu" class="status-pill status-online">Operational</span></div>
+      <div class="machine-img"><svg viewBox="0 0 180 100"><rect x="25" y="6" width="130" height="82" rx="6" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/><rect x="35" y="20" width="40" height="40" rx="4" fill="#3b82f6" opacity=".3" stroke="#3b82f6" stroke-width="1.5"/><rect x="105" y="20" width="40" height="40" rx="4" fill="#38bdf8" opacity=".3" stroke="#38bdf8" stroke-width="1.5"/><rect x="55" y="70" width="70" height="4" rx="2" fill="#64748b"/><circle cx="90" cy="40" r="9" fill="#22c55e" opacity=".8"/><text x="90" y="4" text-anchor="middle" fill="#64748b" font-size="6">Bambu Lab P2S</text></svg></div>
+      <h3>Bambu Lab P2S</h3>
+      <p class="machine-desc">Enclosed CoreXY, 256mm³, AI spaghetti detection, lidar first-layer scan, 500mm/s.</p>
+      <a href="https://calendly.com/isaacchan1804/bambu-lab-p2s-3d-printer-bookin" target="_blank" rel="noopener" class="btn btn-sm">Reserve</a>
+    </div>
+    <div class="machine-card">
+      <div class="machine-meta"><span id="machStatus-weedo" class="status-pill status-online">Operational</span></div>
+      <div class="machine-img"><svg viewBox="0 0 180 100"><rect x="30" y="10" width="120" height="72" rx="6" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/><rect x="45" y="28" width="90" height="30" rx="3" fill="#3b82f6" opacity=".15" stroke="#3b82f6" stroke-width="1"/><path d="M45 43 L135 43" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4 3"/><rect x="65" y="66" width="50" height="3" rx="2" fill="#64748b"/><circle cx="90" cy="36" r="4" fill="#22c55e"/><text x="90" y="6" text-anchor="middle" fill="#64748b" font-size="6">Weedo Tina2S</text></svg></div>
+      <h3>Weedo Tina2S</h3>
+      <p class="machine-desc">Compact printer for fast iterative verification runs. 100mm³, PLA/PETG/TPU.</p>
+      <a href="https://calendly.com/isaacchan1804/weedo-tina2s-3d-printer-bookin" target="_blank" rel="noopener" class="btn btn-sm">Reserve</a>
+    </div>
+    <div class="machine-card">
+      <div class="machine-meta"><span id="machStatus-daja" class="status-pill status-online">Operational</span></div>
+      <div class="machine-img"><svg viewBox="0 0 180 100"><rect x="10" y="6" width="160" height="82" rx="6" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/><rect x="20" y="16" width="140" height="60" rx="3" fill="#090d16" opacity=".8"/><line x1="30" y1="46" x2="150" y2="46" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6 3"/><circle cx="90" cy="46" r="5" fill="#ef4444" opacity=".8"/><rect x="50" y="37" width="80" height="18" rx="2" fill="none" stroke="#eab308" stroke-width="1" stroke-dasharray="3 3"/><text x="90" y="4" text-anchor="middle" fill="#64748b" font-size="6">Daja A6 Pro</text></svg></div>
+      <h3>Daja A6 Pro</h3>
+      <p class="machine-desc">5.5W diode vector laser cutter for wood, polymer, marking. 130×90mm work area.</p>
+      <a href="https://calendly.com/isaacchan1804/daja-a6-pro-diode-laser-bookin" target="_blank" rel="noopener" class="btn btn-sm">Reserve</a>
+    </div>
+  </div>
+</section>
+
+<!-- MAINTENANCE -->
+<section id="maintenanceWorkspaceSection" class="section-card hidden">
+  <h2 class="section-title">Toolhead Diagnostics</h2>
+  <p class="section-desc">Admin maintenance node.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;margin-bottom:1.5rem">
+    <div style="background:var(--bg);padding:0.75rem;border:1px solid var(--border);border-radius:var(--radius-sm)">
+      <h4 style="font-size:0.68rem;text-transform:uppercase;margin-bottom:0.5rem;font-weight:700;letter-spacing:0.5px">Cricut Maker 3</h4>
+      <select id="maintStatus-cricut" style="padding:0.35rem;width:100%;border-radius:var(--radius-xs);border:1px solid var(--border);background:var(--surface);color:var(--text)" onchange="setMachineState('cricut',this.value)"><option value="Operational">Online</option><option value="Maintenance">Maint</option><option value="Offline">Offline</option></select>
+    </div>
+    <div style="background:var(--bg);padding:0.75rem;border:1px solid var(--border);border-radius:var(--radius-sm)">
+      <h4 style="font-size:0.68rem;text-transform:uppercase;margin-bottom:0.5rem;font-weight:700;letter-spacing:0.5px">Bambu Lab P2S</h4>
+      <select id="maintStatus-bambu" style="padding:0.35rem;width:100%;border-radius:var(--radius-xs);border:1px solid var(--border);background:var(--surface);color:var(--text)" onchange="setMachineState('bambu',this.value)"><option value="Operational">Online</option><option value="Maintenance">Maint</option><option value="Offline">Offline</option></select>
+    </div>
+    <div style="background:var(--bg);padding:0.75rem;border:1px solid var(--border);border-radius:var(--radius-sm)">
+      <h4 style="font-size:0.68rem;text-transform:uppercase;margin-bottom:0.5rem;font-weight:700;letter-spacing:0.5px">Weedo Tina2S</h4>
+      <select id="maintStatus-weedo" style="padding:0.35rem;width:100%;border-radius:var(--radius-xs);border:1px solid var(--border);background:var(--surface);color:var(--text)" onchange="setMachineState('weedo',this.value)"><option value="Operational">Online</option><option value="Maintenance">Maint</option><option value="Offline">Offline</option></select>
+    </div>
+    <div style="background:var(--bg);padding:0.75rem;border:1px solid var(--border);border-radius:var(--radius-sm)">
+      <h4 style="font-size:0.68rem;text-transform:uppercase;margin-bottom:0.5rem;font-weight:700;letter-spacing:0.5px">Daja A6 Pro</h4>
+      <select id="maintStatus-daja" style="padding:0.35rem;width:100%;border-radius:var(--radius-xs);border:1px solid var(--border);background:var(--surface);color:var(--text)" onchange="setMachineState('daja',this.value)"><option value="Operational">Online</option><option value="Maintenance">Maint</option><option value="Offline">Offline</option></select>
+    </div>
+  </div>
+
+  <!-- Maintenance Log -->
+  <div style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius);padding:1rem">
+    <div class="flex-between" style="margin-bottom:0.5rem">
+      <h4 style="font-size:0.75rem;text-transform:uppercase;font-weight:700;letter-spacing:0.5px">Maintenance Log</h4>
+      <button class="btn btn-sm btn-accent" onclick="openModal('addMaintLog')">+ Log Entry</button>
+    </div>
+    <div id="maintLogList" style="max-height:200px;overflow-y:auto">
+      <div style="padding:0.75rem;font-size:0.78rem;text-align:center;color:var(--text-muted)">No maintenance entries yet.</div>
+    </div>
+  </div>
+</section>
+
+<!-- KNOWLEDGE BASE -->
+<section id="knowledge-base" class="section-card hidden">
+  <h2 class="section-title">Knowledge Base</h2>
+  <p class="section-desc">Troubleshooting guides, best practices, and machine tips.</p>
+  <div class="tab-bar" id="kbTabs">
+    <button class="tab-btn active" data-tab="kb-general">General</button>
+    <button class="tab-btn" data-tab="kb-cricut">Cricut</button>
+    <button class="tab-btn" data-tab="kb-bambu">Bambu P2S</button>
+    <button class="tab-btn" data-tab="kb-weedo">Weedo</button>
+    <button class="tab-btn" data-tab="kb-daja">Daja A6</button>
+  </div>
+  <div class="tab-panel active" id="kb-general">
+    <div id="kbArticlesGeneral" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0.75rem"></div>
+  </div>
+  <div class="tab-panel" id="kb-cricut"><div id="kbArticlesCricut" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0.75rem"></div></div>
+  <div class="tab-panel" id="kb-bambu"><div id="kbArticlesBambu" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0.75rem"></div></div>
+  <div class="tab-panel" id="kb-weedo"><div id="kbArticlesWeedo" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0.75rem"></div></div>
+  <div class="tab-panel" id="kb-daja"><div id="kbArticlesDaja" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0.75rem"></div></div>
+</section>
+
+<!-- DOCS -->
+<section id="manual-hub" class="section-card hidden">
+  <h2 class="section-title">Documentation Hub</h2>
+  <p class="section-desc">Machine specifications and manuals.</p>
+  <div style="background:var(--bg);padding:1rem;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:0.85rem">
+    <h4 style="font-size:0.75rem;text-transform:uppercase;margin-bottom:0.5rem;color:var(--primary);font-weight:800;letter-spacing:0.5px">Select Manual</h4>
+    <select id="pdfSelectionEngine" style="width:100%;padding:0.5rem;border-radius:var(--radius-xs);border:1px solid var(--border);font-weight:600;background:var(--surface);color:var(--text)" onchange="loadPdf(this.value)">
+      <option value="cricut">Cricut Maker 3</option>
+      <option value="daja">Daja A6 Pro</option>
+      <option value="weedo">Weedo Tina2S</option>
+      <option value="bambulab">BBL P2S</option>
+    </select>
+  </div>
+  <div style="position:relative;width:100%;height:480px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--bg)">
+    <iframe id="pdfDisplayFrameNode" class="hidden" style="width:100%;height:100%;border:none;display:none"></iframe>
+    <div id="pdfPlaceholder" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--text-muted);gap:0.65rem;text-align:center;padding:2rem">
+      <div style="font-size:2.3rem">📄</div>
+      <p style="font-size:0.8rem;max-width:280px">Select a manual above.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section id="studio-enquiry" class="section-card">
+  <h2 class="section-title">Enquiry Support</h2>
+  <p class="section-desc">File a routing question or assistance ticket.</p>
+  <div class="form-group"><label for="enquiryTitle">Topic</label><input type="text" id="enquiryTitle" placeholder="e.g. Toolhead calibration timeout"></div>
+  <div class="form-group"><label for="enquiryBody">Description</label><textarea id="enquiryBody" rows="4" placeholder="Detail hardware observations or software errors..."></textarea></div>
+  <button class="btn btn-sm" onclick="submitTicket()">Submit</button>
+  <div class="ticket-list" id="ticketQueueDisplay" style="margin-top:0.75rem"><div style="padding:1rem;font-size:0.78rem;text-align:center;color:var(--text-muted)">No active enquiries.</div></div>
+</section>
+
+<!-- ADMIN -->
+<section id="rootAdminWorkspace" class="section-card admin-section hidden">
+  <div class="flex-between" style="margin-bottom:1rem">
+    <div>
+      <h3 style="color:var(--danger);text-transform:uppercase;font-size:1rem;font-weight:800;letter-spacing:1px">Master Operations</h3>
+      <p style="color:var(--text-muted);font-size:0.72rem">Root supervisor panel.</p>
+    </div>
+    <div class="gap-sm">
+      <button class="btn btn-success btn-sm" onclick="openModal('signup')">Add</button>
+      <button class="btn btn-accent btn-sm" onclick="openModal('quickadd')">Quick Add</button>
+      <button class="btn btn-accent btn-sm" onclick="exportJSON()">Backup</button>
+      <button class="btn btn-sm" style="background:#0284c7" onclick="exportCSV()">CSV</button>
+      <button class="btn btn-sm btn-outline" onclick="openModal('impersonate')">Impersonate</button>
+    </div>
+  </div>
+
+  <!-- Health -->
+  <div style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius);padding:0.85rem;margin-bottom:1rem">
+    <div class="flex-between" style="margin-bottom:0.5rem">
+      <h4 style="font-size:0.7rem;text-transform:uppercase;font-weight:700;letter-spacing:0.5px">System Health <span id="healthPulse" style="font-size:0.6rem;color:var(--success)">● All Good</span></h4>
+      <button class="btn btn-sm btn-outline" onclick="runHealthCheck()">Run Check</button>
+    </div>
+    <div id="healthGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.65rem"></div>
+  </div>
+
+  <!-- Announce -->
+  <div style="background:rgba(234,179,8,0.03);border:1px solid var(--warning);border-radius:var(--radius);padding:0.85rem;margin-bottom:1rem">
+    <h4 style="font-size:0.7rem;text-transform:uppercase;margin-bottom:0.4rem;color:var(--warning);font-weight:700;letter-spacing:0.5px">Broadcast Announcement</h4>
+    <div class="gap-sm">
+      <input type="text" id="announcementInput" placeholder="Message to all members..." style="flex:1;padding:0.4rem 0.6rem;border:1px solid var(--border);border-radius:var(--radius-xs);font-size:0.78rem;background:var(--bg);color:var(--text)">
+      <button class="btn btn-sm" onclick="broadcastAnnouncement()">Send</button>
+      <button class="btn btn-sm btn-outline" onclick="clearAnnouncement()">Clear</button>
+    </div>
+    <div id="announcementPreview" style="font-size:0.7rem;margin-top:0.3rem;color:var(--text-muted)"></div>
+  </div>
+
+  <!-- Emergency -->
+  <div style="background:rgba(239,68,68,0.03);border:2px dashed var(--danger);border-radius:var(--radius);padding:0.85rem;margin-bottom:1rem">
+    <div class="gap-sm" style="align-items:center">
+      <h4 style="font-size:0.7rem;text-transform:uppercase;color:var(--danger);font-weight:900;margin-right:0.5rem;letter-spacing:0.5px">Controls</h4>
+      <button class="btn btn-danger btn-sm" onclick="emergencyFreeze()">Freeze All</button>
+      <button class="btn btn-accent btn-sm" onclick="resetAllPasswords()">Reset PW</button>
+      <button class="btn btn-sm" style="background:#475569" onclick="refreshAdminMetrics()">Refresh</button>
+      <button class="btn btn-sm btn-outline" onclick="clearAllActivityLogs()">Activity</button>
+      <button class="btn btn-sm btn-outline" onclick="openModal('restore')">Restore</button>
+    </div>
+  </div>
+
+  <!-- Feed -->
+  <div style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius);padding:0.75rem 0.85rem;margin-bottom:1rem">
+    <div class="flex-between" style="margin-bottom:0.4rem">
+      <h4 style="font-size:0.7rem;text-transform:uppercase;color:var(--text-muted);font-weight:700;letter-spacing:0.5px">Activity Feed</h4>
+      <div class="gap-sm">
+        <select id="feedFilter" onchange="renderActivityFeed()" style="padding:0.25rem;font-size:0.65rem;border:1px solid var(--border);border-radius:var(--radius-xs);background:var(--bg);color:var(--text)"><option value="all">All</option><option value="auth">Auth</option><option value="machine">Machine</option><option value="admin">Admin</option><option value="material">Material</option><option value="finance">Finance</option></select>
+        <button class="btn btn-xs btn-outline" onclick="clearActivityFeed()">Clear</button>
+      </div>
+    </div>
+    <div class="feed-list" id="activityFeedList"><div style="padding:0.65rem;font-size:0.78rem;text-align:center;color:var(--text-muted)">No activity.</div></div>
+  </div>
+
+  <!-- KPI -->
+  <div class="kpi-grid">
+    <div class="kpi-card"><h4>Members</h4><p id="metricTotal">0</p></div>
+    <div class="kpi-card"><h4>Standard</h4><p id="metricCreator">0</p></div>
+    <div class="kpi-card"><h4>Students</h4><p id="metricStudent">0</p></div>
+    <div class="kpi-card"><h4>Partners</h4><p id="metricPartner">0</p></div>
+    <div class="kpi-card"><h4>Revenue</h4><p id="metricRevenue">HKD 0</p></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;background:var(--surface-raised);border:1px solid var(--border);padding:0.85rem;border-radius:var(--radius-sm);margin-bottom:1rem">
+    <div>
+      <h5 style="font-size:0.62rem;text-transform:uppercase;margin-bottom:0.4rem;color:var(--text-muted);letter-spacing:0.5px">Industry Breakdown</h5>
+      <div style="font-size:0.7rem;display:flex;flex-direction:column;gap:5px">
+        <div>Education <div class="chart-bar"><div class="chart-fill" id="barIndEdu" style="width:0%"></div></div></div>
+        <div>Engineering <div class="chart-bar"><div class="chart-fill" id="barIndEng" style="width:0%"></div></div></div>
+        <div>Creative Arts <div class="chart-bar"><div class="chart-fill" id="barIndArt" style="width:0%"></div></div></div>
+        <div>Robotics <div class="chart-bar"><div class="chart-fill" id="barIndRob" style="width:0%"></div></div></div>
+      </div>
+    </div>
+    <div>
+      <h5 style="font-size:0.62rem;text-transform:uppercase;margin-bottom:0.4rem;color:var(--text-muted);letter-spacing:0.5px">Demographics</h5>
+      <p style="font-size:0.75rem;margin-bottom:0.15rem">Avg Age: <strong id="lblAverageAge" style="color:var(--primary)">0</strong></p>
+      <p style="font-size:0.75rem">Minors: <strong id="lblMinorCount" style="color:var(--warning)">0</strong></p>
+      <p style="font-size:0.75rem">Top Industry: <strong id="lblTopIndustry">&mdash;</strong></p>
+    </div>
+  </div>
+
+  <!-- Door logs -->
+  <div style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius);padding:0.85rem;margin-bottom:1rem">
+    <div class="flex-between" style="margin-bottom:0.4rem">
+      <h4 style="font-size:0.7rem;text-transform:uppercase;color:var(--danger);font-weight:800;letter-spacing:0.5px">Door Access Log</h4>
+      <button class="btn btn-xs btn-accent" onclick="clearDoorLogs()">Clear</button>
+    </div>
+    <div class="table-wrap" style="max-height:160px;overflow-y:auto"><table><thead><tr><th>Time</th><th>Name</th><th>Serial</th><th>Protocol</th><th>Tier</th></tr></thead><tbody id="adminDoorLogsTableBody"><tr><td colspan="5" style="text-align:center;color:var(--text-muted)">No entries.</td></tr></tbody></table></div>
+  </div>
+
+  <!-- Bulk + Search -->
+  <div class="flex-between" style="margin-bottom:0.75rem">
+    <div class="gap-sm" style="align-items:center">
+      <label class="toggle-switch"><input type="checkbox" id="bulkSelectToggle" onchange="toggleBulkSelect()"><span class="toggle-slider"></span></label>
+      <span style="font-size:0.62rem;font-weight:700;color:var(--text-muted);text-transform:uppercase">Bulk</span>
+      <button class="btn btn-xs btn-danger" id="bulkDeleteBtn" onclick="bulkDeleteMembers()" disabled>Delete</button>
+      <button class="btn btn-xs btn-outline" id="bulkExportBtn" onclick="bulkExportSelected()" disabled>Export</button>
+      <span id="bulkCount" style="font-size:0.7rem;color:var(--text-muted)"></span>
+    </div>
+    <div class="gap-sm">
+      <input type="text" id="adminDatabaseSearch" class="admin-search" placeholder="Search name, email, ID..." oninput="adminPage=0;renderAdminTable()" style="padding:0.4rem 0.6rem;border:1px solid var(--border);border-radius:var(--radius-xs);font-size:0.76rem;background:var(--bg);color:var(--text);min-width:180px">
+      <select id="filterTierSelect" onchange="adminPage=0;renderAdminTable()" style="padding:0.35rem;font-size:0.7rem;border:1px solid var(--border);border-radius:var(--radius-xs);background:var(--bg);color:var(--text)"><option value="">All</option><option value="Creator Plan">Standard</option><option value="Student Creator Plan">Student</option><option value="Partner Creator Plan">Partner</option></select>
+      <select id="sortOrderSelect" onchange="adminPage=0;renderAdminTable()" style="padding:0.35rem;font-size:0.7rem;border:1px solid var(--border);border-radius:var(--radius-xs);background:var(--bg);color:var(--text)"><option value="id-asc">ID</option><option value="name-asc">A-Z</option><option value="name-desc">Z-A</option></select>
+    </div>
+  </div>
+
+  <div class="table-wrap" style="max-height:420px;overflow-y:auto">
+    <table><thead><tr id="bulkHeader" style="display:none"><th style="width:32px;text-align:center"><input type="checkbox" id="bulkSelectAll" onchange="toggleBulkSelectAll(this.checked)"></th><th>ID</th><th>Name</th><th>Contact</th><th>Clearance</th><th>Password</th><th>Actions</th></tr><tr id="normalHeader"><th>ID</th><th>Name</th><th>Contact</th><th>Clearance</th><th>Password</th><th>Actions</th></tr></thead><tbody id="adminUserTableBody"></tbody></table>
+  </div>
+  <div class="pagination" id="adminPagination"></div>
+</section>
+
+</main>
+
+<div class="modal-overlay" id="modalOverlayPortal" onclick="closeModalBackdrop(event)" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal" id="modalContainerDynamic"><button class="modal-close" onclick="closeModal()">&times;</button><div id="modalInjectionBody"></div></div>
+</div>
+
+<footer>
+  <span class="footer-brand">Kinetic Industries</span> Ltd. &copy; 2026 · Maker Studio v9.0 · All rights reserved.
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════
+// KINETIC INDUSTRIES v9.0 — APPLICATION SCRIPT
+// ═══════════════════════════════════════════════════
+
+// ─── SOUND ENGINE ──────────────────────────────────
+var AudioCtx = window.AudioContext || window.webkitAudioContext;
+var audioCtx = null;
+function ensureAudio() { if (!audioCtx) audioCtx = new AudioCtx(); return audioCtx; }
+function playBeep(freq, dur, type, vol) {
+  if (!type) type = 'square'; if (!vol) vol = 0.08; if (!dur) dur = 0.12;
+  try { var ctx = ensureAudio(); var o = ctx.createOscillator(); var g = ctx.createGain();
+    o.type = type; o.frequency.value = freq; g.gain.value = vol;
+    o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + dur);
+  } catch(e) {}
+}
+function playJobComplete() {
+  playBeep(880, 0.1, 'square', 0.06);
+  setTimeout(function() { playBeep(1100, 0.15, 'square', 0.06); }, 100);
+  setTimeout(function() { playBeep(1320, 0.2, 'triangle', 0.05); }, 200);
+}
+function playClick() { playBeep(600, 0.05, 'sine', 0.04); }
+function playError() { playBeep(200, 0.2, 'sawtooth', 0.06); }
+
+// ─── CONFETTI ──────────────────────────────────────
+function spawnConfetti() {
+  var c = document.getElementById('confettiContainer');
+  var colors = ['#3b82f6','#22c55e','#eab308','#ef4444','#8b5cf6','#38bdf8','#f472b6'];
+  for (var i = 0; i < 60; i++) {
+    var p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.left = Math.random()*100+'%';
+    p.style.top = -(Math.random()*20)+'px';
+    p.style.background = colors[Math.floor(Math.random()*colors.length)];
+    p.style.width = (4+Math.random()*8)+'px';
+    p.style.height = (4+Math.random()*8)+'px';
+    p.style.animationDuration = (1.5+Math.random()*2)+'s';
+    p.style.animationDelay = Math.random()*0.5+'s';
+    p.style.borderRadius = Math.random()>0.5?'50%':'2px';
+    c.appendChild(p);
+    setTimeout(function() { p.remove(); }, 3500);
+  }
+}
+
+// ─── QR CODE GENERATOR ─────────────────────────────
+function generateQR(text, canvas) {
+  var ctx = canvas.getContext('2d');
+  var size = canvas.width; var moduleCount = 21; var moduleSize = Math.floor(size/moduleCount);
+  ctx.clearRect(0,0,size,size);
+  ctx.fillStyle = '#fff'; ctx.fillRect(0,0,size,size);
+
+  // Simple hash-based pseudo-QR pattern
+  var hash = 0;
+  for (var i = 0; i < text.length; i++) { hash = ((hash<<5)-hash)+text.charCodeAt(i); hash |= 0; }
+  var grid = [];
+  for (var y = 0; y < moduleCount; y++) {
+    grid[y] = [];
+    for (var x = 0; x < moduleCount; x++) {
+      // Finder patterns (top-left, top-right, bottom-left)
+      if ((x<7&&y<7) || (x>moduleCount-8&&y<7) || (x<7&&y>moduleCount-8)) {
+        var fx = (x<7) ? x : (x>moduleCount-8 ? x-(moduleCount-7) : x);
+        var fy = (y<7) ? y : (y>moduleCount-8 ? y-(moduleCount-7) : y);
+        grid[y][x] = (fx===0||fx===6||fy===0||fy===6) || (fx>=2&&fx<=4&&fy>=2&&fy<=4);
+      } else if (x===6 || y===6) {
+        grid[y][x] = (x+y)%2===0;
+      } else {
+        // Data: use hash and position
+        var bit = ((hash >> ((x*y + y*7 + x*13) % 32)) & 1);
+        grid[y][x] = (bit === 1) || ((x+y)%5===0);
+      }
+    }
+  }
+
+  ctx.fillStyle = '#0f172a';
+  for (var y = 0; y < moduleCount; y++) {
+    for (var x = 0; x < moduleCount; x++) {
+      if (grid[y][x]) {
+        ctx.fillRect(x*moduleSize, y*moduleSize, moduleSize, moduleSize);
+      }
+    }
+  }
+  // Quiet zone
+  ctx.strokeStyle = '#fff'; ctx.lineWidth = moduleSize*2;
+  ctx.strokeRect(moduleSize, moduleSize, size-moduleSize*2, size-moduleSize*2);
+}
+
+// ─── INIT ──────────────────────────────────────────
+var adminPage = 0, pageSize = 20;
+var cmdHistory = [], cmdHistoryIdx = -1;
+
+function init() {
+  getRegistry();
+  initTheme();
+  verifySessionOnLoad();
+  renderAdminTable();
+  ['cricut','bambu','weedo','daja'].forEach(function(k) {
+    var s = document.getElementById('maintStatus-'+k);
+    if (s) s.value = 'Operational';
+  });
+  updateClock();
+  setInterval(updateClock, 1000);
+  initKB();
+  renderMaintLog();
+  updateHeroStats();
+}
+
+function updateClock() {
+  var now = new Date();
+  var el = document.getElementById('navClock');
+  if (el) el.textContent = now.toLocaleTimeString('en-GB');
+}
+
+// ─── THEME ─────────────────────────────────────────
+function toggleTheme() {
+  var h = document.documentElement;
+  var b = document.getElementById('themeToggleLabel');
+  if (h.getAttribute('data-theme') === 'dark') {
+    h.setAttribute('data-theme', 'light');
+    b.textContent = '☀️';
+  } else {
+    h.setAttribute('data-theme', 'dark');
+    b.textContent = '🌙';
+  }
+  localStorage.setItem('kinetic_theme', h.getAttribute('data-theme'));
+  if (currentUser) { renderAnalytics(); }
+}
+
+function initTheme() {
+  var saved = localStorage.getItem('kinetic_theme');
+  var btn = document.getElementById('themeToggleLabel');
+  if (saved) {
+    document.documentElement.setAttribute('data-theme', saved);
+    btn.textContent = saved === 'dark' ? '🌙' : '☀️';
+  }
+}
+
+// ─── MOBILE NAV ────────────────────────────────────
+function toggleMobileNav() {
+  var n = document.getElementById('navLinks');
+  var o = document.getElementById('mobileOverlay');
+  var b = document.getElementById('hamburgerBtn');
+  n.classList.toggle('open');
+  o.classList.toggle('open');
+  b.classList.toggle('active');
+}
+function closeMobileNav() {
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('mobileOverlay').classList.remove('open');
+  document.getElementById('hamburgerBtn').classList.remove('active');
+}
+
+// ─── TOAST ─────────────────────────────────────────
+function toast(msg, type, dur) {
+  if (!type) type = 'info'; if (!dur) dur = 4000;
+  var c = document.getElementById('toastContainer');
+  if (!c) return;
+  var icons = {success:'✓', error:'✗', warning:'⚠', info:'ℹ'};
+  var el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = '<span style="font-weight:700;color:var(--'+(type==='success'?'success':type==='error'?'danger':type==='warning'?'warning':'primary')+')">'+(icons[type]||'ℹ')+'</span><span>'+msg+'</span>';
+  c.appendChild(el);
+  setTimeout(function() { el.classList.add('removing'); setTimeout(function() { el.remove(); }, 300); }, dur);
+  if (type === 'error') playError(); else playClick();
+}
+
+// ─── DATA ──────────────────────────────────────────
+var SK = 'kinetic_matrix_registry_v9';
+
+function getRegistry() {
+  var d = localStorage.getItem(SK);
+  if (!d) {
+    // Migrate v8 data if exists
+    var old = localStorage.getItem('kinetic_matrix_registry_v8');
+    if (old) { try { localStorage.setItem(SK, old); return JSON.parse(old); } catch(e) {} }
+    var l = generateAccounts();
+    localStorage.setItem(SK, JSON.stringify(l));
+    return l;
+  }
+  try { return JSON.parse(d); } catch(e) { return generateAccounts(); }
+}
+
+function saveRegistry(arr) { localStorage.setItem(SK, JSON.stringify(arr)); }
+
+var BASE_USERS = [
+  {id:10001,name:'Root Supervisor',email:'root@kinetic.com',phone:'+852 9000 0001',tier:'Admin Override',duration:'Permanent Pass',password:'admin123',age:'32',under18:'No',nationality:'Hong Kong',company:'Kinetic Industries HQ',partnerOrg:'',projectDetails:'Supervising system configurations.',industry:'Engineering / Technology',referral:['Startup community'],paymentMethod:'Corporate Bank Transfer'},
+  {id:10002,name:'Isaac Chan',email:'isaac.chan@studio.hk',phone:'+852 6111 2222',tier:'Student Creator Plan',duration:'Permanent Pass',password:'password123',age:'15',under18:'Yes',nationality:'Hong Kong',company:'Island School',partnerOrg:'',projectDetails:'VEX IQ competitive robot chassis builds. F1 in Schools portfolio.',industry:'Education / Student',referral:['Friends and family','Social media'],paymentMethod:'Octopus / FPS'},
+  {id:10003,name:'Chloe Wong',email:'chloe.wong@edu.hk',phone:'+852 9123 4567',tier:'Student Creator Plan',duration:'6 Months Pass',password:'chloemaker99',age:'16',under18:'Yes',nationality:'British',company:'HKIS',partnerOrg:'',projectDetails:'Drone shell prototyping.',industry:'Education / Student',referral:['Social media'],paymentMethod:'Pay in Cash'},
+  {id:10004,name:'Derek Lau',email:'derek.lau@designworks.com',phone:'+852 6234 5678',tier:'Creator Plan',duration:'1 Month Pass',password:'dlau_proto7',age:'28',under18:'No',nationality:'Canadian',company:'Lau Design Studio',partnerOrg:'',projectDetails:'Engraving timber panels.',industry:'Creative Arts / Design',referral:['Startup community'],paymentMethod:'Credit Card'}
+];
+
+function generateAccounts() {
+  var list = BASE_USERS.slice();
+  var fN = ['Anson','Tiffany','Hayden','Hillary','Marcus','Carson','Valerie','Kingsley','Adrian','Natasha','Gavin','Eunice','CY','Bosco','Janice','Kelvin','Fiona','Vincent','Stephanie','Justin'];
+  var sN = ['Wong','Chan','Cheung','Lee','Ho','Ng','Lau','Lam','Tse','Leung','Kwok','Chow','Mo','Ip','Shum','Mak','Tang','Yeung','Tam','Lai'];
+  var sch = ["King's College","HKU Engineering","CUHK Science Hub","PolyU Design","Diocesan Boys'","La Salle College","ESF West Island","Shatin College"];
+  var co = ['Cyberport Prototyping','Science Park Lab','InnoTech Maker Lab','HK Engineering Hub','Vector Frame Studios','Freelance Automation'];
+  var partners = ['Robotics Hub Ltd','InnoTech Group','MakersHK Channel','HK Tech Accelerator'];
+  var ind = ['Education / Student','Engineering / Technology','Creative Arts / Design','Robotics / Automation'];
+  var pas = ['1 Day Pass','7 Days Pass','1 Month Pass','3 Months Pass','6 Months Pass','12 Months Pass','Permanent Pass'];
+  var tiers = ['Creator Plan','Student Creator Plan','Partner Creator Plan'];
+  var pay = ['Octopus / FPS','Credit Card','Pay in Cash'];
+  var proj = ['Building lightweight composite structures.','Calibrating spatial robotics modules.','Plotting adhesive decals on vinyl.','Multi-material design checks on toolheads.','Engraving vectors onto timber stock.','Brackets for STEM F1 entry.','Custom casing for microcontrollers.','Multi-layer templates and mockups.'];
+  var nid = 10005;
+  for (var i = 1; i <= 100; i++) {
+    var fn = fN[Math.floor(Math.random()*fN.length)];
+    var sn = sN[Math.floor(Math.random()*sN.length)];
+    var name = fn+' '+sn;
+    var slug = fn.toLowerCase()+'.'+sn.toLowerCase()+i;
+    var isStudent = Math.random() > 0.5;
+    var age = isStudent ? Math.floor(Math.random()*7)+13 : Math.floor(Math.random()*25)+21;
+    var tier = isStudent ? 'Student Creator Plan' : tiers[Math.floor(Math.random()*tiers.length)];
+    if (tier === 'Student Creator Plan' && age >= 25) tier = 'Creator Plan';
+    if (tier === 'Partner Creator Plan' && isStudent) tier = 'Student Creator Plan';
+    var email = slug+'@'+(isStudent?(Math.random()>0.5?'connect.hku.hk':'link.cuhk.edu.hk'):'gmail.com');
+    var prefix = [5,6,9][Math.floor(Math.random()*3)];
+    var phone = '+852 '+prefix+String(Math.floor(1000000+Math.random()*9000000)).slice(0,7);
+    var org = isStudent ? sch[Math.floor(Math.random()*sch.length)] : co[Math.floor(Math.random()*co.length)];
+    var partner = tier === 'Partner Creator Plan' ? partners[Math.floor(Math.random()*partners.length)] : '';
+    var industry = isStudent ? 'Education / Student' : ind[Math.floor(Math.random()*ind.length)];
+    list.push({
+      id: nid, name: name, email: email, phone: phone,
+      tier: tier, duration: pas[Math.floor(Math.random()*pas.length)],
+      password: 'pass_'+fn.toLowerCase()+nid,
+      age: String(age), under18: age<18?'Yes':'No',
+      nationality: Math.random()>0.15?'Hong Kong':'Canadian',
+      company: org, partnerOrg: partner,
+      projectDetails: proj[Math.floor(Math.random()*proj.length)]+' Calibrated under HKD.',
+      industry: industry,
+      referral: ['Startup community','Social media'].slice(0,Math.floor(Math.random()*2)+1),
+      paymentMethod: pay[Math.floor(Math.random()*pay.length)]
+    });
+    nid++;
+  }
+  return list;
+}
+
+// ─── SESSION ───────────────────────────────────────
+var currentUser = null;
+function saveSession(u) { localStorage.setItem('kinetic_active_session_token', JSON.stringify(u)); }
+function clearSession() { localStorage.removeItem('kinetic_active_session_token'); }
+
+// ─── AUTH ──────────────────────────────────────────
+function triggerAuthenticationPipeline() {
+  var email = document.getElementById('loginEmailField').value.trim();
+  var pass = document.getElementById('loginPasswordField').value;
+  if (!email || !pass) { toast('Enter email and password.', 'warning'); return; }
+  var arr = getRegistry();
+  var u = null;
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].email.toLowerCase() === email.toLowerCase() && arr[i].password === pass) { u = arr[i]; break; }
+  }
+  if (!u) { toast('Invalid credentials.', 'error'); return; }
+  currentUser = u;
+  saveSession(u);
+  mountDashboard(u);
+  closeModal();
+  toast('Welcome, '+u.name, 'success');
+  logActivity('auth', u.name+' signed in');
+}
+
+function triggerAccountRegistrationPipeline() {
+  var get = function(id) { return document.getElementById(id); };
+  var name = get('regName').value.trim();
+  var email = get('regEmail').value.trim();
+  var phone = get('regPhone').value.trim();
+  var pass = get('regPassword').value;
+
+  // Validation
+  if (!name) { showFieldError('regName', 'Required'); return; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFieldError('regEmail', 'Valid email required'); return; }
+  if (!phone) { showFieldError('regPhone', 'Required'); return; }
+  if (!pass || pass.length < 4) { showFieldError('regPassword', 'Min 4 characters'); return; }
+
+  var arr = getRegistry();
+  var maxId = 10004;
+  for (var i = 0; i < arr.length; i++) { if (arr[i].id > maxId) maxId = arr[i].id; }
+  var nid = maxId + 1;
+  arr.push({
+    id: nid, name: name, email: email, phone: phone, password: pass,
+    age: get('regAge').value, under18: get('regUnder18').value,
+    nationality: get('regNationality').value.trim(),
+    company: get('regCompany').value.trim(), partnerOrg: get('regPartnerOrg').value.trim(),
+    projectDetails: get('regProjectDetails').value.trim(),
+    industry: get('regIndustry').value, tier: get('regTier').value,
+    duration: get('regDuration').value, paymentMethod: get('regPaymentMethod').value,
+    referral: []
+  });
+  saveRegistry(arr);
+  toast('Account created! ID: KI-'+nid, 'success');
+  renderAdminTable(); updateHeroStats();
+  closeModal();
+  logActivity('auth', 'New: '+name+' (KI-'+nid+')');
+  try {
+    fetch('https://formspree.io/f/mvzypoze', {
+      method: 'POST', headers: {'Accept':'application/json','Content-Type':'application/json'},
+      body: JSON.stringify({'Account ID':'KI-'+nid,'Name':name,'Email':email,'Phone':phone,'Pass Tier':get('regTier').value,'Duration':get('regDuration').value,'Payment Method':get('regPaymentMethod').value})
+    }).catch(function(){});
+  } catch(e) {}
+}
+
+function showFieldError(id, msg) {
+  var el = document.getElementById(id);
+  if (el) { el.classList.add('error'); el.focus(); }
+  toast(msg, 'error');
+  setTimeout(function() { if (el) el.classList.remove('error'); }, 2000);
+}
+
+function quickAddMember() {
+  var get = function(id) { return document.getElementById(id); };
+  var name = get('qaName').value.trim();
+  var email = get('qaEmail').value.trim();
+  var tier = get('qaTier').value;
+  var pass = get('qaPassword').value;
+  if (!name || !email || !pass) { toast('Name, email, and password required.', 'warning'); return; }
+  var arr = getRegistry();
+  var maxId = 10004;
+  for (var i = 0; i < arr.length; i++) { if (arr[i].id > maxId) maxId = arr[i].id; }
+  var nid = maxId + 1;
+  arr.push({
+    id: nid, name: name, email: email, phone: get('qaPhone').value.trim(),
+    tier: tier, duration: get('qaDuration').value, password: pass,
+    age: '', under18: 'No', nationality: '', company: '', partnerOrg: '',
+    projectDetails: '', industry: 'Engineering / Technology',
+    referral: [], paymentMethod: 'Credit Card'
+  });
+  saveRegistry(arr);
+  toast('Member KI-'+nid+' added.', 'success');
+  renderAdminTable(); updateHeroStats();
+  closeModal();
+  logActivity('admin', 'Quick add: '+name+' (KI-'+nid+')');
+  try {
+    fetch('https://formspree.io/f/mvzypoze', {
+      method: 'POST', headers: {'Accept':'application/json','Content-Type':'application/json'},
+      body: JSON.stringify({'Account ID':'KI-'+nid,'Name':name,'Email':email,'Phone':get('qaPhone').value,'Pass Tier':tier,'Duration':get('qaDuration').value,'Payment Method':'Credit Card'})
+    }).catch(function(){});
+  } catch(e) {}
+}
+
+// ─── ACTIVITY LOG ──────────────────────────────────
+function logActivity(type, desc) {
+  var logs = JSON.parse(localStorage.getItem('kinetic_activity_log_v9')||'[]');
+  logs.unshift({type: type, desc: desc, time: new Date().toLocaleString()});
+  if (logs.length > 200) logs.length = 200;
+  localStorage.setItem('kinetic_activity_log_v9', JSON.stringify(logs));
+  renderActivityFeed();
+}
+function renderActivityFeed() {
+  var el = document.getElementById('activityFeedList');
+  if (!el) return;
+  var filterEl = document.getElementById('feedFilter');
+  var filter = filterEl ? filterEl.value : 'all';
+  var logs = JSON.parse(localStorage.getItem('kinetic_activity_log_v9')||'[]');
+  var f = filter === 'all' ? logs : [];
+  if (filter !== 'all') { for (var i = 0; i < logs.length; i++) { if (logs[i].type === filter) f.push(logs[i]); } }
+  if (!f.length) { el.innerHTML = '<div style="padding:0.65rem;font-size:0.78rem;text-align:center;color:var(--text-muted)">No activity.</div>'; return; }
+  var html = '';
+  var maxItems = Math.min(f.length, 50);
+  for (var i = 0; i < maxItems; i++) {
+    var l = f[i];
+    html += '<div style="padding:0.35rem 0;border-bottom:1px solid var(--border);font-size:0.75rem"><b>'+esc(l.desc)+'</b><br><small style="color:var(--text-muted)">'+l.time+'</small></div>';
+  }
+  el.innerHTML = html;
+}
+function clearActivityFeed() {
+  if (!confirm('Clear activity log?')) return;
+  localStorage.setItem('kinetic_activity_log_v9', JSON.stringify([]));
+  renderActivityFeed();
+  toast('Activity log cleared.', 'info');
+}
+function clearAllActivityLogs() { clearActivityFeed(); }
+
+// ─── DASHBOARD ─────────────────────────────────────
+function mountDashboard(user) {
+  document.getElementById('navLoginLink').style.display = 'none';
+  document.getElementById('navRegisterLink').style.display = 'none';
+  document.getElementById('navLogoutLink').style.display = 'inline-block';
+  document.getElementById('navMachineryLink').classList.remove('hidden');
+  document.getElementById('navManualLink').classList.remove('hidden');
+  document.getElementById('navKBLink').classList.remove('hidden');
+  document.getElementById('machinery-deck').classList.remove('hidden');
+  document.getElementById('manual-hub').classList.remove('hidden');
+  document.getElementById('knowledge-base').classList.remove('hidden');
+
+  var isAdmin = (user.tier === 'Admin Override' || user.email === 'root@kinetic.com');
+  var dash = document.getElementById('memberDashboardWorkspace');
+  dash.classList.remove('hidden');
+  document.getElementById('memberWelcomeTitle').textContent = 'Terminal Active: '+user.name;
+  document.getElementById('mDashId').textContent = 'KI-'+user.id;
+  document.getElementById('mDashName').textContent = user.name;
+  document.getElementById('mDashTier').textContent = user.tier;
+  document.getElementById('mDashDuration').textContent = user.duration;
+  document.getElementById('idCardHolderName').textContent = user.name;
+  document.getElementById('idCardSerialId').textContent = 'SERIAL: KI-'+user.id;
+  document.getElementById('idCardPermissionTier').textContent = user.tier;
+  document.getElementById('idCardTimestampSync').textContent = 'SYNC: '+new Date().toLocaleTimeString();
+
+  generateQR('KI-'+user.id+'|'+user.name, document.getElementById('secureStudioDoorQrCanvas'));
+  initTelemetry();
+  renderInventory();
+  renderBookings();
+  renderProjects();
+  renderAnalytics();
+  renderNotifs();
+  renderFavorites();
+  loadSettings();
+  updateKPIStats();
+  loadAnnouncement();
+  loadProfileEdit();
+
+  var ccM = document.getElementById('costCalcMachine');
+  var ccH = document.getElementById('costCalcHours');
+  if (ccM && ccH) { ccM.onchange = updateCost; ccH.oninput = updateCost; }
+  updateCost();
+
+  if (isAdmin) {
+    document.getElementById('rootAdminWorkspace').classList.remove('hidden');
+    document.getElementById('navMaintLink').classList.remove('hidden');
+    document.getElementById('maintenanceWorkspaceSection').classList.remove('hidden');
+    renderAdminTable();
+    renderActivityFeed();
+    renderMaintLog();
+    runHealthCheck();
+  } else {
+    document.getElementById('rootAdminWorkspace').classList.add('hidden');
+    document.getElementById('navMaintLink').classList.add('hidden');
+    document.getElementById('maintenanceWorkspaceSection').classList.add('hidden');
+  }
+  renderTickets();
+  loadPdf(document.getElementById('pdfSelectionEngine').value);
+  updateHeroStats();
+}
+
+function updateCost() {
+  var rate = parseFloat(document.getElementById('costCalcMachine').value) || 10;
+  var hours = parseFloat(document.getElementById('costCalcHours').value) || 1;
+  document.getElementById('costCalcResult').textContent = 'HKD '+(rate*hours).toFixed(2);
+}
+
+function verifySessionOnLoad() {
+  var raw = localStorage.getItem('kinetic_active_session_token');
+  if (raw) {
+    try { currentUser = JSON.parse(raw); mountDashboard(currentUser); } catch(e) { clearSession(); }
+  }
+}
+
+function logout() {
+  currentUser = null; clearSession();
+  toast('Session terminated.', 'info');
+  location.reload();
+}
+
+function updateHeroStats() {
+  var arr = getRegistry();
+  var pj = JSON.parse(localStorage.getItem('kinetic_projects_v9')||'[]');
+  document.getElementById('heroMembers').textContent = arr.length;
+  document.getElementById('heroJobs').textContent = pj.length;
+}
+
+// ─── TABS ──────────────────────────────────────────
+document.addEventListener('click', function(e) {
+  var btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  var bar = btn.closest('.tab-bar');
+  if (!bar) return;
+  var targetId = btn.getAttribute('data-tab');
+  var container = bar.parentElement;
+
+  var tabs = bar.querySelectorAll('.tab-btn');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  btn.classList.add('active');
+
+  var panels = container.querySelectorAll('.tab-panel');
+  for (var i = 0; i < panels.length; i++) panels[i].classList.remove('active');
+  var target = document.getElementById(targetId);
+  if (target) target.classList.add('active');
+});
+
+// ─── DOOR ──────────────────────────────────────────
+function doorUnlock() {
+  if (!currentUser) return;
+  var logs = JSON.parse(localStorage.getItem('kinetic_matrix_door_logs_v9')||'[]');
+  logs.unshift({timestamp: new Date().toLocaleString(), name: currentUser.name, serial: 'KI-'+currentUser.id, protocol: 'Manual Door', tier: currentUser.tier});
+  if (logs.length > 100) logs.length = 100;
+  localStorage.setItem('kinetic_matrix_door_logs_v9', JSON.stringify(logs));
+  toast('Door released for '+currentUser.name, 'success');
+  renderAdminTable();
+  logActivity('admin', 'Door: '+currentUser.name);
+}
+
+function printIdCard() {
+  if (!currentUser) return;
+  var w = window.open('','_blank','width=400,height=300');
+  w.document.write('<html><head><title>ID Card</title><style>body{font-family:Arial,sans-serif;padding:20px;text-align:center}.card{border:2px solid #000;padding:20px;border-radius:10px;max-width:320px;margin:0 auto}.name{font-size:18px;font-weight:bold}.id{font-family:monospace}.tier{background:#3b82f6;color:#fff;padding:4px 12px;border-radius:20px;display:inline-block;font-size:12px;font-weight:bold;margin-top:8px}</style></head><body><div class="card"><h3>Kinetic Industries</h3><div class="name">'+currentUser.name+'</div><div class="id">KI-'+currentUser.id+'</div><div class="tier">'+currentUser.tier+'</div><p style="font-size:12px;color:#666">'+currentUser.duration+'</p></div><script>window.print();window.close();<\/script></body></html>');
+  w.document.close();
+}
+
+// ─── WALLET ────────────────────────────────────────
+function walletTopUp() {
+  var inp = document.getElementById('walletTopUpInput');
+  var amt = parseFloat(inp.value);
+  if (!amt || amt <= 0) { toast('Enter a positive amount.', 'warning'); return; }
+  var bal = parseFloat(document.getElementById('mDashWalletBalance').textContent);
+  document.getElementById('mDashWalletBalance').textContent = (bal+amt).toFixed(2);
+  document.getElementById('mDashWalletBalance2').textContent = (bal+amt).toFixed(2);
+  inp.value = '';
+  toast('Added HKD '+amt.toFixed(2), 'success');
+  logActivity('finance', 'Wallet +HKD '+amt.toFixed(2));
+}
+
+function dispenseMaterial() {
+  var sel = document.getElementById('materialInventorySelect');
+  var cost = parseFloat(sel.value);
+  var label = sel.options[sel.selectedIndex].text.split('—')[0].trim();
+  var bal = parseFloat(document.getElementById('mDashWalletBalance').textContent);
+  if (bal < cost) { toast('Insufficient balance.', 'error'); return; }
+  document.getElementById('mDashWalletBalance').textContent = (bal-cost).toFixed(2);
+  document.getElementById('mDashWalletBalance2').textContent = (bal-cost).toFixed(2);
+  document.getElementById('materialLog').textContent = '🟢 Dispensed: '+label;
+  setTimeout(function() { document.getElementById('materialLog').textContent = ''; }, 3500);
+  appendTerminal('[ASSET] -HKD '+cost+' '+label, 'success');
+  deductInventory(label, 1);
+  logActivity('material', 'Dispensed '+label+' (HKD '+cost+')');
+}
+
+// ─── TERMINAL ──────────────────────────────────────
+function appendTerminal(msg, color) {
+  var l = document.getElementById('terminalGCodeLogs');
+  var d = document.createElement('div');
+  if (color) d.style.cssText = 'color:var(--'+color+')';
+  d.textContent = msg;
+  l.appendChild(d);
+  l.scrollTop = l.scrollHeight;
+}
+
+function handleTerminalKey(e) {
+  if (e.key === 'Enter') { sendTerminalCmd(); return; }
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (cmdHistoryIdx < cmdHistory.length - 1) {
+      cmdHistoryIdx++;
+      e.target.value = cmdHistory[cmdHistory.length - 1 - cmdHistoryIdx];
+    }
+    return;
+  }
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (cmdHistoryIdx > 0) {
+      cmdHistoryIdx--;
+      e.target.value = cmdHistory[cmdHistory.length - 1 - cmdHistoryIdx];
+    } else if (cmdHistoryIdx === 0) {
+      cmdHistoryIdx = -1;
+      e.target.value = '';
+    }
+    return;
+  }
+}
+
+function sendTerminalCmd() {
+  var inp = document.getElementById('manualTerminalInput');
+  var cmd = inp.value.trim();
+  if (!cmd) return;
+  cmdHistory.push(cmd);
+  if (cmdHistory.length > 50) cmdHistory.shift();
+  cmdHistoryIdx = -1;
+
+  appendTerminal('→ '+cmd);
+  if (cmd === 'help') {
+    appendTerminal('  Commands: help, clear, status, jobs, about, gcode');
+  } else if (cmd === 'clear') {
+    document.getElementById('terminalGCodeLogs').innerHTML = '';
+    appendTerminal('[SYSTEM] Console cleared.');
+  } else if (cmd === 'status') {
+    appendTerminal('  Nodes: 4/4 Operational', 'success');
+    appendTerminal('  Uptime: 99.8%', 'success');
+  } else if (cmd === 'jobs') {
+    var pj = JSON.parse(localStorage.getItem('kinetic_projects_v9')||'[]');
+    appendTerminal('  Total jobs: '+pj.length);
+  } else if (cmd === 'about') {
+    appendTerminal('  Kinetic Industries v9.0 — Maker Studio', 'primary');
+  } else {
+    setTimeout(function() { appendTerminal('[ACK] '+cmd+' — dispatched.', 'warning'); }, 150);
+  }
+  inp.value = '';
+}
+
+// ─── JOB DISPATCH ─────────────────────────────────
+var jobCount = 0;
+function dispatchJob() {
+  var name = document.getElementById('simJobName').value.trim() || 'PROJECT';
+  var node = document.getElementById('simJobNode').value;
+  var queue = document.getElementById('memberJobQueueDisplay');
+  var ts = document.getElementById('terminalStatusIndicator');
+
+  jobCount++;
+  document.getElementById('kpiQueue').textContent = '1 active';
+  queue.innerHTML = '<div style="padding:0.55rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.72rem"><div>Compiling for <b>'+node+'</b>...</div><div class="chart-bar" style="margin-top:4px"><div class="chart-fill" id="jobProgress" style="width:0%"></div></div></div>';
+  ts.textContent = 'COMPILING';
+  ts.style.color = 'var(--warning)';
+  var pct = 0;
+  var iv = setInterval(function() {
+    pct += 20;
+    var bar = document.getElementById('jobProgress');
+    if (bar) bar.style.width = pct+'%';
+    if (pct === 20) appendTerminal('[STREAM] G28 X0 Y0 (Homing)');
+    if (pct === 60) appendTerminal('[STREAM] M106 S255 (Spindle)');
+    if (pct === 80) appendTerminal('[STREAM] G1 F1200 X45.2 Y78.1 Z-0.20 (Cut)');
+    if (pct >= 100) {
+      clearInterval(iv);
+      ts.textContent = 'SUCCESS';
+      ts.style.color = 'var(--success)';
+      queue.innerHTML = '<div style="padding:0.55rem;background:var(--success-light);border-left:4px solid var(--success);border-radius:var(--radius-sm);font-size:0.72rem">Done: <code>'+esc(name)+'</code> on <b>'+node+'</b>.</div>';
+      document.getElementById('kpiQueue').textContent = '—';
+      toast('Job "'+name+'" complete', 'success');
+      spawnConfetti();
+      var settings = JSON.parse(localStorage.getItem('kinetic_user_settings')||'{}');
+      if (settings.sound !== false) playJobComplete();
+      var pj = JSON.parse(localStorage.getItem('kinetic_projects_v9')||'[]');
+      pj.unshift({id:Date.now(), name:name, node:node, status:'Completed', date:new Date().toLocaleDateString(), time:new Date().toLocaleTimeString()});
+      localStorage.setItem('kinetic_projects_v9', JSON.stringify(pj));
+      renderProjects(); updateKPIStats(); renderAnalytics(); updateHeroStats();
+      logActivity('machine', 'Job "'+name+'" on '+node);
+      saveNotif('Job completed: '+name+' on '+node, 'success');
+      if (document.getElementById('settingsAutoSave').checked) {
+        var pjAll = JSON.parse(localStorage.getItem('kinetic_projects_v9')||'[]');
+        pjAll.unshift({id:Date.now(), name:name, node:node, status:'Auto-saved', date:new Date().toLocaleDateString(), time:new Date().toLocaleTimeString()});
+        localStorage.setItem('kinetic_projects_v9', JSON.stringify(pjAll));
+      }
+    }
+  }, 350);
+}
+
+// ─── MACHINE STATUS ────────────────────────────────
+function setMachineState(key, val) {
+  var pill = document.getElementById('machStatus-'+key);
+  if (!pill) return;
+  var cls = val === 'Operational' ? 'online' : (val === 'Maintenance' ? 'maintenance' : 'offline');
+  pill.className = 'status-pill status-'+cls;
+  pill.textContent = val;
+  var m = document.getElementById('maintStatus-'+key);
+  if (m) m.value = val;
+  toast(key+' → '+val, 'info');
+  logActivity('machine', key+' set to '+val);
+}
+
+// ─── PDF ───────────────────────────────────────────
+var MACHINE_SPECS = {
+  cricut: {name:'Cricut Maker 3',specs:['Max cut width: 30.5 cm (12 in)','Max cut force: 5 kg (approx.)','Blade types: Fine point, deep, knife, rotary, scoring, wavy','Materials: Vinyl, cardstock, fabric, leather, balsa, chipboard','Connectivity: Bluetooth, USB','Software: Cricut Design Space, LightBurn compatible']},
+  daja: {name:'Daja A6 Pro',specs:['Laser power: 5.5W diode (450 nm)','Work area: 130x90 mm (A6)','Max material thickness: 12 mm','Focus: Fixed with adjustable Z','Supported: LightBurn, LaserGRBL','Materials: Wood, acrylic, leather, paper, polymer, fabric']},
+  weedo: {name:'Weedo Tina2S',specs:['Build volume: 100x100x90 mm','Filament: 1.75 mm PLA/PETG/TPU','Nozzle: 0.4 mm brass (max 260°C)','Bed: Heated to 80°C','Layer height: 0.1-0.3 mm','Software: Cura, PrusaSlicer, Repetier']},
+  bambulab: {name:'Bambu Lab P2S',specs:['Build volume: 256x256x256 mm','Filament: 1.75 mm wide range','Nozzle: 0.4 mm hardened steel (max 300°C)','Bed: Dual-sided PEI textured, 120°C max','Features: AI spaghetti detection, lidar first-layer scan','Speed: Up to 500 mm/s','Software: Bambu Studio, Orca Slicer']}
+};
+function loadPdf(val) {
+  var frame = document.getElementById('pdfDisplayFrameNode');
+  var placeholder = document.getElementById('pdfPlaceholder');
+  var spec = MACHINE_SPECS[val];
+  if (spec) {
+    var html = '<div style="font-size:2.3rem;margin-bottom:0.5rem">📄</div>';
+    html += '<h3 style="color:var(--text);margin-bottom:0.5rem;font-size:1.1rem">'+spec.name+'</h3>';
+    html += '<div style="text-align:left;max-width:400px;margin:0 auto">';
+    for (var i = 0; i < spec.specs.length; i++) {
+      html += '<div style="padding:4px 0;border-bottom:1px solid var(--border);font-size:0.8rem">• '+spec.specs[i]+'</div>';
+    }
+    html += '</div>';
+    html += '<p style="margin-top:1rem;font-size:0.72rem;color:var(--text-muted)">PDF manual not available. Specifications shown instead.</p>';
+    placeholder.innerHTML = html;
+    frame.style.display = 'none';
+    placeholder.style.display = 'flex';
+  }
+}
+
+// ─── TICKETS ───────────────────────────────────────
+function submitTicket() {
+  var title = document.getElementById('enquiryTitle').value.trim();
+  var body = document.getElementById('enquiryBody').value.trim();
+  if (!title || !body) { toast('Fill in both fields.', 'warning'); return; }
+  var tk = JSON.parse(localStorage.getItem('kinetic_tickets_cache_v9')||'[]');
+  tk.unshift({id:Date.now(), title:title, body:body, status:'OPEN', time:new Date().toLocaleTimeString()});
+  localStorage.setItem('kinetic_tickets_cache_v9', JSON.stringify(tk));
+  document.getElementById('enquiryTitle').value = '';
+  document.getElementById('enquiryBody').value = '';
+  renderTickets();
+  toast('Ticket submitted.', 'success');
+  logActivity('admin', 'Ticket: "'+title+'"');
+}
+function deleteTicket(id) {
+  var tk = JSON.parse(localStorage.getItem('kinetic_tickets_cache_v9')||'[]');
+  var filtered = [];
+  for (var i = 0; i < tk.length; i++) { if (tk[i].id !== id) filtered.push(tk[i]); }
+  localStorage.setItem('kinetic_tickets_cache_v9', JSON.stringify(filtered));
+  renderTickets();
+}
+function renderTickets() {
+  var c = document.getElementById('ticketQueueDisplay');
+  if (!c) return;
+  var tk = JSON.parse(localStorage.getItem('kinetic_tickets_cache_v9')||'[]');
+  if (!tk.length) { c.innerHTML = '<div style="padding:1rem;font-size:0.78rem;text-align:center;color:var(--text-muted)">No active enquiries.</div>'; return; }
+  var html = '';
+  for (var i = 0; i < tk.length; i++) {
+    var t = tk[i];
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border)"><div><strong>'+esc(t.title)+'</strong><br><small style="color:var(--text-muted)">'+esc(t.body)+'</small></div><div style="display:flex;gap:0.25rem;align-items:center;flex-shrink:0"><span style="color:var(--warning);font-weight:800;font-size:0.6rem;background:var(--warning-light);padding:2px 5px;border-radius:4px">'+t.status+' ('+t.time+')</span><button class="btn btn-danger btn-xs" onclick="deleteTicket('+t.id+')">×</button></div></div>';
+  }
+  c.innerHTML = html;
+}
+function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// ─── TELEMETRY ─────────────────────────────────────
+var telMachines = [
+  {key:'cricut', name:'Cricut Maker 3', sensors:{spindle:0,temp:0,load:0,rt:0,jobs:0}},
+  {key:'bambu',  name:'Bambu Lab P2S',  sensors:{nozzle:0,bed:0,chamber:0,fan:0,rt:0,jobs:0}},
+  {key:'weedo',  name:'Weedo Tina2S',   sensors:{nozzle:0,bed:0,rt:0,jobs:0}},
+  {key:'daja',   name:'Daja A6 Pro',    sensors:{laser:0,temp:0,air:0,rt:0,jobs:0}}
+];
+var telTimer = null;
+
+function initTelemetry() {
+  var grid = document.getElementById('telemetryGrid');
+  if (!grid) return;
+  var html = '';
+  for (var i = 0; i < telMachines.length; i++) {
+    var m = telMachines[i];
+    html += '<div style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.85rem;border-left:3px solid var(--success)" id="tel-'+m.key+'">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem">';
+    html += '<span style="font-weight:700;font-size:0.78rem">'+m.name+'</span>';
+    html += '<span style="font-size:0.58rem;font-weight:700;color:var(--success)">● Operational</span></div>';
+    html += '<div id="tel-data-'+m.key+'" style="font-size:0.7rem;color:var(--text-muted)">Loading...</div></div>';
+  }
+  grid.innerHTML = html;
+  if (telTimer) clearInterval(telTimer);
+  updateTelemetry();
+  telTimer = setInterval(updateTelemetry, 3000);
+}
+
+function updateTelemetry() {
+  for (var i = 0; i < telMachines.length; i++) {
+    var m = telMachines[i];
+    var statusEl = document.getElementById('machStatus-'+m.key);
+    var status = statusEl ? statusEl.textContent : 'Operational';
+    var s = m.sensors;
+    if (m.key === 'cricut') { s.spindle = 8000+Math.floor(Math.random()*2000); s.temp = 35+Math.random()*8; s.load = 30+Math.random()*50; }
+    else if (m.key === 'bambu') { s.nozzle = 190+Math.random()*30; s.bed = 55+Math.random()*10; s.chamber = 35+Math.random()*10; s.fan = 30+Math.floor(Math.random()*70); }
+    else if (m.key === 'weedo') { s.nozzle = 180+Math.random()*25; s.bed = 50+Math.random()*8; }
+    else if (m.key === 'daja') { s.laser = 2.5+Math.random()*3; s.temp = 28+Math.random()*6; s.air = 40+Math.floor(Math.random()*60); }
+    s.jobs = Math.floor(Math.random()*12);
+    if (status === 'Offline') s.rt = 0; else s.rt += 0.05;
+    var el = document.getElementById('tel-data-'+m.key);
+    if (!el) continue;
+    var html = '';
+    if (m.key === 'cricut') { html = '<div style="font-size:1.1rem;font-weight:900;font-family:var(--mono)">'+s.spindle.toFixed(0)+' <span style="font-size:0.6rem;color:var(--text-muted)">RPM</span></div><div style="font-size:0.7rem">Temp: '+s.temp.toFixed(1)+'°C  Load: '+s.load.toFixed(0)+'%</div><div style="font-size:0.7rem">Runtime: '+s.rt.toFixed(1)+'h  Jobs: '+s.jobs+'</div>'; }
+    else if (m.key === 'bambu') { html = '<div style="font-size:1.1rem;font-weight:900;font-family:var(--mono)">'+s.nozzle.toFixed(0)+' <span style="font-size:0.6rem;color:var(--text-muted)">°C nozzle</span></div><div style="font-size:0.7rem">Bed: '+s.bed.toFixed(0)+'°C  Chamber: '+s.chamber.toFixed(0)+'°C</div><div style="font-size:0.7rem">Fan: '+s.fan+'%  Runtime: '+s.rt.toFixed(1)+'h  Jobs: '+s.jobs+'</div>'; }
+    else if (m.key === 'weedo') { html = '<div style="font-size:1.1rem;font-weight:900;font-family:var(--mono)">'+s.nozzle.toFixed(0)+' <span style="font-size:0.6rem;color:var(--text-muted)">°C nozzle</span></div><div style="font-size:0.7rem">Bed: '+s.bed.toFixed(0)+'°C  Runtime: '+s.rt.toFixed(1)+'h</div><div style="font-size:0.7rem">Jobs: '+s.jobs+'</div>'; }
+    else if (m.key === 'daja') { html = '<div style="font-size:1.1rem;font-weight:900;font-family:var(--mono)">'+s.laser.toFixed(1)+' <span style="font-size:0.6rem;color:var(--text-muted)">W laser</span></div><div style="font-size:0.7rem">Temp: '+s.temp.toFixed(0)+'°C  Air: '+s.air+'%</div><div style="font-size:0.7rem">Runtime: '+s.rt.toFixed(1)+'h  Jobs: '+s.jobs+'</div>'; }
+    el.innerHTML = html;
+    var card = document.getElementById('tel-'+m.key);
+    if (card) {
+      card.style.borderLeftColor = status === 'Operational' ? 'var(--success)' : (status === 'Maintenance' ? 'var(--warning)' : 'var(--danger)');
+    }
+  }
+}
+
+// ─── INVENTORY ─────────────────────────────────────
+var DEF_INV = {
+  'PLA Filament 1kg':{q:12,t:3,u:'spools'},'Cast Acrylic A4':{q:8,t:2,u:'sheets'},'Vinyl 1m Roll':{q:6,t:2,u:'rolls'},
+  'Sanding Pack':{q:15,t:5,u:'packs'},'PETG Filament 1kg':{q:5,t:2,u:'spools'},'TPU Filament 0.5kg':{q:3,t:1,u:'spools'},
+  'MDF Sheet 300x200mm':{q:10,t:3,u:'sheets'},'Leather Panel A5':{q:4,t:1,u:'panels'},
+  'Aluminum Composite Panel':{q:6,t:2,u:'panels'},'Clear Resin 500ml':{q:4,t:1,u:'bottles'}
+};
+function getInventory() {
+  var d = localStorage.getItem('kinetic_inventory_v9');
+  if (!d) { localStorage.setItem('kinetic_inventory_v9', JSON.stringify(DEF_INV)); return JSON.parse(JSON.stringify(DEF_INV)); }
+  try { return JSON.parse(d); } catch(e) { return JSON.parse(JSON.stringify(DEF_INV)); }
+}
+function saveInventory(inv) { localStorage.setItem('kinetic_inventory_v9', JSON.stringify(inv)); }
+function getStockMovements() { return JSON.parse(localStorage.getItem('kinetic_stock_movements_v9')||'[]'); }
+function addStockMovement(desc) {
+  var m = getStockMovements(); m.unshift({desc:desc,time:new Date().toLocaleString()});
+  if (m.length > 50) m.length = 50;
+  localStorage.setItem('kinetic_stock_movements_v9', JSON.stringify(m));
+}
+function deductInventory(label, qty) {
+  var inv = getInventory(); var keys = Object.keys(inv);
+  for (var i = 0; i < keys.length; i++) {
+    var k = keys[i];
+    if (label.indexOf(k.split(' ')[0]) >= 0 || k.indexOf(label.split(' ')[0]) >= 0) {
+      inv[k].q = Math.max(0, inv[k].q - qty); addStockMovement('Deducted 1 '+k+' (remaining: '+inv[k].q+')'); break;
+    }
+  }
+  saveInventory(inv); renderInventory();
+}
+function renderInventory() {
+  var el = document.getElementById('inventoryList'); if (!el) return;
+  var inv = getInventory(); var keys = Object.keys(inv); var html = '';
+  for (var i = 0; i < keys.length; i++) {
+    var k = keys[i], v = inv[k];
+    var cls = v.q <= 0 ? 'inv-low' : (v.q <= v.t ? 'inv-warn' : 'inv-ok');
+    html += '<div class="inv-item"><span>'+k+'</span><span><span class="inv-qty '+cls+'">'+v.q+'</span> <small style="color:var(--text-muted)">/'+v.u+'</small></span></div>';
+  }
+  el.innerHTML = html;
+  var mEl = document.getElementById('stockMovementLog');
+  if (mEl) {
+    var mov = getStockMovements();
+    if (mov.length) {
+      var mHtml = ''; var maxM = Math.min(mov.length, 20);
+      for (var i = 0; i < maxM; i++) { mHtml += '<div style="padding:2px 0;font-size:0.68rem">'+mov[i].desc+' <small style="color:var(--text-muted)">'+mov[i].time+'</small></div>'; }
+      mEl.innerHTML = mHtml;
+    } else { mEl.innerHTML = '<div style="font-size:0.68rem;padding:0.2rem 0;color:var(--text-muted)">No movements.</div>'; }
+  }
+}
+
+// ─── BOOKINGS ──────────────────────────────────────
+var weekOff = 0;
+var MACHINE_KEYS = ['cricut','bambu','weedo','daja'];
+var MACHINE_SHORT = {cricut:'Cricut', bambu:'P2S', weedo:'Tina2S', daja:'Daja'};
+function getBookings() { return JSON.parse(localStorage.getItem('kinetic_bookings_v9')||'[]'); }
+function saveBookings(b) { localStorage.setItem('kinetic_bookings_v9', JSON.stringify(b)); }
+function shiftWeek(d) { weekOff += d; renderBookings(); }
+
+function renderBookings() {
+  var el = document.getElementById('bookingCalendar');
+  if (!el) return;
+  var now = new Date();
+  var start = new Date(now);
+  var dayOfWeek = start.getDay();
+  var mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+  start.setDate(start.getDate() + weekOff + mondayOffset);
+
+  // Update week label
+  var end = new Date(start); end.setDate(start.getDate() + 6);
+  var wl = document.getElementById('bookingWeekLabel');
+  if (wl) {
+    if (weekOff === 0) wl.textContent = 'This Week';
+    else if (weekOff === -7) wl.textContent = 'Last Week';
+    else if (weekOff === 7) wl.textContent = 'Next Week';
+    else wl.textContent = start.toLocaleDateString()+' - '+end.toLocaleDateString();
+  }
+
+  var html = '<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center">';
+  var days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  for (var d = 0; d < 7; d++) { html += '<div style="font-weight:700;font-size:0.62rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;padding:0.25rem">'+days[d]+'</div>'; }
+  var bookings = getBookings();
+  for (var i = 0; i < 7; i++) {
+    var d = new Date(start); d.setDate(start.getDate() + i);
+    var dateStr = d.toLocaleDateString();
+    var isToday = d.toDateString() === now.toDateString();
+    html += '<div style="background:'+(isToday?'var(--primary-light)':'var(--bg)')+';border:1px solid '+(isToday?'var(--primary)':'var(--border)')+';border-radius:var(--radius-xs);padding:0.35rem;cursor:pointer;min-height:60px;font-size:0.68rem" onclick="handleBookingClick(\''+dateStr+'\')" data-date="'+dateStr+'">';
+    html += '<div style="font-size:0.62rem;color:var(--text-muted);margin-bottom:0.2rem">'+d.getDate()+'/'+(d.getMonth()+1)+'</div>';
+    for (var m = 0; m < MACHINE_KEYS.length; m++) {
+      var mk = MACHINE_KEYS[m];
+      for (var b = 0; b < bookings.length; b++) {
+        if (bookings[b].date === dateStr && bookings[b].machine === mk) {
+          html += '<div style="background:var(--primary);color:#fff;padding:1px 4px;border-radius:3px;font-size:0.55rem;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+MACHINE_SHORT[mk]+'</div>';
+        }
+      }
+    }
+    html += '</div>';
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function handleBookingClick(dateStr) {
+  if (!currentUser) { toast('Sign in first.', 'warning'); return; }
+  var mk = prompt('Select machine:\n1. Cricut Maker 3\n2. Bambu Lab P2S\n3. Weedo Tina2S\n4. Daja A6 Pro\n\nEnter 1-4:', '1');
+  var idx = parseInt(mk) - 1;
+  if (idx < 0 || idx >= MACHINE_KEYS.length) return;
+  var machineKey = MACHINE_KEYS[idx];
+  var bks = getBookings();
+  var existingIdx = -1;
+  for (var j = 0; j < bks.length; j++) {
+    if (bks[j].date === dateStr && bks[j].machine === machineKey && bks[j].userId === currentUser.id) {
+      existingIdx = j; break;
+    }
+  }
+  if (existingIdx >= 0) {
+    bks.splice(existingIdx, 1); saveBookings(bks);
+    toast('Booking removed: '+MACHINE_SHORT[machineKey], 'info');
+  } else {
+    bks.push({date:dateStr, machine:machineKey, userId:currentUser.id, userName:currentUser.name});
+    saveBookings(bks);
+    toast('Booked '+MACHINE_SHORT[machineKey]+' on '+dateStr, 'success');
+    logActivity('machine', 'Booking: '+MACHINE_SHORT[machineKey]+' on '+dateStr);
+  }
+  renderBookings();
+}
+
+// ─── PROJECTS ──────────────────────────────────────
+function renderProjects() {
+  var el = document.getElementById('projectList'); if (!el) return;
+  var pj = JSON.parse(localStorage.getItem('kinetic_projects_v9')||'[]');
+  if (!pj.length) { el.innerHTML = '<div style="padding:0.75rem;font-size:0.78rem;text-align:center;color:var(--text-muted)">No projects yet.</div>'; return; }
+  var html = ''; var maxP = Math.min(pj.length, 30);
+  for (var i = 0; i < maxP; i++) {
+    var p = pj[i];
+    html += '<div class="inv-item"><span><strong>'+esc(p.name)+'</strong><br><small style="color:var(--text-muted)">'+p.node+' · '+p.date+' '+p.time+'</small></span>';
+    html += '<span><span style="color:var(--success);font-size:0.7rem;font-weight:700">'+p.status+'</span>';
+    html += '<button class="btn btn-xs btn-outline" style="margin-left:0.25rem" onclick="reDispatch(\''+esc(p.name)+'\',\''+esc(p.node)+'\')">↻</button></span></div>';
+  }
+  el.innerHTML = html;
+}
+function saveCurrentProject() {
+  var name = document.getElementById('simJobName').value.trim() || 'PROJECT';
+  var node = document.getElementById('simJobNode').value;
+  var pj = JSON.parse(localStorage.getItem('kinetic_projects_v9')||'[]');
+  pj.unshift({id:Date.now(), name:name, node:node, status:'Draft', date:new Date().toLocaleDateString(), time:new Date().toLocaleTimeString()});
+  localStorage.setItem('kinetic_projects_v9', JSON.stringify(pj));
+  renderProjects(); toast('Saved "'+name+'"', 'success');
+  logActivity('machine', 'Project saved: '+name);
+}
+function reDispatch(name, node) {
+  document.getElementById('simJobName').value = name;
+  var sel = document.getElementById('simJobNode');
+  for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].value.indexOf(node) >= 0 || node.indexOf(sel.options[i].value) >= 0) { sel.value = sel.options[i].value; break; } }
+  dispatchJob();
+}
+function exportMyData() {
+  var pj = JSON.parse(localStorage.getItem('kinetic_projects_v9')||'[]');
+  var all = getRegistry(); var user = null;
+  if (currentUser) { for (var i = 0; i < all.length; i++) { if (all[i].id === currentUser.id) { user = all[i]; break; } } }
+  var data = {profile: user, projects: pj, exportedAt: new Date().toISOString()};
+  downloadFile(JSON.stringify(data, null, 2), 'kinetic_my_data_'+(currentUser?currentUser.id:'anon')+'.json', 'application/json');
+  toast('Your data exported.', 'success');
+}
+
+// ─── ANALYTICS ─────────────────────────────────────
+function renderAnalytics() {
+  var pj = JSON.parse(localStorage.getItem('kinetic_projects_v9')||'[]');
+  document.getElementById('analyticsTotalJobs').textContent = pj.length;
+  document.getElementById('analyticsTotalHours').textContent = (pj.length * 0.5).toFixed(1);
+  var mc = {};
+  for (var i = 0; i < pj.length; i++) { var n = pj[i].node; mc[n] = (mc[n]||0) + 1; }
+  var entries = Object.entries(mc); entries.sort(function(a,b) { return b[1]-a[1]; });
+  document.getElementById('analyticsTopMachine').textContent = entries.length ? entries[0][0] : '—';
+  document.getElementById('analyticsTotalSpent').textContent = 'HKD '+((pj.length*15)+350).toFixed(0);
+  drawJobsChart(pj); drawMachineChart(mc);
+}
+function drawJobsChart(pj) {
+  var c = document.getElementById('jobsChart'); if (!c) return;
+  var ctx = c.getContext('2d'); var w = c.parentElement.offsetWidth; c.width = w; c.height = 130;
+  var ch = 130;
+  var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+  var textColor = isDark ? '#94a3b8' : '#64748b';
+  ctx.clearRect(0,0,w,ch);
+  ctx.fillStyle = isDark ? '#0a0e17' : '#f1f5f9'; ctx.fillRect(0,0,w,ch);
+  var days = [];
+  for (var i = 6; i >= 0; i--) { var d = new Date(); d.setDate(d.getDate()-i); days.push(d.toLocaleDateString()); }
+  var counts = [];
+  for (var i = 0; i < 7; i++) { var c2 = 0; for (var j = 0; j < pj.length; j++) { if (pj[j].date === days[i]) c2++; } counts.push(c2); }
+  var max = 1; for (var i = 0; i < 7; i++) { if (counts[i] > max) max = counts[i]; }
+  var padL = 40, padR = 20, padT = 12, padB = 20;
+  var chartW = w-padL-padR, chartH = ch-padT-padB;
+  var barW = Math.max(14, (chartW/7)-6);
+  ctx.strokeStyle = isDark ? '#1e293b' : '#e2e8f0'; ctx.lineWidth = 0.5;
+  for (var y = 0; y <= chartH; y += chartH/4) { ctx.beginPath(); ctx.moveTo(padL, padT+y); ctx.lineTo(w-padR, padT+y); ctx.stroke(); }
+  for (var i = 0; i < 7; i++) {
+    var x = padL + i*(chartW/7) + (chartW/7-barW)/2;
+    var h = (counts[i]/max)*chartH;
+    var grad = ctx.createLinearGradient(x, padT+chartH-h, x, padT+chartH);
+    grad.addColorStop(0, '#3b82f6'); grad.addColorStop(1, '#8b5cf6');
+    ctx.fillStyle = grad; ctx.fillRect(x, padT+chartH-h, barW, h);
+    ctx.fillStyle = textColor; ctx.font = '8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(counts[i], padL + i*(chartW/7) + chartW/14, padT+chartH+10);
+    ctx.font = '6px sans-serif'; ctx.fillText(days[i].slice(0,2), padL + i*(chartW/7) + chartW/14, padT+chartH+20);
+  }
+}
+function drawMachineChart(mc) {
+  var c = document.getElementById('machineChart'); if (!c) return;
+  var ctx = c.getContext('2d'); var w = c.parentElement.offsetWidth; c.width = w; c.height = 130;
+  var ch = 130;
+  var isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+  var textColor = isDark ? '#94a3b8' : '#64748b';
+  ctx.clearRect(0,0,w,ch);
+  ctx.fillStyle = isDark ? '#0a0e17' : '#f1f5f9'; ctx.fillRect(0,0,w,ch);
+  var entries = Object.entries(mc); if (!entries.length) entries = [['No data',1]];
+  var total = 0; for (var i = 0; i < entries.length; i++) total += entries[i][1];
+  var colors = ['#3b82f6','#22c55e','#eab308','#ef4444'];
+  var cx = w/2, cy = ch/2 + 10; var r = Math.min(w, ch)/2.8 - 5;
+  var start = 0;
+  for (var i = 0; i < Math.min(entries.length, 4); i++) {
+    var slice = (entries[i][1]/total)*Math.PI*2;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, r, start, start+slice); ctx.closePath();
+    ctx.fillStyle = colors[i%4]; ctx.fill();
+    start += slice;
+  }
+  ctx.fillStyle = isDark ? '#0a0e17' : '#f1f5f9';
+  ctx.beginPath(); ctx.arc(cx, cy, r*0.45, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = textColor; ctx.font = '7px sans-serif'; ctx.textAlign = 'center'; ctx.fillText('Usage', cx, cy+3);
+  var ly = 5;
+  for (var i = 0; i < Math.min(entries.length, 4); i++) {
+    ctx.fillStyle = colors[i%4]; ctx.fillRect(5, ly, 8, 8);
+    ctx.fillStyle = textColor; ctx.font = '6px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText(entries[i][0]+': '+entries[i][1], 16, ly+6); ly += 14;
+  }
+}
+
+// ─── NOTIFICATIONS ─────────────────────────────────
+function getNotifs() { return JSON.parse(localStorage.getItem('kinetic_notifs_'+(currentUser?currentUser.id:'anon')+'_v9')||'[]'); }
+function saveNotifs(n) { localStorage.setItem('kinetic_notifs_'+(currentUser?currentUser.id:'anon')+'_v9', JSON.stringify(n)); }
+function saveNotif(msg, type) {
+  var n = getNotifs(); n.unshift({msg:msg, type:type||'info', time:new Date().toLocaleString(), read:false});
+  if (n.length > 50) n.length = 50;
+  saveNotifs(n); renderNotifs(); updateNotifBadge();
+  var settings = JSON.parse(localStorage.getItem('kinetic_user_settings')||'{}');
+  if (settings.notify !== false) toast(msg, type||'info', 3000);
+}
+function renderNotifs() {
+  var el = document.getElementById('notifList'); if (!el) return;
+  var n = getNotifs();
+  if (!n.length) { el.innerHTML = '<div style="padding:0.75rem;font-size:0.78rem;text-align:center;color:var(--text-muted)">No notifications.</div>'; updateNotifBadge(); return; }
+  var html = '';
+  for (var i = 0; i < Math.min(n.length, 30); i++) {
+    var x = n[i];
+    html += '<div class="inv-item" style="'+(x.read?'':'background:var(--primary-light)')+'"><span><b>'+esc(x.msg)+'</b><br><small style="color:var(--text-muted)">'+x.time+'</small></span></div>';
+  }
+  el.innerHTML = html; updateNotifBadge();
+}
+function updateNotifBadge() {
+  var n = getNotifs(); var unread = 0;
+  for (var i = 0; i < n.length; i++) { if (!n[i].read) unread++; }
+  var badge = document.getElementById('notifBadge');
+  var title = document.getElementById('mDashNotifCount');
+  if (unread > 0) { badge.textContent = unread; badge.classList.remove('hidden'); if (title) title.innerHTML = '<span style="background:var(--danger);color:#fff;border-radius:50%;padding:1px 6px;font-size:0.6rem;font-weight:700">'+unread+'</span> notifications'; }
+  else { badge.classList.add('hidden'); if (title) title.textContent = 'no notifications'; }
+}
+function markAllNotifsRead() {
+  var n = getNotifs(); for (var i = 0; i < n.length; i++) n[i].read = true;
+  saveNotifs(n); renderNotifs(); toast('All marked as read.', 'info');
+}
+
+// ─── SESSION TIMER ─────────────────────────────────
+var sessionSeconds = 0, sessionTimer = null;
+function startSessionTimer() {
+  if (sessionTimer) { toast('Timer already running.', 'warning'); return; }
+  sessionTimer = setInterval(function() {
+    sessionSeconds++;
+    var m = Math.floor(sessionSeconds/60), s = sessionSeconds%60;
+    document.getElementById('sessionTimerDisplay').textContent = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  }, 1000);
+  toast('Session timer started.', 'success');
+}
+function stopSessionTimer() {
+  if (!sessionTimer) { toast('No timer running.', 'warning'); return; }
+  clearInterval(sessionTimer); sessionTimer = null;
+  var m = Math.floor(sessionSeconds/60);
+  toast('Session ended: '+m+'m '+(sessionSeconds%60)+'s', 'info');
+  if (m > 0) logActivity('machine', 'Session: '+m+'m');
+  saveNotif('Session completed: '+m+'m '+(sessionSeconds%60)+'s', 'success');
+}
+function resetSessionTimer() {
+  if (sessionTimer) { clearInterval(sessionTimer); sessionTimer = null; }
+  sessionSeconds = 0; document.getElementById('sessionTimerDisplay').textContent = '00:00';
+  toast('Timer reset.', 'info');
+}
+
+// ─── PROFILE EDIT ──────────────────────────────────
+function loadProfileEdit() {
+  if (!currentUser) return;
+  var arr = getRegistry(); var u = null;
+  for (var i = 0; i < arr.length; i++) { if (arr[i].id === currentUser.id) { u = arr[i]; break; } }
+  if (!u) return;
+  document.getElementById('profileEditName').value = u.name;
+  document.getElementById('profileEditPhone').value = u.phone || '';
+  document.getElementById('profileEditCompany').value = u.company || '';
+  document.getElementById('profileEditProject').value = u.projectDetails || '';
+}
+function saveMyProfile() {
+  if (!currentUser) return;
+  var arr = getRegistry(); var idx = -1;
+  for (var i = 0; i < arr.length; i++) { if (arr[i].id === currentUser.id) { idx = i; break; } }
+  if (idx === -1) return;
+  arr[idx].name = document.getElementById('profileEditName').value.trim();
+  arr[idx].phone = document.getElementById('profileEditPhone').value.trim();
+  arr[idx].company = document.getElementById('profileEditCompany').value.trim();
+  arr[idx].projectDetails = document.getElementById('profileEditProject').value.trim();
+  saveRegistry(arr); currentUser = arr[idx]; saveSession(currentUser); mountDashboard(currentUser);
+  toast('Profile updated.', 'success'); logActivity('auth', 'Profile edited: '+currentUser.name);
+}
+
+// ─── FAVORITES ─────────────────────────────────────
+function getFavorites() { var key = 'kinetic_favs_'+(currentUser?currentUser.id:'anon')+'_v9'; return JSON.parse(localStorage.getItem(key)||'[]'); }
+function saveFavorites(f) { var key = 'kinetic_favs_'+(currentUser?currentUser.id:'anon')+'_v9'; localStorage.setItem(key, JSON.stringify(f)); }
+function saveFavorite() {
+  var name = document.getElementById('favNameInput').value.trim() || 'Fav_'+Math.floor(Math.random()*1000);
+  var machine = document.getElementById('favMachineInput').value;
+  var f = getFavorites();
+  for (var i = 0; i < f.length; i++) { if (f[i].name === name && f[i].machine === machine) { toast('Already exists.', 'warning'); return; } }
+  f.push({name:name, machine:machine, created:new Date().toLocaleString()});
+  saveFavorites(f); renderFavorites(); document.getElementById('favNameInput').value = '';
+  toast('Saved "'+name+'" as favorite.', 'success');
+}
+function renderFavorites() {
+  var el = document.getElementById('favoritesList'); if (!el) return;
+  var f = getFavorites();
+  if (!f.length) { el.innerHTML = '<div style="padding:0.75rem;font-size:0.78rem;text-align:center;color:var(--text-muted)">No favorites yet.</div>'; return; }
+  var html = '';
+  for (var i = 0; i < f.length; i++) {
+    html += '<div class="inv-item"><span><strong>'+esc(f[i].name)+'</strong><br><small style="color:var(--text-muted)">'+f[i].machine+'</small></span>';
+    html += '<div class="gap-sm"><button class="btn btn-xs" onclick="useFavorite('+i+')">▶</button><button class="btn btn-xs btn-danger" onclick="deleteFavorite('+i+')">×</button></div></div>';
+  }
+  el.innerHTML = html;
+}
+function useFavorite(i) { var f = getFavorites(); var x = f[i]; if (!x) return; document.getElementById('simJobName').value = x.name; var sel = document.getElementById('simJobNode'); for (var j = 0; j < sel.options.length; j++) { if (sel.options[j].value.indexOf(x.machine) >= 0) { sel.value = sel.options[j].value; break; } } toast('Loaded "'+x.name+'"', 'info'); }
+function deleteFavorite(i) { var f = getFavorites(); f.splice(i, 1); saveFavorites(f); renderFavorites(); }
+
+// ─── SETTINGS ──────────────────────────────────────
+function saveSettings() {
+  var s = {
+    defaultMachine: document.getElementById('settingsDefaultMachine').value,
+    notify: document.getElementById('settingsNotify').checked,
+    sound: document.getElementById('settingsSound').checked,
+    autoSave: document.getElementById('settingsAutoSave').checked,
+    compact: document.getElementById('settingsCompact').checked,
+    stats: document.getElementById('settingsStats').checked
+  };
+  localStorage.setItem('kinetic_user_settings', JSON.stringify(s));
+}
+function loadSettings() {
+  var raw = localStorage.getItem('kinetic_user_settings');
+  if (!raw) return;
+  try {
+    var s = JSON.parse(raw);
+    var sel = document.getElementById('settingsDefaultMachine');
+    if (sel) { for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].value === s.defaultMachine) { sel.value = s.defaultMachine; break; } } }
+    if (document.getElementById('settingsNotify')) document.getElementById('settingsNotify').checked = s.notify !== false;
+    if (document.getElementById('settingsSound')) document.getElementById('settingsSound').checked = s.sound || false;
+    if (document.getElementById('settingsAutoSave')) document.getElementById('settingsAutoSave').checked = s.autoSave !== false;
+    if (document.getElementById('settingsCompact')) document.getElementById('settingsCompact').checked = s.compact || false;
+    if (document.getElementById('settingsStats')) document.getElementById('settingsStats').checked = s.stats !== false;
+  } catch(e) {}
+}
+function updateKPIStats() {
+  var pj = JSON.parse(localStorage.getItem('kinetic_projects_v9')||'[]');
+  var today = new Date().toLocaleDateString(); var td = 0;
+  for (var i = 0; i < pj.length; i++) { if (pj[i].date === today) td++; }
+  if (document.getElementById('kpiJobsToday')) document.getElementById('kpiJobsToday').textContent = td;
+}
+
+// ─── ADMIN ─────────────────────────────────────────
+function emergencyFreeze() {
+  if (!confirm('Freeze all nodes?')) return;
+  setMachineState('cricut','Offline'); setMachineState('bambu','Offline');
+  setMachineState('weedo','Offline'); setMachineState('daja','Offline');
+  document.getElementById('terminalStatusIndicator').textContent = 'GLOBAL FREEZE';
+  document.getElementById('terminalStatusIndicator').style.color = 'var(--danger)';
+  toast('All nodes frozen.', 'warning'); logActivity('admin', 'Emergency freeze');
+}
+function resetAllPasswords() {
+  if (!confirm('Reset all passwords?')) return;
+  var arr = getRegistry();
+  for (var i = 0; i < arr.length; i++) { if (arr[i].id !== 10001) arr[i].password = 'kinetic_default_2026'; }
+  saveRegistry(arr); toast('Passwords reset.', 'info'); renderAdminTable();
+  logActivity('admin', 'All passwords reset');
+}
+function refreshAdminMetrics() { adminPage = 0; renderAdminTable(); toast('Refreshed.', 'info'); }
+function exportJSON() {
+  var full = {
+    accounts: getRegistry(), inventory: getInventory(), bookings: getBookings(),
+    projects: JSON.parse(localStorage.getItem('kinetic_projects_v9')||'[]'), exportedAt: new Date().toISOString()
+  };
+  localStorage.setItem('kinetic_full_backup_v9', JSON.stringify(full));
+  downloadFile(JSON.stringify(full, null, 2), 'kinetic_full_backup.json', 'application/json');
+  toast('Full backup downloaded.', 'success');
+}
+function exportCSV() {
+  var arr = getRegistry();
+  var csv = 'ID,Name,Email,Phone,Age,Tier,Duration,Industry,PaymentMethod\n';
+  for (var i = 0; i < arr.length; i++) { var u = arr[i]; csv += u.id+',"'+u.name+'",'+u.email+','+(u.phone||'')+','+(u.age||'')+',"'+u.tier+'","'+u.duration+'","'+(u.industry||'')+'","'+(u.paymentMethod||'N/A')+'"\n'; }
+  downloadFile(csv, 'kinetic_registry.csv', 'text/csv'); toast('CSV exported.', 'success');
+}
+function downloadFile(content, filename, mime) {
+  var blob = new Blob([content], {type: mime}); var url = URL.createObjectURL(blob);
+  var a = document.createElement('a'); a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+function clearDoorLogs() { localStorage.setItem('kinetic_matrix_door_logs_v9', JSON.stringify([])); renderAdminTable(); }
+
+// ─── ADMIN: PAGINATION + TABLE ─────────────────────
+var bulkMode = false, selectedIds = {};
+function toggleBulkSelect() {
+  bulkMode = !bulkMode; selectedIds = {};
+  var bulkH = document.getElementById('bulkHeader'); var normalH = document.getElementById('normalHeader');
+  if (bulkH) bulkH.style.display = bulkMode ? 'table-row' : 'none';
+  if (normalH) normalH.style.display = bulkMode ? 'none' : 'table-row';
+  document.getElementById('bulkDeleteBtn').disabled = true;
+  document.getElementById('bulkExportBtn').disabled = true;
+  document.getElementById('bulkCount').textContent = '';
+  renderAdminTable();
+}
+function toggleBulkSelectAll(checked) {
+  var arr = getRegistry(); selectedIds = {};
+  if (checked) { for (var i = 0; i < arr.length; i++) { if (arr[i].id !== 10001) selectedIds[arr[i].id] = true; } }
+  var count = Object.keys(selectedIds).length;
+  document.getElementById('bulkDeleteBtn').disabled = count === 0;
+  document.getElementById('bulkExportBtn').disabled = count === 0;
+  document.getElementById('bulkCount').textContent = count ? 'Selected: '+count : '';
+  renderAdminTable();
+}
+function toggleBulkMember(id) {
+  if (!bulkMode) return;
+  if (selectedIds[id]) delete selectedIds[id]; else if (id !== 10001) selectedIds[id] = true;
+  var count = Object.keys(selectedIds).length;
+  document.getElementById('bulkDeleteBtn').disabled = count === 0;
+  document.getElementById('bulkExportBtn').disabled = count === 0;
+  document.getElementById('bulkCount').textContent = count ? 'Selected: '+count : '';
+  renderAdminTable();
+}
+function bulkDeleteMembers() {
+  if (Object.keys(selectedIds).length === 0) return;
+  if (!confirm('Delete '+Object.keys(selectedIds).length+' selected members?')) return;
+  var arr = getRegistry(); var filtered = [];
+  for (var i = 0; i < arr.length; i++) { if (!selectedIds[arr[i].id]) filtered.push(arr[i]); }
+  saveRegistry(filtered); toast('Deleted '+(arr.length-filtered.length)+' members.', 'info');
+  selectedIds = {}; document.getElementById('bulkDeleteBtn').disabled = true;
+  document.getElementById('bulkExportBtn').disabled = true;
+  document.getElementById('bulkCount').textContent = '';
+  adminPage = 0; renderAdminTable(); updateHeroStats();
+}
+function bulkExportSelected() {
+  if (Object.keys(selectedIds).length === 0) return;
+  var arr = getRegistry(); var csv = 'ID,Name,Email,Phone,Tier,Duration,Payment\n';
+  for (var i = 0; i < arr.length; i++) { if (selectedIds[arr[i].id]) { var u = arr[i]; csv += u.id+',"'+u.name+'",'+u.email+','+(u.phone||'')+',"'+u.tier+'","'+u.duration+'","'+(u.paymentMethod||'')+'"\n'; } }
+  downloadFile(csv, 'kinetic_selected_export.csv', 'text/csv');
+  toast('Exported '+Object.keys(selectedIds).length+' members.', 'success');
+}
+
+function renderAdminTable() {
+  var arr = getRegistry(); var tbody = document.getElementById('adminUserTableBody');
+  if (!tbody) return;
+  var search = (document.getElementById('adminDatabaseSearch').value||'').toLowerCase();
+  var tierFilter = document.getElementById('filterTierSelect').value;
+  var sortOrder = document.getElementById('sortOrderSelect').value;
+
+  // Metrics
+  var creators = 0, students = 0, partners = 0;
+  for (var i = 0; i < arr.length; i++) {
+    var t = arr[i].tier;
+    if (t === 'Creator Plan') creators++; else if (t === 'Student Creator Plan') students++; else if (t === 'Partner Creator Plan') partners++;
+  }
+  document.getElementById('metricTotal').textContent = arr.length;
+  document.getElementById('metricCreator').textContent = creators;
+  document.getElementById('metricStudent').textContent = students;
+  document.getElementById('metricPartner').textContent = partners;
+  var revMap = {'Creator Plan':800,'Student Creator Plan':200,'Partner Creator Plan':400,'Admin Override':0};
+  var rev = 0; for (var i = 0; i < arr.length; i++) { rev += (revMap[arr[i].tier] || 0); }
+  document.getElementById('metricRevenue').textContent = 'HKD '+rev.toLocaleString();
+
+  // Industry bars
+  var edu=0, eng=0, art=0, rob=0;
+  for (var i = 0; i < arr.length; i++) {
+    var ind = arr[i].industry || '';
+    if (ind.indexOf('Education')>=0) edu++; else if (ind.indexOf('Engineering')>=0) eng++;
+    else if (ind.indexOf('Creative')>=0) art++; else if (ind.indexOf('Robotics')>=0) rob++;
+  }
+  var totalInd = Math.max(edu+eng+art+rob, 1);
+  document.getElementById('barIndEdu').style.width = (edu/totalInd*100).toFixed(1)+'%';
+  document.getElementById('barIndEng').style.width = (eng/totalInd*100).toFixed(1)+'%';
+  document.getElementById('barIndArt').style.width = (art/totalInd*100).toFixed(1)+'%';
+  document.getElementById('barIndRob').style.width = (rob/totalInd*100).toFixed(1)+'%';
+
+  var counts = {}; for (var i = 0; i < arr.length; i++) { var ind = arr[i].industry; if (ind) counts[ind] = (counts[ind]||0)+1; }
+  var topInd = '', topCount = 0;
+  for (var k in counts) { if (counts[k] > topCount) { topCount = counts[k]; topInd = k; } }
+  document.getElementById('lblTopIndustry').textContent = topInd ? topInd+' ('+topCount+')' : '—';
+  var totalAge = 0, ageCount = 0, minors = 0;
+  for (var i = 0; i < arr.length; i++) { var a = parseInt(arr[i].age); if (!isNaN(a)) { totalAge += a; ageCount++; if (a < 18) minors++; } }
+  document.getElementById('lblAverageAge').textContent = ageCount > 0 ? (totalAge/ageCount).toFixed(1) : '0';
+  document.getElementById('lblMinorCount').textContent = minors;
+
+  // Door logs
+  var logs = JSON.parse(localStorage.getItem('kinetic_matrix_door_logs_v9')||'[]');
+  var logsBody = document.getElementById('adminDoorLogsTableBody');
+  if (logsBody) {
+    if (!logs.length) { logsBody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-muted)">No entries.</td></tr>'; }
+    else { var lHtml = ''; for (var i = 0; i < logs.length; i++) { var l = logs[i]; lHtml += '<tr><td>'+l.timestamp+'</td><td><b>'+l.name+'</b></td><td style="font-family:var(--mono)">'+l.serial+'</td><td><span style="color:var(--success);font-weight:600">'+l.protocol+'</span></td><td><small>'+l.tier+'</small></td></tr>'; } logsBody.innerHTML = lHtml; }
+  }
+
+  // Filter
+  var filtered = [];
+  for (var i = 0; i < arr.length; i++) {
+    var u = arr[i];
+    var ms = u.name.toLowerCase().indexOf(search) >= 0 || u.email.toLowerCase().indexOf(search) >= 0 || String(u.id).indexOf(search) >= 0;
+    var mt = tierFilter === '' || u.tier === tierFilter;
+    if (ms && mt) filtered.push(u);
+  }
+  if (sortOrder === 'id-asc') filtered.sort(function(a,b){return a.id-b.id;});
+  else if (sortOrder === 'name-asc') filtered.sort(function(a,b){return a.name.localeCompare(b.name);});
+  else if (sortOrder === 'name-desc') filtered.sort(function(a,b){return b.name.localeCompare(a.name);});
+
+  // Pagination
+  var totalPages = Math.ceil(filtered.length / pageSize);
+  if (adminPage >= totalPages) adminPage = Math.max(0, totalPages - 1);
+  var start = adminPage * pageSize;
+  var pageItems = filtered.slice(start, start + pageSize);
+
+  var html = '';
+  for (var i = 0; i < pageItems.length; i++) {
+    var u = pageItems[i];
+    var badge = u.tier.indexOf('Admin') >= 0 ? 'badge-admin' : 'badge-user';
+    var isRoot = u.id === 10001;
+    html += '<tr>';
+    if (bulkMode) { html += '<td style="width:32px;text-align:center"><input type="checkbox" '+(selectedIds[u.id]?'checked':'')+' '+(isRoot?'disabled':'')+' onchange="toggleBulkMember('+u.id+')"></td>'; }
+    html += '<td><strong style="font-family:var(--mono);color:var(--primary)">KI-'+u.id+'</strong></td>';
+    html += '<td><b>'+esc(u.name)+'</b><br><small style="font-size:0.65rem;color:var(--text-muted);font-family:var(--mono)">'+(u.phone||'')+'</small></td>';
+    html += '<td><small style="font-family:var(--mono)">'+u.email+'</small><br><span style="font-size:0.58rem;color:var(--text-muted);text-transform:uppercase;font-weight:bold">'+(u.paymentMethod||'')+'</span></td>';
+    html += '<td><span class="'+badge+'">'+u.tier+'</span><br><small style="color:var(--text-muted)">'+u.duration+'</small></td>';
+    html += '<td><code style="background:var(--bg);padding:2px 5px;border-radius:4px;font-size:0.7rem">'+esc(u.password||'****')+'</code></td>';
+    html += '<td><div class="gap-sm">';
+    html += '<button class="btn btn-xs" style="background:var(--warning);color:#000!important" onclick="openModal(\'inspect_member\','+u.id+')">📋</button>';
+    html += '<button class="btn btn-xs" onclick="openModal(\'edit_member\','+u.id+')">Edit</button>';
+    if (!isRoot) { html += '<button class="btn btn-xs btn-outline" onclick="impersonateUser('+u.id+')">👤</button>'; html += '<button class="btn btn-xs btn-danger" onclick="deleteMember('+u.id+')">×</button>'; }
+    html += '</div></td></tr>';
+  }
+  tbody.innerHTML = html;
+
+  // Pagination controls
+  var pagEl = document.getElementById('adminPagination');
+  if (pagEl && totalPages > 1) {
+    var pagHtml = '';
+    pagHtml += '<button '+(adminPage===0?'disabled':'')+' onclick="adminPage=0;renderAdminTable()">«</button>';
+    pagHtml += '<button '+(adminPage===0?'disabled':'')+' onclick="adminPage--;renderAdminTable()">‹</button>';
+    for (var p = Math.max(0, adminPage-2); p < Math.min(totalPages, adminPage+3); p++) {
+      pagHtml += '<button class="'+(p===adminPage?'active':'')+'" onclick="adminPage='+p+';renderAdminTable()">'+(p+1)+'</button>';
+    }
+    pagHtml += '<button '+(adminPage>=totalPages-1?'disabled':'')+' onclick="adminPage++;renderAdminTable()">›</button>';
+    pagHtml += '<button '+(adminPage>=totalPages-1?'disabled':'')+' onclick="adminPage='+(totalPages-1)+';renderAdminTable()">»</button>';
+    pagHtml += '<span class="page-info">'+(start+1)+'-'+Math.min(start+pageSize, filtered.length)+' of '+filtered.length+'</span>';
+    pagEl.innerHTML = pagHtml;
+  } else if (pagEl) { pagEl.innerHTML = ''; }
+}
+
+function deleteMember(id) {
+  if (id === 10001) { toast('Cannot delete root.', 'error'); return; }
+  if (!confirm('Delete KI-'+id+'?')) return;
+  var arr = getRegistry(); var filtered = [];
+  for (var i = 0; i < arr.length; i++) { if (arr[i].id !== id) filtered.push(arr[i]); }
+  saveRegistry(filtered); renderAdminTable(); updateHeroStats();
+  toast('Member removed.', 'info'); logActivity('admin', 'Deleted KI-'+id);
+}
+
+// ─── IMPERSONATE ───────────────────────────────────
+function impersonateUser(id) {
+  var arr = getRegistry(); var u = null;
+  for (var i = 0; i < arr.length; i++) { if (arr[i].id === id) { u = arr[i]; break; } }
+  if (!u || !currentUser) return;
+  if (u.id === currentUser.id) { toast('Already viewing as yourself.', 'info'); return; }
+  if (currentUser.tier !== 'Admin Override' && currentUser.email !== 'root@kinetic.com') { toast('Admin only.', 'error'); return; }
+  var prevId = currentUser.id; currentUser = u; saveSession(u); mountDashboard(u);
+  toast('Now viewing as '+u.name, 'success'); closeModal();
+  logActivity('admin', 'Impersonated KI-'+u.id+' (was KI-'+prevId+')');
+}
+
+// ─── HEALTH ────────────────────────────────────────
+function runHealthCheck() {
+  var grid = document.getElementById('healthGrid'); if (!grid) return;
+  var checks = [
+    {label:'Database',test:function(){try{getRegistry();return[true,'Online']}catch(e){return[false,'Error']}}},
+    {label:'Storage',test:function(){try{localStorage.setItem('_h','1');localStorage.removeItem('_h');return[true,'OK']}catch(e){return[false,'Unavailable']}}},
+    {label:'Nodes',test:function(){var on=0;for(var i=0;i<MACHINE_KEYS.length;i++){var s=document.getElementById('machStatus-'+MACHINE_KEYS[i]);if(s&&s.textContent==='Operational')on++}return[true,on+'/4 Online']}},
+    {label:'Bookings',test:function(){try{getBookings();return[true,'OK']}catch(e){return[false,'Error']}}},
+    {label:'Sessions',test:function(){return[true,sessionTimer?'1 active':'Idle']}},
+    {label:'Backup',test:function(){var bk=localStorage.getItem('kinetic_full_backup_v9');return[true,bk?'Available':'Manual']}}
+  ];
+  var html = '', allOk = true;
+  for (var i = 0; i < checks.length; i++) {
+    var result = checks[i].test();
+    if (!result[0]) allOk = false;
+    html += '<div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.7rem;text-align:center">';
+    html += '<span style="font-size:1.3rem;display:block;margin-bottom:0.2rem">'+(result[0]?'✅':'❌')+'</span>';
+    html += '<div style="font-size:0.6rem;text-transform:uppercase;color:var(--text-muted);font-weight:700;letter-spacing:0.5px">'+checks[i].label+'</div>';
+    html += '<div style="font-size:0.75rem;font-weight:700;color:'+(result[0]?'var(--success)':'var(--danger)')+'">'+result[1]+'</div></div>';
+  }
+  grid.innerHTML = html;
+  document.getElementById('healthPulse').innerHTML = allOk ? '● All Good' : '● Issues';
+  document.getElementById('healthPulse').style.color = allOk ? 'var(--success)' : 'var(--danger)';
+}
+
+// ─── ANNOUNCEMENT ──────────────────────────────────
+function broadcastAnnouncement() {
+  var msg = document.getElementById('announcementInput').value.trim();
+  if (!msg) { toast('Enter a message.', 'warning'); return; }
+  localStorage.setItem('kinetic_announcement_v9', JSON.stringify({msg:msg, time:new Date().toLocaleString(), author:currentUser?currentUser.name:'Admin'}));
+  document.getElementById('announcementInput').value = '';
+  loadAnnouncement(); toast('Announcement sent.', 'success');
+  logActivity('admin', 'Announcement: "'+msg+'"');
+}
+function loadAnnouncement() {
+  var banner = document.getElementById('announcementBanner'); var text = document.getElementById('announcementText');
+  var preview = document.getElementById('announcementPreview');
+  var a = JSON.parse(localStorage.getItem('kinetic_announcement_v9')||'null');
+  var dismissed = localStorage.getItem('kinetic_announcement_dismissed');
+  if (a && !dismissed) { banner.classList.remove('hidden'); text.innerHTML = '<strong>'+esc(a.msg)+'</strong> <small>'+a.author+', '+a.time+'</small>'; }
+  else { banner.classList.add('hidden'); }
+  if (preview) { preview.textContent = a ? 'Current: "'+a.msg+'" by '+a.author+' at '+a.time : 'No active announcement.'; }
+}
+function dismissAnnouncement() { localStorage.setItem('kinetic_announcement_dismissed', 'true'); document.getElementById('announcementBanner').classList.add('hidden'); }
+function clearAnnouncement() { localStorage.removeItem('kinetic_announcement_v9'); localStorage.removeItem('kinetic_announcement_dismissed'); loadAnnouncement(); toast('Announcement cleared.', 'info'); }
+
+// ─── RESTORE ───────────────────────────────────────
+function restoreFromFile() {
+  var input = document.createElement('input'); input.type = 'file'; input.accept = '.json';
+  input.onchange = function(e) {
+    var file = e.target.files[0]; if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+      try {
+        var data = JSON.parse(ev.target.result);
+        if (data.accounts) { saveRegistry(data.accounts); toast('Members restored.', 'success'); }
+        if (data.inventory) { saveInventory(data.inventory); }
+        localStorage.setItem('kinetic_full_backup_v9', JSON.stringify(data));
+        toast('Restore complete.', 'success'); renderAdminTable(); renderInventory(); updateHeroStats();
+        closeModal(); logActivity('admin', 'System restored from backup');
+      } catch(e) { toast('Invalid backup file.', 'error'); }
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}
+
+// ─── DRAG & DROP ──────────────────────────────────
+function hDragOver(e) { e.preventDefault(); e.currentTarget.classList.add('dragover'); }
+function hDragLeave(e) { e.currentTarget.classList.remove('dragover'); }
+function hDrop(e) {
+  e.preventDefault(); e.currentTarget.classList.remove('dragover');
+  var file = e.dataTransfer.files[0];
+  if (file) { var name = file.name.replace(/\.[^.]+$/,''); document.getElementById('simJobName').value = name.toUpperCase().replace(/[^A-Z0-9_]/g,'_').slice(0,30); toast('Loaded "'+file.name+'"', 'info'); }
+}
+
+// ─── MAINTENANCE LOG ───────────────────────────────
+function getMaintLog() { return JSON.parse(localStorage.getItem('kinetic_maint_log_v9')||'[]'); }
+function saveMaintLog(log) { localStorage.setItem('kinetic_maint_log_v9', JSON.stringify(log)); }
+function addMaintLogEntry() {
+  var machine = document.getElementById('maintLogMachine').value;
+  var desc = document.getElementById('maintLogDesc').value.trim();
+  var tech = document.getElementById('maintLogTech').value.trim();
+  if (!desc) { toast('Description required.', 'warning'); return; }
+  var log = getMaintLog();
+  log.unshift({machine:machine, desc:desc, tech:tech, date:new Date().toLocaleString()});
+  if (log.length > 50) log.length = 50;
+  saveMaintLog(log); renderMaintLog(); closeModal();
+  toast('Maintenance entry added.', 'success');
+  logActivity('machine', 'Maint: '+machine+' — '+desc);
+}
+function renderMaintLog() {
+  var el = document.getElementById('maintLogList'); if (!el) return;
+  var log = getMaintLog();
+  if (!log.length) { el.innerHTML = '<div style="padding:0.75rem;font-size:0.78rem;text-align:center;color:var(--text-muted)">No maintenance entries yet.</div>'; return; }
+  var html = '';
+  for (var i = 0; i < Math.min(log.length, 20); i++) {
+    var l = log[i];
+    html += '<div style="padding:0.45rem 0;border-bottom:1px solid var(--border);font-size:0.75rem"><b>'+l.machine+'</b> — '+esc(l.desc)+'<br><small style="color:var(--text-muted)">'+(l.tech||'Unknown')+' · '+l.date+'</small></div>';
+  }
+  el.innerHTML = html;
+}
+
+// ─── KNOWLEDGE BASE ────────────────────────────────
+var KB_ARTICLES = {
+  general: [
+    {title:'Getting Started',body:'New to the studio? Start here. Sign in with your credentials, top up your wallet, and dispatch your first job from the Dispatch Project panel. Use the terminal for G-code commands and the telemetry tab to monitor live machine data.'},
+    {title:'Safety Guidelines',body:'Always wear safety glasses when operating the laser cutter. Keep hands clear of moving parts. Use the emergency freeze button in the Admin panel if anything goes wrong. Never leave machines unattended during operation.'},
+    {title:'Wallet & Payments',body:'Your wallet balance covers machine time and materials. Top up from the Overview tab. Student passes get discounted rates. Material costs are deducted automatically when you dispense from inventory.'},
+    {title:'Booking Machines',body:'Use the Bookings tab to reserve machine time. Click a day, select your machine, and confirm. Click again to cancel. Each machine can only be booked by one person per day.'}
+  ],
+  cricut: [
+    {title:'Cricut: Loading Material',body:'Place your material on the cutting mat with the adhesive side down. Align the mat edge with the guides. Press the Load button on the machine. Ensure the mat feeds straight before starting your cut.'},
+    {title:'Cricut: Blade Selection',body:'Fine Point: standard vinyl and paper. Deep Point: thicker materials. Rotary: fabric. Knife Blade: chipboard, balsa, leather. Always check your material thickness matches the blade type.'},
+    {title:'Cricut: Common Issues',body:'If cuts are incomplete, increase pressure in Design Space. If material tears, reduce pressure. If the mat doesn\'t feed, clean the rollers with a lint-free cloth. Replace blades every 2-3 months of regular use.'}
+  ],
+  bambu: [
+    {title:'Bambu P2S: Filament Loading',body:'Heat the nozzle to your filament\'s printing temperature. Cut the filament at a 45° angle. Insert into the extruder until you feel resistance. Use the Load function on the touchscreen to complete feeding.'},
+    {title:'Bambu P2S: Bed Adhesion',body:'Clean the PEI sheet with isopropyl alcohol before each print. For PLA, bed temp at 55°C. For PETG, 70°C. If prints still lift, use a brim in the slicer or apply a thin layer of glue stick.'},
+    {title:'Bambu P2S: AI Spaghetti Detection',body:'The P2S uses camera-based AI to detect failed prints. If spaghetti is detected, the print pauses automatically. Check the touchscreen for the alert and decide whether to resume or cancel.'}
+  ],
+  weedo: [
+    {title:'Weedo: Bed Leveling',body:'The Tina2S uses manual leveling. Use a piece of paper between the nozzle and bed. Adjust the four corner screws until you feel slight resistance when pulling the paper. Re-level after every 5-10 prints.'},
+    {title:'Weedo: PETG Tips',body:'PETG prints best at 230-250°C with a bed at 70-80°C. Reduce speed by 20% compared to PLA. PETG is stringy — enable retraction in your slicer. Store PETG in a dry box to prevent moisture absorption.'}
+  ],
+  daja: [
+    {title:'Daja A6: Focus Adjustment',body:'Place the focus spacer on the material. Loosen the Z-axis thumb screw. Lower the laser module until it touches the spacer. Tighten the screw. Remove the spacer before engraving.'},
+    {title:'Daja A6: Material Settings',body:'Wood: 80% power, 100mm/s. Acrylic: 60% power, 150mm/s. Leather: 40% power, 200mm/s. Paper: 20% power, 300mm/s. Always test on scrap material first. Never cut PVC — it produces toxic chlorine gas.'},
+    {title:'Daja A6: Ventilation',body:'Always use the air assist pump and ensure the workspace is well-ventilated. The built-in fan helps but is not sufficient for extended use. Open a window or use an external exhaust.'}
+  ]
+};
+
+function initKB() {
+  var cats = ['general','cricut','bambu','weedo','daja'];
+  for (var c = 0; c < cats.length; c++) {
+    var cat = cats[c];
+    var containerId = cat === 'general' ? 'kbArticlesGeneral' : 'kbArticles'+cat.charAt(0).toUpperCase()+cat.slice(1);
+    var el = document.getElementById(containerId);
+    if (!el) continue;
+    var articles = KB_ARTICLES[cat] || [];
+    var html = '';
+    for (var i = 0; i < articles.length; i++) {
+      var a = articles[i];
+      html += '<div style="background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem;cursor:pointer;transition:all var(--transition)" onclick="this.classList.toggle(\'expanded\')">';
+      html += '<div style="font-weight:700;font-size:0.82rem;margin-bottom:0.3rem;display:flex;justify-content:space-between;align-items:center"><span>'+a.title+'</span><span style="font-size:0.7rem;color:var(--text-muted);transition:transform var(--transition)">▶</span></div>';
+      html += '<div style="font-size:0.75rem;color:var(--text-muted);line-height:1.6;max-height:0;overflow:hidden;transition:max-height 0.3s ease">'+a.body+'</div></div>';
+    }
+    el.innerHTML = html;
+  }
+  // Expand/collapse
+  document.addEventListener('click', function(e) {
+    var card = e.target.closest('[style*="cursor:pointer"]');
+    if (!card || !card.classList.contains('expanded') && !card.querySelector('[style*="max-height:0"]')) return;
+    var body = card.querySelector('[style*="max-height"]');
+    var arrow = card.querySelector('[style*="transform"]');
+    if (card.classList.contains('expanded')) {
+      body.style.maxHeight = body.scrollHeight+'px';
+      if (arrow) arrow.style.transform = 'rotate(90deg)';
+    } else {
+      body.style.maxHeight = '0';
+      if (arrow) arrow.style.transform = 'rotate(0deg)';
+    }
+  });
+}
+
+// ─── MODAL ─────────────────────────────────────────
+function openModal(view, accountId) {
+  var overlay = document.getElementById('modalOverlayPortal');
+  var body = document.getElementById('modalInjectionBody');
+  overlay.classList.add('active'); overlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  setTimeout(function() { var first = overlay.querySelector('input,button,select,textarea'); if (first) first.focus(); }, 100);
+
+  var html = '';
+  if (view === 'login') {
+    html = '<h2>Sign In</h2>';
+    html += '<div class="form-group"><label>Email</label><input type="email" id="loginEmailField" value="root@kinetic.com"></div>';
+    html += '<div class="form-group"><label>Password</label><input type="password" id="loginPasswordField" placeholder="Password" onkeydown="if(event.key===\'Enter\')triggerAuthenticationPipeline()"></div>';
+    html += '<button class="btn" style="width:100%;margin-top:0.5rem" onclick="triggerAuthenticationPipeline()">Mount Session</button>';
+  } else if (view === 'signup') {
+    html = '<h2>Join Maker Matrix</h2>';
+    html += '<div class="form-group"><label>Name *</label><input type="text" id="regName"></div>';
+    html += '<div class="form-group"><label>Phone *</label><input type="text" id="regPhone"></div>';
+    html += '<div class="form-group"><label>Email *</label><input type="email" id="regEmail"></div>';
+    html += '<div class="form-row"><div class="form-group"><label>Age</label><input type="number" id="regAge"></div><div class="form-group"><label>Under 18?</label><select id="regUnder18"><option value="No">No</option><option value="Yes">Yes</option></select></div></div>';
+    html += '<div class="form-group"><label>Nationality</label><input type="text" id="regNationality"></div>';
+    html += '<div class="form-group"><label>Company / School</label><input type="text" id="regCompany"></div>';
+    html += '<div class="form-group"><label>Partner Org</label><input type="text" id="regPartnerOrg"></div>';
+    html += '<div style="border:1px solid var(--border);padding:0.75rem;border-radius:var(--radius-sm);margin-bottom:0.75rem;background:var(--bg)"><label style="font-weight:700;font-size:0.65rem;text-transform:uppercase;display:block;margin-bottom:0.35rem;letter-spacing:0.5px">Details</label>';
+    html += '<div class="form-group"><label style="font-size:0.6rem">Project</label><textarea id="regProjectDetails" rows="3"></textarea></div>';
+    html += '<div class="form-group"><label style="font-size:0.6rem">Industry</label><select id="regIndustry"><option value="Education / Student">Education</option><option value="Engineering / Technology">Engineering</option><option value="Creative Arts / Design">Creative Arts</option><option value="Robotics / Automation">Robotics</option></select></div></div>';
+    html += '<div class="form-group"><label>Tier</label><select id="regTier"><option value="Creator Plan">Standard Creator</option><option value="Student Creator Plan">Student</option><option value="Partner Creator Plan">Partner</option></select></div>';
+    html += '<div class="form-group"><label>Duration</label><select id="regDuration"><option value="1 Day Pass">1 Day</option><option value="7 Days Pass">7 Days</option><option value="1 Month Pass">1 Month</option><option value="12 Months Pass">12 Months</option><option value="Permanent Pass">Permanent</option></select></div>';
+    html += '<div class="form-group"><label>Payment</label><select id="regPaymentMethod"><option value="Octopus / FPS">Octopus/FPS</option><option value="Credit Card">Credit Card</option><option value="Pay in Cash">Cash</option></select></div>';
+    html += '<div class="form-group"><label>Password *</label><input type="password" id="regPassword"></div>';
+    html += '<button class="btn" style="width:100%;margin-top:0.5rem" onclick="triggerAccountRegistrationPipeline()">Register</button>';
+  } else if (view === 'quickadd') {
+    html = '<h2>Quick Add Member</h2><p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.75rem">Minimal form for admins.</p>';
+    html += '<div class="form-group"><label>Name *</label><input type="text" id="qaName"></div>';
+    html += '<div class="form-group"><label>Email *</label><input type="email" id="qaEmail"></div>';
+    html += '<div class="form-group"><label>Phone</label><input type="text" id="qaPhone"></div>';
+    html += '<div class="form-row"><div class="form-group"><label>Tier</label><select id="qaTier"><option value="Creator Plan">Standard</option><option value="Student Creator Plan">Student</option><option value="Partner Creator Plan">Partner</option></select></div><div class="form-group"><label>Duration</label><select id="qaDuration"><option value="1 Month Pass">1 Month</option><option value="3 Months Pass">3 Months</option><option value="6 Months Pass">6 Months</option><option value="12 Months Pass">12 Months</option><option value="Permanent Pass">Permanent</option></select></div></div>';
+    html += '<div class="form-group"><label>Password *</label><input type="password" id="qaPassword" value="kinetic_default_2026"></div>';
+    html += '<button class="btn" style="width:100%;margin-top:0.5rem" onclick="quickAddMember()">Add Member</button>';
+  } else if (view === 'inspect_member' && accountId) {
+    var arr = getRegistry(); var u = null;
+    for (var i = 0; i < arr.length; i++) { if (arr[i].id === accountId) { u = arr[i]; break; } }
+    if (!u) { closeModal(); return; }
+    html = '<h2 style="color:var(--primary)">Member Profile</h2>';
+    html += '<div style="background:var(--bg);padding:0.85rem;border-radius:var(--radius-sm);border:1px solid var(--border);font-size:0.8rem">';
+    html += '<p><span class="text-muted">ID:</span> <b>KI-'+u.id+'</b></p><p><span class="text-muted">Clearance:</span> <b>'+u.tier+' ('+u.duration+')</b></p>';
+    html += '<h4 style="margin-top:0.65rem;color:var(--primary);border-bottom:1px solid var(--border);padding-bottom:0.15rem;font-size:0.72rem;letter-spacing:0.5px">Identity</h4>';
+    html += '<p><span class="text-muted">Name:</span> '+esc(u.name)+'</p><p><span class="text-muted">Phone:</span> '+(u.phone||'—')+'</p><p><span class="text-muted">Email:</span> '+u.email+'</p>';
+    html += '<p><span class="text-muted">Age:</span> '+(u.age||'N/A')+' (Under 18: '+(u.under18||'No')+')</p><p><span class="text-muted">Nationality:</span> '+(u.nationality||'—')+'</p>';
+    html += '<h4 style="margin-top:0.65rem;color:var(--primary);border-bottom:1px solid var(--border);padding-bottom:0.15rem;font-size:0.72rem;letter-spacing:0.5px">Organisation</h4>';
+    html += '<p><span class="text-muted">Company:</span> '+(u.company||'—')+'</p><p><span class="text-muted">Partner:</span> '+(u.partnerOrg||'None')+'</p>';
+    html += '<h4 style="margin-top:0.65rem;color:var(--primary);border-bottom:1px solid var(--border);padding-bottom:0.15rem;font-size:0.72rem;letter-spacing:0.5px">Project</h4>';
+    html += '<p><i style="display:block;background:var(--surface);padding:5px;border-radius:4px;border:1px solid var(--border)">'+(u.projectDetails||'—')+'</i></p><p><span class="text-muted">Industry:</span> '+(u.industry||'—')+'</p>';
+    html += '<h4 style="margin-top:0.65rem;color:var(--primary);border-bottom:1px solid var(--border);padding-bottom:0.15rem;font-size:0.72rem;letter-spacing:0.5px">Financial</h4>';
+    html += '<p><span class="text-muted">Payment:</span> <b>'+(u.paymentMethod||'—')+'</b></p><p><span class="text-muted">Password:</span> <code>'+(u.password||'****')+'</code></p></div>';
+    html += '<button class="btn" style="width:100%;margin-top:0.65rem" onclick="closeModal()">Close</button>';
+  } else if (view === 'edit_member' && accountId) {
+    var arr = getRegistry(); var u = null;
+    for (var i = 0; i < arr.length; i++) { if (arr[i].id === accountId) { u = arr[i]; break; } }
+    if (!u) { closeModal(); return; }
+    html = '<h2 style="color:var(--primary)">Edit Member</h2><input type="hidden" id="editUserId" value="'+u.id+'">';
+    html += '<div class="form-group"><label>Name</label><input type="text" id="editName" value="'+esc(u.name)+'"></div>';
+    html += '<div class="form-group"><label>Email</label><input type="email" id="editEmail" value="'+u.email+'"></div>';
+    html += '<div class="form-group"><label>Phone</label><input type="text" id="editPhone" value="'+(u.phone||'')+'"></div>';
+    html += '<div class="form-group"><label>Tier</label><select id="editTier"><option value="Creator Plan" '+(u.tier==='Creator Plan'?'selected':'')+'>Standard</option><option value="Student Creator Plan" '+(u.tier==='Student Creator Plan'?'selected':'')+'>Student</option><option value="Partner Creator Plan" '+(u.tier==='Partner Creator Plan'?'selected':'')+'>Partner</option><option value="Admin Override" '+(u.tier==='Admin Override'?'selected':'')+'>Admin</option></select></div>';
+    html += '<div class="form-group"><label>Duration</label><input type="text" id="editDuration" value="'+u.duration+'"></div>';
+    html += '<div class="form-group"><label>Payment</label><select id="editPaymentMethod"><option value="Octopus / FPS" '+(u.paymentMethod==='Octopus / FPS'?'selected':'')+'>Octopus/FPS</option><option value="Credit Card" '+(u.paymentMethod==='Credit Card'?'selected':'')+'>Credit Card</option><option value="Pay in Cash" '+(u.paymentMethod==='Pay in Cash'?'selected':'')+'>Cash</option></select></div>';
+    html += '<div class="form-group"><label>Password</label><input type="text" id="editPassword" value="'+esc(u.password||'')+'"></div>';
+    html += '<button class="btn" style="width:100%;margin-top:0.5rem" onclick="saveEditMember()">Save</button>';
+  } else if (view === 'impersonate') {
+    html = '<h2>Impersonate Member</h2><p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.75rem">View dashboard as another member.</p>';
+    html += '<div style="display:flex;gap:0.25rem;margin-bottom:0.5rem"><input type="text" id="impersonateSearch" style="flex:1;padding:0.4rem 0.6rem;border:1px solid var(--border);border-radius:var(--radius-xs);font-size:0.78rem;background:var(--bg);color:var(--text)" placeholder="Search name..." oninput="renderImpersonateList()"></div>';
+    html += '<div id="impersonateList" style="max-height:300px;overflow-y:auto"></div>';
+    html += '<button class="btn btn-outline" style="width:100%;margin-top:0.5rem" onclick="closeModal()">Cancel</button>';
+    body.innerHTML = html; renderImpersonateList(); document.addEventListener('keydown', modalEscHandler); return;
+  } else if (view === 'restore') {
+    html = '<h2>Restore from Backup</h2><p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:1rem">Upload a JSON backup file.</p>';
+    html += '<button class="btn" style="width:100%;margin-bottom:0.5rem" onclick="restoreFromFile()">Choose Backup File</button>';
+    html += '<button class="btn btn-outline" style="width:100%" onclick="closeModal()">Cancel</button>';
+  } else if (view === 'restock') {
+    var inv = getInventory(); var keys = Object.keys(inv); var opts = '';
+    for (var i = 0; i < keys.length; i++) { opts += '<option value="'+keys[i]+'">'+keys[i]+'</option>'; }
+    html = '<h2>Restock Inventory</h2>';
+    html += '<div class="form-group"><label>Item</label><select id="restockItem">'+opts+'</select></div>';
+    html += '<div class="form-group"><label>Qty</label><input type="number" id="restockQty" value="2" min="1"></div>';
+    html += '<button class="btn" style="width:100%;margin-top:0.5rem" onclick="doRestock()">Add Stock</button>';
+  } else if (view === 'addMaintLog') {
+    html = '<h2>Add Maintenance Entry</h2>';
+    html += '<div class="form-group"><label>Machine</label><select id="maintLogMachine"><option value="Cricut Maker 3">Cricut Maker 3</option><option value="Bambu Lab P2S">Bambu Lab P2S</option><option value="Weedo Tina2S">Weedo Tina2S</option><option value="Daja A6 Pro">Daja A6 Pro</option></select></div>';
+    html += '<div class="form-group"><label>Description</label><textarea id="maintLogDesc" rows="3" placeholder="What was done..."></textarea></div>';
+    html += '<div class="form-group"><label>Technician</label><input type="text" id="maintLogTech" placeholder="Name">';
+    html += '<button class="btn" style="width:100%;margin-top:0.5rem" onclick="addMaintLogEntry()">Save Entry</button>';
+  } else if (view === 'shortcuts') {
+    html = '<h2>Keyboard Shortcuts</h2>';
+    html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.35rem;font-size:0.78rem">';
+    var shortcuts = [
+      ['Ctrl+K','Focus terminal'],['?','Show shortcuts'],['Esc','Close modal'],
+      ['Ctrl+F','Admin search'],['Ctrl+S','Save project'],['↑/↓','Command history']
+    ];
+    for (var i = 0; i < shortcuts.length; i++) {
+      html += '<span><kbd style="background:var(--bg);padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:0.7rem;border:1px solid var(--border)">'+shortcuts[i][0]+'</kbd></span><span>'+shortcuts[i][1]+'</span>';
+    }
+    html += '</div><button class="btn" style="width:100%;margin-top:1rem" onclick="closeModal()">Got it</button>';
+  }
+  body.innerHTML = html;
+  if (view === 'impersonate') return;
+  document.addEventListener('keydown', modalEscHandler);
+}
+
+function renderImpersonateList() {
+  var el = document.getElementById('impersonateList'); if (!el) return;
+  var search = (document.getElementById('impersonateSearch').value||'').toLowerCase();
+  var arr = getRegistry(); var filtered = [];
+  for (var i = 0; i < arr.length; i++) { if (arr[i].name.toLowerCase().indexOf(search) >= 0 || arr[i].email.toLowerCase().indexOf(search) >= 0) filtered.push(arr[i]); }
+  var maxShow = Math.min(filtered.length, 30); var html = '';
+  for (var i = 0; i < maxShow; i++) { var u = filtered[i]; html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:0.45rem 0;border-bottom:1px solid var(--border);cursor:pointer" onclick="impersonateUser('+u.id+');closeModal()"><span><strong>'+esc(u.name)+'</strong> <small style="color:var(--text-muted)">KI-'+u.id+' · '+u.tier+'</small></span><span class="btn btn-xs btn-outline">View</span></div>'; }
+  el.innerHTML = html;
+}
+function modalEscHandler(e) { if (e.key === 'Escape') closeModal(); }
+function closeModal() {
+  var overlay = document.getElementById('modalOverlayPortal');
+  overlay.classList.remove('active'); overlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = ''; document.removeEventListener('keydown', modalEscHandler);
+}
+function closeModalBackdrop(e) { if (e.target === document.getElementById('modalOverlayPortal')) closeModal(); }
+function saveEditMember() {
+  var id = parseInt(document.getElementById('editUserId').value);
+  var arr = getRegistry(); var idx = -1;
+  for (var i = 0; i < arr.length; i++) { if (arr[i].id === id) { idx = i; break; } }
+  if (idx === -1) return;
+  arr[idx].name = document.getElementById('editName').value.trim();
+  arr[idx].email = document.getElementById('editEmail').value.trim();
+  arr[idx].phone = document.getElementById('editPhone').value.trim();
+  arr[idx].tier = document.getElementById('editTier').value;
+  arr[idx].duration = document.getElementById('editDuration').value.trim();
+  arr[idx].paymentMethod = document.getElementById('editPaymentMethod').value;
+  arr[idx].password = document.getElementById('editPassword').value;
+  saveRegistry(arr); toast('Member updated.', 'success');
+  if (currentUser && currentUser.id === id) { currentUser = arr[idx]; saveSession(currentUser); mountDashboard(currentUser); }
+  renderAdminTable(); closeModal(); logActivity('admin', 'Edited KI-'+id);
+}
+function doRestock() {
+  var item = document.getElementById('restockItem').value;
+  var qty = parseInt(document.getElementById('restockQty').value) || 1;
+  var inv = getInventory();
+  if (inv[item]) { inv[item].q += qty; saveInventory(inv); renderInventory(); addStockMovement('Restocked '+qty+' '+item); toast('Added '+qty+' to '+item, 'success'); closeModal(); logActivity('material', 'Restocked '+qty+'x '+item); }
+}
+
+// ─── KEYBOARD SHORTCUTS ────────────────────────────
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); var inp = document.getElementById('manualTerminalInput'); if (inp) { inp.focus(); inp.select(); toast('Terminal focused (Ctrl+K)', 'info', 1500); } }
+  if (e.key === '?' && !e.ctrlKey && !e.metaKey && !e.target.closest('input,textarea,select')) { e.preventDefault(); openModal('shortcuts'); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'f') { var inp = document.getElementById('adminDatabaseSearch'); if (inp && inp.offsetParent !== null) { e.preventDefault(); inp.focus(); inp.select(); } }
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); var dash = document.getElementById('memberDashboardWorkspace'); if (!dash.classList.contains('hidden')) { saveCurrentProject(); toast('Saved (Ctrl+S)', 'success'); } }
+});
+
+// ─── START ─────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
