@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drill Bits — Interactive Guide</title>
+<style>
+  @page { size: A3 landscape; margin: 4mm; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background:
+      repeating-linear-gradient(0deg,  rgba(255,255,255,.02) 0 1px, transparent 1px 8mm),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 8mm),
+      linear-gradient(160deg, #0B1220 0%, #101C33 55%, #0C1526 100%);
+    color: #E6EDF7; min-height: 100vh;
+  }
+  .hidden { display:none !important; }
+
+  /* ---------- TOP BAR ---------- */
+  .topbar {
+    position: sticky; top:0; z-index:50;
+    background: rgba(11,18,32,.94); backdrop-filter: blur(6px);
+    border-bottom: 1px solid #2A3A55; padding: 10px 22px 12px;
+  }
+  .tb-row1 { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  .tb-title { font-size: 24px; font-weight: 900; letter-spacing: 2px; color:#F4F7FC; line-height:1.05; }
+  .tb-title span { color:#F5A623; }
+  .tb-title small { font-size: 10.5px; font-weight:600; color:#7E90B4; letter-spacing:1px; display:block; margin-top:2px; }
+  .search {
+    flex:1; min-width:200px; display:flex; align-items:center; gap:8px;
+    background:#16233D; border:1px solid #2C3E5E; border-radius:20px; padding:8px 14px;
+  }
+  .search input { flex:1; background:none; border:none; outline:none; color:#E6EDF7; font-size:14px; }
+  .search input::placeholder { color:#7E90B4; }
+  .print-btn {
+    background:#F5A623; color:#0B1220; border:none; border-radius:20px;
+    font-weight:800; font-size:13px; letter-spacing:.5px; padding:9px 16px; cursor:pointer;
+  }
+  .print-btn:hover { background:#FFC14D; }
+  .tabs { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .tab {
+    background:#16233D; border:1px solid #2C3E5E; color:#9FB0CC; border-radius:10px;
+    font-size:12.5px; font-weight:800; letter-spacing:1px; padding:7px 16px; cursor:pointer;
+    transition: all .15s;
+  }
+  .tab:hover { border-color:#F5A623; color:#F5A623; }
+  .tab.on { background:#F5A623; border-color:#F5A623; color:#0B1220; }
+  .filters { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .fchip {
+    background:#16233D; border:1px solid #2C3E5E; color:#9FB0CC; border-radius:16px;
+    font-size:12.5px; font-weight:700; letter-spacing:.5px; padding:5px 13px; cursor:pointer;
+    transition: all .15s;
+  }
+  .fchip:hover { border-color:#F5A623; color:#F5A623; }
+  .fchip.on { background:#F5A623; border-color:#F5A623; color:#0B1220; }
+  .count { color:#7E90B4; font-size:12px; margin-top:8px; }
+
+  /* ---------- GRID ---------- */
+  .grid {
+    display:grid; grid-template-columns: repeat(auto-fill, minmax(172px, 1fr));
+    gap:12px; padding:18px 22px 10px; max-width: 1900px; margin:0 auto;
+  }
+  .card {
+    background: linear-gradient(180deg, #16233D 0%, #122036 100%);
+    border: 1px solid #2C3E5E; border-radius: 12px;
+    display:flex; flex-direction:column; align-items:stretch;
+    padding: 10px 12px 12px; cursor:pointer; text-align:left; color:inherit;
+    transition: transform .12s, border-color .12s, box-shadow .12s;
+    font-family: inherit;
+  }
+  .card:hover { transform: translateY(-3px); border-color:#F5A62388; box-shadow: 0 8px 22px rgba(0,0,0,.4); }
+  .card .csvg { height: 82px; display:flex; align-items:center; justify-content:center; background: radial-gradient(ellipse at center, #1A2B49 0%, #131F38 80%); border-radius: 8px; }
+  .card .csvg svg { height: 78px; width:auto; }
+  .cname { font-size: 15px; font-weight: 800; color:#F4F7FC; margin-top: 9px; letter-spacing:.2px; }
+  .caka { font-size: 10.5px; color:#7E90B4; margin-top: 2px; }
+  .cchips { display:flex; gap:4px; margin-top:7px; flex-wrap:wrap; }
+  .chip { font-size: 9px; font-weight:700; letter-spacing:.4px; padding: 2.5px 7px; border-radius: 10px; white-space:nowrap; }
+  .chip.wood   { color:#FBBF24; background:#FBBF2418; border:1px solid #FBBF2466; }
+  .chip.metal  { color:#5CC8F5; background:#5CC8F518; border:1px solid #5CC8F566; }
+  .chip.masonry{ color:#F87171; background:#F8717118; border:1px solid #F8717166; }
+  .chip.tile   { color:#C084FC; background:#C084FC18; border:1px solid #C084FC66; }
+  .chip.multi  { color:#4ADE80; background:#4ADE8018; border:1px solid #4ADE8066; }
+  .chip.slow   { color:#F87171; background:#F8717112; border:1px dashed #F8717155; }
+  .chip.med    { color:#FBBF24; background:#FBBF2412; border:1px dashed #FBBF2455; }
+  .chip.fast   { color:#4ADE80; background:#4ADE8012; border:1px dashed #4ADE8055; }
+  .chip.vslow  { color:#FCA5A5; background:#FCA5A512; border:1px dashed #FCA5A555; }
+  .blurb { font-size: 11px; line-height: 1.4; color:#B9C6DE; margin-top: 7px; flex:1; }
+  .more { font-size: 10.5px; color:#F5A623; font-weight:700; margin-top: 8px; letter-spacing:.3px; }
+
+  /* ---------- MODAL ---------- */
+  .backdrop {
+    position: fixed; inset:0; background: rgba(5,9,18,.78); backdrop-filter: blur(3px);
+    display:flex; align-items:center; justify-content:center; z-index:100; padding: 20px;
+  }
+  .backdrop[hidden] { display:none !important; }
+  .modal {
+    background: linear-gradient(180deg, #141F38 0%, #101A30 100%);
+    border: 1px solid #2C3E5E; border-radius: 16px; width: min(960px, 100%);
+    max-height: 92vh; display:flex; flex-direction:column; overflow:hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,.6);
+  }
+  .m-head { padding: 16px 24px 12px; border-bottom: 1px solid #2A3A55; display:flex; align-items:flex-start; gap:14px; }
+  .m-title { font-size: 25px; font-weight: 900; color:#F4F7FC; letter-spacing:.5px; }
+  .m-aka { font-size: 12.5px; color:#7E90B4; margin-top: 3px; }
+  .m-close {
+    margin-left:auto; background:#1A2B49; color:#9FB0CC; border:1px solid #2C3E5E;
+    width:34px; height:34px; border-radius:50%; font-size:18px; cursor:pointer; line-height:1;
+  }
+  .m-close:hover { color:#F5A623; border-color:#F5A623; }
+  .m-body { display:flex; gap: 22px; padding: 16px 24px 8px; overflow-y:auto; flex:1; }
+  .m-art { flex: 0 0 290px; }
+  .m-art .bigsvg {
+    background: radial-gradient(ellipse at center, #1A2B49 0%, #131F38 90%);
+    border:1px solid #2C3E5E; border-radius: 12px;
+    display:flex; align-items:center; justify-content:center; padding: 8px;
+  }
+  .m-art .bigsvg svg { height: 230px; width:auto; }
+  .parts { margin-top: 12px; }
+  .parts h4 { font-size: 11px; letter-spacing: 1.5px; color:#F5A623; margin-bottom: 7px; }
+  .part-btn {
+    display:inline-block; background:#16233D; border:1px solid #2C3E5E; color:#B9C6DE;
+    font-size: 11px; padding: 4px 10px; border-radius: 12px; margin: 0 4px 5px 0; cursor:pointer; font-family:inherit;
+  }
+  .part-btn:hover, .part-btn.on { border-color:#F5A623; color:#F5A623; }
+  .m-info { flex: 1; min-width: 0; }
+  .m-how { font-size: 13.5px; line-height: 1.55; color:#E6EDF7; }
+  .specs { width:100%; border-collapse:collapse; margin-top: 10px; }
+  .specs td { font-size: 12px; padding: 5px 8px; border-bottom: 1px solid #1E2C47; vertical-align: top; }
+  .specs td:first-child { color:#7E90B4; font-weight:700; white-space:nowrap; width: 90px; }
+  .specs td:last-child { color:#D6DFEF; }
+  .two-col { display:flex; gap: 18px; margin-top: 10px; }
+  .two-col > div { flex:1; }
+  .sec-title { font-size: 11px; font-weight:800; letter-spacing:1.5px; margin-bottom: 6px; }
+  .sec-title.good { color:#4ADE80; } .sec-title.bad { color:#F87171; } .sec-title.tip { color:#F5A623; } .sec-title.safe { color:#5CC8F5; }
+  .m-info ul { list-style:none; }
+  .m-info li { font-size: 12px; color:#B9C6DE; line-height: 1.5; padding-left: 14px; position: relative; margin-bottom: 3px; }
+  .good li::before { content:"✓"; position:absolute; left:0; color:#4ADE80; }
+  .bad  li::before { content:"✗"; position:absolute; left:0; color:#F87171; }
+  .tip  li::before { content:"★"; position:absolute; left:0; color:#F5A623; }
+  .safe li::before { content:"!"; position:absolute; left:0; color:#5CC8F5; font-weight:900; }
+  .related { margin-top: 10px; }
+  .related a { color:#F5A623; font-size: 12px; cursor:pointer; text-decoration: underline; margin-right: 10px; }
+  .m-nav { display:flex; justify-content:space-between; align-items:center; padding: 9px 24px 12px; border-top: 1px solid #2A3A55; }
+  .m-nav button {
+    background:#1A2B49; color:#E6EDF7; border:1px solid #2C3E5E; border-radius: 10px;
+    padding: 7px 14px; font-size: 12.5px; font-weight:700; cursor:pointer; font-family:inherit;
+  }
+  .m-nav button:hover { border-color:#F5A623; color:#F5A623; }
+  .m-nav .pos { color:#7E90B4; font-size: 12px; }
+
+  /* ---------- TOOLTIP ---------- */
+  .tip {
+    position: fixed; z-index: 200; pointer-events:none; background:#0B1220; color:#F5A623;
+    border:1px solid #F5A62388; font-size: 11px; font-weight:700; letter-spacing:.5px;
+    padding: 4px 9px; border-radius: 6px; white-space: nowrap; display:none;
+  }
+  .hp { fill:#F5A623; stroke:#0B1220; stroke-width:1.5; cursor: help; opacity:.95; transition: r .1s; }
+  .hp:hover, .hp.hl { fill:#FFC14D; }
+  .hp.hl { animation: pulse 1s ease 2; }
+  @keyframes pulse { 50% { opacity:.35; } }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 0 22px 30px; max-width: 1400px; margin: 0 auto; }
+  section h2 { font-size: 20px; font-weight:900; letter-spacing:1.5px; color:#F4F7FC; margin: 22px 0 4px; }
+  section h2 span { color:#F5A623; }
+  section .lede { color:#9FB0CC; font-size: 13px; margin-bottom: 16px; }
+
+  /* ---------- TOOLS ---------- */
+  .tool-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+  .tool-card {
+    background: linear-gradient(180deg, #16233D 0%, #122036 100%);
+    border: 1px solid #2C3E5E; border-radius: 12px; padding: 16px;
+  }
+  .tool-card h3 { font-size: 15px; font-weight:800; color:#F5A623; letter-spacing:.5px; margin-bottom: 3px; }
+  .tool-card .sub { font-size: 11.5px; color:#7E90B4; margin-bottom: 12px; }
+  .trow { display:flex; align-items:center; gap: 10px; margin-bottom: 10px; flex-wrap:wrap; }
+  .trow label { font-size: 12px; color:#9FB0CC; font-weight:700; min-width: 84px; }
+  select, .trow input[type=number] {
+    background:#101A30; color:#E6EDF7; border:1px solid #2C3E5E; border-radius: 8px;
+    padding: 7px 10px; font-size: 13px; font-family:inherit; outline:none;
+  }
+  select:focus, input:focus { border-color:#F5A623; }
+  .result {
+    background:#0E1729; border:1px solid #F5A62355; border-radius: 10px; padding: 12px 14px;
+    font-size: 13.5px; color:#E6EDF7; line-height: 1.55;
+  }
+  .result b { color:#F5A623; font-size: 17px; }
+  .result .formula { color:#7E90B4; font-size: 11.5px; font-style: italic; margin-top: 4px; }
+  table.data { width:100%; border-collapse:collapse; margin-top: 6px; }
+  table.data th { font-size: 10.5px; color:#F5A623; text-align:left; letter-spacing:1px; padding: 5px 8px; border-bottom: 1px solid #F5A62344; }
+  table.data td { font-size: 12px; padding: 4px 8px; border-bottom: 1px solid #1E2C47; color:#D6DFEF; }
+  table.data tr.hlrow td { background:#F5A62314; color:#F5A623; font-weight:700; }
+
+  /* ---------- QUIZ ---------- */
+  .quiz-card {
+    background: linear-gradient(180deg, #16233D 0%, #122036 100%);
+    border: 1px solid #2C3E5E; border-radius: 14px; padding: 22px; max-width: 760px; margin: 0 auto;
+  }
+  .q-progress { height: 6px; background:#101A30; border-radius: 4px; margin-bottom: 16px; overflow:hidden; }
+  .q-progress i { display:block; height:100%; background:#F5A623; border-radius:4px; transition: width .2s; }
+  .q-count { font-size: 11.5px; color:#7E90B4; letter-spacing:1px; margin-bottom: 8px; }
+  .q-text { font-size: 17px; font-weight: 800; color:#F4F7FC; line-height: 1.45; margin-bottom: 14px; }
+  .q-opt {
+    display:block; width:100%; text-align:left; background:#101A30; border:1px solid #2C3E5E;
+    color:#D6DFEF; font-size: 13.5px; padding: 11px 14px; border-radius: 10px; margin-bottom: 8px;
+    cursor:pointer; font-family:inherit; transition: border-color .12s;
+  }
+  .q-opt:hover:not(:disabled) { border-color:#F5A623; }
+  .q-opt.correct { border-color:#4ADE80; background:#4ADE8014; color:#4ADE80; font-weight:700; }
+  .q-opt.wrong { border-color:#F87171; background:#F8717114; color:#F87171; }
+  .q-opt:disabled { cursor:default; opacity:.75; }
+  .q-feedback { margin-top: 12px; padding: 11px 14px; border-radius: 10px; font-size: 13px; line-height: 1.5; display:none; }
+  .q-feedback.show { display:block; }
+  .q-feedback.ok { background:#4ADE8014; border:1px solid #4ADE8066; color:#4ADE80; }
+  .q-feedback.no { background:#F8717114; border:1px solid #F8717166; color:#F87171; }
+  .q-next { margin-top: 14px; background:#F5A623; color:#0B1220; border:none; border-radius: 10px; font-weight:800; padding: 10px 22px; font-size: 13px; cursor:pointer; display:none; }
+  .q-next.show { display:inline-block; }
+  .quiz-start { text-align:center; padding: 30px 10px; }
+  .quiz-start p { color:#9FB0CC; font-size: 13.5px; margin: 10px 0 18px; line-height:1.6; }
+  .q-start-btn { background:#F5A623; color:#0B1220; border:none; border-radius: 12px; font-size: 15px; font-weight:800; padding: 13px 34px; cursor:pointer; letter-spacing:.5px; }
+  .q-start-btn:hover { background:#FFC14D; }
+  .q-score { font-size: 42px; font-weight: 900; color:#F5A623; text-align:center; margin: 8px 0 2px; }
+  .q-verdict { text-align:center; font-size: 15px; font-weight:800; letter-spacing:1px; margin-bottom: 14px; }
+  .q-verdict.great { color:#4ADE80; } .q-verdict.good { color:#FBBF24; } .q-verdict.meh { color:#F87171; }
+  .q-review { margin-top: 10px; }
+  .q-review h4 { font-size: 12px; letter-spacing:1.5px; color:#F5A623; margin-bottom: 8px; }
+  .q-review li { font-size: 12.5px; color:#B9C6DE; line-height:1.5; padding-left: 14px; position:relative; margin-bottom: 5px; list-style:none; }
+  .q-review li::before { content:"✗"; position:absolute; left:0; color:#F87171; font-weight:900; }
+
+  /* ---------- GUIDE (accordion) ---------- */
+  .acc { border:1px solid #2C3E5E; border-radius: 12px; background: linear-gradient(180deg,#16233D 0%,#122036 100%); margin-bottom: 12px; overflow:hidden; }
+  .acc-head { padding: 14px 18px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+  .acc-head h3 { font-size: 15px; font-weight:800; color:#F4F7FC; letter-spacing:.5px; }
+  .acc-head h3 span { color:#F5A623; }
+  .acc-head .arr { color:#F5A623; transition: transform .2s; font-size: 14px; }
+  .acc.open .arr { transform: rotate(90deg); }
+  .acc-body { display:none; padding: 2px 18px 16px; }
+  .acc.open .acc-body { display:block; }
+  table.prob { width:100%; border-collapse:collapse; }
+  table.prob th { font-size: 10.5px; color:#F5A623; text-align:left; letter-spacing:1px; padding: 5px 8px; border-bottom: 1px solid #F5A62344; }
+  table.prob td { font-size: 12px; padding: 6px 8px; border-bottom: 1px solid #1E2C47; color:#D6DFEF; vertical-align: top; }
+  .steps { counter-reset: step; list-style:none; }
+  .steps li { counter-increment: step; position: relative; padding-left: 34px; font-size: 13px; color:#D6DFEF; line-height: 1.55; margin-bottom: 8px; }
+  .steps li::before {
+    content: counter(step); position:absolute; left:0; top:0; width: 22px; height: 22px;
+    background:#F5A623; color:#0B1220; border-radius: 50%; font-weight:900; font-size: 12px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .acc-body h4 { font-size: 12.5px; color:#F5A623; letter-spacing:1px; margin: 12px 0 6px; }
+  .acc-body p, .acc-body li { font-size: 13px; color:#D6DFEF; line-height: 1.55; }
+  .acc-body ul { list-style:none; padding-left: 0; }
+  .acc-body ul li { padding-left: 16px; position: relative; margin-bottom: 4px; }
+  .acc-body ul li::before { content:"▸"; position:absolute; left:0; color:#F5A623; }
+  .mach-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .mach { background:#101A30; border:1px solid #2C3E5E; border-radius: 10px; padding: 13px 15px; }
+  .mach h5 { color:#F5A623; font-size: 13.5px; font-weight:800; margin-bottom: 4px; letter-spacing:.3px; }
+  .mach p { font-size: 12px; color:#B9C6DE; line-height: 1.5; }
+  .gloss { column-count: 2; column-gap: 26px; }
+  .gloss div { break-inside: avoid; margin-bottom: 8px; }
+  .gloss b { color:#F5A623; font-size: 12.5px; }
+  .gloss span { font-size: 12px; color:#B9C6DE; line-height:1.5; }
+
+  .foot-note { text-align:center; color:#7E90B4; font-size: 11px; padding: 0 22px 24px; }
+
+  /* ---------- PRINT ---------- */
+  @media print {
+    .topbar, .backdrop, .tip, .foot-note, #sec-tools, #sec-quiz, #sec-guide { display:none !important; }
+    body { background:#0B1220 !important; }
+    #sec-bits { display:block !important; padding:0; max-width:none; }
+    .grid { grid-template-columns: repeat(6, 1fr) !important; gap: 3.5mm; padding: 0; max-width:none; }
+    .card { break-inside: avoid; padding: 2mm 2.2mm 2.4mm; border-radius: 2.5mm; }
+    .card .csvg { height: 24mm; border-radius: 2mm; }
+    .card .csvg svg { height: 23mm; }
+    .cname { font-size: 4.4mm; margin-top: 1.3mm; }
+    .caka { font-size: 2.8mm; }
+    .cchips { margin-top: 1.1mm; }
+    .chip { font-size: 2.3mm; padding: .6mm 1.8mm; }
+    .blurb { font-size: 2.7mm; margin-top: 1.1mm; }
+    .more { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb-row1">
+    <div class="tb-title">DRILL <span>BITS</span><small>INTERACTIVE GUIDE · WORKSHOP EDITION</small></div>
+    <div class="search">🔍 <input id="q" type="text" placeholder="Search: hinge, concrete, clean hole, sheet metal…"></div>
+    <button class="print-btn" onclick="window.print()">🖨 PRINT POSTER</button>
+  </div>
+  <div class="tabs" id="tabs">
+    <button class="tab on" data-tab="bits">🔩 BITS</button>
+    <button class="tab" data-tab="tools">🧮 TOOLS</button>
+    <button class="tab" data-tab="quiz">🎯 QUIZ</button>
+    <button class="tab" data-tab="guide">🛠 WORKSHOP GUIDE</button>
+  </div>
+  <div class="filters" id="filters">
+    <button class="fchip on" data-f="all">ALL</button>
+    <button class="fchip" data-f="wood">WOOD</button>
+    <button class="fchip" data-f="metal">METAL</button>
+    <button class="fchip" data-f="masonry">MASONRY</button>
+    <button class="fchip" data-f="tile">TILE &amp; GLASS</button>
+    <button class="fchip" data-f="multi">MULTI</button>
+  </div>
+  <div class="count" id="count"></div>
+</div>
+
+<!-- ============ BITS ============ -->
+<section id="sec-bits">
+  <main class="grid" id="grid"></main>
+  <div class="foot-note" style="text-align:center;padding-top:12px;">22 bit types · Click any card for full details · Hover the orange dots on diagrams to name the parts · ESC closes · ← → flips between bits</div>
+</section>
+
+<!-- ============ TOOLS ============ -->
+<section id="sec-tools" class="hidden">
+  <h2>🧮 INTERACTIVE <span>TOOLS</span></h2>
+  <div class="lede">Three workshop calculators — all based on real workshop formulas.</div>
+  <div class="tool-grid">
+
+    <div class="tool-card">
+      <h3>RPM SPEED CALCULATOR</h3>
+      <div class="sub">What speed should the drill spin? Small bits spin fast, big bits slow.</div>
+      <div class="trow"><label>Material</label>
+        <select id="rpmMat">
+          <option value="90,120">Softwood</option>
+          <option value="60,90">Hardwood</option>
+          <option value="30,50" selected>Plastic / acrylic</option>
+          <option value="60,100">Aluminium</option>
+          <option value="40,70">Brass</option>
+          <option value="20,30">Mild steel</option>
+          <option value="8,12">Stainless steel</option>
+          <option value="15,25">Cast iron</option>
+        </select>
+      </div>
+      <div class="trow"><label>Bit type</label>
+        <select id="rpmType">
+          <option value="9999" selected>Twist drill</option>
+          <option value="1800">Spade bit</option>
+          <option value="1200">Forstner bit</option>
+          <option value="600">Hole saw</option>
+          <option value="1200">Countersink</option>
+          <option value="1500">Step drill</option>
+          <option value="800">Auger / self-feed</option>
+          <option value="0">Masonry (hammer)</option>
+        </select>
+      </div>
+      <div class="trow"><label>Bit Ø (mm)</label>
+        <input type="number" id="rpmDia" min="1" max="160" value="6" style="width:90px;">
+      </div>
+      <div class="result" id="rpmOut">Pick material, bit type and diameter → get your speed.</div>
+    </div>
+
+    <div class="tool-card">
+      <h3>PILOT HOLE FINDER</h3>
+      <div class="sub">Right-size pilot hole for a screw — stops splitting wood &amp; stripped threads.</div>
+      <div class="trow"><label>Screw</label>
+        <select id="pilScrew">
+          <option value="2">M2 (2.0 mm)</option>
+          <option value="3">M3 (3.0 mm)</option>
+          <option value="3.5">M3.5 / #6 (3.5 mm)</option>
+          <option value="4">M4 / #8 (4.0 mm)</option>
+          <option value="5">M5 / #10 (5.0 mm)</option>
+          <option value="6" selected>M6 / #12 (6.0 mm)</option>
+          <option value="8">M8 (8.0 mm)</option>
+          <option value="10">M10 (10.0 mm)</option>
+        </select>
+      </div>
+      <div class="trow"><label>Material</label>
+        <select id="pilMat">
+          <option value="0.8" selected>Softwood (80%)</option>
+          <option value="0.68">Hardwood (68%)</option>
+          <option value="0.74">Plastic (74%)</option>
+        </select>
+      </div>
+      <div class="result" id="pilOut">Choose a screw and material → get your pilot drill size.</div>
+    </div>
+
+    <div class="tool-card">
+      <h3>TAP DRILL CHART</h3>
+      <div class="sub">Drill size before cutting a metric thread with a tap (≈75% thread).</div>
+      <div class="trow"><label>Thread</label>
+        <select id="tapSel">
+          <option value="">— choose —</option>
+          <option>M2</option><option>M2.5</option><option>M3</option><option>M3.5</option>
+          <option>M4</option><option>M5</option><option>M6</option><option>M8</option>
+          <option>M10</option><option>M12</option><option>M16</option>
+        </select>
+      </div>
+      <table class="data" id="tapTable">
+        <tr><th>THREAD</th><th>TAP DRILL Ø</th><th>THREAD</th><th>TAP DRILL Ø</th></tr>
+        <tr><td>M2</td><td>1.6 mm</td><td>M6</td><td>5.0 mm</td></tr>
+        <tr><td>M2.5</td><td>2.0 mm</td><td>M8</td><td>6.8 mm</td></tr>
+        <tr><td>M3</td><td>2.5 mm</td><td>M10</td><td>8.5 mm</td></tr>
+        <tr><td>M3.5</td><td>2.9 mm</td><td>M12</td><td>10.2 mm</td></tr>
+        <tr><td>M4</td><td>3.3 mm</td><td>M16</td><td>14.0 mm</td></tr>
+        <tr><td>M5</td><td>4.2 mm</td><td></td><td></td></tr>
+      </table>
+      <div class="result" id="tapOut" style="margin-top:10px;">Rule of thumb: tap drill ≈ major Ø − thread pitch.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="sec-quiz" class="hidden">
+  <h2>🎯 KNOWLEDGE <span>QUIZ</span></h2>
+  <div class="lede">22 questions — which bit for which job, how they cut, and workshop safety.</div>
+  <div class="quiz-card" id="quizCard"></div>
+</section>
+
+<!-- ============ GUIDE ============ -->
+<section id="sec-guide" class="hidden">
+  <h2>🛠 WORKSHOP <span>GUIDE</span></h2>
+  <div class="lede">Troubleshooting, technique, sharpening, the machines, and the vocabulary.</div>
+
+  <div class="acc open">
+    <div class="acc-head"><h3>🚑 TROUBLESHOOTING — <span>common problems &amp; fixes</span></h3><span class="arr">▶</span></div>
+    <div class="acc-body">
+      <table class="prob">
+        <tr><th>PROBLEM</th><th>CAUSE</th><th>FIX</th></tr>
+        <tr><td>Bit wanders off the mark</td><td>Point skidding on smooth/hard surface</td><td>Centre punch (metal) or awl mark (wood); use a brad point bit</td></tr>
+        <tr><td>Hole burns / wood blackens</td><td>Speed too high or dull bit</td><td>Slow down, use a sharp bit, pull out to clear chips</td></tr>
+        <tr><td>Bit slips in the chuck</td><td>Loose chuck or smooth shank</td><td>Tighten a keyed chuck fully (all three holes); wipe oily shanks</td></tr>
+        <tr><td>Bit breaks</td><td>Side force, forcing, or too-small pilot</td><td>Keep drill square, feed gently, use a centre drill for starts</td></tr>
+        <tr><td>Ragged exit hole / tear-out</td><td>Spindle (twist) bit bursting through</td><td>Back the work with scrap wood; use a brad point</td></tr>
+        <tr><td>Bit won't start on metal</td><td>Point skids on smooth steel</td><td>Centre punch first — it gives the point a socket to bite</td></tr>
+        <tr><td>Chips clog / bit jams</td><td>Swarf not clearing the flutes</td><td>Withdraw often, add cutting fluid, use a higher-helix bit</td></tr>
+        <tr><td>Screw head won't sit flush</td><td>Wrong countersink angle</td><td>Use 82° for standard countersunk screws, 90° for metric</td></tr>
+        <tr><td>Blue shavings / burning smell (metal)</td><td>Too fast, no lubricant</td><td>Slow down and use cutting fluid — blue = ruined temper</td></tr>
+        <tr><td>Oversized / not-round hole</td><td>Worn chuck or spindle run-out; tilted feed</td><td>Use a drill press; check chuck jaws; feed square</td></tr>
+        <tr><td>Bit stuck in the hole</td><td>Binding on deep cut</td><td>Reverse slowly, clear chips, never force it</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-head"><h3>📋 HOW TO DRILL A HOLE — <span>step by step</span></h3><span class="arr">▶</span></div>
+    <div class="acc-body">
+      <ol class="steps">
+        <li><b>Mark the spot.</b> Pencil cross on wood, then centre-punch it on metal so the bit can't skid.</li>
+        <li><b>Choose the bit.</b> Right type for the material, right size, and check it's sharp.</li>
+        <li><b>Clamp the work.</b> A bit can snatch and spin the whole piece — always secure it.</li>
+        <li><b>Pilot first.</b> For anything over ~6 mm, drill a small pilot hole first.</li>
+        <li><b>Start slow and square.</b> Bring the bit to the mark at low speed, then straighten up.</li>
+        <li><b>Feed steadily.</b> Let the bit cut; withdraw to clear chips; use fluid on metal.</li>
+        <li><b>Ease off at breakthrough.</b> The last few millimetres grab — lighten pressure.</li>
+        <li><b>Finish.</b> Deburr the hole, blow out chips, wipe the work.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-head"><h3>⚒ SHARPENING &amp; <span>CARE</span></h3><span class="arr">▶</span></div>
+    <div class="acc-body">
+      <h4>Twist drills</h4>
+      <ul>
+        <li>Sharpen on a bench grinder to a 118° point — keep both cutting edges the same length and angle.</li>
+        <li>Dip in water often — overheating turns the steel blue and ruins the temper.</li>
+        <li>A sharpening jig keeps the angles identical; freehand takes practice.</li>
+      </ul>
+      <h4>Spade &amp; brad point bits</h4>
+      <ul>
+        <li>Spade: file the flat cutting corners flat and square — never the centre point.</li>
+        <li>Brad point: lightly stone the inside of the spurs only.</li>
+      </ul>
+      <h4>Carbide &amp; diamond tips</h4>
+      <ul>
+        <li>Masonry, tile and diamond bits are NOT hand-sharpened — replace the tip or the bit.</li>
+        <li>Keep diamond rims wet while drilling; a dry diamond rim dies fast.</li>
+      </ul>
+      <h4>Storage</h4>
+      <ul>
+        <li>Keep bits in a case or rack — rattling in a drawer blunts the edges.</li>
+        <li>Wipe oily shanks, separate wood bits from metal bits, replace worn chucks early.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-head"><h3>🔧 THE DRILL <span>MACHINES</span></h3><span class="arr">▶</span></div>
+    <div class="acc-body">
+      <div class="mach-grid">
+        <div class="mach"><h5>Hand Drill &amp; Brace</h5><p>Manual, slow, total control. The brace + auger is the traditional way to bore deep timber holes.</p></div>
+        <div class="mach"><h5>Power Drill</h5><p>Corded or cordless, keyed or keyless chuck, often a 2-speed gearbox. Handles nearly every bit here.</p></div>
+        <div class="mach"><h5>Hammer Drill</h5><p>Adds rapid light percussion — good for masonry bits up to ~13 mm in brick and block.</p></div>
+        <div class="mach"><h5>Rotary Hammer (SDS)</h5><p>Pneumatic hammer with SDS shanks — big masonry holes, cores and chiselling.</p></div>
+        <div class="mach"><h5>Pillar / Bench Drill</h5><p>Fixed vertical spindle, depth stop, adjustable speeds. Square, accurate, repeatable holes — best for metalwork.</p></div>
+        <div class="mach"><h5>Magnetic Drill</h5><p>Clamps magnetically to steel and drives annular cutters — large, precise holes in beams and plate.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-head"><h3>📖 GLOSSARY</h3><span class="arr">▶</span></div>
+    <div class="acc-body">
+      <div class="gloss">
+        <div><b>Shank</b> — <span>the end gripped by the chuck (round, hex, SDS, Weldon).</span></div>
+        <div><b>Flutes</b> — <span>the grooves that carry waste out of the hole.</span></div>
+        <div><b>Swarf</b> — <span>the waste material a bit removes.</span></div>
+        <div><b>Point angle</b> — <span>the angle at the tip; 118° standard for metal.</span></div>
+        <div><b>Pilot hole</b> — <span>a small starter hole drilled before the final size.</span></div>
+        <div><b>Countersink</b> — <span>a cone recess letting a screw head sit flush.</span></div>
+        <div><b>Counterbore</b> — <span>a flat-bottomed recess for a bolt head.</span></div>
+        <div><b>Chamfer</b> — <span>a cut-away edge or corner, usually 45°.</span></div>
+        <div><b>Deburr</b> — <span>to remove the sharp burrs left around a hole.</span></div>
+        <div><b>Run-out</b> — <span>wobble of a bit in the chuck; causes oversize holes.</span></div>
+        <div><b>Cutting fluid</b> — <span>lubricant/coolant for drilling metal.</span></div>
+        <div><b>HSS</b> — <span>high-speed steel — hard, heat-resistant bit steel.</span></div>
+        <div><b>Carbide (TC)</b> — <span>tungsten carbide, the hard tip material for masonry/tile bits.</span></div>
+        <div><b>SDS</b> — <span>a splined shank system that locks into rotary hammers.</span></div>
+        <div><b>Weldon shank</b> — <span>a flat-sided shank for magnetic-drill chucks.</span></div>
+        <div><b>RPM</b> — <span>revolutions per minute — how fast the bit spins.</span></div>
+        <div><b>Chuck</b> — <span>the jaws that grip the shank.</span></div>
+        <div><b>Arbor</b> — <span>the central spindle a hole saw or core bit mounts on.</span></div>
+        <div><b>Annulus</b> — <span>a ring-shaped cut — what hole saws and core bits make.</span></div>
+        <div><b>Breakthrough</b> — <span>the moment the bit exits the far side — grab city.</span></div>
+        <div><b>Feed</b> — <span>how fast you push the bit into the work.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="backdrop" id="backdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="m-head">
+      <div>
+        <div class="m-title" id="mTitle"></div>
+        <div class="m-aka" id="mAka"></div>
+        <div class="cchips" id="mChips" style="margin-top:8px;"></div>
+      </div>
+      <button class="m-close" id="mClose">×</button>
+    </div>
+    <div class="m-body">
+      <div class="m-art">
+        <div class="bigsvg" id="mSvg"></div>
+        <div class="parts"><h4>ANATOMY — HOVER OR TAP A PART</h4><div id="mParts"></div></div>
+      </div>
+      <div class="m-info">
+        <p class="m-how" id="mHow"></p>
+        <table class="specs" id="mSpecs"></table>
+        <div class="two-col">
+          <div class="good"><div class="sec-title good">BEST FOR</div><ul id="mBest"></ul></div>
+          <div class="bad"><div class="sec-title bad">AVOID</div><ul id="mAvoid"></ul></div>
+        </div>
+        <div class="tip-sec"><div class="sec-title tip">PRO TIPS</div><ul id="mTips"></ul></div>
+        <div class="safe-sec"><div class="sec-title safe">SAFETY</div><ul id="mSafe"></ul></div>
+        <div class="related" id="mRelated"></div>
+      </div>
+    </div>
+    <div class="m-nav">
+      <button id="mPrev">← PREV</button>
+      <span class="pos" id="mPos"></span>
+      <button id="mNext">NEXT →</button>
+    </div>
+  </div>
+</div>
+
+<div class="tip" id="tip"></div>
+
+<script>
+const BITS = [
+{
+ id:'twist', name:'Twist Drill', aka:'HSS · jobber drill', mats:['wood','metal','multi'], speed:'MED', speedClass:'med',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="72" y="6" width="16" height="14" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M72 20 L88 20 L85.5 68 Q82 76 80 82 Q78 76 74.5 68 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M75.5 24 Q80 42 79 60" stroke="#7B8FB3" stroke-width="2.2" fill="none"/>
+  <path d="M84.5 24 Q80 42 81 60" stroke="#7B8FB3" stroke-width="2.2" fill="none"/>
+  <path d="M75 62 L80 82 M85 62 L80 82" stroke="#E2E8F4" stroke-width="1.5"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="13" r="4"/><circle class="hp" data-label="Flutes" cx="79" cy="36" r="4"/><circle class="hp" data-label="Cutting edges" cx="80" cy="78" r="4"/><circle class="hp" data-label="Point (118°)" cx="80" cy="82" r="4"/>
+ </svg>`,
+ parts:['Shank','Flutes','Cutting edges','Point (118°)'],
+ how:'The classic all-rounder. Two cutting edges (lips) shear the material while the spiral flutes screw the waste — swarf — up and out of the hole. HSS (high-speed steel) holds its edge when drilling metal.',
+ specs:[['Sizes','0.5–13 mm sets, up to 25 mm'],['Speeds','Wood 1000–3000 rpm · Metal 300–1500 rpm · smaller bit = faster'],['Point angle','118° metal · 90° plastic · 60° softwood (ground down)'],['Shank','Round, 3-jaw chuck']],
+ best:['General drilling in wood, metal, plastic','Pilot holes before larger bits','Almost every workshop job'],
+ avoid:['Masonry and concrete','Glass and tile','Huge holes (use spade / hole saw)'],
+ tips:['Cobalt twist = hardened steel; gold (TiN) = less friction; black oxide = rust-resistant','Use cutting fluid on metal, and pull out often to clear swarf','Drill a pilot hole for anything over 6 mm'],
+ safety:'Clamp the work and never force the drill — let the cutting edges do the work.',
+ related:['brad-point','step','center']
+},
+{
+ id:'brad-point', name:'Brad Point', aka:'Spur point · dowel bit', mats:['wood'], speed:'MED', speedClass:'med',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="72" y="6" width="16" height="14" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M72 20 L88 20 L85.5 60 Q82 67 80 72 Q78 67 74.5 60 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M70.5 52 L70.5 72 M89.5 52 L89.5 72" stroke="#B9C6DE" stroke-width="2.5"/>
+  <path d="M68.8 70 L70.5 77 L72.2 70 Z M87.8 70 L89.5 77 L91.2 70 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="1.5"/>
+  <path d="M78.2 71 L80 92 L81.8 71 Z" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1.5"/>
+  <path d="M75.5 24 Q80 40 79 54 M84.5 24 Q80 40 81 54" stroke="#7B8FB3" stroke-width="2.2" fill="none"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="13" r="4"/><circle class="hp" data-label="Flutes" cx="79" cy="34" r="4"/><circle class="hp" data-label="Twin spurs" cx="70" cy="62" r="4"/><circle class="hp" data-label="Center point" cx="80" cy="84" r="4"/>
+ </svg>`,
+ parts:['Shank','Flutes','Twin spurs','Center point'],
+ how:'The centre spur bites into the wood first, so the bit cannot wander off your mark. The two sharp spurs score the rim of the hole, slicing the wood fibres — the exit hole comes out clean instead of ragged.',
+ specs:[['Sizes','3–16 mm'],['Speeds','Wood 1200–2500 rpm'],['Point','Centre spur + twin rim spurs'],['Shank','Round']],
+ best:['Furniture making and joinery','Dowel joints — accurate, clean holes','Holes where position matters'],
+ avoid:['Metal and plastic','Very thin plywood without a backing board'],
+ tips:['Mark the spot with an awl first for perfect placement','Use a drill stand or guide to keep the bit square','Cheap in sets — a great first upgrade from twist drills'],
+ safety:'Work supported on a bench; spurs grab hard when breaking through.',
+ related:['twist','forstner','self-centering']
+},
+{
+ id:'spade', name:'Spade Bit', aka:'Paddle bit · flat wood boring bit', mats:['wood'], speed:'FAST', speedClass:'fast',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="75" y="6" width="10" height="16" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M70 24 C54 28 46 42 52 56 C55 63 62 68 69 71 L75 76 L85 76 L91 71 C98 68 105 63 108 56 C114 42 106 28 90 24 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M80 26 L80 74" stroke="#7B8FB3" stroke-width="1.6"/>
+  <path d="M78 74 L80 88 L82 74 Z" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1.5"/>
+  <path d="M52 56 L49 64 M108 56 L111 64" stroke="#B9C6DE" stroke-width="2.5"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="13" r="4"/><circle class="hp" data-label="Paddle" cx="80" cy="45" r="4"/><circle class="hp" data-label="Cutting corners" cx="107" cy="57" r="4"/><circle class="hp" data-label="Center point" cx="80" cy="84" r="4"/>
+ </svg>`,
+ parts:['Shank','Paddle','Cutting corners','Center point'],
+ how:'The flat paddle spins at speed and scrapes a wide hole in seconds. The centre point pulls it into the timber and the sharp outer corners slice the outside of the hole.',
+ specs:[['Sizes','6–38 mm (up to 50 mm)'],['Speeds','Wood 900–1800 rpm'],['Shank','Round — fits any drill'],['Cheapest per size','Yes — big hole for almost nothing']],
+ best:['Fast, rough holes in softwood and timber','Cable runs, pipe holes, stud work','When speed matters more than finish'],
+ avoid:['Visible / finished surfaces (tears the exit)','Metal, plastic, masonry','Deep holes — the paddle clogs'],
+ tips:['Always drill into a scrap backer board to stop tear-out','Entry at an angle lets the point bite, then straighten up','Sharpen the corners with a file to keep it cutting'],
+ safety:'Spade bits grab hard — keep both hands on the drill and clamp the work.',
+ related:['hole-saw','auger','self-feed']
+},
+{
+ id:'forstner', name:'Forstner Bit', aka:'Flat-bottom bit', mats:['wood'], speed:'SLOW', speedClass:'slow',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="74" y="6" width="12" height="12" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <rect x="56" y="18" width="48" height="40" rx="3" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M58 20 L58 54 M102 20 L102 54" stroke="#7B8FB3" stroke-width="1.6"/>
+  <path d="M56 32 L104 32" stroke="#7B8FB3" stroke-width="1.2"/>
+  <path d="M56 58 l4 7 l4 -7 l4 7 l4 -7 l4 7 l4 -7 l4 7 l4 -7 l4 7 l4 -7 l4 7 l4 -7" fill="none" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M78.5 57 L80 70 L81.5 57 Z" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1.5"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="12" r="4"/><circle class="hp" data-label="Cutting rim" cx="80" cy="38" r="4"/><circle class="hp" data-label="Rim teeth" cx="104" cy="50" r="4"/><circle class="hp" data-label="Center point" cx="80" cy="66" r="4"/>
+ </svg>`,
+ parts:['Shank','Cutting rim','Rim teeth','Center point'],
+ how:'The outer ring of teeth cuts the circle of the hole first, then the inner blades shave the face flat — giving a perfectly flat bottom. Because the rim cuts before the middle, it can drill partial and overlapping holes without wandering.',
+ specs:[['Sizes','10–50 mm +'],['Speeds','Wood 400–900 rpm (slow!)'],['Depth','Flat-bottom holes of exact depth'],['Shank','Round']],
+ best:['Hinge recesses and mortises','Shelf-pin holes','Flat-bottomed and overlapping holes','Accurate angled holes (rim stays put)'],
+ avoid:['Metal (needs slow speed + lube, rarely worth it)','Very hard wood at high speed'],
+ tips:['Slow speed and steady feed — force burns the rim teeth','Clear the chips often; they clog the rim','Use a depth stop or tape on the bit for repeat depth'],
+ safety:'Clamp the work firmly — Forstners grab on entry and exit.',
+ related:['brad-point','plug-cutter','counterbore']
+},
+{
+ id:'auger', name:'Auger Bit', aka:'Brace bit', mats:['wood'], speed:'MED', speedClass:'med',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="74" y="6" width="12" height="12" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M71 18 L89 18 L86 52 Q82 55 80 57 Q78 55 74 52 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M70.5 26 Q78 31 89.5 29 M70 34 Q78 39 89 37 M70 42 Q77 47 88 45 M71.5 49 Q76 52 85 51" stroke="#7B8FB3" stroke-width="2" fill="none"/>
+  <path d="M78.5 56 L80 66 L81.5 56 Z" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1.5"/>
+  <path d="M75 62 Q80 66 85 62" stroke="#F5CE7E" stroke-width="1.5" fill="none"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="12" r="4"/><circle class="hp" data-label="Spiral flight" cx="80" cy="36" r="4"/><circle class="hp" data-label="Screw tip" cx="80" cy="62" r="4"/><circle class="hp" data-label="Cutting lips" cx="76" cy="54" r="4"/>
+ </svg>`,
+ parts:['Shank','Spiral flight','Screw tip','Cutting lips'],
+ how:'The threaded screw tip pulls the bit into the timber by itself — you just guide it. The long spiral flight carries the waste up and out, so it bores deep, clean holes without clearing.',
+ specs:[['Sizes','6–25 mm +'],['Speeds','Hand brace or slow power drill (200–800 rpm)'],['Lengths','Up to 460 mm for deep boring'],['Shank','Square-taper (brace) or round']],
+ best:['Deep holes in solid timber','Dowelling and green (damp) wood','Traditional brace-and-bit work'],
+ avoid:['Sheet material and plywood','Metal, plastic','Short shallow holes (overkill)'],
+ tips:['Let the screw feed — pushing hard just stalls it','Withdraw often to clear the flight','The screw tip can burst through — back it with scrap'],
+ safety:'Brace work keeps your hands clear; in a power drill, expect a strong pull when the screw bites.',
+ related:['self-feed','spade','flex-auger']
+},
+{
+ id:'self-feed', name:'Self-Feed Bit', aka:'Power auger', mats:['wood'], speed:'FAST', speedClass:'fast',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="74" y="6" width="12" height="12" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M70 18 L90 18 L84 50 Q81 54 80 56 Q79 54 76 50 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M72 24 Q80 30 88 28 M71.5 33 Q79 38 87 36 M71.5 42 Q77 46 84 44" stroke="#7B8FB3" stroke-width="2" fill="none"/>
+  <path d="M70.5 46 L68 53 M89.5 46 L92 53" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M78.5 55 L80 67 L81.5 55 Z" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1.5"/>
+  <path d="M74.5 61 Q80 65 85.5 61" stroke="#F5CE7E" stroke-width="1.5" fill="none"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="12" r="4"/><circle class="hp" data-label="Wide flutes" cx="80" cy="30" r="4"/><circle class="hp" data-label="Spur cutters" cx="90" cy="48" r="4"/><circle class="hp" data-label="Threaded tip" cx="80" cy="62" r="4"/>
+ </svg>`,
+ parts:['Shank','Wide flutes','Spur cutters','Threaded tip'],
+ how:'Built for power drills: the threaded tip screws itself through the timber fast while the wide flutes blast the waste out. Spur cutters score the edge of the hole so it stays clean and round.',
+ specs:[['Sizes','12–40 mm'],['Speeds','600–1200 rpm, high torque'],['Use with','1/2" chuck or SDS drills'],['Lengths','150–460 mm']],
+ best:['Framing and construction timber','Fast large holes in studs and joists','Repeated big holes (decking, fencing)'],
+ avoid:['Hand drilling','Knotty or nail-embedded timber (danger)','Metal, plastic, masonry'],
+ tips:['Feed screw keeps pulling — keep the drill straight','Stop before the tip bursts through, finish from the other side','Never reverse a spinning self-feed bit in the hole'],
+ safety:'Kickback risk when the tip catches — both hands, stand firm, beware of nails.',
+ related:['auger','spade','hole-saw']
+},
+{
+ id:'hole-saw', name:'Hole Saw', aka:'Cup saw · holesaw kit', mats:['wood','metal','multi'], speed:'SLOW', speedClass:'slow',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="78" y="4" width="4" height="12" fill="#3D5178" stroke="#B9C6DE" stroke-width="1.5"/>
+  <rect x="75.5" y="16" width="9" height="24" fill="#3D5178" stroke="#B9C6DE" stroke-width="1.5"/>
+  <path d="M75.5 40 L80 54 L84.5 40 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="1.5"/>
+  <path d="M77.5 22 Q79.5 30 79 36 M82.5 22 Q80.5 30 81 36" stroke="#7B8FB3" stroke-width="1.6" fill="none"/>
+  <path d="M50 14 Q50 10 56 10 L104 10 Q110 10 110 14 L110 44 L50 44 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M58 18 L58 40 M102 18 L102 40" stroke="#7B8FB3" stroke-width="1.4" stroke-dasharray="3 2"/>
+  <path d="M50 44 l5 8 l5 -8 l5 8 l5 -8 l5 8 l5 -8 l5 8 l5 -8 l5 8 l5 -8 l5 8 l5 -8" fill="none" stroke="#B9C6DE" stroke-width="2"/>
+  <circle class="hp" data-label="Arbor" cx="80" cy="10" r="4"/><circle class="hp" data-label="Pilot drill" cx="80" cy="34" r="4"/><circle class="hp" data-label="Cup / barrel" cx="108" cy="28" r="4"/><circle class="hp" data-label="Teeth" cx="80" cy="49" r="4"/>
+ </svg>`,
+ parts:['Arbor','Pilot drill','Cup / barrel','Teeth'],
+ how:'The ring of teeth saws a circle out of the material while the centre pilot drill keeps the whole saw on target. You get a large, round hole using the power of a normal drill.',
+ specs:[['Sizes','19–150 mm'],['Speeds','Wood 300–600 rpm · Metal 100–300 rpm with lube'],['Types','Bi-metal (wood+metal) · carbide-tipped (masonry)'],['Arbor','Hex or SDS']],
+ best:['Door locks and latches','Pipe and cable pass-throughs','Large holes in wood, plasterboard, thin metal'],
+ avoid:['Tile and glass (use a diamond core bit)','Thick solid metal (use an annular cutter)','Running fast — it burns the teeth'],
+ tips:['Clear the wood plug often — it jams the saw','Use a slow speed and steady pressure for metal with cutting oil','Drill from both sides for very thick material'],
+ safety:'Hole saws snatch hard on breakthrough — clamp the work and keep the drill square.',
+ related:['spade','diamond-core','annular']
+},
+{
+ id:'countersink', name:'Countersink', aka:'82° countersink · rose bit', mats:['wood','metal','multi'], speed:'SLOW', speedClass:'slow',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="76" y="6" width="8" height="12" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M54 18 L106 18 L80 50 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M60 20 L78 46 M80 20 L80 46 M100 20 L82 46" stroke="#7B8FB3" stroke-width="1.8" fill="none"/>
+  <path d="M78.5 50 L80 56 L81.5 50 Z" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1.5"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="12" r="4"/><circle class="hp" data-label="Cone cutter" cx="80" cy="34" r="4"/><circle class="hp" data-label="Flutes" cx="94" cy="26" r="4"/><circle class="hp" data-label="Pilot point" cx="80" cy="53" r="4"/>
+ </svg>`,
+ parts:['Shank','Cone cutter','Flutes','Pilot point'],
+ how:'The cone-shaped cutter matches the angle of a screw head (82° for standard countersunk screws). It cuts a neat chamfer so the screw head sits flush with — or just below — the surface.',
+ specs:[['Angles','82° imperial · 90° metric · 100° some hardware'],['Sizes','6–16 mm (for screws #4 – #12)'],['Speeds','500–1200 rpm, light touch'],['Sets','Often combined with pilot drill']],
+ best:['Before driving screws into wood or metal','Flush-mounting hinges and brackets','Keeping screw heads out of the way'],
+ avoid:['As a general drilling bit (not for full holes)','Thin sheet metal at high speed (grabs)'],
+ tips:['Drill the pilot hole first, then countersink','A depth stop gives consistent screw heights','Countersink both sides for a clean finish on show wood'],
+ safety:'Light pressure — a deep countersink weakens thin material.',
+ related:['counterbore','twist','self-centering']
+},
+{
+ id:'counterbore', name:'Counterbore', aka:'Recess bit', mats:['metal','wood'], speed:'SLOW', speedClass:'slow',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="76" y="6" width="8" height="10" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <rect x="66" y="16" width="28" height="24" rx="2" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M70 26 L90 26 M70 36 L90 36" stroke="#7B8FB3" stroke-width="1.4"/>
+  <rect x="74" y="40" width="12" height="18" fill="#3D5178" stroke="#B9C6DE" stroke-width="1.5"/>
+  <path d="M74 58 L80 68 L86 58 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="1.5"/>
+  <circle class="hp" data-label="Recess cutter" cx="80" cy="26" r="4"/><circle class="hp" data-label="Flat bottom" cx="80" cy="40" r="4"/><circle class="hp" data-label="Pilot" cx="80" cy="50" r="4"/><circle class="hp" data-label="Pilot point" cx="80" cy="64" r="4"/>
+ </svg>`,
+ parts:['Recess cutter','Flat bottom','Pilot','Pilot point'],
+ how:'Like a countersink but with straight sides — it cuts a flat-bottomed recess the exact size of a bolt or socket-cap screw head, with a pilot hole underneath for the shank. The fastener then sits flush or below the surface.',
+ specs:[['Recess sizes','6–25 mm'],['Pilot sizes','3–12 mm (match screw shank)'],['Speeds','400–900 rpm'],['Depth','Controlled by drill-press stop or collar']],
+ best:['Socket-head cap screws (Allen bolts)','Fixtures where bolts must sit flush','Metal plate and wood jig work'],
+ avoid:['Countersunk screws (they need a countersink!)','Deep recesses in thin material'],
+ tips:['Choose the pilot to match the screw shank, not the thread','Use a drill press for exact depth control','A little wax on the pilot stops it sticking'],
+ safety:'Drill the pilot fully first — forcing a counterbore through jams the bit.',
+ related:['countersink','forstner','twist']
+},
+{
+ id:'step', name:'Step Drill', aka:'Unibit · cone drill', mats:['metal','multi'], speed:'MED', speedClass:'med',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="77" y="4" width="6" height="12" fill="#3D5178" stroke="#B9C6DE" stroke-width="1.5"/>
+  <rect x="71.5" y="16" width="17" height="8" fill="#2A3A55" stroke="#B9C6DE" stroke-width="1.5"/>
+  <rect x="66.5" y="24" width="27" height="8" fill="#2A3A55" stroke="#B9C6DE" stroke-width="1.5"/>
+  <rect x="61.5" y="32" width="37" height="8" fill="#2A3A55" stroke="#B9C6DE" stroke-width="1.5"/>
+  <rect x="56.5" y="40" width="47" height="8" fill="#2A3A55" stroke="#B9C6DE" stroke-width="1.5"/>
+  <rect x="51.5" y="48" width="57" height="7" fill="#2A3A55" stroke="#B9C6DE" stroke-width="1.5"/>
+  <path d="M51.5 55 L80 71 L108.5 55 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="1.5"/>
+  <path d="M78.5 70 L80 76 L81.5 70 Z" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1.2"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="10" r="4"/><circle class="hp" data-label="Steps" cx="69" cy="28" r="4"/><circle class="hp" data-label="Cutting edges" cx="80" cy="44" r="4"/><circle class="hp" data-label="Pilot point" cx="80" cy="73" r="4"/>
+ </svg>`,
+ parts:['Shank','Steps','Cutting edges','Pilot point'],
+ how:'The stepped cone is many drill sizes in one tool. Each step shears sheet material cleanly without grabbing, and the pilot point self-centres — so you can step up to exactly the size you need, no bit changes.',
+ specs:[['Sizes','4–40 mm by steps (0.5–1 mm each)'],['Speeds','Metal 500–1500 rpm'],['Best in','Sheet metal, enclosures, plastic panels'],['Shank','1/4" hex for quick-change chucks']],
+ best:['Thin sheet metal and stainless enclosures','Electrical boxes and panels','Plastic sheet and acrylic (slow speed)','Holes in curved surfaces (no wander)'],
+ avoid:['Thick solid metal (steps bind)','Masonry, tile, glass'],
+ tips:['Drill until the step you need — that is your size','Deburr the edge afterwards; the steps leave sharp lips','Use cutting fluid for stainless'],
+ safety:'Chips are razor-sharp — wear gloves when clearing, eye protection always.',
+ related:['twist','hole-saw','counterbore']
+},
+{
+ id:'masonry', name:'Masonry Bit', aka:'SDS bit · carbide-tipped', mats:['masonry'], speed:'FAST', speedClass:'fast',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="76" y="6" width="8" height="12" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <rect x="66" y="18" width="28" height="42" rx="3" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M71 22 L71 56 M89 22 L89 56" stroke="#7B8FB3" stroke-width="1.6"/>
+  <path d="M68 60 L92 60 L85 74 L75 74 Z" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1.5"/>
+  <circle class="hp" data-label="Shank (SDS)" cx="80" cy="12" r="4"/><circle class="hp" data-label="Body / flutes" cx="80" cy="36" r="4"/><circle class="hp" data-label="Carbide tip" cx="80" cy="66" r="4"/>
+ </svg>`,
+ parts:['Shank (SDS)','Body / flutes','Carbide tip'],
+ how:'The tungsten-carbide tip smashes and grinds its way through masonry — but only when the hammer action is on. The hammer blows fracture the material, the tip grinds the debris, and the flutes (often two flat sides) clear the dust.',
+ specs:[['Sizes','4–20 mm (round shank) · SDS up to 50 mm +'],['Speeds','Hammer mode, 800–1500 rpm'],['Shank types','Round (3-jaw) · SDS / SDS-Plus (hammer drills)'],['Tip','Brazed tungsten carbide']],
+ best:['Brick, block, concrete, mortar','Rawl-plug holes for fixings','Any hammer-drill work'],
+ avoid:['Tile and glass (it chips them)','Steel (carbide tip shatters)','Plain drilling — without hammer it just rubs'],
+ tips:['Let the hammer do the work — no pushing','SDS shanks lock in and out instantly, ideal for big holes','Use dust extraction or a mask — silica dust is dangerous'],
+ safety:'Wear eye protection and a dust mask; anchor yourself against the drill kick.',
+ related:['diamond-core','glass-tile','core-bit']
+},
+{
+ id:'glass-tile', name:'Glass & Tile Bit', aka:'Spear bit · tile drill', mats:['tile'], speed:'V. SLOW', speedClass:'vslow',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="77" y="6" width="6" height="12" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <rect x="73" y="18" width="14" height="32" rx="5" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M80 50 L66 64 L80 84 L94 64 Z" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1.5"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="12" r="4"/><circle class="hp" data-label="Shaft" cx="80" cy="34" r="4"/><circle class="hp" data-label="Spear tip (carbide)" cx="80" cy="66" r="4"/>
+ </svg>`,
+ parts:['Shank','Shaft','Spear tip (carbide)'],
+ how:'The spear-shaped carbide tip scrapes rather than cuts — at low speed, with NO hammer action. It slowly grinds through tile and glass without shattering them.',
+ specs:[['Sizes','3–13 mm'],['Speeds','300–600 rpm max — slow!'],['Coolant','Water or cutting oil drip'],['Tip','Sharpened carbide spear']],
+ best:['Ceramic wall tile','Glass and mirror','Small holes in tile before a core bit'],
+ avoid:['Porcelain (too hard — use diamond)','Concrete and brick','High speed and hammer (shatters the tile)'],
+ tips:['Stick masking tape on the tile to stop the bit wandering','Keep a drip of water or coolant on the spot','For glass, start at a shallow angle, then straighten up'],
+ safety:'Eye protection is essential — glass fragments fly. Wear gloves when handling broken edges.',
+ related:['diamond-core','masonry','hole-saw']
+},
+{
+ id:'diamond-core', name:'Diamond Core Bit', aka:'Diamond hole saw', mats:['tile'], speed:'SLOW', speedClass:'slow',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="78" y="4" width="4" height="10" fill="#3D5178" stroke="#B9C6DE" stroke-width="1.5"/>
+  <rect x="56" y="14" width="48" height="34" rx="3" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M60 18 L60 44 M100 18 L100 44" stroke="#7B8FB3" stroke-width="1.4" stroke-dasharray="3 2"/>
+  <rect x="56" y="48" width="48" height="6" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1"/>
+  <circle class="hp" data-label="Arbor" cx="80" cy="9" r="4"/><circle class="hp" data-label="Barrel" cx="104" cy="30" r="4"/><circle class="hp" data-label="Diamond rim" cx="80" cy="51" r="4"/>
+ </svg>`,
+ parts:['Arbor','Barrel','Diamond rim'],
+ how:'The rim is impregnated with industrial diamond, which grinds an annulus (ring) out of the hardest materials. Used wet with water, it drills clean, chip-free holes through porcelain, marble and glass.',
+ specs:[['Sizes','6–150 mm'],['Speeds','200–600 rpm, always with water'],['Coolant','Flood or drip water — keeps diamond alive'],['Types','Wet (tile/glass) · dry (brick/stone)']],
+ best:['Porcelain and ceramic tile','Marble, granite, stone','Big clean holes in tile — shower fittings, basins'],
+ avoid:['Wood and metal (destroys the rim)','Running dry on tile (burns the diamonds)','Hammer mode'],
+ tips:['Always cool with water — a dry diamond rim dies fast','Start with a small diamond pilot bit or tile spear first','Let the weight of the drill do the work, no pressure'],
+ safety:'Water + electricity = keep the drill cord and socket dry; use an RCD-protected supply.',
+ related:['glass-tile','hole-saw','masonry']
+},
+{
+ id:'center', name:'Center Drill', aka:'Combined drill & countersink', mats:['metal'], speed:'MED', speedClass:'med',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="74" y="6" width="12" height="16" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M66 22 L94 22 L80 40 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M78.5 40 L80 50 L81.5 40 Z" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1.5"/>
+  <circle class="hp" data-label="Stubby shank" cx="80" cy="14" r="4"/><circle class="hp" data-label="60° cone" cx="80" cy="30" r="4"/><circle class="hp" data-label="Pilot point" cx="80" cy="46" r="4"/>
+ </svg>`,
+ parts:['Stubby shank','60° cone','Pilot point'],
+ how:'A short, rigid bit that combines a pilot drill with a 60° countersink cone. It makes an accurate, strong start hole — perfect for lathe centres and for starting bigger twist drills without them wandering.',
+ specs:[['Sizes','1–6 mm (combined pilot + cone)'],['Angle','60° (lathe centre standard)'],['Speeds','1000–2000 rpm'],['Use','Lathe work, pilot starts']],
+ best:['Lathe centre holes','Starting holes for large twist drills','Accurate centre marks on metal'],
+ avoid:['Final through-holes (it is a starter)','Wood (brad point is better)'],
+ tips:['Do not drill deeper than the cone section','The stiff shank stops the bit bending and wandering','Use centre punch marks to locate it exactly'],
+ safety:'Small stubby bits break if forced sideways — keep the drill aligned.',
+ related:['twist','step','counterbore']
+},
+{
+ id:'plug-cutter', name:'Plug Cutter', aka:'Bung cutter', mats:['wood'], speed:'SLOW', speedClass:'slow',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="76" y="6" width="8" height="12" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M64 18 L96 18 L96 54 L64 54 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M70 18 L70 52 M90 18 L90 52" stroke="#7B8FB3" stroke-width="1.6"/>
+  <path d="M64 54 l4 6 l4 -6 l4 6 l4 -6 l4 6 l4 -6 l4 6 l4 -6" fill="none" stroke="#B9C6DE" stroke-width="2"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="12" r="4"/><circle class="hp" data-label="Hollow cutter" cx="80" cy="34" r="4"/><circle class="hp" data-label="Cutting teeth" cx="80" cy="55" r="4"/>
+ </svg>`,
+ parts:['Shank','Hollow cutter','Cutting teeth'],
+ how:'The hollow cylinder cuts a neat wooden plug from a scrap of the same timber. Drive the plug over a screw head with glue and it disappears — a grain-matched, invisible repair.',
+ specs:[['Sizes','6–20 mm'],['Speeds','400–800 rpm'],['Plug depth','Up to ~20 mm per cut'],['Use','After countersinking or counterboring']],
+ best:['Hiding screw heads in furniture','Plugging old holes in visible wood','Matching grain for invisible repairs'],
+ avoid:['Metal, plastic, masonry','End grain (plugs break)'],
+ tips:['Cut plugs from the same board as the workpiece for a perfect match','Sand the proud plug flush after the glue dries','Angle the cutter slightly to start, then straighten'],
+ safety:'Glue squeeze-out is slippery — wipe excess immediately.',
+ related:['forstner','countersink','counterbore']
+},
+{
+ id:'installer', name:'Installer Bit', aka:'Fish bit · insulated bit', mats:['wood','multi'], speed:'MED', speedClass:'med',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="77" y="4" width="6" height="10" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <rect x="74.5" y="14" width="11" height="70" rx="5.5" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <circle cx="80" cy="78" r="3.2" fill="none" stroke="#F5CE7E" stroke-width="2"/>
+  <path d="M78 28 L82 28 M78 38 L82 38 M78 48 L82 48 M78 58 L82 58" stroke="#7B8FB3" stroke-width="1.4" stroke-dasharray="2 2"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="9" r="4"/><circle class="hp" data-label="Flexible shaft" cx="80" cy="44" r="4"/><circle class="hp" data-label="Wire eyelet" cx="80" cy="78" r="4"/>
+ </svg>`,
+ parts:['Shank','Flexible shaft','Wire eyelet'],
+ how:'A long, flexible shaft with a small hole near the tip. Drill through a stud or joist, poke the wire or pull-string through the eyelet, then pull the bit back — your cable comes with it.',
+ specs:[['Lengths','300–600 mm'],['Diameters','6–10 mm'],['Shank','Round or 1/4" hex'],['Tip hole','For wire, rope or string']],
+ best:['Running cables and low-voltage wire','Pulling string through stud walls','Long reach in awkward spaces'],
+ avoid:['Masonry and metal','Hard, knotty timber (shaft can twist)','High speed (flexible shaft whips)'],
+ tips:['Bend a hook in the wire to lock it in the eyelet','Keep speed low — the shaft flexes','Use insulated versions when working near live circuits'],
+ safety:'Never pull cables near live wiring — isolate the circuit first.',
+ related:['spade','auger','flex-auger']
+},
+{
+ id:'multi', name:'Multi-Material Bit', aka:'Universal bit', mats:['multi'], speed:'MED', speedClass:'med',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="73" y="6" width="14" height="12" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M73 18 L87 18 L84 58 Q81 64 80 70 Q79 64 76 58 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M76 22 Q80 36 79.5 50 M84 22 Q80 36 80.5 50" stroke="#7B8FB3" stroke-width="2" fill="none"/>
+  <path d="M75.5 52 L80 70 M84.5 52 L80 70" stroke="#E2E8F4" stroke-width="1.5"/>
+  <path d="M76 44 L84 46 M76 50 L83 52" stroke="#B9C6DE" stroke-width="1.3"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="12" r="4"/><circle class="hp" data-label="Steep flutes" cx="80" cy="32" r="4"/><circle class="hp" data-label="Stepped tip" cx="80" cy="56" r="4"/>
+ </svg>`,
+ parts:['Shank','Steep flutes','Stepped tip'],
+ how:'A clever compromise: the notched, stepped tip and steep flutes can cut wood, plastic, soft metal and even plasterboard or soft brick — all without changing bits or using hammer action.',
+ specs:[['Sizes','3–13 mm'],['Speeds','MED — adjust to material'],['No hammer','Needed for soft masonry'],['Shank','Round']],
+ best:['Quick jobs across mixed materials','Plasterboard, soft brick, wood, plastic','DIY where you do not want to swap bits'],
+ avoid:['Hardened steel and thick concrete (use the right tool)','Glass and tile','Demanding accuracy work'],
+ tips:['Still drill a pilot for accuracy in metal','For soft brick, use gentle pressure — no hammer','Great spare in a toolbox; not a replacement for the specialists'],
+ safety:'Because it cuts many materials, chips vary — wear eye protection always.',
+ related:['twist','masonry','step']
+},
+{
+ id:'self-centering', name:'Self-Centering Bit', aka:'Hinge bit', mats:['wood'], speed:'MED', speedClass:'med',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="74" y="6" width="12" height="10" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <rect x="62" y="16" width="36" height="16" rx="3" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M66 20 L66 29 M94 20 L94 29" stroke="#7B8FB3" stroke-width="1.3" stroke-dasharray="2 2"/>
+  <path d="M76 32 L84 32 L82.5 54 Q81 58 80 61 Q79 58 77.5 54 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M76.5 50 L76.5 58 M83.5 50 L83.5 58" stroke="#B9C6DE" stroke-width="1.8"/>
+  <path d="M78.5 60 L80 74 L81.5 60 Z" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1.5"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="11" r="4"/><circle class="hp" data-label="Spring sleeve" cx="80" cy="24" r="4"/><circle class="hp" data-label="Center point" cx="80" cy="68" r="4"/>
+ </svg>`,
+ parts:['Shank','Spring sleeve','Center point'],
+ how:'The spring-loaded sleeve centres the bit inside an existing hole — like a hinge screw hole — so every pilot lands dead-centre, every time. Press until the sleeve is flat, then drill.',
+ specs:[['Sizes','2–6 mm (hinge screw pilots)'],['Speeds','1000–2000 rpm'],['Sleeve','Spring-loaded, self-centring'],['Use','Hinges, handles, hardware']],
+ best:['Cabinet hinge screw holes','Door handles and knobs','Production runs of identical hardware'],
+ avoid:['Deep drilling (sleeve limits depth)','Metal and masonry'],
+ tips:['Align the sleeve with the existing hole before starting the drill','Perfect for repetitive work — position is automatic','Pair with a countersink for a pro finish'],
+ safety:'Keep fingers clear of the spinning sleeve — it can pinch.',
+ related:['brad-point','countersink','plug-cutter']
+},
+{
+ id:'annular', name:'Annular Cutter', aka:'Core cutter · mag-drill cutter', mats:['metal'], speed:'MED', speedClass:'med',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="77" y="4" width="6" height="14" rx="1" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M75 18 L85 18 L85 22 L75 22 Z" fill="#101A30" stroke="#B9C6DE" stroke-width="1"/>
+  <rect x="62" y="18" width="36" height="30" rx="2" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M62 48 l3 7 l3 -7 l3 7 l3 -7 l3 7 l3 -7 l3 7 l3 -7 l3 7 l3 -7 l3 7 l3 -7" fill="none" stroke="#B9C6DE" stroke-width="2"/>
+  <rect x="78" y="48" width="4" height="9" fill="#3D5178" stroke="#B9C6DE" stroke-width="1.5"/>
+  <circle class="hp" data-label="Weldon shank" cx="80" cy="11" r="4"/><circle class="hp" data-label="Body" cx="80" cy="32" r="4"/><circle class="hp" data-label="Teeth" cx="80" cy="52" r="4"/><circle class="hp" data-label="Pilot pin" cx="80" cy="55" r="4"/>
+ </svg>`,
+ parts:['Weldon shank','Body','Teeth','Pilot pin'],
+ how:'Driven by a magnetic drill, the annular cutter mills a ring (annulus) out of solid steel — leaving a solid core instead of grinding it all to chips. Makes accurate large holes in thick plate with far less power than a twist drill.',
+ specs:[['Sizes','12–65 mm +'],['Speeds','Mag drill, ~200–400 rpm with coolant'],['Shank','Weldon flat'],['Use with','Magnetic drill press']],
+ best:['Thick steel plate and beams','Accurate large holes in metal','Structural steelwork'],
+ avoid:['Wood and masonry','Thin sheet (grab risk)','Hand-held drills (needs the mag base)'],
+ tips:['Use cutting fluid or a coolant feed through the pin','Clear the slug regularly — it jams','Lubricate the pilot pin before each hole'],
+ safety:'Mag drills are powerful — secure the base fully and wear hearing protection.',
+ related:['hole-saw','step','twist']
+},
+{
+ id:'left-hand', name:'Left-Hand Bit', aka:'Reverse-twist bit', mats:['metal'], speed:'MED', speedClass:'med',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="72" y="6" width="16" height="14" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M72 20 L88 20 L85.5 68 Q82 76 80 82 Q78 76 74.5 68 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M85 24 Q81 40 82 58" stroke="#7B8FB3" stroke-width="2.2" fill="none"/>
+  <path d="M75 24 Q79 40 78 58" stroke="#7B8FB3" stroke-width="2.2" fill="none"/>
+  <path d="M75 62 L80 82 M85 62 L80 82" stroke="#E2E8F4" stroke-width="1.5"/>
+  <path d="M88 28 A 16 16 0 0 1 72 28" fill="none" stroke="#F5A623" stroke-width="2.4"/>
+  <path d="M72 28 l-6 -2 l2 6 z" fill="#F5A623"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="13" r="4"/><circle class="hp" data-label="Reversed flutes" cx="81" cy="38" r="4"/><circle class="hp" data-label="Spins in reverse" cx="80" cy="26" r="4"/><circle class="hp" data-label="Point" cx="80" cy="82" r="4"/>
+ </svg>`,
+ parts:['Shank','Reversed flutes','Spins in reverse','Point'],
+ how:'Its flutes are cut the "wrong way", so it cuts while the drill spins in reverse. Drill into a snapped bolt and the left-hand action often unscrews the broken piece instead of just drilling it.',
+ specs:[['Sizes','3–13 mm'],['Use','Broken bolt & stud extraction'],['Speeds','Slow, 300–800 rpm'],['Trick','Often removes the bolt without drilling through']],
+ best:['Extracting snapped bolts and studs','Broken screws in engine blocks and machines','Backing out seized fasteners'],
+ avoid:['Normal drilling jobs (it cuts in reverse)','Hardened steel (start with a centre pop)','Wood (point design is for metal)'],
+ tips:['Centre-pop the broken bolt first','Start slow — the reverse twist walks into the metal','If it binds, the bolt usually spins out with the bit'],
+ safety:'Broken fasteners can spring loose — wear eye protection and keep fingers clear.',
+ related:['twist','center','step']
+},
+{
+ id:'flex-auger', name:'Flex Auger', aka:'Bell hanger bit', mats:['wood'], speed:'MED', speedClass:'med',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="77" y="4" width="6" height="10" rx="2" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <rect x="74.5" y="14" width="11" height="52" rx="5.5" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M78 22 L82 22 M78 30 L82 30 M78 38 L82 38 M78 46 L82 46 M78 54 L82 54" stroke="#7B8FB3" stroke-width="1.4" stroke-dasharray="2 2"/>
+  <path d="M72 66 L88 66 L85 84 Q82 87 80 89 Q78 87 75 84 Z" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M73.5 72 Q78 76 86.5 74 M73.5 79 Q78 82 85 80" stroke="#7B8FB3" stroke-width="1.8" fill="none"/>
+  <path d="M78.5 88 L80 96 L81.5 88 Z" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1.5"/>
+  <circle class="hp" data-label="Shank" cx="80" cy="9" r="4"/><circle class="hp" data-label="Flexible shaft" cx="80" cy="40" r="4"/><circle class="hp" data-label="Auger tip" cx="80" cy="78" r="4"/><circle class="hp" data-label="Screw point" cx="80" cy="92" r="4"/>
+ </svg>`,
+ parts:['Shank','Flexible shaft','Auger tip','Screw point'],
+ how:'A long flexible shaft ending in a small auger-style tip with a screw point. It bores awkward, off-angle holes in tight cavities — and the tip design lets it grab and pull through where a rigid bit cannot reach.',
+ specs:[['Lengths','400–1800 mm'],['Tip','Auger screw point'],['Use','Cavity walls, tight stud spaces'],['Drive','Standard power drill']],
+ best:['Awkward, angled holes in timber','Running cables in tight cavities','Bell-hanger and retrofit wiring'],
+ avoid:['Metal and masonry','Hard, knotty wood (shaft can twist)','High speed (flexible shaft whips)'],
+ tips:['Start the hole with a normal short bit, then follow with the flex','Keep the drill straight — let the shaft flex, not your wrist','Use pull-string: drill, hook, pull back'],
+ safety:'A flexing shaft can whip — keep your face and hands clear of the arc.',
+ related:['installer','auger','spade']
+},
+{
+ id:'core-bit', name:'Core Bit (Concrete)', aka:'SDS core · concrete core drill', mats:['masonry'], speed:'MED', speedClass:'med',
+ svg:`<svg viewBox="0 0 160 120">
+  <rect x="77" y="4" width="6" height="12" rx="1" fill="#3D5178" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M77 10 L83 10 M77 13 L83 13" stroke="#0B1220" stroke-width="1.5"/>
+  <rect x="60" y="16" width="40" height="34" rx="2" fill="#2A3A55" stroke="#B9C6DE" stroke-width="2"/>
+  <path d="M64 20 L64 46 M96 20 L96 46" stroke="#7B8FB3" stroke-width="1.4" stroke-dasharray="3 2"/>
+  <rect x="61" y="50" width="7" height="9" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1"/>
+  <rect x="72" y="50" width="7" height="9" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1"/>
+  <rect x="83" y="50" width="7" height="9" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1"/>
+  <rect x="94" y="50" width="7" height="9" fill="#E3A93C" stroke="#F5CE7E" stroke-width="1"/>
+  <rect x="78" y="42" width="4" height="12" fill="#3D5178" stroke="#B9C6DE" stroke-width="1.2"/>
+  <circle class="hp" data-label="SDS shank" cx="80" cy="10" r="4"/><circle class="hp" data-label="Barrel" cx="104" cy="32" r="4"/><circle class="hp" data-label="Carbide segments" cx="80" cy="54" r="4"/><circle class="hp" data-label="Center pilot" cx="80" cy="46" r="4"/>
+ </svg>`,
+ parts:['SDS shank','Barrel','Carbide segments','Center pilot'],
+ how:'A large-diameter masonry drill with carbide segments brazed on the rim, driven by a rotary hammer. It grinds a ring in concrete, brick or block — leaving a solid core you knock out. Much faster than a solid bit at big sizes.',
+ specs:[['Sizes','25–160 mm +'],['Speeds','Rotary hammer, 200–600 rpm'],['Drive','SDS / SDS-Max only'],['Tip','Brazed carbide segments']],
+ best:['Big holes in concrete for pipes and vents','Deep masonry drilling','Through-wall and floor services'],
+ avoid:['Rebar-heavy concrete (segments shatter)','Wood, metal, tile','Light drills (needs a rotary hammer)'],
+ tips:['Use the hammer function and let the core drop out every few cm','A centre pilot keeps the core straight','Water-fed core rigs for deep, clean concrete'],
+ safety:'Concrete dust is hazardous — wet drill where possible, wear a mask, anchor the drill.',
+ related:['masonry','diamond-core','annular']
+}
+];
+
+/* ================= STATE ================= */
+let activeFilter = 'all';
+let query = '';
+let currentIndex = 0;
+
+const grid = document.getElementById('grid');
+const countEl = document.getElementById('count');
+const backdrop = document.getElementById('backdrop');
+const tip = document.getElementById('tip');
+
+/* ================= TABS ================= */
+function showTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t.dataset.tab === tab));
+  ['bits','tools','quiz','guide'].forEach(s => {
+    document.getElementById('sec-' + s).classList.toggle('hidden', s !== tab);
+  });
+  document.getElementById('filters').classList.toggle('hidden', tab !== 'bits');
+  document.getElementById('q').parentElement.classList.toggle('hidden', tab !== 'bits');
+}
+document.getElementById('tabs').addEventListener('click', e => {
+  const t = e.target.closest('.tab');
+  if (t) showTab(t.dataset.tab);
+});
+
+/* ================= BITS ================= */
+function visibleBits() {
+  return BITS.filter(b => {
+    if (activeFilter !== 'all' && !b.mats.includes(activeFilter)) return false;
+    if (query) {
+      const hay = (b.name + ' ' + b.aka + ' ' + b.how + ' ' + b.best.join(' ')).toLowerCase();
+      if (!hay.includes(query)) return false;
+    }
+    return true;
+  });
+}
+
+function chipHTML(b) {
+  const mat = {wood:'WOOD', metal:'METAL', masonry:'MASONRY', tile:'TILE', multi:'MULTI'};
+  const seen = new Set();
+  let h = '';
+  b.mats.forEach(m => { if (!seen.has(m)) { seen.add(m); h += `<span class="chip ${m}">${mat[m]}</span>`; } });
+  h += `<span class="chip ${b.speedClass}">${b.speed}</span>`;
+  return h;
+}
+
+function renderGrid() {
+  const list = visibleBits();
+  grid.innerHTML = list.map((b, i) => `
+    <button class="card" data-i="${i}" aria-label="Details for ${b.name}">
+      <div class="csvg">${b.svg}</div>
+      <div class="cname">${b.name}</div>
+      <div class="caka">${b.aka}</div>
+      <div class="cchips">${chipHTML(b)}</div>
+      <div class="blurb">${b.best[0]}</div>
+      <div class="more">FULL DETAILS ▸</div>
+    </button>`).join('');
+  countEl.textContent = `Showing ${list.length} of ${BITS.length} bit types`;
+}
+
+document.querySelectorAll('.fchip').forEach(ch => {
+  ch.addEventListener('click', () => {
+    document.querySelectorAll('.fchip').forEach(c => c.classList.remove('on'));
+    ch.classList.add('on');
+    activeFilter = ch.dataset.f;
+    renderGrid();
+  });
+});
+document.getElementById('q').addEventListener('input', e => {
+  query = e.target.value.trim().toLowerCase();
+  renderGrid();
+});
+
+/* ================= TOOLTIP ================= */
+function showTip(el, label) {
+  const r = el.getBoundingClientRect();
+  tip.textContent = label;
+  tip.style.display = 'block';
+  tip.style.left = Math.min(Math.max(r.left + r.width/2 - 40, 6), window.innerWidth - 160) + 'px';
+  tip.style.top = Math.max(r.top - 34, 6) + 'px';
+}
+function hideTip() { tip.style.display = 'none'; }
+document.addEventListener('mouseover', e => {
+  if (e.target.classList && e.target.classList.contains('hp')) showTip(e.target, e.target.dataset.label);
+});
+document.addEventListener('mouseout', e => {
+  if (e.target.classList && e.target.classList.contains('hp')) hideTip();
+});
+
+/* ================= MODAL ================= */
+function hlParts(bitId, label) {
+  const svg = document.querySelector('.bigsvg svg');
+  if (!svg) return;
+  svg.querySelectorAll('.hp').forEach(c => c.classList.toggle('hl', c.dataset.label === label));
+}
+function clearHl(svg) { if (svg) svg.querySelectorAll('.hp').forEach(c => c.classList.remove('hl')); }
+
+function openModal(bit) {
+  currentIndex = BITS.indexOf(bit);
+  document.getElementById('mTitle').textContent = bit.name;
+  document.getElementById('mAka').textContent = bit.aka;
+  document.getElementById('mChips').innerHTML = chipHTML(bit);
+  document.getElementById('mSvg').innerHTML = bit.svg;
+  document.getElementById('mHow').textContent = bit.how;
+  document.getElementById('mSpecs').innerHTML = bit.specs.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
+  document.getElementById('mBest').innerHTML = bit.best.map(x => `<li>${x}</li>`).join('');
+  document.getElementById('mAvoid').innerHTML = bit.avoid.map(x => `<li>${x}</li>`).join('');
+  document.getElementById('mTips').innerHTML = bit.tips.map(x => `<li>${x}</li>`).join('');
+  document.getElementById('mSafe').innerHTML = `<li>${bit.safety}</li>`;
+  document.getElementById('mRelated').innerHTML = bit.related.length
+    ? `<div class="sec-title tip" style="color:#9FB0CC;">RELATED BITS</div>` + bit.related.map(id => {
+        const r = BITS.find(x => x.id === id);
+        return r ? `<a data-rel="${id}">${r.name}</a>` : '';
+      }).join('') : '';
+  const partsWrap = document.getElementById('mParts');
+  partsWrap.innerHTML = bit.parts.map(p => `<button class="part-btn" data-label="${p}">${p}</button>`).join('');
+  const bigSvg = document.querySelector('.bigsvg svg');
+  bigSvg.addEventListener('mouseleave', () => clearHl(bigSvg));
+  partsWrap.querySelectorAll('.part-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      partsWrap.querySelectorAll('.part-btn').forEach(x => x.classList.remove('on'));
+      btn.classList.add('on');
+      clearHl(bigSvg); hlParts(bit.id, btn.dataset.label);
+    });
+  });
+  bigSvg.querySelectorAll('.hp').forEach(c => {
+    c.addEventListener('click', () => {
+      partsWrap.querySelectorAll('.part-btn').forEach(x => x.classList.toggle('on', x.dataset.label === c.dataset.label));
+      clearHl(bigSvg); hlParts(bit.id, c.dataset.label);
+    });
+  });
+  document.getElementById('mPos').textContent = `${currentIndex + 1} / ${BITS.length}`;
+  document.getElementById('mRelated').querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      const r = BITS.find(x => x.id === a.dataset.rel);
+      if (r) openModal(r);
+    });
+  });
+  backdrop.hidden = false;
+  document.body.style.overflow = 'hidden';
+  document.getElementById('mClose').focus();
+}
+
+function closeModal() { backdrop.hidden = true; document.body.style.overflow = ''; hideTip(); }
+function stepModal(d) { openModal(BITS[(currentIndex + d + BITS.length) % BITS.length]); }
+
+grid.addEventListener('click', e => {
+  const card = e.target.closest('.card');
+  if (card) openModal(BITS[+card.dataset.i]);
+});
+document.getElementById('mClose').addEventListener('click', closeModal);
+backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+document.getElementById('mPrev').addEventListener('click', () => stepModal(-1));
+document.getElementById('mNext').addEventListener('click', () => stepModal(1));
+document.addEventListener('keydown', e => {
+  if (backdrop.hidden) return;
+  if (e.key === 'Escape') closeModal();
+  if (e.key === 'ArrowLeft') stepModal(-1);
+  if (e.key === 'ArrowRight') stepModal(1);
+});
+
+/* ================= TOOLS ================= */
+function calcRPM() {
+  const [csLo, csHi] = document.getElementById('rpmMat').value.split(',').map(Number);
+  const clamp = +document.getElementById('rpmType').value;
+  const dia = +document.getElementById('rpmDia').value;
+  const out = document.getElementById('rpmOut');
+  if (!dia || dia <= 0) { out.innerHTML = 'Enter a bit diameter (mm).'; return; }
+  if (clamp === 0) {
+    out.innerHTML = `Masonry bit → <b>hammer mode, 800–1500 rpm</b> — the hammer action does the cutting, not speed. <div class="formula">No surface-speed formula applies.</div>`;
+    return;
+  }
+  let lo = Math.round(csLo * 1000 / (Math.PI * dia));
+  let hi = Math.round(csHi * 1000 / (Math.PI * dia));
+  hi = Math.min(hi, clamp); lo = Math.min(lo, hi);
+  const advise = dia > 25 ? 'Big bit — go to the slow end, or consider a hole saw.' :
+                 dia < 3 ? 'Tiny bit — at the fast end, feed gently — small bits snap.' :
+                 csLo >= 60 && dia > 10 ? 'Metal + big bit = slow and steady with cutting fluid.' :
+                 'Steady feed, clear the chips, let the bit cut.';
+  out.innerHTML = `Recommended speed: <b>${lo}–${hi} rpm</b><div class="formula">RPM = (cutting speed m/min × 1000) ÷ (π × Ø mm) · clamped by bit type</div><div class="formula">${advise}</div>`;
+}
+['rpmMat','rpmType','rpmDia'].forEach(id => document.getElementById(id).addEventListener('input', calcRPM));
+calcRPM();
+
+function calcPilot() {
+  const screw = +document.getElementById('pilScrew').value;
+  const frac = +document.getElementById('pilMat').value;
+  const pilot = (screw * frac).toFixed(1);
+  const bits = [2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,8,9,10];
+  const match = bits.find(b => b >= pilot) || bits[bits.length-1];
+  document.getElementById('pilOut').innerHTML =
+    `Pilot hole: <b>${pilot} mm</b> — use a <b>${match} mm</b> twist drill.<div class="formula">Pilot ≈ ${Math.round(frac*100)}% of screw Ø, then countersink, then screw.</div>`;
+}
+['pilScrew','pilMat'].forEach(id => document.getElementById(id).addEventListener('change', calcPilot));
+calcPilot();
+
+const TAP = {'M2':'1.6','M2.5':'2.0','M3':'2.5','M3.5':'2.9','M4':'3.3','M5':'4.2','M6':'5.0','M8':'6.8','M10':'8.5','M12':'10.2','M16':'14.0'};
+document.getElementById('tapSel').addEventListener('change', e => {
+  const sel = e.target.value;
+  document.querySelectorAll('#tapTable tr').forEach(r => r.classList.remove('hlrow'));
+  document.getElementById('tapOut').innerHTML = 'Rule of thumb: tap drill ≈ major Ø − thread pitch.';
+  if (!sel) return;
+  const rows = document.querySelectorAll('#tapTable tr');
+  rows.forEach(r => {
+    const cells = [...r.querySelectorAll('td')];
+    if (cells.some(c => c.textContent.trim() === sel)) {
+      r.classList.add('hlrow');
+      document.getElementById('tapOut').innerHTML = `<b>${sel}</b> → tap drill <b>${TAP[sel]} mm</b> (≈75% thread).`;
+    }
+  });
+});
+
+/* ================= QUIZ ================= */
+const QUIZ = [
+ {q:'Which bit leaves a perfectly flat-bottomed hole?', opts:['Spade bit','Forstner bit','Auger bit','Twist drill'], a:1, why:'The Forstner rim cuts the circle first, then inner blades shave the face flat.'},
+ {q:'Best choice for drilling into concrete?', opts:['HSS twist drill','Step drill','Masonry bit with hammer action','Glass & tile spear bit'], a:2, why:'The carbide masonry tip smashes and grinds — but only works with hammer action on.'},
+ {q:'What stops a brad point bit from wandering off the mark?', opts:['The flutes','The centre spur','The shank','Cutting fluid'], a:1, why:'The centre spur bites into the wood first and holds the bit in place.'},
+ {q:'Which bit is many drill sizes in one?', opts:['Step drill','Spade bit','Hole saw','Auger bit'], a:0, why:'The stepped cone gives you a range of sizes — drill to the step you need.'},
+ {q:'Best bit for thin sheet-metal enclosures without grabbing?', opts:['Spade bit','Forstner bit','Step drill','Auger bit'], a:2, why:'Step-drill edges shear sheet material cleanly instead of catching.'},
+ {q:'To make a screw head sit flush with the surface, use a…', opts:['Counterbore','Countersink','Plug cutter','Hole saw'], a:1, why:'The 82° cone matches the screw-head angle for a flush fit.'},
+ {q:'Big holes in a door for a lock or latch?', opts:['Twist drill','Hole saw','Masonry bit','Center drill'], a:1, why:'The ring of saw teeth cuts large circles; the pilot drill centres it.'},
+ {q:'Which bit pulls itself into timber via a screw tip?', opts:['Spade bit','Auger bit','Step drill','Twist drill'], a:1, why:'The auger\'s screw tip feeds itself; the spiral flight clears the waste.'},
+ {q:'Correct way to drill ceramic wall tile?', opts:['Masonry bit, fast, with hammer','Spear bit, slow, no hammer','Twist drill with cutting fluid','Step drill, medium speed'], a:1, why:'The spear tip scrapes at low speed — hammer action shatters tile.'},
+ {q:'Best tool for porcelain tile (the really hard stuff)?', opts:['Spear bit','Masonry bit','Diamond core bit with water','Spade bit'], a:2, why:'Industrial diamond grinds porcelain; water keeps the rim alive.'},
+ {q:'Standard point angle of an HSS twist drill for metal?', opts:['60°','90°','118°','135°'], a:2, why:'118° is the all-round standard; 135° for harder steels.'},
+ {q:'Which bit NEEDS hammer action to work?', opts:['Forstner bit','Step drill','Masonry bit','Countersink'], a:2, why:'Without the hammer blows the carbide tip just rubs and does nothing.'},
+ {q:'Before drilling metal, mark the spot with a…', opts:['Pencil cross','Centre punch','Permanent marker','Scratch with a nail'], a:1, why:'The punch dimple gives the bit a socket to bite — stops it skidding.'},
+ {q:'Best bit for lathe centre holes?', opts:['Center drill','Spade bit','Auger bit','Hole saw'], a:0, why:'The stubby center drill cuts a strong 60° seat that matches lathe centres.'},
+ {q:'Hide a screw head with a grain-matched wooden plug?', opts:['Counterbore','Plug cutter','Countersink','Forstner bit'], a:1, why:'The hollow cutter slices a plug from the same board — invisible repair.'},
+ {q:'Pulling wire through studs in a wall?', opts:['Auger bit','Installer bit','Step drill','Masonry bit'], a:1, why:'The eyelet near the tip hooks the wire — drill through, hook, pull back.'},
+ {q:'Hinge screws dead-centre every time?', opts:['Brad point bit','Self-centering bit','Twist drill','Countersink'], a:1, why:'The spring sleeve centres itself in the existing hinge hole.'},
+ {q:'Removing a snapped bolt from a machine?', opts:['Left-hand bit','Spade bit','Hole saw','Diamond core bit'], a:0, why:'It cuts in reverse and often spins the broken bolt straight out.'},
+ {q:'Why is the wood burning black around the hole?', opts:['Bit too sharp','Speed too high or dull bit','Not enough pressure','Wrong drill make'], a:1, why:'Friction from high speed or a blunt edge overheats the wood fibres.'},
+ {q:'Thick steel plate with a magnetic drill?', opts:['Twist drill','Annular cutter','Hole saw','Masonry bit'], a:1, why:'The annular cutter mills a ring out of solid steel — fast, accurate, less power.'},
+ {q:'The waste material a bit removes is called…', opts:['Swarf','Slag','Fluff','Dross'], a:0, why:'Swarf is the technical word for drilling waste.'},
+ {q:'Which machine gives the most accurate, square holes?', opts:['Hand drill','Power drill','Pillar (bench) drill','Hammer drill'], a:2, why:'The fixed vertical spindle, depth stop and speed control make it the precision choice.'}
+];
+let quizState = null;
+
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+function quizStart() {
+  quizState = { order: shuffle(QUIZ.map((_, i) => i)), idx: 0, score: 0, wrong: [] };
+  quizQuestion();
+}
+function quizQuestion() {
+  const s = quizState;
+  const item = QUIZ[s.order[s.idx]];
+  const opts = shuffle(item.opts.map((t, i) => ({ t, i })));
+  document.getElementById('quizCard').innerHTML = `
+    <div class="q-progress"><i style="width:${(s.idx / QUIZ.length) * 100}%"></i></div>
+    <div class="q-count">QUESTION ${s.idx + 1} / ${QUIZ.length} · SCORE ${s.score}</div>
+    <div class="q-text">${item.q}</div>
+    ${opts.map(o => `<button class="q-opt" data-oi="${o.i}">${o.t}</button>`).join('')}
+    <div class="q-feedback"></div>
+    <button class="q-next">${s.idx === QUIZ.length - 1 ? 'SEE RESULTS' : 'NEXT →'}</button>`;
+  const card = document.getElementById('quizCard');
+  card.querySelectorAll('.q-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      card.querySelectorAll('.q-opt').forEach(b => b.disabled = true);
+      const oi = +btn.dataset.oi;
+      const correct = oi === item.a;
+      if (correct) s.score++;
+      else s.wrong.push({ q: item.q, ans: item.opts[item.a] });
+      opts.forEach(o => {
+        const el = card.querySelector(`.q-opt[data-oi="${o.i}"]`);
+        if (o.i === item.a) el.classList.add('correct');
+        else if (o.i === oi && !correct) el.classList.add('wrong');
+      });
+      const fb = card.querySelector('.q-feedback');
+      fb.className = 'q-feedback show ' + (correct ? 'ok' : 'no');
+      fb.textContent = (correct ? '✓ Correct — ' : '✗ Not quite — ') + item.why;
+      card.querySelector('.q-next').classList.add('show');
+    });
+  });
+  card.querySelector('.q-next').addEventListener('click', () => {
+    s.idx++;
+    if (s.idx < QUIZ.length) quizQuestion();
+    else quizResults();
+  });
+}
+function quizResults() {
+  const s = quizState;
+  const pct = Math.round(s.score / QUIZ.length * 100);
+  const verdict = pct >= 85 ? ['great','WORKSHOP MASTER 🏆'] : pct >= 60 ? ['good','SOLID — BRUSH UP A FEW'] : ['meh','WORTH ANOTHER ROUND'];
+  document.getElementById('quizCard').innerHTML = `
+    <div class="q-score">${s.score} / ${QUIZ.length}</div>
+    <div class="q-verdict ${verdict[0]}">${pct}% · ${verdict[1]}</div>
+    ${s.wrong.length ? `<div class="q-review"><h4>REVIEW THESE</h4><ul>${s.wrong.map(w => `<li><b>${w.q}</b> — ${w.ans}</li>`).join('')}</ul></div>` : '<div class="q-review"><h4>PERFECT SCORE — NO REVIEW NEEDED 🎉</h4></div>'}
+    <div style="text-align:center;margin-top:18px;">
+      <button class="q-start-btn" onclick="quizStart()">RETRY QUIZ</button>
+      <button class="q-start-btn" style="background:#1A2B49;color:#E6EDF7;border:1px solid #2C3E5E;margin-left:10px;" onclick="showTab('bits')">BACK TO BITS</button>
+    </div>`;
+}
+document.getElementById('quizCard').innerHTML = `
+  <div class="quiz-start">
+    <div style="font-size:44px;">🎯</div>
+    <h3 style="font-size:20px;color:#F4F7FC;margin-top:6px;">Ready to test yourself?</h3>
+    <p>22 questions on which bit for which job, how they cut, and workshop safety.<br>You get instant feedback with the reasoning — then a score and a review list.</p>
+    <button class="q-start-btn" onclick="quizStart()">START QUIZ</button>
+  </div>`;
+
+/* ================= GUIDE ================= */
+document.querySelectorAll('.acc-head').forEach(h => {
+  h.addEventListener('click', () => h.parentElement.classList.toggle('open'));
+});
+
+renderGrid();
+</script>
+</body>
+</html>

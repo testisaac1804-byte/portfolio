@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Bearing Reference</title>
+<style>
+  :root{
+    --bg:#0d1b2e; --bg2:#12233a; --panel:rgba(255,255,255,.045); --line:rgba(120,160,210,.25);
+    --txt:#e8eef7; --dim:#9fb3cc; --dim2:#7f95b5;
+    --orange:#ff8c2e; --sky:#38bdf8; --yellow:#facc15; --green:#34d399; --red:#ff5d5d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;
+    background-image:repeating-linear-gradient(0deg,rgba(120,160,210,.04) 0 1px,transparent 1px 24px),
+                     repeating-linear-gradient(90deg,rgba(120,160,210,.04) 0 1px,transparent 1px 24px);}
+  .mono{font-family:"SF Mono",Menlo,Consolas,"Courier New",monospace}
+  .wrap{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+  .kicker{font-size:11px;letter-spacing:3px;color:var(--dim2);font-weight:700;margin-bottom:6px}
+  h1{font-size:34px;font-weight:900;letter-spacing:.5px}
+  h1 .o{color:var(--orange)}
+  .sub{color:var(--dim);font-size:14px;margin-top:6px;max-width:760px;line-height:1.5}
+  .badges{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+  .badge{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 10px;border-radius:20px;border:1px solid var(--line);color:var(--dim)}
+  .badge b{color:var(--orange)}
+
+  /* tabs */
+  .tabs{display:flex;gap:6px;margin:22px 0 14px;border-bottom:1px solid var(--line);padding-bottom:0}
+  .tabs input{display:none}
+  .tabs label{font-size:13px;font-weight:700;letter-spacing:1px;padding:10px 18px;border-radius:8px 8px 0 0;color:var(--dim);cursor:pointer;border:1px solid transparent;border-bottom:none;user-select:none}
+  .tabs input:checked+label{color:var(--orange);background:var(--panel);border-color:var(--line)}
+  .tab{display:none;animation:fade .25s}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+  #panel-browse:checked~.tab-browse,#panel-decode:checked~.tab-decode,#panel-builder:checked~.tab-builder,#panel-dims:checked~.tab-dims,#panel-mount:checked~.tab-mount,#panel-fail:checked~.tab-fail,#panel-quiz:checked~.tab-quiz{display:block}
+  #panel-browse:checked~.tabs label[for=panel-browse],#panel-decode:checked~.tabs label[for=panel-decode],#panel-builder:checked~.tabs label[for=panel-builder],#panel-dims:checked~.tabs label[for=panel-dims],#panel-mount:checked~.tabs label[for=panel-mount],#panel-fail:checked~.tabs label[for=panel-fail],#panel-quiz:checked~.tabs label[for=panel-quiz]{border-color:var(--line)}
+
+  /* browse */
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+  input[type=search]{flex:1;min-width:220px;background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:10px 14px;font-size:14px;outline:none}
+  input[type=search]:focus{border-color:var(--sky)}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font-size:12px;font-weight:700;padding:7px 13px;border-radius:20px;border:1px solid var(--line);background:transparent;color:var(--dim);cursor:pointer}
+  .chip.on{background:var(--orange);border-color:var(--orange);color:#0d1b2e}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;transition:transform .12s,border-color .12s;text-align:left;font:inherit;color:inherit;display:block;width:100%}
+  .card:hover{transform:translateY(-2px);border-color:var(--orange)}
+  .card svg{width:100%;height:86px;margin-bottom:8px}
+  .card .nm{font-size:15px;font-weight:800;letter-spacing:.3px}
+  .card .cd{font-family:"SF Mono",Menlo,monospace;color:var(--yellow);font-size:12px;font-weight:700;margin-top:2px}
+  .card .ds{font-size:12px;color:var(--dim);margin-top:6px;line-height:1.45}
+  .ld{margin-top:8px;display:inline-block;font-size:10px;font-weight:800;letter-spacing:1.2px;padding:3px 8px;border-radius:4px}
+  .ld.rad{background:rgba(56,189,248,.15);color:var(--sky)}
+  .ld.ax{background:rgba(250,204,21,.15);color:var(--yellow)}
+  .ld.both{background:rgba(255,140,46,.15);color:var(--orange)}
+  .ld.spec{background:rgba(52,211,153,.15);color:var(--green)}
+  .hidden{display:none!important}
+
+  /* detail modal */
+  .modal{position:fixed;inset:0;background:rgba(5,10,20,.75);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+  .modal.open{display:flex}
+  .mcard{background:#0f1f36;border:1px solid var(--line);border-radius:16px;max-width:880px;width:100%;max-height:88vh;overflow-y:auto;padding:26px 28px;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.6)}
+  .mclose{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--dim);font-size:26px;cursor:pointer;line-height:1}
+  .mclose:hover{color:var(--orange)}
+  .mtop{display:flex;gap:24px;flex-wrap:wrap}
+  .mtop svg{width:min(340px,100%);height:auto}
+  .mhead{flex:1;min-width:260px}
+  .mhead h2{font-size:24px;font-weight:900}
+  .mhead .cd{font-family:"SF Mono",Menlo,monospace;color:var(--yellow);font-size:15px;font-weight:700;margin-top:4px}
+  .mhead .desc{color:var(--dim);font-size:13.5px;line-height:1.6;margin-top:10px}
+  .msec{margin-top:18px}
+  .msec h4{font-size:11px;letter-spacing:2px;color:var(--orange);font-weight:800;text-transform:uppercase;border-bottom:1px solid rgba(255,140,46,.35);padding-bottom:6px;margin-bottom:10px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:700px){.cols{grid-template-columns:1fr}}
+  ul.lst{list-style:none}
+  ul.lst li{font-size:13px;color:var(--txt);padding:5px 0 5px 20px;position:relative;line-height:1.5}
+  ul.lst li:before{content:"▸";position:absolute;left:2px;color:var(--sky)}
+  ul.lst li b{color:var(--yellow)}
+  .ex{display:inline-block;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:5px 10px;margin:0 6px 6px 0;font-family:"SF Mono",Menlo,monospace;font-size:12px;color:var(--sky);font-weight:700}
+  .ex span{color:var(--dim);font-weight:400}
+  .rates{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .rate{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;text-align:center}
+  .rate .k{font-size:10px;letter-spacing:1.5px;color:var(--dim2);font-weight:700}
+  .rate .v{font-size:16px;font-weight:900;color:var(--sky);margin-top:3px}
+  .factbox{margin-top:16px;background:rgba(255,140,46,.09);border:1px solid rgba(255,140,46,.5);border-radius:10px;padding:12px 16px;font-size:13px;color:#f3d9c2;line-height:1.55}
+  .factbox b{color:var(--orange)}
+
+  /* svg classes */
+  svg .ro{stroke:#9fb0c0;fill:none}
+  svg .ri{stroke:#cfd8e0;fill:none}
+  svg .ball{fill:url(#ballG);stroke:#4a5a6e;stroke-width:1.2}
+  svg .ballc{fill:url(#cerG);stroke:#0e7a63;stroke-width:1.2}
+  svg .roll{fill:url(#ballG);stroke:#4a5a6e;stroke-width:1.2}
+  svg .cage{stroke:var(--sky);fill:none;stroke-dasharray:5 5;stroke-width:1.4;opacity:.85}
+  svg .seal{fill:var(--orange);opacity:.92}
+  svg .bore{fill:#0d1b2e;stroke:var(--yellow);stroke-width:1.5;stroke-dasharray:4 3}
+  svg .lbl{font-family:Helvetica,Arial,sans-serif;font-size:9px;fill:#c6d4e6}
+  svg .hl{stroke:#7f95b5;stroke-width:1}
+
+  /* decoder */
+  .decode-hero{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px;display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+  .dhero-code{font-size:44px;font-weight:800;letter-spacing:2px;line-height:1;white-space:nowrap}
+  .dhero-code .sx{font-size:34px}
+  .steps{flex:1;min-width:280px;border-left:1px dashed rgba(120,160,210,.35);padding-left:20px}
+  .step{display:flex;gap:10px;margin-bottom:8px;font-size:13px;color:var(--dim);align-items:baseline}
+  .step b{color:var(--sky);letter-spacing:1px}
+  .step .m{color:var(--yellow);font-family:"SF Mono",Menlo,monospace}
+  .stnum{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:var(--orange);color:#0d1b2e;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;transform:translateY(4px)}
+  .decode-box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .decode-box label{font-size:11px;letter-spacing:2px;color:var(--orange);font-weight:800;text-transform:uppercase;display:block;margin-bottom:8px}
+  .din{display:flex;gap:10px}
+  .din input{flex:1;background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:14px 16px;font-size:22px;font-family:"SF Mono",Menlo,monospace;letter-spacing:2px;outline:none;text-transform:uppercase}
+  .din input:focus{border-color:var(--sky)}
+  .exchips{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .exchips span{font-size:11px;color:var(--dim2);letter-spacing:1px;margin-right:4px}
+  .exchip{font-family:"SF Mono",Menlo,monospace;font-size:12px;font-weight:700;padding:5px 10px;border-radius:6px;border:1px solid var(--line);background:var(--bg2);color:var(--sky);cursor:pointer}
+  .exchip:hover{border-color:var(--orange);color:var(--orange)}
+  .out{margin-top:18px}
+  .segs{display:flex;gap:0;flex-wrap:wrap;align-items:stretch}
+  .seg{display:flex;flex-direction:column;align-items:center;padding:0 10px;position:relative}
+  .seg+.seg{border-left:1px dashed rgba(120,160,210,.3)}
+  .seg .big{font-size:34px;font-weight:800;font-family:"SF Mono",Menlo,monospace;line-height:1.2}
+  .seg .tag{font-size:9px;letter-spacing:1.5px;font-weight:800;padding:2px 8px;border-radius:4px;color:#0d1b2e;margin-top:4px}
+  .seg .mean{font-size:12px;color:var(--dim);margin-top:5px;max-width:150px;text-align:center;line-height:1.4}
+  .seg.t .big{color:var(--orange)} .seg.t .tag{background:var(--orange)}
+  .seg.s .big{color:var(--sky)} .seg.s .tag{background:var(--sky)}
+  .seg.b .big{color:var(--yellow)} .seg.b .tag{background:var(--yellow)}
+  .seg.sf .big{color:var(--green)} .seg.sf .tag{background:var(--green)}
+  .seg.p .big{color:var(--red)} .seg.p .tag{background:var(--red)}
+  .summary{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+  .sumbox{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .sumbox .k{font-size:10px;letter-spacing:1.5px;color:var(--dim2);font-weight:700}
+  .sumbox .v{font-size:14px;font-weight:700;margin-top:3px;color:var(--txt);line-height:1.4}
+  .warn{margin-top:14px;background:rgba(255,93,93,.1);border:1px solid rgba(255,93,93,.5);border-radius:10px;padding:10px 14px;font-size:12.5px;color:#ffb9b9;line-height:1.5}
+  .empty{margin-top:14px;color:var(--dim2);font-size:13px;font-style:italic}
+
+  /* quiz */
+  .qbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .qtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+  .qtop .n{font-size:12px;letter-spacing:2px;color:var(--dim2);font-weight:700}
+  .score{font-size:13px;font-weight:800;color:var(--green)}
+  .q{font-size:19px;font-weight:800;margin-bottom:16px;line-height:1.4}
+  .q .mono{color:var(--yellow)}
+  .opts{display:grid;gap:10px}
+  .opt{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:13px 16px;font-size:14px;cursor:pointer;text-align:left;color:var(--txt);font-family:inherit}
+  .opt:hover{border-color:var(--sky)}
+  .opt.correct{background:rgba(52,211,153,.15);border-color:var(--green)}
+  .opt.wrong{background:rgba(255,93,93,.15);border-color:var(--red)}
+  .opt .mono{color:var(--yellow)}
+  .expl{margin-top:14px;font-size:13px;color:var(--dim);line-height:1.6;background:var(--bg2);border-radius:8px;padding:12px 14px;display:none}
+  .expl.show{display:block}
+  .expl b{color:var(--sky)}
+  .qnext{margin-top:16px;background:var(--orange);border:none;color:#0d1b2e;font-weight:800;font-size:14px;padding:12px 26px;border-radius:8px;cursor:pointer;letter-spacing:1px}
+  .qnext:hover{filter:brightness(1.1)}
+  .qstart{margin-top:8px;background:var(--orange);border:none;color:#0d1b2e;font-weight:800;font-size:15px;padding:14px 32px;border-radius:10px;cursor:pointer;letter-spacing:1px}
+  .qend{text-align:center;padding:30px 0}
+  .qend .big{font-size:52px;font-weight:900}
+  .qend .sub{font-size:15px;margin:8px 0 18px}
+  .review{margin-top:20px;text-align:left}
+  .rev{margin-bottom:12px;padding:12px 14px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;font-size:13px;line-height:1.55}
+  .rev .ok{color:var(--green);font-weight:800}
+  .rev .no{color:var(--red);font-weight:800}
+  .rev .mono{color:var(--yellow)}
+  footer{margin-top:40px;color:var(--dim2);font-size:12px;text-align:center;letter-spacing:1px}
+  #selftest{display:none}
+  .tabs{flex-wrap:wrap}
+  select{background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:9px 12px;font-size:13px;outline:none}
+  select:focus{border-color:var(--sky)}
+  .ltable{width:100%;border-collapse:collapse;font-size:12.5px}
+  .ltable th{background:#13263f;color:var(--sky);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;padding:9px 10px;border-bottom:2px solid var(--line);text-align:left;cursor:pointer;user-select:none}
+  .dimwrap .ltable th{position:sticky;top:0}
+  .ltable th:hover{color:var(--orange)}
+  .ltable td{padding:7px 10px;border-bottom:1px solid rgba(120,160,210,.1)}
+  .ltable tr:hover td{background:rgba(255,140,46,.07)}
+  .ltable td.cd{font-family:"SF Mono",Menlo,monospace;color:var(--yellow);font-weight:700}
+  .ltable .muted{color:var(--dim2);font-size:11px}
+  .dimwrap{max-height:340px;overflow-y:auto;border:1px solid var(--line);border-radius:10px;margin-top:10px}
+  .hint{font-size:11.5px;color:var(--dim2);margin-top:6px}
+  .calcgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:10px}
+  .cfield label{font-size:10px;letter-spacing:1.5px;color:var(--dim2);font-weight:700;display:block;margin-bottom:4px}
+  .cfield input[type=number]{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:10px 12px;font-size:15px;font-family:"SF Mono",Menlo,monospace;outline:none}
+  .cfield input[type=number]:focus{border-color:var(--sky)}
+  .result{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-top:12px;font-size:13.5px;line-height:1.7}
+  .result b{color:var(--sky)}
+  .result .big{font-size:22px;font-weight:900;color:var(--orange)}
+  .toolgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:12px}
+  .tcard{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .tcard .ic{font-size:26px}
+  .tcard h4{font-size:13.5px;font-weight:800;margin:6px 0 6px;color:var(--sky)}
+  .tcard p{font-size:12.5px;color:var(--dim);line-height:1.55}
+  .tcard p b{color:var(--txt)}
+  .fcard{border-left:4px solid var(--sky)}
+  .fcard.bad{border-left-color:var(--red)}
+  .fcard.mid{border-left-color:var(--orange)}
+  .rule{display:flex;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;align-items:flex-start}
+  .rule .n{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--orange);color:#0d1b2e;font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center}
+  .rule b{color:var(--sky)}
+  .rule p{font-size:13px;color:var(--dim);line-height:1.55;margin-top:2px}
+  .gencode{font-size:44px;font-weight:800;letter-spacing:2px;line-height:1;font-family:"SF Mono",Menlo,monospace;color:var(--yellow);margin-top:14px}
+  .fitrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:10px}
+  .fitbox{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:11px 13px;text-align:center}
+  .fitbox .k{font-size:10px;letter-spacing:1.5px;color:var(--dim2);font-weight:800}
+  .fitbox .v{font-size:16px;font-weight:900;color:var(--yellow);margin-top:4px;font-family:"SF Mono",Menlo,monospace}
+  .fitbox .d{font-size:10.5px;color:var(--dim);margin-top:3px;line-height:1.35}
+  .fitbox.rec{border-color:var(--orange);background:rgba(255,140,46,.08)}
+  .fitbox.rec .k{color:var(--orange)}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.twocol{grid-template-columns:1fr}}
+  .callout{background:rgba(250,204,21,.08);border:1px solid rgba(250,204,21,.5);border-radius:10px;padding:11px 15px;font-size:12.5px;color:#f3e6b8;line-height:1.55;margin-top:10px}
+  .callout b{color:var(--yellow)}
+  .callout.blue{background:rgba(56,189,248,.08);border-color:rgba(56,189,248,.5);color:#c8e6f8}
+  .callout.blue b{color:var(--sky)}
+  .rowlabel{grid-column:1/-1;font-size:10px;letter-spacing:2px;color:var(--sky);font-weight:800}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <radialGradient id="ballG" cx="35%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#ffffff"/><stop offset="55%" stop-color="#c9d4e0"/><stop offset="100%" stop-color="#7e8ea3"/>
+    </radialGradient>
+    <radialGradient id="cerG" cx="35%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#ffffff"/><stop offset="50%" stop-color="#d9f5ee"/><stop offset="100%" stop-color="#34d399"/>
+    </radialGradient>
+    <linearGradient id="ringG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c3cedb"/><stop offset="50%" stop-color="#8fa2b8"/><stop offset="100%" stop-color="#66798f"/>
+    </linearGradient>
+    <linearGradient id="bronzeG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c9a15f"/><stop offset="100%" stop-color="#8a6a35"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <div class="kicker">DT · MECHANICAL ENGINEERING · ISO 15 · WORKS OFFLINE</div>
+  <h1>INTERACTIVE <span class="o">BEARING REFERENCE</span></h1>
+  <div class="sub">Every type of bearing with full details — click any card to explore. Type any bearing code into the decoder to have it explained, then test yourself with the quiz.</div>
+  <div class="badges">
+    <div class="badge"><b id="cnt">0</b> BEARING TYPES</div>
+    <div class="badge">LIVE DECODER</div>
+    <div class="badge">BUILD-A-CODE</div>
+    <div class="badge">67 REAL DIMENSIONS</div>
+    <div class="badge">L10 LIFE CALCULATOR</div>
+    <div class="badge">ISO FIT GUIDE</div>
+    <div class="badge">FAILURE MODES</div>
+    <div class="badge">QUIZ MODE</div>
+  </div>
+
+  <input type="radio" name="tabs" id="panel-browse" checked onchange="V.onTab()">
+  <input type="radio" name="tabs" id="panel-decode" onchange="V.onTab()">
+  <input type="radio" name="tabs" id="panel-builder" onchange="V.onTab()">
+  <input type="radio" name="tabs" id="panel-dims" onchange="V.onTab()">
+  <input type="radio" name="tabs" id="panel-mount" onchange="V.onTab()">
+  <input type="radio" name="tabs" id="panel-fail" onchange="V.onTab()">
+  <input type="radio" name="tabs" id="panel-quiz" onchange="V.onTab()">
+  <div class="tabs">
+    <label for="panel-browse">🔍 TYPES</label>
+    <label for="panel-decode">🔢 DECODER</label>
+    <label for="panel-builder">🧱 BUILDER</label>
+    <label for="panel-dims">📐 DIMENSIONS</label>
+    <label for="panel-mount">🛠 MOUNTING</label>
+    <label for="panel-fail">⚠️ FAILURES</label>
+    <label for="panel-quiz">🎯 QUIZ</label>
+  </div>
+
+  <!-- BROWSE -->
+  <section class="tab tab-browse">
+    <div class="toolbar">
+      <input type="search" id="q" placeholder="Search: name, code, use… e.g. skateboard, 608, spindle" oninput="V.applyFilter()">
+      <div class="chips" id="chips"></div>
+    </div>
+    <div class="grid" id="cards"></div>
+    <div class="empty hidden" id="nores">No bearings match — try a different search.</div>
+  </section>
+
+  <!-- DECODER -->
+  <section class="tab tab-decode">
+    <div class="decode-hero">
+      <div class="dhero-code mono"><span style="color:var(--orange)">6</span><span style="color:var(--sky)">2</span><span style="color:var(--yellow)">05</span><span class="sx" style="color:var(--green)">-2RS</span></div>
+      <div class="steps">
+        <div class="step"><span class="stnum">1</span><div><b>TYPE</b> — first digit = the bearing family</div></div>
+        <div class="step"><span class="stnum">2</span><div><b>SERIES</b> — middle digits = size range &amp; strength</div></div>
+        <div class="step"><span class="stnum">3</span><div><b>BORE</b> — last two digits = shaft-hole size (<span class="m">×5 mm</span>, specials <span class="m">00–03</span>)</div></div>
+      </div>
+    </div>
+    <div class="decode-box">
+      <label>Type any bearing code to decode it</label>
+      <div class="din">
+        <input id="code" placeholder="e.g. 6205-2RS, 6308, 608, NU205, 30205, GE20ES, LM8UU…" oninput="D.live()">
+        <button class="qnext" onclick="D.rand()" style="flex:0 0 auto">🎲 Random</button>
+      </div>
+      <div class="exchips"><span>TRY:</span>
+        <button class="exchip" onclick="D.set('6205-2RS')">6205-2RS</button>
+        <button class="exchip" onclick="D.set('6308')">6308</button>
+        <button class="exchip" onclick="D.set('608-2Z')">608-2Z</button>
+        <button class="exchip" onclick="D.set('NU205')">NU205</button>
+        <button class="exchip" onclick="D.set('30205')">30205</button>
+        <button class="exchip" onclick="D.set('22208')">22208</button>
+        <button class="exchip" onclick="D.set('51105')">51105</button>
+        <button class="exchip" onclick="D.set('UC205')">UC205</button>
+        <button class="exchip" onclick="D.set('GE20ES')">GE20ES</button>
+        <button class="exchip" onclick="D.set('LM8UU')">LM8UU</button>
+        <button class="exchip" onclick="D.set('623')">623</button>
+      </div>
+      <div class="out" id="out"></div>
+    </div>
+  </section>
+
+  <!-- BUILDER -->
+  <section class="tab tab-builder">
+    <div class="decode-box">
+      <label>Build-a-code — pick the parts, get a real bearing code</label>
+      <div class="calcgrid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+        <div class="cfield"><label>1 · FAMILY (TYPE)</label><select id="bfam" onchange="N.buiSeries()"></select></div>
+        <div class="cfield"><label>2 · SERIES</label><select id="bser" onchange="N.bui()"></select></div>
+        <div class="cfield"><label>3 · BORE (SHAFT, mm)</label><select id="bbore" onchange="N.bui()"></select></div>
+        <div class="cfield"><label>4 · SUFFIX</label><select id="bsuf" onchange="N.bui()"></select></div>
+      </div>
+      <div class="gencode" id="bcode">—</div>
+      <div class="out" id="bout"></div>
+    </div>
+    <div class="decode-box">
+      <label>Precision grades — ABEC vs ISO</label>
+      <div class="dimwrap" style="max-height:none">
+        <table class="ltable" id="gradetab"></table>
+      </div>
+      <div class="callout"><b>⚠️ ABEC only measures dimensional accuracy</b> — it says NOTHING about speed, noise, load or how long the bearing lasts. An ABEC-9 toy bearing can still be slow and short-lived. Higher grades mainly matter for smooth, precise rotation (spindles, robots).</div>
+    </div>
+  </section>
+
+  <!-- DIMENSIONS -->
+  <section class="tab tab-dims">
+    <div class="decode-box">
+      <label>Dimension lookup — real d × D × B sizes for the common series</label>
+      <div class="toolbar" style="margin-bottom:0">
+        <input type="search" id="dq" placeholder="Filter… e.g. 6205, 608, 6900" oninput="N.dimFilter()">
+        <div class="chips"><button class="chip on" id="dsortcode" onclick="N.dimSort('code')">SORT: CODE</button><button class="chip" id="dsortbore" onclick="N.dimSort('bore')">BY BORE</button><button class="chip" id="dsortod" onclick="N.dimSort('od')">BY OD</button></div>
+      </div>
+      <div class="dimwrap"><table class="ltable" id="dimtab"></table></div>
+      <div class="hint">Click a row to load its load rating into the life calculator. C = basic dynamic load rating (the number the life formula uses). Values are typical catalogue figures — always check the maker's data for exact numbers.</div>
+      <div class="panel" style="margin-top:16px">
+        <h3>Bearing Life Calculator — L10</h3>
+        <div class="calcgrid">
+          <div class="cfield"><label>LOAD RATING C (N)</label><input id="lc" type="number" placeholder="e.g. 14000" oninput="N.life()"></div>
+          <div class="cfield"><label>ACTUAL LOAD P (N)</label><input id="lp" type="number" placeholder="e.g. 1000" oninput="N.life()"></div>
+          <div class="cfield"><label>SPEED n (RPM)</label><input id="ln" type="number" placeholder="e.g. 3000" oninput="N.life()"></div>
+          <div class="cfield"><label style="margin-bottom:12px">ELEMENT TYPE</label><label style="font-size:12px;color:var(--txt);font-weight:400"><input type="checkbox" id="lk" checked onchange="N.life()"> ball bearings (exponent 3)</label></div>
+        </div>
+        <div class="result" id="lres">Enter C, P and speed to see the predicted L10 life. Click a row in the table above to auto-fill C.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOUNTING -->
+  <section class="tab tab-mount">
+    <div class="decode-box">
+      <label>The 3 rules of mounting — break these and the bearing dies young</label>
+      <div class="rule"><span class="n">1</span><div><b>WHICH RING TURNS?</b><p>The rotating ring gets the <b>interference (press) fit</b>. Shaft spins → press fit on the shaft (p6). Housing spins → press fit in the housing (P7/N7). The non-rotating ring gets a light slip fit so it can't spin and wear its seat.</p></div></div>
+      <div class="rule"><span class="n">2</span><div><b>PUSH ON THE RING THAT IS GOING IN</b><p>Pressing onto a shaft → push on the <b>INNER ring</b>. Pressing into a housing → push on the <b>OUTER ring</b>. NEVER push through the balls — it dents the raceways (brinelling) and the bearing is scrap.</p></div></div>
+      <div class="rule"><span class="n">3</span><div><b>HEAT OR COLD FOR TIGHT FITS</b><p>Heat the housing ring (induction heater or oven, 80–100 °C, never above 120 °C) or chill the shaft (dry ice) so parts slide together without force. Never heat above 120 °C — seals and grease melt.</p></div></div>
+    </div>
+    <div class="decode-box">
+      <label>Fit calculator — pick your shaft size</label>
+      <select id="fsize" onchange="N.fit()" style="width:100%;max-width:300px"></select>
+      <div class="fitrow" id="fitshaft"></div>
+      <div class="fitrow" id="fithole"></div>
+      <div class="callout blue" id="fitrec"></div>
+    </div>
+    <div class="decode-box">
+      <label>Mounting methods</label>
+      <div class="toolgrid">
+        <div class="tcard"><div class="ic">🖨️</div><h4>Arbor press</h4><p>Best for small bearings. Support the <b>correct ring</b> (rule 2), press slowly and straight. F1 in Schools: press 608s into 3D-printed wheels — print the hub hole ~<b>0.1–0.2 mm smaller</b> than the bearing OD for a plastic press fit.</p></div>
+        <div class="tcard"><div class="ic">🔥</div><h4>Heat mounting</h4><p>Expands the housing ring. Induction heaters are cleanest; an oven at <b>80–100 °C</b> works for small jobs. Never above <b>120 °C</b> — seals and grease melt. The hot ring drops straight on.</p></div>
+        <div class="tcard"><div class="ic">🧊</div><h4>Cold mounting</h4><p>Shrinks the shaft with <b>dry ice</b> or a freezer. The shaft slides into the bore, then warms and grips. Great for fitting bearings onto long shafts.</p></div>
+        <div class="tcard"><div class="ic">🔩</div><h4>Adapter sleeves</h4><p>Spherical & spherical-roller bearings often mount on a <b>tapered adapter sleeve</b> (suffix K). Tighten the nut to push the sleeve up the taper — the inner ring grips the shaft with no press needed.</p></div>
+        <div class="tcard"><div class="ic">🧴</div><h4>Never hammer</h4><p>A hammer blow transmits straight through the balls into the raceways = instant <b>brinelling</b>. If it won't go on, it's the wrong fit — don't force it.</p></div>
+        <div class="tcard"><div class="ic">🔧</div><h4>Removal</h4><p>Pull on the <b>inner ring</b> for shaft-mounted bearings (bearing puller), or heat the housing. Never pry between the rings — the balls get squeezed.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAILURES -->
+  <section class="tab tab-fail">
+    <div class="decode-box">
+      <label>Failure modes — read the damage, find the cause</label>
+      <div class="toolgrid" id="failgrid"></div>
+    </div>
+    <div class="decode-box">
+      <label>Lubrication — the one thing every bearing needs</label>
+      <div class="twocol">
+        <div>
+          <h3 style="font-size:9.5pt;letter-spacing:1.6px;color:var(--orange);font-weight:800;text-transform:uppercase;margin-bottom:8px">Grease vs oil</h3>
+          <table class="ltable">
+            <tr><th>Grease</th><th>Oil</th></tr>
+            <tr><td>Stays where you put it</td><td>Flows &amp; carries heat away</td></tr>
+            <tr><td>Sealed bearings = lifetime fill</td><td>Needed above ~dN 300 000</td></tr>
+            <tr><td>Simpler, cleaner, cheaper</td><td>Better at very high speed</td></tr>
+            <tr><td>Fill only <b>30–50%</b> of free space</td><td>Level should reach lowest ball</td></tr>
+          </table>
+        </div>
+        <div>
+          <h3 style="font-size:9.5pt;letter-spacing:1.6px;color:var(--orange);font-weight:800;text-transform:uppercase;margin-bottom:8px">NLGI grease grades</h3>
+          <table class="ltable">
+            <tr><th>NLGI</th><th>Consistency</th><th>Use</th></tr>
+            <tr><td class="cd">0–1</td><td>Soft / semi-fluid</td><td>Cold climates, gearboxes</td></tr>
+            <tr><td class="cd">2</td><td>Soft butter</td><td>General-purpose, bearings</td></tr>
+            <tr><td class="cd">3</td><td>Firm</td><td>Sealed bearings, motors</td></tr>
+            <tr><td class="cd">4–6</td><td>Very firm</td><td>Slow heavy jobs, blocks</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="callout"><b>Fast rule of thumb:</b> sealed bearings (2RS/2Z) are greased for life — never open them. Open bearings: pack grease to <b>30–50%</b> of the free space. Too much grease = overheating (the grease churns and heats up).</div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="tab tab-quiz">
+    <div class="qbox" id="quizbox"></div>
+  </section>
+
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="modal" id="modal" onclick="V.close()">
+  <div class="mcard" onclick="event.stopPropagation()">
+    <button class="mclose" onclick="V.close()">✕</button>
+    <div id="mbody"></div>
+  </div>
+</div>
+
+<div id="selftest"></div>
+
+<script>
+var B = [
+ {id:'deep', cat:'ball', load:'both', name:'Deep-Groove Ball', code:'6xxx', series:'60 · 62 · 63 · 64',
+  desc:'The classic all-rounder. A single row of balls running in deep, continuous grooves. Handles radial loads plus light axial loads in BOTH directions. Cheap, quiet and everywhere.',
+  feat:['Most common bearing type in the world','Takes radial + light axial loads both ways','Low friction, high speed, low maintenance','Available sealed (2RS) or shielded (2Z)','Needs little or no lubrication care'],
+  uses:['Electric motors & fans','Gearboxes & pumps','Washing machines, bikes, skateboards','Car wheels & pulleys','F1 in Schools wheels (608 / 623)'],
+  ex:[['6205-2RS','light series · 25 mm bore · sealed — the world\u2019s most common bearing'],['608-2Z','8 mm bore · shielded — skateboard & fidget spinner classic'],['6308','medium series · 40 mm bore'],['6004','extra light · 20 mm bore']],
+  vars:['60 extra light / 62 light / 63 medium / 64 heavy','Shields (2Z) vs contact seals (2RS) vs low-friction seals (2RZ)','Snap-ring groove (N) so it clips into a housing','C3 clearance for heat or high speed'],
+  pros:['Cheap, quiet, forgiving of small misalignment','Handles both load directions','Huge size range — 1 mm to over 1000 mm bore'],
+  cons:['Not for very heavy or pure-axial loads','Limited misalignment (~0.1–0.25°)'],
+  sp:'Very high', ld:'Medium', ms:'~0.1–0.25°',
+  fact:'More deep-groove bearings are made than all other types combined. The 6205 alone sells in the hundreds of millions every year.'},
+ {id:'ang', cat:'ball', load:'both', name:'Angular-Contact Ball', code:'7xxx', series:'70 · 72 · 73',
+  desc:'Ball grooves are offset so the load line runs at an angle (15°, 25° or 40°) through the ball. This creates strong axial capacity in ONE direction — so they are normally mounted in opposing pairs.',
+  feat:['Handles radial + heavy axial load in one direction','Contact angle sets the axial strength: 15° (C) < 25° (AC) < 40° (B)','Mounted in pairs: DB (back-to-back), DF (face-to-face) or DT (tandem)','One of the fastest bearing designs'],
+  uses:['Machine-tool spindles','Pumps, compressors, gearboxes','RC car and drone motors','Aircraft wheels & engines'],
+  ex:[['7205-B','light series · 25 mm bore · 40° contact angle'],['7010-C','extra light · 50 mm bore · 15° contact angle'],['7208-2RS','medium light · 40 mm bore · sealed pair']],
+  vars:['Single row (one-direction axial)','Double row (5200/5300) = axial both ways','Four-point contact (QJ) = one bearing does a pair\u2019s job'],
+  pros:['Very high speed capability','Precision grades P5/P4 for spindles','Can be preloaded for zero play'],
+  cons:['Single rows must be used in pairs','Sensitive to misalignment','More expensive than deep groove'],
+  sp:'Very high', ld:'High', ms:'~0.05–0.1°',
+  fact:'Remove the cage, preload a pair, add oil mist — and you have the exact recipe for a 40,000 rpm machine-tool spindle.'},
+ {id:'sal', cat:'ball', load:'both', name:'Self-Aligning Ball', code:'1xxx', series:'12 · 13 · 22',
+  desc:'Two rows of balls running in a spherical outer raceway. The inner ring and balls can tilt inside the outer ring — the bearing corrects its own alignment errors.',
+  feat:['Automatically corrects misalignment up to ~2–3°','Two rows of balls = decent load capacity','Radial + light axial loads','Cheap way to cope with bent shafts or flexing frames'],
+  uses:['Agricultural machinery','Textile machines, conveyors','Fans & blowers on flexible frames','Long shaft lines with several bearings'],
+  ex:[['1205','self-aligning · 25 mm bore'],['1305','bigger balls · 25 mm bore'],['2205','extra capacity · 25 mm bore']],
+  vars:['12xx light / 13xx medium / 22xx heavy','Conical bore (K) versions for tapered shafts'],
+  pros:['Forgives shaft flex and housing misalignment','Easy to install — no precision alignment needed','Moderate cost'],
+  cons:['Not for heavy axial loads','Lower speed than deep groove','More friction than deep groove'],
+  sp:'Medium', ld:'Medium', ms:'2–3° (self-correcting)',
+  fact:'These were the original \u201Cfrictionless\u201D bearing that made the car axle practical — designed in 1907 by Sven Wingquist of SKF.'},
+ {id:'tball', cat:'thrust', load:'ax', name:'Thrust Ball', code:'5xxx', series:'511 · 512 · 513 · 514',
+  desc:'Two flat washer-like rings with balls running between them. Built for pure axial (shaft-direction) loads only — it cannot take radial load at all.',
+  feat:['Axial load in one direction only (single) or both (double, 52xx)','Flat washers = simple and cheap','High axial capacity for its size','Must run with some axial load to stop ball skidding'],
+  uses:['Vertical shafts & rotating tables','Turntables, lazy susans','Car steering columns','Thrust washers in gearboxes'],
+  ex:[['51105','light · 25 mm bore'],['51208','medium · 40 mm bore'],['52210','double direction · 50 mm bore']],
+  vars:['511 light / 512 medium / 513 heavy / 514 extra heavy','Single direction (51xx) vs double direction (52xx)'],
+  pros:['Simple, cheap, compact','High axial capacity','Can run at moderate speed'],
+  cons:['ZERO radial capacity','No misalignment tolerance','Wears fast if run with light loads at high speed'],
+  sp:'Medium', ld:'High (axial only)', ms:'None',
+  fact:'A thrust bearing is basically two washers with ball-bearings stuck between them — the simplest roller bearing there is.'},
+ {id:'cyl', cat:'roller', load:'rad', name:'Cylindrical Roller', code:'N · NU · NJ · NUP', series:'N, NU, NJ, NUP',
+  desc:'Cylindrical rollers make LINE contact instead of point contact — so the same size bearing carries much more radial load. Most versions are separable: the rings come apart for easy mounting.',
+  feat:['Very high radial capacity (line contact)','NU type lets the shaft slide axially — perfect for thermal expansion','Separable rings make assembly easy','Rigid — great for heavy machine spindles'],
+  uses:['Electric motors & generators','Machine-tool spindles','Railway axleboxes','Gearboxes & rolling mills'],
+  ex:[['NU205','free axial movement · 25 mm bore'],['NJ305','one flange — locates shaft one way'],['NUP2205','two flanges — locates both ways']],
+  vars:['N (no flange) / NU (flange on outer) / NJ / NUP — each adds more axial location','Single vs double row (NN)','Full complement (SL) for max load'],
+  pros:['Huge radial load for the size','Shaft can expand freely inside (NU)','Easy to fit/remove'],
+  cons:['Almost no axial capacity','Sensitive to misalignment','Needs good lubrication'],
+  sp:'Medium–high', ld:'Very high (radial)', ms:'~0.05–0.1°',
+  fact:'NU bearings are the standard fix for long motor shafts: the shaft grows when hot, and the NU lets it slide without jamming the bearing.'},
+ {id:'needle', cat:'roller', load:'rad', name:'Needle Roller', code:'NA · RNA · HK · NK', series:'NA48 · NA49 · HK · NK',
+  desc:'Ultra-thin cylindrical rollers. The smallest cross-section of any rolling bearing — huge load capacity squeezed into almost no space.',
+  feat:['Thinnest cross-section of all bearing types','Very high radial capacity in tiny space','Drawn-cup types (HK) just press into a housing','RNA = no inner ring — rollers run directly on the shaft'],
+  uses:['Car gearboxes & engines (rocker arms, balance shafts)','CV joints & universal joints','Typewriters → printers, actuators','Connecting rods & swashplates'],
+  ex:[['NA4905','with inner ring · 25 mm bore'],['HK2020','drawn cup · 20 mm bore · 20 mm wide'],['NK20/20','machined cage · 20 mm bore']],
+  vars:['NA = with inner ring / RNA = without inner ring','Drawn-cup (HK, BK) vs machined (NK)','Full complement (K) for max load'],
+  pros:['Smallest cross-section per load','Lets designers shrink housings','Cheap in drawn-cup form'],
+  cons:['Almost no axial capacity','Needs perfect alignment & lubrication','Harder to mount than ball types'],
+  sp:'Medium', ld:'High (radial)', ms:'Very low',
+  fact:'A needle bearing can carry as much load as a ball bearing TWICE its diameter — which is why gearboxes are packed with them.'},
+ {id:'taper', cat:'roller', load:'both', name:'Tapered Roller', code:'3xxx', series:'302 · 303 · 313 · 320',
+  desc:'Cone-shaped rollers between a cone (inner ring) and cup (outer ring). Handles radial AND axial loads together — and the axial capacity grows with the taper angle. Always used in opposed pairs.',
+  feat:['Combined radial + axial (one direction) per bearing','Two bearings mounted opposed (cone-to-cone) take any load','Line contact = very strong','Sealed versions (TS) are the car-hub workhorse'],
+  uses:['Car wheel hubs & axles','Truck and trailer wheels','Gearboxes, differentials','Agriculture & construction equipment'],
+  ex:[['30205','light · 25 mm bore'],['32008','light wide · 40 mm bore'],['32308','heavy · 40 mm bore']],
+  vars:['302/303 light–medium / 313 / 320 / 322 / 323 heavy','Metric vs inch (imperial) series','Single, double (TDO/TDI) and matched pairs'],
+  pros:['Takes combined loads like nothing else','Adjustable preload by shims','Very rugged'],
+  cons:['Must be set up in pairs','Sensitive to installation adjustment','Higher friction than ball types'],
+  sp:'Medium', ld:'Very high (radial + axial)', ms:'~0.1–0.2°',
+  fact:'Draw lines through all the roller contact surfaces of a tapered bearing and they all meet at ONE point on the bearing axis — that\u2019s what makes the rollers roll without sliding.'},
+ {id:'sph', cat:'roller', load:'both', name:'Spherical Roller', code:'2xxx', series:'222 · 223 · 230 · 231',
+  desc:'Two rows of barrel-shaped rollers on a spherical outer raceway. The heavyweight champion: massive load capacity PLUS self-alignment. The go-to for the world\u2019s toughest machines.',
+  feat:['Extremely high radial + axial capacity','Self-aligning — tolerates shaft deflection and frame flex','Barrel rollers distribute load over a wide area','Survives shock loads and vibration'],
+  uses:['Crushers, mills & shakers','Wind-turbine main shafts','Mining & cement equipment','Paper mills, marine drives, heavy fans'],
+  ex:[['22208','light wide · 40 mm bore'],['22312','heavy · 60 mm bore'],['23120','very wide · 100 mm bore']],
+  vars:['222 light / 223 heavy / 230, 231, 232 wide series','Tapered bore (K) for adapter sleeves','Sealed variants for dirty environments'],
+  pros:['Enormous load capacity','Self-aligning + combined loads','Long life in brutal conditions'],
+  cons:['Large & heavy','Expensive','Not for high speeds'],
+  sp:'Low–medium', ld:'Extreme', ms:'~1.5–2° (self-correcting)',
+  fact:'If a machine shakes, crushes or grinds for a living — crusher, shredder, ball mill — it almost certainly sits on spherical roller bearings.'},
+ {id:'sphth', cat:'thrust', load:'ax', name:'Spherical Roller Thrust', code:'292 · 293 · 294', series:'292 · 293 · 294',
+  desc:'Barrel rollers arranged around a shaft, running between a spherical housing washer and a shaft washer. Takes giant axial loads while still tolerating misalignment.',
+  feat:['Highest axial capacity of any bearing','Self-aligning under load','Can take a bit of radial load too','Ideal for heavy vertical shafts'],
+  uses:['Vertical mills & pumps','Hydroelectric generators','Crane hooks & heavy lifting','Marine propeller shafts'],
+  ex:[['29412','heavy · 60 mm bore'],['29317','medium · 85 mm bore'],['29222','light · 110 mm bore']],
+  vars:['292 light / 293 medium / 294 heavy','Tapered bore (K) versions'],
+  pros:['Massive axial load capacity','Self-aligning','Absorbs shock loads'],
+  cons:['Large and heavy','Needs continuous oil lubrication','Expensive'],
+  sp:'Low–medium', ld:'Extreme (axial)', ms:'1–1.5° (self-correcting)',
+  fact:'The 294 series is the bearing of choice under the biggest vertical machines on Earth — mine hoists and hydro turbines.'},
+ {id:'cylth', cat:'thrust', load:'ax', name:'Cylindrical Roller Thrust', code:'8xxx', series:'811 · 812',
+  desc:'Short cylindrical rollers standing on end, arranged in a ring between two washers. Pure axial load with very high stiffness in a compact package.',
+  feat:['High axial stiffness — little deflection','Compact axial profile','Handles continuous rotation well','Often stacked in multiple rows'],
+  uses:['Hoists & cranes','Planetary gearboxes','Machine tools (table supports)','Valve actuators'],
+  ex:[['81105','light · 25 mm bore'],['81208','medium · 40 mm bore']],
+  vars:['811 light / 812 medium','Single vs multi-row (893, 894 heavy)'],
+  pros:['Very rigid under axial load','Thin — saves axial space','Good rolling performance'],
+  cons:['Axial only — no radial or moment capacity','Needs precise flat seating'],
+  sp:'Medium', ld:'High (axial)', ms:'None',
+  fact:'Planet gears in automatic transmissions spin on tiny roller thrust bearings — thousands of them in every car.'},
+ {id:'linear', cat:'linear', load:'spec', name:'Linear Ball Bushing', code:'LMxx · SCS', series:'LM4 – LM100',
+  desc:'Balls recirculate around a shaft, letting a carriage slide freely with almost zero friction. Not for rotation — for straight-line motion.',
+  feat:['Near-zero friction linear motion','Balls recirculate through load-free return channels','Standard bores: LM8 = 8 mm shaft, LM12 = 12 mm…','Open type (LM…OP) for supported shafts'],
+  uses:['3D printers & CNC machines','Linear slides & actuators','Camera dollies, drawers, office chairs','Lab equipment & robots'],
+  ex:[['LM8UU','8 mm shaft — the 3D-printer rail classic'],['LM12UU','12 mm shaft'],['SCS8LUU','8 mm · long type']],
+  vars:['Standard / long (L) / compact (J)','Closed vs open type','Sealed versions for dusty shops'],
+  pros:['Silky-smooth linear motion','Long life, low wear','Cheap standard sizes'],
+  cons:['Needs a hard, straight shaft','Limited load per bearing','No rotation allowed'],
+  sp:'n/a', ld:'Medium (radial to shaft)', ms:'n/a',
+  fact:'Every 3D printer on your desk moves on 2–4 of these — the LM8UU is the most popular linear bearing in the maker world.'},
+ {id:'insert', cat:'special', load:'both', name:'Insert / Y-Bearing (Mounted Unit)', code:'UC2xx + housing', series:'UC2 · UC3 + UCP/UCF/UCFL',
+  desc:'A deep-groove bearing with an extended inner ring that LOCKS onto the shaft with setscrews or an eccentric collar — then drops into a cast housing (pillow block).',
+  feat:['Setscrews lock it to the shaft — no press fit','Plugs straight into pillow-block housings','Self-aligning within the housing','Sealed for dirty environments'],
+  uses:['Conveyor rollers','Fans, blowers & pumps','Agricultural machines','Anywhere a shaft must mount fast'],
+  ex:[['UC205','25 mm bore · setscrew lock'],['UCP205','complete pillow-block unit'],['UCF205','flanged unit for side mounting']],
+  vars:['UC = setscrew / UB = eccentric collar','P = pillow block, F = flange, FL = flanged oval','Stainless & food-grade versions'],
+  pros:['Super quick to mount','Replaces precision machining of housings','Cheap to replace as a unit'],
+  cons:['Setscrews can slip under shock','Less precise than a proper fit','Limited speed'],
+  sp:'Low–medium', ld:'Medium', ms:'Up to ~1° (in housing)',
+  fact:'When a conveyor belt stops moving, the maintenance guy doesn\u2019t replace a bearing — he unbolts the whole pillow block and clicks in a new one in five minutes.'},
+ {id:'mini', cat:'ball', load:'both', name:'Miniature & Instrument', code:'68x · 69x · MRxx', series:'68 · 69 · MR',
+  desc:'Everything with a bore under 10 mm. Tiny, low-torque, high-precision bearings for small fast-spinning things. Includes the legendary 608.',
+  feat:['Bores from ~1 mm up to 10 mm','Very low starting torque','Flanged versions (F) mount without machining','Available in ABEC 7+ precision for instruments'],
+  uses:['Skateboards, fidget spinners, yo-yos','RC cars, drones, gimbal motors','Dental drills & surgical tools','Gyroscopes & hard-drive-era motors'],
+  ex:[['608-2Z','8 mm bore — the skateboard king'],['623','3 mm bore — F1 in Schools axle favourite'],['MR63','3 mm · thin type · RC-car wheels'],['682','2 mm bore — tiny drone motors']],
+  vars:['68x/69x metric miniatures','MR/RA inch-based miniatures','Flanged (F) types'],
+  pros:['Tiny and light','Low friction at speed','Cheap in the classic sizes'],
+  cons:['Small load capacity','Small sizes need careful handling','Dust kills them fast'],
+  sp:'Very high', ld:'Low', ms:'Varies',
+  fact:'The 608 is so famous it has its own nickname in every sport: skateboard bearing, fidget-spinner bearing, yo-yo bearing — same 8 mm bore everywhere.'},
+ {id:'full', cat:'special', load:'rad', name:'Full-Complement', code:'BC · SL · NCF', series:'no cage',
+  desc:'The cage (separator) is removed so EVERY possible ball or roller fits. More elements = more load capacity for the same size — but the elements rub together, so speed drops.',
+  feat:['Up to ~30% more load than caged types','Elements touch each other — no cage to break','Best for slow, heavy, vibrating jobs','Roller type: NCF, SL series'],
+  uses:['Slow heavy rollers & idlers','Crane wheels & turntables','Vibrating screens','Wind-turbine blade pitch bearings'],
+  ex:[['NCF3006','full-complement cylindrical roller · 30 mm bore'],['6205V','full-complement ball (V = no cage)']],
+  vars:['Ball full-complement (deep groove)','Roller full-complement (NCF, SL)'],
+  pros:['Maximum load for the envelope size','No cage wear or cage failure','Simple and robust'],
+  cons:['Lower max speed (element rubbing)','More friction & heat','Slightly noisier'],
+  sp:'Low', ld:'Very high', ms:'~0.1°',
+  fact:'Full-complement bearings are the strongman of the bearing world: same body size, but they bench-press far more — you just can\u2019t make them run fast.'},
+ {id:'hybrid', cat:'ball', load:'both', name:'Hybrid Ceramic', code:'6xxx + ceramic balls', series:'any series',
+  desc:'Steel rings with SILICON-NITRIDE (Si\u2083N\u2084) ceramic balls. The balls are ~60% lighter than steel — less centrifugal force, less heat, more speed, and they don\u2019t conduct electricity.',
+  feat:['Ceramic balls 60% lighter than steel','Runs faster & cooler','Electrically insulating — stops bearing "fluting" in motors','Harder than steel = longer life in clean conditions'],
+  uses:['E-scooter & e-bike wheels','EV and industrial motors','Machine-tool spindles','Racing wheels & high-end fidget spinners'],
+  ex:[['6205 hybrid','standard 25 mm bore · ceramic balls'],['608 ceramic','8 mm bore · premium skateboard upgrade']],
+  vars:['Full ceramic (rings too) vs hybrid (balls only)','Black ceramic (Si\u2083N\u2084) vs zirconia (ZrO\u2082)'],
+  pros:['Higher speed & lower heat','No electrical pitting (motors!)','Longer life, lower friction'],
+  cons:['Expensive','Ceramic is brittle to shock loads','Less tolerant of contamination'],
+  sp:'Very high', ld:'Medium', ms:'Same as steel',
+  fact:'EV motor shafts can build up electrical voltage — ceramic balls act as an insulator and stop tiny sparks from melting the raceways. That\u2019s why EVs are full of them.'},
+ {id:'thin', cat:'ball', load:'both', name:'Thin-Section', code:'6700 · 6800 · KAA', series:'67 · 68 · 69',
+  desc:'The cross-section stays small and CONSTANT no matter how big the bore gets. Saves serious weight and space — used when a big-diameter ring must spin in a compact housing.',
+  feat:['Cross-section does NOT scale with bore size','Huge weight & space savings','Available in 4-point contact for combined loads','Often used in big rotating assemblies'],
+  uses:['Robots & cobot joints','Radar & antenna rotators','Medical imaging (CT scanners)','Optical tables & turntables'],
+  ex:[['6706','very thin · 30 mm bore'],['61800','extra thin · 10 mm bore'],['KAA070','inch thin-section · 7\u201d ring']],
+  vars:['67xx/68xx/69xx metric','KAA/KB/KA inch thin-section','Deep groove vs 4-point contact'],
+  pros:['Big bore, tiny weight','Fits compact designs','Smooth running'],
+  cons:['Limited load capacity','Flexible — needs a rigid housing','Premium price'],
+  sp:'Medium–high', ld:'Medium', ms:'Low',
+  fact:'CT scanner rings are meters wide but only centimetres thick — thin-section bearings make that possible.'},
+ {id:'crossed', cat:'special', load:'spec', name:'Crossed Roller', code:'XRB · CRB', series:'single ring',
+  desc:'Rollers arranged in an X — each roller at 90° to its neighbour — inside ONE ring. Takes radial, axial AND tilting (moment) loads from every direction at once.',
+  feat:['One bearing handles radial + axial + moment loads','Very high rigidity','Compact: replaces stacks of bearings','Rollers cross at 90° for stability'],
+  uses:['Robot joints & rotary tables','Semiconductor wafer stages','Optical & radar platforms','Precision index tables'],
+  ex:[['XRB6012','60 mm ring · crossed rollers'],['CRB3010','30 mm ring · thin type']],
+  vars:['XRB (standard) / CRB (thin)','Internal vs external gear options'],
+  pros:['Extreme rigidity in all directions','Saves axial space','High precision available'],
+  cons:['Expensive','Needs precise housings','Specialist availability'],
+  sp:'Medium', ld:'High (any direction)', ms:'Very low',
+  fact:'Every six-axis robot arm joint is a crossed-roller bearing — one compact ring that carries the arm\u2019s weight, the torque and the bending all at once.'},
+ {id:'slewing', cat:'special', load:'spec', name:'Slewing / Turntable', code:'011.30.xxx', series:'single-row · 4-point',
+  desc:'A huge ring bearing with balls or rollers running in a raceway the size of a dinner table — often with gear teeth cut into the ring. Rotates entire machines.',
+  feat:['Ring diameters from ~0.3 m to over 6 m','Takes massive axial + moment loads','Optional integral gear teeth (external or internal)','Single-row, double-row or 3-row designs'],
+  uses:['Excavators & cranes (the cab swing)','Wind-turbine blade pitch & yaw','Solar-tracker arrays','Radar dishes & concert stages'],
+  ex:[['011.30.500','500 mm ring · 4-point ball'],['Three-row roller slewing','millimetres-tall but metres wide']],
+  vars:['4-point ball (cheap, flexible)','Crossed roller (stiff)','3-row roller (heaviest loads)'],
+  pros:['Rotates enormous weights smoothly','Gear teeth built in — no extra ring','Long life outdoors'],
+  cons:['Very expensive','Needs skilled installation & preload','Heavy'],
+  sp:'Low', ld:'Extreme (axial + moment)', ms:'Self-set',
+  fact:'The ring that lets a 100-ton excavator cab spin 360° with one finger on the joystick is a slewing bearing — probably 4-point ball type.'},
+ {id:'sleeve', cat:'plain', load:'rad', name:'Plain Sleeve Bushing', code:'bronze · PTFE · plastic', series:'no rolling elements',
+  desc:'The oldest bearing of all: a simple sleeve with the shaft sliding inside on an oil film. No balls, no rollers — just low-friction materials and a film of lubricant.',
+  feat:['No moving parts inside — nothing to break','Oil or grease film separates shaft and sleeve','Handles shock & vibration well','Flanged versions locate the shaft too'],
+  uses:['Hinges, linkages & pivots','Small motors & appliances','Suspension bushes in cars','Where a bearing must be silent'],
+  ex:[['8 mm bronze bushing','classic motor sleeve'],['PTFE-lined bushing','needs no oil at all'],['Flanged bushing','locates the shaft sideways']],
+  vars:['Bronze (oiled) / PTFE & plastic (self-lubricating)','Porous sintered bronze (oil-impregnated)','Flanged vs plain vs spherical'],
+  pros:['Cheapest bearing there is','Quiet and vibration-damping','Works with shock loads'],
+  cons:['Higher friction than rolling types','Wears — the shaft and sleeve both','Needs lubrication (unless PTFE)'],
+  sp:'Low', ld:'Medium (radial)', ms:'None',
+  fact:'Every ceiling fan and drill in the world runs on plain bushings — a little oil-soaked sleeve is all a quiet, cheap machine needs.'},
+ {id:'sphplain', cat:'plain', load:'spec', name:'Spherical Plain', code:'GE · GAC · GX', series:'GE20ES etc.',
+  desc:'A steel ball sliding directly inside a steel socket — like a ball joint. Made for SLOW oscillating movement with huge tilting freedom and heavy loads.',
+  feat:['Tilts and swivels through large angles','Sliding contact — not rolling','Takes heavy radial + axial loads','Maintenance types (ES) grease regularly; EL = self-lubricating'],
+  uses:['Hydraulic cylinder rod ends','Vehicle suspension links','Aircraft control linkages','Conveyor & lifting gear'],
+  ex:[['GE20ES','20 mm bore · steel-on-steel · greased'],['GAC30T','angular contact · 30 mm bore'],['GE8C','maintenance-free · 8 mm bore']],
+  vars:['Steel-on-steel (ES) vs maintenance-free liners (C)','Radial (GE) vs angular-contact (GAC)','Inch series (SIB, SA…)'],
+  pros:['Enormous movement freedom','Very strong and compact','Survives misalignment that would kill a ball bearing'],
+  cons:['Not for continuous rotation','Higher friction (sliding)','Wears faster than rolling bearings'],
+  sp:'n/a (oscillating only)', ld:'Very high', ms:'Up to ~15° tilt',
+  fact:'Every hydraulic ram on an excavator ends in a spherical plain bearing — it has to swivel while pushing with tonnes of force.'},
+ {id:'cam', cat:'roller', load:'rad', name:'Cam Follower / Track Roller', code:'KR · CF · NUTR', series:'stud type',
+  desc:'A roller bearing built onto a threaded STUD — the bearing IS the wheel. It bolts straight into a machine and rolls along tracks, cams and guideways.',
+  feat:['Integral stud with thread — bolts directly in','Heavy outer ring takes direct track contact','Sealed against dirt and impact','Eccentric stud versions adjust the track gap'],
+  uses:['Cam drives & indexers','Conveyor guide rails','Printing & packaging machines','CNC tool changers, bottling lines'],
+  ex:[['KR16','16 mm stud · ball type'],['CF12','12 mm stud · roller type (heavier)'],['NUTR20','20 mm · full roller']],
+  vars:['Ball type (KR) vs roller type (CF/NUTR)','Eccentric stud (KR…PP) for adjustment','Yoke type (no stud) for shafts'],
+  pros:['Self-contained — no housing needed','Easy mounting and adjusting','Tough outer ring'],
+  cons:['Load limited by stud strength','Replacement means unbolting','Not for high speed'],
+  sp:'Medium', ld:'High (radial on track)', ms:'Low',
+  fact:'Bottling lines have hundreds of cam followers guiding bottles at 60,000 per hour — they take millions of tiny impacts a day.'},
+ {id:'airmag', cat:'advanced', load:'spec', name:'Air & Magnetic (Contactless)', code:'no ISO code', series:'fluid film · levitation',
+  desc:'The ultimate bearings: NO physical contact at all. Air bearings float on a pressurised gas film; magnetic bearings levitate with electromagnets. Zero wear, zero friction.',
+  feat:['Air bearing: pressurised air film ~5 µm thick','Magnetic: active electromagnets + sensors','Zero wear, zero friction, zero lubrication','Extreme precision and speed'],
+  uses:['Semiconductor wafer steppers (air)','High-speed turbos & blowers (magnetic)','Flywheel energy storage','Maglev trains (giant magnetic bearings)'],
+  ex:[['Aerostatic air spindle','10,000–150,000 rpm with sub-µm runout'],['Active magnetic bearing','levitates a 2-ton rotor']],
+  vars:['Aerostatic (pressurised supply) vs aerodynamic (self-generating)','Passive (permanent magnet) vs active (controlled) magnetic'],
+  pros:['No wear — theoretically infinite life','Ultra precision & speed','No oil, no seals, no contamination'],
+  cons:['Expensive & complex','Needs power/air supply — fail-safe systems','Specialist engineering only'],
+  sp:'Extreme', ld:'Application-specific', ms:'n/a',
+  fact:'Maglev trains don\u2019t touch the track — they ride on magnetic bearings the length of the whole train. And a wafer-fab air spindle spins at 150,000 rpm without ever touching.'}
+];
+
+var CATS = [['all','ALL'],['ball','BALL'],['roller','ROLLER'],['thrust','THRUST'],['linear','LINEAR'],['plain','PLAIN'],['special','SPECIAL'],['advanced','ADVANCED']];
+
+/* ---------------- EXPANSION DATA ---------------- */
+var DIMS=[
+ ['6000',10,26,8,4.6,1.95],['6001',12,28,8,5.1,2.4],['6002',15,32,9,5.9,2.9],['6003',17,35,10,6.4,3.3],
+ ['6004',20,42,12,9.4,5.0],['6005',25,47,12,11.9,6.6],['6006',30,55,13,13.8,8.3],['6007',35,62,14,16.8,10.4],
+ ['6008',40,68,15,17.8,11.6],['6009',45,75,16,21,14.8],['6010',50,80,16,22,16],
+ ['6200',10,30,9,5.1,2.4],['6201',12,32,10,6.1,3.0],['6202',15,35,11,7.8,3.8],['6203',17,40,12,9.6,4.8],
+ ['6204',20,47,14,12.7,6.6],['6205',25,52,15,14,7.8],['6206',30,62,16,19.5,11.2],['6207',35,72,17,25.5,15.3],
+ ['6208',40,80,18,29.5,18],['6209',45,85,19,32.5,20.4],['6210',50,90,20,35,23.2],
+ ['6300',10,35,11,7.6,3.4],['6301',12,37,12,8.7,4.2],['6302',15,42,13,10.1,5.4],['6303',17,47,14,13.3,6.8],
+ ['6304',20,52,15,15.9,7.8],['6305',25,62,17,20.7,11.4],['6306',30,72,19,28.1,16],['6307',35,80,21,33.2,19.2],
+ ['6308',40,90,23,41.8,24],['6309',45,100,25,52.7,30.5],['6310',50,110,27,61.8,38],
+ ['6800',10,19,5,1.7,0.85],['6801',12,21,5,1.9,1],['6802',15,24,5,2.1,1.2],['6803',17,26,5,2.2,1.3],
+ ['6804',20,32,7,4,2.3],['6805',25,37,7,4.4,2.6],['6806',30,42,7,4.7,3],['6807',35,47,7,5,3.3],
+ ['6900',10,22,6,2.7,1.4],['6901',12,24,6,2.9,1.5],['6902',15,28,7,4.3,2.3],['6903',17,30,7,4.5,2.5],
+ ['6904',20,37,9,6.4,3.7],['6905',25,42,9,7,4.2],['6906',30,47,9,7.4,4.5],['6907',35,55,10,9.5,6.2],
+ ['608',8,22,7,3.35,1.44],['623',3,10,4,0.54,0.22],['624',4,13,5,1.11,0.49],['625',5,16,5,1.29,0.6],
+ ['626',6,19,6,2.34,0.96],['627',7,22,7,3.35,1.44],['628',8,24,8,2.6,1.16],['629',9,26,8,4.2,1.9],
+ ['682',2,5,2.3,0.15,0.05],['693',3,8,3,0.56,0.23],['694',4,11,4,0.96,0.35],['695',5,13,4,1.05,0.44],
+ ['696',6,15,5,1.35,0.52],['698',8,19,6,2.25,0.98],['699',9,20,6,2.55,1.1],
+ ['MR63',3,6,2.5,0.29,0.11],['MR105',5,10,3,0.63,0.22],['MR128',8,16,4,1.41,0.55]
+];
+var FITS={
+ '10-18':{shaft:{h6:[0,-11],g6:[-5,-16],j6:[6,-5],p6:[26,15],r6:[34,23]},hole:{H7:[18,0],J7:[8,-10],N7:[-14,-32],P7:[-22,-40]}},
+ '18-30':{shaft:{h6:[0,-13],g6:[-7,-20],j6:[8,-5],p6:[35,22],r6:[41,28]},hole:{H7:[21,0],J7:[10,-11],N7:[-14,-35],P7:[-22,-43]}},
+ '30-50':{shaft:{h6:[0,-16],g6:[-9,-25],j6:[10,-6],p6:[42,26],r6:[50,34]},hole:{H7:[25,0],J7:[13,-12],N7:[-17,-42],P7:[-26,-51]}},
+ '50-80':{shaft:{h6:[0,-19],g6:[-10,-29],j6:[12,-7],p6:[51,32],r6:[60,41]},hole:{H7:[30,0],J7:[16,-14],N7:[-20,-50],P7:[-32,-62]}}
+};
+var FAILS=[
+ {n:'Spalling / flaking',i:'🧨',sev:'bad',look:'Small pits, chips or crescent flakes on the raceway or balls.',why:'Metal fatigue after millions of cycles — or overload, misalignment, or poor lubrication.',fx:'Replace the bearing; check load, alignment and lube. This is normal end-of-life once the L10 life is used up.'},
+ {n:'Brinelling',i:'🔨',sev:'bad',look:'Dents in the raceway at exactly the ball spacing.',why:'Static overload — hammer blows during mounting, or pressing through the balls.',fx:'Replace. Never hammer a bearing on, and always push on the correct ring (see Mounting).'},
+ {n:'False brinelling',i:'🪫',sev:'mid',look:'Shiny wear marks or fretting at ball spacing — like a ghost of the balls.',why:'Vibration while the bearing is NOT rotating: transport, parked machines, storage.',fx:'Not true damage — rotate bearings during storage/transport, or preload them. It stops when running normally.'},
+ {n:'Electrical fluting',i:'⚡',sev:'mid',look:'Washboard / corrugated lines on the raceway.',why:'Electric current passes through the bearing (VFD motors, shaft currents) and micro-arcs pit the metal.',fx:'Fit hybrid ceramic bearings (insulating) or shaft grounding brushes. Motor VFDs are the usual cause.'},
+ {n:'Overheating',i:'🌡️',sev:'bad',look:'Discolouration — blue, brown or black rings; melted grease.',why:'Too much grease, over-preload, seal rubbing, or running faster than rated.',fx:'Fill grease only 30–50%, check preload and seal clearance, reduce speed or fit a C3 clearance bearing.'},
+ {n:'Contamination / abrasion',i:'🪨',sev:'bad',look:'Dull, scratched or frosted raceways; gritty feel.',why:'Dirt, sand or metal particles got in through bad seals or dirty mounting.',fx:'Clean work area, use sealed/shielded bearings, never blow bearings clean with compressed air (it drives dirt in).'},
+ {n:'Cage damage',i:'🔩',sev:'bad',look:'Deformed, cracked or broken cage; loose balls.',why:'Shock loads, mounting damage, too-high speed, or wrong lubrication.',fx:'Replace; check mounting and speed. Cages hate shock — they are the weakest part.'},
+ {n:'Corrosion / rust',i:'🦠',sev:'mid',look:'Red-brown rust, pitting, rough running.',why:'Water, acid or condensation inside the bearing.',fx:'Replace; fit sealed bearings, keep lubricant fresh, store bearings upright in dry packaging.'}
+];
+var GRADES=[
+ ['P0','ABEC 1','standard manufacturing','General industry, toys, cheap wheels','★'],
+ ['P6','ABEC 3','tightened','Motors, fans, RC cars, skateboards','★★'],
+ ['P5','ABEC 5','precision','Machine tools, precision motors, robots','★★★'],
+ ['P4','ABEC 7','high precision','Spindles, aerospace, high speed','★★★★'],
+ ['P2','ABEC 9','ultra precision','Gyroscopes, wafer fabs, metrology','★★★★★']
+];
+
+/* ---------------- SVG DIAGRAMS ---------------- */
+var T = {};
+T.place = function(cx,cy,rMid,n,off,fn){
+  var s='',a,i,x,y;
+  for(i=0;i<n;i++){ a=-90+off+i*360/n; x=cx+rMid*Math.cos(a*Math.PI/180); y=cy-rMid*Math.sin(a*Math.PI/180); s+=fn(x,y,a); }
+  return s;
+};
+T.ball = function(x,y,r,cls){ return '<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r+'" class="'+(cls||'ball')+'"/>'; };
+T.rectA = function(x,y,w,h,rx,cls,a){ return '<g transform="rotate('+a.toFixed(0)+','+x.toFixed(1)+','+y.toFixed(1)+')"><rect x="'+(x-w/2).toFixed(1)+'" y="'+(y-h/2).toFixed(1)+'" width="'+w+'" height="'+h+'" rx="'+rx+'" class="'+cls+'"/></g>'; };
+T.trap = function(x,y,w1,w2,h,cls,a){ return '<g transform="rotate('+a.toFixed(0)+','+x.toFixed(1)+','+y.toFixed(1)+')"><polygon points="'+(x-w1/2)+','+(y-h/2)+' '+(x+w1/2)+','+(y-h/2)+' '+(x+w2/2)+','+(y+h/2)+' '+(x-w2/2)+','+(y+h/2)+'" class="'+cls+'"/></g>'; };
+T.radBase = function(cx,cy,Ro,Ri,boreR,cageR){
+  return '<circle cx="'+cx+'" cy="'+cy+'" r="'+Ro+'" class="ro" stroke-width="13"/>'+
+         '<circle cx="'+cx+'" cy="'+cy+'" r="'+Ri+'" class="ri" stroke-width="13"/>'+
+         '<circle cx="'+cx+'" cy="'+cy+'" r="'+boreR+'" class="bore"/>'+
+         '<circle cx="'+cx+'" cy="'+cy+'" r="'+cageR+'" class="cage"/>';
+};
+T.seals = function(cx,cy,rIn,rOut){
+  return '<rect x="'+(cx-rOut)+'" y="'+(cy-4)+'" width="'+(rOut-rIn)+'" height="8" rx="4" class="seal"/>'+
+         '<rect x="'+(cx+rIn)+'" y="'+(cy-4)+'" width="'+(rOut-rIn)+'" height="8" rx="4" class="seal"/>';
+};
+
+T.draw = function(key,big){
+  var cx=100, cy=70, s='';
+  var vb = big ? '0 0 340 240' : '0 0 200 140';
+  if(key==='deep'||key==='mini'||key==='hybrid'||key==='full'||key==='thin'){
+    var Ro,Ri,bR,cR,bs,n;
+    if(key==='mini'){Ro=42;Ri=24;bR=18;cR=33;bs=5.5;n=6;}
+    else if(key==='thin'){Ro=60;Ri=48;bR=42;cR=54;bs=5;n=8;}
+    else if(key==='full'){Ro=60;Ri=32;bR=26;cR=46;bs=8;n=10;}
+    else{Ro=62;Ri=30;bR=23.5;cR=46;bs=8.5;n=6;}
+    s=T.radBase(cx,cy,Ro,Ri,bR,cR);
+    var cls = (key==='hybrid')?'ballc':'ball';
+    s+=T.place(cx,cy,cR,n,0,function(x,y,a){return T.ball(x,y,bs,cls);});
+    if(key==='deep'||key==='mini') s+=T.seals(cx,cy,Ri+7,Ro-7);
+    if(key==='full') s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" class="lbl" fill="#ff8c2e">no cage</text>';
+    if(key==='hybrid') s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" class="lbl" fill="#34d399">Si₃N₄ ceramic balls</text>';
+    if(key==='thin') s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" class="lbl" fill="#38bdf8">thin rings</text>';
+  }
+  else if(key==='ang'){
+    var Ro2=62,Ri2=30,cR2=46;
+    s=T.radBase(cx,cy,Ro2,Ri2,23.5,cR2);
+    s+=T.place(cx,cy,cR2,6,0,function(x,y,a){return T.ball(x,y,8.5,'ball');});
+    s+='<line x1="'+(cx-10)+'" y1="'+(cy-52)+'" x2="'+(cx+70)+'" y2="'+(cy+34)+'" stroke="#ff8c2e" stroke-width="1.5" stroke-dasharray="4 3"/>';
+    s+='<path d="M '+(cx+70)+' '+(cy+34)+' l -8 4 l 4 -7 z" fill="#ff8c2e"/>';
+    s+='<text x="'+(cx+60)+'" y="'+(cy-30)+'" class="lbl" fill="#ff8c2e">contact angle</text>';
+  }
+  else if(key==='sal'){
+    var Ro3=62,Ri3=32,cR3=46;
+    s=T.radBase(cx,cy,Ro3,Ri3,25,cR3);
+    s+='<path d="M '+(cx-46)+' '+(cy-34)+' A 70 70 0 0 1 '+(cx+46)+' '+(cy-34)+'" stroke="#8fa2b8" stroke-width="6" fill="none"/>';
+    s+=T.place(cx,cy,cR3-4,6,0,function(x,y,a){return T.ball(x,y,7.5,'ball');});
+    s+=T.place(cx,cy,cR3+4,6,30,function(x,y,a){return T.ball(x,y,6.5,'roll');});
+    s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" class="lbl" fill="#38bdf8">2 rows · tilts</text>';
+  }
+  else if(key==='cyl'||key==='needle'){
+    var Ro4=60,Ri4=32,cR4=46, wd=6,hd=14, nn=8;
+    if(key==='needle'){wd=4;hd=20;nn=12;}
+    s=T.radBase(cx,cy,Ro4,Ri4,26,cR4);
+    s+=T.place(cx,cy,cR4,nn,0,function(x,y,a){return T.rectA(x,y,wd,hd,1.5,'roll',a);});
+    if(key==='needle') s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" class="lbl" fill="#38bdf8">ultra-thin rollers</text>';
+    else s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" class="lbl" fill="#38bdf8">line contact</text>';
+  }
+  else if(key==='taper'){
+    var Ro5=62,Ri5=30,cR5=46;
+    s='<circle cx="'+cx+'" cy="'+cy+'" r="'+Ro5+'" class="ro" stroke-width="13"/>'+
+      '<circle cx="'+cx+'" cy="'+cy+'" r="'+Ri5+'" class="ri" stroke-width="16"/>'+
+      '<circle cx="'+cx+'" cy="'+cy+'" r="23.5" class="bore"/>'+
+      '<circle cx="'+cx+'" cy="'+cy+'" r="'+cR5+'" class="cage"/>';
+    s+=T.place(cx,cy,cR5,6,0,function(x,y,a){return T.trap(x,y,5,9,14,'roll',a);});
+    s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" class="lbl" fill="#38bdf8">cone + cup</text>';
+  }
+  else if(key==='sph'||key==='sphth'){
+    var Ro6=62,Ri6=32,cR6=46;
+    s='<circle cx="'+cx+'" cy="'+cy+'" r="'+Ro6+'" class="ro" stroke-width="13"/>'+
+      '<circle cx="'+cx+'" cy="'+cy+'" r="'+Ri6+'" class="ri" stroke-width="13"/>'+
+      '<circle cx="'+cx+'" cy="'+cy+'" r="25" class="bore"/>'+
+      '<circle cx="'+cx+'" cy="'+cy+'" r="'+cR6+'" class="cage"/>';
+    s+='<path d="M '+(cx-46)+' '+(cy-32)+' A 66 66 0 0 1 '+(cx+46)+' '+(cy-32)+'" stroke="#8fa2b8" stroke-width="6" fill="none"/>';
+    s+=T.place(cx,cy,cR6-4,6,0,function(x,y,a){return T.rectA(x,y,7,13,3.5,'roll',a);});
+    s+=T.place(cx,cy,cR6+4,6,30,function(x,y,a){return T.rectA(x,y,6,11,3,'roll',a);});
+    s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" class="lbl" fill="#38bdf8">barrel rollers</text>';
+  }
+  else if(key==='tball'||key==='cylth'){
+    var cy1=30, cy2=92, by=61;
+    s='<rect x="30" y="'+(cy1-7)+'" width="140" height="14" rx="7" class="ro"/>'+
+      '<rect x="30" y="'+(cy2-7)+'" width="140" height="14" rx="7" class="ri"/>'+
+      '<rect x="'+(cx-7)+'" y="0" width="14" height="120" rx="3" stroke="#facc15" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>';
+    var i,a,x,y;
+    for(i=0;i<8;i++){ a=i*45*Math.PI/180; x=cx+62*Math.cos(a); y=by+20*Math.sin(a);
+      if(key==='tball') s+=T.ball(x,y,6.5,'ball');
+      else s+=T.rectA(x,y,15,4.5,2,'roll',a*180/Math.PI);
+    }
+    s+='<ellipse cx="'+cx+'" cy="'+by+'" rx="62" ry="20" class="cage"/>';
+    s+='<text x="'+cx+'" y="118" text-anchor="middle" class="lbl" fill="#38bdf8">axial load only</text>';
+  }
+  else if(key==='linear'){
+    s='<rect x="22" y="26" width="156" height="48" rx="8" class="ro" stroke-width="4"/>'+
+      '<rect x="36" y="40" width="128" height="20" rx="3" fill="#cfd8e0" stroke="#66798f" stroke-width="1.5"/>'+
+      T.ball(52,50,5,'ball')+T.ball(100,50,5,'ball')+T.ball(148,50,5,'ball');
+    s+='<text x="14" y="58" class="lbl" fill="#ff8c2e" font-size="14">◀</text>'+
+      '<text x="180" y="58" class="lbl" fill="#ff8c2e" font-size="14">▶</text>'+
+      '<text x="'+cx+'" y="92" text-anchor="middle" class="lbl" fill="#38bdf8">slides along shaft</text>';
+  }
+  else if(key==='insert'){
+    s='<rect x="34" y="12" width="132" height="116" rx="14" class="ro" stroke-width="5"/>'+
+      '<circle cx="'+cx+'" cy="70" r="40" class="ro" stroke-width="9"/>'+
+      '<circle cx="'+cx+'" cy="70" r="17" class="ri" stroke-width="9"/>'+
+      '<circle cx="'+cx+'" cy="70" r="11.5" class="bore"/>'+
+      T.place(cx,70,28,6,0,function(x,y,a){return T.ball(x,y,4.5,'ball');});
+    s+='<rect x="72" y="56" width="8" height="9" rx="2" fill="#ff8c2e"/><rect x="120" y="56" width="8" height="9" rx="2" fill="#ff8c2e"/>';
+    s+='<text x="'+cx+'" y="142" text-anchor="middle" class="lbl" fill="#38bdf8">setscrew lock · plugs into housing</text>';
+  }
+  else if(key==='crossed'){
+    var Ro7=60,Ri7=36,cR7=48;
+    s=T.radBase(cx,cy,Ro7,Ri7,30,cR7);
+    s+=T.place(cx,cy,cR7,8,0,function(x,y,a){return '<rect x="'+(x-3.5)+'" y="'+(y-3.5)+'" width="7" height="7" rx="1.5" transform="rotate('+a.toFixed(0)+','+x.toFixed(1)+','+y.toFixed(1)+')" class="'+(a/45%2<1?'roll':'seal')+'"/>';});
+    s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" class="lbl" fill="#38bdf8">rollers crossed 90°</text>';
+  }
+  else if(key==='slewing'){
+    s='<circle cx="'+cx+'" cy="70" r="58" class="ro" stroke-width="10"/>'+
+      '<circle cx="'+cx+'" cy="70" r="38" class="ri" stroke-width="10"/>'+
+      '<circle cx="'+cx+'" cy="70" r="32" class="bore"/>';
+    s+=T.place(cx,70,48,12,0,function(x,y,a){return T.ball(x,y,4.5,'ball');});
+    var i,a2;
+    for(i=0;i<4;i++){ a2=-90+i*90+22; s+='<circle cx="'+(cx+53*Math.cos(a2*Math.PI/180)).toFixed(1)+'" cy="'+(70-53*Math.sin(a2*Math.PI/180)).toFixed(1)+'" r="3" fill="none" stroke="#7f95b5" stroke-width="1.5"/>'; }
+    s+='<text x="'+cx+'" y="132" text-anchor="middle" class="lbl" fill="#38bdf8">giant ring · gear teeth optional</text>';
+  }
+  else if(key==='sleeve'){
+    s='<circle cx="'+cx+'" cy="70" r="52" stroke="url(#bronzeG)" stroke-width="14" fill="none"/>'+
+      '<circle cx="'+cx+'" cy="70" r="35" fill="#0d1b2e" stroke="#b08d57" stroke-width="1.5" stroke-dasharray="4 3"/>'+
+      '<circle cx="'+cx+'" cy="70" r="43" class="cage"/>'+
+      '<circle cx="'+(cx-43)+'" cy="70" r="2.6" fill="#facc15"/><circle cx="'+(cx+43)+'" cy="70" r="2.6" fill="#facc15"/>';
+    s+='<text x="'+cx+'" y="132" text-anchor="middle" class="lbl" fill="#b08d57">oil film · no rolling elements</text>';
+  }
+  else if(key==='sphplain'){
+    s='<rect x="16" y="34" width="108" height="62" rx="20" class="ro" stroke-width="5"/>'+
+      '<circle cx="70" cy="65" r="24" class="ri" stroke-width="6"/>'+
+      '<circle cx="70" cy="65" r="18" fill="#cfd8e0" stroke="#66798f" stroke-width="1.5"/>'+
+      '<rect x="112" y="57" width="62" height="16" rx="5" fill="#8fa2b8" stroke="#4a5a6e" stroke-width="1.2"/>';
+    s+='<line x1="130" y1="65" x2="166" y2="52" stroke="#ff8c2e" stroke-width="1.5" stroke-dasharray="4 3"/>'+
+      '<line x1="130" y1="65" x2="166" y2="78" stroke="#ff8c2e" stroke-width="1.5" stroke-dasharray="4 3"/>';
+    s+='<text x="'+cx+'" y="112" text-anchor="middle" class="lbl" fill="#38bdf8">swings like a ball joint</text>';
+  }
+  else if(key==='cam'){
+    s='<circle cx="62" cy="70" r="40" class="ro" stroke-width="10"/>'+
+      '<circle cx="62" cy="70" r="16" class="ri" stroke-width="10"/>'+
+      '<circle cx="62" cy="70" r="11" class="bore"/>'+
+      T.place(62,70,28,6,0,function(x,y,a){return T.ball(x,y,4.5,'ball');});
+    s+='<rect x="92" y="58" width="62" height="24" rx="4" fill="#8fa2b8" stroke="#4a5a6e" stroke-width="1.2"/>'+
+      '<rect x="104" y="52" width="18" height="36" rx="3" fill="#ff8c2e"/>'+
+      '<line x1="120" y1="52" x2="120" y2="88" stroke="#ff8c2e" stroke-width="2"/>'+
+      '<line x1="118" y1="56" x2="118" y2="84" stroke="#0d1b2e" stroke-width="1"/><line x1="122" y1="56" x2="122" y2="84" stroke="#0d1b2e" stroke-width="1"/>';
+    s+='<text x="140" y="106" text-anchor="middle" class="lbl" fill="#38bdf8">stud bolts into machine</text>';
+  }
+  else if(key==='airmag'){
+    s='<circle cx="'+cx+'" cy="70" r="52" class="ro" stroke-width="12"/>'+
+      '<circle cx="'+cx+'" cy="64" r="28" fill="none" stroke="#34d399" stroke-width="10" opacity=".9"/>'+
+      '<circle cx="'+cx+'" cy="64" r="22" class="bore"/>';
+    s+='<path d="M '+(cx-42)+' 84 q 6 -8 12 0 q 6 -8 12 0 q 6 -8 12 0" stroke="#38bdf8" stroke-width="1.6" fill="none" opacity=".8"/>';
+    s+='<path d="M '+(cx-42)+' 44 q 6 -8 12 0 q 6 -8 12 0 q 6 -8 12 0" stroke="#38bdf8" stroke-width="1.6" fill="none" opacity=".8"/>';
+    s+='<text x="'+cx+'" y="132" text-anchor="middle" class="lbl" fill="#34d399">no contact — zero friction</text>';
+  }
+  else { s=T.radBase(cx,cy,62,30,23.5,46)+T.place(cx,cy,46,6,0,function(x,y,a){return T.ball(x,y,8.5,'ball');}); }
+  return '<svg viewBox="'+vb+'" xmlns="http://www.w3.org/2000/svg">'+s+'</svg>';
+};
+
+/* ---------------- DECODER ---------------- */
+var D = {};
+D.SERIES = {'60':'extra light','62':'light','63':'medium','64':'heavy','68':'ultra light','69':'very light','618':'extra thin','619':'extra thin',
+ '511':'light thrust','512':'medium thrust','513':'heavy thrust','514':'extra heavy thrust',
+ '302':'light taper','303':'medium taper','313':'medium taper','320':'light taper','322':'medium taper','323':'heavy taper',
+ '222':'light spherical','223':'heavy spherical','230':'wide spherical','231':'wide spherical','232':'wide spherical',
+ '292':'light sph thrust','293':'medium sph thrust','294':'heavy sph thrust','811':'light roller thrust','812':'medium roller thrust',
+ '70':'extra light angular','72':'light angular','73':'medium angular','12':'light self-align','13':'medium self-align','22':'heavy self-align'};
+D.SUFFIX = {
+ '2RS':'rubber seal — BOTH sides','RS':'rubber seal — one side','2RZ':'low-friction seal — both sides','RZ':'low-friction seal — one side',
+ '2Z':'metal shield — both sides','Z':'metal shield — one side','ZZ':'metal shield — both sides',
+ 'C2':'reduced internal clearance','CN':'normal clearance','C3':'extra internal clearance (heat/speed)','C4':'extra-extra clearance',
+ 'N':'snap-ring groove in outer ring','NR':'snap ring fitted','N1':'one snap-ring groove',
+ 'K':'tapered bore 1:12','K30':'tapered bore 1:30',
+ 'E':'reinforced / stronger design','EC':'optimised internal design',
+ 'M':'machined brass cage','TN':'PA66 plastic cage','MA':'brass cage guided on outer ring',
+ 'P6':'precision class 6','P5':'precision class 5','P4':'precision class 4 (spindle grade)',
+ 'DB':'mounted back-to-back (pair)','DF':'mounted face-to-face (pair)','DT':'mounted tandem (pair)',
+ 'B':'contact angle 40°','AC':'contact angle 25°','C':'contact angle 15°',
+ 'W33':'lubrication groove + holes','HT':'high-temperature stabilised'};
+D.PREFIX = {
+ 'NU':'cylindrical roller, free axial slide','NJ':'cylindrical roller, one flange','NUP':'cylindrical roller, two flanges','N':'cylindrical roller',
+ 'RNA':'needle roller, no inner ring','NA':'needle roller, with inner ring','HK':'needle roller, drawn cup','NK':'needle roller, machined',
+ 'GE':'spherical plain bearing','GAC':'spherical plain, angular contact','GX':'spherical plain, heavy','SIB':'spherical plain, inch',
+ 'LM':'linear ball bushing','SCS':'linear bearing unit','SHF':'linear flange unit',
+ 'UC':'insert bearing (setscrew)','UB':'insert bearing (eccentric collar)','UCP':'pillow-block unit','UCF':'flanged unit','UCFL':'flanged oval unit',
+ 'MR':'miniature (inch-based)','F':'flanged miniature',
+ 'KR':'cam follower (ball)','CF':'cam follower (roller)','NUTR':'cam follower (full roller)',
+ 'XRB':'crossed roller bearing','CRB':'crossed roller bearing (thin)',
+ 'SL':'full-complement roller','NCF':'full-complement roller','BC':'full-complement ball',
+ 'SS':'stainless steel','V':'no cage (full complement)'};
+D.types = {1:'Self-aligning ball',2:'Spherical roller',3:'Tapered roller',5:'Thrust ball',6:'Deep-groove ball',7:'Angular-contact ball',8:'Cylindrical roller thrust'};
+D.pfxType = {
+ 'NU':'Cylindrical roller','NJ':'Cylindrical roller','NUP':'Cylindrical roller','N':'Cylindrical roller',
+ 'NA':'Needle roller','RNA':'Needle roller','HK':'Needle roller','NK':'Needle roller',
+ 'UC':'Insert / mounted unit','UB':'Insert / mounted unit','UCP':'Insert / mounted unit','UCF':'Insert / mounted unit','UCFL':'Insert / mounted unit',
+ 'KR':'Cam follower','CF':'Cam follower','NUTR':'Cam follower',
+ 'XRB':'Crossed roller','CRB':'Crossed roller',
+ 'SL':'Full-complement','NCF':'Full-complement','BC':'Full-complement',
+ 'MR':'Miniature bearing'};
+D.pfxTypeName = {
+ 'Cylindrical roller':'line contact — huge radial load',
+ 'Needle roller':'thin rollers — big load, tiny space',
+ 'Insert / mounted unit':'deep groove + setscrew lock, drops into a housing',
+ 'Cam follower':'roller on a threaded stud — the bearing IS the wheel',
+ 'Crossed roller':'rollers crossed 90° — loads from every direction',
+ 'Full-complement':'no cage — max load, lower speed',
+ 'Miniature bearing':'tiny bearing — bore under 10 mm'};
+D.pfxBore = {
+ 'NU':'std','NJ':'std','NUP':'std','N':'std','NA':'std','RNA':'std','UC':'std','UB':'std','UCP':'std','UCF':'std','UCFL':'std','SL':'std','NCF':'std','BC':'std',
+ 'HK':'first2','NK':'first2','KR':'direct','CF':'direct','NUTR':'direct',
+ 'XRB':'first2','CRB':'first2',
+ 'MR':'last'};
+D.boreOf = function(digits){
+  var n;
+  if(digits.length>=4){ n=parseInt(digits.slice(-2),10); if(n<=3) return [10,12,15,17][n]; return n*5; }
+  if(digits.length===3){ n=parseInt(digits.slice(-1),10); if(n===0) return 10; if(n===1) return 12; if(n===2) return 15; return n; }
+  if(digits.length===2){ n=parseInt(digits,10); if(n<=3) return [10,12,15,17][n]; return n*5; }
+  return null;
+};
+D.how = function(digits){
+  var n;
+  if(digits.length>=4){ n=parseInt(digits.slice(-2),10); return (n<=3)?('special code '+digits.slice(-2)+' = 10/12/15/17 mm'):('code '+digits.slice(-2)+' × 5 = '+n*5+' mm'); }
+  if(digits.length===3){ n=parseInt(digits.slice(-1),10);
+    if(n===0) return 'single 0 = 10 mm (like 620)';
+    if(n===1) return 'single 1 = 12 mm (like 621)';
+    if(n===2) return 'single 2 = 15 mm (like 622)';
+    return 'bore under 10 mm — the code IS the bore: '+n+' mm';
+  }
+  if(digits.length===2){ n=parseInt(digits,10); return (n<=3)?'special = 10/12/15/17 mm':(n*5)+' mm (×5 rule)'; }
+  return '—';
+};
+D.decode = function(raw){
+  var code=(raw||'').trim().toUpperCase().replace(/\s+/g,'');
+  var out={raw:raw||'',code:code,prefix:'',prefixName:'',type:'',typeName:'',series:'',seriesName:'',boreCode:'',bore:null,boreHow:'',suffixes:[],unknown:[],valid:false,warnings:[]};
+  if(!code){ return out; }
+  var m=code.match(/^([A-Z]+)?(\d+)(.*)$/);
+  if(!m){ out.warnings.push('I can\u2019t read that — try a code like 6205-2RS or NU205.'); return out; }
+  out.prefix=m[1]||''; var digits=m[2]; var rest=m[3]||'';
+  if(out.prefix){ out.prefixName=D.PREFIX[out.prefix]||''; if(!out.prefixName) out.unknown.push('prefix '+out.prefix); }
+  if(digits.length>0){
+    var handled=false, mode;
+    if(out.prefix==='LM'||out.prefix==='SCS'||out.prefix==='SHF'){
+      out.type='Linear ball bushing'; out.typeName='linear motion — slides along a shaft';
+      out.bore=parseInt(digits,10); out.boreHow='LM + number = shaft diameter in mm: '+out.bore+' mm shaft';
+      out.series='LM'; out.seriesName='standard linear series';
+      handled=true;
+    } else if(out.prefix==='GE'||out.prefix==='GAC'||out.prefix==='GX'||out.prefix==='SIB'){
+      out.type='Spherical plain bearing'; out.typeName='sliding ball-in-socket — tilts, no rolling';
+      out.bore=parseInt(digits,10); out.boreHow='GE + number = bore in mm: '+out.bore+' mm';
+      out.series='GE'; out.seriesName='spherical plain series';
+      if(rest.indexOf('ES')>=0) out.suffixes.push(['ES','steel-on-steel, greased']);
+      else if(rest.indexOf('C')>=0) out.suffixes.push(['C','maintenance-free liner']);
+      handled=true;
+    } else if(out.prefix && D.pfxBore[out.prefix]){
+      mode=D.pfxBore[out.prefix];
+      out.type=D.pfxType[out.prefix]; out.typeName=D.pfxTypeName[out.type]||'';
+      out.series=digits.charAt(0)+'x'; out.seriesName=(D.PREFIX[out.prefix]||out.prefix);
+      if(mode==='direct'){ out.bore=parseInt(digits,10); out.boreCode=digits; out.boreHow=out.prefix+' + number = size in mm: '+out.bore+' mm'; }
+      else if(mode==='last'){ out.bore=parseInt(digits.slice(-1),10); out.boreCode=digits.slice(-1); out.boreHow='MR miniature — last digit = bore in mm: '+out.bore+' mm'; }
+      else if(mode==='first2'){ out.bore=parseInt(digits.slice(0,2),10); out.boreCode=digits.slice(0,2); out.boreHow=out.prefix+' + first two digits = ring size: '+out.bore+' mm'; }
+      else { var n2=parseInt(digits.slice(-2),10); out.boreCode=digits.slice(-2);
+        if(n2<=3){ out.bore=[10,12,15,17][n2]; out.boreHow='special code '+out.boreCode+' = 10/12/15/17 mm'; }
+        else { out.bore=n2*5; out.boreHow='last two digits '+out.boreCode+' × 5 = '+out.bore+' mm'; }
+      }
+    } else {
+      var d0=digits.charAt(0);
+      var tkey=parseInt(d0,10);
+      out.type=D.types[tkey]||'Unknown type';
+      if(!D.types[tkey]) out.unknown.push('type digit '+d0);
+      if(digits.length>=4){
+        out.series=digits.slice(1,3); out.boreCode=digits.slice(-2);
+        var sname=D.SERIES[out.series]||'';
+        if(out.series.charAt(1)==='0') sname='width 0 · diameter '+out.series.charAt(0)+' — '+(D.SERIES[out.series]||'see table');
+        out.seriesName=sname||('series '+out.series);
+      } else {
+        out.series=digits.slice(0,2); out.boreCode=digits.slice(-1);
+        out.seriesName=(D.SERIES[digits.slice(0,2)]||'miniature/3-digit series')+' (3-digit code)';
+      }
+      out.bore=D.boreOf(digits);
+      out.boreHow=D.how(digits);
+    }
+    var suf='';
+    if(rest && !handled){ suf=rest.replace(/^[-/]+/,''); }
+    var i,k;
+    for(i=0;i<D.SUFLIST.length;i++){
+      k=D.SUFLIST[i];
+      if(suf.indexOf(k)===0){ out.suffixes.push([k,D.SUFFIX[k]]); suf=suf.slice(k.length).replace(/^[-/]+/,''); i=-1; }
+    }
+    if(suf.length>0){
+      var parts=suf.match(/[A-Z]+[0-9]*/g)||[suf];
+      for(i=0;i<parts.length;i++){
+        var p=parts[i];
+        if(D.SUFFIX[p]) out.suffixes.push([p,D.SUFFIX[p]]);
+        else out.unknown.push('suffix "'+p+'"');
+      }
+    }
+  }
+  out.valid=(out.type!=='Unknown type'||out.prefixName!=='')&&(out.bore!==null||out.typeName!=='');
+  return out;
+};
+D.SUFLIST = ['2RS','2RZ','2Z','ZZ','C3','C2','C4','CN','NR','N1','N','K30','K','W33','HT','P6','P5','P4','DB','DF','DT','B','AC','C','E','EC','M','TN','MA','RS','RZ','Z','V'];
+D.live = function(){ D.render(D.decode(document.getElementById('code').value)); };
+D.set = function(c){ document.getElementById('code').value=c; D.render(D.decode(c)); };
+D.rand = function(){
+  var pool=['6205-2RS','6308','608-2Z','6902','NU205','NJ305','30205','32008','22208','22312','29412','51105','81105','UC205','UCP205','GE20ES','LM8UU','MR63','623-2Z','7205-B','1205','KR16','XRB6012','6205-2RS/C3'];
+  D.set(pool[Math.floor(Math.random()*pool.length)]);
+};
+D.render = function(t){
+  var el=document.getElementById('out'), h='';
+  if(!t.code){ el.innerHTML='<div class="empty">Start typing a code above… e.g. <b>6205-2RS</b> → the decoder will split it into TYPE · SERIES · BORE · SUFFIX.</div>'; return; }
+  h+='<div class="segs">';
+  if(t.prefix){ h+='<div class="seg p"><span class="big">'+t.prefix+'</span><span class="tag">PREFIX</span><span class="mean">'+(t.prefixName||'unknown')+'</span></div>'; }
+  var digits=t.code.replace(/^[A-Z]+/,'').replace(/[^0-9].*$/,'');
+  var rest=t.code.replace(/^[A-Z]+/,'').replace(/^[0-9]+/,'');
+  if(t.type && !(t.prefix && D.pfxType[t.prefix])){ h+='<div class="seg t"><span class="big">'+digits.charAt(0)+'</span><span class="tag">TYPE</span><span class="mean">'+(t.typeName||t.type)+'</span></div>'; }
+  if(t.series){ h+='<div class="seg s"><span class="big">'+t.series+'</span><span class="tag">SERIES</span><span class="mean">'+(t.seriesName||'')+'</span></div>'; }
+  if(t.boreCode){ h+='<div class="seg b"><span class="big">'+t.boreCode+'</span><span class="tag">BORE CODE</span><span class="mean">'+(t.boreHow)+'</span></div>'; }
+  if(rest){ h+='<div class="seg sf"><span class="big" style="font-size:26px">'+rest+'</span><span class="tag">SUFFIX</span><span class="mean">'+(t.suffixes.map(function(s){return s[0]+' = '+s[1];}).join(' · ')||'see below')+'</span></div>'; }
+  h+='</div>';
+  h+='<div class="summary">';
+  h+='<div class="sumbox"><div class="k">BEARING TYPE</div><div class="v">'+t.type+'</div></div>';
+  h+='<div class="sumbox"><div class="k">SERIES</div><div class="v">'+(t.seriesName||'—')+'</div></div>';
+  h+='<div class="sumbox"><div class="k">BORE (SHAFT HOLE)</div><div class="v">'+(t.bore!==null?t.bore+' mm':'—')+'</div></div>';
+  h+='<div class="sumbox"><div class="k">SUFFIXES</div><div class="v">'+(t.suffixes.length?t.suffixes.map(function(s){return s[0];}).join(', '):'none')+'</div></div>';
+  h+='</div>';
+  if(t.suffixes.length){ h+='<div class="warn"><b>Suffix meanings:</b> '+t.suffixes.map(function(s){return '<b class="mono" style="color:#facc15">'+s[0]+'</b> = '+s[1];}).join('<br>')+'</div>'; }
+  if(t.unknown.length){ h+='<div class="warn">⚠️ Unrecognised: '+t.unknown.join(', ')+' — could be a maker-specific code (SKF, NSK, NTN all add their own). Check the catalogue.</div>'; }
+  if(t.warnings.length){ h+='<div class="warn">'+t.warnings.join('<br>')+'</div>'; }
+  el.innerHTML=h;
+};
+
+/* ---------------- VIEW ---------------- */
+var V = {};
+V.cat='all'; V.q='';
+V.loadLabel = {rad:'RADIAL',ax:'AXIAL',both:'RADIAL + AXIAL',spec:'SPECIAL'};
+V.onTab = function(){
+  if(document.getElementById('panel-builder').checked && !V.built){ V.built=true; N.buildInit(); }
+  if(document.getElementById('panel-dims').checked && !V.dims){ V.dims=true; N.dimSort('code'); }
+  if(document.getElementById('panel-mount').checked && !V.mount){ V.mount=true; N.mountInit(); }
+  if(document.getElementById('panel-fail').checked && !V.fail){ V.fail=true; N.failInit(); }
+  if(document.getElementById('panel-quiz').checked && !Q.started){ Q.start(); }
+  if(document.getElementById('panel-decode').checked && !document.getElementById('code').value){ D.render(D.decode('')); }
+};
+V.renderChips = function(){
+  var h='',i;
+  for(i=0;i<CATS.length;i++){ h+='<button class="chip'+(CATS[i][0]===V.cat?' on':'')+'" onclick="V.setCat(\''+CATS[i][0]+'\')">'+CATS[i][1]+'</button>'; }
+  document.getElementById('chips').innerHTML=h;
+};
+V.setCat = function(c){ V.cat=c; V.renderChips(); V.applyFilter(); };
+V.applyFilter = function(){
+  V.q=(document.getElementById('q').value||'').toLowerCase();
+  var h='',i,b,hit;
+  for(i=0;i<B.length;i++){ b=B[i];
+    if(V.cat!=='all'&&b.cat!==V.cat) continue;
+    if(V.q){ hit=(b.name+' '+b.code+' '+b.desc+' '+b.uses.join(' ')).toLowerCase().indexOf(V.q)>=0; if(!hit) continue; }
+    h+='<button class="card" onclick="V.open(\''+b.id+'\')">'+T.draw(b.id,false)+
+       '<div class="nm">'+b.name+'</div><div class="cd">'+b.code+'</div>'+
+       '<div class="ds">'+b.desc.slice(0,110)+'…</div>'+
+       '<span class="ld '+b.load+'">'+V.loadLabel[b.load]+'</span></button>';
+  }
+  document.getElementById('cards').innerHTML=h;
+  document.getElementById('nores').classList.toggle('hidden',h!=='');
+};
+V.open = function(id){
+  var b=null,i;
+  for(i=0;i<B.length;i++){ if(B[i].id===id){ b=B[i]; break; } }
+  if(!b) return;
+  var h='';
+  h+='<div class="mtop">'+T.draw(b.id,true)+'<div class="mhead">'+
+     '<h2>'+b.name+'</h2><div class="cd">'+b.code+'</div>'+
+     '<div style="margin-top:8px"><span class="ld '+b.load+'">'+V.loadLabel[b.load]+'</span></div>'+
+     '<div class="desc">'+b.desc+'</div></div></div>';
+  h+='<div class="msec"><h4>Key Features</h4><ul class="lst">';
+  for(i=0;i<b.feat.length;i++) h+='<li>'+b.feat[i]+'</li>';
+  h+='</ul></div>';
+  h+='<div class="msec"><div class="cols"><div><h4>Typical Uses</h4><ul class="lst">';
+  for(i=0;i<b.uses.length;i++) h+='<li>'+b.uses[i]+'</li>';
+  h+='</ul></div><div><h4>Example Codes</h4>';
+  for(i=0;i<b.ex.length;i++) h+='<div class="ex">'+b.ex[i][0]+' <span>— '+b.ex[i][1]+'</span></div>';
+  h+='<h4 style="margin-top:14px">Variants</h4><ul class="lst">';
+  for(i=0;i<b.vars.length;i++) h+='<li>'+b.vars[i]+'</li>';
+  h+='</ul></div></div></div>';
+  h+='<div class="msec"><h4>Rated</h4><div class="rates">'+
+     '<div class="rate"><div class="k">SPEED</div><div class="v">'+b.sp+'</div></div>'+
+     '<div class="rate"><div class="k">LOAD</div><div class="v">'+b.ld+'</div></div>'+
+     '<div class="rate"><div class="k">MISALIGNMENT</div><div class="v">'+b.ms+'</div></div></div></div>';
+  h+='<div class="msec"><div class="cols"><div><h4>Pros</h4><ul class="lst">';
+  for(i=0;i<b.pros.length;i++) h+='<li>'+b.pros[i]+'</li>';
+  h+='</ul></div><div><h4>Cons</h4><ul class="lst">';
+  for(i=0;i<b.cons.length;i++) h+='<li>'+b.cons[i]+'</li>';
+  h+='</ul></div></div></div>';
+  h+='<div class="factbox">💡 <b>Did you know?</b> '+b.fact+'</div>';
+  document.getElementById('mbody').innerHTML=h;
+  document.getElementById('modal').classList.add('open');
+};
+V.close = function(){ document.getElementById('modal').classList.remove('open'); };
+
+/* ---------------- QUIZ ---------------- */
+var Q = {};
+Q.started=false; Q.cur=0; Q.questions=[]; Q.score=0; Q.total=0;
+Q.pick = function(arr){ return arr[Math.floor(Math.random()*arr.length)]; };
+Q.shuffle = function(a){ var i,j,t; for(i=a.length-1;i>0;i--){ j=Math.floor(Math.random()*(i+1)); t=a[i];a[i]=a[j];a[j]=t; } return a; };
+Q.genBore = function(){
+  var b=Q.pick(B), ex=Q.pick(b.ex), code=ex[0].replace(/[^A-Z0-9]/g,'').replace(/^[A-Z]+/,''), digits=code.replace(/[^0-9]/g,'');
+  if(!digits||digits.length<2) return null;
+  var correct=D.boreOf(digits); if(correct===null) return null;
+  var wrongs=[correct+5,correct-5,correct*2,correct+2,correct-2,Math.round(correct/5)];
+  var opts={}; opts[''+correct]=correct+' mm — correct!';
+  var ws=[],i,o;
+  for(i=0;i<wrongs.length;i++){ o=''+wrongs[i]; if(o!==''+correct&&wrongs[i]>0&&!ws[o]){ opts[o]=wrongs[i]+' mm'; ws[o]=1; } }
+  var keys=Object.keys(opts);
+  while(keys.length>4){ keys.splice(Math.floor(Math.random()*keys.length),1); }
+  if(keys.indexOf(''+correct)<0){ keys[Math.floor(Math.random()*keys.length)]=''+correct; }
+  keys=Q.shuffle(keys);
+  return {q:'What is the <b>bore</b> (shaft-hole size) of <span class="mono">'+code+'</span>?',
+    opts:keys.map(function(k){return {t:opts[k],ok:k===''+correct};}),
+    expl:'<span class="mono">'+code+'</span>: last two digits '+code.slice(-2)+' → '+D.how(digits)+'. So bore = <b>'+correct+' mm</b>.'};
+};
+Q.genType = function(){
+  var b=Q.pick(B), ex=Q.pick(b.ex), code=ex[0].replace(/[^A-Z0-9]/g,'');
+  var wrongs=[],i,cands;
+  cands=B.slice(); Q.shuffle(cands);
+  for(i=0;i<cands.length&&wrongs.length<3;i++){ if(cands[i].id!==b.id&&wrongs.indexOf(cands[i].name)<0) wrongs.push(cands[i].name); }
+  var opts=[{t:b.name,ok:true}];
+  for(i=0;i<3;i++) opts.push({t:wrongs[i],ok:false});
+  opts=Q.shuffle(opts);
+  return {q:'What <b>type</b> of bearing is <span class="mono">'+code+'</span>?',
+    opts:opts,
+    expl:'<span class="mono">'+code+'</span> → <b>'+b.name+'</b> ('+b.code+'). '+b.desc.slice(0,140)+'…'};
+};
+Q.genSeries = function(){
+  var pairs=[['6205','62 = light series — the everyday choice'],['6308','63 = medium series — thicker rings, more load'],['6406','64 = heavy series — biggest rings of the 6-series'],['6004','60 = extra light series — slim and light']];
+  var p=Q.pick(pairs), code=p[0];
+  var opts=[{t:'62 = light',ok:p[1].indexOf('62')===0},{t:'63 = medium',ok:p[1].indexOf('63')===0},{t:'64 = heavy',ok:p[1].indexOf('64')===0},{t:'60 = extra light',ok:p[1].indexOf('60')===0}];
+  return {q:'In <span class="mono">'+code+'</span>, what does the middle digit mean?',
+    opts:opts, expl:p[1]+' — bigger series = thicker rings + bigger balls = stronger.'};
+};
+Q.genSuffix = function(){
+  var pairs=[['6205-2RS','2RS = rubber seal on both sides — keeps grease in, dirt out'],['6308-2Z','2Z = metal shield on both sides — contact-free, faster'],['6205-2RS/C3','C3 = extra internal clearance — room for heat expansion'],['6205NR','NR = snap ring fitted — clips into the housing'],['6205-2RS P5','P5 = precision class 5 — tighter tolerances']];
+  var p=Q.pick(pairs);
+  var parts=p[0].split('-'); var suf=(parts[1]||'').split('/')[0];
+  var opts=[{t:p[1].split(' = ')[0],ok:true},{t:'Bigger bore',ok:false},{t:'Heavier series',ok:false},{t:'Tapered shaft',ok:false}];
+  opts=Q.shuffle(opts);
+  return {q:'What does the suffix <span class="mono">'+suf+'</span> on <span class="mono">'+p[0]+'</span> mean?',
+    opts:opts, expl:p[1]+'.'};
+};
+Q.newRound = function(){
+  Q.questions=[]; Q.cur=0; Q.score=0; Q.total=0;
+  var gens=[Q.genBore,Q.genBore,Q.genType,Q.genType,Q.genSeries,Q.genSuffix,Q.genType,Q.genBore];
+  var i,q;
+  for(i=0;i<gens.length;i++){ q=gens[i](); if(q) Q.questions.push(q); }
+  Q.questions=Q.shuffle(Q.questions);
+  Q.total=Q.questions.length;
+};
+Q.start = function(){
+  Q.started=true; Q.newRound();
+  document.getElementById('quizbox').innerHTML=
+    '<div class="qstart" style="text-align:center"><button class="qstart" onclick="Q.ask()">▶ START '+Q.total+' QUESTIONS</button></div>';
+};
+Q.ask = function(){
+  if(Q.cur>=Q.questions.length){ Q.end(); return; }
+  var q=Q.questions[Q.cur], h='';
+  h+='<div class="qtop"><span class="n">QUESTION '+(Q.cur+1)+' / '+Q.total+'</span><span class="score">SCORE: '+Q.score+'</span></div>';
+  h+='<div class="q">'+q.q+'</div><div class="opts">';
+  var i;
+  for(i=0;i<q.opts.length;i++){
+    h+='<button class="opt" id="opt'+i+'" onclick="Q.answer(this,'+i+')">'+q.opts[i].t+'</button>';
+  }
+  h+='</div><div class="expl" id="expl"></div>';
+  h+='<button class="qnext hidden" id="nxt" onclick="Q.next()">NEXT →</button>';
+  document.getElementById('quizbox').innerHTML=h;
+};
+Q.answer = function(btn,idx){
+  var q=Q.questions[Q.cur],i;
+  if(btn.disabled) return;
+  for(i=0;i<q.opts.length;i++){ document.getElementById('opt'+i).disabled=true; }
+  var chosen=q.opts[idx];
+  if(chosen.ok){ btn.classList.add('correct'); Q.score++; }
+  else{ btn.classList.add('wrong'); for(i=0;i<q.opts.length;i++){ if(q.opts[i].ok) document.getElementById('opt'+i).classList.add('correct'); } }
+  Q.total=Q.total||1;
+  document.getElementById('expl').innerHTML=chosen.ok?'✅ <b>Correct!</b> ':('❌ <b>Not quite.</b> ')+q.expl;
+  document.getElementById('expl').classList.add('show');
+  document.getElementById('nxt').classList.remove('hidden');
+};
+Q.next = function(){ Q.cur++; Q.ask(); };
+Q.end = function(){
+  var pct=Math.round(Q.score/Q.total*100), msg = pct>=90?'Bearing Master! 🏆':(pct>=70?'Solid — you\u2019re getting the hang of it! 🔧':(pct>=50?'Good start — study the decoder tab and retry. 📖':'Read through the Browse tab first, then come back. 💪'));
+  var h='<div class="qend"><div class="big">'+Q.score+' / '+Q.total+'</div><div class="sub">'+msg+'</div>'+
+    '<button class="qstart" onclick="Q.start()">↻ TRY AGAIN</button></div><div class="review" id="rev"></div>';
+  document.getElementById('quizbox').innerHTML=h;
+  var r='',i,q,wrong=[];
+  for(i=0;i<Q.questions.length;i++){ q=Q.questions[i]; if(!q.got) wrong.push(q); }
+  if(wrong.length){
+    r+='<h4 style="color:var(--orange);letter-spacing:2px;margin-bottom:10px">REVIEW</h4>';
+    for(i=0;i<wrong.length;i++){
+      r+='<div class="rev"><span class="no">✗</span> '+wrong[i].q.replace(/<[^>]+>/g,'')+'<br><span class="ok">Answer:</span> '+wrong[i].expl.replace(/<[^>]+>/g,'')+'</div>';
+    }
+  }
+  document.getElementById('rev').innerHTML=r;
+};
+
+/* ---------------- NEW TOOLS (N) ---------------- */
+var N = {};
+N.boreCode = function(bore){
+  if(bore===10) return '00'; if(bore===12) return '01'; if(bore===15) return '02'; if(bore===17) return '03';
+  if(bore<10) return ''+bore;
+  if(bore%5!==0) return null;
+  var v=bore/5;
+  return v<10 ? '0'+v : ''+v;
+};
+N.FAM=[
+ {k:'6', n:'Deep-groove ball', ser:['60','62','63','64','68','69'], bmin:0},
+ {k:'7', n:'Angular-contact ball', ser:['70','72','73'], bmin:10},
+ {k:'1', n:'Self-aligning ball', ser:['12','13'], bmin:10},
+ {k:'3', n:'Tapered roller', ser:['302','303','320'], bmin:10},
+ {k:'2', n:'Spherical roller', ser:['222','223'], bmin:10},
+ {k:'5', n:'Thrust ball', ser:['511','512','513'], bmin:10},
+ {k:'8', n:'Cyl. roller thrust', ser:['811','812'], bmin:10},
+ {k:'N', n:'Cylindrical roller (NU)', ser:['NU2','NU3'], bmin:10},
+ {k:'NA', n:'Needle roller (NA)', ser:['NA49','NA48'], bmin:10},
+ {k:'UC', n:'Insert bearing', ser:['UC2','UC3'], bmin:10},
+ {k:'GE', n:'Spherical plain', ser:['GE'], bmin:5},
+ {k:'LM', n:'Linear bushing', ser:['LM'], bmin:4}
+];
+N.BORES=[3,4,5,6,8,10,12,15,17,20,25,30,35,40,45,50,60,80,100];
+N.SUFS=['','2RS','2Z','C3','NR','P5','K','E','M'];
+N.buildCode = function(fk, ser, bore, suf){
+  var i,f=null;
+  for(i=0;i<N.FAM.length;i++){ if(N.FAM[i].k===fk){ f=N.FAM[i]; break; } }
+  if(!f) return null;
+  if(bore<f.bmin) return null;
+  var bc=N.boreCode(bore);
+  if(bc===null) return null;
+  if(fk==='GE'||fk==='LM'){ var c=fk+bore; if(fk==='LM') c+='UU'; else c+=(suf||'ES'); return c; }
+  var code=ser+bc;
+  if(fk==='LM') code+='UU';
+  if(fk==='GE') code+=(suf||'ES');
+  else if(suf && fk!=='LM') code+='-'+suf;
+  return code;
+};
+N.buiSeries = function(){
+  var fk=document.getElementById('bfam').value, i,f=null;
+  for(i=0;i<N.FAM.length;i++){ if(N.FAM[i].k===fk) f=N.FAM[i]; }
+  if(!f) return;
+  var hs='';
+  for(i=0;i<f.ser.length;i++) hs+='<option value="'+f.ser[i]+'">'+f.ser[i]+'</option>';
+  document.getElementById('bser').innerHTML=hs;
+  var hb='';
+  for(i=0;i<N.BORES.length;i++){ if(N.BORES[i]>=f.bmin) hb+='<option value="'+N.BORES[i]+'">'+N.BORES[i]+' mm</option>'; }
+  document.getElementById('bbore').innerHTML=hb;
+  var sfs=(fk==='GE')?['ES','C']:N.SUFS, hsuf='';
+  for(i=0;i<sfs.length;i++) hsuf+='<option value="'+sfs[i]+'">'+(sfs[i]===''?'(none)':sfs[i])+'</option>';
+  document.getElementById('bsuf').innerHTML=hsuf;
+  N.bui();
+};
+N.bui = function(){
+  var fk=document.getElementById('bfam').value;
+  var ser=document.getElementById('bser').value;
+  var bore=parseInt(document.getElementById('bbore').value,10);
+  var suf=document.getElementById('bsuf').value;
+  var code=N.buildCode(fk,ser,bore,suf);
+  var el=document.getElementById('bcode');
+  if(!code){ el.textContent='—'; return; }
+  el.textContent=code;
+  var t=D.decode(code);
+  var out=document.getElementById('bout');
+  out.innerHTML='<div class="callout blue"><b>Your code:</b> <span class="mono">'+code+'</span> — a '+t.type+(t.bore!==null?(' with a <b>'+t.bore+' mm</b> bore'):'')+'. Type it into the Decoder tab to check it.</div>';
+  D.render(t);
+};
+N.buildInit = function(){
+  var h='',i;
+  for(i=0;i<N.FAM.length;i++) h+='<option value="'+N.FAM[i].k+'">'+N.FAM[i].n+'</option>';
+  document.getElementById('bfam').innerHTML=h;
+  N.buiSeries();
+  var g='<tr><th>ISO</th><th>ABEC</th><th>Level</th><th>Typical use</th><th>Price</th></tr>',j;
+  for(j=0;j<GRADES.length;j++) g+='<tr><td class="cd">'+GRADES[j][0]+'</td><td class="cd">'+GRADES[j][1]+'</td><td>'+GRADES[j][2]+'</td><td>'+GRADES[j][3]+'</td><td>'+GRADES[j][4]+'</td></tr>';
+  document.getElementById('gradetab').innerHTML=g;
+};
+N.dimSort = function(key){
+  N.dkey=key;
+  var idx=(key==='code')?0:(key==='bore'?1:(key==='od'?2:3));
+  var arr=DIMS.slice();
+  arr.sort(function(a,b){
+    var va=a[idx], vb=b[idx];
+    if(typeof va==='string') return va<vb?-1:1;
+    return va-vb;
+  });
+  N.darr=arr;
+  document.getElementById('dsortcode').className='chip';
+  document.getElementById('dsortbore').className='chip';
+  document.getElementById('dsortod').className='chip';
+  document.getElementById('dsort'+key).className='chip on';
+  N.dimRender();
+};
+N.dimFilter = function(){
+  var q=(document.getElementById('dq').value||'').toUpperCase();
+  if(!q){ N.darr=null; }
+  else { N.darr=[]; var i; for(i=0;i<DIMS.length;i++){ if(DIMS[i][0].toUpperCase().indexOf(q)>=0||(''+DIMS[i][1]).indexOf(q)>=0) N.darr.push(DIMS[i]); } }
+  N.dimRender();
+};
+N.dimRender = function(){
+  var h='<tr><th onclick="N.dimSort(\'code\')">CODE</th><th onclick="N.dimSort(\'bore\')">BORE d (mm)</th><th onclick="N.dimSort(\'od\')">OD D (mm)</th><th onclick="N.dimSort(\'w\')">WIDTH B (mm)</th><th>LOAD C (kN)</th><th>LOAD Co (kN)</th></tr>',i,d;
+  var arr=N.darr||DIMS;
+  for(i=0;i<arr.length;i++){
+    d=arr[i];
+    h+='<tr onclick="N.dimPick('+i+')" id="dimrow'+i+'"><td class="cd">'+d[0]+'</td><td>'+d[1]+'</td><td>'+d[2]+'</td><td>'+d[3]+'</td><td class="muted">'+(d[4]?d[4]:'—')+'</td><td class="muted">'+(d[5]?d[5]:'—')+'</td></tr>';
+  }
+  document.getElementById('dimtab').innerHTML=h;
+};
+N.dimPick = function(i){
+  var d=(N.darr||DIMS)[i];
+  document.getElementById('lc').value=d[4]?Math.round(d[4]*1000):'';
+  document.getElementById('lp').value='';
+  document.getElementById('lres').innerHTML='<b>'+d[0]+'</b> loaded — d = '+d[1]+' mm, D = '+d[2]+' mm, B = '+d[3]+' mm, C = '+(d[4]?d[4]+' kN':'n/a')+'. Now set the actual load P and speed, then read the life.';
+};
+N.life = function(){
+  var C=parseFloat(document.getElementById('lc').value)||0;
+  var P=parseFloat(document.getElementById('lp').value)||0;
+  var n=parseFloat(document.getElementById('ln').value)||0;
+  var ball=document.getElementById('lk').checked;
+  var el=document.getElementById('lres');
+  if(!C||!P){ el.innerHTML='Enter the load rating C (table above → click a row) and the actual load P.'; return; }
+  if(P>=C){ el.innerHTML='<span class="big">⚠️ P ≥ C</span><br>The applied load is at or above the rating — the bearing won\u2019t last long. Pick a bigger bearing (higher C).'; return; }
+  var r=N.lifeCalc(C,P,n,ball);
+  var h='<span class="big">L10 ≈ '+r.rev+' million revolutions</span>'+(r.h!==null?('<br>At '+n+' rpm that\u2019s roughly <b>'+r.h+' hours</b> — about '+r.days+' days of continuous running.'):'');
+  h+='<br><span style="font-size:11px;color:var(--dim2)">L10 means 90% of a batch of identical bearings will reach or exceed this life. Formula: L10 = (C/P)^'+(ball?3:'3.33')+' × 10⁶ revolutions.</span>';
+  el.innerHTML=h;
+};
+N.lifeCalc = function(C,P,n,ball){
+  var exp=ball?3:10/3;
+  var rev=Math.pow(C/P,exp);
+  var h=n>0?rev*1e6/(60*n):null;
+  return {rev:rev.toFixed(1), h:h?Math.round(h):null, days:h?Math.round(h/24):0};
+};
+N.fit = function(){
+  var sz=parseInt(document.getElementById('fsize').value,10);
+  var range=sz<=17?'10-18':(sz<=30?'18-30':(sz<=50?'30-50':'50-80'));
+  var f=FITS[range];
+  var sh=f.shaft, ho=f.hole;
+  var h='<div class="rowlabel">SHAFT FITS (µm — positive = bigger than nominal)</div>';
+  h+='<div class="fitbox rec"><div class="k">SHAFT p6 ★</div><div class="v">+'+sh.p6[0]+' / +'+sh.p6[1]+'</div><div class="d">interference press — rotating inner ring</div></div>';
+  h+='<div class="fitbox"><div class="k">SHAFT j6</div><div class="v">+'+(sh.j6[0]>=0?sh.j6[0]:'')+' / '+sh.j6[1]+'</div><div class="d">light press — normal loads</div></div>';
+  h+='<div class="fitbox"><div class="k">SHAFT h6</div><div class="v">'+sh.h6[0]+' / '+sh.h6[1]+'</div><div class="d">slip fit — slides on</div></div>';
+  h+='<div class="fitbox"><div class="k">SHAFT g6</div><div class="v">'+sh.g6[0]+' / '+sh.g6[1]+'</div><div class="d">slide fit — free axial movement</div></div>';
+  document.getElementById('fitshaft').innerHTML=h;
+  h='<div class="rowlabel">HOUSING FITS (µm)</div>';
+  h+='<div class="fitbox rec"><div class="k">HOUSING H7 ★</div><div class="v">+'+ho.H7[0]+' / '+ho.H7[1]+'</div><div class="d">slip fit — outer ring stationary</div></div>';
+  h+='<div class="fitbox"><div class="k">HOUSING N7</div><div class="v">'+ho.N7[0]+' / '+ho.N7[1]+'</div><div class="d">light press — outer ring rotating</div></div>';
+  h+='<div class="fitbox"><div class="k">HOUSING P7</div><div class="v">'+ho.P7[0]+' / '+ho.P7[1]+'</div><div class="d">press fit — heavy outer-ring rotation</div></div>';
+  h+='<div class="fitbox"><div class="k">HOUSING J7</div><div class="v">'+(ho.J7[0]>=0?'+':'')+ho.J7[0]+' / '+ho.J7[1]+'</div><div class="d">transition — light loads</div></div>';
+  document.getElementById('fithole').innerHTML=h;
+  var note=(sz>80)?' (values are for the 50–80 mm range — approximate)':'';
+  document.getElementById('fitrec').innerHTML='<b>For a '+sz+' mm bore'+(sz>80?'':'')+' normal machine:</b> shaft <b>p6</b> (+'+sh.p6[1]+' to +'+sh.p6[0]+' µm interference) + housing <b>H7</b> (0 to +'+ho.H7[0]+' µm clearance)'+note+'. Outer ring spinning instead? Swap to housing <b>P7/N7</b> and shaft <b>h6</b>. Typical ISO 286 values.';
+};
+N.mountInit = function(){
+  var h='',i;
+  for(i=0;i<N.BORES.length;i++){ if(N.BORES[i]>=10) h+='<option value="'+N.BORES[i]+'">'+N.BORES[i]+' mm bore</option>'; }
+  document.getElementById('fsize').innerHTML=h;
+  N.fit();
+};
+N.failInit = function(){
+  var h='',i,f;
+  for(i=0;i<FAILS.length;i++){
+    f=FAILS[i];
+    h+='<div class="tcard fcard '+(f.sev==='bad'?'bad':'mid')+'"><div class="ic">'+f.i+'</div><h4>'+f.n+'</h4>'+
+       '<p><b>Look:</b> '+f.look+'</p><p><b>Cause:</b> '+f.why+'</p><p><b>Fix:</b> '+f.fx+'</p></div>';
+  }
+  document.getElementById('failgrid').innerHTML=h;
+};
+
+/* ---------------- INIT + SELF-TEST ---------------- */
+(function(){
+  var i;
+  V.renderChips(); V.applyFilter();
+  document.getElementById('cnt').textContent=B.length;
+  D.render(D.decode(''));
+  /* pre-render hidden tabs (also makes first tab switch instant) */
+  V.built=true; N.buildInit();
+  V.dims=true; N.dimSort('code');
+  V.mount=true; N.mountInit();
+  V.fail=true; N.failInit();
+  /* self-test */
+  var fails=[];
+  var chk=function(code,bore,type){ var t=D.decode(code); if(t.bore!==bore) fails.push(code+' bore expected '+bore+' got '+t.bore); if(type&&t.type!==type) fails.push(code+' type expected '+type+' got '+t.type); };
+  chk('6205-2RS',25,'Deep-groove ball');
+  chk('6308',40,'Deep-groove ball');
+  chk('608',8,'Deep-groove ball');
+  chk('623',3,'Deep-groove ball');
+  chk('620',10,'Deep-groove ball');
+  chk('621',12,'Deep-groove ball');
+  chk('622',15,'Deep-groove ball');
+  chk('609',9,'Deep-groove ball');
+  chk('6000',10,'Deep-groove ball');
+  chk('6004',20,'Deep-groove ball');
+  chk('6902',15,'Deep-groove ball');
+  chk('7005',25,'Angular-contact ball');
+  chk('1205',25,'Self-aligning ball');
+  chk('51105',25,'Thrust ball');
+  chk('30205',25,'Tapered roller');
+  chk('22208',40,'Spherical roller');
+  chk('29412',60,'Spherical roller');
+  chk('81105',25,'Cylindrical roller thrust');
+  chk('NU205',25,'Cylindrical roller');
+  chk('UC205',25,'Insert / mounted unit');
+  chk('GE20ES',20,'Spherical plain bearing');
+  chk('LM8UU',8,'Linear ball bushing');
+  chk('MR63',3,'Miniature bearing');
+  chk('KR16',16,'Cam follower');
+  chk('HK2020',20,'Needle roller');
+  var t=D.decode('6205-2RS');
+  if(t.suffixes.length!==1||t.suffixes[0][0]!=='2RS') fails.push('6205 suffix parse');
+  t=D.decode('NU205');
+  if(t.prefix!=='NU'||t.prefixName.indexOf('cylindrical')<0) fails.push('NU prefix parse');
+  t=D.decode('6205-2RS/C3');
+  if(t.suffixes.length!==2) fails.push('multi-suffix parse');
+  if(B.length<20) fails.push('bearing count too low: '+B.length);
+  var svgOK=true;
+  for(i=0;i<B.length;i++){ if(T.draw(B[i].id,false).indexOf('<svg')!==0) svgOK=false; }
+  if(!svgOK) fails.push('svg draw broken');
+  Q.newRound();
+  if(Q.questions.length<6) fails.push('quiz too short: '+Q.questions.length);
+  for(i=0;i<Q.questions.length;i++){ var qq=Q.questions[i], okc=0;
+    if(!qq.q||!qq.opts||!qq.expl) fails.push('quiz q'+i+' missing fields');
+    for(var oi=0;oi<qq.opts.length;oi++){ if(qq.opts[oi].ok) okc++; }
+    if(okc!==1) fails.push('quiz q'+i+' correct count '+okc);
+  }
+  /* expansion self-tests */
+  if(DIMS.length<60) fails.push('DIMS too short: '+DIMS.length);
+  var f608=null,f6205=null,jj;
+  for(jj=0;jj<DIMS.length;jj++){ if(DIMS[jj][0]==='608') f608=DIMS[jj]; if(DIMS[jj][0]==='6205') f6205=DIMS[jj]; }
+  if(!f608||f608[1]!==8||f608[2]!==22||f608[3]!==7) fails.push('608 dims wrong');
+  if(!f6205||f6205[1]!==25||f6205[2]!==52||f6205[3]!==15) fails.push('6205 dims wrong');
+  var lc=N.lifeCalc(14000,1000,1000,true);
+  if(Math.abs(lc.h-45733)>100) fails.push('life calc: '+lc.h);
+  var bcT=[['6','62',25,'2RS','6205-2RS'],['6','60',8,'','608'],['6','62',3,'','623'],['3','302',25,'','30205'],['2','222',40,'','22208'],['5','511',25,'','51105'],['8','811',25,'','81105'],['N','NU2',25,'','NU205'],['NA','NA49',25,'','NA4905'],['UC','UC2',25,'','UC205'],['GE','GE',20,'ES','GE20ES'],['LM','LM',8,'','LM8UU']];
+  for(i=0;i<bcT.length;i++){
+    var gen=N.buildCode(bcT[i][0],bcT[i][1],bcT[i][2],bcT[i][3]);
+    if(gen!==bcT[i][4]) fails.push('build '+bcT[i][4]+' got '+gen);
+    else { var dt=D.decode(gen); if(dt.bore!==bcT[i][2]) fails.push('built code bore '+gen+'='+dt.bore); }
+  }
+  if(FITS['18-30'].shaft.p6[0]!==35||FITS['18-30'].shaft.p6[1]!==22) fails.push('fit p6 values');
+  if(FITS['30-50'].hole.H7[0]!==25) fails.push('fit H7 values');
+  if(FAILS.length<8) fails.push('fails count');
+  if(GRADES.length!==5) fails.push('grades count');
+  document.getElementById('selftest').textContent = fails.length ? 'SELFTEST FAIL: '+fails.join(' | ') : 'SELFTEST PASS — '+B.length+' bearings, decoder + quiz + tools OK';
+})();
+</script>
+</body>
+</html>
