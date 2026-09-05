@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEX Components — Interactive Reference (IQ 2nd Gen + V5)</title>
+<style>
+:root{
+  --bg:#0f172a; --card:#1e293b; --card2:#243349; --line:#334155; --txt:#e2e8f0; --dim:#94a3b8;
+  --acc:#38bdf8; --iq:#f97316; --v5:#0ea5e9;
+  --c-electronics:#2563eb; --c-sensors:#16a34a; --c-structure:#ea580c; --c-fasteners:#64748b;
+  --c-motion:#dc2626; --c-specialty:#9333ea; --c-tools:#a16207;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+header{position:sticky;top:0;z-index:50;background:rgba(15,23,42,.96);border-bottom:1px solid var(--line);padding:14px 20px 10px}
+.top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;max-width:1400px;margin:0 auto}
+h1{font-size:22px;letter-spacing:.4px}
+h1 small{color:var(--dim);font-weight:400;font-size:13px}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button{background:var(--card);color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:7px 13px;font-size:13px;cursor:pointer;font-family:inherit}
+button:hover{border-color:var(--acc)}
+button.active{background:var(--acc);color:#06121f;border-color:var(--acc);font-weight:600}
+input[type=search]{background:var(--card);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:7px 12px;font-size:13px;width:230px;font-family:inherit}
+input[type=search]:focus{outline:none;border-color:var(--acc)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;max-width:1400px;margin:10px auto 0}
+.chip{font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--dim);cursor:pointer}
+.chip.on{color:#fff;border-color:transparent}
+.chip .n{opacity:.75;font-size:10.5px;margin-left:3px}
+#info{max-width:1400px;margin:10px auto 0;color:var(--dim);font-size:12.5px;display:flex;gap:14px;flex-wrap:wrap}
+main{max-width:1400px;margin:18px auto;padding:0 20px 60px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px;cursor:pointer;transition:transform .08s,border-color .08s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-2px);border-color:var(--acc)}
+.card .bar{height:4px;border-radius:3px;margin-bottom:9px}
+.card .nm{font-size:14.5px;font-weight:600;line-height:1.25}
+.card .sub{font-size:11.5px;color:var(--dim);margin-top:3px}
+.card .dd{font-size:12px;color:var(--dim);margin-top:6px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .meta{display:flex;justify-content:space-between;align-items:center;margin-top:9px;font-size:11px;color:var(--dim)}
+.badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;letter-spacing:.5px}
+.badge.IQ{background:rgba(249,115,22,.16);color:#fdba74;border:1px solid rgba(249,115,22,.4)}
+.badge.V5{background:rgba(14,165,233,.16);color:#7dd3fc;border:1px solid rgba(14,165,233,.4)}
+.qty{font-weight:600;color:var(--txt)}
+.qty.addon{color:#c084fc}
+.pn{font-family:ui-monospace,Menlo,monospace;font-size:10.5px}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(2,6,23,.72);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.modal.open{display:flex}
+.dbox{background:var(--card2);border:1px solid var(--line);border-radius:16px;max-width:560px;width:100%;padding:24px;max-height:85vh;overflow:auto}
+.dbox h2{font-size:19px;margin-bottom:2px}
+.dbox .pn{color:var(--dim);margin:6px 0 12px}
+.dbox .desc{font-size:14.5px;line-height:1.6;color:var(--txt)}
+.dbox .row{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.k{font-size:12px;color:var(--dim)}
+.k b{color:var(--txt)}
+.close{float:right;background:none;border:none;font-size:22px;color:var(--dim);cursor:pointer}
+.empty{color:var(--dim);text-align:center;padding:50px 0;font-size:15px}
+/* quiz */
+#quiz{max-width:640px;margin:20px auto;text-align:center}
+#quiz .qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px}
+#quiz .qname{font-size:22px;font-weight:700;margin:14px 0 4px}
+#quiz .qsub{color:var(--dim);font-size:13px}
+#quiz .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+#quiz .opt{font-size:14px;padding:14px;text-align:center}
+#quiz .opt.correct{background:#14532d;border-color:#4ade80;color:#bbf7d0}
+#quiz .opt.wrong{background:#7f1d1d;border-color:#f87171;color:#fecaca}
+#quiz .opt:disabled{cursor:default}
+.score{font-size:14px;color:var(--dim);margin-top:14px}
+.score b{color:var(--acc);font-size:18px}
+.hidden{display:none}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:11.5px;color:var(--dim);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+@media print{
+  @page{size:A3 landscape;margin:8mm}
+  body{background:#fff}
+  header,.chips,#info,.no-print,.legend{display:none!important}
+  main{margin:0;padding:0;max-width:none}
+  .grid{grid-template-columns:repeat(3,1fr);gap:6px}
+  .card{background:#fff;border:1px solid #ccc;border-radius:6px;break-inside:avoid;padding:8px}
+  .card .dd{color:#444}
+  .card .sub,.card .meta{color:#666}
+  .card:hover{transform:none;border-color:#ccc}
+  .card .bar{margin-bottom:6px}
+  #quiz{display:none!important}
+  .badge.IQ{background:#fde7d2;color:#7c2d12;border-color:#fdba74}
+  .badge.V5{background:#d7ecfb;color:#075985;border-color:#7dd3fc}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <h1>VEX Components <small>— Interactive Parts Reference · IQ (2nd Gen) + V5</small></h1>
+    <div class="controls no-print">
+      <button id="bAll" class="active" onclick="setPl('ALL')">All</button>
+      <button id="bIQ" onclick="setPl('IQ')">VEX IQ</button>
+      <button id="bV5" onclick="setPl('V5')">VEX V5</button>
+      <input type="search" id="q" placeholder="Search part, number, keyword…" oninput="render()">
+      <select id="sort" onchange="render()" style="background:var(--card);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:7px 10px;font-size:13px">
+        <option value="cat">Category order</option>
+        <option value="name">Name A–Z</option>
+        <option value="qty">Most parts</option>
+      </select>
+      <button id="btnQuiz" onclick="showQuiz()">🎯 Self-Test</button>
+      <button onclick="window.print()" title="Save as PDF — enable ‘Background graphics’ in the print dialog">🖨 Print / PDF</button>
+    </div>
+  </div>
+  <div class="chips no-print" id="chips"></div>
+  <div id="info"><span id="count"></span><span class="legend"></span></div>
+</header>
+
+<main id="browse"><div class="grid" id="grid"></div></main>
+
+<div id="quiz" class="hidden">
+  <div class="qcard">
+    <div class="badge" id="quizPl"></div>
+    <div class="qname" id="quizName"></div>
+    <div class="qsub" id="quizSub"></div>
+    <div class="opts" id="quizOpts"></div>
+    <div class="score" id="quizScore"></div>
+    <button class="no-print" id="quizNext" style="margin-top:16px;display:none" onclick="nextQ()">Next ➜</button>
+  </div>
+  <p class="score">Round <span id="quizRound">1</span>/10 · score <b id="quizPts">0</b></p>
+  <button class="no-print" style="margin-top:10px" onclick="backToBrowse()">← Back to parts</button>
+</div>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeM()">
+  <div class="dbox">
+    <button class="close" onclick="closeM()">×</button>
+    <div id="mBadge"></div>
+    <h2 id="mName"></h2>
+    <div class="pn" id="mPn"></div>
+    <div class="desc" id="mDesc"></div>
+    <div class="row">
+      <span class="k"><b>Category:</b> <span id="mCat"></span></span>
+      <span class="k"><b>Platform:</b> <span id="mPl"></span></span>
+      <span class="k"><b>In kit:</b> <span id="mQty"></span></span>
+    </div>
+  </div>
+</div>
+
+<script>
+var PARTS = [{"pl": "IQ", "cat": "Electronics", "n": "Robot Brain (2nd Gen)", "q": 1, "pn": "228-6480-000", "d": "The robot's computer — colour touchscreen, 12 smart ports, USB-C programming. Runs VEXcode programs.", "sub": "Electronics"}, {"pl": "IQ", "cat": "Electronics", "n": "Controller (2nd Gen)", "q": 1, "pn": "228-6470-000", "d": "Wireless remote — 2 joysticks, 4 buttons, small screen. Drives the robot during Driver Control.", "sub": "Electronics"}, {"pl": "IQ", "cat": "Electronics", "n": "Smart Motor (2nd Gen)", "q": 4, "pn": "228-2560-000", "d": "The motor — built-in rotation encoder, software speed control, high torque for its size.", "sub": "Electronics"}, {"pl": "IQ", "cat": "Electronics", "n": "Robot Battery (2nd Gen)", "q": 1, "pn": "228-7045-000", "d": "Rechargeable Li-ion battery that powers the Brain and motors.", "sub": "Electronics"}, {"pl": "IQ", "cat": "Electronics", "n": "Battery Charger", "q": 1, "pn": "", "d": "Charges the Robot Battery — plug into the wall, LED shows charging state.", "sub": "Electronics"}, {"pl": "IQ", "cat": "Electronics", "n": "USB Cable A-C (2 m)", "q": 1, "pn": "228-6960-001", "d": "Connects the Brain to a computer for programming in VEXcode.", "sub": "Electronics"}, {"pl": "IQ", "cat": "Electronics", "n": "Smart Cable 200 mm", "q": 4, "pn": "228-2780-001", "d": "Short cable — motors and sensors plug into the Brain's 12 ports.", "sub": "Electronics"}, {"pl": "IQ", "cat": "Electronics", "n": "Smart Cable 300 mm", "q": 3, "pn": "228-2780-002", "d": "Medium smart cable for wiring motors and sensors.", "sub": "Electronics"}, {"pl": "IQ", "cat": "Electronics", "n": "Smart Cable 400 mm", "q": 1, "pn": "228-2780-003", "d": "Longer smart cable for far-away ports.", "sub": "Electronics"}, {"pl": "IQ", "cat": "Electronics", "n": "Smart Cable 600 mm", "q": 1, "pn": "228-2780-004", "d": "Longest kit cable — reaches across the whole robot.", "sub": "Electronics"}, {"pl": "IQ", "cat": "Sensors", "n": "Touch LED", "q": 1, "pn": "228-3010-000", "d": "Button that also glows RGB — program it to react when pressed, or light up as feedback.", "sub": "Sensors"}, {"pl": "IQ", "cat": "Sensors", "n": "Bumper Switch", "q": 1, "pn": "228-2677-000", "d": "Press sensor — detects when the robot bumps into things.", "sub": "Sensors"}, {"pl": "IQ", "cat": "Sensors", "n": "Optical Sensor", "q": 1, "pn": "228-7082-000", "d": "Detects colour and brightness — great for line following or sorting objects.", "sub": "Sensors"}, {"pl": "IQ", "cat": "Sensors", "n": "Distance Sensor", "q": 1, "pn": "228-7106-000", "d": "Ultrasonic range finder — measures how far away objects are.", "sub": "Sensors"}, {"pl": "IQ", "cat": "Sensors", "n": "Inertial Sensor", "q": null, "pn": "", "d": "Add-on — gyroscope + accelerometer. Perfect for accurate turns and balancing.", "sub": "Sensors"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 1x1", "q": 4, "pn": "228-2500-154", "d": "Tiniest beam — a single hole. Great for small brackets.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 1x2", "q": 5, "pn": "228-2500-001", "d": "Short 1-wide beam, 2 holes.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 1x4", "q": 7, "pn": "228-2500-003", "d": "Basic 1-wide beam, 4 holes — the workhorse of small robots.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 1x5", "q": 2, "pn": "228-2500-004", "d": "Odd-length beam (5 holes) — useful when you need a centre hole.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 1x6", "q": 4, "pn": "228-2500-005", "d": "1-wide beam, 6 holes.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 1x8", "q": 4, "pn": "228-2500-007", "d": "1-wide beam, 8 holes.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 1x10", "q": 4, "pn": "228-2500-009", "d": "Long 1-wide beam, 10 holes.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 1x12", "q": 4, "pn": "228-2500-011", "d": "Longest plain 1-wide beam in the kit — 12 holes.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 1x3 Centre Lock", "q": 4, "pn": "228-2500-147", "d": "Lock beam — pins click into the end locks for a sturdier join.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 1x4 Low-Profile End Lock", "q": 5, "pn": "228-2500-158", "d": "Lock beam with slim ends — holds pins in place at the end of a beam.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 2x2", "q": 4, "pn": "228-2500-017", "d": "2-wide short beam — stronger than 1-wide.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 2x4", "q": 4, "pn": "228-2500-019", "d": "2-wide beam, 4 holes.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 2x6", "q": 5, "pn": "228-2500-021", "d": "2-wide beam, 6 holes.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 2x7", "q": 5, "pn": "228-2500-023", "d": "2-wide beam, 7 holes (centre hole for symmetric builds).", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 2x8", "q": 6, "pn": "228-2500-025", "d": "2-wide beam, 8 holes.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 2x10", "q": 4, "pn": "228-2500-023", "d": "2-wide beam, 10 holes.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 2x12", "q": 4, "pn": "228-2500-025", "d": "2-wide beam, 12 holes.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 2x16", "q": 4, "pn": "228-2500-026", "d": "Long 2-wide beam, 16 holes — good chassis rails.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 2x18", "q": 4, "pn": "228-2500-029", "d": "2-wide beam, 18 holes.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 2x20", "q": 2, "pn": "228-2500-030", "d": "Longest beam in the kit — 2-wide, 20 holes.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 3x5 Right Angle", "q": 4, "pn": "228-2500-150", "d": "Pre-bent 90° corner in one piece — no connector needed.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 2x3 Right Angle", "q": 3, "pn": "228-2500-145", "d": "Small pre-bent 90° corner.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 3x4 Tee", "q": 4, "pn": "228-2500-144", "d": "T-shape beam — branches off at 90° from the middle.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 3x3 30° Angle", "q": 4, "pn": "228-2500-147", "d": "Angled beam — 30° bends for wedges and sloped intakes.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 45° Angle", "q": 4, "pn": "228-2500-143", "d": "45° angled beam for chamfered corners.", "sub": "Beams"}, {"pl": "IQ", "cat": "Beams", "n": "Beam 3x3 60° Angle", "q": 4, "pn": "228-2500-148", "d": "60° angled beam — steeper slopes.", "sub": "Beams"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Plate 3x3", "q": 2, "pn": "228-2500-031", "d": "Flat plate — solid mounting surface.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Plate 4x4", "q": 4, "pn": "228-2500-040", "d": "Flat 4x4 plate.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Plate 4x8", "q": 4, "pn": "228-2500-043", "d": "Big flat plate — great deck or chassis base.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Plate 2x8 Smooth", "q": 1, "pn": "228-2500-124", "d": "Smooth plate — lets game objects slide over it.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Large Chassis Corner Connector", "q": 6, "pn": "228-2500-126", "d": "Big 90° bracket for joining beams into a chassis.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Small Chassis Corner Connector", "q": 15, "pn": "228-2500-127", "d": "Compact 90° bracket.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Corner Connector 2x2", "q": 10, "pn": "228-2500-134", "d": "Classic 90° corner join.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Corner Connector 2x2 Offset", "q": 4, "pn": "228-2500-136", "d": "Corner with offset holes — shifts the join sideways.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Corner Connector 2x Wide 2x Offset", "q": 8, "pn": "228-2500-135", "d": "2-wide corner with a 2-hole offset.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Corner Connector 2x Wide 1x1 Offset", "q": 3, "pn": "228-2500-137", "d": "Small offset corner — fine adjustments.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Corner Connector 2x Wide 1x2", "q": 11, "pn": "228-2500-128", "d": "Short 90° corner, 2-wide.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Corner Connector 2x Wide 3x", "q": 4, "pn": "228-2500-131", "d": "Longer 90° corner.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Double Corner Connector 2x2", "q": 24, "pn": "228-2500-278", "d": "Two corners in one piece — joins beams on both sides.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Double Corner Connector 2x2 Offset", "q": 8, "pn": "228-2500-277", "d": "Double corner with offset geometry.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Double Corner Connector 1x2", "q": 5, "pn": "228-2500-271", "d": "Compact double corner.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Triple Corner Connector 2x2", "q": 8, "pn": "228-2500-253", "d": "Three-way corner — branches in two directions.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "Corner Connector 60° Omni 1x2", "q": 4, "pn": "228-2500-160", "d": "60° corner for angled drivetrains.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Plates & Connectors", "n": "1x Wide 2x Corner Connector", "q": 9, "pn": "228-2500-129", "d": "Slim 90° corner, 1-wide.", "sub": "Plates & Connectors"}, {"pl": "IQ", "cat": "Pins & Standoffs", "n": "Connector Pin 1x", "q": 53, "pn": "228-2500-061", "d": "Standard pin — pushes through holes to join beams. Remove with the Pin Tool.", "sub": "Pins & Standoffs"}, {"pl": "IQ", "cat": "Pins & Standoffs", "n": "Connector Pin 2x", "q": 21, "pn": "228-2500-062", "d": "Longer pin — joins two layers at once.", "sub": "Pins & Standoffs"}, {"pl": "IQ", "cat": "Pins & Standoffs", "n": "Connector Pin 1x1", "q": 11, "pn": "228-2500-060", "d": "Short pin with a spacer ring.", "sub": "Pins & Standoffs"}, {"pl": "IQ", "cat": "Pins & Standoffs", "n": "Connector Pin 0x3", "q": 21, "pn": "228-2500-087", "d": "Pin with a 3-long shaft — holds wheels/gears on shafts.", "sub": "Pins & Standoffs"}, {"pl": "IQ", "cat": "Pins & Standoffs", "n": "Idler Pin", "q": 4, "pn": "228-2500-084", "d": "Free-spinning pin — smooth axle for idler gears.", "sub": "Pins & Standoffs"}, {"pl": "IQ", "cat": "Pins & Standoffs", "n": "Standoff 1x Pitch", "q": 13, "pn": "228-2500-066", "d": "Spacer column — stacks beams apart at 1-hole height.", "sub": "Pins & Standoffs"}, {"pl": "IQ", "cat": "Pins & Standoffs", "n": "Standoff 2x Pitch", "q": 15, "pn": "228-2500-076", "d": "2-hole-tall standoff column.", "sub": "Pins & Standoffs"}, {"pl": "IQ", "cat": "Pins & Standoffs", "n": "Standoff 4x Pitch", "q": 5, "pn": "228-2500-074", "d": "Tall 4-hole standoff — big gaps between layers.", "sub": "Pins & Standoffs"}, {"pl": "IQ", "cat": "Pins & Standoffs", "n": "Standoff 6x Pitch", "q": 6, "pn": "228-2500-072", "d": "Tallest kit standoff — 6 holes.", "sub": "Pins & Standoffs"}, {"pl": "IQ", "cat": "Pins & Standoffs", "n": "Standoff 0.25x Pitch", "q": 11, "pn": "228-2500-065", "d": "Thin spacer — small gaps.", "sub": "Pins & Standoffs"}, {"pl": "IQ", "cat": "Pins & Standoffs", "n": "Standoff 0.25x Pitch Extender", "q": 11, "pn": "228-2500-150", "d": "Extends thin standoffs.", "sub": "Pins & Standoffs"}, {"pl": "IQ", "cat": "Pins & Standoffs", "n": "Mini Standoff Connector", "q": 13, "pn": "228-2500-170", "d": "Joins standoffs end-to-end.", "sub": "Pins & Standoffs"}, {"pl": "IQ", "cat": "Pins & Standoffs", "n": "Standoff Connector 2x", "q": 8, "pn": "228-2500-178", "d": "Links standoffs 2-holes apart.", "sub": "Pins & Standoffs"}, {"pl": "IQ", "cat": "Pins & Standoffs", "n": "End Standoff Connector", "q": 9, "pn": "228-2500-172", "d": "Caps the end of a standoff stack.", "sub": "Pins & Standoffs"}, {"pl": "IQ", "cat": "Gears & Sprockets", "n": "Gear 12T", "q": 10, "pn": "228-2500-213", "d": "Small spur gear — speed gear. Pairs with 36T/48T for gear ratios.", "sub": "Gears & Sprockets"}, {"pl": "IQ", "cat": "Gears & Sprockets", "n": "Gear 24T", "q": 4, "pn": "228-2500-227", "d": "Mid-size spur gear.", "sub": "Gears & Sprockets"}, {"pl": "IQ", "cat": "Gears & Sprockets", "n": "Gear 36T", "q": 6, "pn": "228-2500-214", "d": "Large spur gear — torque gear. 36T:12T = 3:1 ratio.", "sub": "Gears & Sprockets"}, {"pl": "IQ", "cat": "Gears & Sprockets", "n": "Gear 48T", "q": 2, "pn": "228-2500-228", "d": "Biggest gear in the kit — 4:1 with a 12T.", "sub": "Gears & Sprockets"}, {"pl": "IQ", "cat": "Gears & Sprockets", "n": "Crank Arm 1x4 w/ 23T Gear", "q": 1, "pn": "228-2500-246", "d": "Gear with a built-in crank arm — for mechanisms that need an offset lever.", "sub": "Gears & Sprockets"}, {"pl": "IQ", "cat": "Gears & Sprockets", "n": "Sprocket 8T", "q": 4, "pn": "228-2500-232", "d": "Small chain sprocket.", "sub": "Gears & Sprockets"}, {"pl": "IQ", "cat": "Gears & Sprockets", "n": "Sprocket 16T", "q": 4, "pn": "228-2500-233", "d": "Mid chain sprocket.", "sub": "Gears & Sprockets"}, {"pl": "IQ", "cat": "Gears & Sprockets", "n": "Sprocket 24T", "q": 2, "pn": "228-2500-235", "d": "Large chain sprocket.", "sub": "Gears & Sprockets"}, {"pl": "IQ", "cat": "Gears & Sprockets", "n": "Chain Link", "q": 101, "pn": "228-2500-230", "d": "Snap-together chain — build chains of any length to transfer motion far away.", "sub": "Gears & Sprockets"}, {"pl": "IQ", "cat": "Shafts & Collars", "n": "Squared Shaft 2x Pitch", "q": 3, "pn": "228-2500-331", "d": "Steel square shaft — 2 holes long. Wheels and gears mount on it.", "sub": "Shafts & Collars"}, {"pl": "IQ", "cat": "Shafts & Collars", "n": "Squared Shaft 3x Pitch", "q": 3, "pn": "228-2500-221", "d": "Square shaft, 3 holes.", "sub": "Shafts & Collars"}, {"pl": "IQ", "cat": "Shafts & Collars", "n": "Shaft 4x Pitch", "q": 2, "pn": "228-2500-126", "d": "Round 4-hole shaft.", "sub": "Shafts & Collars"}, {"pl": "IQ", "cat": "Shafts & Collars", "n": "Squared Shaft 5x Pitch", "q": 2, "pn": "228-2500-239", "d": "Square shaft, 5 holes.", "sub": "Shafts & Collars"}, {"pl": "IQ", "cat": "Shafts & Collars", "n": "Squared Shaft 6x Pitch", "q": 2, "pn": "228-2500-240", "d": "Long square shaft — 6 holes. Axle for drive wheels.", "sub": "Shafts & Collars"}, {"pl": "IQ", "cat": "Shafts & Collars", "n": "Plastic Squared Shaft 4x Pitch", "q": 6, "pn": "228-2500-223", "d": "Plastic square shaft — lighter, easy to cut.", "sub": "Shafts & Collars"}, {"pl": "IQ", "cat": "Shafts & Collars", "n": "Plastic Squared Shaft 5x Pitch", "q": 4, "pn": "228-2500-133", "d": "Plastic square shaft, 5 holes.", "sub": "Shafts & Collars"}, {"pl": "IQ", "cat": "Shafts & Collars", "n": "Motor Shaft 2x Pitch", "q": 4, "pn": "228-2500-234", "d": "Short shaft that plugs straight into the Smart Motor.", "sub": "Shafts & Collars"}, {"pl": "IQ", "cat": "Shafts & Collars", "n": "Plastic Motor Shaft 2x Pitch", "q": 4, "pn": "228-2500-093", "d": "Plastic motor shaft — 2 holes.", "sub": "Shafts & Collars"}, {"pl": "IQ", "cat": "Shafts & Collars", "n": "Plastic Motor Shaft 3x Pitch", "q": 6, "pn": "228-2500-094", "d": "Plastic motor shaft — 3 holes.", "sub": "Shafts & Collars"}, {"pl": "IQ", "cat": "Shafts & Collars", "n": "Motor Snap Shaft 1x Pitch", "q": 5, "pn": "228-2500-328", "d": "Snap-on motor shaft — clicks into the motor spline.", "sub": "Shafts & Collars"}, {"pl": "IQ", "cat": "Shafts & Collars", "n": "Rubber Shaft Collar", "q": 32, "pn": "228-2500-143", "d": "Grippy collar — stops wheels/gears sliding off a shaft.", "sub": "Shafts & Collars"}, {"pl": "IQ", "cat": "Shafts & Collars", "n": "Shaft Spacer 0.25x Pitch", "q": 28, "pn": "228-2500-114", "d": "Tiny spacer for fine shaft positioning.", "sub": "Shafts & Collars"}, {"pl": "IQ", "cat": "Shafts & Collars", "n": "Washer", "q": 24, "pn": "228-2500-112", "d": "Flat washer — reduces friction between moving parts.", "sub": "Shafts & Collars"}, {"pl": "IQ", "cat": "Wheels & Treads", "n": "Wheel 200 mm Travel", "q": 2, "pn": "228-2500-236", "d": "Standard drive wheel — 200 mm of travel per rotation.", "sub": "Wheels & Treads"}, {"pl": "IQ", "cat": "Wheels & Treads", "n": "Tire 200 mm Travel", "q": 2, "pn": "228-2500-209", "d": "Rubber tire for the 200 mm wheel — grip on smooth floors.", "sub": "Wheels & Treads"}, {"pl": "IQ", "cat": "Wheels & Treads", "n": "Wheel Hub 44 mm", "q": 2, "pn": "228-2500-128", "d": "Small wheel hub — mounts tires or custom wheels.", "sub": "Wheels & Treads"}, {"pl": "IQ", "cat": "Wheels & Treads", "n": "Hub 2x Wide 48.5 mm", "q": 2, "pn": "228-2500-193", "d": "Wide wheel hub — 48.5 mm diameter.", "sub": "Wheels & Treads"}, {"pl": "IQ", "cat": "Wheels & Treads", "n": "Balloon Tire 5x Pitch", "q": 2, "pn": "228-2500-198", "d": "Soft balloon tire — absorbs shocks, grips well.", "sub": "Wheels & Treads"}, {"pl": "IQ", "cat": "Wheels & Treads", "n": "Traction Link", "q": 5, "pn": "228-2500-234", "d": "Tread link — build tank treads for climbing and grip.", "sub": "Wheels & Treads"}, {"pl": "IQ", "cat": "Wheels & Treads", "n": "Round Lock Beam 2x2 Centre Offset", "q": 1, "pn": "228-2500-192", "d": "Round beam — a wheel-like spinner for game objects.", "sub": "Wheels & Treads"}, {"pl": "IQ", "cat": "Specialty", "n": "Pin Tool", "q": 1, "pn": "228-4053-000", "d": "Removes stuck connector pins — push the tip through the pin's centre.", "sub": "Specialty"}, {"pl": "IQ", "cat": "Specialty", "n": "Cable Anchor", "q": 1, "pn": "228-2500-158", "d": "Holds cables flat against the frame — keeps wiring tidy.", "sub": "Specialty"}, {"pl": "IQ", "cat": "Specialty", "n": "Spool 1x Wide", "q": 1, "pn": "228-2500-420", "d": "Drum for the rope — builds winch mechanisms.", "sub": "Specialty"}, {"pl": "IQ", "cat": "Specialty", "n": "Silicone Rubber Band", "q": 2, "pn": "228-2500-468", "d": "Stretchy band — springs, launchers, grippers.", "sub": "Specialty"}, {"pl": "IQ", "cat": "Specialty", "n": "Rubber Band Anchor", "q": 3, "pn": "228-2500-157", "d": "Hooks for rubber bands.", "sub": "Specialty"}, {"pl": "IQ", "cat": "Specialty", "n": "Intake Flap Short", "q": 24, "pn": "228-2500-240", "d": "Flexible flap for intakes — guides game objects in.", "sub": "Specialty"}, {"pl": "IQ", "cat": "Specialty", "n": "Intake Flap Medium", "q": 24, "pn": "228-2500-241", "d": "Medium flexible intake flap.", "sub": "Specialty"}, {"pl": "IQ", "cat": "Specialty", "n": "Rope 24x Pitch", "q": 1, "pn": "228-2500-243", "d": "Strong rope — winches and lifts.", "sub": "Specialty"}, {"pl": "V5", "cat": "Electronics", "n": "V5 Robot Brain", "q": 1, "pn": "", "d": "The V5 computer — colour touchscreen, 21 smart ports, 8 three-wire ports, micro-USB and SD card slot.", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "V5 Controller", "q": 1, "pn": "", "d": "Driver remote — 2 joysticks, 12 buttons, LCD. Two controllers can daisy-chain.", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "V5 Robot Radio", "q": 1, "pn": "", "d": "Wireless link between the Controller and the Brain.", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "V5 Robot Battery (Li-ion 1100 mAh)", "q": 1, "pn": "", "d": "Rechargeable Li-ion battery that powers the whole robot.", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "V5 Robot Battery Cable (180 mm)", "q": 1, "pn": "", "d": "Connects the battery to the Brain.", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "V5 Robot Battery Charger", "q": 1, "pn": "", "d": "Charges the V5 battery.", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "V5 Smart Motor", "q": 8, "pn": "", "d": "The V5 motor — built-in optical shaft encoder for precise position/speed control.", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "Smart Motor Cartridge 36:1", "q": 2, "pn": "", "d": "Swap-in gear cartridge — changes motor speed/torque. (36:1 = higher torque)", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "Smart Cable 300 mm", "q": 3, "pn": "", "d": "Short smart cable.", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "Smart Cable 600 mm", "q": 3, "pn": "", "d": "Medium smart cable.", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "Smart Cable 900 mm", "q": 2, "pn": "", "d": "Long smart cable.", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "Smart Cable 1200 mm", "q": 1, "pn": "", "d": "Extra-long smart cable.", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "Smart Cable 1500 mm", "q": 1, "pn": "", "d": "Longest V5 smart cable — 1.5 m.", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "USB A-Micro Cable", "q": 1, "pn": "", "d": "Programs the Brain from a computer.", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "Brain Attachment Flange (Short)", "q": 2, "pn": "", "d": "Bracket that mounts the Brain to the frame.", "sub": "Electronics"}, {"pl": "V5", "cat": "Electronics", "n": "Brain Attachment Flange (Long)", "q": 2, "pn": "", "d": "Longer Brain mounting bracket.", "sub": "Electronics"}, {"pl": "V5", "cat": "Sensors", "n": "AI Vision Sensor", "q": 1, "pn": "", "d": "Camera — detects objects, colours and AI signatures. The V5 'eyes'.", "sub": "Sensors"}, {"pl": "V5", "cat": "Sensors", "n": "Bumper Switch v2", "q": 4, "pn": "", "d": "Press sensor for bump/contact detection.", "sub": "Sensors"}, {"pl": "V5", "cat": "Sensors", "n": "Optical Sensor", "q": null, "pn": "", "d": "Add-on — colour, light and gesture detection.", "sub": "Sensors"}, {"pl": "V5", "cat": "Sensors", "n": "Distance Sensor", "q": null, "pn": "", "d": "Add-on — ultrasonic range finder.", "sub": "Sensors"}, {"pl": "V5", "cat": "Sensors", "n": "Inertial Sensor", "q": null, "pn": "", "d": "Add-on — gyroscope + accelerometer for accurate turns.", "sub": "Sensors"}, {"pl": "V5", "cat": "Sensors", "n": "Touch LED", "q": null, "pn": "", "d": "Add-on — programmable button with RGB light.", "sub": "Sensors"}, {"pl": "V5", "cat": "Sensors", "n": "Rotation Sensor", "q": null, "pn": "", "d": "Add-on — measures a shaft's angle/rotations precisely.", "sub": "Sensors"}, {"pl": "V5", "cat": "Sensors", "n": "Limit Switch (3-wire)", "q": null, "pn": "", "d": "Add-on — detects when a mechanism reaches its end position.", "sub": "Sensors"}, {"pl": "V5", "cat": "Sensors", "n": "Potentiometer (3-wire)", "q": null, "pn": "", "d": "Add-on — variable resistor; reads a rotating knob's position.", "sub": "Sensors"}, {"pl": "V5", "cat": "Sensors", "n": "Line Tracker (3-wire)", "q": null, "pn": "", "d": "Add-on — follows lines using reflected light.", "sub": "Sensors"}, {"pl": "V5", "cat": "Sensors", "n": "Ultrasonic Rangefinder (3-wire)", "q": null, "pn": "", "d": "Add-on — 3-wire distance sensor.", "sub": "Sensors"}, {"pl": "V5", "cat": "Structure", "n": "Aluminium C-Channel 1x2x1x25", "q": 2, "pn": "", "d": "C-shaped aluminium rail — strong yet light. 25 holes long.", "sub": "Structure"}, {"pl": "V5", "cat": "Structure", "n": "Aluminium C-Channel 1x2x1x35", "q": 24, "pn": "", "d": "The V5 workhorse rail — 35 holes. Builds frames and supports.", "sub": "Structure"}, {"pl": "V5", "cat": "Structure", "n": "Aluminium C-Channel 1x3x1x35", "q": 12, "pn": "", "d": "Deeper C-channel — stiffer, taller walls.", "sub": "Structure"}, {"pl": "V5", "cat": "Structure", "n": "Aluminium Plate 5x25", "q": 6, "pn": "", "d": "Big flat aluminium plate — decks, walls, bases.", "sub": "Structure"}, {"pl": "V5", "cat": "Structure", "n": "Aluminium Angle 2x2x25", "q": 4, "pn": "", "d": "L-shaped corner rail, 25 holes.", "sub": "Structure"}, {"pl": "V5", "cat": "Structure", "n": "Aluminium Angle 1x1x35", "q": 4, "pn": "", "d": "Slim L-shaped corner rail, 35 holes.", "sub": "Structure"}, {"pl": "V5", "cat": "Structure", "n": "Gusset Plate 90°", "q": 4, "pn": "", "d": "Flat corner brace — stiffens right-angle joins.", "sub": "Structure"}, {"pl": "V5", "cat": "Structure", "n": "Gusset Angle 90°", "q": 4, "pn": "", "d": "Angle brace for 90° corners.", "sub": "Structure"}, {"pl": "V5", "cat": "Fasteners", "n": "Screw #8-32 x 0.25 in Locking Star Drive", "q": 175, "pn": "", "d": "Short locking screw — star (Torx) drive, self-locking.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Screw #8-32 x 0.50 in Locking Star Drive", "q": 125, "pn": "", "d": "Medium locking star-drive screw.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Screw #8-32 x 0.375 in Star Drive", "q": 250, "pn": "", "d": "Standard star-drive screw.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Screw #8-32 x 0.50 in Star Drive", "q": 225, "pn": "", "d": "Standard 1/2-inch star-drive screw.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Screw #8-32 x 0.875 in Star Drive", "q": 100, "pn": "", "d": "Long star-drive screw — through multiple layers.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Screw #8-32 x 1.00 in Star Drive", "q": 75, "pn": "", "d": "1-inch star-drive screw.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Screw #8-32 x 1.25 in Star Drive", "q": 50, "pn": "", "d": "1.25-inch screw.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Screw #8-32 x 1.50 in Star Drive", "q": 50, "pn": "", "d": "1.5-inch screw — thick stacks.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Screw #8-32 x 1.75 in Star Drive", "q": 25, "pn": "", "d": "1.75-inch screw.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Screw #8-32 x 2.00 in Star Drive", "q": 10, "pn": "", "d": "Longest kit screw — 2 inches.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Nylock Nut #8-32", "q": 700, "pn": "", "d": "Self-locking nut — nylon ring stops it vibrating loose.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Hex Nut #8-32", "q": 100, "pn": "", "d": "Plain hex nut.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "1-Post Hex Nut Retainer", "q": 20, "pn": "", "d": "Holds a nut in place — tighten one-handed.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "1-Post Hex Nut Retainer w/ Bearing Flat", "q": 20, "pn": "", "d": "Nut retainer with an integrated bearing surface.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Standoff 0.5 in", "q": 20, "pn": "", "d": "Metal spacer column — 1/2 inch.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Standoff 0.75 in", "q": 30, "pn": "", "d": "3/4-inch standoff.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Standoff 1 in", "q": 20, "pn": "", "d": "1-inch standoff.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Standoff 2 in", "q": 40, "pn": "", "d": "2-inch standoff — big layer gaps.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Fasteners", "n": "Standoff 3 in", "q": 4, "pn": "", "d": "Tallest kit standoff — 3 inches.", "sub": "Fasteners"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Shaft 2 in (4x pitch)", "q": 2, "pn": "", "d": "1/8-inch square steel shaft, 2 inches long.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Shaft 3 in (6x pitch)", "q": 4, "pn": "", "d": "Square shaft, 3 inches.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Shaft 4 in (8x pitch)", "q": 2, "pn": "", "d": "Square shaft, 4 inches.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Shaft 12 in (24x pitch)", "q": 16, "pn": "", "d": "Long 12-inch square shaft — cut to any length.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Shaft 12 in High Strength (24x pitch)", "q": 4, "pn": "", "d": "Heavy-duty 12-inch shaft — handles high torque.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "High Strength Shaft Bearing", "q": 20, "pn": "", "d": "Bearing plate — supports spinning shafts.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Pillow Block Bearing", "q": 12, "pn": "", "d": "Pre-assembled bearing block — shafts spin smoothly through it.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Bearing Flat", "q": 40, "pn": "", "d": "Flat bearing plate.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "High Strength Clamping Shaft Collar", "q": 20, "pn": "", "d": "Clamps tight onto a shaft — holds parts in place.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Star Drive Shaft Collar", "q": 96, "pn": "", "d": "Screw-tight collar for square shafts.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Rubber Shaft Collar", "q": 30, "pn": "", "d": "Grippy rubber collar.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Drive Shaft Bar Lock", "q": 8, "pn": "", "d": "Locks a shaft to the frame.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Setscrew #8-32", "q": 32, "pn": "", "d": "Tiny screw that locks collars onto shafts.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "HS Shaft Spacer 0.0625 in", "q": 60, "pn": "", "d": "Paper-thin shaft spacer.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "HS Shaft Spacer 0.125 in", "q": 20, "pn": "", "d": "1/8-inch shaft spacer.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "HS Shaft Spacer 0.25 in", "q": 20, "pn": "", "d": "1/4-inch shaft spacer.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "HS Shaft Spacer 0.5 in", "q": 20, "pn": "", "d": "1/2-inch shaft spacer.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Nylon Spacer 0.125 in", "q": 80, "pn": "", "d": "Nylon spacer — 1/8 inch.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Nylon Spacer 0.25 in", "q": 80, "pn": "", "d": "Nylon spacer — 1/4 inch.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Nylon Spacer 0.375 in", "q": 70, "pn": "", "d": "Nylon spacer — 3/8 inch.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Nylon Spacer 0.5 in", "q": 70, "pn": "", "d": "Nylon spacer — 1/2 inch.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Shafts & Bearings", "n": "Shaft Adapter HS (1/8 in square bore)", "q": 8, "pn": "", "d": "Adapts motors/gears to square shafts.", "sub": "Shafts & Bearings"}, {"pl": "V5", "cat": "Gears & Sprockets", "n": "High Strength Gear 12T Metal Pinion", "q": 8, "pn": "", "d": "Small metal pinion gear — drives on the motor.", "sub": "Gears & Sprockets"}, {"pl": "V5", "cat": "Gears & Sprockets", "n": "High Strength Gear 36T v2", "q": 8, "pn": "", "d": "High-strength gear — 36 teeth.", "sub": "Gears & Sprockets"}, {"pl": "V5", "cat": "Gears & Sprockets", "n": "High Strength Gear 60T v2", "q": 8, "pn": "", "d": "High-strength gear — 60 teeth.", "sub": "Gears & Sprockets"}, {"pl": "V5", "cat": "Gears & Sprockets", "n": "High Strength Gear 84T", "q": 8, "pn": "", "d": "Biggest V5 gear — 84 teeth. Huge torque.", "sub": "Gears & Sprockets"}, {"pl": "V5", "cat": "Gears & Sprockets", "n": "High Strength Metal Gear Insert", "q": 32, "pn": "", "d": "Metal core for high-strength gears — steel shaft bore.", "sub": "Gears & Sprockets"}, {"pl": "V5", "cat": "Gears & Sprockets", "n": "Free-Spinning Gear Insert", "q": 32, "pn": "", "d": "Insert that lets a gear spin freely on a shaft.", "sub": "Gears & Sprockets"}, {"pl": "V5", "cat": "Gears & Sprockets", "n": "High Strength Sprocket 6T", "q": 4, "pn": "", "d": "Tiny chain sprocket — 6 teeth.", "sub": "Gears & Sprockets"}, {"pl": "V5", "cat": "Gears & Sprockets", "n": "High Strength Sprocket 12T", "q": 6, "pn": "", "d": "12-tooth sprocket.", "sub": "Gears & Sprockets"}, {"pl": "V5", "cat": "Gears & Sprockets", "n": "High Strength Sprocket 18T", "q": 6, "pn": "", "d": "18-tooth sprocket.", "sub": "Gears & Sprockets"}, {"pl": "V5", "cat": "Gears & Sprockets", "n": "High Strength Sprocket 24T", "q": 2, "pn": "", "d": "24-tooth sprocket.", "sub": "Gears & Sprockets"}, {"pl": "V5", "cat": "Gears & Sprockets", "n": "High Strength Sprocket 30T", "q": 2, "pn": "", "d": "30-tooth sprocket — slowest chain drive.", "sub": "Gears & Sprockets"}, {"pl": "V5", "cat": "Chain & Treads", "n": "High Strength Chain Link", "q": 700, "pn": "", "d": "Roller chain links — build chains to transfer motion across the robot.", "sub": "Chain & Treads"}, {"pl": "V5", "cat": "Chain & Treads", "n": "Chain Attachment Link", "q": 100, "pn": "", "d": "Chain link with a tab — attach conveyor buckets or treads.", "sub": "Chain & Treads"}, {"pl": "V5", "cat": "Chain & Treads", "n": "Tank Tread Traction Link", "q": 50, "pn": "", "d": "Tread link with grip — build tank tracks.", "sub": "Chain & Treads"}, {"pl": "V5", "cat": "Chain & Treads", "n": "Conveyor Belt Base Link", "q": 60, "pn": "", "d": "Chain link for conveyor belts — carries inserts.", "sub": "Chain & Treads"}, {"pl": "V5", "cat": "Chain & Treads", "n": "Conveyor Belt Insert Short", "q": 24, "pn": "", "d": "Short scoop insert for a conveyor belt.", "sub": "Chain & Treads"}, {"pl": "V5", "cat": "Chain & Treads", "n": "Conveyor Belt Insert Medium", "q": 20, "pn": "", "d": "Medium scoop insert.", "sub": "Chain & Treads"}, {"pl": "V5", "cat": "Chain & Treads", "n": "Conveyor Belt Insert Tall", "q": 20, "pn": "", "d": "Tall scoop insert — carries more objects.", "sub": "Chain & Treads"}, {"pl": "V5", "cat": "Wheels", "n": "Wheel 4 in Anti-Static (320 mm travel)", "q": 4, "pn": "", "d": "Standard 4-inch drive wheel — 320 mm per rotation, anti-static rubber.", "sub": "Wheels"}, {"pl": "V5", "cat": "Wheels", "n": "Wheel 4 in Omni (320 mm travel)", "q": 4, "pn": "", "d": "Omni wheel — small rollers let the robot strafe sideways.", "sub": "Wheels"}, {"pl": "V5", "cat": "Wheels", "n": "Intake Roller", "q": 8, "pn": "", "d": "Soft roller — pulls game objects into an intake.", "sub": "Wheels"}, {"pl": "V5", "cat": "Pneumatics", "n": "Air Cylinder", "q": null, "pn": "", "d": "Add-on (Pneumatics kit) — pneumatic ram that pushes/pulls with air power.", "sub": "Pneumatics"}, {"pl": "V5", "cat": "Pneumatics", "n": "Solenoid Valve", "q": null, "pn": "", "d": "Add-on — electrically switches air to the cylinders (3-wire port).", "sub": "Pneumatics"}, {"pl": "V5", "cat": "Pneumatics", "n": "Air Tank", "q": null, "pn": "", "d": "Add-on — stores compressed air.", "sub": "Pneumatics"}, {"pl": "V5", "cat": "Pneumatics", "n": "Pneumatic Tubing & Fittings", "q": null, "pn": "", "d": "Add-on — hoses and connectors between tank, valve and cylinders.", "sub": "Pneumatics"}, {"pl": "V5", "cat": "Tools", "n": "T15 Star Screwdriver", "q": 4, "pn": "", "d": "Torx screwdriver for all V5 screws.", "sub": "Tools"}, {"pl": "V5", "cat": "Tools", "n": "T15 Star Key", "q": 2, "pn": "", "d": "Small Torx L-wrench.", "sub": "Tools"}, {"pl": "V5", "cat": "Tools", "n": "T8 Star Key", "q": 2, "pn": "", "d": "Tiny Torx wrench — setscrews and collars.", "sub": "Tools"}, {"pl": "V5", "cat": "Tools", "n": "Open-End Wrench", "q": 6, "pn": "", "d": "Wrench for hex nuts.", "sub": "Tools"}, {"pl": "V5", "cat": "Tools", "n": "Zip Tie 4 in", "q": 600, "pn": "", "d": "Cable ties — tidy wiring, quick mounting.", "sub": "Tools"}, {"pl": "V5", "cat": "Tools", "n": "Zip Tie 11 in", "q": 50, "pn": "", "d": "Long cable ties.", "sub": "Tools"}, {"pl": "V5", "cat": "Tools", "n": "Rubber Band #64", "q": 20, "pn": "", "d": "Small rubber bands — spring tension.", "sub": "Tools"}, {"pl": "V5", "cat": "Tools", "n": "Anti-Slip Mat 12x15 in", "q": 1, "pn": "", "d": "Stops the robot sliding on the workbench.", "sub": "Tools"}];
+var PL = "ALL", CATS = new Set(), curCat = "";
+var CAT_COLORS = {Electronics:"#2563eb",Sensors:"#16a34a",Structure:"#ea580c",Fasteners:"#64748b","Gears & Sprockets":"#dc2626","Chain & Treads":"#dc2626",Wheels:"#dc2626","Shafts & Bearings":"#dc2626","Plates & Connectors":"#ea580c",Pins:"#64748b",Pneumatics:"#9333ea",Tools:"#a16207",Specialty:"#9333ea"};
+var QUIZ = [], qi = 0, pts = 0, round = 1;
+
+PARTS.forEach(function(p){ if(!CATS.has(p.cat)) CATS.add(p.cat); });
+function esc(s){return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function catColor(c){return CAT_COLORS[c]||"#38bdf8"}
+function barColor(p){return p.pl==="IQ" ? "rgba(249,115,22,.75)" : "rgba(14,165,233,.75)"}
+
+function legend(){
+  var el=document.querySelector(".legend"), h="";
+  Array.from(CATS).forEach(function(c){h+='<span><i style="background:'+catColor(c)+'"></i>'+esc(c)+'</span>'});
+  el.innerHTML=h;
+}
+function chips(){
+  var el=document.getElementById("chips"), h='<button class="chip on" data-c="" onclick="setCat(this,this.dataset.c)">All categories <span class="n"></span></button>';
+  Array.from(CATS).sort().forEach(function(c){
+    var n=PARTS.filter(function(p){return (PL==="ALL"||p.pl===PL)&&p.cat===c}).length;
+    h+='<button class="chip" data-c="'+esc(c)+'" style="border-color:'+catColor(c)+'" onclick="setCat(this,this.dataset.c)">'+esc(c)+' <span class="n">'+n+'</span></button>';
+  });
+  el.innerHTML=h;
+}
+function setPl(pl){
+  PL=pl;
+  ["bAll","bIQ","bV5"].forEach(function(id){document.getElementById(id).classList.toggle("active", id==="bAll"?pl==="ALL":id==="bIQ"?pl==="IQ":pl==="V5")});
+  chips(); render();
+}
+function setCat(btn,c){
+  curCat=c;
+  document.querySelectorAll("#chips .chip").forEach(function(b){b.classList.toggle("on", b.dataset.c===c)});
+  render();
+}
+function filtered(){
+  var q=(document.getElementById("q").value||"").toLowerCase();
+  return PARTS.filter(function(p){
+    if(PL!=="ALL"&&p.pl!==PL)return false;
+    if(curCat&&p.cat!==curCat)return false;
+    if(q&&(p.n.toLowerCase().indexOf(q)<0)&&(p.d||"").toLowerCase().indexOf(q)<0&&(p.pn||"").toLowerCase().indexOf(q)<0)return false;
+    return true;
+  });
+}
+function render(){
+  var arr=filtered(), sort=document.getElementById("sort").value;
+  if(sort==="name")arr.sort(function(a,b){return a.n.localeCompare(b.n)});
+  else if(sort==="qty")arr.sort(function(a,b){return (b.q||0)-(a.q||0)});
+  else arr.sort(function(a,b){return (a.pl===b.pl?0:a.pl<b.pl?-1:1)||a.cat.localeCompare(b.cat)||a.n.localeCompare(b.n)});
+  document.getElementById("count").textContent=arr.length+" of "+PARTS.length+" parts shown";
+  var el=document.getElementById("grid");
+  if(!arr.length){el.innerHTML='<div class="empty">No parts match — try a different search or filter.</div>';return}
+  el.innerHTML=arr.map(function(p,i){
+    var qty = p.q ? '<span class="qty">'+p.q+'×</span>' : '<span class="qty addon">add-on</span>';
+    return '<div class="card" onclick="openM('+(PARTS.indexOf(p))+')">'+
+      '<div class="bar" style="background:'+catColor(p.cat)+'"></div>'+
+      '<span class="badge '+p.pl+'">'+p.pl+'</span> '+
+      '<div class="nm">'+esc(p.n)+'</div>'+
+      '<div class="sub">'+esc(p.cat)+'</div>'+
+      '<div class="dd">'+esc(p.d)+'</div>'+
+      '<div class="meta"><span>'+qty+'</span><span class="pn">'+(p.pn?esc(p.pn):"")+'</span></div>'+
+      '</div>';
+  }).join("");
+}
+function openM(i){
+  var p=PARTS[i];
+  document.getElementById("mBadge").innerHTML='<span class="badge '+p.pl+'">'+p.pl+'</span>';
+  document.getElementById("mName").textContent=p.n;
+  document.getElementById("mPn").textContent=p.pn?("Part # "+p.pn):"No part number listed (kit bulk part)";
+  document.getElementById("mDesc").textContent=p.d;
+  document.getElementById("mCat").textContent=p.cat;
+  document.getElementById("mPl").textContent=p.pl==="IQ"?"VEX IQ (2nd Gen)":"VEX V5";
+  document.getElementById("mQty").textContent=p.q?(p.q+" in the standard kit"):"add-on / not in standard kit";
+  document.getElementById("modal").classList.add("open");
+}
+function closeM(){document.getElementById("modal").classList.remove("open")}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeM()});
+
+/* ---------- self-test quiz (Can You Name That Part?) ---------- */
+function showQuiz(){
+  document.getElementById("browse").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  var pool=PARTS.slice();
+  QUIZ=[]; qi=0; pts=0; round=1;
+  while(QUIZ.length<10&&pool.length){var j=Math.floor(Math.random()*pool.length);QUIZ.push(pool.splice(j,1)[0])}
+  nextQ();
+}
+function nextQ(){
+  if(qi>=QUIZ.length){finishQuiz();return}
+  document.getElementById("quizNext").style.display="none";
+  var p=QUIZ[qi];
+  document.getElementById("quizPl").innerHTML='<span class="badge '+p.pl+'">'+p.pl+'</span>';
+  document.getElementById("quizName").textContent=p.n;
+  document.getElementById("quizSub").textContent="What category is this part from?";
+  var opts=[p.cat];
+  var others=Array.from(CATS).filter(function(c){return c!==p.cat});
+  while(opts.length<4&&others.length){var j=Math.floor(Math.random()*others.length);var c=others.splice(j,1)[0];if(opts.indexOf(c)<0)opts.push(c)}
+  opts.sort(function(){return Math.random()-.5});
+  document.getElementById("quizOpts").innerHTML=opts.map(function(c){
+    return '<button class="opt" data-c="'+esc(c)+'" onclick="pick(this,this.dataset.c)">'+esc(c)+'</button>';
+  }).join("");
+  document.getElementById("quizRound").textContent=qi+1;
+  document.getElementById("quizPts").textContent=pts;
+}
+function pick(btn,c){
+  var p=QUIZ[qi], correct=p.cat===c;
+  if(correct)pts++;
+  document.querySelectorAll("#quizOpts .opt").forEach(function(b){
+    b.disabled=true;
+    if(b.textContent===p.cat)b.classList.add("correct");
+    else if(b===btn)b.classList.add("wrong");
+  });
+  qi++;
+  document.getElementById("quizPts").textContent=pts;
+  document.getElementById("quizNext").style.display="inline-block";
+  document.getElementById("quizNext").textContent=qi>=QUIZ.length?"See result ➜":"Next ➜";
+}
+function finishQuiz(){
+  document.getElementById("quizName").textContent="Done!";
+  document.getElementById("quizSub").textContent="You scored "+pts+" / "+QUIZ.length+(pts>=8?" — VEX parts master! 🏆":pts>=5?" — getting there!":" — open the reference and study the categories");
+  document.getElementById("quizPl").innerHTML="";
+  document.getElementById("quizOpts").innerHTML="";
+  document.getElementById("quizNext").style.display="none";
+}
+function backToBrowse(){
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("browse").classList.remove("hidden");
+}
+legend(); chips(); render();
+</script>
+</body>
+</html>
