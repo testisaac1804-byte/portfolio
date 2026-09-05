@@ -10,6 +10,7 @@ Single-file interactive HTML reference covering EVERY part in the VEX IQ (2nd Ge
 - V1 — Static A3 PDF poster (2 pages: IQ + V5), reportlab, official kit contents scraped via r.jina.ai (vexrobotics.com blocks curl)
 - V2 — Interactive single-file HTML app, 220 parts, quiz mode, print-to-PDF
 - V3 — "VEX Universe": 344 parts (IQ Edu+Comp kits, V5 Super+Booster), gear-ratio calculator, 12-mechanism gallery, 35-term glossary, 16 platform cards (123/GO/AIM/EXP/CTE/AIR + software + competitions)
+- V4 — All 8 platforms: 436 parts (adds GO, EXP, 123, AIM, CTE Workcell 40-part, AIR kits; official contents for AIM/CTE/AIR/EXP-electronics via r.jina.ai, GO/123/EXP-structure from established components — no invented specs). Platform chips for every platform, click platform card → browse its parts, software/comp cards get detail bullets.
 
 **Location:** `~/Desktop/vex-parts-interactive.html` · `~/Desktop/vex-poster/VEX-Components-Poster.pdf`
 
