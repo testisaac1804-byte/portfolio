@@ -33,6 +33,14 @@ header nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;height
 .sync-msg.on{display:inline}
 .sync-msg.ok{color:var(--ag)}
 .sync-msg.err{color:var(--ar)}
+.res-section{max-width:1280px;margin:0 auto;padding:0 24px 40px}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.res-card{display:flex;align-items:center;gap:14px;background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:18px 20px;text-decoration:none;color:var(--t2);transition:all .22s;position:relative;overflow:hidden}
+.res-card:hover{border-color:rgba(99,102,241,0.35);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+.res-ico{font-size:28px;width:52px;height:52px;border-radius:12px;background:rgba(99,102,241,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.res-t{font-weight:600;color:var(--t1);font-size:15px}
+.res-d{font-size:12px;color:var(--t3);margin-top:3px;line-height:1.5}
+.res-n{font-size:10px;color:var(--ab);background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.25);padding:2px 8px;border-radius:9999px;margin-top:6px;display:inline-block;font-weight:600}
 .hero{text-align:center;padding:100px 24px 48px;max-width:900px;margin:0 auto}
 .hero h1{font-size:56px;font-weight:800;color:var(--t1);line-height:1.05;letter-spacing:-2px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero p{font-size:18px;color:var(--t3);margin-top:16px;font-weight:400}
@@ -176,15 +184,19 @@ function igcseSync(){
 <section class="hero"><h1>Every project I've built</h1><p>Interactive catalog with 3D previews, version timelines, and every design documented.</p></section>
 <div class="stats"><div class="stat"><div class="num" id="statTotal">120+</div><div class="label">Total Projects</div></div><div class="stat"><div class="num" id="statSW">25</div><div class="label">Software</div></div><div class="stat"><div class="num" id="statHW">5</div><div class="label">Hardware</div></div><div class="stat"><div class="num" id="statF3d">60+</div><div class="label">Fusion 360</div></div><div class="stat"><div class="num" id="statDes">20+</div><div class="label">Design</div></div></div>
 <div class="filters"><button class="fbtn active" onclick="F('all')">All</button><button class="fbtn" onclick="F('software')">Software</button><button class="fbtn" onclick="F('hardware')">Hardware</button><button class="fbtn" onclick="F('fusion')">Fusion 360</button><button class="fbtn" onclick="F('design')">Design &amp; Docs</button><span class="tagchip" id="tagChip" onclick="clearTag()" style="display:none">🔖 <b></b> ✕</span></div>
-<div style="max-width:1280px;margin:0 auto;padding:0 24px 24px;display:flex;gap:10px;flex-wrap:wrap">
-<a href="/portfolio/igcse%20books/" style="font-size:12px;padding:8px 16px;border-radius:9999px;border:1px solid var(--bd);background:var(--sf);color:var(--t2);text-decoration:none;font-weight:600">📚 IGCSE Books</a>
-<a href="/portfolio/igcse%20things/" style="font-size:12px;padding:8px 16px;border-radius:9999px;border:1px solid var(--bd);background:var(--sf);color:var(--t2);text-decoration:none;font-weight:600">🗂️ IGCSE Things</a>
-<a href="/portfolio/science%20booklet/" style="font-size:12px;padding:8px 16px;border-radius:9999px;border:1px solid var(--bd);background:var(--sf);color:var(--t2);text-decoration:none;font-weight:600">🧪 Science Booklets</a>
-<a href="/portfolio/past%20papers/" style="font-size:12px;padding:8px 16px;border-radius:9999px;border:1px solid var(--bd);background:var(--sf);color:var(--t2);text-decoration:none;font-weight:600">📝 Past Papers (1835)</a>
-<a href="/portfolio/Economics-IGCSE-Notes.html" style="font-size:12px;padding:8px 16px;border-radius:9999px;border:1px solid var(--bd);background:var(--sf);color:var(--t2);text-decoration:none;font-weight:600">📈 Econ Notes</a>
-<a href="/portfolio/Biology-IGCSE-Notes.html" style="font-size:12px;padding:8px 16px;border-radius:9999px;border:1px solid var(--bd);background:var(--sf);color:var(--t2);text-decoration:none;font-weight:600">🧬 Bio Notes</a>
-<a href="/portfolio/Chemistry-IGCSE-Notes.html" style="font-size:12px;padding:8px 16px;border-radius:9999px;border:1px solid var(--bd);background:var(--sf);color:var(--t2);text-decoration:none;font-weight:600">⚗️ Chem Notes</a>
-<a href="/portfolio/Physics-IGCSE-Notes.html" style="font-size:12px;padding:8px 16px;border-radius:9999px;border:1px solid var(--bd);background:var(--sf);color:var(--t2);text-decoration:none;font-weight:600">⚡ Phys Notes</a>
+<div class="res-section">
+<h2 class="stitle" style="margin-bottom:6px">📚 IGCSE Resources</h2>
+<p class="ssub" style="margin-bottom:20px">Study guides, textbooks, school files and past papers — all hosted right here.</p>
+<div class="res-grid">
+<a class="res-card" href="/portfolio/Economics-IGCSE-Notes.html"><div class="res-ico">📈</div><div><div class="res-t">Economics Notes</div><div class="res-d">Complete 42-chapter revision guide with graph diagrams</div></div></a>
+<a class="res-card" href="/portfolio/Biology-IGCSE-Notes.html"><div class="res-ico">🧬</div><div><div class="res-t">Biology Notes</div><div class="res-d">Complete 22-chapter revision guide (all units)</div></div></a>
+<a class="res-card" href="/portfolio/Chemistry-IGCSE-Notes.html"><div class="res-ico">⚗️</div><div><div class="res-t">Chemistry Notes</div><div class="res-d">Complete 29-chapter revision guide (all units)</div></div></a>
+<a class="res-card" href="/portfolio/Physics-IGCSE-Notes.html"><div class="res-ico">⚡</div><div><div class="res-t">Physics Notes</div><div class="res-d">Complete 28-chapter revision guide (all units)</div></div></a>
+<a class="res-card" href="/portfolio/igcse%20books/"><div class="res-ico">📚</div><div><div class="res-t">IGCSE Books</div><div class="res-d">4 Edexcel textbooks — biology, chemistry, physics, economics</div><span class="res-n">6 files · 417 MB</span></div></a>
+<a class="res-card" href="/portfolio/igcse%20things/"><div class="res-ico">🗂️</div><div><div class="res-t">IGCSE Things</div><div class="res-d">School lessons, papers and resources</div><span class="res-n">191 files · 268 MB</span></div></a>
+<a class="res-card" href="/portfolio/science%20booklet/"><div class="res-ico">🧪</div><div><div class="res-t">Science Booklets</div><div class="res-d">Yr 7–9 MYP booklets</div><span class="res-n">17 files · 153 MB</span></div></a>
+<a class="res-card" href="/portfolio/past%20papers/"><div class="res-ico">📝</div><div><div class="res-t">Past Papers</div><div class="res-d">Cambridge IGCSE · 7 subjects · 2018–2024</div><span class="res-n">1835 papers · 1.3 GB</span></div></a>
+</div>
 </div>
 <div class="admin-overlay" id="aOverlay" onclick="hideAdmin()"></div>
 <div class="admin-panel" id="aPanel"><h3>Admin Login</h3><input type="password" id="aPass" placeholder="Password" onkeydown="if(event.key==='Enter')login()"><button onclick="login()">Unlock Edit Mode</button><button onclick="exportData()" style="margin-left:8px;background:var(--sf);color:var(--t2);border:1px solid var(--bd)">Export JSON</button><div class="err" id="aErr"></div></div>
