@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Lathe — Complete Reference Poster</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { margin:0; padding:0; }
+  @page { size: 594mm 420mm; margin: 0; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background:#f4f5f7; color:#1c2333;
+    width:594mm; -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .poster { padding:4.5mm 8mm 4mm 8mm; }
+
+  /* ---------- HEADER ---------- */
+  .header {
+    background:linear-gradient(135deg,#1d2a44 0%,#2c4166 60%,#3a5484 100%);
+    color:#fff; border-radius:3mm; padding:3.2mm 7mm 2.8mm 7mm;
+    display:flex; align-items:center; justify-content:space-between;
+    box-shadow:0 1.5mm 3mm rgba(20,30,50,.25);
+  }
+  .header .titleblock h1 { font-size:28pt; letter-spacing:.5px; line-height:1; }
+  .header .titleblock h1 span { color:#ffb25e; }
+  .header .titleblock .sub { font-size:9pt; color:#c8d3e8; margin-top:1.3mm; font-weight:500; }
+  .header .chips { display:flex; gap:2mm; flex-wrap:wrap; max-width:78mm; }
+  .chip {
+    background:rgba(255,255,255,.12); border:0.3mm solid rgba(255,255,255,.25);
+    border-radius:4mm; padding:0.9mm 2.6mm; font-size:7.6pt; font-weight:700;
+    letter-spacing:.4px; text-align:center;
+  }
+  .chip b { display:block; font-size:10.5pt; color:#ffb25e; }
+
+  /* ---------- ROWS ---------- */
+  .row { display:grid; grid-template-columns: 7.1fr 4.9fr; gap:2.5mm; margin-top:2.5mm; }
+  .row.r1 { grid-template-columns: 5.6fr 6.4fr; }
+  .card {
+    background:#fff; border-radius:2.5mm; border:0.35mm solid #d9dee8;
+    padding:2.4mm 3.2mm 2.4mm 3.2mm; box-shadow:0 0.6mm 1.5mm rgba(30,40,60,.06);
+  }
+  .card h2 {
+    font-size:12.5pt; color:#fff; background:#2c4166; border-radius:1.5mm;
+    padding:1mm 3mm; margin-bottom:1.6mm; letter-spacing:.3px;
+    display:flex; align-items:center; gap:2mm;
+  }
+  .card h2 .num {
+    background:#ffb25e; color:#24344f; border-radius:1.2mm; font-size:9.5pt;
+    padding:0.2mm 1.8mm; font-weight:800;
+  }
+  .card h3 { font-size:9.6pt; color:#2c4166; margin:1.5mm 0 0.7mm 0; letter-spacing:.2px; }
+  p.copy { font-size:9.2pt; line-height:1.34; color:#2a3040; }
+  b.k { color:#c05621; }
+  .footnote { font-size:8.2pt; color:#5a6280; margin-top:1.4mm; line-height:1.3; }
+
+  /* ---------- LATHE DIAGRAM ---------- */
+  .diagram-card h2 { background:#5b6b8c; }
+  .diagram-card .intro { font-size:8.8pt; color:#2a3040; line-height:1.32; margin-bottom:1.2mm; }
+  svg.lathe { width:54%; height:auto; display:block; margin:0 auto; }
+  .legend { display:flex; gap:2.6mm; margin-top:1.4mm; font-size:8pt; color:#4a5266; flex-wrap:wrap; justify-content:center; }
+  .legend .sw { display:inline-block; width:2.8mm; height:1.7mm; border-radius:0.5mm; vertical-align:middle; margin-right:1mm; }
+  .diagram-note { font-size:7.8pt; color:#7a8296; margin-top:1mm; font-style:italic; text-align:center; line-height:1.28; }
+
+  /* ---------- TABLES ---------- */
+  table.parts { width:100%; border-collapse:collapse; font-size:8.2pt; }
+  table.parts th {
+    text-align:left; font-size:7.8pt; text-transform:uppercase; letter-spacing:.6px;
+    color:#fff; background:#3a5484; padding:0.55mm 1.7mm;
+  }
+  table.parts td { padding:0.55mm 1.7mm; border-bottom:0.25mm solid #e3e7ef; vertical-align:top; line-height:1.22; }
+  table.parts td.p { font-weight:800; color:#24344f; white-space:nowrap; width:24mm; }
+  table.parts tr:nth-child(even) td { background:#f7f9fc; }
+  table.speed { width:100%; border-collapse:collapse; font-size:8.4pt; margin-top:1.1mm; }
+  table.speed th { background:#3a5484; color:#fff; padding:0.55mm 1.5mm; text-align:left; font-size:8pt; }
+  table.speed td { padding:0.55mm 1.5mm; border-bottom:0.25mm solid #e3e7ef; }
+  table.speed tr:nth-child(even) td { background:#f7f9fc; }
+  table.insert { width:100%; border-collapse:collapse; font-size:8.2pt; margin-top:0.8mm; }
+  table.insert th { background:#3a5484; color:#fff; padding:0.5mm 1.4mm; text-align:left; font-size:7.8pt; }
+  table.insert td { padding:0.5mm 1.4mm; border-bottom:0.25mm solid #e3e7ef; }
+  table.insert td:first-child { font-weight:800; color:#c05621; white-space:nowrap; width:12mm; }
+
+  /* ---------- OPERATION GRID ---------- */
+  .ops { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4mm; }
+  .op {
+    border:0.3mm solid #d9dee8; border-left:1.5mm solid #e07b39; border-radius:1.3mm;
+    padding:1.2mm 1.7mm; background:#fbfcfe;
+  }
+  .op .t { font-size:9.2pt; font-weight:800; color:#2c4166; line-height:1.15; }
+  .op .d { font-size:8pt; color:#3c4356; line-height:1.22; margin-top:0.35mm; }
+
+  /* ---------- LISTS ---------- */
+  ul.tight { list-style:none; }
+  ul.tight li { font-size:8.6pt; line-height:1.26; padding:0.5mm 0 0.5mm 3.3mm; position:relative; color:#2a3040; }
+  ul.tight li::before { content:"›"; position:absolute; left:0; color:#e07b39; font-size:9.5pt; }
+  ul.tight li b { color:#24344f; }
+
+  /* two-column card (safety+care, workholding+tooling) */
+  .twocol { display:grid; grid-template-columns:1fr 1fr; gap:3.5mm; }
+  .twocol h3 { margin-top:0; }
+  .twocol .divider { border-left:0.3mm dashed #d9dee8; padding-left:3.5mm; }
+
+  /* ---------- FORMULAS ---------- */
+  .formula {
+    background:#eef2f9; border-left:1.2mm solid #e07b39; border-radius:1mm;
+    padding:1.2mm 2.2mm; font-size:9.8pt; font-weight:700; color:#24344f;
+    margin:1.1mm 0;
+  }
+  .formula small { display:block; font-size:7.8pt; font-weight:500; color:#5a6280; margin-top:0.35mm; }
+  .example { font-size:8.2pt; color:#444c60; background:#faf7f2; border-radius:1mm; padding:1.1mm 2mm; line-height:1.3; }
+
+  /* ---------- SAFETY ---------- */
+  .safety h2 { background:#a83232; }
+  .safety ul li::before { color:#d9534f; }
+
+  /* ---------- FOOTER BAND ---------- */
+  .footer {
+    margin-top:2.5mm; background:#24344f; color:#dfe6f2; border-radius:2.5mm;
+    padding:2.2mm 5mm; display:flex; gap:6mm; align-items:stretch;
+  }
+  .footer .timeline { flex:1.55; font-size:8.4pt; line-height:1.4; }
+  .footer .timeline b { color:#ffb25e; }
+  .footer .facts { flex:1; border-left:0.3mm solid rgba(255,255,255,.2); padding-left:5mm; font-size:8.2pt; line-height:1.38; }
+  .footer .facts div { margin-bottom:0.7mm; }
+  .footer .facts b { color:#ffb25e; }
+  .footer .tag { font-size:7.2pt; color:#8fa0bd; text-transform:uppercase; letter-spacing:.9px; font-weight:800; margin-bottom:0.7mm; }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- ================= HEADER ================= -->
+  <div class="header">
+    <div class="titleblock">
+      <h1>THE <span>LATHE</span> — COMPLETE REFERENCE POSTER</h1>
+      <div class="sub">The “mother of machine tools”: a rotating workpiece + a moving single-point cutting tool = every cylindrical, conical, threaded &amp; spherical part in the machine world</div>
+    </div>
+    <div class="chips">
+      <div class="chip">FIRST LATHE<b>~1300 BCE</b></div>
+      <div class="chip">MAUDELAY 1797<b>SCREW CUTTING</b></div>
+      <div class="chip">MANUAL ACCURACY<b>±0.01 mm</b></div>
+      <div class="chip">CNC ACCURACY<b>±0.001 mm</b></div>
+    </div>
+  </div>
+
+  <!-- ================= ROW 1 ================= -->
+  <div class="row r1">
+    <!-- DIAGRAM + WHAT IS -->
+    <div class="card diagram-card">
+      <h2><span class="num">1</span> ANATOMY OF AN ENGINE LATHE (CENTRE LATHE)</h2>
+      <p class="intro">A <b>lathe</b> holds the workpiece and <b class="k">spins it about its own axis</b> while a <b class="k">single-point cutting tool</b> is pressed against it. Because the work rotates, every feature is <b>symmetrical about the axis</b> — cylinders, cones, threads, spheres, bores. It is the <b>“mother of machine tools”</b>: it can machine the parts to build every other machine tool, including itself.</p>
+      <svg class="lathe" viewBox="0 0 1400 560" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+        <!-- ground -->
+        <line x1="60" y1="510" x2="1340" y2="510" stroke="#c3c9d6" stroke-width="3"/>
+        <!-- bed legs -->
+        <rect x="110" y="462" width="44" height="50" fill="#8a94a6"/>
+        <rect x="1250" y="462" width="44" height="50" fill="#8a94a6"/>
+        <!-- leadscrew + feed rod -->
+        <rect x="70" y="455" width="1260" height="7" fill="#97a1b3"/>
+        <line x1="90" y1="458.5" x2="78" y2="458.5" stroke="#e8ecf3" stroke-width="1.6"/>
+        <line x1="130" y1="458.5" x2="118" y2="458.5" stroke="#e8ecf3" stroke-width="1.6"/>
+        <line x1="170" y1="458.5" x2="158" y2="458.5" stroke="#e8ecf3" stroke-width="1.6"/>
+        <line x1="210" y1="458.5" x2="198" y2="458.5" stroke="#e8ecf3" stroke-width="1.6"/>
+        <line x1="250" y1="458.5" x2="238" y2="458.5" stroke="#e8ecf3" stroke-width="1.6"/>
+        <line x1="290" y1="458.5" x2="278" y2="458.5" stroke="#e8ecf3" stroke-width="1.6"/>
+        <line x1="330" y1="458.5" x2="318" y2="458.5" stroke="#e8ecf3" stroke-width="1.6"/>
+        <line x1="370" y1="458.5" x2="358" y2="458.5" stroke="#e8ecf3" stroke-width="1.6"/>
+        <rect x="70" y="470" width="1260" height="5" fill="#aab3c2"/>
+        <!-- bed + ways -->
+        <rect x="70" y="410" width="1260" height="45" fill="#98a2b4"/>
+        <rect x="70" y="398" width="1260" height="12" fill="#c3ccdb"/>
+        <line x1="70" y1="404" x2="1330" y2="404" stroke="#e8ecf3" stroke-width="1.4"/>
+        <line x1="70" y1="410" x2="1330" y2="410" stroke="#8a94a6" stroke-width="2"/>
+        <!-- workpiece -->
+        <rect x="392" y="250" width="613" height="40" fill="#c9ced8"/>
+        <line x1="430" y1="250" x2="430" y2="290" stroke="#aeb5c4" stroke-width="1.4"/>
+        <line x1="480" y1="250" x2="480" y2="290" stroke="#aeb5c4" stroke-width="1.4"/>
+        <line x1="530" y1="250" x2="530" y2="290" stroke="#aeb5c4" stroke-width="1.4"/>
+        <line x1="580" y1="250" x2="580" y2="290" stroke="#aeb5c4" stroke-width="1.4"/>
+        <line x1="630" y1="250" x2="630" y2="290" stroke="#aeb5c4" stroke-width="1.4"/>
+        <line x1="680" y1="250" x2="680" y2="290" stroke="#aeb5c4" stroke-width="1.4"/>
+        <line x1="730" y1="250" x2="730" y2="290" stroke="#aeb5c4" stroke-width="1.4"/>
+        <line x1="780" y1="250" x2="780" y2="290" stroke="#aeb5c4" stroke-width="1.4"/>
+        <line x1="830" y1="250" x2="830" y2="290" stroke="#aeb5c4" stroke-width="1.4"/>
+        <line x1="880" y1="250" x2="880" y2="290" stroke="#aeb5c4" stroke-width="1.4"/>
+        <line x1="930" y1="250" x2="930" y2="290" stroke="#aeb5c4" stroke-width="1.4"/>
+        <line x1="980" y1="250" x2="980" y2="290" stroke="#aeb5c4" stroke-width="1.4"/>
+        <rect x="392" y="248" width="613" height="4" fill="#f2f4f8" opacity="0.8"/>
+        <!-- headstock -->
+        <rect x="70" y="310" width="190" height="88" fill="#4a5a78"/>
+        <rect x="84" y="324" width="60" height="26" rx="3" fill="#37465f"/>
+        <rect x="84" y="356" width="60" height="26" rx="3" fill="#37465f"/>
+        <line x1="158" y1="330" x2="240" y2="330" stroke="#37465f" stroke-width="6"/>
+        <line x1="158" y1="362" x2="240" y2="362" stroke="#37465f" stroke-width="6"/>
+        <circle cx="130" cy="383" r="9" fill="none" stroke="#8fa0bd" stroke-width="2.5"/>
+        <!-- spindle -->
+        <rect x="238" y="265" width="52" height="10" fill="#2f3a52"/>
+        <!-- chuck body -->
+        <rect x="290" y="235" width="90" height="70" rx="8" fill="#5b6b8c"/>
+        <rect x="300" y="246" width="18" height="48" rx="3" fill="#4d5c7a"/>
+        <rect x="352" y="246" width="18" height="48" rx="3" fill="#4d5c7a"/>
+        <!-- chuck jaws -->
+        <rect x="378" y="240" width="16" height="9" fill="#2f3a52"/>
+        <rect x="378" y="291" width="16" height="9" fill="#2f3a52"/>
+        <rect x="380" y="262" width="12" height="6" fill="#2f3a52"/>
+        <rect x="380" y="272" width="12" height="6" fill="#2f3a52"/>
+        <!-- rotation arrow -->
+        <path d="M 296 200 A 48 48 0 0 1 360 212" fill="none" stroke="#e07b39" stroke-width="4"/>
+        <polygon points="360,212 349,216 353,205" fill="#e07b39"/>
+        <!-- tailstock -->
+        <rect x="1040" y="390" width="230" height="10" fill="#37465f"/>
+        <rect x="1050" y="320" width="210" height="78" rx="4" fill="#4a5a78"/>
+        <rect x="1100" y="336" width="110" height="30" rx="4" fill="#37465f"/>
+        <circle cx="1130" cy="382" r="8" fill="none" stroke="#8fa0bd" stroke-width="2.5"/>
+        <!-- quill + dead centre -->
+        <rect x="1002" y="264" width="52" height="12" fill="#2f3a52"/>
+        <polygon points="1002,270 986,261 986,279" fill="#1f2735"/>
+        <!-- carriage / saddle -->
+        <rect x="640" y="360" width="180" height="38" rx="3" fill="#6a7b9e"/>
+        <rect x="652" y="370" width="40" height="14" rx="2" fill="#57668a"/>
+        <rect x="706" y="370" width="40" height="14" rx="2" fill="#57668a"/>
+        <!-- apron + handwheel -->
+        <rect x="640" y="398" width="72" height="32" rx="3" fill="#5b6b8c"/>
+        <circle cx="676" cy="414" r="13" fill="none" stroke="#8fa0bd" stroke-width="2.5"/>
+        <!-- cross slide -->
+        <rect x="670" y="322" width="120" height="38" rx="3" fill="#7c8db0"/>
+        <line x1="670" y1="341" x2="790" y2="341" stroke="#c9d2e2" stroke-width="1.6"/>
+        <!-- compound rest -->
+        <rect x="700" y="288" width="62" height="34" rx="3" fill="#8c9dc0"/>
+        <!-- tool post -->
+        <rect x="718" y="262" width="26" height="26" rx="3" fill="#2f3a52"/>
+        <!-- tool bit -->
+        <rect x="728" y="250" width="7" height="24" fill="#e8eef5"/>
+        <polygon points="735,250 735,272 741,272" fill="#ffb25e"/>
+        <!-- chip curl -->
+        <path d="M 741 250 q 10 -8 6 -18 q -3 -7 -9 -4" fill="none" stroke="#e07b39" stroke-width="2.4"/>
+        <!-- feed arrow -->
+        <line x1="585" y1="340" x2="648" y2="340" stroke="#e07b39" stroke-width="3.4"/>
+        <polygon points="648,340 636,334 636,346" fill="#e07b39"/>
+
+        <!-- ===== LABELS ===== -->
+        <g font-size="22" font-weight="700" fill="#24344f">
+          <text x="110" y="203">HEADSTOCK</text>
+          <text x="220" y="235">SPINDLE</text>
+          <text x="330" y="203">CHUCK &amp; JAWS</text>
+          <text x="520" y="220">WORKPIECE</text>
+          <text x="700" y="203">TOOL BIT</text>
+          <text x="900" y="220">DEAD CENTRE</text>
+          <text x="1120" y="203">TAILSTOCK</text>
+          <text x="745" y="322">COMPOUND REST</text>
+          <text x="780" y="352">CROSS SLIDE</text>
+          <text x="240" y="478">BED &amp; WAYS</text>
+          <text x="560" y="478">APRON / HANDWHEEL</text>
+          <text x="790" y="478">LEADSCREW</text>
+        </g>
+        <!-- leader lines -->
+        <g stroke="#7c8db0" stroke-width="1.8" fill="#5b6b8c">
+          <line x1="165" y1="310" x2="130" y2="212"/><circle cx="165" cy="310" r="3.4"/>
+          <line x1="252" y1="265" x2="235" y2="243"/><circle cx="252" cy="265" r="3.4"/>
+          <line x1="335" y1="235" x2="335" y2="212"/><circle cx="335" cy="235" r="3.4"/>
+          <line x1="560" y1="250" x2="560" y2="230"/><circle cx="560" cy="250" r="3.4"/>
+          <line x1="731" y1="250" x2="720" y2="212"/><circle cx="731" cy="250" r="3.4"/>
+          <line x1="940" y1="262" x2="935" y2="230"/><circle cx="940" cy="262" r="3.4"/>
+          <line x1="1150" y1="320" x2="1150" y2="212"/><circle cx="1150" cy="320" r="3.4"/>
+          <line x1="731" y1="288" x2="755" y2="330"/><circle cx="731" cy="288" r="3.4"/>
+          <line x1="730" y1="322" x2="800" y2="360"/><circle cx="730" cy="322" r="3.4"/>
+          <line x1="250" y1="455" x2="250" y2="486"/><circle cx="250" cy="455" r="3.4"/>
+          <line x1="660" y1="430" x2="600" y2="486"/><circle cx="660" cy="430" r="3.4"/>
+          <line x1="790" y1="462" x2="790" y2="486"/><circle cx="790" cy="462" r="3.4"/>
+        </g>
+      </svg>
+      <div class="legend">
+        <span><span class="sw" style="background:#5b6b8c"></span>Cast-iron members</span>
+        <span><span class="sw" style="background:#c9ced8"></span>Workpiece</span>
+        <span><span class="sw" style="background:#2f3a52"></span>Moving / driven parts</span>
+        <span><span class="sw" style="background:#e07b39"></span>Cutting action &amp; motion</span>
+        <span><span class="sw" style="background:#e8eef5"></span>HSS tool bit</span>
+      </div>
+      <div class="diagram-note">Workpiece ROTATES about its axis (orange arrow); the tool is fed along the bed (longitudinal) or across it (facing) to remove material. The leadscrew synchronises carriage travel with spindle rotation so screw threads cut perfectly.</div>
+    </div>
+
+    <!-- RIGHT: parts -->
+    <div class="card">
+      <h2><span class="num">2</span> MAIN PARTS &amp; THEIR JOBS</h2>
+      <table class="parts">
+        <tr><th>Part</th><th>Function</th></tr>
+        <tr><td class="p">Bed</td><td>Heavy cast-iron base; keeps headstock, carriage &amp; tailstock aligned; absorbs vibration.</td></tr>
+        <tr><td class="p">Ways</td><td>Hardened ground guide rails the carriage slides along.</td></tr>
+        <tr><td class="p">Headstock</td><td>Houses spindle, bearings, belts/gears and speed controls.</td></tr>
+        <tr><td class="p">Spindle</td><td>Hollow rotating shaft driving the chuck/collet; bore lets long bar stock pass through.</td></tr>
+        <tr><td class="p">Chuck</td><td>3-jaw self-centring (round stock) or 4-jaw independent (irregular/square work).</td></tr>
+        <tr><td class="p">Carriage</td><td>Saddle sliding along the bed; carries cross slide &amp; apron; longitudinal feed.</td></tr>
+        <tr><td class="p">Cross slide</td><td>Moves the tool at 90° to the axis — facing and depth of cut.</td></tr>
+        <tr><td class="p">Compound rest</td><td>Swivels to any angle on the cross slide — taper turning; holds the tool post.</td></tr>
+        <tr><td class="p">Tool post</td><td>Clamps the tool bit or quick-change holder at centre height.</td></tr>
+        <tr><td class="p">Apron</td><td>Front of carriage: feed gears, clutch and carriage handwheel.</td></tr>
+        <tr><td class="p">Tailstock</td><td>Supports long work with a centre; quill (Morse taper) holds drills &amp; reamers.</td></tr>
+        <tr><td class="p">Leadscrew</td><td>Precision threaded shaft driving the carriage for screw cutting; geared 1:1 with spindle.</td></tr>
+        <tr><td class="p">Feed rod</td><td>Power feed (turning/facing) at selected rates, no thread sync.</td></tr>
+        <tr><td class="p">Centres</td><td>Dead (fixed) &amp; live (rotating) 60° centres — work <i>between centres</i> for max accuracy.</td></tr>
+        <tr><td class="p">Faceplate</td><td>Slotted plate for bolting on irregular work that can’t be chucked.</td></tr>
+        <tr><td class="p">Change gears</td><td>Set the leadscrew ratio to cut any thread pitch.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ================= ROW 2 ================= -->
+  <div class="row">
+    <!-- OPERATIONS -->
+    <div class="card">
+      <h2><span class="num">3</span> LATHE OPERATIONS — WHAT YOU CAN CUT</h2>
+      <div class="ops">
+        <div class="op"><div class="t">Facing</div><div class="d">Square the end of the work; tool feeds across the end face. First operation after chucking.</div></div>
+        <div class="op"><div class="t">Straight turning</div><div class="d">Reduce diameter along the length — <b>roughing</b> (deep cuts) then <b>finishing</b> (light cuts, fine feed, accurate size).</div></div>
+        <div class="op"><div class="t">Taper turning</div><div class="d">Cones by swivelled compound, offset tailstock, taper attachment or CNC — e.g. Morse tapers 1.5°–3°.</div></div>
+        <div class="op"><div class="t">Grooving / parting</div><div class="d">Narrow tool cuts a groove (O-ring seats) or parts off the piece; thin tools — slow speed, firm workholding.</div></div>
+        <div class="op"><div class="t">Knurling</div><div class="d">Hardened wheels press a diamond/straight grip pattern into handles — light pressure, slow speed, oil.</div></div>
+        <div class="op"><div class="t">Thread cutting</div><div class="d">Single-point tool + leadscrew sync cuts 60° V-threads; dies cut external, taps cut internal threads.</div></div>
+        <div class="op"><div class="t">Drilling</div><div class="d">Tailstock quill feeds the drill into rotating work — centre-drill first so it can’t wander.</div></div>
+        <div class="op"><div class="t">Boring</div><div class="d">Single-point boring bar enlarges/straightens holes; corrects holes drilled off-centre.</div></div>
+        <div class="op"><div class="t">Reaming</div><div class="d">Finish a drilled hole to exact size and smoothness — removes only ~0.1–0.3 mm.</div></div>
+        <div class="op"><div class="t">Eccentric turning</div><div class="d">Work between two <b>offset</b> centres makes crank pins and cam lobes.</div></div>
+        <div class="op"><div class="t">Filing / polishing</div><div class="d">Slow speed, draw-file or emery cloth to smooth and finish the surface.</div></div>
+        <div class="op"><div class="t">Hard turning</div><div class="d">Turn hardened steel (45–65 HRC) with CBN inserts — replaces grinding on many jobs.</div></div>
+      </div>
+      <div class="footnote">Also possible: chamfering &amp; deburring, spherical turning (form tool / CNC arc), tapping (internal threads via tailstock), and form-tool profile cutting.</div>
+    </div>
+
+    <!-- RIGHT: workholding + tooling merged -->
+    <div class="card">
+      <h2><span class="num">4</span> WORKHOLDING, MEASURING &amp; TOOLING</h2>
+      <div class="twocol">
+        <div>
+          <h3>Workholding</h3>
+          <ul class="tight">
+            <li><b>3-jaw scroll chuck</b> — self-centring, fastest; runout ~0.05–0.1 mm.</li>
+            <li><b>4-jaw independent</b> — each jaw dialed in; squares &amp; irregular; true to 0.01 mm.</li>
+            <li><b>Collet / ER chuck</b> — precise ±0.005 mm; thin &amp; bar stock, no jaw marks.</li>
+            <li><b>Between centres</b> — dead/live centre + dog; most accurate for long shafts.</li>
+            <li><b>Faceplate</b> — straps &amp; bolts hold irregular castings.</li>
+            <li><b>Steady / follower rests</b> — support long slender work; stop chatter.</li>
+            <li><b>Mandrel</b> — pressed into the bore so the outside turns true to it.</li>
+          </ul>
+          <h3>Measuring</h3>
+          <ul class="tight">
+            <li>Vernier caliper 0.02 mm · micrometer 0.01 mm · dial indicator 0.01 mm · DRO 0.005 mm.</li>
+            <li>Check diameter at 3 positions, runout &amp; taper — spindle <b>stopped</b>.</li>
+          </ul>
+        </div>
+        <div class="divider">
+          <h3>Tool materials</h3>
+          <ul class="tight">
+            <li><b>HSS</b> — tough, cheap, grindable; ~600 °C max; the manual-lathe default. <b>Cobalt</b> for tough alloys.</li>
+            <li><b>Carbide</b> — brazed or indexable inserts; 3–4× HSS speeds; rigid machines only.</li>
+            <li><b>Coated carbide</b> (TiN/TiAlN) — less friction, longer life.</li>
+            <li><b>Ceramic</b> — cast iron &amp; hardened steel at very high speeds.</li>
+            <li><b>CBN</b> — hard turning 45–65 HRC. <b>PCD</b> — aluminium &amp; composites.</li>
+          </ul>
+          <h3>Insert code — CNMG 12 04 08</h3>
+          <table class="insert">
+            <tr><th>Pos</th><th>Meaning</th></tr>
+            <tr><td>C</td><td>Shape: C=80° rhombus, D=55°, T=triangle, S=square, V=35°</td></tr>
+            <tr><td>N</td><td>Relief angle: N=0°, C=7°, B=5° · M = tolerance</td></tr>
+            <tr><td>G</td><td>Hole + chipbreaker · 12 = size (mm) · 04 thick · 08 = 0.8 mm nose radius</td></tr>
+          </table>
+          <h3>Tool geometry</h3>
+          <ul class="tight">
+            <li><b>Rake:</b> positive = sharp light cuts (HSS); negative = strong edge (carbide, high speed). <b>Clearance</b> ~5–10° stops flank rubbing.</li>
+            <li>Tip exactly at <b>spindle centre height</b>; bigger <b>nose radius</b> = stronger, smoother, higher forces.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ROW 3 ================= -->
+  <div class="row">
+    <!-- SPEEDS & FEEDS -->
+    <div class="card">
+      <h2><span class="num">5</span> SPEEDS, FEEDS &amp; DEPTH OF CUT</h2>
+      <p class="copy"><b class="k">Cutting speed (CS)</b> is the workpiece surface speed in <b>m/min</b> — set by material, tool and operation, not the dial:</p>
+      <div class="formula">RPM = (CS × 1000) ÷ (π × D)<small>D = diameter in mm · π ≈ 3.1416 · CS = π × D × RPM ÷ 1000 · Feed rate (mm/min) = feed (mm/rev) × RPM</small></div>
+      <div class="example"><b>Example:</b> Ø40 mm mild steel, HSS, CS ≈ 35 m/min → RPM = 35 000 ÷ 125.7 = <b>≈ 278 RPM</b>; carbide (CS 140) → ≈ 1114 RPM. Smaller Ø = higher RPM; bigger Ø = lower.</div>
+      <table class="speed">
+        <tr><th>Workpiece material</th><th>HSS CS</th><th>Carbide CS</th><th>Feed fin./rough (mm/rev)</th></tr>
+        <tr><td>Mild / low-carbon steel</td><td>30–45</td><td>90–180</td><td>0.05–0.15 / 0.2–0.5</td></tr>
+        <tr><td>Aluminium alloys</td><td>60–120</td><td>200–400</td><td>0.05–0.15 / 0.15–0.4</td></tr>
+        <tr><td>Brass &amp; bronze</td><td>45–75</td><td>150–250</td><td>0.05–0.15 / 0.15–0.4</td></tr>
+        <tr><td>Cast iron</td><td>20–30</td><td>60–120</td><td>0.05–0.15 / 0.2–0.5</td></tr>
+        <tr><td>Stainless steel</td><td>15–25</td><td>60–120</td><td>0.05–0.12 / 0.15–0.35</td></tr>
+        <tr><td>Plastics</td><td>60–120</td><td>200–300</td><td>0.05–0.1 / 0.1–0.3</td></tr>
+        <tr><td>Wood (hand chisels)</td><td colspan="2">300–900 (hand feed)</td><td>by eye — light sweeping cuts</td></tr>
+      </table>
+      <h3>Rules of thumb</h3>
+      <ul class="tight">
+        <li><b>Depth of cut:</b> roughing 1–4 mm (HSS) / 2–8 mm (carbide); finishing 0.1–0.5 mm. <b>Chatter</b> = too fast/deep, dull tool, too much overhang — slow down.</li>
+        <li><b>Threading:</b> several light passes, finish with a zero-cut spring pass. <b>Coolant:</b> soluble oil (steel), paraffin (aluminium), dry (cast iron).</li>
+      </ul>
+    </div>
+
+    <!-- RIGHT: types -->
+    <div class="card">
+      <h2><span class="num">6</span> TYPES OF LATHES</h2>
+      <ul class="tight">
+        <li><b>Engine / centre lathe</b> — classic general-purpose manual lathe; belts &amp; gears; turning, facing, threading.</li>
+        <li><b>Bench / mini lathe</b> — small; models, jewellery, electronics, hobby work.</li>
+        <li><b>Toolroom lathe</b> — highest manual precision; fine leadscrew, close tolerances; tool &amp; die work.</li>
+        <li><b>Gap-bed lathe</b> — removable bed section swings very large diameters past the carriage.</li>
+        <li><b>Turret / capstan lathe</b> — multi-tool turret for repeat production batches.</li>
+        <li><b>CNC turning centre</b> — computer control; canned threading, live tooling, C-axis milling, bar feeders.</li>
+        <li><b>Swiss-type lathe</b> — sliding headstock + guide bushing; ultra-small precise parts (watch screws, medical).</li>
+        <li><b>Vertical lathe (VTL)</b> — vertical spindle for heavy, large-diameter discs &amp; flywheels.</li>
+        <li><b>Wood lathe</b> — hand-held gouges &amp; chisels on a tool rest; work turns, tool guided by hand.</li>
+        <li><b>Metal-spinning lathe</b> — presses sheet metal discs over a rotating former.</li>
+      </ul>
+      <div class="footnote"><b>Lathe vs mill:</b> a lathe rotates the work past a fixed tool (circles about the axis: shafts, threads, bores); a mill rotates the tool and moves the work (flats, slots, 3D shapes). Turning centres add milling via live tooling; turn-mill centres do both in one setup.</div>
+    </div>
+  </div>
+
+  <!-- ================= ROW 4 ================= -->
+  <div class="row">
+    <!-- SAFETY + CARE -->
+    <div class="card safety">
+      <h2><span class="num">7</span> SAFETY &amp; DAILY CARE</h2>
+      <div class="twocol">
+        <div>
+          <h3>Before you touch the spindle</h3>
+          <ul class="tight">
+            <li><b>No gloves, long sleeves, loose hair or jewellery</b> near a rotating chuck — they wrap and pull you in.</li>
+            <li><b>Remove the chuck key</b> before starting — a thrown key is a lethal missile.</li>
+            <li><b>Stop the spindle</b> before measuring, adjusting, cleaning or changing tools.</li>
+            <li><b>Safety glasses always</b>; clear swarf with a brush/hook, never bare hands.</li>
+            <li>Secure work firmly; right speed; listen for chatter; never grab the chuck to stop it — use the brake. Guards closed, ventilated; know the <b>E-stop</b>.</li>
+          </ul>
+        </div>
+        <div class="divider">
+          <h3>Daily care</h3>
+          <ul class="tight">
+            <li>Brush chips after every job; <b>wipe the ways</b> — grit grinds the slides.</li>
+            <li><b>Oil</b> ways, leadscrew &amp; gears daily; a thin film stops rust.</li>
+            <li>Check &amp; adjust <b>gibs</b> (no backlash) and belt tension; clean chuck jaws, re-check runout.</li>
+            <li>Align tailstock to headstock (test between centres); check tool tip height; keep electrical box dry.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHY IT MATTERS -->
+    <div class="card">
+      <h2><span class="num">8</span> WHY IT MATTERS</h2>
+      <p class="copy">Every engine, gearbox, axle, bolt, bearing and screw on Earth is shaped by a lathe or by machines the lathe built. Without Maudslay’s screw-cutting lathe (1797) there would be no standardised threads, no interchangeable parts, no mass production. Today’s CNC turning centres hold ±0.001 mm and run unattended overnight — yet the <b>manual engine lathe is still the first machine every machinist learns on</b>, because it shows directly how metal behaves under a cutting edge.</p>
+      <h3>Facts</h3>
+      <ul class="tight">
+        <li>Wood lathes hold the tool by hand; metal lathes clamp it rigidly — same motion, different rules.</li>
+        <li>Watch screws from Swiss lathes are thinner than a human hair; the largest lathes turn ship propeller shafts many metres long.</li>
+        <li>A lathe is the only machine tool that can build a copy of itself.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER BAND ================= -->
+  <div class="footer">
+    <div class="timeline">
+      <div class="tag">EVOLUTION OF THE LATHE — 3300 YEARS</div>
+      <b>~1300 BCE</b> Egypt: bow-driven wood lathes → <b>~500 BCE</b> Roman two-person lathes → <b>Middle Ages</b> pole lathes (treadle + springy branch) → <b>~1480</b> Da Vinci’s flywheel treadle lathe → <b>1568</b> Besson: first screw cutting → <b>1797</b> Maudslay: all-metal screw-cutting lathe, slide rest, standard threads → <b>1840s–60s</b> turret lathes → <b>1890s</b> geared-headstock engine lathe → <b>1950s</b> punched-tape NC → <b>1970s→</b> microprocessor CNC turning centres.
+    </div>
+    <div class="facts">
+      <div class="tag">QUICK FACTS</div>
+      <div><b>“Mother of machine tools”</b> — it makes the parts for every other machine tool.</div>
+      <div><b>Maudslay 1797</b> — standardised threads still fit worldwide today.</div>
+      <div><b>Biggest lathes</b> turn ship shafts &amp; rotor discs many metres across.</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
