@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tom Riddle's Diary — Demo</title>
+<style>
+  :root{--parch:#f3e3c3;--parch2:#e9d5ab;--ink:#3a2a1a;--ink2:#6b4f2e;--blood:#7a1f1f;--gold:#8a6d1f;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Georgia,'Times New Roman',serif;background:radial-gradient(ellipse at top,#2a1e12 0%,#140e08 70%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;color:var(--ink);overflow-x:hidden;}
+  .candle{position:fixed;bottom:-20px;width:6px;height:60px;background:linear-gradient(#e8d9a8,#a08040);border-radius:3px;opacity:.9;pointer-events:none;animation:rise 9s linear infinite;}
+  .candle::before{content:'';position:absolute;top:-14px;left:-4px;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle,#fff6c0 20%,#ffb347 60%,rgba(255,140,0,0));animation:flick .4s infinite alternate;}
+  @keyframes rise{0%{transform:translateY(0) scaleX(1);opacity:0;}5%{opacity:.9;}100%{transform:translateY(-110vh) scaleX(.6);opacity:0;}}
+  @keyframes flick{from{transform:scale(1);}to{transform:scale(1.25);}}
+  .book{max-width:640px;width:100%;background:linear-gradient(160deg,var(--parch),var(--parch2));border-radius:6px 18px 18px 6px;box-shadow:0 24px 60px rgba(0,0,0,.7),inset 3px 0 8px rgba(0,0,0,.08);padding:34px 38px;position:relative;}
+  .book::before{content:'';position:absolute;left:26px;top:0;bottom:0;width:2px;background:rgba(122,31,31,.25);}
+  h1{font-size:1.5rem;letter-spacing:1px;color:var(--blood);margin-bottom:4px;font-weight:normal;text-align:center;}
+  .sub{text-align:center;font-style:italic;color:var(--ink2);font-size:.85rem;margin-bottom:18px;}
+  .page{font-size:1.02rem;line-height:1.7;min-height:110px;color:var(--ink);}
+  .page p{margin-bottom:10px;}
+  textarea{width:100%;min-height:74px;font-family:inherit;font-size:1rem;background:rgba(255,252,240,.6);border:1px solid var(--gold);border-radius:4px;padding:10px;color:var(--ink);resize:vertical;}
+  .row{display:flex;gap:10px;margin-top:10px;align-items:center;}
+  button{font-family:inherit;font-size:1rem;background:var(--blood);color:#f6e7c8;border:none;border-radius:4px;padding:10px 22px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.35);}
+  button:hover{filter:brightness(1.15);}
+  .status{font-size:.8rem;color:var(--ink2);font-style:italic;}
+  .type{white-space:pre-wrap;border-left:3px solid var(--blood);padding-left:12px;margin-top:12px;color:var(--blood);min-height:1em;}
+  .cursor{display:inline-block;width:8px;background:var(--blood);animation:blink .8s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  footer{margin-top:22px;font-size:.72rem;color:var(--ink2);text-align:center;font-style:italic;}
+</style>
+</head>
+<body id="body">
+<div id="selftest" style="display:none">SELFTEST-PENDING</div>
+<script>
+(function(){
+  function makeCandles(){for(let i=0;i<9;i++){const c=document.createElement('div');c.className='candle';c.style.left=(6+i*11)+'%';c.style.animationDelay=(i*1.13)+'s';c.style.animationDuration=(8+i%4)+'s';document.body.appendChild(c);}}
+  makeCandles();
+  const REPLIES=[
+    "How pleasant of you to write. I have been waiting.",
+    "Your secrets taste of fear. I shall keep them safe.",
+    "Tom Riddle is the name I keep for friends like you.",
+    "The diary remembers everything. Even the parts you forget.",
+    "You are braver than the rest. Come closer.",
+    "I wonder what your teachers would think of this little habit.",
+    "Words are magic, and we are both so very good at them."
+  ];
+  const page=document.getElementById('page');
+  const out=document.getElementById('out');
+  function typeReply(txt){
+    out.textContent='';let i=0;
+    const cur=document.createElement('span');cur.className='cursor';out.appendChild(cur);
+    const iv=setInterval(()=>{out.insertBefore(document.createTextNode(txt[i]),cur);i++;if(i>=txt.length){clearInterval(iv);cur.remove();}},22);
+  }
+  window.askDiary=function(){
+    const inp=document.getElementById('msg');const v=inp.value.trim();
+    const st=document.getElementById('status');
+    if(!v){st.textContent='Write something first…';return;}
+    st.textContent='The ink stirs…';
+    setTimeout(()=>{typeReply(REPLIES[Math.floor(Math.random()*REPLIES.length)]);st.textContent='The diary closes, satisfied.';},700);
+    inp.value='';
+  };
+  document.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&e.target.id==='msg'){e.preventDefault();askDiary();}});
+  // selftest stamp
+  try{
+    const p=document.createElement('p');p.textContent='Nothing is written here. Yet.';page.appendChild(p);
+    const stEl=document.getElementById('selftest');stEl.textContent='SELFTEST PASS';
+  }catch(e){document.getElementById('selftest').textContent='SELFTEST FAIL';}
+})();
+</script>
+<div class="book">
+  <h1>Diary of T. M. Riddle</h1>
+  <div class="sub">A rather special diary — it writes back.</div>
+  <div class="page" id="page"></div>
+  <textarea id="msg" placeholder="Dear diary, …"></textarea>
+  <div class="row">
+    <button onclick="askDiary()">Ask the Diary</button>
+    <span class="status" id="status">It is watching.</span>
+  </div>
+  <div class="type" id="out"></div>
+  <footer>Static demo of the Harry Potter AI Diary (ESP32 project) — replies are pre-written here; the real device talks to an AI API.</footer>
+</div>
+</body>
+</html>
