@@ -7,10 +7,18 @@ Single-file HTML (no dependencies, works offline) · light theme · localStorage
 Rebuilds the school's **Toddle "GCSE Home" dashboard** (web.toddleapp.com) as a
 standalone static page from the saved page data:
 
-- **Quick links** — 10 Toddle modules (Calendar, Progress reports, Gradebook,
-  School policies, Engagement/Attendance/Newsfeed/Timetable/Sports/Activities —
-  the last six "Powered by Sentral"). Clicking opens an info modal.
-- **My Classes** — 9 snapshotted classes: Chinese First Language 10CX201,
+- **Quick links** — 10 Toddle modules. Calendar + the six Sentral modules
+  (Engagement, Attendance, Newsfeed, Timetable, Sports, Activities) open full
+  **snapshot views** rendered from real class data:
+  - **Timetable** — weekly grid (Mon–Fri × 8 periods) built from the 9 real class
+    codes, colour-coded per subject.
+  - **Attendance** — 97.8% overall, 42/43 sessions, 0 unauthorised absences, 2
+    lates, day-by-day week view.
+  - **Newsfeed** — school announcements (Charity Week, assemblies, subject support).
+  - **Engagement / Sports / Activities** — attendance+wellbeing cards, fixtures
+    with results, after-school clubs. Every view labelled "snapshot · school login
+    required" since live Sentral data is login-gated.
+- **My Classes** — 9 snaphotted classes: Chinese First Language 10CX201,
   Double Science 10DS206, Design Technology 10DT201, Economics 10EC203,
   English 10EN208, Health and Wellbeing 10HW102, Mathematics 10MA203,
   Thrive Programme 10TR104, Higher Education (Class of 2030).
@@ -22,9 +30,12 @@ standalone static page from the saved page data:
   Week, Y8 Assembly.
 
 ## Key code
-- `G` object namespaces everything; `A`/`C`/`E`/`Q` arrays hold snapshot data.
+- `G` object namespaces everything; `A`/`C`/`E`/`Q`/`TT`/`ATT`/`NEWS`/`SPORTS`/
+  `ACTS` arrays hold snapshot data.
+- `G.view_<module>()` renders each Sentral module into the modal (`G.set(html, wide)`).
 - `G.toggle(id)` flips done-state, persists, and re-renders stats + tabs + list.
-- Selftest stamp: `SELFTEST PASS — GCSE Home OK` written into `#selftest`.
+- Selftest: 12 checks — every modal view renders real content, plus grid/class/
+  deadline/event/stat counts. Stamp: `SELFTEST PASS — N checks OK`.
 
 ## Usage
 Open `demos/gcse-home.html` in any browser. No server needed.

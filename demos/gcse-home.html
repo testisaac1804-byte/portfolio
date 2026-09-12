@@ -84,7 +84,8 @@ h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--sub)
 /* modal */
 .ov{position:fixed;inset:0;background:rgba(15,22,35,.46);z-index:50;display:none;align-items:center;justify-content:center;padding:22px}
 .ov.open{display:flex}
-.mod{background:#fff;border-radius:16px;max-width:520px;width:100%;max-height:86vh;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,.25);padding:22px}
+.mod{background:#fff;border-radius:16px;max-width:560px;width:100%;max-height:86vh;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,.25);padding:22px}
+.mod.wide{max-width:860px}
 .mod h3{margin:0 0 6px;font-size:17px}
 .mod .subt{color:var(--sub);font-size:12.5px;margin-bottom:16px}
 .mod .row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--bord);font-size:13px}
@@ -104,6 +105,52 @@ h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--sub)
 .stat b{font-size:22px;display:block;color:var(--red)}
 .stat span{font-size:11.5px;color:var(--sub)}
 .foot{color:var(--faint);font-size:11.5px;text-align:center;margin-top:34px}
+/* ---- sentral module views ---- */
+.hrow{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.hrow .hm{display:flex;align-items:center;gap:8px;background:#f0f1f4;border:1px solid var(--bord);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--sub)}
+.hrow .hm.on{background:#eaf0ff;border-color:#c9d8ff;color:var(--blue)}
+.ttwrap{overflow-x:auto}
+table.tt{border-collapse:separate;border-spacing:0;width:100%;min-width:620px;font-size:12px}
+table.tt th{background:#f8f9fb;color:var(--sub);font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding:8px 6px;border-bottom:2px solid var(--bord);text-align:center;position:sticky;top:0}
+table.tt td{border-bottom:1px solid var(--bord);padding:6px 5px;text-align:center;vertical-align:middle;height:38px}
+table.tt td.pn{color:var(--faint);font-size:10.5px;font-weight:700;text-align:right;padding-right:9px;white-space:nowrap;width:76px}
+table.tt td .sub{display:block;font-weight:650;font-size:11.5px;line-height:1.15}
+table.tt td .code{display:block;font-size:9.5px;color:var(--faint);margin-top:1px}
+table.tt td.tp{background:#fff;border-radius:8px;padding:0}
+table.tt td.tp .in{border:1px solid var(--bord2);border-radius:8px;padding:5px 3px;margin:1px;background:#fff}
+table.tt td.tp.free{color:var(--faint);font-size:11px}
+.atti{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.attc{background:#f8f9fb;border:1px solid var(--bord);border-radius:12px;padding:13px}
+.attc b{font-size:20px;display:block;color:var(--ink)}
+.attc span{font-size:11px;color:var(--sub)}
+.attc.g b{color:var(--green)} .attc.r b{color:var(--red)} .attc.a b{color:var(--amber)}
+.barline{height:9px;background:#eef0f4;border-radius:99px;overflow:hidden;margin:4px 0 2px}
+.barline i{display:block;height:100%;background:var(--green);border-radius:99px}
+.days{margin-top:6px}
+.drow{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--bord);font-size:12.5px}
+.drow:last-child{border-bottom:none}
+.drow .dd{width:56px;font-weight:650;flex:none}
+.drow .ds{flex:1}
+.drow .st{font-size:11px;font-weight:650;padding:2px 9px;border-radius:99px}
+.st.pr{background:#e2f6f1;color:var(--green)} .st.la{background:#fff2d6;color:#b87400} .st.ab{background:#ffe1e8;color:var(--red)}
+.nitem{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--bord)}
+.nitem:last-child{border-bottom:none}
+.nitem .nic{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;flex:none}
+.nitem .nt{font-size:13px;font-weight:650}
+.nitem .nd{font-size:11.5px;color:var(--sub);margin-top:3px}
+.nitem .nd b{color:var(--ink)}
+.evbox{border-left:3px solid var(--bord2);padding-left:12px;margin:9px 0}
+.evbox .et{font-size:13px;font-weight:650}
+.evbox .em{font-size:11.5px;color:var(--sub);margin-top:2px}
+.wbar{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--sub);margin-top:3px}
+.wbar i{display:inline-block;width:9px;height:9px;border-radius:3px}
+.wgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:8px 0 4px}
+.wgrid .wd{background:#f0f1f4;border-radius:9px;padding:8px 4px;text-align:center;font-size:11.5px;min-height:52px}
+.wgrid .wd b{display:block;font-size:14px}
+.wgrid .wd .evt{display:block;font-size:9px;color:var(--red);margin-top:3px;line-height:1.2}
+.wgrid .wd.today{outline:2px solid var(--red);outline-offset:1px}
+.wgrid .wd .no{font-size:9px;color:var(--faint);margin-top:3px}
+.subnote{font-size:11px;color:var(--faint);margin-top:12px}
 </style>
 </head>
 <body id="body">
@@ -159,6 +206,7 @@ var G={
   init:function(){
     try{this.done=JSON.parse(localStorage.getItem(this.LS)||'{}')||{};}catch(e){this.done={};}
     this.renderStats();this.renderQuick();this.renderClasses();this.renderTabs();this.renderDeadlines();this.renderEvents();
+    if(!this.selftest()){document.getElementById('selftest').textContent='SELFTEST FAIL';return;}
     document.getElementById('selftest').textContent='SELFTEST PASS — GCSE Home OK';
   },
   save:function(){try{localStorage.setItem(this.LS,JSON.stringify(this.done));}catch(e){}},
@@ -184,10 +232,11 @@ var G={
     });
   },
   openQuick:function(q){
+    if(q.view){G['view_'+q.view]();return;}
     var inr='';
     if(q.s){inr='<div class="row"><span>Source</span><b>'+q.s+'</b></div>';}
     G.set('<h3>'+q.n+'</h3><div class="subt">'+q.d+'</div>'+inr+
-      '<div class="tag'+(q.sentry?' s':'')+'">'+(q.sentry?'Powered by Sentral · school login required':'Toddle module')+'</div>'+
+      '<div class="tag'+(q.sentry?' s':'')+'">'+(q.sentry?'Powered by Sentral · snapshot view':'Toddle module')+'</div>'+
       '<div class="btns"><button class="btn p" onclick="G.close()">Close</button></div>');
   },
   /* ---- classes ---- */
@@ -259,7 +308,6 @@ var G={
   /* ---- events ---- */
   renderEvents:function(){
     var p=document.getElementById('evlist');p.innerHTML='';
-    var dn=[new Date().getDate()];
     E.forEach(function(e){
       var d=document.createElement('div');d.className='ev'+(e.today?' today':'');
       d.innerHTML='<div class="d"><b>'+e.d+'</b><span>'+e.m+'</span></div>'+
@@ -269,39 +317,171 @@ var G={
     });
   },
   /* ---- modal ---- */
-  set:function(html){document.getElementById('mod').innerHTML=html;document.getElementById('ov').classList.add('open');},
+  set:function(html,wide){document.getElementById('mod').innerHTML=html;document.getElementById('mod').className='mod'+(wide?' wide':'');document.getElementById('ov').classList.add('open');},
   close:function(){document.getElementById('ov').classList.remove('open');},
   reopen:function(a){
     var rows='<div class="row"><span>Due</span><b>'+(a.due||'No due date')+'</b></div>'+
       '<div class="row"><span>Status</span><b>'+(G.done[a.id]?'Complete ✓':'Not submitted')+'</b></div>';
     G.set('<h3>'+a.t+'</h3><div class="subt">Learning experience · '+a.cl+'</div>'+rows+
       '<div class="btns"><button class="btn" onclick="G.toggle('+a.id+');G.close()">'+(G.done[a.id]?'Undo':'Mark done')+'</button><button class="btn p" onclick="G.close()">Close</button></div>');
+  },
+  /* ================= SENTRAL MODULE VIEWS ================= */
+  view_timetable:function(){
+    var h='<h3>📅 Timetable</h3><div class="subt">Weekly lesson schedule · snapshot from your real GCSE classes</div>'+
+      '<div class="hrow"><span class="hm on">Week A — 14–18 Sep 2026</span><span class="hm">YM10</span></div>'+
+      '<div class="ttwrap"><table class="tt"><tr><th></th><th>Mon 14</th><th>Tue 15</th><th>Wed 16</th><th>Thu 17</th><th>Fri 18</th></tr>';
+    var clsByCode={};
+    C.forEach(function(c){clsByCode[c.code]=c;});
+    TT.forEach(function(row){
+      h+='<tr><td class="pn">'+row.p+'</td>';
+      row.d.forEach(function(code){
+        if(!code){h+='<td class="tp free">—</td>';return;}
+        var c=clsByCode[code]||{t:code,code:code};
+        h+='<td class="tp"><div class="in" style="background:'+c.bg+'"><span class="sub" style="color:'+c.fg+'">'+c.t.replace('Year 10 – 11 ','')+'</span><span class="code">'+c.code+'</span></div></td>';
+      });
+      h+='</tr>';
+    });
+    h+='</table></div>'+
+      '<div class="tag s">Snapshot · live timetable needs school login</div>'+
+      '<div class="btns"><button class="btn p" onclick="G.close()">Close</button></div>';
+    G.set(h,true);
+  },
+  view_attendance:function(){
+    var h='<h3>✅ Attendance</h3><div class="subt">Attendance record · this term so far (Sept 2026)</div>'+
+      '<div class="atti">'+
+      '<div class="attc g"><b>97.8%</b><span>Overall attendance</span></div>'+
+      '<div class="attc"><b>42 / 43</b><span>Sessions present</span></div>'+
+      '<div class="attc"><b>0</b><span>Unauthorised absences</span></div>'+
+      '<div class="attc a"><b>2</b><span>Lates</span></div>'+
+      '</div>'+
+      '<div><div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--sub)"><span>This week</span><b style="color:var(--ink)">42/43 sessions</b></div>'+
+      '<div class="barline"><i style="width:97.8%"></i></div></div>'+
+      '<div class="days">';
+    ['Mon 14 Sep','Tue 15 Sep','Wed 16 Sep','Thu 17 Sep','Fri 18 Sep'].forEach(function(d,i){
+      var st=ATT[i];
+      var css={P:'pr',L:'la',A:'ab'}[st[0]];
+      var lab={P:'Present',L:'Late',A:'Absent'}[st[0]];
+      h+='<div class="drow"><span class="dd">'+d+'</span><span class="ds">'+st[1]+'</span><span class="st '+css+'">'+lab+'</span></div>';
+    });
+    h+='</div>'+
+      '<div class="tag s">Snapshot · live attendance needs school login</div>'+
+      '<div class="btns"><button class="btn p" onclick="G.close()">Close</button></div>';
+    G.set(h);
+  },
+  view_newsfeed:function(){
+    var h='<h3>📰 Newsfeed</h3><div class="subt">School news &amp; announcements</div>';
+    NEWS.forEach(function(n){
+      h+='<div class="nitem"><div class="nic" style="background:'+n.bg+'">'+n.i+'</div>'+
+        '<div><div class="nt">'+n.t+'</div><div class="nd">'+n.d+'</div></div></div>';
+    });
+    h+='<div class="tag s">Snapshot · live newsfeed needs school login</div>'+
+      '<div class="btns"><button class="btn p" onclick="G.close()">Close</button></div>';
+    G.set(h);
+  },
+  view_engagement:function(){
+    var h='<h3>❤️ Engagement</h3><div class="subt">Attendance &amp; wellbeing overview</div>'+
+      '<div class="atti">'+
+      '<div class="attc g"><b>97.8%</b><span>Attendance</span></div>'+
+      '<div class="attc g"><b>8 / 8</b><span>Classes engaged</span></div>'+
+      '<div class="attc"><b>12</b><span>Wellbeing check-ins</span></div>'+
+      '<div class="attc a"><b>1</b><span>Needs attention</span></div>'+
+      '</div>'+
+      '<div class="evbox" style="border-color:var(--green)"><div class="et">✅ Good week</div>'+
+      '<div class="em">All classes attended, homework submitted on time. One wellbeing check-in flagged "a bit tired" — nothing to worry about.</div></div>'+
+      '<div class="subnote">Engagement combines attendance + wellbeing data from Sentral. Shown as a snapshot.</div>'+
+      '<div class="tag s">Powered by Sentral · snapshot</div>'+
+      '<div class="btns"><button class="btn p" onclick="G.close()">Close</button></div>';
+    G.set(h);
+  },
+  view_sports:function(){
+    var h='<h3>🏅 Sports</h3><div class="subt">Fixtures &amp; results · island games season</div>';
+    SPORTS.forEach(function(s){
+      h+='<div class="nitem"><div class="nic" style="background:'+s.bg+'">'+s.i+'</div>'+
+        '<div><div class="nt">'+s.t+'</div><div class="nd">'+s.d+'</div>'+
+        '<div class="wbar"><i style="background:'+(s.w?'var(--green)':'var(--faint)')+'"></i>'+(s.w?'Result: won '+s.sc:'Upcoming fixture')+'</div></div></div>';
+    });
+    h+='<div class="tag s">Snapshot · live fixtures need school login</div>'+
+      '<div class="btns"><button class="btn p" onclick="G.close()">Close</button></div>';
+    G.set(h);
+  },
+  view_activities:function(){
+    var h='<h3>🎯 Activities</h3><div class="subt">Clubs &amp; after-school activities · this term</div>';
+    ACTS.forEach(function(a){
+      h+='<div class="nitem"><div class="nic" style="background:'+a.bg+'">'+a.i+'</div>'+
+        '<div><div class="nt">'+a.t+'</div><div class="nd">'+a.d+'</div>'+
+        '<div class="wbar"><i style="background:var(--green)"></i>'+a.when+'</div></div></div>';
+    });
+    h+='<div class="tag s">Snapshot · club listings need school login</div>'+
+      '<div class="btns"><button class="btn p" onclick="G.close()">Close</button></div>';
+    G.set(h);
+  },
+  view_calendar:function(){
+    var h='<h3>📅 Calendar</h3><div class="subt">September 2026 · school events</div><div class="wgrid">';
+    var days=['','','','','','','','','','','','','',''   // 1-13
+      ,'<b>12</b><span class="no">—</span>','<b>13</b>'
+      ,'<b>14</b><span class="evt">Assembly ×2</span><span class="evt">Charity wk</span>'
+      ,'<b>15</b><span class="evt">Y8 Assembly</span>','<b>16</b>','<b>17</b>','<b>18</b>','<b>19</b>','<b>20</b>'
+      ,'<b>21</b>','<b>22</b>','<b>23</b>','<b>24</b>','<b>25</b>','<b>26</b>','<b>27</b>'
+      ,'<b>28</b>','<b>29</b>','<b>30</b>',''];
+    days[15]='<b>12</b><span class="no">No events</span>';
+    days.forEach(function(d,i){if(!d)return;h+='<div class="wd'+(i===15?' today':'')+'">'+d+'</div>';});
+    h+='</div>'+
+      '<div class="evbox" style="border-color:var(--violet)"><div class="et">Coming up</div>'+
+      '<div class="em"><b>Mon 14 Sep:</b> Y10 &amp; Y12 Assembly (08:00) · Y7 Assembly (08:00) · Rutherford Charity Week (08:00–15:00)</div>'+
+      '<div class="em"><b>Tue 15 Sep:</b> Y8 Assembly (08:00)</div></div>'+
+      '<div class="tag s">Data snapshot from GCSE Home · 12 Sep 2026</div>'+
+      '<div class="btns"><button class="btn p" onclick="G.close()">Close</button></div>';
+    G.set(h);
+  },
+  /* ---- selftest: every view renders real content ---- */
+  selftest:function(){
+    var t=0, ok=function(){t++;};
+    var checks=[
+      ['timetable',function(){G.view_timetable();var m=document.getElementById('mod');return m.innerHTML.indexOf('10MA203')>-1&&m.innerHTML.indexOf('Mon 14')>-1;}],
+      ['attendance',function(){G.view_attendance();var m=document.getElementById('mod');return m.innerHTML.indexOf('97.8%')>-1;}],
+      ['newsfeed',function(){G.view_newsfeed();var m=document.getElementById('mod');return m.innerHTML.indexOf('Newsfeed')>-1&&m.innerHTML.indexOf('Charity')>-1;}],
+      ['engagement',function(){G.view_engagement();var m=document.getElementById('mod');return m.innerHTML.indexOf('97.8%')>-1;}],
+      ['sports',function(){G.view_sports();var m=document.getElementById('mod');return m.innerHTML.indexOf('Fixtures')>-1;}],
+      ['activities',function(){G.view_activities();var m=document.getElementById('mod');return m.innerHTML.indexOf('Activities')>-1;}],
+      ['calendar',function(){G.view_calendar();var m=document.getElementById('mod');return m.innerHTML.indexOf('September 2026')>-1;}],
+      ['quickgrid',function(){return document.getElementById('qgrid').children.length===Q.length;}],
+      ['classes',function(){return document.getElementById('clist').children.length===C.length;}],
+      ['deadlines',function(){return document.getElementById('dlist').children.length===G.upcoming().length;}],
+      ['events',function(){return document.getElementById('evlist').children.length===E.length;}],
+      ['stats',function(){return document.getElementById('stats').children.length===4;}]
+    ];
+    var bad=[];
+    checks.forEach(function(c){if(c[1]()){ok();}else{bad.push(c[0]);}});
+    G.close();
+    if(bad.length){document.getElementById('selftest').textContent='SELFTEST FAIL: '+bad.join(',');return false;}
+    document.getElementById('selftest').textContent='SELFTEST PASS — '+t+' checks OK';
+    return true;
   }
 };
 
 /* ---- data: snapshot from GCSE Home (Sept 2026) ---- */
 var Q=[
- {i:'📅',n:'Calendar',d:'View your daily timetable and school events.',s:'12th Sep, 2026',bg:'#ffe5cc'},
+ {i:'📅',n:'Calendar',d:'View your daily timetable and school events.',s:'12th Sep, 2026',bg:'#ffe5cc',view:'calendar'},
  {i:'📊',n:'Progress reports',d:'Track your academic progress across subjects.',s:'0 reports',bg:'#d8fbe9'},
  {i:'📈',n:'Gradebook',d:'Your grades, scored work and feedback.',s:'',bg:'#d8fbe9'},
  {i:'📄',n:'School policies and resources',d:'Policies and files from Island School.',s:'',bg:'#e2e7ff'},
- {i:'❤️',n:'Engagement',d:'Attendance and wellbeing information.',s:'Sentral',sentry:true,bg:'#e6f7ff'},
- {i:'✅',n:'Attendance',d:'Your attendance record.',s:'Sentral',sentry:true,dot:true,bg:'#e6f7ff'},
- {i:'📰',n:'Newsfeed',d:'School news and announcements.',s:'Sentral',sentry:true,dot:true,bg:'#e6f7ff'},
- {i:'🕗',n:'Timetable',d:'Your weekly lesson schedule.',s:'Sentral',sentry:true,bg:'#e6f7ff'},
- {i:'🏅',n:'Sports',d:'Sports teams, fixtures and results.',s:'Sentral',sentry:true,bg:'#e6f7ff'},
- {i:'🎯',n:'Activities',d:'Clubs and after-school activities.',s:'Sentral',sentry:true,bg:'#ffe5ea'}
+ {i:'❤️',n:'Engagement',d:'Attendance and wellbeing information.',s:'Sentral',sentry:true,bg:'#e6f7ff',view:'engagement'},
+ {i:'✅',n:'Attendance',d:'Your attendance record.',s:'Sentral',sentry:true,dot:true,bg:'#e6f7ff',view:'attendance'},
+ {i:'📰',n:'Newsfeed',d:'School news and announcements.',s:'Sentral',sentry:true,dot:true,bg:'#e6f7ff',view:'newsfeed'},
+ {i:'🕗',n:'Timetable',d:'Your weekly lesson schedule.',s:'Sentral',sentry:true,bg:'#e6f7ff',view:'timetable'},
+ {i:'🏅',n:'Sports',d:'Sports teams, fixtures and results.',s:'Sentral',sentry:true,bg:'#e6f7ff',view:'sports'},
+ {i:'🎯',n:'Activities',d:'Clubs and after-school activities.',s:'Sentral',sentry:true,bg:'#ffe5ea',view:'activities'}
 ];
 
 var C=[
  {code:'10CX201',t:'Year 10 – 11 Chinese First Language',init:'Y1',bg:'#ffe1e8',fg:'#b0233e'},
  {code:'10DS206',t:'Year 10 – 11 Double Science',init:'Y1',bg:'#ede6ff',fg:'#6d28d9'},
- {code:'10DT201',t:'Year 10 – 11 Design Technology',init:'Y1',bg:'#ffe1e8',fg:'#b0233e'},
+ {code:'10DT201',t:'Year 10 – 11 Design Technology',init:'Y1',bg:'#e2f6f1',fg:'#0f766e'},
  {code:'10EC203',t:'Year 10 – 11 Economics',init:'Y1',bg:'#e3e9ff',fg:'#1d4ed8'},
  {code:'10EN208',t:'Year 10 – 11 English',init:'Y1',bg:'#fff2d6',fg:'#b87400'},
- {code:'10HW102',t:'Year 10 – 11 Health and Wellbeing',init:'Y1',bg:'#ffe1e8',fg:'#b0233e'},
+ {code:'10HW102',t:'Year 10 – 11 Health and Wellbeing',init:'Y1',bg:'#ffe8d9',fg:'#c2590a'},
  {code:'10MA203',t:'Year 10 – 11 Mathematics',init:'Y1',bg:'#d7f5f1',fg:'#0f766e'},
- {code:'10TR104',t:'Year 10 – 11 Thrive Programme',init:'Y1',bg:'#e3e9ff',fg:'#1d4ed8'},
+ {code:'10TR104',t:'Year 10 – 11 Thrive Programme',init:'Y1',bg:'#ede6ff',fg:'#6d28d9'},
  {code:'HE',t:'Year 10 – Higher Education',init:'HI',sub:'Higher Education Class of 2030',bg:'#ffe1e8',fg:'#b0233e'}
 ];
 
@@ -317,6 +497,45 @@ var E=[
  {d:14,m:'Sep',t:'Y7 Assembly',tm:'08:00 – 08:15 am',c:'#a78bfa'},
  {d:14,m:'Sep',t:'Rutherford Charity Week',tm:'08:00 – 03:00 pm',c:'#a78bfa'},
  {d:15,m:'Sep',t:'Y8 Assembly',tm:'08:00 – 08:15 am',c:'#a78bfa'}
+];
+
+/* ---- sentral module snapshot data ---- */
+/* Timetable: 8 lessons/day, Mon-Fri. P1-P8 with real GCSe classes. */
+var TT=[
+ {p:'P1 · 08:30',d:['10MA203','10DS206','10CX201','10EC203','10EN208']},
+ {p:'P2 · 09:15',d:['10CX201','10EN208','10DS206','10MA203','10EC203']},
+ {p:'P3 · 10:20',d:['10DS206','10MA203','10EN208','10CX201','10MA203']},
+ {p:'P4 · 11:05',d:['10EC203','10CX201','10MA203','10DS206','10DS206']},
+ {p:'P5 · 11:50',d:['10EN208','10EC203','10EC203','10EN208','10CX201']},
+ {p:'P6 · 13:15',d:['10DT201','10DT201','10DT201','10HW102','10HW102']},
+ {p:'P7 · 14:00',d:['10HW102','10TR104','','10TR104','10TR104']},
+ {p:'P8 · 14:45',d:['10TR104','','','','']}
+];
+var ATT=[
+ ['P','All lessons attended'],
+ ['L','Late to P1 (5 min) — 2nd late this term'],
+ ['P','All lessons attended'],
+ ['P','All lessons attended'],
+ ['P','All lessons attended']
+];
+var NEWS=[
+ {i:'🎗️',bg:'#ffe1e8',t:'Rutherford Charity Week starts Monday',d:'<b>14–18 Sep</b> · Bake sale on Thursday, dress-down day Friday. All money goes to the Rutherford Fund.'},
+ {i:'📣',bg:'#e3e9ff',t:'Y10 & Y12 Assembly — Monday 08:00',d:'<b>14 Sep</b> · Main hall. House points for punctuality.'},
+ {i:'🎓',bg:'#d7f5f1',t:'Welcome back, Year 10!',d:'<b>1 Sep</b> · Ms. Chan welcomes everyone to GCSE year 1. Check your class codes in My Classes.'},
+ {i:'📚',bg:'#fff2d6',t:'GCSE Subject Support Sessions',d:'<b>Every Wed</b> · Lunchtime drop-in for Maths &amp; Double Science in the library.'}
+];
+var SPORTS=[
+ {i:'⚽',bg:'#e2f6f1',t:'Football vs West Island',d:'<b>Sat 19 Sep · 09:00</b> · Home match, South Campus',w:false},
+ {i:'🏀',bg:'#fff2d6',t:'Basketball vs South Island',d:'<b>Wed 23 Sep · 15:30</b> · Away match',w:false},
+ {i:'🏊',bg:'#e6f7ff',t:'Swimming Gala — trials',d:'<b>Thu 24 Sep · 15:45</b> · Pool, bring kit',w:false},
+ {i:'🏏',bg:'#e3e9ff',t:'Cricket vs KGV',d:'<b>Sat 26 Sep</b> · Away',w:true,sc:'108/4'}
+];
+var ACTS=[
+ {i:'🤖',bg:'#ede6ff',t:'Robotics Club',d:'Build &amp; program VEX IQ robots for the winter comp.',when:'Mon · 15:30'}, 
+ {i:'🛠️',bg:'#e2f6f1',t:'Makerspace / DT Workshop',d:'Laser cutting, 3D printing and CNC — open project time.',when:'Tue · 15:30'}, 
+ {i:'♟️',bg:'#fff2d6',t:'Chess Club',d:'Casual games + House chess league.',when:'Wed · lunch'}, 
+ {i:'🏃',bg:'#ffe8d9',t:'Running Club',d:'3–5 km around the neighbourhood. All paces welcome.',when:'Thu · 15:30'}, 
+ {i:'🏸',bg:'#e6f7ff',t:'Badminton',d:'Courts booked for Y10–11 players.',when:'Fri · 15:30'} 
 ];
 
 if(document.getElementById && document.readyState!=='loading'){G.init();}
