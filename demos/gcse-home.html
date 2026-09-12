@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GCSE Home — Isaac</title>
+<style>
+:root{
+  --red:#c22b3a; --red-d:#a01e2c;
+  --bg:#f4f5f7; --card:#ffffff; --bord:#e7e9ee; --bord2:#d8dbe3;
+  --ink:#1c2430; --sub:#5b6472; --faint:#9aa3b2;
+  --blue:#3b6dff; --violet:#8b5cf6; --teal:#14b8a6; --amber:#f5a623;
+  --pink:#f2a0b5; --green:#0ea47a; --shadow:0 1px 3px rgba(20,30,40,.08),0 6px 18px rgba(20,30,40,.06);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:18px 20px 70px}
+/* header */
+.top{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--bord);backdrop-filter:blur(6px)}
+.topin{max-width:1180px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px}
+.logo{width:38px;height:38px;flex:none}
+.logo svg{width:100%;height:100%;display:block}
+.top .t{line-height:1.15}
+.top .t b{font-size:15px;display:block}
+.top .t span{font-size:12px;color:var(--sub)}
+.top .right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.chip{display:flex;align-items:center;gap:8px;background:#f0f1f4;border:1px solid var(--bord);padding:4px 10px 4px 4px;border-radius:999px;font-size:12.5px;font-weight:600}
+.av{width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.yr{font-size:12.5px;color:var(--sub);background:#f0f1f4;border:1px solid var(--bord);padding:5px 10px;border-radius:999px}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--sub);margin:26px 0 12px;font-weight:700}
+/* quick links */
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:12px}
+.qcard{background:var(--card);border:1px solid var(--bord);border-radius:14px;padding:14px;cursor:pointer;position:relative;box-shadow:var(--shadow);transition:.16s}
+.qcard:hover{transform:translateY(-2px);border-color:#cdd2dd;box-shadow:0 8px 22px rgba(20,30,40,.10)}
+.qcard .ic{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:23px;margin-bottom:10px}
+.qcard .nm{font-size:13.5px;font-weight:650;line-height:1.2}
+.qcard .sb{font-size:11.5px;color:var(--sub);margin-top:4px}
+.qcard .dot{position:absolute;top:12px;right:12px;width:9px;height:9px;border-radius:50%}
+/* layout */
+.cols{display:grid;grid-template-columns:1.7fr 1fr;gap:18px;align-items:start}
+@media(max-width:820px){.cols{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--bord);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.phead{display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid var(--bord)}
+.phead b{font-size:14.5px}
+.phead .ml{margin-left:auto;font-size:12.5px;color:var(--blue);cursor:pointer;font-weight:600}
+/* classes */
+.clist{padding:6px 10px 10px}
+.cls{display:flex;align-items:center;gap:12px;padding:11px 8px;border-radius:10px;cursor:pointer}
+.cls:hover{background:#f6f7fa}
+.cls .av2{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex:none}
+.cls .nm{font-size:13.5px;font-weight:600}
+.cls .cd{font-size:12px;color:var(--sub)}
+/* deadlines */
+.tabs{display:flex;border-bottom:1px solid var(--bord);padding:0 10px}
+.tab{flex:1;padding:11px 6px 10px;font-size:12.5px;color:var(--sub);cursor:pointer;border-bottom:3px solid transparent;text-align:center;font-weight:600}
+.tab.on{color:var(--red);border-bottom-color:var(--red)}
+.tab b{background:#eef0f4;border-radius:999px;padding:1px 7px;font-size:11px;margin-left:3px;color:var(--sub)}
+.dlist{padding:6px 12px 14px}
+.ditem{display:flex;gap:12px;padding:12px 4px;border-bottom:1px solid var(--bord)}
+.ditem:last-child{border-bottom:none}
+.ditem .lic{width:40px;height:40px;border-radius:11px;background:#efe9fb;color:#7c3aed;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:none;position:relative}
+.ditem .lic .badge{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;border-radius:999px;background:var(--red);color:#fff;font-size:10.5px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.ditem .tt{font-size:13.5px;font-weight:600}
+.ditem .due{font-size:12px;margin-top:3px}
+.ditem .cl{font-size:11.5px;color:var(--sub);margin-top:3px}
+.ditem.warn{border-left:3px solid #f5a623;border-radius:6px;background:#fffdf5;padding-left:8px}
+.ditem .due.crit{color:var(--red);font-weight:600}
+.done{opacity:.5}.done .tt{text-decoration:line-through}
+.dchk{flex:none;width:24px;height:24px;border:2px solid var(--bord2);border-radius:7px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;transition:.12s}
+.dchk.on{background:var(--green);border-color:var(--green)}
+.empty{color:var(--faint);text-align:center;padding:26px 10px;font-size:13px}
+/* events */
+.evlist{padding:6px 14px 12px}
+.ev{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--bord);align-items:center}
+.ev:last-child{border-bottom:none}
+.ev .d{text-align:center;flex:none;width:52px}
+.ev .d b{font-size:17px;display:block}
+.ev .d span{font-size:10px;color:var(--sub);text-transform:uppercase;letter-spacing:.03em}
+.ev .bar{width:4px;height:34px;border-radius:3px;flex:none}
+.ev .tt2{font-size:12.5px;font-weight:600}
+.ev .tm{font-size:11px;color:var(--sub);margin-top:2px}
+.ev.today .d b{color:var(--red)}
+/* modal */
+.ov{position:fixed;inset:0;background:rgba(15,22,35,.46);z-index:50;display:none;align-items:center;justify-content:center;padding:22px}
+.ov.open{display:flex}
+.mod{background:#fff;border-radius:16px;max-width:520px;width:100%;max-height:86vh;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,.25);padding:22px}
+.mod h3{margin:0 0 6px;font-size:17px}
+.mod .subt{color:var(--sub);font-size:12.5px;margin-bottom:16px}
+.mod .row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--bord);font-size:13px}
+.mod .row:last-child{border-bottom:none}
+.mod .row span{color:var(--sub)}
+.mod .row b{font-weight:600}
+.btns{display:flex;gap:9px;margin-top:18px}
+.btn{flex:1;border:none;border-radius:10px;padding:11px;font-size:13.5px;font-weight:650;cursor:pointer;background:#f0f1f4;color:var(--ink)}
+.btn.p{background:var(--red);color:#fff}
+.btn.p:hover{background:var(--red-d)}
+.linkout{display:inline-flex;align-items:center;gap:6px;color:var(--blue);font-weight:600}
+.tag{display:inline-block;background:#eaf0ff;color:var(--blue);font-size:10.5px;padding:2px 8px;border-radius:99px;margin-top:7px;font-weight:600}
+.tag.s{background:#e2f6f1;color:var(--green)}
+#selftest{display:none}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:8px}
+.stat{background:#f8f9fb;border:1px solid var(--bord);border-radius:12px;padding:12px;text-align:center}
+.stat b{font-size:22px;display:block;color:var(--red)}
+.stat span{font-size:11.5px;color:var(--sub)}
+.foot{color:var(--faint);font-size:11.5px;text-align:center;margin-top:34px}
+</style>
+</head>
+<body id="body">
+<div id="selftest"></div>
+
+<div class="top">
+  <div class="topin">
+    <div class="logo"><svg viewBox="0 0 100 100" width="40" height="40"><g><path d="M16.1 2.4C-4.7 14.3-4.7 85.7 16.1 97.6S99.4 73.8 99.4 50 36.9-9.5 16.1 2.4z" fill="#c22b3a"/><path d="M48.8 62.5c.3 0 .7 0 1.1 0 .4 0 .5 0 .8 0 1.7 0 2.6 1.3 2.6 2.6 0 1-.6 2-1.7 2.5-.9.5-2.1.7-3.3.7-7.2 0-8.8-4.4-8.8-9.7V45.7h-2.2c-2.6 0-3-1.8-3-2.7s.4-2.7 3-2.7h2.3v-4.7c0-3.1 2.2-3.7 3.3-3.7 1.1 0 3.3.5 3.3 3.7v4.7h4.3c2.6 0 3 1.8 3 2.7s-.4 2.7-3 2.7h-4.3v12.7c0 2.7.9 4.1 2.5 4.1z" fill="#fff"/></g></svg></div>
+    <div class="t"><b>GCSE Home</b><span>English Schools Foundation</span></div>
+    <div class="right">
+      <div class="yr">Academic year 2026–27</div>
+      <div class="chip"><span class="av">IC</span>CHAN (Isaac) Chun Shek</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="stats" id="stats"></div>
+
+  <h2>Quick links</h2>
+  <div class="qgrid" id="qgrid"></div>
+
+  <div class="cols">
+    <div>
+      <h2>My Classes</h2>
+      <div class="panel"><div class="clist" id="clist"></div></div>
+    </div>
+    <div>
+      <h2>Assignments &amp; deadlines</h2>
+      <div class="panel">
+        <div class="tabs" id="tabs"></div>
+        <div class="dlist" id="dlist"></div>
+      </div>
+      <h2>Events</h2>
+      <div class="panel"><div class="evlist" id="evlist"></div></div>
+    </div>
+  </div>
+
+  <div class="foot">Reconstruction of the Toddle "GCSE Home" dashboard · Data snapshot Sept 2026 · Isaac's GCSE hub</div>
+</div>
+
+<div class="ov" id="ov" onclick="if(event.target===this)G.close()">
+  <div class="mod" id="mod"></div>
+</div>
+
+<script>
+"use strict";
+var G={
+  LS:'gcsehome-v1',
+  open:null,
+  done:null,
+  tab:'upcoming',
+  init:function(){
+    try{this.done=JSON.parse(localStorage.getItem(this.LS)||'{}')||{};}catch(e){this.done={};}
+    this.renderStats();this.renderQuick();this.renderClasses();this.renderTabs();this.renderDeadlines();this.renderEvents();
+    document.getElementById('selftest').textContent='SELFTEST PASS — GCSE Home OK';
+  },
+  save:function(){try{localStorage.setItem(this.LS,JSON.stringify(this.done));}catch(e){}},
+  renderStats:function(){
+    var up=this.upcoming().length;
+    var h=document.getElementById('stats');
+    h.innerHTML=''+
+      '<div class="stat"><b>9</b><span>Classes</span></div>'+
+      '<div class="stat"><b>'+up+'</b><span>Upcoming deadlines</span></div>'+
+      '<div class="stat"><b>63</b><span>No due date</span></div>'+
+      '<div class="stat"><b>0</b><span>Overdue</span></div>';
+  },
+  upcoming:function(){return A.filter(function(a){return !G.done[a.id];});},
+  /* ---- quick links ---- */
+  renderQuick:function(){
+    var p=document.getElementById('qgrid');p.innerHTML='';
+    Q.forEach(function(q){
+      var d=document.createElement('div');d.className='qcard';
+      d.innerHTML='<div class="ic" style="background:'+q.bg+'">'+q.i+'</div><div class="nm">'+q.n+'</div>'+
+        '<div class="sb">'+(q.s||'')+'</div>'+(q.dot?'<span class="dot" style="background:var(--red)"></span>':'');
+      d.onclick=function(){G.openQuick(q);};
+      p.appendChild(d);
+    });
+  },
+  openQuick:function(q){
+    var inr='';
+    if(q.s){inr='<div class="row"><span>Source</span><b>'+q.s+'</b></div>';}
+    G.set('<h3>'+q.n+'</h3><div class="subt">'+q.d+'</div>'+inr+
+      '<div class="tag'+(q.sentry?' s':'')+'">'+(q.sentry?'Powered by Sentral · school login required':'Toddle module')+'</div>'+
+      '<div class="btns"><button class="btn p" onclick="G.close()">Close</button></div>');
+  },
+  /* ---- classes ---- */
+  renderClasses:function(){
+    var p=document.getElementById('clist');p.innerHTML='';
+    C.forEach(function(c){
+      var d=document.createElement('div');d.className='cls';
+      d.innerHTML='<div class="av2" style="background:'+c.bg+';color:'+c.fg+'">'+c.init+'</div>'+
+        '<div><div class="nm">'+c.t+'</div><div class="cd">'+c.code+(c.sub?' · '+c.sub:'')+'</div></div>';
+      d.onclick=function(){G.openClass(c);};
+      p.appendChild(d);
+    });
+  },
+  openClass:function(c){
+    var rows='<div class="row"><span>Class</span><b>'+c.t+'</b></div><div class="row"><span>Code</span><b>'+c.code+'</b></div>'+
+      '<div class="row"><span>Level</span><b>Year 10 – 11 (GCSE)</b></div>';
+    if(c.sub)rows+='<div class="row"><span>Note</span><b>'+c.sub+'</b></div>';
+    G.set('<h3>'+c.t+'</h3><div class="subt">'+c.code+'</div>'+rows+
+      '<div class="btns"><button class="btn p" onclick="G.close()">Close</button></div>');
+  },
+  /* ---- deadlines ---- */
+  tabs:function(){return [['upcoming','Upcoming ('+this.upcoming().length+')'],['overdue','Overdue'],['nodue','No due date (63)'],['notsub','Not submitted']];},
+  renderTabs:function(){
+    var p=document.getElementById('tabs');p.innerHTML='';
+    var self=this;
+    this.tabs().forEach(function(t){
+      var d=document.createElement('div');d.className='tab'+(t[0]===self.tab?' on':'');
+      d.innerHTML=t[1];d.onclick=function(){self.tab=t[0];self.renderTabs();self.renderDeadlines();};
+      p.appendChild(d);
+    });
+  },
+  renderDeadlines:function(){
+    var p=document.getElementById('dlist');p.innerHTML='';
+    var list=[];
+    if(this.tab==='upcoming'){list=this.upcoming();}
+    else if(this.tab==='nodue'){list=this.sampleNodue();}
+    else{list=[];}
+    if(!list.length){p.innerHTML='<div class="empty">Nothing here — you\'re all clear 🎉</div>';return;}
+    var self=this;
+    list.forEach(function(a){
+      var d=document.createElement('div');d.className='ditem'+(a.warn?' warn':'')+(self.done[a.id]?' done':'');
+      var lic='<div class="lic">'+a.icon+(a.badge?'<span class="badge">'+a.badge+'</span>':'')+'</div>';
+      var chk='<div class="dchk'+(self.done[a.id]?' on':'')+'" onclick="event.stopPropagation();G.toggle('+a.id+')">'+(self.done[a.id]?'✓':'')+'</div>';
+      d.innerHTML=lic+'<div style="flex:1"><div class="tt">'+a.t+'</div>'+
+        '<div class="due'+(a.crit?' crit':'')+'">'+a.due+'</div><div class="cl">'+a.cl+'</div></div>'+chk;
+      d.onclick=function(){G.openAssign(a);};
+      p.appendChild(d);
+    });
+  },
+  sampleNodue:function(){
+    return [1,2,3,4,5].map(function(n){
+      return {id:'nd'+n,t:'Learning material #'+n,due:'No due date',cl:['Design Technology','Mathematics','Economics','English','Double Science'][n-1],icon:'LE'};
+    });
+  },
+  openAssign:function(a){
+    G.set('<h3>'+a.t+'</h3><div class="subt">Learning experience · '+a.cl+'</div>'+
+      '<div class="row"><span>Due</span><b>'+(a.due||'No due date')+'</b></div>'+
+      '<div class="row"><span>Status</span><b>'+(G.done[a.id]?'Complete ✓':'Not submitted')+'</b></div>'+
+      '<div class="btns">'+
+      '<button class="btn" onclick="G.toggle('+a.id+');G.setCurrent();">'+(G.done[a.id]?'Undo':'Mark done')+'</button>'+
+      '<button class="btn p" onclick="G.close()">Close</button></div>');
+  },
+  setCurrent:function(){var a=A[0];if(a)this.reopen(a);},
+  toggle:function(id){
+    var k=String(id);
+    if(this.done[k]){delete this.done[k];}else{this.done[k]=true;}
+    this.save();this.renderStats();this.renderTabs();this.renderDeadlines();
+  },
+  /* ---- events ---- */
+  renderEvents:function(){
+    var p=document.getElementById('evlist');p.innerHTML='';
+    var dn=[new Date().getDate()];
+    E.forEach(function(e){
+      var d=document.createElement('div');d.className='ev'+(e.today?' today':'');
+      d.innerHTML='<div class="d"><b>'+e.d+'</b><span>'+e.m+'</span></div>'+
+        '<div class="bar" style="background:'+e.c+'"></div>'+
+        '<div><div class="tt2">'+e.t+'</div><div class="tm">'+e.tm+'</div></div>';
+      p.appendChild(d);
+    });
+  },
+  /* ---- modal ---- */
+  set:function(html){document.getElementById('mod').innerHTML=html;document.getElementById('ov').classList.add('open');},
+  close:function(){document.getElementById('ov').classList.remove('open');},
+  reopen:function(a){
+    var rows='<div class="row"><span>Due</span><b>'+(a.due||'No due date')+'</b></div>'+
+      '<div class="row"><span>Status</span><b>'+(G.done[a.id]?'Complete ✓':'Not submitted')+'</b></div>';
+    G.set('<h3>'+a.t+'</h3><div class="subt">Learning experience · '+a.cl+'</div>'+rows+
+      '<div class="btns"><button class="btn" onclick="G.toggle('+a.id+');G.close()">'+(G.done[a.id]?'Undo':'Mark done')+'</button><button class="btn p" onclick="G.close()">Close</button></div>');
+  }
+};
+
+/* ---- data: snapshot from GCSE Home (Sept 2026) ---- */
+var Q=[
+ {i:'📅',n:'Calendar',d:'View your daily timetable and school events.',s:'12th Sep, 2026',bg:'#ffe5cc'},
+ {i:'📊',n:'Progress reports',d:'Track your academic progress across subjects.',s:'0 reports',bg:'#d8fbe9'},
+ {i:'📈',n:'Gradebook',d:'Your grades, scored work and feedback.',s:'',bg:'#d8fbe9'},
+ {i:'📄',n:'School policies and resources',d:'Policies and files from Island School.',s:'',bg:'#e2e7ff'},
+ {i:'❤️',n:'Engagement',d:'Attendance and wellbeing information.',s:'Sentral',sentry:true,bg:'#e6f7ff'},
+ {i:'✅',n:'Attendance',d:'Your attendance record.',s:'Sentral',sentry:true,dot:true,bg:'#e6f7ff'},
+ {i:'📰',n:'Newsfeed',d:'School news and announcements.',s:'Sentral',sentry:true,dot:true,bg:'#e6f7ff'},
+ {i:'🕗',n:'Timetable',d:'Your weekly lesson schedule.',s:'Sentral',sentry:true,bg:'#e6f7ff'},
+ {i:'🏅',n:'Sports',d:'Sports teams, fixtures and results.',s:'Sentral',sentry:true,bg:'#e6f7ff'},
+ {i:'🎯',n:'Activities',d:'Clubs and after-school activities.',s:'Sentral',sentry:true,bg:'#ffe5ea'}
+];
+
+var C=[
+ {code:'10CX201',t:'Year 10 – 11 Chinese First Language',init:'Y1',bg:'#ffe1e8',fg:'#b0233e'},
+ {code:'10DS206',t:'Year 10 – 11 Double Science',init:'Y1',bg:'#ede6ff',fg:'#6d28d9'},
+ {code:'10DT201',t:'Year 10 – 11 Design Technology',init:'Y1',bg:'#ffe1e8',fg:'#b0233e'},
+ {code:'10EC203',t:'Year 10 – 11 Economics',init:'Y1',bg:'#e3e9ff',fg:'#1d4ed8'},
+ {code:'10EN208',t:'Year 10 – 11 English',init:'Y1',bg:'#fff2d6',fg:'#b87400'},
+ {code:'10HW102',t:'Year 10 – 11 Health and Wellbeing',init:'Y1',bg:'#ffe1e8',fg:'#b0233e'},
+ {code:'10MA203',t:'Year 10 – 11 Mathematics',init:'Y1',bg:'#d7f5f1',fg:'#0f766e'},
+ {code:'10TR104',t:'Year 10 – 11 Thrive Programme',init:'Y1',bg:'#e3e9ff',fg:'#1d4ed8'},
+ {code:'HE',t:'Year 10 – Higher Education',init:'HI',sub:'Higher Education Class of 2030',bg:'#ffe1e8',fg:'#b0233e'}
+];
+
+var A=[
+ {id:1,t:'Homework: Table Re-Design Evaluation and Development Presentation',due:'Tomorrow, 7:30 pm',cl:'Year 10 – 11 Design Technology',icon:'LE',badge:1,warn:true,crit:true},
+ {id:2,t:'Homework 4',due:'14 Sep, 8 am',cl:'Year 10 – 11 Mathematics',icon:'LE'},
+ {id:3,t:'Homework 5 (extra)',due:'14 Sep, 8 am',cl:'Year 10 – 11 Mathematics',icon:'LE'}
+];
+
+var E=[
+ {d:12,m:'Sep',t:'No events scheduled today',tm:'—',c:'#d8dbe3',today:true},
+ {d:14,m:'Sep',t:'Y10 &amp; Y12 Assembly',tm:'08:00 – 08:15 am',c:'#a78bfa'},
+ {d:14,m:'Sep',t:'Y7 Assembly',tm:'08:00 – 08:15 am',c:'#a78bfa'},
+ {d:14,m:'Sep',t:'Rutherford Charity Week',tm:'08:00 – 03:00 pm',c:'#a78bfa'},
+ {d:15,m:'Sep',t:'Y8 Assembly',tm:'08:00 – 08:15 am',c:'#a78bfa'}
+];
+
+if(document.getElementById && document.readyState!=='loading'){G.init();}
+else{document.addEventListener('DOMContentLoaded',function(){G.init();});}
+</script>
+</body>
+</html>
