@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAJA A6 Pro 20W — LightBurn Material & Layer Reference</title>
+<style>
+  :root{
+    --bg:#f4f6f9; --panel:#ffffff; --panel2:#eef1f5; --line:#d8dee6;
+    --txt:#1c2128; --dim:#57616f; --faint:#8a93a1;
+    --acc:#5856d6; --acc2:#4a48c9; --good:#128a4e; --warn:#b26a00; --bad:#d63f3f;
+    --mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font:15px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;padding-bottom:80px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+  /* header */
+  header{padding:34px 0 20px;border-bottom:1px solid var(--line)}
+  .kicker{color:var(--acc);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+  h1{font-size:30px;margin:6px 0 10px;letter-spacing:-.02em}
+  h1 .sub{color:var(--dim);font-weight:400;font-size:20px}
+  .specs{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .spec{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:12.5px;color:var(--dim)}
+  .spec b{color:var(--txt);font-weight:600}
+  .spec .warn-txt{color:var(--warn)}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin-bottom:26px}
+  nav .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:0;padding-bottom:0}
+  nav a{display:block;padding:13px 15px;color:var(--dim);text-decoration:none;font-size:13.5px;font-weight:600;white-space:nowrap;border-bottom:2px solid transparent}
+  nav a:hover{color:var(--txt)}
+  nav a.on{color:var(--acc2);border-bottom-color:var(--acc)}
+
+  section{margin-bottom:44px}
+  h2{font-size:21px;letter-spacing:-.01em;margin-bottom:6px}
+  h2 .n{color:var(--acc);font-family:var(--mono);font-size:14px;vertical-align:middle;margin-right:8px}
+  .lead{color:var(--dim);font-size:14px;margin-bottom:18px;max-width:900px}
+  .lead b{color:var(--txt)}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:16px}
+  .card h3{font-size:15px;margin-bottom:8px;color:var(--acc2)}
+  .card p,.card li{font-size:13.5px;color:var(--dim)}
+  .card ul,.card ol{padding-left:20px}
+  .card li{margin:4px 0}
+
+  /* table */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+  table{border-collapse:collapse;width:100%;min-width:1050px;font-size:12.8px}
+  thead th{background:var(--panel2);color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.08em;text-align:left;padding:10px 10px;border-bottom:1px solid var(--line);white-space:nowrap;position:sticky;top:42px}
+  tbody td{padding:8px 10px;border-bottom:1px solid #e4e8ee;vertical-align:top}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:#f2f4f8}
+  td.mono,td.num{font-family:var(--mono);font-size:12px;white-space:nowrap}
+  .grp td{background:#e9eaf9;color:#4a48c9;font-weight:700;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;padding:7px 10px}
+  .chip{display:inline-block;width:13px;height:13px;border-radius:4px;vertical-align:-2px;margin-right:8px;border:1px solid rgba(0,0,0,.25)}
+  .job{font-weight:600}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:6px;vertical-align:1px}
+  .tag.cut{background:rgba(214,63,63,.12);color:var(--bad)}
+  .tag.eng{background:rgba(18,138,78,.12);color:var(--good)}
+  .tag.img{background:rgba(88,86,214,.14);color:var(--acc)}
+  .note{color:var(--faint);font-size:11.8px}
+  .ok{color:var(--good)} .warn{color:var(--warn)} .no{color:var(--bad)}
+  .sm{font-size:11.5px;color:var(--faint)}
+
+  /* matrix */
+  .matrix td{text-align:center;font-size:13px}
+  .matrix td:first-child,.matrix td:nth-child(2){text-align:left}
+  .matrix .mat{font-weight:600;color:var(--txt)}
+
+  /* badges */
+  .b-good{color:var(--good);font-weight:700}
+  .b-mid{color:var(--warn);font-weight:700}
+  .b-no{color:var(--bad);font-weight:700}
+
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:800px){.grid-2{grid-template-columns:1fr}}
+
+  .ditch{background:rgba(214,63,63,.07);border:1px solid rgba(214,63,63,.4);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+  .ditch h3{color:var(--bad);font-size:15px;margin-bottom:8px}
+  .ditch li{color:var(--dim);font-size:13.5px;margin:4px 0}
+
+  .callout{background:rgba(88,86,214,.08);border:1px solid rgba(88,86,214,.4);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+  .callout h3{color:var(--acc2);font-size:15px;margin-bottom:8px}
+  .callout p,.callout li{color:var(--dim);font-size:13.5px;margin:4px 0}
+
+  .steps{counter-reset:st}
+  .steps li{list-style:none;counter-increment:st;position:relative;padding-left:34px;margin:10px 0;color:var(--dim);font-size:13.5px}
+  .steps li::before{content:counter(st);position:absolute;left:0;top:0;width:22px;height:22px;border-radius:50%;background:var(--acc);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+  .swatch{width:20px;height:20px;border-radius:5px;display:inline-block;vertical-align:middle;margin-right:10px;border:1px solid rgba(0,0,0,.2)}
+
+  .footer{margin-top:30px;color:var(--faint);font-size:12px;border-top:1px solid var(--line);padding-top:16px}
+
+  .print-btn{position:fixed;right:22px;bottom:22px;background:var(--acc);color:#fff;border:none;border-radius:50%;width:52px;height:52px;font-size:22px;cursor:pointer;box-shadow:0 6px 20px rgba(88,86,214,.35);z-index:100}
+  .print-btn:hover{background:var(--acc2)}
+
+  @media print{
+    body{background:#fff;color:#111;padding:0;font-size:11px}
+    .wrap{max-width:100%;padding:0}
+    nav,.print-btn{display:none!important}
+    header{border-color:#ccc}
+    .spec{background:#f4f4f4;border-color:#ccc;color:#444}
+    .spec b{color:#111}
+    h1{font-size:20px} h2{font-size:16px}
+    .card,.callout{background:#fff;border:1px solid #bbb;break-inside:avoid}
+    table{min-width:0;font-size:10px}
+    thead th{background:#eee;color:#333;position:static}
+    tbody td{border-bottom-color:#ddd}
+    .grp td{background:#e8e8f8;color:#333}
+    .lead,.card p,.card li,.note,.sm{color:#333}
+    .ditch{border-color:#d88;background:#fff4f4}
+    .ditch li,.callout p,.callout li{color:#333}
+    section{break-inside:auto}
+    .tbl-wrap{overflow:visible;border-color:#aaa}
+    .chip{border-color:#888}
+    .print-btn{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">Workshop Reference · LightBurn</div>
+    <h1>DAJA A6 Pro 20W <span class="sub">— Blue Diode (455&thinsp;nm) Material &amp; Layer Reference</span></h1>
+    <div class="specs">
+      <div class="spec">Laser: <b>20&thinsp;W blue diode · 455&thinsp;nm</b></div>
+      <div class="spec">Work area: <b>300 × 300&thinsp;mm</b></div>
+      <div class="spec">Enclosure: <b>Class 1 · lid-open stop · E-stop</b></div>
+      <div class="spec">Software: <b>LightBurn (GRBL)</b></div>
+      <div class="spec">Focus: <b>fixed-height platform</b></div>
+      <div class="spec" class="warn-txt" style="color:var(--warn)">Always run the test grid first — these are safe starting points, not guarantees</div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#layers" class="on">Layer Reference 0–30</a>
+    <a href="#yours">Your Tested Settings</a>
+    <a href="#matrix">Material Suitability</a>
+    <a href="#encyclopedia">Material Encyclopedia</a>
+    <a href="#other">CO2 &amp; Fiber</a>
+    <a href="#types">Laser Types</a>
+    <a href="#physics">How Lasers Work</a>
+    <a href="#lasertypes">All Laser Types</a>
+    <a href="#wavelength">Colours &amp; Wavelengths</a>
+    <a href="#brands">Brand Matrices</a>
+    <a href="#params">Parameters</a>
+    <a href="#matsci">Material Science</a>
+    <a href="#safesci">Laser Safety</a>
+    <a href="#history">History</a>
+    <a href="#atomstack">Atomstack 20W</a>
+    <a href="#creality">Creality</a>
+    <a href="#xtoolp2">xTool P2</a>
+    <a href="#wecreat">WeCreat</a>
+    <a href="#vector">Vector/Raster</a>
+    <a href="#lightburn">LightBurn Tools</a>
+    <a href="#designrules">Design Rules</a>
+    <a href="#maintenance">Maintenance</a>
+    <a href="#business">Business</a>
+    <a href="#compare">Machine Wars</a>
+    <a href="#rotary">Rotary</a>
+    <a href="#air">Air &amp; Fumes</a>
+    <a href="#testgrid">Test Grids</a>
+    <a href="#advanced">Techniques</a>
+    <a href="#workflow">Workflow</a>
+    <a href="#trouble">Troubleshoot</a>
+    <a href="#photoeng">Photo Engraving</a>
+    <a href="#grbl">GRBL &amp; G-code</a>
+    <a href="#optics">Optics</a>
+    <a href="#chem">Chemistry</a>
+    <a href="#math">Math</a>
+    <a href="#folder">Folder Index</a>
+    <a href="#test">Test Grid</a>
+    <a href="#tool">T1 / T2 Tool Layers</a>
+    <a href="#tabs">Tabs &amp; Cut Tricks</a>
+    <a href="#safety">Safety &amp; Banned Materials</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<div class="callout">
+  <h3>How reliable are these numbers? Read this first</h3>
+  <p><b class="ok">⭐ Folder added</b> — your entire ~/Desktop/Parametrers/ is decoded and indexed (section 04d), including CO₂/fiber tables from other machines (04b) and laser-type/safety notes (04c).</p>
+  <p><b class="ok">⭐ Your tested data first</b> — the settings you verified on your own machine (Materials Reference.xlsx → Sheet 2) are the ground truth and are marked "(tested)" throughout. Every chart value is a backup, not an override.</p>
+  <p><b class="ok">✓ Verified</b> — machine specs &amp; LightBurn structure (layers 0–30, T1/T2 tool layers, Tabs) from DAJA's official spec page and LightBurn's official docs.</p>
+  <p><b class="ok">✓ Cross-checked</b> — every layer value retuned against <b>173 community-tested settings</b> from the xTool D1 Pro 20W database (same 20W-output blue diode class), plus Twotrees, MetalEraser, Diode Laser Wiki &amp; OMTech baselines.</p>
+  <p><b class="warn">⚠ Machine-specific</b> — cut speeds vary 2–3× between "20W" machines because real output power differs by brand. These are set <b>mid-range</b>: if DAJA's 20W is genuine output you can push faster; if a cut stalls, slow to ~⅓ speed and add a pass. The test grid (section 03) settles it for <i>your</i> unit in 20 minutes.</p>
+</div>
+
+<!-- ================= LAYERS ================= -->
+<section id="layers">
+  <h2><span class="n">01</span>Layer Reference — Layers 0–30</h2>
+  <p class="lead">LightBurn's color palette has <b>31 output layers (0–30)</b> plus two <b>Tool Layers (T1, T2)</b>. Each layer below is assigned one material + job so you can build a file by just switching colors. <b>Line mode = cut</b> (follows vector paths), <b>Scan mode = engrave</b> (fills shapes with lines), <b>Image mode = photos</b>. Speed is in <b>mm/min</b>, power in <b>%</b>, line interval in <b>mm</b>.</p>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Layer</th><th>Job</th><th>Mode</th><th>Speed mm/min</th><th>Power %</th><th>Max Pwr %</th><th>Passes</th><th>Interval mm</th><th>Tabs</th><th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="grp"><td colspan="10">CUTS — Line mode · 100% Max Power · air assist on for plastics</td></tr>
+
+      <tr>
+        <td class="mono"><span class="chip" style="background:#ff3b30"></span>0</td>
+        <td class="job">3&thinsp;mm birch / basswood plywood — cut</td>
+        <td>Line</td><td class="num">500</td><td class="num">100</td><td class="num">100</td><td class="num">2</td><td class="num">—</td>
+        <td class="num">Auto 8&thinsp;mm / 40&thinsp;mm</td>
+        <td class="note">Best all-round material. Community spread 300–1000 mm/min depending on real output — start 500, slow down if edges stay welded.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#ff9500"></span>1</td>
+        <td class="job">6&thinsp;mm plywood — cut</td>
+        <td>Line</td><td class="num">600</td><td class="num">100</td><td class="num">100</td><td class="num">3–4</td><td class="num">—</td>
+        <td class="num">Auto 8 / 35</td>
+        <td class="note">Multiple passes at full power beat one slow pass — less char, cleaner edge.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#ffcc00"></span>2</td>
+        <td class="job">3&thinsp;mm MDF — cut</td>
+        <td>Line</td><td class="num">300</td><td class="num">100</td><td class="num">100</td><td class="num">2–3</td><td class="num">—</td>
+        <td class="num">Auto 8 / 35</td>
+        <td class="note">Sootier edge than ply; the glue wears the lens faster — clean lens after MDF sessions.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#34c759"></span>3</td>
+        <td class="job">3&thinsp;mm basswood sheet — cut</td>
+        <td>Line</td><td class="num">400</td><td class="num">100</td><td class="num">100</td><td class="num">1–2</td><td class="num">—</td>
+        <td class="num">Auto 8 / 50</td>
+        <td class="note">Soft, fast, clean. Thin balsa: use layer 8.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#00c7be"></span>4</td>
+        <td class="job">3&thinsp;mm acrylic — cut <span class="tag cut">dark cast only</span></td>
+        <td>Line</td><td class="num">250</td><td class="num">100</td><td class="num">100</td><td class="num">2–3</td><td class="num">—</td>
+        <td class="num">Auto 6 / 30</td>
+        <td class="note"><b>Cast, dark/opaque acrylic only.</b> Clear &amp; extruded acrylic reject 455&thinsp;nm blue — it passes straight through. Keep protective film on; air assist mandatory.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#32ade6"></span>5</td>
+        <td class="job">2&thinsp;mm cardboard — cut</td>
+        <td>Line</td><td class="num">1000</td><td class="num">60</td><td class="num">100</td><td class="num">1</td><td class="num">—</td>
+        <td class="num">—</td>
+        <td class="note">Cheap prototyping material. High speed + low power = no flame-up.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#007aff"></span>6</td>
+        <td class="job">2–3&thinsp;mm leather — cut</td>
+        <td>Line</td><td class="num">600</td><td class="num">80</td><td class="num">100</td><td class="num">1–2</td><td class="num">—</td>
+        <td class="num">—</td>
+        <td class="note">Genuine leather only (veg-tan best). Faux/PU melts and stinks. Tape edges flat to stop curling into the lens.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#af52de"></span>7</td>
+        <td class="job">3&thinsp;mm cork — cut</td>
+        <td>Line</td><td class="num">800</td><td class="num">60</td><td class="num">100</td><td class="num">1–2</td><td class="num">—</td>
+        <td class="num">—</td>
+        <td class="note">Coasters, bulletin boards. Low power keeps the tan edge instead of black.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#5856d6"></span>8</td>
+        <td class="job">1.5&thinsp;mm balsa — cut</td>
+        <td>Line</td><td class="num">3000</td><td class="num">70</td><td class="num">100</td><td class="num">1</td><td class="num">—</td>
+        <td class="num">—</td>
+        <td class="note">Model aircraft wood. Cuts like butter — don't over-power.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#ff2d55"></span>9</td>
+        <td class="job">Paper / cardstock — cut</td>
+        <td>Line</td><td class="num">4000</td><td class="num">30</td><td class="num">100</td><td class="num">1</td><td class="num">—</td>
+        <td class="num">—</td>
+        <td class="note">Cardstock 300gsm: 6000–8000 @ 30–35%. Fire risk — keep power low and never leave it running.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#7a5cff"></span>10</td>
+        <td class="job">10&thinsp;mm plywood — multi-pass cut</td>
+        <td>Line</td><td class="num">400</td><td class="num">100</td><td class="num">100</td><td class="num">6–8</td><td class="num">—</td>
+        <td class="num">Auto 10 / 30</td>
+        <td class="note">The 20&thinsp;W diode's practical ceiling on wood. Check pass 4–5: re-zero height if the head drifts (tape shims work).</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#00d2a0"></span>11</td>
+        <td class="job">3&thinsp;mm hardboard — cut</td>
+        <td>Line</td><td class="num">250</td><td class="num">100</td><td class="num">100</td><td class="num">2–3</td><td class="num">—</td>
+        <td class="num">Auto 8 / 30</td>
+        <td class="note">Dense, slow. Ventilate — hardboard glue fumes are nasty.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#ff9f0a"></span>12</td>
+        <td class="job">3&thinsp;mm EVA foam — cut</td>
+        <td>Line</td><td class="num">4000</td><td class="num">60</td><td class="num">100</td><td class="num">1–2</td><td class="num">—</td>
+        <td class="num">—</td>
+        <td class="note">Closed-cell foam only. <b>Ventilate well</b> — melting foam smoke is toxic. Open-cell foam burns, don't cut it. 6mm: 4500 @ 45%.</td>
+      </tr>
+
+      <tr class="grp"><td colspan="10">ENGRAVES — Scan / Image mode · Max Power = Power (constant power) · interval ≈ line spacing</td></tr>
+
+      <tr>
+        <td class="mono"><span class="chip" style="background:#ff453a"></span>13</td>
+        <td class="job">Wood — light engrave <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">5000</td><td class="num">30</td><td class="num">30</td><td class="num">1</td><td class="num">0.10</td>
+        <td class="num">—</td>
+        <td class="note">Light golden text/logos on plywood &amp; basswood.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#ff9b3d"></span>14</td>
+        <td class="job">Wood — dark engrave <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">3000</td><td class="num">55</td><td class="num">55</td><td class="num">1</td><td class="num">0.08</td>
+        <td class="num">—</td>
+        <td class="note">Deep chocolate-brown marks. Drop to 0.06 interval for near-black.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#ffd60a"></span>15</td>
+        <td class="job">Photo on wood <span class="tag img">image</span></td>
+        <td>Image</td><td class="num">4000</td><td class="num">40</td><td class="num">40</td><td class="num">1</td><td class="num">0.07</td>
+        <td class="num">—</td>
+        <td class="note">Grayscale image, dither <b>Jarvis</b> or <b>Atkinson</b>. Birch ply gives the best tonal range; avoid knotty wood.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#30d158"></span>16</td>
+        <td class="job">Slate / stone — engrave <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">2000</td><td class="num">80</td><td class="num">80</td><td class="num">1–2</td><td class="num">0.08</td>
+        <td class="num">—</td>
+        <td class="note">White frosted mark on slate — classic coaster look. Clear-coat after to make it pop. Wipe dust off after; don't touch while hot.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#30b0c7"></span>17</td>
+        <td class="job">Ceramic tile — engrave <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">1000</td><td class="num">75</td><td class="num">75</td><td class="num">1–2</td><td class="num">0.08</td>
+        <td class="num">—</td>
+        <td class="note">Glossy tiles mark better than matte. Test one corner first — glaze varies by brand.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#32ade6"></span>18</td>
+        <td class="job">Anodized aluminium — mark <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">2500</td><td class="num">80</td><td class="num">80</td><td class="num">1</td><td class="num">0.06</td>
+        <td class="num">—</td>
+        <td class="note">The blue diode's party trick: blasts the anodize layer off → white mark. Community range 1500–4000 @ 65–100%. Black anodize = best contrast.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#007aff"></span>19</td>
+        <td class="job">Stainless steel — mark (spray) <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">500</td><td class="num">95</td><td class="num">95</td><td class="num">2–3</td><td class="num">0.05</td>
+        <td class="num">—</td>
+        <td class="note"><b>Requires marking spray / paste</b> (e.g. Enduramark, DryMoly). Bare metal: the 455&thinsp;nm beam bounces off. Several passes build a dark etch.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#af52de"></span>20</td>
+        <td class="job">Glass — engrave (coated) <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">1200</td><td class="num">55</td><td class="num">55</td><td class="num">2–3</td><td class="num">0.06</td>
+        <td class="num">—</td>
+        <td class="note">Bare glass won't mark — cover with black paint or DAJA's color sheet first (their official method), or the wet-paper-towel technique. Frosted look, not deep etch.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#ff2d55"></span>21</td>
+        <td class="job">Leather — engrave <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">2500</td><td class="num">35</td><td class="num">35</td><td class="num">1</td><td class="num">0.08</td>
+        <td class="num">—</td>
+        <td class="note">Branding, wallet flaps. Wipe surface with damp cloth first — even moisture = even burn.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#5e5ce6"></span>22</td>
+        <td class="job">Acrylic — engrave (white core) <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">3500</td><td class="num">40</td><td class="num">40</td><td class="num">1</td><td class="num">0.08</td>
+        <td class="num">—</td>
+        <td class="note">Cast acrylic only → frosty white engrave. Keep film ON while engraving for a cleaner edge.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#00c7be"></span>23</td>
+        <td class="job">Bamboo — engrave <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">5000</td><td class="num">35</td><td class="num">35</td><td class="num">1</td><td class="num">0.09</td>
+        <td class="num">—</td>
+        <td class="note">Cuts okay too (same layer as ply at slower speed). Stripey grain makes photos muddy — keep to text/shapes.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#ffb340"></span>24</td>
+        <td class="job">Cardboard — engrave <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">6000</td><td class="num">25</td><td class="num">25</td><td class="num">1</td><td class="num">0.10</td>
+        <td class="num">—</td>
+        <td class="note">Corrugated boxes, prototypes. Keep it fast &amp; cool to avoid flame.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#ff8fb2"></span>25</td>
+        <td class="job">Cork — engrave <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">3500</td><td class="num">40</td><td class="num">40</td><td class="num">1</td><td class="num">0.10</td>
+        <td class="num">—</td>
+        <td class="note">Soft texture swallows fine detail — use bold shapes.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#8e8e93"></span>26</td>
+        <td class="job">Wood — deep contrast / inlay pockets <span class="tag img">image</span></td>
+        <td>Image</td><td class="num">3000</td><td class="num">50</td><td class="num">50</td><td class="num">1</td><td class="num">0.06</td>
+        <td class="num">—</td>
+        <td class="note">Deep burns for inlay pockets or very dark artwork. Test depth before committing.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#c8a2ff"></span>27</td>
+        <td class="job">Denim / fabric — mark <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">5000</td><td class="num">30</td><td class="num">30</td><td class="num">1</td><td class="num">0.10</td>
+        <td class="num">—</td>
+        <td class="note">Marks great at 5000 @ 30%. Cutting works too (3500–4000 @ 70%) — edges fray, accept it. Pin flat, ventilate.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#ff7ab6"></span>28</td>
+        <td class="job">Brick — engrave <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">2000</td><td class="num">65</td><td class="num">65</td><td class="num">1</td><td class="num">0.08</td>
+        <td class="num">—</td>
+        <td class="note">House-number bricks, signs. Rough surface = chunky result, that's normal.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#a6a6f0"></span>29</td>
+        <td class="job">Coconut / walnut shell — engrave <span class="tag eng">scan</span></td>
+        <td>Scan</td><td class="num">2500</td><td class="num">50</td><td class="num">50</td><td class="num">1</td><td class="num">0.08</td>
+        <td class="num">—</td>
+        <td class="note">Jewelry/keychain blanks. Use the rotary roller (RT5) for round shells.</td>
+      </tr>
+      <tr>
+        <td class="mono"><span class="chip" style="background:#ffffff"></span>30</td>
+        <td class="job"><b>YOUR TEST GRID LAYER</b> <span class="tag img">custom</span></td>
+        <td>Scan</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">0.08</td>
+        <td class="num">—</td>
+        <td class="note">Reserved for calibration grids (see Test Grid section). When you find a new material's sweet spot, save it here first.</td>
+      </tr>
+
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout" style="margin-top:16px">
+    <h3>How to use this in LightBurn</h3>
+    <ol class="steps">
+      <li>Draw/import your design. Select the objects you want to cut — click the matching layer color at the bottom of the palette (or in the <b>Cuts/Layers</b> window, <code>Ctrl/Cmd+L</code>).</li>
+      <li>In the <b>Cuts/Layers</b> window, set the mode per layer: <b>Line</b> for cuts (Layer 0–12), <b>Scan</b> for filled engraves (13–29), <b>Image</b> for photos (15, 26).</li>
+      <li>Type in the speed / power / passes / interval values from the table. "Max Power" = same value as Power unless you want dynamic (variable) shading.</li>
+      <li>For cut layers, click the <b>Add Tabs</b> button (scissors icon) — see the Tabs section for widths.</li>
+      <li>Frame the job (<kbd>F</kbd>), eyeball the path, then start. Keep the lid closed — the A6 Pro's lid-open stop is there for a reason.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= MATRIX ================= -->
+<section id="matrix">
+  <h2><span class="n">02</span>Material Suitability — What the 20W Blue Diode Can &amp; Can't Do</h2>
+  <p class="lead"><b class="ok">✓✓</b> excellent · <b class="warn">✓</b> works with caveats · <b class="no">✗</b> don't. Blue 455&thinsp;nm is absorbed by dark/pigmented materials and <b>passes straight through clear ones</b> — that one fact explains most of this table.</p>
+
+  <div class="tbl-wrap">
+  <table class="matrix">
+    <thead>
+      <tr><th>Material</th><th>Notes</th><th>Engrave</th><th>Cut</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="mat">Birch / basswood plywood</td><td class="note">The sweet spot for this machine. Clean edges, great contrast.</td><td><span class="b-good">✓✓</span></td><td><span class="b-good">✓✓</span></td></tr>
+      <tr><td class="mat">Balsa</td><td class="note">Soft, cuts instantly. Watch fire on thin stock.</td><td><span class="b-good">✓✓</span></td><td><span class="b-good">✓✓</span></td></tr>
+      <tr><td class="mat">MDF</td><td class="note">Sooty edges, lens-fogging glue. Ventilate.</td><td><span class="b-good">✓✓</span></td><td><span class="b-mid">✓</span></td></tr>
+      <tr><td class="mat">Hardwood (oak / walnut / cherry)</td><td class="note">Oily/resinous species cut badly on blue diodes. Engraving is beautiful though.</td><td><span class="b-good">✓✓</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Bamboo</td><td class="note">Engraves fine; cuts with passes.</td><td><span class="b-good">✓✓</span></td><td><span class="b-mid">✓</span></td></tr>
+      <tr><td class="mat">Acrylic — cast, dark/opaque</td><td class="note">White-core frosting on engrave; clean cuts. MUST be cast, MUST be dark.</td><td><span class="b-good">✓✓</span></td><td><span class="b-mid">✓</span></td></tr>
+      <tr><td class="mat">Acrylic — clear / transparent</td><td class="note">455&thinsp;nm beam sails through — burns nothing (or melts the edge if tinted). A CO2 laser's job, not a diode's.</td><td><span class="b-no">✗</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Leather (genuine)</td><td class="note">Veg-tan best. Lovely tan cut edges.</td><td><span class="b-good">✓✓</span></td><td><span class="b-mid">✓</span></td></tr>
+      <tr><td class="mat">Faux leather / PU</td><td class="note">Engraves OK at high speed; cuts melt &amp; fuse edges. Genuine preferred.</td><td><span class="b-mid">✓</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Cotton / denim fabric</td><td class="note">Cut works at 3500–4000 @ 70% — edges fray, accept it or mark only. Pin flat, ventilate.</td><td><span class="b-good">✓✓</span></td><td><span class="b-mid">✓</span></td></tr>
+      <tr><td class="mat">Powder-coated steel</td><td class="note">Coating marks white/brown — keychains, tools. Bare steel still needs spray.</td><td><span class="b-good">✓✓</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Silicone</td><td class="note">Wristbands, cases — slow + hot for a frosted white mark.</td><td><span class="b-mid">✓</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Photopolymer stamp blanks</td><td class="note">Real rubber stamps: engrave recessed text at ~500 DPI.</td><td><span class="b-mid">✓</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Mirror / mirrored acrylic</td><td class="note">Engrave the painted BACK side only — reflections can kill the diode.</td><td><span class="b-mid">✓</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Soapstone / granite</td><td class="note">Soft stones mark white like slate; polished dark granite best.</td><td><span class="b-mid">✓</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Cardboard / corrugated</td><td class="note">Cheap test material. Keep power low, speed high.</td><td><span class="b-good">✓✓</span></td><td><span class="b-good">✓✓</span></td></tr>
+      <tr><td class="mat">Paper / cardstock</td><td class="note">Fire risk above ~30%. Never unattended.</td><td><span class="b-good">✓✓</span></td><td><span class="b-mid">✓</span></td></tr>
+      <tr><td class="mat">Cork</td><td class="note">Soft, forgiving. Great beginner material.</td><td><span class="b-good">✓✓</span></td><td><span class="b-good">✓✓</span></td></tr>
+      <tr><td class="mat">Denim / fabric</td><td class="note">Mark only, never cut.</td><td><span class="b-mid">✓</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">EVA foam (closed-cell)</td><td class="note">Cosplay, inserts. Fumes — ventilate hard.</td><td><span class="b-mid">✓</span></td><td><span class="b-mid">✓</span></td></tr>
+      <tr><td class="mat">Slate</td><td class="note">White frosted marks, zero cleanup. Coasters/signs.</td><td><span class="b-good">✓✓</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Ceramic tile / stone / brick</td><td class="note">Glaze quality varies — always test first.</td><td><span class="b-mid">✓</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Glass</td><td class="note">Needs a coating (black paint / color sheet / wet towel) per DAJA's own specs.</td><td><span class="b-mid">✓</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Anodized aluminium</td><td class="note">Instant white marks at high speed. Best metal for this machine.</td><td><span class="b-good">✓✓</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Stainless steel</td><td class="note">Only with marking spray/paste. Multiple passes.</td><td><span class="b-mid">✓</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Raw aluminium / brass / copper</td><td class="note">Beam reflects. Needs spray or the 1&thinsp;W IR head.</td><td><span class="b-no">✗</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Natural rubber</td><td class="note">Stamps! Synthetic rubber stinks and melts.</td><td><span class="b-mid">✓</span></td><td><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Coconut / walnut shell</td><td class="note">Keychains, jewelry. Rotary roller helps.</td><td><span class="b-mid">✓</span></td><td><span class="b-no">✗</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="ditch" style="margin-top:16px">
+    <h3>Banned on the A6 Pro — never load these</h3>
+    <ul>
+      <li><b>PVC &amp; PVC-based vinyl</b> — chlorine gas destroys your lungs <i>and</i> corrodes the machine's optics &amp; frame. Check HTV SDS sheets: PU-based heat-transfer vinyl is laser-safe at low power (cut 9000 @ 16%), PVC-based is not.</li>
+      <li><b>ABS, polycarbonate, styrene</b> — melts into a mess and smokes toxic fumes (ABS releases cyanide gas).</li>
+      <li><b>Chrome-tanned leather</b> — hexavalent chromium (Chromium VI), a carcinogen. Vegetable-tanned only.</li>
+      <li><b>Treated / pressure-treated wood</b> — toxic fumes incl. arsenic compounds. Untreated wood only.</li>
+      <li><b>Fiberglass, carbon fiber, epoxy laminates</b> — toxic resin smoke + microfibers in the air.</li>
+      <li><b>Anything unknown</b> — if you don't know what it is, don't laser it. Test on a corner first, ventilated.</li>
+    </ul>
+  </div>
+</section>
+
+
+
+<!-- ================= YOUR TESTED ================= -->
+<section id="yours">
+  <h2><span class="n">01b</span>Your Tested Settings — Materials Reference Sheet 2 <span class="tag eng" style="margin-left:8px">ground truth for YOUR machine</span></h2>
+  <p class="lead">These are the settings <b>you</b> burned and verified on your own A6 Pro — they beat every chart in this document, including mine. Trust these first. They're also saved as an importable LightBurn library: <b>~/Desktop/DAJA-A6Pro-20W.clb</b> → in LightBurn open <b>Cuts/Layers (Ctrl+L)</b> → <b>Material Library → Import</b> → pick a material → it applies speed/power/passes to the current layer.</p>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Layer</th><th>Job</th><th>Mode</th><th>Speed mm/min</th><th>Power</th><th>Passes</th><th>Notes</th></tr></thead>
+    <tbody>
+<tr><td class="mono"><span class="chip" style="background:#ff3b30"></span>L00</td><td class="job">6mm plywood — cut</td><td>Line</td><td class="num">200</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#ff9500"></span>L01</td><td class="job">3mm bamboo — cut</td><td>Line</td><td class="num">240</td><td class="num">60%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#ffcc00"></span>L02</td><td class="job">3mm plywood — cut</td><td>Line</td><td class="num">300</td><td class="num">100%</td><td class="num">1</td><td class="note">sometimes 235 mm/min</td></tr>
+<tr><td class="mono"><span class="chip" style="background:#34c759"></span>L03</td><td class="job">6mm cardboard — cut</td><td>Line</td><td class="num">450</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#00c7be"></span>L04</td><td class="job">3mm MDF — cut</td><td>Line</td><td class="num">500</td><td class="num">100%</td><td class="num">3</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#32ade6"></span>L05</td><td class="job">filtering paper — cut</td><td>Line</td><td class="num">700</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#007aff"></span>L06</td><td class="job">toilet paper — cut</td><td>Line</td><td class="num">750</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#af52de"></span>L07</td><td class="job">3mm cardboard / 5mm foam — cut</td><td>Line</td><td class="num">1000</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#5856d6"></span>L08</td><td class="job">white card paper / 300g yuanhao — cut</td><td>Line</td><td class="num">1500</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#ff2d55"></span>L09</td><td class="job">plywood — vector engrave</td><td>Line</td><td class="num">2000</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#7a5cff"></span>L10</td><td class="job">card paper — cut</td><td>Line</td><td class="num">2500</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#00d2a0"></span>L11</td><td class="job">A4 paper — cut</td><td>Line</td><td class="num">3000</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#ff9f0a"></span>L12</td><td class="job">A4 paper — vector engrave</td><td>Line</td><td class="num">4000</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#ff453a"></span>L13</td><td class="job">cardboard — vector engrave</td><td>Line</td><td class="num">5000</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#ff9b3d"></span>L14</td><td class="job">plywood — deep text engrave</td><td>Scan</td><td class="num">8000</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#ffd60a"></span>L15</td><td class="job">plywood — text fill / image</td><td>Scan</td><td class="num">15000</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#30d158"></span>L16</td><td class="job">6mm bamboo dowel — cut</td><td>Line</td><td class="num">150</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#30b0c7"></span>L17</td><td class="job">350g white card paper — cut</td><td>Line</td><td class="num">900</td><td class="num">80%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#ff3b30"></span>Image L00</td><td class="job">plywood — light etch</td><td>Image</td><td class="num">2000</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#ff9500"></span>Image L01</td><td class="job">plywood — medium engrave</td><td>Image</td><td class="num">3500</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#ffcc00"></span>Image L02</td><td class="job">plywood — deep engrave</td><td>Image</td><td class="num">5000</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#34c759"></span>Image L03</td><td class="job">plywood — photo</td><td>Image</td><td class="num">7500</td><td class="num">100%</td><td class="num">1</td><td class="note">interval 0.100</td></tr>
+<tr><td class="mono"><span class="chip" style="background:#00c7be"></span>Image L04</td><td class="job">A4 paper — photo</td><td>Image</td><td class="num">8000</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#32ade6"></span>Image L05</td><td class="job">leaf — photo</td><td>Image</td><td class="num">10000</td><td class="num">100%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#007aff"></span>—</td><td class="job">6mm bamboo wood — cut</td><td>Line</td><td class="num">100</td><td class="num">80%</td><td class="num">1</td><td class="note"></td></tr>
+<tr><td class="mono"><span class="chip" style="background:#af52de"></span>—</td><td class="job">2mm airplane (balsa) wood — cut</td><td>Line</td><td class="num">1200</td><td class="num">50%</td><td class="num">1</td><td class="note"></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout" style="margin-top:16px">
+    <h3>What your data tells us about your machine</h3>
+    <ul>
+      <li><b>Your cuts run slower than the community chart</b> — 3mm ply at 300 vs the xTool D1 Pro's 300–1000 range. Your unit sits on the conservative side of the 20W class; that's normal, and it's exactly why machine-tested values win.</li>
+      <li><b>You engrave at 100% power and control tone with speed</b> (2000→15000 mm/min) — a valid, proven approach. The chart's low-power/high-speed engraves are an alternative that uses less diode stress; both work.</li>
+      <li><b>Your MDF cut (500 @ 100% × 3 passes) is faster than the chart's (400 × 2)</b> — 3 passes at higher speed gives you cleaner edges. Nice find.</li>
+      <li>Layer numbers match your LightBurn palette order (L00…L17 + Image layers) — so your file colors and this table line up directly.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= ENCYCLOPEDIA ================= -->
+<section id="encyclopedia">
+  <h2><span class="n">02b</span>Material Encyclopedia — 90+ Materials</h2>
+  <p class="lead">Community-tested settings from <b>173 entries on the xTool D1 Pro 20W</b> (the closest comparable 20W-output blue diode to your A6 Pro), plus curated extras. Speeds in <b>mm/min</b>, power in <b>%</b>; ranges mean multiple users reported success. <b>These are starting points — your test grid (section 03) picks the exact cell.</b></p>
+  <div class="enc-controls">
+    <input id="enc-search" type="text" placeholder="Search materials… (e.g. walnut, felt, tile)">
+    <div class="chips" id="enc-chips">
+      <button class="chip-btn on" data-cat="All">All</button>
+      <button class="chip-btn" data-cat="Wood">Wood</button>
+      <button class="chip-btn" data-cat="Plywood & MDF">Plywood &amp; MDF</button>
+      <button class="chip-btn" data-cat="Acrylic & Plastic">Acrylic &amp; Plastic</button>
+      <button class="chip-btn" data-cat="Leather & Fabric">Leather &amp; Fabric</button>
+      <button class="chip-btn" data-cat="Stone & Ceramic">Stone &amp; Ceramic</button>
+      <button class="chip-btn" data-cat="Metal">Metal</button>
+      <button class="chip-btn" data-cat="Paper & Cardboard">Paper &amp; Cardboard</button>
+      <button class="chip-btn" data-cat="Foam & Rubber">Foam &amp; Rubber</button>
+      <button class="chip-btn" data-cat="Tape & Film">Tape &amp; Film</button>
+      <button class="chip-btn" data-cat="Other">Other</button>
+    </div>
+  </div>
+  <div class="tbl-wrap">
+  <table class="enc" id="enc-table">
+    <thead>
+      <tr><th>Material</th><th>Engrave / Mark</th><th>Cut</th><th>DPI</th></tr>
+    </thead>
+    <tbody>
+<tr data-cat="Plywood & MDF"><td class="mat">2mm basswood plywood</td><td>6000 @ 50%</td><td>100 @ 100% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Plywood & MDF"><td class="mat">3mm baltic birch plywood</td><td>2000 @ 45%</td><td>100 @ 100% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Plywood & MDF"><td class="mat">3mm basswood plywood</td><td>3000 @ 55%</td><td>100 @ 100% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Acrylic & Plastic"><td class="mat">3mm black acrylic</td><td>2000–4000 @ 45–50%</td><td>95–100 @ 95–100% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Acrylic & Plastic"><td class="mat">3mm clear acrylic</td><td>—</td><td>100 @ 100% · 3 pass</td><td class="note"></td></tr>
+<tr data-cat="Acrylic & Plastic"><td class="mat">3mm clear acrylic cast</td><td>2200–4500</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Acrylic & Plastic"><td class="mat">3mm coloured acrylic</td><td>—</td><td>90 @ 90% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Plywood & MDF"><td class="mat">3mm maple plywood</td><td>1200–3200</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Plywood & MDF"><td class="mat">3mm mdf</td><td>2500 @ 60%</td><td>100 @ 100% · 3 pass</td><td class="note"></td></tr>
+<tr data-cat="Acrylic & Plastic"><td class="mat">3mm mirrored acrylic</td><td>2000–4200</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Acrylic & Plastic"><td class="mat">3mm tinted acrylic</td><td>3000 @ 70%</td><td>100 @ 100% · 3 pass</td><td class="note"></td></tr>
+<tr data-cat="Plywood & MDF"><td class="mat">3mm walnut plywood</td><td>2500 @ 50%</td><td>100 @ 100% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Plywood & MDF"><td class="mat">5mm plywood</td><td>4000 @ 65%</td><td>100 @ 100% · 4 pass</td><td class="note"></td></tr>
+<tr data-cat="Plywood & MDF"><td class="mat">9mm birch plywood</td><td>3500 @ 70%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Acrylic & Plastic"><td class="mat">acrylic</td><td>3000 @ 35%</td><td>100 @ 100% · 3 pass</td><td class="note"></td></tr>
+<tr data-cat="Acrylic & Plastic"><td class="mat">acrylic felt</td><td>8000 @ 25%</td><td>50 @ 50% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">alder</td><td>3000 @ 50%</td><td>80 @ 80% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">alder 3mm</td><td>5500 @ 58%</td><td>88 @ 88% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Metal"><td class="mat">anodized aluminum</td><td>1500–4000 @ 65–100%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">bamboo</td><td>5000 @ 30%</td><td>50 @ 50% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">bamboo 3mm</td><td>5500–6000 @ 35–55%</td><td>82–85 @ 82–85% · 2–3 pass</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">bamboo cutting board</td><td>—</td><td>65–100 @ 65–100% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">basswood</td><td>4000 @ 70%</td><td>100 @ 100% · 4 pass</td><td class="note"></td></tr>
+<tr data-cat="Paper & Cardboard"><td class="mat">cardboard</td><td>—</td><td>45–80 @ 45–80% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Paper & Cardboard"><td class="mat">cardboard 3mm</td><td>—</td><td>80 @ 80% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Paper & Cardboard"><td class="mat">cardboard corrugated 3 4mm</td><td>30</td><td>90 @ 90% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Paper & Cardboard"><td class="mat">cardstock</td><td>5000 @ 12%</td><td>35 @ 35% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Paper & Cardboard"><td class="mat">cardstock 300gsm</td><td>8000–9000 @ 15%</td><td>30–35 @ 30–35% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Paper & Cardboard"><td class="mat">cardstock 80 110 lb 220 300 gsm</td><td>15</td><td>45 @ 45% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">cedar</td><td>2500 @ 45%</td><td>75 @ 75% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">cedar 3mm</td><td>5500 @ 55%</td><td>85 @ 85% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Stone & Ceramic"><td class="mat">ceramic tile</td><td>500–2000 @ 70–100%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">cherry</td><td>3000 @ 55%</td><td>85 @ 85% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">cherry 3mm</td><td>5500 @ 60%</td><td>90 @ 90% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Plywood & MDF"><td class="mat">chipboard 2mm</td><td>6500 @ 40%</td><td>65–85 @ 65–85% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Metal"><td class="mat">coated powder coated steel</td><td>2500 @ 80%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Paper & Cardboard"><td class="mat">copy paper 80gsm</td><td>8000 @ 15%</td><td>25 @ 25% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Foam & Rubber"><td class="mat">cork</td><td>4000 @ 30–45%</td><td>50–85 @ 50–85% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Foam & Rubber"><td class="mat">cork 3mm</td><td>3000 @ 40%</td><td>45 @ 45% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Foam & Rubber"><td class="mat">cork sheet 3mm</td><td>6000 @ 40%</td><td>75 @ 75% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Paper & Cardboard"><td class="mat">corrugated cardboard</td><td>8000 @ 20%</td><td>48 @ 48% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Leather & Fabric"><td class="mat">cotton fabric</td><td>7000 @ 22–35%</td><td>70–78 @ 70–78% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Leather & Fabric"><td class="mat">craft felt 3mm</td><td>2000–6500 @ 30–35%</td><td>70–80 @ 70–80% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Leather & Fabric"><td class="mat">denim fabric</td><td>5000–5500 @ 25–45%</td><td>45–72 @ 45–72% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Foam & Rubber"><td class="mat">eva foam 3mm</td><td>2000–7000 @ 30%</td><td>65–70 @ 65–70% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Foam & Rubber"><td class="mat">eva foam 6mm</td><td>8000 @ 20%</td><td>45 @ 45% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Leather & Fabric"><td class="mat">faux leather</td><td>8000 @ 25%</td><td>58 @ 58% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Leather & Fabric"><td class="mat">felt</td><td>2000 @ 25%</td><td>55 @ 55% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Foam & Rubber"><td class="mat">foam</td><td>2000 @ 15%</td><td>35 @ 35% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Acrylic & Plastic"><td class="mat">foam board 5mm</td><td>—</td><td>42–60 @ 42–60% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Leather & Fabric"><td class="mat">genuine leather</td><td>1500 @ 35%</td><td>80 @ 80% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Leather & Fabric"><td class="mat">genuine leather veg tan 3mm</td><td>6000 @ 70%</td><td>95 @ 95% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Stone & Ceramic"><td class="mat">glass</td><td>1000–2000 @ 35–55%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Plywood & MDF"><td class="mat">hardboard</td><td>3000 @ 65%</td><td>100 @ 100% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Tape & Film"><td class="mat">htv vinyl</td><td>8000 @ 15%</td><td>16 @ 16% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Paper & Cardboard"><td class="mat">kraft paper</td><td>7500 @ 15%</td><td>22 @ 22% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Leather & Fabric"><td class="mat">leather</td><td>3500 @ 28%</td><td>80 @ 80% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">maple</td><td>3000 @ 55%</td><td>85 @ 85% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Stone & Ceramic"><td class="mat">marble tile</td><td>1500–2200 @ 85%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Plywood & MDF"><td class="mat">mdf</td><td>3000 @ 60%</td><td>100 @ 100% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Acrylic & Plastic"><td class="mat">mylar stencil 7 5mil</td><td>8000 @ 15%</td><td>25 @ 25% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">oak</td><td>2500 @ 65%</td><td>100 @ 100% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">oak 3mm</td><td>5500 @ 65%</td><td>95 @ 95% · 3 pass</td><td class="note"></td></tr>
+<tr data-cat="Paper & Cardboard"><td class="mat">paper</td><td>5000 @ 15%</td><td>30 @ 30% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Foam & Rubber"><td class="mat">photopolymer stamp blank</td><td>2000 @ 65%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">pine</td><td>3000 @ 45%</td><td>75 @ 75% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">pine 3mm</td><td>5000 @ 60%</td><td>90 @ 90% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Plywood & MDF"><td class="mat">plywood</td><td>3000–3500 @ 55–65%</td><td>100 @ 100% · 2–3 pass</td><td class="note"></td></tr>
+<tr data-cat="Metal"><td class="mat">powder coated steel</td><td>2500 @ 80%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Foam & Rubber"><td class="mat">rubber</td><td>3000 @ 70%</td><td>100 @ 100% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Foam & Rubber"><td class="mat">rubber stamp blank</td><td>2800 @ 82%</td><td>100 @ 100% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Stone & Ceramic"><td class="mat">slate</td><td>2000 @ 75%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Stone & Ceramic"><td class="mat">slate coaster</td><td>1800–5000 @ 80–90%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Metal"><td class="mat">spray painted metal</td><td>2800 @ 75%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Metal"><td class="mat">stainless steel</td><td>400–3000 @ 70–100%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">walnut</td><td>2500 @ 70%</td><td>100 @ 100% · 2 pass</td><td class="note"></td></tr>
+<tr data-cat="Tape & Film"><td class="mat">washi tape</td><td>2500 @ 15%</td><td>20 @ 20% ·  pass</td><td class="note"></td></tr>
+<tr data-cat="Stone & Ceramic"><td class="mat">Soapstone</td><td>1500–2500 @ 60–80%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Stone & Ceramic"><td class="mat">Granite (dark, polished)</td><td>1500–2500 @ 70–80% · 2–3 passes</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Stone & Ceramic"><td class="mat">Mirror (glass)</td><td>back side @ 1000–1500 @ 50–60%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Foam & Rubber"><td class="mat">Silicone band</td><td>800–1200 @ 80–90% · 2–3 passes</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Other"><td class="mat">Eggshell</td><td>3000–4000 @ 10–15%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Tape & Film"><td class="mat">Magnetic sheet</td><td>2000–3000 @ 40–50%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">Gourd / dried shell</td><td>2000–3000 @ 50–60%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Acrylic & Plastic"><td class="mat">Corian / solid surface</td><td>3000–4000 @ 30–40%</td><td>250 @ 100% · 3–4 passes</td><td class="note"></td></tr>
+<tr data-cat="Wood"><td class="mat">Wood veneer (0.6mm)</td><td>like wood</td><td>3000–5000 @ 40–50% · 1 pass</td><td class="note"></td></tr>
+<tr data-cat="Leather & Fabric"><td class="mat">Suede</td><td>4000 @ 25–30%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Leather & Fabric"><td class="mat">Rawhide</td><td>2500 @ 30–35%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Metal"><td class="mat">Titanium (coated)</td><td>2000–3000 @ 70–80%</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Metal"><td class="mat">Brass / copper</td><td>300–500 @ 100% · 3–5 passes (spray)</td><td>—</td><td class="note"></td></tr>
+<tr data-cat="Foam & Rubber"><td class="mat">Photopolymer stamp blank</td><td>2000 @ 65% · 500 DPI</td><td>—</td><td class="note"></td></tr>
+      <tr data-cat="Other"><td class="mat">PCB board (green mask)</td><td>2000 @ 60%</td><td>—</td><td class="note">Atezr 20W: engraves the mask — electronics labels. Copper shows through.</td></tr>
+      <tr data-cat="Acrylic & Plastic"><td class="mat">HD foam board</td><td>3000 @ 15%</td><td>3000 @ 30% · 1 pass</td><td class="note">Atezr 20W: the 8mm display-board foam. Ventilate.</td></tr>
+      <tr data-cat="Other"><td class="mat">Biscuits / cookies (food)</td><td>1500–2500 @ 15–20%</td><td>—</td><td class="note">Mark only, light brown. Laser residue on food is debated — do at your own risk, never on packaging.</td></tr>
+      <tr data-cat="Other"><td class="mat">Sealing wax</td><td>1000–2000 @ 30–40%</td><td>—</td><td class="note">Melts &amp; marks — wax stamps for letters. Low power, ventilate.</td></tr>
+      <tr data-cat="Other"><td class="mat">Bone / antler</td><td>2000–3000 @ 50–60%</td><td>—</td><td class="note">Smoky &amp; smells awful — ventilate hard. Marks cream/brown on dark pieces.</td></tr>
+      <tr data-cat="Other"><td class="mat">Melamine</td><td>weak marks</td><td>—</td><td class="note">Thunder charts list it for CO₂ only. Diode: dark melamine marks faintly; don't expect much.</td></tr>
+      <tr data-cat="Other"><td class="mat">Mother of pearl</td><td>—</td><td>—</td><td class="note">CO₂ recommended (Thunder Laser wiki); diode not recommended — brittle shell, poor absorption.</td></tr>
+
+    </tbody>
+  </table>
+  </div>
+  <p class="sm" style="margin-top:8px">Sources: bonnycreations.com xTool D1 Pro community database (78 materials, multiple reports each) + curated values from Diode Laser Wiki / MetalEraser / OMTech for materials without D1 Pro data. See section 06 for full source list.</p>
+</section>
+
+
+<!-- ================= OTHER MACHINES ================= -->
+<section id="other">
+  <h2><span class="n">04b</span>Other Machines — CO2 &amp; Fiber References <span class="tag cut">NOT for your A6 Pro</span></h2>
+  <p class="lead">From your folder &amp; sheets: settings for <b>CO2 (40–150W)</b> and <b>fiber (50W)</b> machines — school DT lab / future machines. Speeds are <b>mm/s</b> for CO2/fiber (different controllers), power in %. Useful to understand what a CO2 can do that your diode can't (clear acrylic, thick cuts, metal marking).</p>
+
+  <div class="card">
+    <h3>CO2 150W — common materials (CO2-Laser-Cutter_Engraver-Settings-for-Common-Materials-150-W-2.pdf)</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Material</th><th>Engrave</th><th>Cut</th><th>Cut thickness</th></tr></thead><tbody>
+      <tr><td class="mat">Acrylic</td><td>15% · 350</td><td>65% · 20</td><td>¼"</td></tr>
+      <tr><td class="mat">Anodized aluminum</td><td>15% · 325</td><td>—</td><td>—</td></tr>
+      <tr><td class="mat">Balsa wood</td><td>15% · 350</td><td>40% · 25</td><td>⅛"</td></tr>
+      <tr><td class="mat">Bass wood</td><td>20% · 350</td><td>40% · 25</td><td>⅛"</td></tr>
+      <tr><td class="mat">Birch wood</td><td>20% · 350</td><td>65% · 20</td><td>¼"</td></tr>
+      <tr><td class="mat">Birch plywood</td><td>20% · 350</td><td>70% · 20</td><td>¼"</td></tr>
+      <tr><td class="mat">Cardboard</td><td>15% · 350</td><td>50% · 15</td><td>¼"</td></tr>
+      <tr><td class="mat">Ceramic</td><td>27% · 350</td><td>—</td><td>—</td></tr>
+      <tr><td class="mat">Glass</td><td>20% · 325</td><td>—</td><td>—</td></tr>
+      <tr><td class="mat">Granite</td><td>18% · 275</td><td>—</td><td>—</td></tr>
+      <tr><td class="mat">Leather</td><td>15% · 350</td><td>70% · 15</td><td>⅛"</td></tr>
+      <tr><td class="mat">Powder-coated metal</td><td>15% · 325</td><td>—</td><td>—</td></tr>
+      <tr><td class="mat">Mirror (back side)</td><td>15% · 325</td><td>—</td><td>—</td></tr>
+      <tr><td class="mat">Paper</td><td>—</td><td>15% · 30</td><td>1/100"</td></tr>
+      <tr><td class="mat">Romark (multi-colour)</td><td>15% · 350</td><td>—</td><td>—</td></tr>
+      <tr><td class="mat">Rubber</td><td>15% · 350</td><td>70% · 15</td><td>⅛"</td></tr>
+      <tr><td class="mat">Foam</td><td>—</td><td>40% · 25</td><td>¼"</td></tr>
+    </tbody></table></div>
+    <p class="sm">Engrave interval 0.065 mm for most. Source: your folder PDF + Sheet1.</p>
+  </div>
+
+  <div class="card">
+    <h3>CO2 40 / 60 / 80W — detailed (Sheet1 + speedsfeeds_RL.pdf) — speed mm/s · scan gap / DPI noted</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Material</th><th>Process</th><th>40W</th><th>60W</th><th>80W</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="mat">Glass</td><td>Engrave</td><td>20% · 350</td><td>18% · 350</td><td>12% · 350</td><td class="note">0.055 gap · 462 DPI · keep cold: wet paper / cold air</td></tr>
+      <tr><td class="mat">Wood</td><td>Engrave</td><td>20% · 350</td><td>18% · 350</td><td>14% · 350</td><td class="note">0.085 · 300 DPI · masking tape stops sap haze</td></tr>
+      <tr><td class="mat">Bass wood</td><td>Cut ⅛"</td><td>80% · 15</td><td>65% · 15</td><td>50% · 15</td><td class="note">lowest power that cuts, highest speed</td></tr>
+      <tr><td class="mat">Balsa</td><td>Cut ⅛"</td><td>80% · 45</td><td>65% · 45</td><td>50% · 45</td><td class="note">fastest of the woods</td></tr>
+      <tr><td class="mat">Birch plate</td><td>Cut ⅛"</td><td>85% · 12</td><td>68% · 12</td><td>52% · 12</td><td class="note">—</td></tr>
+      <tr><td class="mat">Birch plywood</td><td>Cut 3/16"</td><td>85% · 5</td><td>85% · 7</td><td>70% · 10</td><td class="note">—</td></tr>
+      <tr><td class="mat">RC aircraft ply</td><td>Cut 3/16"</td><td>80% · 12</td><td>65% · 35</td><td>50% · 45</td><td class="note">quality depends on density, glue, humidity</td></tr>
+      <tr><td class="mat">Acrylic</td><td>Cut ¼"</td><td>85% · 12</td><td>70% · 12</td><td>55% · 12</td><td class="note">don't crawl — sag/fire risk</td></tr>
+      <tr><td class="mat">Acrylic</td><td>Engrave</td><td>85% · 300</td><td>70% · 300</td><td>55% · 300</td><td class="note">0.065 · 391 DPI · hard/brittle acrylic engraves best</td></tr>
+      <tr><td class="mat">Mirrored acrylic</td><td>Cut ⅛"</td><td>75% · 10</td><td>60% · 12</td><td>40% · 15</td><td class="note">2 passes; high air assist; heat boils mirror backing</td></tr>
+      <tr><td class="mat">Granite Romark</td><td>Engrave</td><td>85% · 101</td><td>85% · 120</td><td>85% · 150</td><td class="note">0.085 · 299 DPI · rub paint into cracks to POP</td></tr>
+      <tr><td class="mat">Plexi-glass</td><td>Engrave</td><td>18% · 350</td><td>15% · 325</td><td>12% · 325</td><td class="note">0.1 gap · 254 DPI — thick gap stops plastic globs</td></tr>
+      <tr><td class="mat">Styrofoam closed-cell</td><td>Cut</td><td>85% · 7</td><td>70% · 10</td><td>50% · 12</td><td class="note">cut fast &amp; hard; evacuate fumes</td></tr>
+      <tr><td class="mat">Styrofoam open-cell</td><td>Cut</td><td>15% · 45</td><td>15% · 45</td><td>12% · 45</td><td class="note">long focal lens; lots of air; thin layers</td></tr>
+      <tr><td class="mat">Brick</td><td>Cut</td><td>18% · 25</td><td>15% · 25</td><td>12% · 25</td><td class="note">long focal lens; heavy air assist</td></tr>
+      <tr><td class="mat">Mirror (back)</td><td>Engrave</td><td>85% · 10</td><td>80% · 25</td><td>70% · 35</td><td class="note">slightly out of focus; minimal air</td></tr>
+      <tr><td class="mat">Leather</td><td>Engrave</td><td>60% · 325</td><td>50% · 325</td><td>45% · 325</td><td class="note">0.085 · 299 DPI</td></tr>
+      <tr><td class="mat">Anodized aluminum</td><td>Cut 1/16"</td><td>85% · 7</td><td>85% · 10</td><td>70% · 12</td><td class="note">CO2 only — your diode can't cut metal</td></tr>
+      <tr><td class="mat">Powder-coated metal</td><td>Engrave</td><td>35% · 325</td><td>30% · 325</td><td>25% · 325</td><td class="note">0.065 · 391 DPI · power varies by colour</td></tr>
+      <tr><td class="mat">Cermark</td><td>Engrave</td><td>60% · 300</td><td>55% · 300</td><td>50% · 300</td><td class="note">0.07 · 362 DPI · 1+ pass; material must be warm; too hot destroys the Cermark</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <div class="card">
+    <h3>Acrylic cut speed vs CO2 wattage (laser cutting recommended parameters.pdf) — mm/s, max (optimal)</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Thickness</th><th>40W</th><th>60W</th><th>80W</th><th>100W</th><th>130W</th><th>150W</th></tr></thead><tbody>
+      <tr><td class="mat">3 mm</td><td>15 (10)</td><td>20 (15)</td><td>25 (20)</td><td>30 (25)</td><td>35 (30)</td><td>40 (35)</td></tr>
+      <tr><td class="mat">5 mm</td><td>8 (5)</td><td>10 (7)</td><td>12 (8)</td><td>15 (10)</td><td>17 (12)</td><td>21 (15)</td></tr>
+      <tr><td class="mat">8 mm</td><td>4 (2)</td><td>5 (3)</td><td>9 (5)</td><td>10 (6)</td><td>12 (8)</td><td>15 (10)</td></tr>
+    </tbody></table></div>
+    <p class="sm">Air assist: small airflow on top (side-blown) for smooth edges, airflow below the material to prevent fire.</p>
+  </div>
+
+  <div class="card">
+    <h3>Fiber 50W — metal marking (Sheet1 + Parameters for Fiber Laser.pdf · Thunder Aurora 8-50W)</h3>
+    <p class="sm">Fiber lasers mark (not cut) metals — your blue diode can't do bare metal. Table: speed mm/s · power % · freq kHz.</p>
+    <div class="tbl-wrap"><table><thead><tr><th>Material</th><th>Result</th><th>Speed</th><th>Power</th><th>kHz</th><th>Notes</th></tr></thead><tbody>
+      <tr><td class="mat">Titanium</td><td>White</td><td>1200</td><td>25</td><td>75</td><td class="note">interval 0.03</td></tr>
+      <tr><td class="mat">Titanium</td><td>Black</td><td>100</td><td>12</td><td>80</td><td class="note">10 passes, interval 0.03</td></tr>
+      <tr><td class="mat">Titanium</td><td>Light blue</td><td>100</td><td>17.5</td><td>100</td><td class="note">defocus 1 mm</td></tr>
+      <tr><td class="mat">Titanium</td><td>Dark blue</td><td>100</td><td>21.7</td><td>100</td><td class="note">defocus 1 mm</td></tr>
+      <tr><td class="mat">Titanium</td><td>Purple</td><td>1200 + 100</td><td>25 + 16</td><td>75 + 100</td><td class="note">two superimposed passes for purple</td></tr>
+      <tr><td class="mat">Titanium</td><td>Golden yellow</td><td>100</td><td>17</td><td>100</td><td class="note">defocus 1 mm</td></tr>
+      <tr><td class="mat">Titanium</td><td>Silver</td><td>500</td><td>15</td><td>80</td><td class="note">5 passes · mirror-like finish</td></tr>
+      <tr><td class="mat">304 stainless</td><td>Black</td><td>200</td><td>10</td><td>100</td><td class="note">bi-directional</td></tr>
+      <tr><td class="mat">304 stainless</td><td>White</td><td>1000</td><td>20</td><td>60</td><td class="note">bi-directional</td></tr>
+      <tr><td class="mat">304 stainless</td><td>Black</td><td>100</td><td>10</td><td>50</td><td class="note">cross-hatch fill</td></tr>
+      <tr><td class="mat">Carbon steel</td><td>White (≈gray)</td><td>900</td><td>20</td><td>60</td><td class="note">bi-directional</td></tr>
+      <tr><td class="mat">Carbon steel</td><td>Black</td><td>100</td><td>30</td><td>50</td><td class="note">bi-directional</td></tr>
+      <tr><td class="mat">Brass</td><td>White</td><td>500</td><td>20</td><td>50</td><td class="note">bi-directional</td></tr>
+      <tr><td class="mat">Aluminium sheet</td><td>White</td><td>900</td><td>20</td><td>60</td><td class="note">no black result on aluminium</td></tr>
+      <tr><td class="mat">ABS</td><td>Black</td><td>500</td><td>10</td><td>50</td><td class="note">no white on white ABS</td></tr>
+      <tr><td class="mat">Mirror stainless</td><td>Black</td><td>100</td><td>20</td><td>90</td><td class="note">bi-directional</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <div class="card">
+    <h3>Quick CO2 + fiber sheet (laser-cutter-material-settings-Sheet1.pdf)</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Material</th><th>Laser</th><th>Process</th><th>Power</th><th>Speed</th><th>PPI</th><th>Passes</th><th>Offset</th></tr></thead><tbody>
+      <tr><td class="mat">½" plywood</td><td>CO2</td><td>Engrave</td><td>100</td><td>80</td><td>auto</td><td>1</td><td>0</td></tr>
+      <tr><td class="mat">½" plywood</td><td>CO2</td><td>Cut</td><td>60</td><td>0.2</td><td>auto</td><td>4</td><td>−0.1</td></tr>
+      <tr><td class="mat">¼" plywood / MDF</td><td>CO2</td><td>Cut</td><td>60</td><td>0.4</td><td>auto</td><td>1</td><td>−0.12</td></tr>
+      <tr><td class="mat">⅛" plywood</td><td>CO2</td><td>Cut</td><td>48</td><td>0.45</td><td>auto</td><td>1</td><td>−0.05</td></tr>
+      <tr><td class="mat">¼" acrylic</td><td>CO2</td><td>Cut</td><td>42</td><td>0.3</td><td>auto</td><td>2</td><td>−0.1</td></tr>
+      <tr><td class="mat">⅛" acrylic</td><td>CO2</td><td>Cut</td><td>42</td><td>0.3</td><td>auto</td><td>1</td><td>−0.05</td></tr>
+      <tr><td class="mat">Cardboard</td><td>CO2</td><td>Cut</td><td>40</td><td>1</td><td>auto</td><td>1</td><td>0</td></tr>
+      <tr><td class="mat">Foamcore 3/16–¼"</td><td>CO2</td><td>Cut</td><td>32</td><td>1.5</td><td>auto</td><td>1</td><td>0</td></tr>
+      <tr><td class="mat">Posterboard &lt;0.02"</td><td>CO2</td><td>Cut</td><td>30</td><td>2</td><td>5000</td><td>1</td><td>0</td></tr>
+      <tr><td class="mat">Brass &lt;0.01"</td><td>Fiber</td><td>Engrave</td><td>40</td><td>7.5</td><td>20000</td><td>1</td><td>0</td></tr>
+      <tr><td class="mat">Aluminium &lt;0.01"</td><td>Fiber</td><td>Cut</td><td>100</td><td>0.35</td><td>auto</td><td>8</td><td>0</td></tr>
+      <tr><td class="mat">Stainless steel</td><td>Fiber</td><td>Engrave</td><td>60</td><td>15</td><td>20000</td><td>1</td><td>0</td></tr>
+      <tr><td class="mat">Polyurethane foam 1.75"</td><td>CO2</td><td>Cut</td><td>25</td><td>0.5</td><td>1000</td><td>1</td><td>0</td></tr>
+      <tr><td class="mat">Felt 1/16"</td><td>CO2</td><td>Cut</td><td>25</td><td>1</td><td>auto</td><td>1</td><td>0</td></tr>
+      <tr><td class="mat">Heavy canvas</td><td>CO2</td><td>Cut</td><td>25</td><td>2.5</td><td>auto</td><td>1</td><td>0</td></tr>
+    </tbody></table></div>
+    <p class="sm">Also in the folder: Gravoply laserable plastic on LS100 (30–35W): engrave power 30–40 @ speed 90 · 500 DPI, cut 100% @ 20–30 — Gravotech spec. Fusion Series CO2 (30–120W) acrylic/Anodized/Alumamark tables — see fusion-material-settings.pdf. RF tube (30/55W) light/deep engrave tables — see the two RF PDFs. Thunder Nova CO2 machines (24-63 series) — the 4 edbsn jpegs.</p>
+  </div>
+</section>
+
+
+<!-- ================= LASER TYPES ================= -->
+<section id="types">
+  <h2><span class="n">04c</span>Laser Types &amp; Light Colours — from your Sheet 3</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Laser light colours</h3>
+      <ul>
+        <li><b>Red (≈650 nm)</b> — longest common wavelength, most visible, cheapest to produce. Pointers &amp; teaching.</li>
+        <li><b>Green (≈532 nm)</b> — brighter to the eye than red; outdoor presentations.</li>
+        <li><b>Blue (≈445–455 nm)</b> — direct-diode laser, far more intense. <b>Your A6 Pro.</b> Ideal for engraving (darker blacks on wood than CO₂) but slow on thick cuts.</li>
+        <li><b>Infrared (1064 nm)</b> — invisible; fiber lasers use it to mark metals. Your A6 Pro's optional 1W IR head.</li>
+        <li><b>Ultraviolet (355 nm)</b> — precision marking: electronics, medical devices, delicate work.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Machine types — quick overview</h3>
+      <ul>
+        <li><b>CO₂ (10.6 µm)</b> — most versatile. Cuts wood, acrylic, leather, fabric. <b>Can't do bare metal.</b> This is what the school DT lab likely has.</li>
+        <li><b>Fiber (1.06 µm)</b> — metal specialists: mark steel, aluminium, brass. Limited on organics.</li>
+        <li><b>Diode (445 nm)</b> — budget option, <b>yours</b>. Darker blacks on wood than CO₂ (perfect for photo engraving). Slow, struggles with thick cuts.</li>
+        <li><b>UV (355 nm)</b> — precision marking: electronics, medical, delicate work.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ditch">
+    <h3>Sheet 3 safety additions — never laser these (any machine)</h3>
+    <ul>
+      <li><b>Chrome-tanned leather</b> — creates hexavalent chromium (Chromium VI), a carcinogen. Use <b>vegetable-tanned</b> leather; most commercial leather is chrome-tanned unless labelled.</li>
+      <li><b>Treated / pressure-treated wood</b> — chemical treatments release toxic fumes including arsenic compounds. Untreated wood only.</li>
+      <li><b>PVC</b> — chlorine gas → hydrochloric acid: corrodes machine metal, damages lungs (vinyl flooring, shower curtains, some imitation leather, wire insulation).</li>
+      <li><b>ABS</b> — releases cyanide gas when lasered (3D printer filament, LEGO, automotive parts, electronics cases).</li>
+    </ul>
+  </div>
+</section>
+
+
+
+<!-- ================= PHYSICS ================= -->
+<section id="physics">
+  <h2><span class="n">04d</span>How Lasers Work — the Physics</h2>
+  <p class="lead">A laser is just light that has been organised. Understanding the 30-second version explains everything about why your machine cuts wood but not clear acrylic, and why CO₂ machines are so versatile.</p>
+
+  <div class="card">
+    <h3>The 5 ideas you need</h3>
+    <ul>
+      <li><b>Light is photons.</b> Every beam is a stream of particles/waves with a <b>wavelength</b> (colour) and an <b>energy per photon</b>. Shorter wavelength = higher energy = usually more material damage per photon.</li>
+      <li><b>Atoms have energy levels.</b> Electrons sit in orbits around the nucleus. Give an electron a photon of exactly the right energy and it <b>jumps up</b> (absorbed); when it falls back down it <b>emits a photon</b> of that same energy.</li>
+      <li><b>Stimulated emission (Einstein, 1917).</b> If you hit an already-excited atom with a photon, it emits an identical twin photon — <b>same direction, same wavelength, in phase</b>. One photon becomes two. This is the trick no normal light source has.</li>
+      <li><b>Population inversion.</b> Normally most atoms are in the ground state. "Pumping" the gain medium (with electricity, flashlamps, or another laser) flips the population so <b>more atoms are excited than not</b> — then stimulated emission runs away.</li>
+      <li><b>The cavity.</b> The gain medium sits between two mirrors. Light bounces back and forth, doubling at every pass, until a tiny fraction leaks out through the <b>partially-reflective mirror</b> = your beam. That's why a laser is monochromatic (one colour), coherent (in phase), and collimated (stays tight) — and why it can be focused to a microscopic spot.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Anatomy of a laser — your A6 Pro included</h3>
+    <pre style="font-family:var(--mono);font-size:12px;line-height:1.5;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;color:var(--txt)">        fully reflective                    partially reflective
+        mirror                                 mirror
+           │                                      │
+           ▼                                      ▼
+   ┌───────┴────────┐   ┌─────────────────┐   ┌───┴───────┐
+   │                │   │   GAIN MEDIUM   │   │           │  ─────► beam out
+   │   MIRROR 1     │◄──┤ (atoms pumped   │──►│  MIRROR 2 │  (to focus lens,
+   │   (100%)       │   │  into excited   │   │ (partial  │   then your wood)
+   │                │   │  state)         │   │  ~5-50%)  │
+   └────────────────┘   └─────────────────┘   └───────────┘
+           ▲                                        │
+           └────── light bounces, doubling each pass ┘
+   PUMP:  electric current (diode) · electrical discharge (CO2 gas)
+          · flashlamps / other lasers (fiber, Nd:YAG)</pre>
+    <p class="sm">In your machine the gain medium is a <b>semiconductor diode</b>: electric current pumps electrons into excited states; the mirrors are the polished ends of the diode chip; the output is 455 nm blue. In a CO₂ laser the medium is a gas tube and the pump is a high-voltage discharge.</p>
+  </div>
+
+  <div class="card">
+    <h3>Why this matters for cutting</h3>
+    <ul>
+      <li>A laser beam can be focused to a spot ~0.05–0.2 mm — that's <b>megawatts per cm²</b> of energy density. Materials either <b>vaporise</b> (wood, paper), <b>melt + blow away</b> (acrylic), <b>fracture/mark</b> (slate, glass), or <b>change colour</b> (anodized aluminium, marking sprays).</li>
+      <li><b>Absorption is wavelength-dependent.</b> A material only heats if it <i>absorbs</i> your wavelength. This single fact explains your machine's entire personality (see section 04f).</li>
+      <li><b>Engraving</b> = lots of small overlapping burns (scan lines) → darker/whiter mark. <b>Cutting</b> = one concentrated pass (or many) that goes all the way through.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LASER TYPES DEEP DIVE ================= -->
+<section id="lasertypes">
+  <h2><span class="n">04e</span>Every Laser Type — How It Works &amp; What It Does</h2>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Type</th><th>Wavelength</th><th>Gain medium</th><th>How it works</th><th>Typical power</th><th>Good at</th><th>Bad at</th></tr></thead>
+    <tbody>
+      <tr><td class="mat">Diode (blue)</td><td class="mono">445–455 nm</td><td>Semiconductor chip</td><td>Electric current pumps the chip directly; mirrors are the chip's polished ends</td><td>0.5–40 W</td><td class="note"><b>Yours.</b> Engraving wood/leather/paper, marking anodized aluminium, cheap &amp; compact</td><td class="note">Thick cuts, clear acrylic, bare metal, glass without coating</td></tr>
+      <tr><td class="mat">Diode (IR)</td><td class="mono">808 nm / 1064 nm</td><td>Semiconductor</td><td>Same idea; longer wavelength</td><td>0.5–20 W</td><td class="note">Cheap engravers, dark plastics</td><td class="note">Less efficient on light wood than blue; still can't do metal</td></tr>
+      <tr><td class="mat">CO₂</td><td class="mono">10.6 µm (far IR)</td><td>Gas tube (CO₂+N₂+He)</td><td>High-voltage electrical discharge excites the gas; mirrors at tube ends</td><td>30–150 W (up to kW)</td><td class="note">The versatile one: cuts wood/acrylic/fabric/thick stock, engraves glass &amp; stone; absorbs in almost everything</td><td class="note">Bare metal marking (needs coatings), high running cost, big machine</td></tr>
+      <tr><td class="mat">Fiber</td><td class="mono">1.06 µm</td><td>Doped optical fibre</td><td>Diode-pumped rare-earth (Yb/Er) fibre; beam delivered through the same fibre</td><td>20 W – 4 kW</td><td class="note">Metal marking/cutting, titanium colouring (section 04b), deep engraving steel</td><td class="note">Organics burn unevenly; expensive</td></tr>
+      <tr><td class="mat">Nd:YAG</td><td class="mono">1.06 µm</td><td>Crystal rod</td><td>Flashlamp/diode pumps a neodymium-doped crystal; Q-switched for pulses</td><td>10 W – 400 W</td><td class="note">Welding, metal engraving, older industrial workhorse</td><td class="note">Same metal-only profile as fiber, more maintenance</td></tr>
+      <tr><td class="mat">UV</td><td class="mono">355 nm</td><td>Frequency-tripled Nd:YAG</td><td>IR → green → UV via nonlinear crystals</td><td>3–20 W</td><td class="note">"Cold" marking: electronics, PCBs, medical devices, glass, ceramics — minimal heat damage</td><td class="note">Expensive per watt; slow on thick organics</td></tr>
+      <tr><td class="mat">Excimer</td><td class="mono">193–351 nm</td><td>Reactive gas (KrF, ArF…)</td><td>Pulsed gas discharge; UV pulses ablate surfaces</td><td>up to ~100 W avg</td><td class="note">Eye surgery (LASIK), microelectronics, precision polymer ablation</td><td class="note">Toxic gas handling; lab equipment</td></tr>
+      <tr><td class="mat">Femtosecond</td><td class="mono">varies (IR–UV)</td><td>Titanium-sapphire / fiber</td><td>Ultra-short pulses (10⁻¹⁵ s) — so fast the material has no time to conduct heat</td><td>1–100 W avg</td><td class="note">Micro-machining, stents, anything needing zero heat-affected zone</td><td class="note">Very expensive; lab-grade</td></tr>
+      <tr><td class="mat">Free electron</td><td class="mono">tunable</td><td>Electron beam in magnets</td><td>Electrons wiggle through undulators, emitting light — no gain medium at all</td><td>kW–GW (research)</td><td class="note">Science: materials research, particle physics</td><td class="note">Building-sized; not a workshop tool</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout" style="margin-top:14px">
+    <h3>One-line summary</h3>
+    <p><b>Diode = your budget all-rounder</b> · <b>CO₂ = workshop workhorse</b> (cuts everything organic) · <b>Fiber/Nd:YAG = metal specialists</b> · <b>UV/Excimer/Femto = precision cold tools</b>. Most school DT labs have a CO₂; most hobbyists have a diode. Now you can read any spec sheet.</p>
+  </div>
+</section>
+
+<!-- ================= WAVELENGTH & COLOUR ================= -->
+<section id="wavelength">
+  <h2><span class="n">04f</span>Laser Colours &amp; Wavelengths — What Each One Does</h2>
+  <p class="lead">Same laser physics, different wavelengths → different materials respond. The rule: <b>a material heats up only where it absorbs light</b>; the rest is transmitted or reflected.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Colour</th><th>Wavelength</th><th>Used by</th><th>Absorbs well in</th><th>Passes through / reflects off</th></tr></thead>
+    <tbody>
+      <tr><td class="mat">Ultraviolet</td><td class="mono">355 nm</td><td>UV lasers (cold marking)</td><td class="note">Plastics, ceramics, glass, thin films</td><td class="note">Most metals (so it marks coatings on them)</td></tr>
+      <tr><td class="mat">Violet</td><td class="mono">405 nm</td><td>Cheap diode modules</td><td class="note">Dark materials, photopolymers</td><td class="note">Light/clear materials</td></tr>
+      <tr><td class="mat">Blue</td><td class="mono">445–455 nm</td><td><b>Your A6 Pro</b>, most hobby diode lasers</td><td class="note">Dark &amp; coloured wood, dark acrylic, leather, anodized coating, paper</td><td class="note"><b>Clear acrylic (passes straight through), shiny metals (reflect ~90%), white/light materials (weak burn)</b></td></tr>
+      <tr><td class="mat">Green</td><td class="mono">532 nm</td><td>DPSS lasers, some marking systems</td><td class="note">Some metals &amp; foils, visible alignment</td><td class="note">—</td></tr>
+      <tr><td class="mat">Red</td><td class="mono">635–650 nm</td><td>Pointers, low-power engravers, laser levels</td><td class="note">Dark pigments</td><td class="note">Too low power to cut most things</td></tr>
+      <tr><td class="mat">Near-IR</td><td class="mono">808 nm / 1064 nm</td><td>IR diodes, fiber &amp; Nd:YAG lasers</td><td class="note">Metals (1064 nm absorbed well), dark plastics</td><td class="note">Light organics burn poorly; invisible beam = extra safety care</td></tr>
+      <tr><td class="mat">Far-IR (CO₂)</td><td class="mono">10.6 µm</td><td>CO₂ machines</td><td class="note"><b>Almost everything organic</b>: wood, acrylic, leather, paper, stone, glass, fabric</td><td class="note">Polished metals (CO₂ reflects off shiny metal — the classic CO₂ limitation)</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout">
+    <h3>Why your blue 455 nm machine behaves the way it does</h3>
+    <ul>
+      <li><b>Clear acrylic is transparent to 455 nm</b> — the beam goes through without heating, which is why only <i>dark/opaque cast</i> acrylic works on your machine. A CO₂'s 10.6 µm is absorbed by acrylic's molecular bonds, so CO₂ cuts clear acrylic fine.</li>
+      <li><b>Bare aluminium/steel/copper reflect blue light</b> (~85–95% at 445 nm) — you need anodized surfaces, marking spray, or the IR head. Even worse, reflections can hit the optics and damage the diode.</li>
+      <li><b>Dark materials absorb blue beautifully</b> — that's why your engraves on basswood/ply come out with such rich contrast, often darker than a CO₂'s.</li>
+      <li><b>White/light-coloured stock burns weakly</b> — pale maple or white card needs more passes or lower speed than walnut or kraft.</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ================= BRAND MATRICES ================= -->
+<section id="brands">
+  <h2><span class="n">05</span>Brand Material Matrices — What Every Maker Machine Officially Supports</h2>
+  <p class="lead">Official compatibility data from manufacturers, so you can read any machine's spec list. <b>✓* = needs coating/spray</b> (e.g. glass, clear acrylic, metals). Most relevant to you: the <b>xTool F1 Ultra diode + 2W IR matrix</b> below — the same blue-diode physics as your A6 Pro.</p>
+
+  <div class="card">
+    <h3>xTool F1 Ultra — official matrix (diode 455nm + 2W IR) — 100+ materials</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Material</th><th>Diode engrave</th><th>IR engrave</th><th>Cut</th></tr></thead>
+      <tbody>
+<tr><td class="mat">Basswood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Balsa Wood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Basswood Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Technological Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Walnut</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Walnut Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Cherrywood Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Okoume Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Sapele Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Red Oak Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Ebony Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Birch Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">White Oak Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Hickory Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Betula Alnoides Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Terminalia Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">White Ash Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Zebrawood Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Red Rose Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Bamboo Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Beechwood Coasters</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Round Cork Coasters</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Sublimation Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Sublimation Ceramic Coasters</td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Cutting Board</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">MDF Board</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Bamboo</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Painted Metal</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Anodic Aluminum Oxide</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Brass</td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Titanium alloy</td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Aluminium</td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Stainless Steel</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Electroplated Metal</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Round Bead</td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Shale</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Gold Cuff Bracelet</td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Marble</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">PVC</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">ABS</td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">PU Leather</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU Patch</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU Iron-on Patch</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU Notebook</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU Patch Passport Holder</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU Patch Bookmarks</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU Mouse Pad with Wrist Support</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">PU MagSafe Wallet</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU StainlessSteel Hip Flask</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Silicone Apple Watch Bands</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Silicone Magnetic iPhone Case</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Tumbler</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Brown Top Grain Cowhide Leather</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Black to Gold Laserable PU Leather</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Grass Green Opaque Glossy Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Green Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Black Opaque Glossy Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Black Translucent Acrylic</td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Frosted Black Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Red Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Dark Red Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Orange Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Orange Opaque Glossy Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Red Glitter Opaque Glossy Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Yellow Opaque Glossy Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Fluorescent Yellow Translucent Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Brown Opaque Glossy Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Chrome Yellow Opaque Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Light Pink Acrylic</td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Deep Blue Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Gray Translucent Acrylic</td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Pearl White Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Two-Tone Acrylic Sheet White to Black</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Two-Tone Acrylic Sheet Black to Pearl White</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Mirror Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Clear Acrylic</td><td><span class="b-mid">✓*</span></td><td><span class="b-mid">✓*</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Felt</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Blue Denim</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU StainlessSteel Hip Flask</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laser Engraving Rubber Sheet</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Cardstock Paper</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Kraft Paper</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Coated Screen</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Silicone</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Coated Canvas</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laser Engraving Photo Paper</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Shimmer Paper</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Corrugated Paper</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Ceramic</td><td><span class="b-good">✓</span></td><td><span class="b-mid">✓*</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Cement</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Brick</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Velvet</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Coir Doormat</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Cork Sheet</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Glass</td><td><span class="b-mid">✓*</span></td><td><span class="b-mid">✓*</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Fabric</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Ballpoint Pens with Stylus</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Denim Bag</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">xTool Coated Screen</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="sm">Source: support.xtool.com/article/1716. Notes: clear acrylic &amp; glass need coating; translucent acrylics (pink/gray/black/blue) are IR-only; stainless/brass/titanium rows assume marking spray or laser-safe blanks.</p>
+  </div>
+
+  <div class="card">
+    <h3>xTool UV laser — official matrix (excerpt — UV's unique abilities)</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Material</th><th>UV engrave</th><th>UV cut</th></tr></thead>
+      <tbody>
+<tr><td class="mat">Glass</td><td><span class="b-good">✓</span></td><td><span class="b-mid">(Transparent</span></td></tr>
+<tr><td class="mat">Tumbler</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Felt</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Denim</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Velvet</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">ABS</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">PET</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">PP</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">PC</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">EVA</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Kraft Paper</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Photo Paper</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Scratch Paper</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Rock</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Marble</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">PU Leather</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Natural Leather</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Self-adhesive Vinyl</td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Heat Transfer Vinyl</td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Sublimation Paper</td><td><span class="b-no">–</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Shrinky Dink Paper</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Stainless Steel</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Aluminum</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Zinc</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Titanium</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Brass</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Silver</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Carbon Steel</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Galvanized Sheet</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Screen Printing</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Rubber</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Silicone</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Ceramic</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Canvas</td><td><span class="b-good">✓</span></td><td><span class="b-mid">✅(Linen Canv</span></td></tr>
+<tr><td class="mat">Photosensitive Stamp</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Foil Paper</td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Acrylic</td><td><span class="b-mid">✅(Anti-UV Cl</span></td><td><span class="b-mid">✅(Anti-UV Cl</span></td></tr>
+<tr><td class="mat">Magnetic Sheet</td><td><span class="b-no">–</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">MDF (Medium Density Fiberboard)</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Cardboard</td><td><span class="b-mid">✅(Glitter Ca</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Whiskey Saponite Stones</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Hardwood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Leaf</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="sm">UV (355nm) cuts <b>clear glass</b> (soda-lime), self-adhesive &amp; heat-transfer vinyl, sublimation paper — things blue diodes and CO₂ struggle with. Still: laser-safe vinyl only.</p>
+  </div>
+
+  <div class="card">
+    <h3>Where every brand keeps its material data (verified URLs)</h3>
+    <ul>
+      <li><b>Epilog (CO₂)</b> — huge searchable database, 100+ materials, speed/power/DPI per machine: epiloglaser.com/resources/sample-laser-configurations.htm</li>
+      <li><b>Boss Laser (CO₂)</b> — speed/power settings per material: bosslaser.com (settings pages; heavy JS, curl-blocked)</li>
+      <li><b>OMTech (CO₂ + diode)</b> — knowledge base + the LightBurn test card you already have in your folder</li>
+      <li><b>Atomstack (diode, 20W)</b> — official LightBurn engrave + cut parameter tables: atomstackshop.com (included as section 05e)</li>
+      <li><b>Snapmaker (diode)</b> — 10W/40W guides on support.snapmaker.com (Cloudflare-blocked for scripts; community mirror on forum.snapmaker.com)</li>
+      <li><b>Glowforge (CO₂)</b> — 158 community settings at bonnycreations.com/settings/machines/glowforge-pro + library libguides; note Glowforge uses its own UI speed/power scale</li>
+      <li><b>LA Hobby Guy forum</b> (lahobbyguy.com) — the biggest diode community; Ortur/Atomstack/xTool charts shared daily</li>
+      <li><b>Creality Falcon series</b> — official 10/20/22/40W parameter tables: eu.crealityfalcon.com (included as section 05f)</li>
+      <li><b>Longer RAY5 20W</b> — official parameter table at longer3d.com/pages/ray5-20w-parameter-table (JS-rendered; Scribd mirror available)</li>
+      <li><b>Glowforge (CO₂)</b> — glowforge.com/materials — material hub with settings per material</li>
+      <li><b>Snapmaker (diode module)</b> — snapmaker.com academy settings guides</li>
+      <li><b>Thunder Laser (CO₂/fiber)</b> — thunderlaser.com laser-wiki — the mother-of-pearl + Nova charts you already have</li>
+    </ul>
+    <p class="sm">Rule for reading any brand chart: speeds/powers are tuned to <i>their</i> machine's real output — scale by power class, then run your test grid. That's the whole secret.</p>
+  </div>
+</section>
+
+
+<!-- ================= ATOMSTACK ================= -->
+<section id="atomstack">
+  <h2><span class="n">05e</span>Atomstack Official 20W Tables — X20 Pro / A20 Pro / S20 Pro</h2>
+  <p class="lead">Atomstack's own LightBurn parameter tables for their <b>20W optical blue diode</b> modules — the same power class as your A6 Pro. Speeds mm/min. <b>"Needs to be blackened" = coat the surface black first</b> (marker/paint) — that's how they engrave glass, mirrors &amp; bright metal.</p>
+  <div class="card">
+    <h3>Engraving (Scan/Image) — interval, speed, max power</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Material</th><th>Interval</th><th>Speed</th><th>Max Pwr</th><th>Image mode</th><th>Blacken?</th><th>Passes</th></tr></thead><tbody>
+<tr><td class="mat">Basswood</td><td class="num">0.1</td><td class="num">3000</td><td class="num">20%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Yellow Peachwood</td><td class="num">0.1</td><td class="num">3000</td><td class="num">15%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Mahogany</td><td class="num">0.1</td><td class="num">3000</td><td class="num">35%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Pine</td><td class="num">0.1</td><td class="num">3000</td><td class="num">20%</td><td class="note">Jarvis</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Paulownia</td><td class="num">0.1</td><td class="num">2700</td><td class="num">45%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Bamboo</td><td class="num">0.1</td><td class="num">3000</td><td class="num">50%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Leather</td><td class="num">0.1</td><td class="num">3000</td><td class="num">20%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Denim</td><td class="num">0.1</td><td class="num">3000</td><td class="num">20%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Ceramics</td><td class="num">0.1</td><td class="num">1000</td><td class="num">80%</td><td class="note">Threshold</td><td>YES</td><td class="num">1</td></tr>
+<tr><td class="mat">Creamic tile</td><td class="num">0.1</td><td class="num">1000</td><td class="num">80%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Alumina</td><td class="num">0.1</td><td class="num">500</td><td class="num">60%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Glass</td><td class="num">0.1</td><td class="num">1000</td><td class="num">50%</td><td class="note">Threshold</td><td>YES</td><td class="num">1</td></tr>
+<tr><td class="mat">Acrylic</td><td class="num">0.1</td><td class="num">3000</td><td class="num">50%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">TranslucentAcrylic</td><td class="num">0.1</td><td class="num">3000</td><td class="num">13%</td><td class="note">Jarvis</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Two color plate</td><td class="num">0.1</td><td class="num">3000</td><td class="num">12%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Plastic</td><td class="num">0.1</td><td class="num">3000</td><td class="num">20%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Resin</td><td class="num">0.1</td><td class="num">1000</td><td class="num">13%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Artificial beef bone</td><td class="num">0.1</td><td class="num">1000</td><td class="num">30%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">High densityfoam board</td><td class="num">0.1</td><td class="num">3000</td><td class="num">15</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Rubber</td><td class="num">0.1</td><td class="num">3000</td><td class="num">50%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Kraft paper</td><td class="num">0.1</td><td class="num">3000</td><td class="num">15%</td><td class="note">Jarvis</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Office paper</td><td class="num">0.125</td><td class="num">1500</td><td class="num">13</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Oil paintingpaper</td><td class="num">0.1</td><td class="num">3000</td><td class="num">23%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Carton</td><td class="num">0.1</td><td class="num">3000</td><td class="num">15%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">MDF</td><td class="num">0.085</td><td class="num">3000</td><td class="num">20</td><td class="note">Atkinson</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Mirrors</td><td class="num">0.08</td><td class="num">3000</td><td class="num">30%</td><td class="note">Threshold</td><td>YES</td><td class="num">1</td></tr>
+<tr><td class="mat">Rock</td><td class="num">0.1</td><td class="num">3000</td><td class="num">60%</td><td class="note">Filled</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Cobblestone</td><td class="num">0.1</td><td class="num">3000</td><td class="num">60%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Crystal Stone</td><td class="num">0.1</td><td class="num">1000</td><td class="num">65%</td><td class="note">Threshold</td><td>YES</td><td class="num">1</td></tr>
+<tr><td class="mat">PCB Board</td><td class="num">0.1</td><td class="num">2000</td><td class="num">60%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Mirror Stainless steel</td><td class="num">0.1</td><td class="num">600</td><td class="num">80%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Brushed Stainless Steel</td><td class="num">0.08</td><td class="num">1000</td><td class="num">80%</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+<tr><td class="mat">Galvanized iron</td><td class="num">0.1</td><td class="num">100</td><td class="num">80%</td><td class="note">Threshold</td><td>YES</td><td class="num">1</td></tr>
+<tr><td class="mat">Iron sheet</td><td class="num">0.1</td><td class="num">100</td><td class="num">80%</td><td class="note">Threshold</td><td>YES</td><td class="num">1</td></tr>
+<tr><td class="mat">Artificial agate</td><td class="num">0.1</td><td class="num">50</td><td class="num">80</td><td class="note">Threshold</td><td>NO</td><td class="num">1</td></tr>
+    </tbody></table></div>
+  </div>
+  <div class="card">
+    <h3>Cutting (Line) — speed &amp; passes per thickness</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Material</th><th>Thickness</th><th>Speed</th><th>Max Pwr</th><th>Passes</th></tr></thead><tbody>
+<tr><td class="mat">Material</td><td class="num">Thickness</td><td class="num">Speed（mm/m）</td><td class="num">S-Max</td><td class="num">Number of passes</td></tr>
+<tr><td class="mat">Basswood</td><td class="num">10mm</td><td class="num">600</td><td class="num">75%</td><td class="num">6</td></tr>
+<tr><td class="mat">Pine</td><td class="num">14mm</td><td class="num">280</td><td class="num">80%</td><td class="num">10</td></tr>
+<tr><td class="mat">Paulownia wood</td><td class="num">18mm</td><td class="num">320</td><td class="num">70%</td><td class="num">10</td></tr>
+<tr><td class="mat">Cork wood</td><td class="num">15mm</td><td class="num">2000</td><td class="num">70%</td><td class="num">10</td></tr>
+<tr><td class="mat">Bamboo</td><td class="num">6mm</td><td class="num">550</td><td class="num">100%</td><td class="num">3</td></tr>
+<tr><td class="mat">Leather</td><td class="num">2mm</td><td class="num">300</td><td class="num">80%</td><td class="num">1</td></tr>
+<tr><td class="mat">Kraft Paper</td><td class="num">0.2mm</td><td class="num">3000</td><td class="num">80%</td><td class="num">1</td></tr>
+<tr><td class="mat">Acrylic</td><td class="num">15mm</td><td class="num">100</td><td class="num">65%</td><td class="num">10</td></tr>
+<tr><td class="mat">MDF</td><td class="num">8mm</td><td class="num">400</td><td class="num">100%</td><td class="num">4</td></tr>
+<tr><td class="mat">Stainless Steel Sheet</td><td class="num">0.05mm</td><td class="num">500</td><td class="num">80%</td><td class="num">1</td></tr>
+    </tbody></table></div>
+    <p class="sm">Source: atomstackshop.com LightBurn parameter tables. Note the engineering pattern: thick stock = multiple passes at 70–100% (basswood 10mm = 6 passes, pine 14mm = 10 passes); thin stock = one fast pass. Stainless foil 0.05mm cuts at 500 mm/min — foil only, never sheet.</p>
+  </div>
+</section>
+
+
+<!-- ================= CREALITY ================= -->
+<section id="creality">
+  <h2><span class="n">05f</span>Creality Falcon Series Official Tables — 10 / 20 / 22 / 40W</h2>
+  <p class="lead">Creality's own parameter tables for the Falcon Pro/Falcon 2 diode lasers — the <b>Falcon Pro 20W</b> table is the same power class as your A6 Pro. Speeds mm/min.</p>
+  <div class="card">
+    <h3>Falcon Pro 20W — full official table</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Mode</th><th>Material</th><th>Thick mm</th><th>Power %</th><th>Speed</th><th>Passes</th></tr></thead><tbody>
+<tr><td class="note">engraving</td><td class="mat">Linden planks</td><td class="num">2</td><td class="num">25</td><td class="num">6000</td><td class="num">1</td></tr>
+<tr><td class="note">Cutting</td><td class="mat">Linden planks</td><td class="num">2</td><td class="num">100</td><td class="num">1000</td><td class="num">1</td></tr>
+    </tbody></table></div>
+  </div>
+  <div class="card">
+    <h3>How the same material scales across Creality's power range</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Job</th><th>40W (Falcon 2)</th><th>22W</th><th>20W (Pro)</th></tr></thead><tbody>
+      <tr><td class="mat">Basswood 2mm engrave</td><td class="num">75% · 3000</td><td class="num">40% · 3000</td><td class="num">40% · 4000</td></tr>
+      <tr><td class="mat">Basswood 2mm cut</td><td class="num">100% · 250 · 1p</td><td class="num">100% · 350 · 1p</td><td class="num">100% · 350 · 1p</td></tr>
+      <tr><td class="mat">Basswood 5mm cut</td><td class="num">100% · 220 · 4p</td><td class="num">100% · 150 · 1p</td><td class="num">100% · 150 · 1p</td></tr>
+      <tr><td class="mat">Kraft paper 0.2mm cut</td><td class="num">100% · 2000</td><td class="num">100% · 3500</td><td class="num">100% · 3500</td></tr>
+      <tr><td class="mat">Black acrylic 4.5mm cut</td><td class="num">100% · 120 · 4p</td><td class="num">100% · 120 · 2p</td><td class="num">100% · 120 · 2p</td></tr>
+      <tr><td class="mat">Anodized aluminum engrave</td><td class="num">100% · 100</td><td class="num">100% · 200</td><td class="num">100% · 250</td></tr>
+    </tbody></table></div>
+    <p class="sm">Read the pattern: higher power = <b>lower % and/or higher speed</b>; cuts stay 100% with passes doing the work; <b>anodized marking is slow + hot on every power level</b> (your Layer 18 is in the right family). Source: eu.crealityfalcon.com Falcon series material settings.</p>
+  </div>
+</section>
+
+
+<!-- ================= XTOOL P2 ================= -->
+<section id="xtoolp2">
+  <h2><span class="n">05g</span>xTool P2 (CO₂ 55W) Official Matrix — the CO₂ contrast</h2>
+  <p class="lead">The same xTool material matrix, but for their <b>P2 CO₂ machine</b> — engrave + cut columns. Compare with section 05: <b>CO₂ engraves <i>and cuts</i> nearly everything on the list</b>, including all acrylic colours (no coating), and the only "with coating" entries are clear acrylic &amp; glass — exactly the physics from section 04f.</p>
+  <div class="card">
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Material</th><th>Engrave</th><th>Cut</th></tr></thead>
+      <tbody>
+<tr><td class="mat">Basswood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Balsa Wood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Basswood Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Technological Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Walnut</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Walnut Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Cherrywood Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Okoume Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Sapele Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Red Oak Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Ebony Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Birch Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">White Oak Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Hickory Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Betula Alnoides Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Terminalia Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">White Ash Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Zebrawood Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Red Rose Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Bamboo Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Beechwood Coasters</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Round Cork Coasters</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Sublimation Plywood</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Cutting Board</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">MDF Board</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Bamboo</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Painted Metal</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Anodic Aluminum Oxide</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Stainless Steel</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Electroplated Metal</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Round Bead</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Shale</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Marble</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">PVC</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">PU Leather</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU Patch</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU Iron-on Patch</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU Notebook</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU Patch Passport Holder</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU Patch Bookmarks</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU Mouse Pad with Wrist Support</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">PU MagSafe Wallet</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU StainlessSteel Hip Flask</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Silicone Apple Watch Bands</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Silicone Magnetic iPhone Case</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Tumbler</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Brown Top Grain Cowhide Leather</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Black to Gold Laserable PU Leather</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Grass Green Opaque Glossy Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Green Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Black Opaque Glossy Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Frosted Black Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Red Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Dark Red Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Orange Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Orange Opaque Glossy Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Red Glitter Opaque Glossy Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Yellow Opaque Glossy Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Fluorescent Yellow Translucent Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Brown Opaque Glossy Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Chrome Yellow Opaque Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Deep Blue Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Pearl White Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Two-Tone Acrylic Sheet White to Black</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Two-Tone Acrylic Sheet Black to Pearl White</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Mirror Acrylic</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Clear Acrylic</td><td><span class="b-mid">✓*</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Felt</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Blue Denim</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laserable PU StainlessSteel Hip Flask</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laser Engraving Rubber Sheet</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Cardstock Paper</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Kraft Paper</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Coated Screen</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Silicone</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Coated Canvas</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Laser Engraving Photo Paper</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Shimmer Paper</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Corrugated Paper</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Ceramic</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Cement</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Brick</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Velvet</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Coir Doormat</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Cork Sheet</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Glass</td><td><span class="b-mid">✓*</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Fabric</td><td><span class="b-good">✓</span></td><td><span class="b-good">✓</span></td></tr>
+<tr><td class="mat">Ballpoint Pens with Stylus</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+<tr><td class="mat">Denim Bag</td><td><span class="b-good">✓</span></td><td><span class="b-no">–</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="sm">Source: support.xtool.com/article/1716 (P2 section). Note: PVC appears as ✅ in xTool's list — their laser-safe sheet stock, not household PVC (still banned, see section 06).</p>
+  </div>
+</section>
+
+<!-- ================= WECREAT ================= -->
+<section id="wecreat">
+  <h2><span class="n">05h</span>WeCreat Vision 20W — What's Different About It</h2>
+  <div class="card">
+    <ul>
+      <li><b>Same class as yours</b> (20W blue diode, 455nm) but with three differentiators: <b>auto-lifting gantry</b> (engraves 0–140 mm tall objects — focus follows surface automatically), <b>integrated rotary</b> (one-pass full-wrap on 40oz tumblers), and a <b>built-in camera + QuickView Matrix</b> (preview the burn effect, set parameters from the preview).</li>
+      <li><b>Why that matters for you:</b> the auto-lift solves the focus problem from section 06c mechanically — you still solve it with tape shims on the A6 Pro. The camera preview is just a fancy test grid (section 07c).</li>
+      <li><b>Settings:</b> official max-thickness &amp; parameter chart lives at support.wecreat.com (search "Thickness of materials the WeCreat Vision can cut"). Community calculator: kerricraftsit.com/wecreat-settings-calc (mm/s speeds — multiply by 60 for LightBurn mm/min).</li>
+      <li><b>Takeaway:</b> no mystery settings — same diode physics, same materials, same grids. The machine just makes them easier to find.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= PARAMETERS DECODED ================= -->
+<section id="params">
+  <h2><span class="n">05a</span>Laser Parameters Decoded — What Each Setting Physically Does</h2>
+  <p class="lead">Every number in the tables above is really controlling one of four physical quantities: <b>energy per spot, spot overlap, how many times, and airflow</b>. Understand these and you can set any material blind.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Setting</th><th>What it controls physically</th><th>Effect when increased</th><th>Typical range</th></tr></thead>
+    <tbody>
+      <tr><td class="mat">Power %</td><td>Average optical power = <b>energy per spot</b> (diode: PWM duty cycle)</td><td class="note">Deeper cut, darker engrave — but charring, melt-back, detail loss</td><td class="note">cuts 60–100%, engrave 10–80%</td></tr>
+      <tr><td class="mat">Speed (mm/min)</td><td><b>Exposure time</b> per point (slower = longer dwell)</td><td class="note">Slower = more energy deposited = deeper/darker; too slow = burn-away</td><td class="note">engrave 2000–20000, cuts 100–1500</td></tr>
+      <tr><td class="mat">PPI / frequency</td><td><b>Pulse overlap</b> — how close consecutive pulses land</td><td class="note">Higher = smoother edge, more heat; lower = perforation effect</td><td class="note">1–5 for scoring, high for smooth cuts</td></tr>
+      <tr><td class="mat">Line interval (mm)</td><td><b>Fill-line spacing</b> during scan engraving (overlap of burns)</td><td class="note">Smaller = denser/darker engrave, slower job; larger = lighter, faster</td><td class="note">0.05–0.15 mm typical</td></tr>
+      <tr><td class="mat">Passes</td><td><b>Number of exposures</b> of the same path</td><td class="note">More = deeper without extra spot energy (cleaner than one slow pass)</td><td class="note">1 for engrave, 2–10 for thick cuts</td></tr>
+      <tr><td class="mat">Max power (scan)</td><td>Peak power of dynamic ramp for shading</td><td class="note">Higher = whiter/darker extremes in photos</td><td class="note">= power for flat burns</td></tr>
+      <tr><td class="mat">Overscan</td><td>Extra travel beyond shape edges</td><td class="note">Fixes faded edges at line-ends (accelerating zones)</td><td class="note">3–10 mm</td></tr>
+      <tr><td class="mat">Air assist</td><td>Blows away plasma/smoke, cools cut zone</td><td class="note">On = cleaner cuts, less char, flame suppression; can cool too much for dark engrave</td><td class="note">on for cuts/plastics, low/off for engrave</td></tr>
+      <tr><td class="mat">Focus / z-offset</td><td><b>Spot size</b> → energy density (smallest spot = most concentrated)</td><td class="note">Out of focus = wide weak burn (engraving trick for glass); in focus = cutting</td><td class="note">±0–3 mm</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout">
+    <h3>The two golden rules</h3>
+    <p><b>1. Power and speed are the same dial.</b> Energy per spot ≈ power ÷ speed. Halving speed is (roughly) doubling power. When a chart says "more power," you can often just slow down instead — gentler on the diode.</p>
+    <p><b>2. For cuts: full power + speed + passes &gt; low power + crawling speed.</b> A slow 100% single pass chars; three quick passes at full power cut cleaner. (Your own 3mm MDF recipe is exactly this.)</p>
+  </div>
+</section>
+
+<!-- ================= MATERIAL SCIENCE ================= -->
+<section id="matsci">
+  <h2><span class="n">05b</span>Laser × Material Science — Why Materials React Differently</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>The three fates of a photon</h3>
+      <ul>
+        <li><b>Absorbed</b> → heats the material (this is the only one that does work).</li>
+        <li><b>Reflected</b> → bounces off (metals at 455 nm). Wasted energy + hazard to your optics.</li>
+        <li><b>Transmitted</b> → passes straight through (clear acrylic, glass, clear PET). No heating at all.</li>
+      </ul>
+      <p class="sm">A material's colour, crystal structure and molecular bonds decide the split. Dark pigments absorb broadly; transparent materials transmit; shiny metals reflect.</p>
+    </div>
+    <div class="card">
+      <h3>What happens when material absorbs</h3>
+      <ul>
+        <li><b>Vaporisation</b> — wood, paper, leather: cellulose/lignin heats past its boiling point and turns to smoke + char. Char = carbon, which absorbs even better → self-accelerating (why cuts "run away" on wood).</li>
+        <li><b>Melting</b> — acrylic: melts then vaporises; cast acrylic froths white when engraved (frosted look), extruded melts to a flame-polished edge.</li>
+        <li><b>Thermal fracture / marking</b> — slate, glass, stone: rapid local heating cracks or chemically alters the surface (white frosted marks).</li>
+        <li><b>Coating removal</b> — anodized aluminium, painted metal: the thin coating vaporises, revealing the substrate (white mark on black anodize).</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Three phenomena you'll see every job</h3>
+    <ul>
+      <li><b>HAZ — Heat-Affected Zone:</b> material next to the cut that got hot but didn't vaporise: charred edge on plywood, melted lip on acrylic. Less energy &amp; air assist shrink it. This is why pass-based cutting beats slow single passes.</li>
+      <li><b>Kerf:</b> the width of material actually removed — always wider than the theoretical beam spot (heat spreads sideways). Your press-fit parts must be drawn <i>kerf-compensated</i>: part width + kerf = slot width. Measure yours once: cut a 10 mm slot, measure the hole vs the part.</li>
+      <li><b>Engrave contrast:</b> you're controlling how much char/oxidation stays behind. Fast+low power = light golden (thin char); slow+high = dark brown/black (thick char); on slate/glass the "mark" is actually micro-fracture scattering light → white.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= SAFETY SCIENCE ================= -->
+<section id="safesci">
+  <h2><span class="n">05c</span>Laser Safety Science — Classes, Eyes, Fumes</h2>
+  <div class="card">
+    <h3>Laser classes (ANSI Z136 / IEC 60825)</h3>
+    <div class="tbl-wrap"><table><thead><tr><th>Class</th><th>Power</th><th>Risk</th><th>Examples</th></tr></thead><tbody>
+      <tr><td class="mat">1</td><td class="mono">any (enclosed)</td><td class="note">Safe by design — beam fully enclosed, no exposure possible</td><td class="note"><b>Your A6 Pro with lid closed</b>, CD players</td></tr>
+      <tr><td class="mat">1M / 2</td><td class="mono">&lt;1 mW (2: &lt;1 mW visible)</td><td class="note">Safe unless focused optics; blink reflex protects</td><td class="note">Laser pointers, barcode scanners</td></tr>
+      <tr><td class="mat">3R / 3B</td><td class="mono">1–5 mW / 5–500 mW</td><td class="note">Direct beam can injure; diffuse reflections of 3B dangerous</td><td class="note">Alignment lasers, some engraver alignment beams</td></tr>
+      <tr><td class="mat">4</td><td class="mono">&gt;500 mW</td><td class="note">Direct + reflected beam injure instantly; <b>fires</b>; toxic fumes</td><td class="note">All cutting lasers with lid open — your 20W diode, CO₂, fiber</td></tr>
+    </tbody></table></div>
+    <p class="sm">Your A6 Pro is <b>Class 1 when enclosed</b>, Class 4 the moment the lid is open. The lid-open interlock exists for exactly this reason.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Why the eye is the #1 target</h3>
+      <ul>
+        <li>The cornea and lens focus light <b>~100,000×</b> onto the retina — a 20W beam becomes a retina-burning point in microseconds.</li>
+        <li><b>455 nm blue lands on the retina</b> (visible + focusable). 1064 nm IR is worse: <b>invisible</b>, so your blink reflex never triggers, and it still burns the retina.</li>
+        <li>You can't feel it — the retina has no pain receptors. Damage is permanent.</li>
+        <li>OD (optical density) ratings on goggles = how many decades of attenuation: OD4 = 10,000× dimmer. Blue-diode goggles block ~400–460 nm.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Fume chemistry — what you're breathing</h3>
+      <ul>
+        <li><b>Wood/paper:</b> smoke, tars, CO, formaldehyde traces — ventilate, don't huff.</li>
+        <li><b>Plastics:</b> PVC → hydrogen chloride gas; ABS → cyanide compounds; polycarbonate → bisphenol-A smoke. All toxic, all avoidable.</li>
+        <li><b>Leather (chrome-tanned):</b> hexavalent chromium, a carcinogen.</li>
+        <li><b>Treated wood:</b> arsenic/copper compounds.</li>
+        <li>Rule: <b>any fume at all = ventilation</b>. The A6 Pro's purifier (SP3) or a window + fan beats "it smells a bit".</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HISTORY ================= -->
+<section id="history">
+  <h2><span class="n">05d</span>Laser History &amp; Applications — 60 Years in One Card</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Timeline</h3>
+      <ul>
+        <li><b>1917</b> — Einstein publishes stimulated emission (the theory).</li>
+        <li><b>1960</b> — Theodore Maiman builds the <b>first laser</b>: a synthetic ruby crystal. "A solution looking for a problem."</li>
+        <li><b>1962</b> — First <b>semiconductor (diode) laser</b> — your machine's great-grandfather.</li>
+        <li><b>1964</b> — <b>CO₂</b> and <b>Nd:YAG</b> lasers invented — industrial cutting/marking born.</li>
+        <li><b>1978</b> — First primitive laser engraver for wooden art.</li>
+        <li><b>1996</b> — First laser-specific software — computer-controlled engraving goes mainstream.</li>
+        <li><b>2015→</b> — Cheap high-power blue diodes → the hobby engraver explosion (your A6 Pro).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Where lasers live today</h3>
+      <ul>
+        <li><b>Industry:</b> cutting sheet steel (fiber), welding cars, marking serial numbers, PCB drilling (UV).</li>
+        <li><b>Medicine:</b> LASIK (excimer), eye surgery, tattoo removal, dentistry.</li>
+        <li><b>Telecom:</b> every fibre-optic internet connection is laser light (1064/1310/1550 nm).</li>
+        <li><b>Consumer:</b> DVD/Blu-ray players, barcode scanners, laser printers, your engraver.</li>
+        <li><b>Science:</b> LIGO interferometers, particle accelerators, laser cooling of atoms to near absolute zero.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= PHOTO ENGRAVING SCIENCE ================= -->
+<section id="photoeng">
+  <h2><span class="n">06a</span>Photo Engraving Science — Dithering, Grayscale &amp; Image Prep</h2>
+  <p class="lead">Your Image layers (Image L00–L05) burn photographs. How LightBurn turns pixels into laser pulses decides whether your photo looks like a photo or a smudge.</p>
+  <div class="card">
+    <h3>Three ways to burn a photo</h3>
+    <ul>
+      <li><b>Grayscale mode</b> — laser power follows pixel brightness in real time: dark pixel = high power, white pixel = low/none. Smooth but requires accurate PWM at speed; best for your 100%-power-fast-speed style on wood.</li>
+      <li><b>Dither mode</b> — every pixel becomes a burn/no-burn dot (like newspaper print). Mid-tones are faked by <b>dot density</b>. Great on materials that don't shade well (acrylic, slate).</li>
+      <li><b>Threshold mode</b> — pixels darker than a cutoff burn, lighter don't. Pure black &amp; white — logos, QR codes, line art.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Error-diffusion dithering — the algorithm behind Jarvis/Atkinson/Stucki/Floyd-Steinberg</h3>
+    <ul>
+      <li>When a pixel is rounded to "burn" or "don't burn", the <b>rounding error is pushed onto its neighbours</b> — so average brightness is preserved across the image. That's what keeps smooth gradients in a 2-level output.</li>
+      <li><b>Floyd-Steinberg</b> — the classic; spreads error to 4 neighbours (3/16, 5/16, 1/16, 7/16). Fine detail, slightly "noisy".</li>
+      <li><b>Jarvis / Stucki</b> — spread over 12 neighbours → smoother, film-like grain; <b>the go-to for wood photos</b> (your Layer 15 note is right).</li>
+      <li><b>Atkinson</b> — Apple-style; spreads only 75% of error → <b>crisper contrast</b>, great on plywood and cardboard where wood grain fights mid-tones.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>DPI vs line interval — the resolution math</h3>
+    <ul>
+      <li>Interval 0.1 mm ≈ <b>254 DPI</b> (25.4 ÷ 0.1). Interval 0.08 ≈ 317 DPI. Interval 0.06 ≈ 423 DPI.</li>
+      <li>Rule: <b>source image resolution ≈ physical DPI</b> — a 300 DPI photo printed at 100×100 mm needs ~1200×1200 px. Upscaling a small image doesn't add detail; downscaling wastes it.</li>
+      <li>Interval below ~0.06 on a 20W diode = overburn (neighbouring burns merge into char) unless power is very low.</li>
+    </ul>
+  </div>
+  <div class="callout">
+    <h3>Prep recipe that works on wood</h3>
+    <p>1) Boost contrast slightly · 2) lift the highlights (wood burns darker than the screen shows) · 3) resize to physical DPI · 4) dither Jarvis, interval 0.07–0.08 · 5) run a 3-step speed test on scrap first. Your own Image L03 (7500 @ 100%, interval 0.10) is a proven starting point.</p>
+  </div>
+</section>
+
+<!-- ================= GRBL & GCODE ================= -->
+<section id="grbl">
+  <h2><span class="n">06b</span>How Your Machine Thinks — GRBL, G-code &amp; Motion</h2>
+  <p class="lead">Your A6 Pro is a GRBL machine: an Arduino-class controller running open-source firmware, talking G-code. Knowing this fixes half of all "why did it do that" moments.</p>
+  <div class="card">
+    <h3>G-code, the machine's language</h3>
+    <ul>
+      <li><b>G0/G1 X.. Y.. F..</b> — move to coordinates; <b>F</b> = feed rate (your speed, mm/min); <b>S</b> = laser power as PWM value 0–1000 (S300 = 30%).</li>
+      <li><b>M3/M4</b> — laser on (M3 constant, M4 dynamic power); <b>M5</b> — laser off. <b>M8/M9</b> — air assist on/off.</li>
+      <li>LightBurn writes this for you — but <b>Material Test.gc</b> in your folder is raw G-code you can read line-by-line now: <code>G1 Y2.684S300F1800</code> = "cut at 1800 mm/min, 30% power".</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Why motion physics matters for burns</h3>
+    <ul>
+      <li>Steppers can't teleport: they <b>accelerate</b>. At the start of every line the head is slow → <b>more energy per spot</b> → darker dots at line ends. That's exactly why <b>overscan</b> exists (extend travel beyond the shape so the burn zone is wasted outside your art).</li>
+      <li><b>Jerk/acceleration</b> limits round corners — sharp corners get slightly rounded unless the controller slows down (LightBurn's "smooth corners" option).</li>
+      <li><b>Speed isn't free:</b> your machine's max rapid is set by steppers + belts + frame stiffness, not by the laser. Engraving at 20000 mm/min is often the motion ceiling, not the power ceiling.</li>
+      <li><b>Steps/mm &amp; homing:</b> 300×300 mm bed, limits/homing switches at the corners — if jobs drift between runs, the belts or steps/mm need checking ($$ view in GRBL console).</li>
+    </ul>
+  </div>
+  <div class="callout">
+    <h3>Power = duty cycle, not "strength"</h3>
+    <p>A diode is pulsed at ~20–30 kHz. "30% power" = the laser is on 30% of the time — <b>average</b> optical power, which is what actually burns. That's why the same % means different things on different machines: it's relative to <i>their</i> max, which is why your test grid beats any chart.</p>
+  </div>
+</section>
+
+<!-- ================= OPTICS ================= -->
+<section id="optics">
+  <h2><span class="n">06c</span>Optics — Focus, Spot Size &amp; the Beam</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Focus &amp; spot size</h3>
+      <ul>
+        <li>A lens focuses the beam to a <b>spot</b>; smaller spot = higher energy density = deeper cut. Spot size ≈ wavelength × f-number — diffraction sets the floor, real optics land above it.</li>
+        <li>Diode modules (yours) are <b>fixed-focus</b>: the focal point sits a set distance below the lens — material must sit at exactly that height. Warped board = blurry burns on the high spots.</li>
+        <li><b>Depth of field:</b> the beam stays near-focus for only a few mm above/below the focal plane. Beyond it the spot doubles → burns go weak and wide. That's the real limit on thick-stock cutting with a diode.</li>
+        <li><b>Defocusing is a tool:</b> +2–3 mm out of focus = soft wide burn — the classic glass &amp; mirror technique (bigger spot = gentler thermal shock).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Why your beam isn't a perfect circle</h3>
+      <ul>
+        <li>Blue diode bars emit a <b>wide, elliptical, multi-mode beam</b> (fast axis / slow axis). Lenses correct it partially — that's why engrave lines can look thicker in one direction and why "20W" modules are often 4 smaller diodes combined.</li>
+        <li>Multi-mode = not diffraction-limited: you can't focus as tightly as a CO₂ or fiber of the same power. It's physics, not a defect.</li>
+        <li><b>Lens care:</b> smoke film on the lens absorbs light → lens heats → more film → thermal runaway until the lens cracks. A fogged lens shows up as "cutting got weak" long before you see it. Clean with lens tissue + IPA, never dry.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout">
+    <h3>The 2-minute focus test</h3>
+    <p>Cut/engrave a straight line, then <b>re-run it with a sheet of paper stacked under the material</b> (≈0.1 mm higher each run, 5 runs). The sharpest, darkest line = your true focal height. Tape shims to the bed to correct warped sheets.</p>
+  </div>
+</section>
+
+<!-- ================= MATERIALS CHEMISTRY ================= -->
+<section id="chem">
+  <h2><span class="n">06d</span>Materials Chemistry — Why Things Burn, Melt &amp; Fume the Way They Do</h2>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Material</th><th>What it's made of</th><th>What the laser does</th><th>Why it behaves that way</th></tr></thead>
+    <tbody>
+      <tr><td class="mat">Wood</td><td class="note">Cellulose + hemicellulose + lignin</td><td class="note">Pyrolyses → smoke, tars, then <b>char (carbon)</b></td><td class="note">Carbon absorbs better than wood → burn self-accelerates; knots/resin = more fuel = darker burns</td></tr>
+      <tr><td class="mat">Plywood / MDF</td><td class="note">Wood layers/fibres + urea-formaldehyde glue</td><td class="note">Cuts like wood; <b>sootier</b> edges, formaldehyde fumes</td><td class="note">Glue vapour condenses as soot; clean lens after MDF sessions</td></tr>
+      <tr><td class="mat">Acrylic (PMMA)</td><td class="note">Poly(methyl methacrylate)</td><td class="note">Depolymerises back to MMA monomer vapour → clean cut; cast froths white, extruded flame-polishes</td><td class="note">PMMA unzips at ~300°C instead of charring; clear = transparent to 455nm → no absorption → no cut on your diode</td></tr>
+      <tr><td class="mat">PVC</td><td class="note">Poly(vinyl chloride) — 57% chlorine</td><td class="note">Releases <b>HCl gas + dioxins</b>, corrodes machine, destroys lungs</td><td class="note">Chlorine chemistry: heat breaks C–Cl bonds first. This is why it's banned, not "hard to cut"</td></tr>
+      <tr><td class="mat">ABS</td><td class="note">Acrylonitrile-butadiene-styrene</td><td class="note">Melts badly + <b>cyanide compounds</b> in smoke</td><td class="note">The nitrile group (−C≡N) becomes HCN on pyrolysis</td></tr>
+      <tr><td class="mat">Glass</td><td class="note">SiO₂ + soda-lime (Na₂O·CaO·6SiO₂)</td><td class="note">Thermal micro-fracture → frosted white mark; can crack on rapid heating</td><td class="note">Transparent to 455nm (needs coating); low thermal conductivity = stress = fracture</td></tr>
+      <tr><td class="mat">Anodized aluminium</td><td class="note">Al core + Al₂O₃ oxide layer</td><td class="note">Laser vaporises the thin oxide → white mark, metal untouched</td><td class="note">Al₂O₃ is hard &amp; absorbs blue; the anodize layer is what makes "marking metal" possible on a diode</td></tr>
+      <tr><td class="mat">Leather</td><td class="note">Collagen (protein) + tanning chemicals</td><td class="note">Tan edges, dark marks; <b>chrome-tanned releases Chromium VI</b></td><td class="note">Chromium salts (Cr³⁺ → Cr⁶⁺ under heat) are carcinogenic — veg-tan only</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sm">One sentence to remember: <b>lasers break chemical bonds with heat — the products depend on what atoms are in the material.</b> That's the entire reason for every "never laser this" rule.</p>
+</section>
+
+<!-- ================= MATH OF A CUT ================= -->
+<section id="math">
+  <h2><span class="n">06e</span>The Math of a Cut — Energy, Time, Kerf</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Energy per spot (the master equation)</h3>
+      <ul>
+        <li>Energy ≈ <b>Power ÷ Speed</b> (per unit length). Halve speed ≈ double burn. This is why charts give (speed, power) pairs, never just one.</li>
+        <li>Line interval turns area into lines: total engrave time ≈ <b>area ÷ (interval × speed)</b>. A 100×100 mm fill at 0.1 mm interval, 5000 mm/min ≈ 10000/0.1 = 1000 m of path ÷ 5000 mm/min ≈ 12 min.</li>
+        <li>Passes multiply time linearly — 3 passes = 3× the time for ~1.5× the effective depth (each pass re-burns at full energy).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Kerf &amp; fit math</h3>
+      <ul>
+        <li><b>Slot width = part width + kerf.</b> If your kerf is 0.15 mm and you want a press-fit finger 3.0 mm wide: slot = 3.15 mm. Draw it in CAD/DXF before exporting.</li>
+        <li>Measure kerf once: cut a 20 mm slot, subtract 20 from the measured gap, divide by 2 walls.</li>
+        <li>Rule of thumb, blue diode: ~1 mm of plywood per ~3–5 W optical, one fast pass. 20W ≈ 4–6 mm practical single-pass wood; thicker = passes.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Cost of a job</h3>
+    <ul>
+      <li>Time × power × electricity ≈ pennies; <b>time is the real cost</b> — a slow engrave that ties up the machine beats a fast one that ruins the sheet.</li>
+      <li>Material waste is the expensive part: a test grid costs 10 minutes of scrap, one ruined sheet costs the whole project. <b>Never skip the grid on a new batch.</b></li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ================= ROTARY ================= -->
+<section id="rotary">
+  <h2><span class="n">07a</span>Rotary &amp; Cylindrical Engraving — Mapping a Flat World Onto a Round One</h2>
+  <div class="card">
+    <h3>Why cylinders need a rotary</h3>
+    <ul>
+      <li>Engraving a tumbler/glass/candle without a rotary = the beam goes out of focus at the edges (cylinder surface curves away) → blurry distorted art. The <b>rotary roller (RT5 for your A6 Pro)</b> spins the object instead of moving X — every point stays at focus height.</li>
+      <li>LightBurn's <b>Rotary Setup</b>: you give the roller's circumference-per-step ("steps per revolution" or mm/revolution) — LightBurn then treats degrees as X-distance. Design on a flat plane; the machine wraps it.</li>
+      <li>Math: <b>art width ↔ arc length</b> — an 80 mm-diameter tumbler has circumference π×80 ≈ 251 mm. A 251 mm-wide design wraps exactly once. Wider = overlap, narrower = gap.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Practical rules</h3>
+    <ul>
+      <li>Chamfered/conical objects (flutes, bottles) change diameter along their length — engrave only the straight section, or accept distortion.</li>
+      <li>Use <b>engrave not cut</b> on rotary jobs — a full cut through a cylinder while spinning is how you break a tumbler.</li>
+      <li>Diameter matters for focus: a rotary raises the top of the object above the bed — <b>re-focus for the object's surface, not the bed</b>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= AIR & FUMES ================= -->
+<section id="air">
+  <h2><span class="n">07b</span>Air Assist &amp; Fume Extraction — The Physics of Clean Burns</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>What air assist actually does</h3>
+      <ul>
+        <li><b>Clears the plasma/smoke plume:</b> the flame above the cut absorbs and scatters the beam. Blow it away and the beam reaches the material → deeper, cleaner cuts.</li>
+        <li><b>Cools the HAZ:</b> less heat soak into neighbouring material → less char on wood, no melted lip on acrylic.</li>
+        <li><b>Suppresses flames:</b> paper/cardboard jobs stop "running away".</li>
+        <li><b>Trade-off:</b> too much air on an <i>engrave</i> cools the surface before it chars → washed-out marks. Engrave: low/off. Cut: on. (Your layer notes already follow this.)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Fume extraction — the two-stage truth</h3>
+      <ul>
+        <li>Smoke is <b>particles + gases</b>. A HEPA filter catches particles; it does <b>nothing</b> for formaldehyde, HCl, or cyanide gases — you need <b>activated carbon</b> for those, or just exhaust outside.</li>
+        <li>The DAJA SP3 purifier = fan + filters; good for casual work, not a substitute for a window when cutting plastics.</li>
+        <li>Enclosure negative pressure: the A6 Pro's lid keeps fumes in; opening it mid-job vents them at you — <b>wait a few seconds after job end, or run the fan</b>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEST GRID SCIENCE ================= -->
+<section id="testgrid">
+  <h2><span class="n">07c</span>Test-Grid Science — Designing Experiments Like an Engineer</h2>
+  <div class="card">
+    <h3>Why grids beat guessing</h3>
+    <ul>
+      <li>Every variable (power, speed, focus, material batch, lens state) shifts the result. A grid varies <b>one pair at a time</b> so you can read the answer off the sheet instead of reasoning about it.</li>
+      <li>Best layout: <b>speed on one axis, power on the other</b> — that's a 2-factor design. 10×10 cells = 100 data points in one run, ~10 minutes.</li>
+      <li>Read diagonals: the <b>power÷speed energy line</b> runs diagonal (both up) — cells along a diagonal have similar energy but different char/quality. Pick by <i>appearance</i>, not just depth.</li>
+      <li>Log what you find: material, batch, date, winning cell. Your Sheet 2 is exactly this — the log is what makes it "tested" instead of "guessed".</li>
+    </ul>
+  </div>
+  <div class="callout">
+    <h3>What to look for in each cell</h3>
+    <p><b>Engrave:</b> even tone, no halo (too hot), no pale spots (too cold), crisp edges · <b>Cut:</b> through in the pass count, minimal char, square edges, kerf as expected · <b>Worst failure to watch:</b> the cell that <i>looks</i> great but was cut at 99% duty — diode life prefers power ≤90% where possible.</p>
+  </div>
+</section>
+
+<!-- ================= ADVANCED TECHNIQUES ================= -->
+<section id="advanced">
+  <h2><span class="n">07d</span>Advanced Techniques — Masking, Sprays, Wet Methods &amp; Their Chemistry</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Masking &amp; coating methods</h3>
+      <ul>
+        <li><b>Transfer tape / masking film on wood:</b> the laser cuts the tape + wood; the tape traps soot → lift it off and the engrave is clean, no sanding. Your masking strips also stop leather curling.</li>
+        <li><b>Black paint on glass/ceramic</b> (or DAJA's color sheet): 455nm vaporises the paint, the heat scars the glass under it → frosted mark, wash the rest off. Same trick as Atomstack's "blacken first" column.</li>
+        <li><b>Wet-paper technique:</b> damp paper towel on glass = local cooling + absorption → reduces cracking. Same science as the CO₂ glass rule "keep it cold".</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Marking sprays &amp; their chemistry</h3>
+      <ul>
+        <li><b>Enduramark / DryMoly / Cermark:</b> metal-oxide + glass-frit inks. The laser melts the frit into a ceramic-like layer bonded to the metal — that's the "dark permanent mark" on stainless. Requires enough heat to sinter — hence slow speeds, multiple passes, warm material.</li>
+        <li><b>Mustard/marker trick</b> (Diode Laser Wiki): the pigment absorbs 455nm, chars onto the metal. Cheap, temporary-ish, great for learning the spot.</li>
+        <li><b>Anti-rust note:</b> Cermark marks on bare steel need a clear coat after, or the exposed metal tarnishes.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Scoring &amp; partial cuts</h3>
+    <ul>
+      <li>Score = light cut that doesn't go through (fold lines, barcode scratches, flexible sheets). Recipe: full power, <b>high speed</b>, 1 pass, or low power at normal speed.</li>
+      <li>LightBurn <b>PPI &lt; 1000</b> gives perforation-style scoring — dashed cuts that fold or tear cleanly (ticket stubs, packaging).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= WORKFLOW ================= -->
+<section id="workflow">
+  <h2><span class="n">07e</span>Digital Workflow — From CAD to Burn Without Losing a Micron</h2>
+  <ol class="steps">
+    <li><b>Design in Fusion 360</b> (your stack): sketch at final part size, then add <b>kerf compensation</b> — for press-fit fingers, offset the slot by kerf (measure yours; ~0.1–0.2 mm on 20W diodes). Export DXF (R12 for max compatibility) or SVG.</li>
+    <li><b>Import into LightBurn</b>: File → Import → DXF/SVG. Set your material size in the Cuts/Layers window (300×300 mm — or smaller for test runs).</li>
+    <li><b>Assign layers by colour</b>: select art → click layer colour. Your Sheet 2 layers are already ordered for this.</li>
+    <li><b>Order cuts smartly:</b> engraves first, then cuts (cuts move the piece / drop parts). LightBurn sorts by layer — put your cut layers <i>after</i> engrave layers.</li>
+    <li><b>Nest multiple parts</b> to save material — leave ≥3–4 mm between parts so HAZ doesn't weld them.</li>
+    <li><b>Frame (F), position, then run.</b> Keep the lid closed; watch the first 5 seconds for misfires.</li>
+  </ol>
+  <p class="sm">Common export bugs: DXF in mm vs inches (LightBurn asks — match Fusion's units), exploded text (convert text to outlines before export), and duplicate overlapping lines (they burn twice — use LightBurn's "delete duplicates" or avoid overlapping in CAD).</p>
+</section>
+
+<!-- ================= TROUBLESHOOTING ================= -->
+<section id="trouble">
+  <h2><span class="n">07f</span>Troubleshooting Science — A Decision Tree for Bad Burns</h2>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Symptom</th><th>Most likely cause</th><th>Fix order</th></tr></thead>
+    <tbody>
+      <tr><td class="mat">Engrave washed out / invisible</td><td class="note">Focus too high · lens fogged · power too low · material too light</td><td class="note">1) focus test 2) clean lens 3) up power / slow down 4) darken material (paint/coating)</td></tr>
+      <tr><td class="mat">Engrave too dark / burnt halo</td><td class="note">Too much energy (power or dwell) · interval too tight</td><td class="note">1) reduce power or raise speed 2) widen interval 3) air assist on low</td></tr>
+      <tr><td class="mat">Cut doesn't go through</td><td class="note">Not enough passes · too fast · lens film · material thicker than rated</td><td class="note">1) add passes 2) slow down 3) clean lens 4) check focus</td></tr>
+      <tr><td class="mat">Cut chars badly / flames</td><td class="note">Too slow single pass · no air assist · resinous wood</td><td class="note">1) more passes at full power 2) air assist on 3) masking tape</td></tr>
+      <tr><td class="mat">Edges of engrave faded</td><td class="note">Acceleration dwell at line ends burning/under-burning · no overscan</td><td class="note">1) overscan 3–10 mm 2) check scan angle</td></tr>
+      <tr><td class="mat">Inconsistent darkness across the piece</td><td class="note">Material not flat (focus varies) · batch difference</td><td class="note">1) tape down warp 2) re-test grid per batch</td></tr>
+      <tr><td class="mat">Lines instead of solid fill</td><td class="note">Interval too wide · scan angle 0 (parallel lines visible)</td><td class="note">1) shrink interval 2) angle 45°</td></tr>
+      <tr><td class="mat">Job drifted / misaligned between runs</td><td class="note">Belts/steps · homing · machine moved</td><td class="note">1) re-home 2) check GRBL steps/mm 3) tighten belts</td></tr>
+      <tr><td class="mat">Suddenly weak after working fine</td><td class="note">Lens film (thermal runaway starts) · diode aging</td><td class="note">1) clean lens immediately 2) check power supply/cable</td></tr>
+      <tr><td class="mat">Burning smells like chemicals</td><td class="note">You're lasering something you shouldn't</td><td class="note">1) STOP 2) check material 3) ventilate — see banned list</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sm">Golden rule: change <b>one variable at a time</b> and re-test. Two changes at once = you learn nothing about which one fixed it.</p>
+</section>
+
+
+<!-- ================= VECTOR VS RASTER ================= -->
+<section id="vector">
+  <h2><span class="n">08a</span>Vector vs Raster — File Format Science</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Vector (SVG, DXF, AI)</h3>
+      <ul>
+        <li>Art defined by <b>math</b>: lines, bezier curves, shapes with coordinates. Infinitely scalable, zero resolution loss.</li>
+        <li>Laser path = the vector itself: the head <b>follows the line</b> → cuts and line-engraves. One pass per path, clean corners, tiny files.</li>
+        <li>Text stays editable until you <b>convert to outlines</b> (then it's curves — export before that and fonts vanish on other machines).</li>
+        <li>DXF R12 is the lowest-common-denominator for CAD→laser; SVG is the web-native equivalent. Both are plain text you could read if you had to.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Raster (PNG, JPG, BMP)</h3>
+      <ul>
+        <li>Art defined by <b>pixels</b>. The laser scans line-by-line, burning dots — that's <b>engraving</b>. Resolution = pixels per inch; bigger print = blurrier if pixels are few.</li>
+        <li>Rule: <b>image pixels ≈ physical DPI</b> — 100mm at 300 DPI needs ~1181px wide. Upscaling adds no detail (section 06a).</li>
+        <li>JPG compresses (artifacts = ugly burn noise); PNG/BMP are lossless — always engrave from PNG.</li>
+        <li>LightBurn <b>Trace Image</b> converts raster → vector (for logos); <b>Convert to Lines</b> does single-line engraving from images (your vector-engrave layers!).</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout">
+    <h3>Why this matters on your machine</h3>
+    <p>Cut = vector, engrave = raster (or vector lines). Your Sheet 2 already separates them: L00–L13 cuts &amp; vector jobs, L14–L15 scan fills, Image L00–L05 photos. Getting the file type wrong is the #1 beginner failure — a photo sent as a "cut" burns a rectangle.</p>
+  </div>
+</section>
+
+<!-- ================= LIGHTBURN OPERATIONS ================= -->
+<section id="lightburn">
+  <h2><span class="n">08b</span>LightBurn Operations — Tools You Haven't Opened Yet</h2>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Tool</th><th>What it does</th><th>When you need it</th></tr></thead>
+    <tbody>
+      <tr><td class="mat">Offset</td><td class="note">Creates parallel copies of shapes (in/out by N mm)</td><td class="note">Kerf compensation, inlay pockets, glow-line borders</td></tr>
+      <tr><td class="mat">Array</td><td class="note">Grid/copy shapes (rows × cols, spacing)</td><td class="note">Test grids, batch keychains, coaster sets — your 07c grid</td></tr>
+      <tr><td class="mat">Nest</td><td class="note">Auto-arranges parts to minimise material waste</td><td class="note">Any production run; set part spacing ≥ kerf + HAZ (~3–4mm)</td></tr>
+      <tr><td class="mat">Text tools</td><td class="note">Text on path, arc text, font control</td><td class="note">Circular text on tumblers (with rotary), curved signage</td></tr>
+      <tr><td class="mat">Trace Image</td><td class="note">Raster → vector conversion</td><td class="note">Logos from PNG for clean cuts instead of burnt fills</td></tr>
+      <tr><td class="mat">Convert to Lines</td><td class="note">Image → single-line engrave path</td><td class="note">Fast line-art engraves (your L09/L12/L13 style)</td></tr>
+      <tr><td class="mat">Node editing</td><td class="note">Direct bezier editing of shapes</td><td class="note">Fixing imported DXF junk, rounding corners</td></tr>
+      <tr><td class="mat">Job origin / frame</td><td class="note">Sets start corner; draws bounding box</td><td class="note">Positioning on oddly-shaped stock — frame before every job</td></tr>
+      <tr><td class="mat">Layer presets</td><td class="note">Save/recall full layer configs</td><td class="note">Your .clb library file — one click per material</td></tr>
+      <tr><td class="mat">Preview / Simulation</td><td class="note">Animates the exact burn order &amp; timing</td><td class="note">Catch collisions, verify order (engrave→cut), estimate time</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ================= DESIGN RULES ================= -->
+<section id="designrules">
+  <h2><span class="n">08c</span>Design Rules for Laser Projects — Physics as a Design Constraint</h2>
+  <div class="card">
+    <h3>Minimum feature size</h3>
+    <ul>
+      <li>The laser can't resolve finer than <b>spot + HAZ</b>. On a 20W diode that's ~0.1–0.2 mm — thin legs of letters (<0.8 mm) and tiny cut slots (<0.5 mm) will distort or vanish.</li>
+      <li>Engrave rule: keep strokes ≥0.5–1 mm for fills to read; halftone dots need ≥0.15 mm or they merge.</li>
+      <li>Cut rule: slot width ≥ material thickness × 1.1 (or parts won't drop out); gap between parts ≥ 3–4 mm.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Press-fit &amp; box design</h3>
+    <ul>
+      <li><b>Finger joints:</b> finger width ≈ material thickness; slot = finger + kerf (0.1–0.2). Your F1-in-Schools and VEX boxes are the exact use case — you already know this from 30+ iterations.</li>
+      <li><b>Tabs</b> (section 05): keep parts attached until you want them; break with a twist, sand nubs.</li>
+      <li><b>Box generators</b> (LightBurn has one) auto-compute joints — but check the kerf field: it defaults to 0 and parts come out tight.</li>
+      <li><b>Engrave-first, cut-last</b> always: cutting separates parts and the sheet shifts.</li>
+    </ul>
+  </div>
+  <div class="callout">
+    <h3>The design checklist before every export</h3>
+    <p>1) units = mm everywhere · 2) text converted to outlines · 3) kerf added to slots · 4) ≥3mm part spacing · 5) min feature sizes respected · 6) engraves on earlier layers than cuts · 7) material size matches your bed/stock.</p>
+  </div>
+</section>
+
+<!-- ================= MAINTENANCE ================= -->
+<section id="maintenance">
+  <h2><span class="n">08d</span>Maintenance Science — Keep It Cutting Like Day One</h2>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Every</th><th>Task</th><th>Why (the physics)</th></tr></thead>
+    <tbody>
+      <tr><td class="mat">Job</td><td class="note">Check lens for film; blow debris off bed</td><td class="note">Smoke film = absorbed power = weaker burns AND lens overheating (thermal runaway, section 06c)</td></tr>
+      <tr><td class="mat">Day</td><td class="note">Wipe rails &amp; lead screws; clean lens with IPA + lens tissue if used</td><td class="note">Dust grinds rails (steps drift); grit scratches lenses</td></tr>
+      <tr><td class="mat">Week</td><td class="note">Clean honeycomb/plate; check belt tension; verify homing accuracy</td><td class="note">Char debris = fire fuel; loose belts = drifting jobs (section 07f)</td></tr>
+      <tr><td class="mat">Month</td><td class="note">Light lube rails (dry PTFE); full alignment check; inspect cable chains</td><td class="note">Friction = lost steps at high accel; worn cables = intermittent power</td></tr>
+      <tr><td class="mat">Quarter</td><td class="note">Power-output test (cut a standard 3mm ply line, compare speed); check fan/filter</td><td class="note">Diodes age; a 20% power drop is invisible until jobs fail — baseline tests catch it</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sm">Diode lifetime: typically 8,000–20,000 hours, <b>worsened by heat</b> — keep airflow over the module, avoid 100% duty marathons, and the ≤90% power habit (section 07c) pays off in years.</p>
+</section>
+
+<!-- ================= BUSINESS ================= -->
+<section id="business">
+  <h2><span class="n">08e</span>The Business of Laser Making — Pricing &amp; Production Math</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Cost of a job</h3>
+      <ul>
+        <li><b>Material</b> — actual sheet cost ÷ parts per sheet (incl. 10–15% waste for tests).</li>
+        <li><b>Machine time</b> — engrave time (section 06e) × your hourly rate. A 20W diode engraves slowly; that's your biggest cost on photo jobs.</li>
+        <li><b>Consumables</b> — lens cleaning, air filter, electricity (≈0.1–0.3 kWh per session, pennies).</li>
+        <li><b>Wear</b> — diode hours are a real cost: ~$100–300 per 10k hours of module life.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Pricing rule of thumb</h3>
+      <ul>
+        <li><b>Retail = (material + time × rate) × 2–3</b> — the multiplier covers design, risk, and profit. Underpricing is the #1 maker-business failure.</li>
+        <li>Batch economics: setup (design, grid test) is fixed — 10 identical keychains cost ~1.5× one, not 10×. Batch = where money is made.</li>
+        <li>Time yourself once per job type; your logs (Sheet 2 style) double as quoting data.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MACHINE COMPARISON ================= -->
+<section id="compare">
+  <h2><span class="n">08f</span>Diode vs CO₂ vs Fiber — The Full Comparison Table</h2>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th></th><th>Diode (yours)</th><th>CO₂</th><th>Fiber</th></tr></thead>
+    <tbody>
+      <tr><td class="mat">Wavelength</td><td class="note">455 nm blue</td><td class="note">10.6 µm far-IR</td><td class="note">1.06 µm IR</td></tr>
+      <tr><td class="mat">Price (20–60W class)</td><td class="note">$150–700</td><td class="note">$1,500–6,000</td><td class="note">$3,000–15,000</td></tr>
+      <tr><td class="mat">Wood engrave quality</td><td class="note">Very dark, high contrast</td><td class="note">Slightly lighter, smooth</td><td class="note">Poor on organics</td></tr>
+      <tr><td class="mat">Clear acrylic</td><td class="note"><span class="b-no">✗</span> transmits beam</td><td class="note"><span class="b-good">✓</span> cuts clean</td><td class="note"><span class="b-no">✗</span></td></tr>
+      <tr><td class="mat">Thick wood cuts</td><td class="note">4–10mm with passes</td><td class="note">10–25mm single pass</td><td class="note">✗ (marking only)</td></tr>
+      <tr><td class="mat">Bare metal</td><td class="note">✗ (needs spray/coating)</td><td class="note">✗ (marks coatings)</td><td class="note"><span class="b-good">✓✓</span> marks &amp; cuts</td></tr>
+      <tr><td class="mat">Stone/glass</td><td class="note">✓ with coating</td><td class="note"><span class="b-good">✓✓</span> direct</td><td class="note">✓ stone marking</td></tr>
+      <tr><td class="mat">Speed</td><td class="note">Slow (motion + power limited)</td><td class="note">3–10× faster</td><td class="note">Fastest for marking</td></tr>
+      <tr><td class="mat">Running cost</td><td class="note">Pennies (fan + diode wear)</td><td class="note">Tube replacement $300–800 / 1–2yrs</td><td class="note">Low maintenance, high initial</td></tr>
+      <tr><td class="mat">Safety</td><td class="note">Class 1 enclosed; raw beam dangerous</td><td class="note">Invisible beam — worse; enclosure essential</td><td class="note">Invisible + reflective hazards; strictest</td></tr>
+      <tr><td class="mat">Best for</td><td class="note">Hobby engraving, photos, thin wood/paper, anodize marking</td><td class="note">Workshop production: acrylic, thick wood, fabric, glass</td><td class="note">Industrial marking: serial numbers, metals, titanium colour</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sm">The school DT lab likely runs a CO₂ — now you can read its spec sheet, predict its results, and explain why it cuts the clear acrylic your diode can't. And you can explain what your diode does better (dark wood contrast, price, safety).</p>
+</section>
+
+<!-- ================= FOLDER INDEX ================= -->
+<section id="folder">
+  <h2><span class="n">04g</span>Your Materials Folder — File Index <span class="sm">~/Desktop/Parametrers/</span></h2>
+  <p class="lead">Every file you downloaded, decoded — what it actually is and whether it applies to your A6 Pro. The ❌ files are CO₂/fiber references for other machines (covered in section 04b), ⚠️ images had readable material lists but scrambled numbers, ✅ files are usable on your machine.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>File</th><th>What it is</th><th>For your A6 Pro?</th></tr></thead>
+    <tbody><tr><td class="mono" style="white-space:normal;font-size:11.5px">Atezr-20W.clb</td><td>LightBurn material library — 20W blue diode (same class as yours), 30 materials</td><td>✅ merged into DAJA-A6Pro-20W.clb</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">5W_MATLIB_v2.21.clb</td><td>LightBurn library — 5W blue diode</td><td>✅ scaling reference</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">10W_MATLIB_v1.00.clb</td><td>LightBurn library — 10W blue diode, 19 materials</td><td>✅ scaling reference</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">40W / 60W_MATLIB_v1.60.clb</td><td>LightBurn libraries — CO₂ machines</td><td>❌ CO₂</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">materials-reference_-_LaserGRBL (1).pdf</td><td>Blue-diode chart (image scan) — same data as xlsx Sheet 1</td><td>✅ yours</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">materials-reference_-_Lightburn.pdf</td><td>Same blue-diode chart, LightBurn version</td><td>✅ yours</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">materials-reference-lightburn.pdf</td><td>Same chart again (duplicate)</td><td>✅ yours</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">CO2-…-150-W-2.pdf</td><td>CO₂ 150W common materials table</td><td>❌ CO₂</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">Laser-Reference.pdf</td><td>Rowmark laserable plastics guide (CO₂)</td><td>❌ CO₂</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">laser-cutter-material-settings-Sheet1.pdf</td><td>Quick CO₂ + fiber settings sheet</td><td>❌ CO₂/fiber</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">Parameter for 30W / 55W RF Laser Tube.pdf</td><td>RF CO₂ tube light/deep engrave tables</td><td>❌ CO₂</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">Parameters for CO2 Glass Laser Tube.pdf</td><td>CO₂ glass tube parameters</td><td>❌ CO₂</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">Parameters for Fiber Laser.pdf</td><td>Thunder Aurora 8–50W fiber marking + titanium colouring</td><td>❌ fiber</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">fusion-material-settings.pdf</td><td>Fusion Series CO₂ 30–120W tables</td><td>❌ CO₂</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">gravoply_laser_1.pdf</td><td>Gravoply laserable plastic on LS100 (30–35W)</td><td>❌ CO₂</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">laser cutting recommended parameters.pdf</td><td>Acrylic cut speed vs wattage 25–260W</td><td>❌ CO₂</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">makerspace-intro-to-laser-engraving-cutting.pdf</td><td>18-page intro: history + laser types</td><td>📖 read</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">Sculpteo_ultimate_guide_laser_cutting.pdf</td><td>40-page general laser-cutting guide</td><td>📖 read</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">speedsfeeds_RL.pdf</td><td>Rabbit Laser USA CO₂ settings (80/60/40W)</td><td>❌ CO₂</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">Colour20W–100W-M7.ezd</td><td>EZCAD projects for galvo CO₂ machines</td><td>❌ other software</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">colour20w–100w-m7.lbrn2</td><td>LightBurn projects for OMTech M7 (CO₂)</td><td>❌ CO₂</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">AllArtLibraries-2025Sep30.zip</td><td>LightBurn ART clipart: Fall / Halloween / Winter 2025</td><td>✅ importable art</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">OMTech_LightBurn_Test_Card.zip</td><td>Real LightBurn test-card project + screenshot</td><td>✅ extracted → OMTech-LightBurn-Test-Card/</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">Material Test.gc</td><td>GRBL test gcode — LightBurn 1.7.04, 1800 mm/min @ 30%</td><td>✅ yours</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">OMNI-XXE-12w-70X70mm-library-1..4.png</td><td>12W diode library screenshots — 30+ materials listed</td><td>⚠️ list only (numbers scrambled)</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">5470…_n.jpg / 5471…_n.jpg</td><td>Blue-diode material chart screenshots (basswood, cork, acrylic…)</td><td>⚠️ list only</td></tr>
+<tr><td class="mono" style="white-space:normal;font-size:11.5px">edbsn…×4.jpeg</td><td>Thunder Laser Nova series CO₂ charts (24–63 series)</td><td>❌ CO₂</td></tr></tbody>
+  </table></div>
+</section>
+
+<!-- ================= TEST GRID ================= -->
+<section id="test">
+  <h2><span class="n">03</span>Calibration Test Grid — 20 Minutes, Every New Material</h2>
+  <p class="lead">Every sheet is different (thickness, glue, moisture, color). The table gives starting points — <b>this grid is how you find <i>your</i> machine's exact numbers</b> for a material you'll use a lot.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Engrave test (Scan)</h3>
+      <ol class="steps">
+        <li>In LightBurn, draw a <b>10 × 10 grid of 10&thinsp;mm squares</b> (Array function: 10 cols × 10 rows, 12&thinsp;mm pitch). Put it on <b>Layer 30</b>.</li>
+        <li>Select the whole grid → set <b>Scan mode</b> → interval <b>0.08&thinsp;mm</b>.</li>
+        <li><b>Columns = speed, rows = power.</b> Power row 1 = 20%, +5% each row → row 10 = 65%. Speed col 1 = 2000&thinsp;mm/min, +500 → col 10 = 6500&thinsp;mm/min.</li>
+        <li>Run it. Pick the square that looks exactly like what you want. <b>That row's power + column's speed is your engrave setting</b> — write it into the layer for that material.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>Cut test (Line)</h3>
+      <ol class="steps">
+        <li>Draw <b>6 lines of 40&thinsp;mm</b> on a scrap piece, on a Line-mode layer.</li>
+        <li>All at <b>100% power</b>; speeds: 1200, 1000, 800, 600, 450, 300&thinsp;mm/min.</li>
+        <li>Run, then <b>push the parts apart</b>. Find the fastest line that cut clean through in the pass count you want.</li>
+        <li>If 300&thinsp;mm/min doesn't cut through: keep the same speed, add <b>passes</b> (2, 3, 4…). Full power + more passes &gt; lower power + slow speed — less char.</li>
+        <li>Note the <b>kerf</b> (width of the cut line) — subtract it from part dimensions in your CAD/DXF when press-fit parts matter.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TOOL LAYERS ================= -->
+<section id="tool">
+  <h2><span class="n">04</span>T1 &amp; T2 — Tool Layers (no output)</h2>
+  <div class="callout">
+    <h3>Important: T1/T2 have no power, speed, or cut settings — by design</h3>
+    <p>LightBurn's two <b>Tool Layers</b> (the last two swatches in the palette) are <b>for creating non-output shapes</b>: they have <b>no cut parameters and will never fire the laser</b>. So there's no power/speed to set — instead, use them for anything that must exist in the file but must <i>never</i> be engraved or cut:</p>
+    <ul>
+      <li><b>T1 — Layout &amp; guides:</b> material edge rectangle (300×300&thinsp;mm frame), center crosshair, rotary-roller axis lines, alignment/registration marks, the machine bed outline.</li>
+      <li><b>T2 — Notes &amp; QC:</b> part labels, quantities, assembly instructions, cut-order numbers, kerf-measurement shapes, "flip for pass 2" arrows.</li>
+      <li>Objects on T1/T2 are still <b>snappable and visible</b> while designing, but LightBurn ignores them when it generates the job. Great for jig templates you reuse file-to-file.</li>
+    </ul>
+  </div>
+  <p class="lead">This is also why the settings table above covers layers 0–30 only — those are the 31 layers that can actually carry cut/engrave parameters.</p>
+</section>
+
+<!-- ================= TABS ================= -->
+<section id="tabs">
+  <h2><span class="n">05</span>Tabs — Keeping Parts in the Sheet</h2>
+  <p class="lead">Tabs are tiny uncut bridges that stop parts from falling through mid-job (or dragging under the head). In the Cuts/Layers window, click <b>Add Tabs</b> on a Line-mode layer.</p>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Automatic tabs</h3>
+      <ul>
+        <li><b>Tab width:</b> ~1.5–2× material thickness. 3&thinsp;mm ply → <b>5–8&thinsp;mm</b> tabs. Thicker material needs wider tabs.</li>
+        <li><b>Spacing:</b> one tab every <b>30–50&thinsp;mm</b> of path. Small parts (coasters) = 2 tabs per part; long straight cuts = tighter spacing.</li>
+        <li><b>Tab Cut Power = 0%</b> (default): laser skips the tab entirely → clean break-off tabs.</li>
+        <li><b>Tab Cut Power &gt; 0%:</b> laser pulses across the tab → you can snap it with light pressure, edges stay tidy.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Manual tabs</h3>
+      <ul>
+        <li>Select the cut path, click <b>Add Tabs</b>, then place tabs by clicking exactly where you want the bridges.</li>
+        <li>Best for parts with corners you want to protect (tab on straight runs, never on a sharp corner).</li>
+        <li>VEX / F1-style press-fit parts: use tabs on the <i>outside</i> perimeter only, not on the finger joints.</li>
+        <li>Break tabs with a twist, then sand the nubs — don't pry, or you'll splinter the part.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="lead" style="margin-top:6px">Also in the Cuts/Layers window: <b>air assist</b> on for plastics &amp; MDF, off/gentle for paper; <b>overscan</b> a few mm on scan layers so edges don't fade; enable <b>"laser on at start of scan"</b> to avoid clipped lines at the edge of fills.</p>
+</section>
+
+<!-- ================= SAFETY ================= -->
+<section id="safety">
+  <h2><span class="n">06</span>Safety &amp; Machine Care</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Run discipline</h3>
+      <ul>
+        <li><b>Keep the lid closed while firing.</b> The A6 Pro is Class 1 only when enclosed — the lid-open stop exists so you never see the raw beam.</li>
+        <li>Never leave a job unattended. Paper/cardboard jobs can flame in seconds.</li>
+        <li>Vent fumes: use the air purifier/SP3 if you have it, or run near a window/fume extraction. Wood smoke and plastic fumes are not "just smell".</li>
+        <li>No reflective jewelry/watches near the open bed; don't point the beam at shiny surfaces.</li>
+        <li>If a cut catches fire: kill the job, lid stays closed (starves oxygen), E-stop if needed. Small fires self-extinguish in the sealed box.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Lens &amp; machine care</h3>
+      <ul>
+        <li>Check the lens every few jobs — smoke film kills cutting power long before you notice the burn getting weak.</li>
+        <li>Clean with lens tissue + isopropyl alcohol (or the DAJA cleaning kit), never dry-wipe grit.</li>
+        <li>MDF &amp; hardboard smoke the lens fastest — clean after those sessions.</li>
+        <li>Keep the honeycomb/plate clear of debris; a bed full of charred bits = fire risk on the next job.</li>
+        <li>Material must sit <b>flat at focus height</b> — tape or magnets on warped corners. Out-of-focus = wide weak burns.</li>
+        <li>Cut lines and engravings that look "washed out" on a known-good file = check focus first, lens second.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <h3>Sources &amp; confidence levels</h3>
+    <ul>
+      <li><b>Your own tested settings</b> (Materials Reference.xlsx → Sheet 2): 26 machine-verified layer configs — primary source, marked "(tested)". Also exported as an importable LightBurn library: ~/Desktop/DAJA-A6Pro-20W.clb.</li>
+      <li><b>bonnycreations.com — xTool D1 Pro community database</b>: 78 materials / 173 reported settings (the closest comparable 20W-output blue diode machine). This is the primary source for the layer table values and the Material Encyclopedia.</li>
+      <li><b>MetalEraser LightBurn cheat sheet</b>, <b>Diode Laser Wiki</b>, <b>Twotrees 5/10/20W module guide</b>, <b>OMTech settings blog</b>: independent baselines used to cross-check ranges.</li>
+      <li><b>DAJA official product pages</b> (dajalaser.com, dajastores.com): 455&thinsp;nm blue module with 5.5/10/20&thinsp;W options, 300×300&thinsp;mm work area, GRBL &amp; LightBurn compatible, enclosed Class 1 with lid-open stop, official material list = wood, leather, glass (with color sheet); IR head for metals.</li>
+      <li><b>LightBurn official docs</b> (docs.lightburnsoftware.com): color palette = layers 0–30 plus T1/T2; tool layers have no cut parameters and never output; Add-Tabs feature incl. Tab Cut Power.</li>
+      <li><b>Not machine-benchmarked:</b> exact mm/min depends on your unit's real output power, lens condition and material batch. Ranges in this reference reflect the real spread between units — the test grid converts "likely" into "yours".</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <b>DAJA A6 Pro 20W · LightBurn Material &amp; Layer Reference</b> — v1.9 · xTool P2 + WeCreat · vector/LightBurn/design/maintenance/business/compare. Machine specs &amp; LightBurn structure verified from official sources; layer values retuned against 173 community settings for the 20W-output diode class; encyclopedia sourced from xTool D1 Pro community reports + curated extras. Calibrate with the test grid before production runs. Sheets vary; your eyes are the final judge.
+  </div>
+</section>
+
+</div>
+
+<button class="print-btn" onclick="window.print()" title="Print / save as PDF">🖨</button>
+
+<script>
+  // scroll-spy for nav
+  const links=[...document.querySelectorAll('nav a')];
+  const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+  addEventListener('scroll',()=>{
+    let cur=0;
+    secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<120)cur=i});
+    links.forEach((a,i)=>a.classList.toggle('on',i===cur));
+  },{passive:true});
+</script>
+
+<style>
+  .enc-controls{margin:14px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  #enc-search{background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:9px 14px;font-size:13.5px;width:280px;outline:none}
+  #enc-search:focus{border-color:var(--acc)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip-btn{background:var(--panel);border:1px solid var(--line);color:var(--dim);border-radius:20px;padding:5px 12px;font-size:12px;cursor:pointer;font-weight:600}
+  .chip-btn:hover{color:var(--txt)}
+  .chip-btn.on{background:var(--acc);border-color:var(--acc);color:#fff}
+  table.enc td{padding:7px 10px}
+  table.enc tr.hide{display:none}
+  table.enc .mat{font-weight:600;color:var(--txt)}
+  @media print{.enc-controls,.chip-btn{display:none}}
+</style>
+<script>
+  (function(){
+    const inp=document.getElementById('enc-search'), table=document.getElementById('enc-table');
+    const btns=[...document.querySelectorAll('#enc-chips .chip-btn')];
+    let cat='All';
+    function apply(){
+      const q=inp.value.trim().toLowerCase();
+      table.querySelectorAll('tbody tr').forEach(tr=>{
+        const rowCat=tr.dataset.cat||'', text=tr.textContent.toLowerCase();
+        const okCat=cat==='All'||rowCat===cat, okQ=!q||text.includes(q);
+        tr.classList.toggle('hide',!(okCat&&okQ));
+      });
+    }
+    btns.forEach(b=>b.addEventListener('click',()=>{
+      btns.forEach(x=>x.classList.remove('on')); b.classList.add('on'); cat=b.dataset.cat; apply();
+    }));
+    inp.addEventListener('input',apply);
+  })();
+</script>
+</body>
+</html>
