@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master Fusion Workbook — Interactive Copy</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1a1a2e; font-family: -apple-system, "Segoe UI", Roboto, sans-serif; }
+  header { position: sticky; top: 0; z-index: 50; background: #16213e; color: #fff; padding: 12px 20px;
+           display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 10px rgba(0,0,0,.4); }
+  header h1 { font-size: 17px; font-weight: 600; }
+  header .hint { font-size: 12px; color: #9aa5ce; }
+  nav { display: flex; gap: 6px; overflow-x: auto; padding: 10px 20px; background: #0f3460; position: sticky; top: 52px; z-index: 40; }
+  nav a { color: #cdd6f4; text-decoration: none; font-size: 12px; padding: 4px 8px; border-radius: 6px; white-space: nowrap; }
+  nav a:hover { background: #1a1a2e; }
+  main { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  .slide { margin-bottom: 28px; background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 6px 24px rgba(0,0,0,.35); }
+  .slide-inner { position: relative; width: 100%; aspect-ratio: 16/9; background: #fff; border-radius: 6px; overflow: hidden; }
+  .slide-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; display: block; }
+  .slide-num { position: absolute; bottom: 8px; right: 12px; background: rgba(0,0,0,.55); color: #fff;
+               font-size: 12px; padding: 3px 10px; border-radius: 20px; }
+  a.link { position: absolute; border-radius: 4px; display: block; cursor: pointer; }
+  a.link:hover { background: rgba(26, 115, 232, .18); outline: 2px solid rgba(26,115,232,.5); }
+  .link-label { position: absolute; left: 2px; top: -20px; font-size: 10px; color: #0f3460; background: #ffe9a8;
+                padding: 1px 6px; border-radius: 4px; opacity: 0; pointer-events: none; white-space: nowrap; max-width: 420px; overflow: hidden; text-overflow: ellipsis; }
+  a.link:hover .link-label { opacity: 1; }
+  .video { position: absolute; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .video:hover .play-btn { transform: scale(1.15); box-shadow: 0 0 24px rgba(255, 255, 255, .6); }
+  .play-btn { width: 44%; height: 44%; max-width: 90px; max-height: 90px; background: rgba(255, 0, 0, .88);
+              border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff;
+              font-size: 26px; padding-left: 4px; transition: all .15s; box-shadow: 0 2px 10px rgba(0,0,0,.4); }
+  .vid-title { position: absolute; bottom: -24px; left: 0; right: 0; font-size: 11px; color: #0f3460;
+               background: rgba(255,255,255,.85); padding: 2px 6px; border-radius: 4px; text-align: center;
+               opacity: 0; transition: opacity .15s; pointer-events: none; }
+  .video:hover .vid-title { opacity: 1; }
+</style>
+</head>
+<body>
+<header>
+  <h1>&#128212; Master Fusion Workbook — Interactive Copy</h1>
+  <span class="hint">55 slides &#8226; Links clickable</span>
+</header>
+<nav id="nav"></nav>
+<main>
+
+<section class="slide" id="s1">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_01.png" alt="Slide 1">
+    
+    
+    <div class="slide-num">1 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s2">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_02.png" alt="Slide 2">
+    <a class="link" href="https://www.autodesk.com/education/edu-software/overview?sorting=featured&page=1" target="_blank" rel="noopener" style="left:1.771%;top:31.481%;width:65.833%;height:72.963%;" title="Click this link to go to the download page"><span class="link-label">Click this link to go to the download page</span></a>
+    
+    <div class="slide-num">2 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s3">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_03.png" alt="Slide 3">
+    <a class="link" href="https://www.autodesk.com/education/edu-software/overview?sorting=featured&filters=individual" target="_blank" rel="noopener" style="left:52.292%;top:36.852%;width:37.917%;height:4.074%;" title="1. Fusion 360 Student Website"><span class="link-label">1. Fusion 360 Student Website</span></a>
+    <a class="link" href="https://docs.google.com/document/d/1wujkLghXgjNtJak3fBuVZ3u8GAaKt4Wo60vVOdrxNlg/edit" target="_blank" rel="noopener" style="left:52.292%;top:47.222%;width:37.917%;height:3.889%;" title="2. Fusion 360 student letter"><span class="link-label">2. Fusion 360 student letter</span></a>
+    <a class="link" href="https://island.edu.hk/how-do-i-get-to-island-school/" target="_blank" rel="noopener" style="left:52.292%;top:57.407%;width:37.917%;height:4.074%;" title="School Address"><span class="link-label">School Address</span></a>
+    <a class="link" href="https://island.edu.hk/" target="_blank" rel="noopener" style="left:52.292%;top:57.407%;width:37.917%;height:4.074%;" title="School website"><span class="link-label">School website</span></a>
+    <div class="video" style="left:2.724%;top:35.614%;width:47.644%;height:47.806%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_544" data-title="installing fusion.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">installing fusion.mp4</div></div>
+    <div class="slide-num">3 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s4">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_04.png" alt="Slide 4">
+    <a class="link" href="https://www.autodesk.com/education/edu-software/overview?sorting=featured&filters=individual" target="_blank" rel="noopener" style="left:52.292%;top:36.852%;width:37.917%;height:4.074%;" title="1. Fusion 360 Student Website"><span class="link-label">1. Fusion 360 Student Website</span></a>
+    <a class="link" href="https://docs.google.com/document/d/1wujkLghXgjNtJak3fBuVZ3u8GAaKt4Wo60vVOdrxNlg/edit" target="_blank" rel="noopener" style="left:52.292%;top:47.222%;width:37.917%;height:3.889%;" title="2. Fusion 360 student letter"><span class="link-label">2. Fusion 360 student letter</span></a>
+    <a class="link" href="https://island.edu.hk/how-do-i-get-to-island-school/" target="_blank" rel="noopener" style="left:52.292%;top:57.407%;width:37.917%;height:4.074%;" title="School Address"><span class="link-label">School Address</span></a>
+    <a class="link" href="https://island.edu.hk/" target="_blank" rel="noopener" style="left:52.292%;top:57.407%;width:37.917%;height:4.074%;" title="School website"><span class="link-label">School website</span></a>
+    <div class="video" style="left:1.995%;top:34.812%;width:48.235%;height:48.397%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_564" data-title="Re-installing fusion.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Re-installing fusion.mp4</div></div>
+    <div class="slide-num">4 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s5">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_05.png" alt="Slide 5">
+    
+    
+    <div class="slide-num">5 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s6">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_06.png" alt="Slide 6">
+    
+    
+    <div class="slide-num">6 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s7">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_07.png" alt="Slide 7">
+    
+    <div class="video" style="left:34.342%;top:46.118%;width:28.708%;height:28.870%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_31" data-title="Fusion - Creating &amp; saving sketches.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Fusion - Creating &amp; saving sketches.mp4</div></div>
+    <div class="video" style="left:3.771%;top:46.118%;width:28.708%;height:28.870%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_31" data-title="Intro to fusion.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Intro to fusion.mp4</div></div>
+    <div class="video" style="left:64.913%;top:46.118%;width:28.708%;height:28.870%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_31" data-title="move copy and scale.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">move copy and scale.mp4</div></div>
+    <div class="slide-num">7 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s8">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_08.png" alt="Slide 8">
+    
+    <div class="video" style="left:40.541%;top:74.411%;width:18.556%;height:18.718%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_319" data-title="spline tool.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">spline tool.mp4</div></div>
+    <div class="video" style="left:21.223%;top:74.411%;width:18.556%;height:18.718%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_319" data-title="rounder corner square.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">rounder corner square.mp4</div></div>
+    <div class="video" style="left:59.859%;top:74.470%;width:18.556%;height:18.718%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_319" data-title="moon and circle.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">moon and circle.mp4</div></div>
+    <div class="video" style="left:1.906%;top:74.411%;width:18.556%;height:18.718%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_319" data-title="Heart.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Heart.mp4</div></div>
+    <div class="video" style="left:79.177%;top:74.470%;width:18.556%;height:18.718%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_319" data-title="hexagon with offset lines.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">hexagon with offset lines.mp4</div></div>
+    <div class="slide-num">8 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s9">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_09.png" alt="Slide 9">
+    
+    <div class="video" style="left:4.394%;top:77.598%;width:18.555%;height:18.718%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_407" data-title="wave box.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">wave box.mp4</div></div>
+    <div class="video" style="left:27.452%;top:77.683%;width:18.555%;height:18.717%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_407" data-title="Fish.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Fish.mp4</div></div>
+    <div class="video" style="left:50.568%;top:77.655%;width:18.555%;height:18.717%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_407" data-title="LetterP.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">LetterP.mp4</div></div>
+    <div class="video" style="left:73.685%;top:77.598%;width:18.555%;height:18.717%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_407" data-title="snake sketch.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">snake sketch.mp4</div></div>
+    <div class="slide-num">9 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s10">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_10.png" alt="Slide 10">
+    
+    <div class="video" style="left:35.375%;top:48.489%;width:25.015%;height:25.177%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_156" data-title="2D Mirror.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">2D Mirror.mp4</div></div>
+    <div class="video" style="left:4.772%;top:48.489%;width:25.015%;height:25.177%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_156" data-title="2d patterns.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">2d patterns.mp4</div></div>
+    <div class="video" style="left:65.979%;top:48.218%;width:25.556%;height:25.718%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_156" data-title="Inserting image.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Inserting image.mp4</div></div>
+    <div class="slide-num">10 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s11">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_11.png" alt="Slide 11">
+    
+    <div class="video" style="left:1.588%;top:76.515%;width:18.827%;height:18.989%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_381" data-title="flower.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">flower.mp4</div></div>
+    <div class="video" style="left:40.473%;top:76.419%;width:18.827%;height:18.989%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_381" data-title="butterfly.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">butterfly.mp4</div></div>
+    <div class="video" style="left:59.916%;top:76.271%;width:18.827%;height:18.989%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_381" data-title="blended curve.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">blended curve.mp4</div></div>
+    <div class="video" style="left:79.359%;top:76.271%;width:18.827%;height:18.989%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_381" data-title="Inserting image.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Inserting image.mp4</div></div>
+    <div class="video" style="left:21.030%;top:76.422%;width:18.827%;height:18.989%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_381" data-title="pattern in sketch.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">pattern in sketch.mp4</div></div>
+    <div class="slide-num">11 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s12">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_12.png" alt="Slide 12">
+    
+    <div class="video" style="left:0.967%;top:79.767%;width:18.556%;height:18.717%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_426" data-title="3D letter.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">3D letter.mp4</div></div>
+    <div class="video" style="left:40.671%;top:79.690%;width:18.556%;height:18.718%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_426" data-title="recycling symbol.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">recycling symbol.mp4</div></div>
+    <div class="video" style="left:20.819%;top:79.691%;width:18.555%;height:18.717%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_426" data-title="sun.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">sun.mp4</div></div>
+    <div class="video" style="left:60.731%;top:79.690%;width:18.555%;height:18.717%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_426" data-title="rocket sketch.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">rocket sketch.mp4</div></div>
+    <div class="video" style="left:80.375%;top:79.690%;width:18.555%;height:18.717%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2617f1061d0_0_426" data-title="comb.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">comb.mp4</div></div>
+    <div class="slide-num">12 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s13">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_13.png" alt="Slide 13">
+    
+    <div class="video" style="left:26.061%;top:47.705%;width:23.790%;height:23.953%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g31b421d92f5_0_7" data-title="Fusion - Project a sketch.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Fusion - Project a sketch.mp4</div></div>
+    <div class="video" style="left:1.297%;top:47.737%;width:23.790%;height:23.952%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g31b421d92f5_0_7" data-title="Workplanes.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Workplanes.mp4</div></div>
+    <div class="video" style="left:50.824%;top:47.737%;width:23.790%;height:23.953%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g31b421d92f5_0_7" data-title="Constraints.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Constraints.mp4</div></div>
+    <div class="video" style="left:75.376%;top:47.705%;width:23.791%;height:23.953%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g31b421d92f5_0_7" data-title="Dimensioning.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Dimensioning.mp4</div></div>
+    <div class="slide-num">13 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s14">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_14.png" alt="Slide 14">
+    
+    <div class="video" style="left:1.502%;top:79.727%;width:18.610%;height:18.772%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_226" data-title="project from Sketch.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">project from Sketch.mp4</div></div>
+    <div class="video" style="left:20.852%;top:79.727%;width:18.610%;height:18.772%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_226" data-title="Angled hole into body.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Angled hole into body.mp4</div></div>
+    <div class="video" style="left:59.630%;top:79.727%;width:18.610%;height:18.772%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_226" data-title="Project complex body2.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Project complex body2.mp4</div></div>
+    <div class="video" style="left:78.922%;top:79.727%;width:18.610%;height:18.773%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_226" data-title="Smaller panels project.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Smaller panels project.mp4</div></div>
+    <div class="video" style="left:40.240%;top:79.727%;width:18.610%;height:18.772%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_226" data-title="project a complex shape.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">project a complex shape.mp4</div></div>
+    <div class="slide-num">14 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s15">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_15.png" alt="Slide 15">
+    
+    <div class="video" style="left:4.001%;top:77.867%;width:20.721%;height:20.884%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_201" data-title="circles on planes at angle.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">circles on planes at angle.mp4</div></div>
+    <div class="video" style="left:26.073%;top:77.867%;width:20.721%;height:20.883%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_201" data-title="Smiley face.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Smiley face.mp4</div></div>
+    <div class="video" style="left:48.146%;top:77.867%;width:20.721%;height:20.883%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_201" data-title="project a blob.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">project a blob.mp4</div></div>
+    <div class="video" style="left:71.004%;top:77.867%;width:20.721%;height:20.883%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_201" data-title="Constraint example.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Constraint example.mp4</div></div>
+    <div class="slide-num">15 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s16">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_16.png" alt="Slide 16">
+    
+    
+    <div class="slide-num">16 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s17">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_17.png" alt="Slide 17">
+    
+    
+    <div class="slide-num">17 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s18">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_18.png" alt="Slide 18">
+    
+    
+    <div class="slide-num">18 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s19">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_19.png" alt="Slide 19">
+    
+    <div class="video" style="left:2.703%;top:44.828%;width:27.753%;height:27.915%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_68" data-title="Simple Extrude.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Simple Extrude.mp4</div></div>
+    <div class="video" style="left:32.432%;top:44.828%;width:27.753%;height:27.915%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_68" data-title="Full extrusions.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Full extrusions.mp4</div></div>
+    <div class="video" style="left:62.160%;top:44.828%;width:27.753%;height:27.915%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_68" data-title="Extruding a hole.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Extruding a hole.mp4</div></div>
+    <div class="slide-num">19 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s20">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_20.png" alt="Slide 20">
+    
+    <div class="video" style="left:5.446%;top:77.825%;width:20.697%;height:20.859%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_100" data-title="Extruding block.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Extruding block.mp4</div></div>
+    <div class="video" style="left:37.034%;top:77.571%;width:20.951%;height:21.113%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_100" data-title="2 direction extrude.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">2 direction extrude.mp4</div></div>
+    <div class="video" style="left:68.876%;top:77.571%;width:20.951%;height:21.113%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_100" data-title="Cutting holes Extrude.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Cutting holes Extrude.mp4</div></div>
+    <div class="slide-num">20 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s21">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_21.png" alt="Slide 21">
+    
+    <div class="video" style="left:75.627%;top:76.413%;width:20.951%;height:21.113%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_144" data-title="Bird extrude.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Bird extrude.mp4</div></div>
+    <div class="video" style="left:26.939%;top:76.413%;width:20.951%;height:21.113%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_144" data-title="YingYang extrude.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">YingYang extrude.mp4</div></div>
+    <div class="video" style="left:2.767%;top:76.413%;width:20.951%;height:21.113%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_144" data-title="dice extrude.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">dice extrude.mp4</div></div>
+    <div class="video" style="left:51.111%;top:76.413%;width:20.951%;height:21.113%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_144" data-title="layered sketch extrude.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">layered sketch extrude.mp4</div></div>
+    <div class="slide-num">21 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s22">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_22.png" alt="Slide 22">
+    
+    
+    <div class="slide-num">22 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s23">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_23.png" alt="Slide 23">
+    
+    
+    <div class="slide-num">23 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s24">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_24.png" alt="Slide 24">
+    
+    
+    <div class="slide-num">24 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s25">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_25.png" alt="Slide 25">
+    
+    <div class="video" style="left:65.016%;top:44.188%;width:26.426%;height:26.347%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_216" data-title="adding materials.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">adding materials.mp4</div></div>
+    <div class="video" style="left:34.285%;top:44.305%;width:26.426%;height:26.347%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_216" data-title="move a body.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">move a body.mp4</div></div>
+    <div class="video" style="left:3.554%;top:44.068%;width:26.426%;height:26.588%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29d2fc676f6_0_216" data-title="fillets and chamfers.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">fillets and chamfers.mp4</div></div>
+    <div class="slide-num">25 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s26">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_26.png" alt="Slide 26">
+    
+    <div class="video" style="left:36.362%;top:76.028%;width:21.870%;height:22.032%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29ef81e5822_0_5" data-title="move and copy exercise.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">move and copy exercise.mp4</div></div>
+    <div class="video" style="left:5.019%;top:76.028%;width:21.870%;height:22.032%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29ef81e5822_0_5" data-title="exercise - fillet and chamfer.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">exercise - fillet and chamfer.mp4</div></div>
+    <div class="video" style="left:67.705%;top:76.028%;width:21.870%;height:22.032%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g29ef81e5822_0_5" data-title="exercise - fillet and chamfer.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">exercise - fillet and chamfer.mp4</div></div>
+    <div class="slide-num">26 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s27">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_27.png" alt="Slide 27">
+    
+    <div class="video" style="left:37.837%;top:79.048%;width:18.860%;height:19.022%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_297" data-title="wooden staircase.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">wooden staircase.mp4</div></div>
+    <div class="video" style="left:71.304%;top:79.173%;width:18.610%;height:18.772%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_297" data-title="Toy Airplane.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Toy Airplane.mp4</div></div>
+    <div class="video" style="left:6.665%;top:79.173%;width:18.610%;height:18.772%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_297" data-title="cross halving joint.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">cross halving joint.mp4</div></div>
+    <div class="slide-num">27 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s28">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_28.png" alt="Slide 28">
+    
+    <div class="video" style="left:32.842%;top:42.721%;width:27.755%;height:27.917%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g268d4a56e17_0_22" data-title="3D patterns and mirror.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">3D patterns and mirror.mp4</div></div>
+    <div class="video" style="left:1.648%;top:42.721%;width:28.143%;height:28.305%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g268d4a56e17_0_22" data-title="Split Body.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Split Body.mp4</div></div>
+    <div class="slide-num">28 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s29">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_29.png" alt="Slide 29">
+    
+    <div class="video" style="left:4.643%;top:76.159%;width:19.521%;height:19.683%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g268d4a56e17_0_41" data-title="Shell exercise.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Shell exercise.mp4</div></div>
+    <div class="video" style="left:51.116%;top:76.159%;width:19.521%;height:19.683%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g268d4a56e17_0_41" data-title="grill using rectangle pattern.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">grill using rectangle pattern.mp4</div></div>
+    <div class="video" style="left:27.879%;top:76.159%;width:19.521%;height:19.683%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g268d4a56e17_0_41" data-title="circular pattern flower.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">circular pattern flower.mp4</div></div>
+    <div class="slide-num">29 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s30">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_30.png" alt="Slide 30">
+    
+    <div class="video" style="left:49.033%;top:75.535%;width:20.813%;height:20.975%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_383" data-title="logo brick.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">logo brick.mp4</div></div>
+    <div class="video" style="left:26.476%;top:75.700%;width:20.813%;height:20.975%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_383" data-title="ball circular pattern.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">ball circular pattern.mp4</div></div>
+    <div class="video" style="left:3.918%;top:75.535%;width:20.813%;height:20.975%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_383" data-title="plant pot shell.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">plant pot shell.mp4</div></div>
+    <div class="slide-num">30 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s31">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_31.png" alt="Slide 31">
+    
+    
+    <div class="slide-num">31 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s32">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_32.png" alt="Slide 32">
+    
+    <div class="video" style="left:3.494%;top:42.252%;width:27.755%;height:27.917%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g32283e513f0_0_11" data-title="Split Body.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Split Body.mp4</div></div>
+    <div class="video" style="left:32.949%;top:42.252%;width:27.755%;height:27.917%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g32283e513f0_0_11" data-title="Advance splitting.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Advance splitting.mp4</div></div>
+    <div class="slide-num">32 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s33">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_33.png" alt="Slide 33">
+    
+    <div class="video" style="left:7.433%;top:75.530%;width:19.521%;height:19.683%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g32283e513f0_0_30" data-title="shell pill box.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">shell pill box.mp4</div></div>
+    <div class="slide-num">33 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s34">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_34.png" alt="Slide 34">
+    
+    <div class="video" style="left:4.550%;top:77.047%;width:20.813%;height:20.975%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g32283e513f0_0_52" data-title="mouse case.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">mouse case.mp4</div></div>
+    <div class="slide-num">34 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s35">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_35.png" alt="Slide 35">
+    
+    
+    <div class="slide-num">35 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s36">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_36.png" alt="Slide 36">
+    
+    
+    <div class="slide-num">36 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s37">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_37.png" alt="Slide 37">
+    
+    <div class="video" style="left:29.320%;top:41.182%;width:34.014%;height:34.176%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_30" data-title="Basic Revolves.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Basic Revolves.mp4</div></div>
+    <div class="video" style="left:65.076%;top:41.182%;width:34.014%;height:34.176%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_30" data-title="Revolves advanced.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Revolves advanced.mp4</div></div>
+    <div class="slide-num">37 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s38">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_38.png" alt="Slide 38">
+    
+    <div class="video" style="left:5.155%;top:79.298%;width:19.186%;height:19.347%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_48" data-title="Revolve Coke Bottle.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Revolve Coke Bottle.mp4</div></div>
+    <div class="video" style="left:36.709%;top:78.868%;width:19.185%;height:19.347%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_48" data-title="Revolve - Lamp.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Revolve - Lamp.mp4</div></div>
+    <div class="video" style="left:70.739%;top:78.868%;width:19.186%;height:19.348%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_48" data-title="Revolve Mug.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Revolve Mug.mp4</div></div>
+    <div class="slide-num">38 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s39">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_39.png" alt="Slide 39">
+    
+    <div class="video" style="left:30.390%;top:41.182%;width:33.367%;height:34.176%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_111" data-title="loft basic.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">loft basic.mp4</div></div>
+    <div class="video" style="left:64.943%;top:41.182%;width:33.367%;height:34.176%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_111" data-title="Loft advanced.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Loft advanced.mp4</div></div>
+    <div class="slide-num">39 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s40">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_40.png" alt="Slide 40">
+    
+    <div class="video" style="left:38.196%;top:80.690%;width:16.957%;height:17.119%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_298" data-title="Loft Lemon Squeezer.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Loft Lemon Squeezer.mp4</div></div>
+    <div class="video" style="left:61.824%;top:80.690%;width:16.957%;height:17.119%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_298" data-title="Loft Handle.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Loft Handle.mp4</div></div>
+    <div class="video" style="left:1.995%;top:80.834%;width:16.668%;height:16.830%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_298" data-title="loft shampoo bottle.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">loft shampoo bottle.mp4</div></div>
+    <div class="slide-num">40 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s41">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_41.png" alt="Slide 41">
+    
+    <div class="video" style="left:32.890%;top:41.182%;width:32.330%;height:34.176%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_124" data-title="Sweep Basic.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Sweep Basic.mp4</div></div>
+    <div class="video" style="left:66.166%;top:41.182%;width:32.330%;height:34.176%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_124" data-title="Sweep Advanced.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Sweep Advanced.mp4</div></div>
+    <div class="slide-num">41 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s42">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_42.png" alt="Slide 42">
+    
+    <div class="video" style="left:40.062%;top:78.233%;width:19.747%;height:19.909%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_317" data-title="sweep Paperclip.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">sweep Paperclip.mp4</div></div>
+    <div class="video" style="left:15.921%;top:78.233%;width:19.747%;height:19.909%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_317" data-title="Sweep Camera Strap.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Sweep Camera Strap.mp4</div></div>
+    <div class="video" style="left:70.273%;top:78.233%;width:19.747%;height:19.909%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_317" data-title="Loft Handle.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Loft Handle.mp4</div></div>
+    <div class="slide-num">42 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s43">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_43.png" alt="Slide 43">
+    
+    <div class="video" style="left:66.509%;top:39.226%;width:32.270%;height:34.211%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_137" data-title="Form editing Basic.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Form editing Basic.mp4</div></div>
+    <div class="video" style="left:33.584%;top:39.226%;width:32.270%;height:34.211%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g3175e70446d_1_137" data-title="Basic Form.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Basic Form.mp4</div></div>
+    <div class="slide-num">43 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s44">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_44.png" alt="Slide 44">
+    
+    <div class="video" style="left:32.442%;top:39.701%;width:31.380%;height:32.287%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g31b421d92f5_0_256" data-title="Form - Shape control.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Form - Shape control.mp4</div></div>
+    <div class="video" style="left:64.756%;top:39.592%;width:32.125%;height:32.287%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g31b421d92f5_0_256" data-title="Forms into Bodies.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Forms into Bodies.mp4</div></div>
+    <div class="slide-num">44 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s45">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_45.png" alt="Slide 45">
+    
+    <div class="video" style="left:33.821%;top:44.016%;width:29.674%;height:29.836%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g31707384e21_0_6" data-title="Basic T-Spine.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Basic T-Spine.mp4</div></div>
+    <div class="video" style="left:66.029%;top:44.305%;width:29.890%;height:30.052%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g31707384e21_0_6" data-title="Tracing a sketch using T-Spine.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Tracing a sketch using T-Spine.mp4</div></div>
+    <div class="slide-num">45 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s46">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_46.png" alt="Slide 46">
+    
+    
+    <div class="slide-num">46 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s47">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_47.png" alt="Slide 47">
+    
+    
+    <div class="slide-num">47 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s48">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_48.png" alt="Slide 48">
+    
+    <div class="video" style="left:32.199%;top:45.198%;width:25.730%;height:25.892%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2bb22fed52f_0_27" data-title="Fusion - scene setting.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Fusion - scene setting.mp4</div></div>
+    <div class="video" style="left:3.794%;top:45.469%;width:25.188%;height:25.350%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2bb22fed52f_0_27" data-title="fusion - adjusting materials.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">fusion - adjusting materials.mp4</div></div>
+    <div class="video" style="left:61.146%;top:44.311%;width:26.609%;height:26.771%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2bb22fed52f_0_27" data-title="Rendering and saving a design.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Rendering and saving a design.mp4</div></div>
+    <div class="slide-num">48 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s49">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_49.png" alt="Slide 49">
+    
+    
+    <div class="slide-num">49 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s50">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_50.png" alt="Slide 50">
+    
+    <div class="video" style="left:1.394%;top:43.998%;width:31.639%;height:31.801%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2bb22fed52f_0_91" data-title="Save sketch as DXF.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Save sketch as DXF.mp4</div></div>
+    <div class="video" style="left:34.387%;top:43.998%;width:31.639%;height:31.801%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2bb22fed52f_0_91" data-title="Saving as fusion file.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Saving as fusion file.mp4</div></div>
+    <div class="video" style="left:67.115%;top:44.258%;width:31.050%;height:31.212%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2bb22fed52f_0_91" data-title="Saving an STL for 3D printing.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Saving an STL for 3D printing.mp4</div></div>
+    <div class="slide-num">50 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s51">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_51.png" alt="Slide 51">
+    
+    <div class="video" style="left:4.009%;top:45.739%;width:31.050%;height:31.212%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_325" data-title="Arrange for dxf.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">Arrange for dxf.mp4</div></div>
+    <div class="video" style="left:36.904%;top:45.739%;width:31.050%;height:31.212%;" data-deep="https://docs.google.com/presentation/d/1FZ4WoAiInkyt8MMN5BnuTB2dK-C4khQQJfqHmsC0XQk/present?slide=id.g2de3aed6be1_1_325" data-title="nesting a sketch.mp4" onclick="go(this)"><div class="play-btn">&#9654;</div><div class="vid-title">nesting a sketch.mp4</div></div>
+    <div class="slide-num">51 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s52">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_52.png" alt="Slide 52">
+    
+    
+    <div class="slide-num">52 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s53">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_53.png" alt="Slide 53">
+    
+    
+    <div class="slide-num">53 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s54">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_54.png" alt="Slide 54">
+    
+    
+    <div class="slide-num">54 / 55</div>
+  </div>
+</section>
+
+<section class="slide" id="s55">
+  <div class="slide-inner">
+    <img class="slide-img" src="slides/slide_55.png" alt="Slide 55">
+    
+    
+    <div class="slide-num">55 / 55</div>
+  </div>
+</section>
+
+</main>
+
+<script>
+var nav = document.getElementById("nav");
+  var navItems = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55];
+  nav.innerHTML = navItems.map(function(s) {
+    return '<a href="#s' + s + '">Slide ' + s + '</a>';
+  }).join("");
+  function go(el) { window.open(el.getAttribute("data-deep"), "_blank"); }
+</script>
+</body>
+</html>
