@@ -104,6 +104,9 @@ var D={sw:[
 {t:"Dino Game (Casio)",s:"done",pt:"prompts/casio-dino-prompt.md",d:"The offline Chrome dino-runner recreated as a native .g3a add-in for the fx-CG50.",g:[{l:"Casio"},{l:"Calculator"},{l:"Game"}],a:[{l:"📂 Files",o:9,u:"./Downloads/casio-games/"}]},
 {t:"Snake (Casio fx-CG50)",s:"done",pt:"prompts/casio-snake-prompt.md",d:"Classic Snake compiled as a .g3a add-in for the Casio fx-CG50 graphing calculator.",g:[{l:"Casio"},{l:"Calculator"},{l:"Game"}],a:[{l:"📂 Files",o:9,u:"./Downloads/casio-games/"}]},
 {t:"VEX IQ Autopilot (VEXcode Python)",s:"done",pt:"prompts/vex-autopilot-prompt.md",d:"Autopilot robot program written in VEXcode IQ Python - motors, sensors and driving logic.",g:[{l:"VEX"},{l:"IQ"},{l:"Python"},{l:"Code"}],a:[{l:"📂 Files",o:9,u:"./Documents/vex-autopilot/"}]}
+,
+{t:"Casio fx-CG50 Add-ins Backup",s:"done",d:"Backup pack of Isaac's Casio add-ins, plus the fx-CG50 G90 firmware update zip.",g:[{l:"Casio"},{l:"Calculator"},{l:"Backup"}],a:[{l:"📂 Files",o:9,u:"./Downloads/casio-games/"}]},
+{t:"Flappy Bird (Python)",s:"done",d:"Flappy Bird written in Python (fx-CG50 Python-capable workflow) - the Python twin of the g3a version.",g:[{l:"Casio"},{l:"Calculator"},{l:"Python"},{l:"Game"}],a:[{l:"📂 Files",o:9,u:"./Downloads/casio-games/"}]}
 ],hw:[
 {t:"Auto-Clamping Vise",s:"wip",pt:"prompts/auto-clamping-vise-prompt.md",d:"Arduino Nano + NEMA 17 + ACS712 sensor. 3D printed. ~$32.",a:[{l:"Open Folder",o:1,u:"./projects/auto-vise/"}],g:[{c:"ac",l:"Arduino"},{l:"Stepper"},{l:"3D Printed"},{l:"Current Sense"}],v:[{n:"V1",i:"Concept."},{n:"V2",i:"ACS712 current detection."},{n:"V3",L:1,i:"Calibrating."}]},
 {t:"Clip-On Thermometer",s:"done",pt:"prompts/clip-thermometer-prompt.md",d:"ESP32-C3 hot wire cutter temp sensor. MAX6675 K-type probe + OLED + WiFi dashboard.",a:[{l:"Open Folder",o:1,u:"./projects/clip-thermometer/"}],g:[{c:"ac",l:"ESP32-C3"},{l:"Sensor"},{l:"PlatformIO"},{l:"MAX6675"},{l:"OLED"},{l:"WiFi"}],v:[{n:"V1",i:"Breadboard + OLED."},{n:"V2",i:"WiFi AP dashboard."},{n:"V3",L:1,i:"°C/°F, graph, buzzer, targets."}]},
@@ -112,6 +115,8 @@ var D={sw:[
 {t:"BLE Scanner",s:"wip",pt:"prompts/ble-scanner-prompt.md",d:"ESP32 BLE device scanner - detect, log, dashboard.",a:[{l:"Open Folder",o:1,u:"./projects/"}],g:[{c:"ac",l:"ESP32"},{l:"BLE"},{l:"Scanner"},{l:"IoT"}],v:[{n:"V1",i:"Research phase."}]}
 ,
 {t:"Harry Potter AI Diary",s:"done",pt:"prompts/harry-potter-diary-prompt.md",d:"ESP32-C3 Tom Riddle diary - makes its own WiFi AP with a captive portal, answers in-character through an AI API, OLED + typewriter effect.",g:[{l:"ESP32"},{l:"IoT"},{l:"AI"},{l:"Harry Potter"}],a:[{l:"Live Demo",o:7,u:"./demos/harry-potter-diary.html"},{l:"📂 Files",o:9,u:"./projects/harry-potter-diary/"}]}
+,
+
 ],f3d:[
 
 {t:"Robot Arm (3D Print)",s:"done",d:"6-axis robot arm STL models — modern body, legs, arms, and head. 3D printed hobby project.",a:[{c:"ac",l:"View 3D",o:2,p:"./hobby/prints/robot-arm/modern-body.stl"},{c:"ac",l:"📂 Files",o:9,u:"./hobby/prints/robot-arm/"}],g:[{c:"ac",l:"3D Print"},{l:"STL"},{l:"Robot"}],v:[{n:"V1",i:"5 parts: body, arms, legs, head, limb."}]},
@@ -365,6 +370,57 @@ var D={sw:[
 {t:"Keychain - Arcadi (no connect)",s:"done",pt:"prompts/family-keychain-set-prompt.md",d:"Arcadi keychain, disconnected letters style.",g:[{l:"Keychain"},{l:"DXF"},{l:"Laser Cut"}],a:[{l:"View DXF",o:5,p:"./Documents/family keychain/arcadi no connect.dxf"},{l:"📂 Files",o:9,u:"./Documents/family keychain/"}]},
 {t:"Keychain - Isaac",s:"done",pt:"prompts/family-keychain-set-prompt.md",d:"Isaac's own name keychain - laser cut.",g:[{l:"Keychain"},{l:"DXF"},{l:"Laser Cut"}],a:[{l:"View DXF",o:5,p:"./Documents/family keychain/isaac.dxf"},{l:"📂 Files",o:9,u:"./Documents/family keychain/"}]},
 {t:"Keychain - Ivan",s:"done",pt:"prompts/family-keychain-set-prompt.md",d:"Ivan's name keychain - laser cut (SVG).",g:[{l:"Keychain"},{l:"Laser Cut"}],a:[{l:"📂 Files",o:9,u:"./Documents/family keychain/"}]}
+,
+{t:"F1 Car - Isaac & Damian",s:"done",pt:"prompts/f1-car-net-prompt.md",d:"F1 car model built together with Damian.",g:[{l:"F1"},{l:"STL"},{l:"Print"}],a:[{l:"View 3D",o:2,p:"./Downloads/The car Isaac Damian.stl"}]},
+{t:"F1 Car - 'ish' A",s:"done",pt:"prompts/f1-car-net-prompt.md",d:"Mid-iteration body shape ('ish' attempt A, STL).",g:[{l:"F1"},{l:"STL"},{l:"Print"}],a:[{l:"View 3D",o:2,p:"./Downloads/ish 3.stl_A.stl"}]},
+{t:"F1 Car - ish fixed (DXF)",s:"done",pt:"prompts/f1-car-net-prompt.md",d:"Laser-cut net of the fixed 'ish' body.",g:[{l:"F1"},{l:"DXF"},{l:"Laser Cut"}],a:[{l:"View DXF",o:5,p:"./Downloads/ish 3_fixed.dxf"}]},
+{t:"F1 Car - OK ish",s:"done",pt:"prompts/f1-car-net-prompt.md",d:"An 'ok ish' body iteration.",g:[{l:"F1"},{l:"STL"},{l:"Print"}],a:[{l:"View 3D",o:2,p:"./Downloads/ok ish.stl"}]},
+{t:"F1 Car - reprint 2",s:"done",pt:"prompts/f1-car-net-prompt.md",d:"Reprint of the F1 body, attempt 2.",g:[{l:"F1"},{l:"STL"},{l:"Print"}],a:[{l:"View 3D",o:2,p:"./Downloads/reprint 2.stl"}]},
+{t:"F1 Car - reprint 3",s:"done",pt:"prompts/f1-car-net-prompt.md",d:"Reprint of the F1 body, attempt 3.",g:[{l:"F1"},{l:"STL"},{l:"Print"}],a:[{l:"View 3D",o:2,p:"./Downloads/reprint 3.stl"}]},
+{t:"F1 Car - green body",s:"done",pt:"prompts/f1-car-net-prompt.md",d:"Green body variant of the F1 car.",g:[{l:"F1"},{l:"STL"},{l:"Print"}],a:[{l:"View 3D",o:2,p:"./Downloads/(body) green.stl"}]},
+{t:"F1 Chassis - grouped net",s:"done",pt:"prompts/f1-car-net-prompt.md",d:"Grouped F1 chassis laser-cut net.",g:[{l:"F1"},{l:"DXF"},{l:"Chassis"}],a:[{l:"View DXF",o:5,p:"./Downloads/grouped car shasis.dxf"}]},
+{t:"F1 Chassis - 2.0 net",s:"done",pt:"prompts/f1-car-net-prompt.md",d:"F1 chassis net version 2.0.",g:[{l:"F1"},{l:"DXF"},{l:"Chassis"}],a:[{l:"View DXF",o:5,p:"./Downloads/car chasis dxf 2.0.dxf"}]},
+{t:"F1 Front Wing - Damian",s:"done",pt:"prompts/f1-self-modified-parts-prompt.md",d:"Front wing designed with Damian.",g:[{l:"F1"},{l:"STL"},{l:"Wing"}],a:[{l:"View 3D",o:2,p:"./Downloads/damian front wing (1).stl"}]},
+{t:"F1 Front Wing - Luke",s:"done",pt:"prompts/f1-self-modified-parts-prompt.md",d:"Front wing variant (Luke's version).",g:[{l:"F1"},{l:"STL"},{l:"Wing"}],a:[{l:"View 3D",o:2,p:"./Downloads/Luke Front Wing.stl"}]},
+{t:"F1 Axle Bush - 0.41mm tolerance",s:"done",pt:"prompts/f1-self-modified-parts-prompt.md",d:"Axle bush for 2.5 axle with 0.41mm tolerance - precision fit test.",g:[{l:"F1"},{l:"STL"},{l:"Axle"}],a:[{l:"View 3D",o:2,p:"./Downloads/0.41 tolerance axle bush for 2.5.stl"}]},
+{t:"F1 Battery Car - offset optimised",s:"done",pt:"prompts/f1-car-net-prompt.md",d:"Battery-powered F1 car net with offset-optimised layout.",g:[{l:"F1"},{l:"DXF"},{l:"Battery"}],a:[{l:"View DXF",o:5,p:"./Downloads/offset optimised batterycar.dxf"}]},
+{t:"Alice Laptop Stand (DXF)",s:"done",pt:"prompts/laptop-stand-prompt.md",d:"Laptop stand variant designed for Alice - final fixed DXF.",g:[{l:"Laptop Stand"},{l:"DXF"},{l:"Laser Cut"}],a:[{l:"View DXF",o:5,p:"./Downloads/DONE alice laptop stand final fixed.dxf"}]},
+{t:"Gigantamax Snorlax",s:"done",d:"Gigantamax Snorlax print - final-final body STL (sliced gcode also on file).",g:[{l:"3D Print"},{l:"Pokemon"},{l:"Hobby"}],a:[{l:"View 3D",o:2,p:"./Downloads/Gigantamax Snorlax final final.stl"}]},
+{t:"X-Wing v5 (laser cut)",s:"done",d:"Star Wars X-Wing laser-cut model, v5.",g:[{l:"DXF"},{l:"Laser Cut"},{l:"Star Wars"}],a:[{l:"View DXF",o:5,p:"./Downloads/xwing v5.dxf"}]},
+{t:"Christmas Tree (laser cut)",s:"done",d:"Laser-cut Christmas tree ornament/decoration.",g:[{l:"DXF"},{l:"Laser Cut"},{l:"Holiday"}],a:[{l:"View DXF",o:5,p:"./Downloads/christmas tree.dxf"}]},
+{t:"Spinning Top",s:"done",d:"3D-printed spinning top with alignment-tuned geometry.",g:[{l:"3D Print"},{l:"Toy"}],a:[{l:"View 3D",o:2,p:"./Downloads/spinning top align.stl"}]},
+{t:"Toothpaste Squisher",s:"done",d:"1mm-tolerance toothpaste squisher - get every last bit out.",g:[{l:"3D Print"},{l:"Practical"}],a:[{l:"View 3D",o:2,p:"./Downloads/1mm toothpaste squisher.stl"}]},
+{t:"Egg Yolk Separator v2",s:"done",pt:"prompts/egg-yolk-mixer-prompt.md",d:"Second version of the egg yolk separator kitchen gadget.",g:[{l:"3D Print"},{l:"Kitchen"}],a:[{l:"View 3D",o:2,p:"./Downloads/Egg Yolk Seperator v2.stl"}]},
+{t:"Paper Roll Holder v2",s:"done",pt:"prompts/paper-roll-holder-prompt.md",d:"Paper roll holder (卷纸架) second version - 3D printed.",g:[{l:"3D Print"},{l:"Practical"}],a:[{l:"View 3D",o:2,p:"./Downloads/卷纸架 v2.stl"}]},
+{t:"Ryan's Spinner",s:"done",d:"Spinner fidget designed for Ryan - STL + DXF versions.",g:[{l:"3D Print"},{l:"Fidget"}],a:[{l:"View 3D",o:2,p:"./Downloads/Ryan's Spinner 1.stl"}]},
+{t:"Raspberry Pi 4B Case",s:"done",d:"Bottom half of a Raspberry Pi 4B protective case.",g:[{l:"3D Print"},{l:"Raspberry Pi"}],a:[{l:"View 3D",o:2,p:"./Downloads/Raspberry Pi 4B case - bottom.stl"}]},
+{t:"Buckle",s:"done",d:"3D-printed belt buckle design.",g:[{l:"3D Print"},{l:"Practical"}],a:[{l:"View 3D",o:2,p:"./Downloads/Buckle-1 (1).stl"}]},
+{t:"Keychain Base",s:"done",pt:"prompts/family-keychain-set-prompt.md",d:"Blank keychain base - ready for engraving.",g:[{l:"3D Print"},{l:"Keychain"}],a:[{l:"View 3D",o:2,p:"./Downloads/Keychain base.stl"}]},
+{t:"Keyholder (laser cut)",s:"done",d:"Laser-cut keyholder design - final version.",g:[{l:"DXF"},{l:"Laser Cut"},{l:"Keyholder"}],a:[{l:"View DXF",o:5,p:"./Downloads/final keyholoder.dxf"}]},
+{t:"Charger Package",s:"done",d:"3D-printed holder/package for a charger.",g:[{l:"3D Print"},{l:"Practical"}],a:[{l:"View 3D",o:2,p:"./Downloads/charger package.stl"}]},
+{t:"Nametag",s:"done",d:"3D-printed nametag.",g:[{l:"3D Print"}],a:[{l:"View 3D",o:2,p:"./Downloads/nametag.stl"}]},
+{t:"Honeycomb Clipper",s:"done",pt:"prompts/honeycomb-laser-bed-clip-prompt.md",d:"Clip for a honeycomb laser bed (clipper style).",g:[{l:"3D Print"},{l:"Laser"}],a:[{l:"View 3D",o:2,p:"./Downloads/honeycomb clipper.stl"}]},
+{t:"PLA Trap",s:"done",d:"Novelty PLA trap print.",g:[{l:"3D Print"},{l:"Fun"}],a:[{l:"View 3D",o:2,p:"./Downloads/PLA_Trap.stl"}]},
+{t:"Drill v2 + v3",s:"done",d:"Drill bit print iterations v2 (STL) and v3 (3MF).",g:[{l:"3D Print"},{l:"Drill"}],a:[{l:"View 3D",o:2,p:"./Downloads/3mm drill v2.stl"},{l:"📂 Files",o:9,u:"./Downloads/"}]},
+{t:"Lamp - 3mm plate",s:"done",d:"Laser-cut lamp design, 3mm material plate.",g:[{l:"DXF"},{l:"Laser Cut"},{l:"Lamp"}],a:[{l:"View DXF",o:5,p:"./Downloads/3mm final lampp.dxf"}]},
+{t:"Lamp - 6mm plate",s:"done",d:"Laser-cut lamp design, 6mm material plate.",g:[{l:"DXF"},{l:"Laser Cut"},{l:"Lamp"}],a:[{l:"View DXF",o:5,p:"./Downloads/6mm final lampp.dxf"}]},
+{t:"Spur Gear M1.25 Z100",s:"done",d:"Spur gear DXF - module 1.25, 100 teeth (SPUR_M1.25).",g:[{l:"DXF"},{l:"Gear"},{l:"Engineering"}],a:[{l:"View DXF",o:5,p:"./Downloads/Spur_M1.25_Pa20_Z100.dxf"}]},
+{t:"Involute Gear (DXF)",s:"done",d:"Involute-profile gear laser-cut DXF.",g:[{l:"DXF"},{l:"Gear"},{l:"Engineering"}],a:[{l:"View DXF",o:5,p:"./Downloads/involute_gear (3).dxf"}]},
+{t:"VEX IQ 60T Gear (modified)",s:"done",d:"Modified VEX IQ 60-tooth gear profile.",g:[{l:"VEX"},{l:"DXF"},{l:"Gear"}],a:[{l:"View DXF",o:5,p:"./Downloads/modified vex iq 60t gear.dxf"}]},
+{t:"Keychain Tag (from Koen)",s:"done",pt:"prompts/family-keychain-set-prompt.md",d:"A keychain tag design received from Koen.",g:[{l:"Keychain"},{l:"DXF"}],a:[{l:"View DXF",o:5,p:"./Downloads/a keychain tag from koen.dxf"}]},
+{t:"Laser Bed Centre Finder",s:"done",pt:"prompts/laser-cutting-reference-prompt.md",d:"Middle-point finder DXF for a 300x300 laser bed.",g:[{l:"DXF"},{l:"Laser"},{l:"Tool"}],a:[{l:"View DXF",o:5,p:"./Downloads/middle point of 300x300.dxf"}]},
+{t:"Music Sheet Holder - 0.7 variant",s:"done",pt:"prompts/music-sheet-holder-prompt.md",d:"0.7 scale variant of the music sheet holder.",g:[{l:"Music"},{l:"DXF"},{l:"Laser Cut"}],a:[{l:"View DXF",o:5,p:"./Downloads/100 music sheet holder 0.7 (1).dxf"}]},
+{t:"Astronaut Badge Base",s:"done",d:"Base for an astronaut badge print.",g:[{l:"3D Print"},{l:"Badge"}],a:[{l:"View 3D",o:2,p:"./Downloads/astronaut_badge_base.stl"}]},
+{t:"Fidget Revolver (3MF)",s:"done",d:"Revolver-style fidget remix print project (v3a).",g:[{l:"3D Print"},{l:"Fidget"}],a:[{l:"📂 Files",o:9,u:"./Downloads/"}]},
+{t:"Vortex Ball (3MF)",s:"done",d:"Vortex ball print project.",g:[{l:"3D Print"},{l:"Fun"}],a:[{l:"📂 Files",o:9,u:"./Downloads/"}]},
+{t:"Speed Boat (3MF)",s:"done",d:"Speed boat race print project (Bambu A1 settings).",g:[{l:"3D Print"},{l:"Vehicle"}],a:[{l:"📂 Files",o:9,u:"./Downloads/"}]},
+{t:"Sailboat (3MF)",s:"done",d:"Sailboat print project (v2).",g:[{l:"3D Print"},{l:"Vehicle"}],a:[{l:"📂 Files",o:9,u:"./Downloads/"}]},
+{t:"Heartflexi (3MF)",s:"done",d:"Flexible heart print - heartflexi.",g:[{l:"3D Print"},{l:"Fun"}],a:[{l:"📂 Files",o:9,u:"./Downloads/"}]},
+{t:"Brachiosaurus Cup Holder (3MF)",s:"done",d:"Brachiosaurus-themed cup holder print.",g:[{l:"3D Print"},{l:"Fun"},{l:"Desk"}],a:[{l:"📂 Files",o:9,u:"./Downloads/"}]},
+{t:"Cyclone Speed Car (3MF)",s:"done",d:"飆风音速 - cyclone-speed car print project.",g:[{l:"3D Print"},{l:"Car"}],a:[{l:"📂 Files",o:9,u:"./Downloads/"}]},
+{t:"VEX IQ Blocks - Drive & Sensor Programs",s:"done",pt:"prompts/vex-blocks-prompt.md",d:"21 VEXcode IQ Blocks programs - drive training, turning, bumper/optical sensor control, gyro turns.",g:[{l:"VEX"},{l:"Code"},{l:"Blocks"}],a:[{l:"📂 Files",o:9,u:"./Documents/vex-blocks/"}]},
+{t:"Boxford F1 Blank (QuickCAM)",s:"done",pt:"prompts/boxford-f1-prompt.md",d:"School Boxford CNC F1 blank - drawings, STL design, Rtype .des job files and model block.",g:[{l:"F1"},{l:"Boxford"},{l:"CNC"},{l:"QuickCAM"}],a:[{l:"Open PDF",o:6,p:"./Documents/boxford-f1/F1223 F1 BLANK V3.pdf"},{l:"View 3D",o:2,p:"./Documents/boxford-f1/DesignRtype004.stl"},{l:"📂 Files",o:9,u:"./Documents/boxford-f1/"}]},
+{t:"Boxford CO2 Car Manufacturing",s:"done",pt:"prompts/boxford-f1-prompt.md",d:"CO2 canister jig + spigot Boxford jobs and the full manufacturing guide for R-type CO2 cars.",g:[{l:"F1"},{l:"Boxford"},{l:"CNC"},{l:"CO2"}],a:[{l:"Open PDF",o:6,p:"./Documents/boxford-f1/Manufacturing Rtype Co2 Cars on Boxford Equipment.pdf"},{l:"📂 Files",o:9,u:"./Documents/boxford-f1/"}]}
 ],des:[
 {t:"Utilitarianism Guide",s:"done",d:"School philosophy project — interactive utilitarianism ethics study guide.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/utilitarianism-guide.html"}],g:[{c:"gr",l:"HTML"},{l:"School"},{l:"Philosophy"}],v:[{n:"V1",i:"Interactive study guide."}]},
 {t:"Master Fusion Workbook",s:"done",pt:"prompts/master-fusion-workbook-prompt.md",d:"Complete interactive Fusion 360 workbook — 14.6 MB self-contained HTML with tutorials, exercises, and reference.",a:[{c:"ac",l:"Open Workbook",o:6,p:"./Desktop/master-fusion-workbook/Master_Fusion_Workbook_interactive.html"}],g:[{c:"ac",l:"Fusion 360"},{l:"Tutorial"},{l:"Workbook"},{l:"Interactive"}],v:[{n:"V1",i:"Complete interactive workbook."}]},
@@ -415,6 +471,10 @@ var D={sw:[
  {t:"Bearings Poster",s:"done",pt:"prompts/bearing-numbers-poster-prompt.md",d:"A2 one-sheet bearings reference — bearing types, ISO 15 / DIN 623 numbering decoder, how to read a bearing number, dimensions &amp; clearances, materials, loads &amp; L10 life, failures, plain &amp; linear, applications, glossary. ~2,900 words.",g:[{c:"ac",l:"Poster"},{l:"Bearings"},{l:"DT"},{l:"Engineering"}],a:[{l:"Open Poster PDF",o:6,p:"./Desktop/bearing-poster/Bearing-Numbers-Poster-A2.pdf"},{l:"View Preview",o:8,p:"./Desktop/bearing-poster/Bearing-Numbers-Poster-A2-preview.png"},{l:"📂 Files",o:9,u:"./Desktop/bearing-poster/"}]}
 ,
 {t:"DT Finishing Reference",s:"done",pt:"prompts/dt-finishing-prompt.md",d:"HTML study reference for IGCSE DT finishing processes - abrasives, coatings, paints, varnishes, metal finishing. Light-theme reading doc.",g:[{l:"DT"},{l:"Study Guide"},{l:"IGCSE"},{l:"Reference"}],a:[{l:"Open Reference",o:1,u:"./reference/dt/finishing-reference.html"},{l:"📂 Files",o:9,u:"./reference/dt/"}]}
+,
+{t:"Fiber Laser Parameters (PDF)",s:"done",pt:"prompts/laser-cutting-reference-prompt.md",d:"Workshop reference PDF covering parameters for fiber laser machines.",g:[{l:"Laser"},{l:"Reference"},{l:"Parameters"}],a:[{l:"Open PDF",o:6,p:"./reference/laser/Parameters for Fiber Laser.pdf"},{l:"📂 Files",o:9,u:"./reference/laser/"}]},
+{t:"Detailed Laser Cutting Guide",s:"done",pt:"prompts/laser-cutting-reference-prompt.md",d:"In-depth laser cutting guide and instruction manual (PDF).",g:[{l:"Laser"},{l:"Guide"},{l:"Manual"}],a:[{l:"Open PDF",o:6,p:"./reference/laser/Detailed Laser Cutting Guide and Instruction Manual.pdf"},{l:"📂 Files",o:9,u:"./reference/laser/"}]},
+{t:"LightBurn Isaac Libraries",s:"done",pt:"prompts/lightburn-prompt.md",d:"Isaac's custom LightBurn libraries - personal art library (.lbart) + material & engrave CLB settings.",g:[{l:"LightBurn"},{l:"Laser"},{l:"Library"}],a:[{l:"📂 Files",o:9,u:"./reference/lightburn/"}]}
 ]};
 
 // ==== Enrichment: how-it-works, materials/sources, file folder ====
