@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAJA A6 Pro 20W — Laser Cutter Guide</title>
+<style>
+  :root{
+    --bg:#f6f8fa; --card:#ffffff; --ink:#1c2430; --muted:#5c6b7a; --line:#dde4ea;
+    --accent:#2563eb; --green:#16a34a; --amber:#d97706; --red:#dc2626; --soft:#eef4ff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.55;}
+  .wrap{max-width:1080px; margin:0 auto; padding:20px 18px 60px;}
+
+  /* ---------- header ---------- */
+  header{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:6px;}
+  h1{font-size:26px; letter-spacing:-0.4px;}
+  h1 small{display:block; font-size:13px; font-weight:500; color:var(--muted); margin-top:2px;}
+  .ver{font-size:12px; color:var(--muted); white-space:nowrap;}
+  .hright{display:flex; align-items:center; gap:10px;}
+  .refbtn{background:var(--accent); color:#fff; text-decoration:none; font-size:12.5px; font-weight:700; padding:7px 14px; border-radius:999px; white-space:nowrap; transition:background .15s;}
+  .refbtn:hover{background:#1d4ed8;}
+  a.inlink{color:var(--accent); text-decoration:underline; text-underline-offset:2px;}
+
+  /* ---------- tabs ---------- */
+  .tabnav{display:flex; gap:6px; margin:14px 0 18px; flex-wrap:wrap;}
+  .tabnav button{
+    border:1px solid var(--line); background:var(--card); color:var(--ink);
+    padding:8px 16px; border-radius:999px; font-size:14px; font-weight:600; cursor:pointer;
+    font-family:inherit; transition:all .15s;
+  }
+  .tabnav button:hover{border-color:var(--accent); color:var(--accent);}
+  .tabnav button.active{background:var(--accent); border-color:var(--accent); color:#fff;}
+  section.tab{display:none;}
+  section.tab.active{display:block;}
+
+  /* ---------- learn ---------- */
+  .phase{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin-bottom:22px;}
+  .phase h2{font-size:18px; margin-bottom:4px; display:flex; align-items:center; gap:10px;}
+  .phase h2 .badge{font-size:11px; font-weight:700; color:var(--accent); background:var(--soft); border-radius:999px; padding:3px 10px; letter-spacing:.5px;}
+  .phase>p{color:var(--muted); font-size:13.5px; margin-bottom:14px;}
+  .step{display:flex; gap:14px; padding:14px 0; border-top:1px dashed var(--line);}
+  .step:first-of-type{border-top:none;}
+  .num{flex:0 0 34px; height:34px; border-radius:50%; background:var(--soft); color:var(--accent);
+       font-weight:800; font-size:15px; display:flex; align-items:center; justify-content:center; margin-top:2px;}
+  .step h4{font-size:15.5px; margin-bottom:4px;}
+  .step p{font-size:13.8px; color:#33404f;}
+  .step ul{font-size:13.8px; color:#33404f; padding-left:18px; margin-top:3px;}
+  .locbar{background:#eef7ff; border:1px solid #b8dcff; border-radius:10px; padding:9px 12px; font-size:13.2px; margin:8px 0 2px; color:#1c4e8c;}
+  .exbox{background:#f5f3ff; border:1px solid #ddd6fe; border-radius:10px; padding:9px 12px; font-size:13.2px; margin:8px 0 2px; color:#4c1d95;}
+  .locchip{display:inline-block; font-size:11px; font-weight:700; color:#1c4e8c; background:#eef7ff; border:1px solid #b8dcff; border-radius:999px; padding:1px 9px; margin-right:6px; vertical-align:2px;}
+  .why{margin-top:8px; background:#f0fdf4; border:1px solid #bbe7c9; color:#14532d; border-radius:9px; padding:8px 11px; font-size:13px;}
+  .why b{display:block; margin-bottom:2px;}
+  .tip{margin-top:7px; background:#fffbeb; border:1px solid #fde68a; color:#78350f; border-radius:9px; padding:8px 11px; font-size:13px;}
+  .media{display:flex; gap:12px; margin-top:10px; flex-wrap:wrap;}
+  .slot{border:2px dashed #b6c2cf; border-radius:10px; min-height:96px; flex:1 1 280px; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#fafbfc;}
+  .slot video, .slot img{width:100%; max-height:340px; display:block; object-fit:contain;}
+  .ph{color:var(--muted); font-size:12.5px; text-align:center; padding:14px; line-height:1.6;}
+  .ph code{background:#eef1f4; border-radius:4px; padding:1px 5px; font-size:11.5px;}
+
+  /* ---------- practice / simulator ---------- */
+  .sim{display:grid; grid-template-columns:1.35fr 1fr; gap:16px;}
+  @media (max-width:860px){ .sim{grid-template-columns:1fr;} }
+  .panel{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px;}
+  .panel h3{font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;}
+  .hint{font-size:12.5px; color:var(--muted); margin-bottom:10px;}
+
+  /* machine diagram */
+  .rig{position:relative; border:3px solid #33404f; border-radius:12px; background:#eef2f6; padding:14px; margin-bottom:14px;}
+  .rig .label{position:absolute; top:-10px; left:14px; background:#33404f; color:#fff; font-size:11px; font-weight:700; padding:2px 10px; border-radius:999px; letter-spacing:.4px; z-index:5;}
+  .bed{position:relative; height:190px; border:2px solid #9fb0c1; border-radius:8px; background:
+     repeating-linear-gradient(0deg, transparent 0 23px, #d7dfe7 23px 24px),
+     repeating-linear-gradient(90deg, transparent 0 23px, #d7dfe7 23px 24px), #f8fafc;
+     overflow:hidden;}
+  .mat{border:2px dashed var(--accent); border-radius:4px; background:rgba(37,99,235,.12); color:var(--accent);
+       font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; position:absolute; inset:36px 38px; cursor:pointer; transition:background .2s;}
+  .mat:hover{background:rgba(37,99,235,.22);}
+  .head{position:absolute; width:12px; height:12px; background:var(--red); border-radius:3px; top:50%; left:20%;
+        box-shadow:0 0 0 3px rgba(220,38,38,.25); transition:left .5s linear, top .5s linear; display:none;}
+  .rig.framing .head, .rig.cutting .head{display:block;}
+  .lid{position:absolute; top:4px; left:4px; right:4px; height:26px; border-radius:6px 6px 0 0; cursor:pointer; z-index:4;
+       background:#94a3b8; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; color:#fff; letter-spacing:.4px; transition:background .2s, transform .3s;}
+  .lid.closed{background:var(--green);}
+  .lid.open{background:var(--amber);}
+  .controls{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:12px;}
+  .dev{border:1px solid var(--line); border-radius:10px; padding:10px; text-align:center; background:#fafbfc; cursor:pointer; transition:all .15s; user-select:none;}
+  .dev:hover{border-color:var(--accent);}
+  .dev .t{font-size:12px; font-weight:700; display:block; margin-bottom:6px;}
+  .dev .sw{width:40px; height:20px; border-radius:999px; background:#c3cdd6; margin:0 auto; position:relative; transition:background .2s;}
+  .dev .sw::after{content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; transition:left .2s; box-shadow:0 1px 2px rgba(0,0,0,.25);}
+  .dev.on .sw{background:var(--green);} .dev.on .sw::after{left:22px;}
+  .dev .st{display:block; margin-top:5px; font-size:11px; font-weight:700;}
+  .dev.on .st{color:var(--green);} .dev.off .st{color:var(--muted);}
+  .estop{height:44px; border-radius:999px; background:#fecaca; border:1px solid #f87171; display:flex; align-items:center; justify-content:center;
+         font-size:12px; font-weight:800; color:#7f1d1d; cursor:pointer; transition:all .15s;}
+  .estop.pressed{background:#dc2626; color:#fff; transform:scale(.97); box-shadow:inset 0 2px 6px rgba(0,0,0,.35);}
+  .ext{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px;}
+  .ext .dev{display:flex; align-items:center; justify-content:space-between; text-align:left; padding:10px 12px;}
+  .ext .dev .t{display:flex; align-items:center; gap:6px; margin-bottom:0;}
+  .ext .dev .sw{flex:0 0 40px; margin:0;}
+
+  .btns{display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;}
+  button.act{border:none; border-radius:10px; padding:10px 18px; font-size:13.5px; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s;}
+  #btnFrame{background:#eef4ff; color:var(--accent); border:1.5px solid var(--accent);}
+  #btnFrame:hover{background:#dbe7ff;}
+  #btnStart{background:var(--green); color:#fff; flex:1; min-width:140px;}
+  #btnStart:hover{background:#15803d;}
+  #btnStart:disabled{background:#c3cdd6; color:#fff; cursor:not-allowed;}
+  #btnReset{background:#f1f3f5; color:var(--muted); border:1px solid var(--line);}
+  #btnReset:hover{color:var(--ink);}
+
+  /* mission check */
+  .mission{list-style:none;}
+  .mission li{display:flex; align-items:center; gap:9px; padding:6px 8px; border-radius:8px; font-size:13.5px; color:#5c6b7a;}
+  .mission li .mark{flex:0 0 20px; height:20px; border-radius:50%; background:#e7ebef; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; color:transparent;}
+  .mission li.ok{color:#33404f;}
+  .mission li.ok .mark{background:var(--green); color:#fff;}
+  .mission li.next{background:var(--soft); color:var(--accent); font-weight:700;}
+  .mission li .mark{flex:0 0 20px;}
+
+  .toasts{position:fixed; left:18px; bottom:18px; z-index:99; display:flex; flex-direction:column; gap:8px; max-width:400px;}
+  .toast{background:#1c2430; color:#fff; border-radius:10px; padding:11px 14px; font-size:13px; box-shadow:0 6px 18px rgba(0,0,0,.25); animation:tin .18s ease-out;}
+  .toast.warn{background:#7c2d12;} .toast.ok{background:#14532d;} .toast.danger{background:#7f1d1d;}
+  @keyframes tin{from{transform:translateY(8px); opacity:0;} to{transform:none; opacity:1;}}
+
+  /* cleanup */
+  .clean{display:none; margin-top:14px; background:#f0fdf4; border:1px solid #bbe7c9; border-radius:12px; padding:14px;}
+  .clean.on{display:block;}
+  .clean h3{color:#14532d; font-size:14.5px; margin-bottom:8px;}
+  .clean label{display:flex; align-items:center; gap:9px; padding:5px 0; font-size:13.5px; cursor:pointer;}
+  .clean input{width:17px; height:17px; accent-color:var(--green);}
+  .done-banner{display:none; background:#fefce8; border:1.5px solid #facc15; border-radius:12px; padding:12px 14px; margin-top:12px; font-size:13.5px; font-weight:700; color:#713f12;}
+  .done-banner.on{display:block;}
+
+  /* ---------- cheat sheet ---------- */
+  .sheet{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:24px 26px;}
+  .sheet h2{font-size:19px; margin-bottom:2px;}
+  .sheet .sub{color:var(--muted); font-size:12.5px; margin-bottom:16px;}
+  .sheet .ph{display:flex; gap:10px; margin-bottom:14px;}
+  .sheet .ph .pbadge{flex:0 0 26px; height:26px; border-radius:7px; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;}
+  .sheet h3{font-size:14.5px; margin-bottom:7px;}
+  .sheet .cols{display:grid; grid-template-columns:1fr 1fr; gap:4px 22px;}
+  @media (max-width:640px){ .sheet .cols{grid-template-columns:1fr;} }
+  .sheet label{display:flex; align-items:flex-start; gap:8px; font-size:13.2px; padding:3.5px 0; cursor:pointer; break-inside:avoid;}
+  .sheet input{width:15px; height:15px; accent-color:var(--accent); margin-top:2px; flex:0 0 auto;}
+  .safetybox{margin-top:6px; background:#fef2f2; border:1.5px solid #fca5a5; border-radius:10px; padding:11px 13px; font-size:12.8px; color:#7f1d1d;}
+  .safetybox b{display:block; margin-bottom:4px; font-size:13px;}
+  .sheet .ref{margin-top:14px; font-size:12.5px; color:var(--muted);}
+  .printrow{display:flex; justify-content:flex-end; margin-bottom:10px;}
+
+  footer{margin-top:34px; text-align:center; font-size:12px; color:var(--muted);}
+  footer a{color:var(--accent); text-decoration:none;}
+
+  /* ---------- print ---------- */
+  @media print{
+    body{background:#fff;}
+    .tabnav, .printrow, footer, header .ver{display:none !important;}
+    section.tab{display:none !important;}
+    section#tab-sheet{display:block !important;}
+    .wrap{max-width:none; padding:0;}
+    .sheet{border:none; border-radius:0; padding:0;}
+    .sheet label{-webkit-print-color-adjust:exact;}
+    .safetybox{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>DAJA A6 Pro 20W — Laser Cutter Guide
+      <small>The whole procedure, in the right order. Design on your Mac → transfer → cut on the laser PC → cleanup.</small>
+    </h1>
+    <div class="hright">
+      <a class="refbtn" href="../DAJA-A6-Pro-20W-Material-Reference.html">📚 DAJA 20W Material Reference</a>
+      <span class="ver">v1.7 · Sep 2026</span>
+    </div>
+  </header>
+
+  <nav class="tabnav">
+    <button data-tab="tab-learn" class="active">📖 Learn</button>
+    <button data-tab="tab-practice">🕹 Practice Simulator</button>
+    <button data-tab="tab-sheet">📋 Cheat Sheet</button>
+  </nav>
+
+  <!-- ================= LEARN ================= -->
+  <section class="tab active" id="tab-learn">
+
+    <div class="phase">
+      <h2><span class="badge">PHASE A</span> Design → your Mac → laser PC</h2>
+      <p>The file pipeline: Fusion on your Mac, LightBurn on the laser computer. IsaacDrop moves the file between them.</p>
+
+      <div class="step" id="media-a1">
+        <div class="num">A1</div>
+        <div class="body">
+          <h4>Design in Fusion 360, export as DXF</h4>
+          <p>Finish your 2D sketch, then <b>File → Export → DXF</b>. Name it with the material + thickness so you never guess later (e.g. <code>jig-3mm-ply.dxf</code>).</p>
+          <div class="media"><div class="slot video" data-src="clips/a1-export-dxf.mp4"></div><div class="slot shot" data-src="shots/a1-export-dxf.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-a2">
+        <div class="num">A2</div>
+        <div class="body">
+          <h4>Upload to IsaacDrop</h4>
+          <p>Go to <b>da.gd/isaacdrop</b> → open the <b>lasercut</b> folder → upload the DXF. Set a password on it if you want (the laser PC just needs it to open). This is the bridge between your Mac and the laser computer.</p>
+          <div class="why"><b>💡 Why</b>No USB stick, no dead drops, works from school WiFi. Your file waits in the cloud while you walk to the laser.</div>
+          <div class="media"><div class="slot video" data-src="clips/a2-upload-drop.mp4"></div><div class="slot shot" data-src="shots/a2-upload-drop.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-a3">
+        <div class="num">A3</div>
+        <div class="body">
+          <h4>On the laser PC: download from IsaacDrop</h4>
+          <div class="locbar">📍 <b>On the laser computer now.</b> Everything from here through A8 happens on the laser PC — your Mac is done until the next design.</div>
+          <p>At the laser computer, go to <b>da.gd/isaacdrop</b> → lasercut folder → open/download your file. If a password was set, enter it. If the file doesn't show up yet, <b>refresh</b> — the upload syncs in a moment.</p>
+          <div class="tip">👤 <b>Accounts:</b> <b>DT</b> / <b>DesignTech</b> is the laser-PC <b>download account</b> — it can view and download only (no upload, no editing). To upload your file: log in with your own account, or just <b>upload as a guest</b> (enter your name — guests can rename/delete their files while the page stays open, upload-only after a refresh).</div>
+          <div class="media"><div class="slot video" data-src="clips/a3-download-drop.mp4"></div><div class="slot shot" data-src="shots/a3-download-drop.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-a4-open">
+        <div class="num">A4</div>
+        <div class="body">
+          <h4><span class="locchip">📍 laser PC</span>Open LightBurn — pick the DAJA profile</h4>
+          <p>Open <b>LightBurn</b> on the laser computer (desktop shortcut / Start menu). If it asks which controller to use, pick the <b>DAJA A6 Pro 20W</b> profile. The machine itself doesn't need to be on yet — a "no device" notice in LightBurn is normal until B1.</p>
+          <div class="tip">📌 LightBurn works fully without the machine connected: you can import, set layers and plan the design before the DAJA is even powered on. The connection happens in B1.</div>
+          <div class="media"><div class="slot video" data-src="clips/a4-open-lightburn.mp4"></div><div class="slot shot" data-src="shots/a4-open-lightburn.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-a5">
+        <div class="num">A5</div>
+        <div class="body">
+          <h4><span class="locchip">📍 laser PC</span>Import into LightBurn with Cmd+I</h4>
+          <p><b>File → Import</b> (or <b>Cmd+I</b>), pick the DXF. When it asks about units, choose <b>mm</b> — then quickly measure a known edge of your design to confirm the scale survived the trip. A 100 mm part imported as inches becomes 254 mm.</p>
+          <div class="media"><div class="slot video" data-src="clips/a5-import.mp4"></div><div class="slot shot" data-src="shots/a5-import.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-a6">
+        <div class="num">A6</div>
+        <div class="body">
+          <h4><span class="locchip">📍 laser PC</span>Set layers from the material reference sheet</h4>
+          <p>Open the <a href="../DAJA-A6-Pro-20W-Material-Reference.html" class="inlink">DAJA 20W material reference</a> (the HTML / your tested-settings spreadsheet). In LightBurn, <b>select the shapes in the Shapes box</b> and assign each to the right layer — Line = cut, Scan = engrave — then type in the speed &amp; power from the reference.</p>
+          <div class="tip">📌 <b>Then re-check the settings before you start.</b> LightBurn sometimes auto-maps or resets layer settings on import — the app 'auto-removes' them. One look at the speed/power columns per layer catches it.</div>
+          <div class="exbox">▶ <b>Example in this video: 350 gsm white card — cut.</b> The clip does it as a real job: select the shapes in the Shapes box → assign the <b>Cut</b> layer → enter <b>900 mm/min · 80% power · 1 pass</b> (from your tested-settings sheet). Different material? Use its own row in the reference.</div>
+          <div class="media"><div class="slot video" data-src="clips/a6-layers.mp4"></div><div class="slot shot" data-src="shots/a6-layers.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-a7">
+        <div class="num">A7</div>
+        <div class="body">
+          <h4><span class="locchip">📍 laser PC</span>The cleanup ritual — do it on every DXF</h4>
+          <ul>
+            <li><b>Select All</b> (Cmd+A)</li>
+            <li><b>Arrange → Ungroup</b> — Fusion DXFs come in as one big group</li>
+            <li><b>Arrange → Break apart</b> — every shape becomes its own object</li>
+            <li><b>Edit → Delete Duplicate Lines</b> — kills the double-cut lines that burn charred spots</li>
+            <li><b>Arrange → Auto Group</b> — regroups everything so the design moves as one piece</li>
+          </ul>
+          <div class="why"><b>💡 Why</b>A duplicate line cuts twice in the same spot — slower, hotter, charred edges. Grouped shapes that don't break apart select awkwardly and miss layers. This ritual fixes both in 20 seconds.</div>
+          <div class="exbox">▶ <b>Example in this video: 2 rectangles.</b> The clip uses two shapes on purpose — so you can SEE <b>Ungroup</b> split them apart, then the ritual continues: Break apart → Delete Duplicate Lines → Auto Group.</div>
+          <div class="media"><div class="slot video" data-src="clips/a7-cleanup.mp4"></div><div class="slot shot" data-src="shots/a7-cleanup.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-a8">
+        <div class="num">A8</div>
+        <div class="body">
+          <h4><span class="locchip">📍 laser PC</span>Test grid — only for materials you've never cut</h4>
+          <p>New plywood pack? Different material. Burn a small speed × power test grid first (Scan, 0.08 interval) and pick the cleanest square. Your logged settings from last time mean you can usually skip this.</p>
+          <div class="media"><div class="slot video" data-src="clips/a8-testgrid.mp4"></div><div class="slot shot" data-src="shots/a8-testgrid.png"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <h2><span class="badge">PHASE B</span> Machine setup — order matters</h2>
+      <p>Every step protects the machine, the material, or you. Blower + purifier + exhaust get their own steps because they're the difference between a clean cut and a smoky, fire-prone one.</p>
+
+      <div class="step" id="media-b1">
+        <div class="num">B1</div>
+        <div class="body">
+          <h4>Turn on the laser machine (+ release the E-stop)</h4>
+          <p>Power switch on. While you're there, check the E-stop isn't pressed — if it is, twist to release. The machine can't move until it's out.</p>
+          <p>Then glance at LightBurn: the <b>Device panel should show the DAJA as Connected</b> (top-right / device list). If it says not connected, check the USB cable — no jog, frame or start works until it is.</p>
+          <div class="media"><div class="slot video" data-src="clips/b1-power.mp4"></div><div class="slot shot" data-src="shots/b1-power.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-b2">
+        <div class="num">B2</div>
+        <div class="body">
+          <h4>Air blower → MAX</h4>
+          <p>Crank the air blower (air assist) to max. It pushes air over the cut point — clears smoke from the beam path for cleaner cuts and cools the material so little fires don't start.</p>
+          <div class="why"><b>💡 Why</b>Blower at max = cleanest cuts + your first fire prevention. It's the one knob people set at 60% and then wonder why edges char.</div>
+          <div class="media"><div class="slot video" data-src="clips/b2-blower.mp4"></div><div class="slot shot" data-src="shots/b2-blower.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-b3">
+        <div class="num">B3</div>
+        <div class="body">
+          <h4>Air purifier → MAX</h4>
+          <p>Purifier to max — fumes start the second the laser fires and it has to already be pulling. It keeps smoke off the lens (soot = weak cuts) and out of your lungs.</p>
+          <div class="media"><div class="slot video" data-src="clips/b3-purifier.mp4"></div><div class="slot shot" data-src="shots/b3-purifier.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-b4">
+        <div class="num">B4</div>
+        <div class="body">
+          <h4>Put the exhaust pipe outside (window or door)</h4>
+          <p>Route the exhaust pipe out the window/door so fumes actually leave the room. A purifier scrubs the air; the pipe gets the smoke out of the building. <b>Check the pipe isn't kinked or pinched</b> — a folded pipe = no airflow = smoke backs up into the room.</p>
+          <div class="why"><b>💡 Why</b>Recirculated smoke settles on everything — including the lens you just cleaned. Out the window beats filtered-room-air every time.</div>
+          <div class="media"><div class="slot video" data-src="clips/b4-pipe.mp4"></div><div class="slot shot" data-src="shots/b4-pipe.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-b5">
+        <div class="num">B5</div>
+        <div class="body">
+          <h4>Put in the material — keep it flat</h4>
+          <p>Sheet on the bed, clean, inside the 300×300 area, square to the rails. If it won't stay flat, <b>put magnets along the edge or 4 weights on the 4 corners</b> — a lifted corner changes focus mid-cut. Peel off any sticker/film layer first — the beam burns through it and it smokes.</p>
+          <div class="tip">📌 Blue diode: dark/opaque materials only. No PVC, no ABS, no clear acrylic (the beam goes straight through it).</div>
+          <div class="media"><div class="slot video" data-src="clips/b5-material.mp4"></div><div class="slot shot" data-src="shots/b5-material.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-b6">
+        <div class="num">B6</div>
+        <div class="body">
+          <h4>Focus check — only when material thickness changes</h4>
+          <p>Same thickness as last time? Nothing to do. Different thickness → set the focus so the beam sits on the surface (use the focus gauge/jig). Do it <b>while the lid is still open</b> — you need to reach in. Wrong height = blurry engraving, weak cuts, fire-prone edges.</p>
+          <div class="media"><div class="slot video" data-src="clips/b6-focus.mp4"></div><div class="slot shot" data-src="shots/b6-focus.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-b7">
+        <div class="num">B7</div>
+        <div class="body">
+          <h4>Check the honeycomb bed is underneath</h4>
+          <p>With the lid open, look under the material: the honeycomb support grid must be in place. It holds the sheet up so the beam passes through cuts cleanly and stops the laser from hitting the machine base.</p>
+          <div class="why"><b>💡 Why</b>Cutting without the honeycomb = the beam burns the machine's base plate. One glance saves a very expensive mistake.</div>
+          <div class="media"><div class="slot video" data-src="clips/b7-honeycomb.mp4"></div><div class="slot shot" data-src="shots/b7-honeycomb.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-b8">
+        <div class="num">B8</div>
+        <div class="body">
+          <h4>Close the lid (top + front flap)</h4>
+          <p>Material, focus and honeycomb all checked? Now close the lid. Lid shut = interlock armed. This machine is Class 1: the laser will not fire with the lid open and stops instantly if you open it mid-cut. The little front flap counts too.</p>
+          <div class="why"><b>💡 Why</b>Your eyes' only protection. Never defeat the interlock — blinking is not fast enough.</div>
+          <div class="media"><div class="slot video" data-src="clips/b8-lid.mp4"></div><div class="slot shot" data-src="shots/b8-lid.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-b9">
+        <div class="num">B9</div>
+        <div class="body">
+          <h4>Frame — or the low-power sketch trick (advanced)</h4>
+          <p>Press <b>Frame</b> (Space) and the head traces the outline of your design on the real bed — check position, scale, orientation. <b>Frame works with the lid open or closed</b> — the head just traces, no beam, so either is fine.</p>
+          <p>Advanced alternative: run a layer with <b>low speed + low power</b> once, which visibly sketches the cut shape onto the material before you commit to cutting.</p>
+          <div class="tip">📌 <b>The sketch trick is NOT for beginners</b> — a wrong low-power pass can burn the material or leave a permanent mark. Frame is free; use it.</div>
+          <div class="media"><div class="slot video" data-src="clips/b9-frame.mp4"></div><div class="slot shot" data-src="shots/b9-frame.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-b10">
+        <div class="num">B10</div>
+        <div class="body">
+          <h4>Position the job &amp; set the origin</h4>
+          <p>The head starts every job from the <b>origin point</b> — so tell the machine where that is, every time:</p>
+          <ul>
+            <li><b>Move the design</b> on screen (drag, or arrow keys) so it sits inside your material with a margin from the edges — nothing should hang off the bed.</li>
+            <li><b>Jog the head</b> to the corner where you want the job to begin (Jog panel in LightBurn, or the buttons on the machine).</li>
+            <li>Press <b>Set Origin</b> — that corner is now (0,0) and the job will start from it.</li>
+            <li>Press <b>Frame</b> (Space) once more to confirm the whole design fits inside the material before starting.</li>
+          </ul>
+          <div class="why"><b>💡 Why</b>Forgetting Set Origin is the #1 way a job "runs off the material" — the design still cuts, just 10 cm to the left of your sheet. Origin + a frame check = the job lands exactly where you planned.</div>
+          <div class="media"><div class="slot video" data-src="clips/b10-position-origin.mp4"></div><div class="slot shot" data-src="shots/b10-position-origin.png"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <h2><span class="badge">PHASE C</span> Running the job</h2>
+      <p>Short phase, but it's where accidents actually happen.</p>
+
+      <div class="step" id="media-c1">
+        <div class="num">C1</div>
+        <div class="body">
+          <h4>Start — and stay with the machine</h4>
+          <p>Hit <b>Start</b>. Then stay. Watch it. A laser unattended is a fire waiting for a bad piece of plywood. Keep a spray bottle (water) within arm's reach, and know where Stop and the E-stop are before you need them. <b>The most important minute is the first one — don't walk away until the first pass has finished.</b></p>
+          <div class="why"><b>💡 Why</b>Diode fires are usually small, slow, and stoppable in the first 5 seconds — if someone is looking. They become a real problem in 2 minutes unattended.</div>
+          <div class="media"><div class="slot video" data-src="clips/c1-start.mp4"></div><div class="slot shot" data-src="shots/c1-start.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-c2">
+        <div class="num">C2</div>
+        <div class="body">
+          <h4>Watch the first pass, test-fit early</h4>
+          <p>The first pass tells you if speed/power were right. For a cut job, check the first piece that drops — does it fit? If it's clearly wrong, stop and fix rather than letting all 20 copies run. <b>If the cut didn't go all the way through, run just the cut layer once more with the same settings</b> — don't re-run the engrave layer, and don't touch speed/power until you know how far off the first pass was.</p>
+          <div class="media"><div class="slot video" data-src="clips/c2-firstpass.mp4"></div><div class="slot shot" data-src="shots/c2-firstpass.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-c3">
+        <div class="num">C3</div>
+        <div class="body">
+          <h4>If something catches fire</h4>
+          <ul>
+            <li>Hit <b>E-stop / Stop</b> first — kill the beam.</li>
+            <li><b>Do NOT open the lid.</b> Opening it feeds oxygen and the smoke hits your face. Kill the beam, let the blower work.</li>
+            <li>Keep the purifier RUNNING — it's your smoke extractor.</li>
+            <li>Small flame → spray bottle. Big flame → leave lid shut, get help / extinguisher.</li>
+          </ul>
+          <div class="why"><b>💡 Why</b>The instinct is to fling the lid open and wave at the flame. That is exactly backwards — oxygen is what it wants. Beam off first. Then decide.</div>
+          <div class="media"><div class="slot video" data-src="clips/c3-fire.mp4"></div><div class="slot shot" data-src="shots/c3-fire.png"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <h2><span class="badge">PHASE D</span> Cleanup &amp; shut down</h2>
+      <p>The second-most-skipped phase — and skipping it is how machines break slowly.</p>
+
+      <div class="step" id="media-d1">
+        <div class="num">D1</div>
+        <div class="body">
+          <h4>Remove parts when cool</h4>
+          <p>Fresh-cut edges are hot enough to sting. Let the job sit 30 seconds, then pop the parts out. Don't drag parts across the bed — or drop hot debris onto the lens.</p>
+          <div class="media"><div class="slot video" data-src="clips/d1-remove.mp4"></div><div class="slot shot" data-src="shots/d1-remove.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-d2">
+        <div class="num">D2</div>
+        <div class="body">
+          <h4>Clean the bed + check the lens</h4>
+          <p>Sweep/brush debris off the bed — leftover gunk makes the next job sit uneven and the focus drifts. Wipe the lens only if it looks sooty: a quick lens-check is a 10-second habit.</p>
+          <div class="why"><b>💡 Why</b>A dirty bed = tilted workpiece = inconsistent cuts. A dirty lens = weaker beam = "why did this suddenly stop cutting through".</div>
+          <div class="media"><div class="slot video" data-src="clips/d2-clean.mp4"></div><div class="slot shot" data-src="shots/d2-clean.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-d3">
+        <div class="num">D3</div>
+        <div class="body">
+          <h4>Purifier &amp; blower off LAST (pipe back in too)</h4>
+          <p>Let them run a minute after the job to pull the last of the smoke out, then switch them off — and pull the exhaust pipe back in. They're the last thing to turn off, every time.</p>
+          <div class="why"><b>💡 Why</b>Shut them off with the machine and the room keeps a layer of smoke that settles into everything — including the lens you just cleaned.</div>
+          <div class="media"><div class="slot video" data-src="clips/d3-off.mp4"></div><div class="slot shot" data-src="shots/d3-off.png"></div></div>
+        </div>
+      </div>
+
+      <div class="step" id="media-d4">
+        <div class="num">D4</div>
+        <div class="body">
+          <h4>Power off the machine + log what you cut</h4>
+          <p>Machine off. Then write down material + settings used (add it to the materials spreadsheet / file name). Next time, you skip the test grid entirely.</p>
+          <div class="tip">📌 Your own tested settings are the most reliable data you have — they beat any chart. The log is what makes the charts yours.</div>
+          <div class="media"><div class="slot video" data-src="clips/d4-log.mp4"></div><div class="slot shot" data-src="shots/d4-log.png"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRACTICE ================= -->
+  <section class="tab" id="tab-practice">
+    <div class="sim">
+      <div class="panel">
+        <h3>🕹 Machine (click things in the safe order)</h3>
+        <p class="hint">This is a simulation, not the real control board — but the <b>rules are real</b>. Try to start the laser with anything missing and it will tell you exactly what's wrong. Open the lid mid-cut and watch what happens. The mission list on the right is the order you should learn.</p>
+
+        <div class="rig" id="rig">
+          <span class="label">DAJA A6 PRO — 300×300 BED</span>
+          <div class="lid open" id="lid" title="Click to open/close the lid">LID: OPEN</div>
+          <div class="bed">
+            <div class="mat" id="mat" title="Click to place / remove material">MATERIAL</div>
+            <div class="head" id="head"></div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="dev off" id="devPower">
+            <span class="t">🔌 Machine power</span>
+            <span class="sw"></span>
+            <span class="st">OFF</span>
+          </div>
+          <div class="estop" id="estop">E-STOP<br>PRESSED</div>
+          <div class="dev off" id="devFocus">
+            <span class="t">🔍 Focus</span>
+            <span class="sw"></span>
+            <span class="st">NOT SET</span>
+          </div>
+        </div>
+
+        <div class="ext">
+          <div class="dev off" id="devPurifier">
+            <span class="t">🌬 Air purifier</span>
+            <span class="sw"></span>
+            <span class="st">OFF</span>
+          </div>
+          <div class="dev off" id="devBlower">
+            <span class="t">💨 Air blower</span>
+            <span class="sw"></span>
+            <span class="st">OFF</span>
+          </div>
+          <div class="dev off" id="devPipe">
+            <span class="t">🌫 Exhaust pipe</span>
+            <span class="sw"></span>
+            <span class="st">INSIDE</span>
+          </div>
+          <div class="dev off" id="devHoney">
+            <span class="t">🍯 Honeycomb bed</span>
+            <span class="sw"></span>
+            <span class="st">NOT IN</span>
+          </div>
+        </div>
+
+        <div class="btns">
+          <button class="act" id="btnFrame">◻ Frame job</button>
+          <button class="act" id="btnStart">▶ START LASER</button>
+          <button class="act" id="btnReset">↺ Reset</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>✅ Mission — the one true order</h3>
+        <ul class="mission" id="mission"></ul>
+        <div class="clean" id="clean">
+          <h3>🧹 Job done. Cleanup phase:</h3>
+          <label><input type="checkbox" data-ck="parts"> Parts removed (cool first!)</label>
+          <label><input type="checkbox" data-ck="bed"> Bed swept clean</label>
+          <label><input type="checkbox" data-ck="air"> Purifier + blower switched off</label>
+          <label><input type="checkbox" data-ck="power"> Machine powered off</label>
+        </div>
+        <div class="done-banner" id="doneBanner">🏁 Machine back to safe state. That's the habit — do it the same way every single time.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CHEAT SHEET ================= -->
+  <section class="tab" id="tab-sheet">
+    <div class="printrow"><button class="act" id="btnPrint" style="background:var(--accent);color:#fff;">🖨 Print this page</button></div>
+    <div class="sheet">
+      <h2>DAJA A6 Pro 20W — Quick Start Checklist</h2>
+      <div class="sub">Follow in order. Anything in <b>red</b> is a safety hard-stop.</div>
+
+      <div class="ph"><div class="pbadge">A</div><div><h3>Design &amp; file transfer — your Mac → laser PC</h3>
+        <div class="cols">
+          <label><input type="checkbox"> Fusion → Export DXF (name = part-material-thickness)</label>
+          <label><input type="checkbox"> da.gd/isaacdrop → lasercut folder → upload (password if wanted)</label>
+          <label><input type="checkbox"> Laser PC: da.gd/isaacdrop → get file (password / refresh if missing)</label>
+          <label><input type="checkbox"> Open LightBurn — pick the DAJA A6 Pro 20W profile</label>
+          <label><input type="checkbox"> LightBurn: Cmd+I import, check mm scale</label>
+          <label><input type="checkbox"> Set layers from material reference (Shapes box) + re-check settings survived</label>
+          <label><input type="checkbox"> Cleanup ritual: Select all → Ungroup → Break apart → Delete Duplicate Lines → Auto Group</label>
+          <label><input type="checkbox"> Test grid only if material is new</label>
+        </div></div></div>
+
+      <div class="ph"><div class="pbadge">B</div><div><h3>Machine setup — in this order</h3>
+        <div class="cols">
+          <label><input type="checkbox"> Laser machine ON (E-stop released)</label>
+          <label><input type="checkbox"> Air blower → MAX</label>
+          <label><input type="checkbox"> Air purifier → MAX</label>
+          <label><input type="checkbox"> Exhaust pipe out the window/door</label>
+          <label><input type="checkbox"> Material in: clean, flat, magnets / 4 corner weights</label>
+          <label><input type="checkbox"> Focus check (only if thickness changed)</label>
+          <label><input type="checkbox"> Honeycomb bed underneath</label>
+          <label><input type="checkbox"> Lid closed (top + front flap)</label>
+          <label><input type="checkbox"><b>Frame the job</b> — check position (lid open or closed OK)</label>
+          <label><input type="checkbox"><b>Position the job + Set Origin</b> (move on screen → Jog to corner → Set Origin → Frame)</label>
+        </div></div></div>
+
+      <div class="ph"><div class="pbadge">C</div><div><h3>Running</h3>
+        <div class="cols">
+          <label><input type="checkbox"> Start — and STAY with it</label>
+          <label><input type="checkbox"> Watch first pass, test-fit early</label>
+          <label><input type="checkbox"> Spray bottle within reach</label>
+        </div></div></div>
+
+      <div class="ph"><div class="pbadge">D</div><div><h3>Cleanup</h3>
+        <div class="cols">
+          <label><input type="checkbox"> Remove parts when cool</label>
+          <label><input type="checkbox"> Sweep bed, check lens</label>
+          <label><input type="checkbox"> Purifier + blower OFF last, pipe back in</label>
+          <label><input type="checkbox"> Machine OFF + log settings used</label>
+        </div></div></div>
+
+      <div class="safetybox"><b>⛔ NEVER</b>
+        Leave it running unattended · cut PVC / ABS / vinyl / clear acrylic on the diode · open the lid while it fires · start with purifier, blower or exhaust not ready · cut without the honeycomb bed · defeat the interlock. Fire: <b>E-stop first, lid stays shut</b>, purifier keeps running.
+      </div>
+
+      <div class="ref">Settings &amp; speeds → <a href="../DAJA-A6-Pro-20W-Material-Reference.html" class="inlink"><b>DAJA 20W Material Reference</b></a> (opens the Desktop copy).</div>
+    </div>
+  </section>
+
+  <footer>DAJA A6 Pro 20W Guide · v1.7 · Sep 2026 · drop clips into <code>clips/</code> and screenshots into <code>shots/</code> next to this file — they show up automatically.</footer>
+
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script>
+/* ---------------- tabs ---------------- */
+document.querySelectorAll('.tabnav button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.tabnav button').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('section.tab').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById(b.dataset.tab).classList.add('active');
+  });
+});
+
+/* ---------------- media slots (auto-detect clips/ & shots/) ---------------- */
+document.querySelectorAll('.slot').forEach(slot=>{
+  const src = slot.dataset.src; if(!src) return;
+  if(slot.classList.contains('video')){
+    const v=document.createElement('video');
+    v.src=src; v.controls=true; v.preload='metadata';
+    v.onerror=()=>{ slot.innerHTML='<div class="ph">🎬 drop clip here:<br><code>'+src+'</code></div>'; };
+    slot.appendChild(v);
+  }else{
+    const img=new Image();
+    img.onload=()=>{ slot.innerHTML=''; slot.appendChild(img); };
+    img.onerror=()=>{ slot.innerHTML='<div class="ph">🖼 drop screenshot here:<br><code>'+src+'</code></div>'; };
+    img.src=src;
+  }
+});
+
+/* ---------------- simulator ---------------- */
+const $=id=>document.getElementById(id);
+const toasts=$('toasts');
+function toast(msg,type){
+  const t=document.createElement('div');
+  t.className='toast '+(type||'');
+  t.textContent=msg;
+  toasts.appendChild(t);
+  setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .4s'; setTimeout(()=>t.remove(),450); },3600);
+}
+
+const S={power:false, purifier:false, blower:false, pipe:false, honey:false, estop:true, lid:false, focus:false, material:false, framed:false, cutting:false, done:false};
+let frameTimer=null;
+
+const missionDefs=[
+  {id:'power',    label:'Machine power ON'},
+  {id:'estop',    label:'E-stop released'},
+  {id:'blower',   label:'Air blower at MAX'},
+  {id:'purifier', label:'Air purifier at MAX'},
+  {id:'pipe',     label:'Exhaust pipe out the window'},
+  {id:'material', label:'Material placed (flat!)'},
+  {id:'focus',    label:'Focus set'},
+  {id:'honey',    label:'Honeycomb bed in place'},
+  {id:'lid',      label:'Lid closed'},
+  {id:'framed',   label:'Job framed'},
+];
+
+function render(){
+  // devices
+  setDev($('devPower'),   S.power,    'ON','OFF');
+  setDev($('devPurifier'),S.purifier, 'MAX','OFF');
+  setDev($('devBlower'),  S.blower,   'MAX','OFF');
+  setDev($('devPipe'),    S.pipe,     'OUT WINDOW','INSIDE');
+  setDev($('devHoney'),   S.honey,    'READY','NOT IN');
+  setDev($('devFocus'),   S.focus,    'SET','NOT SET');
+  $('estop').classList.toggle('pressed',S.estop);
+  $('estop').textContent = S.estop ? '⏹ E-STOP\nPRESSED' : 'E-STOP\nRELEASED';
+  const lid=$('lid');
+  lid.classList.toggle('closed',S.lid);
+  lid.classList.toggle('open',!S.lid);
+  lid.textContent = S.lid ? 'LID: CLOSED ✓' : 'LID: OPEN';
+  $('mat').style.display = 'flex';
+  $('btnStart').disabled = S.cutting;
+
+  // mission list
+  const m=$('mission'); m.innerHTML='';
+  let nextFound=false;
+  missionDefs.forEach(d=>{
+    const ok = d.id==='estop' ? !S.estop : S[d.id];
+    const li=document.createElement('li');
+    li.className = ok ? 'ok' : (nextFound?'':'next');
+    if(!ok) nextFound=true;
+    li.innerHTML = '<span class="mark">'+(ok?'✓':'·')+'</span> '+d.label;
+    m.appendChild(li);
+  });
+}
+
+function setDev(el,on,txtOn,txtOff){
+  el.classList.toggle('on',on);
+  el.classList.toggle('off',!on);
+  el.querySelector('.st').textContent = on?txtOn:txtOff;
+}
+
+/* blocked-reasons for Start, safety-critical first */
+function startBlockers(){
+  const b=[];
+  if(!S.power)       b.push('machine power is OFF');
+  if(S.estop)        b.push('E-stop is pressed');
+  if(!S.lid)         b.push('lid is open (interlock)');
+  if(!S.purifier)    b.push('air purifier is OFF');
+  if(!S.blower)      b.push('air blower is OFF');
+  if(!S.pipe)        b.push('exhaust pipe is not out the window');
+  if(!S.honey)       b.push('honeycomb bed is not in place');
+  if(!S.focus)       b.push('focus not set');
+  if(!S.material)    b.push('no material on the bed');
+  if(S.material && !S.framed) b.push('job not framed yet');
+  return b;
+}
+
+/* ---------------- interactions ---------------- */
+$('devPower').addEventListener('click',()=>{
+  if(S.cutting){ toast('Machine is cutting — you can only stop it.','warn'); return; }
+  S.power=!S.power;
+  if(!S.power){
+    S.focus=false; S.framed=false; S.material=false;
+    toast('Power off — machine unpowered. Everything reset.','warn');
+  }else toast('Machine powered on.','ok');
+  render();
+});
+
+$('devPurifier').addEventListener('click',()=>{
+  if(S.cutting){ toast('Purifier stays ON during a cut — smoke extraction.','warn'); return; }
+  S.purifier=!S.purifier;
+  toast(S.purifier?'Air purifier at MAX — fumes will be extracted.':'Purifier OFF — remember it goes on BEFORE the laser fires.','ok');
+  render();
+});
+
+$('devBlower').addEventListener('click',()=>{
+  if(S.cutting){ toast('Blower stays ON during a cut — air assist prevents fires.','warn'); return; }
+  S.blower=!S.blower;
+  toast(S.blower?'Air blower at MAX — air assist ready.':'Blower OFF.','ok');
+  render();
+});
+
+$('devPipe').addEventListener('click',()=>{
+  if(S.cutting){ toast('Pipe stays out while cutting — fumes must leave the room.','warn'); return; }
+  S.pipe=!S.pipe;
+  toast(S.pipe?'Exhaust pipe out the window — smoke leaves the room.':'Pipe pulled back in — remember it goes OUT before cutting.','ok');
+  render();
+});
+
+$('devHoney').addEventListener('click',()=>{
+  if(S.cutting){ toast('Honeycomb stays under the job.','warn'); return; }
+  S.honey=!S.honey;
+  toast(S.honey?'Honeycomb bed in place — machine base protected.':'Honeycomb removed — the beam would hit the machine base!','ok');
+  render();
+});
+
+$('estop').addEventListener('click',()=>{
+  if(!S.estop){
+    if(S.cutting){
+      S.cutting=false; S.framed=false;
+      $('rig').classList.remove('cutting');
+      toast('⛔ E-STOP — cut cancelled instantly. That is exactly what it is for.','danger');
+    } else toast('E-stop pressed — machine locked. (Twist to release.)','warn');
+    S.estop=true;
+  }else{
+    S.estop=false;
+    toast('E-stop released. Machine can move again.','ok');
+  }
+  render();
+});
+
+$('lid').addEventListener('click',()=>{
+  if(S.cutting && !S.lid){ return; }
+  S.lid=!S.lid;
+  if(S.cutting && !S.lid){
+    S.cutting=false; S.framed=false;
+    $('rig').classList.remove('cutting');
+    toast('🚨 INTERLOCK — lid opened mid-cut. Laser stopped instantly. The lid must stay shut while firing.','danger');
+  } else if(S.lid){
+    toast('Lid closed — interlock armed.','ok');
+  } else {
+    toast('Lid open. The laser will NOT fire like this.','warn');
+  }
+  render();
+});
+
+$('devFocus').addEventListener('click',()=>{
+  if(!S.power){ toast('Power the machine on first.','warn'); return; }
+  if(S.cutting){ return; }
+  S.focus=!S.focus;
+  toast(S.focus?'Focus set using the gauge.':'Focus not set.','ok');
+  render();
+});
+
+$('mat').addEventListener('click',()=>{
+  if(S.cutting){ toast('Machine is cutting — leave the material alone.','warn'); return; }
+  if(S.material){ S.material=false; S.framed=false; toast('Material removed.','warn'); }
+  else{
+    S.material=true; S.framed=false; toast('Material placed — flat, magnets or 4 weights on the corners.','ok');
+  }
+  render();
+});
+
+function frameJob(){
+  const head=$('head');
+  const rig=$('rig');
+  if(!S.material){ toast('Nothing to frame — place material first.','warn'); return; }
+  if(frameTimer) clearInterval(frameTimer);
+  rig.classList.add('framing');
+  const corners=[[14,18],[86,18],[86,82],[14,82]];
+  let i=0;
+  head.style.left=corners[0][0]+'%'; head.style.top=corners[0][1]+'%';
+  frameTimer=setInterval(()=>{
+    i++;
+    if(i>=corners.length+1){ clearInterval(frameTimer); frameTimer=null; rig.classList.remove('framing'); S.framed=true; toast('◻ Framed — check the traced outline on the real bed: position, size, orientation.','ok'); render(); return; }
+    const c=corners[i%corners.length];
+    head.style.left=c[0]+'%'; head.style.top=c[1]+'%';
+  },420);
+  S.framed=false; render();
+}
+$('btnFrame').addEventListener('click',frameJob);
+
+$('btnStart').addEventListener('click',()=>{
+  const blockers=startBlockers();
+  if(blockers.length){
+    toast('⛔ Cannot start: '+blockers[0]+'.'+(blockers.length>1?' Also: '+blockers.slice(1).join(', ')+'.':''),'danger');
+    return;
+  }
+  // go!
+  S.cutting=true; S.framed=false; render();
+  const rig=$('rig'), head=$('head');
+  rig.classList.add('cutting');
+  toast('▶ Cutting started — STAY with the machine. Watch the first pass.','ok');
+  let pass=0;
+  head.style.left='14%'; head.style.top='18%';
+  const sweep=setInterval(()=>{
+    pass++;
+    if(pass%2===1) head.style.left='86%'; else head.style.left='14%';
+    if(pass>=8){
+      clearInterval(sweep);
+      rig.classList.remove('cutting');
+      S.cutting=false; S.done=true;
+      toast('✅ Job finished. Now the cleanup phase — left panel bottom.','ok');
+      $('clean').classList.add('on');
+      render();
+    }
+  },600);
+});
+
+$('btnReset').addEventListener('click',()=>{
+  if(frameTimer) clearInterval(frameTimer);
+  Object.assign(S,{power:false,purifier:false,blower:false,pipe:false,honey:false,estop:true,lid:false,focus:false,material:false,framed:false,cutting:false,done:false});
+  $('rig').classList.remove('framing','cutting');
+  $('clean').classList.remove('on');
+  $('doneBanner').classList.remove('on');
+  document.querySelectorAll('#clean input').forEach(c=>c.checked=false);
+  toast('↺ Simulator reset — fresh cold machine.','warn');
+  render();
+});
+
+/* cleanup checklist gates the done banner */
+document.querySelectorAll('#clean input').forEach(chk=>{
+  chk.addEventListener('change',()=>{
+    const all=[...document.querySelectorAll('#clean input')].every(c=>c.checked);
+    if(all) $('doneBanner').classList.add('on');
+  });
+});
+
+/* ---------------- print ---------------- */
+$('btnPrint').addEventListener('click',()=>{
+  document.querySelectorAll('.tabnav button').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('section.tab').forEach(x=>x.classList.remove('active'));
+  $('tab-sheet').classList.add('active');
+  window.print();
+});
+
+render();
+</script>
+</body>
+</html>
