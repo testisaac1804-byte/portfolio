@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Hong Kong Observatory — Official Weather Notices (FICTIONAL)</title>
+<style>
+  :root{
+    --hko-blue:#004b87; --hko-blue2:#0072bc; --ink:#1f2a36; --muted:#5b6b7c;
+    --line:#d8e0e8; --bg:#eef2f6; --card:#ffffff;
+    --warn-red:#d0021b; --warn-amber:#e8a020; --warn-black:#141414;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.65 Arial,"Helvetica Neue",Helvetica,"PingFang HK","Microsoft JhengHei",sans-serif;}
+  a{color:var(--hko-blue2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+
+  .fic{background:#12203a;color:#fff;text-align:center;font-weight:700;font-size:12.5px;
+    padding:7px 12px;border-bottom:3px solid var(--warn-amber)}
+
+  header{background:linear-gradient(180deg,#00569b,#004b87);color:#fff;border-bottom:4px solid #00335e}
+  .hdr{display:flex;align-items:center;gap:18px;padding:14px 0;flex-wrap:wrap}
+  .hdr img{height:52px;background:#fff;border-radius:4px;padding:5px 9px}
+  .hdr .t1{font-size:20px;font-weight:700}
+  .hdr .t2{font-size:12.5px;opacity:.85}
+  .search{margin-left:auto;display:flex;gap:6px}
+  .search input{border:0;border-radius:3px;padding:9px 11px;font-size:13px;width:230px}
+  .search button{border:0;border-radius:3px;background:#ffd24d;color:#3a2c00;font-weight:700;
+    padding:9px 14px;font-size:13px;cursor:pointer}
+  nav{background:#00335e}
+  nav ul{display:flex;gap:2px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+  nav a{display:block;color:#dce8f4;padding:11px 14px;font-size:13.5px;font-weight:600}
+  nav a.on,nav a:hover{background:#00569b;color:#fff;text-decoration:none}
+
+  /* ticker */
+  .ticker{background:#141414;color:#ffd24d;overflow:hidden;white-space:nowrap;font-size:13px;
+    font-weight:700;padding:8px 0}
+  .ticker span{display:inline-block;padding-left:100%;animation:tk 40s linear infinite}
+  @keyframes tk{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+
+  .notice{margin:20px 0;background:#fffbe6;border:2px solid var(--warn-amber);
+    border-left:9px solid var(--warn-amber);border-radius:4px;padding:16px 20px}
+  .notice h2{margin:0 0 8px;font-size:17px;color:#8a6d00}
+  .notice ul{margin:8px 0 0 18px;padding:0}
+  .notice li{margin:6px 0}
+
+  h2.sec{font-size:18px;margin:26px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--hko-blue2);
+    display:flex;align-items:center;gap:9px}
+  h2.sec .dot{width:9px;height:9px;background:var(--warn-red);border-radius:50%;display:inline-block}
+  .sub{font-weight:400;color:var(--muted);font-size:13.5px}
+
+  .badges{display:flex;gap:14px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);
+    border-radius:4px;padding:16px}
+  .badge{text-align:center;width:118px}
+  .badge .cap{font-size:11.5px;font-weight:700;margin-top:6px;color:var(--muted)}
+
+  .bulletin{background:#1b1b1b;color:#fff;border-radius:4px;padding:18px 20px;border-left:9px solid var(--warn-red)}
+  .bulletin h3{margin:0 0 8px;font-size:17px;color:#ff6b6b;letter-spacing:.4px}
+  .bulletin p{margin:0 0 9px}
+  .bulletin .sig{font-size:44px;font-weight:900;line-height:1;color:#fff}
+  .bulletin .meta{font-size:13px;color:#b9c4cf}
+
+  .cur{display:grid;grid-template-columns:1.1fr 1fr;gap:16px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:18px}
+  .temp{font-size:64px;font-weight:700;color:var(--hko-blue);line-height:1}
+  .temp small{font-size:16px;color:var(--muted);font-weight:400}
+  .kv{display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:14px}
+  .kv .k{color:var(--muted)}
+  .kv .v{font-weight:700;text-align:right}
+  .slogan{font-style:italic;color:var(--hko-blue);font-weight:700}
+
+  table{width:100%;border-collapse:collapse;background:var(--card);font-size:14px}
+  table caption{text-align:left;font-weight:700;padding:0 0 8px;color:var(--muted);font-size:13px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left}
+  th{background:#e7eef5;font-size:13px;color:#2a3948}
+  tbody tr:nth-child(even){background:#f7fafc}
+  td.num{text-align:right;font-weight:700;color:var(--hko-blue);white-space:nowrap}
+  td.st{white-space:nowrap;font-weight:700;color:#8a6d00}
+
+  .fc{display:grid;grid-template-columns:repeat(9,1fr);gap:8px}
+  .day{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:10px 6px;text-align:center}
+  .day .d{font-weight:700;font-size:12.5px}
+  .day .w{font-size:11px;color:var(--muted);margin-bottom:4px}
+  .day .desc{font-size:11.5px;min-height:62px;margin:6px 0;color:#33404f}
+  .day .tp{font-weight:700;color:var(--hko-blue);font-size:13px}
+  .day .psr{font-size:10.5px;color:#8a6d00;font-weight:700;margin-top:5px}
+
+  .qa{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:4px 20px}
+  .qa dt{font-weight:700;margin:14px 0 3px;color:var(--hko-blue)}
+  .qa dd{margin:0 0 12px;color:#33404f;border-bottom:1px dashed var(--line);padding-bottom:12px}
+  .qa dd:last-child{border-bottom:0}
+
+  .news{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:6px 18px;list-style:none;margin:0}
+  .news li{padding:9px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+  .news li:last-child{border-bottom:0}
+  .news .dt{color:var(--muted);font-size:12.5px;margin-left:6px}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+  .mini{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px}
+  .mini h3{margin:0 0 8px;font-size:15px;color:var(--hko-blue)}
+  .mini p{margin:0 0 8px}
+  .tag{display:inline-block;background:#e7eef5;color:#2a3948;border-radius:3px;
+    padding:2px 8px;font-size:12px;font-weight:700;margin:0 4px 4px 0}
+  .quote{background:#f3f7fb;border-left:6px solid var(--hko-blue2);padding:14px 18px;border-radius:4px;
+    font-style:italic;color:#2a3948}
+
+  .stamp{position:fixed;right:18px;top:96px;transform:rotate(-7deg);z-index:99;
+    border:3px solid rgba(0,75,135,.35);color:rgba(0,75,135,.42);background:rgba(255,255,255,.6);
+    font:900 24px/1 Arial,Helvetica,sans-serif;letter-spacing:3px;padding:8px 16px;pointer-events:none}
+
+  footer{margin-top:30px;background:#00335e;color:#c7d8ea;font-size:13px;padding:22px 0}
+  footer a{color:#ffd24d}
+  footer .fgrid{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
+  @media(max-width:900px){.cur,.two,.three{grid-template-columns:1fr}.fc{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+
+<div class="fic">&#9888; FICTIONAL DEMONSTRATION — NOT the real Hong Kong Observatory &nbsp;·&nbsp; 純屬搞笑虛構 &nbsp;·&nbsp; comedy parody project</div>
+
+<header>
+  <div class="wrap hdr">
+    <img src="data:image/png;base64,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" alt="Hong Kong Observatory (fictional demo)">
+    <div>
+      <div class="t1">Hong Kong Observatory</div>
+      <div class="t2">香港天文台 &nbsp;·&nbsp; <span class="slogan">Measure the Sky, Apologise for the Rain</span></div>
+    </div>
+    <form class="search" onsubmit="return false">
+      <input type="search" placeholder="Search the sky…" aria-label="Search">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+  <nav>
+    <div class="wrap">
+      <ul>
+        <li><a class="on" href="#">Weather</a></li>
+        <li><a href="#">Warnings</a></li>
+        <li><a href="#">Forecast</a></li>
+        <li><a href="#">Climate</a></li>
+        <li><a href="#">Astronomy</a></li>
+        <li><a href="#">Earthquakes</a></li>
+        <li><a href="#">Marine</a></li>
+        <li><a href="#">Learn About</a></li>
+        <li><a href="#">My Observatory</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Complaints</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<div class="ticker"><span>&#9888; TYPHOON SIGNAL NO. 11 IN FORCE &nbsp;·&nbsp; VERY MILD WEATHER WARNING — IT IS SLIGHTLY BREEZY &nbsp;·&nbsp; AMBER HUMIDITY ADVISORY — YOU ARE NOW PART OF THE AIR &nbsp;·&nbsp; CHANCE OF CLOUDS: CERTAIN, PROBABLY NOT &nbsp;·&nbsp; FROST WARNING ISSUED FOR YOUR FREEZER &nbsp;·&nbsp; TSUNAMI ADVISORY — THE WAVE IS FRIENDLY &nbsp;·&nbsp; THE SKY REMAINS UP &nbsp;·&nbsp; PLEASE LOOK OUTSIDE, THEN DECIDE &nbsp;·&nbsp;</span></div>
+
+<div class="wrap">
+
+  <div class="notice">
+    <h2>&#9888; OBSERVATORY ANNOUNCEMENT</h2>
+    <p style="margin:0">The following notices are issued for the comfort of the public. Members of the public are advised to look outside, then decide.</p>
+    <ul>
+      <li><b>Typhoon Signal No. 11</b> — the supernumerary signal, issued when the Observatory has run out of numbers. Please remain indoors and do not ask questions.</li>
+      <li><b>Very Mild Weather Warning</b> — it is slightly breezy. Nothing to worry about. This warning is issued for completeness.</li>
+      <li><b>Chance of Clouds Advisory</b> — clouds are possible today. Some may be large.</li>
+      <li><b>Amber Humidity Advisory</b> — you are now part of the air.</li>
+      <li><b>Frost Warning</b> — issued for your freezer. Your freezer has been notified.</li>
+      <li><b>Tsunami Advisory</b> — a small wave has been reported. It is friendly. Do not wave back.</li>
+    </ul>
+  </div>
+
+  <h2 class="sec"><span class="dot"></span>Special Bulletin <span class="sub">— Typhoon Signal No. 11</span></h2>
+  <div class="bulletin">
+    <h3>THE SUPER NUMERARY SIGNAL</h3>
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <div class="sig">11</div>
+      <div>
+        <p>The Observatory will raise the signal to <b>No. 12</b> if the numbers arrive. The numbers have not arrived. The Observatory is waiting.</p>
+        <p>The signal is expected to remain in force until it stops. Members of the public should secure loose items, and their expectations.</p>
+        <p class="meta">Issued at 11:40 (the time is also weather) &nbsp;·&nbsp; Next update: when there is one &nbsp;·&nbsp; Enquiries: the window</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sec"><span class="dot"></span>Today's Warning <span class="sub">(7 in force — a record)</span></h2>
+  <div class="badges">
+    <div class="badge">
+      <svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="42" fill="#141414"/><g fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="M45 22a23 23 0 1 1-23 23"/><path d="M22 45a23 23 0 0 1 23-23"/></g><circle cx="45" cy="45" r="5" fill="#fff"/><text x="45" y="80" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" font-family="Arial">NO. 11</text></svg>
+      <div class="cap">Typhoon Signal No. 11</div>
+    </div>
+    <div class="badge">
+      <svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="42" fill="#7fb8e0"/><g fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="M22 40h34M26 50h34M30 60h26"/></g><text x="45" y="80" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" font-family="Arial">MILD</text></svg>
+      <div class="cap">Very Mild Weather Warning</div>
+    </div>
+    <div class="badge">
+      <svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="42" fill="#9aa7b4"/><path d="M30 56a10 10 0 0 1 1-20 13 13 0 0 1 25 4 9 9 0 0 1-2 16z" fill="none" stroke="#fff" stroke-width="4"/><text x="45" y="52" font-size="16" font-weight="700" fill="#fff" text-anchor="middle" font-family="Arial">?</text><text x="45" y="80" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" font-family="Arial">CLOUD</text></svg>
+      <div class="cap">Chance of Clouds Advisory</div>
+    </div>
+    <div class="badge">
+      <svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="42" fill="#d9a441"/><path d="M45 24c7 9 12 14 12 21a12 12 0 1 1-24 0c0-7 5-12 12-21z" fill="none" stroke="#fff" stroke-width="4"/><text x="45" y="80" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" font-family="Arial">100%</text></svg>
+      <div class="cap">Amber Humidity Advisory</div>
+    </div>
+    <div class="badge">
+      <svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="42" fill="#c0562f"/><g fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="M24 56a11 11 0 0 1 1-22 14 14 0 0 1 27 4 10 10 0 0 1-2 18z"/><path d="M34 64l-3 8M46 64l-3 8M58 64l-3 8"/></g><text x="45" y="82" font-size="10" font-weight="700" fill="#fff" text-anchor="middle" font-family="Arial">DRIZZLE</text></svg>
+      <div class="cap">Slight Drizzle (Decorative)</div>
+    </div>
+    <div class="badge">
+      <svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="42" fill="#5f9f77"/><path d="M22 38h34a7 7 0 1 0-7-7M22 50h26a6 6 0 1 1-6 6" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><text x="45" y="80" font-size="10" font-weight="700" fill="#fff" text-anchor="middle" font-family="Arial">BREEZE</text></svg>
+      <div class="cap">Gentle Breeze Notice</div>
+    </div>
+    <div class="badge">
+      <svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="42" fill="#6b5fa8"/><circle cx="45" cy="42" r="13" fill="none" stroke="#fff" stroke-width="4"/><g stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="M45 18v-5M45 71v-5M21 42h-5M74 42h-5"/></g><text x="45" y="80" font-size="10" font-weight="700" fill="#fff" text-anchor="middle" font-family="Arial">UNSETTLED</text></svg>
+      <div class="cap">Unsettled Weather Advisory</div>
+    </div>
+    <div class="badge">
+      <svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="42" fill="#3d7ea6"/><path d="M45 22c8 10 13 15 13 22a13 13 0 1 1-26 0c0-7 5-12 13-22z" fill="none" stroke="#fff" stroke-width="4"/><text x="45" y="82" font-size="10" font-weight="700" fill="#fff" text-anchor="middle" font-family="Arial">FROST</text></svg>
+      <div class="cap">Frost Warning (Freezer)</div>
+    </div>
+  </div>
+
+  <h2 class="sec"><span class="dot"></span>Warning Summary</h2>
+  <table>
+    <caption>All warnings currently in force, and for how long</caption>
+    <thead><tr><th>Warning</th><th>In force since</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Typhoon Signal No. 11</td><td>Since the numbers ran out</td><td class="st">In force</td></tr>
+      <tr><td>Very Mild Weather Warning</td><td>Tuesday</td><td class="st">In force, mildly</td></tr>
+      <tr><td>Chance of Clouds Advisory</td><td>Always</td><td class="st">Ongoing</td></tr>
+      <tr><td>Amber Humidity Advisory</td><td>100%</td><td class="st">You are the air</td></tr>
+      <tr><td>Gentle Breeze Notice</td><td>Since the wind started</td><td class="st">Breezy</td></tr>
+      <tr><td>Frost Warning</td><td>2019</td><td class="st">Your freezer</td></tr>
+      <tr><td>Tsunami Advisory</td><td>Once, briefly</td><td class="st">The wave was friendly</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="sec"><span class="dot"></span>Current Weather</h2>
+  <div class="cur">
+    <div class="panel">
+      <div style="display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap">
+        <div class="temp">27<small>&deg;C</small></div>
+        <div style="padding-bottom:10px">
+          <div style="font-weight:700">Feels like 27&deg;C, but louder</div>
+          <div style="color:var(--muted);font-size:13px">Update at 11:40 (the time is also weather)</div>
+        </div>
+      </div>
+      <div class="kv" style="margin-top:16px">
+        <div class="k">Relative Humidity</div><div class="v">100% — you are now part of the air</div>
+        <div class="k">Minimum / Maximum</div><div class="v">27&deg;C / 27&deg;C (the temperature has agreed to stay put)</div>
+        <div class="k">UV Index</div><div class="v">3 (Moderate) — consider a hat, or don't</div>
+        <div class="k">Rain Probability</div><div class="v">Certain, probably not</div>
+        <div class="k">Wind</div><div class="v">Gentle. The wind is not angry.</div>
+        <div class="k">Mean Sea Level Pressure</div><div class="v">Yes</div>
+        <div class="k">Visibility</div><div class="v">Sufficient (if you can see, it is sufficient)</div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3 style="margin:0 0 8px;font-size:15px">General Situation</h3>
+      <p style="margin:0 0 12px">An anticyclone aloft is bringing weather to Guangdong. It has been doing so for some time. The Observatory has no further comment. Members of the public are reminded that the sky remains up.</p>
+      <p style="margin:0">Relative humidity over parts of the territory is 100%, meaning residents are now technically part of the air. No action is required.</p>
+      <h3 style="margin:16px 0 8px;font-size:15px">Astro</h3>
+      <div class="kv">
+        <div class="k">Sunrise</div><div class="v">06:11 (subject to the sun)</div>
+        <div class="k">Sunset</div><div class="v">Later</div>
+        <div class="k">Moon Age</div><div class="v">8 days — it is doing its best</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sec"><span class="dot"></span>Regional Temperature <span class="sub">(as measured, or estimated)</span></h2>
+  <table>
+    <thead><tr><th>District</th><th>Temperature</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>Central</td><td class="num">27&deg;C</td><td>Agreeable</td></tr>
+      <tr><td>Kowloon</td><td class="num">27&deg;C</td><td>Also agreeable</td></tr>
+      <tr><td>Sha Tin</td><td class="num">27&deg;C</td><td>Suspiciously agreeable</td></tr>
+      <tr><td>Your Kitchen</td><td class="num">31&deg;C</td><td>Someone is cooking</td></tr>
+      <tr><td>The Shade</td><td class="num">24&deg;C</td><td>Recommended</td></tr>
+      <tr><td>Direct Sunlight</td><td class="num">41&deg;C</td><td>Please do not stand here</td></tr>
+      <tr><td>Underground Car Park</td><td class="num">22&deg;C</td><td>Oddly pleasant</td></tr>
+      <tr><td>Inside a Coat</td><td class="num">34&deg;C</td><td>Self-inflicted</td></tr>
+      <tr><td>The Window (as observed)</td><td class="num">—</td><td>Being looked out of</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="sec"><span class="dot"></span>9-Day Outlook</h2>
+  <div class="fc">
+    <div class="day">
+  <div class="d">20 Sep</div><div class="w">(SUN)</div>
+  <svg width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Sunny, then not."><circle cx="32" cy="32" r="11" fill="none" stroke="#e8a020" stroke-width="3.5"/><g stroke="#e8a020" stroke-width="3.5" stroke-linecap="round"><path d="M32 12v-5M32 57v-5M12 32H7M57 32h-5M18 18l-4-4M50 50l4 4M46 18l4-4M14 50l-4 4"/></g></svg>
+  <div class="desc">Sunny, then not.</div>
+  <div class="tp">27 – 32&deg;C</div>
+  <div class="psr">Certain</div>
+</div>
+<div class="day">
+  <div class="d">21 Sep</div><div class="w">(MON)</div>
+  <svg width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Cloudy with a chance of clouds."><path d="M20 42a8 8 0 0 1 1-16 11 11 0 0 1 21 3 7 7 0 0 1-1 13z" fill="none" stroke="#7b8a99" stroke-width="3.5"/></svg>
+  <div class="desc">Cloudy with a chance of clouds.</div>
+  <div class="tp">26 – 31&deg;C</div>
+  <div class="psr">Probably Not</div>
+</div>
+<div class="day">
+  <div class="d">22 Sep</div><div class="w">(TUE)</div>
+  <svg width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Rain, or the absence thereof."><path d="M20 38a8 8 0 0 1 1-16 11 11 0 0 1 21 3 7 7 0 0 1-1 13z" fill="none" stroke="#4a7fa0" stroke-width="3.5"/><g stroke="#4a7fa0" stroke-width="3.5" stroke-linecap="round"><path d="M23 45l-3 8M33 45l-3 8M43 45l-3 8"/></g></svg>
+  <div class="desc">Rain, or the absence thereof.</div>
+  <div class="tp">25 – 29&deg;C</div>
+  <div class="psr">Who Knows</div>
+</div>
+<div class="day">
+  <div class="d">23 Sep</div><div class="w">(WED)</div>
+  <svg width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Windy. The wind is not angry."><g fill="none" stroke="#5f9f77" stroke-width="3.5" stroke-linecap="round"><path d="M12 27h26a6 6 0 1 0-6-6"/><path d="M12 38h20a5 5 0 1 1-5 5"/></g></svg>
+  <div class="desc">Windy. The wind is not angry.</div>
+  <div class="tp">26 – 30&deg;C</div>
+  <div class="psr">Ask Again Later</div>
+</div>
+<div class="day">
+  <div class="d">24 Sep</div><div class="w">(THU)</div>
+  <svg width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Humid. You are now part of the air."><path d="M32 13c6 8 11 13 11 19a11 11 0 1 1-22 0c0-6 5-11 11-19z" fill="none" stroke="#0072bc" stroke-width="3.5"/></svg>
+  <div class="desc">Humid. You are now part of the air.</div>
+  <div class="tp">27 – 31&deg;C</div>
+  <div class="psr">Mildly Possible</div>
+</div>
+<div class="day">
+  <div class="d">25 Sep</div><div class="w">(FRI)</div>
+  <svg width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Typhoon Signal No. 11 possible if the numbers arrive."><g fill="none" stroke="#141414" stroke-width="3.5" stroke-linecap="round"><path d="M32 14a18 18 0 1 1-18 18"/><path d="M14 32a18 18 0 0 1 18-18"/></g><circle cx="32" cy="32" r="4" fill="#141414"/></svg>
+  <div class="desc">Typhoon Signal No. 11 possible if the numbers arrive.</div>
+  <div class="tp">27 – 33&deg;C</div>
+  <div class="psr">Unlikely</div>
+</div>
+<div class="day">
+  <div class="d">26 Sep</div><div class="w">(SAT)</div>
+  <svg width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Mild. Please dress mildly."><g stroke="#a37fb0" stroke-width="3.5" stroke-linecap="round"><path d="M14 29h36M18 38h30"/></g></svg>
+  <div class="desc">Mild. Please dress mildly.</div>
+  <div class="tp">25 – 30&deg;C</div>
+  <div class="psr">Definitely Maybe</div>
+</div>
+<div class="day">
+  <div class="d">27 Sep</div><div class="w">(SUN)</div>
+  <svg width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="The weather will continue."><circle cx="32" cy="32" r="11" fill="none" stroke="#e8a020" stroke-width="3.5"/><g stroke="#e8a020" stroke-width="3.5" stroke-linecap="round"><path d="M32 12v-5M32 57v-5M12 32H7M57 32h-5M18 18l-4-4M50 50l4 4M46 18l4-4M14 50l-4 4"/></g></svg>
+  <div class="desc">The weather will continue.</div>
+  <div class="tp">26 – 31&deg;C</div>
+  <div class="psr">No Idea</div>
+</div>
+<div class="day">
+  <div class="d">28 Sep</div><div class="w">(MON)</div>
+  <svg width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Unsettled. So are we."><path d="M20 42a8 8 0 0 1 1-16 11 11 0 0 1 21 3 7 7 0 0 1-1 13z" fill="none" stroke="#7b8a99" stroke-width="3.5"/></svg>
+  <div class="desc">Unsettled. So are we.</div>
+  <div class="tp">26 – 30&deg;C</div>
+  <div class="psr">Yes, Probably</div>
+</div>
+  </div>
+
+  <div class="two">
+    <div>
+      <h2 class="sec"><span class="dot"></span>UV Index &amp; Health Advice</h2>
+      <div class="panel">
+        <div class="kv">
+          <div class="k">UV Index</div><div class="v">3 (Moderate)</div>
+          <div class="k">Advice</div><div class="v">Consider a hat, or don't</div>
+          <div class="k">Sunscreen</div><div class="v">Optional, but brave</div>
+          <div class="k">The Sun</div><div class="v">Has been notified</div>
+          <div class="k">Risk of Sunburn</div><div class="v">Low to existential</div>
+        </div>
+        <p style="margin:12px 0 0;color:var(--muted);font-size:13.5px">Members of the public who intend to remain outdoors are advised to also consider remaining indoors.</p>
+      </div>
+    </div>
+    <div>
+      <h2 class="sec"><span class="dot"></span>Marine &amp; Sea Conditions</h2>
+      <div class="panel">
+        <div class="kv">
+          <div class="k">Sea Temperature</div><div class="v">Warm</div>
+          <div class="k">Wave Height</div><div class="v">A wave</div>
+          <div class="k">Fish</div><div class="v">Informed</div>
+          <div class="k">Sea State</div><div class="v">Wet</div>
+          <div class="k">Advisory</div><div class="v">The sea is not angry either</div>
+        </div>
+        <p style="margin:12px 0 0;color:var(--muted);font-size:13.5px">Small craft are advised to remain small.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sec"><span class="dot"></span>Frequently Asked Questions</h2>
+  <dl class="qa">
+    <dt>Will it rain tomorrow?</dt>
+    <dd>The Observatory does not comment on the future.</dd>
+    <dt>Is it hot today?</dt>
+    <dd>Comparatively.</dd>
+    <dt>When will the rain stop?</dt>
+    <dd>When it stops. The Observatory is monitoring the situation, and the rain.</dd>
+    <dt>Should I bring an umbrella?</dt>
+    <dd>Yes. Or no. Both are defensible.</dd>
+    <dt>Is the wind angry?</dt>
+    <dd>The wind is not angry. The wind is merely moving.</dd>
+    <dt>Why is the sky blue?</dt>
+    <dd>Please see our article, "Why Is the Sky Blue and Not Beige?"</dd>
+    <dt>Why is there a typhoon signal with no typhoon?</dt>
+    <dd>The signal is correct. The typhoon is late. Please be patient with it.</dd>
+    <dt>Can I speak to a meteorologist?</dt>
+    <dd>Our Chief Meteorologist is currently looking out of the window. This is a scheduled activity and cannot be interrupted.</dd>
+  </dl>
+
+  <div class="two">
+    <div>
+      <h2 class="sec"><span class="dot"></span>What's New</h2>
+      <ul class="news">
+        <li><a href="#">"Cool Met Stuff": Is it Possible to be Rained On?</a><span class="dt">18 Sep</span></li>
+        <li><a href="#">"Cool Met Stuff": Why Is the Sky Blue and Not Beige?</a><span class="dt">16 Sep</span></li>
+        <li><a href="#">The Wind: Where Does It Go When Nobody Is Looking?</a><span class="dt">14 Sep</span></li>
+        <li><a href="#">Observatory clarifies: the rain was not a mistake</a><span class="dt">11 Sep</span></li>
+        <li><a href="#">Typhoon Signal No. 11: your questions, not answered</a><span class="dt">09 Sep</span></li>
+        <li><a href="#">Study finds Tuesday still the most Tuesday-like day of the week</a><span class="dt">07 Sep</span></li>
+        <li><a href="#">Observatory apologises for the rain (again)</a><span class="dt">05 Sep</span></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="sec"><span class="dot"></span>Earthquake Report</h2>
+      <div class="panel">
+        <p style="margin:0 0 10px"><b>A magnitude 0.3 tremor was felt by one person, who was mistaken.</b></p>
+        <p style="margin:0 0 10px;color:var(--muted);font-size:14px">The Observatory received a single report from a resident who described the experience as "probably the fridge". No further reports are expected, and none have been received.</p>
+        <div class="kv">
+          <div class="k">Magnitude</div><div class="v">0.3</div>
+          <div class="k">Felt by</div><div class="v">1 person (in error)</div>
+          <div class="k">Epicentre</div><div class="v">The kitchen</div>
+          <div class="k">Action required</div><div class="v">None</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sec"><span class="dot"></span>Careers at the Observatory</h2>
+  <div class="three">
+    <div class="mini">
+      <h3>Window Looker (Senior)</h3>
+      <p>Requirements: ability to look. Experience with windows preferred.</p>
+      <p><span class="tag">Full time</span><span class="tag">On-site</span><span class="tag">Window provided</span></p>
+      <p style="color:var(--muted);font-size:13px">Closing date: when the window closes.</p>
+    </div>
+    <div class="mini">
+      <h3>Rain Namer</h3>
+      <p>Requirements: creativity. Must be comfortable with the word "drizzle".</p>
+      <p><span class="tag">Part time</span><span class="tag">Remote (outdoors)</span></p>
+      <p style="color:var(--muted);font-size:13px">Portfolio of previous rain required.</p>
+    </div>
+    <div class="mini">
+      <h3>Future Correspondent</h3>
+      <p>Requirements: none. The future is not available for comment.</p>
+      <p><span class="tag">Indefinite</span><span class="tag">Later</span></p>
+      <p style="color:var(--muted);font-size:13px">Start date: soon, or not.</p>
+    </div>
+  </div>
+
+  <div class="two">
+    <div>
+      <h2 class="sec"><span class="dot"></span>Public Consultation on the Sky</h2>
+      <div class="panel">
+        <p style="margin:0 0 12px">The Observatory invites public views on the sky. All views will be considered and then looked at.</p>
+        <div class="kv">
+          <div class="k">"It's up"</div><div class="v">4,102</div>
+          <div class="k">"It's grey"</div><div class="v">987</div>
+          <div class="k">"No comment"</div><div class="v">1</div>
+          <div class="k">Consultation closes</div><div class="v">Eventually</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2 class="sec"><span class="dot"></span>Weather Information Hotline</h2>
+      <div class="panel">
+        <div class="kv">
+          <div class="k">Hotline</div><div class="v">1878 200</div>
+          <div class="k">Status</div><div class="v">Quiet, like the weather</div>
+          <div class="k">Wait time</div><div class="v">None (nobody is calling)</div>
+        </div>
+        <p style="margin:12px 0 0">Subscribe to <b>My Observatory</b> and you will be notified when the weather happens. Notifications are sent after the weather, so that they are accurate.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sec"><span class="dot"></span>Thought for the Day</h2>
+  <div class="quote">"There is no bad weather — only weather for which the Observatory has not yet apologised."<br>
+    <span style="font-style:normal;color:var(--muted);font-size:13px">— Hong Kong Observatory (fictional), published daily, weather permitting</span></div>
+
+</div>
+
+<footer>
+  <div class="wrap fgrid">
+    <div>
+      <b style="color:#fff">Hong Kong Observatory</b> (fictional demonstration)<br>
+      香港天文台 · parody site
+    </div>
+    <div>
+      <a href="#">About Us</a> &nbsp;·&nbsp; <a href="#">Warnings</a> &nbsp;·&nbsp;
+      <a href="#">Climate</a> &nbsp;·&nbsp; <a href="#">Careers</a> &nbsp;·&nbsp; <a href="#">Contact</a>
+    </div>
+    <div style="max-width:360px">
+      This is a <b style="color:#fff">fictional comedy page</b> made for fun. It is not affiliated with,
+      endorsed by, or connected to the Hong Kong Observatory or any government body.
+      The real HKO template and logo are used as parody. Please check hko.gov.hk for actual weather.
+    </div>
+  </div>
+</footer>
+
+<div class="stamp">官方 · OFFICIAL</div>
+</body>
+</html>
