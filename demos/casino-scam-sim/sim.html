@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>218/213 騙局複刻模擬器 — 首頁</title>
+<link rel="stylesheet" href="sim.css">
+<style>
+:root{--gold:#d4af37;--gold2:#f0d98c;--bg:#0d0f14;--panel:#151925;--panel2:#1c2233;--line:#2a3247;--txt:#e8e6df;--dim:#8b93a7;--red:#e5484d;--green:#3fb36a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(1200px 800px at 70% -10%,#1a2035 0%,var(--bg) 55%);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang HK","Microsoft JhengHei",Roboto,sans-serif;min-height:100vh;padding-bottom:40px}
+.h{max-width:1000px;margin:0 auto;padding:26px 18px 6px;text-align:center}
+.h h1{font-size:24px;letter-spacing:1px}
+.h h1 b{background:linear-gradient(180deg,#f5e6b0,#d4af37);-webkit-background-clip:text;background-clip:text;color:transparent}
+.h p{color:var(--dim);font-size:13px;margin-top:8px;line-height:1.7}
+.grid{max-width:1000px;margin:18px auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;padding:0 18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;overflow:hidden;text-decoration:none;color:var(--txt);transition:border-color .15s}
+.card:hover{border-color:var(--gold)}
+.card .img{height:110px;display:flex;align-items:center;justify-content:center;font-size:38px;position:relative}
+.card .img .tag{position:absolute;top:8px;right:8px;background:var(--red);color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px}
+.card .bd{padding:13px}
+.card .bd h3{font-size:15px;margin-bottom:5px}
+.card .bd .u{font-family:Menlo,monospace;font-size:11px;color:var(--gold2);word-break:break-all}
+.card .bd p{font-size:12px;color:var(--dim);margin-top:6px;line-height:1.6}
+.panel{max-width:1000px;margin:16px auto;background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:16px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tabs input{display:none}
+.tabs label{padding:8px 14px;border-radius:9px;background:var(--panel2);border:1px solid var(--line);font-size:13px;cursor:pointer}
+.tabs input:checked+label{background:var(--gold);color:#14100a;font-weight:700}
+.tab{display:none}
+.tab.on{display:block}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+td,th{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:var(--panel2);color:var(--gold2)}
+code{font-family:Menlo,monospace;font-size:11px;color:#9fd3ff}
+.flags{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin-top:10px}
+.flag{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:12px;line-height:1.5;opacity:.55}
+.flag.seen{opacity:1;border-color:var(--green)}
+.flag b{display:block;color:var(--gold2)}
+.flag .n{color:var(--dim);font-size:10px}
+.tell{background:rgba(77,141,246,.12);border:1px solid rgba(77,141,246,.4);border-radius:10px;padding:10px 12px;font-size:12.5px;line-height:1.6;color:#c9d8f5}
+</style>
+</head>
+<body>
+<div class="h">
+  <h1>🎰 <b>218 / 213 騙局複刻模擬器</b></h1>
+  <p>逐頁複刻自真實非法賭博網站 218.com (永誠貴賓會) 與 213.com (PG娛樂) 的教學工具。<br>
+  外觀一模一樣,但<b>所有按鈕只連到本地模擬</b> —— 不會真的連上賭場、不會下載任何東西、不收集任何資料。<br>
+  走完流程,收集 🚩 詐騙手法,學會一眼識破。</p>
+</div>
+
+<div class="grid">
+  <a class="card" href="loading.html">
+    <div class="img" style="background:#fff">⟳<span class="tag">入門</span></div>
+    <div class="bd"><h3>218.com 入口頁</h3><div class="u">218.com → base64 隱藏跳轉</div><p>逐行複刻 218.com 首頁 —— 畫面只有「Loading...」,真正的工作是偷偷執行跳轉。</p></div>
+  </a>
+  <a class="card" href="hub.html">
+    <div class="img" style="background:linear-gradient(135deg,#241d0f,#171207)">🌐<span class="tag">備用網址</span></div>
+    <div class="bd"><h3>218yc.com 官方備用網址資訊站</h3><div class="u">218yc.com · 5 條線路 :9900/:8866…</div><p>原版複刻 —— 連頁面的 5 條「線路」跟延時數字 (ms) 都一樣。點「點擊開啟」只會連到本地大廳。</p></div>
+  </a>
+  <a class="card" href="door.html">
+    <div class="img" style="background:linear-gradient(135deg,#7a1f1f,#2a1030)">🏠<span class="tag">門戶</span></div>
+    <div class="bd"><h3>213.com 歡迎回家門戶</h3><div class="u">yy2iaikt.213001.cc · 商戶 FNQ2</div><p>原版複刻 —— 網頁入口、在線客服、97聊天、(假)瀏覽器下載列全部保留,點擊全部走本地教學。</p></div>
+  </a>
+  <a class="card" href="lobby.html">
+    <div class="img" style="background:linear-gradient(135deg,#1a2035,#0d0f14)">🎲<span class="tag">遊戲</span></div>
+    <div class="bd"><h3>遊戲大廳 (模擬)</h3><div class="u">百家樂 · 輪盤 · 龍虎鬥 · 老虎機 · 體育</div><p>虛擬籌碼 + 真實莊家優勢。試試「提款」—— 永遠審核中。</p></div>
+  </a>
+  <a class="card" href="chat.html">
+    <div class="img" style="background:linear-gradient(135deg,#2f6f46,#245334)">💬<span class="tag">練功房</span></div>
+    <div class="bd"><h3>在線客服 小美</h3><div class="u">7x24 · 已讀</div><p>模擬詐騙客服話術。跟她說「我要提款」,看她的「解鎖費」表演;練習拒絕、封鎖。</p></div>
+  </a>
+  <a class="card" href="tour.html">
+    <div class="img" style="background:linear-gradient(135deg,#1c2233,#151925)">🎓<span class="tag">教學</span></div>
+    <div class="bd"><h3>深度導覽</h3><div class="u">10 課 · 術語表 · 小測驗</div><p>從廣告引流到代理後台,10 課講完整條詐騙產業鏈,附 12 個黑話術語 + 10 題測驗。</p></div>
+  </a>
+  <a class="card" href="app.html">
+    <div class="img" style="background:linear-gradient(135deg,#10131c,#1a2035)">🔐<span class="tag">加密</span></div>
+    <div class="bd"><h3>218 App 啟動頁</h3><div class="u">web/#/first · AES-256-ECB 破解現場</div><p>複刻 App 啟動流程: 3 次加密握手 + 解密後的真實設定檔 (我們的破解過程教學)。</p></div>
+  </a>
+  <a class="card" href="backoffice.html">
+    <div class="img" style="background:linear-gradient(135deg,#11141d,#2a1030)">🔐<span class="tag">營運方</span></div>
+    <div class="bd"><h3>代理後台 (示意)</h3><div class="u">ag.218920.com · Vue3 管理面板</div><p>根據公開 JS 路線重建的後台示意圖: 會員、注單、佣金、IP白名單、2FA…每一塊都有解說。</p></div>
+  </a>
+<a class="card" href="sim.html" onclick="alert('就在這裡 👆');return false">
+    <div class="img" style="background:linear-gradient(135deg,#2a1030,#1a2035)">📁<span class="tag">真實數據</span></div>
+    <div class="bd"><h3>調查檔案</h3><div class="u">下方標籤頁</div><p>218/213 網絡的完整研究: 網域池、伺服器、加密破解、舉報渠道。</p></div>
+  </a>
+</div>
+
+<div class="panel">
+  <div class="tabs">
+    <input type="radio" name="ct" id="ct1" checked onchange="T(0)"><label for="ct1">🚩 詐騙手法 (已收集 X/8)</label>
+    <input type="radio" name="ct" id="ct2" onchange="T(1)"><label for="ct2">📁 218 網絡</label>
+    <input type="radio" name="ct" id="ct3" onchange="T(2)"><label for="ct3">📁 213 網絡</label>
+    <input type="radio" name="ct" id="ct4" onchange="T(3)"><label for="ct4">🛟 如何舉報</label>
+  </div>
+  <div class="tab on" id="tab0">
+    <div class="tell">🚶 逛一遍模擬器就會自動收集。收集到的會亮起綠框。</div>
+    <div class="flags" id="flg"></div>
+  </div>
+    <div class="tell mt8"><b>📖 黑話速查:</b> 白標、代理、返水、流水、二次詐騙… 完整 12 條在 <a href="tour.html" style="color:#4d8df6">深度導覽 → 術語表</a></div>
+  <div class="tab" id="tab1">
+    <h3 style="color:var(--gold2);font-size:14px">218.com — 永誠貴賓會 (BBIN 白標賭場)</h3>
+    <table>
+      <tr><th>項目</th><th>發現</th></tr>
+      <tr><td>入口鏈</td><td>218.com 假「Loading」→ base64 解出 <code>185.186.146.156:8080</code> → 301 → 218yc.com</td></tr>
+      <tr><td>備用線路</td><td>2182999 / 2183111 / 2183666 / 2185666.com,端口 <code>9900 / 8866 / 5569 / 6899 / 7730</code> → 真遊戲 App</td></tr>
+      <tr><td>平台</td><td>vir888.net / vir999.net (BBIN 白標),別名 dj8886;監控 kibana/prom.vir999.net (GCP)</td></tr>
+      <tr><td>代理後台</td><td>ag.218920.com → Vue3 管理後台 /vi/,API /paa/api/,K8s pod <code>agent-cli-node-api-*</code></td></tr>
+      <tr><td>追蹤</td><td>get.wadidowe.net:9988 · ai-cli.airegioncare.com · elegancepath.online:3637</td></tr>
+      <tr><td>註冊商</td><td>GoDaddy 為主 · NS 特徵 <code>*cne.com</code> · 網域 1998(218.com)/2025-09(218yc.com)</td></tr>
+    </table>
+    <div class="tell" style="margin-top:10px"><b>加密破解:</b> App API 用 AES-256-ECB (金鑰=MD5(alias) 雙層 base64) —— 研究中已解密設定檔,證實遊戲與代理制度。</div>
+  </div>
+  <div class="tab" id="tab2">
+    <h3 style="color:var(--gold2);font-size:14px">213.com — PG娛樂 (TruckSDK 門戶農場)</h3>
+    <table>
+      <tr><th>項目</th><th>發現</th></tr>
+      <tr><td>入口鏈</td><td>213.com (1996老網域) → 302 → <code>yy2iaikt.213001.cc/?agentName=ZYM</code></td></tr>
+      <tr><td>網域池</td><td>2138051–59.cc + 3128060.cc (Gname 2026-07-24 批量),萬用字元 DNS</td></tr>
+      <tr><td>H5 / 假瀏覽器</td><td>213h5tz0069–74.cc · 213h5004–09.cc (冒充 Chrome/Firefox/誇克/Opera)</td></tr>
+      <tr><td>後端</td><td>gw.gwpg.cc → skr004.cc 中繼 → K8s <code>k8s-ccgame-gateway</code> (Spring Boot)</td></tr>
+      <tr><td>客服/指紋</td><td>97chat.app · yybet213cscht.yixiangmeiju.top · FingerprintJS 設備指紋</td></tr>
+    </table>
+  </div>
+  <div class="tab" id="tab3">
+    <div style="font-size:13.5px;line-height:1.9">
+      <p><b>1.</b> 不註冊、不下載、不存款。<b>2.</b> 香港: 報警 / 反詐騙協調中心 <b>18222</b> (賭博條例 Cap.148)。<b>3.</b> 大陸: <b>96110</b> 反詐中心。<b>4.</b> 技術舉報: 註冊商 (GoDaddy/Gname) + Cloudflare + 主機商 (Vultr/GCP) abuse 部門,附網域池+NS特徵+IP 最有效。<b>5.</b> 已損失: 停止、保存紀錄、報警;「提款先繳保證金」是二次詐騙。</p>
+    </div>
+  </div>
+</div>
+
+<script src="sim.js"></script>
+<script>
+var FLAGS=[
+  {id:'f1',t:'隨機網域池 + 亂碼子網域',d:'2138051-59.cc 每次隨機 8 位子網域'},
+  {id:'f2',t:'假 Loading + base64 隱藏跳轉',d:'218.com 首頁只做一件事'},
+  {id:'f3',t:'追蹤碼 (?r= / agentName)',d:'記錄來源,供代理分佣'},
+  {id:'f4',t:'假瀏覽器下載陷阱',d:'「專用瀏覽器」= 追蹤/惡意軟體'},
+  {id:'f5',t:'假版權 + 24hr 客服',d:'COPYRIGHT©2025 營造正規假象'},
+  {id:'f6',t:'備用網址站 + 多註冊商',d:'218yc.com 資訊站,網域每週輪換'},
+  {id:'f7',t:'設備指紋 (FingerprintJS)',d:'換網域也認得你的設備'},
+  {id:'f8',t:'提款永遠「審核中」',d:'輸了是真錢,贏了提不出來'}
+];
+function T(i){
+  for(var j=0;j<4;j++)document.getElementById('tab'+j).classList.remove('on');
+  document.getElementById('tab'+i).classList.add('on');
+}
+function paint(){
+  var f=SIM.getFlags(),n=0,h='';
+  for(var i=0;i<FLAGS.length;i++){
+    var fl=FLAGS[i],seen=!!f[fl.id];
+    if(seen)n++;
+    h+='<div class="flag'+(seen?' seen':'')+'"><span class="n">#'+(i+1)+'</span><b>'+fl.t+'</b>'+fl.d+'</div>';
+  }
+  document.getElementById('flg').innerHTML=h;
+  document.querySelector('label[for="ct1"]').textContent='🚩 詐騙手法 (已收集 '+n+'/8)';
+}
+SIM.pageName='首頁 (導覽)';
+SIM.init();
+paint();
+</script>
+</body>
+</html>

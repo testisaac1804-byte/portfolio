@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Loading</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%}
+body{background:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%;}
+.loader{text-align:center;color:#999;}
+.dots{display:flex;justify-content:center;gap:10px;}
+.dot{width:12px;height:12px;border-radius:50%;background:#2563eb;animation:bounce 1.2s infinite;}
+.dot:nth-child(2){animation-delay:0.2s;}.dot:nth-child(3){animation-delay:0.4s}
+.loader p{margin:18px 0 0;font-size:16px;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+#reveal{font-family:Menlo,monospace;font-size:12px;margin-top:22px;color:#2563eb;word-break:break-all;max-width:480px;line-height:1.5}
+#note{display:none;margin-top:14px;font-size:13px;color:#1a3a6b;background:#eef4ff;border:1px solid #bcd0f5;border-radius:10px;padding:12px;max-width:480px;line-height:1.6}
+code{font-size:12px;word-break:break-all}
+</style>
+</head>
+<body>
+<div class="loader">
+  <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+  <p>Loading...</p>
+  <div id="reveal"></div>
+  <div id="note"></div>
+</div>
+<script>
+(function(){
+  var b='aHR0cDovLzE4NS4xODYuMTQ2LjE1Njo4MDgw';
+  var u=atob(b);
+  var out=document.getElementById('reveal');
+  var full=u+'/?r='+window.btoa(window.location.href);
+  var i=0;
+  var iv=setInterval(function(){
+    out.textContent=full.slice(0,++i);
+    if(i>=full.length){
+      clearInterval(iv);
+      document.getElementById('note').style.display='block';
+      document.getElementById('note').innerHTML='<b>教學模式:</b> 真實的 218.com 首頁就是這樣 —— 畫面只有「Loading...」,真正的工作是執行這行 base64 偷偷跳轉到 <code>'+u+'</code> (隱藏重定向)。<br>本複刻不會真的跳轉,2 秒後帶你去看「官方備用網址資訊站」。';
+      setTimeout(function(){window.location.href='hub.html';},2200);
+    }
+  },16);
+})();
+</script>
+</body>
+</html>

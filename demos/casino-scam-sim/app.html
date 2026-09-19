@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>218 App 啟動頁 (複刻) — Casino Scam Simulator</title>
+<link rel="stylesheet" href="sim.css">
+<style>
+:root{--gold:#d4af37;--gold2:#f0d98c;--bg:#0d0f14;--panel:#151925;--panel2:#1c2233;--line:#2a3247;--txt:#e8e6df;--dim:#8b93a7;--red:#e5484d;--green:#3fb36a;--blue:#4d8df6}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0c11;color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang HK","Microsoft JhengHei",Roboto,sans-serif;min-height:100vh}
+.app{max-width:454px;margin:14px auto;background:#161922;border-radius:14px;overflow:hidden;border:1px solid #2a2f3d;box-shadow:0 16px 40px rgba(0,0,0,.55)}
+.only-mobile{max-width:454px;margin:0 auto;min-height:100vh;background:#B9B9B9}
+.boot{min-height:520px;background:#10131c;display:flex;flex-direction:column}
+.boot-step{display:none;padding:18px}
+.boot-step.on{display:block}
+.boot-top{display:flex;align-items:center;gap:8px;padding:12px 14px;background:#161a28;border-bottom:1px solid #2a2f3d}
+.boot-top .bt{font-family:Menlo,monospace;font-size:13px;color:#9fd3ff}
+.boot-top a{margin-left:auto;color:var(--dim);text-decoration:none;font-size:12px}
+h3.t{color:var(--gold2);font-size:15px;margin-bottom:10px}
+.mono{font-family:Menlo,monospace;font-size:10.5px;word-break:break-all;background:#0a0d14;border:1px solid var(--line);border-radius:9px;padding:10px;color:#9fd3ff;line-height:1.55}
+.good{background:rgba(63,179,106,.1);border:1px solid rgba(63,179,106,.35);color:#b8e6c8}
+.btn{display:block;width:100%;padding:12px;border:none;border-radius:11px;font-size:14px;cursor:pointer;font-weight:600;margin-top:10px}
+.btn.gold{background:linear-gradient(180deg,#f0d98c,#d4af37 45%,#a8821f);color:#1a1405}
+.btn.ghost{background:var(--panel2);border:1px solid var(--line);color:var(--txt)}
+.tell{background:rgba(77,141,246,.12);border:1px solid rgba(77,141,246,.4);border-radius:10px;padding:10px 12px;font-size:12.5px;line-height:1.6;color:#c9d8f5;margin-top:10px}
+.tell b{color:var(--blue)}
+table{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:10px}
+td,th{border:1px solid var(--line);padding:5px 7px;text-align:left;vertical-align:top}
+th{background:var(--panel2);color:var(--gold2)}
+code{font-family:Menlo,monospace;font-size:10.5px;color:#9fd3ff;word-break:break-all}
+.simdots{display:flex;gap:9px;justify-content:center;margin-top:100px}
+.simdots span{width:12px;height:12px;border-radius:50%;background:var(--blue);animation:sb 1.2s infinite}
+.simdots span:nth-child(2){animation-delay:.2s}.simdots span:nth-child(3){animation-delay:.4s}
+@keyframes sb{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+.hl{background:#1a2416;border:1px solid rgba(63,179,106,.5);border-radius:9px;padding:9px 11px;color:#b8e6c8;font-size:12.5px;line-height:1.6;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="only-mobile">
+  <div class="boot">
+    <div class="boot-top">
+      <span class="bt">web/#/first</span>
+      <a href="sim.html">🏠 首頁</a>
+    </div>
+
+    <!-- STEP 0: loading like the real app shell -->
+    <div class="boot-step on" id="bs0">
+      <div class="simdots"><span></span><span></span><span></span></div>
+      <p class="dim" style="text-align:center;margin-top:16px;color:#8b93a7;font-size:13px">載入中…</p>
+      <p style="text-align:center;margin-top:8px;color:#5a6174;font-size:11px" id="bt0">正在發送加密請求 (entrance/api)…</p>
+    </div>
+
+    <!-- STEP 1: the shell source -->
+    <div class="boot-step" id="bs1">
+      <h3 class="t">🧩 這是 App 啟動頁的「骨架」(複刻自真實頁面)</h3>
+      <div class="tell"><b>你看到的東西,真實在網頁原始碼裡長這樣:</b> (由我們從 2182999.com:9900 原樣抓下)</div>
+      <div class="mono" style="margin-top:8px">&lt;script&gt;var __cdnUrl__ = 'https://g4.cldfvn.com';<br>var alias = 'ZGo4ODg2';<br>var xrayUrl = 'https://www992073.ats.elegancepath.online:3637/api/info';&lt;/script&gt;</div>
+      <div class="tell mt8"><b>三個變數就是三條線索:</b><br>① CDN 網域 <code>g4.cldfvn.com</code> (2024-11 註冊)<br>② 別名 <code>ZGo4ODg2</code> = base64("dj4886") → 解密金鑰的種子<br>③ 追蹤後門 <code>elegancepath.online:3637</code> (AWS)</div>
+      <button class="btn gold" onclick="B.go(2)">下一步 → 看加密請求</button>
+    </div>
+
+    <!-- STEP 2: encrypted API -->
+    <div class="boot-step" id="bs2">
+      <h3 class="t">🔐 三次加密握手 (entrance/api)</h3>
+      <div class="tell"><b>App 啟動時連續發 3 個加密請求:</b> 語言包 → 設定檔 → 遊戲配置。每個請求都是 JSON 被 AES-256-ECB 加密 + 雙層 base64。</div>
+      <p class="dim" style="margin-top:10px;font-size:12px">真實請求包 (已截短):</p>
+      <div class="mono" style="margin-top:4px">POST /entrance/api<br>requestData=NFM1T3d1aERsSjRqSzVCcXc3andiajltZmw5K0pl…(180KB)</div>
+      <h3 class="t" style="margin-top:12px">🔓 我們怎麼破解的 (教學)</h3>
+      <div class="mono">① 金鑰 = MD5(alias) = MD5("ZGo4ODg2")<br>   = 3505071d704aac4fcdecdbe876735349 (轉 ASCII)<br>② 解密: openssl enc -d -aes-256-ecb -K 3335303530373164…<br>③ 回覆是「雙層 base64」: 先解一層 → 再解一層 → AES</div>
+      <div class="hl">✅ 成果: 我們真的解出了設定檔 —— 下一頁就是解密後的內容。</div>
+      <button class="btn gold" onclick="B.go(3)">下一步 → 解密後的真相</button>
+    </div>
+
+    <!-- STEP 3: decrypted config -->
+    <div class="boot-step" id="bs3">
+      <h3 class="t">📋 解密後的設定檔 (真實內容)</h3>
+      <p class="dim" style="font-size:12px">這不是猜的 —— 是 2026-09-17 用上述金鑰實際解密 <code>/entrance/api</code> 回覆得到的 JSON:</p>
+      <table>
+        <tr><th>欄位</th><th>解密值</th></tr>
+        <tr><td>WEBSITE_TITLE</td><td><b>永诚贵宾会</b></td></tr>
+        <tr><td>REAL_SITE_SERVER_ALIAS</td><td>dj8886</td></tr>
+        <tr><td>staticFileUrl / CDN</td><td>g4.cldfvn.com · cdn4.cldfvn.com</td></tr>
+        <tr><td>AGENT_LOGIN_LINK</td><td>ag.218920.com (代理後台)</td></tr>
+        <tr><td>SUPPORT_URL</td><td>bbinproblem.support (BBIN 白標)</td></tr>
+        <tr><td>bbCasinoJackpotUrl</td><td>kco7a3h5.com/app/flash/publicbmw/EjpRemote.js (BBIN 經典加載器)</td></tr>
+        <tr><td>LANGUAGE_SELECTED</td><td>zh-cn · 1257 條話術</td></tr>
+      </table>
+      <div class="tell mt8"><b>含義:</b> 加密只是「防君子」—— 金鑰就藏在頁面自己的 JS 裡。任何瀏覽器都必須能解密,否則遊戲開不起來。<b>這就是為什麼研究一定能成功。</b></div>
+      <button class="btn gold" onclick="B.go(4)">下一步 → 進遊戲大廳 (模擬)</button>
+    </div>
+
+    <!-- STEP 4: entry -->
+    <div class="boot-step" id="bs4">
+      <h3 class="t">🎰 就緒</h3>
+      <div class="tell"><b>現在你知道 218 的 App 是怎麼啟動的了:</b><br>假 Loading → 加密握手 → 解密設定 → 遊戲大廳。<br><br>整條鏈的「正當感」都來自包了一層密碼學 —— 但記住: 加密保護的是騙子自己(躲避審查),不是保護你。</div>
+      <button class="btn gold" onclick="window.location.href='lobby.html'">進入遊戲大廳 (模擬) →</button>
+      <button class="btn ghost" onclick="window.location.href='hub.html'">← 回 218 網址站</button>
+    </div>
+  </div>
+</div>
+<script src="sim.js"></script>
+<script>
+var B = {
+  go:function(i){
+    for(var j=0;j<5;j++){var el=document.getElementById('bs'+j);if(el)el.classList.remove('on');}
+    document.getElementById('bs'+i).classList.add('on');
+    if(i===1)SIM.mark('f2');
+    if(i===3)SIM.mark('f8');
+  }
+};
+SIM.pageName='218 App 啟動頁 (web/#/first 複刻)';
+SIM.init();
+// boot: simulate the handshake pause then reveal
+setTimeout(function(){ document.getElementById('bt0').textContent='請求完成 (模擬握手)…'; },2100);
+setTimeout(function(){ document.getElementById('bt0').textContent='載入完成'; B.go(1); },3400);
+SIM.mark('f2');
+</script>
+</body>
+</html>

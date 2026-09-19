@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>代理後台 (教學複刻) — Casino Scam Simulator</title>
+<link rel="stylesheet" href="sim.css">
+<style>
+:root{--gold:#d4af37;--gold2:#f0d98c;--bg:#0d0f14;--panel:#151925;--panel2:#1c2233;--line:#2a3247;--txt:#e8e6df;--dim:#8b93a7;--red:#e5484d;--green:#3fb36a;--blue:#4d8df6}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0c11;color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang HK","Microsoft JhengHei",Roboto,sans-serif;min-height:100vh}
+.console{max-width:1000px;margin:16px auto;display:flex;min-height:600px;border:1px solid #2a3247;border-radius:14px;overflow:hidden;box-shadow:0 18px 44px rgba(0,0,0,.5)}
+.side{width:190px;flex:0 0 auto;background:#11141d;border-right:1px solid #2a3247;padding:12px 8px}
+.side .logo{font-size:12px;color:var(--gold2);font-weight:800;padding:6px 10px 14px;border-bottom:1px solid #2a3247;margin-bottom:10px}
+.side button{display:block;width:100%;text-align:left;background:transparent;border:none;color:var(--dim);padding:8px 10px;border-radius:8px;font-size:12.5px;cursor:pointer}
+.side button:hover{background:var(--panel2);color:var(--txt)}
+.side button.on{background:var(--gold);color:#14100a;font-weight:700}
+.main{flex:1;background:var(--panel);padding:16px;overflow-y:auto}
+h3{color:var(--gold2);font-size:14px;margin-bottom:10px}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:12px;margin-bottom:10px}
+.card .row{display:flex;justify-content:space-between;font-size:12.5px;padding:5px 0;border-bottom:1px dashed var(--line)}
+.card .row:last-child{border:none}
+.card .v{color:var(--gold2);font-weight:700}
+.explain{background:rgba(77,141,246,.1);border:1px solid rgba(77,141,246,.35);border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.65;color:#c9d8f5;margin-top:10px}
+.explain b{color:var(--blue)}
+.warn{background:rgba(229,72,77,.1);border:1px solid rgba(229,72,77,.4);border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.65;color:#ffd7d7;margin-top:10px}
+.btn{display:block;width:100%;padding:12px;border:none;border-radius:11px;font-size:14px;cursor:pointer;font-weight:600;margin-top:10px}
+.btn.gold{background:linear-gradient(180deg,#f0d98c,#d4af37 45%,#a8821f);color:#1a1405}
+.btn.ghost{background:var(--panel2);border:1px solid var(--line);color:var(--txt)}
+.login-box{max-width:340px;margin:60px auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+.login-box h3{text-align:center}
+input{width:100%;background:#0a0d14;border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:11px;margin-top:8px;font-size:14px}
+.pill{display:inline-block;background:rgba(63,179,106,.15);border:1px solid rgba(63,179,106,.4);color:#b8e6c8;border-radius:12px;font-size:10.5px;padding:2px 9px;margin:2px}
+.nav{max-width:1000px;margin:14px auto 0;display:flex;gap:8px;padding:0 4px}
+.nav a{color:var(--dim);text-decoration:none;font-size:12.5px;border:1px solid var(--line);padding:6px 12px;border-radius:9px}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="sim.html">🏠 首頁</a>
+  <a href="app.html">🧩 App 啟動頁</a>
+  <a href="tour.html">🎓 導覽</a>
+</div>
+
+<div id="loginView">
+  <div class="login-box">
+    <h3>🔑 代理登入 <span style="font-size:10px;color:#8b93a7">(教學複刻)</span></h3>
+    <p class="dim" style="font-size:12px;text-align:center;margin-bottom:6px">真實網址: <code>ag.218920.com/vi/</code> · 真實後台是 Vue3 + Element Plus</p>
+    <input id="au" placeholder="帳號 (隨意輸入)">
+    <input id="ap" type="password" placeholder="密碼 (隨意輸入)">
+    <button class="btn gold" onclick="BO.login()">登入 (教學模式: 什麼都能登)</button>
+    <div class="warn" style="margin-top:12px"><b>⚠️ 重要聲明:</b> 我們從未登入過真實後台,也不知道任何真實憑證。下面的畫面是<b>根據公開的前端 JS 路線圖重建的示意圖</b>,所有數據皆為虛構。</div>
+  </div>
+</div>
+
+<div id="consoleView" class="hidden">
+  <div class="console">
+    <div class="side">
+      <div class="logo">🃏 代理後台 <span style="display:block;font-weight:400;font-size:9.5px;color:#8b93a7">ag.218920.com 教學複刻</span></div>
+      <button class="on" onclick="BO.show(0)">📊 總覽</button>
+      <button onclick="BO.show(1)">👥 會員管理</button>
+      <button onclick="BO.show(2)">🎰 注單統計</button>
+      <button onclick="BO.show(3)">💰 佣金/紅包</button>
+      <button onclick="BO.show(4)">🛡 IP 白名單</button>
+      <button onclick="BO.show(5)">🔢 登入碼</button>
+      <button onclick="BO.show(6)">📱 2FA / 設備綁定</button>
+      <button onclick="BO.show(7)">📣 推送中心</button>
+      <button onclick="BO.show(8)">🔬 研究揭露</button>
+    </div>
+    <div class="main" id="mains"></div>
+  </div>
+</div>
+
+<script src="sim.js"></script>
+<script>
+var PANELS = [
+  {t:'📊 總覽', body:
+    '<div class="card"><div class="row"><span>今日有效會員</span><span class="v">1,284 (虛構)</span></div><div class="row"><span>今日注單</span><span class="v">8,392 筆</span></div><div class="row"><span>今日流水</span><span class="v">¥ 2,140,500</span></div><div class="row"><span>代理佣金率</span><span class="v">35% 退水</span></div></div>'+
+    '<div class="explain"><b>🔍 真實情況:</b> 我們從公開的後台 JS (<code>v3/js/index.BwQvMKi2.js</code>) 挖到了這套面板的全部頁面路線: <code>/member/bet-statistics/index</code>、<code>/cash/bonus/index</code>、<code>/domain/ip_white_list/index</code>… 證明這是個完整營運系統。而且 <code>/paa/api/</code> 接口回應時洩漏了 K8s pod 名稱 <code>agent-cli-node-api-6cdbcb49bc-6lzhv</code>。</div>'},
+  {t:'👥 會員管理', body:
+    '<div class="card"><div class="row"><span>玩家A (demo‑001)</span><span class="v">餘額 ¥3,200</span></div><div class="row"><span>玩家B (demo‑002)</span><span class="v">餘額 ¥0 · 提款中</span></div><div class="row"><span>玩家C (demo‑003)</span><span class="v">鎖定</span></div></div>'+
+    '<div class="explain"><b>🔍 真實功能:</b> 真實面板有: 會員層級管理 (<code>/member/level-management/index</code>)、積分明細 (<code>/member/points_record/detail</code>)、存款/登入結構報表 (<code>/domain/members/deposit_structure</code>)。</div>'},
+  {t:'🎰 注單統計', body:
+    '<div class="card"><div class="row"><span>百家樂 有效注單</span><span class="v">1,204 (虛構)</span></div><div class="row"><span>老虎機 有效注單</span><span class="v">3,871</span></div><div class="row"><span>體育 有效注單</span><span class="v">886</span></div></div>'+
+    '<div class="explain"><b>🔍 真實功能:</b> 真實路徑 <code>/member_betting_statistics/bet_record/*</code> 有 未結算/已撤銷/破紀錄 等細分頁,還支援匯出 (export) —— 這是白標賭場給代理「看業績」的標準工具。</div>'},
+  {t:'💰 佣金/紅包', body:
+    '<div class="card"><div class="row"><span>代理商 ZYM 本月佣金</span><span class="v">¥ 84,200 (虛構)</span></div><div class="row"><span>返水活動</span><span class="v">實時返水 0.8%</span></div><div class="row"><span>贏家榜</span><span class="v">/cash/bonus/winner-list</span></div></div>'+
+    '<div class="explain"><b>🔍 真實功能:</b> <code>/cash/bonus/index</code> 管理紅包,<code>/cash/bonus/history/winner-list/index</code> 顯示中獎者 —— 「贏家榜」是心理話術,讓玩家覺得真的有人中獎。</div>'},
+  {t:'🛡 IP 白名單', body:
+    '<div class="card"><div class="row"><span>IP 白名單</span><span class="v"><span class="pill">登入碼白名單</span> <span class="pill">提款白名單</span></span></div><div class="row"><span>用途</span><span class="v">限代理/管理員 IP 存取</span></div></div>'+
+    '<div class="explain"><b>🔍 真實功能:</b> 真實路徑 <code>/domain/ip_white_list/index</code> + <code>/ip/whitelist/index</code> —— 後台只允許「白名單 IP」登入。這解釋了為什麼我們從外部怎麼探測都是 403/404。</div>'},
+  {t:'🔢 登入碼', body:
+    '<div class="card"><div class="row"><span>登入碼</span><span class="v">XXXX-XXXX (脫敏)</span></div><div class="row"><span>用途</span><span class="v">每個網域一組,給會員「驗證身分」</span></div></div>'+
+    '<div class="explain"><b>🔍 真實功能:</b> <code>/domain/login_code</code> —— 這類網站用登入碼 + 網域綁定,所以換網域後「登入碼」還是同一組,會員不會跑掉。</div>'},
+  {t:'📱 2FA / 設備綁定', body:
+    '<div class="card"><div class="row"><span>兩步驗證 (2FA)</span><span class="v">綁定列表管理</span></div><div class="row"><span>設備綁定</span><span class="v">/login_verify/user/device</span></div><div class="row"><span>子帳號</span><span class="v">/login_verify/user/sub_account</span></div></div>'+
+    '<div class="explain"><b>🔍 真實功能:</b> 真實面板連 <code>/domain/two_factor_authentication/binding_list</code> 都有 —— 這不是小作坊,是成熟的詐騙企業軟體。2FA 保護的是騙子的帳號,不是你的。</div>'},
+  {t:'📣 推送中心', body:
+    '<div class="card"><div class="row"><span>推送渠道</span><span class="v">socket.dudufor.com (真實)</span></div><div class="row"><span>用途</span><span class="v">發「優惠」「新網域」通知給玩家</span></div></div>'+
+    '<div class="explain"><b>🔍 真實情況:</b> 我們在後台 JS 裡發現推送主機 <code>socket.dudufor.com</code> + 騰訊雲/金山雲配置桶 —— 中國大陸雲端基礎設施,證明營運者有陸資背景。</div>'},
+  {t:'🔬 研究揭露', body:
+    '<div class="card"><div class="row"><span>後台入口</span><span class="v">ag.218920.com → /vi/</span></div><div class="row"><span>框架</span><span class="v">Vue 3 + Element Plus</span></div><div class="row"><span>API</span><span class="v">/paa/api/ (Node.js, K8s)</span></div><div class="row"><span>追蹤</span><span class="v">aliases: dj4886 / dj8886</span></div></div>'+
+    '<div class="explain"><b>這些怎麼知道的?</b> 全部來自公開資訊:<br>① <code>ag.218920.com/vi/</code> 的 JS bundle 是公開下載的<br>② 頁面路線 = Vue router 表(明文)<br>③ <code>/paa/api/hall/redirect</code> 回應 JSON 洩漏 pod 名<br>④ 我們從未登入、未爆破、未繞過任何驗證。</div>'+
+    '<div class="warn"><b>再次聲明:</b> 本頁所有數據為虛構示意。真實後台有 IP 白名單 + 2FA,外部無法存取 —— 這也正是它被舉報後能快速轉移的原因。</div>'}
+];
+var BO = {
+  login:function(){
+    var u=(document.getElementById('au').value||'某代理').replace(/</g,'&lt;');
+    document.getElementById('loginView').classList.add('hidden');
+    document.getElementById('consoleView').classList.remove('hidden');
+    BO.show(0);
+    SIM.mark('f5'); SIM.mark('f7');
+    var w=document.createElement('div'); w.className='warn';
+    w.innerHTML='<b>教學提示:</b> 你剛剛「登入」了 —— 但在真實後台這是 <b>不可能的</b>: IP 白名單 + 2FA + 設備綁定擋在外面。這裡的畫面是示意圖,數據全是假的。';
+    document.getElementById('mains').prepend(w);
+  },
+  show:function(i){
+    var btns=document.querySelectorAll('.side button');
+    for(var j=0;j<btns.length;j++)btns[j].classList.remove('on');
+    btns[i].classList.add('on');
+    document.getElementById('mains').innerHTML='<h3>'+PANELS[i].t+'</h3>'+PANELS[i].body+'<button class="btn ghost" onclick="window.location.href=\'sim.html\'">← 回首頁</button>';
+  }
+};
+SIM.pageName='代理後台 (ag.218920.com 教學複刻)';
+SIM.init();
+</script>
+</body>
+</html>

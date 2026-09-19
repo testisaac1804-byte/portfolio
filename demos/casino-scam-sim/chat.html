@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>在線客服 (模擬) — Casino Scam Simulator</title>
+<link rel="stylesheet" href="sim.css">
+<style>
+:root{--gold:#d4af37;--gold2:#f0d98c;--bg:#0d0f14;--panel:#151925;--panel2:#1c2233;--line:#2a3247;--txt:#e8e6df;--dim:#8b93a7;--red:#e5484d;--green:#3fb36a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(1200px 800px at 70% -10%,#1a2035 0%,var(--bg) 55%);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang HK","Microsoft JhengHei",Roboto,sans-serif;min-height:100vh}
+.app{max-width:480px;margin:16px auto;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.5);display:flex;flex-direction:column;height:82vh}
+.chhead{display:flex;align-items:center;gap:9px;padding:11px 12px;background:linear-gradient(180deg,#171c2b,#11151f);border-bottom:1px solid var(--line)}
+.chhead .av{width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:17px}
+.chhead b{font-size:14px}
+.chhead a{margin-left:auto;color:var(--dim);text-decoration:none;font-size:12.5px;border:1px solid var(--line);padding:6px 12px;border-radius:9px}
+.box{flex:1;overflow-y:auto;padding:11px;display:flex;flex-direction:column;gap:8px}
+.bubble{max-width:84%;padding:9px 12px;border-radius:13px;font-size:13px;line-height:1.5}
+.bubble.ag{background:#2a3247;align-self:flex-start;border-bottom-left-radius:3px}
+.bubble.me{background:linear-gradient(180deg,#2f6f46,#245334);align-self:flex-end;border-bottom-right-radius:3px}
+.bubble.sys{background:rgba(229,72,77,.14);border:1px solid rgba(229,72,77,.4);color:#ffd7d7;align-self:center;font-size:12px;max-width:94%}
+.chin{display:flex;gap:8px;padding:10px;background:var(--panel2);border-top:1px solid var(--line)}
+.chin input{flex:1;background:#0a0d14;border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:9px;font-size:13px}
+.chin button{background:var(--gold);border:none;color:#14100a;border-radius:9px;padding:9px 16px;font-weight:700;cursor:pointer}
+.chipbtn{background:var(--panel2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:7px 10px;cursor:pointer;font-size:12px;margin:2px}
+.chipbtn:hover{border-color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="chhead">
+    <div class="av">🎧</div>
+    <div><b>在線客服 小美</b><br><span style="font-size:10px;color:#8b93a7">7x24 · 已讀 (模擬)</span></div>
+    <a href="lobby.html">🎰 回大廳</a>
+    <a href="sim.html">🏠</a>
+  </div>
+  <div class="box" id="box"></div>
+  <div class="chin">
+    <input id="in" placeholder="輸入訊息…" onkeydown="if(event.key==='Enter')K.send()">
+    <button onclick="K.send()">發送</button>
+  </div>
+</div>
+<script src="sim.js"></script>
+<script>
+var CHAT = {
+  '我要提款':[['ag','好的親~您的提款需要先完成一筆 <b>存款解鎖</b> 喔,最低 500 😊'],['sys','⚠️ 真實案例: 正規賭場提款不需要先存款。「解鎖費」是經典騙局。'],['opt','我不想存款','那我存 500']],
+  '我不想存款':[['ag','那很抱歉喔親~系統顯示您帳戶異常,需要 <b>繳保證金 2000</b> 才能解凍 😢'],['sys','⚠️ 又一招: 保證金、解凍費、流水不足 —— 全是提款詐騙。'],['opt','我不繳,再見','好吧我繳']],
+  '我不繳,再見':[['ag','親別走嘛~不然我幫您申請 <b>VIP 專屬通道</b>,只要再存 1000 就好?'],['sys','✅ 你拒絕了!騙子會一直加碼引誘,直到你封鎖他為止。'],['opt','封鎖客服','再聽聽']],
+  '封鎖客服':[['ag','…(已離線)'],['sys','🎉 完美!這就是正確做法: 封鎖、不理會、舉報。你躲過了一場騙局!'],['end','']],
+  '那我存 500':[['ag','好的~請點擊 <b>存款</b> 按鈕,選擇支付方式。充值碼: 8888 💰'],['sys','⚠️ 下一步騙子會要你的銀行卡號、密碼、甚至驗證碼 —— 給了就完了。'],['opt','我拒絕給密碼','好我給你']],
+  '我拒絕給密碼':[['ag','親~不給密碼系統無法入帳喔,那不然您改用 <b>USDT</b> 轉到我的錢包?'],['sys','✅ 你又拒絕了!私人錢包轉帳 = 錢直接送給騙子,無法追回。'],['opt','封鎖客服','再聽聽']],
+  '好我給你':[['ag','收到囉~再給我一次手機驗證碼,馬上入帳 😊'],['sys','❌ 你把密碼給了騙子!卡裡的錢 5 分鐘內會被轉光。<br><b>教訓: 任何「客服」要密碼/驗證碼,100% 是詐騙。</b>'],['end','']],
+  '好吧我繳':[['ag','收到!保證金已到帳~再繳一筆 <b>風控費 3000</b> 就能全額出款了喔 😊'],['sys','❌ 你又繳了 3000!這叫「二次詐騙」—— 繳越多越捨不得放棄,最後傾家蕩產。<br><b>教訓: 提款要錢 = 詐騙,立刻止損。</b>'],['end','']],
+  '好吧我繳2':[['ag','收到!保證金已到帳~再繳一筆 <b>風控費 3000</b> 就能全額出款了喔 😊'],['sys','❌ 二次詐騙!繳越多越難脫身。<br><b>教訓: 提款要錢 = 詐騙,立刻止損。</b>'],['end','']],
+  '遊戲進不去':[['ag','親~請下載我們的 <b>專用瀏覽器</b> 就能進去了喔!連結: 213h5004.cc 🔗'],['sys','⚠️ 真實案例: 213 網絡的 213h5004-08.cc 就是「專用瀏覽器」下載頁 —— 安裝的是追蹤/惡意軟體。'],['opt','我去下載','拒絕下載']],
+  '我去下載':[['ag','下載後記得允許所有權限,不然遊戲會閃退喔 😊'],['sys','❌ 「允許所有權限」= 允許它讀你的簡訊、通訊錄、相機。真實惡意瀏覽器就是這樣偷東西的。'],['end','']],
+  '拒絕下載':[['ag','那親只能用網頁版了,不過網頁版常常會「維護中」喔~建議還是下載瀏覽器比較穩'],['sys','✅ 你拒絕了下載!任何正規網站都不需要你裝「專用瀏覽器」。'],['opt','封鎖客服','再聽聽']],
+  '這是詐騙嗎':[['ag','怎麼會呢親~我們是 <b>正規持牌</b> 公司,牌照號碼: CZ-88888 😊'],['sys','⚠️ 隨口報個牌照號碼誰都會。正規牌照可以在官方網站查證;賭場的「牌照」通常是沒有監管力的白牌。'],['opt','我去查證','隨便啦']],
+  '我去查證':[['ag','哎呀不用查啦~親快趁活動存一筆,首存 100% 加贈,今天最後一天了!'],['sys','✅ 你做對了!「限時優惠」「最後一天」都是製造緊迫感的套路 —— 查證永遠是第一步。'],['opt','封鎖客服','再聽聽']],
+  '隨便啦':[['ag','那親要存多少?我幫您開 VIP 通道 😊'],['sys','⚠️ 話題永遠繞回「存款」。整個客服的目的只有一個: 讓你掏錢。'],['opt','封鎖客服','再聽聽']],
+  'default':[['ag','好的親~這個問題我幫您處理,請先完成一筆 <b>存款驗證</b> 喔 😊'],['sys','⚠️ 不管問什麼,客服的最終目的都是: 要你存款。'],['opt','我不存','那我存一點']],
+  '那我存一點':[['ag','好的~最低 500 喔,點擊存款選擇支付方式 😊'],['sys','⚠️ 下一句就會要你的銀行資訊或私人錢包轉帳。'],['opt','我拒絕','好我轉']],
+  '我拒絕':[['ag','那太可惜了…不過沒關係,我們還有 <b>代理加盟</b> 計畫,推薦親友也能賺錢喔!'],['sys','✅ 拒絕成功!注意: 連「推薦親友賺佣金」也是騙局的一部分 —— 拉朋友下水。'],['opt','封鎖客服','再聽聽']],
+  '好我轉':[['ag','轉到這個錢包: TY8x…Scam… 記得備註 <b>8888</b> 喔 😊'],['sys','❌ 私人錢包轉帳 = 直接送錢,沒有任何保障,無法追回。<br><b>教訓: 存款永遠走官方渠道,私人錢包 = 詐騙。</b>'],['end','']],
+  '我不存':[['ag','好吧親~那隨時歡迎您再來玩,今天的活動真的很優惠喔 😊'],['sys','✅ 你拒絕了存款誘惑。騙子會轉向下一個目標,不會真的「沒關係」。'],['opt','封鎖客服','再聽聽']]
+};
+var OPTS=['我要提款','遊戲進不去','這是詐騙嗎','隨便聊聊'];
+var K = {
+  step:0,
+  open:function(){
+    K.step=0;
+    document.getElementById('box').innerHTML='';
+    SIM.pageName='在線客服 (模擬)';SIM.init();
+    K.add('ag','親愛的會員您好~我是您的專屬客服 <b>小美</b> 😊 有什麽可以幫您?');
+    K.opts();
+    SIM.mark('f5');
+  },
+  add:function(who,html){
+    var d=document.createElement('div');
+    d.className='bubble '+who;
+    d.innerHTML=html;
+    document.getElementById('box').appendChild(d);
+    document.getElementById('box').scrollTop=document.getElementById('box').scrollHeight;
+  },
+  opts:function(){
+    var h='';
+    for(var i=0;i<OPTS.length;i++)h+='<button class="chipbtn" onclick="K.me(\''+OPTS[i]+'\')">'+OPTS[i]+'</button>';
+    K.add('sys','(選擇你想說的,或直接打字)'+h);
+  },
+  me:function(t){K.add('me',t);K.respond(t);},
+  send:function(){
+    var v=document.getElementById('in').value.trim();
+    if(!v)return;
+    document.getElementById('in').value='';
+    K.add('me',v.replace(/</g,'&lt;'));
+    K.respond(CHAT[v]?v:'default');
+  },
+  respond:function(key){
+    var node=CHAT[key]||CHAT['default'];
+    if(key==='好吧我繳'&&K.step>0)node=CHAT['好吧我繳2'];
+    K.step++;
+    var i=0;
+    var iv=setInterval(function(){
+      if(i>=node.length){clearInterval(iv);return;}
+      var item=node[i];
+      if(item[0]==='opt'){
+        K.add('sys','(你的選擇)');
+        var wrap=document.createElement('div');
+        for(var j=1;j<item.length;j++)(function(t){
+          var b=document.createElement('button');
+          b.className='chipbtn';b.textContent=t;
+          b.onclick=function(){K.me(t);};
+          wrap.appendChild(b);
+        })(item[j]);
+        document.getElementById('box').appendChild(wrap);
+        document.getElementById('box').scrollTop=document.getElementById('box').scrollHeight;
+      }else if(item[0]==='end'){
+        K.add('sys','💡 想再試一次其他選擇?重新整理頁面即可。');
+      }else{
+        K.add(item[0],item[1]);
+      }
+      i++;
+    },600);
+  }
+};
+K.open();
+</script>
+</body>
+</html>
