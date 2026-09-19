@@ -34,7 +34,7 @@ var SIM = {
     b.id='simBanner';
     b.innerHTML = '<span class="sb-badge">⚠ 教學複刻 DEMO</span>' +
       '<span class="sb-txt">這頁是 <b>' + (SIM.pageName||'') + '</b> 的忠實複刻 —— 外觀一模一樣,但所有按鈕只連到本地模擬,不會真的連上賭場、不會下載任何東西、不收集任何資料。</span>' +
-      '<a class="sb-link" href="index.html">🏠 首頁</a>';
+      '<a class="sb-link" href="sim.html">🏠 首頁</a>';
     document.body.insertBefore(b, document.body.firstChild);
     if(!document.getElementById('simCss')){
       var c=document.createElement('link'); c.id='simCss'; c.rel='stylesheet';
