@@ -11,7 +11,7 @@ Full copy of Mr McGill's Design & Technology Google Site (sites.google.com/view/
 - V2 — Full site: 49 nav pages fetched via Jina markdown, rebuilt as static HTML with sidebar nav
 - V3 — Crawled hidden IGCSE coursework section (25 more pages, linked only from Coursework Guide) → 74 pages total
 
-**Location:** https://testisaac1804-byte.github.io/isaac-dt/ · short: https://da.gd/53Kfta · local: `~/Desktop/DT-Site-Copy/`
+**Location:** https://isaac1804.com/isaac-dt/ · short: https://da.gd/53Kfta · local: `~/Desktop/DT-Site-Copy/`
 
 **Build notes (real knowledge):**
 - Google Sites + Google Slides block automated browsers (empty shell, black stage). Working path: Jina reader proxy (r.jina.ai) for rendered markdown; raw curl HTML for embed iframes (docs.google.com presentation/document, youtube) which ARE present in unrendered HTML.

@@ -2,7 +2,7 @@
 
 An open-source, self-hosted portfolio of every project Isaac has built — software apps, hardware/electronics, Fusion 360 CAD designs, and design documents.
 
-**Live:** https://testisaac1804-byte.github.io/portfolio/
+**Live:** https://isaac1804.com/portfolio/
 
 ## What it is
 

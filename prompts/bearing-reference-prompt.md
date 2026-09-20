@@ -29,4 +29,4 @@ One interactive reference covering EVERY bearing type for DT coursework, F1 in S
 
 ## Deploy
 - Copied to `demos/bearing-reference.html` in portfolio repo; card uses o:7 iframe demo.
-- Live: `https://testisaac1804-byte.github.io/portfolio/` → Bearing Reference card.
+- Live: `https://isaac1804.com/portfolio/` → Bearing Reference card.
