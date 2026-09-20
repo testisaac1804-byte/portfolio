@@ -830,10 +830,77 @@ async function drawDXF(p){
  var ctx=cv.getContext('2d');
  var polys=[],ents=0;
  function addPoly(pts,closed){if(pts.length>1)polys.push({p:pts,c:!!closed})}
+ function _scanBlocks(ls){
+  var BLKS={};
+  for(var b=0;b<ls.length-6;b++){
+   if(ls[b].trim()==='0'&&(ls[b+1]||'').trim().toUpperCase()==='SECTION'&&ls[b+2].trim()==='2'&&(ls[b+3]||'').trim().toUpperCase()==='BLOCKS'){
+    var p=b+4,cur=null,curName='',base=[0,0];
+    var flush=function(){if(cur&&curName)BLKS[curName]={b:base.slice(),e:cur}};
+    while(p<ls.length-1){
+     var ln=ls[p].trim();
+     if(ln!=='0'){p+=1;continue}
+     var nm=(ls[p+1]||'').trim().toUpperCase();
+     if(nm==='BLOCK'){flush();curName='';base=[0,0];var q=p+2;
+      while(q<ls.length-1){
+       var c=ls[q].trim();
+       if(c==='0')break;
+       if(c==='2'){curName=(ls[q+1]||'').trim()}
+       else if(c==='10'){base[0]=parseFloat(ls[q+1])||0}
+       else if(c==='20'){base[1]=parseFloat(ls[q+1])||0}
+       q+=2}
+      cur=[];p=q}
+     else if(nm==='ENDBLK'){flush();cur=null;p+=2}
+     else if(nm==='ENDSEC'){flush();return BLKS}
+     else if(cur){
+      cur.push(ls[p]);cur.push(ls[p+1]);p+=2;
+      while(p<ls.length-1&&ls[p].trim()!=='0'){cur.push(ls[p]);cur.push(ls[p+1]);p+=2}
+     }
+     else p+=2;
+    }
+    break;
+   }
+  }
+  return BLKS;
+ }
+ function _expandInserts(ls,BLKS){
+  var out=ls.slice(),es=-1,ee=-1;
+  for(var k=0;k<out.length-1;k++){if(k>0&&out[k-1].trim()==='2'&&out[k].trim().toUpperCase()==='ENTITIES'){es=k+1;break}}
+  if(es<0)return out;
+  for(var k2=es;k2<out.length;k2++){if(out[k2].trim().toUpperCase()==='ENDSEC'){ee=k2;break}}
+  if(ee<0)ee=out.length;
+  var j=es,guard=0;
+  while(j<ee-1&&guard++<9999){
+   var t=out[j].trim();
+   if(t!=='0'){j+=1;continue}
+   var ty=(out[j+1]||'').trim().toUpperCase();
+   if(ty!=='INSERT'){j+=2;continue}
+   var nm='',ix=0,iy=0,jj=j+2;
+   while(jj<ee&&jj<out.length-1&&out[jj].trim()!=='0'){var c2=out[jj].trim();
+    if(c2==='2'){nm=(out[jj+1]||'').trim()}
+    else if(c2==='10'){ix=parseFloat(out[jj+1])||0}
+    else if(c2==='20'){iy=parseFloat(out[jj+1])||0}
+    jj+=2;}
+   var blk=BLKS[nm];
+   if(!blk||!blk.e||!blk.e.length){j=jj+2;continue}
+   var ox=ix-blk.b[0],oy=iy-blk.b[1],exp=[];
+   for(var m=0;m<blk.e.length;m+=2){
+    var code=blk.e[m].trim(),val=blk.e[m+1];
+    var num=parseFloat(val);
+    if(!isNaN(num)&&(code==='10'||code==='11'||code==='12'||code==='13')){exp.push(code);exp.push(String(num+ox))}
+    else if(!isNaN(num)&&(code==='20'||code==='21'||code==='22'||code==='23')){exp.push(code);exp.push(String(num+oy))}
+    else{exp.push(code);exp.push(val)}}
+   var removed=jj-j;
+   Array.prototype.splice.apply(out,[j,removed].concat(exp));
+   ee=ee-removed+exp.length;
+   j+=2;
+  }
+  return out;
+ }
  try{
   var r=await fetch(p);if(!r.ok)throw new Error('HTTP '+r.status);
   var tx=await r.text();
   var lines=tx.split(/\r?\n/),i=0;
+ var _bl=_scanBlocks(lines);if(_bl&&Object.keys(_bl).length)lines=_expandInserts(lines,_bl);
   while(i<lines.length&&lines[i].trim().toUpperCase()!=='ENTITIES')i++;
   i++;
   var minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
