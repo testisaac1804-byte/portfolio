@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preview — Isaac's Files</title>
+<style>
+:root{--bg:#0d0e12;--card:#14161c;--line:rgba(255,255,255,.08);--tx:#d0d6e0;--mut:#8a93a3;--acc:#818cf8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;display:flex;flex-direction:column}
+header{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;flex-wrap:wrap;position:sticky;top:0;background:rgba(13,14,18,.92);backdrop-filter:blur(8px);z-index:10}
+a.home{color:var(--acc);text-decoration:none;font-size:13px;white-space:nowrap}
+a.home:hover{text-decoration:underline}
+.fname{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+.fsize{color:var(--mut);font-size:12px;white-space:nowrap}
+.spacer{flex:1}
+.badge{font-size:11px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--mut);white-space:nowrap}
+.badge.preview{color:#6ee7b7;border-color:rgba(110,231,183,.35)}
+.badge.dlonly{color:#fbbf24;border-color:rgba(251,191,36,.35)}
+.btn{display:inline-flex;align-items:center;gap:6px;background:var(--acc);color:#0d0e12;text-decoration:none;font-size:13px;font-weight:600;padding:8px 16px;border-radius:8px;white-space:nowrap}
+.btn:hover{filter:brightness(1.12)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--tx)}
+main{flex:1;display:flex;flex-direction:column;align-items:center;padding:18px;gap:16px}
+#wrap{width:100%;max-width:1200px;flex:1;display:flex;justify-content:center;align-items:flex-start}
+iframe{border:none;background:#fff;border-radius:10px;width:100%;height:78vh}
+img{max-width:100%;max-height:78vh;border-radius:10px;object-fit:contain;background:repeating-conic-gradient(#1a1c24 0 25%,#16181f 0 50%) 0 0/24px 24px}
+video{max-width:100%;max-height:78vh;border-radius:10px;background:#000}
+audio{width:min(520px,92vw);margin-top:8vh}
+pre{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;width:100%;max-width:900px;max-height:78vh;overflow:auto;font-size:13px;line-height:1.5;white-space:pre-wrap;word-break:break-word;color:#c8ccd6}
+#nodl{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:40px;text-align:center;max-width:520px;width:100%}
+#nodl .ico{font-size:44px;margin-bottom:12px}
+#nodl h2{font-size:18px;margin-bottom:8px;color:#f0f0f5}
+#nodl p{color:var(--mut);font-size:13px;line-height:1.6;margin-bottom:20px}
+#canvasbox{width:100%;height:78vh;border-radius:10px;overflow:hidden;background:radial-gradient(ellipse at center,#1b1d2a 0%,#101116 75%);position:relative}
+#canvasbox canvas{display:block}
+.hint{position:absolute;left:12px;bottom:10px;color:#9aa0a8;font-size:11px;background:rgba(0,0,0,.5);padding:3px 9px;border-radius:6px;pointer-events:none}
+.err{color:#fca5a5;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);padding:18px 22px;border-radius:10px;font-size:13px;max-width:560px}
+@media (max-width:640px){.fname{max-width:40vw}.btn{font-size:12px;padding:7px 12px}}
+</style>
+</head>
+<body>
+<header>
+  <a class="home" href="https://isaac1804.com/portfolio/">← Portfolio</a>
+  <span class="fname" id="fname">Loading…</span>
+  <span class="fsize" id="fsize"></span>
+  <span class="badge preview" id="badge" hidden>inline preview</span>
+  <span class="badge dlonly" id="badge2" hidden>no inline preview</span>
+  <span class="spacer"></span>
+  <a class="btn ghost" id="openlnk" href="#" target="_blank" rel="noopener">Open original ↗</a>
+  <a class="btn" id="dllnk" href="#">⬇ Download</a>
+</header>
+<main>
+  <div id="err" class="err" hidden></div>
+  <div id="wrap"></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/three@0.140.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/STLLoader.js"></script>
+<script src="https://unpkg.com/three@0.140.0/examples/js/loaders/3MFLoader.js"></script>
+<script>
+// ---- file type detection ----
+var ext = function(u){var p=u.split('?')[0];var i=p.lastIndexOf('.');return i<0?'':p.slice(i).toLowerCase()};
+var IMG=['.png','.jpg','.jpeg','.gif','.webp','.svg','.bmp','.ico'];
+var VID=['.mp4','.webm','.mov','.m4v','.ogv','.mp3','.wav','.m4a','.ogg','.flac','.aac'];
+var DOC=['.pdf'];
+var TXT=['.txt','.md','.json','.csv','.html','.htm','.xml','.log','.gcode','.nc','.gc','.js','.css'];
+var M3D=['.stl'];
+var M3MF=['.3mf'];
+
+function fmt(n){if(!n)return '';if(n>=1048576)return (n/1048576).toFixed(1)+' MB';if(n>=1024)return Math.round(n/1024)+' KB';return n+' B'}
+
+// ---- 3D viewers ----
+function viewer3D(url, is3mf){
+  var w=document.getElementById('wrap');
+  w.innerHTML='<div id="canvasbox"><canvas id="cv"></canvas><div class="hint">scroll=zoom · drag=rotate · right-drag=pan</div></div>';
+  var box=document.getElementById('canvasbox');
+  var scene=new THREE.Scene();
+  var cam=new THREE.PerspectiveCamera(50,box.clientWidth/box.clientHeight,0.1,100000);
+  cam.position.set(0,0,300);
+  var ren=new THREE.WebGLRenderer({canvas:document.getElementById('cv'),antialias:true,alpha:true});
+  ren.setSize(box.clientWidth,box.clientHeight);
+  ren.setClearColor(0x000000,0);
+  var dl=new THREE.DirectionalLight(0xffffff,1.1);dl.position.set(200,300,400);scene.add(dl);
+  var dl2=new THREE.DirectionalLight(0xffffff,.4);dl2.position.set(-300,-100,-200);scene.add(dl2);
+  scene.add(new THREE.AmbientLight(0xffffff,.35));
+  var ctl=null;
+  if(typeof THREE.OrbitControls==='function'){ctl=new THREE.OrbitControls(cam,ren.domElement);ctl.enableDamping=true;ctl.dampingFactor=.12}
+  var mat=new THREE.MeshStandardMaterial({color:0x8b93c2,metalness:.25,roughness:.55,flatShading:true});
+  var onLoad=function(geo,name){
+    geo.computeBoundingSphere();
+    var r=geo.boundingSphere.radius||1;
+    cam.position.set(r*1.8,r*1.2,r*2.2);
+    cam.lookAt(0,0,0);
+    var mesh=new THREE.Mesh(geo,mat);mesh.name=name;scene.add(mesh);
+    if(ctl)ctl.target.set(0,0,0);
+    animate();
+  };
+  function animate(){requestAnimationFrame(animate);if(ctl)ctl.update();ren.render(scene,cam)}
+  var loader=is3mf? new THREE.ThreeMFLoader():new THREE.STLLoader();
+  try{
+    loader.load(url,function(obj){
+      try{
+        if(is3mf&&obj&&(obj.group||obj)){var g=obj.group||obj;g.traverse(function(c){if(c.isMesh){c.material=mat}});scene.add(g);var bb=new THREE.Box3().setFromObject(g);var r=bb.getSize().length()/2;cam.position.set(r*1.6,r*1.0,r*1.9);cam.lookAt(0,0,0);if(ctl)ctl.target.set(0,0,0);animate();}
+        else if(obj&&obj.isBufferGeometry)onLoad(obj,'model');
+        else throw new Error('empty model');
+      }catch(e){fallback3D(url)}
+    },undefined,function(e){fallback3D(url)});
+  }catch(e){fallback3D(url)}
+  function fallback3D(u){
+    document.getElementById('badge').hidden=true;
+    document.getElementById('badge2').hidden=false;
+    var w=document.getElementById('wrap');
+    w.innerHTML='<div id="nodl"><div class="ico">📦</div><h2>3D preview unavailable for this file</h2><p>This model couldn’t be parsed in the browser (some slicer exports use unsupported ZIP64). Grab it with the Download button.</p><a class="btn" href="'+(u.indexOf('?')<0?u+'?download=1':u+'&download=1')+'">⬇ Download file</a></div>';
+  }
+}
+function showErr(m){var e=document.getElementById('err');e.hidden=false;e.textContent=m;document.getElementById('wrap').innerHTML=''}
+
+function show(u){
+  var e=ext(u),w=document.getElementById('wrap');
+  var ex=IMG.indexOf(e)>=0;
+  if(DOC.indexOf(e)>=0||ex){
+    var badge=document.getElementById('badge');badge.hidden=false;
+    var el=ex? '<img src="'+u+'" alt="preview">' : '<iframe src="'+u+'" allowfullscreen loading="lazy"></iframe>';
+    w.innerHTML=el;return;
+  }
+  if(VID.indexOf(e)>=0){
+    document.getElementById('badge').hidden=false;
+    var isA=['.mp3','.wav','.m4a','.ogg','.flac','.aac'].indexOf(e)>=0;
+    w.innerHTML=isA? '<audio controls src="'+u+'"></audio>':'<video controls playsinline src="'+u+'"></video>';
+    return;
+  }
+  if(TXT.indexOf(e)>=0){
+    document.getElementById('badge').hidden=false;
+    fetch(u).then(function(r){return r.text()}).then(function(t){
+      w.innerHTML='<pre>'+t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</pre>';
+    }).catch(function(err){showErr('text preview failed: '+err.message)});
+    return;
+  }
+  if(M3D.indexOf(e)>=0||M3MF.indexOf(e)>=0){
+    document.getElementById('badge').hidden=false;
+    viewer3D(u, M3MF.indexOf(e)>=0);return;
+  }
+  // nothing inline — offer download-only card
+  document.getElementById('badge2').hidden=false;
+  w.innerHTML='<div id="nodl"><div class="ico">📦</div><h2>No inline preview for .'+e.slice(1)+'</h2><p>This file type can’t be shown in the browser. Grab it with the Download button.</p><a class="btn" href="'+u+'?download=1">⬇ Download file</a></div>';
+}
+
+// ---- boot ----
+var u=new URLSearchParams(location.search).get('u')||'';
+if(!u){document.getElementById('err').hidden=false;document.getElementById('err').textContent='No file URL given (?u=…).';}
+else{
+  var name=u.split('?')[0].split('/').pop();
+  document.getElementById('fname').textContent=decodeURIComponent(name);
+  document.getElementById('dllnk').href=u+ (u.indexOf('?')<0?'?':'&') +'download=1';
+  document.getElementById('openlnk').href=u;
+  // size probe
+  fetch(u,{method:'HEAD',cache:'no-store'}).then(function(r){
+    var cl=r.headers.get('content-length');
+    if(cl)document.getElementById('fsize').textContent=fmt(+cl);
+  }).catch(function(){});
+  show(u);
+}
+</script>
+</body>
+</html>
