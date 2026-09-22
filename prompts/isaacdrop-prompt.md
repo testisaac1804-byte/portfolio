@@ -5,7 +5,7 @@
 ## How it works
 - Single `server/main.py` (~1100 lines): JSON metadata (`data/files.json`), blobs in `data/storage/`, users in `data/users.json`. Stateless HMAC tokens: file-unlock tokens (6h), login tokens (7d, `X-Auth-Token`).
 - `run-servers.sh` (launchd agent `com.isaac.isaacdrop`, KeepAlive + RunAtLoad): boots uvicorn + cloudflared, extracts the trycloudflare URL, re-points `~/Desktop/portfolio-deploy/camdrive.html` (GitHub Pages redirect) to it, commits + pushes. Killed server/tunnel → loop exits → launchd restarts the pair with a fresh URL. `caffeinate -s` keeps the Mac awake on AC.
-- Public chain: `da.gd/isaacdrop` → `testisaac1804-byte.github.io/portfolio/camdrive.html` → tunnel → local server. (da.gd blacklists trycloudflare.com, hence the GH hop.)
+- Public chain: `da.gd/isaacdrop` → `https://isaac1804.com/portfolio/camdrive.html` → tunnel → local server. (da.gd blacklists trycloudflare.com.)
 
 ## Features
 - **Accounts:** register/login (first account = admin ⭐), guests browse/upload/download. Every file/folder has an `owner`; **only owner or admin can rename/move/trash/restore/purge/protect/restore-version/create folders**; uploads over a same-name file require ownership (409 otherwise). Admin Users panel: promote/demote (last-admin + self-demote guards), reset password, delete user. Guests get a delete-link for each upload.

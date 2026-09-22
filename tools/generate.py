@@ -88,7 +88,7 @@ def write_file_listing(dirpath):
     crumbs = []
     parts = rp.split('/') if rp else []
     acc = ''
-    crumb_html = '<a class="home" href="https://testisaac1804-byte.github.io/portfolio/">\u2190 Portfolio Home</a>'
+    crumb_html = '<a class="home" href="https://isaac1804.com/portfolio/">\u2190 Portfolio Home</a>'
     for i, p in enumerate(parts):
         acc += ('/' if acc else '') + p
         crumbs.append((p, acc))
@@ -96,7 +96,7 @@ def write_file_listing(dirpath):
     if crumbs:
         bar = '<div class="bc">'
         for i, (name, path) in enumerate(crumbs):
-            href = 'https://testisaac1804-byte.github.io/portfolio/' + path + '/'
+            href = 'https://isaac1804.com/portfolio/' + path + '/'
             if i == len(crumbs)-1:
                 bar += f'<span class="cur">{html.escape(name)}</span>'
             else:
@@ -113,7 +113,7 @@ def write_file_listing(dirpath):
     # parent link
     if rp:
         parent = '/'.join(rp.split('/')[:-1])
-        phref = 'https://testisaac1804-byte.github.io/portfolio/' + (parent + '/' if parent else '')
+        phref = 'https://isaac1804.com/portfolio/' + (parent + '/' if parent else '')
         rows.append(f'<a class="row up" href="{phref}"><span>\u2191 ..</span></a>')
     for name, isdir in dirs + fls:
         icon = '\U0001f4c1' if isdir else '\U0001f4c4'
