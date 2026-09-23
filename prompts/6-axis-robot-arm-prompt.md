@@ -1,13 +1,16 @@
-# 6-Axis Robot Arm (TicStep)
+# 6-Axis Robot Arm
 
-**Category:** Fusion 360 CAD · **Status:** Done
+# 6-Axis Robot Arm
 
-Desktop 6-axis robotic arm - TicStep model with STEP drawings and manual.
+A 6-axis robotic arm project — mechanics, drawings, and stepper-control firmware.
 
-**Stack / Tools:** Robotics, 6-Axis, STEP, CNC
+## Contents
+- **`图纸/`** — drawings and CAD: `arm.STEP` (full assembly, 38 MB), `UpperArm_short.STL`, `WE-2.4.step.zip`
+- **`TicStepTest/`** — firmware/test code for Pololu **TicStep** stepper drivers:
+  - `main.h` / `main.c`, `sio_util.h`, `TicStepTest.mk` / `.res` (Microchip project)
+  - `testpoints_circle.txt` — circular interpolation test path for the arm
+- **`TicStep.pdf`** / **`RunFile.pdf`** — driver docs and how to run a motion file
+- 13 STL parts for printing
 
-**How:** Studied the TicStep open-source 6-axis arm kit: joint structure, STEP assembly drawings, and control approach.
-
-**Sources:** TicStep kit (open source), STEP drawings, PDF manual.
-
-**Location:** `/Users/isaac/Documents/六軸機器手臂/TicStep.pdf`
+## Notes
+Stepper-driven 6-DOF arm; the test firmware streams coordinates from a points file so the arm traces a circle — the same G-code-style approach used for CNC motion.
