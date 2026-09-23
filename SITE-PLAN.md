@@ -77,14 +77,17 @@ DNS on Cloudflare (`carla`/`yichun.ns.cloudflare.com`), nameservers set at Space
 - ~~Laser settings calculator~~ ✅ in `/tools/` (material/thickness/power → speed, power, passes)
 - ~~Engineering calculators~~ ✅ `/tools/` — gear ratio, resistor code, beam deflection, print cost, CNC feeds
 
-**Phase 3 — depth (do next)**
-- **Print log** (KV-backed): every print with material/settings/result → becomes your proven-settings database, and feeds the calculators real numbers
+**Phase 3 — depth ✅ SHIPPED**
+- ~~Print log~~ ✅ `/print-log/` — Worker + KV (`print-log.isaac1804.workers.dev`, KV `print-log-prints`), passcode 1804; logs material/temps/layer/speed/grams/hours/result, "use last settings", stats (success rate, filament, time)
+- ~~CV page~~ ✅ `/cv/` — auto-generated from portfolio cards (`cv/cards.json` regenerated on every deploy by `extract-cards.js`), print-ready A4
+- ~~Revision progress~~ ✅ `/revision/` — "mark revised" per subject with progress bar (localStorage)
+- ~~Command palette~~ ✅ ⌘K/Ctrl+K on the portfolio — searches projects, libraries and pages
+
+**Phase 4 — reach (do next)**
 - **Per-subject revision pages** — expand `/revision/` into a real page per subject (syllabus checklist, formula sheet, topic progress)
 - **Build write-ups** — a short post per project (photo + what broke + what you'd change)
-- **CV page** — auto-generated from your cards, print-ready PDF for applications
 - **Formula sheet generator** — printable per-subject formula cards
-
-**Phase 4 — reach**
+- **Print Log → calculator link** — feed real logged settings into `/tools/` laser/print calculators
 - Offline revision packs per subject (PWA groundwork already in place)
 - Commission intake upgrade on `/portfolio/upload` (quote request → email)
 - Quest platform with progress/hints saved per user
