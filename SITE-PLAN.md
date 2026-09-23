@@ -72,24 +72,29 @@ DNS on Cloudflare (`carla`/`yichun.ns.cloudflare.com`), nameservers set at Space
 
 ## 4. Suggested roadmap
 
-**Phase 2 — everyday value (do next)**
-- Revision hub: `/revision/` + per-subject pages, built from existing notes/booklets
-- Laser settings calculator (reuses `.clb` data)
-- Engineering calculators page
+**Phase 2 — everyday value ✅ SHIPPED**
+- ~~Revision hub `/revision/`~~ ✅ 11 subject cards linking notes + resources + past papers + Pearson
+- ~~Laser settings calculator~~ ✅ in `/tools/` (material/thickness/power → speed, power, passes)
+- ~~Engineering calculators~~ ✅ `/tools/` — gear ratio, resistor code, beam deflection, print cost, CNC feeds
 
-**Phase 3 — depth**
-- Print log (KV-backed) + filament comparison
-- Build write-ups section
-- CV page (auto-generated, print-ready)
+**Phase 3 — depth (do next)**
+- **Print log** (KV-backed): every print with material/settings/result → becomes your proven-settings database, and feeds the calculators real numbers
+- **Per-subject revision pages** — expand `/revision/` into a real page per subject (syllabus checklist, formula sheet, topic progress)
+- **Build write-ups** — a short post per project (photo + what broke + what you'd change)
+- **CV page** — auto-generated from your cards, print-ready PDF for applications
+- **Formula sheet generator** — printable per-subject formula cards
 
 **Phase 4 — reach**
-- Offline revision packs per subject
-- Commission intake upgrade on `/portfolio/upload`
-- Quest platform with progress/hints
-- Public JSON API
+- Offline revision packs per subject (PWA groundwork already in place)
+- Commission intake upgrade on `/portfolio/upload` (quote request → email)
+- Quest platform with progress/hints saved per user
+- Public JSON API for your libraries (other students can query them)
+- Laser settings sharing: export a `.clb` from the calculator
 
 **Housekeeping / known issues**
 - Local DNS on the Mac still has a stale entry — flush with `sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder`
 - IsaacDrop's public link depends on trycloudflare quick tunnels, which are rate-limited and churn constantly → move to a **named tunnel** with a permanent hostname
 - The homepage `🔌 Local Servers` section links to `http://localhost:…` — only works on this Mac; consider hiding it behind a toggle
 - `da.gd/betterterm` points at `raw.githubusercontent.com` — a GitHub URL in a public short link
+- **Fixed Sep 2026:** junk `"quoted"` directories (720 paths) were being generated because `git ls-tree` without `-z` C-quotes paths containing emoji/non-ASCII. Now uses `-z`, plus a guard in `gen_library_indexes.py`.
+
