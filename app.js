@@ -1264,3 +1264,82 @@ function showImage(p){
  document.body.appendChild(m);
  m.addEventListener('click',function(e){if(e.target===m)closeM('_img')});
 }
+
+
+/* ---- command palette (Cmd/Ctrl+K) ---- */
+function cmdkIndex(){
+  var items=[];
+  items.push({t:"Home",u:"/",k:"page",i:"🏠"});
+  items.push({t:"Workshop Tools (calculators)",u:"/tools/",k:"page",i:"🔧"});
+  items.push({t:"IGCSE Revision Hub",u:"/revision/",k:"page",i:"📚"});
+  items.push({t:"Quest Hub",u:"/quests/",k:"page",i:"🗺️"});
+  items.push({t:"Isaac DT site",u:"/isaac-dt/",k:"page",i:"🛠️"});
+  items.push({t:"IsaacNAS",u:"/nas/",k:"page",i:"💾"});
+  items.push({t:"Upload a 3D model",u:"/upload.html",k:"page",i:"⬆️"});
+  items.push({t:"Preview hub (open any file)",u:"/portfolio/preview.html",k:"page",i:"👁️"});
+  ["sw","hw","f3d","des"].forEach(function(k){
+    (D[k]||[]).forEach(function(p,ix){
+      items.push({t:p.t,u:"",k:"project",i:"📦",cat:k,idx:ix,tags:(p.g||[]).join(" ")});
+    });
+  });
+  ["equipments","bambu print profiles","vex iq official","past papers","igcse books",
+   "igcse things","science booklet","let it be band pack","gear mechanisms","5-axis cnc model",
+   "6-axis robot arm","daja tf card files","workshop stl parts","x1 print library",
+   "pokemon snorlax keychains","meme clickers","mini 4wd parts","vex super kit parts"].forEach(function(f){
+    items.push({t:f,u:"/portfolio/"+encodeURIComponent(f)+"/",k:"library",i:"📁"});
+  });
+  return items;
+}
+var _cmdk=null,_cmdkSel=0,_cmdkHits=[];
+function cmdkOpen(){
+  if(!_cmdk)_cmdk=cmdkIndex();
+  var el=document.getElementById("cmdk");if(!el)return;
+  el.classList.add("on");
+  var i=document.getElementById("cmdk-in");i.value="";i.focus();
+  cmdkRun("");
+}
+function cmdkClose(){var el=document.getElementById("cmdk");if(el)el.classList.remove("on")}
+function cmdkRun(q){
+  q=(q||"").trim().toLowerCase();
+  var all=_cmdk||[];
+  _cmdkHits=!q?all.filter(function(x){return x.k==="page"}).concat(all.filter(function(x){return x.k!=="page"}).slice(0,40))
+              :all.filter(function(x){return (x.t+" "+x.tags+" "+x.k).toLowerCase().indexOf(q)>=0}).slice(0,60);
+  _cmdkSel=0;
+  cmdkDraw();
+}
+function cmdkDraw(){
+  var r=document.getElementById("cmdk-res");if(!r)return;
+  if(!_cmdkHits.length){r.innerHTML='<div class="none">No matches</div>';return}
+  r.innerHTML=_cmdkHits.map(function(x,i){
+    return '<div class="it'+(i===_cmdkSel?" sel":"")+'" onclick="cmdkGo('+i+')"><span>'+x.i+'</span><span>'+x.t+'</span><span class="k">'+x.k+'</span></div>';
+  }).join("");
+  var sel=r.querySelector(".it.sel");if(sel&&sel.scrollIntoView)sel.scrollIntoView({block:"nearest"});
+}
+function cmdkGo(i){
+  var x=_cmdkHits[i];if(!x)return;
+  cmdkClose();
+  if(x.k==="project"&&x.cat!=null){
+    var c=document.querySelector('.card[data-cat="'+x.cat+'"][data-idx="'+x.idx+'"]');
+    if(c){c.scrollIntoView({behavior:"smooth",block:"center"});c.style.outline="2px solid var(--ab)";setTimeout(function(){c.style.outline=""},1800);return}
+  }
+  if(x.u)location.href=x.u;
+}
+(function(){
+  document.addEventListener("keydown",function(e){
+    var tag=(document.activeElement||{}).tagName||"";
+    if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){e.preventDefault();cmdkOpen();return}
+    var open=document.getElementById("cmdk");
+    if(!open||!open.classList.contains("on"))return;
+    if(e.key==="Escape"){e.preventDefault();cmdkClose()}
+    else if(e.key==="ArrowDown"){e.preventDefault();_cmdkSel=Math.min(_cmdkSel+1,_cmdkHits.length-1);cmdkDraw()}
+    else if(e.key==="ArrowUp"){e.preventDefault();_cmdkSel=Math.max(_cmdkSel-1,0);cmdkDraw()}
+    else if(e.key==="Enter"){e.preventDefault();cmdkGo(_cmdkSel)}
+  });
+  document.addEventListener("input",function(e){
+    if(e.target&&e.target.id==="cmdk-in")cmdkRun(e.target.value);
+  });
+  document.addEventListener("click",function(e){
+    var el=document.getElementById("cmdk");
+    if(el&&e.target===el)cmdkClose();
+  });
+})();
