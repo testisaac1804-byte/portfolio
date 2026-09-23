@@ -1276,7 +1276,7 @@ function cmdkIndex(){
   items.push({t:"Isaac DT site",u:"/isaac-dt/",k:"page",i:"🛠️"});
   items.push({t:"IsaacNAS",u:"/nas/",k:"page",i:"💾"});
   items.push({t:"Upload a 3D model",u:"/upload.html",k:"page",i:"⬆️"});
-  items.push({t:"Preview hub (open any file)",u:"/portfolio/preview.html",k:"page",i:"👁️"});
+  items.push({t:"Preview hub (open any file)",u:"/portfolio/preview",k:"page",i:"👁️"});
   ["sw","hw","f3d","des"].forEach(function(k){
     (D[k]||[]).forEach(function(p,ix){
       items.push({t:p.t,u:"",k:"project",i:"📦",cat:k,idx:ix,tags:(p.g||[]).join(" ")});
