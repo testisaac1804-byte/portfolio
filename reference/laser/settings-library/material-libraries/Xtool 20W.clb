@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightBurnLibrary>
+    <Material name="Basswood Plywood">
+        <Entry Thickness="-1.0000" Desc="Raster Engrave" NoThickTitle="Raser Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Basswood Plywood/Raser Engrave/Raster Engrave"/>
+                <minPower Value="18"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="60"/>
+                <frequency Value="45000"/>
+                <PPI Value="0"/>
+                <JumpSpeed Value="4000"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotTime Value="1"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.169"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Basswood Plywood/3.0000/Cut"/>
+                <minPower Value="6"/>
+                <maxPower Value="6"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="100"/>
+                <frequency Value="45000"/>
+                <PPI Value="0"/>
+                <JumpSpeed Value="4000"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotTime Value="1"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.169"/>
+                <priority Value="0"/>
+                <tabSize Value="0.50038"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.038"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Basswood Plywood/3.0000/Cut"/>
+                <minPower Value="6"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="6"/>
+                <frequency Value="45000"/>
+                <PPI Value="0"/>
+                <JumpSpeed Value="4000"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotTime Value="1"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.169"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Basswood Plywood/6.0000/Cut"/>
+                <minPower Value="6"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="6"/>
+                <frequency Value="45000"/>
+                <PPI Value="0"/>
+                <JumpSpeed Value="4000"/>
+                <numPasses Value="3"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotTime Value="1"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.169"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Birch Plywood">
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Birch Plywood/3.0000/Cut"/>
+                <minPower Value="4"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="6"/>
+                <frequency Value="45000"/>
+                <PPI Value="0"/>
+                <JumpSpeed Value="4000"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotTime Value="1"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.169"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Birch Plywood/6.0000/Cut"/>
+                <minPower Value="4"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4"/>
+                <frequency Value="45000"/>
+                <PPI Value="0"/>
+                <JumpSpeed Value="4000"/>
+                <numPasses Value="3"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotTime Value="1"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.169"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Cherry Plywood">
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Cherry Plywood/3.0000/Cut"/>
+                <minPower Value="4"/>
+                <maxPower Value="5"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="100"/>
+                <frequency Value="45000"/>
+                <PPI Value="0"/>
+                <JumpSpeed Value="4000"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotTime Value="1"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.169"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Cherry Plywood/3.0000/Cut"/>
+                <minPower Value="4"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="6"/>
+                <frequency Value="45000"/>
+                <PPI Value="0"/>
+                <JumpSpeed Value="4000"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotTime Value="1"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.169"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Fraxinus mandshuric Plywood">
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Fraxinus mandshuric Plywood/3.0000/Cut"/>
+                <minPower Value="4"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4"/>
+                <frequency Value="45000"/>
+                <PPI Value="0"/>
+                <JumpSpeed Value="4000"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotTime Value="1"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.169"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Mahogany Plywood">
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Mahogany Plywood/3.0000/Cut"/>
+                <minPower Value="4"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="6"/>
+                <frequency Value="45000"/>
+                <PPI Value="0"/>
+                <JumpSpeed Value="4000"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotTime Value="1"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.169"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Pine Plywood">
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Pine Plywood/3.0000/Cut"/>
+                <minPower Value="4"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <frequency Value="45000"/>
+                <PPI Value="0"/>
+                <JumpSpeed Value="4000"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotTime Value="1"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.169"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Walnut Plywood">
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Walnut Plywood/3.0000/Cut"/>
+                <minPower Value="6"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="6"/>
+                <frequency Value="45000"/>
+                <PPI Value="0"/>
+                <JumpSpeed Value="4000"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotTime Value="1"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.169"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Walnut Plywood/6.0000/Cut"/>
+                <minPower Value="6"/>
+                <maxPower Value="80"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="6"/>
+                <frequency Value="45000"/>
+                <PPI Value="0"/>
+                <JumpSpeed Value="4000"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotTime Value="1"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.169"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="White Oak Plywood">
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="White Oak Plywood/3.0000/Cut"/>
+                <minPower Value="4"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <frequency Value="45000"/>
+                <PPI Value="0"/>
+                <JumpSpeed Value="4000"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotTime Value="1"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.169"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+</LightBurnLibrary>

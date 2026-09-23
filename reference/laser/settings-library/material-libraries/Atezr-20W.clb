@@ -1,0 +1,1645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightBurnLibrary>
+    <Material name="Acrylic">
+        <Entry Thickness="5.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic/5.0000/Cut"/>
+                <maxPower Value="65"/>
+                <maxPower2 Value="20"/>
+                <speed Value="3.66667"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="15.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic/15.0000/Cut"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="1.66667"/>
+                <numPasses Value="10"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic/Engrave/Engrave"/>
+                <maxPower Value="75"/>
+                <maxPower2 Value="20"/>
+                <speed Value="133.333"/>
+                <priority Value="0"/>
+                <tabSize Value="0.50038"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.038"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Grayscale" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic/Image/Grayscale"/>
+                <minPower Value="25"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="133.333"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="grayscale"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic/3.0000/Cut"/>
+                <maxPower Value="60"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4.16667"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic/Image/Dither"/>
+                <maxPower Value="75"/>
+                <maxPower2 Value="20"/>
+                <speed Value="25"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <interval Value="0.089"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+                <dpi Value="285"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic/Image/Dither"/>
+                <maxPower Value="85"/>
+                <maxPower2 Value="20"/>
+                <speed Value="25"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <interval Value="0.089"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+                <dpi Value="285"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic/Image/Dither"/>
+                <maxPower Value="85"/>
+                <maxPower2 Value="20"/>
+                <speed Value="25"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <interval Value="0.089"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+                <dpi Value="285"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic/Image/Dither"/>
+                <maxPower Value="85"/>
+                <maxPower2 Value="20"/>
+                <speed Value="25"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <interval Value="0.089"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+                <dpi Value="285"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic/Image/Dither"/>
+                <maxPower Value="85"/>
+                <maxPower2 Value="20"/>
+                <speed Value="25"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <interval Value="0.089"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+                <dpi Value="285"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Aluminum (Coated)">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Aluminum (Coated)/Engrave/Engrave"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="8.33333"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Artificial Agate">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Artificial Agate/Engrave/Engrave"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="1.66667"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Artificial Bone">
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Artificial Bone/Engrave/Engrave Dark"/>
+                <maxPower Value="30"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Artificial Bone/Engrave/Engrave Light"/>
+                <maxPower Value="33"/>
+                <maxPower2 Value="20"/>
+                <speed Value="33.3333"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Artificial Bone/Image/Dither"/>
+                <maxPower Value="72"/>
+                <maxPower2 Value="20"/>
+                <speed Value="45"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <interval Value="0.089"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+                <dpi Value="285"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Artificial leather">
+        <Entry Thickness="2.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Artificial leather/2.0000/Cut"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Artificial leather/Image/Dither"/>
+                <maxPower Value="65"/>
+                <maxPower2 Value="20"/>
+                <speed Value="70"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <interval Value="0.089"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+                <dpi Value="285"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Bamboo">
+        <Entry Thickness="5.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Bamboo/5.0000/Cut"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="6.66667"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Bamboo/Engrave/Engrave"/>
+                <maxPower Value="30"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Jarvis" NoThickTitle="Photo">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Bamboo/Photo/Jarvis"/>
+                <minPower Value="5"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="275"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="jarvis"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Grayscale" NoThickTitle="Photo">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Bamboo/Photo/Grayscale"/>
+                <minPower Value="25"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="283.333"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="grayscale"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Photo">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Bamboo/Photo/Dither"/>
+                <minPower Value="5"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="275"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="8.7500" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Bamboo/8.7500/Cut"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="10"/>
+                <runBlower Value="0"/>
+                <numPasses Value="5"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Basswood">
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Photo">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Basswood/Photo/Dither"/>
+                <minPower Value="5"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="275"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Jarvis" NoThickTitle="Photo">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Basswood/Photo/Jarvis"/>
+                <minPower Value="5"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="275"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="jarvis"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Grayscale" NoThickTitle="Photo">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Basswood/Photo/Grayscale"/>
+                <minPower Value="30"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="283.333"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="grayscale"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="2.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Basswood/2.0000/Cut"/>
+                <maxPower Value="50"/>
+                <maxPower2 Value="20"/>
+                <speed Value="10"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="4.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Basswood/4.0000/Cut"/>
+                <maxPower Value="70"/>
+                <maxPower2 Value="20"/>
+                <speed Value="6.66667"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light" NoThickTitle="Engrave Fast">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Basswood/Engrave Fast/Engrave Light"/>
+                <maxPower Value="70"/>
+                <maxPower2 Value="20"/>
+                <speed Value="133.333"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave Fast">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Basswood/Engrave Fast/Engrave Dark"/>
+                <maxPower Value="85"/>
+                <maxPower2 Value="20"/>
+                <speed Value="133.333"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave Slow">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Basswood/Engrave Slow/Engrave Dark"/>
+                <maxPower Value="50"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light" NoThickTitle="Engrave Slow">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Basswood/Engrave Slow/Engrave Light"/>
+                <maxPower Value="30"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Cardboard">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Cardboard/Engrave/Engrave"/>
+                <minPower Value="15"/>
+                <maxPower Value="17"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabSize Value="0.50038"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.038"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Ceramics">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Blacken">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Ceramics/Blacken/Engrave"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Ceramic Tile">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Ceramics/Ceramic Tile/Engrave"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Denim">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Denim/Engrave/Engrave"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Density Plate">
+        <Entry Thickness="4.5000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Density Plate/4.5000/Cut"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="2.66667"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="8.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Density Plate/8.0000/Cut"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="6.66667"/>
+                <numPasses Value="4"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Density Plate/Engrave/Engrave"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Glass (Coated)">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Glass (Coated)/Engrave/Engrave"/>
+                <maxPower Value="50"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Glass (Coated)/Image/Dither"/>
+                <maxPower Value="85"/>
+                <maxPower2 Value="20"/>
+                <speed Value="32.5"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <interval Value="0.089"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+                <dpi Value="285"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="HD Foam Board">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="HD Foam Board/Engrave/Engrave"/>
+                <minPower Value="15"/>
+                <maxPower Value="15"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="8.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="HD Foam Board/8.0000/Cut"/>
+                <minPower Value="15"/>
+                <maxPower Value="30"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Hardwood">
+        <Entry Thickness="-1.0000" Desc="Slow &amp; Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Hardwood/Engrave/Slow &amp; Dark"/>
+                <maxPower Value="55"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Slow &amp; Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Hardwood/Engrave/Slow &amp; Light"/>
+                <maxPower Value="35"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Slow &amp; Med" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Hardwood/Engrave/Slow &amp; Med"/>
+                <maxPower Value="45"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fast &amp; Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Hardwood/Engrave/Fast &amp; Dark"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="133.333"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fast &amp; Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Hardwood/Engrave/Fast &amp; Light"/>
+                <maxPower Value="60"/>
+                <maxPower2 Value="20"/>
+                <speed Value="133.333"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="5.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Hardwood/5.0000/Cut"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="6.66667"/>
+                <runBlower Value="0"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="8.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Hardwood/8.0000/Cut"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="8.33333"/>
+                <runBlower Value="0"/>
+                <numPasses Value="4"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Hardwood/Image/Dither"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="203.333"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <interval Value="0.089"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+                <dpi Value="285"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Grayscale" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Hardwood/Image/Grayscale"/>
+                <minPower Value="22"/>
+                <maxPower Value="95"/>
+                <maxPower2 Value="20"/>
+                <speed Value="203.333"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <interval Value="0.089"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="285"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Iron Steel">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Black Mark">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Iron Steel/Black Mark/Engrave"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="8.33333"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Kraft Paper">
+        <Entry Thickness="0.2000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Kraft Paper/0.2000/Cut"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Kraft Paper/Engrave/Engrave"/>
+                <minPower Value="15"/>
+                <maxPower Value="15"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Leather">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Leather/Engrave/Engrave"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Mirrors (back)">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Mirrors (back)/Engrave/Engrave"/>
+                <maxPower Value="75"/>
+                <maxPower2 Value="20"/>
+                <speed Value="150"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Oil Painting Paper">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Oil Painting Paper/Engrave/Engrave"/>
+                <maxPower Value="25"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Jarvis" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Oil Painting Paper/Image/Jarvis"/>
+                <minPower Value="5"/>
+                <maxPower Value="50"/>
+                <maxPower2 Value="20"/>
+                <speed Value="100"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="jarvis"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Grayscale" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Oil Painting Paper/Image/Grayscale"/>
+                <minPower Value="5"/>
+                <maxPower Value="50"/>
+                <maxPower2 Value="20"/>
+                <speed Value="100"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="grayscale"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Oil Painting Paper/Image/Dither"/>
+                <minPower Value="5"/>
+                <maxPower Value="50"/>
+                <maxPower2 Value="20"/>
+                <speed Value="100"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="PCB Board">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="PCB Board/Engrave/Engrave"/>
+                <maxPower Value="60"/>
+                <maxPower2 Value="20"/>
+                <speed Value="33.3333"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Paulownia Wood">
+        <Entry Thickness="12.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paulownia Wood/12.0000/Cut"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4.33333"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="18.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paulownia Wood/18.0000/Cut"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <numPasses Value="5"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paulownia Wood/Image/Dither"/>
+                <minPower Value="5"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="333.333"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Jarvis" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paulownia Wood/Image/Jarvis"/>
+                <minPower Value="5"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="333.333"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabSize Value="0.50038"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.038"/>
+                <ditherMode Value="jarvis"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Grayscale" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paulownia Wood/Image/Grayscale"/>
+                <minPower Value="30"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="333.333"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabSize Value="0.50038"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.038"/>
+                <ditherMode Value="grayscale"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paulownia Wood/3.0000/Cut"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="10"/>
+                <runBlower Value="0"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="5.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paulownia Wood/5.0000/Cut"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="8"/>
+                <runBlower Value="0"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="8.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paulownia Wood/8.0000/Cut"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="10"/>
+                <runBlower Value="0"/>
+                <numPasses Value="4"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Pine">
+        <Entry Thickness="9.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Pine/9.0000/Cut"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="2.16667"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="14.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Pine/14.0000/Cut"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <numPasses Value="10"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Grayscale" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Pine/Image/Grayscale"/>
+                <minPower Value="30"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="283.333"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="grayscale"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Jarvis" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Pine/Image/Jarvis"/>
+                <minPower Value="5"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="275"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="jarvis"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Pine/Image/Dither"/>
+                <minPower Value="5"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="275"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Slow &amp; Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Pine/Engrave/Slow &amp; Light"/>
+                <maxPower Value="30"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabSize Value="0.50038"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.038"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Slow &amp; Med" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Pine/Engrave/Slow &amp; Med"/>
+                <maxPower Value="40"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabSize Value="0.50038"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.038"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Slow &amp; Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Pine/Engrave/Slow &amp; Dark"/>
+                <maxPower Value="50"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabSize Value="0.50038"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.038"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Plastic">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plastic/Engrave/Engrave"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Plywood">
+        <Entry Thickness="8.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood/8.0000/Cut"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="8.33333"/>
+                <numPasses Value="3"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="10.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood/10.0000/Cut"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="8.33333"/>
+                <numPasses Value="7"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Slow &amp; Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood/Engrave/Slow &amp; Light"/>
+                <maxPower Value="30"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabSize Value="0.50038"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.038"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Dither" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood/Image/Dither"/>
+                <minPower Value="5"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="275"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="dithered"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Jarvis" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood/Image/Jarvis"/>
+                <minPower Value="5"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="275"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="jarvis"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Grayscale" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood/Image/Grayscale"/>
+                <minPower Value="30"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="283.333"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="grayscale"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Slow &amp; Med" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood/Engrave/Slow &amp; Med"/>
+                <maxPower Value="40"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabSize Value="0.50038"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.038"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Slow &amp; Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood/Engrave/Slow &amp; Dark"/>
+                <maxPower Value="50"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabSize Value="0.50038"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.038"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="2.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood/2.0000/Cut"/>
+                <maxPower Value="50"/>
+                <maxPower2 Value="20"/>
+                <speed Value="8.33333"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood/3.0000/Cut"/>
+                <maxPower Value="70"/>
+                <maxPower2 Value="20"/>
+                <speed Value="8.33333"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.5000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood/3.5000/Cut"/>
+                <maxPower Value="75"/>
+                <maxPower2 Value="20"/>
+                <speed Value="8.33333"/>
+                <runBlower Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Polystyrene Black Foamboard">
+        <Entry Thickness="4.7600" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Polystyrene Black Foamboard/4.7600/Cut"/>
+                <maxPower Value="42"/>
+                <maxPower2 Value="20"/>
+                <speed Value="61.6667"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Resin">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Resin/Engrave/Engrave"/>
+                <minPower Value="13"/>
+                <maxPower Value="13"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Rock">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Rock/Engrave/Engrave"/>
+                <maxPower Value="60"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Rubber">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Rubber/Engrave/Engrave"/>
+                <maxPower Value="50"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Stainless Steel">
+        <Entry Thickness="0.0500" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Stainless Steel/0.0500/Cut"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="8.33333"/>
+                <forceConstantPower Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Black Mark">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Stainless Steel/Black Mark/Engrave"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="10"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Brushed">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Stainless Steel/Brushed/Engrave"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Stone Slate">
+        <Entry Thickness="-1.0000" Desc="Engrave Bright White" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Stone Slate/Engrave/Engrave Bright White"/>
+                <maxPower Value="60"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Grayscale" NoThickTitle="Image">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Stone Slate/Image/Grayscale"/>
+                <minPower Value="28"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="41.6667"/>
+                <runBlower Value="0"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="4"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="50.04"/>
+                <ditherMode Value="grayscale"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light White" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Stone Slate/Engrave/Engrave Light White"/>
+                <maxPower Value="24"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+</LightBurnLibrary>

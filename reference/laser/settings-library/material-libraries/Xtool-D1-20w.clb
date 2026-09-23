@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightBurnLibrary>
+    <Material name="Acrylic">
+        <Entry Thickness="2.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="2mm Acrylic_brown/2.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Black Acrylic Sheet(Transparent, Glossy)/3.0000/Vector Engraving"/>
+                <maxPower Value="30"/>
+                <maxPower2 Value="20"/>
+                <speed Value="40"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Black Acrylic Sheet(Transparent, Glossy)/3.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="3"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Black Acrylic Sheet(Transparent, Glossy)/3.0000/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Blood Red Acrylic Sheet(Opaque,Glossy)/3.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="3"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="5mm Acrylic_brown/5.0000/Vector Engraving"/>
+                <maxPower Value="50"/>
+                <maxPower2 Value="20"/>
+                <speed Value="40"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="5.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="5mm Acrylic_brown/5.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="3"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="5mm Acrylic_brown/5.0000/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="150"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Anodized Aluminum">
+        <Entry Thickness="-1.0000" Desc="Engrave" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Metal Business Cards Blue/0.0000/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Ash Wood">
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Ash plywood 30*30/3.0000/Vector Engraving"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="60"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Ash plywood 30*30/3.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engraving Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Ash plywood 30*30/3.0000/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="100"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="6mm Ash plywood 30*30/6.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="3"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Bamboo">
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Bamboo Plant Label/0.0000/Vector Engraving"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="70"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Bamboo Plant Label/0.0000/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="100"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Basswood">
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Basswood Plywood/3.1700/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Engrave Light">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Basswood Plywood/3.1700/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="100"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Engrave Dark">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Basswood Plywood/3.1700/Fill Engraving"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="100"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="6mm Basswood plywood 30*30/6.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="6"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Birch">
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Birch Plywood/3.1700/Vector Engraving"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="60"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Birch Plywood/3.1700/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Birch Plywood/3.1700/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="100"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="6mm Birch plywood 30*30/6.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Bubinga">
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Bubinga plywood 30*30/3.0000/Vector Engraving"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="60"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Bubinga plywood 30*30/3.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Bubinga plywood 30*30/3.0000/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="6mm Bubinga plywood 30*30/6.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Cherry Wood">
+        <Entry Thickness="-1.0000" Desc="Engrave Vector" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Cherry Plywood/3.1700/Vector Engraving"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="60"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Cherry Plywood/3.1700/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Image" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Cherry Plywood/3.1700/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="100"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="6mm Cheery wood plywood 30*30/6.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Cork">
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Cork Desk Pad/0.0000/Vector Engraving"/>
+                <maxPower Value="90"/>
+                <maxPower2 Value="20"/>
+                <speed Value="80"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Cork Desk Pad/0.0000/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="250"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Mahogany Wood">
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Mahogany Plywood/3.1700/Vector Engraving"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="60"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Mahogany Plywood/3.1700/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="6"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Mahogany Plywood/3.1700/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="100"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Maple">
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Maple plywood 30*30/3.0000/Vector Engraving"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="60"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Maple plywood 30*30/3.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Maple plywood 30*30/3.0000/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="250"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="6mm Maple plywood 30*30/6.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Oak">
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Red oak plywood 30*30/3.0000/Vector Engraving"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="60"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Red oak plywood 30*30/3.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="7"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Red oak plywood 30*30/3.0000/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="6mm Red oak plywood 30*30/6.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Pine">
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Pine Plywood/3.1700/Vector Engraving"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="60"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Pine Plywood/3.1700/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Image" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Pine Plywood/3.1700/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Rubber">
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Laser Engraving Rubber Mat/0.0000/Vector Engraving"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="80"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Laser Engraving Rubber Mat/0.0000/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Stainless Steel">
+        <Entry Thickness="-1.0000" Desc="Engrave Dark" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Silver Stainless Steel Tag/0.0000/Vector Engraving"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="15"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Engrave Light" NoThickTitle="Engrave">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Silver Stainless Steel Tag/0.0000/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="30"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Walnut">
+        <Entry Thickness="3.0000" Desc="Engrave Dark">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Walnut Plywood/3.1700/Vector Engraving"/>
+                <maxPower Value="80"/>
+                <maxPower2 Value="20"/>
+                <speed Value="60"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Walnut Plywood/3.1700/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Engraving Light">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="12 x 12x 1/8 Walnut Plywood/3.1700/Bitmap Engraving (Image)"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="6mm Walnut plywood 30*30/6.0000/Cut"/>
+                <maxPower Value="20"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <priority Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+</LightBurnLibrary>

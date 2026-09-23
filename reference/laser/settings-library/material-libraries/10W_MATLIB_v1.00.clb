@@ -1,0 +1,2162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightBurnLibrary>
+    <Material name="Acrylic Opaque">
+        <Entry Thickness="3.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic Opaque/3.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="3.83333"/>
+                <PPI Value="0"/>
+                <numPasses Value="2"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="2.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic Opaque/2.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="3.75"/>
+                <PPI Value="0"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic Opaque/Engrave Settings/Fill Engrave (Good)"/>
+                <minPower Value="0"/>
+                <maxPower Value="46"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-2.2"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.11"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic Opaque/Engrave Settings/Fill Engrave (Best)"/>
+                <minPower Value="0"/>
+                <maxPower Value="40"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.075"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Line Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Acrylic Opaque/Engrave Settings/Line Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="50"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="35"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.05"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Contact Film">
+        <Entry Thickness="0.2000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Contact Film/0.2000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="80"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="0.2000" Desc="Kiss Cut">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Contact Film/0.2000/Kiss Cut"/>
+                <minPower Value="0"/>
+                <maxPower Value="30"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Corkboard">
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Corkboard/Engrave Settings/Fill Engrave (Good)"/>
+                <minPower Value="0"/>
+                <maxPower Value="11"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.15"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Corkboard/Engrave Settings/Fill Engrave (Best)"/>
+                <minPower Value="0"/>
+                <maxPower Value="7.5"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Corkboard/Engrave Settings/Image Engrave (Good)"/>
+                <minPower Value="2"/>
+                <maxPower Value="11"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.15"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="169"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Corkboard/Engrave Settings/Image Engrave (Best)"/>
+                <minPower Value="3.5"/>
+                <maxPower Value="7.5"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="318"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Line Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Corkboard/Engrave Settings/Line Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="10"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="35"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.05"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Corrugated Cardboard">
+        <Entry Thickness="3.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Corrugated Cardboard/3.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="10.8333"/>
+                <PPI Value="0"/>
+                <overcut Value="1.5"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Corrugated Cardboard/6.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="15.8333"/>
+                <PPI Value="0"/>
+                <overcut Value="1.5"/>
+                <numPasses Value="2"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Corrugated Cardboard/Engrave Settings/Fill Engrave (Good)"/>
+                <minPower Value="0"/>
+                <maxPower Value="25"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.18"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Corrugated Cardboard/Engrave Settings/Fill Engrave (Best)"/>
+                <minPower Value="0"/>
+                <maxPower Value="18"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Corrugated Cardboard/Engrave Settings/Image Engrave (Good)"/>
+                <minPower Value="8"/>
+                <maxPower Value="25"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.18"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="141"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Corrugated Cardboard/Engrave Settings/Image Engrave (Best)"/>
+                <minPower Value="6"/>
+                <maxPower Value="18"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="318"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Line Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Corrugated Cardboard/Engrave Settings/Line Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="10"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="35"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.05"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Fabric">
+        <Entry Thickness="0.2000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Fabric/0.2000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="70"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <overcut Value="1.5"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Fabric/Engrave Settings/Fill Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="10"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Fabric/Engrave Settings/Image Engrave"/>
+                <minPower Value="5"/>
+                <maxPower Value="10"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="318"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Line Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Fabric/Engrave Settings/Line Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="12"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="35"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.05"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Felt">
+        <Entry Thickness="3.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Felt/3.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="15"/>
+                <PPI Value="0"/>
+                <overcut Value="1.5"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Foam - EVA">
+        <Entry Thickness="10.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Foam - EVA/10.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="85"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <zOffset Value="10"/>
+                <PPI Value="0"/>
+                <blowerSpeedOverride Value="1"/>
+                <blowerSpeedPercent Value="50"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Leather">
+        <Entry Thickness="1.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Leather/1.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="7.5"/>
+                <PPI Value="0"/>
+                <overcut Value="1.5"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="3.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Leather/3.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <PPI Value="0"/>
+                <numPasses Value="2"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Leather/Engrave Settings/Fill Engrave (Good)"/>
+                <minPower Value="0"/>
+                <maxPower Value="12"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.175"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Leather/Engrave Settings/Fill Engrave (Best)"/>
+                <minPower Value="0"/>
+                <maxPower Value="8"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Leather/Engrave Settings/Image Engrave (Good)"/>
+                <minPower Value="3"/>
+                <maxPower Value="12"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.18"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="141"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Leather/Engrave Settings/Image Engrave (Best)"/>
+                <minPower Value="2"/>
+                <maxPower Value="8"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="318"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Line Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Leather/Engrave Settings/Line Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="10"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="35"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.05"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="MDF">
+        <Entry Thickness="3.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="MDF/3.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="3.75"/>
+                <PPI Value="0"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="MDF/6.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4.83333"/>
+                <PPI Value="0"/>
+                <numPasses Value="3"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="MDF/Engrave Settings/Fill Engrave (Good)"/>
+                <minPower Value="0"/>
+                <maxPower Value="52"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.175"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="MDF/Engrave Settings/Fill Engrave (Best)"/>
+                <minPower Value="0"/>
+                <maxPower Value="38"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="MDF/Engrave Settings/Image Engrave (Good)"/>
+                <minPower Value="12"/>
+                <maxPower Value="56"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.18"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="141"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="MDF/Engrave Settings/Image Engrave (Best)"/>
+                <minPower Value="3"/>
+                <maxPower Value="45"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="318"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Line Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="MDF/Engrave Settings/Line Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="25"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="35"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.05"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Metal - Anodised">
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Metal - Anodised/Engrave Settings/Fill Engrave (Good)"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="36.6667"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.18"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Metal - Anodised/Engrave Settings/Fill Engrave (Best)"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="41.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Metal - Anodised/Engrave Settings/Image Engrave (Good)"/>
+                <minPower Value="14"/>
+                <maxPower Value="80"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.18"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <negative Value="1"/>
+                <ditherMode Value="dithered"/>
+                <dpi Value="141"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Metal - Anodised/Engrave Settings/Image Engrave (Best)"/>
+                <minPower Value="3.5"/>
+                <maxPower Value="30"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <negative Value="1"/>
+                <ditherMode Value="dithered"/>
+                <dpi Value="318"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Line Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Metal - Anodised/Engrave Settings/Line Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="35"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.05"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Paper">
+        <Entry Thickness="0.2000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paper/0.2000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="11.6667"/>
+                <PPI Value="0"/>
+                <overcut Value="1.5"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="0.1000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paper/0.1000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="30"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <overcut Value="1.5"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paper/Engrave Settings/Fill Engrave (Good)"/>
+                <minPower Value="0"/>
+                <maxPower Value="50"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.18"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paper/Engrave Settings/Fill Engrave (Best)"/>
+                <minPower Value="0"/>
+                <maxPower Value="35"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paper/Engrave Settings/Image Engrave (Good)"/>
+                <minPower Value="16"/>
+                <maxPower Value="55"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.18"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="141"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paper/Engrave Settings/Image Engrave (Best)"/>
+                <minPower Value="14"/>
+                <maxPower Value="32"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="318"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Line Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Paper/Engrave Settings/Line Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="10"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="35"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.05"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Plywood - Birch Laser">
+        <Entry Thickness="2.5000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Birch Laser/2.5000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4.58333"/>
+                <PPI Value="0"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="1.2500" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Birch Laser/1.2500/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="9.16667"/>
+                <PPI Value="0"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Birch Laser/Engrave Settings/Fill Engrave (Good)"/>
+                <minPower Value="0"/>
+                <maxPower Value="40"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.18"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Birch Laser/Engrave Settings/Fill Engrave (Best)"/>
+                <minPower Value="0"/>
+                <maxPower Value="30"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Birch Laser/Engrave Settings/Image Engrave (Good)"/>
+                <minPower Value="4"/>
+                <maxPower Value="38"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedOverride Value="1"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.1752"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="145"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Birch Laser/Engrave Settings/Image Engrave (Best)"/>
+                <minPower Value="4"/>
+                <maxPower Value="28"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="318"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Line Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Birch Laser/Engrave Settings/Line Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="25"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedOverride Value="1"/>
+                <blowerSpeedPercent Value="35"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.05"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Plywood - Eucalypt Laser">
+        <Entry Thickness="2.5000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Eucalypt Laser/2.5000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4.58333"/>
+                <PPI Value="0"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="1.2500" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Eucalypt Laser/1.2500/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="9.16667"/>
+                <PPI Value="0"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Eucalypt Laser/Engrave Settings/Fill Engrave (Good)"/>
+                <minPower Value="0"/>
+                <maxPower Value="40"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.18"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Eucalypt Laser/Engrave Settings/Fill Engrave (Best)"/>
+                <minPower Value="0"/>
+                <maxPower Value="30"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Eucalypt Laser/Engrave Settings/Image Engrave (Good)"/>
+                <minPower Value="4"/>
+                <maxPower Value="38"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedOverride Value="1"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.1752"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="145"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Eucalypt Laser/Engrave Settings/Image Engrave (Best)"/>
+                <minPower Value="4"/>
+                <maxPower Value="28"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="318"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Line Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Eucalypt Laser/Engrave Settings/Line Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="25"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedOverride Value="1"/>
+                <blowerSpeedPercent Value="35"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.05"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Plywood - Generic">
+        <Entry Thickness="3.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Generic/3.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4.16667"/>
+                <PPI Value="0"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Generic/6.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4.16667"/>
+                <PPI Value="0"/>
+                <numPasses Value="4"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Generic/Engrave Settings/Fill Engrave (Good)"/>
+                <minPower Value="0"/>
+                <maxPower Value="32"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.18"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Generic/Engrave Settings/Fill Engrave (Best)"/>
+                <minPower Value="0"/>
+                <maxPower Value="25"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Generic/Engrave Settings/Image Engrave (Good)"/>
+                <minPower Value="10"/>
+                <maxPower Value="40"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.18"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="141"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Generic/Engrave Settings/Image Engrave (Best)"/>
+                <minPower Value="3"/>
+                <maxPower Value="25"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="318"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Line Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Generic/Engrave Settings/Line Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="16"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedOverride Value="1"/>
+                <blowerSpeedPercent Value="35"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.05"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Plywood - Poplar Laser">
+        <Entry Thickness="3.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Poplar Laser/3.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="7.5"/>
+                <PPI Value="0"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="6.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Poplar Laser/6.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="4.16667"/>
+                <PPI Value="0"/>
+                <numPasses Value="2"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Poplar Laser/Engrave Settings/Fill Engrave (Good)"/>
+                <minPower Value="0"/>
+                <maxPower Value="49"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.175"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Fill Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Poplar Laser/Engrave Settings/Fill Engrave (Best)"/>
+                <minPower Value="0"/>
+                <maxPower Value="34"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Good)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Poplar Laser/Engrave Settings/Image Engrave (Good)"/>
+                <minPower Value="16"/>
+                <maxPower Value="50"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <zOffset Value="-3"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.18"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="141"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave (Best)" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Poplar Laser/Engrave Settings/Image Engrave (Best)"/>
+                <minPower Value="5"/>
+                <maxPower Value="36"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <ditherMode Value="grayscale"/>
+                <dpi Value="318"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Line Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood - Poplar Laser/Engrave Settings/Line Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="25"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="35"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.05"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Polypropylene ">
+        <Entry Thickness="1.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Polypropylene /1.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="15.8333"/>
+                <PPI Value="0"/>
+                <overcut Value="1.5"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Scoring Settings" NoThickTitle="Score">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Polypropylene /Score/Scoring Settings"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="66.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.175"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Rubber - Stamp Material">
+        <Entry Thickness="-1.0000" Desc="Fill Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Rubber - Stamp Material/Engrave Settings/Fill Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="25"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <rampLength Value="0.5"/>
+                <rampOuter Value="1"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.08"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Line Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Rubber - Stamp Material/Engrave Settings/Line Engrave"/>
+                <minPower Value="0"/>
+                <maxPower Value="80"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="35"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.05"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Slate">
+        <Entry Thickness="-1.0000" Desc="Fill Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Scan">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Metal - Anodised/Engrave Settings/Fill Engrave (Best)_copy"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="41.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Image Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Image">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Metal - Anodised/Engrave Settings/Image Engrave (Best)_copy"/>
+                <minPower Value="3.5"/>
+                <maxPower Value="30"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="40"/>
+                <perfLen Value="0.01"/>
+                <perfSkip Value="0.01"/>
+                <dotSpacing Value="0"/>
+                <scanOpt Value="individual"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="5"/>
+                <angle Value="45"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <negative Value="1"/>
+                <ditherMode Value="dithered"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="-1.0000" Desc="Line Engrave" NoThickTitle="Engrave Settings">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Metal - Anodised/Engrave Settings/Line Engrave_copy"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <PPI Value="0"/>
+                <blowerSpeedPercent Value="35"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <overscanPercent Value="5"/>
+                <interval Value="0.05"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Wood - Balsa">
+        <Entry Thickness="3.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Wood - Balsa/3.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="20"/>
+                <PPI Value="0"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="1.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Wood - Balsa/1.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="80"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="20"/>
+                <PPI Value="0"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+        <Entry Thickness="5.0000" Desc="Cut Thru">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Wood - Balsa/5.0000/Cut Thru"/>
+                <minPower Value="0"/>
+                <maxPower Value="100"/>
+                <minPower2 Value="10"/>
+                <maxPower2 Value="20"/>
+                <speed Value="11.6667"/>
+                <PPI Value="0"/>
+                <perfLen Value="1"/>
+                <perfSkip Value="1"/>
+                <dotSpacing Value="0"/>
+                <overscan Value="0"/>
+                <overscanPercent Value="0"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+</LightBurnLibrary>

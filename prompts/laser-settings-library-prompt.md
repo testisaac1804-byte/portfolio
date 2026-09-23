@@ -2,19 +2,28 @@
 
 # Laser Settings & Material Libraries
 
-Importable laser settings collected for diode/CO₂ cutters — drop the `.clb` files straight into LightBurn.
+Importable laser settings and artwork collected for diode/CO₂ cutters — drop `.clb` files straight
+into LightBurn.
 
-## LightBurn material libraries (.clb)
-- `5W_MATLIB_v2.21.clb`, `10W_MATLIB_v1.00.clb`, `40W_MATLIB_v1.00.clb`, `60W_MATLIB_v1.60.clb` — power-specific material presets
-- `Atezr-20W.clb` — 20W diode preset set (closest match to a DAJA A6 Pro 20W)
+## LightBurn material libraries (.clb) — 21 files
+- `material-libraries/` — 16 power-specific preset sets (5W / 10W / 20W / 40W / 60W MATLIB + Atezr-20W …)
+- Top level: the DAJA-relevant set plus earlier imports
 
 **Import:** LightBurn → File → Import → select `.clb`
+
+## LightBurn art libraries (.lbart) — 4 files
+- `art-libraries/ArtLibrary-Isaac.lbart` — **my own** curated art/shape library
+- `ArtLibrary-Halloween2025.lbart`, `ArtLibrary-FallAutumn2025.lbart`, `ArtLibrary-Winter2025.lbart`
+- Seasonal shape packs: pumpkins, bats, leaves, snowflakes, ornaments
+
+**Import:** LightBurn → Art Library panel → Import `.lbart`
 
 ## LightBurn test grids (.lbrn2)
 - `colour20w-m7` … `colour100w-m7` — colour-engraving test grids per laser power
 
 ## Reference PDFs
-Material setting sheets (LaserGRBL, CO₂ 150W common materials, Fusion 360 settings, Gravoply, speeds/feeds, laser reference).
+Material setting sheets (LaserGRBL, CO₂ 150W common materials, Fusion 360 settings, Gravoply,
+speeds/feeds, laser reference).
 
 ## Test cards
 - `OMTech_LightBurn_Test_Card.zip` — printable focus/power test card

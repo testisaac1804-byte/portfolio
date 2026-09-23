@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightBurnLibrary DisplayName="Material Library">
+    <Material name="3mm Cardboard">
+        <Entry Thickness="3.0000" Desc="3mm Cardboard">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Cardboard/3.0000/3mm Cardboard"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="16.6667"/>
+                <kerf Value="0.03"/>
+                <tabsEnabled Value="1"/>
+                <priority Value="0"/>
+                <tabSize Value="0.2"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="100"/>
+                <tabsUseSpacing Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="3mm Plywood">
+        <Entry Thickness="3.0000" Desc="3mm Plywood">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="3mm Plywood/3.0000/3mm Plywood"/>
+                <minPower Value="8"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="5"/>
+                <kerf Value="0.03"/>
+                <tabsEnabled Value="1"/>
+                <priority Value="0"/>
+                <tabSize Value="0.2"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="100"/>
+                <tabsUseSpacing Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="6mm Cardboard">
+        <Entry Thickness="6.0000" Desc="6mm Cardboard">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="6mm Cardboard/6.0000/6mm Cardboard"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="7.5"/>
+                <kerf Value="0.03"/>
+                <tabsEnabled Value="1"/>
+                <priority Value="0"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="6mm Plywood">
+        <Entry Thickness="6.0000" Desc="6mm Plywood">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="6mm Plywood/6.0000/6mm Plywood"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="3.33333"/>
+                <kerf Value="0.03"/>
+                <tabsEnabled Value="1"/>
+                <priority Value="0"/>
+                <tabSize Value="0.2"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="100"/>
+                <tabsUseSpacing Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="A4 Paper">
+        <Entry Thickness="-1.0000" Desc="Paper">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="A4 Paper/-1.0000/Paper"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="50"/>
+                <kerf Value="0.03"/>
+                <tabsEnabled Value="1"/>
+                <priority Value="0"/>
+                <tabSize Value="0.2"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="100"/>
+                <tabsUseSpacing Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Cardpaper">
+        <Entry Thickness="-1.0000" Desc="Cardpaper">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Cardpaper/-1.0000/Cardpaper"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="66.6667"/>
+                <kerf Value="0.03"/>
+                <tabsEnabled Value="1"/>
+                <priority Value="0"/>
+                <tabSize Value="3"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="100"/>
+                <tabsUseSpacing Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Plywood">
+        <Entry Thickness="-1.0000" Desc="Text Engraving">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Plywood/-1.0000/Text Engraving"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <kerf Value="0.03"/>
+                <tabsEnabled Value="1"/>
+                <priority Value="0"/>
+                <tabSize Value="0.2"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="100"/>
+                <tabsUseSpacing Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Vector Engraving Cardboard">
+        <Entry Thickness="-1.0000" Desc="Cardboard">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Vector Engraving Cardboard/-1.0000/Cardboard"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="83.3333"/>
+                <kerf Value="0.03"/>
+                <tabsEnabled Value="1"/>
+                <priority Value="0"/>
+                <tabSize Value="0.2"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="100"/>
+                <tabsUseSpacing Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+    <Material name="Vector Engraving Plywood">
+        <Entry Thickness="-1.0000" Desc="Plywood">
+            <CutSetting type="Cut">
+                <index Value="0"/>
+                <name Value=""/>
+                <LinkPath Value="Vector Engraving Plywood/-1.0000/Plywood"/>
+                <maxPower Value="100"/>
+                <maxPower2 Value="20"/>
+                <speed Value="33.3333"/>
+                <kerf Value="0.03"/>
+                <tabsEnabled Value="1"/>
+                <priority Value="0"/>
+                <tabSize Value="0.2"/>
+                <tabCount Value="1"/>
+                <tabCountMax Value="1"/>
+                <tabSpacing Value="100"/>
+                <tabsUseSpacing Value="0"/>
+            </CutSetting>
+        </Entry>
+    </Material>
+</LightBurnLibrary>
