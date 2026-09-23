@@ -6,6 +6,16 @@
 <meta property="og:description" content="Interactive portfolio of 80+ projects: software, hardware, Fusion 360 CAD, laser-cut designs, and documents with 3D previews.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://isaac1804.com/portfolio/">
+<meta property="og:url" content="https://isaac1804.com/portfolio/">
+<meta property="og:site_name" content="Isaac Chan">
+<meta property="og:image" content="https://isaac1804.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://isaac1804.com/og-image.png">
+<link rel="canonical" href="https://isaac1804.com/portfolio/">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#050508">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -171,6 +181,34 @@ footer{text-align:center;padding:48px 24px;border-top:1px solid var(--bd);color:
 .img-inner{width:92vw;max-width:1000px;height:85vh}
 .img-body{height:calc(100% - 57px);display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,0.3)}
 .img-body img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px}
+
+/* ---- popular-tag chips ---- */
+.chipbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:22px auto 6px}
+.chiplab{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--t3);margin-right:4px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;cursor:pointer;
+  font-size:12.5px;font-family:inherit;color:var(--t2);background:rgba(255,255,255,0.03);
+  border:1px solid var(--bd);transition:all .15s}
+.chip:hover{background:rgba(99,102,241,0.14);border-color:rgba(99,102,241,0.45);color:#fff;transform:translateY(-1px)}
+.chip b{font-size:10.5px;color:var(--t3);font-weight:600}
+.chipclear{opacity:.65}
+/* ---- recently added ---- */
+.recentsec{margin-top:26px}
+.recentgrid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+/* ---- back to top ---- */
+#toTop{position:fixed;right:22px;bottom:22px;width:44px;height:44px;border-radius:50%;border:1px solid var(--bd);
+  background:rgba(13,14,18,0.9);color:var(--t1);font-size:18px;cursor:pointer;opacity:0;pointer-events:none;
+  transition:opacity .25s,transform .25s;backdrop-filter:blur(8px);z-index:60}
+#toTop.show{opacity:1;pointer-events:auto}
+#toTop:hover{transform:translateY(-3px);border-color:rgba(99,102,241,0.5);color:var(--ab)}
+/* ---- print: clean one-sheet of the cards ---- */
+@media print{
+  header,.search-bar,#toTop,.chipbar,.recentsec,.copybtn,.favbtn,.act,.sync-btn{display:none!important}
+  body{background:#fff!important;color:#111!important}
+  .card{break-inside:avoid;border:1px solid #ccc!important;background:#fff!important}
+  .ctitle,.cdesc,.stitle,.ssub,.tag{color:#111!important}
+  a{color:#111!important;text-decoration:none!important}
+  .grid{grid-template-columns:1fr 1fr!important}
+}
 </style></head><body>
 <header><nav><div class="logo">Isaac<span>.</span>dev</div><div class="search-bar"><span class="sync-msg" id="syncMsg"></span><span id="fcount" style="font-size:11px;color:var(--t3)"></span><select class="admin-btn" id="sortSel" onchange="setSort(this.value)" title="Sort cards" style="padding:5px 8px;cursor:pointer"><option value="default">Sort: default</option><option value="az">Sort: A→Z</option><option value="za">Sort: Z→A</option></select><button class="admin-btn favbtn" id="favBtn" onclick="toggleFavFilter(this)" title="Show only favourites">★ Favourites</button><input type="text" placeholder="Search projects...  (press /)" id="search" oninput="search(this.value)"><button class="admin-btn" onclick="randomProj()" title="Random project">🎲</button><button class="admin-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button><button class="admin-btn" onclick="showAdmin()">Admin</button></div></nav></header>
 <script>
@@ -234,4 +272,13 @@ footer{text-align:center;padding:48px 24px;border-top:1px solid var(--bd);color:
 <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <footer>Built by Isaac · Island School · Hong Kong · 2026 · <a href="mailto:isaac_cs.chan@online.island.edu.hk" style="color:var(--t3)">Contact</a></footer>
 <script src="app.js?v=59"></script>
+<script>
+/* PWA: register the service worker (offline access + installable) */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function () {});
+  });
+}
+</script>
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top" aria-label="Back to top">↑</button>
 </body></html>

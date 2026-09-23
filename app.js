@@ -577,11 +577,65 @@ function enrich(){
 }
 enrich();
 
+/* ---- tag chips: the most common tags, one click to filter ---- */
+function tagChips(){
+ var counts={},order=['sw','hw','f3d','des'];
+ order.forEach(function(k){D[k].forEach(function(p){(p.g||[]).forEach(function(x){
+   var s=((x&&x.l)||x||'').toString().trim();
+   if(s&&s.length<26)counts[s]=(counts[s]||0)+1;
+ })})});
+ var top=Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]||a.localeCompare(b)}).slice(0,18);
+ if(!top.length)return '';
+ var h='<div class="container chipbar"><span class="chiplab">Popular tags</span>';
+ top.forEach(function(t){h+='<button class="chip" data-tag="'+escAttr(t)+'" onclick="filterTag(this)">'+esc(t)+'<b>'+counts[t]+'</b></button>'});
+ h+='<button class="chip chipclear" onclick="clearTag()">✕ clear</button></div>';
+ return h;
+}
+
+/* ---- recently added: newest cards (they are appended, so the tail is newest) ---- */
+function recentStrip(){
+ var items=[];
+ ['sw','hw','f3d','des'].forEach(function(k){
+   var a=D[k],n=a.length;
+   for(var i=Math.max(0,n-2);i<n;i++)items.push([k,i]);
+ });
+ if(!items.length)return '';
+ var h='<div class="container cat-section recentsec"><div class="stitle">🆕 Recently added</div><div class="ssub">The newest projects and libraries on the site</div><div class="grid recentgrid">';
+ items.forEach(function(it){h+=R(D[it[0]][it[1]],it[0],it[1])});
+ h+='</div></div>';
+ return h;
+}
+
+/* ---- share (native share sheet on mobile, copy-link fallback) ---- */
+function shareCard(cat,idx,btn){
+ var p=D[cat][idx]||{};
+ var url=location.origin+location.pathname+'?p='+cat+'-'+idx;
+ var data={title:p.t||'Isaac Chan',text:(p.d||'').slice(0,140),url:url};
+ if(navigator.share){navigator.share(data).catch(function(){copyLink(cat,idx,btn)})}
+ else{copyLink(cat,idx,btn)}
+}
+
+/* ---- back to top ---- */
+function initTop(){
+ var b=document.getElementById('toTop');
+ if(!b)return;
+ function upd(){
+   var y=window.pageYOffset||document.documentElement.scrollTop||document.body.scrollTop||0;
+   b.classList.toggle('show',y>600);
+ }
+ window.addEventListener('scroll',upd,{passive:true});
+ // body is the scroll container here and element scroll events don't bubble —
+ // a capturing listener on document catches every scroller
+ document.addEventListener('scroll',upd,{passive:true,capture:true});
+ window.addEventListener('resize',upd);
+ upd();
+}
+
 function rebuild(){
  var map={sw:'software',hw:'hardware',f3d:'fusion',des:'design'};
  var cats={sw:'Software &amp; Apps',hw:'Hardware &amp; Electronics',f3d:'Fusion 360 CAD',des:'Design &amp; Documents'};
  var subs={sw:'24 applications from network bypass to AI chat',hw:'5 projects from micro RC to auto-clamping vises',f3d:'60+ original designs from F1 parts to practical tools',des:'20+ posters, presentations, portfolios, and graphic design'};
- var html='';
+ var html=recentStrip()+tagChips();
  for(var k in cats){
   var p3d=0,p2d=0,pdf=0,live=0;
   D[k].forEach(function(p){p.a&&p.a.forEach(function(a){if(a.o===2||a.o===3)p3d++;else if(a.o===4||a.o===5)p2d++;else if(a.o===6)pdf++;else if(a.o===7)live++})});
@@ -608,7 +662,7 @@ function rebuild(){
 function R(p,cat,idx){
  var emojis={sw:'💻',hw:'🔧',f3d:'📐',des:'📄'};
  var em=emojis[cat]||'📦';
- var h='<div class="card'+(editMode?' editing':'')+'" data-cat="'+cat+'" data-idx="'+idx+'"><div class="ch"><div class="ctitle">'+em+' '+p.t+'</div><div style="display:flex;gap:6px;align-items:center"><button class="favbtn'+(isFav(cat,idx)?' on':'')+'" onclick="event.stopPropagation();toggleFav(\''+cat+'\','+idx+',this)" title="Favourite">'+(isFav(cat,idx)?'★':'☆')+'</button><button class="copybtn" onclick="copyLink(\''+cat+'\','+idx+',this)" title="Copy link">🔗</button><span class="status '+p.s+'">'+p.s+'</span></div></div>';
+ var h='<div class="card'+(editMode?' editing':'')+'" data-cat="'+cat+'" data-idx="'+idx+'"><div class="ch"><div class="ctitle">'+em+' '+p.t+'</div><div style="display:flex;gap:6px;align-items:center"><button class="favbtn'+(isFav(cat,idx)?' on':'')+'" onclick="event.stopPropagation();toggleFav(\''+cat+'\','+idx+',this)" title="Favourite">'+(isFav(cat,idx)?'★':'☆')+'</button><button class="copybtn" onclick="shareCard(\''+cat+'\','+idx+',this)" title="Share">↗</button><button class="copybtn" onclick="copyLink(\''+cat+'\','+idx+',this)" title="Copy link">🔗</button><span class="status '+p.s+'">'+p.s+'</span></div></div>';
  h+='<div class="cdesc">'+p.d+'</div>';
  if(p.howR&&p.how&&p.how!==p.d){h+='<div class="howline" onclick="openDetails(\''+cat+'\','+idx+')" title="How it works / how it was made">'+trunc(p.how,150)+'</div>'}
  if(p.g){h+='<div class="tags">';p.g.forEach(function(x){h+='<span class="tag'+(x.c?' '+x.c:'')+'" onclick="event.stopPropagation();filterTag(this)">'+x.l+'</span>'});h+='</div>'}
@@ -640,6 +694,8 @@ function saveData(){try{localStorage.setItem('isaac-projects-v3',JSON.stringify(
 // Load saved edits (after D defined + enriched)
 try{var saved=localStorage.getItem('isaac-projects-v3');if(saved){var sd=JSON.parse(saved);for(var k in sd)for(var i=0;i<sd[k].length;i++)if(D[k]&&D[k][i]){for(var f in sd[k][i])if(sd[k][i][f]!==undefined)D[k][i][f]=sd[k][i][f]}}}catch(e){}
 rebuild();
+// back-to-top needs the button element, which lives after app.js in the document
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initTop)}else{initTop()}
 // Deep link support: open ?p=cat-idx
 (function(){
  var m=location.search.match(/[?&]p=(\w+)-(\d+)/);
@@ -687,7 +743,7 @@ function applySort(){
   cards.forEach(function(c){g.appendChild(c)});
  });
 }
-function filterTag(el){var t=(el.textContent||'').trim().toLowerCase();curTag=(curTag===t)?'':t;applySearch();highlightTags();}
+function filterTag(el){var t=((el&&el.getAttribute&&el.getAttribute('data-tag'))||(el.textContent||'')).trim().toLowerCase();curTag=(curTag===t)?'':t;applySearch();highlightTags();}
 function clearTag(){curTag='';applySearch();highlightTags();}
 function applySearch(){
  var q=(document.getElementById('search').value||'').toLowerCase();
