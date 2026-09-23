@@ -97,15 +97,23 @@ function viewer3D(url, is3mf){
   };
   function animate(){requestAnimationFrame(animate);if(ctl)ctl.update();ren.render(scene,cam)}
   var loader=is3mf? new THREE.ThreeMFLoader():new THREE.STLLoader();
-  try{
-    loader.load(url,function(obj){
-      try{
-        if(is3mf&&obj&&(obj.group||obj)){var g=obj.group||obj;g.traverse(function(c){if(c.isMesh){c.material=mat}});scene.add(g);var bb=new THREE.Box3().setFromObject(g);var r=bb.getSize().length()/2;cam.position.set(r*1.6,r*1.0,r*1.9);cam.lookAt(0,0,0);if(ctl)ctl.target.set(0,0,0);animate();}
-        else if(obj&&obj.isBufferGeometry)onLoad(obj,'model');
-        else throw new Error('empty model');
-      }catch(e){fallback3D(url)}
-    },undefined,function(e){fallback3D(url)});
-  }catch(e){fallback3D(url)}
+  function onGeo(geo){
+    try{
+      if(is3mf&&geo&&(geo.group||geo)){var g=geo.group||geo;g.traverse(function(c){if(c.isMesh){c.material=mat}});scene.add(g);var bb=new THREE.Box3().setFromObject(g);var r=bb.getSize().length()/2;cam.position.set(r*1.6,r*1.0,r*1.9);cam.lookAt(0,0,0);if(ctl)ctl.target.set(0,0,0);animate();}
+      else if(geo&&geo.isBufferGeometry)onLoad(geo,'model');
+      else throw new Error('empty model');
+    }catch(e){fallback3D(url)}
+  }
+  if(/\.gz(\?|$)/i.test(url.split('?')[0])){
+    // gzipped STL (files over the host per-file cap) — gunzip natively, then parse
+    fetch(url).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer()})
+      .then(function(buf){onGeo(new THREE.STLLoader().parse(buf))})
+      .catch(function(){fallback3D(url)});
+  } else {
+    try{
+      loader.load(url,onGeo,undefined,function(e){fallback3D(url)});
+    }catch(e){fallback3D(url)}
+  }
   function fallback3D(u){
     document.getElementById('badge').hidden=true;
     document.getElementById('badge2').hidden=false;

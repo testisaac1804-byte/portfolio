@@ -1,4 +1,7 @@
 var ADMIN_PASS='Isaac1804',editMode=false;
+// Favourites state must exist before the first card render (rebuild runs further down).
+var FAVS=(function(){try{return JSON.parse(localStorage.getItem('isaac-favs-v1')||'[]')}catch(e){return[]}})();
+var showFavs=false;
 // Theme toggle
 function toggleTheme(){
  var h=document.documentElement;
@@ -166,7 +169,7 @@ var D={sw:[
 {t:"Drill Bit Box",s:"done",pt:"prompts/drill-bit-box-prompt.md",d:"Friction-fit bit storage. Snap lid. Labeled.",g:[{l:"Storage"},{l:"Organization"},{l:"Tools"}],a:[{c:"p3d",l:"View 3D",o:2,p:"./Documents/common stl/bit-storage-box-base.stl"}],v:[{n:"V1",i:"Bits fell out."},{n:"Final",L:1,i:"Friction-fit + labels."}]},
 {t:"CNC Mill Tool Head Box",s:"done",pt:"prompts/cnc-mill-tool-head-box-prompt.md",d:"Single to dual slot. Improved latch.",a:[{c:"p3d",l:"View 3D",o:2,p:"https://files-proxy.isaac1804.workers.dev/Downloads/cnc%20drill%20bit%20case.stl"}],g:[{c:"ac",l:"CNC"},{l:"Storage"}],v:[{n:"V1",i:"Single slot."},{n:"V2",L:1,i:"Dual slot."}]},
 {t:"Hex Drill Adapter",s:"done",pt:"prompts/hex-drill-adapter-prompt.md",d:"Magnetic quick-change. V2-V4 magnet + concentricity.",g:[{c:"ac",l:"Tools"},{l:"Magnetic"},{l:"Adapter"}],a:[{c:"p3d",l:"View 3D",o:2,p:"./Documents/common stl/hex adapter v4.stl"}],v:[{n:"V2",i:"Weak magnet."},{n:"V3",i:"3mm hex."},{n:"V4",L:1,i:"Final: zero wobble."}]},
-{t:"80 Vise Jaw",s:"done",pt:"prompts/80-vise-jaw-prompt.md",d:"Magnetic jaw - test + final. Press-fit magnet.",g:[{c:"ac",l:"Vise"},{l:"Magnetic"},{l:"Workshop"}],a:[{c:"p3d",l:"View 3D (2 vers)",o:3,vs:[{l:"V1 Test",p:"./Documents/common stl/80 vise jaw good.stl"},{l:"V2 Final",p:"./Documents/common stl/80 vise jaw good.stl"}]}],v:[{n:"V1",i:"Loose magnet."},{n:"V2",L:1,i:"Press-fit, 2mm thinner."}]},
+{t:"80 Vise Jaw",s:"done",pt:"prompts/80-vise-jaw-prompt.md",d:"Magnetic jaw - test + final. Press-fit magnet.",g:[{c:"ac",l:"Vise"},{l:"Magnetic"},{l:"Workshop"}],a:[{c:"p3d",l:"View 3D (2 vers)",o:3,vs:[{l:"V1 Test",p:"./Documents/common stl/80 vise jaw good.stl.gz"},{l:"V2 Final",p:"./Documents/common stl/80 vise jaw good.stl.gz"}]}],v:[{n:"V1",i:"Loose magnet."},{n:"V2",L:1,i:"Press-fit, 2mm thinner."}]},
 {t:"USB Dust Cover",s:"done",pt:"prompts/usb-dust-cover-prompt.md",d:"Protective USB cover. V2 tighter fit + grip.",g:[{l:"USB"},{l:"Protection"}],a:[{c:"p3d",l:"View 3D",o:2,p:"./Documents/common stl/usb dust cover v2.stl"}],v:[{n:"V1",i:"Too loose."},{n:"V2",L:1,i:"Tighter + grip ridge."}]},
 {t:"Type-C to USB Adapter",s:"done",pt:"prompts/type-c-to-usb-adapter-prompt.md",d:"Custom adapter housing. V2 snap-fit.",g:[{c:"ac",l:"USB"},{l:"Adapter"},{l:"Type-C"}],a:[{c:"p3d",l:"View 3D (2 vers)",o:3,vs:[{l:"V1",p:"./Documents/common stl/type c to usb adapter.stl"},{l:"V2",p:"./Documents/common stl/v2 type c to usb adapter.stl"}]}],v:[{n:"V1",i:"Too tight."},{n:"V2",L:1,i:"+0.3mm, snap-fit."}]},
 {t:"1205 Bearing Plug",s:"done",pt:"prompts/1205-bearing-plug-prompt.md",d:"Standard and tight-fit variants.",g:[{l:"Bearings"},{l:"Plug"}],a:[{c:"p3d",l:"View 3D",o:2,p:"./Documents/common stl/tight 1205 plug.stl"}]},
@@ -499,7 +502,9 @@ var D={sw:[
 {t:"茶寮 Fleur Tea — Online Shop",s:"done",pt:"prompts/fleur-tea-shop-prompt.md",d:"A full live e-commerce shop for a herbal flower-tea brand — storefront, product pages, cart, coupons, blog, reviews + a complete admin panel (products, orders, posts, backups, SEO). Built on Cloudflare Workers + KV, live at fleur-tea.isaac1804.workers.dev.",g:[{l:"Web App"},{l:"E-commerce"},{l:"Cloudflare"},{l:"Shop"}],a:[{c:"ac",l:"Live Site",o:1,u:"https://fleur-tea.isaac1804.workers.dev/"},{c:"ac",l:"Admin Demo",o:1,u:"https://fleur-tea.isaac1804.workers.dev/admin"}]},
 {t:"The Open Press — Community Newspaper",s:"done",pt:"prompts/openpress-newspaper-prompt.md",d:"A newspaper written by anyone, for everyone — 8 sections (Local, World, Campus, Tech, Sports, Arts, Opinion, Investigations), tight word-count editing rules, pull quotes, images and captions. Live on Cloudflare Workers.",g:[{l:"Web App"},{l:"Cloudflare"},{l:"Writing"}],a:[{c:"ac",l:"Live Site",o:1,u:"https://openpress.isaac1804.workers.dev/"}]},
 {t:"a1d2.org — Link Compressor",s:"done",pt:"prompts/a1d2-link-compressor-prompt.md",d:"Compress long links and optimise QR codes entirely in the browser — strips tracking parameters to shorten URLs, no backend needed. Live at a1d2.org with a bilingual projects page.",g:[{l:"Web"},{l:"Tool"},{l:"Link"},{l:"QR"}],a:[{c:"ac",l:"Live Site",o:1,u:"https://a1d2.org/"}]},
-{t:"Laser Nesting Test DXFs",s:"done",pt:"prompts/laser-nesting-dxfs-prompt.md",d:"8 nesting test files for laser cutting — 'nested all' plus 7 CheckedNestedGroup variants, exercise CAD nesting on the laser bed.",g:[{l:"Laser"},{l:"DXF"},{l:"Nesting"}],a:[{l:"View DXF",o:5,p:"./laser-nesting-dxfs/nested all.dxf"},{l:"🗂 Browse Files",o:1,u:"./laser-nesting-dxfs/"}]}
+{t:"Laser Nesting Test DXFs",s:"done",pt:"prompts/laser-nesting-dxfs-prompt.md",d:"8 nesting test files for laser cutting — 'nested all' plus 7 CheckedNestedGroup variants, exercise CAD nesting on the laser bed.",g:[{l:"Laser"},{l:"DXF"},{l:"Nesting"}],a:[{l:"View DXF",o:5,p:"./laser-nesting-dxfs/nested all.dxf"},{l:"🗂 Browse Files",o:1,u:"./laser-nesting-dxfs/"}]},
+{t:"$100 HKD DIY Tablet",s:"done",pt:"prompts/diy-tablet-prompt.md",d:"A working touchscreen Linux tablet built from Pinduoduo parts for about HK$100 - Orange Pi Zero 2W + 3.5\" SPI TFT, Armbian, and the fbcp-ili9341 framebuffer driver.",how:"Flash Armbian to microSD, wire the ILI9486 screen + XPT2046 touch to the GPIO header, enable spi-spidev and spi-add-cs1 in armbian-config, then build fbcp-ili9341 to mirror the console onto the panel. Openbox for a light desktop, or fbterm for terminal-only.",src:"Orange Pi Zero 2W / Mango Pi MQ-Pro, 3.5\" ILI9486 SPI TFT, Armbian, fbcp-ili9341",g:[{l:"Hardware"},{l:"Linux"},{l:"Orange Pi"},{l:"DIY"}],a:[{c:"ac",l:"Open Build Guide",o:1,u:"./reference/builds/diy-tablet.html"},{l:"\ud83d\udcc1 Files",o:9,u:"./reference/builds/"}]},
+{t:"Laser Settings & Material Libraries",s:"done",pt:"prompts/laser-settings-library-prompt.md",d:"Importable LightBurn material libraries (.clb) for 5W/10W/20W/40W/60W lasers, colour test grids (.lbrn2), test cards and material setting references.",how:"Collected from laser communities and vendor packs. Import a .clb straight into LightBurn (File -> Import) to get a full material preset list; run a test grid on your own stock before cutting anything expensive.",src:"LightBurn .clb/.lbrn2 presets, OMTech test card, LaserGRBL/LightBurn material references",g:[{l:"Laser"},{l:"LightBurn"},{l:"Settings"},{l:"Reference"}],a:[{l:"\ud83d\udcc1 Files",o:9,u:"./reference/laser/settings-library/"}]}
 ]};
 
 // ==== Enrichment: how-it-works, materials/sources, file folder ====
@@ -596,7 +601,7 @@ function rebuild(){
 function R(p,cat,idx){
  var emojis={sw:'💻',hw:'🔧',f3d:'📐',des:'📄'};
  var em=emojis[cat]||'📦';
- var h='<div class="card'+(editMode?' editing':'')+'" data-cat="'+cat+'" data-idx="'+idx+'"><div class="ch"><div class="ctitle">'+em+' '+p.t+'</div><div style="display:flex;gap:6px;align-items:center"><button class="copybtn" onclick="copyLink(\''+cat+'\','+idx+',this)" title="Copy link">🔗</button><span class="status '+p.s+'">'+p.s+'</span></div></div>';
+ var h='<div class="card'+(editMode?' editing':'')+'" data-cat="'+cat+'" data-idx="'+idx+'"><div class="ch"><div class="ctitle">'+em+' '+p.t+'</div><div style="display:flex;gap:6px;align-items:center"><button class="favbtn'+(isFav(cat,idx)?' on':'')+'" onclick="event.stopPropagation();toggleFav(\''+cat+'\','+idx+',this)" title="Favourite">'+(isFav(cat,idx)?'★':'☆')+'</button><button class="copybtn" onclick="copyLink(\''+cat+'\','+idx+',this)" title="Copy link">🔗</button><span class="status '+p.s+'">'+p.s+'</span></div></div>';
  h+='<div class="cdesc">'+p.d+'</div>';
  if(p.howR&&p.how&&p.how!==p.d){h+='<div class="howline" onclick="openDetails(\''+cat+'\','+idx+')" title="How it works / how it was made">'+trunc(p.how,150)+'</div>'}
  if(p.g){h+='<div class="tags">';p.g.forEach(function(x){h+='<span class="tag'+(x.c?' '+x.c:'')+'" onclick="event.stopPropagation();filterTag(this)">'+x.l+'</span>'});h+='</div>'}
@@ -645,6 +650,36 @@ rebuild();
  }
 })();
 var curTag='';
+/* ---- favourites (star) — state declared at top of file ---- */
+function favKey(cat,idx){return cat+':'+idx}
+function isFav(cat,idx){return FAVS.indexOf(favKey(cat,idx))>=0}
+function saveFavs(){try{localStorage.setItem('isaac-favs-v1',JSON.stringify(FAVS))}catch(e){}}
+function toggleFav(cat,idx,btn){
+ var k=favKey(cat,idx),i=FAVS.indexOf(k);
+ if(i>=0){FAVS.splice(i,1);if(btn){btn.textContent='\u2606';btn.classList.remove('on')}}
+ else{FAVS.push(k);if(btn){btn.textContent='\u2605';btn.classList.add('on')}}
+ saveFavs();toast(i>=0?'Removed from favourites':'\u2605 Added to favourites');
+ if(showFavs)applySearch();
+}
+function toggleFavFilter(btn){showFavs=!showFavs;if(btn)btn.classList.toggle('on',showFavs);applySearch()}
+/* ---- sort ---- */
+var sortMode='default';
+function setSort(v){sortMode=v;applySort()}
+function applySort(){
+ document.querySelectorAll('.grid').forEach(function(g){
+  var cards=[].slice.call(g.children).filter(function(c){return c.classList&&c.classList.contains('card')});
+  if(!cards.length)return;
+  if(sortMode==='default'){cards.sort(function(a,b){return(+a.getAttribute('data-idx'))-(+b.getAttribute('data-idx'))})}
+  else if(sortMode==='za'||sortMode==='az'){
+   cards.sort(function(a,b){
+    var ta=((a.querySelector('.ctitle')||{}).textContent||'').replace(/^[^\w]+/,'').trim();
+    var tb=((b.querySelector('.ctitle')||{}).textContent||'').replace(/^[^\w]+/,'').trim();
+    return sortMode==='az'?ta.localeCompare(tb):tb.localeCompare(ta);
+   });
+  }
+  cards.forEach(function(c){g.appendChild(c)});
+ });
+}
 function filterTag(el){var t=(el.textContent||'').trim().toLowerCase();curTag=(curTag===t)?'':t;applySearch();highlightTags();}
 function clearTag(){curTag='';applySearch();highlightTags();}
 function applySearch(){
@@ -654,9 +689,23 @@ function applySearch(){
   var t2=t?t.textContent.toLowerCase():'',d2=d?d.textContent.toLowerCase():'',g2=tags?tags.textContent.toLowerCase():'';
   var qOk=!q||t2.indexOf(q)>=0||d2.indexOf(q)>=0||g2.indexOf(q)>=0;
   var tagOk=!curTag||g2.indexOf(curTag)>=0;
-  c.style.display=(qOk&&tagOk)?'':'none';
+  var favOk=!showFavs||isFav(c.getAttribute('data-cat'),parseInt(c.getAttribute('data-idx'),10));
+  c.style.display=(qOk&&tagOk&&favOk)?'':'none';
  });
+ var n=document.querySelectorAll('.card:not([style*="none"])').length;
+ var cnt=document.getElementById('fcount');
+ if(cnt)cnt.textContent=(q||curTag||showFavs)?(n+' shown'):'';
 }
+/* ---- keyboard shortcuts: / focus search, Esc close modals, ? help ---- */
+document.addEventListener('keydown',function(e){
+ var tag=((document.activeElement||{}).tagName||'');
+ if(e.key==='/'&&!/INPUT|TEXTAREA|SELECT/.test(tag)){e.preventDefault();var s=document.getElementById('search');if(s)s.focus()}
+ else if(e.key==='Escape'){
+  if(/INPUT|TEXTAREA/.test(tag)&&document.activeElement)document.activeElement.blur();
+  ['_3d','_dxf','_if','_pr','_img','_fb','_dt'].forEach(function(id){if(document.getElementById(id))closeM(id)});
+ }
+ else if(e.key==='?'&&!/INPUT|TEXTAREA/.test(tag)){e.preventDefault();toast('Shortcuts:  /  search  ·  Esc  close  ·  \u2606 favourite cards',5000)}
+});
 function highlightTags(){
  document.querySelectorAll('.card .tag').forEach(function(t){
   var on=(t.textContent||'').trim().toLowerCase()===curTag;
@@ -751,15 +800,22 @@ function loadSTL(p,vl){
  p=EP(p);
  if(_mesh){_scene.remove(_mesh);_mesh=null}
  vl.style.display='flex';vl.innerHTML='<span>Loading model...</span><div style="width:200px;height:4px;background:var(--bd);border-radius:2px;margin-top:8px"><div id="_prog" style="width:0%;height:100%;background:var(--ab);border-radius:2px;transition:width 0.3s"></div></div>';
- new THREE.STLLoader().load(p,function(g){
+ var _done=function(g){
   vl.style.display='none';
   g.computeBoundingBox();var b=g.boundingBox,c=b.getCenter(new THREE.Vector3()),s=b.getSize(new THREE.Vector3()),sc=4/Math.max(s.x,s.y,s.z,1);
   _mesh=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:0x7170ff,metalness:0.3,roughness:0.5}));
   _mesh.scale.set(sc,sc,sc);_mesh.position.set(-c.x*sc,-c.y*sc,-c.z*sc);_scene.add(_mesh);
   _ctrl.target.set(0,0,0);_ctrl.update()
- },function(x){var pct=Math.round(x.loaded/x.total*100);var prog=document.getElementById('_prog');if(prog)prog.style.width=pct+'%'},
- function(e){vl.innerHTML='<p style="color:var(--red)">Model not found</p><p style="font-size:11px;color:var(--t4)">'+p.split('/').pop()+'</p>'}
- );
+ };
+ var _err=function(){vl.innerHTML='<p style="color:var(--red)">Model not found</p><p style="font-size:11px;color:var(--t4)">'+p.split('/').pop()+'</p>'};
+ if(/\.gz(\?|$)/i.test(p)){
+  // gzipped model (used when a file exceeds the host's per-file size cap) — gunzip natively
+  fetch(p).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer()})
+   .then(function(buf){_done(new THREE.STLLoader().parse(buf))})
+   .catch(_err);
+  return;
+ }
+ new THREE.STLLoader().load(p,_done,function(x){var pct=Math.round(x.loaded/x.total*100);var prog=document.getElementById('_prog');if(prog)prog.style.width=pct+'%'},_err);
 }
 function swV(i){var vl=document.getElementById('_3dl');vl.style.display='flex';vl.innerHTML='<span>Switching...</span><div style="width:200px;height:4px;background:var(--bd);border-radius:2px;margin-top:8px"><div id="_prog" style="width:0%;height:100%;background:var(--ab);border-radius:2px"></div></div>';loadSTL(cv[i].p,vl)}
 function closeM(id){var m=document.getElementById(id);if(m)m.remove();if(id==='_3d'&&_anim){cancelAnimationFrame(_anim);_anim=null}}

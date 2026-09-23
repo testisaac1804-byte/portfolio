@@ -84,6 +84,11 @@ header nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;height
 .status{font-size:10px;font-weight:600;padding:3px 8px;border-radius:5px;text-transform:uppercase;letter-spacing:0.3px}
 .copybtn{width:24px;height:24px;border-radius:6px;border:1px solid var(--bd);background:transparent;color:var(--t3);cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .copybtn:hover{background:rgba(99,102,241,0.12);color:var(--ab);border-color:rgba(99,102,241,0.3)}
+.favbtn{width:24px;height:24px;border-radius:6px;border:1px solid var(--bd);background:transparent;color:var(--t3);cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.favbtn:hover{background:rgba(245,158,11,0.12);color:#f59e0b;border-color:rgba(245,158,11,0.35)}
+.favbtn.on{color:#f59e0b;border-color:rgba(245,158,11,0.45);background:rgba(245,158,11,0.1)}
+button.favbtn{width:auto;padding:5px 10px;font-size:11px}
+button.favbtn.on{background:rgba(245,158,11,0.15)}
 .status.done{background:rgba(16,185,129,0.1);color:var(--ag);border:1px solid rgba(16,185,129,0.2)}.status.wip{background:rgba(99,102,241,0.1);color:var(--ab);border:1px solid rgba(99,102,241,0.2)}.status.draft{background:rgba(255,255,255,0.03);color:var(--t3);border:1px solid var(--bd)}
 .abtn{padding:5px 12px;border-radius:6px;border:1px solid var(--bd);background:rgba(255,255,255,0.02);color:var(--t3);font-size:11px;font-weight:500;cursor:pointer;transition:all .2s;font-family:inherit;display:inline-flex;align-items:center;gap:5px}
 .abtn:hover{background:rgba(255,255,255,0.06);color:var(--t2);transform:translateY(-1px)}
@@ -167,19 +172,9 @@ footer{text-align:center;padding:48px 24px;border-top:1px solid var(--bd);color:
 .img-body{height:calc(100% - 57px);display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,0.3)}
 .img-body img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px}
 </style></head><body>
-<header><nav><div class="logo">Isaac<span>.</span>dev</div><div class="search-bar"><span class="sync-msg" id="syncMsg"></span><button class="sync-btn" id="syncBtn" onclick="igcseSync()" title="Sync IGCSE folders (igcse books, igcse things, science booklet) to GitHub — requires the local sync server">🔄 Sync Files</button><input type="text" placeholder="Search projects..." id="search" oninput="search(this.value)"><button class="admin-btn" onclick="randomProj()" title="Random project">🎲</button><button class="admin-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button><button class="admin-btn" onclick="showAdmin()">Admin</button></div></nav></header>
+<header><nav><div class="logo">Isaac<span>.</span>dev</div><div class="search-bar"><span class="sync-msg" id="syncMsg"></span><span id="fcount" style="font-size:11px;color:var(--t3)"></span><select class="admin-btn" id="sortSel" onchange="setSort(this.value)" title="Sort cards" style="padding:5px 8px;cursor:pointer"><option value="default">Sort: default</option><option value="az">Sort: A→Z</option><option value="za">Sort: Z→A</option></select><button class="admin-btn favbtn" id="favBtn" onclick="toggleFavFilter(this)" title="Show only favourites">★ Favourites</button><input type="text" placeholder="Search projects...  (press /)" id="search" oninput="search(this.value)"><button class="admin-btn" onclick="randomProj()" title="Random project">🎲</button><button class="admin-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button><button class="admin-btn" onclick="showAdmin()">Admin</button></div></nav></header>
 <script>
-function igcseSync(){
-  var b=document.getElementById('syncBtn'),m=document.getElementById('syncMsg');
-  b.disabled=true;m.className='sync-msg on';m.textContent='⏳ Syncing…';
-  fetch('http://localhost:8541/sync').then(function(r){return r.text()}).then(function(t){
-    m.className='sync-msg on ok';m.textContent='✅ '+t.split('\n').filter(function(l){return l.indexOf('pushed')>-1}).join(' · ')||'✅ done';
-    setTimeout(function(){m.className='sync-msg'},8000);
-  }).catch(function(e){
-    m.className='sync-msg on err';m.textContent='⚠️ Sync server offline — run igcse-sync-server.py';
-    setTimeout(function(){m.className='sync-msg'},8000);
-  }).finally(function(){b.disabled=false});
-}
+/* local file-sync button removed — the site is served statically from Cloudflare Pages */
 </script>
 <section class="hero"><h1>Every project I've built</h1><p>Interactive catalog with 3D previews, version timelines, and every design documented.</p></section>
 <div class="stats"><div class="stat"><div class="num" id="statTotal">120+</div><div class="label">Total Projects</div></div><div class="stat"><div class="num" id="statSW">25</div><div class="label">Software</div></div><div class="stat"><div class="num" id="statHW">5</div><div class="label">Hardware</div></div><div class="stat"><div class="num" id="statF3d">60+</div><div class="label">Fusion 360</div></div><div class="stat"><div class="num" id="statDes">20+</div><div class="label">Design</div></div></div>
@@ -238,5 +233,5 @@ function igcseSync(){
 <div id="app"></div>
 <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <footer>Built by Isaac · Island School · Hong Kong · 2026 · <a href="mailto:isaac_cs.chan@online.island.edu.hk" style="color:var(--t3)">Contact</a></footer>
-<script src="app.js?v=58"></script>
+<script src="app.js?v=59"></script>
 </body></html>

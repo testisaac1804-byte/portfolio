@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>$100 HKD DIY Tablet — Setup Guide</title>
+<style>
+:root{--bg:#f7f8fb;--card:#fff;--tx:#1f2430;--t2:#4b5364;--mut:#7b8394;--bd:#e3e6ee;--ac:#4f46e5;--code:#f2f4f9}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--tx);font-family:Inter,-apple-system,system-ui,sans-serif;font-size:15.5px;line-height:1.7;padding:40px 20px 80px}
+.wrap{max-width:860px;margin:0 auto}
+h1{font-size:30px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.sub{color:var(--mut);font-size:14px;margin-bottom:28px}
+h2{font-size:20px;font-weight:700;margin:34px 0 12px;padding-top:18px;border-top:1px solid var(--bd)}
+h2:first-of-type{border-top:none}
+h3{font-size:16px;font-weight:700;margin:22px 0 8px;color:var(--ac)}
+p{margin-bottom:12px;color:var(--t2)}
+ul,ol{margin:0 0 14px 22px;color:var(--t2)}
+li{margin-bottom:6px}
+code{background:var(--code);padding:2px 6px;border-radius:5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:#3730a3}
+pre{background:#1e2130;color:#e6e9f2;padding:16px 18px;border-radius:10px;overflow-x:auto;margin:12px 0 18px;font-size:13px;line-height:1.6}
+pre code{background:none;color:inherit;padding:0;font-size:13px}
+table{width:100%;border-collapse:collapse;margin:14px 0 20px;font-size:14px;background:var(--card);border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+th{background:#eef1f7;text-align:left;padding:10px 14px;font-weight:600;font-size:13px;color:var(--t2);border-bottom:1px solid var(--bd)}
+td{padding:9px 14px;border-bottom:1px solid var(--bd);color:var(--t2)}
+tr:last-child td{border-bottom:none}
+.note{background:#fff8e6;border:1px solid #f2d999;border-left:4px solid #e6a817;border-radius:8px;padding:14px 18px;margin:18px 0;font-size:14px;color:#6b5416}
+.tag{display:inline-block;background:#eef2ff;color:#4338ca;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;margin-right:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.tile{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:14px 16px}
+.tile b{display:block;font-size:14px;margin-bottom:3px}
+.tile span{font-size:13px;color:var(--mut)}
+footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--bd);color:var(--mut);font-size:13px}
+a{color:var(--ac)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>💻 $100 HKD DIY Tablet</h1>
+<div class="sub">Build a working touchscreen Linux tablet for about HK$100 using a Pinduoduo SBC + SPI display.</div>
+<p><span class="tag">Linux</span><span class="tag">Orange Pi</span><span class="tag">SPI TFT</span><span class="tag">Armbian</span><span class="tag">Pinduoduo</span></p>
+
+<h2>Parts to Buy</h2>
+<div class="grid">
+  <div class="tile"><b>Board (~50–70 HKD)</b><span>Orange Pi Zero 2W · Mango Pi MQ-Pro · Orange Pi Zero 3</span></div>
+  <div class="tile"><b>Screen (~30–40 HKD)</b><span>3.5" SPI TFT, ILI9486/ILI9341 + XPT2046 touch, 480×320</span></div>
+  <div class="tile"><b>Power (~15–30 HKD)</b><span>5V power bank, or LiPo + TP4056</span></div>
+  <div class="tile"><b>Already have</b><span>microSD 8GB+, USB cable, Dupont wires</span></div>
+</div>
+<h3>Pinduoduo searches</h3>
+<ul>
+<li><code>orange pi zero 2w</code> / <code>香橙派</code> / <code>linux开发板</code> — board</li>
+<li><code>3.5寸 TFT触摸屏 SPI</code> / <code>ili9486 屏幕</code> — screen</li>
+<li><code>树莓派 外壳 亚克力</code> — cheap acrylic case</li>
+</ul>
+
+<h2>Step 1 — Flash Armbian</h2>
+<ol>
+<li>Download Armbian for <b>Orange Pi Zero 2W</b> from <a href="https://www.armbian.com/orange-pi-zero-2w/">armbian.com</a> (or Zero 3 depending on board).</li>
+<li>Flash the SD card on macOS:
+<pre><code>diskutil list
+sudo dd if=~/Downloads/Armbian_*.img of=/dev/rdiskX bs=4m status=progress</code></pre></li>
+<li>Insert card, plug in power, wait ~2 min for first boot.</li>
+</ol>
+
+<h2>Step 2 — First Login</h2>
+<p>Connect via micro-HDMI or SSH. Default password <code>1234</code> (it forces a change + creates a user).</p>
+<pre><code>ssh root@&lt;ip-address&gt;</code></pre>
+
+<h2>Step 3 — Enable the TFT Screen</h2>
+<p>The screen talks SPI over the GPIO header:</p>
+<table>
+<tr><th>TFT Pin</th><th>Orange Pi GPIO</th></tr>
+<tr><td>VCC</td><td>Pin 1 (3.3V)</td></tr>
+<tr><td>GND</td><td>Pin 6 (GND)</td></tr>
+<tr><td>CS</td><td>Pin 24 (SPI1 CS0)</td></tr>
+<tr><td>RESET</td><td>Pin 22 (GPIO)</td></tr>
+<tr><td>DC/RS</td><td>Pin 18 (GPIO)</td></tr>
+<tr><td>SDI/MOSI</td><td>Pin 19 (SPI1 MOSI)</td></tr>
+<tr><td>SCK</td><td>Pin 23 (SPI1 CLK)</td></tr>
+<tr><td>LED</td><td>Pin 1 (3.3V)</td></tr>
+<tr><td>SDO/MISO</td><td>Pin 21 (SPI1 MISO)</td></tr>
+</table>
+<h3>Touch (XPT2046)</h3>
+<table>
+<tr><th>Touch Pin</th><th>Orange Pi GPIO</th></tr>
+<tr><td>T_CS</td><td>Pin 26 (SPI1 CS1)</td></tr>
+<tr><td>T_IRQ</td><td>Pin 16 (GPIO)</td></tr>
+<tr><td>T_DO</td><td>Pin 21 (SPI1 MISO)</td></tr>
+<tr><td>T_DIN</td><td>Pin 19 (SPI1 MOSI)</td></tr>
+<tr><td>T_CLK</td><td>Pin 23 (SPI1 CLK)</td></tr>
+</table>
+<h3>Enable SPI</h3>
+<pre><code>sudo armbian-config
+# System → Hardware → enable spi-spidev
+# then add overlay: spi-add-cs1   (touch needs its own CS)</code></pre>
+<h3>Install the LCD driver (fbcp-ili9341)</h3>
+<pre><code>sudo apt update
+sudo apt install -y git build-essential device-tree-compiler
+
+git clone https://github.com/juj/fbcp-ili9341.git
+cd fbcp-ili9341 &amp;&amp; mkdir build &amp;&amp; cd build
+cmake -DILI9486=ON -DSPI_BUS_CLOCK_DIVISOR=6 \
+      -DGPIO_TFT_DATA_CONTROL=18 -DGPIO_TFT_RESET_PIN=22 ..
+make -j4
+sudo ./fbcp-ili9341</code></pre>
+<h3>Auto-start on boot</h3>
+<p>Add to <code>/etc/rc.local</code> before <code>exit 0</code>:</p>
+<pre><code>/home/youruser/fbcp-ili9341/build/fbcp-ili9341 &amp;</code></pre>
+
+<h2>Step 4 — Lightweight Desktop</h2>
+<p>A full desktop crawls on 1GB RAM — use a window manager:</p>
+<pre><code>sudo apt install -y xorg openbox lightdm
+sudo apt install -y xserver-xorg-input-evdev   # touchscreen driver
+sudo apt install -y xinput-calibrator          # touch calibration</code></pre>
+
+<h2>Step 5 — Make It Useful</h2>
+<div class="grid">
+  <div class="tile"><b>✅ Works well</b><span>Terminal · file manager · text editor · SSH client · Python scripts · info display</span></div>
+  <div class="tile"><b>⚠️ Struggles</b><span>YouTube/video · modern websites · multi-tasking (1GB RAM)</span></div>
+</div>
+<h3>Or skip the desktop entirely</h3>
+<pre><code>sudo apt install -y fbterm
+# fbterm runs a terminal straight on the framebuffer — no X11 needed</code></pre>
+
+<h2>Pitfalls</h2>
+<ol>
+<li><b>Screen won't light up</b> — check SPI is enabled in armbian-config, re-check wiring.</li>
+<li><b>Touch doesn't work</b> — XPT2046 needs its own CS pin (CS1, not CS0).</li>
+<li><b>Board runs hot</b> — Zero 2W is warm; a small heatsink helps (~5 HKD).</li>
+<li><b>Power bank auto-shuts off</b> — many cut out at low current draw; test yours first.</li>
+<li><b>WiFi drops</b> — onboard antenna is weak; fine within ~5m of the router.</li>
+</ol>
+
+<div class="note"><b>Total:</b> ~HK$100 for board + screen + power, assuming you already have a microSD and cable. Cheapest useful Linux computer you can build from Pinduoduo parts.</div>
+
+<footer>Isaac · Island School · Hong Kong · build notes, 2026</footer>
+</div>
+</body>
+</html>
