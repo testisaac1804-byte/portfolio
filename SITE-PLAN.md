@@ -14,6 +14,9 @@ _Last updated: 2026-09-27 · Live: https://isaac1804.com · Deploy: `bash ~/scri
 | `/childquest-*`, `/hces-quest-*`, `/yeshan-*` | The three quest sites + their walkthrough guides |
 | `/science booklet/` | IGCSE science booklets (proxy-served) — 19 files incl. the 2026–27 editions |
 | `/revision/` | IGCSE revision hub by subject (+ `/revision/unit-1-number/` Maths unit page) |
+| `/tools/` | Workshop calculators (laser, gears, resistors, beams, filament, CNC) |
+| `/tools/link-compressor/` | **NEW** — Link Compressor: paste a long link → `isaac1804.com/s/xxxxx` (bulk, QR, click counts) |
+| `/s/<code>` | **NEW** — short links: Worker route, 302 + click counting, KV `LINKS` |
 
 **Architecture:** one Cloudflare Pages deployment; bulk files live in the `portfolio-files` store and are served
 through `files-proxy.isaac1804.workers.dev` (correct content-types, inline previews, `?download=1`).
@@ -28,6 +31,39 @@ python3 ~/scripts/gen-sitemap.py        # sitemap.xml
 bash   ~/scripts/deploy-isaac-site.sh   # portfolio-prep + CV cards + wrangler pages deploy
 python3 ~/scripts/verify-site-update.py # check the live URLs actually serve the new stuff
 ```
+
+---
+
+## 2a. Shipped 2026-09-27 (evening) — 🔗 Link Compressor
+
+**New `/tools/link-compressor/`** — a self-hosted URL shortener living on the real domain:
+paste a long link, get `https://isaac1804.com/s/xxxxx` back. It is the hosted big sibling of the
+browser-only **a1d2.org** compressor (that one only rewrites a link; this one *owns* the short link
+and counts clicks).
+
+- **Backend:** new Worker `isaac-links` (`~/Documents/projects/apps/isaac-links/`, `./deploy.sh`) +
+  KV namespace `LINKS` (id `30cd56899a0b4dbcb82325e562954409`). **Worker routes on the Pages zone:**
+  `isaac1804.com/s/*`, `/api/links*`, `/api/shorten`, `/api/stats` — Worker routes take precedence
+  over the Pages custom domain for those paths, so both live on the same hostname. workers.dev is
+  now off for this Worker.
+- **Compresses, not just shortens:** strips `utm_*` / `fbclid` / `gclid` / `igshid` / `si` / `spm` …
+  and reports what it removed; signed URLs (`X-Amz-Signature`, `token`, `expires`) are left alone.
+- Codes: 5 chars, 31-char alphabet with no `0 O 1 l i`; custom names allowed; repeating a URL
+  returns its existing code. QR codes are generated in-page (self-hosted `qrcode.min.js`).
+- **Abuse guard:** anonymous use is limited to Isaac's own hosts (`isaac1804.com`,
+  `*.isaac1804.workers.dev`, `pages.dev`, `da.gd`) + 60 links/hour per IP, so it can never become an
+  open redirect. Admin token unlocks any URL / custom names / delete / global list —
+  token lives in `~/.isaac-links-token` (chmod 600) and a Worker secret, never in the page source.
+- Page features: bulk paste (one link per line), per-link "was 214 chars → 33 chars · 85% smaller"
+  readout, copy/open/QR/delete per link, searchable history in `localStorage`, JSON export,
+  live totals. Token can be handed to a phone as `/tools/link-compressor/#token=…`.
+- Wired in: homepage hub card, `/tools/` banner, `sitemap.xml`, portfolio card
+  (**431 cards**, `sw`, newest position so it shows in "Recently added") + `prompts/link-compressor-prompt.md`.
+- **Verified live** with `~/Documents/projects/apps/isaac-links/test-e2e.py` (Playwright, headless):
+  24/24 checks — load, single/bulk/deduped compressing, real redirect, refusal for outside links
+  without the token, custom slug after unlocking, QR canvas, stats, mobile no-h-scroll, zero JS errors.
+- Known quirk (documented in the UI): Cloudflare's KV **list** API is eventually consistent, so the
+  Totals card can lag up to ~60 s behind a link you just made; per-link counts are immediate.
 
 ---
 
