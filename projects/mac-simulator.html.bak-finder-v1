@@ -76,61 +76,17 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font);backgro
 .window-body.pad{padding:12px}
 
 /* Finder */
-.finder-wrap{display:flex;flex-direction:column;height:100%;min-height:0}
-.finder-body{display:flex;flex:1;min-height:0}
-.finder-toolbar{display:flex;align-items:center;gap:4px;padding:6px 10px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
-.finder-toolbar button{width:28px;height:28px;border-radius:6px;border:none;background:transparent;color:var(--text);cursor:default;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.finder-toolbar button:hover{background:rgba(127,127,127,.18)}
-.finder-toolbar button:disabled{opacity:.28}
-.finder-toolbar button.on{background:rgba(127,127,127,.22);color:var(--accent);font-weight:700}
-.finder-toolbar .fsep{width:1px;height:18px;background:var(--border);margin:0 3px;flex-shrink:0}
-.finder-toolbar .fgrow{flex:1}
-.finder-search{width:140px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:rgba(127,127,127,.12);color:var(--text);font-size:12px;outline:none;font-family:var(--font);flex-shrink:0}
-.finder-search:focus{border-color:var(--accent)}
-.finder-sidebar{width:186px;background:rgba(127,127,127,.10);padding:6px 8px 14px;flex-shrink:0;overflow-y:auto;font-size:13px;border-right:1px solid var(--border)}
-.finder-sidebar .fs-item{padding:4px 8px;border-radius:6px;cursor:default;display:flex;align-items:center;gap:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.finder-sidebar .fs-item:hover{background:rgba(127,127,127,.14)}
+.finder-sidebar{width:180px;background:rgba(0,0,0,.1);padding:8px;flex-shrink:0;overflow-y:auto;font-size:13px}
+.finder-sidebar .fs-item{padding:4px 8px;border-radius:4px;cursor:default;display:flex;align-items:center;gap:6px}
+.finder-sidebar .fs-item:hover{background:rgba(255,255,255,.06)}
 .finder-sidebar .fs-item.active{background:var(--accent);color:#fff}
-.finder-sidebar .fs-item .fi{width:16px;text-align:center;flex-shrink:0}
-.finder-sidebar .fs-section{font-size:11px;font-weight:700;color:var(--text2);padding:10px 8px 4px;text-transform:uppercase;letter-spacing:.4px}
-.finder-content{flex:1;min-width:0;overflow:auto}
-.finder-empty{display:flex;align-items:center;justify-content:center;height:100%;color:var(--text2);font-size:13px;flex-direction:column;gap:6px}
-/* icon view */
-.fv-grid{display:flex;flex-wrap:wrap;align-content:flex-start;gap:2px;padding:14px}
-.finder-file{width:94px;padding:8px 4px;border-radius:8px;cursor:default;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--text)}
-.finder-file:hover{background:rgba(127,127,127,.10)}
-.finder-file .ficon{font-size:40px;line-height:1}
-.finder-file .fname{padding:1px 4px;border-radius:3px;max-width:88px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.finder-file.selected{background:rgba(127,127,127,.16)}
-.finder-file.selected .fname{background:var(--accent);color:#fff}
-/* list view */
-.fv-list{width:100%;border-collapse:collapse;font-size:13px}
-.fv-list th{position:sticky;top:0;text-align:left;font-size:11.5px;font-weight:600;color:var(--text2);padding:6px 10px;background:var(--surface);border-bottom:1px solid var(--border);cursor:default}
-.fv-list td{padding:5px 10px;border-bottom:1px solid rgba(127,127,127,.13);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:280px;color:var(--text)}
-.fv-list tr{cursor:default}
-.fv-list tr:nth-child(even) td{background:rgba(127,127,127,.05)}
-.fv-list tr:hover td{background:rgba(127,127,127,.12)}
-.fv-list tr.selected td{background:var(--accent);color:#fff}
-.fv-list .cname{display:flex;align-items:center;gap:8px}
-.fv-list .cname .fi{font-size:16px}
-/* column view */
-.fv-cols{display:flex;height:100%;align-items:stretch}
-.fv-col{width:228px;flex-shrink:0;border-right:1px solid var(--border);overflow-y:auto;padding:4px}
-.fv-col .fv-item{padding:4px 9px;border-radius:6px;font-size:13px;display:flex;align-items:center;gap:7px;cursor:default;white-space:nowrap;overflow:hidden;color:var(--text)}
-.fv-col .fv-item:hover{background:rgba(127,127,127,.12)}
-.fv-col .fv-item.active{background:var(--accent);color:#fff}
-.fv-col .fv-item .nm{overflow:hidden;text-overflow:ellipsis}
-.fv-col .fv-item .arrow{margin-left:auto;opacity:.55;font-size:12px}
-.fv-col .fv-none{padding:8px;color:var(--text2);font-size:12px}
-.fv-preview{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:var(--text2);font-size:12px;padding:20px;text-align:center;min-width:150px}
-.fv-preview .picon{font-size:60px;line-height:1}
-.fv-preview .pname{font-size:14px;font-weight:600;color:var(--text);word-break:break-word}
-/* path + status bars */
-.finder-pathbar{display:flex;align-items:center;gap:3px;padding:3px 12px;font-size:11px;color:var(--text2);border-top:1px solid var(--border);background:var(--surface);flex-shrink:0;overflow:hidden;white-space:nowrap}
-.finder-pathbar .crumb{padding:1px 5px;border-radius:4px;cursor:default}
-.finder-pathbar .crumb:hover{background:rgba(127,127,127,.16)}
-.finder-pathbar .csep{opacity:.45}
-.finder-statusbar{display:flex;align-items:center;justify-content:space-between;padding:4px 12px;font-size:11px;color:var(--text2);border-top:1px solid var(--border);background:var(--surface);flex-shrink:0}
+.finder-sidebar .fs-section{font-size:11px;font-weight:700;color:var(--text2);padding:8px 8px 4px;text-transform:uppercase}
+.finder-content{flex:1;display:flex;flex-wrap:wrap;align-content:flex-start;padding:12px;gap:4px;overflow-y:auto}
+.finder-file{width:80px;padding:8px 4px;border-radius:6px;cursor:default;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px}
+.finder-file:hover{background:rgba(255,255,255,.05)}
+.finder-file .ficon{font-size:36px}
+.finder-file.selected{background:rgba(255,255,255,.1)}
+
 /* Safari */
 .browser-toolbar{display:flex;align-items:center;gap:6px;padding:8px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
 .browser-toolbar button{width:28px;height:28px;border-radius:6px;border:none;background:transparent;color:var(--text);cursor:default;font-size:14px;display:flex;align-items:center;justify-content:center}
@@ -343,14 +299,14 @@ M.state = {
   nextNoteId: 1,
   activeNoteId: 0,
   finderLocation: 'desktop',
-  finderFiles: {},
-  finderView: 'icon',
-  finderHistory: [],
-  finderIdx: 0,
-  finderSelection: [],
-  finderQuery: '',
-  finderSort: 'name',
-  finderColumnPath: [],
+  finderFiles: {
+    desktop: [{name:'Macintosh HD',type:'drive',icon:'💻'},{name:'Documents',type:'folder',icon:'📁'},{name:'Downloads',type:'folder',icon:'📥'},{name:'Pictures',type:'folder',icon:'🖼️'},{name:'Music',type:'folder',icon:'🎵'},{name:'Movies',type:'folder',icon:'🎬'}],
+    documents: [{name:'Resume.pdf',type:'file',icon:'📄'},{name:'Budget.xlsx',type:'file',icon:'📊'},{name:'Project Plan.docx',type:'file',icon:'📝'},{name:'Presentation.pptx',type:'file',icon:'📽️'}],
+    downloads: [{name:'installer.dmg',type:'file',icon:'💿'},{name:'photo.jpg',type:'file',icon:'🖼️'},{name:'archive.zip',type:'file',icon:'📦'},{name:'readme.txt',type:'file',icon:'📃'}],
+    pictures: [{name:'Vacation',type:'folder',icon:'📁'},{name:'Family',type:'folder',icon:'📁'},{name:'Screenshot.png',type:'file',icon:'🖼️'},{name:'Selfie.jpg',type:'file',icon:'📷'}],
+    music: [{name:'Playlist.m3u',type:'file',icon:'🎵'},{name:'song.mp3',type:'file',icon:'🎶'}],
+    movies: [{name:'movie.mp4',type:'file',icon:'🎬'}]
+  },
   trashItems: [],
   mailMessages: [
     {id:0,from:'Apple',subject:'Your Apple ID was used to sign in',date:'Today',read:true,body:'Your Apple ID was used to sign in to iCloud on a new device.'},
@@ -460,19 +416,6 @@ M.menuContent = {
   'finder-menu': [
     {label:'About Finder',action:function(){M.toast('Finder v1.0')}},
     {sep:true},
-    {label:'New Finder Window',action:function(){M.openWindow('finder')},shortcut:'⌘N'},
-    {sep:true},
-    {label:'Back',action:function(){M.finderBack()},shortcut:'⌘['},
-    {label:'Forward',action:function(){M.finderForward()},shortcut:'⌘]'},
-    {label:'Enclosing Folder',action:function(){M.finderUp()},shortcut:'⌘↑'},
-    {sep:true},
-    {label:'as Icons',action:function(){M.finderSetView('icon')},shortcut:'⌘1'},
-    {label:'as List',action:function(){M.finderSetView('list')},shortcut:'⌘2'},
-    {label:'as Columns',action:function(){M.finderSetView('column')},shortcut:'⌘3'},
-    {sep:true},
-    {label:'New Folder',action:function(){M.newFolder()},shortcut:'⇧⌘N'},
-    {label:'Move to Trash',action:function(){M.finderTrashSelected()},shortcut:'⌘⌫'},
-    {sep:true},
     {label:'Settings...',action:function(){M.openWindow('settings')},shortcut:'⌘,'},
     {sep:true},
     {label:'Empty Trash...',action:function(){M.emptyTrash()},shortcut:'⇧⌘⌫'},
@@ -493,7 +436,7 @@ M.menuContent = {
     {sep:true},
     {label:'Get Info',action:function(){M.toast('Get Info')},shortcut:'⌘I'},
     {sep:true},
-    {label:'Move to Trash',action:function(){M.finderTrashSelected()},shortcut:'⌘⌫'},
+    {label:'Move to Trash',action:function(){M.toast('Moved to Trash')},shortcut:'⌘⌫'},
     {label:'Eject',disabled:true},
     {sep:true},
     {label:'Find...',action:function(){M.toast('Find')},shortcut:'⌘F'}
@@ -531,12 +474,12 @@ M.menuContent = {
     {label:'Forward',action:function(){M.toast('Forward')},shortcut:'⌘]'},
     {label:'Enclosing Folder',action:function(){M.toast('Enclosing')},shortcut:'⌘↑'},
     {sep:true},
-    {label:'Desktop',action:function(){M.openWindow('finder');M.finderGo('desktop')}},
-    {label:'Documents',action:function(){M.openWindow('finder');M.finderGo('documents')}},
-    {label:'Downloads',action:function(){M.openWindow('finder');M.finderGo('downloads')}},
+    {label:'Desktop',action:function(){M.openWindow('finder')}},
+    {label:'Documents',action:function(){M.openWindow('finder')}},
+    {label:'Downloads',action:function(){M.openWindow('finder')}},
     {sep:true},
     {label:'Home',action:function(){M.toast('Home')}},
-    {label:'Computer',action:function(){M.openWindow('finder');M.finderGo('macintosh')}},
+    {label:'Computer',action:function(){M.openWindow('finder')}},
     {sep:true},
     {label:'Go to Folder...',action:function(){M.toast('Go to Folder')},shortcut:'⇧⌘G'},
     {label:'Connect to Server...',action:function(){M.toast('Connect')},shortcut:'⌘K'}
@@ -816,623 +759,86 @@ M.windowConfigs = {
 };
 
 /* ========== FINDER ========== */
-M.finderFavs = [
-  {id:'desktop',label:'Desktop',icon:'🖥️'},
-  {id:'documents',label:'Documents',icon:'📄'},
-  {id:'downloads',label:'Downloads',icon:'📥'},
-  {id:'pictures',label:'Pictures',icon:'🖼️'},
-  {id:'music',label:'Music',icon:'🎵'},
-  {id:'movies',label:'Movies',icon:'🎬'}
-];
-
-M.finderLocTitles = {
-  desktop:'Desktop',documents:'Documents',downloads:'Downloads',pictures:'Pictures',
-  music:'Music',movies:'Movies',work:'Work',school:'School',archive:'Archive',
-  igcse:'IGCSE',vacation:'Vacation',family:'Family',album:'Album',
-  icloud:'iCloud Drive',iclouddocs:'Documents',shared:'Shared',photos:'Photos',
-  macintosh:'Macintosh HD',applications:'Applications',system:'System',
-  users:'Users',home:'isaac',systemlib:'Library',extensions:'Extensions'
-};
-
-M.finderDates = ['Today, 10:24','Today, 08:05','Yesterday, 21:47','Yesterday, 16:12',
-  '12 Sep 2026, 11:30','9 Sep 2026, 18:22','4 Sep 2026, 09:15','28 Aug 2026, 14:03','21 Aug 2026, 07:58'];
-
-M.finderKindMap = {pdf:'PDF Document',txt:'Plain Text',md:'Markdown',jpg:'JPEG Image',jpeg:'JPEG Image',
-  png:'PNG Image',heic:'HEIC Image',mp3:'MP3 Audio',m4a:'MPEG-4 Audio',mp4:'MPEG-4 Movie',
-  mov:'QuickTime Movie',dmg:'Disk Image',zip:'ZIP Archive',xlsx:'Excel Spreadsheet',
-  docx:'Word Document',pptx:'Presentation',pages:'Pages Document',numbers:'Numbers Spreadsheet',
-  key:'Keynote Presentation',m3u:'Playlist',task:'Unix Executable',photoslibrary:'Photos Library',
-  ipynb:'Jupyter Notebook',html:'HTML Document',css:'CSS Stylesheet',js:'JavaScript'};
-
-M.finderDefaults = function(){
-  return {
-    desktop: [
-      {name:'Macintosh HD',type:'drive',icon:'💻',key:'macintosh'},
-      {name:'Documents',type:'folder',icon:'📁',key:'documents'},
-      {name:'Downloads',type:'folder',icon:'📥',key:'downloads'},
-      {name:'Pictures',type:'folder',icon:'🖼️',key:'pictures'},
-      {name:'Music',type:'folder',icon:'🎵',key:'music'},
-      {name:'Movies',type:'folder',icon:'🎬',key:'movies'}
-    ],
-    documents: [
-      {name:'Resume.pdf',type:'file',icon:'📄'},
-      {name:'Budget.xlsx',type:'file',icon:'📊'},
-      {name:'Project Plan.docx',type:'file',icon:'📝'},
-      {name:'Presentation.pptx',type:'file',icon:'📽️'},
-      {name:'Work',type:'folder',icon:'📁',key:'work'},
-      {name:'School',type:'folder',icon:'📁',key:'school'}
-    ],
-    work: [
-      {name:'Meeting Notes.txt',type:'file',icon:'📃'},
-      {name:'Roadmap.pages',type:'file',icon:'📝'},
-      {name:'Q3 Report.pdf',type:'file',icon:'📄'},
-      {name:'Old',type:'folder',icon:'📁',key:'archive'}
-    ],
-    archive: [
-      {name:'Old Report.pdf',type:'file',icon:'📄'},
-      {name:'2025 Backup.zip',type:'file',icon:'📦'}
-    ],
-    school: [
-      {name:'Homework.docx',type:'file',icon:'📝'},
-      {name:'Timetable.pdf',type:'file',icon:'📄'},
-      {name:'IGCSE',type:'folder',icon:'📁',key:'igcse'}
-    ],
-    igcse: [
-      {name:'Economics Notes.pdf',type:'file',icon:'📄'},
-      {name:'Physics Notes.pdf',type:'file',icon:'📄'},
-      {name:'Maths Notes.pdf',type:'file',icon:'📄'}
-    ],
-    downloads: [
-      {name:'installer.dmg',type:'file',icon:'💿'},
-      {name:'photo.jpg',type:'file',icon:'🖼️'},
-      {name:'archive.zip',type:'file',icon:'📦'},
-      {name:'readme.txt',type:'file',icon:'📃'}
-    ],
-    pictures: [
-      {name:'Vacation',type:'folder',icon:'📁',key:'vacation'},
-      {name:'Family',type:'folder',icon:'📁',key:'family'},
-      {name:'Screenshot.png',type:'file',icon:'🖼️'},
-      {name:'Selfie.jpg',type:'file',icon:'📷'}
-    ],
-    vacation: [
-      {name:'Beach.jpg',type:'file',icon:'🏖️'},
-      {name:'Sunset.png',type:'file',icon:'🌇'},
-      {name:'Mountain.heic',type:'file',icon:'🏔️'}
-    ],
-    family: [
-      {name:'Birthday.jpg',type:'file',icon:'🎂'},
-      {name:'Dinner.png',type:'file',icon:'🍜'}
-    ],
-    music: [
-      {name:'Playlist.m3u',type:'file',icon:'🎵'},
-      {name:'song.mp3',type:'file',icon:'🎶'},
-      {name:'Album',type:'folder',icon:'📁',key:'album'}
-    ],
-    album: [
-      {name:'track01.mp3',type:'file',icon:'🎶'},
-      {name:'track02.mp3',type:'file',icon:'🎶'},
-      {name:'cover.png',type:'file',icon:'🖼️'}
-    ],
-    movies: [
-      {name:'movie.mp4',type:'file',icon:'🎬'},
-      {name:'trailer.mov',type:'file',icon:'📹'}
-    ],
-    icloud: [
-      {name:'Documents',type:'folder',icon:'📁',key:'iclouddocs'},
-      {name:'Shared',type:'folder',icon:'📁',key:'shared'},
-      {name:'Notes.txt',type:'file',icon:'📃'}
-    ],
-    iclouddocs: [
-      {name:'Ideas.pages',type:'file',icon:'📝'},
-      {name:'Budget.numbers',type:'file',icon:'📊'}
-    ],
-    shared: [
-      {name:'Team Photo.jpg',type:'file',icon:'🖼️'},
-      {name:'Slides.key',type:'file',icon:'📽️'}
-    ],
-    photos: [
-      {name:'Library.photoslibrary',type:'folder',icon:'📸'},
-      {name:'Vacation',type:'folder',icon:'📁',key:'vacation'},
-      {name:'Family',type:'folder',icon:'📁',key:'family'}
-    ],
-    macintosh: [
-      {name:'Applications',type:'folder',icon:'📁',key:'applications'},
-      {name:'System',type:'folder',icon:'📁',key:'system'},
-      {name:'Users',type:'folder',icon:'📁',key:'users'},
-      {name:'Library',type:'folder',icon:'📁',key:'systemlib'}
-    ],
-    applications: [
-      {name:'Finder',type:'app',icon:'💻',app:'finder'},
-      {name:'Safari',type:'app',icon:'🧭',app:'safari'},
-      {name:'Terminal',type:'app',icon:'⌨️',app:'terminal'},
-      {name:'Notes',type:'app',icon:'📒',app:'notes'},
-      {name:'Calculator',type:'app',icon:'🧮',app:'calculator'},
-      {name:'Calendar',type:'app',icon:'📅',app:'calendar'},
-      {name:'Mail',type:'app',icon:'✉️',app:'mail'},
-      {name:'TextEdit',type:'app',icon:'📝',app:'textedit'},
-      {name:'System Settings',type:'app',icon:'⚙️',app:'settings'}
-    ],
-    system: [
-      {name:'Library',type:'folder',icon:'📁',key:'systemlib'},
-      {name:'Extensions',type:'folder',icon:'📁'},
-      {name:'kernel.task',type:'file',icon:'⚙️'}
-    ],
-    users: [
-      {name:'isaac',type:'folder',icon:'🏠',key:'home'},
-      {name:'Shared',type:'folder',icon:'📁',key:'shared'}
-    ],
-    home: [
-      {name:'Desktop',type:'folder',icon:'🖥️',key:'desktop'},
-      {name:'Documents',type:'folder',icon:'📁',key:'documents'},
-      {name:'Downloads',type:'folder',icon:'📥',key:'downloads'},
-      {name:'Pictures',type:'folder',icon:'🖼️',key:'pictures'},
-      {name:'Music',type:'folder',icon:'🎵',key:'music'},
-      {name:'Movies',type:'folder',icon:'🎬',key:'movies'}
-    ],
-    systemlib: [
-      {name:'Extensions',type:'folder',icon:'📁',key:'extensions'},
-      {name:'Preferences',type:'folder',icon:'📁'}
-    ],
-    extensions: [
-      {name:'AppleHDA.kext',type:'file',icon:'⚙️'},
-      {name:'IOGraphicsFamily.kext',type:'file',icon:'⚙️'}
-    ]
-  };
-};
-
-M.finderTitle = function(loc){
-  return M.finderLocTitles[loc] || (loc.charAt(0).toUpperCase() + loc.slice(1));
-};
-
-M.finderEsc = function(s){
-  return String(s).replace(/\\/g,'\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');
-};
-
-M.finderMeta = function(f){
-  var h = 7, i;
-  for(i = 0; i < f.name.length; i++) h = (h * 31 + f.name.charCodeAt(i)) % 99991;
-  if(f.size || f.date){
-    return {size:f.size || '--', date:f.date || '', sizeKB:(f.sizeKB || 0), dateRank:(f.dateRank || 0)};
-  }
-  if(f.type === 'folder' || f.type === 'drive' || f.type === 'app'){
-    return {size:'--', date:M.finderDates[h % M.finderDates.length], sizeKB:-1, dateRank:h % 9};
-  }
-  var kb = (h % 4800) + 40;
-  return {
-    size: kb < 1024 ? kb + ' KB' : (kb / 1024).toFixed(1) + ' MB',
-    date: M.finderDates[h % M.finderDates.length],
-    sizeKB: kb,
-    dateRank: h % 9
-  };
-};
-
-M.finderKind = function(f){
-  if(f.type === 'folder') return 'Folder';
-  if(f.type === 'app') return 'Application';
-  if(f.type === 'drive') return 'Volume';
-  var ext = (f.name.indexOf('.') >= 0) ? f.name.split('.').pop().toLowerCase() : '';
-  return M.finderKindMap[ext] || (ext ? ext.toUpperCase() + ' Document' : 'Document');
-};
-
-M.finderSeed = function(){
-  if(!M.state.finderFiles) M.state.finderFiles = {};
-  var d = M.finderDefaults(), k;
-  for(k in d){ if(!(k in M.state.finderFiles)) M.state.finderFiles[k] = d[k]; }
-  if(!M.state.finderView) M.state.finderView = 'icon';
-  if(!M.state.finderHistory || !M.state.finderHistory.length) M.state.finderHistory = [M.state.finderLocation || 'desktop'];
-  if(typeof M.state.finderIdx !== 'number' || M.state.finderIdx >= M.state.finderHistory.length) M.state.finderIdx = M.state.finderHistory.length - 1;
-  if(!M.state.finderSelection) M.state.finderSelection = [];
-  if(typeof M.state.finderQuery !== 'string') M.state.finderQuery = '';
-  if(!M.state.finderSort) M.state.finderSort = 'name';
-  if(!M.state.finderColumnPath || !M.state.finderColumnPath.length) M.state.finderColumnPath = [M.state.finderLocation || 'desktop'];
-  if(!M.state.finderFiles[M.state.finderLocation]) M.state.finderLocation = 'desktop';
-};
-
-M.finderFilesAt = function(loc){
-  M.finderSeed();
-  return M.state.finderFiles[loc] || [];
-};
-
-M.finderVisible = function(loc){
-  var items = M.finderFilesAt(loc).slice();
-  var q = (M.state.finderQuery || '').toLowerCase();
-  if(q) items = items.filter(function(f){ return f.name.toLowerCase().indexOf(q) >= 0; });
-  var sort = M.state.finderSort || 'name';
-  items.sort(function(a, b){
-    var af = (a.type === 'folder' || a.type === 'drive' || a.type === 'app') ? 0 : 1;
-    var bf = (b.type === 'folder' || b.type === 'drive' || b.type === 'app') ? 0 : 1;
-    if(af !== bf) return af - bf;
-    var am = M.finderMeta(a), bm = M.finderMeta(b);
-    if(sort === 'size' && am.sizeKB !== bm.sizeKB) return am.sizeKB - bm.sizeKB;
-    if(sort === 'date' && am.dateRank !== bm.dateRank) return am.dateRank - bm.dateRank;
-    return a.name.localeCompare(b.name);
-  });
-  return items;
-};
-
-/* ---------- window chrome ---------- */
 M.finderBody = function(){
-  M.finderSeed();
-  var view = M.state.finderView || 'icon';
-  var s = '<div class="finder-wrap">';
-  s += '<div class="finder-toolbar">';
-  s += '<button id="f-back" title="Back" onclick="M.finderBack()">◀</button>';
-  s += '<button id="f-fwd" title="Forward" onclick="M.finderForward()">▶</button>';
-  s += '<span class="fsep"></span>';
-  s += '<button id="f-newfolder" title="New Folder" onclick="M.newFolder()">＋</button>';
-  s += '<button id="f-trash" title="Move to Trash" onclick="M.finderTrashSelected()">🗑</button>';
-  s += '<span class="fgrow"></span>';
-  s += '<button id="f-v-icon" title="Icon View" onclick="M.finderSetView(\'icon\')">▦</button>';
-  s += '<button id="f-v-list" title="List View" onclick="M.finderSetView(\'list\')">☰</button>';
-  s += '<button id="f-v-column" title="Column View" onclick="M.finderSetView(\'column\')">▤</button>';
-  s += '<span class="fsep"></span>';
-  s += '<input class="finder-search" id="finder-search" placeholder="Search" value="' + M.finderEsc(M.state.finderQuery) + '" oninput="M.finderSearch(this.value)">';
-  s += '</div>';
-  s += '<div class="finder-body">';
-  s += M.finderSidebarHTML();
-  s += '<div class="finder-content" id="finder-content"></div>';
-  s += '</div>';
-  s += '<div class="finder-pathbar" id="finder-pathbar"></div>';
-  s += '<div class="finder-statusbar"><span id="finder-status"></span><span>Available: 214.28 GB of 494.38 GB</span></div>';
-  s += '</div>';
-  return s;
-};
-
-M.finderSidebarHTML = function(){
-  M.finderSeed();
-  var loc = M.state.finderLocation;
-  var s = '<div class="finder-sidebar" id="finder-sidebar">';
+  var s = '<div style="display:flex;height:100%">';
+  s += '<div class="finder-sidebar" id="finder-sidebar">';
   s += '<div class="fs-section">Favorites</div>';
-  M.finderFavs.forEach(function(f){
-    s += '<div class="fs-item' + (loc === f.id ? ' active' : '') + '" onclick="M.finderGo(\'' + f.id + '\')"><span class="fi">' + f.icon + '</span>' + f.label + '</div>';
+  var favs = [
+    {id:'desktop',label:'Desktop',icon:'🖥️'},
+    {id:'documents',label:'Documents',icon:'📁'},
+    {id:'downloads',label:'Downloads',icon:'📥'},
+    {id:'pictures',label:'Pictures',icon:'🖼️'},
+    {id:'music',label:'Music',icon:'🎵'},
+    {id:'movies',label:'Movies',icon:'🎬'}
+  ];
+  favs.forEach(function(f){
+    s += '<div class="fs-item'+(M.state.finderLocation===f.id?' active':'')+'" onclick="M.setFinderLocation(\''+f.id+'\')">'+f.icon+' '+f.label+'</div>';
   });
   s += '<div class="fs-section">iCloud</div>';
-  [['icloud', 'iCloud Drive', '☁️'], ['photos', 'Photos', '📸']].forEach(function(x){
-    s += '<div class="fs-item' + (loc === x[0] ? ' active' : '') + '" onclick="M.finderGo(\'' + x[0] + '\')"><span class="fi">' + x[2] + '</span>' + x[1] + '</div>';
-  });
+  s += '<div class="fs-item">☁️ iCloud Drive</div>';
+  s += '<div class="fs-item">📸 Photos</div>';
   s += '<div class="fs-section">Locations</div>';
-  s += '<div class="fs-item' + (loc === 'macintosh' ? ' active' : '') + '" onclick="M.finderGo(\'macintosh\')"><span class="fi">💻</span>Macintosh HD</div>';
-  s += '<div class="fs-item" onclick="M.openWindow(\'trash\')"><span class="fi">🗑️</span>Trash</div>';
+  s += '<div class="fs-item">💻 Macintosh HD</div>';
+  s += '<div class="fs-item" onclick="M.openWindow(\'trash\')">🗑️ Trash</div>';
+  s += '</div>';
+  s += '<div class="finder-content" id="finder-content"></div>';
   s += '</div>';
   return s;
 };
 
-M.finderWindowTitle = function(loc){
-  var w = M.state.openApps && M.state.openApps['finder'];
-  if(!w) return;
-  var t = w.el.querySelector('.titlebar .title');
-  if(t) t.textContent = M.finderTitle(loc);
-};
-
-/* ---------- navigation ---------- */
-M.finderGo = function(loc){
-  M.finderSeed();
-  var h = M.state.finderHistory.slice(0, M.state.finderIdx + 1);
-  if(h[h.length - 1] !== loc) h.push(loc);
-  M.state.finderHistory = h;
-  M.state.finderIdx = h.length - 1;
+M.setFinderLocation = function(loc){
   M.state.finderLocation = loc;
-  M.state.finderSelection = [];
-  M.state.finderQuery = '';
-  M.state.finderColumnPath = [loc];
-  M.renderFinder();
-  M.save();
-};
-
-M.setFinderLocation = function(loc){ M.finderGo(loc); };
-
-M.finderBack = function(){
-  M.finderSeed();
-  if(M.state.finderIdx <= 0){ M.toast('No previous folder'); return; }
-  M.state.finderIdx--;
-  M.state.finderLocation = M.state.finderHistory[M.state.finderIdx];
-  M.state.finderSelection = [];
-  M.state.finderQuery = '';
-  M.state.finderColumnPath = [M.state.finderLocation];
-  M.renderFinder();
-};
-
-M.finderForward = function(){
-  M.finderSeed();
-  if(M.state.finderIdx >= M.state.finderHistory.length - 1){ M.toast('No next folder'); return; }
-  M.state.finderIdx++;
-  M.state.finderLocation = M.state.finderHistory[M.state.finderIdx];
-  M.state.finderSelection = [];
-  M.state.finderQuery = '';
-  M.state.finderColumnPath = [M.state.finderLocation];
-  M.renderFinder();
-};
-
-M.finderUp = function(){
-  var loc = M.state.finderLocation;
-  var map = {documents:'home',downloads:'home',pictures:'home',music:'home',movies:'home',desktop:'home',
-             iclouddocs:'icloud',shared:'icloud',photos:'home',work:'documents',archive:'work',
-             school:'documents',igcse:'school',album:'music',vacation:'pictures',family:'pictures',
-             applications:'macintosh',system:'macintosh',users:'macintosh',systemlib:'macintosh',
-             extensions:'systemlib',home:'users',macintosh:'desktop'};
-  M.finderGo(map[loc] || 'desktop');
-};
-
-M.finderSetView = function(v){
-  M.state.finderView = v;
-  if(v === 'column') M.state.finderColumnPath = [M.state.finderLocation];
-  M.finderUpdateViewButtons();
-  M.finderRefreshContent();
-  M.save();
-};
-
-M.finderUpdateViewButtons = function(){
-  var view = M.state.finderView || 'icon';
-  [['f-v-icon', 'icon'], ['f-v-list', 'list'], ['f-v-column', 'column']].forEach(function(p){
-    var b = document.getElementById(p[0]);
-    if(b) b.classList.toggle('on', view === p[1]);
-  });
-};
-
-M.finderSortBy = function(key){
-  M.state.finderSort = (M.state.finderSort === key) ? 'name' : key;
-  M.finderRefreshContent();
-};
-
-M.finderSearch = function(q){
-  M.state.finderQuery = q || '';
-  M.state.finderColumnPath = [M.state.finderLocation];
-  M.finderRefreshContent();
-};
-
-/* ---------- selection ---------- */
-M.finderSelect = function(ev, name){
-  var sel = M.state.finderSelection || [];
-  if(ev && (ev.metaKey || ev.ctrlKey || ev.shiftKey)){
-    var i = sel.indexOf(name);
-    if(i >= 0) sel.splice(i, 1); else sel.push(name);
-  } else {
-    sel = [name];
+  var sidebar = document.getElementById('finder-sidebar');
+  if(sidebar){
+    sidebar.querySelectorAll('.fs-item').forEach(function(el){el.classList.remove('active');});
+    sidebar.querySelector('.fs-item[onclick*="'+loc+'"]').classList.add('active');
   }
-  M.state.finderSelection = sel;
-  M.finderRefreshContent();
+  M.renderFinderFiles();
 };
 
-M.finderClearSelection = function(){
-  M.state.finderSelection = [];
-  M.finderRefreshContent();
-};
-
-M.finderTrashSelected = function(){
-  var sel = (M.state.finderSelection || []).slice();
-  if(!sel.length){ M.toast('Nothing selected'); return; }
-  var loc = M.state.finderLocation;
-  var moved = [];
-  var kept = M.finderFilesAt(loc).filter(function(f){
-    if(sel.indexOf(f.name) >= 0){ moved.push(f); return false; }
-    return true;
-  });
-  M.state.finderFiles[loc] = kept;
-  moved.forEach(function(f){
-    M.state.trashItems.push({name:f.name, type:f.type, icon:f.icon, from:M.finderTitle(loc)});
-  });
-  M.state.finderSelection = [];
-  M.state.finderColumnPath = [loc];
-  M.finderRefreshContent();
-  M.save();
-  M.toast('Moved ' + moved.length + ' item' + (moved.length === 1 ? '' : 's') + ' to Trash');
-};
-
-/* ---------- rendering ---------- */
 M.renderFinder = function(){
-  M.finderSeed();
-  var sb = document.getElementById('finder-sidebar');
-  if(sb) sb.outerHTML = M.finderSidebarHTML();
-  var si = document.getElementById('finder-search');
-  if(si) si.value = M.state.finderQuery || '';
-  M.finderWindowTitle(M.state.finderLocation);
-  M.finderUpdateViewButtons();
-  M.finderRefreshContent();
+  M.renderFinderFiles();
 };
 
-M.renderFinderFiles = function(){ M.renderFinder(); };
-
-M.finderRefreshContent = function(){
-  M.finderSeed();
+M.renderFinderFiles = function(){
   var content = document.getElementById('finder-content');
   if(!content) return;
-  var back = document.getElementById('f-back'), fwd = document.getElementById('f-fwd');
-  if(back) back.disabled = M.state.finderIdx <= 0;
-  if(fwd) fwd.disabled = M.state.finderIdx >= M.state.finderHistory.length - 1;
-  var view = M.state.finderView || 'icon';
-  if(view === 'list') M.renderFinderList();
-  else if(view === 'column') M.renderFinderColumns();
-  else M.renderFinderIcons();
-  M.finderUpdatePathbar();
-  M.finderUpdateStatus();
-  M.finderWindowTitle(M.state.finderLocation);
-};
-
-M.finderEmptyHTML = function(){
-  var q = M.state.finderQuery || '';
-  return '<div class="finder-empty"><div style="font-size:44px">' + (q ? '🔍' : '📂') + '</div><div>' +
-    (q ? 'No results for “' + q + '”' : 'Folder is empty') + '</div></div>';
-};
-
-M.renderFinderIcons = function(){
-  var content = document.getElementById('finder-content');
   var loc = M.state.finderLocation;
-  var items = M.finderVisible(loc);
-  if(!items.length){ content.innerHTML = M.finderEmptyHTML(); return; }
-  var h = '<div class="fv-grid" onclick="if(event.target===this)M.finderClearSelection()">';
-  items.forEach(function(f){
-    var sel = (M.state.finderSelection || []).indexOf(f.name) >= 0;
-    var n = M.finderEsc(f.name);
-    h += '<div class="finder-file' + (sel ? ' selected' : '') + '" onclick="M.finderSelect(event,\'' + n + '\')" ondblclick="M.openFinderItem(\'' + M.finderEsc(loc) + '\',\'' + n + '\')">' +
-      '<div class="ficon">' + (f.icon || '📄') + '</div><div class="fname">' + f.name + '</div></div>';
-  });
-  h += '</div>';
-  content.innerHTML = h;
-};
-
-M.renderFinderList = function(){
-  var content = document.getElementById('finder-content');
-  var loc = M.state.finderLocation;
-  var items = M.finderVisible(loc);
-  if(!items.length){ content.innerHTML = M.finderEmptyHTML(); return; }
-  var sort = M.state.finderSort || 'name';
-  var arrow = function(k){ return sort === k ? ' ▾' : ''; };
-  var h = '<table class="fv-list"><thead><tr>' +
-    '<th style="width:44%" onclick="M.finderSortBy(\'name\')">Name' + arrow('name') + '</th>' +
-    '<th style="width:26%" onclick="M.finderSortBy(\'date\')">Date Modified' + arrow('date') + '</th>' +
-    '<th style="width:15%" onclick="M.finderSortBy(\'size\')">Size' + arrow('size') + '</th>' +
-    '<th style="width:15%">Kind</th></tr></thead><tbody>';
-  items.forEach(function(f){
-    var sel = (M.state.finderSelection || []).indexOf(f.name) >= 0;
-    var m = M.finderMeta(f);
-    var n = M.finderEsc(f.name);
-    h += '<tr class="' + (sel ? 'selected' : '') + '" onclick="M.finderSelect(event,\'' + n + '\')" ondblclick="M.openFinderItem(\'' + M.finderEsc(loc) + '\',\'' + n + '\')">' +
-      '<td><span class="cname"><span class="fi">' + (f.icon || '📄') + '</span>' + f.name + '</span></td>' +
-      '<td>' + m.date + '</td><td>' + m.size + '</td><td>' + M.finderKind(f) + '</td></tr>';
-  });
-  h += '</tbody></table>';
-  content.innerHTML = h;
-};
-
-M.finderColumnChain = function(){
-  var path = (M.state.finderColumnPath && M.state.finderColumnPath.length) ? M.state.finderColumnPath.slice() : [M.state.finderLocation];
-  if(path[0] !== M.state.finderLocation) path = [M.state.finderLocation];
-  var cols = [{loc:path[0], items:M.finderVisible(path[0]), selected:path[1] || null}];
-  for(var i = 1; i < path.length; i++){
-    var prev = cols[i - 1];
-    var f = prev.items.filter(function(x){ return x.name === prev.selected; })[0];
-    if(!f || (f.type !== 'folder' && f.type !== 'drive')) break;
-    var childLoc = f.key || f.name.toLowerCase();
-    cols.push({loc:childLoc, items:M.finderVisible(childLoc), selected:path[i + 1] || null});
-  }
-  return cols;
-};
-
-M.renderFinderColumns = function(){
-  var content = document.getElementById('finder-content');
-  var cols = M.finderColumnChain();
-  var h = '<div class="fv-cols">';
-  cols.forEach(function(c, ci){
-    h += '<div class="fv-col">';
-    if(!c.items.length) h += '<div class="fv-none">' + ((M.state.finderQuery || '') ? 'No results' : 'Folder is empty') + '</div>';
-    c.items.forEach(function(f){
-      var sel = (c.selected === f.name);
-      var n = M.finderEsc(f.name);
-      h += '<div class="fv-item' + (sel ? ' active' : '') + '" onclick="M.finderColumnPick(' + ci + ',\'' + n + '\')" ondblclick="M.finderColumnOpen(' + ci + ',\'' + n + '\')">' +
-        '<span>' + (f.icon || '📄') + '</span><span class="nm">' + f.name + '</span>' +
-        ((f.type === 'folder' || f.type === 'drive') ? '<span class="arrow">›</span>' : '') + '</div>';
-    });
-    h += '</div>';
-  });
-  var deepest = cols[cols.length - 1];
-  var sel = deepest.selected ? deepest.items.filter(function(x){ return x.name === deepest.selected; })[0] : null;
-  h += '<div class="fv-preview">';
-  if(sel){
-    var m = M.finderMeta(sel);
-    h += '<div class="picon">' + (sel.icon || '📄') + '</div>' +
-      '<div class="pname">' + sel.name + '</div>' +
-      '<div>' + M.finderKind(sel) + '</div>' +
-      (m.size !== '--' ? '<div>' + m.size + '</div>' : '') +
-      (m.date ? '<div>Modified ' + m.date + '</div>' : '') +
-      '<div style="margin-top:6px">Double-click to open</div>';
-  } else {
-    h += '<div class="picon">' + (cols.length > 1 ? '📁' : '💻') + '</div>' +
-      '<div class="pname">' + M.finderTitle(deepest.loc) + '</div>' +
-      '<div>' + deepest.items.length + ' item' + (deepest.items.length === 1 ? '' : 's') + '</div>';
-  }
-  h += '</div></div>';
-  content.innerHTML = h;
-};
-
-M.finderColumnPick = function(colIdx, name){
-  var cols = M.finderColumnChain();
-  var col = cols[colIdx];
-  if(!col) return;
-  var f = col.items.filter(function(x){ return x.name === name; })[0];
-  var path = (M.state.finderColumnPath || [M.state.finderLocation]).slice(0, colIdx + 1);
-  path.push(name);
-  M.state.finderColumnPath = path;
-  M.state.finderSelection = [name];
-  M.renderFinderColumns();
-  M.finderUpdateStatus();
-  if(f && (f.type === 'folder' || f.type === 'drive') && !f.key) { /* keeps drilling with lowercased name */ }
-};
-
-M.finderColumnOpen = function(colIdx, name){
-  var cols = M.finderColumnChain();
-  var col = cols[colIdx];
-  if(!col) return;
-  M.openFinderItem(col.loc, name);
-};
-
-M.finderUpdatePathbar = function(){
-  var el = document.getElementById('finder-pathbar');
-  if(!el) return;
-  var loc = M.state.finderLocation;
-  var crumbs = [{label:'Macintosh HD', loc:'macintosh'}, {label:'Users', loc:'users'}, {label:'isaac', loc:'home'}];
-  if(loc === 'macintosh') crumbs = crumbs.slice(0, 1);
-  else if(loc === 'users') crumbs = crumbs.slice(0, 2);
-  if(crumbs[crumbs.length - 1].loc !== loc) crumbs.push({label:M.finderTitle(loc), loc:loc});
-  el.innerHTML = crumbs.map(function(c, i){
-    return '<span class="crumb" onclick="M.finderGo(\'' + c.loc + '\')">' + c.label + '</span>' +
-      (i < crumbs.length - 1 ? '<span class="csep">▸</span>' : '');
+  var files = M.state.finderFiles[loc] || [];
+  content.innerHTML = files.map(function(f){
+    return '<div class="finder-file" ondblclick="M.openFinderItem(\''+loc+'\',\''+f.name+'\')">'+
+      '<div class="ficon">'+f.icon+'</div><div>'+f.name+'</div></div>';
   }).join('');
 };
 
-M.finderUpdateStatus = function(){
-  var el = document.getElementById('finder-status');
-  if(!el) return;
-  var loc = M.state.finderLocation;
-  var all = M.finderFilesAt(loc).length;
-  var shown = M.finderVisible(loc).length;
-  var sel = (M.state.finderSelection || []).length;
-  var txt;
-  if(M.state.finderQuery) txt = shown + ' of ' + all + ' shown for “' + M.state.finderQuery + '”';
-  else if(sel) txt = sel + ' of ' + all + ' selected';
-  else txt = all + ' item' + (all === 1 ? '' : 's');
-  el.textContent = txt;
-};
-
-/* ---------- actions ---------- */
 M.openFinderItem = function(loc, name){
-  var f = M.finderFilesAt(loc).filter(function(x){ return x.name === name; })[0];
-  if(!f) return;
-  if(f.type === 'app' && f.app){ M.openWindow(f.app); return; }
-  if(f.type === 'folder' || f.type === 'drive'){
-    var dest = f.key || name.toLowerCase();
-    M.state.finderColumnPath = [dest];
-    M.finderGo(dest);
-    return;
+  var files = M.state.finderFiles[loc] || [];
+  var file = files.find(function(f){return f.name === name;});
+  if(file && file.type === 'folder'){
+    M.state.finderLocation = file.name.toLowerCase();
+    M.setFinderLocation(file.name.toLowerCase());
+  } else {
+    M.toast('Opening '+name+'...');
+    M.addNotif('Opened', 'Opened '+name);
   }
-  M.toast('Opening ' + name + '…');
-  M.addNotif('Opened', name + ' — ' + M.finderKind(f));
 };
 
 M.newFolder = function(){
-  M.finderSeed();
   var loc = M.state.finderLocation;
-  var files = M.finderFilesAt(loc);
-  var name = 'untitled folder', i = 1;
-  while(files.some(function(f){ return f.name === name; })){ name = 'untitled folder ' + (++i); }
-  files.push({name:name, type:'folder', icon:'📁'});
-  M.state.finderQuery = '';
-  M.state.finderSelection = [name];
-  M.state.finderColumnPath = [loc];
-  var q = document.getElementById('finder-search');
-  if(q) q.value = '';
-  M.renderFinder();
+  var name = 'New Folder';
+  var i = 1;
+  var files = M.state.finderFiles[loc] || [];
+  while(files.some(function(f){return f.name === name;})){name = 'New Folder '+(++i);}
+  M.state.finderFiles[loc].push({name:name,type:'folder',icon:'📁'});
+  M.renderFinderFiles();
   M.save();
-  M.toast('Created “' + name + '”');
+  M.toast('Created "'+name+'"');
 };
 
 M.emptyTrash = function(){
   M.state.trashItems = [];
-  M.save();
-  if(M.state.openApps && M.state.openApps['trash']){
-    var b = document.getElementById('body-trash');
-    if(b) b.innerHTML = M.trashBody();
-  }
   M.toast('Trash emptied');
+  M.save();
 };
 
 /* ========== SAFARI ========== */
@@ -1995,24 +1401,12 @@ M.selectMailFolder = function(folder){
 
 /* ========== TRASH ========== */
 M.trashBody = function(){
-  M.finderSeed();
-  var items = M.state.trashItems || [];
-  var s = '<div style="display:flex;flex-direction:column;height:100%">';
-  s += '<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--border);flex-shrink:0">';
-  s += '<div style="font-size:20px">\ud83d\uddd1\ufe0f</div><div style="font-size:14px;font-weight:600">Trash</div>';
-  s += '<div style="margin-left:auto;font-size:12px;color:var(--text2)">' + items.length + ' item' + (items.length === 1 ? '' : 's') + '</div>';
-  if(items.length) s += '<button onclick="M.emptyTrash()" style="padding:5px 12px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:12px;cursor:default">Empty</button>';
-  s += '</div>';
-  if(!items.length){
-    s += '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--text2)"><div style="font-size:56px">\ud83d\uddd1\ufe0f</div><div>Trash is empty</div></div>';
-  } else {
-    s += '<div style="flex:1;overflow:auto;padding:6px">';
-    items.forEach(function(f){
-      s += '<div style="display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:6px;font-size:13px">' +
-        '<span style="font-size:17px">' + (f.icon || '\ud83d\udcc4') + '</span><span>' + f.name + '</span>' +
-        '<span style="margin-left:auto;color:var(--text2);font-size:11px">from ' + (f.from || 'Finder') + '</span></div>';
-    });
-    s += '</div>';
+  var s = '<div style="padding:20px;text-align:center;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">';
+  s += '<div style="font-size:64px">🗑️</div>';
+  s += '<div style="font-size:16px;font-weight:600">Trash</div>';
+  s += '<div style="color:var(--text2)">' + (M.state.trashItems.length === 0 ? 'Trash is empty' : M.state.trashItems.length + ' item(s) in Trash') + '</div>';
+  if(M.state.trashItems.length > 0){
+    s += '<button onclick="M.emptyTrash()" style="padding:8px 20px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:14px;cursor:default">Empty Trash</button>';
   }
   s += '</div>';
   return s;
@@ -2131,6 +1525,7 @@ document.addEventListener('keydown', function(e){
 M.applyTheme();
 M.setWallpaper(M.state.wallpaper);
 M.renderNotifs();
+M.updateDockPositions();
 
 M.updateDockPositions = function(){
   // already called from setDockPosition which is called on load
