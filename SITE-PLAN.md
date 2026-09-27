@@ -1,6 +1,6 @@
 # isaac1804.com — Site Plan & Expansion Ideas
 
-_Last updated: 2026-09-23 · Live: https://isaac1804.com · Deploy: `bash ~/scripts/deploy-isaac-site.sh`_
+_Last updated: 2026-09-27 · Live: https://isaac1804.com · Deploy: `bash ~/scripts/deploy-isaac-site.sh`_
 
 ## 1. What the site is today
 
@@ -12,15 +12,52 @@ _Last updated: 2026-09-23 · Live: https://isaac1804.com · Deploy: `bash ~/scri
 | `/isaac-dt/` | Design & Technology site |
 | `/nas/` | IsaacNAS portal |
 | `/childquest-*`, `/hces-quest-*`, `/yeshan-*` | The three quest sites + their walkthrough guides |
-| `/science booklet/` | IGCSE science booklets (proxy-served) |
+| `/science booklet/` | IGCSE science booklets (proxy-served) — 19 files incl. the 2026–27 editions |
+| `/revision/` | IGCSE revision hub by subject (+ `/revision/unit-1-number/` Maths unit page) |
 
 **Architecture:** one Cloudflare Pages deployment; bulk files live in the `portfolio-files` store and are served
 through `files-proxy.isaac1804.workers.dev` (correct content-types, inline previews, `?download=1`).
 DNS on Cloudflare (`carla`/`yichun.ns.cloudflare.com`), nameservers set at Spaceship via API.
 
+### File pipeline (run in this order)
+
+```bash
+python3 ~/scripts/sync-igcse-files.py   # ~/Documents -> portfolio + homepage + portfolio-files, then push
+bash   ~/scripts/portfolio-prep.sh      # regenerate every browse page (now includes proxy listings)
+python3 ~/scripts/gen-sitemap.py        # sitemap.xml
+bash   ~/scripts/deploy-isaac-site.sh   # portfolio-prep + CV cards + wrangler pages deploy
+python3 ~/scripts/verify-site-update.py # check the live URLs actually serve the new stuff
+```
+
 ---
 
-## 2. Shipped in this round
+## 2. Shipped 2026-09-27 (this round)
+
+**Files synced up (all three repos pushed):**
+- **3 new 2026–27 science booklets** — Chemistry Unit 1, DAB Unit 1 Cells & Microbes (Revised June 2026), Forces Double Award 2026 → `science booklet/` in the portfolio + homepage repos *and* the `portfolio-files` store (the browse pages link to the proxy, which only serves that store)
+- **135 new Y10 (1011) lesson files / 185 MB** — Biology Cells & Microbes L1–8 + revision pack (knowledge organiser, exam questions, answers), Chemistry Unit 1 lessons 1–6 + Unit 1 revision worksheets with mark schemes, DT 10DT201 material-properties tree, Maths Unit 1, Thrive L1–5, Chinese 0509, English FLE
+- **4526 Cambridge past papers** committed to the portfolio-files store (repo now 11,526 tracked files)
+- Economics Edexcel textbook re-split into 3 parts (<100 MB each) for GitHub
+
+**8 new cards** (`des`, portfolio now **430 cards**):
+IGCSE Science Booklets 2026–27 · IGCSE Biology Cells & Microbes (Unit 1) · IGCSE Chemistry Unit 1 States of Matter · IGCSE Maths Unit 1 Number · DT Material Properties · Thrive Wellbeing · Y10 Chinese 0509 & English FLE · IGCSE Lesson Files Y10 1011 (all subjects)
+— plus updated **Science Booklets (Y7–Y10)** and **IGCSE Study Resources** cards, and a prompt `.md` for each new card.
+
+**Little details:**
+- Homepage hub: science-booklet line now names the 2026–27 editions (19 files); IGCSE things line fixed (was "1011 files" = folder name, not a count)
+- Revision hub: 📕 booklet links for Biology / Chemistry / Physics, 📝 unit-revision link for Maths, 🗂 all-booklets link
+- `sitemap.xml` now includes homepage sub-pages (e.g. `/revision/unit-1-number/`)
+- New `gen_proxy_index.py` + prep step 4/4: `tools/generate.py` blanks the science-booklet browse page (no local content in the portfolio repo), which left a dead listing after every deploy — now regenerated as a proxy listing in both repos on every prep
+- files-proxy worker: a 404 from a *stale negative edge-cache entry* (a file pushed minutes earlier) is now retried with a cache-buster before returning not-found
+- `sync-macintosh-hd.py`: rebase-then-push retry — the isaac-nas daemon pushes "Update NAS redirect" commits to the homepage repo constantly and plain pushes were being rejected
+
+**Housekeeping / known issues**
+- Files >25 MiB are dropped from the Pages bundle by the deploy script (currently `8C Mapping Matter` + a DT mp4) — fine, because every browse page links through the proxy; never hand-write a `/science booklet/...` link to a big file
+- `~/Desktop/nas-redirect` is a second clone of the homepage repo owned by the NAS daemon — always `git fetch && git rebase origin/main` before pushing the homepage repo
+
+---
+
+## 2b. Shipped 2026-09-23
 
 - **PWA** — `manifest.json` + service worker → installable on phone, **works offline** (network-first so never stale)
 - **Icons + social card** — `icon-192/512`, `apple-touch-icon`, `og-image.png` (1200×630) for link previews
