@@ -384,12 +384,12 @@
             // the public site; the mirrors work when the page is opened over
             // file:// or http:// (e.g. locally).
             {
-                name: 'Cloudflare DNS (DoH)',
-                note: 'HTTPS · measurable from this page',
+                name: 'Cloudflare edge (cdn-cgi/trace)',
+                note: 'HTTPS · anycast edge, 212-byte reply',
                 tag: null,
-                openai: 'https://cloudflare-dns.com/dns-query?name=example.com&type=A',
+                openai: 'https://www.cloudflare.com/cdn-cgi/trace',
                 anthropic: '',
-                testUrl: 'https://cloudflare-dns.com/dns-query?name=example.com&type=A'
+                testUrl: 'https://www.cloudflare.com/cdn-cgi/trace'
             },
             {
                 name: 'Google DNS (DoH)',

@@ -34,6 +34,39 @@ python3 ~/scripts/verify-site-update.py # check the live URLs actually serve the
 
 ---
 
+## 2. Shipped 2026-09-27 (round 2 — 🔧 Build Logs at `/builds/`)
+
+One page per software project, assembled **only from evidence that already exists** — nothing narrated into
+existence. `python3 ~/scripts/gen-build-logs.py` (fed by `node ~/scripts/dump-cards-full.js`, both now run by
+`deploy-isaac-site.sh`).
+
+**Each log has:** what it is (the card’s own description) · version history (the card’s real `v[]` changelog) ·
+files on the site (every card attachment that exists on disk, with line counts + sizes) · by the numbers
+(real folder: files, LOC, file types, oldest → last-touched — only for the 10 projects whose spec names a
+folder that exists) · the build spec (the project’s own `prompts/<name>-prompt.md` rendered as HTML, escaped) ·
+**and a reflection slot**.
+
+**The reflection slot is the point, and it is honest.** `builds/reflections/<slug>.md` → rendered as
+*What broke / What I’d change / What I learned*. Until that file has words in it, the page says
+**“Not written yet — this is the part only I can write.”** Nothing is invented to fill the gap. Template at
+`/builds/reflections/_TEMPLATE.md`. Verified end-to-end: a temp reflection file rendered 2 sections and flipped
+the hub to “1 of 43”, then was removed.
+
+**Deliberately NOT shipped:** the 25 software cards that only ever got a title, category and status (no spec,
+no versions, no files) are listed on the hub under *“Not documented yet (25)”* with a link to their spec file,
+instead of getting pages that would have to invent their own content. 51 specs were also under 600 bytes —
+those pages carry a visible ⚠️ “this spec is a stub” note rather than pretending to document a build.
+
+- Hub: search + filters (`Has live demo` 8 · `Has version history` 43 · `Detailed spec only` 17 ·
+  `Reflection written` — currently 0). Cards lead with reflections written, then live demos.
+- A new hub card links it from the homepage; `/builds/` + all 43 logs are in `sitemap.xml`.
+- Live: `/builds/` 200 with 43 logs and 25 not-documented, `/builds/betterterminal/` 200 (3 versions, 5 stat
+  tiles, 6 spec headings), a removed thin page 404s, zero JS errors.
+- ⚠️ Verification gotcha: the CDN cached the previous hub for a few minutes — re-verify with a `?cb=<ts>`
+  query string, or a stale 68-card hub looks like a failed deploy.
+
+---
+
 ## 2. Shipped 2026-09-27 (Tier-1 round — revision pages, print-log wiring, IsaacDrop)
 
 **Per-subject revision pages — `/revision/<subject>/` × 10** (`python3 ~/scripts/gen-revision-pages.py`)
