@@ -23,10 +23,11 @@ so the short link keeps working forever and tells me how many times it was opene
 - **History** — searchable, exportable as JSON, kept in `localStorage`; with the admin token it
   merges with every link created anywhere.
 - **No duplicates** — compressing the same URL twice hands back the code it already has.
-- **Not an open redirect** — anonymous use is limited to my own hosts (`isaac1804.com`,
-  `*.isaac1804.workers.dev`, `pages.dev` previews, `da.gd`) plus a 60-links-per-hour rate limit.
-  The admin token (kept in `~/.isaac-links-token`, never in the page source) unlocks any URL,
-  custom names, deleting and the global list.
+- **Not an open redirect in practice** — anyone may compress any link (that is the point: it is meant
+  to be usable without me), but creation is rate limited to 200 links per IP per hour and only
+  `http(s)` targets are accepted, so it cannot be turned into a spam redirector. The admin token
+  (kept in `~/.isaac-links-token`, never in the page source) adds custom names, deleting and the
+  global list.
 
 ## Stack
 Cloudflare Worker (routes on `isaac1804.com/s/*`, `/api/links*`, `/api/shorten`, `/api/stats`) +

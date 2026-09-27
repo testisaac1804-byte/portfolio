@@ -50,10 +50,10 @@ and counts clicks).
   and reports what it removed; signed URLs (`X-Amz-Signature`, `token`, `expires`) are left alone.
 - Codes: 5 chars, 31-char alphabet with no `0 O 1 l i`; custom names allowed; repeating a URL
   returns its existing code. QR codes are generated in-page (self-hosted `qrcode.min.js`).
-- **Abuse guard:** anonymous use is limited to Isaac's own hosts (`isaac1804.com`,
-  `*.isaac1804.workers.dev`, `pages.dev`, `da.gd`) + 60 links/hour per IP, so it can never become an
-  open redirect. Admin token unlocks any URL / custom names / delete / global list —
-  token lives in `~/.isaac-links-token` (chmod 600) and a Worker secret, never in the page source.
+- **Abuse guard:** compressing is **open to anyone for any link** (Isaac's call, 2026-09-27 — it has
+  to work for whoever he sends the tool to), guarded by a 200-links/hour/IP limit and `http(s)`-only
+  targets. The admin token only adds custom names / delete / global list — token lives in
+  `~/.isaac-links-token` (chmod 600) and a Worker secret, never in the page source.
 - Page features: bulk paste (one link per line), per-link "was 214 chars → 33 chars · 85% smaller"
   readout, copy/open/QR/delete per link, searchable history in `localStorage`, JSON export,
   live totals. Token can be handed to a phone as `/tools/link-compressor/#token=…`.
