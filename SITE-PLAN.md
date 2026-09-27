@@ -39,7 +39,7 @@ python3 ~/scripts/verify-site-update.py # check the live URLs actually serve the
 **New `/tools/link-compressor/`** — a self-hosted URL shortener living on the real domain:
 paste a long link, get `https://isaac1804.com/s/xxxxx` back. It is the hosted big sibling of the
 browser-only **a1d2.org** compressor (that one only rewrites a link; this one *owns* the short link
-and counts clicks).
+and logs who used it).
 
 - **Backend:** new Worker `isaac-links` (`~/Documents/projects/apps/isaac-links/`, `./deploy.sh`) +
   KV namespace `LINKS` (id `30cd56899a0b4dbcb82325e562954409`). **Worker routes on the Pages zone:**
@@ -60,10 +60,43 @@ and counts clicks).
 - Wired in: homepage hub card, `/tools/` banner, `sitemap.xml`, portfolio card
   (**431 cards**, `sw`, newest position so it shows in "Recently added") + `prompts/link-compressor-prompt.md`.
 - **Verified live** with `~/Documents/projects/apps/isaac-links/test-e2e.py` (Playwright, headless):
-  24/24 checks — load, single/bulk/deduped compressing, real redirect, refusal for outside links
-  without the token, custom slug after unlocking, QR canvas, stats, mobile no-h-scroll, zero JS errors.
+  46/46 checks — load, single/bulk/deduped compressing, real redirect, an outside link compressing
+  with no token, custom slug after unlocking, the log refusing reads without the token, the creator +
+  click log showing IP/place/ISP/device, the activity feed, 12 authenticated creations back-to-back,
+  QR canvas, stats, mobile no-h-scroll, zero JS errors.
 - Known quirk (documented in the UI): Cloudflare's KV **list** API is eventually consistent, so the
   Totals card can lag up to ~60 s behind a link you just made; per-link counts are immediate.
+
+### 2a-bis. Link Compressor V1.2 — tracking + unlimited (same evening)
+
+Isaac asked: *"when someone clicks … I (only me) can check who clicked on it and who created the
+shorten link, and if I put in password I can also make unlimited shorten links."*
+
+- **Who created it** — every `POST /api/links` stores `by`: IP, city/region/country, ISP
+  (`cf.asOrganization`) + ASN, Cloudflare colo, timezone, lat/long when available, language, device
+  string (`Chrome on Mac` / `Safari on iPhone` / `bot / link preview`) and the raw user-agent.
+- **Who clicked it** — every `/s/<code>` hit appends to `ev:<code>` (last **100** clicks, newest
+  first) with the same fields plus the **referer**; `cl:` total and `last:` timestamp stay separate so
+  the redirect never waits on a write (`ctx.waitUntil`). Nothing is loaded on the visitor's machine —
+  it all comes from the request Cloudflare already sees. No cookies, no third-party script.
+- **Only Isaac sees it** — `GET /api/links/<code>` and `GET /api/activity` both 401 without the token
+  (verified in the e2e). Public `POST`/`/s/` never expose a log.
+- **Password = unlimited** — the 200/hour/IP limit and its KV counter are consulted only when the
+  request is *not* authenticated; with the token there is no rate limit at all (12 back-to-back
+  creations + a 25-in-a-row curl run, all 200; the 429 branch is unreachable with a token).
+- **UI**: each link row now has **📊 Log** → a modal with the created-by block, clicks/unique-IPs/
+  countries chips and one card per click; plus a **📈 Who clicked — activity** card with a combined
+  newest-first feed of creations and clicks (and a 🔄 refresh). Both are token-gated and say so when
+  locked.
+- **Real bug found & fixed while building this:** Cloudflare **route patterns match the path
+  INCLUDING the query string** — `isaac1804.com/api/activity` alone did NOT match
+  `…/api/activity?limit=5`, so the request fell through to Pages and returned the site's 404 HTML
+  while the same path with no query returned 200. Every pattern now ends in `*`
+  (`/api/activity*`, `/api/stats*`, `/api/shorten*`) with a comment in `wrangler.toml` so nobody
+  "tidies" them back. This is the second `wrangler.toml`/routes trap on this project.
+- New helper script `~/scripts/check-inline-js.py` — extracts and `node --check`s every inline
+  `<script>` in a page (the tool page's JS is 20 KB of hand-written vanilla JS; deploy only after it
+  passes).
 
 ---
 

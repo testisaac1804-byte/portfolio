@@ -19,7 +19,12 @@ so the short link keeps working forever and tells me how many times it was opene
 - **Bulk mode** — paste one link per line (or a comma-separated list) and it compresses them
   all, with a live "was 214 chars → 33 chars · 85% smaller · saved 181 characters" readout per link.
 - **QR codes** — generated in the page (inline library, works offline), downloadable as PNG.
-- **Click counting** — every hit on `/s/<code>` increments a counter in KV.
+- **Click counting + tracking** — every hit on `/s/<code>` increments a counter in KV *and* logs who
+  clicked: IP, city/country, ISP, device and which page they came from. Every creation logs the same
+  about whoever made it.
+- **Only I can see the logs** — the per-link log and the combined activity feed both require the admin
+  token; anyone else gets a 401. The token also removes the rate limit, so with the password there is
+  no hourly cap on making links.
 - **History** — searchable, exportable as JSON, kept in `localStorage`; with the admin token it
   merges with every link created anywhere.
 - **No duplicates** — compressing the same URL twice hands back the code it already has.
