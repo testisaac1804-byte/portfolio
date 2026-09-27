@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API地址延迟测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .test-btn {
+            display: block;
+            width: 200px;
+            margin: 0 auto 30px;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        .test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        .test-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .status {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* ---- additions for the portfolio copy ---- */
+        .proto-banner {
+            margin: 0 0 20px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.6;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #b9c0d0;
+        }
+        .proto-banner b { color: #00ff88; }
+        .proto-banner.warn b { color: #ffb84d; }
+        .how {
+            margin-top: 32px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 18px 20px;
+            font-size: 14px;
+            line-height: 1.75;
+            color: #c8ccd6;
+        }
+        .how h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .how code {
+            background: rgba(0,0,0,0.35);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 12.5px;
+            color: #9ef0c0;
+        }
+        .how ol { margin: 8px 0 0 20px; }
+        .how li { margin-bottom: 6px; }
+        .how p { margin-bottom: 8px; }
+
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .address-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .address-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #00d9ff, #00ff88);
+        }
+        .address-card.rank-1 {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+        .address-card.rank-1::before {
+            background: linear-gradient(180deg, #ffd700, #ffaa00);
+        }
+        .address-card.rank-2 {
+            background: rgba(192, 192, 192, 0.1);
+            border-color: rgba(192, 192, 192, 0.3);
+        }
+        .address-card.rank-2::before {
+            background: linear-gradient(180deg, #c0c0c0, #a0a0a0);
+        }
+        .address-card.rank-3 {
+            background: rgba(205, 127, 50, 0.1);
+            border-color: rgba(205, 127, 50, 0.3);
+        }
+        .address-card.rank-3::before {
+            background: linear-gradient(180deg, #cd7f32, #a06020);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .rank-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .rank-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .rank-1 .rank-number {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #000;
+        }
+        .rank-2 .rank-number {
+            background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
+            color: #000;
+        }
+        .rank-3 .rank-number {
+            background: linear-gradient(135deg, #cd7f32, #a06020);
+            color: #000;
+        }
+        .rank-number.other {
+            background: rgba(255,255,255,0.2);
+        }
+        .address-name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .tag {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .tag-priority {
+            background: rgba(255, 87, 87, 0.2);
+            color: #ff5757;
+        }
+        .tag-best {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+        .tag-https {
+            background: rgba(0, 217, 255, 0.2);
+            color: #00d9ff;
+        }
+        .latency {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ff88;
+        }
+        .latency.timeout {
+            color: #ff5757;
+        }
+        .latency.testing {
+            color: #ffd700;
+        }
+        .endpoints {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .endpoint {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            flex-wrap: wrap;
+        }
+        .endpoint-type {
+            font-size: 12px;
+            padding: 4px 8px;
+            background: rgba(102, 126, 234, 0.3);
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .endpoint-url {
+            flex: 1;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            color: #aaa;
+            word-break: break-all;
+        }
+        .copy-btn {
+            padding: 6px 12px;
+            background: rgba(102, 126, 234, 0.3);
+            border: 1px solid rgba(102, 126, 234, 0.5);
+            border-radius: 6px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .copy-btn:hover {
+            background: rgba(102, 126, 234, 0.5);
+        }
+        .copy-btn.copied {
+            background: rgba(0, 255, 136, 0.3);
+            border-color: rgba(0, 255, 136, 0.5);
+        }
+        .note {
+            font-size: 12px;
+            color: #888;
+            margin-top: 8px;
+            padding: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+        }
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @media (max-width: 600px) {
+            .endpoint {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .endpoint-url {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 API地址延迟测试</h1>
+        <p class="subtitle">测试各地址响应速度，按延迟从低到高排名</p>
+        
+        <button class="test-btn" id="testBtn" onclick="startTest()">
+            开始测试
+        </button>
+        
+        <div class="proto-banner" id="protoBanner"></div>
+        <div class="status" id="status">点击上方按钮开始测试</div>
+        
+        <div class="ranking-list" id="rankingList"></div>
+    </div>
+
+        <details class="how" open>
+            <summary style="cursor:pointer;font-weight:600;color:#f0f0f5;">How this works / 工作原理</summary>
+            <h2>What it measures</h2>
+            <p>Round-trip time from <em>your browser</em> to each API endpoint — the network part you
+            actually pay for, not the model's thinking time. Every visitor measures their own
+            network, so the ranking is theirs, not the author's.</p>
+            <h2>The trick that makes it possible</h2>
+            <ol>
+                <li><code>performance.now()</code> is read immediately before and after an
+                <code>await fetch(...)</code>. The difference is the request's wall-clock time.</li>
+                <li>The fetch uses <code>mode:'no-cors'</code>, so no <code>Access-Control-Allow-Origin</code>
+                header is needed — the response arrives <em>opaque</em> (body unreadable, status 0).
+                We never read the body; we only need the moment it resolves.</li>
+                <li>Timing survives because a no-cors request is still a real HTTP request: DNS +
+                TCP + TLS + server processing + first byte all happen and are included in the delta.</li>
+                <li><code>AbortController</code> cancels the request after 5 s, so a dead endpoint
+                becomes a <code>null</code> → shown as 超时 (timeout) instead of hanging the page.</li>
+                <li>Each address is probed 3× with 100 ms between samples, then averaged — one lucky
+                sample can't win the ranking.</li>
+                <li><code>renderResults()</code> sorts by that average with unknowns last, and paints
+                rank-1/2/3 badges on the first three cards.</li>
+                <li>The <code>testUrl</code> is deliberately a cheap <code>/health</code> path: latency,
+                not throughput, and no quota is spent on your API key.</li>
+            </ol>
+            <h2>Why three addresses look ⛔ on this page</h2>
+            <p>Those mirrors answer on plain <code>http://…:11223</code> with no TLS. A page served
+            over <code>https://</code> is not allowed to open an <code>http://</code> request
+            (mixed content), so the browser refuses before any packet leaves. The guard reports
+            <code>⛔ mixed content</code> rather than a fake 0 ms or a fake timeout. Open this same
+            file from disk (<code>file://</code>) or over <code>http://</code> and all of them test
+            normally.</p>
+            <p style="opacity:.75">Copy of a relay's own address tester (<code>API地址延迟测试</code>) —
+            markup, CSS and measurement logic are the original; the HTTPS endpoints, the
+            mixed-content guard and this panel were added so it runs on an HTTPS site.</p>
+        </details>
+
+    <script>
+        const addresses = [
+            {
+                name: '地址9',
+                note: '全模型地址',
+                tag: null,
+                openai: 'http://64.90.19.58:11223/openai/v1',
+                anthropic: 'http://64.90.19.58:11223/anthropic',
+                testUrl: 'http://64.90.19.58:11223/health'
+            },
+            {
+                name: '国内优先使用地址7',
+                note: '全模型地址',
+                tag: null,
+                openai: 'http://103.236.76.197:11223/openai/v1',
+                anthropic: 'http://103.236.76.197:11223/anthropic',
+                testUrl: 'http://103.236.76.197:11223/health'
+            },
+            {
+                name: '梯子优化地址8',
+                note: '梯子地址',
+                tag: null,
+                openai: 'http://43.155.171.170:11223/openai/v1',
+                anthropic: 'http://43.155.171.170:11223/anthropic',
+                testUrl: 'http://43.155.171.170:11223/health'
+            },
+            // ---- added for the isaac1804.com copy ----
+            // The three mirrors above are plain HTTP (no TLS anywhere on :11223),
+            // so a browser loading this page over https:// refuses to contact them
+            // (mixed content). These HTTPS endpoints keep the tool meaningful on
+            // the public site; the mirrors work when the page is opened over
+            // file:// or http:// (e.g. locally).
+            {
+                name: 'Cloudflare DNS (DoH)',
+                note: 'HTTPS · measurable from this page',
+                tag: null,
+                openai: 'https://cloudflare-dns.com/dns-query?name=example.com&type=A',
+                anthropic: '',
+                testUrl: 'https://cloudflare-dns.com/dns-query?name=example.com&type=A'
+            },
+            {
+                name: 'Google DNS (DoH)',
+                note: 'HTTPS · measurable from this page',
+                tag: null,
+                openai: 'https://dns.google/resolve?name=example.com&type=A',
+                anthropic: '',
+                testUrl: 'https://dns.google/resolve?name=example.com&type=A'
+            },
+            {
+                name: 'AliDNS (中国 DoH)',
+                note: 'HTTPS · measurable from this page',
+                tag: null,
+                openai: 'https://dns.alidns.com/resolve?name=example.com&type=A',
+                anthropic: '',
+                testUrl: 'https://dns.alidns.com/resolve?name=example.com&type=A'
+            },
+            {
+                name: 'GitHub API (真实 https API)',
+                note: 'HTTPS · origin server, not an edge',
+                tag: null,
+                openai: 'https://api.github.com/zen',
+                anthropic: '',
+                testUrl: 'https://api.github.com/zen'
+            }
+        ];
+
+        let results = [];
+        let isTesting = false;
+
+        // A browser will not let an https:// page open an http:// request
+        // (mixed content). Detect it up front instead of reporting a fake
+        // number or a bogus 'timeout'.
+        function mixedContentBlocked(url) {
+            return location.protocol === 'https:' && url.indexOf('http://') === 0;
+        }
+
+        async function testLatency(url) {
+            if (mixedContentBlocked(url)) return 'blocked';
+            const startTime = performance.now();
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+                
+                await fetch(url, {
+                    method: 'GET',
+                    mode: 'no-cors',
+                    cache: 'no-cache',
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                const endTime = performance.now();
+                return Math.round(endTime - startTime);
+            } catch (error) {
+                return null;
+            }
+        }
+
+        async function startTest() {
+            if (isTesting) return;
+            isTesting = true;
+            results = [];
+            
+            const testBtn = document.getElementById('testBtn');
+            const status = document.getElementById('status');
+            const rankingList = document.getElementById('rankingList');
+            
+            testBtn.disabled = true;
+            testBtn.innerHTML = '<span class="loading-spinner"></span> 测试中...';
+            rankingList.innerHTML = '';
+            
+            // 初始化显示
+            addresses.forEach((addr, index) => {
+                results.push({
+                    ...addr,
+                    latency: null,
+                    tested: false
+                });
+            });
+            renderResults();
+
+            // 测试每个地址
+            for (let i = 0; i < addresses.length; i++) {
+                status.textContent = `正在测试: ${addresses[i].name}...`;
+                
+                // 进行3次测试取平均值
+                const tests = [];
+                for (let j = 0; j < 3; j++) {
+                    const latency = await testLatency(addresses[i].testUrl);
+                    if (latency === 'blocked') {
+                        tests.push('blocked');
+                        break;
+                    }
+                    if (latency !== null) {
+                        tests.push(latency);
+                    }
+                    await new Promise(r => setTimeout(r, 100));
+                }
+                
+                let avgLatency = null;
+                if (tests.some(t => t === 'blocked')) {
+                    avgLatency = 'blocked';
+                } else if (tests.length > 0) {
+                    avgLatency = Math.round(tests.reduce((a, b) => a + b, 0) / tests.length);
+                }
+                
+                results[i].latency = avgLatency;
+                results[i].tested = true;
+                renderResults();
+            }
+
+            status.textContent = '✅ 测试完成！延迟从低到高排名如下：';
+            testBtn.disabled = false;
+            testBtn.textContent = '重新测试';
+            isTesting = false;
+        }
+
+        function renderResults() {
+            const rankingList = document.getElementById('rankingList');
+            
+            // 按延迟排序（null排最后）
+            const num = v => typeof v === 'number';
+            const sorted = [...results].sort((a, b) => {
+                if (num(a.latency) && num(b.latency)) return a.latency - b.latency;
+                if (num(a.latency)) return -1;
+                if (num(b.latency)) return 1;
+                return 0;
+            });
+
+            rankingList.innerHTML = sorted.map((addr, index) => {
+                const rankClass = (index < 3 && typeof addr.latency === 'number') ? `rank-${index + 1}` : '';
+                let latencyText = '等待测试...';
+                let latencyClass = 'testing';
+                
+                if (addr.latency === 'blocked') {
+                    latencyText = '⛔ 需 http 页面 (mixed content)';
+                    latencyClass = 'timeout';
+                } else if (typeof addr.latency === 'number') {
+                    latencyText = `${addr.latency} ms`;
+                    latencyClass = '';
+                } else if (addr.tested) {
+                    latencyText = '超时';
+                    latencyClass = 'timeout';
+                } else if (isTesting) {
+                    latencyText = '测速中...';
+                    latencyClass = 'testing';
+                } else {
+                    latencyText = '等待测试...';
+                    latencyClass = 'testing';
+                }
+
+                let tagHtml = '';
+                if (addr.tag) {
+                    const tagClass = addr.tag === 'priority' ? 'tag-priority' : 
+                                    addr.tag === 'best' ? 'tag-best' : 'tag-https';
+                    tagHtml = `<span class="tag ${tagClass}">${addr.tagText}</span>`;
+                }
+
+                return `
+                    <div class="address-card ${rankClass}">
+                        <div class="card-header">
+                            <div class="rank-badge">
+                                <div class="rank-number ${index >= 3 ? 'other' : ''}">${index + 1}</div>
+                                <div class="address-name">${addr.name}</div>
+                                ${tagHtml}
+                            </div>
+                            <div class="latency ${latencyClass}">${latencyText}</div>
+                        </div>
+                        <div class="endpoints">
+                            <div class="endpoint">
+                                <span class="endpoint-type">OpenAI</span>
+                                <span class="endpoint-url">${addr.openai}</span>
+                                <button class="copy-btn" onclick="copyUrl('${addr.openai}', this)">复制</button>
+                            </div>
+                            ${addr.anthropic ? `<div class="endpoint">
+                                <span class="endpoint-type">Anthropic</span>
+                                <span class="endpoint-url">${addr.anthropic}</span>
+                                <button class="copy-btn" onclick="copyUrl('${addr.anthropic}', this)">复制</button>
+                            </div>` : ''}
+                        </div>
+                        ${addr.note ? `<div class="note">💡 ${addr.note}</div>` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function copyUrl(url, btn) {
+            const showCopied = () => {
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            };
+
+            const fallbackCopy = () => {
+                const textarea = document.createElement('textarea');
+                textarea.value = url;
+                textarea.style.position = 'fixed';
+                textarea.style.left = '-9999px';
+                textarea.style.top = '0';
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                } catch (e) {}
+                document.body.removeChild(textarea);
+                showCopied();
+            };
+
+            // navigator.clipboard 仅在安全上下文(HTTPS/localhost)可用，
+            // 在 HTTP 下为 undefined，访问 writeText 会同步抛错且不会被 .catch 捕获，
+            // 因此需先判断再使用，否则走降级方案。
+            if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(showCopied).catch(fallbackCopy);
+            } else {
+                fallbackCopy();
+            }
+        }
+
+        // 页面加载时初始化显示
+        (function banner() {
+            const el = document.getElementById('protoBanner');
+            const https = location.protocol === 'https:';
+            const httpOnly = addresses.filter(a => a.testUrl.indexOf('http://') === 0).length;
+            el.className = 'proto-banner' + (https ? ' warn' : '');
+            el.innerHTML = https
+                ? `Page served over <b>https</b> — ${httpOnly} of ${addresses.length} addresses are http-only and will show ⛔ (the browser blocks mixed content). Open this file from disk to test those as well.`
+                : `Page opened over <b>${location.protocol.replace(':', '')}</b> — all ${addresses.length} addresses are reachable, including the ${httpOnly} plain-HTTP mirrors.`;
+        })();
+        renderResults();
+    </script>
+</body>
+</html>
+

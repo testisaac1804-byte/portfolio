@@ -34,6 +34,73 @@ python3 ~/scripts/verify-site-update.py # check the live URLs actually serve the
 
 ---
 
+## 2. Shipped 2026-09-27 (Tier-1 round — revision pages, print-log wiring, IsaacDrop)
+
+**Per-subject revision pages — `/revision/<subject>/` × 10** (`python3 ~/scripts/gen-revision-pages.py`)
+
+The hub used to be a list of links; now every subject has a real page: topic checklist → notes → booklet →
+past papers → class files, with progress saved per browser.
+
+| Page | Items | What's on it |
+|---|---|---|
+| `/revision/biology/` | 32 | 22 chapters (6 units) from the notes + Cells & Microbes class files |
+| `/revision/chemistry/` | 31 | 29 chapters (5 units) + Unit 1 class files |
+| `/revision/physics/` | 43 | 28 chapters (9 units) + Forces lesson folders |
+| `/revision/economics/` | 53 | 42 chapters (5 units) + class folders |
+| `/revision/maths/` | 22 | unit index (Unit 1 built, 2–4 tracked) + Edexcel Class files |
+| `/revision/english/`, `design-technology/`, `chinese/`, `physical-education/`, `global-perspectives/` | 10/4/1/0/3 | class-file checklists, paper structure, GP components |
+
+- **Nothing on these pages is invented**: chapter lists are parsed out of `notes/<Subject>-IGCSE-Notes.html`
+  (unit headings + `details.chapter#chN` + the chapter's own intro line), class-file lists are walked out of
+  the real `portfolio/igcse things/1011/<sub>` folders, and every booklet / past-paper / Pearson tile is
+  checked against disk by `check_targets()` before deploy.
+- Progress = `localStorage["rchap-<slug>"]`; the hub reads the same keys, so each card shows
+  "✅ 3 topics revised on this page" and the hub bar counts subjects. Per-page: progress bar, *Hide revised*,
+  *Reset*, print stylesheet.
+- **Notes deep links now work**: `/notes/Biology-IGCSE-Notes.html#ch22` used to land on a collapsed chapter
+  inside a hidden tab (the notes have tabs + `<details>`). `gen-revision-pages.py` injects a tiny
+  `/*rev-deeplink*/` helper (idempotent, re-applied every run) that activates the right tab, opens the
+  details and flashes a blue outline on the chapter.
+- **Global Perspectives dead card fixed** — `/revision/global-perspectives/` explains the three components
+  (Team Project, Individual Report, Written Paper) and links the official Cambridge subject list instead of
+  a bare "no resources uploaded yet".
+- Wired in: `deploy-isaac-site.sh` now runs `gen-revision-pages.py` → `gen-sitemap.py` before the bundle, so
+  the pages and sitemap (10 new URLs) rebuild on every deploy.
+
+**Print log → Print Cost calculator**
+
+- The 🧵 Print Cost panel in `/tools/` now has a **📥 From my print log** block: it fetches
+  `https://print-log.isaac1804.workers.dev/api/prints` (public read) and offers (a) per-material
+  averages — `PLA 2 prints · 100% clean · avg 25.4 g / 2.1 h` — with **Use avg**, and (b) a picker of the
+  last 12 logged prints with **Use this print**.
+- Choosing either fills *filament grams*, *print time* and the **failure allowance from my real fail rate**
+  for that material, then re-runs the calculator. Degrades to "print log unreachable — type the numbers"
+  when offline. *(Log is empty today, so the panel shows the "log a print at /print-log/" state; the wiring
+  was verified against a mocked payload: 4 prints → averages + per-print fill, other calculators untouched.)*
+- `tools.js` gained a generic `extra:` slot so any calculator can host a block above its fields.
+
+**IsaacDrop — the churning tunnel is gone for good (was a stale known-issue)**
+
+- Public access is the **permanent Worker** `https://isaacdrop.isaac1804.workers.dev` (200) and
+  `da.gd/isaacdrop` → GitHub Pages `camdrive.html` → 301 → `isaac1804.com/portfolio/camdrive` → 200, all
+  pointing at that Workers URL. The Mac only runs the **local-only** server (port 8585, launchd
+  `com.isaac.isaacdrop-local`); the tunnel daemon `com.isaac.isaacdrop` is `.plist.disabled`.
+- **Footgun removed:** `IsaacDrop/run-servers.sh` (the old quick-tunnel supervisor) would have rewritten
+  `camdrive.html` with a random `trycloudflare` URL and broken the permanent link. It now refuses to run and
+  prints where the real link lives; override only with `ISAACDROP_ALLOW_TUNNEL=1`. Verified: exit 1,
+  `camdrive.html` SHA unchanged.
+- A **named tunnel** (permanent `*.isaac1804.com` hostname for reaching the Mac itself) is *not* possible with
+  the current API token — it can list tunnels (`GET /cfd_tunnel` → 200) but create returns
+  `Authentication error` (needs Account → Cloudflare Tunnel → Edit on the token). Not needed today; the
+  Workers URL is permanent.
+
+**Verification (live, headless Chromium — `~/scripts/verify-revision-pages.py`):** 11 URLs 200, card counts
+match the generator (32/31/43/53/22/10/4/1/0/3), light theme applied, 3 ticks → bar 9.375% → survives reload →
+hub shows "✅ 3 topics revised", chapter link opens `tab-0`+`ch1` open and visible, print-log panel live,
+zero JS errors.
+
+---
+
 ## 2a. Shipped 2026-09-27 (evening) — 🔗 Link Compressor
 
 **New `/tools/link-compressor/`** — a self-hosted URL shortener living on the real domain:
@@ -220,10 +287,13 @@ IGCSE Science Booklets 2026–27 · IGCSE Biology Cells & Microbes (Unit 1) · I
 - ~~Command palette~~ ✅ ⌘K/Ctrl+K on the portfolio — searches projects, libraries and pages
 
 **Phase 4 — reach (do next)**
-- **Per-subject revision pages** — expand `/revision/` into a real page per subject (syllabus checklist, formula sheet, topic progress)
+- ~~Per-subject revision pages~~ ✅ 2026-09-27 — 10 pages under `/revision/<subject>/` with topic checklists,
+  class-file lists and per-browser progress (see §2)
 - **Build write-ups** — a short post per project (photo + what broke + what you'd change)
+- **Flashcards / quiz mode** generated from the notes (localStorage, offline via the PWA)
+- **Past-paper tracker** — which papers done, score, time (Worker + KV like print-log)
 - **Formula sheet generator** — printable per-subject formula cards
-- **Print Log → calculator link** — feed real logged settings into `/tools/` laser/print calculators
+- ~~Print Log → calculator link~~ ✅ 2026-09-27 — real logged settings + real fail rate feed `/tools/` Print Cost
 - Offline revision packs per subject (PWA groundwork already in place)
 - Commission intake upgrade on `/portfolio/upload` (quote request → email)
 - Quest platform with progress/hints saved per user
@@ -232,7 +302,8 @@ IGCSE Science Booklets 2026–27 · IGCSE Biology Cells & Microbes (Unit 1) · I
 
 **Housekeeping / known issues**
 - Local DNS on the Mac still has a stale entry — flush with `sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder`
-- IsaacDrop's public link depends on trycloudflare quick tunnels, which are rate-limited and churn constantly → move to a **named tunnel** with a permanent hostname
+- ~~IsaacDrop's public link depends on trycloudflare quick tunnels~~ ✅ **fixed** — permanent Worker
+  `isaacdrop.isaac1804.workers.dev`; the old tunnel supervisor now refuses to run (see §2)
 - The homepage `🔌 Local Servers` section links to `http://localhost:…` — only works on this Mac; consider hiding it behind a toggle
 - `da.gd/betterterm` points at `raw.githubusercontent.com` — a GitHub URL in a public short link
 - **Fixed Sep 2026:** junk `"quoted"` directories (720 paths) were being generated because `git ls-tree` without `-z` C-quotes paths containing emoji/non-ASCII. Now uses `-z`, plus a guard in `gen_library_indexes.py`.

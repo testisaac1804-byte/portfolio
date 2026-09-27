@@ -6,6 +6,8 @@ Network DNS sinkhole on ESP32. Blocks ads for all WiFi devices.
 
 **Stack / Tools:** ESP32, C, DNS, IoT
 
+**Reference:** https://github.com/M-Abozaid/esp32-c3-adblock — open-source Pi-hole-class DNS ad-blocker on an ESP32-C3 (537k domains as 40-bit FNV-1a hashes in flash, binary-searched; UDP DNS sinkhole + web dashboard, MIT). Used as the reference for this build.
+
 **Build path:**
 - Note — C3 incompatible with RT-AC58U WPA2. Used WROOM-32D.
 
