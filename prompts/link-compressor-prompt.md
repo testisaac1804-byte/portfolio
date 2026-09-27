@@ -23,8 +23,10 @@ so the short link keeps working forever and tells me how many times it was opene
   clicked: IP, city/country, ISP, device and which page they came from. Every creation logs the same
   about whoever made it.
 - **Only I can see the logs** — the per-link log and the combined activity feed both require the admin
-  token; anyone else gets a 401. The token also removes the rate limit, so with the password there is
-  no hourly cap on making links.
+  password; anyone else gets a 401. The password (🔒 Admin box at the top of the page) also removes the
+  rate limit, so with it there is no hourly cap on making links.
+- **Everyone else can only make links** — a visitor can compress any link and open it; deleting,
+  custom names, the list and the logs are all behind the password.
 - **History** — searchable, exportable as JSON, kept in `localStorage`; with the admin token it
   merges with every link created anywhere.
 - **No duplicates** — compressing the same URL twice hands back the code it already has.
