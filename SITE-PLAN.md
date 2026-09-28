@@ -19,7 +19,7 @@ _Last updated: 2026-09-27 · Live: https://isaac1804.com · Deploy: `bash ~/scri
 | `/s/<code>` | **NEW** — short links: Worker route, 302 + click counting, KV `LINKS` |
 
 **Architecture:** one Cloudflare Pages deployment; bulk files live in the `portfolio-files` store and are served
-through `files.isaac1804.com` (correct content-types, inline previews, `?download=1`).
+through `cdn.isaac1804.com` (correct content-types, inline previews, `?download=1`).
 DNS on Cloudflare (`carla`/`yichun.ns.cloudflare.com`), nameservers set at Spaceship via API.
 
 ### File pipeline (run in this order)
