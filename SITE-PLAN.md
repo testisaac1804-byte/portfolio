@@ -34,6 +34,74 @@ python3 ~/scripts/verify-site-update.py # check the live URLs actually serve the
 
 ---
 
+## 2. Shipped 2026-09-28 (round 3 — 51 real project specs · previews fixed · file-placement audit)
+
+### 51 project specs written from the actual source (`gen-project-specs.py`)
+
+Every software card that had only a title/status stub, or a spec under 600 bytes, now carries a real spec
+assembled **only** from files that exist:
+
+- **Source resolution** (conservative, reviewed): each project gets its source folder/file found by exact
+  name match, else the published copy on the site. **37 name a real source folder**, **14 say plainly
+  “published copy on the site (working folder isn’t on this Mac)”** — nothing is guessed.
+- Each spec gets: Where it lives · Stack (real file-type counts + detected toolchain) · What’s in the code
+  (per-file line counts) · Verified in the Python source (routes, CLI options, classes, functions) ·
+  Verified in the page source (title, headings, fetches/endpoints, function names) · script comments.
+- **Binary artefacts are never line-counted** — a compiled `.g3a` Casio add-in was initially reported as
+  “44 lines”; it now reads `50 KB (compiled Casio add-in, binary — not line-counted)`. `.g3a/.zip/.stl/.pdf/
+  .dmg/...` all handled as artefacts, not text.
+- Idempotent: re-running replaces the generated block instead of appending a second copy.
+
+**Effect on `/builds/`: 43 → 68 logs.** The 25 previously uncovered projects now have pages, **0 pages carry
+the “spec is a stub” warning** (was 51) and the hub’s “Not documented yet” list is **empty**.
+
+### Previews — two real bugs, plus the browse pages
+
+- **197 browse pages never used the preview page** (`tools/generate.py` emitted plain file links while the
+  other three generators already emitted `preview.html?u=` + a ⬇ button). Now every file row is
+  click → preview, with a separate ⬇ Download. Preview-routed pages: **638 → 801**.
+- **`preview.html` had no DXF support at all**, so DXF rows would have hit “no inline preview”. Added a
+  dependency-free 2D DXF viewer (LINE / LWPOLYLINE+bulge / POLYLINE / CIRCLE / ARC / ELLIPSE / SPLINE,
+  auto-fit, scroll-zoom, drag-pan). Verified on 10 real DXFs — all draw, up to 21,541 segments.
+- **3D models could render a completely blank canvas.** `viewer3D()` looked at the origin without centring
+  the geometry, so any mesh whose vertices sit away from the origin (e.g. `cad/cube-holder.stl` at x≈−45,
+  y≈35) drew nothing — no error, badge still said “inline preview”. Fixed by centring + normalising to 4
+  units (the approach `app.js` already used). Verified by reading pixels out of the WebGL context.
+- `cad/pendant.stl` was **0 bytes** — replaced with the only real pendant model on the machine
+  (`~/Downloads/ImageToStl.com_Pendant.stl`, 5832 tris, 40×9×3 mm). Deep check of all 228 viewer files: 0 problems.
+
+### File placement — audited, then fixed
+
+- **`/portfolio/reference/` was missing 10 of its 11 subfolders live.** `gen_library_indexes.py` rebuilt each
+  listing *only* from the storage-repo blob list, wiping repo-only children on every deploy. Now merges
+  store + repo + existing entries and drops renamed ones (so “Graph” → “Graph??” can’t resurrect a dead row);
+  plus a guard that refuses to overwrite a non-generated page.
+- **`Graph??/` was a dead link** — the generator didn’t percent-encode hrefs, so the browser read it as path
+  `Graph` + query. Fixed for child rows, breadcrumbs and parent links.
+- Removed 5 **stale duplicate** IGCSE note files from the portfolio root (older than the canonical
+  `homepage/notes/` copies), 15 `.DS_Store`, and a 0-byte orphan upload; repointed the portfolio landing
+  page’s note cards at `/notes/`.
+- Restored **`scam-mirror`’s 4 stylesheets** from the real dump (316 KB of CSS that was 404ing), fixed the
+  scam-evidence page’s `file:///tmp/...` links (dead for every visitor) and Kinetic’s privacy link, and wrote
+  the missing `school-shield/README.md` from the actual code.
+
+**Audit scripts (reusable, both keepers):** `audit-portfolio-previews.py` (card action targets + viewer
+integrity), `audit-file-placement2.py` (stale listings, stale twins, zero-byte files, loose root files).
+Current state: **887 listing pages · 0 dead rows · 0 stale twins · 0 empty dirs**; the only remaining
+“dead” hits are the 38 unrecoverable Toddle stylesheets and ~10 JS template strings.
+
+**Still open (deliberate):** the saved `toddle-class-portfolio` dump renders unstyled because its 38
+stylesheets were never captured and exist nowhere on the machine — it now carries a visible notice instead of
+being silently restyled. Card reflections on `/builds/` remain Isaac’s to write.
+
+### Verification
+Live (headless Chromium + HTTP): hub 68 logs / 0 stub mentions / 0 undocumented entries; 8 previously
+undocumented pages each render 4–7 spec headings (5 have real folder stat tiles); reference hub 11/11
+subfolders 200; browse rows preview-first; click-through opens a working preview; `Graph??` link 200; all
+repaired URLs 200; stale duplicates 404 with canonical `/notes/` 200; zero JS errors.
+
+---
+
 ## 2. Shipped 2026-09-27 (round 2 — 🔧 Build Logs at `/builds/`)
 
 One page per software project, assembled **only from evidence that already exists** — nothing narrated into
