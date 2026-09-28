@@ -91,7 +91,7 @@ img{max-width:100%;border-radius:8px;margin:8px 0}
   <div class="transcript" id="transcript-preview">
     <p style="color:var(--muted)">載入中...</p>
   </div>
-  <p style="margin-top:8px"><a class="btn btn-b" href="file:///tmp/scam-evidence/transcript.txt" target="_blank">📄 查看完整轉錄</a></p>
+  <p style="margin-top:8px;color:var(--muted);font-size:12px">📄 完整轉錄與截圖格（transcript.txt / frames/）屬於本地調查包，未隨網頁發佈。</p></p>
 </div>
 
 <div class="card">
@@ -127,23 +127,14 @@ img{max-width:100%;border-radius:8px;margin:8px 0}
 </div>
 
 <script>
-// Load transcript
-fetch('file:///tmp/scam-evidence/transcript.txt')
-  .then(r => r.text())
-  .then(t => {
-    document.getElementById('transcript-preview').innerHTML = t.split('\n').map(line => {
-      if(line.startsWith('===')) return `<div style="color:var(--orange);margin-top:10px;font-weight:700">${line}</div>`;
-      if(line.match(/^\s*$/)) return '<br>';
-      return `<div>${line}</div>`;
-    }).join('');
-  })
-  .catch(() => document.getElementById('transcript-preview').innerHTML = '<p style="color:var(--muted)">轉錄檔案需從本地載入。請打開 /tmp/scam-evidence/transcript.txt</p>');
+// Full transcript lived in the local investigation bundle (/tmp/scam-evidence) and is
+// no longer shipped with the page — the preview above shows the extracted excerpt.
 
 // Load frames
 let framesHtml = '';
 for(let i=1; i<=17; i++){
   let ts = [10,30,60,120,180,300,420,540,660,780,900,480,600,720,840,960,120][i-1] || i*60;
-  framesHtml += `<div><img src="file:///tmp/scam-evidence/frames/frame_${ts}s.jpg" onerror="this.parentElement.innerHTML='<div style=background:#1a1a2e;height:300px;display:flex;align-items:center;justify-content:center;color:var(--muted)>🖼️ ${Math.floor(ts/60)}:${String(ts%60).padStart(2,\"0\")}</div>'"><div style="font-size:10px;color:var(--muted);text-align:center">${Math.floor(ts/60)}:${String(ts%60).padStart(2,'0')}</div></div>`;
+  framesHtml += `<div><img src="about:blank#frame-frame_${ts}s.jpg" onerror="this.parentElement.innerHTML='<div style=background:#1a1a2e;height:300px;display:flex;align-items:center;justify-content:center;color:var(--muted)>🖼️ ${Math.floor(ts/60)}:${String(ts%60).padStart(2,\"0\")}</div>'"><div style="font-size:10px;color:var(--muted);text-align:center">${Math.floor(ts/60)}:${String(ts%60).padStart(2,'0')}</div></div>`;
 }
 document.getElementById('frames-grid').innerHTML = framesHtml;
 </script>

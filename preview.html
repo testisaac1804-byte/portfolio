@@ -64,6 +64,7 @@ var IMG=['.png','.jpg','.jpeg','.gif','.webp','.svg','.bmp','.ico'];
 var VID=['.mp4','.webm','.mov','.m4v','.ogv','.mp3','.wav','.m4a','.ogg','.flac','.aac'];
 var DOC=['.pdf'];
 var TXT=['.txt','.md','.json','.csv','.html','.htm','.xml','.log','.gcode','.nc','.gc','.js','.css'];
+var DXF=['.dxf'];
 var M3D=['.stl'];
 var M3MF=['.3mf'];
 
@@ -86,20 +87,30 @@ function viewer3D(url, is3mf){
   var ctl=null;
   if(typeof THREE.OrbitControls==='function'){ctl=new THREE.OrbitControls(cam,ren.domElement);ctl.enableDamping=true;ctl.dampingFactor=.12}
   var mat=new THREE.MeshStandardMaterial({color:0x8b93c2,metalness:.25,roughness:.55,flatShading:true});
+  // Frame the model properly: centre it and normalise to ~4 units, then look at the
+  // origin. Without the centring, a mesh whose vertices are off-origin rendered as a
+  // blank canvas with no error at all.
+  var frame=function(obj){
+    obj.updateMatrixWorld(true);
+    var bb=new THREE.Box3().setFromObject(obj);
+    var c=bb.getCenter(new THREE.Vector3()), sz=bb.getSize(new THREE.Vector3());
+    var sc=4/Math.max(sz.x,sz.y,sz.z,0.001);
+    obj.scale.multiplyScalar(sc);
+    obj.position.set(-c.x*sc,-c.y*sc,-c.z*sc);
+    cam.near=0.01;cam.far=1000;cam.position.set(5,3,5);cam.lookAt(0,0,0);cam.updateProjectionMatrix();
+    if(ctl){ctl.target.set(0,0,0);ctl.update()}
+  };
   var onLoad=function(geo,name){
-    geo.computeBoundingSphere();
-    var r=geo.boundingSphere.radius||1;
-    cam.position.set(r*1.8,r*1.2,r*2.2);
-    cam.lookAt(0,0,0);
-    var mesh=new THREE.Mesh(geo,mat);mesh.name=name;scene.add(mesh);
-    if(ctl)ctl.target.set(0,0,0);
+    geo.computeBoundingBox();
+    var mesh=new THREE.Mesh(geo,mat);mesh.name=name;
+    frame(mesh);scene.add(mesh);
     animate();
   };
   function animate(){requestAnimationFrame(animate);if(ctl)ctl.update();ren.render(scene,cam)}
   var loader=is3mf? new THREE.ThreeMFLoader():new THREE.STLLoader();
   function onGeo(geo){
     try{
-      if(is3mf&&geo&&(geo.group||geo)){var g=geo.group||geo;g.traverse(function(c){if(c.isMesh){c.material=mat}});scene.add(g);var bb=new THREE.Box3().setFromObject(g);var r=bb.getSize().length()/2;cam.position.set(r*1.6,r*1.0,r*1.9);cam.lookAt(0,0,0);if(ctl)ctl.target.set(0,0,0);animate();}
+      if(is3mf&&geo&&(geo.group||geo)){var g=geo.group||geo;g.traverse(function(c){if(c.isMesh){c.material=mat}});frame(g);scene.add(g);animate();}
       else if(geo&&geo.isBufferGeometry)onLoad(geo,'model');
       else throw new Error('empty model');
     }catch(e){fallback3D(url)}
@@ -123,6 +134,181 @@ function viewer3D(url, is3mf){
 }
 function showErr(m){var e=document.getElementById('err');e.hidden=false;e.textContent=m;document.getElementById('wrap').innerHTML=''}
 
+
+/* ---------- DXF preview (2D, no libraries) ---------- */
+function _dxfPairs(L, i) {
+  var out = [], j = i;
+  while (j < L.length - 1 && L[j].trim() !== '0') { out.push([L[j].trim(), (L[j + 1] || '').trim()]); j += 2; }
+  return { p: out, next: j };
+}
+function _dxfGet(p, code) {
+  for (var i = p.length - 1; i >= 0; i--) if (p[i][0] === code) return p[i][1];
+  return undefined;
+}
+function _dxfAll(p, code) {
+  var r = [];
+  for (var i = 0; i < p.length; i++) if (p[i][0] === code) r.push(parseFloat(p[i][1]));
+  return r;
+}
+function _arc(cx, cy, r, a0, a1, ccw, out) {
+  var t = ccw ? ((a1 < a0 ? a1 + 2 * Math.PI : a1) - a0) : ((a0 < a1 ? a0 + 2 * Math.PI : a0) - a1);
+  var steps = Math.max(10, Math.ceil(Math.abs(t) / (Math.PI / 40)));
+  for (var i = 0; i <= steps; i++) {
+    var a = a0 + (ccw ? t : -t) * i / steps;
+    out.push({ x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) });
+  }
+}
+function dxfParse(text) {
+  var L = text.split(/\r\n|\r|\n/), polys = [], ents = 0, i = 0, inEnt = false, cur = null;
+  while (i < L.length - 1) {
+    var code = L[i].trim(), val = (L[i + 1] || '').trim();
+    if (code === '0') {
+      var up = val.toUpperCase();
+      if (up === 'SECTION') { inEnt = ((L[i + 3] || '').trim().toUpperCase() === 'ENTITIES'); i += 4; continue; }
+      if (up === 'ENDSEC') { inEnt = false; cur = null; i += 2; continue; }
+      if (!inEnt) { i += 2; continue; }
+      var r = _dxfPairs(L, i + 2), p = r.p;
+      i = r.next;
+      if (up === 'LINE') {
+        var x1 = parseFloat(_dxfGet(p, '10')), y1 = parseFloat(_dxfGet(p, '20'));
+        var x2 = parseFloat(_dxfGet(p, '11')), y2 = parseFloat(_dxfGet(p, '21'));
+        if (isFinite(x1) && isFinite(x2)) polys.push({ p: [{ x: x1, y: y1 }, { x: x2, y: y2 }], c: false });
+        ents++;
+      } else if (up === 'LWPOLYLINE' || up === 'POLYLINE') {
+        var xs = _dxfAll(p, '10'), ys = _dxfAll(p, '20'), bl = _dxfAll(p, '42');
+        var pts = [];
+        for (var k = 0; k < Math.min(xs.length, ys.length); k++) {
+          var pt = { x: xs[k], y: ys[k] };
+          if (pts.length && k - 1 < bl.length && Math.abs(bl[k - 1]) > 1e-9) _bulgeTo(pts[pts.length - 1], pt, bl[k - 1], pts);
+          else pts.push(pt);
+        }
+        if (up === 'LWPOLYLINE' && pts.length > 1) {
+          var closed = (parseInt(_dxfGet(p, '70') || '0', 10) & 1) === 1;
+          polys.push({ p: pts, c: closed });
+          if (closed) { cur = null; }
+          ents++;
+        } else {
+          cur = { p: pts, c: false };
+          polys.push(cur);
+          ents++;
+        }
+      } else if (up === 'VERTEX' && cur) {
+        var vx = parseFloat(_dxfGet(p, '10')), vy = parseFloat(_dxfGet(p, '20'));
+        if (isFinite(vx)) cur.p.push({ x: vx, y: vy });
+      } else if (up === 'SEQEND') {
+        cur = null;
+      } else if (up === 'CIRCLE') {
+        var cx = parseFloat(_dxfGet(p, '10')), cy = parseFloat(_dxfGet(p, '20')), rr = parseFloat(_dxfGet(p, '40'));
+        if (isFinite(cx) && rr > 0) { var c1 = []; _arc(cx, cy, rr, 0, 2 * Math.PI, true, c1); polys.push({ p: c1, c: true }); ents++; }
+      } else if (up === 'ARC') {
+        var ax = parseFloat(_dxfGet(p, '10')), ay = parseFloat(_dxfGet(p, '20')), ar = parseFloat(_dxfGet(p, '40'));
+        var a0 = parseFloat(_dxfGet(p, '50')) * Math.PI / 180, a1 = parseFloat(_dxfGet(p, '51')) * Math.PI / 180;
+        if (isFinite(ax) && ar > 0) { var c2 = []; _arc(ax, ay, ar, a0, a1, true, c2); polys.push({ p: c2, c: false }); ents++; }
+      } else if (up === 'ELLIPSE') {
+        var ex = parseFloat(_dxfGet(p, '10')), ey = parseFloat(_dxfGet(p, '20'));
+        var mx = parseFloat(_dxfGet(p, '11')), my = parseFloat(_dxfGet(p, '21')), ra = parseFloat(_dxfGet(p, '40')) || 1;
+        var e0 = parseFloat(_dxfGet(p, '41')) || 0, e1s = parseFloat(_dxfGet(p, '42'));
+        if (!isFinite(e1s)) e1s = 2 * Math.PI;
+        var st = Math.max(16, Math.ceil(Math.abs(e1s - e0) / (Math.PI / 40))), ep = [];
+        for (var t2 = 0; t2 <= st; t2++) {
+          var tt = e0 + (e1s - e0) * t2 / st, ct = Math.cos(tt), stn = Math.sin(tt);
+          ep.push({ x: ex + mx * ct - my * ra * stn, y: ey + my * ct + mx * ra * stn });
+        }
+        polys.push({ p: ep, c: false }); ents++;
+      } else if (up === 'SPLINE') {
+        var sx = _dxfAll(p, '10'), sy = _dxfAll(p, '20'), sp = [];
+        for (var q = 0; q < Math.min(sx.length, sy.length); q++) sp.push({ x: sx[q], y: sy[q] });
+        if (sp.length > 1) { polys.push({ p: sp, c: false }); ents++; }
+      }
+      continue;
+    }
+    i += 2;
+  }
+  return { polys: polys, ents: ents };
+}
+function _bulgeTo(p1, p2, b, out) {
+  var c = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+  if (c < 1e-9) { out.push(p2); return; }
+  var R = c * (1 + b * b) / (4 * Math.abs(b));
+  var ap = R - Math.abs(b * c / 2), sg = b > 0 ? 1 : -1;
+  var dx = p2.x - p1.x, dy = p2.y - p1.y;
+  var cx = (p1.x + p2.x) / 2 + (-dy / c) * ap * sg, cy = (p1.y + p2.y) / 2 + (dx / c) * ap * sg;
+  var a0 = Math.atan2(p1.y - cy, p1.x - cx), a1 = Math.atan2(p2.y - cy, p2.x - cx);
+  var tmp = [];
+  _arc(cx, cy, R, a0, a1, b > 0, tmp);
+  for (var i = 1; i < tmp.length; i++) out.push(tmp[i]);
+}
+function viewerDXF(u) {
+  var w = document.getElementById('wrap');
+  w.innerHTML = '<div id="canvasbox"><canvas id="cv"></canvas>' +
+    '<div class="hint">scroll = zoom · drag = pan' + '</div></div>';
+  var box = document.getElementById('canvasbox'), cv = document.getElementById('cv');
+  var ctx = cv.getContext('2d');
+  fetch(u).then(function (r) { return r.text(); }).then(function (txt) {
+    var res = dxfParse(txt);
+    if (!res.polys.length) {
+      document.getElementById('badge2').hidden = false;
+      w.innerHTML = '<div id="nodl"><div class="ico">📐</div><h2>Nothing to draw in this DXF</h2>' +
+        '<p>It parsed, but no drawable entities (LINE / POLYLINE / CIRCLE / ARC / ELLIPSE) were found.</p>' +
+        '<a class="btn" href="' + u + (u.indexOf('?') < 0 ? '?' : '&') + 'download=1">⬇ Download file</a></div>';
+      return;
+    }
+    var minx = Infinity, miny = Infinity, maxx = -Infinity, maxy = -Infinity, segs = 0;
+    res.polys.forEach(function (pl) {
+      pl.p.forEach(function (pt) {
+        if (pt.x < minx) minx = pt.x; if (pt.x > maxx) maxx = pt.x;
+        if (pt.y < miny) miny = pt.y; if (pt.y > maxy) maxy = pt.y;
+      });
+      segs += Math.max(0, pl.p.length - 1);
+    });
+    var W = box.clientWidth, H = box.clientHeight, dpr = window.devicePixelRatio || 1;
+    var pad = 24, sx = (W - pad * 2) / Math.max(maxx - minx, 1e-6), sy = (H - pad * 2) / Math.max(maxy - miny, 1e-6);
+    var scale = Math.min(sx, sy), offx = (W - (maxx - minx) * scale) / 2, offy = (H - (maxy - miny) * scale) / 2;
+    var zoom = 1, panx = 0, pany = 0;
+    function draw() {
+      cv.width = W * dpr; cv.height = H * dpr;
+      cv.style.width = W + 'px'; cv.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.fillStyle = '#14161c'; ctx.fillRect(0, 0, W, H);
+      ctx.strokeStyle = '#c8ccd6'; ctx.lineWidth = 1.1; ctx.beginPath();
+      function tx(pt) {
+        var X = offx + (pt.x - minx) * scale, Y = offy + (maxy - pt.y) * scale;  // y-flip (DXF is y-up)
+        return [X * zoom + panx, Y * zoom + pany];
+      }
+      res.polys.forEach(function (pl) {
+        var first = true;
+        pl.p.forEach(function (pt) {
+          var a = tx(pt);
+          if (first) { ctx.moveTo(a[0], a[1]); first = false; } else ctx.lineTo(a[0], a[1]);
+        });
+        if (pl.c && pl.p.length > 1) { var z = tx(pl.p[0]); ctx.closePath(); ctx.moveTo(z[0], z[1]); }
+      });
+      ctx.stroke();
+      document.querySelector('#canvasbox .hint').textContent =
+        segs + ' segments · ' + res.polys.length + ' paths · ' + ents0(res.ents) + ' entities · scroll = zoom';
+    }
+    function ents0(n) { return n; }
+    draw();
+    box.addEventListener('wheel', function (ev) {
+      ev.preventDefault();
+      var f = ev.deltaY < 0 ? 1.12 : 1 / 1.12;
+      var rx = ev.offsetX, ry = ev.offsetY;
+      panx = rx - (rx - panx) * f; pany = ry - (ry - pany) * f; zoom *= f;
+      draw();
+    }, { passive: false });
+    var drag = null;
+    box.addEventListener('pointerdown', function (ev) { drag = [ev.clientX - panx, ev.clientY - pany]; box.style.cursor = 'grabbing'; });
+    window.addEventListener('pointermove', function (ev) {
+      if (!drag) return;
+      panx = ev.clientX - drag[0]; pany = ev.clientY - drag[1]; draw();
+    });
+    window.addEventListener('pointerup', function () { drag = null; box.style.cursor = 'grab'; });
+    if (!res.polys.length) return;
+  }).catch(function (err) {
+    showErr('DXF preview failed: ' + err.message + ' — the Download button still works.');
+  });
+}
+
 function show(u){
   var e=ext(u),w=document.getElementById('wrap');
   var ex=IMG.indexOf(e)>=0;
@@ -143,6 +329,10 @@ function show(u){
       w.innerHTML='<pre>'+t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</pre>';
     }).catch(function(err){showErr('text preview failed: '+err.message)});
     return;
+  }
+  if(DXF.indexOf(e)>=0){
+    document.getElementById('badge').hidden=false;
+    viewerDXF(u);return;
   }
   if(M3D.indexOf(e)>=0||M3MF.indexOf(e)>=0){
     document.getElementById('badge').hidden=false;

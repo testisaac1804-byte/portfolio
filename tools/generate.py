@@ -4,13 +4,17 @@
 Run from the deploy root (portfolio-deploy/) before pushing.
 Excludes build junk (.pio, .git, __pycache__, node_modules, venv, .DS_Store, etc).
 """
-import os, json, datetime, html
+import os, json, datetime, html, urllib.parse
 
 ROOT = os.path.dirname(os.path.abspath(__file__))  # tools/
 DEPLOY = os.path.dirname(ROOT)
+# Canonical site prefix for the deployed portfolio (files live under /portfolio/).
+SITE = "https://isaac1804.com/portfolio"
 
+# 'tools' is excluded only at the deploy ROOT (it holds this generator); a project's
+# own tools/ folder is real content and must stay listed + browsable.
 EXCLUDE_DIRS = {'.git', '.pio', '__pycache__', 'node_modules', 'venv', '.venv',
-                'env', '.idea', '.vscode', '.gitattributes', 'tools'}
+                'env', '.idea', '.vscode', '.gitattributes'}
 EXCLUDE_FILES = {'.DS_Store', 'Thumbs.db', 'desktop.ini', 'files.json'}
 
 def is_listing(path):
@@ -108,7 +112,8 @@ def write_file_listing(dirpath):
     rows = []
     try: entries = sorted(os.listdir(dirpath), key=lambda s: s.lower())
     except OSError: entries = []
-    dirs = [(e, True) for e in entries if os.path.isdir(os.path.join(dirpath, e)) and e not in EXCLUDE_DIRS]
+    dirs = [(e, True) for e in entries if os.path.isdir(os.path.join(dirpath, e))
+            and e not in EXCLUDE_DIRS and not (e == 'tools' and os.path.abspath(dirpath) == DEPLOY)]
     fls = [(e, False) for e in entries if os.path.isfile(os.path.join(dirpath, e)) and e not in EXCLUDE_FILES and e != 'index.html']
     # parent link
     if rp:
@@ -120,14 +125,30 @@ def write_file_listing(dirpath):
         if not isdir:
             k = ext_kind(name)
             icon = {'image':'\U0001f5bc','stl':'\U0001f9ca','dxf':'\U0001f4d0','pdf':'\U0001f4d6','text':'\U0001f4c4','binary':'\U0001f4e6'}.get(k,'\U0001f4c4')
-        href = html.escape(name) + ('/' if isdir else '')
         size = ''
         if not isdir:
             try: size = human(os.path.getsize(os.path.join(dirpath, name)))
             except OSError: size = ''
-        rows.append(f'<a class="row" href="{href}"><span>{icon} {html.escape(name)}</span>'
-                    + (f'<span class="sz">{size}</span>' if size else '') + '</a>')
-    doc = f"""<!DOCTYPE html><html lang="en"><!--portfolio-listing--><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>{html.escape(title)} - Isaac's Files</title><style>body{{font-family:Inter,system-ui,sans-serif;background:#0d0e12;color:#d0d6e0;margin:0;padding:24px;max-width:900px}}h1{{font-size:20px;color:#f0f0f5;margin:12px 0 16px}}a.home{{display:inline-block;margin-bottom:8px;color:#818cf8;text-decoration:none;font-size:13px}}.bc{{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px;margin-bottom:4px;color:#666}}.bc a{{color:#818cf8;text-decoration:none}}.bc a:hover{{text-decoration:underline}}.bc .sep{{color:#444}}.bc .cur{{color:#c8ccd6;font-weight:600}}.row{{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 12px;border:1px solid rgba(255,255,255,0.06);border-radius:6px;margin-bottom:6px;text-decoration:none;color:#c8ccd6;font-size:14px;background:rgba(255,255,255,0.02)}}.row:hover{{background:rgba(99,102,241,0.1);border-color:rgba(99,102,241,0.3)}}.row.up{{color:#818cf8}}.row .sz{{color:#666;font-size:12px;white-space:nowrap}}</style></head><body>{crumb_html}<h1>{html.escape(title)}</h1>{''.join(rows)}</body></html>"""
+        if isdir:
+            # folders keep the plain row — clicking opens the generated listing
+            # href must be percent-encoded: a folder named "Graph??" produced
+            # href="Graph??/" which the browser reads as path "Graph" + query "?/" → dead link
+            rows.append(f'<a class="row" href="{urllib.parse.quote(name, safe="")}/">'
+                        f'<span>{icon} {html.escape(name)}</span></a>')
+        else:
+            # FILES: click = PREVIEW (preview page), with a SEPARATE ⬇ Download button.
+            # Raw file links made the browser download instead of previewing (Isaac's
+            # rule: preview first, download only when the ⬇ button is pressed).
+            fpath = (rp + '/' + name) if rp else name
+            furl = SITE + '/' + urllib.parse.quote(fpath)
+            prow = f'{SITE}/preview?u=' + urllib.parse.quote(furl, safe='')
+            durl = furl + '?download=1'
+            rows.append(f'<div class="frow"><a class="row" href="{prow}" rel="noopener">'
+                        f'<span>{icon} {html.escape(name)}</span>'
+                        + (f'<span class="sz">{size}</span>' if size else '') + '</a>'
+                        f'<a class="dl" href="{durl}" title="Download">\u2b07</a>'
+                        f'<a class="dl" href="{furl}" target="_blank" rel="noopener" title="Open in a new tab">\u2197</a></div>')
+    doc = f"""<!DOCTYPE html><html lang="en"><!--portfolio-listing--><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>{html.escape(title)} - Isaac's Files</title><style>body{{font-family:Inter,system-ui,sans-serif;background:#0d0e12;color:#d0d6e0;margin:0;padding:24px;max-width:900px}}h1{{font-size:20px;color:#f0f0f5;margin:12px 0 16px}}a.home{{display:inline-block;margin-bottom:8px;color:#818cf8;text-decoration:none;font-size:13px}}.bc{{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px;margin-bottom:4px;color:#666}}.bc a{{color:#818cf8;text-decoration:none}}.bc a:hover{{text-decoration:underline}}.bc .sep{{color:#444}}.bc .cur{{color:#c8ccd6;font-weight:600}}.row{{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 12px;border:1px solid rgba(255,255,255,0.06);border-radius:6px;margin-bottom:6px;text-decoration:none;color:#c8ccd6;font-size:14px;background:rgba(255,255,255,0.02)}}.row:hover{{background:rgba(99,102,241,0.1);border-color:rgba(99,102,241,0.3)}}.row.up{{color:#818cf8}}.row .sz{{color:#666;font-size:12px;white-space:nowrap}}.frow{{display:flex;align-items:center;gap:8px;margin-bottom:6px}}.frow .row{{flex:1;margin-bottom:0}}.dl{{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;padding:9px 12px;border-radius:6px;text-decoration:none;font-size:12px;color:#c8ccd6;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);white-space:nowrap}}.dl:hover{{background:rgba(99,102,241,0.15);border-color:rgba(99,102,241,0.4);color:#fff}}</style></head><body>{crumb_html}<h1>{html.escape(title)}</h1>{''.join(rows)}</body></html>"""
     with open(os.path.join(dirpath, 'index.html'), 'w') as fh:
         fh.write(doc)
 
