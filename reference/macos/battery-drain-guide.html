@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Battery Drain Mode — Keep Your Mac Awake Until 0%</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1c2330; --mut:#67707f; --line:#e3e7ee;
+    --acc:#2f6fed; --acc-soft:#e8effd; --good:#177245; --good-soft:#e6f4ec;
+    --warn:#b4540a; --warn-soft:#fdf0e2; --bad:#b3261e; --bad-soft:#fdecea;
+    --mono:#0f172a; --term:#0d1117; --term-ink:#c9d1d9; --term-dim:#8b949e;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.6; padding-bottom:80px;}
+  .wrap{max-width:900px; margin:0 auto; padding:0 20px;}
+
+  /* header */
+  header{background:linear-gradient(135deg,#1c3f94 0%,#2f6fed 60%,#4f8bff 100%); color:#fff; padding:44px 0 36px; margin-bottom:28px;}
+  header .wrap{display:flex; flex-direction:column; gap:10px;}
+  .kicker{font-size:12px; letter-spacing:2px; text-transform:uppercase; opacity:.85; font-weight:600;}
+  h1{font-size:32px; line-height:1.2; font-weight:800;}
+  .sub{font-size:16px; opacity:.92; max-width:640px;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px;}
+  .chip{background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.35); padding:4px 12px; border-radius:999px; font-size:12.5px; font-weight:600;}
+
+  /* tabs */
+  nav.tabs{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 22px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:8px; position:sticky; top:10px; z-index:50; box-shadow:0 4px 14px rgba(20,30,60,.07);}
+  input[type=radio]{display:none;}
+  .tab{display:flex; align-items:center; gap:7px; padding:9px 15px; border-radius:8px; font-size:14px; font-weight:600; color:var(--mut); cursor:pointer; user-select:none; background:transparent; border:1px solid transparent; transition:all .15s;}
+  .tab:hover{background:#f0f3f8; color:var(--ink);}
+  input:checked+label.tab{background:var(--acc); color:#fff; border-color:var(--acc);}
+  .panel{display:none; animation:fade .25s ease;}
+  .panel.on{display:block;}
+  @keyframes fade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;}}
+
+  /* cards */
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:24px; margin-bottom:18px;}
+  .card h2{font-size:20px; margin-bottom:14px; display:flex; align-items:center; gap:9px;}
+  .card h3{font-size:15.5px; margin:18px 0 8px;}
+  .card p{color:#333b4a; margin-bottom:10px;}
+  .card p:last-child{margin-bottom:0;}
+  .card ul,.card ol{margin:0 0 12px 22px; color:#333b4a;}
+  .card li{margin-bottom:7px;}
+  b,kbd,code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+  code.inline{background:#eef1f6; border:1px solid var(--line); border-radius:5px; padding:1px 6px; font-size:13px; color:#22419e;}
+  kbd{background:#f2f4f8; border:1px solid #d6dbe4; border-bottom-width:2px; border-radius:5px; padding:1px 6px; font-size:12px;}
+
+  /* code blocks */
+  .codeblock{position:relative; background:var(--term); border-radius:10px; margin:12px 0; overflow:hidden;}
+  .codeblock pre{padding:16px 16px 14px; overflow-x:auto; color:var(--term-ink); font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; line-height:1.65;}
+  .codeblock .cmd{color:#7ee787;} .codeblock .cmt{color:var(--term-dim);}
+  .copybtn{position:absolute; top:8px; right:8px; background:rgba(255,255,255,.1); color:var(--term-ink); border:1px solid rgba(255,255,255,.2); border-radius:6px; padding:4px 10px; font-size:11.5px; font-weight:600; cursor:pointer;}
+  .copybtn:hover{background:rgba(255,255,255,.22);}
+  .copybtn.ok{background:#2ea043; border-color:#2ea043; color:#fff;}
+
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{background:#f0f3f8; font-size:12.5px; text-transform:uppercase; letter-spacing:.5px; color:var(--mut);}
+  tr:last-child td{border-bottom:none;}
+  td code{font-size:12px;}
+
+  /* badges + callouts */
+  .badge{display:inline-block; padding:2px 9px; border-radius:999px; font-size:11.5px; font-weight:700;}
+  .b-on{background:var(--bad-soft); color:var(--bad);}
+  .b-off{background:var(--good-soft); color:var(--good);}
+  .callout{border-left:4px solid var(--acc); background:#f4f7fd; border-radius:0 10px 10px 0; padding:13px 16px; margin:14px 0; font-size:14px;}
+  .callout.warn{border-color:var(--warn); background:var(--warn-soft);}
+  .callout.good{border-color:var(--good); background:var(--good-soft);}
+  .callout b{color:inherit;}
+
+  /* steps */
+  .step{display:flex; gap:14px; margin-bottom:16px; align-items:flex-start;}
+  .stepnum{flex:0 0 30px; height:30px; border-radius:50%; background:var(--acc); color:#fff; font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center;}
+  .stepbody{min-width:0;}
+  .stepbody h4{font-size:15px; margin-bottom:3px;}
+
+  /* terminal logger panel */
+  .logger{background:var(--term); border-radius:10px; padding:14px 16px; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12.5px; line-height:1.8; color:var(--term-ink); overflow-x:auto; margin:10px 0;}
+  .logger .t{color:var(--term-dim);}
+  .logger .pct{color:#7ee787; font-weight:700;}
+  .logger .off{color:#ff7b72; font-weight:700;}
+
+  /* simulator */
+  .sim{background:linear-gradient(160deg,#0d1117,#161b22); border-radius:14px; padding:22px; margin:14px 0; color:var(--term-ink);}
+  .sim h3{color:#fff; margin-bottom:4px;}
+  .sim p.simsub{color:var(--term-dim); font-size:13px; margin-bottom:14px;}
+  .sim .row{display:flex; flex-wrap:wrap; gap:18px; align-items:center;}
+  .battbox{background:#0b0f14; border:2px solid #30363d; border-radius:8px; height:44px; width:200px; position:relative; overflow:hidden;}
+  .battbox::after{content:""; position:absolute; right:-7px; top:12px; width:6px; height:18px; background:#30363d; border-radius:0 3px 3px 0;}
+  .battfill{position:absolute; left:0; top:0; bottom:0; width:100%; background:linear-gradient(90deg,#2ea043,#56d364); transition:width .5s ease;}
+  .battfill.low{background:linear-gradient(90deg,#d29922,#e3b341);}
+  .battfill.crit{background:linear-gradient(90deg,#f85149,#ff7b72);}
+  .battpct{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px; color:#fff; text-shadow:0 1px 3px rgba(0,0,0,.6);}
+  .simbtn{background:var(--acc); border:none; color:#fff; font-weight:700; font-size:13px; padding:9px 16px; border-radius:8px; cursor:pointer;}
+  .simbtn:hover{filter:brightness(1.1);}
+  .sim .delay{color:var(--term-dim); font-size:12.5px; margin-left:4px;}
+  .sim .logview{background:#0b0f14; border:1px solid #21262d; border-radius:8px; padding:10px 12px; margin-top:14px; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12px; height:150px; overflow-y:auto; color:var(--term-ink);}
+  .sim .logview div{white-space:pre;}
+  .poweroff{display:none; margin-top:14px; background:#3d1312; border:1px solid #f85149; border-radius:8px; padding:12px 16px; color:#ff7b72; font-weight:700; font-size:13.5px;}
+  .poweroff.on{display:block; animation:fade .3s ease;}
+
+  /* quiz */
+  .quizq{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; margin-bottom:14px;}
+  .quizq h4{font-size:15px; margin-bottom:10px;}
+  .qopt{display:block; background:#f6f8fb; border:1.5px solid var(--line); border-radius:9px; padding:9px 13px; margin-bottom:8px; font-size:14px; cursor:pointer; transition:all .15s;}
+  .qopt:hover{border-color:var(--acc);}
+  .qopt.correct{background:var(--good-soft); border-color:var(--good); font-weight:600;}
+  .qopt.wrong{background:var(--bad-soft); border-color:var(--bad);}
+  .qopt.done{pointer-events:none; opacity:.75;}
+  .qopt.done.correct{opacity:1;}
+  .score{display:inline-block; background:var(--acc-soft); color:#2553c4; font-weight:800; border-radius:8px; padding:6px 14px; margin-bottom:14px; font-size:14px;}
+
+  /* faq */
+  details{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; margin-bottom:10px;}
+  summary{cursor:pointer; font-weight:700; font-size:14.5px; color:var(--ink);}
+  details p{margin-top:10px; font-size:14px; color:#333b4a;}
+
+  footer{margin-top:40px; text-align:center; color:var(--mut); font-size:12.5px;}
+
+  @media (max-width:640px){
+    h1{font-size:25px;}
+    nav.tabs{position:static;}
+    .tab{font-size:13px; padding:8px 11px;}
+    .sim .row{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">macOS Power Management · pmset</div>
+    <h1>Battery Drain Mode — keep your Mac awake until 0%</h1>
+    <p class="sub">Three terminal settings that let your Mac run flat-out on battery — lid closed or open — until the battery is critically low and macOS powers itself off. Safe, reversible, and fully explained.</p>
+    <div class="chips">
+      <span class="chip">🧑‍💻 Works on any MacBook</span>
+      <span class="chip">⚡ Apple Silicon + Intel</span>
+      <span class="chip">🔒 Reversible in seconds</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="tabs">
+    <input type="radio" name="tabs" id="tab1" checked onchange="T('p1')">
+    <label class="tab" for="tab1">⚡ How it works</label>
+    <input type="radio" name="tabs" id="tab2" onchange="T('p2')">
+    <label class="tab" for="tab2">⚙️ The settings</label>
+    <input type="radio" name="tabs" id="tab3" onchange="T('p3')">
+    <label class="tab" for="tab3">🚀 Run it</label>
+    <input type="radio" name="tabs" id="tab4" onchange="T('p4')">
+    <label class="tab" for="tab4">📊 The log</label>
+    <input type="radio" name="tabs" id="tab5" onchange="T('p5')">
+    <label class="tab" for="tab5">🧠 Quiz</label>
+    <input type="radio" name="tabs" id="tab6" onchange="T('p6')">
+    <label class="tab" for="tab6">⚠️ Warnings</label>
+  </nav>
+
+  <!-- ================= 1. HOW IT WORKS ================= -->
+  <div class="panel on" id="p1">
+    <div class="card">
+      <h2>⚡ How it works</h2>
+      <p>Normally, a MacBook does three things that stop a battery-only run: it <b>sleeps when you close the lid</b>, it <b>idle-sleeps after a few minutes</b>, and it <b>can hibernate</b> to disk. All three are just software rules the system daemon <code class="inline">powerd</code> follows — and all three can be switched off with a tool called <code class="inline">pmset</code> (Power Management SETtings).</p>
+
+      <table>
+        <tr><th>Layer</th><th>What it controls</th><th>Can we change it?</th></tr>
+        <tr><td><b>pmset settings</b></td><td>idle sleep, lid-close sleep, display sleep, hibernation</td><td><span class="badge b-off">YES — with sudo</span></td></tr>
+        <tr><td><b>powerd daemon</b></td><td>applies those settings, negotiates App Nap / energy use</td><td><span class="badge b-off">Indirectly (via pmset)</span></td></tr>
+        <tr><td><b>Battery / SMC firmware</b></td><td>final safety cut-off at ~1–2% battery</td><td><span class="badge b-on">NO — hardware</span></td></tr>
+      </table>
+
+      <p>The important part is that last row: even with every sleep disabled, the Mac <b>still shuts itself off when the battery hits ~1–2%</b>. That cut-off lives in the battery controller firmware and cannot be disabled by software. This is the safety net that makes the whole trick safe — <b>the run always ends cleanly by itself</b>, at nearly 0%.</p>
+
+      <div class="callout good"><b>The golden rule:</b> you can only delay sleep, never defeat the low-battery cut-off. So the worst case is a dead battery and a clean power-off — exactly what "drain to 0%" means.</div>
+
+      <h3>Why would anyone do this?</h3>
+      <ul>
+        <li><b>Battery calibration</b> — a full drain-and-recharge cycle every few months keeps the battery gauge honest.</li>
+        <li><b>Benchmarking runtime</b> — find out how long your Mac actually lasts under load.</li>
+        <li><b>Headless tasks</b> — close the lid and let it crunch overnight without sleeping.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🎮 Try it — simulated drain</h2>
+      <p>See the whole run compressed into a few seconds: watch the battery drain, the log tick along, and the machine power off at 0%.</p>
+      <div class="sim">
+        <h3>Simulated battery drain</h3>
+        <p class="simsub">Starts at 40%, drains to 0%, then powers off — exactly like the real thing.</p>
+        <div class="row">
+          <div class="battbox"><div class="battfill" id="simfill"></div><div class="battpct" id="simpct">40%</div></div>
+          <button class="simbtn" onclick="S.simStart()">▶ Start drain</button>
+          <button class="simbtn" style="background:#30363d" onclick="S.simReset()">↺ Reset</button>
+          <span class="delay">Runs in ~20s (1 real second ≈ 2% battery)</span>
+        </div>
+        <div class="logview" id="simlog"></div>
+        <div class="poweroff" id="simoff">⏻ POWER OFF — battery at 0%. The hardware cut-off fired, like it always does. Now plug it in.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 2. THE SETTINGS ================= -->
+  <div class="panel" id="p2">
+    <div class="card">
+      <h2>⚙️ The four settings</h2>
+      <p>Everything is controlled by four <code class="inline">pmset</code> values. Here's what each one means, its normal value, and its drain-mode value.</p>
+
+      <table>
+        <tr><th>Setting</th><th>Command</th><th>Normal</th><th>Drain mode</th><th>Plain English</th></tr>
+        <tr>
+          <td><code>disablesleep</code></td>
+          <td><code>pmset -a disablesleep 1</code></td>
+          <td><span class="badge b-off">0</span></td>
+          <td><span class="badge b-on">1</span></td>
+          <td>The lid-close switch. Normally, closing the lid = sleep. With <code>1</code>, the lid is treated like a screen-off only — the Mac keeps computing.</td>
+        </tr>
+        <tr>
+          <td><code>sleep</code></td>
+          <td><code>pmset -a sleep 0</code></td>
+          <td>10 min</td>
+          <td><span class="badge b-on">0 = never</span></td>
+          <td>Idle system sleep. <code>0</code> means "never idle-sleep", even with the lid open.</td>
+        </tr>
+        <tr>
+          <td><code>hibernatemode</code></td>
+          <td><code>pmset -a hibernatemode 0</code></td>
+          <td>3</td>
+          <td><span class="badge b-on">0</span></td>
+          <td>3 = sleep-to-RAM (with disk backup in some versions). 0 = never hibernate — nothing gets frozen to disk mid-drain.</td>
+        </tr>
+        <tr>
+          <td><code>displaysleep</code></td>
+          <td><code>pmset -a displaysleep 5</code></td>
+          <td>5 min</td>
+          <td>5 (leave it)</td>
+          <td>Display timeout. The screen is the biggest power draw, so let it sleep on its own — it doesn't stop the drain.</td>
+        </tr>
+      </table>
+
+      <div class="callout">The <code>-a</code> flag means <b>all power sources</b> (battery + charger). <code>-b</code> would be battery-only, <code>-c</code> charger-only. <code>-a</code> is the right choice for a drain test.</div>
+
+      <h3>Checking the current state</h3>
+      <div class="codeblock">
+        <pre>pmset -g | grep -iE 'sleepdisabled|sleep |displaysleep|hibernatemode'</pre>
+      </div>
+      <p>Look at <code class="inline">SleepDisabled</code>: <span class="badge b-on">1</span> = drain mode on, <span class="badge b-off">0</span> = normal.</p>
+    </div>
+  </div>
+
+  <!-- ================= 3. RUN IT ================= -->
+  <div class="panel" id="p3">
+    <div class="card">
+      <h2>🚀 Run it, step by step</h2>
+
+      <div class="step"><div class="stepnum">1</div><div class="stepbody"><h4>Optional: decide the starting level</h4><p>Unplug the charger at any level — the trick works from any %, it just takes longer the fuller the battery. (~1 hour per 25% is a rough guide on Apple Silicon.)</p></div></div>
+
+      <div class="step"><div class="stepnum">2</div><div class="stepbody"><h4>Enable drain mode</h4><p>Run this in Terminal (or double-click <b>~/Desktop/battery-drain-mode.command</b> and pick option 1). You'll be asked for your admin password:</p>
+        <div class="codeblock">
+          <button class="copybtn" onclick="S.copy(this,'sudo pmset -a disablesleep 1 sleep 0 hibernatemode 0')">⧉ Copy</button>
+          <pre><span class="cmt"># Disable lid-close sleep, idle sleep, and hibernation</span>
+<span class="cmd">sudo</span> pmset -a disablesleep 1 sleep 0 hibernatemode 0</pre>
+        </div>
+        <div class="callout warn"><b>Note:</b> if something else is already preventing sleep (e.g. a <code>caffeinate</code> process), <code>pmset -g</code> may show "sleep prevented by powerd". That's harmless — the drain still happens.</div>
+      </div></div>
+
+      <div class="step"><div class="stepnum">3</div><div class="stepbody"><h4>Start the battery logger (optional but recommended)</h4><p>Logs battery % every 60 seconds to <code class="inline">~/battery-drain.log</code> — your proof the Mac kept running with the lid shut. The command file does this for you, or manually:</p>
+        <div class="codeblock">
+          <button class="copybtn" onclick="S.copy(this,'nohup bash -c \'while true; do echo \"$(date \\'+%F %T\\') $(pmset -g batt | grep -oE \\'[0-9]+%\\' | head -1)\"; sleep 60; done\' >> ~/battery-drain.log &')">⧉ Copy</button>
+          <pre><span class="cmt"># Append timestamp + battery % every 60s (runs until the Mac powers off)</span>
+<span class="cmd">nohup</span> bash -c <span class="cmd">'while true; do echo "$(date '\''+%F %T'\'') $(pmset -g batt | grep -oE '\''[0-9]+%'\'' | head -1)"; sleep 60; done'</span> >> ~/battery-drain.log &</pre>
+        </div>
+      </div></div>
+
+      <div class="step"><div class="stepnum">4</div><div class="stepbody"><h4>Close the lid and walk away</h4><p>Lid closed, on a table — <b>not in a bag</b> (see Warnings). Two low-battery alerts will pop up around 10% and 3%; ignore them or dismiss them.</p></div></div>
+
+      <div class="step"><div class="stepnum">5</div><div class="stepbody"><h4>Wait for the power-off</h4><p>When the battery hits roughly 1–2%, the Mac powers itself off — no action needed. That's the end of the run.</p></div></div>
+
+      <div class="step"><div class="stepnum">6</div><div class="stepbody"><h4>After: charge, then restore</h4><p>Plug the charger back in. Once it's back on, restore normal sleep behaviour:</p>
+        <div class="codeblock">
+          <button class="copybtn" onclick="S.copy(this,'sudo pmset -a disablesleep 0 sleep 10 displaysleep 5 hibernatemode 3 standby 1')">⧉ Copy</button>
+          <pre><span class="cmt"># Restore: lid-close sleep on, 10-min idle sleep, 5-min display, default hibernation</span>
+<span class="cmd">sudo</span> pmset -a disablesleep 0 sleep 10 displaysleep 5 hibernatemode 3 standby 1
+<span class="cmd">pkill -f battery-drain-log.sh</span>   <span class="cmt"># stop the logger if you used it</span></pre>
+        </div>
+        <p>(The double-clickable <b>~/Desktop/battery-drain-mode.command</b> also has a "Restore" option that does all of this for you.)</p>
+      </div></div>
+
+      <div class="callout good"><b>Verify it worked:</b> <code class="inline">tail -f ~/battery-drain.log</code> while it drains — timestamps should keep advancing every minute with the lid shut. If numbers climb with time and end at ~1%, the whole run worked.</div>
+    </div>
+  </div>
+
+  <!-- ================= 4. THE LOG ================= -->
+  <div class="panel" id="p4">
+    <div class="card">
+      <h2>📊 Reading the battery log</h2>
+      <p>While drain mode is on, the logger appends one line per minute to <code class="inline">~/battery-drain.log</code>. Each line is <b>timestamp + battery %</b> — nothing else:</p>
+      <div class="logger">
+        <span class="t">2026-09-29 12:05:57</span> <span class="pct">39%</span><br>
+        <span class="t">2026-09-29 12:06:57</span> <span class="pct">39%</span><br>
+        <span class="t">2026-09-29 12:08:02</span> <span class="pct">38%</span><br>
+        <span class="t">2026-09-29 12:09:57</span> <span class="pct">37%</span><br>
+        <span class="t">… (one line every 60 seconds, % tick-ing down) …</span><br>
+        <span class="t">2026-09-29 13:31:03</span> <span class="pct">1%</span><br>
+        <span class="off">⏻ log ends here — that's the power-off</span>
+      </div>
+      <ul>
+        <li><b>Timestamps keep marching</b> → the Mac stayed awake (lid-close + idle sleep defeat working).</li>
+        <li><b>% keeps dropping</b> → it's genuinely draining.</li>
+        <li><b>The log stops</b> → the run ended. The last line is usually 1–2%.</li>
+      </ul>
+      <h3>Handy commands</h3>
+      <div class="codeblock">
+        <button class="copybtn" onclick="S.copy(this,'tail -f ~/battery-drain.log')">⧉ Copy</button>
+        <pre><span class="cmd">tail -f</span> ~/battery-drain.log   <span class="cmt"># watch the drain live</span></pre>
+      </div>
+      <div class="codeblock">
+        <button class="copybtn" onclick="S.copy(this,'head -3 ~/battery-drain.log && echo … && tail -3 ~/battery-drain.log')">⧉ Copy</button>
+        <pre><span class="cmd">head -3</span> ~/battery-drain.log && <span class="cmd">echo</span> "…" && <span class="cmd">tail -3</span> ~/battery-drain.log   <span class="cmt"># start vs end of the run</span></pre>
+      </div>
+      <div class="callout">The logger dies with the Mac — that's expected, not an error. If the log <i>keeps</i> growing after you expected it to be dead, you're not at 0% yet. Wait.</div>
+    </div>
+  </div>
+
+  <!-- ================= 5. QUIZ ================= -->
+  <div class="panel" id="p5">
+    <div class="card">
+      <h2>🧠 Know your pmset — quiz</h2>
+      <div class="score" id="score">Score: 0 / 6</div>
+      <div id="quiz"></div>
+    </div>
+  </div>
+
+  <!-- ================= 6. WARNINGS ================= -->
+  <div class="panel" id="p6">
+    <div class="card">
+      <h2>⚠️ Warnings &amp; FAQ</h2>
+
+      <details open>
+        <summary>🔴 Don't put it in a bag while it's running</summary>
+        <p>A closed-lid Mac that's awake generates heat with nowhere to go. On a desk or table it's fine — inside a backpack or sleeve it can overheat badly. Keep it flat and ventilated for the whole drain.</p>
+      </details>
+      <details>
+        <summary>🔴 Draining to 0% every day kills the battery</summary>
+        <p>Lithium-ion cells dislike full discharges. The battery industry guideline is a full drain-and-recharge <b>once every few months</b> for gauge calibration — not daily. Treat this as a calibration ritual, not a habit.</p>
+      </details>
+      <details>
+        <summary>🔴 What does "0%" actually mean?</summary>
+        <p>Software never lets a lithium battery truly hit 0. The firmware reserves the last ~1–2% as a hard floor, then commands a shutdown. So "until it closes" really means "until the Mac powers off around 1–2%".</p>
+      </details>
+      <details>
+        <summary>🟡 Does this work on Apple Silicon (M-series)?</summary>
+        <p>Yes — <code class="inline">disablesleep</code> works on both Apple Silicon and Intel MacBooks. The pmset option has existed for years and is honoured by current macOS (26.x). If Apple ever removes it, third-party tools like <b>Amphetamine</b> do the same job via a GUI.</p>
+      </details>
+      <details>
+        <summary>🟡 Will it also ignore the display sleep setting?</summary>
+        <p>No — <code class="inline">displaysleep</code> is untouched. The screen still sleeps on its own timer, which is good: the display is the single biggest power consumer, so letting it shut off drains slower and the lid-close case has no screen anyway.</p>
+      </details>
+      <details>
+        <summary>🟡 What if the Mac powers off but won't turn back on?</summary>
+        <p>That's normal right after a 0%-drain — it needs a few minutes of charging first. Plug it in, wait ~5 minutes, then power on. If it still won't boot after 15 min of charging, hold the power button for 10 seconds (Apple Silicon) and try again.</p>
+      </details>
+      <details>
+        <summary>🟢 Do I need a password every time?</summary>
+        <p>Yes — changing <code class="inline">pmset</code> system-wide requires admin rights, so macOS asks for your password each time you flip the settings. That's the same security boundary that keeps random apps from making your Mac never sleep.</p>
+      </details>
+    </div>
+  </div>
+
+  <footer>Battery Drain Mode guide · macOS · <code class="inline">pmset</code> power management · made for Isaac</footer>
+</div>
+
+<script>
+var S={
+  tabs:{p1:0,p2:0,p3:0,p4:0,p5:0,p6:0},
+  simTimer:null, simPct:40,
+  simLog:null, simFill:null, simPctEl:null, simOff:null,
+
+  T:0,
+  init:function(){
+    S.simLog=document.getElementById('simlog');
+    S.simFill=document.getElementById('simfill');
+    S.simPctEl=document.getElementById('simpct');
+    S.simOff=document.getElementById('simoff');
+    S.quizBuild();
+    S.simLogLine('<span class="t">'+S.stamp()+'</span> log ready — press ▶ Start drain');
+  },
+
+  stamp:function(){var d=new Date();function p(n){return(n<10?'0':'')+n;}
+    return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());},
+
+  simLogLine:function(html){
+    var d=document.createElement('div'); d.innerHTML=html; S.simLog.appendChild(d);
+    S.simLog.scrollTop=S.simLog.scrollHeight;
+  },
+
+  simStart:function(){
+    if(S.simTimer) return;
+    S.simLog.innerHTML='';
+    S.simOff.className='poweroff';
+    S.simPct=40; S.update(40,'');
+    S.simLogLine('<span class="t">'+S.stamp()+'</span> <span class="pct">40%</span> run started — lid closed, drain mode on');
+    S.simTimer=setInterval(function(){
+      S.simPct-=2;
+      if(S.simPct<=0){
+        S.simPct=0; clearInterval(S.simTimer); S.simTimer=null;
+        S.update(0,'crit');
+        S.simLogLine('<span class="t">'+S.stamp()+'</span> <span class="pct">1%</span>');
+        S.simLogLine('<span class="off">⏻ POWER OFF — hardware cut-off at ~1%. Log ends here.</span>');
+        S.simOff.className='poweroff on';
+        S.simLogLine('<span class="t">'+S.stamp()+'</span> plug in charger to wake it up');
+        return;
+      }
+      var cls = S.simPct<=20 ? 'crit' : (S.simPct<=40 ? 'low' : '');
+      S.update(S.simPct, cls);
+      S.simLogLine('<span class="t">'+S.stamp()+'</span> <span class="pct">'+S.simPct+'%</span>');
+    },1000);
+  },
+
+  update:function(p,cls){
+    S.simFill.style.width=p+'%';
+    S.simFill.className='battfill'+(cls?' '+cls:'');
+    S.simPctEl.textContent=p+'%';
+  },
+
+  simReset:function(){
+    if(S.simTimer){clearInterval(S.simTimer); S.simTimer=null;}
+    S.simLog.innerHTML='<div><span class="t">'+S.stamp()+'</span> log ready — press ▶ Start drain</div>';
+    S.simOff.className='poweroff';
+    S.update(40,'');
+  },
+
+  copy:function(btn,txt){
+    function done(){btn.textContent='✓ Copied'; btn.classList.add('ok'); setTimeout(function(){btn.textContent='⧉ Copy'; btn.classList.remove('ok');},1600);}
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done,function(){S.copyFallback(btn,txt,done);});
+    }else{S.copyFallback(btn,txt,done);}
+  },
+  copyFallback:function(btn,txt,done){
+    var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy'); done();}catch(e){btn.textContent='✗ Failed';}
+    document.body.removeChild(ta);
+  },
+
+  quizBuild:function(){
+    var Q=[
+      {q:'Which pmset setting makes closing the lid NOT sleep the Mac?',
+       o:['sleep 0','disablesleep 1','hibernatemode 0','displaysleep 5'], a:1},
+      {q:'What does "sleep 0" mean?',
+       o:['Sleep after 0 minutes (immediately)','Never idle-sleep','Hibernate instead','Only sleep on charger'], a:1},
+      {q:'Can software make a Mac run past ~1% battery without powering off?',
+       o:['Yes, with disablesleep 1','Yes, with hibernatemode 0','No — the ~1-2% cut-off is firmware, it cannot be disabled','Only on Intel Macs'], a:2},
+      {q:'Why does the Mac power off cleanly at ~1-2% even in drain mode?',
+       o:['Because macOS kills it to protect data','Because a hardware safety in the battery/SMC commands shutdown','Because the power adapter gets disconnected','Because of the screensaver'], a:1},
+      {q:'The battery logger writes to which file?',
+       o:['~/Desktop/battery.log','/var/log/battery','~/battery-drain.log','~/.pmset/log'], a:2},
+      {q:'How often should you fully drain a lithium battery?',
+       o:['Every day for best lifespan','Once a week','About once every few months for calibration','Never — draining below 50% is forbidden'], a:2}
+    ];
+    S.quizQ=Q; S.quizScore=0; S.quizDone=0;
+    S.renderQuiz();
+  },
+
+  renderQuiz:function(){
+    var Q=S.quizQ; var html='';
+    for(var i=0;i<Q.length;i++){
+      html+='<div class="quizq"><h4>'+(i+1)+'. '+Q[i].q+'</h4>';
+      for(var j=0;j<Q[i].o.length;j++){
+        html+='<span class="qopt" qn="'+i+'" qo="'+j+'" onclick="S.answer(this,'+i+','+j+')">'+Q[i].o[j]+'</span>';
+      }
+      html+='</div>';
+    }
+    document.getElementById('quiz').innerHTML=html;
+  },
+
+  answer:function(el,qn,opt){
+    if(el.classList.contains('done')) return;
+    var Q=S.quizQ[qn];
+    if(opt===Q.a){
+      el.classList.add('correct','done');
+      S.quizScore++; S.quizDone++;
+    }else{
+      el.classList.add('wrong','done');
+      var opts=document.querySelectorAll('.qopt[qn="'+qn+'"]');
+      for(var i=0;i<opts.length;i++){
+        if(parseInt(opts[i].getAttribute('qo'))===Q.a){opts[i].classList.add('correct','done');}
+      }
+      S.quizDone++;
+    }
+    document.getElementById('score').textContent='Score: '+S.quizScore+' / '+S.quizQ.length;
+  }
+};
+
+function T(id){
+  var panels=['p1','p2','p3','p4','p5','p6'];
+  for(var i=0;i<panels.length;i++){
+    document.getElementById(panels[i]).className = panels[i]===id ? 'panel on' : 'panel';
+  }
+}
+S.init();
+</script>
+</body>
+</html>

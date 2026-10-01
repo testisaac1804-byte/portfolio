@@ -8,8 +8,9 @@ import os, json, datetime, html, urllib.parse
 
 ROOT = os.path.dirname(os.path.abspath(__file__))  # tools/
 DEPLOY = os.path.dirname(ROOT)
-# Canonical site prefix for the deployed portfolio (files live under /portfolio/).
-SITE = "https://isaac1804.com/portfolio"
+# Canonical site prefix for the deployed portfolio. Content now lives at ROOT,
+# not under /portfolio/ — the /portfolio/ prefix is legacy and dead.
+SITE = "https://isaac1804.com"
 
 # 'tools' is excluded only at the deploy ROOT (it holds this generator); a project's
 # own tools/ folder is real content and must stay listed + browsable.
@@ -92,7 +93,7 @@ def write_file_listing(dirpath):
     crumbs = []
     parts = rp.split('/') if rp else []
     acc = ''
-    crumb_html = '<a class="home" href="https://isaac1804.com/portfolio/">\u2190 Portfolio Home</a>'
+    crumb_html = '<a class="home" href="https://isaac1804.com/">\u2190 Portfolio Home</a>'
     for i, p in enumerate(parts):
         acc += ('/' if acc else '') + p
         crumbs.append((p, acc))
@@ -100,7 +101,7 @@ def write_file_listing(dirpath):
     if crumbs:
         bar = '<div class="bc">'
         for i, (name, path) in enumerate(crumbs):
-            href = 'https://isaac1804.com/portfolio/' + urllib.parse.quote(path, safe='/') + '/'
+            href = SITE + '/' + urllib.parse.quote(path, safe='/') + '/'
             if i == len(crumbs)-1:
                 bar += f'<span class="cur">{html.escape(name)}</span>'
             else:
@@ -118,7 +119,7 @@ def write_file_listing(dirpath):
     # parent link
     if rp:
         parent = '/'.join(rp.split('/')[:-1])
-        phref = 'https://isaac1804.com/portfolio/' + (urllib.parse.quote(parent, safe='/') + '/' if parent else '')
+        phref = SITE + '/' + (urllib.parse.quote(parent, safe='/') + '/' if parent else '')
         rows.append(f'<a class="row up" href="{phref}"><span>\u2191 ..</span></a>')
     for name, isdir in dirs + fls:
         icon = '\U0001f4c1' if isdir else '\U0001f4c4'
@@ -176,6 +177,12 @@ def main():
         if '.git' in root.split(os.sep): continue
         if '.pio' in root.split(os.sep): continue
         if os.path.abspath(root) == DEPLOY: continue  # never overwrite the portfolio index.html
+        # Don't clobber a real app/hub page: only regenerate folders whose existing
+        # index.html is a generated listing or that have none. (Generated listings
+        # carry the <!--portfolio-listing--> marker; real pages do not.)
+        idx = os.path.join(root, 'index.html')
+        if os.path.exists(idx) and not is_listing(idx):
+            continue
         write_file_listing(root)
         n += 1
     print(f'{n} index.html listings generated')

@@ -1,0 +1,11 @@
+# Cloudflare Pages security headers
+# CSP is deliberately omitted: the site relies on inline scripts, external CDN
+# libraries (three.js, etc.) and loads arbitrary user files in the preview
+# pane — a strict CSP would break those, so we apply the safe subset instead.
+
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

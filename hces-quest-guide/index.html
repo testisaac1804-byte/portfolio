@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>溪埕國小解謎網站 — 完整攻略與秘密指南</title>
+<style>
+:root{--bg:#141210;--panel:#1e1b17;--panel2:#262219;--txt:#d8d2c6;--dim:#8a7f6e;--gold:#e8b84b;--red:#e06c5a;--green:#7fb87f;--blue:#7fb4e8;--purple:#c3a6e8}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:"PingFang TC","Noto Sans TC",-apple-system,sans-serif;margin:0;line-height:1.8}
+.wrap{max-width:920px;margin:0 auto;padding:36px 26px 90px}
+h1{font-size:30px;color:var(--gold);margin-bottom:4px}
+h2{font-size:22px;color:var(--gold);border-bottom:2px solid #4a4030;padding-bottom:8px;margin-top:2.6em}
+h3{font-size:17px;color:#f0e6d0;margin:1.4em 0 .5em}
+.sub{color:var(--dim);font-size:14px;margin-bottom:26px}
+.panel{background:var(--panel);border:1px solid #3a3226;border-radius:10px;padding:18px 22px;margin:16px 0}
+.panel h3{margin-top:0}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}
+th,td{border:1px solid #3a3226;padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--panel2);color:var(--gold);font-weight:600}
+code{background:#0f0d0b;border:1px solid #3a3226;border-radius:5px;padding:2px 7px;font-size:13px;color:#c9d8e8}
+.code-block{background:#0f0d0b;border:1px solid #3a3226;border-radius:8px;padding:14px 16px;font-family:Menlo,monospace;font-size:13px;color:#c9d8e8;overflow-x:auto;white-space:pre;line-height:1.6}
+.tag{display:inline-block;padding:1px 9px;border-radius:20px;font-size:12px;font-weight:600;margin-right:6px}
+.t200{background:#1d3a1d;color:#9fe09f}.t403{background:#3a241d;color:#f0a090}.t404{background:#2a2330;color:#c9a8e0}.t-red{background:#3a1d1d;color:#f0a0a0}
+.step{display:flex;gap:14px;margin:14px 0}
+.step .n{flex:0 0 30px;height:30px;background:var(--gold);color:#141210;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.path-list li{margin:8px 0}
+.secret{background:var(--panel2);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.secret b{color:var(--gold)}
+.note{background:#1d2430;border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:14px}
+.warn{background:#301d1d;border-left:4px solid var(--red);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:14px}
+ul,ol{padding-left:26px}
+a{color:var(--blue)}
+hr{border:none;border-top:1px solid #3a3226;margin:34px 0}
+.toc{columns:2;font-size:14px}
+.toc a{display:block;margin:4px 0;text-decoration:none}
+.good{color:var(--green)}
+.bad{color:var(--red)}
+</style>
+</head>
+<body><div class="wrap">
+
+<h1>溪埕國小解謎網站 — 完整攻略與秘密指南</h1>
+<div class="sub">目標網站：<code>https://www.hces.edu.tw.solve.quest/</code> · 解謎任務工作室（Solve.quest Studio）<br>
+完整攻略 · 全秘密路徑地圖 · HTTP 狀態碼全解析 · 密碼與鑰匙 · 故事全貌</div>
+
+<div class="warn"><b>⚠️ 重要聲明：</b>這個網站是<b>虛構創作</b>（原站自己也這樣宣告）。它不是真的學校網站，許雅雯、雅玲、標叔叔都是故事角色。這個網站的「秘密」全部是解謎設計的一部分，沒有真實受害者。Enjoy the puzzle!</div>
+
+<h2>目錄</h2>
+<div class="panel toc">
+<a href="#s1">1. 這是什麼網站？</a>
+<a href="#s2">2. 網址的騙術（DNS 技巧）</a>
+<a href="#s3">3. 故事摘要（兩條任務線）</a>
+<a href="#s4">4. 完整時間線</a>
+<a href="#s5">5. HTTP 狀態碼全解析（403 / 404 / 200 是什麼）</a>
+<a href="#s6">6. 全網站地圖（每個路徑是什麼）</a>
+<a href="#s7">7. 如何找到所有秘密（逐步攻略）</a>
+<a href="#s8">8. 密碼與鑰匙</a>
+<a href="#s9">9. 人物表</a>
+<a href="#s10">10. 圖片裡藏的秘密</a>
+<a href="#s11">11. 網站怎麼做出「2003 年」的感覺</a>
+<a href="#s12">12. 官方真相檔案（兩本小說）</a>
+<a href="#s13">13. 延伸資源</a>
+</div>
+
+<h2 id="s1">1. 這是什麼網站？</h2>
+<div class="panel">
+<p>這是一個架設在 <code>solve.quest</code>（解謎任務工作室）平台上的<b>互動解謎遊戲</b>，偽裝成一個 2003 年的台灣國小網站（嘉平縣溪埕鎮溪埕國小）。</p>
+<p>整個網站是一層一層的謎題盒：表面是普通的舊校網，但藏在 HTML 註解、錯誤頁面、備份目錄裡的全是故事線索。解謎者要像偵探一樣，從<a href="#s7">蛛絲馬跡</a>拼出真相。</p>
+<p>官方一共放了<b>兩條任務線</b>：</p>
+<ul>
+<li><b>《溪埕國民小學失蹤事件》</b> — 2003 年女學生許雅雯「失蹤案」背後的真相（28 章小說）</li>
+<li><b>《雅玲的日記》</b> — 六年乙班張雅玲的日記（24 章），是第二條任務線，也是第一條的隱藏視角</li>
+</ul>
+<p>網站由單一創作者/小團隊製作：域名約 US$10–30/年（Porkbun 註冊），託管在 Vercel 免費方案，其餘全部是免費工具 —— 真正的成本是<b>數百小時的寫作與設計</b>。</p>
+</div>
+
+<h2 id="s2">2. 網址的騙術（DNS 技巧）</h2>
+<div class="panel">
+<p>網址 <code>www.hces.edu.tw.solve.quest</code> 是整個體驗的第一個謎題。DNS 是<b>由右往左</b>讀的：</p>
+<div class="code-block">www.hces.edu.tw.solve.quest
+        └────────┬────────┘  └──┬──┘
+      子網域（假裝是學校）   真正的域名
+  "www.hces.edu.tw"       = "solve.quest"</div>
+<ul>
+<li>真正的域名是 <code>solve.quest</code>（2025-08-25 於 Porkbun 註冊）</li>
+<li><code>www.hces.edu.tw</code> 只是<b>子網域的名字</b> —— 創作者故意把它命名得像一所台灣學校（<code>hces.edu.tw</code> 是台灣教育部的域名格式），讓眼睛一掃過去以為是真的學校網站</li>
+<li>DNS：<code>www.hces.edu.tw.solve.quest → 76.76.21.21</code>（Vercel 邊緣節點）</li>
+<li>主站 <code>solve.quest</code> 走 Cloudflare（172.67.130.62 / 104.21.3.48）</li>
+</ul>
+<div class="note">💡 教訓：看到網址先拆解。後綴（TLD）往左數第二段才是真正的域名，前面全部可以是偽裝。</div>
+</div>
+
+<h2 id="s3">3. 故事摘要（兩條任務線）</h2>
+<div class="panel">
+<h3>《溪埕國民小學失蹤事件》</h3>
+<p>2003 年 7 月 4 日，三年丙班學生<b>許雅雯</b>在「白沙嶺親山徑校外教學」時失蹤。官方說法：她走失在山區。警消在山上搜了三天，學校貼協尋公告，家長焦急等待。表面故事到此為止。</p>
+<p>但網站的隱藏資料說的是另一個故事：</p>
+<ul>
+<li>當天 17:00 起，學校電腦 <code>PC-OLD-03</code> 出現長達 5 天的<b>搜尋紀錄</b>（361 筆）——「老師在哪」「我不是故意沒有去」「我只是去廁所」「我在學校不是山」「門打不開」「標叔叔救我」「媽媽找我」</li>
+<li>真相：雅雯去上廁所，回來時車隊已經開走。她獨自走回學校，躲進電腦教室後方的<b>弱電間</b>（沒人會注意的小設備室）等媽媽——然後門被鎖上，沒人知道她在裡面</li>
+<li>她在裡面待了 5 天（7/4 → 7/9），用一台舊電腦拼命打字求救，最後印出一張「我想回家」的紙，但<a href="#s8">mail server unreachable</a>，沒有寄出去</li>
+<li>9 月開學後，校方一連串「正常」公告其實是善後：9/12「消毒」（聞到異味請通知總務處）、9/13 資訊組「設備盤點」（實際上是把證據搬進備份目錄）、9/15「北側校舍暫停使用」（封鎖現場）、9/18「請同學勿散播未經證實消息」</li>
+<li>2006 年，鎖門的校工吳清標（標叔叔）死於租屋處，生前酒後說過「門後面有人」「我不知道」</li>
+<li>2026 年，北側舊翼樓拆除——真相即將被抹去，小說的主角（舊生）把一切寫成手記發布</li>
+</ul>
+
+<h3>《雅玲的日記》</h3>
+<p>張雅玲是六年乙班的學生，教過雅雯騎腳踏車，也是少數知道雅雯「祕密基地」（工友室後方 + 電腦教室後方）的人。她的日記表面是平凡的國小生活——媽媽、吹風機、交換禮物、冬至湯圓——但 12 月 22 日起，媽媽因為頭痛開始「一直睡」。</p>
+<p>雅玲用一個 12 歲孩子能想到的所有方式假裝一切正常：偽造聯絡簿簽名、洗碗想蓋過味道、跟老師說「媽媽只是頭痛」。12 月 26 日，老師堅持送她回家，才發現媽媽已經走了（腦血管破裂）。日記最後一句：「我再也不會聽到媽媽說『後面還沒乾』了。」</p>
+<div class="note">💡 兩條任務線互相鏡像：<b>兩個女孩、兩扇鎖著的門、兩種沒人聽見的沉默</b>。雅玲的日記同時解釋了為什麼她在第一條線裡「記憶不穩」、不願多談。</div>
+</div>
+
+<h2 id="s4">4. 完整時間線</h2>
+<div class="panel">
+<table>
+<tr><th>日期</th><th>事件</th><th>網站證據</th></tr>
+<tr><td>2003/06/22</td><td>標叔叔在雅雯作文留言：「暑假不要自己跑來學校」</td><td><code>hyawen.tmp.html</code></td></tr>
+<tr><td>2003/07/03</td><td>校外教學行前提醒</td><td><code>news_20030703.html</code></td></tr>
+<tr><td><b>2003/07/04</b></td><td><b>雅雯失蹤當天</b>。17:00–23:00 PC-OLD-03 開始出現求救搜尋</td><td><code>searchlog</code></td></tr>
+<tr><td>2003/07/04 18:02</td><td>雅雯在留言板留言：「有人在嗎 我在學校 我不知道怎麼出去」</td><td><code>guestbook #1742</code></td></tr>
+<tr><td>2003/07/05–07</td><td>警消在白沙嶺搜山（找錯地方）；雅雯仍在學校</td><td><code>news_local/20030705.html</code>、<code>20030707.html</code></td></tr>
+<tr><td>2003/07/09 06:28</td><td>PC-OLD-03 最後連線；印出「我想回家」但寄不出去</td><td><code>print/PC-OLD-03/0709.html</code></td></tr>
+<tr><td>2003/09/12</td><td>「校園環境消毒」公告（聞到異味請通知，勿進北側後方通道）</td><td><code>news_20030912.html</code></td></tr>
+<tr><td><b>2003/09/13</b></td><td><b>資訊組「設備盤點」</b> —— 實際上是把所有相關檔案搬進 <code>/backup/0913/</code> 並設為隱藏</td><td>多個 403 頁 + <code>backup/0913/</code></td></tr>
+<tr><td>2003/09/15</td><td>「北側校舍暫停使用」（電腦課改地點，封鎖現場）</td><td><code>news_20030915.html</code> + <code>map_0915.html</code></td></tr>
+<tr><td>2003/09/18</td><td>「請同學勿散播未經證實消息」（周秀蘭老師負責學生輔導）</td><td><code>news_20030918.html</code></td></tr>
+<tr><td>2006</td><td>標叔叔（吳清標）死於租屋處，生前酒後：「門後面有人」</td><td>小說第 12–13 章</td></tr>
+<tr><td>2003/12/22–26</td><td>雅玲的媽媽頭痛 → 一直睡 → 12/26 被發現已過世</td><td><code>雅玲的日記</code></td></tr>
+<tr><td>2026/07</td><td>北側舊翼樓拆除工程開始；舊生發現舊站，展開調查並發布手記</td><td>小說第 1 章、第 28 章</td></tr>
+</table>
+</div>
+
+<h2 id="s5">5. HTTP 狀態碼全解析（403 / 404 / 200 是什麼）</h2>
+<div class="panel">
+<p>你訪問網站時，伺服器會回一個「狀態碼」告訴你結果。這個網站把狀態碼當成解謎工具用 —— 有些 403/404 是<b>真的</b>（檔案不存在），有些是<b>故意放的謎題提示</b>。</p>
+<table>
+<tr><th>狀態碼</th><th>一般意思</th><th>在這個網站上的意義</th></tr>
+<tr>
+<td><span class="tag t200">200</span> OK</td>
+<td>成功。檔案存在且已送出</td>
+<td>正常頁面。但<b>別太相信 200</b>——有些 200 頁面本身就是謎題（例如「找不到指定檔案」的錯誤頁其實回傳 200，裡面藏了下一條路徑）</td>
+</tr>
+<tr>
+<td><span class="tag t-red">301/302</span> Redirect</td>
+<td>頁面搬家，瀏覽器自動跳到新位置</td>
+<td>本網站幾乎不用，全部是靜態檔</td>
+</tr>
+<tr>
+<td><span class="tag t403">403</span> Forbidden</td>
+<td>「你沒有權限看這個」——檔案存在但不給你</td>
+<td><b>最重要的一種。</b>本網站的 403 頁是精心設計的謎題：<br>
+• 會寫出檔名被隱藏的日期（<code>set hidden 2003/09/13 18:44</code>）<br>
+• 常附「原始檔」連結（<code>_v/...</code>）洩漏更多<br>
+• 暗示資料搬去了備份目錄<br>
+<b>看到 403 = 你正走在對的路上。</b></td>
+</tr>
+<tr>
+<td><span class="tag t404">404</span> Not Found</td>
+<td>「沒有這個檔案」</td>
+<td>通常是真·不存在。但有例外：<br>
+• 某些「404」其實是故意留的（例如相簿裡被刪掉的照片編號）<br>
+• 有些頁面表面上 404，其實是叫你從錯誤訊息裡找線索（例：<code>work_0197.html</code> 回傳 200 但內容是「找不到指定檔案」，並洩漏 <code>/student_work/920704/3c/hsu_yw_tmp.html</code>）</td>
+</tr>
+<tr>
+<td><span class="tag t403">403</span> on <code>/cgi-bin/</code>, <code>/wp-admin/</code></td>
+<td>一般網站：真的拒絕存取</td>
+<td>這裡是<b>道具</b>——回傳的是一個固定的靜態假 403 頁（59 bytes），沒有任何 CGI 真的存在。騙你以為是 2003 年的老網站有 CGI 程式</td>
+</tr>
+<tr>
+<td><span class="tag t200">200</span> <code>/backup/0913/student_work/920704/3c/</code></td>
+<td>成功</td>
+<td>這是<b>唯一的目錄列表</b>（Index of ...），直接把她的作文檔名列出來 —— 全站最重要的一頁</td>
+</tr>
+</table>
+
+<h3>速查口訣</h3>
+<ul>
+<li><span class="tag t200">200</span> = 檔案在 → 看內容</li>
+<li><span class="tag t403">403</span> = 檔案在但被藏 → <b>讀 403 頁上的字</b>，它會告訴你去哪</li>
+<li><span class="tag t404">404</span> = 通常真的沒有 → 但檢查回應內容，可能有線索頁面</li>
+<li>看到 <code>set hidden</code> / <code>move tmp to</code> / <code>backup/0913</code> 這些字 = 下一條路</li>
+</ul>
+</div>
+
+<h2 id="s6">6. 全網站地圖（每個路徑是什麼）</h2>
+<div class="panel">
+<h3>L1 · 公開頁面（偽裝層）</h3>
+<table>
+<tr><th>路徑</th><th>內容</th></tr>
+<tr><td><code>/</code>（index.html）</td><td>2003 校網首頁：校徽、公告、訪客計數器（0000913——注意這個數字！）、聖誕樹</td></tr>
+<tr><td><code>/news.html</code> + <code>news_YYYYMMDD.html</code></td><td>公告列表與各篇公告（15 篇，含關鍵的 9/12、9/13、9/15、9/18）</td></tr>
+<tr><td><code>/school.html</code></td><td>學校簡介（北側校舍「民國88年後調整為電腦教室」——伏筆）</td></tr>
+<tr><td><code>/works.html</code></td><td>學生作品表。許雅雯的 0197 會跳出錯誤頁 → 洩漏路徑</td></tr>
+<tr><td><code>/guestbook.html</code></td><td>留言板。#1742 被隱藏（見備份）</td></tr>
+<tr><td><code>/activities.html</code> / <code>/album_920704.html</code></td><td>活動剪影 + 白沙嶺相簿（出發前合照有粉紅水壺袋的女孩）</td></tr>
+<tr><td><code>/news_local/</code></td><td>嘉平地方新聞網（7/5、7/7 搜山報導、9/16 校舍報導）</td></tr>
+<tr><td><code>/internal.html</code> 系列</td><td>校內系統：維修紀錄、分機表、圖書統計、行事曆等（世界觀填充）</td></tr>
+</table>
+
+<h3>L2 · 原始檔檢視器（每次看到「原始檔」連結就到這裡）</h3>
+<table>
+<tr><th>路徑</th><th>內容</th></tr>
+<tr><td><code>/_v/guestbook.html</code></td><td>留言板原始碼 → HTML 註解洩漏 <code>1742 move private 0913</code></td></tr>
+<tr><td><code>/_v/works.html</code></td><td>作品頁原始碼</td></tr>
+<tr><td><code>/_v/equipment/PC-OLD-03.html</code></td><td>設備頁原始碼 → 洩漏搬移路徑</td></tr>
+</table>
+
+<h3>L3 · 隱藏/被刪除的原檔案（403 迷宮）</h3>
+<table>
+<tr><th>路徑</th><th>狀態</th><th>洩漏的線索</th></tr>
+<tr><td><code>/student_works/work_0197.html</code></td><td>200（假錯誤頁）</td><td>「找不到指定檔案」→ 路徑 <code>/student_work/920704/3c/hsu_yw_tmp.html</code>（7/4 的暫存檔！）</td></tr>
+<tr><td><code>/student_work/920704/3c/hsu_yw_tmp.html</code></td><td><span class="tag t403">403</span></td><td><code>set hidden 2003/09/13 18:41</code> + 註解：<code>0913 move tmp to /backup/0913/student_work/920704/3c/</code></td></tr>
+<tr><td><code>/equipment/PC-OLD-03.html</code></td><td><span class="tag t403">403</span></td><td><code>set hidden 2003/09/13 18:44</code> + 註解：<code>device log moved: /backup/0913/device/PC-OLD-03.html</code></td></tr>
+<tr><td><code>/0913/pc-old-03.html</code></td><td>200（假錯誤頁）</td><td>「找不到指定設備」→ 指向 <code>/equipment/PC-OLD-03.html</code></td></tr>
+<tr><td><code>/classweb/3c.html</code>, <code>/classweb/6b.html</code> 等</td><td>200 登入表單</td><td>靜態道具登入頁（所有 18 班都有），密碼藏在故事裡（見 §8）</td></tr>
+</table>
+
+<h3>L4 · 備份目錄（真相層）</h3>
+<table>
+<tr><th>路徑</th><th>內容</th></tr>
+<tr><td><code>/backup/0913/</code></td><td>「Directory listing denied — backup mirror 0913 / no public index」——本身就是提示</td></tr>
+<tr><td><code>/backup/0913/guestbook/1742.html</code></td><td><b>被刪的留言</b>：「有人在嗎 我在學校 我不知道怎麼出去」（PC-OLD-03，7/4 18:02）</td></tr>
+<tr><td><code>/backup/0913/device/PC-OLD-03.html</code></td><td>設備資料：最後連線 2003/07/09 06:28 + 系統紀錄 <code>mount 0913/searchlog</code></td></tr>
+<tr><td><code>/backup/0913/searchlog/PC-OLD-03.html</code></td><td><b>361 筆搜尋紀錄</b>（7/4–7/9）——最揪心的頁面</td></tr>
+<tr><td><code>/backup/0913/print/PC-OLD-03/0709.html</code></td><td><b>「我想回家」</b>列印預覽 + <code>mail server unreachable</code> + 「結束」→ 通往真相檔案</td></tr>
+<tr><td><code>/backup/0913/student_work/920704/3c/</code></td><td><b>唯一開放的目錄列表</b>，含 <code>hyawen.tmp.html</code></td></tr>
+<tr><td><code>/backup/0913/student_work/920704/3c/hyawen.tmp.html</code></td><td>雅雯的《我的暑假計畫》+ 留言（陳老師、標叔叔、張雅玲、PC-OLD-03 最後留言「我不是故意沒有去……」）</td></tr>
+</table>
+
+<h3>L5 · 資產</h3>
+<table>
+<tr><th>路徑</th><th>內容</th></tr>
+<tr><td><code>/images/</code></td><td>校徽、header gif、notice_920704.jpg（掃描件，下方有手寫字）、map_0915_photo.jpg（手繪地圖紅叉）、pc03_photo.jpg（PC-OLD-03 盤點照）、og_preview.png</td></tr>
+<tr><td><code>/album/920704/</code></td><td>13 張相簿照片，但 DSC0019/20/21 回傳 404（被刪的證據照？）</td></tr>
+<tr><td><code>/favicon.ico</code></td><td>存在</td></tr>
+</table>
+
+<h3>L6 · 真相檔案（solve.quest 主站）</h3>
+<table>
+<tr><th>路徑</th><th>內容</th></tr>
+<tr><td><code>https://solve.quest/</code></td><td>工作室首頁：兩條任務線 + Discord</td></tr>
+<tr><td><code>/truth/hces/</code> + <code>book-data.js</code></td><td>《溪埕國民小學失蹤事件》28 章小說</td></tr>
+<tr><td><code>/truth/hces-6b/</code> + <code>book-data.js</code></td><td>《雅玲的日記》24 章小說</td></tr>
+<tr><td><code>/home/assets/hces-6b-full.png</code></td><td>6B 班網截圖（密碼 <code>happyland92</code> 藏在底部）</td></tr>
+</table>
+</div>
+
+<h2 id="s7">7. 如何找到所有秘密（逐步攻略）</h2>
+<div class="panel">
+<p>這是完整的解謎流程，從零開始，照做就能解開全站：</p>
+
+<div class="step"><div class="n">1</div><div>
+<b>逛表面網站。</b>打開首頁，看公告、留言板、作品區。注意 <code>notice_920704.html</code>（協尋公告）。<br>
+<span class="dim">線索：訪客計數器顯示 0000913 —— 這不是人數，是日期暗示（9/13）。</span>
+</div></div>
+
+<div class="step"><div class="n">2</div><div>
+<b>點許雅雯的作品</b>（<code>works.html</code> → 三年丙班 0197）。它不會正常打開 —— 出現「找不到指定檔案」，路徑是 <code>/student_work/920704/3c/hsu_yw_tmp.html</code>。<b>記住 920704（= 她失蹤那天）</b>和 <code>tmp</code>（暫存檔）。</div></div>
+
+<div class="step"><div class="n">3</div><div>
+<b>瀏覽器開「原始碼」檢視（或找「原始檔」連結）。</b>所有頁面的 HTML 註解 <code>&lt;!-- ... --&gt;</code> 都是線索：
+<div class="code-block">guestbook.html: &lt;!-- 1742 move private 0913: /backup/0913/guestbook/1742.html --&gt;
+notice_920704.html: &lt;!-- 920913 掃描圖下方手寫補註不用重掃。公告本身可以留。 --&gt;
+index.html: &lt;!-- 920913 資料搬移後首頁不要刪。公開頁只保留公告與相簿。 --&gt;</div>
+</div></div>
+
+<div class="step"><div class="n">4</div><div>
+<b>直接訪問 <code>/backup/0913/guestbook/1742.html</code></b> —— 被隱藏的留言板留言：<br>
+「<b>有人在嗎 我在學校 我不知道怎麼出去</b>」· 2003/07/04 18:02 · 來源：<code>PC-OLD-03</code>。<br>
+<span class="dim">這是全站第一顆震撼彈：失蹤女孩其實在學校。</span></div></div>
+
+<div class="step"><div class="n">5</div><div>
+<b>追 <code>PC-OLD-03</code>。</b>去 <code>internal.html</code> → 校園設備報修紀錄（<code>repair_0705.html</code>，9 頁 270 筆）。第七頁左右找到 <code>R0495 2003/05/16 電腦教室後方 PC-OLD-03 查無異常結案</code>——但它的連結不是標準格式，而是 <code>0913/pc-old-03.html</code>。</div></div>
+
+<div class="step"><div class="n">6</div><div>
+打開 <code>/0913/pc-old-03.html</code> → 「找不到指定設備」→ 洩漏 <code>/equipment/PC-OLD-03.html</code>。<br>
+訪問它 → <span class="tag t403">403</span> <code>PC-OLD-03.html set hidden 2003/09/13 18:44</code> + 註解 <code>device log moved: /backup/0913/device/PC-OLD-03.html</code>。</div></div>
+
+<div class="step"><div class="n">7</div><div>
+<b>訪問 <code>/backup/0913/device/PC-OLD-03.html</code></b> —— 設備頁：<br>
+「最後連線 <b>2003/07/09 06:28</b>」（失蹤後第 5 天！）+ 系統紀錄 <code>mount 0913/searchlog</code>。<br>
+<span class="dim">她失蹤 5 天後那台電腦還在動 —— 那 5 天裡發生什麼？</span></div></div>
+
+<div class="step"><div class="n">8</div><div>
+<b>照系統紀錄拼出路徑：<code>/backup/0913/searchlog/PC-OLD-03.html</code></b>。<br>
+這是全站最重要的頁面：<b>361 筆搜尋紀錄</b>，7/4 17:00 → 7/9 06:09。一筆一筆讀（老師在哪 → 門打不開 → 標叔叔救我 → 媽媽找我）。<br>
+頁尾系統紀錄：<code>print queue saved /backup/0913/print/PC-OLD-03/0709.html</code></div></div>
+
+<div class="step"><div class="n">9</div><div>
+<b>訪問列印佇列：<code>/backup/0913/print/PC-OLD-03/0709.html</code></b> —— 她最後印出的東西：<br>
+<div class="code-block">姓名：許雅雯  班級：三年級  聯絡方式：媽媽
+我想回家
+mail server unreachable
+[結束] → https://solve.quest/truth/hces/</div>
+</div></div>
+
+<div class="step"><div class="n">10</div><div>
+<b>「結束」連結帶你到官方真相檔案</b>：<code>solve.quest/truth/hces/</code> —— 28 章小說，完整交代調查過程與真相。看完小說，任務線一完成。</div></div>
+
+<div class="step"><div class="n">11</div><div>
+<b>回頭補完她的作文。</b>從 step 2 的 403 頁註解得知備份位置：<br>
+<code>/backup/0913/student_work/920704/3c/</code>（<b>唯一開放的目錄列表</b>）→ <code>hyawen.tmp.html</code> —— 作文 + 留言板，最後一則留言是 7/4 的 <code>PC-OLD-03</code>：「我不是故意沒有去……」</div></div>
+
+<div class="step"><div class="n">12</div><div>
+<b>第二條任務線：六年乙班。</b>回 solve.quest 首頁 → 《溪埕國民小學六年乙班》→ <code>/truth/hces-6b/</code>（雅玲的日記 24 章）。<br>
+日記第 7 章（9/3）提到班網密碼「怕把小寫的 l 看成數字 1」——配合首頁的 6B 班網截圖 <code>/home/assets/hces-6b-full.png</code>，底部找到密碼：<b><code>happyland92</code></b>。</div></div>
+</div>
+
+<h2 id="s8">8. 密碼與鑰匙</h2>
+<div class="panel">
+<table>
+<tr><th>鑰匙</th><th>值</th><th>用途</th><th>來源</th></tr>
+<tr><td><b>6B 班網密碼</b></td><td><code>happyland92</code></td><td>六年乙班班級網頁登入（<code>/classweb/6b.html</code>）</td><td>官方 6B 截圖底部 + 日記「l vs 1」提示。名字來源：班網叫「六年乙班快樂園地」= Happy Land + 92（民國92年）</td></tr>
+<tr><td><b>備份掛載密碼</b></td><td><code>09!$_backup</code></td><td>小說第 20 章：陳建宏便利貼上的備份入口密碼（<code>/backup/0913/device/PC-OLD-03.html</code>）</td><td>小說《溪埕國民小學失蹤事件》第 20 章</td></tr>
+<tr><td><b>資訊組帳號</b></td><td><code>it_ch</code></td><td>資訊組管理帳號（故事角色陳建宏）</td><td><code>/maintain.html</code></td></tr>
+<tr><td><b>備份根路徑</b></td><td><code>/backup/0913/</code></td><td>所有隱藏資料的根目錄</td><td>HTML 註解 + 403 頁</td></tr>
+<tr><td><b>真相檔案</b></td><td><code>solve.quest/truth/hces/</code></td><td>28 章小說（任務線一結局）</td><td>列印頁「結束」按鈕</td></tr>
+</table>
+<div class="note">💡 這些「密碼」在小說內是解鎖備份的鑰匙；在真實網站上，<code>/classweb/*.html</code> 的登入表單是<b>靜態道具</b>（沒有後端），所以輸入任何密碼都只會重刷頁面。解謎的「回報」是發現密碼本身，不是真的登入成功。</div>
+</div>
+
+<h2 id="s9">9. 人物表</h2>
+<div class="panel">
+<table>
+<tr><th>人物</th><th>身份</th><th>角色定位</th></tr>
+<tr><td><b>許雅雯</b></td><td>三年丙班學生</td><td>核心人物。被留在學校，困在弱電間 5 天</td></tr>
+<tr><td><b>張雅玲</b></td><td>六年乙班學生</td><td>第二任務線主角。教雅雯騎車、知道她的祕密基地；12 月失去媽媽</td></tr>
+<tr><td><b>標叔叔（吳清標）</b></td><td>校工</td><td>鎖門的人。2006 年過世，生前：「門後面有人」「我不知道」</td></tr>
+<tr><td><b>陳建宏（it_ch）</b></td><td>資訊組老師</td><td>執行 9/13 資料搬移的人。「我沒有刪。我只是照他們講的做」</td></tr>
+<tr><td><b>周秀蘭</b></td><td>輔導室老師</td><td>9/18 公告的承辦人，電話中迴避問題但態度軟化</td></tr>
+<tr><td><b>徐德昌</b></td><td>校長</td><td>官腔回覆，拒絕承認：「不要在網路上寫故事」</td></tr>
+<tr><td><b>林麗君老師</b></td><td>六年乙班導師</td><td>雅玲日記中的溫暖存在，最後發現雅玲媽媽過世</td></tr>
+<tr><td><b>雅玲的媽媽</b></td><td>印刷店員工</td><td>「後面還沒乾」——日記的迴響句。12/26 因腦血管破裂過世</td></tr>
+</table>
+</div>
+
+<h2 id="s10">10. 圖片裡藏的秘密</h2>
+<div class="panel">
+<table>
+<tr><th>圖片</th><th>秘密</th></tr>
+<tr><td><code>notice_920704.jpg</code>（協尋公告掃描件）</td><td>掃描件下方有<b>手寫字</b>：「上午集合時仍在校內」——官方說法（山上失蹤）的第一個破綻。HTML 註解還提醒「掃描圖下方手寫補註不用重掃」</td></tr>
+<tr><td><code>map_0915_photo.jpg</code>（校園動線圖）</td><td>手繪地圖，<b>兩個紅叉</b>落在「後方通道」和「設備區」，紅色虛線繞開走廊寫「改由操場側通行」——封鎖範圍正是弱電間所在</td></tr>
+<tr><td><code>pc03_photo.jpg</code>（設備盤點照）</td><td>PC-OLD-03 的照片：米白 CRT 螢幕、窄桌、垂落的線——「電腦教室後方」的真實樣貌</td></tr>
+<tr><td><code>hces-6b-full.png</code>（官方 6B 班網截圖）</td><td>底部家長簽名區藏著密碼 <code>happyland92</code></td></tr>
+<tr><td><code>album/920704/DSC*.JPG</code></td><td>出發前合照裡有個掛粉紅水壺袋的女孩（疑似雅雯）；DSC0019/20/21 回傳 404（被刪的照片）</td></tr>
+<tr><td><code>og_preview.png</code></td><td>只是首頁截圖（社交媒體預覽用）</td></tr>
+</table>
+<div class="note">💡 找圖片秘密的方法：用 OCR（光學字元辨識）讀手寫字；對比相簿照片編號找缺號；檢查每張圖的 EXIF。</div>
+</div>
+
+<h2 id="s11">11. 網站怎麼做出「2003 年」的感覺</h2>
+<div class="panel">
+<p>整站是<b>純靜態檔案</b>（HTML + CSS + JS），沒有任何後端。所有「2003 年老網站」的效果都是刻意做的：</p>
+<table>
+<tr><th>效果</th><th>技術</th></tr>
+<tr><td>圖片一格一格慢慢載入（像撥接）</td><td><code>imgload.js</code>：圖片藏在 <code>data-img-src</code>，載入時用 CSS <code>clip-path</code> 做「下載進度」動畫，隨機跳動</td></tr>
+<tr><td>整頁慢慢出現（像慢網路）</td><td><code>slow-stream-sw.js</code>：Service Worker 攔截 HTML 請求，把回應切成小塊，用隨機延遲重新串流</td></tr>
+<tr><td>點連結有延遲</td><td><code>imgload.js</code> 攔截點擊事件，隨機延遲 360–650ms 才跳頁</td></tr>
+<tr><td>頁面底部灰色小字「本網站內容為虛構創作」</td><td>JS 自動插入（<code>addFictionNotice()</code>）</td></tr>
+<tr><td>「CGI 程式」<code>/cgi-bin/</code></td><td>假的。回傳固定 59-byte 靜態 403 頁</td></tr>
+<tr><td>訪客計數器 0000913</td><td>不是人數，是日期密碼（9/13）</td></tr>
+<tr><td>班級登入頁</td><td>靜態表單，POST 只會重刷同一頁</td></tr>
+</table>
+<p>託管：Vercel（免費方案，自動 HTTPS + CDN），主站套 Cloudflare。域名 Porkbun 註冊，<code>.quest</code> 後綴。總成本約 US$10–30/年。</p>
+</div>
+
+<h2 id="s12">12. 官方真相檔案（兩本小說）</h2>
+<div class="panel">
+<p>網站解到最後，官方把完整故事寫成了兩本小說，收錄在本資料夾（可離線閱讀）：</p>
+<ul>
+<li>📖 <a href="溪埕國小失蹤事件-真相檔案.html"><b>《溪埕國民小學失蹤事件》</b>（28 章）</a>—— 主任務線，2026 年舊生視角調查全過程</li>
+<li>📖 <a href="雅玲的日記.html"><b>《雅玲的日記》</b>（24 章）</a>—— 第二任務線，2003 年 6–12 月，張雅玲視角</li>
+</ul>
+</div>
+
+<h2 id="s13">13. 延伸資源</h2>
+<div class="panel">
+<ul>
+<li>🔗 工作室首頁：<a href="https://solve.quest/">https://solve.quest/</a></li>
+<li>💬 解謎社群 Discord：<a href="https://discord.gg/VwGk7KTPZf">https://discord.gg/VwGk7KTPZf</a></li>
+<li>📦 全站離線鏡像（原始檔不修改）：<code>~/Desktop/hces-quest-site/</code>（150 檔、3.2MB）</li>
+<li>📁 本攻略資料夾：<code>~/Desktop/hces-quest-guide/</code></li>
+</ul>
+<div class="warn">⚠️ 再次提醒：本網站為虛構創作。若你在網路上看到有人拿這個故事當真實事件散播，那是誤傳。</div>
+</div>
+
+<hr>
+<p class="sub" style="text-align:center">攻略製作：Hermes · 資料來源：solve.quest 解謎任務工作室官方網站 · 2026-09-06</p>
+
+</div></body></html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>邺山彼处 — 完整攻略與秘密指南</title>
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2333;--txt:#e6edf3;--dim:#8b949e;--gold:#f0b429;--red:#f85149;--green:#3fb950;--blue:#58a6ff;--purple:#bc8cff;--border:#30363d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.7 -apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px}
+h1{font-size:2.2em;margin:0 0 4px}h2{font-size:1.5em;border-left:5px solid var(--gold);padding-left:12px;margin:48px 0 16px}h3{font-size:1.15em;color:var(--gold);margin:28px 0 8px}
+.sub{color:var(--dim);margin-bottom:24px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:14px 0}
+.warn{background:#2d1a1a;border:1px solid #7a2d2d;border-radius:10px;padding:14px 18px;margin:18px 0;color:#ffb3ae}
+.ok{background:#13261a;border:1px solid #2d6a3f;border-radius:10px;padding:14px 18px;margin:18px 0;color:#9fe8b5}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.95em}
+th,td{border:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--panel2);color:var(--gold)}
+code{background:#262c36;padding:2px 7px;border-radius:5px;font-size:0.9em;color:var(--blue)}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+.tag{display:inline-block;background:#1f3a5f;color:#9ecbff;border-radius:4px;padding:1px 8px;font-size:0.85em;margin:2px}
+.pw{background:#3a2d10;color:#ffd75e;padding:2px 10px;border-radius:5px;font-family:monospace;font-weight:bold}
+.step{background:var(--panel2);border-left:4px solid var(--blue);padding:12px 16px;margin:10px 0;border-radius:0 8px 8px 0}
+.end{border-left:5px solid var(--purple);background:var(--panel);padding:14px 18px;margin:14px 0;border-radius:0 10px 10px 0}
+ul{margin:6px 0}li{margin:4px 0}
+.small{font-size:0.85em;color:var(--dim)}
+.center{text-align:center}
+@media(max-width:600px){h1{font-size:1.6em}table{font-size:0.85em}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>《邺山彼处》完整攻略與秘密指南</h1>
+<p class="sub">中式民俗恐怖解謎 ARG ・ kikoj 制作 ・ 含完整劇透</p>
+
+<div class="warn">⚠️ <b>完整劇透警告</b> — 本指南解開所有謎題與三種結局。想自己玩請先探索原站 <a href="https://yeshanbichu.pages.dev/">yeshanbichu.pages.dev</a>。遊戲含略恐元素與音效。</div>
+
+<h2>0. 這是什麼？</h2>
+<div class="card">
+<p><b>《邺山彼处》</b>是一款中式民俗恐怖網頁解謎遊戲。故事發生在 2026 年 2 月：你的好友兼記者 <b>陈宇</b> 為了追查一樁舊案獨自前往偏遠的 <b>邺山村</b>，2月17日發來最後一條訊息「<b>我看到了...就在前面...我过去看看...</b>」後失聯。警方搜索無果，你決定自己動手尋找真相。</p>
+<p>遊戲是模擬手機體驗：微信聊天 → 七闻论坛 → 小红书 → 微信公众号 → 邺山农家乐網站 → 三個結局。右上角數字代表遊戲進度（x/39）。</p>
+</div>
+
+<h2>1. 遊戲流程總覽</h2>
+<div class="step"><b>① 微信聊天</b> — 閱讀與陈宇的完整對話紀錄 + 他的朋友圈。關鍵線索：<b>七闻论坛</b> 帳號密碼藏在對話裡。</div>
+<div class="step"><b>② 七闻论坛登入</b> — 帳號是陈宇微信號，密碼是宿舍口號拼音首字母。</div>
+<div class="step"><b>③ 論壇搜尋「邺山村」</b> — 找到被封鎖的旅遊帖，裡面有人爆料後山「失踪过不少人」。</div>
+<div class="step"><b>④ 私訊兩位樓友</b>（想过就哭了吗、驴友小张）— 拿到 <b>小红书</b> 連結。</div>
+<div class="step"><b>⑤ 小红书旅遊帖</b> — 民宿連結指向 <b>公众号</b>。</div>
+<div class="step"><b>⑥ 公众号</b> — 有「与佛论禅」密碼轉換器文章（佛又曰），是後續解謎工具。</div>
+<div class="step"><b>⑦ 邺山农家乐網站</b> — 村裡告示：后山搜救中、农家乐歇業；「暖心民警」<b>于警官</b>（于承安）。</div>
+<div class="step"><b>⑧ 决定</b> — 消息.html：最後通話紀錄，然後選擇 → 三種結局。</div>
+
+<h2>2. 🔑 論壇登入（關鍵密碼）</h2>
+<div class="ok">
+<p><b>帳號：</b><span class="pw">chenyu0912</span>　<b>密碼：</b><span class="pw">jgjssl</span></p>
+<p class="small">推理：微信對話說「账号是我微信号，密码是咱宿舍口号拼音首字母」。陈宇微信號 = chenyu0912；朋友圈提到畢業名言「<b>及格就是胜利</b>」→ 拼音首字母 = <b>jgjssl</b>（JS 內確認）。</p>
+</div>
+<p class="small">※ 論壇搜尋功能需先登入（「您尚未登录，搜索功能需先登录账号」）。搜尋「邺山村」→ 1 個結果 → 旅遊帖（已被管理員封鎖）。</p>
+
+<h2>3. 📜 完整故事（邺山村的秘密）</h2>
+<div class="card">
+<h3>后山的傳說</h3>
+<ul>
+<li>邺山村後山被村民「闭口不谈」，官方說法是「未開發區域、防山火」</li>
+<li>論壇爆料：後山「<b>失踪过不少人</b>」，至今沒找到</li>
+<li>村裡有祭祀傳統：清明前後在祠堂舉行三天三夜儀式「祈求茶香人安」；農曆六月初六全村在古樟樹下祭山神</li>
+<li>真正的秘密：村裡信奉 <b>窅大人</b>（邪神），以活人獻祭</li>
+</ul>
+<h3>真相</h3>
+<ul>
+<li>陈宇在後山看到了不該看的東西，被抓去當 <b>祭品</b>，綁在邺山古寺側殿石柱上</li>
+<li>幕後黑手：<b>李福明</b>（祭典主祭）、<b>孙涛开</b>（邺山公安分局局長，與村同流合污）、當地勢力已滲透派出所</li>
+<li>正義警察：<b>于承安</b> — 不收錢不聽話，被架空、還被盤算當「下一回祭祀的祭品」</li>
+</ul>
+</div>
+
+<h2>4. 🎭 三種結局</h2>
+
+<div class="end"><b>結局 1：小小脑子 · 钢铁友谊</b>（end1.html）— 熱血衝動
+<p class="small">你不顧一切獨自衝進邺山村，發現全村人都跪在古寺裡祭祀。陈宇跪在最前面。正殿深處飄出蒼老尖細的聲音：「<b>妙哉……真划算，还买一送一。</b>」你也成了祭品。</p></div>
+
+<div class="end"><b>結局 2：袖手邺山 · 永失其友</b>（end2.html）— 膽怯逃避
+<p class="small">那晚你沒有去。陈宇從此消失，像從沒存在過。幾年後你在公众号推送裡看到一篇文章，滑到最後，手指突然停住——（暗示你錯過了真相，永遠背負愧疚）</p></div>
+
+<div class="end"><b>結局 3：尘埃落定 · 各自平安</b>（end3.html）— 冷靜布局 ✔ 好結局
+<p class="small">你沒衝動，也沒直接報警（村勢力已滲透派出所）。你聯繫了正直民警 <b>于承安</b>，把祭祀時間、窅大人傳說、陈宇定位與截圖全部打包寄給 <b>汀州市公安局举报邮箱</b>。凌晨五點回覆：「材料已收到，专案组已成立。」近百警力進村，祈福儀式進行中當場逮捕李福明、孙涛开等 17 人。三天後你在醫院見到陈宇：「这次真是查了个大案。」</p></div>
+
+<h2>5. 📰 結局後續（next1/2/3）</h2>
+<table>
+<tr><th>頁面</th><th>內容</th></tr>
+<tr><td><b>next1.html</b> 邺山日报</td><td>官方掩蓋報導：「两名男子擅闯未开发区域不幸遇难」，法醫初判「野兽攻击致死」，案件已結。局長 <b>孙涛开</b> 親自主持發布會。→ 結局1/2 的壞結局後續</td></tr>
+<tr><td><b>next2.html</b> 2030 年新聞</td><td>邺山村獲評國家 5A 景區，邺山面館全國連鎖突破 500 家。→ 邪教「洗白成功」的黑暗諷刺結局</td></tr>
+<tr><td><b>next3.html</b> 感謝遊玩</td><td>「邺山村的故事到此结束」。<b>微信公众号回复「无求自应，必先奉之」有小惊喜</b>（彩蛋暗號）；附小紅書與愛發電關注</td></tr>
+</table>
+
+<h2>6. 🧩 謎題工具與彩蛋</h2>
+<div class="card">
+<ul>
+<li><b>与佛论禅（佛又曰）</b> — <a href="https://moeta.cn/talk-with-buddha/">moeta.cn/talk-with-buddha/</a>：把普通中文轉成「佛又曰：+啰耶怛舍…」的禪意密文密碼轉換器。公众号文章有教學（輸入「我想你了」「考研上岸了」的範例）。這是遊戲暗示的解碼工具。</li>
+<li><b>公众号神秘回覆</b> — next3 結尾：回覆「<b>无求自应，必先奉之</b>」有小驚喜。</li>
+<li><b>微信音效</b> — 通話浮層、背景音（微信.mp3 循環播放）。</li>
+<li><b>农家乐告示</b> — 5 條黑板告示可點開，第 4 條「暖心民警护邺山平安」介紹于警官（于承安），附他的照片（images/于.webp）。</li>
+<li><b>論壇帖子</b> — 被封鎖的旅遊帖：回復串「想过就哭了吗」爆料後山失踪，「灵感枯竭的菜鸡」（記者專業）說查系統「好像真有这回事」——這正是陈宇的動機。</li>
+</ul>
+</div>
+
+<h2>7. 🗺️ 頁面地圖（全部頁面）</h2>
+<table>
+<tr><th>頁面</th><th>內容</th><th>進度</th></tr>
+<tr><td>index.html</td><td>封面 + 遊戲玩法 + 走進邺山（跳轉 微信.html）</td><td>01/39</td></tr>
+<tr><td>微信.html</td><td>iPhone 主屏 + 陈宇聊天 + 朋友圈 + 通話</td><td>01/39</td></tr>
+<tr><td>luntan.html</td><td>七闻论坛首頁（需登入）</td><td>02/39</td></tr>
+<tr><td>luntan1.html</td><td>搜尋「邺山村」結果</td><td>03/39</td></tr>
+<tr><td>luntanopen.html</td><td>旅遊帖全文 + 私訊樓友</td><td>03/39</td></tr>
+<tr><td>xhs.html</td><td>小红书「夏木暖暖」旅遊帖</td><td>04/39</td></tr>
+<tr><td>公众号.html</td><td>微信公眾號文章列表（佛又曰密碼）</td><td>04/39</td></tr>
+<tr><td>农家乐.html</td><td>邺山农家乐官網（告示、菜單、住宿）</td><td>10/39</td></tr>
+<tr><td>消息.html</td><td>最後通話紀錄（選擇分歧點）</td><td>39/39</td></tr>
+<tr><td>end1.html / end2.html / end3.html</td><td>三種結局</td><td>—</td></tr>
+<tr><td>next1.html / next2.html / next3.html</td><td>結局後續（報紙 / 5A景區 / 感謝遊玩）</td><td>—</td></tr>
+</table>
+
+<h2>8. 🛠 技術拆解</h2>
+<div class="card">
+<table>
+<tr><th>元件</th><th>說明</th></tr>
+<tr><td>主機</td><td>Cloudflare Pages（pages.dev），純靜態 HTML/JS</td></tr>
+<tr><td>未知名路徑</td><td>回傳首頁（9912B 的 SPA fallback）— 猜路徑不會找到隱藏頁</td></tr>
+<tr><td>308 重定向</td><td>Cloudflare 自動把 .html 轉成無副檔名 URL（消息.html → /消息）</td></tr>
+<tr><td>登入</td><td>前端 JS 比對 chenyu0912 / jgjssl（無後端，純前端體驗）</td></tr>
+<tr><td>音效</td><td>微信.mp3（背景循環）、connect.mp3（撥號聲）、Web Audio API 合成按鍵音</td></tr>
+<tr><td>素材</td><td>images/（封面、聊天頭像、xhs 截圖、邺山村風景）+ user/（公众号頭像）</td></tr>
+<tr><td>進度指示</td><td>右上角 x/39 數字 = 遊戲流程進度</td></tr>
+</table>
+</div>
+
+<h2>9. HTTP 狀態碼速查</h2>
+<table>
+<tr><th>狀態碼</th><th>意思</th><th>在本站</th></tr>
+<tr><td><b>200 OK</b></td><td>存在</td><td>所有真實頁面與 assets</td></tr>
+<tr><td><b>308 Permanent Redirect</b></td><td>永久重定向</td><td>.html 結尾 → 無副檔名（Cloudflare Pages 行為）</td></tr>
+<tr><td><b>404 Not Found</b></td><td>不存在</td><td>不存在的路徑（但本站對未知名路徑回傳首頁 fallback，需比對大小判斷）</td></tr>
+</table>
+<p class="small">判別技巧：真實頁面 > 10KB；未知路徑回傳 9912 位元組的封面頁。</p>
+
+<h2>10. 本地檔案</h2>
+<div class="card">
+<ul>
+<li><code>index.html</code> — 原站封面（打開即可玩）</li>
+<li><code>微信.html</code>、<code>luntan.html</code>、<code>luntan1.html</code>、<code>luntanopen.html</code> — 遊戲主流程</li>
+<li><code>xhs.html</code>、<code>公众号.html</code>、<code>农家乐.html</code>、<code>消息.html</code> — 其他關卡</li>
+<li><code>end1-3.html</code>、<code>next1-3.html</code> — 三結局與後續</li>
+<li><code>images/</code>（32 圖）+ <code>user/</code>（15 圖）+ <code>微信.mp3</code></li>
+</ul>
+</div>
+
+<div class="warn"><b>友情提醒：</b>這是虛構的恐怖解謎遊戲。所有名稱、事件、文件均與現實無關（原站 next1 頁面也有此聲明）。</div>
+
+<p class="center small">邺山彼处 完整攻略・由 Hermes 整理・2026</p>
+</div>
+</body>
+</html>

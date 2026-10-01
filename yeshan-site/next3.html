@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>感谢游玩 · 邺山旧事</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #faf9f5;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Georgia', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .top-image-area {
+            width: 75%;
+            background: #FFE500;
+            line-height: 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .top-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            cursor: pointer;
+            object-fit: contain;
+            background: #FFE500;
+        }
+
+        .card-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 2rem 1.5rem 1.5rem;
+            position: relative;
+        }
+
+        /* ===== 核心卡片容器 ===== */
+        .card {
+            max-width: 1200px;
+            width: 100%;
+            background: #ffffff;
+            padding: 3rem 3rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== 彻底重写：让跪.gif 和卡片在同一行 ===== */
+        .kneel-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 2px; /* 留极少的缝隙免得压住卡片 */
+            pointer-events: none;
+        }
+
+        .kneel-container img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* 调整卡片外层的布局，将跪.gif贴在左右 */
+        .card-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 2rem 1.5rem 1.5rem;
+        }
+
+        .title {
+            margin-bottom: 2.5rem;
+        }
+
+        .title h1 {
+            font-size: 3rem;
+            font-weight: 450;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #2b2a27;
+            font-family: 'Inter', system-ui;
+        }
+
+        .content {
+            font-size: 0.98rem;
+            line-height: 1.8;
+            color: #2c2a27;
+            font-family: 'Georgia', 'Times New Roman', 'Inter', serif;
+            text-align: center;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== 二维码区域 ===== */
+        .qr-section {
+            margin-top: 2.5rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid #ece7df;
+            position: relative;
+        }
+
+        .qr-row {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 10rem;
+            flex-wrap: nowrap;
+        }
+
+        .qr-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1 1 0;
+            max-width: 300px;
+            min-width: 140px;
+        }
+
+        .qr-label {
+            font-size: 0.75rem;
+            color: #8e877c;
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            font-family: 'Inter', monospace;
+        }
+
+        .qr-code-wrapper {
+            display: inline-block;
+            width: 100%;
+            max-width: 280px;
+            background: #ffffff;
+            padding: 0.6rem;
+            border-radius: 12px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            border: 1px solid #ece7df;
+        }
+
+        .qr-code-wrapper:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+        }
+
+        .qr-image {
+            display: block;
+            width: 250px;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            object-fit: contain;
+            background: #fef9e8;
+        }
+
+        .qr-caption {
+            margin-top: 1.2rem;
+            font-size: 0.95rem;
+            color: #2b2a27;
+            font-family: 'Inter', system-ui;
+            letter-spacing: 0.3px;
+            line-height: 1.6;
+        }
+
+        .qr-caption strong {
+            color: #cc0000;
+            font-weight: 600;
+        }
+
+        .qr-caption .highlight {
+            display: inline-block;
+            background: #fff3e8;
+            padding: 0.1rem 0.6rem;
+            border-radius: 4px;
+            border-left: 3px solid #cc0000;
+        }
+
+        .signature {
+            margin-top: 1.8rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #b9b0a2;
+            letter-spacing: 0.3px;
+            font-family: monospace;
+        }
+
+        .arrow-wrap {
+            position: relative;
+            display: inline-block;
+        }
+
+        .arrow {
+            position: absolute;
+            font-size: 28px;
+            color: #cc0000;
+            font-weight: 900;
+            text-shadow: 0 0 6px rgba(204, 0, 0, 0.25);
+            animation: pulse-arrow 1.2s ease-in-out infinite;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .arrow-t { top: -28px; left: 50%; transform: translateX(-50%) rotate(0deg); }
+        .arrow-b { bottom: -28px; left: 50%; transform: translateX(-50%) rotate(180deg); }
+        .arrow-l { left: -32px; top: 50%; transform: translateY(-50%) rotate(270deg); }
+        .arrow-r { right: -32px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+
+        @keyframes pulse-arrow {
+            0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(0.9); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.15); }
+        }
+        @keyframes pulse-arrow-lr {
+            0%, 100% { opacity: 0.6; transform: translateY(-50%) scale(0.9); }
+            50% { opacity: 1; transform: translateY(-50%) scale(1.15); }
+        }
+        .arrow-t { animation: pulse-arrow 1.2s ease-in-out infinite; }
+        .arrow-b { animation: pulse-arrow 1.2s ease-in-out infinite 0.2s; }
+        .arrow-l { animation: pulse-arrow-lr 1.2s ease-in-out infinite 0.4s; }
+        .arrow-r { animation: pulse-arrow-lr 1.2s ease-in-out infinite 0.6s; }
+
+        .back { margin-top: 1rem; text-align: center; }
+
+        .back-btn {
+            background: none; border: none;
+            font-size: 0.7rem; font-family: 'Inter', monospace;
+            color: #a79e8f; cursor: pointer;
+            padding: 0.4rem 0; letter-spacing: 2px;
+            transition: color 0.2s; text-transform: uppercase;
+        }
+        .back-btn:hover { color: #4f4a3e; }
+
+        .bottom-image-area {
+            width: 100%; max-width: 650px;
+            margin: 1.5rem auto 0; padding: 0 1rem;
+            text-align: center;
+        }
+        .bottom-image-area img {
+            width: 100%; max-width: 100%; height: auto; display: block;
+            border-radius: 12px; background: #faf9f5;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            /* 平板端尺寸微调 */
+            .kneel-container img { width: 35px; height: 35px; }
+            .kneel-container { gap: 6px; padding: 0 1px; }
+        }
+
+        @media (max-width: 560px) {
+            .card { padding: 2rem 1.5rem 1.8rem; }
+            .title h1 { font-size: 2rem; letter-spacing: 2px; }
+            .content { font-size: 0.9rem; }
+            .card-wrapper { padding: 1.5rem 1rem 1rem; }
+            .qr-row { gap: 0.8rem; flex-wrap: nowrap; }
+            .qr-code-wrapper { padding: 0.5rem; max-width: 140px; }
+            .qr-item { min-width: 110px; max-width: 140px; }
+            .arrow { font-size: 20px; }
+            .arrow-l { left: -24px; } .arrow-r { right: -24px; }
+            .arrow-t { top: -22px; } .arrow-b { bottom: -22px; }
+            .qr-caption { font-size: 0.85rem; }
+            .qr-section { margin-top: 2rem; padding-top: 1.2rem; }
+
+            /* 手机端缩小并依然紧贴卡片 */
+            .kneel-container img { width: 25px; height: 25px; }
+            .kneel-container { gap: 4px; padding: 0 1px; }
+        }
+
+        .top-image { transition: opacity 0.2s ease; }
+        .top-image:hover { opacity: 0.96; }
+    </style>
+</head>
+<body>
+
+    <div class="top-image-area">
+        <img src="images/感谢.webp" alt="邺山旧事·感谢游玩" class="top-image" id="topImage">
+    </div>
+
+    <!-- ===== 新版卡片布局：左右严格围绕卡片 ===== -->
+    <div class="card-wrapper">
+        
+        <!-- 左侧跪.gif容器 -->
+        <div class="kneel-container left">
+            <img src="user/跪.gif" alt="跪" > <!-- 临时红框方便你看到是否加载了 -->
+            <img src="user/跪.gif" alt="跪" >
+             <img src="user/跪.gif" alt="跪">
+            <img src="user/跪.gif" alt="跪" >
+        </div>
+
+        <!-- 主体卡片 -->
+        <div class="card">
+            <div class="title">
+                <h1>感 谢 游 玩</h1>
+            </div>
+
+            <div class="content">
+                <p>邺山村的故事到此结束</p>
+                <p>感谢你走进这片迷雾，解开邺山的秘密</p>
+                <p><strong>（微信公众号回复“无求自应，必先奉之”有小惊喜）</strong></p>
+            </div>
+
+            <!-- ===== 公众号二维码 ===== -->
+            <div class="qr-section">
+                <div class="qr-row">
+                    <div class="qr-item">
+                        <div class="qr-label">小 红 书</div>
+                        <div class="arrow-wrap">
+                            <div class="qr-code-wrapper" id="qrClickZone1">
+                                <img src="user/码.webp" 
+                                     alt="微信公众号二维码" 
+                                     class="qr-image"
+                                     onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23ffe500%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%233b3a36%22%20font-size%3D%2212%22%20font-family%3D%22monospace%22%3E%E5%85%AC%E4%BC%97%E5%8F%B7%3C%2Ftext%3E%3C%2Fsvg%3E';">
+                            </div>
+                        </div>
+                        <div class="qr-label">扫码关注</div>
+                    </div>
+
+                    <div class="qr-item">
+                        <div class="qr-label">爱 发 电</div>
+                        <div class="arrow-wrap">
+                            <div class="qr-code-wrapper" id="qrClickZone2">
+                                <img src="user/爱发电.png" 
+                                     alt="爱发电二维码" 
+                                     class="qr-image"
+                                     onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23ffe500%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%233b3a36%22%20font-size%3D%2212%22%20font-family%3D%22monospace%22%3E%E7%88%B1%E5%8F%91%E7%94%9F%3C%2Ftext%3E%3C%2Fsvg%3E';">
+                            </div>
+                        </div>
+                        <div class="qr-label">扫码支持</div>
+                    </div>
+                </div>
+                
+
+               
+            </div>
+
+            <div class="back">
+                <!-- 预留 -->
+            </div>
+        </div>
+
+        <!-- 右侧跪.gif容器 -->
+        <div class="kneel-container right">
+            <img src="user/跪.gif" alt="跪" >
+            <img src="user/跪.gif" alt="跪">
+             <img src="user/跪.gif" alt="跪" >
+            <img src="user/跪.gif" alt="跪">
+        </div>
+
+    </div>
+
+    
+
+<!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b66629a8781149c8ba21b8827cb977da"}'></script><!-- Cloudflare Pages Analytics --></body>
+</html>

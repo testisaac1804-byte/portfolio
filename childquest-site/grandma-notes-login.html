@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>內部資料登入</title>
+<link rel="icon" href="assets/logo.webp">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#e7ebf3;font:15px/1.6 Arial,"Microsoft JhengHei",sans-serif;color:#222}.box{width:390px;max-width:calc(100% - 32px);margin:70px auto;border:1px solid #333;background:#f2eee3}.box h1{margin:0;padding:10px;background:#283e61;color:#fff;font-size:18px}.form{padding:22px}.hint{margin:0 0 14px;color:#555}.row{display:grid;grid-template-columns:70px 1fr;gap:10px;margin:12px 0}.row input{height:31px;border:1px solid #888;padding:4px 7px}.form button{margin-left:80px;padding:6px 22px}.error{margin:8px 0 0 80px;color:#a22;min-height:24px}.back{display:block;margin:0 22px 18px;color:#315788}
+</style>
+<script src="analytics-r254.js?v=r345"></script></head>
+<body>
+<div class="box">
+<h1>內部資料登入</h1>
+<form class="form" id="login"><p class="hint">已封存的查證筆記。請輸入管理者帳號與密碼。</p>
+<div class="row"><label for="u">帳號：</label><input id="u" autocomplete="username"></div>
+<div class="row"><label for="p">密碼：</label><input id="p" type="password" autocomplete="current-password"></div>
+<button>登入</button><div class="error" id="err"></div>
+</form>
+</div>
+<script>
+(function(){
+ var params=new URLSearchParams(location.search);
+ if(params.get('error')==='1'){
+  document.getElementById('err').textContent='帳號或密碼錯誤。';
+  if(history.replaceState)history.replaceState(null,'',location.pathname+location.hash);
+ }
+ document.getElementById('login').addEventListener('submit',async function(e){
+  e.preventDefault();
+  var u=document.getElementById('u').value.trim().toUpperCase();
+  var p=document.getElementById('p').value.trim();
+  document.getElementById('err').textContent='';
+  try{
+   var raw=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(u+':'+p)));
+   var encoded=btoa(Array.from(raw,function(b){return String.fromCharCode(b)}).join(''));
+   sessionStorage.setItem('notes-ok','1'); sessionStorage.setItem('notes-key-v2',encoded);
+   var target=[115,99,45,97,114,99,104,105,118,101,45,102,52,53,56,102,100,52,100,51,56,57,98,49,52,55,101,51,57,54,54,48,49,98,53,46,104,116,109,108].map(function(n){return String.fromCharCode(n)}).join('');
+   var moved=false,go=function(){if(moved)return;moved=true;location.href=target;};
+   if(window.ARGAnalytics){window.ARGAnalytics.trackEvent('login',{method:'grandma_blog_credentials'},{event_callback:go,event_timeout:500});setTimeout(go,550);}else go();
+  }catch(_error){
+   sessionStorage.removeItem('notes-ok');sessionStorage.removeItem('notes-key-v2');
+   document.getElementById('err').textContent='此瀏覽器無法開啟封存資料。';
+  }
+ });
+})();
+</script>
+</body></html>
