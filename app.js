@@ -840,6 +840,33 @@ function isImg(p){return p&&/\.(png|jpe?g|gif|webp|svg|ico|bmp)$/i.test(p)}
 
 var cv=[],_scene,_cam,_rend,_ctrl,_mesh,_anim;
 function open3D(p){cv=[{l:'Model',p:p}];show3D('3D Preview')}
+// Lazy-load the three.js engine (min, OrbitControls, STLLoader) only when a 3D preview opens,
+// instead of forcing ~700KB of 3D libs on every visitor's first page load.
+var _threePromise=null;
+function ensureThree(cb){
+ if(window.THREE&&window.THREE.OrbitControls&&window.THREE.STLLoader){cb();return}
+ if(!_threePromise){
+  _threePromise=new Promise(function(res,rej){
+   var urls=[
+    'https://cdn.jsdelivr.net/npm/three@0.140.0/build/three.min.js',
+    'https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/controls/OrbitControls.js',
+    'https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/STLLoader.js'];
+   var i=0;
+   function next(){
+    if(i>=urls.length){res();return}
+    if(i===0&&window.THREE){i++;return next()}
+    if(i===1&&window.THREE&&window.THREE.OrbitControls){i++;return next()}
+    if(i===2&&window.THREE&&window.THREE.STLLoader){i++;return next()}
+    var s=document.createElement('script');s.src=urls[i];
+    s.onload=function(){i++;next()};
+    s.onerror=rej;
+    document.head.appendChild(s);
+   }
+   next();
+  });
+ }
+ _threePromise.then(function(){cb()}).catch(function(){var vl=document.getElementById('_3dl');if(vl)vl.innerHTML='<p style="color:var(--red)">3D engine failed to load</p>'});
+}
 function open3DM(t,arr){cv=arr;show3D(t)}
 function show3D(t){
  var th='<span>'+t+'</span>';
@@ -854,7 +881,7 @@ function show3D(t){
   '<div class="modal-body" id="_3db"><div class="modal-loading" id="_3dl">Loading 3D engine...</div><div class="modal-hint">Drag to rotate | Scroll to zoom | Click model to pause rotation</div></div></div>';
  document.body.appendChild(m);
  m.addEventListener('click',function(e){if(e.target===m)closeM('_3d')});
- load3D(cv[0].p)
+ ensureThree(function(){load3D(cv[0].p)});
 }
 function toggleWire(){if(_mesh){_mesh.material.wireframe=!_mesh.material.wireframe}}
 function toggleRotate(){if(_ctrl){_ctrl.autoRotate=!_ctrl.autoRotate}}
