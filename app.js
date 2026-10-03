@@ -776,9 +776,22 @@ function applySearch(){
   var qOk=!q||t2.indexOf(q)>=0||d2.indexOf(q)>=0||g2.indexOf(q)>=0;
   var tagOk=!curTag||g2.indexOf(curTag)>=0;
   var favOk=!showFavs||isFav(c.getAttribute('data-cat'),parseInt(c.getAttribute('data-idx'),10));
-  c.style.display=(qOk&&tagOk&&favOk)?'':'none';
- });
- var n=document.querySelectorAll('.card:not([style*="none"])').length;
+   c.style.display=(qOk&&tagOk&&favOk)?'':'none';
+  });
+  /* resource cards (Apps & Downloads links) — search matches title/desc/meta */
+  document.querySelectorAll('.res-card').forEach(function(r){
+   var t=r.querySelector('.res-t'),d=r.querySelector('.res-d'),n=r.querySelector('.res-n');
+   var t2=t?t.textContent.toLowerCase():'',d2=d?d.textContent.toLowerCase():'',n2=n?n.textContent.toLowerCase():'';
+   var qOk=!q||t2.indexOf(q)>=0||d2.indexOf(q)>=0||n2.indexOf(q)>=0;
+   var tagOk=!curTag|| (t2+' '+d2+' '+n2).indexOf(curTag)>=0;
+   r.style.display=(qOk&&tagOk)?'':'none';
+  });
+  /* hide empty resource sections while a query/filter is active */
+  document.querySelectorAll('.res-section').forEach(function(s){
+   if(q||curTag){var vis=[].some.call(s.querySelectorAll('.res-card'),function(r){return r.style.display!=='none'});s.style.display=vis?'':'none';}
+   else s.style.display='';
+  });
+  var n=document.querySelectorAll('.card:not([style*="none"]),.res-card:not([style*="none"])').length;
  var cnt=document.getElementById('fcount');
  if(cnt)cnt.textContent=(q||curTag||showFavs)?(n+' shown'):'';
 }

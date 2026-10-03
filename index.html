@@ -19,18 +19,16 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
 <style>
 @font-face{font-family:'Inter';font-style:normal;font-weight:300 800;font-display:swap;src:url(/fonts/inter-var.woff2) format('woff2')}/* Inter variable font © The Inter Project Authors, SIL OFL 1.1 — see /fonts/OFL.txt */
-
-<style>
-:root{--bg:#050508;--sf:#0d0e12;--t1:#f0f0f5;--t2:#c8ccd6;--t3:#6b7080;--t4:#3d4150;--ac:#6366f1;--ab:#818cf8;--ag:#10b981;--ar:#ef4444;--bd:rgba(255,255,255,0.06);--bs:rgba(255,255,255,0.03);--grad:linear-gradient(135deg,#6366f1,#8b5cf6,#06b6d4)}
-html[data-theme="light"]{--bg:#f6f7fb;--sf:#ffffff;--t1:#111827;--t2:#374151;--t3:#6b7280;--t4:#9ca3af;--bd:rgba(17,24,39,0.1);--bs:rgba(17,24,39,0.05);--grad:linear-gradient(135deg,#4f46e5,#7c3aed,#0891b2)}
+:root{--bg:#050508;--sf:#0d0e12;--t1:#f0f0f5;--t2:#c8ccd6;--t3:#6b7080;--t4:#3d4150;--ac:#6366f1;--ab:#818cf8;--ag:#10b981;--ar:#ef4444;--bd:rgba(255,255,255,0.06);--bs:rgba(255,255,255,0.03);--grad:linear-gradient(135deg,#6366f1,#8b5cf6,#06b6d4);--hbg:rgba(5,5,8,0.92)}
+html[data-theme="light"]{--bg:#f6f7fb;--sf:#ffffff;--t1:#111827;--t2:#374151;--t3:#6b7280;--t4:#9ca3af;--ac:#4f46e5;--ab:#6366f1;--ag:#059669;--ar:#dc2626;--bd:rgba(17,24,39,0.1);--bs:rgba(17,24,39,0.05);--grad:linear-gradient(135deg,#4f46e5,#7c3aed,#0891b2);--hbg:rgba(246,247,251,0.92)}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--t2);font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
 .hidden{display:none!important}
-header{position:sticky;top:0;z-index:100;background:rgba(5,5,8,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);padding:0 24px}
+header{position:sticky;top:0;z-index:100;background:var(--hbg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);padding:0 24px}
 header nav{max-width:1280px;margin:0 auto;display:flex;align-items:center;height:56px;justify-content:space-between}
 .logo{font-size:18px;font-weight:700;color:var(--t1);letter-spacing:-0.5px}.logo span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .search-bar{display:flex;align-items:center;gap:8px}
-.search-bar input{padding:6px 14px;border-radius:9999px;border:1px solid var(--bd);background:rgba(255,255,255,0.03);color:var(--t1);font-family:inherit;font-size:12px;width:170px;outline:none;transition:all .2s}
+.search-bar input{padding:6px 14px;border-radius:9999px;border:1px solid var(--bd);background:var(--sf);color:var(--t1);font-family:inherit;font-size:12px;width:170px;outline:none;transition:all .2s}
 .search-bar input:focus{border-color:var(--ab);box-shadow:0 0 0 3px rgba(99,102,241,0.15);width:200px}
 .admin-btn{font-size:11px;padding:5px 14px;border-radius:9999px;border:1px solid var(--bd);background:transparent;color:var(--t3);cursor:pointer;font-family:inherit;font-weight:500;transition:all .2s}
 .admin-btn:hover{color:var(--t1);border-color:var(--ab);background:rgba(99,102,241,0.08)}
