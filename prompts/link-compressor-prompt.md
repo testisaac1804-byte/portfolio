@@ -16,7 +16,7 @@ A self-hosted URL shortener on my own domain: paste a long link, get a tiny `htt
 
 **Notes**
 - **Compresses the link itself first**: strips `utm_*`/`fbclid`/`gclid`/`igshid`/`si`/`spm`/`mc_cid`… and reports what it removed; signed-URL params (`X-Amz-Signature`, `token`, `expires`) are left alone so download links never break.
-- **Two credentials accepted**, checked constant-time: the memorable password (`LINKS_PASSWORD`, the portfolio's `Isaac1804` — convenience lock, it is public in app.js) and the long random `LINKS_TOKEN` (`~/.isaac-links-token`, private). Header `X-Link-Token` or `?token=`/`?password=`/`?pw=`.
+- **Two credentials accepted**, checked constant-time, sent as the `X-Link-Token` header **only** (query strings are refused so a secret can never leak into browser history, edge logs or Referer): the admin password (`LINKS_PASSWORD` Worker secret — current value in `apps/isaac-links/ADMIN-CREDENTIALS-2026-10.txt`, mode 600, never published) and the long random `LINKS_TOKEN` (`~/.isaac-links-token`). 5 wrong tries per IP ⇒ 15-minute lockout.
 - **Access model** — visitor: create + follow, nothing else (401 on list/log/activity/delete, custom names 403). Password: logs, delete, custom names, global list, bulk, QR, **no hourly cap** (rate limit is skipped when authenticated).
 - **Pitfall** — Cloudflare route patterns are matched *including the query string*: `/api/activity` does not match `/api/activity?limit=5` (the request falls through to Pages' 404). Every pattern ends in `*`.
 - **Pitfall** — a button that can only fail reads as broken. Render admin-only buttons only when unlocked; locked shows one 🔒 button that focuses the password field, and any 401 mid-session re-locks + re-asks.
