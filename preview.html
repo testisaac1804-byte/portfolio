@@ -309,13 +309,34 @@ function viewerDXF(u) {
   });
 }
 
+// ---- network-robust file host --------------------------------------------
+// Some networks (e.g. school WiFi) block *.workers.dev, which made previews fail
+// with "refused to connect". The Worker ALSO answers on the site's own origin at
+// /files/, so any legacy host is rewritten here at load time — a preview then
+// loads wherever the site itself loads, even from an old cached/bookmarked link.
+function fixHost(u){
+  var m=/^https?:\/\/(files-proxy\.isaac1804\.workers\.dev|files\.isaac1804\.com|cdn\.isaac1804\.com)(\/.*)?$/i.exec(u);
+  return m? 'https://isaac1804.com/files'+(m[2]||'/'): u;
+}
+function fallbackCard(ico,title,msg,u){
+  document.getElementById('badge').hidden=true;
+  document.getElementById('badge2').hidden=false;
+  document.getElementById('wrap').innerHTML='<div id="nodl"><div class="ico">'+ico+'</div><h2>'+title+'</h2><p>'+msg+'</p><a class="btn" href="'+(u.indexOf('?')<0?u+'?download=1':u+'&download=1')+'">⬇ Download file</a></div>';
+}
+
 function show(u){
   var e=ext(u),w=document.getElementById('wrap');
   var ex=IMG.indexOf(e)>=0;
   if(DOC.indexOf(e)>=0||ex){
     var badge=document.getElementById('badge');badge.hidden=false;
-    var el=ex? '<img src="'+u+'" alt="preview">' : '<iframe src="'+u+'" allowfullscreen loading="lazy"></iframe>';
-    w.innerHTML=el;return;
+    if(ex){
+      var img=document.createElement('img');img.alt='preview';
+      img.onerror=function(){fallbackCard('🖼️','Image preview failed','This image could not be loaded — it may be offline or blocked. The download button still works.',u);};
+      img.src=u;w.innerHTML='';w.appendChild(img);
+    }else{
+      w.innerHTML='<iframe src="'+u+'" allowfullscreen loading="lazy"></iframe>';
+    }
+    return;
   }
   if(VID.indexOf(e)>=0){
     document.getElementById('badge').hidden=false;
@@ -344,7 +365,7 @@ function show(u){
 }
 
 // ---- boot ----
-var u=new URLSearchParams(location.search).get('u')||'';
+var u=fixHost(new URLSearchParams(location.search).get('u')||'');
 if(!u){document.getElementById('err').hidden=false;document.getElementById('err').textContent='No file URL given (?u=…).';}
 else{
   var name=u.split('?')[0].split('/').pop();

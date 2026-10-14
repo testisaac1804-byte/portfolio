@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.png">
 <title>Hong Kong Tour</title>
 <style>
 :root {
@@ -353,10 +354,43 @@ async function init() {
 
 async function loadData() {
   try {
-    allData = {"hong_kong_island": {"name": "香港島 Hong Kong Island", "name_cn": "香港島", "description": "The historic and commercial heart of Hong Kong, home to the iconic skyline, colonial heritage, vibrant nightlife, and world-class shopping districts.", "color": "#E74C3C", "areas": [{"name": "中環 Central", "name_cn": "中環", "description": "The central business district — a blend of towering skyscrapers, historic landmarks, luxury shopping, and trendy nightlife.", "spots": [{"name": "太平山頂 Victoria Peak", "name_cn": "太平山頂", "category": "landmark", "description": "The highest point on Hong Kong Island, offering breathtaking panoramic views of the skyline, Victoria Harbour, and the outlying islands. Take the historic Peak Tram (since 1888) for the steepest funic", "location": "Victoria Gap, The Peak", "rating": 4.8, "tips": "Visit at sunset for golden hour + night views. The Peak Tram can have 30-60min queues — book tickets online. Alternatively hike up via the Morning Tra"}, {"name": "中環至半山自動扶梯 Central-Mid-Levels Escalator", "name_cn": "中環至半山自動扶梯", "category": "landmark", "description": "The world's longest outdoor covered escalator system (over 800m). Connects Central to the Mid-Levels residential area, cutting through SoHo and passing trendy bars, restaurants, antique shops, and str", "location": "Starts at Central Market, runs through SoHo to Conduit Road", "rating": 4.5, "tips": "Best visited after 10am when going up. Hop on/off at different points to explore side streets. Great for people-watching and discovering hidden bars."}, {"name": "蘭桂坊 Lan Kwai Fong", "name_cn": "蘭桂坊", "category": "nightlife", "description": "Hong Kong's most famous nightlife district — a small L-shaped alley packed with over 90 bars, clubs, and restaurants. Comes alive after 9pm with expats, tourists, and young locals. Hosts massive stree", "location": "Between D'Aguilar Street and Wyndham Street, Central", "rating": 4.2, "tips": "Happy hour 5-8pm for cheaper drinks. Weekends get extremely crowded. Try the side streets (Wo On Lane, Wing Wah Lane) for quieter pub vibes."}]}, {"name": "上環 Sheung Wan", "name_cn": "上環", "description": "A fascinating blend of old and new — traditional dried seafood shops, antique streets, and hipster cafes coexist in this historic neighbourhood west of Central.", "spots": [{"name": "海味街 Dried Seafood Street (Des Voeux Road West)", "name_cn": "海味街", "category": "market", "description": "A street lined with shops selling dried seafood — abalone, sea cucumber, shark fin, dried scallops, fish maw, and exotic ingredients. The pungent aroma, bustling atmosphere, and shop owners repacking ", "location": "Des Voeux Road West, Sheung Wan", "rating": 4.0, "tips": "Best visited in the morning when deliveries arrive. Not all shops welcome browsing — many cater to wholesale buyers. Combine with a walk to the Wester"}, {"name": "荷李活道古董街 Hollywood Road Antique Shops", "name_cn": "荷李活道古董街", "category": "shopping", "description": "One of the oldest streets in Hong Kong, famous for its antique shops selling Chinese ceramics, furniture, jade, calligraphy, and curios. Ranges from high-end galleries to cluttered treasure troves. Th", "location": "Hollywood Road, Sheung Wan to Central", "rating": 4.2, "tips": "Bargaining is expected in smaller shops. Be wary of fakes in lower-end shops. High-end galleries near the Eastern end are pricier but authentic."}, {"name": "西港城 Western Market", "name_cn": "西港城", "category": "landmark", "description": "A beautiful Edwardian-style building (built 1906) that originally served as the North Point Ferry Pier. Now a shopping arcade housing fabric and tailor shops, craft stores, and a restaurant. The red-b", "location": "323 Des Voeux Road Central, Sheung Wan", "rating": 3.8, "tips": "Free to explore. The fabric shops on the upper floors are great for custom tailoring. The building connects to Sheung Wan MTR station."}]}]}, "kowloon": {"name": "九龍 Kowloon", "name_cn": "九龍", "description": "The bustling peninsula opposite Hong Kong Island — a sensory explosion of neon lights, street markets, dim sum palaces, and some of the most vibrant urban landscapes on Earth.", "color": "#3498DB", "areas": [{"name": "尖沙咀 Tsim Sha Tsui", "name_cn": "尖沙咀", "description": "The most tourist-friendly district in Kowloon — world-class museums, the harbour promenade, luxury shopping, and the famous Star Ferry terminal.", "spots": [{"name": "維多利亞港及星光大道 Victoria Harbour & Avenue of Stars", "name_cn": "維多利亞港及星光大道", "category": "landmark", "description": "One of the most famous harbour views in the world. The Avenue of Stars is the TST promenade lined with handprints of Hong Kong movie stars (Bruce Lee, Jackie Chan, Wong Kar-wai). Evening 'A Symphony o", "location": "Tsim Sha Tsui Promenade, Salisbury Road", "rating": 4.7, "tips": "Best views of the Hong Kong Island skyline. The Symphony of Lights show starts at 8pm daily. Arrive by 7:30pm for a good spot. The Bruce Lee statue is"}, {"name": "香港文化中心 Hong Kong Cultural Centre", "name_cn": "香港文化中心", "category": "arts_culture", "description": "A striking curved building housing the Concert Hall, Grand Theatre, and Studio Theatre. Hosts world-class performances by the Hong Kong Philharmonic, Chinese opera, ballet, and international artists. ", "location": "10 Salisbury Road, Tsim Sha Tsui", "rating": 4.3, "tips": "Check the performance schedule in advance. The building's architecture is worth photographing even if you don't attend a show. Free exhibitions often "}, {"name": "鐘樓 Clock Tower", "name_cn": "鐘樓", "category": "landmark", "description": "The only remaining structure of the original Kowloon-Canton Railway terminus (1915). This 44m-high clock tower is a declared monument and one of Hong Kong's most photographed landmarks. It stands at t", "location": "Salisbury Road, Tsim Sha Tsui, near Star Ferry", "rating": 4.2, "tips": "The clock tower is illuminated at night. Best photographed from across the harbour or from the Star Ferry. Combine with a walk along the TST promenade"}]}, {"name": "佐敦及油麻地 Jordan & Yau Ma Tei", "name_cn": "佐敦及油麻地", "description": "The heart of old Kowloon — night markets, temples, neon signs, and the gritty, authentic energy that Hong Kong is famous for.", "spots": [{"name": "廟街夜市 Temple Street Night Market", "name_cn": "廟街夜市", "category": "market", "description": "Hong Kong's most famous night market — a sensory overload of neon-lit stalls selling clothes, watches, electronics, antiques, and souvenirs. Fortune tellers, street performers, dai pai dong (open-air ", "location": "Temple Street, Jordan to Yau Ma Tei", "rating": 4.3, "tips": "Best visited after 7pm when fully active. Bargain hard (start at 30-40% of asking price). Try the claypot rice and curry fish balls at the dai pai don"}, {"name": "廟街 Tin Hau Temple (Yau Ma Tei)", "name_cn": "廟街天后廟", "category": "temple", "description": "Built in 1865, this is the largest of Hong Kong's Tin Hau temples and the namesake of Temple Street. A peaceful oasis amid the market chaos. The complex includes a See Yee Koon (community hall) and a ", "location": "Market Street & Temple Street, Yau Ma Tei", "rating": 4.0, "tips": "Free entry. Open daily 8am-5pm. Visit during the day when the market is quiet for a more spiritual experience."}, {"name": "玉器市場 Jade Market", "name_cn": "玉器市場", "category": "market", "description": "A covered market with over 400 stalls selling jade jewellery, ornaments, and raw jade stones. Open since the 1960s. Even if you're not buying, the variety of green hues and the lively bargaining atmos", "location": "Kansu Street & Battery Street, Yau Ma Tei", "rating": 3.7, "tips": "Open daily 10am-5pm. Genuine jade is expensive — learn the basics of spotting fakes. The adjacent Yau Ma Tei Fruit Market (1913) is worth a look for t"}]}]}};
+    const r = await fetch('data.json');
+    allData = await r.json();
   } catch(e) {
     console.error('Failed to load data:', e);
   }
+}
+
+// ---- static build: no server, so search runs locally ----------
+// allData is empty until loadData() resolves, so build the index on first
+// search instead of at parse time (doing it eagerly found 0 results).
+var _allSpots = null;
+function _buildSpotIndex() {
+  if (_allSpots) return _allSpots;
+  _allSpots = [];
+  for (var _rk in allData) {
+    var _r = allData[_rk];
+    for (var _ai = 0; _ai < (_r.areas || []).length; _ai++) {
+      var _sp = _r.areas[_ai].spots || [];
+      for (var _si = 0; _si < _sp.length; _si++) {
+        // the search-result markup calls goToSpot(spot.region_key, ...), and
+        // displays spot.region -- the server sets both, so mirror them here.
+        _sp[_si].region_key = _sp[_si].region_key || _rk;
+        _sp[_si].region = _sp[_si].region || _r.name;
+        _allSpots.push(_sp[_si]);
+      }
+    }
+  }
+  return _allSpots;
+}
+function apiSearch(q) {
+  var spots = _buildSpotIndex();
+  var kws = String(q).toLowerCase().split(/\s+/).filter(Boolean);
+  return spots.filter(function (s) {
+    var t = [s.name, s.name_cn, s.description, s.area, s.region, s.category]
+      .join(' ').toLowerCase();
+    return kws.every(function (k) { return t.indexOf(k) !== -1; });
+  });
 }
 
 function renderSidebar() {
@@ -436,13 +470,7 @@ function renderFilters(region) {
   
   let html = `<button class="filter-btn active" data-cat="all" onclick="setFilter('all')">All</button>`;
   
-  const catNames = {
-    landmark: 'Landmarks', beach: 'Beaches', temple: 'Temples', market: 'Markets',
-    shopping: 'Shopping', museum: 'Museums', neighbourhood: 'Villages',
-    park: 'Parks', nightlife: 'Nightlife', hiking: 'Hiking', 
-    entertainment: 'Entertainment', food: 'Food', scenic: 'Scenic',
-    arts_culture: 'Arts & Culture'
-  };
+  const catNames = CAT_LABELS;
   
   for (const cat of [...categories].sort()) {
     html += `<button class="filter-btn" data-cat="${cat}" onclick="setFilter('${cat}')">${catNames[cat] || cat}</button>`;
@@ -478,7 +506,7 @@ function renderRegion(region, regionKey) {
       <div class="area-section">
         <div class="area-header">
           <h3>${area.name}</h3>
-          <span class="area-name-cn">${area.name_cn || ''}</span>
+          <span class="area-name-cn">${cnSuffix(area.name, area.name_cn)}</span>
         </div>
         <div class="area-desc">${area.description || ''}</div>
         <div class="spots-grid" id="spots-${area.name.replace(/\s+/g, '_')}">
@@ -498,6 +526,28 @@ function renderRegion(region, regionKey) {
   container.innerHTML = html;
 }
 
+// Spot/area `name` already embeds the Chinese (e.g. "中環 Central"), so only
+// show `name_cn` when it adds something -- otherwise the UI prints it twice.
+function cnSuffix(name, cn) {
+  if (!cn) return '';
+  return String(name || '').indexOf(cn) !== -1 ? '' : cn;
+}
+
+// Category slugs are snake_case ("arts_culture"); the filter chips spell them
+// out ("Arts & Culture"), so the tags read the same way. Hoisted so the chips
+// (renderFilters) and the tags cannot drift apart.
+const CAT_LABELS = {
+  landmark: 'Landmarks', beach: 'Beaches', temple: 'Temples', market: 'Markets',
+  shopping: 'Shopping', museum: 'Museums', neighbourhood: 'Villages',
+  park: 'Parks', nightlife: 'Nightlife', hiking: 'Hiking',
+  entertainment: 'Entertainment', food: 'Food', scenic: 'Scenic',
+  arts_culture: 'Arts & Culture',
+};
+function catLabel(c) {
+  if (!c) return 'other';
+  return CAT_LABELS[c] || String(c).replace(/_/g, ' ');
+}
+
 function renderSpotCard(spot, regionKey) {
   const ratingStars = '★'.repeat(Math.floor(spot.rating || 0)) + 
     ((spot.rating || 0) % 1 >= 0.5 ? '½' : '');
@@ -509,17 +559,17 @@ function renderSpotCard(spot, regionKey) {
   
   return `
     <div class="spot-card" id="${spotId}" onclick="toggleExpand('${spotId}')">
-      <img onerror="this.style.display='none'" class="spot-img" src="${img}" alt="${spot.name}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22><rect fill=%22%231a1a28%22 width=%22400%22 height=%22200%22/><text fill=%22%239898b8%22 font-size=%2216%22 text-anchor=%22middle%22 x=%22200%22 y=%22110%22>${encodeURIComponent(spot.name)}</text></svg>'">
+      <img class="spot-img" src="${img}" alt="${spot.name}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22><rect fill=%22%231a1a28%22 width=%22400%22 height=%22200%22/><text fill=%22%239898b8%22 font-size=%2216%22 text-anchor=%22middle%22 x=%22200%22 y=%22110%22>${encodeURIComponent(spot.name)}</text></svg>'">
       <div class="spot-body">
         <div class="spot-card-header">
           <div>
             <div class="spot-name">${spot.name}</div>
-            <div class="spot-name-cn">${spot.name_cn || ''}</div>
+            <div class="spot-name-cn">${cnSuffix(spot.name, spot.name_cn)}</div>
           </div>
           <div class="spot-rating" title="${ratingNum}/5">${ratingStars} <span style="margin-left:2px">${ratingNum}</span></div>
         </div>
         <div class="spot-meta">
-          <span class="spot-category ${spot.category || 'other'}">${spot.category || 'other'}</span>
+          <span class="spot-category ${spot.category || 'other'}">${catLabel(spot.category)}</span>
           <span style="font-size:11px;color:var(--text2)">📍 ${spot.area || ''}</span>
         </div>
         <div class="spot-desc">${spot.description || ''}</div>
@@ -564,9 +614,7 @@ async function doSearch(query) {
   
   searchTimeout = setTimeout(async () => {
     try {
-      const r = await fetch(`/api/search?q=${encodeURIComponent(val)}`);
-      const results = await r.json();
-      showSearchResults(results, val);
+      showSearchResults(apiSearch(val), val);
     } catch(e) {
       console.error('Search failed:', e);
     }
@@ -601,10 +649,10 @@ function showSearchResults(results, query) {
     const img = spot.image || '';
     html += `
       <div class="search-result-item" onclick="goToSpot('${spot.region_key}', '${encodeURIComponent(spot.name)}')">
-        <img onerror="this.style.display='none'" class="search-result-img" src="${img}" alt="${spot.name}" loading="lazy" onerror="this.style.display='none'">
+        <img class="search-result-img" src="${img}" alt="${spot.name}" loading="lazy" onerror="this.style.display='none'">
         <div class="search-result-info">
           <h4>${spot.name}</h4>
-          <div class="result-meta">${spot.region} · ${spot.area} · <span class="spot-category ${spot.category || 'other'}">${spot.category || ''}</span></div>
+          <div class="result-meta">${spot.region} · ${spot.area} · <span class="spot-category ${spot.category || 'other'}">${catLabel(spot.category)}</span></div>
           <div class="result-desc">${(spot.description || '').substring(0, 200)}</div>
         </div>
       </div>

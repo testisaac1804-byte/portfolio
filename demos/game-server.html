@@ -1,660 +1,748 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multiplayer Arena</title>
+<meta charset="utf-8">
+<title>Arena — Multiplayer</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230b0e14'/><circle cx='16' cy='16' r='9' fill='none' stroke='%234fc3f7' stroke-width='3'/><circle cx='16' cy='16' r='3' fill='%23e8f4ff'/></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0b0d14">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#111;color:#fff;font-family:-apple-system,BlinkMacSystemFont,sans-serif;overflow:hidden;display:flex;justify-content:center;align-items:center;height:100vh}
-canvas{display:block;cursor:crosshair}
-#join-screen{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;background:rgba(0,0,0,0.85);z-index:100}
-#join-box{background:#1a1a2e;padding:40px;border-radius:12px;text-align:center;width:340px;border:1px solid #333}
-#join-box h2{color:#4488ff;margin-bottom:20px;font-size:22px}
-#join-box input{display:block;width:100%;padding:12px;margin:8px 0;border-radius:6px;border:1px solid #333;background:#222;color:#fff;font-size:16px;text-align:center}
-#join-box input:focus{outline:none;border-color:#4488ff}
-#join-box button{width:100%;padding:12px;margin-top:16px;border-radius:6px;border:none;background:#4488ff;color:#fff;font-size:16px;font-weight:600;cursor:pointer}
-#join-box button:hover{background:#5599ff}
-#join-box .error{color:#ff4444;font-size:13px;margin-top:10px;min-height:20px}
-#join-box .hint{color:#666;font-size:12px;margin-top:8px}
-#hud{position:fixed;top:10px;left:10px;font-size:13px;color:#aaa;font-family:monospace;pointer-events:none;z-index:10;line-height:1.6}
-#hud .hp{color:#ff4444;font-weight:bold}
-#hud .ping{color:#44ff44}
-#minimap{position:fixed;bottom:10px;right:10px;width:160px;height:90px;background:rgba(0,0,0,0.6);border:1px solid #333;border-radius:4px;pointer-events:none;z-index:10}
-#damage-flash{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:50;opacity:0;transition:opacity 0.1s}
-#chat-box{position:fixed;bottom:110px;left:10px;z-index:10;font-family:monospace;font-size:12px;color:#888;pointer-events:none;max-height:100px;overflow:hidden;width:300px}
-.chat-msg{line-height:1.5}
-/* Mobile touch controls */
-#touch-controls{display:none;position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:20}
-#joystick-zone{position:absolute;bottom:40px;left:40px;width:140px;height:140px;pointer-events:auto;touch-action:none}
-#joystick-base{width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.3);position:relative}
-#joystick-stick{width:60px;height:60px;border-radius:50%;background:rgba(68,136,255,0.6);border:2px solid rgba(68,136,255,0.9);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);transition:none}
-#fire-btn{position:absolute;bottom:60px;right:60px;width:100px;height:100px;border-radius:50%;background:rgba(255,68,68,0.4);border:3px solid rgba(255,68,68,0.8);pointer-events:auto;touch-action:none;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:bold;color:#fff;user-select:none}
-#fire-btn.active{background:rgba(255,68,68,0.7)}
-@media (hover:none) and (pointer:coarse){#touch-controls{display:block}}
+  :root{
+    --bg:#0b0d14; --fg:#e4e6f0; --dim:#8a8ea0; --line:#282c40;
+    --accent:#4fc3f7; --danger:#ff5252; --safe-t:env(safe-area-inset-top,0px);
+    --safe-b:env(safe-area-inset-bottom,0px);
+    --safe-l:env(safe-area-inset-left,0px); --safe-r:env(safe-area-inset-right,0px);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{
+    margin:0;padding:0;height:100%;height:100dvh;overflow:hidden;background:var(--bg);color:var(--fg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    overscroll-behavior:none;touch-action:none;user-select:none;-webkit-user-select:none;
+  }
+  canvas{display:block;position:absolute;inset:0;width:100%;height:100%;touch-action:none}
+
+  /* ---------- HUD ---------- */
+  .hud{position:absolute;inset:0;pointer-events:none;z-index:10;
+       padding:calc(10px + var(--safe-t)) calc(10px + var(--safe-r))
+               calc(10px + var(--safe-b)) calc(10px + var(--safe-l));}
+  .panel{position:absolute;background:rgba(11,13,20,.78);border:1px solid var(--line);
+         border-radius:12px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  #scores{top:calc(10px + var(--safe-t));right:calc(10px + var(--safe-r));
+          min-width:150px;max-width:42vw;padding:8px 10px;font-size:12px}
+  #scores h3{margin:0 0 6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
+  .row{display:flex;align-items:center;gap:6px;padding:2px 0;line-height:1.35}
+  .dot{width:8px;height:8px;border-radius:50%;flex:none}
+  .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .pt{color:var(--dim);font-variant-numeric:tabular-nums;font-size:11px}
+  .me .nm{font-weight:700}
+
+  #stats{top:calc(10px + var(--safe-t));left:calc(10px + var(--safe-l));
+         padding:7px 11px;font-size:12px;font-variant-numeric:tabular-nums;line-height:1.5}
+  #stats b{color:var(--accent)}
+
+  /* health bar */
+  #hpwrap{position:absolute;left:50%;transform:translateX(-50%);
+          bottom:calc(14px + var(--safe-b));width:min(300px,54vw);height:14px;
+          background:rgba(11,13,20,.8);border:1px solid var(--line);border-radius:99px;
+          overflow:hidden;pointer-events:none}
+  #hpbar{height:100%;width:100%;background:linear-gradient(90deg,#66bb6a,#9ccc65);
+        transition:width .12s linear}
+
+  #feed{position:absolute;left:50%;transform:translateX(-50%);
+        top:calc(58px + var(--safe-t));text-align:center;font-size:13px;width:min(90vw,520px)}
+  .toast{background:rgba(11,13,20,.85);border:1px solid var(--line);border-radius:8px;
+         padding:5px 12px;margin:3px auto;display:inline-block;animation:fade 4s forwards}
+  @keyframes fade{0%,70%{opacity:1}100%{opacity:0;transform:translateY(-6px)}}
+
+  /* ---------- overlays ---------- */
+  .overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+           background:rgba(6,7,12,.93);z-index:50;padding:20px;
+           padding-top:calc(20px + var(--safe-t));padding-bottom:calc(20px + var(--safe-b))}
+  .overlay.hide{display:none}
+  .card{width:100%;max-width:380px;background:#12141d;border:1px solid var(--line);
+        border-radius:18px;padding:26px 22px;text-align:center;
+        max-height:100%;overflow-y:auto}
+  .card h1{margin:0 0 4px;font-size:28px;letter-spacing:-.02em}
+  .card h1 span{color:var(--accent)}
+  .card p{margin:0 0 18px;color:var(--dim);font-size:13px;line-height:1.55}
+  input{width:100%;padding:13px 14px;font-size:16px;border-radius:11px;
+        border:1px solid var(--line);background:#0b0d14;color:var(--fg);
+        margin-bottom:12px;outline:none;font-family:inherit}
+  input:focus{border-color:var(--accent)}
+  button{width:100%;padding:14px;font-size:16px;font-weight:700;border-radius:11px;
+         border:none;background:var(--accent);color:#06121a;cursor:pointer;
+         font-family:inherit;-webkit-appearance:none}
+  button:active{transform:scale(.985)}
+  button.ghost{background:transparent;color:var(--fg);border:1px solid var(--line);margin-top:9px}
+  .hint{margin-top:16px;font-size:11px;color:#5a5e70;line-height:1.7}
+  kbd{background:#1c1f2c;border:1px solid var(--line);border-radius:4px;
+      padding:1px 5px;font-size:10px;font-family:ui-monospace,monospace}
+
+  /* ---------- mobile controls ---------- */
+  #touch{position:absolute;inset:0;pointer-events:none;z-index:20;display:none}
+  body.touch #touch{display:block}
+  #stickbase{position:absolute;left:calc(24px + var(--safe-l));
+             bottom:calc(28px + var(--safe-b));width:130px;height:130px;
+             border-radius:50%;background:rgba(255,255,255,.05);
+             border:2px solid rgba(255,255,255,.13);pointer-events:auto}
+  #stickknob{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;
+             border-radius:50%;background:rgba(79,195,247,.5);
+             border:2px solid rgba(79,195,247,.85)}
+  #firebtn{position:absolute;right:calc(26px + var(--safe-r));
+           bottom:calc(36px + var(--safe-b));width:104px;height:104px;border-radius:50%;
+           background:rgba(255,82,82,.2);border:2px solid rgba(255,82,82,.6);
+           display:flex;align-items:center;justify-content:center;
+           font-size:13px;font-weight:700;letter-spacing:.06em;color:#ff8a80;
+           pointer-events:auto}
+  #firebtn.on{background:rgba(255,82,82,.5)}
+  #hpmob{position:absolute;left:50%;transform:translateX(-50%);
+         bottom:calc(96px + var(--safe-b));font-size:12px;color:var(--dim);
+         pointer-events:none;font-variant-numeric:tabular-nums}
+
+  #status{position:absolute;left:50%;transform:translateX(-50%);
+          top:calc(10px + var(--safe-t));font-size:11px;color:var(--dim);
+          background:rgba(11,13,20,.7);padding:4px 11px;border-radius:99px;pointer-events:none}
+  #status.err{color:#ff8a80;border:1px solid rgba(255,82,82,.4)}
+  .dead{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+        font-size:clamp(20px,6vw,34px);font-weight:800;color:var(--danger);
+        text-shadow:0 2px 20px rgba(0,0,0,.9);pointer-events:none;display:none;
+        text-align:center;line-height:1.3}
+  .dead small{display:block;font-size:13px;color:var(--dim);font-weight:500;margin-top:6px}
 </style>
 </head>
 <body>
+<style>
+  /* preview-page only: a failed connect on a static host is expected, not an error */
+  .overlay#discScreen{display:none !important}
+  #pvBar{position:fixed;top:0;left:0;right:0;z-index:99999;background:#0f172a;color:#cbd5e1;
+    font:13px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:9px 14px;
+    text-align:center;border-bottom:1px solid #1e293b;transition:background .18s,color .18s}
+  #pvBar b{color:#fff}
+  #pvBar a{color:#7dd3fc}
+  #pvSpacer{height:42px}
+</style>
+<div id="pvBar"><b>Preview</b> — this is the real game client, running in this page. An actual match needs the app:
+  one Mac hosts, everyone else joins over that person's Wi-Fi. Nothing can connect from here, so
+  <em>Join game</em> won't start a match — <a href="./Desktop/arena/install.html">how to install</a>.
+</div>
+<div id="pvSpacer"></div>
+<script>
+document.addEventListener('click', function(ev){
+  var t = ev.target;
+  if (t && t.id === 'joinBtn') {
+    var b = document.getElementById('pvBar');
+    if (b) {
+      b.style.background = '#3b1d1d'; b.style.color = '#fecaca';
+      b.innerHTML = '<b>Preview only</b> — there is no game server behind this page. ' +
+        'Install the app (host + join) for a real match on your Wi-Fi.';
+    }
+  }
+}, true);
+</script>
 
-<div id="join-screen">
-  <div id="join-box">
-    <h2>🎮 Arena</h2>
-    <input id="name-field" type="text" placeholder="Enter your name" maxlength="20" autofocus>
-    <input id="password-field" type="password" placeholder="Game password (if required)">
-    <div id="join-error" class="error"></div>
-    <button id="join-btn">Join Game</button>
-    <div class="hint">WASD / Arrows to move · Mouse to aim · Click to shoot</div>
+<canvas id="c"></canvas>
+
+<div class="hud">
+  <div id="stats" class="panel">hp <b id="hpv">100</b><br>kills <b id="kv">0</b><br>ping <b id="pv">–</b></div>
+  <div id="scores" class="panel"><h3>Players</h3><div id="scorelist"></div></div>
+  <div id="status">connecting…</div>
+  <div id="feed"></div>
+  <div id="hpwrap"><div id="hpbar"></div></div>
+  <div class="dead" id="dead">You were eliminated<small>respawning…</small></div>
+</div>
+
+<div id="touch">
+  <div id="stickbase"><div id="stickknob"></div></div>
+  <div id="firebtn">FIRE</div>
+  <div id="hpmob"></div>
+</div>
+
+<div class="overlay" id="joinScreen">
+  <div class="card">
+    <h1>A<span>rena</span></h1>
+    <p id="joinsub">Same WiFi? You're already connected to the host.</p>
+    <input id="nameInput" placeholder="Your name" maxlength="16" autocomplete="off"
+           autocapitalize="words" enterkeyhint="go" spellcheck="false">
+    <button id="joinBtn">Join game</button>
+    <div class="hint" id="ctrlhint"></div>
   </div>
 </div>
 
-<div id="damage-flash"></div>
-<div id="touch-controls">
-  <div id="joystick-zone">
-    <div id="joystick-base">
-      <div id="joystick-stick"></div>
-    </div>
+<div class="overlay hide" id="discScreen">
+  <div class="card">
+    <h1>Disconnected</h1>
+    <p id="discreason">Lost connection to the host.</p>
+    <button id="rejoinBtn">Reconnect</button>
   </div>
-  <div id="fire-btn">FIRE</div>
 </div>
-<div id="hud">
-  <div class="hp">HP: <span id="hp-display">0</span>/<span id="mhp-display">0</span></div>
-  <div>Ping: <span class="ping" id="ping-display">0</span>ms</div>
-  <div>FPS: <span id="fps-display">0</span></div>
-  <div>Players: <span id="players-display">0</span></div>
-</div>
-<canvas id="game-canvas"></canvas>
-<div id="minimap"><canvas id="minimap-canvas" width="160" height="90"></canvas></div>
-<div id="chat-box"></div>
 
 <script>
-// ── Configuration ──────────────────────────────────────────────────────
-const WS_URL = `/ws`;
+"use strict";
+(function () {
+  // ================= platform detection =================
+  const isTouch = ("ontouchstart" in window) ||
+                  (navigator.maxTouchPoints > 0) ||
+                  /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if (isTouch) document.body.classList.add("touch");
 
-// ── DOM Elements ───────────────────────────────────────────────────────
-const canvas = document.getElementById('game-canvas');
-const ctx = canvas.getContext('2d');
-const minimapCanvas = document.getElementById('minimap-canvas');
-const minimapCtx = minimapCanvas.getContext('2d');
-const joinScreen = document.getElementById('join-screen');
-const nameField = document.getElementById('name-field');
-const passwordField = document.getElementById('password-field');
-const joinBtn = document.getElementById('join-btn');
-const joinError = document.getElementById('join-error');
-const hpDisplay = document.getElementById('hp-display');
-const mhpDisplay = document.getElementById('mhp-display');
-const pingDisplay = document.getElementById('ping-display');
-const fpsDisplay = document.getElementById('fps-display');
-const playersDisplay = document.getElementById('players-display');
-const damageFlash = document.getElementById('damage-flash');
-const chatBox = document.getElementById('chat-box');
+  const $ = (id) => document.getElementById(id);
+  const cvs = $("c"), ctx = cvs.getContext("2d", { alpha: false });
 
-// ── State ──────────────────────────────────────────────────────────────
-const keys = {};
-let mouseX = 0, mouseY = 0;
-let mouseDown = false;
-let myEntityId = null;
-let worldW = 1600, worldH = 900;
-let tickRate = 30;
-let entities = {};
-let prevHp = 100;
-let damageFlashTimer = 0;
-
-// Network
-let ws = null;
-let pingSeq = 0;
-let pingStart = 0;
-let currentPing = 0;
-let connected = false;
-
-// Performance
-let frameCount = 0;
-let fpsTime = 0;
-let currentFps = 0;
-
-// Camera
-let camX = 0, camY = 0;
-
-// ── Canvas Resize ──────────────────────────────────────────────────────
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resize);
-resize();
-
-// ── Input ──────────────────────────────────────────────────────────────
-document.addEventListener('keydown', e => {
-  keys[e.key.toLowerCase()] = true;
-  if (e.key === ' ') e.preventDefault();
-});
-document.addEventListener('keyup', e => {
-  keys[e.key.toLowerCase()] = false;
-});
-
-canvas.addEventListener('mousemove', e => {
-  const rect = canvas.getBoundingClientRect();
-  mouseX = e.clientX - rect.left;
-  mouseY = e.clientY - rect.top;
-});
-canvas.addEventListener('mousedown', () => { mouseDown = true; });
-canvas.addEventListener('mouseup', () => { mouseDown = false; });
-
-// ── Touch Controls ─────────────────────────────────────────────────────
-const joystickZone = document.getElementById('joystick-zone');
-const joystickStick = document.getElementById('joystick-stick');
-const fireBtn = document.getElementById('fire-btn');
-let joystickActive = false;
-let joystickX = 0, joystickY = 0;
-let touchAimX = 0, touchAimY = 0;
-let touchFireActive = false;
-let isTouchDevice = false;
-
-// Joystick touch handling
-joystickZone.addEventListener('touchstart', e => {
-  e.preventDefault();
-  joystickActive = true;
-  handleJoystickMove(e.touches[0]);
-});
-
-joystickZone.addEventListener('touchmove', e => {
-  e.preventDefault();
-  if (joystickActive) {
-    handleJoystickMove(e.touches[0]);
+  let W = 0, H = 0, DPR = 1;
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);   // cap for mobile perf
+    const vv = window.visualViewport;
+    W = Math.round(vv ? vv.width : window.innerWidth);
+    H = Math.round(vv ? vv.height : window.innerHeight);
+    cvs.width = Math.round(W * DPR);
+    cvs.height = Math.round(H * DPR);
+    cvs.style.width = W + "px";
+    cvs.style.height = H + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   }
-});
+  window.addEventListener("resize", resize);
+  window.addEventListener("orientationchange", () => setTimeout(resize, 180));
+  // iOS Safari's toolbar collapsing fires visualViewport resize, not window resize
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", resize);
+    window.visualViewport.addEventListener("scroll", resize);
+  }
+  resize();
 
-joystickZone.addEventListener('touchend', e => {
-  e.preventDefault();
-  joystickActive = false;
-  joystickX = 0;
-  joystickY = 0;
-  joystickStick.style.transform = 'translate(-50%,-50%)';
-});
+  // ================= state =================
+  const S = {
+    ws: null, me: null, world: null,
+    ents: new Map(), scores: [],
+    cam: { x: 0, y: 0 },
+    keys: Object.create(null),
+    move: { x: 0, y: 0 },          // touch joystick vector, -1..1
+    aim: 0,
+    firing: false,
+    mouse: { x: 0, y: 0 },
+    aimId: null,                   // touch identifier steering the aim stick
+    aimPt: { x: 0, y: 0 },
+    zoom: 1,
+    ping: null,
+    lastState: 0,
+    interpolated: new Map(),
+    joined: false,
+    hellos: 0,
+  };
 
-function handleJoystickMove(touch) {
-  const rect = joystickZone.getBoundingClientRect();
-  const centerX = rect.left + rect.width / 2;
-  const centerY = rect.top + rect.height / 2;
-  const deltaX = touch.clientX - centerX;
-  const deltaY = touch.clientY - centerY;
-  const distance = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), 50);
-  const angle = Math.atan2(deltaY, deltaX);
-  
-  joystickX = Math.cos(angle) * distance / 50;
-  joystickY = Math.sin(angle) * distance / 50;
-  
-  const stickX = Math.cos(angle) * distance;
-  const stickY = Math.sin(angle) * distance;
-  joystickStick.style.transform = `translate(calc(-50% + ${stickX}px), calc(-50% + ${stickY}px))`;
-}
+  // ================= websocket =================
+  const WS_URL = (location.protocol === "https:" ? "wss://" : "ws://") +
+                 location.host + "/ws";
 
-// Fire button touch handling
-fireBtn.addEventListener('touchstart', e => {
-  e.preventDefault();
-  touchFireActive = true;
-  fireBtn.classList.add('active');
-});
+  function setStatus(text, isErr) {
+    const el = $("status");
+    el.textContent = text;
+    el.classList.toggle("err", !!isErr);
+  }
 
-fireBtn.addEventListener('touchend', e => {
-  e.preventDefault();
-  touchFireActive = false;
-  fireBtn.classList.remove('active');
-});
+  function connect(name) {
+    try { if (S.ws) S.ws.close(); } catch (e) {}
+    setStatus("connecting…", false);
+    let ws;
+    try { ws = new WebSocket(WS_URL); }
+    catch (e) { setStatus("bad address", true); return; }
+    S.ws = ws;
 
-// Touch aim: tap anywhere on canvas to aim
-canvas.addEventListener('touchstart', e => {
-  // Only prevent default if we're in the game (join screen is hidden)
-  if (joinScreen.style.display === 'none') {
+    ws.onopen = () => {
+      setStatus("connected", false);
+      S.joined = true;
+      ws.send(JSON.stringify({ type: "join", name: name }));
+      startPing();
+    };
+
+    ws.onmessage = (ev) => {
+      let m;
+      try { m = JSON.parse(ev.data); } catch (e) { return; }
+      handle(m);
+    };
+
+    ws.onclose = () => {
+      stopPing();
+      if (S.joined) {
+        $("discScreen").classList.remove("hide");
+        $("discreason").textContent = "Lost connection to the host.";
+      }
+      setStatus("disconnected", true);
+    };
+
+    ws.onerror = () => setStatus("connection failed", true);
+  }
+
+  function handle(m) {
+    switch (m.type) {
+      case "welcome":
+        S.me = m.entity_id;
+        S.world = m.world;
+        $("joinScreen").classList.add("hide");
+        setStatus("connected", false);
+        break;
+
+      case "state":
+        if (m.t > S.lastState) {
+          S.lastState = m.t;
+          ingest(m.e);
+          S.scores = m.scores || [];
+          renderScores();
+        }
+        break;
+
+      case "pong":
+        if (m.t) S.ping = Math.max(0, Math.round(performance.now() - m.t));
+        break;
+
+      case "event":
+        if (m.kind === "kill") {
+          toast((m.killer || "?") + " eliminated " + (m.victim || "?"));
+          if (m.victim_id === S.me) flashDeath();
+        } else if (m.kind === "pickup" && m.player_id === S.me) {
+          toast(m.item === "health" ? "+health" : "+points");
+        }
+        break;
+
+      case "player_joined":
+        toast((m.name || "Someone") + " joined");
+        break;
+
+      case "chat":
+        toast(m.name + ": " + m.text);
+        break;
+
+      case "error":
+        setStatus(m.reason || "error", true);
+        if (m.reason === "server full") {
+          $("joinScreen").classList.remove("hide");
+          $("joinsub").textContent = "Server is full — try again later.";
+        }
+        break;
+    }
+  }
+
+  function ingest(list) {
+    const seen = new Set();
+    for (const e of list) {
+      seen.add(e.id);
+      const prev = S.ents.get(e.id);
+      S.ents.set(e.id, {
+        id: e.id, x: e.x, y: e.y, px: prev ? prev.x : e.x,
+        py: prev ? prev.y : e.y, r: e.r || 0, c: e.c, s: e.s, k: e.k,
+        hp: e.hp, mhp: e.mhp, alive: e.alive !== false, n: e.n,
+        seenAt: performance.now(),
+      });
+    }
+    for (const id of [...S.ents.keys()]) if (!seen.has(id)) S.ents.delete(id);
+
+    const me = S.ents.get(S.me);
+    if (me) {
+      if (me.alive === false) { $("dead").style.display = "block"; }
+      else { $("dead").style.display = "none"; }
+    }
+  }
+
+  // ================= input: keyboard + mouse =================
+  const MOVE_KEYS = {
+    w: "up", arrowup: "up", a: "left", arrowleft: "left",
+    s: "down", arrowdown: "down", d: "right", arrowright: "right",
+  };
+  window.addEventListener("keydown", (e) => {
+    const k = e.key.toLowerCase();
+    if (MOVE_KEYS[k]) { S.keys[MOVE_KEYS[k]] = true; e.preventDefault(); }
+    if (k === " " || k === "spacebar" || k === "enter") { S.firing = true; e.preventDefault(); }
+  });
+  window.addEventListener("keyup", (e) => {
+    const k = e.key.toLowerCase();
+    if (MOVE_KEYS[k]) { S.keys[MOVE_KEYS[k]] = false; e.preventDefault(); }
+    if (k === " " || k === "spacebar" || k === "enter") S.firing = false;
+  });
+
+  // Mouse aim + fire (desktop)
+  cvs.addEventListener("mousemove", (e) => { S.mouse.x = e.clientX; S.mouse.y = e.clientY; });
+  cvs.addEventListener("mousedown", (e) => { if (e.button === 0) S.firing = true; });
+  window.addEventListener("mouseup", () => { S.firing = false; });
+  cvs.addEventListener("contextmenu", (e) => e.preventDefault());
+
+  // ================= input: touch joystick =================
+  const base = $("stickbase"), knob = $("stickknob"), firebtn = $("firebtn");
+  let stickId = null, stickCx = 0, stickCy = 0;
+  const STICK_R = 46;
+
+  function setKnob(dx, dy) {
+    knob.style.transform = "translate(" + dx + "px," + dy + "px)";
+  }
+  function resetKnob() { knob.style.transform = ""; S.move.x = S.move.y = 0; }
+
+  function stickStart(e) {
+    const t = e.changedTouches ? e.changedTouches[0] : e;
+    stickId = t.identifier != null ? t.identifier : "mouse";
+    const r = base.getBoundingClientRect();
+    stickCx = r.left + r.width / 2;
+    stickCy = r.top + r.height / 2;
+    stickMove(e);
+  }
+  function stickMove(e) {
+    if (stickId === null) return;
+    let t = null;
+    if (e.changedTouches) {
+      for (const c of e.changedTouches) if (c.identifier === stickId) t = c;
+      if (!t) return;
+    } else t = e;
+    let dx = t.clientX - stickCx, dy = t.clientY - stickCy;
+    const d = Math.hypot(dx, dy) || 1;
+    const cl = Math.min(d, STICK_R);
+    const nx = dx / d, ny = dy / d;
+    setKnob(nx * cl, ny * cl);
+    const mag = Math.min(1, d / STICK_R);
+    S.move.x = nx * mag; S.move.y = ny * mag;
     e.preventDefault();
   }
-  isTouchDevice = true;
-  const touch = e.touches[0];
-  const rect = canvas.getBoundingClientRect();
-  touchAimX = touch.clientX - rect.left;
-  touchAimY = touch.clientY - rect.top;
-});
-
-canvas.addEventListener('touchmove', e => {
-  // Only prevent default if we're in the game (join screen is hidden)
-  if (joinScreen.style.display === 'none') {
-    e.preventDefault();
-  }
-  isTouchDevice = true;
-  const touch = e.touches[0];
-  const rect = canvas.getBoundingClientRect();
-  touchAimX = touch.clientX - rect.left;
-  touchAimY = touch.clientY - rect.top;
-});
-
-// Also track touches on the entire document for mobile aiming
-document.addEventListener('touchstart', e => {
-  isTouchDevice = true;
-  // Only update aim if not touching joystick, fire button, or UI elements
-  if (!e.target.closest('#joystick-zone') && !e.target.closest('#fire-btn') && !e.target.closest('#join-screen') && !e.target.closest('#hud')) {
-    const touch = e.touches[0];
-    const rect = canvas.getBoundingClientRect();
-    touchAimX = touch.clientX - rect.left;
-    touchAimY = touch.clientY - rect.top;
-  }
-}, { passive: true });
-
-document.addEventListener('touchmove', e => {
-  // Only update aim if not touching joystick, fire button, or UI elements
-  if (!e.target.closest('#joystick-zone') && !e.target.closest('#fire-btn') && !e.target.closest('#join-screen') && !e.target.closest('#hud')) {
-    const touch = e.touches[0];
-    const rect = canvas.getBoundingClientRect();
-    touchAimX = touch.clientX - rect.left;
-    touchAimY = touch.clientY - rect.top;
-  }
-}, { passive: true });
-
-// ── URL Parameters ─────────────────────────────────────────────────────
-const urlParams = new URLSearchParams(window.location.search);
-const urlName = urlParams.get('name') || '';
-const urlPassword = urlParams.get('password') || '';
-if (urlName) nameField.value = urlName;
-if (urlPassword) passwordField.value = urlPassword;
-
-// Auto-join if password is in URL
-if (urlPassword && urlName) {
-  setTimeout(() => joinBtn.click(), 300);
-}
-
-// ── WebSocket ──────────────────────────────────────────────────────────
-function connect(name, password) {
-  ws = new WebSocket(WS_URL);
-
-  ws.onopen = () => {
-    const msg = { type: 'join', name: name || 'Player' };
-    if (password) msg.password = password;
-    ws.send(JSON.stringify(msg));
-  };
-
-  ws.onmessage = (event) => {
-    try {
-      const msg = JSON.parse(event.data);
-      handleMessage(msg);
-    } catch (e) {
-      console.error('Parse error:', e);
+  function stickEnd(e) {
+    if (e.changedTouches) {
+      let found = false;
+      for (const c of e.changedTouches) if (c.identifier === stickId) found = true;
+      if (!found) return;
     }
-  };
-
-  ws.onclose = () => {
-    connected = false;
-    joinError.textContent = 'Disconnected from server';
-    joinScreen.style.display = 'flex';
-    ws = null;
-    setTimeout(() => {
-      if (!connected) {
-        const name = nameField.value || 'Player';
-        const pass = passwordField.value;
-        connect(name, pass);
-      }
-    }, 2000);
-  };
-
-  ws.onerror = () => {
-    joinError.textContent = 'Connection error — is the server running?';
-  };
-}
-
-// ── Message Handler ────────────────────────────────────────────────────
-let lastHp = 100;
-
-function handleMessage(msg) {
-  switch (msg.type) {
-    case 'welcome':
-      myEntityId = msg.entity_id;
-      tickRate = msg.tick_rate || 30;
-      worldW = msg.world.width;
-      worldH = msg.world.height;
-      entities = {};
-      for (const e of (msg.state?.state?.entities || msg.state?.entities || [])) {
-        entities[e.id] = e;
-      }
-      connected = true;
-      joinScreen.style.display = 'none';
-      lastHp = 100;
-      break;
-
-    case 'state':
-      const state = msg.state || {};
-      if (state.entities) {
-        for (const e of state.entities) {
-          entities[e.id] = e;
-        }
-        // Clean up removed entities
-        const alive = new Set(state.entities.map(e => e.id));
-        for (const id in entities) {
-          if (!alive.has(parseInt(id))) {
-            delete entities[id];
-          }
-        }
-      }
-      if (msg.tick) {
-        // Update HUD
-        const me = entities[myEntityId];
-        if (me) {
-          hpDisplay.textContent = me.hp || 0;
-          mhpDisplay.textContent = me.mhp || 100;
-          if (me.hp !== undefined && me.hp < lastHp) {
-            damageFlash.style.opacity = '0.3';
-            damageFlashTimer = 0.2;
-          }
-          lastHp = me.hp;
-        }
-        playersDisplay.textContent = Object.values(entities).filter(e => e.t === 'player').length;
-      }
-      break;
-
-    case 'destroyed':
-      delete entities[msg.id];
-      break;
-
-    case 'pong':
-      currentPing = Math.round(performance.now() - pingStart);
-      pingDisplay.textContent = currentPing;
-      break;
-
-    case 'error':
-      joinError.textContent = msg.message || 'Error';
-      break;
-
-    case 'player_joined':
-      addChat(`${msg.name} joined`, '#4488ff');
-      break;
-
-    case 'player_left':
-      addChat(`Player left`, '#888');
-      break;
+    stickId = null; resetKnob();
   }
-}
+  base.addEventListener("touchstart", stickStart, { passive: false });
+  base.addEventListener("touchmove", stickMove, { passive: false });
+  base.addEventListener("touchend", stickEnd);
+  base.addEventListener("touchcancel", stickEnd);
 
-function addChat(text, color) {
-  const div = document.createElement('div');
-  div.className = 'chat-msg';
-  div.style.color = color || '#888';
-  div.textContent = text;
-  chatBox.appendChild(div);
-  if (chatBox.children.length > 8) {
-    chatBox.removeChild(chatBox.firstChild);
-  }
-}
+  // Fire button
+  firebtn.addEventListener("touchstart", (e) => {
+    S.firing = true; firebtn.classList.add("on"); e.preventDefault();
+  }, { passive: false });
+  firebtn.addEventListener("touchend", (e) => {
+    S.firing = false; firebtn.classList.remove("on"); e.preventDefault();
+  }, { passive: false });
 
-// ── Input Sender (20 Hz) ──────────────────────────────────────────────
-function sendInput() {
-  if (!ws || ws.readyState !== WebSocket.OPEN) return;
-
-  // Determine movement: use joystick on mobile, keyboard on desktop
-  const useTouch = isTouchDevice;
-
-  // Calculate aim direction (world-space)
-  let aimX = 0, aimY = 1;
-  const me = entities[myEntityId];
-  if (me) {
-    if (useTouch) {
-      // On mobile: if actively using joystick, aim in joystick direction
-      if (joystickActive && (Math.abs(joystickX) > 0.1 || Math.abs(joystickY) > 0.1)) {
-        aimX = joystickX;
-        aimY = joystickY;
-      } else if (isTouchDevice && (touchAimX !== 0 || touchAimY !== 0)) {
-        // Otherwise, use touch position if available
-        const worldAimX = touchAimX + camX;
-        const worldAimY = touchAimY + camY;
-        aimX = worldAimX - me.x;
-        aimY = worldAimY - me.y;
-      } else {
-        // Default: aim in last known direction
-        aimX = Math.cos(me.r || 0);
-        aimY = Math.sin(me.r || 0);
-      }
-    } else {
-      // Desktop: use mouse position
-      const worldAimX = mouseX + camX;
-      const worldAimY = mouseY + camY;
-      aimX = worldAimX - me.x;
-      aimY = worldAimY - me.y;
+  // Tap anywhere else on the canvas to aim + fire (mobile one-thumb play)
+  cvs.addEventListener("touchstart", (e) => {
+    if (!document.body.classList.contains("touch")) return;
+    const t = e.changedTouches[0];
+    S.aimId = t.identifier;
+    S.aimPt.x = t.clientX; S.aimPt.y = t.clientY;
+    S.mouse.x = t.clientX; S.mouse.y = t.clientY;
+    S.firing = true;
+  }, { passive: true });
+  cvs.addEventListener("touchmove", (e) => {
+    for (const c of e.changedTouches) {
+      if (c.identifier !== S.aimId) continue;
+      S.aimPt.x = c.clientX; S.aimPt.y = c.clientY;
+      S.mouse.x = c.clientX; S.mouse.y = c.clientY;
     }
-    const len = Math.hypot(aimX, aimY);
-    if (len > 0) { aimX /= len; aimY /= len; }
-  }
-
-  let up = false, down = false, left = false, right = false;
-  
-  if (useTouch) {
-    // Convert joystick values to movement flags
-    up = joystickY < -0.3;
-    down = joystickY > 0.3;
-    left = joystickX < -0.3;
-    right = joystickX > 0.3;
-  } else {
-    up = keys['w'] || keys['arrowup'];
-    down = keys['s'] || keys['arrowdown'];
-    left = keys['a'] || keys['arrowleft'];
-    right = keys['d'] || keys['arrowright'];
-  }
-
-  ws.send(JSON.stringify({
-    type: 'input',
-    input: {
-      up,
-      down,
-      left,
-      right,
-      shoot: mouseDown || keys[' '] || touchFireActive,
-      aim_x: aimX,
-      aim_y: aimY,
-    }
-  }));
-}
-
-// Ping sender (every 2s)
-function sendPing() {
-  if (!ws || ws.readyState !== WebSocket.OPEN) return;
-  pingSeq = performance.now();
-  pingStart = pingSeq;
-  ws.send(JSON.stringify({ type: 'ping', seq: pingSeq }));
-}
-
-// ── Rendering ──────────────────────────────────────────────────────────
-const PLAYER_COLORS = {
-  '#ff4444': '#ff4444', '#44ff44': '#44ff44', '#4488ff': '#4488ff',
-  '#ffff44': '#ffff44', '#ff44ff': '#ff44ff', '#44ffff': '#44ffff',
-  '#ff8844': '#ff8844', '#88ff44': '#88ff44', '#ff4488': '#ff4488',
-  '#44ff88': '#44ff88', '#8844ff': '#8844ff', '#ffaa44': '#ffaa44',
-};
-
-function render(timestamp) {
-  // FPS counter
-  frameCount++;
-  if (timestamp - fpsTime >= 1000) {
-    currentFps = frameCount;
-    frameCount = 0;
-    fpsTime = timestamp;
-    fpsDisplay.textContent = currentFps;
-  }
-
-  // Damage flash decay
-  if (damageFlashTimer > 0) {
-    damageFlashTimer -= 1/60;
-    if (damageFlashTimer <= 0) {
-      damageFlash.style.opacity = '0';
+  }, { passive: true });
+  function aimTouchEnd(e) {
+    for (const c of e.changedTouches) {
+      if (c.identifier === S.aimId) { S.aimId = null; S.firing = false; }
     }
   }
+  cvs.addEventListener("touchend", aimTouchEnd, { passive: true });
+  cvs.addEventListener("touchcancel", aimTouchEnd, { passive: true });
 
-  const me = entities[myEntityId];
-  if (me) {
-    // Smooth camera follow (lerp 0.1)
-    const targetCamX = me.x - canvas.width / 2;
-    const targetCamY = me.y - canvas.height / 2;
-    camX += (targetCamX - camX) * 0.1;
-    camY += (targetCamY - camY) * 0.1;
+  // ================= net send loop =================
+  let pingTimer = null, lastPing = 0;
+  function startPing() {
+    stopPing();
+    pingTimer = setInterval(() => {
+      if (S.ws && S.ws.readyState === 1) {
+        S.ws.send(JSON.stringify({ type: "ping", t: performance.now() }));
+      }
+    }, 1000);
+  }
+  function stopPing() { if (pingTimer) clearInterval(pingTimer); pingTimer = null; }
+
+  function sendInput() {
+    if (!S.ws || S.ws.readyState !== 1 || S.me == null) return;
+    let up = !!S.keys.up, down = !!S.keys.down;
+    let left = !!S.keys.left, right = !!S.keys.right;
+
+    // touch: right thumb aims (twin-stick); otherwise aim along the stick
+    const touchMode = document.body.classList.contains("touch");
+    if (touchMode && S.aimId !== null) {
+      const me0 = S.ents.get(S.me);
+      if (me0) {
+        const sx = W / 2 + (me0.x - S.cam.x) * S.zoom;
+        const sy = H / 2 + (me0.y - S.cam.y) * S.zoom;
+        S.aim = Math.atan2(S.aimPt.y - sy, S.aimPt.x - sx);
+      }
+    }
+
+    if (S.move.x || S.move.y) {           // joystick overrides keys
+      if (S.move.x < -0.28) left = true; else if (S.move.x > 0.28) right = true;
+      else { left = false; right = false; }
+      if (S.move.y < -0.28) up = true; else if (S.move.y > 0.28) down = true;
+      else { up = false; down = false; }
+      // no aim touch held: fall back to aiming where the stick points
+      if (touchMode && S.aimId === null && (S.move.x || S.move.y)) {
+        S.aim = Math.atan2(S.move.y, S.move.x);
+      }
+    }
+
+    // desktop: aim at the mouse
+    if (!touchMode && S.me != null) {
+      const me = S.ents.get(S.me);
+      if (me) {
+        const sx = me.x - S.cam.x, sy = me.y - S.cam.y;
+        S.aim = Math.atan2(S.mouse.y - sy, S.mouse.x - sx);
+      }
+    }
+
+    S.ws.send(JSON.stringify({
+      type: "input",
+      d: { up, down, left, right, fire: S.firing, aim: +S.aim.toFixed(3) },
+    }));
+  }
+  setInterval(sendInput, 1000 / 30);
+
+  // ================= camera =================
+  function updateCamera(dt) {
+    const me = S.ents.get(S.me);
+    if (!me) return;
+    const tx = me.x, ty = me.y;
+    const k = 1 - Math.pow(0.0015, dt);
+    S.cam.x += (tx - S.cam.x) * k;
+    S.cam.y += (ty - S.cam.y) * k;
   }
 
-  // Clamp camera to world
-  camX = Math.max(0, Math.min(worldW - canvas.width, camX));
-  camY = Math.max(0, Math.min(worldH - canvas.height, camY));
+  // ================= render =================
+  const lerp = (a, b, t) => a + (b - a) * t;
 
-  // Clear
-  ctx.fillStyle = '#1a1a2e';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  function draw() {
+    ctx.fillStyle = "#0b0d14";
+    ctx.fillRect(0, 0, W, H);
 
-  // Grid
-  ctx.strokeStyle = '#222244';
-  ctx.lineWidth = 1;
-  const gridSize = 80;
-  const startX = -(camX % gridSize);
-  const startY = -(camY % gridSize);
-  for (let x = startX; x < canvas.width; x += gridSize) {
-    ctx.beginPath();
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, canvas.height);
-    ctx.stroke();
-  }
-  for (let y = startY; y < canvas.height; y += gridSize) {
-    ctx.beginPath();
-    ctx.moveTo(0, y);
-    ctx.lineTo(canvas.width, y);
-    ctx.stroke();
-  }
-
-  // World border
-  ctx.strokeStyle = '#4488ff';
-  ctx.lineWidth = 2;
-  ctx.strokeRect(-camX, -camY, worldW, worldH);
-
-  // Sort entities by z_index
-  const sorted = Object.values(entities).sort((a, b) => (a.s || 0) - (b.s || 0));
-
-  for (const e of sorted) {
-    const sx = e.x - camX;
-    const sy = e.y - camY;
-
-    // View culling
-    const margin = 100;
-    if (sx < -margin || sx > canvas.width + margin ||
-        sy < -margin || sy > canvas.height + margin) continue;
-
-    const hw = e.hw || 28;
-    const hh = e.hh || 28;
-    const color = e.c || '#ffffff';
-    const shape = e.s || 'rect';
-
+    if (!S.world) return;
+    const camX = W / 2 - S.cam.x, camY = H / 2 - S.cam.y;
+    const zoom = Math.max(0.62, Math.min(1, Math.min(W, H) / 820));
+    S.zoom = zoom;
     ctx.save();
-    ctx.translate(sx, sy);
+    ctx.translate(W / 2, H / 2);
+    ctx.scale(zoom, zoom);
+    ctx.translate(-S.cam.x, -S.cam.y);
 
-    // Draw entity based on shape
-    ctx.fillStyle = color;
-    ctx.strokeStyle = '#000';
-    ctx.lineWidth = 2;
+    drawGrid();
+    drawWalls();
 
-    switch (shape) {
-      case 'circle':
-        ctx.beginPath();
-        ctx.arc(0, 0, Math.min(hw, hh), 0, Math.PI * 2);
-        ctx.fill();
-        ctx.stroke();
-        break;
-      case 'diamond':
-        ctx.beginPath();
-        ctx.moveTo(0, -hh);
-        ctx.lineTo(hw, 0);
-        ctx.lineTo(0, hh);
-        ctx.lineTo(-hw, 0);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
-        break;
-      case 'triangle':
-        ctx.beginPath();
-        ctx.moveTo(hw, 0);
-        ctx.lineTo(-hw, hh);
-        ctx.lineTo(-hw, -hh);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
-        break;
-      default: // rect
-        ctx.fillRect(-hw, -hh, hw * 2, hh * 2);
-        ctx.strokeRect(-hw, -hh, hw * 2, hh * 2);
-        break;
+    const now = performance.now();
+    const t = Math.min(1, (now - S.lastState) / 140);
+
+    // items first
+    for (const e of S.ents.values()) if (e.k === "diamond") drawItem(e);
+    for (const e of S.ents.values()) {
+      if (e.id === S.me) continue;
+      if (e.k === "diamond") continue;
+      drawEntity(e, t, false);
     }
+    const me = S.ents.get(S.me);
+    if (me) drawEntity(me, t, true);
 
-    // Direction indicator for players
-    if (e.t === 'player') {
-      ctx.strokeStyle = '#fff';
-      ctx.lineWidth = 2;
+    ctx.restore();
+    drawMinimap();
+  }
+
+  function drawGrid() {
+    const g = 100;
+    const x0 = Math.floor((S.cam.x - W / 2 / 1) / g) * g;
+    ctx.strokeStyle = "rgba(255,255,255,.035)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    const left = S.cam.x - W, right = S.cam.x + W;
+    const top = S.cam.y - H, bot = S.cam.y + H;
+    for (let x = Math.floor(left / g) * g; x < right; x += g) {
+      ctx.moveTo(x, top); ctx.lineTo(x, bot);
+    }
+    for (let y = Math.floor(top / g) * g; y < bot; y += g) {
+      ctx.moveTo(left, y); ctx.lineTo(right, y);
+    }
+    ctx.stroke();
+  }
+
+  function drawWalls() {
+    const p = S.world.padding || 40;
+    ctx.strokeStyle = "rgba(79,195,247,.45)";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(p, p, S.world.width - p * 2, S.world.height - p * 2);
+  }
+
+  function drawEntity(e, t, isMe) {
+    const x = lerp(e.px, e.x, t), y = lerp(e.py, e.y, t);
+    const alive = e.alive !== false;
+    ctx.save();
+    ctx.globalAlpha = alive ? 1 : 0.25;
+    ctx.translate(x, y);
+
+    // shadow
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(0,0,0,.35)";
+    ctx.ellipse(0, e.s * 0.7, e.s * 0.9, e.s * 0.4, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // body
+    ctx.beginPath();
+    ctx.arc(0, 0, e.s, 0, Math.PI * 2);
+    ctx.fillStyle = e.c || "#fff";
+    ctx.fill();
+    ctx.lineWidth = isMe ? 3 : 2;
+    ctx.strokeStyle = isMe ? "#ffffff" : "rgba(0,0,0,.4)";
+    ctx.stroke();
+
+    // gun barrel
+    ctx.rotate(e.r || 0);
+    ctx.fillStyle = "rgba(0,0,0,.55)";
+    ctx.fillRect(e.s * 0.6, -3.5, e.s * 0.95, 7);
+
+    ctx.restore();
+
+    // health ring for others
+    if (!isMe && alive && e.mhp) {
+      const pct = Math.max(0, e.hp / e.mhp);
       ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(Math.cos(e.r || 0) * (hw + 10), Math.sin(e.r || 0) * (hh + 10));
+      ctx.arc(x, y, e.s + 7, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * pct);
+      ctx.strokeStyle = pct > 0.55 ? "#66bb6a" : pct > 0.25 ? "#ffca28" : "#ef5350";
+      ctx.lineWidth = 3;
       ctx.stroke();
-
-      // Name label
-      if (e.n) {
-        ctx.fillStyle = '#fff';
-        ctx.font = '12px monospace';
-        ctx.textAlign = 'center';
-        ctx.fillText(e.n, 0, -hh - 12);
-      }
     }
 
-    // HP bar for players (and projectiles with owner)
-    if (e.hp !== undefined && e.mhp !== undefined) {
-      const barW = hw * 2;
-      const barH = 4;
-      const barY = -hh - 6;
-      ctx.fillStyle = '#333';
-      ctx.fillRect(-barW/2, barY, barW, barH);
-      const hpRatio = Math.max(0, e.hp / e.mhp);
-      ctx.fillStyle = hpRatio > 0.5 ? '#44ff44' : hpRatio > 0.25 ? '#ffaa44' : '#ff4444';
-      ctx.fillRect(-barW/2, barY, barW * hpRatio, barH);
+    // name
+    if (e.n) {
+      ctx.font = "600 12px -apple-system,sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillStyle = isMe ? "#fff" : "rgba(228,230,240,.85)";
+      ctx.fillText(e.n, x, y - e.s - 12);
     }
+  }
 
+  function drawItem(e) {
+    const t = performance.now() / 1000;
+    const bob = Math.sin(t * 3 + e.id) * 3;
+    ctx.save();
+    ctx.translate(e.x, e.y + bob);
+    ctx.rotate(Math.PI / 4);
+    ctx.fillStyle = e.c;
+    ctx.shadowColor = e.c;
+    ctx.shadowBlur = 14;
+    ctx.fillRect(-e.s * 0.7, -e.s * 0.7, e.s * 1.4, e.s * 1.4);
     ctx.restore();
   }
 
-  // Mini-map
-  minimapCtx.fillStyle = 'rgba(0,0,0,0.6)';
-  minimapCtx.fillRect(0, 0, 160, 90);
-  const scaleX = 160 / worldW;
-  const scaleY = 90 / worldH;
-  for (const e of Object.values(entities)) {
-    const mx = e.x * scaleX;
-    const my = e.y * scaleY;
-    const size = e.t === 'player' ? 3 : 2;
-    minimapCtx.fillStyle = e.c || '#fff';
-    minimapCtx.fillRect(mx - size/2, my - size/2, size, size);
+  function drawMinimap() {
+    if (!S.world) return;
+    const pad = 12, size = Math.min(120, W * 0.26);
+    const x = W - size - pad - 8, y = H - size - pad - 8;
+    const sx = size / S.world.width, sy = size / S.world.height;
+    ctx.save();
+    ctx.fillStyle = "rgba(11,13,20,.8)";
+    ctx.strokeStyle = "rgba(40,44,64,1)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.roundRect ? ctx.roundRect(x, y, size, size, 8) : ctx.rect(x, y, size, size);
+    ctx.fill(); ctx.stroke();
+    for (const e of S.ents.values()) {
+      ctx.beginPath();
+      ctx.arc(x + e.x * sx, y + e.y * sy, e.id === S.me ? 3 : 2, 0, Math.PI * 2);
+      ctx.fillStyle = e.id === S.me ? "#fff" : (e.c || "#888");
+      ctx.fill();
+    }
+    ctx.restore();
   }
-  // Self highlight
-  if (me) {
-    minimapCtx.fillStyle = '#fff';
-    minimapCtx.beginPath();
-    minimapCtx.arc(me.x * scaleX, me.y * scaleY, 4, 0, Math.PI * 2);
-    minimapCtx.fill();
+
+  // ================= HUD =================
+  function renderScores() {
+    const list = $("scorelist");
+    list.innerHTML = "";
+    for (const r of S.scores.slice(0, 8)) {
+      const d = document.createElement("div");
+      d.className = "row" + (r.id === S.me ? " me" : "");
+      d.innerHTML =
+        '<span class="dot" style="background:' + r.colour + '"></span>' +
+        '<span class="nm"></span><span class="pt">' + r.points + "</span>";
+      d.querySelector(".nm").textContent = r.name;
+      list.appendChild(d);
+    }
+    const me = S.scores.find((r) => r.id === S.me);
+    if (me) $("kv").textContent = me.kills;
   }
 
-  requestAnimationFrame(render);
-}
+  function toast(text) {
+    const el = document.createElement("div");
+    el.className = "toast";
+    el.textContent = text;
+    const feed = $("feed");
+    feed.appendChild(el);
+    setTimeout(() => el.remove(), 4200);
+    while (feed.children.length > 4) feed.firstChild.remove();
+  }
 
-// ── Join Button ────────────────────────────────────────────────────────
-joinBtn.addEventListener('click', () => {
-  const name = nameField.value.trim() || 'Player';
-  const password = passwordField.value;
-  joinError.textContent = '';
-  connect(name, password);
-});
+  function flashDeath() {
+    $("dead").style.display = "block";
+  }
 
-nameField.addEventListener('keydown', e => {
-  if (e.key === 'Enter') joinBtn.click();
-});
-passwordField.addEventListener('keydown', e => {
-  if (e.key === 'Enter') joinBtn.click();
-});
+  function updateBars() {
+    const me = S.ents.get(S.me);
+    if (!me) return;
+    const hp = me.hp != null ? me.hp : 100;
+    const mhp = me.mhp || 100;
+    const pct = Math.max(0, Math.min(1, hp / mhp));
+    $("hpbar").style.width = (pct * 100) + "%";
+    $("hpv").textContent = hp;
+    $("hpmob").textContent = isTouch ? hp + " hp" : "";
+    $("pv").textContent = S.ping == null ? "–" : S.ping;
+  }
 
-// ── Start ──────────────────────────────────────────────────────────────
-setInterval(sendInput, 50);    // 20 Hz
-setInterval(sendPing, 2000);   // 2 Hz
-requestAnimationFrame(render);
+  // ================= main loop =================
+  let lastFrame = performance.now();
+  function frame(now) {
+    const dt = Math.min(0.05, (now - lastFrame) / 1000);
+    lastFrame = now;
+    updateCamera(dt);
+    draw();
+    updateBars();
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // ================= join =================
+  const nameInput = $("nameInput");
+  const RN = ["Nova", "Blitz", "Echo", "Viper", "Comet", "Onyx", "Zenith", "Frost"];
+  nameInput.value = localStorage.getItem("arena.name") ||
+                    RN[Math.floor(Math.random() * RN.length)];
+
+  $("joinsub").textContent = isTouch
+    ? "Tap Join, then use the stick to move and FIRE to shoot."
+    : "Move with WASD, aim with the mouse, shoot with click or Space.";
+  $("ctrlhint").innerHTML = isTouch
+    ? "Left thumb: move &nbsp;·&nbsp; right: FIRE &nbsp;·&nbsp; tap the field to shoot that way"
+    : "<kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> move &nbsp;·&nbsp; mouse aim &nbsp;·&nbsp; <kbd>Space</kbd> / click to shoot";
+
+  function doJoin() {
+    const name = (nameInput.value || "Player").trim().slice(0, 16) || "Player";
+    localStorage.setItem("arena.name", name);
+    $("joinScreen").classList.add("hide");
+    S.joined = true;
+    connect(name);
+  }
+
+  $("joinBtn").addEventListener("click", doJoin);
+  nameInput.addEventListener("keydown", (e) => { if (e.key === "Enter") doJoin(); });
+  $("rejoinBtn").addEventListener("click", () => {
+    $("discScreen").classList.add("hide");
+    doJoin();
+  });
+
+  // auto-fill from ?name= for shared links
+  const q = new URLSearchParams(location.search).get("name");
+  if (q) nameInput.value = q.slice(0, 16);
+
+  setStatus("ready", false);
+  window.Arena = S;   // debug handle
+})();
 </script>
 </body>
 </html>

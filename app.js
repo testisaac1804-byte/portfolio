@@ -57,7 +57,7 @@ var D={sw:[
 {t:"Gemini Chat",s:"done",d:"AI chat interface — Gemini-powered conversation app.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/gemini-chat.html"}],g:[{c:"ac",l:"AI"},{l:"Chat"}],v:[{n:"V1",i:"Chat interface."}]},
 {t:"RGB Color Calculator",s:"done",d:"Interactive RGB color picker and calculator.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/rgb-calculator.html"}],g:[{c:"gr",l:"HTML"},{l:"Tool"}],v:[{n:"V1",i:"Color picker."}]},
 {t:"Gcode Viewer",s:"done",d:"Browser-based G-code viewer for CNC toolpath visualization.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/gcode-viewer.html"}],g:[{c:"ac",l:"CNC"},{l:"G-code"}],v:[{n:"V1",i:"Toolpath viewer."}]},
-{t:"Hong Kong Tour",s:"done",pt:"prompts/hongkong-tour-prompt.md",d:"Interactive Hong Kong tour guide app — Flask + HTML, native macOS .app bundle with photo gallery and tour routes.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/hongkong-tour.html"}],g:[{c:"ac",l:"Flask"},{l:"HTML"},{l:"Tour"},{l:"macOS .app"}],v:[{n:"V1",i:"Photo gallery, tour routes, ratings."}]},
+{t:"Hong Kong Tour",s:"done",pt:"prompts/hongkong-tour-prompt.md",d:"A Hong Kong tour guide with 143 real spots — Hong Kong Island, Kowloon and the New Territories, split into 27 neighbourhoods — each with an actual photograph of the place, a rating, description, tips and location, plus search and category filters. The same Python + HTML core ships as five real apps: a macOS .app, a Windows installer, a Linux .deb, an Android APK and an iPad app, and it runs here in the browser as a static build with no server behind it. All five installers download straight from this page, and the transfer resumes if the link drops. The packaging turned out to be the hard part: the .deb came out 96 bytes because macOS ar writes a ranlib symbol table and silently drops the members, and the .exe was a Mac binary because p7zip's SFX stub is Mach-O rather than a Windows PE.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/hongkong-tour/"},{c:"ac",l:"macOS (.dmg) 295 MB",o:1,u:"https://isaac1804.com/files/hongkong-tour/HongKongTour-macOS.dmg"},{c:"ac",l:"Windows (.exe) 292 MB",o:1,u:"https://isaac1804.com/files/hongkong-tour/HongKongTour-Windows.exe"},{c:"ac",l:"Linux (.deb) 292 MB",o:1,u:"https://isaac1804.com/files/hongkong-tour/HongKongTour-linux.deb"},{c:"ac",l:"Portable (.zip) 292 MB",o:1,u:"https://isaac1804.com/files/hongkong-tour/HongKongTour-Portable.zip"},{c:"ac",l:"Android (.apk) 2.3 MB",o:1,u:"https://isaac1804.com/files/hongkong-tour/HongKongTour-Android.apk"},{l:"Build notes",o:6,p:"./prompts/hongkong-tour-prompt.md"}],g:[{c:"ac",l:"Python"},{c:"ac",l:"HTML"},{l:"pywebview"},{l:"Android APK"},{l:"Windows"},{l:"Linux .deb"},{l:"iPad"}],v:[{n:"V1",i:"Launcher, HTML UI, spots grouped by region and area, photo gallery."},{n:"V2",i:"143 spots across 3 regions / 27 areas with real photos, search, category filters and ratings."},{n:"V3",L:1,i:"Shipped for every platform — macOS .app, Windows .exe, Linux .deb, Android APK, iPad app — plus this static browser build. Fixed three packaging traps along the way: the macOS launcher now probes for a Python that actually has pywebview (Finder hands apps a minimal PATH), the .deb is written byte-by-byte instead of with macOS ar, and the Windows .exe uses a real PE SFX stub instead of p7zip's macOS one. The browser build drops the local server entirely: data.json + a local search index."}]},
 {t:"IsaacDrop",s:"done",pt:"prompts/isaacdrop-prompt.md",d:"Self-hosted Google-Drive-style file sharing: accounts (guest/register, first user = admin ⭐), per-file & per-folder passwords, folders, trash, per-user stars, search, versions, ZIP downloads, and a launchd auto-start service with self-healing Cloudflare tunnel. Live at da.gd/isaacdrop.",a:[{c:"ac",l:"Open IsaacDrop",o:1,u:"https://da.gd/isaacdrop"},{c:"ac",l:"Files",o:9,u:"./projects/"},{c:"ac",l:"Prompt",o:6,p:"./prompts/isaacdrop-prompt.md"}],g:[{c:"ac",l:"FastAPI"},{l:"Python"},{l:"File Sharing"},{l:"Accounts"},{l:"launchd"}],v:[{n:"V1",i:"Drop-style file sharing with links."},{n:"V2",i:"Drive-style: folders, trash, star, search, versions, ZIP, folder passwords."},{n:"V3",L:1,i:"Accounts + ownership: guests, register, admin role, owner-only manage."}]},
 
 {t:"macOS Simulator",s:"done",pt:"prompts/macos-simulator-prompt.md",d:"Full interactive macOS desktop simulator with menubar, dock, windows, and dark/light theme.",a:[{c:"ac",l:"Live Demo",o:7,u:"./projects/mac-simulator.html"}],g:[{c:"ac",l:"HTML"},{l:"CSS"},{l:"JS"},{l:"Simulator"}],v:[{n:"V1",i:"Menubar, dock, windows, themes."}]},
@@ -67,14 +67,15 @@ var D={sw:[
 {t:"FrostSolve",s:"done",pt:"prompts/frostsolve-prompt.md",d:"macOS desktop app with manifest structure and full .app bundle.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/frostsolve.html"}],g:[{c:"ac",l:"macOS"},{l:"App"},{l:"JavaScript"}],v:[{n:"V1",i:"Standalone script."},{n:"V2",L:1,i:"App bundle: Finder/Dock launchable."}]},
 {t:"IsaacNetPkg",s:"done",pt:"prompts/isaacnetpkg-prompt.md",d:"Password-protected .pkg. AppleScript uninstall.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/isaacnetpkg.html"}],g:[{c:"ac",l:"macOS"},{l:"pkgbuild"},{l:"AppleScript"},{l:"launchd"}],v:[{n:"V1",i:"AppleScript in bash heredocs. Broke."},{n:"V2",L:1,i:"Fixed: AppleScript as real file."}]},
 {t:"IsaacSecureMessenger",s:"done",pt:"prompts/isaacsecuremessenger-prompt.md",d:"E2E encrypted messaging - X3DH + AES-256-GCM.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/isaacsecuremessenger.html"}],g:[{c:"ac",l:"macOS"},{l:"Encryption"},{l:"AES-256"},{l:"PyObjC"}],v:[{n:"V1",i:"Browser chat. Manual key exchange."},{n:"V2",i:"Native app: QR code pairing."},{n:"V3",L:1,i:"X3DH protocol. Production grade."}]},
-{t:"Multiplayer Game Server",s:"done",pt:"prompts/multiplayer-game-server-prompt.md",d:"WebSocket multiplayer backend - multi-room, sync, spectator.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/game-server.html"}],g:[{c:"ac",l:"WebSocket"},{l:"Python"},{l:"FastAPI"},{l:"Real-time"}],v:[{n:"V1",i:"Single room."},{n:"V2",i:"Multi-room with room codes."},{n:"V3",L:1,i:"Spectator mode + reconnect."}]},
+{t:"Arena — LAN Multiplayer Game",s:"done",pt:"prompts/multiplayer-game-server-prompt.md",d:"A top-down arena shooter that runs on your own Wi-Fi: one Mac hosts it and everyone else joins from a browser. Double-click Arena Server and it starts the match, prints the join address and shows a QR code; open Arena Join on any other Mac and it sweeps the local network, finds the host on its own and opens the game — no IP address to type, no internet, no account. Real-time WebSocket combat with a health bar, live scoreboard and kill feed, on a canvas arena that keeps running. Twin-stick: WASD and the mouse on a Mac, two separate thumb sticks on a phone so you can run one way and shoot the other. Both apps install from self-contained .pkg packages — the Python runtime, the server and the client are inside them, so there is nothing else to install. The last pass was about not breaking mid-match: hostile or malformed frames from a client can no longer freeze or kill the simulation, and a bad tick is counted and skipped rather than ending the match.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/game-server.html"},{c:"ac",l:"⬇ Download — join a game (.pkg)",o:1,u:"https://isaac1804.com/files/installers/Arena-Join-1.0.1.pkg"},{l:"Host installer (.pkg · 27 MB)",o:1,u:"https://isaac1804.com/files/installers/Arena-Server-1.0.1.pkg"},{l:"How to install",o:1,u:"./Desktop/arena/install.html"}],g:[{c:"ac",l:"WebSocket"},{c:"ac",l:"Python"},{l:"Canvas"},{l:"LAN"},{l:"pkgbuild"},{l:"Real-time"}],v:[{n:"V1",i:"Single-room WebSocket arena: real-time movement, aiming, shooting, health and a scoreboard."},{n:"V2",i:"Phone support — a separate move stick and aim stick, so you can run one way and shoot another, plus a fire button."},{n:"V3",i:"LAN discovery in the join app: it sweeps the network for the host instead of being told an address, and the host page shows the join link plus a QR code."},{n:"V3.1",L:1,i:"Shipped as two double-click .pkg installers (host + join) and verified by running the packaged bytes rather than the build tree: 39 protocol, 21 hostile-frame and 20 headless-browser checks. Hostile frames can no longer freeze the sim, a bad tick is skipped instead of ending the match, and player names and chat are scrubbed before they reach anyone else's screen."}]},
+{t:"Password Game Solver",s:"done",pt:"prompts/password-game-solver-prompt.md",d:"Beats all 36 rules of neal.fun's Password Game by reading the game's own runtime state, then composing a password that satisfies every rule at once.",a:[{c:"ac",l:"Open Folder",o:1,u:"./projects/password-game-solver/"},{l:"Prompt",o:6,p:"./prompts/password-game-solver-prompt.md"}],g:[{c:"ac",l:"Automation"},{l:"Python"},{l:"Playwright"},{l:"Reverse Engineering"}],v:[{n:"V1",i:"DOM scraping + OCR."},{n:"V2",i:"Reads live app state: no OCR, no screenshot parsing."},{n:"V3",L:1,i:"Constraint composer: 36/36 rules, 211-char password."}]},
 {t:"HKPCBypass",s:"done",pt:"prompts/hkpcbypass-prompt.md",d:"Multi-layer school bypass. DoH+SOCKS5+HTTP CONNECT.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/hkc-bypass.html"}],g:[{c:"ac",l:"Networking"},{l:"Proxy"},{l:"DoH"},{l:"Python"}],v:[{n:"V1",i:"Single proxy."},{n:"V2",i:"DoH added: encrypted DNS."},{n:"V3",L:1,i:"Multi-layer fallback."}]},
 {t:"WiFi Chat",s:"done",pt:"prompts/wifi-chat-prompt.md",d:"LAN offline chat - no internet needed. WebSocket + DXF sharing.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/wifi-chat.html"}],g:[{c:"ac",l:"WebSocket"},{l:"Flask"},{l:"LAN"},{l:"Offline"}],v:[{n:"V1",i:"Basic text."},{n:"V2",i:"DXF/SVG uploads."},{n:"V3",L:1,i:"Offline-first. Cross-device."}]},
 {t:"WiFi Monitor",s:"done",pt:"prompts/wifi-monitor-prompt.md",d:"ESP32 WiFi scanner - signal graphs, device tracking.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/wifi-monitor.html"}],g:[{c:"ac",l:"ESP32"},{l:"WiFi"},{l:"Scanner"},{l:"C"}],v:[{n:"V1",i:"Serial only."},{n:"V2",i:"MAC tracking."},{n:"V3",L:1,i:"Full dashboard."}]},
 {t:"326929.pw Mirror",s:"done",pt:"prompts/326929-pw-mirror-prompt.md",d:"Full phishing site mirror - evidence for takedowns.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/scam-mirror.html"}],g:[{c:"gr",l:"Security"},{l:"Phishing"},{l:"Evidence"}],v:[{n:"V1",i:"Manual save."},{n:"V2",L:1,i:"wget mirror: all assets."}]},
 {t:"218/213 騙局複刻模擬器",s:"done",pt:"prompts/casino-scam-sim-prompt.md",d:"逐頁複刻真實非法賭博網站 218.com（永誠貴賓會）與 213.com（PG娛樂）的反詐教學模擬器 —— 假 Loading 跳轉、備用線路、門戶、遊戲大廳、客服話術、加密啟動頁、代理後台，全部按鈕只連本地模擬。附 10 課深度導覽、12 條黑話術語表、10 題測驗與完整調查檔案。",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/casino-scam-sim/sim.html"},{c:"ac",l:"🎓 深度導覽",o:7,u:"./demos/casino-scam-sim/tour.html"},{c:"ac",l:"🎰 原版鏡像",o:7,u:"./demos/casino-scam-sim/hub.html"},{l:"📂 Files",o:9,u:"./demos/casino-scam-sim/"}],g:[{c:"gr",l:"Security"},{l:"Anti-Scam"},{l:"Phishing"},{l:"Evidence"}],v:[{n:"V1",i:"複刻 218.com 入口頁（假 Loading + base64 隱藏跳轉）。"},{n:"V2",L:1,i:"加入 213 門戶、遊戲大廳、客服練功房、App 加密頁、代理後台、10 課導覽與調查檔案。"}]},
 {t:"Scam Mirror",s:"done",pt:"prompts/scam-mirror-prompt.md",d:"Automated phishing cloner - registrar takedown reports.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/scam-mirror.html"}],g:[{c:"gr",l:"Security"},{l:"Scraping"},{l:"Python"}],v:[{n:"V1",i:"Manual per-site."},{n:"V2",L:1,i:"Automated: one command."}]},
-{t:"IsaacKing Browser",s:"done",pt:"prompts/isaacking-browser-prompt.md",d:"Whitelist-only browser. PyObjC + WKWebView .app.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/isaacking-browser.html"}],g:[{c:"ac",l:"macOS"},{l:"WKWebView"},{l:"PyObjC"},{l:"Browser"}],v:[{n:"V1",i:"White screen bug."},{n:"V2",L:1,i:"Fixed: HTML string direct load."}]},
+{t:"IsaacKing Browser",s:"done",pt:"prompts/isaacking-browser-prompt.md",d:"A whitelist-only macOS browser with NO search: the URL bar rejects anything containing a space, and every navigation is checked against a plain-text allowlist at ~/IsaacKing/whitelist.json that is re-read on every request — edit the file and it applies instantly, no restart, no in-app settings page. Ships as a self-contained 76 MB .app carrying its own Python + PyObjC/WKWebView, with an isaacking CLI (list / add / remove / launch).",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/isaacking-browser.html"}],g:[{c:"ac",l:"macOS"},{l:"WKWebView"},{l:"PyObjC"},{l:"Browser"},{l:"Whitelist"}],v:[{n:"V1",i:"White screen when quitting and reopening."},{n:"V2",i:"Fixed: the start page loads as an HTML string — no redirect chain, no white flash."},{n:"V3",L:1,i:"Self-contained 76 MB .app with its own Python and no PyObjCTools dependency, whitelist re-read live from the file, isaacking CLI, no-search guard, and zero system-proxy writes."}]},
 {t:"IsaacBrowser",s:"done",pt:"prompts/isaacbrowser-prompt.md",d:"Variant browser - category-based whitelist.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/isaacbrowser.html"}],g:[{c:"ac",l:"macOS"},{l:"Browser"},{l:"PyObjC"}],v:[{n:"V1",i:"IsaacKing fork."},{n:"V2",L:1,i:"Independent codebase."}]},
 {t:"IsaacNet",s:"done",pt:"prompts/isaacnet-prompt.md",d:"Layered bypass. TLS-wrapped, multi-tunnel auto-fallback.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/isaacnet.html"}],g:[{c:"ac",l:"Networking"},{l:"Proxy"},{l:"Python"},{l:"Bypass"}],v:[{n:"V1",i:"Single TCP tunnel."},{n:"V2",i:"TLS wrapping."},{n:"V3",L:1,i:"Layered: CONNECT+SOCKS5+WS."}]},
 {t:"Manufacturing Explorer",s:"done",pt:"prompts/manufacturing-explorer-prompt.md",d:"200-method 3D manufacturing explorer. Three.js + Flask.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/manufacturing-explorer.html"}],g:[{c:"ac",l:"Three.js"},{l:"Flask"},{l:"3D"},{l:"G-code"}],v:[{n:"V1",i:"112 methods."},{n:"V2",i:"Collapsible panels."},{n:"V3",L:1,i:"200 methods."}]},
@@ -84,7 +85,7 @@ var D={sw:[
 {t:"Isaac AI",s:"done",pt:"prompts/isaac-ai-prompt.md",d:"AI chat assistant - native .app. Multi-personality, memory.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/isaac-ai.html"}],g:[{c:"ac",l:"AI"},{l:"macOS"},{l:"Chat"},{l:"App"}],v:[{n:"V1",i:"Single-turn."},{n:"V2",i:"Multi-turn with context."},{n:"V3",L:1,i:"Native .app WKWebView."}]},
 {t:"IsaacSuite",s:"wip",pt:"prompts/isaacsuite-prompt.md",d:"Unified launcher - one dock icon for all Isaac apps.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/isaacsuite.html"}],g:[{c:"ac",l:"macOS"},{l:"Launcher"},{l:"PyObjC"}],v:[{n:"V1",i:"Planned: menubar widget."}]},
 {t:"IsaacAppLaunchers",s:"done",pt:"prompts/isaacapplaunchers-prompt.md",d:"Quick-launch scripts for the Isaac ecosystem.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/isaacapplaunchers.html"}],g:[{c:"ac",l:"macOS"},{l:"Scripting"},{l:"Automation"}],v:[{n:"V1",i:"Individual scripts."},{n:"V2",L:1,i:"Unified launcher."}]},
-{t:"IsaacOS",s:"draft",pt:"prompts/isaacos-prompt.md",d:"Custom OS concept - bootable with all Isaac tools.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/isaacos.html"}],g:[{l:"OS"},{l:"Concept"},{l:"System Design"}],v:[{n:"V1",i:"Concept phase."}]},
+{t:"IsaacOS",s:"done",pt:"prompts/isaacos-prompt.md",d:"A custom ARM64 operating system built from a package list and shipped as a bootable ISO: Alpine Linux under an XFCE desktop that deliberately mixes two conventions — a macOS-style bar along the top (app menu, tray, volume, clock) and a Windows-style dock along the bottom (app launchers, live taskbar, show-desktop). It boots in Parallels straight to a branded desktop with no login prompt and no setup wizard, logging itself in and configuring its own wallpaper, shortcuts and panels on first start. Assembled from a downloaded kernel and initramfs with a custom overlay shipped on the disc, then debugged from inside the running VM over TCP, because a guest console cannot be read remotely. Three bugs were worth the trouble: a panel launcher plugin that rendered only one of seven declared icons (fixed with one plugin per icon), a mouse that would not move because Alpine eudev ships no init script so udev never started — and libinput finds devices only through udev — and an invisible cursor that looked exactly like a broken mouse until the core cursor font was installed.",a:[{c:"ac",l:"Download ISO (431 MB)",o:1,u:"https://isaac1804.com/files/isaacos/IsaacOS-v1.0-arm64.iso"},{c:"ac",l:"Live Desktop Demo",o:7,u:"./demos/isaacos.html"},{c:"ac",l:"Build notes",o:6,p:"./prompts/isaacos-prompt.md"}],g:[{c:"ac",l:"Alpine Linux"},{l:"ARM64"},{l:"Bootable ISO"},{l:"XFCE"},{l:"Xorg"},{l:"Parallels"}],v:[{n:"V1",i:"First attempt: a from-scratch kernel and boot chain, built by the repo’s own build script. The kernel booted, but the UEFI handoff could not be verified remotely and there was no way to read a guest console — scrapped for something that could be inspected from the inside."},{n:"V2",L:1,i:"Rebuilt on Alpine Linux: boots to a branded XFCE desktop in Parallels with no login prompt, working mouse and keyboard, self-applied wallpaper and keyboard shortcuts, top menu bar + 7-icon dock. 431 MB ARM64 live ISO, resumable download."}]},
 {t:"IsaacSystem-All",s:"draft",pt:"prompts/isaacsystem-all-prompt.md",d:"Monolithic tool - all Isaac apps in one binary.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/isaacsystem-all.html"}],g:[{l:"System"},{l:"Unified"},{l:"Meta-project"}],v:[{n:"V1",i:"Concept phase."}]},
 {t:"Laser Cutting Simulator",s:"done",pt:"prompts/laser-cutting-simulator-prompt.md",d:"Browser laser simulator - 9+ versions. G-code export.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/laser-cutting-simulator.html"}],g:[{c:"ac",l:"React"},{l:"DXF"},{l:"Simulation"},{l:"Web App"}],v:[{n:"V1-3",i:"Basic canvas."},{n:"V4-6",i:"3D isometric."},{n:"V7-9",L:1,i:"True 3D orbital, G-code."}]},
 {t:"Library Kiosk",s:"done",pt:"prompts/library-kiosk-prompt.md",d:"Locked-down public-library kiosk sim — ticket/HKID auth, guest browsers, session timer, data wipe on logout.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/library-kiosk.html"}],g:[{c:"ac",l:"Kiosk"},{l:"HTML"},{l:"JS"},{l:"Auth"}]},
@@ -132,6 +133,9 @@ var D={sw:[
 {t:"Link Compressor",s:"done",pt:"prompts/link-compressor-prompt.md",d:"A URL shortener that lives on my own domain: paste a long link, get a tiny isaac1804.com/s/xxxxx back. It compresses the link itself first — stripping utm_*/fbclid/igshid/si tracking junk (and telling you what it removed, while leaving signed download URLs alone) — then stores it in Cloudflare KV with click counting, custom names, duplicate detection and QR codes. Bulk mode takes one link per line and shows the exact saving per link (was 214 chars → 33 chars, 85% smaller). Anyone can compress any link (rate limited per IP so it cannot become a spam redirector) and that is all they can do; the 🔒 admin password at the top unlocks everything else — who created each link and who clicked it (IP, city, ISP, device), deleting, custom names, the full list and unlimited links.",a:[{c:"ac",l:"Open Link Compressor",o:1,u:"https://isaac1804.com/tools/link-compressor/"},{l:"Try a short link",o:1,u:"https://isaac1804.com/s/rev"},{c:"ac",l:"Prompt",o:6,p:"./prompts/link-compressor-prompt.md"}],g:[{c:"ac",l:"Cloudflare Worker"},{l:"KV"},{l:"URL shortener"},{l:"QR codes"},{l:"Vanilla JS"}],v:[{n:"V1",i:"Worker + KV shortener routed onto isaac1804.com: 5-char codes from an alphabet with no 0/O/1/l/i, 302 redirects with click counting, same-URL reuse, admin token for custom names, deletes and stats. Tool page: bulk paste, tracking-parameter stripping with a per-link saving readout, inline QR codes, searchable/exportable history."},{n:"V1.1",i:"Compressing opened to everyone — any link, no token, because it has to work for whoever I send the tool to. Abuse guard is now a 200-links-per-hour-per-IP limit; the token only gates custom names, deleting and the full list."},{n:"V1.2",i:"Tracking: every link records who created it and every click records who opened it (IP, city/country, ISP, device, referer) — readable only with the password, in a per-link log plus a combined activity feed."},{n:"V1.3",L:1,i:"Fully admin controlled: a 🔒 Admin box at the top of the page takes the password and unlocks the logs, deleting, custom names and unlimited links — visitors can only make and follow links. Fixed Delete, which was shown to everyone and only printed an error when locked; it now appears only when unlocked, and any 401 re-asks for the password."}]}
 ,
 {t:"DocScribe",s:"done",pt:"prompts/docscribe-prompt.md",d:"A writing pad that needs no setup at all: open the URL and type — no login, no API key, no Google account, no console. The text lives in Cloudflare KV, so the first browser to open it becomes the owner with nothing to type, and nobody else can read, edit, export or delete it. Autosaves as you type, keeps a real edit log (one row = one genuine keystroke-caused edit at real wall-clock time — a no-op save mints nothing), and exports to .docx (a hand-built ZIP that opens in real Word) and .md. Pair a second device with a one-tap link. Originally written against the Google Docs API; deleting the whole Google OAuth setup — Cloud project, consent screen, client ID and secret — is exactly what the KV rewrite did.",a:[{c:"ac",l:"Open DocScribe",o:1,u:"https://docscribe.isaac1804.workers.dev"},{c:"ac",l:"Build notes",o:6,p:"./prompts/docscribe-prompt.md"}],g:[{c:"ac",l:"Cloudflare Worker"},{l:"KV"},{l:"Zero setup"},{l:"Google Docs alternative"},{l:"Vanilla JS"}],v:[{n:"V1",i:"Local Python app on the Google Docs API — needed a Cloud project, an OAuth consent screen and a client ID + secret before it would save a word."},{n:"V2",L:1,i:"Rebuilt as a Cloudflare Worker with the text in KV: no OAuth, no access key, no setup page. First browser to open it owns it; .docx + .md export; one-tap device pairing; 93/93 offline assertions; live-verified with a stranger getting 403."}]},
+{t:"The Brown Meter",s:"done",pt:"prompts/brown-meter-prompt.md",d:"A live, public brownness meter: one big orb, a 0-100 percentage, and a word that says what the number means — from 'nothin brown here' to 'MAXIMUM BROWN'. It updates itself on every open screen the moment the owner moves it: log in at /admin, push the slider, and every watcher's tab changes on its own over a server-sent-events stream, no refresh. 8 bands x 8 words = 64 phrasings, each band with its own 'as brown as ___' comparator and rotating flavour lines (75% still reads ouuuu). Plus today's + all-time peak records (breaking one flashes NEW PEAK), a public reaction bar (ouuuu / meh / i'm dead — one tap per visitor per minute, counts pushed live), and an optional 'vibe mode' where the hourly cron drifts the meter 1-9% on its own. Installable (inline SVG icon + manifest) and shareable (og: preview tags). One worker.js, zero dependencies, 173/173 assertions. Built after the class in-joke Netlify page of the same name could not be found — so it was made instead.",a:[{c:"ac",l:"Open the Brown Meter",o:1,u:"https://brown-meter.isaac1804.workers.dev"},{c:"ac",l:"Build notes",o:6,p:"./prompts/brown-meter-prompt.md"}],g:[{c:"ac",l:"Cloudflare Worker"},{l:"KV"},{l:"Server-sent events"},{l:"Vanilla JS"},{l:"Zero deps"}],v:[{n:"V1",i:"Worker + KV with a password-gated admin panel; public page, /api/rate, live push, logout that really revokes (KV session generation)."},{n:"V2",i:"Admin panel rebuilt: slider, presets, nudge, undo, change history + stats; 2-second micro-cache so N viewers cost one KV read per TTL; 117/117 tests."},{n:"V3",L:1,i:"24 words -> 64 (8 per band) with 'as brown as ___' comparators and flavour lines; daily + all-time peak records; public reaction bar with live counts; hourly auto-drift 'vibe mode' via cron; inline icon + manifest + og tags; 173/173 tests, live-verified (429 on a repeat tap, real SSE stats push)."}]},
+{t:"RemoteConnect",s:"done",pt:"prompts/remoteconnect-prompt.md",d:"One-click remote control of other people's Macs and Android phones from a single Mac app. The far machine installs one silent .pkg that switches on macOS Screen Sharing (ARD) with zero dialogs; my side lists saved targets, and clicking a name opens Screen Sharing for a Mac or mirrors an Android phone with scrcpy. Wireless adb is auto-discovered, USB works as a fallback, and every failed connect returns a plain-language step log instead of a spinner — which is how I found out the real problem was a phone that had left the WiFi and taken a new IP, not the app.",a:[{c:"ac",l:"How it works",o:7,u:"./demos/remoteconnect.html"},{c:"ac",l:"Build notes",o:6,p:"./prompts/remoteconnect-prompt.md"}],g:[{c:"ac",l:"macOS"},{l:"pkgbuild"},{l:"ARD / VNC"},{l:"scrcpy"},{l:"adb"},{l:"pywebview"}],v:[{n:"V1",i:"Mac targets: silent .pkg enables ARD with a baked shared password; controller opens Screen Sharing on click."},{n:"V2",i:"Android targets via scrcpy + wireless adb, with a Type field and a per-target port."},{n:"V3",L:1,i:"Self-diagnosing: ping/ARP/mDNS/subnet probes at /api/scan, a step log on every failure, auto-reconnect, always-on-top mirror window, USB fallback."}]},{t:"Isaac Browser",s:"done",pt:"prompts/isaac-browser-prompt.md",d:"A working macOS web browser built from scratch in Python (PyObjC + WKWebView) \u2014 its own NSWindow and its own WebKit renderer process, not a shell around Chrome. Private by construction rather than by settings: an ephemeral WKWebsiteDataStore so history, cookies and cache exist only in RAM, a tracker/ad filter, anti-fingerprinting (UA, screen size and timezone spoofed), WebRTC and geolocation blocked, referrers stripped, HTTPS-only, stealth mode, one-click New Identity, and auto-burn of everything in memory on exit. Ships an ephemeral CONNECT proxy + DoH resolver that is strictly per-app \u2014 it never reads or writes the macOS system proxy, so Chrome and the rest of the system keep working whether the in-app proxy is on or off. (An earlier build did set the system proxy; that is what silently broke Chrome for other apps. That code is gone.) Packaged as a double-clickable .app with a universal Mach-O launcher and a CLI.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/isaac-browser.html"},{c:"ac",l:"Build notes",o:6,p:"./prompts/isaac-browser-prompt.md"},{c:"ac",l:"🗂 Source files",o:1,u:"./projects/isaac-browser/"}],g:[{c:"ac",l:"macOS"},{l:"PyObjC"},{l:"WKWebView"},{l:"Privacy"}],v:[{n:"V1",L:1,i:"Native macOS browser: ephemeral WKWebView data store (no history/cookies/cache on disk), tracker filter, anti-fingerprinting, leak surfaces closed, stealth mode, New Identity, auto-burn on exit, per-app CONNECT proxy + DoH, universal Mach-O launcher, CLI, and the start-page privacy shield. Fixed: system-proxy leak that broke Chrome, fatal port binds, and the macOS 26 shell-launcher crash."}]},
+{t:"Kwangmyong Network 3.0 — DPRK Intranet Simulator",s:"done",pt:"prompts/kwangmyong-sim-prompt.md",d:"Single-file offline simulator of the DPRK national intranet (Kwangmyong): a 136-site catalogue, 30 hand-built sites, a real command terminal and a surveillance log — fully English.",how:"Rebuilt the simulator from viewpoint of its own UI: a Windows-style desktop, the 《My Country Explorer》 browser that resolves .kp hosts and internal IPs, 136 catalogue sites (30 hand-built, 106 generated from their own rows), and a visit log that refuses to be erased.",src:"Site catalogue transcribed from the Wikipedia article Kwangmyong (network); every page, price and news item is invented for the simulation and says so on the page.",a:[{c:"ac",l:"Live Demo",o:7,u:"./demos/kwangmyong-sim.html"},{l:"Prompt",o:6,p:"./prompts/kwangmyong-sim-prompt.md"}],g:[{c:"ac",l:"HTML"},{l:"Simulator"},{l:"DPRK"},{l:"Single-file"}],v:[{n:"V1",L:1,i:"English build — localised by 13 build-time fix batches; the sim’s own self-test scores 72/72."}]},
 ],hw:[
 {t:"Auto-Clamping Vise",s:"wip",pt:"prompts/auto-clamping-vise-prompt.md",d:"Arduino Nano + NEMA 17 + ACS712 sensor. 3D printed. ~$32.",a:[{l:"Open Folder",o:1,u:"./projects/auto-vise/"}],g:[{c:"ac",l:"Arduino"},{l:"Stepper"},{l:"3D Printed"},{l:"Current Sense"}],v:[{n:"V1",i:"Concept."},{n:"V2",i:"ACS712 current detection."},{n:"V3",L:1,i:"Calibrating."}]},
 {t:"Clip-On Thermometer",s:"done",pt:"prompts/clip-thermometer-prompt.md",d:"ESP32-C3 hot wire cutter temp sensor. MAX6675 K-type probe + OLED + WiFi dashboard.",a:[{l:"Open Folder",o:1,u:"./projects/clip-thermometer/"}],g:[{c:"ac",l:"ESP32-C3"},{l:"Sensor"},{l:"PlatformIO"},{l:"MAX6675"},{l:"OLED"},{l:"WiFi"}],v:[{n:"V1",i:"Breadboard + OLED."},{n:"V2",i:"WiFi AP dashboard."},{n:"V3",L:1,i:"°C/°F, graph, buzzer, targets."}]},
@@ -458,7 +462,7 @@ var D={sw:[
 {t:"VEX Universe",s:"done",pt:"prompts/vex-parts-interactive-prompt.md",d:"436 VEX parts across all 8 platforms (IQ 2nd Gen, V5, GO, EXP, 123, AIM, CTE, AIR) - search, gear-ratio calculator, mechanisms, glossary, competitions, quiz, print-to-PDF poster.",g:[{c:"ac",l:"VEX"},{l:"Reference"},{l:"Interactive"},{l:"Tools"},{l:"Poster"}],a:[{c:"ac",l:"Open App",o:7,u:"./demos/vex-parts.html"},{l:"Open PDF Poster",o:6,p:"./Desktop/vex-poster/VEX-Components-Poster.pdf"}]},
 {t:"P2S Clog Guide",s:"done",pt:"prompts/p2s-clog-guide-prompt.md",d:"Bambu Lab P2S extruder cleaning. 6.6 MB.",g:[{c:"ac",l:"Bambu"},{l:"3D Printer"},{l:"PDF"}],a:[{l:"Open PDF",o:6,p:"https://isaac1804.com/files/Downloads/P2S%20Extruder%20Clog%20Cleaning%20Guide.pdf"}]},
 {t:"Daja A6 Pro Guide",s:"done",pt:"prompts/daja-a6-pro-guide-prompt.md",d:"Complete Daja laser reference. 13.5 MB.",g:[{c:"gr",l:"Laser"},{l:"Daja"},{l:"PDF"}],a:[{l:"Open PDF",o:6,p:"https://isaac1804.com/files/Downloads/daja%20a6%20pro%20tutorial.pdf"}]},
-{t:"Laser Reference Library",s:"done",pt:"prompts/laser-reference-library-prompt.md",d:"30+ files: LightBurn, LaserGRBL, Sheets.",g:[{c:"gr",l:"Laser"},{l:"Reference"},{l:"Sheets"}],a:[{l:"Open Folder",o:1,u:"./Desktop/Parametrers/"}]},
+{t:"Laser Reference Library",s:"done",pt:"prompts/laser-reference-library-prompt.md",d:"30+ files: LightBurn, LaserGRBL, Sheets.",g:[{c:"gr",l:"Laser"},{l:"Reference"},{l:"Sheets"}],a:[{l:"Open Folder",o:1,u:"./reference/laser/"}]},
 {t:"Barrier Reef Poster",s:"done",pt:"prompts/barrier-reef-poster-prompt.md",d:"A3 science/geography poster.",g:[{c:"gr",l:"Poster"},{l:"Science"}],a:[{l:"Open PDF",o:6,p:"https://isaac1804.com/files/Downloads/Barrier%20Reef.pdf"}]},
 {t:"VIQRC Notebook",s:"done",pt:"prompts/viqrc-notebook-prompt.md",d:"VEX IQ engineering notebook. 14 MB.",g:[{c:"ac",l:"VEX"},{l:"Robotics"}],a:[{l:"Open PDF",o:6,p:"https://isaac1804.com/files/Downloads/Copy%20of%20VIQRC%20Digital%20Notebook%20-%20Template%20v4.0.pdf"}]},
 {t:"Mega Tours Presentation",s:"done",pt:"prompts/mega-tours-presentation-prompt.md",d:"87 MB final presentation.",g:[{c:"gr",l:"Presentation"}],a:[{l:"Open PDF",o:6,p:"https://isaac1804.com/files/Downloads/Mega%20Tours%20Final%20Presentation.pdf"}]},
@@ -552,8 +556,10 @@ var EXTRA={
 "MacAdBlock":{how:"A Python DNS server runs on localhost:8053 as a launchd daemon. It loads a blocklist of ad/tracker domains and answers their lookups with 0.0.0.0, so ads never load system-wide.",src:"Python, launchd (auto-start daemon), custom + banned blocklists, .pkg installer."},
 "ESP32-C3 AdBlock":{how:"The ESP32 acts as a network DNS sinkhole. Devices point their DNS at the ESP32, which returns 0.0.0.0 for known ad domains, blocking ads for every device on the WiFi.",src:"ESP32 (WROOM-32D), PlatformIO, C++. Note: the C3 SuperMini was incompatible with the RT-AC58U's WPA2, so the WROOM-32D was used instead."},
 "IsaacSecureMessenger":{how:"End-to-end encrypted chat using the X3DH key-agreement protocol and AES-256-GCM for messages, with double-ratchet forward secrecy, QR pairing, disappearing messages, voice notes and file transfer.",src:"Python, PyObjC (native macOS .app), X3DH, AES-256-GCM, double ratchet."},
-"Multiplayer Game Server":{how:"A FastAPI backend manages WebSocket rooms. Players join with a room code; the server broadcasts moves, keeps state in sync, and supports spectators plus reconnects.",src:"Python, FastAPI, WebSocket (real-time)."},
+"Arena — LAN Multiplayer Game":{how:"One Mac hosts the match; everyone else joins over the same Wi-Fi. The join app finds the host on its own — no IP address to type.",src:"Python + WebSocket game server with a canvas client, packaged as two self-contained .app bundles inside .pkg installers (pkgbuild). Verified by running the packaged bytes: protocol, hostile-frame and headless-browser suites."},
+"Password Game Solver":{how:"Reads the game's live component state (captcha, country, chess puzzle, YouTube duration, rule progress) straight out of the running app, then composes a password satisfying every active rule at once as a constraint problem: prime self-encoding length, a shared 25-point digit budget, roman numerals multiplying to 35, element symbols summing to 200, and a letter cap imposed by the 14 allowed font sizes. Rewrites the editor only when the composed password actually changed.",src:"Python, Playwright, reverse-engineered rule semantics."},
 "HKPCBypass":{how:"Layered network bypass: DNS-over-HTTPS encrypts lookups, then traffic tunnels through SOCKS5 / HTTP CONNECT with automatic fallback between layers.",src:"Python, DoH, SOCKS5, HTTP CONNECT."},
+"RemoteConnect":{how:"The controller is a pywebview window over a small Flask API. Each saved target is either a Mac (clicking it opens vnc://IP in macOS Screen Sharing) or an Android phone (clicking it runs scrcpy --tcpip=IP:PORT, which performs the entire adb connection itself and mirrors the screen). The server side is a .pkg whose postinstall runs as root: it enables the com.apple.screensharing service and calls ARD's kickstart to set a shared VNC password and grant full control, so the other person installs one file and configures nothing. Before dialling, the app pings and scans (mDNS + a 254-address subnet sweep) and returns a step log instead of a spinner, so a failure explains itself.",src:"Python, pywebview + Flask, pkgbuild / productbuild, macOS ARD (kickstart), Screen Sharing.app, scrcpy, adb, AppleScript via osacompile."},
 "WiFi Chat":{how:"A Flask + WebSocket LAN chat that works with no internet. Devices on the same WiFi exchange messages and can share DXF/SVG files.",src:"Flask, WebSocket, JavaScript."},
 "WiFi Monitor":{how:"The ESP32 scans surrounding WiFi networks and devices, graphing signal strength and tracking MAC addresses on a live dashboard.",src:"ESP32, C++, WebSocket dashboard."},
 "BetterTerminal":{how:"Python owns real PTY login shells, xterm.js paints them in a native window, and a rule-based English layer turns “locate to desktop” into cd ~/Desktop.",src:"Python (aiohttp + ptyprocess + pywebview), xterm.js, PyInstaller, pkgbuild."},
@@ -566,7 +572,7 @@ var EXTRA={
 "Optical Center Punch":{how:"A DIY $10 center punch with a 3D-printed body and lens, versus $30-60 commercial versions.",src:"3D printed body, lens, steel tip."},
 "Micro RC Car":{how:"A 1/64-1/32 scale high-speed RC car built no-solder with Dupont wires.",src:"Dupont wires, no-solder build."},
 "BLE Scanner":{how:"An ESP32 BLE scanner that detects nearby devices, logs them and shows them on a dashboard.",src:"ESP32, BLE."},
-"IsaacKing Browser":{how:"A whitelist-only browser built with PyObjC + WKWebView, packaged as a .app.",src:"PyObjC, WKWebView, macOS .app."},
+"IsaacKing Browser":{how:"A whitelist-only browser: there is no search at all — any URL-bar input containing a space is refused — and every navigation is checked against ~/IsaacKing/whitelist.json, plain domain strings re-read on each request, so edits apply with no restart and there is no in-app settings page. The start page is loaded as an HTML string to avoid a redirect chain and white flash, and quitting is a clean teardown that leaves no orphan windows. Packaged as a self-contained 76 MB .app that carries its own Python and PyObjC/WKWebView.",src:"Python 3.14, PyObjC (WKWebView + navigation delegate), py2app self-contained bundle (manually adhoc-signed)."},
 "IsaacBrowser":{how:"A category-based whitelist browser (independent codebase fork of IsaacKing).",src:"PyObjC, WKWebView, macOS .app."},
 "IsaacNet":{how:"Layered bypass with TLS-wrapped tunnels and multi-tunnel automatic fallback.",src:"Python, TLS, SOCKS5, CONNECT, WebSocket."},
 "IsaacCombo":{how:"A multi-app .pkg installer where the user selects which apps to install via a choice dialog.",src:"pkgbuild, AppleScript choice dialog."},
@@ -720,10 +726,10 @@ function editCard(cat,idx,field,val){
  if(field==='how')p.howR=1;
  rebuild();saveData()
 }
-function saveData(){try{localStorage.setItem('isaac-projects-v3',JSON.stringify({sw:D.sw,hw:D.hw,f3d:D.f3d,des:D.des}))}catch(e){}}
+function saveData(){try{localStorage.setItem('isaac-projects-v4',JSON.stringify({sw:D.sw,hw:D.hw,f3d:D.f3d,des:D.des}))}catch(e){}}
 // Load saved edits (after D defined + enriched): saved arrays REPLACE the base
 // arrays wholesale so add/delete/reorder of projects persists across reloads.
-try{var saved=localStorage.getItem('isaac-projects-v3');if(saved){var sd=JSON.parse(saved);for(var k in D)if(Array.isArray(sd[k]))D[k]=sd[k]}}catch(e){}
+try{var saved=localStorage.getItem('isaac-projects-v4');if(saved){var sd=JSON.parse(saved);for(var k in D)if(Array.isArray(sd[k]))D[k]=sd[k]}}catch(e){}
 rebuild();
 // back-to-top needs the button element, which lives after app.js in the document
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initTop)}else{initTop()}
@@ -1238,17 +1244,45 @@ function addProj(cat){
 function delProj(cat,idx){if(!confirm('Delete "'+D[cat][idx].t+'"?'))return;D[cat].splice(idx,1);rebuild();saveData()}
 
 // ==================== NEW: file browser ====================
-var FB=null,FINDEX={},FB_CUR='';
+var FB=null,FINDEX={},FB_CUR='',FBM=null,_fbmState=0;
 function idxTree(n){if(n.path!==undefined)FINDEX[n.path]=n;(n.children||[]).forEach(idxTree)}
+function FBM_SIZE(s){if(!s)return '';if(s<1024)return s+' B';if(s<1048576)return (s/1024).toFixed(1)+' KB';if(s<1073741824)return (s/1048576).toFixed(1)+' MB';return (s/1073741824).toFixed(1)+' GB'}
+function fbmMerge(){
+ if(!FBM||!FBM.f)return 0;
+ var add=0,root=FINDEX['']||FB;
+ for(var p in FBM.f){
+  if(FINDEX[p])continue;
+  var segs=p.split('/'),acc='',par=root;
+  for(var i=0;i<segs.length-1;i++){
+   acc=acc?acc+'/'+segs[i]:segs[i];
+   if(!FINDEX[acc]){var dn={name:segs[i],path:acc,type:'dir',children:[]};FINDEX[acc]=dn;par.children=par.children||[];par.children.push(dn)}
+   par=FINDEX[acc];
+  }
+  var nm=segs[segs.length-1];
+  var node={name:nm,path:p,type:'file',kind:fbKind(nm),size:FBM.f[p],sizeH:FBM_SIZE(FBM.f[p]),u:'https://isaac1804.com/files/'+p.split('/').map(encodeURIComponent).join('/')};
+  FINDEX[p]=node;par.children=par.children||[];par.children.push(node);add++;
+ }
+ return add;
+}
+function loadMoved(cb){
+ if(_fbmState===2){cb&&cb();return}
+ if(_fbmState===1){cb&&cb();return}
+ _fbmState=1;
+ fetch('files-moved.json').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){
+  FBM=j;_fbmState=2;fbmMerge();cb&&cb();
+ }).catch(function(){_fbmState=2;cb&&cb()});
+}
 function loadFiles(cb){
- if(FB){cb&&cb();return}
+ if(FB){loadMoved(cb);return}
  fetch('files.json').then(function(r){return r.json()}).then(function(j){
-  FB=j.root;idxTree(FB);if(cb)cb();
+  FB=j.root;idxTree(FB);
+  loadMoved(function(){cb&&cb()});
  }).catch(function(){toast('Could not load file index')});
 }
 function openFilesFrom(cat,idx){var p=D[cat][idx];if(p&&p.fl)openFiles(p.fl);else openFiles('')}
+function normFolder(f){f=String(f==null?'':f);f=f.replace(/^https?:\/\/[^\/]+/i,'');f=f.replace(/^\/?files\//i,'');f=f.replace(/^\.\//,'');f=f.replace(/\/+$/,'');try{f=decodeURIComponent(f)}catch(e){}return f}
 function openFiles(folder){
- folder=(folder||'').replace(/^\.\//,'').replace(/\/+$/,'');
+ folder=normFolder(folder);
  var m=document.createElement('div');m.className='modal active';m.id='_fb';
  m.innerHTML='<div class="modal-inner fb-inner"><div class="modal-h"><h3>📂 Files</h3>'+
   '<div class="fb-search"><input id="_fbs" placeholder="Search files…" oninput="fbSearch(this.value)"></div>'+
@@ -1258,10 +1292,20 @@ function openFiles(folder){
  m.addEventListener('click',function(e){if(e.target===m)closeM('_fb')});
  loadFiles(function(){fbNav(folder)});
 }
-function fbNav(path){
+function fbNav(path,live){
  path=path||'';
  var n=FINDEX[path];
- if(!n){document.getElementById('_fbb').innerHTML='<div class="fb-empty">Folder not found in index</div>';return}
+ if(n&&n.type==='file'){closeM('_fb');return fbOpen(n.path,n.kind,n.size,n.u)}
+ if((!n||!(n.children||[]).length)&&!live){
+  var _bb=document.getElementById('_fbb');
+  if(_bb)_bb.innerHTML='<div class="modal-loading">Loading files…</div>';
+  return loadMoved(function(){
+   var nn=FINDEX[path];
+   if(nn&&(nn.children||[]).length)return fbNav(path,1);
+   fbLive(path,function(){fbNav(path,1)});
+  });
+ }
+ if(!n){document.getElementById('_fbb').innerHTML='<div class="fb-empty">Nothing indexed for this folder</div>';return}
  FB_CUR=path;
  var parts=path?path.split('/'):[];
  var bc='<a href="javascript:void(0)" onclick="fbNav(\'\')">🏠 root</a>';
@@ -1274,16 +1318,73 @@ function fbNav(path){
  kids.sort(function(a,b){if(a.type!==b.type)return a.type==='dir'?-1:1;return a.name.toLowerCase()<b.name.toLowerCase()?-1:1});
  var h='';
  if(path)h+='<div class="fbrow up" onclick="fbNav(\''+escAttr(path.split('/').slice(0,-1).join('/'))+'\')"><span class="fi">⬆</span><span class="fn">Parent folder</span><span class="fz"></span></div>';
- if(!kids.length)h+='<div class="fb-empty">This folder is empty</div>';
+ if(!kids.length)h+='<div class="fb-empty">No files listed for this folder.<br><a class="vctrl" style="display:inline-flex;margin-top:10px" href="'+(path?EP(path)+'/':'./')+'" target="_blank" rel="noopener">Open folder page ↗</a></div>';
  kids.forEach(function(k){
   if(k.type==='dir')h+='<div class="fbrow dir" onclick="fbNav(\''+escAttr(k.path)+'\')"><span class="fi">📁</span><span class="fn">'+esc(k.name)+'</span><span class="fz"></span></div>';
   else{var icon={'image':'🖼','stl':'🧊','dxf':'📐','pdf':'📕','text':'📄','binary':'📦'}[k.kind]||'📄';
-   h+='<div class="fbrow file" onclick="fbOpen(\''+escAttr(k.path)+'\',\''+k.kind+'\','+(k.size||0)+')"><span class="fi">'+icon+'</span><span class="fn">'+esc(k.name)+'</span><span class="fz">'+(k.sizeH||'')+'</span></div>';}
+   var _u=k.u?("'"+escAttr(k.u)+"'"):'null';
+   h+='<div class="fbrow file" onclick="fbOpen(\''+escAttr(k.path)+'\',\''+k.kind+'\','+(k.size||0)+','+_u+')"><span class="fi">'+icon+'</span><span class="fn">'+esc(k.name)+'</span><span class="fz">'+(k.sizeH||'')+'</span></div>';}
  });
  document.getElementById('_fbb').innerHTML=h;
 }
 function fbSearch(q){q=(q||'').toLowerCase();document.querySelectorAll('#_fbb .fbrow').forEach(function(r){var fn=r.querySelector('.fn');var n=fn?fn.textContent.toLowerCase():'';r.style.display=(!q||n.indexOf(q)>=0)?'':'none'})}
-function fbOpen(path,kind,sz){path=FP(path,sz);
+// ---- live folder fallback: build index entries from the folder's generated listing page ----
+var _fbLive={};
+function fbKind(p){var e=(String(p).split('.').pop()||'').toLowerCase();
+ if(/^(png|jpe?g|gif|webp|bmp|heic|heif|svg)$/.test(e))return 'image';
+ if(/^(stl|3mf|obj|step|stp|iges|igs|fbx|glb|gltf)$/.test(e))return 'stl';
+ if(e==='dxf')return 'dxf';
+ if(e==='pdf')return 'pdf';
+ if(/^(md|txt|json|csv|tsv|log|js|ts|py|html?|css|xml|yml|yaml|ini|cfg|sh|gcode|nc|clb|scad)$/.test(e))return 'text';
+ return 'binary'}
+function fbSize(s){var m=/^([\d.]+)\s*(B|KB|MB|GB|TB)?$/i.exec(String(s||'').trim());if(!m)return 0;var v=parseFloat(m[1])||0;var u=(m[2]||'B').toUpperCase();var f={B:1,KB:1024,MB:1048576,GB:1073741824,TB:1099511627776}[u]||1;return Math.round(v*f)}
+function fbLive(path,cb){
+ if(_fbLive[path]){cb&&cb();return}
+ var rel=path?path.split('/').map(encodeURIComponent).join('/')+'/':'';
+ fetch(rel).then(function(r){if(!r.ok)throw new Error('http '+r.status);return r.text()}).then(function(t){
+  var doc=new DOMParser().parseFromString(t,'text/html');
+  var cur=FINDEX[path];
+  if(!cur&&path){
+   if(!FINDEX['']){FB=FB||{name:'',path:'',type:'dir',children:[]};FINDEX['']=FB}
+   var a='';
+   path.split('/').forEach(function(seg){
+    a=a?a+'/'+seg:seg;
+    if(!FINDEX[a]){var nd={name:seg,path:a,type:'dir',children:[]};FINDEX[a]=nd;
+     var par=FINDEX[a.split('/').slice(0,-1).join('/')];if(par){par.children=par.children||[];par.children.push(nd)}}
+   });
+   cur=FINDEX[path];
+  }
+  if(cur){
+   cur.children=cur.children||[];
+   var have={};cur.children.forEach(function(c){have[c.name]=1});
+   var rows=doc.querySelectorAll('.frow');
+   Array.prototype.forEach.call(rows,function(row){
+    var ra=row.querySelector('a.row');if(!ra)return;
+    var href=ra.getAttribute('href')||'';if(!href)return;
+    if(href.indexOf('preview?u=')<0&&/\/$/.test(href)){
+     var segs=href.replace(/\/+$/,'').split('/').filter(Boolean);
+     var dn=decodeURIComponent(segs[segs.length-1]||'');
+     if(!dn||have[dn])return;
+     var dp=path?path+'/'+dn:dn;
+     FINDEX[dp]={name:dn,path:dp,type:'dir',children:[]};
+     cur.children.push(FINDEX[dp]);have[dn]=1;return;
+    }
+    var mm=href.match(/[?&]u=([^&]+)/);
+    var real=mm?decodeURIComponent(mm[1]):href;
+    if(!/^https?:\/\//i.test(real)){try{real=new URL(real,location.href).href}catch(e){return}}
+    var ip=real.replace(/^https?:\/\/[^\/]+/i,'').replace(/^\/?files\//i,'');
+    try{ip=decodeURIComponent(ip)}catch(e){}
+    var nm=ip.split('/').pop();
+    if(!nm||have[nm])return;
+    var szEl=row.querySelector('.sz');
+    var node={name:nm,path:ip,type:'file',kind:fbKind(nm),size:fbSize(szEl?szEl.textContent:''),sizeH:szEl?szEl.textContent.trim():'',u:real};
+    FINDEX[ip]=node;cur.children.push(node);have[nm]=1;
+   });
+  }
+  _fbLive[path]=1;cb&&cb();
+ }).catch(function(){_fbLive[path]=1;cb&&cb()});
+}
+function fbOpen(path,kind,sz,url){path=url||FP(path,sz);
  if(kind==='image'){closeM('_fb');showImage(path)}
  else if(kind==='stl'){closeM('_fb');open3D(path)}
  else if(kind==='dxf'){closeM('_fb');openDXF(path)}

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Multiplayer Game Server — build log · Isaac Chan</title>
-<meta name="description" content="WebSocket multiplayer backend - multi-room, sync, spectator.">
+<title>Arena — LAN Multiplayer Game — build log · Isaac Chan</title>
+<meta name="description" content="A top-down arena shooter that runs on your own Wi-Fi: one Mac hosts it and everyone else joins from a browser. Double-click Arena Server and it starts the match, prints the join ad">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#101a3a">
 <link rel="stylesheet" href="/builds/builds.css">
@@ -12,59 +12,73 @@
 <body>
 <header><div class="wrap">
   <p class="eyebrow">Build log · Software &amp; apps</p>
-  <h1>Multiplayer Game Server</h1>
-  <div class="chips"><span class="chip">Software &amp; apps</span><span class="chip">done</span><span class="chip">3 versions</span><span class="chip soft">WebSocket</span><span class="chip soft">Python</span><span class="chip soft">FastAPI</span><span class="chip soft">Real-time</span></div>
-  <div class="btns"><a class="btn" href="/prompts/multiplayer-game-server-prompt.md" target="_blank" rel="noopener">📄 Raw spec (.md)</a><a class="btn" href="/">📁 Portfolio</a></div>
+  <h1>Arena — LAN Multiplayer Game</h1>
+  <div class="chips"><span class="chip">Software &amp; apps</span><span class="chip">done</span><span class="chip">4 versions</span><span class="chip soft">WebSocket</span><span class="chip soft">Python</span><span class="chip soft">Canvas</span><span class="chip soft">LAN</span><span class="chip soft">pkgbuild</span><span class="chip soft">Real-time</span></div>
+  <div class="btns"><a class="btn live" href="https://isaac1804.com/files/installers/Arena-Join-1.0.1.pkg" target="_blank" rel="noopener">▶ ⬇ Download — join a game (.pkg)</a><a class="btn live" href="https://isaac1804.com/files/installers/Arena-Server-1.0.1.pkg" target="_blank" rel="noopener">▶ Host installer (.pkg · 27 MB)</a><a class="btn live" href="./Desktop/arena/install.html" target="_blank" rel="noopener">▶ How to install</a><a class="btn" href="/portfolio/prompts/multiplayer-game-server-prompt.md" target="_blank" rel="noopener">📄 Raw spec (.md)</a><a class="btn" href="/portfolio/">📁 Portfolio</a></div>
   <p class="prov">reflection not written yet · every fact below is generated from this project’s own spec and files</p>
 </div></header>
 <nav><div class="wrap"><a href="/builds/">← All build logs</a></div></nav>
 <main class="wrap">
-<section id="what"><h2>What it is</h2><p class="lead">WebSocket multiplayer backend - multi-room, sync, spectator.</p></section><section id="versions"><h2>Version history</h2><p class="fine">Straight from the project’s own card data — what each version added.</p><div class="vers"><div class="ver"><div class="vn">V1</div><div class="vi"><p>Single room.</p></div></div><div class="ver"><div class="vn">V2</div><div class="vi"><p>Multi-room with room codes.</p></div></div><div class="ver"><div class="vn">V3</div><div class="vi"><p>Spectator mode + reconnect.</p></div></div></div></section><section id="numbers"><h2>By the numbers</h2><p class="fine">Measured from the real working folder <code>~/Documents/projects/apps/multiplayer-game-server</code> — not a claim, a count.</p><div class="stats"><div class="st"><div class="n">18</div><div class="l">files</div></div><div class="st"><div class="n">1,892</div><div class="l">lines of code</div></div><div class="st"><div class="n">2</div><div class="l">file types used</div></div><div class="st"><div class="n">2026-07-25</div><div class="l">oldest file</div></div><div class="st"><div class="n">2026-07-26</div><div class="l">last touched</div></div></div><p class="fine">Mostly: Python ×16 · HTML ×1</p></section><section id="reflection"><h2>What broke, and what I’d change</h2><div class="reflect"><p><strong>Not written yet.</strong> This is the part only I can write — what actually went wrong, and what I’d do differently. It lives in <code>builds/reflections/multiplayer-game-server.md</code> (see <a href="/builds/reflections/_TEMPLATE.md">_TEMPLATE.md</a>); as soon as that file has words in it, this section fills in on the next build.</p><p class="fine">Everything else on this page — the spec, the version history, the file counts — is generated from the project’s own build notes and files, so nothing here is guesswork.</p></div></section><section id="spec"><h2>Build spec</h2><p class="fine">The project’s own build notes, rendered. <a href="/prompts/multiplayer-game-server-prompt.md" target="_blank" rel="noopener">Open the raw .md ↗</a></p><details class="spec" open><summary>Show the spec</summary><div class="md"><h2>Multiplayer Game Server</h2>
+<section id="what"><h2>What it is</h2><p class="lead">A top-down arena shooter that runs on your own Wi-Fi: one Mac hosts it and everyone else joins from a browser. Double-click Arena Server and it starts the match, prints the join address and shows a QR code; open Arena Join on any other Mac and it sweeps the local network, finds the host on its own and opens the game — no IP address to type, no internet, no account. Real-time WebSocket combat with a health bar, live scoreboard and kill feed, on a canvas arena that keeps running. Twin-stick: WASD and the mouse on a Mac, two separate thumb sticks on a phone so you can run one way and shoot the other. Both apps install from self-contained .pkg packages — the Python runtime, the server and the client are inside them, so there is nothing else to install. The last pass was about not breaking mid-match: hostile or malformed frames from a client can no longer freeze or kill the simulation, and a bad tick is counted and skipped rather than ending the match.</p></section><section id="versions"><h2>Version history</h2><p class="fine">Straight from the project’s own card data — what each version added.</p><div class="vers"><div class="ver"><div class="vn">V1</div><div class="vi"><p>Single-room WebSocket arena: real-time movement, aiming, shooting, health and a scoreboard.</p></div></div><div class="ver"><div class="vn">V2</div><div class="vi"><p>Phone support — a separate move stick and aim stick, so you can run one way and shoot another, plus a fire button.</p></div></div><div class="ver"><div class="vn">V3</div><div class="vi"><p>LAN discovery in the join app: it sweeps the network for the host instead of being told an address, and the host page shows the join link plus a QR code.</p></div></div><div class="ver"><div class="vn">V3.1</div><div class="vi"><p>Shipped as two double-click .pkg installers (host + join) and verified by running the packaged bytes rather than the build tree: 39 protocol, 21 hostile-frame and 20 headless-browser checks. Hostile frames can no longer freeze the sim, a bad tick is skipped instead of ending the match, and player names and chat are scrubbed before they reach anyone else's screen.</p></div></div></div></section><section id="numbers"><h2>By the numbers</h2><p class="fine">Measured from the real working folder <code>~/Documents/projects/apps/multiplayer-game-server</code> — not a claim, a count.</p><div class="stats"><div class="st"><div class="n">28</div><div class="l">files</div></div><div class="st"><div class="n">3,815</div><div class="l">lines of code</div></div><div class="st"><div class="n">4</div><div class="l">file types used</div></div><div class="st"><div class="n">2026-10-11</div><div class="l">oldest file</div></div><div class="st"><div class="n">2026-10-11</div><div class="l">last touched</div></div></div><p class="fine">Mostly: Python ×21 · Shell ×4 · Markdown ×1 · HTML ×1</p></section><section id="reflection"><h2>What broke, and what I’d change</h2><div class="reflect"><p><strong>Not written yet.</strong> This is the part only I can write — what actually went wrong, and what I’d do differently. It lives in <code>builds/reflections/multiplayer-game-server.md</code> (see <a href="/builds/reflections/_TEMPLATE.md">_TEMPLATE.md</a>); as soon as that file has words in it, this section fills in on the next build.</p><p class="fine">Everything else on this page — the spec, the version history, the file counts — is generated from the project’s own build notes and files, so nothing here is guesswork.</p></div></section><section id="spec"><h2>Build spec</h2><p class="fine">The project’s own build notes, rendered. <a href="/portfolio/prompts/multiplayer-game-server-prompt.md" target="_blank" rel="noopener">Open the raw .md ↗</a></p><details class="spec" open><summary>Show the spec</summary><div class="md"><h2>Arena — LAN Multiplayer Game</h2>
 <p><strong>Category:</strong> Software &amp; Apps · <strong>Status:</strong> Done</p>
-<p>WebSocket multiplayer backend - multi-room, sync, spectator.</p>
-<p><strong>Stack / Tools:</strong> WebSocket, Python, FastAPI, Real-time</p>
+<p>A top-down arena shooter that runs on your own Wi-Fi: one Mac hosts it and everyone else joins from a browser. Double-click Arena Server and it starts the match, prints the join address and shows a QR code; open Arena Join on any other Mac and it sweeps the local network, finds the host on its own and opens the game — no IP address to type, no internet, no account. Real-time WebSocket combat with a health bar, live scoreboard and kill feed, on a canvas arena that keeps running. Twin-stick: WASD and the mouse on a Mac, two separate thumb sticks on a phone so you can run one way and shoot the other.</p>
+<p><strong>Stack / Tools:</strong> WebSocket, Python, Canvas, LAN, pkgbuild, Real-time</p>
 <p><strong>Build path:</strong></p>
 <ul>
-<li>V1 — Single room.</li>
-<li>V2 — Multi-room with room codes.</li>
-<li>V3 — Spectator mode + reconnect.</li>
+<li>V1 — Single-room WebSocket arena: real-time movement, aiming, shooting, health and a scoreboard.</li>
+<li>V2 — Phone support — a separate move stick and aim stick, so you can run one way and shoot another, plus a fire button.</li>
+<li>V3 — LAN discovery in the join app: it sweeps the network for the host instead of being told an address, and the host page shows the join link plus a QR code.</li>
+<li>V3.1 — Shipped as two double-click .pkg installers (host + join), verified by running the packaged bytes rather than the build tree: 39 protocol, 21 hostile-frame and 20 headless-browser checks. Hostile frames can no longer freeze the sim, a bad tick is skipped instead of ending the match, and player names and chat are scrubbed before they reach anyone else's screen.</li>
 </ul>
-<p><strong>Location:</strong> <code>~/demos/game-server.html</code></p>
-<p>Full build spec already in this prompt file (FastAPI + WebSocket ECS game server + host/client .pkg).</p>
+<p><strong>Download:</strong></p>
+<ul>
+<li>Join a game (512 KB): <a href="https://isaac1804.com/files/installers/Arena-Join-1.0.1.pkg" target="_blank" rel="noopener">https://isaac1804.com/files/installers/Arena-Join-1.0.1.pkg</a></li>
+<li>Host a game (27 MB): <a href="https://isaac1804.com/files/installers/Arena-Server-1.0.1.pkg" target="_blank" rel="noopener">https://isaac1804.com/files/installers/Arena-Server-1.0.1.pkg</a></li>
+<li>Install guide: <a href="https://isaac1804.com/portfolio/Desktop/arena/install.html" target="_blank" rel="noopener">https://isaac1804.com/portfolio/Desktop/arena/install.html</a></li>
+</ul>
+<p><strong>Source folder:</strong> <code>~/Documents/projects/apps/multiplayer-game-server</code> <strong>The user's own build spec for this project is at the end of this file.</strong></p>
 <h3>Where it lives</h3>
 <ul>
 <li>Source folder: <code>~/Documents/projects/apps/multiplayer-game-server</code></li>
-<li>Artefacts on the site: 18 files · 1,892 lines of text · 63 KB</li>
+<li>Artefacts on the site: 28 files · 3,815 lines of text · 135 KB</li>
 </ul>
 <h3>Stack</h3>
 <ul>
-<li>Python ×16 · .txt ×1 · HTML ×1 · requirements.txt</li>
+<li>Python ×21 · Shell ×4 · .txt ×1 · Markdown ×1 · requirements.txt</li>
+<li>external tools invoked: <code>python3</code>, <code>uvicorn</code></li>
 </ul>
 <h3>What's in the code</h3>
 <ul>
-<li><code>client/index.html</code> — 660 lines (HTML)</li>
-<li><code>server/game/physics/physics_system.py</code> — 338 lines (Python)</li>
-<li><code>server/main.py</code> — 259 lines (Python)</li>
-<li><code>server/game/game_manager.py</code> — 159 lines (Python)</li>
-<li><code>server/game/ecs/world.py</code> — 154 lines (Python)</li>
-<li><code>server/game/ecs/component.py</code> — 87 lines (Python)</li>
-<li><code>server/game/networking/websocket_manager.py</code> — 76 lines (Python)</li>
-<li><code>server/game/networking/protocol.py</code> — 67 lines (Python)</li>
-<li><code>server/game/physics/collision.py</code> — 33 lines (Python)</li>
-<li><code>server/config.py</code> — 25 lines (Python)</li>
-<li><code>server/game/ecs/system.py</code> — 25 lines (Python)</li>
-<li><code>server/game/ecs/entity.py</code> — 9 lines (Python)</li>
+<li><code>client/index.html</code> — 719 lines (HTML)</li>
+<li><code>server/game/game_manager.py</code> — 497 lines (Python)</li>
+<li><code>tests/test_multiplayer.py</code> — 374 lines (Python)</li>
+<li><code>server/main.py</code> — 286 lines (Python)</li>
+<li><code>tests/browser_test.py</code> — 229 lines (Python)</li>
+<li><code>scripts/build_join_app.sh</code> — 208 lines (Shell)</li>
+<li><code>tests/test_hostile_frames.py</code> — 192 lines (Python)</li>
+<li><code>README.md</code> — 186 lines (Markdown)</li>
+<li><code>scripts/build_host_app.sh</code> — 181 lines (Shell)</li>
+<li><code>scripts/make_icon.py</code> — 163 lines (Python)</li>
+<li><code>scripts/build_pkgs.sh</code> — 155 lines (Shell)</li>
+<li><code>server/game/ecs/components.py</code> — 94 lines (Python)</li>
 </ul>
 <h3>Verified in the Python source</h3>
 <ul>
-<li>routes: <code>get /</code>, <code>get /health</code>, <code>get /status</code>, <code>get /admin</code>, <code>get /admin/players</code>, <code>post /admin/kill/{entity_id}</code></li>
-<li>classes: <code>AABB</code>, <code>CollisionDamage</code>, <code>CollisionSystem</code>, <code>Component</code>, <code>ComponentStore</code>, <code>GameManager</code>, <code>Health</code>, <code>ItemPickup</code>, <code>ItemSpawnerSystem</code>, <code>Lifetime</code>, <code>LifetimeSystem</code>, <code>MovementSystem</code>, <code>NetworkOwned</code>, <code>PlayerInput</code></li>
-<li>functions: <code>aabb_collision_info</code>, <code>aabb_vs_aabb</code>, <code>clamp_to_world</code>, <code>error_msg</code>, <code>make_destroyed</code>, <code>make_pong</code>, <code>make_state</code>, <code>make_welcome</code>, <code>new_entity_id</code>, <code>parse_input</code>, <code>parse_join</code>, <code>parse_ping</code></li>
+<li>routes: <code>get /</code>, <code>get /health</code>, <code>get /status</code>, <code>get /info</code>, <code>get /qr.svg</code>, <code>get /join</code></li>
+<li>classes: <code>BulletTag</code>, <code>Client</code>, <code>Collider</code>, <code>ConnectionManager</code>, <code>Entity</code>, <code>GameManager</code>, <code>Health</code>, <code>Input</code>, <code>ItemTag</code>, <code>Name</code>, <code>PlayerTag</code>, <code>Raw</code>, <code>Renderable</code>, <code>Score</code></li>
+<li>functions: <code>check</code>, <code>circles_overlap</code>, <code>clamp</code>, <code>clean_text</code>, <code>decode</code>, <code>diamond_alpha</code>, <code>disc_alpha</code>, <code>dist_sq</code>, <code>downsample</code>, <code>encode</code>, <code>error_msg</code>, <code>event_msg</code>, <code>get</code>, <code>info</code>, <code>join</code>, <code>join_url</code></li>
+</ul>
+<h3>Notes found in the scripts</h3>
+<ul>
+<li>Verify the <em>shipped bytes</em> inside the rebuilt .pkg payloads.</li>
+<li>Build the two distributable installers into dist/:</li>
+<li>"Arena Server.pkg"  — install this on the Mac that hosts the game</li>
+<li>"Arena Join.pkg"    — send this to a friend; it installs the little</li>
 </ul>
 <hr>
-<p>_Spec generated from the project's own files on 2026-09-28 (<code>gen-project-specs.py</code>). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._</p></div></details></section>
-<footer>Generated 2026-10-01 by <code>gen-build-logs.py</code> ·
-<a href="/revision/">Revision hub</a> · <a href="/tools/">Workshop tools</a> · <a href="/">Portfolio</a></footer>
+<p>_Spec generated from the project's own files on 2026-10-13 (<code>gen-project-specs.py</code>). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._</p></div></details></section>
+<footer>Generated 2026-10-13 by <code>gen-build-logs.py</code> ·
+<a href="/revision/">Revision hub</a> · <a href="/tools/">Workshop tools</a> · <a href="/portfolio/">Portfolio</a></footer>
 </main>
 </body>
 </html>

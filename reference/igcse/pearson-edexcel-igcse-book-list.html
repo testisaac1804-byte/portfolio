@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Pearson Edexcel International GCSE (9-1) — Book List</title>
+<style>
+  :root{
+    --bg:#0d0e12; --panel:rgba(255,255,255,0.025); --panel2:rgba(255,255,255,0.045);
+    --line:rgba(255,255,255,0.07); --line2:rgba(255,255,255,0.14);
+    --txt:#d0d6e0; --dim:#8a93a3; --dim2:#666; --hi:#f0f0f5; --acc:#818cf8; --acc2:#6366f1;
+    --own:#34d399; --ownbg:rgba(52,211,153,0.10); --miss:#fbbf24;
+  }
+  *{box-sizing:border-box}
+  body{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--txt);
+       margin:0;padding:32px 24px 80px;max-width:1060px;margin-inline:auto;line-height:1.5;
+       -webkit-font-smoothing:antialiased}
+
+  header{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:24px}
+  .kicker{color:var(--acc);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin:0 0 10px}
+  h1{font-size:27px;color:var(--hi);margin:0 0 8px;letter-spacing:-.02em;line-height:1.2}
+  .sub{color:var(--dim);font-size:14px;margin:0;max-width:70ch}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 26px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:13px 15px}
+  .stat b{display:block;font-size:24px;color:var(--hi);font-weight:700;letter-spacing:-.02em;line-height:1.15}
+  .stat span{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.07em}
+  .stat.good b{color:var(--own)}
+
+  .controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:24px}
+  input[type=search]{flex:1;min-width:220px;background:var(--panel);border:1px solid var(--line2);border-radius:8px;
+       padding:10px 13px;color:var(--txt);font-size:14px;font-family:inherit;outline:none}
+  input[type=search]:focus{border-color:var(--acc);background:rgba(99,102,241,.07)}
+  .btn{background:var(--panel);border:1px solid var(--line2);border-radius:8px;padding:10px 14px;color:var(--txt);
+       font-size:13px;font-family:inherit;cursor:pointer;white-space:nowrap;transition:.13s}
+  .btn:hover{border-color:var(--acc);color:#fff}
+  .btn.on{background:rgba(99,102,241,.18);border-color:var(--acc);color:#fff}
+
+  h2.sec{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--acc);margin:34px 0 12px;
+       padding-bottom:7px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline}
+  h2.sec em{font-style:normal;color:var(--dim2);font-size:11.5px;letter-spacing:.04em;text-transform:none}
+
+  .book{display:flex;gap:11px;align-items:flex-start;padding:10px 13px;background:var(--panel);
+       border:1px solid var(--line);border-radius:8px;margin-bottom:6px;font-size:14px;transition:.13s}
+  .book:hover{background:var(--panel2);border-color:var(--line2)}
+  .book.owned{background:var(--ownbg);border-color:rgba(52,211,153,.28)}
+  .tick{flex:0 0 18px;width:18px;height:18px;border-radius:5px;border:1.5px solid var(--line2);margin-top:2px;
+       display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;user-select:none}
+  .book.owned .tick{background:var(--own);border-color:var(--own);color:#06251a;font-weight:700}
+  .meta{flex:1;min-width:0}
+  .title{color:var(--hi);font-weight:500}
+  .book.owned .title{color:#a7f3d0}
+  .auth{color:var(--dim);font-size:12.5px;margin-top:1px}
+  .tag{display:inline-block;font-size:10px;letter-spacing:.07em;text-transform:uppercase;padding:1.5px 7px;
+       border-radius:20px;margin-left:7px;vertical-align:1px;font-weight:600}
+  .tag.have{background:rgba(52,211,153,.16);color:var(--own);border:1px solid rgba(52,211,153,.3)}
+  .tag.bad{background:rgba(251,191,36,.13);color:var(--miss);border:1px solid rgba(251,191,36,.28)}
+
+  .subjects{display:grid;grid-template-columns:repeat(auto-fill,minmax(198px,1fr));gap:5px;margin-top:14px}
+  .subj{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:12.5px;color:#aeb6c4}
+  .subj.no{color:var(--dim2);border-style:dashed}
+
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--dim2);font-size:12px}
+  footer a{color:var(--acc);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .hide{display:none!important}
+  .empty{color:var(--dim2);font-size:13px;padding:14px;text-align:center;font-style:italic}
+
+  @media print{
+    :root{--bg:#fff;--txt:#1a1a1a;--hi:#000;--dim:#555;--dim2:#777;--line:#ddd;--line2:#ccc;--panel:#fafafa;--panel2:#f2f2f2}
+    body{padding:0;max-width:none}
+    .controls,.tick{display:none}
+    .book{break-inside:avoid;background:#fff!important;border-color:#ddd!important}
+    .book.owned .title{color:#1a1a1a!important}
+    h2.sec{break-after:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="kicker">Resource inventory</p>
+  <h1>Pearson Edexcel International GCSE (9&ndash;1)<br>Student Book List</h1>
+  <p class="sub">Every Student Book published by Pearson for the Edexcel International GCSE (9&ndash;1) qualifications,
+     grouped by faculty. Books you already have are ticked &mdash; tap a box to toggle it.
+     Sourced from Pearson's International GCSE resources index and the IGCSE Bookshop catalogue (Oct&nbsp;2026).</p>
+</header>
+
+<div class="stats">
+  <div class="stat"><b>37</b><span>IGCSE subjects offered</span></div>
+  <div class="stat"><b>27</b><span>Subjects w/ a Pearson book</span></div>
+  <div class="stat"><b>41</b><span>Pearson Student Book titles</span></div>
+  <div class="stat good"><b id="ownedCount">5</b><span>You have</span></div>
+</div>
+
+<div class="controls">
+  <input type="search" id="q" placeholder="Search title, author or subject&hellip;" autocomplete="off">
+  <button class="btn" id="btnMissing">&nbsp;Show only what I&rsquo;m missing</button>
+  <button class="btn" id="btnExpand">Collapse all</button>
+</div>
+
+<div id="list"></div>
+
+<h2 class="sec">All 37 International GCSE subjects <em>whether or not Pearson publishes its own book</em></h2>
+<div class="subjects" id="subjects"></div>
+
+<footer>
+  <strong>Notes.</strong> Pearson&rsquo;s own series is the one titled exactly
+  &ldquo;Edexcel International GCSE (9&ndash;1)&nbsp;&hellip;&nbsp;Student Book&rdquo;. Other publishers
+  (Hodder, CGP, Collins, Oxford) sell their own Edexcel IG books &mdash; Hodder&rsquo;s and CGP&rsquo;s revision
+  guides are the usual supplements, not part of this list. Of the 37 subjects, these <strong>10 have no
+  Pearson Student Book</strong> at all: Art &amp; Design, Bangla, Bangladesh Studies, Greek (1st language),
+  Islamic Studies, Pakistan Studies, Religious Studies, Sinhala, Swahili and Tamil.
+  <br><br>
+  Sources: <a href="https://www.pearson.com/international-schools/british-curriculum/secondary-curriculum/International-GCSE.html">pearson.com &mdash; International GCSE resources</a> &middot;
+  <a href="https://qualifications.pearson.com/en/qualifications/edexcel-international-gcses.html">Pearson qualifications &mdash; 37 subjects</a> &middot;
+  <a href="https://www.igcsebookshop.co.uk/product-category/edexcel-international-gcse/">IGCSE Bookshop (161 titles, all publishers)</a>
+</footer>
+
+<script>
+const DATA = [
+  {sec:"Sciences", note:"6 titles", books:[
+    {t:"Biology Student Book", a:"Philip Bradfield, Steve Woolley", have:true},
+    {t:"Chemistry Student Book", a:"Jim Clark", have:true},
+    {t:"Physics Student Book", a:"Brian Arnold, Steve Woolley, Penny Johnson", have:true},
+    {t:"Human Biology Student Book", a:"Philip Bradfield, Steve Potter"},
+    {t:"Science (Double Award) Student Book", a:"Philip Bradfield et al."},
+    {t:"Science (Single Award) Student Book", a:"Philip Bradfield et al."}
+  ]},
+  {sec:"Mathematics", note:"4 titles", books:[
+    {t:"Mathematics A Student Book 1", a:"D. A. Turner, I. A. Potts", note:"Higher Tier"},
+    {t:"Mathematics A Student Book 2", a:"D. A. Turner, I. A. Potts", note:"Higher Tier"},
+    {t:"Mathematics B Student Book", a:"D. A. Turner, I. A. Potts"},
+    {t:"Further Pure Mathematics Student Book", a:"Ali Datoo, Marguerite Appleton"}
+  ]},
+  {sec:"English", note:"5 titles", books:[
+    {t:"English Language A Student Book", a:"David Grant", note:"2nd edition"},
+    {t:"English Language A Student Book", a:"Pam Taylor", note:"1st edition"},
+    {t:"English Language B Student Book", a:"Pam Taylor"},
+    {t:"English Literature Student Book", a:"Pam Taylor"},
+    {t:"English as a Second Language Student Book", a:"Peter Clements, Nicky Winder"}
+  ]},
+  {sec:"Humanities", note:"15 titles", books:[
+    {t:"Geography Student Book", a:"Michael Witherick, Michael Chiles"},
+    {t:"History: The USA, 1918&ndash;41", a:"Simon Davis"},
+    {t:"History: Development of Dictatorship &mdash; Germany 1918&ndash;45", a:"Victoria Payne"},
+    {t:"History: Dictatorship and Conflict in the USSR, 1924&ndash;53", a:"Simon Taylor"},
+    {t:"History: The Soviet Union in Revolution, 1905&ndash;24", a:"Rob Bircher"},
+    {t:"History: A World Divided &mdash; Superpower Relations, 1943&ndash;72", a:"Nigel Kelly"},
+    {t:"History: The Origins and Course of the First World War, 1905&ndash;18", a:"Rosemary Rees"},
+    {t:"History: Changes in Medicine, c1848&ndash;c1948", a:"Cathy Warren"},
+    {t:"History: A Divided Union &mdash; Civil Rights in the USA, 1945&ndash;70", a:"Kirsty Taylor"},
+    {t:"History: Conflict, Crisis and Change &mdash; China, 1900&ndash;1989", a:"Sarah Moffatt"},
+    {t:"History: Conflict, Crisis and Change &mdash; The Middle East, 1919&ndash;2012", a:"Hilary Brash"},
+    {t:"History: The Changing Role of International Organisations &mdash; League &amp; UN, 1919&ndash;2011", a:"Georgina Blair"},
+    {t:"History: Paper 1 Depth Studies", a:"Rob Bircher et al."},
+    {t:"History: Paper 2 Investigation and Breadth Studies", a:"Rob Bircher et al."},
+    {t:"Global Citizenship Student Book", a:"Jenny England, Gillian Agnew"}
+  ]},
+  {sec:"Business, Economics &amp; ICT", note:"6 titles", books:[
+    {t:"Business Student Book", a:"Rob Jones, John Sutherland"},
+    {t:"Economics Student Book", a:"Rob Jones", have:true},
+    {t:"Accounting Student Book", a:"James Haigh, Sheila Robinson"},
+    {t:"Commerce Student Book", a:"Rob Jones"},
+    {t:"ICT Student Book", a:"Pete Bell"},
+    {t:"Computer Science Student Book", a:"David Waller"}
+  ]},
+  {sec:"Languages", note:"5 titles", books:[
+    {t:"French Student Book", a:"Clive Bell, Gill Ramage"},
+    {t:"German Student Book", a:"Harriette Lanzer"},
+    {t:"Spanish Student Book", a:"Christopher Lillington, Rachel Hawkes"},
+    {t:"Chinese Student Book", a:"Yu Bin, Linying Liu"},
+    {t:"Arabic (First Language) Student Book", a:"Eltayeb Ali Abusin"}
+  ]}
+];
+
+const SUBJECTS = ["Accounting","Arabic (1st lang.)","Art and Design","Bangla","Bangladesh Studies",
+  "Biology","Business","Chemistry","Chinese","Commerce","Computer Science","Economics",
+  "English (2nd lang.)","English Language A","English Language B","English Literature","French",
+  "Further Pure Maths","Geography","German","Global Citizenship","Greek (1st lang.)","History",
+  "Human Biology","ICT","Islamic Studies","Mathematics A","Mathematics B","Pakistan Studies",
+  "Physics","Religious Studies","Science (Double Award)","Science (Single Award)","Sinhala",
+  "Spanish","Swahili","Tamil"];
+
+// subjects with a Pearson Student Book (see footer note for the rest)
+const COVERED = new Set(["Accounting","Arabic (1st lang.)","Biology","Business","Chemistry","Chinese","Commerce",
+  "Computer Science","Economics","English (2nd lang.)","English Language A","English Language B","English Literature",
+  "French","Further Pure Maths","Geography","German","Global Citizenship","History","Human Biology","ICT",
+  "Mathematics A","Mathematics B","Physics","Science (Double Award)","Science (Single Award)","Spanish"]);
+
+const KEY = "pearson_igcse_owned_v1";
+let owned = JSON.parse(localStorage.getItem(KEY) || "null");
+if (!owned) { owned = []; DATA.forEach(s => s.books.forEach((b,i) => { if (b.have) owned.push(s.sec + "|" + i); })); }
+const isOwned = k => owned.includes(k);
+
+function render(){
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const onlyMissing = document.getElementById("btnMissing").classList.contains("on");
+  const host = document.getElementById("list");
+  host.innerHTML = "";
+  let shown = 0;
+
+  DATA.forEach((sec, si) => {
+    const rows = sec.books.filter((b, i) => {
+      const k = sec.sec + "|" + i;
+      if (onlyMissing && isOwned(k)) return false;
+      if (!q) return true;
+      return (b.t + " " + b.a + " " + sec.sec).toLowerCase().includes(q);
+    });
+    if (!rows.length) return;
+
+    const h = document.createElement("h2");
+    h.className = "sec";
+    h.innerHTML = sec.sec + " <em>" + sec.note + "</em>";
+    host.appendChild(h);
+
+    sec.books.forEach((b, i) => {
+      const k = sec.sec + "|" + i;
+      if (onlyMissing && isOwned(k)) return;
+      if (q && !(b.t + " " + b.a + " " + sec.sec).toLowerCase().includes(q)) return;
+      shown++;
+
+      const el = document.createElement("div");
+      el.className = "book" + (isOwned(k) ? " owned" : "");
+      el.innerHTML =
+        '<div class="tick" data-k="' + k.replace(/"/g,"&quot;") + '">' + (isOwned(k) ? "&#10003;" : "") + "</div>" +
+        '<div class="meta"><div class="title">' + b.t + (b.note ? ' <span class="auth" style="font-size:11.5px">(' + b.note + ")</span>" : "") +
+        (isOwned(k) ? ' <span class="tag have">have it</span>' : "") +
+        "</div><div class=\"auth\">" + b.a + "</div></div>";
+      el.querySelector(".tick").addEventListener("click", () => toggle(k));
+      host.appendChild(el);
+    });
+  });
+
+  if (!shown) {
+    host.innerHTML = '<div class="empty">' +
+      (onlyMissing ? "Nothing missing in the Pearson series &mdash; you&rsquo;ve got the lot." : "No books match that search.") +
+      "</div>";
+  }
+  document.getElementById("ownedCount").textContent = owned.length;
+  localStorage.setItem(KEY, JSON.stringify(owned));
+}
+
+function toggle(k){
+  const i = owned.indexOf(k);
+  if (i > -1) owned.splice(i, 1); else owned.push(k);
+  render();
+}
+
+// subject chips
+document.getElementById("subjects").innerHTML = SUBJECTS.map(s =>
+  '<div class="subj' + (COVERED.has(s) ? "" : " no") + '">' +
+  (COVERED.has(s) ? "&#9679; " : "&#9675; ") + s + "</div>").join("");
+
+document.getElementById("q").addEventListener("input", render);
+document.getElementById("btnMissing").addEventListener("click", e => {
+  e.currentTarget.classList.toggle("on");
+  render();
+});
+document.getElementById("btnExpand").addEventListener("click", e => {
+  const on = e.currentTarget.textContent.trim().startsWith("Collapse");
+  document.querySelectorAll("#list .book").forEach(b => b.classList.toggle("hide", on));
+  document.querySelectorAll("#list h2.sec").forEach(h => h.classList.toggle("hide", false));
+  e.currentTarget.textContent = on ? "Expand all" : "Collapse all";
+});
+render();
+</script>
+</body>
+</html>

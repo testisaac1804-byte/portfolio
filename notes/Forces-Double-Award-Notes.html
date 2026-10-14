@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGCSE Physics — Forces (Double Award) — Complete Revision Notes</title>
+<style>
+:root{
+  --bg:#0f172a; --card:#1e293b; --border:#334155; --text:#e2e8f0; --muted:#94a3b8;
+  --accent:#38bdf8; --accent2:#a5f3fc; --btn:#1e40af; --btn-h:#2563eb;
+  --prac-bg:#064e3b; --prac-tx:#4ade80; --th-bg:#422006; --th-tx:#facc15;
+  --ex-bg:#4c0519; --ex-tx:#f43f5e; --tip:#38bdf8; --warn:#f43f5e; --info:#a5b4fc;
+  --exbox:#0c1a2e; --exborder:#1e3a5f; --gold:#fbbf24;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.65; padding-bottom:80px;}
+/* ---------- NAV ---------- */
+nav{position:sticky; top:0; z-index:50; background:rgba(15,23,42,0.96); border-bottom:1px solid var(--border); padding:10px 12px; display:flex; flex-wrap:wrap; gap:6px; backdrop-filter:blur(6px);}
+nav button{background:var(--btn); color:#fff; border:1px solid var(--border); border-radius:8px; padding:8px 12px; font-size:13px; cursor:pointer; font-weight:600; transition:background .15s;}
+nav button:hover{background:var(--btn-h);}
+nav button.active{background:var(--accent); color:#0f172a; border-color:var(--accent);}
+/* ---------- LAYOUT ---------- */
+main{max-width:980px; margin:0 auto; padding:24px 16px;}
+.tab{display:none;}
+.tab.active{display:block; animation:fade .25s;}
+@keyframes fade{from{opacity:0} to{opacity:1}}
+h1{color:var(--accent); font-size:1.65rem; margin-bottom:4px;}
+h2{color:var(--accent); font-size:1.35rem; margin:28px 0 12px; border-bottom:2px solid var(--border); padding-bottom:6px;}
+h3{color:var(--accent2); font-size:1.08rem; margin:20px 0 8px;}
+p{margin:8px 0;}
+ul,ol{margin:8px 0 8px 22px;}
+li{margin:4px 0;}
+a{color:var(--accent);}
+/* ---------- CARDS ---------- */
+.card{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; margin:14px 0;}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;}
+.stat{background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px; text-align:center;}
+.stat b{display:block; font-size:1.25rem; color:var(--accent);}
+.stat span{font-size:.8rem; color:var(--muted);}
+/* ---------- TABLES ---------- */
+table{width:100%; border-collapse:collapse; margin:12px 0; font-size:.92rem; background:var(--card); border-radius:10px; overflow:hidden;}
+th{background:var(--border); color:#fff; padding:9px 10px; text-align:left; font-size:.85rem; text-transform:uppercase; letter-spacing:.03em;}
+td{padding:8px 10px; border-top:1px solid var(--border);}
+tr:hover td{background:#1e293b;}
+td b,td strong{color:var(--accent2);}
+/* ---------- BOXES ---------- */
+.example{background:var(--exbox); border:1px solid var(--exborder); border-left:4px solid var(--accent); border-radius:8px; padding:12px 14px; margin:12px 0;}
+.example h4{color:var(--gold); font-size:.95rem; margin-bottom:6px;}
+.tip{border-left:4px solid var(--tip); background:var(--card); border-radius:0 8px 8px 0; padding:10px 14px; margin:12px 0;}
+.warn{border-left:4px solid var(--warn); background:var(--card); border-radius:0 8px 8px 0; padding:10px 14px; margin:12px 0;}
+.info{border-left:4px solid var(--info); background:var(--card); border-radius:0 8px 8px 0; padding:10px 14px; margin:12px 0;}
+.badge{display:inline-block; border-radius:6px; padding:2px 9px; font-size:.72rem; font-weight:700; margin-right:6px;}
+.b-prac{background:var(--prac-bg); color:var(--prac-tx);}
+.b-th{background:var(--th-bg); color:var(--th-tx);}
+.b-ex{background:var(--ex-bg); color:var(--ex-tx);}
+.formula{text-align:center; font-size:1.15rem; font-weight:700; color:var(--gold); background:var(--exbox); border:1px dashed var(--exborder); border-radius:10px; padding:14px; margin:14px 0; font-family:"SF Mono",Menlo,Consolas,monospace; letter-spacing:.02em;}
+.formula small{display:block; color:var(--muted); font-weight:400; font-size:.8rem; font-family:inherit; margin-top:4px;}
+pre.art{background:#0b1220; border:1px solid var(--border); border-radius:10px; padding:14px; overflow-x:auto; font-family:"SF Mono",Menlo,Consolas,monospace; font-size:.85rem; line-height:1.45; color:#cbd5e1;}
+.mono{font-family:"SF Mono",Menlo,Consolas,monospace;}
+.key{color:var(--gold); font-weight:700;}
+.footer{text-align:center; color:var(--muted); font-size:.8rem; margin-top:40px; border-top:1px solid var(--border); padding-top:16px;}
+@media(max-width:640px){nav button{flex:1 1 42%; font-size:12px;} h1{font-size:1.3rem;}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <button class="active" data-tab="overview">📊 Overview</button>
+  <button data-tab="units">⚡ Units &amp; Vectors</button>
+  <button data-tab="speed">🏃 Speed &amp; Acceleration</button>
+  <button data-tab="graphs">📈 Motion Graphs</button>
+  <button data-tab="forces">💪 Forces &amp; F=ma</button>
+  <button data-tab="terminal">🪂 Weight &amp; Terminal Velocity</button>
+  <button data-tab="stopping">🚗 Stopping Distance</button>
+  <button data-tab="hooke">🪀 Hooke's Law</button>
+  <button data-tab="formulas">🧮 Formula Bank</button>
+  <button data-tab="exam">🎯 Exam Skills</button>
+</nav>
+
+<main>
+
+<!-- ================= OVERVIEW ================= -->
+<section class="tab active" id="overview">
+  <h1>IGCSE Physics — Forces (Double Award)</h1>
+  <p style="color:var(--muted)">Complete revision notes · Y10 · 10 lessons · Objectives 1.1 – 1.24</p>
+
+  <div class="grid">
+    <div class="stat"><b>10</b><span>lessons</span></div>
+    <div class="stat"><b>9</b><span>formulas to know</span></div>
+    <div class="stat"><b>24</b><span>learning objectives</span></div>
+    <div class="stat"><b>2</b><span>big graph rules</span></div>
+  </div>
+
+  <h2>The 4 Big Ideas</h2>
+  <div class="grid">
+    <div class="card"><b style="color:var(--accent)">1. Movement</b><br>Speed is how fast; acceleration is how fast the speed changes. Everything is measured from graphs and formulas (Lessons 1–6).</div>
+    <div class="card"><b style="color:var(--accent)">2. Forces cause acceleration</b><br>No unbalanced force → no acceleration. F = ma is the engine of the whole topic (Lessons 5–7).</div>
+    <div class="card"><b style="color:var(--accent)">3. Everything stops</b><br>Stopping distance = thinking + braking, and energy explains why speed is so dangerous (Lesson 8).</div>
+    <div class="card"><b style="color:var(--accent)">4. Springs are predictable… until they're not</b><br>Hooke's Law: stretch is proportional to force, up to the elastic limit (Lessons 9–10).</div>
+  </div>
+
+  <h2>Topic Checklist (from the booklet)</h2>
+  <table>
+    <tr><th>Ref</th><th>Objective</th></tr>
+    <tr><td>1.1</td><td>Use units: kg, m, m/s, N, s, N/kg</td></tr>
+    <tr><td>1.3</td><td>Plot and explain distance–time graphs</td></tr>
+    <tr><td>1.4</td><td>Average speed = distance ÷ time</td></tr>
+    <tr><td>1.5</td><td>Practical: motion of toy cars, tennis balls, paper cones</td></tr>
+    <tr><td>1.6</td><td>a = (v − u) ÷ t</td></tr>
+    <tr><td>1.7</td><td>Plot and explain velocity–time graphs</td></tr>
+    <tr><td>1.8</td><td>Acceleration = gradient of a v–t graph</td></tr>
+    <tr><td>1.9</td><td>Distance = area under a v–t graph</td></tr>
+    <tr><td>1.10</td><td>v² = u² + 2as</td></tr>
+    <tr><td>1.11</td><td>Forces change speed, shape or direction</td></tr>
+    <tr><td>1.12</td><td>Types of force: gravitational, electrostatic, etc.</td></tr>
+    <tr><td>1.13</td><td>Scalars vs vectors</td></tr>
+    <tr><td>1.14</td><td>Force is a vector</td></tr>
+    <tr><td>1.15</td><td>Resultant force along a line</td></tr>
+    <tr><td>1.16</td><td>Friction opposes motion</td></tr>
+    <tr><td>1.17</td><td>F = ma (Newton's Second Law)</td></tr>
+    <tr><td>1.18</td><td>W = mg</td></tr>
+    <tr><td>1.19</td><td>Stopping = thinking + braking distance</td></tr>
+    <tr><td>1.20</td><td>Factors affecting stopping distance</td></tr>
+    <tr><td>1.21</td><td>Forces on falling objects → terminal velocity</td></tr>
+    <tr><td>1.22</td><td>Practical: extension vs force (springs, wires, rubber bands)</td></tr>
+    <tr><td>1.23</td><td>Straight-line part of F–x graph = Hooke's Law</td></tr>
+    <tr><td>1.24</td><td>Elastic behaviour = returns to original shape</td></tr>
+  </table>
+
+  <div class="tip"><b>💡 The exam is repetitive.</b> The same ~12 question types appear every year: definitions (scalar/vector, terminal velocity), graph reading (gradient + area), SUVAT calcs, stopping distance factors, Hooke's Law graphs. Master the patterns in this guide and you've mastered the paper.</div>
+</section>
+
+<!-- ================= UNITS & VECTORS ================= -->
+<section class="tab" id="units">
+  <h1>Lesson 1 — Units, Scalars &amp; Vectors</h1>
+
+  <h2>Units — memorise this table (free marks)</h2>
+  <table>
+    <tr><th>Quantity</th><th>Symbol</th><th>Unit</th><th>Unit symbol</th></tr>
+    <tr><td>Mass</td><td>m</td><td>Kilograms</td><td>kg</td></tr>
+    <tr><td>Length / distance / displacement</td><td>d / s</td><td>Metres</td><td>m</td></tr>
+    <tr><td>Time</td><td>t</td><td>Seconds</td><td>s</td></tr>
+    <tr><td>Force</td><td>F</td><td>Newtons</td><td>N</td></tr>
+    <tr><td>Speed / velocity</td><td>v</td><td>Metres per second</td><td>m/s</td></tr>
+    <tr><td>Acceleration</td><td>a</td><td>Metres per second squared</td><td>m/s²</td></tr>
+    <tr><td>Gravitational field strength</td><td>g</td><td>Newtons per kilogram</td><td>N/kg</td></tr>
+    <tr><td>Weight</td><td>W</td><td>Newtons</td><td>N</td></tr>
+    <tr><td>Spring constant</td><td>k</td><td>Newtons per metre</td><td>N/m</td></tr>
+  </table>
+  <div class="warn">⚠️ <b>Weight is in NEWTONS (N), never kg.</b> kg measures mass. Mixing these loses marks constantly.</div>
+
+  <h2>Scalars vs Vectors (objective 1.13, 1.14)</h2>
+  <table>
+    <tr><th>Scalar — size only</th><th>Vector — size AND direction</th></tr>
+    <tr><td><b>mass, time, distance, speed, temperature, energy, length</b></td><td><b>force, velocity, acceleration, displacement, weight</b></td></tr>
+  </table>
+  <div class="tip"><b>Memory trick:</b> ask "which way?" — "5 kg… which way?" = nonsense → scalar. "5 N… which way?" = makes sense → vector. <b>Force is a vector</b> (pushing left ≠ pushing right).</div>
+
+  <h2>Adding forces along a line → Resultant force (1.15)</h2>
+  <ul>
+    <li><b>Same direction → add:</b> 3 N + 4 N = <b>7 N</b></li>
+    <li><b>Opposite directions → subtract</b>, pointing the way the bigger force points: 3 N ← vs 4 N → = <b>1 N →</b></li>
+    <li>The single combined force = the <b>resultant (unbalanced) force</b>.</li>
+  </ul>
+  <div class="example"><h4>⚖️ The golden rule of forces</h4>
+    <b>Resultant force = 0</b> → object stays at rest or keeps moving at constant speed.<br>
+    <b>Resultant force ≠ 0</b> → object accelerates in the direction of that force.<br>
+    This one idea explains terminal velocity, stopping, floating, everything.</div>
+
+  <h2>Types of force (1.12)</h2>
+  <div class="grid">
+    <div class="card"><b style="color:var(--accent)">Non-contact forces</b> (act through fields, no touching)<br>• <b>Gravitational</b> (between masses)<br>• <b>Electrostatic</b> (between charges)<br>• <b>Magnetic</b> (between magnets)</div>
+    <div class="card"><b style="color:var(--accent)">Contact forces</b> (need touching)<br>• <b>Friction</b> (opposes motion)<br>• <b>Air resistance / drag</b> (friction in air)<br>• <b>Tension</b> (pull in ropes/strings)<br>• <b>Normal reaction</b> (surface pushing back)<br>• <b>Thrust</b> (engines pushing forward)</div>
+  </div>
+  <p>Fields: an <b>electric field</b> applies a non-contact force to a <b>charged object</b>; a <b>gravitational field</b> applies a non-contact force to any <b>mass</b>.</p>
+
+  <h2>What forces do (1.11)</h2>
+  <p>Forces cause <b>changes of speed</b> (accelerate/decelerate), <b>changes of direction</b> (turning, circular motion), or <b>changes of shape</b> (stretching, squashing).</p>
+</section>
+
+<!-- ================= SPEED & ACCELERATION ================= -->
+<section class="tab" id="speed">
+  <h1>Lessons 2 &amp; 3 — Speed &amp; Acceleration</h1>
+
+  <h2>Speed (1.4)</h2>
+  <div class="formula">speed = distance ÷ time
+  <small>distance = speed × time &nbsp;·&nbsp; time = distance ÷ speed &nbsp;·&nbsp; unit: m/s (or km/h, mph, knots…)</small></div>
+  <ul>
+    <li>Units: <b>m/s</b> (metres per second). km/h → m/s: <b>÷ 3.6</b>. So 50 km/h ≈ 14 m/s, 100 km/h ≈ 28 m/s.</li>
+    <li><b>Average speed</b> = total distance ÷ total time (the car rarely moves at one exact speed).</li>
+    <li>'Speed' is a <b>scalar</b> (no direction); 'velocity' is its vector cousin.</li>
+  </ul>
+
+  <h2>Acceleration (1.6)</h2>
+  <div class="formula">a = (v − u) ÷ t
+  <small>v = final velocity &nbsp;·&nbsp; u = initial velocity &nbsp;·&nbsp; t = time taken &nbsp;·&nbsp; unit: m/s²</small></div>
+  <p><b>m/s² reads as "metres per second, per second"</b> — how many m/s of speed are gained every single second. A car at 4 m/s² gains 4 m/s of speed each second.</p>
+  <ul>
+    <li>Speeding up → positive acceleration. Slowing down → <b>deceleration</b> (negative acceleration).</li>
+    <li>Starting "from rest" always means <b>u = 0</b>.</li>
+    <li>Acceleration is a <b>vector</b> (it has direction).</li>
+  </ul>
+
+  <h3>Worked examples</h3>
+  <div class="example"><h4>✏️ Example A</h4>A car accelerates from 12 m/s to 24 m/s in 15 s.<br>a = (24 − 12) ÷ 15 = 12 ÷ 15 = <b>0.80 m/s²</b></div>
+  <div class="example"><h4>✏️ Example B</h4>A car accelerates from rest at 2.3 m/s² for 7.1 s.<br>Rearrange: v = u + at → v = 0 + 2.3 × 7.1 = <b>16 m/s</b></div>
+  <div class="example"><h4>✏️ Example C</h4>A plane reaches take-off speed 55 m/s after accelerating at 4.8 m/s² for 9.8 s.<br>Rearrange: u = v − at = 55 − (4.8 × 9.8) = 55 − 47.0 = <b>8.0 m/s</b></div>
+  <div class="example"><h4>✏️ Example D</h4>Usain Bolt accelerates from rest to 12 m/s at 2.1 m/s².<br>t = (v − u) ÷ a = 12 ÷ 2.1 = <b>5.7 s</b></div>
+
+  <h2>Ticker tape — how it works (exam-favourite practical)</h2>
+  <ul>
+    <li>The timer makes <b>50 dots per second</b> → time between dots = 1/50 = <b>0.02 s</b>.</li>
+    <li><b>Speed:</b> measure a gap between two dots (convert cm → m), divide by 0.02 s. Examples: 1 cm gap → 0.01 ÷ 0.02 = 0.5 m/s.</li>
+    <li><b>Acceleration:</b> find speed u at one gap and speed v at another gap 10 dots later (time between them = 10 × 0.02 = <b>0.2 s</b>), then a = (v − u) ÷ 0.2.</li>
+    <li><b>Reading a tape (dots = distance per 0.02 s):</b><br>
+      • gaps equal → <b>constant speed</b><br>
+      • gaps growing → <b>accelerating</b><br>
+      • gaps shrinking → <b>decelerating</b><br>
+      • gaps growing faster → accelerating more</li>
+    <li>Falling plasticine experiment: <b>g ≈ 9.8 m/s²</b>. Your measured value is usually a bit lower because of <b>air resistance and friction on the tape</b> (that's the mark-scheme reason).</li>
+  </ul>
+
+  <h3>Oil-drop version (same idea, car leaking oil)</h3>
+  <div class="example"><h4>✏️ Example — car dripping oil every 1.4 s</h4>
+    First two drops 3.8 m apart; a later pair 4.7 s afterwards, 8.3 m apart.<br>
+    v₁ = 3.8 ÷ 1.4 = 2.71 m/s &nbsp;·&nbsp; v₂ = 8.3 ÷ 1.4 = 5.93 m/s<br>
+    a = (5.93 − 2.71) ÷ 4.7 ≈ <b>0.68 m/s²</b></div>
+
+  <h2>Accuracy vs Reliability (asked in every practical exam)</h2>
+  <table>
+    <tr><th>Accuracy — closeness to the true value</th><th>Reliability — confidence in your readings</th></tr>
+    <tr><td>Better technique, avoiding zero errors, using more sensitive instruments, measuring carefully</td><td>Repeat readings, calculate an average, plot with a line of best fit, eliminate anomalies</td></tr>
+  </table>
+
+  <h2>Light gates + ramp experiment</h2>
+  <ul>
+    <li>Research question: how does ramp <b>height</b> affect a trolley's <b>acceleration</b>?</li>
+    <li>Light gate 1 measures the trolley's starting speed u, light gate 2 the final speed v; the computer times the 0.2 s between them → a = (v − u) ÷ t.</li>
+    <li><b>Higher ramp → bigger acceleration</b> (more of the weight acts along the slope). Graph of height vs acceleration: straight line through the origin (directly proportional).</li>
+  </ul>
+</section>
+
+<!-- ================= MOTION GRAPHS ================= -->
+<section class="tab" id="graphs">
+  <h1>Lesson 4 — Motion Graphs (1.3, 1.7, 1.8, 1.9)</h1>
+  <div class="grid">
+    <div class="card"><b style="color:var(--accent)">📏 Distance–time</b><br><b>Gradient = speed</b><br>Flat = stationary. Straight up = constant speed. Steeper = faster. Curving up = accelerating.</div>
+    <div class="card"><b style="color:var(--accent)">📈 Velocity–time</b><br><b>Gradient = acceleration</b><br><b>Area under = distance</b><br>Flat = constant velocity. Up = accelerating. Down = decelerating.</div>
+  </div>
+
+  <h2>Distance–time graphs</h2>
+  <table>
+    <tr><th>Shape</th><th>Meaning</th></tr>
+    <tr><td>Horizontal line</td><td><b>Stationary</b> (not moving)</td></tr>
+    <tr><td>Straight line going up</td><td><b>Constant speed</b></td></tr>
+    <tr><td>Straight line, steeper</td><td><b>Faster</b> constant speed</td></tr>
+    <tr><td>Curve getting steeper</td><td><b>Accelerating</b> (speeding up)</td></tr>
+    <tr><td>Line going down</td><td><b>Returning toward the start</b></td></tr>
+  </table>
+
+  <h2>Velocity–time graphs</h2>
+  <table>
+    <tr><th>Shape</th><th>Meaning</th></tr>
+    <tr><td>Horizontal line</td><td><b>Constant velocity</b> (acceleration = 0)</td></tr>
+    <tr><td>Straight line going up</td><td><b>Constant acceleration</b></td></tr>
+    <tr><td>Steeper straight line up</td><td><b>Greater</b> acceleration</td></tr>
+    <tr><td>Straight line going down</td><td><b>Deceleration</b></td></tr>
+    <tr><td>Curve getting steeper</td><td>Acceleration <b>increasing</b></td></tr>
+  </table>
+
+  <h2>The area rule — where marks are won</h2>
+  <pre class="art">Steady speed: 20 m/s for 10 s        Speeding up: 0 → 20 m/s over 10 s
+┌────────────────┐   height 20 m/s   ╱│
+│                │   width  10 s     ╱ │
+│                │                   ╱  │  triangle
+│                │   area = 20×10   ╱   │  area = ½ × 10 × 20
+└────────────────┘   = 200 m        ╱    │        = 100 m
+0                10s                ╱─────┘</pre>
+  <ul>
+    <li>Split a complicated graph into <b>triangles + rectangles</b>, add the areas.</li>
+    <li>Triangle: ½ × base × height · Rectangle: base × height.</li>
+    <li>Wavy parts: count squares, or estimate with strips — but IGCSE graphs are made of straight lines.</li>
+  </ul>
+
+  <h3>Worked examples</h3>
+  <div class="example"><h4>✏️ Area question</h4>Car at constant 20 m/s for 10 s → distance = 20 × 10 = <b>200 m</b>.<br>Car accelerating from rest to 20 m/s over 10 s → distance = ½ × 10 × 20 = <b>100 m</b>.<br>Same top speed, but it averaged only 10 m/s — so exactly half the distance. 📉</div>
+  <div class="example"><h4>✏️ Gradient question</h4>Speed rises from 10 m/s to 30 m/s between t = 5 s and t = 15 s:<br>a = gradient = (30 − 10) ÷ (15 − 5) = 20 ÷ 10 = <b>2.0 m/s²</b></div>
+
+  <h2>Bouncing ball (extension, but worth understanding)</h2>
+  <ul>
+    <li><b>Distance–time:</b> a series of curved humps (each bounce, the ball slows going up, speeds up coming down), each hump shorter than the last because the ball loses energy.</li>
+    <li><b>Velocity–time:</b> zigzag — straight lines sloping down while rising (decelerating at g), flipping sign at the top, sloping up while falling back (accelerating at g), then an instant bounce where velocity reverses and shrinks a bit each time.</li>
+  </ul>
+  <div class="warn">⚠️ <b>Traps:</b> distance ≠ displacement on return trips (distance adds up, displacement cancels out). On a v–t graph, acceleration comes from <b>gradient</b> and distance from <b>area</b> — swapping these is the #1 graph mistake.</div>
+</section>
+
+<!-- ================= FORCES & F=ma ================= -->
+<section class="tab" id="forces">
+  <h1>Lessons 5 &amp; 6 — Forces, F = ma &amp; Newton's Laws (1.17)</h1>
+
+  <h2>Newton's Three Laws</h2>
+  <table>
+    <tr><th>Law</th><th>Statement</th><th>In plain words</th></tr>
+    <tr><td><b>I</b></td><td>Objects stay at rest or moving at uniform velocity unless acted on by a resultant force.</td><td>No net force → nothing changes. Moving things keep moving.</td></tr>
+    <tr><td><b>II</b></td><td>Acceleration ∝ resultant force.</td><td><b>F = ma</b> — the formula behind everything.</td></tr>
+    <tr><td><b>III</b></td><td>Every force has an equal and opposite force on the other object.</td><td>Push a wall, the wall pushes you back equally.</td></tr>
+  </table>
+
+  <div class="formula">F = m × a
+  <small>F = resultant (unbalanced) force / N &nbsp;·&nbsp; m = mass / kg &nbsp;·&nbsp; a = acceleration / m/s²
+  Rearranged: m = F ÷ a &nbsp;·&nbsp; a = F ÷ m</small></div>
+  <p><b>1 newton</b> = the force that gives a 1 kg mass an acceleration of 1 m/s².</p>
+  <div class="warn">⚠️ F is always the <b>UNBALANCED (resultant) force</b>. If forces balance, F = 0 and a = 0 — no acceleration even if forces are huge.</div>
+
+  <h3>Worked examples</h3>
+  <div class="example"><h4>✏️ F = ma</h4>30 N acts on a 10 kg object → a = 30 ÷ 10 = <b>3 m/s²</b>.<br>Car 1200 kg braking force 7600 N → a = 7600 ÷ 1200 = <b>6.33 m/s²</b> deceleration.</div>
+  <div class="example"><h4>✏️ Friction block</h4>A 2.7 kg block slides at 2.3 m/s; friction is 2.6 N (opposes motion).<br>Deceleration = F ÷ m = 2.6 ÷ 2.7 = <b>0.96 m/s²</b>. Distance to stop: v² = u² + 2as → 0 = 2.3² − 2(0.96)s → s = 5.29 ÷ 1.93 ≈ <b>2.7 m</b>.</div>
+
+  <h2>The trolley experiment (Lesson 5)</h2>
+  <ul>
+    <li><b>Research question:</b> relationship between resultant force and acceleration of a trolley.</li>
+    <li><b>Independent variable</b> (what you change, x-axis): resultant force (0.5 N → 3.5 N via weights)</li>
+    <li><b>Dependent variable</b> (what you measure, y-axis): acceleration of the trolley (light gates)</li>
+    <li><b>Control variables</b> (keep fixed): angle of slope (horizontal), mass (1 kg), starting point, medium (air)</li>
+    <li>Repeat 3×, take the mean, plot mean acceleration vs force.</li>
+    <li><b>Result:</b> straight line through the origin → <b>force and acceleration are directly proportional</b> → doubling force doubles acceleration.</li>
+    <li><b>Mass of trolley</b> = force ÷ acceleration = the <b>gradient⁻¹</b> of the graph (a = F/m, so F/a = m). Typical result ≈ 2.3 kg.</li>
+  </ul>
+
+  <h2>Variables &amp; fair tests (applies to every practical)</h2>
+  <ul>
+    <li><b>Independent (input):</b> the one thing you change.</li>
+    <li><b>Dependent (outcome):</b> the thing that responds, which you measure.</li>
+    <li><b>Control:</b> everything else, kept the same so the test is fair.</li>
+  </ul>
+
+  <h2>Circular motion — the sneak question</h2>
+  <div class="tip">An object moving in a circle at <b>constant speed</b> is still <b>accelerating</b>, because its <b>direction</b> is constantly changing — and velocity is a vector. Direction change = velocity change = acceleration. 🎯</div>
+</section>
+
+<!-- ================= WEIGHT & TERMINAL VELOCITY ================= -->
+<section class="tab" id="terminal">
+  <h1>Lesson 7 — Weight, Mass &amp; Terminal Velocity (1.18, 1.21)</h1>
+
+  <h2>Mass vs Weight</h2>
+  <table>
+    <tr><th></th><th>Mass</th><th>Weight</th></tr>
+    <tr><td>What it is</td><td>Amount of <b>matter</b> in an object</td><td>The <b>force</b> of gravity pulling on that matter</td></tr>
+    <tr><td>Unit</td><td><b>kg</b></td><td><b>N</b> (it's a force!)</td></tr>
+    <tr><td>Measured with</td><td>Balance</td><td>Spring scale / newton meter</td></tr>
+    <tr><td>In space</td><td><b>Stays the same</b></td><td>Changes (less gravity → less weight)</td></tr>
+  </table>
+  <p>Astronaut example: in space she can be <b>weightless</b>, but her <b>mass stays the same</b>.</p>
+  <div class="formula">W = m × g
+  <small>g = gravitational field strength ≈ 10 N/kg on Earth (accepted value 9.8 N/kg)</small></div>
+  <div class="example"><h4>✏️ Example</h4>Jeremy has mass 74 kg → W = 74 × 10 = <b>740 N</b>.</div>
+
+  <h2>The falling object story — 5 stages</h2>
+  <table>
+    <tr><th>Stage</th><th>Forces</th><th>What happens</th></tr>
+    <tr><td>1. Just dropped</td><td>Only <b>weight</b> (down)</td><td>Unbalanced → <b>accelerates at ~10 m/s²</b></td></tr>
+    <tr><td>2. A few seconds later</td><td>Weight down, some <b>air resistance</b> up</td><td>Resultant force smaller → still accelerating, but less</td></tr>
+    <tr><td>3. ~20 s later</td><td><b>Air resistance = weight</b> (balanced)</td><td>Resultant = 0 → acceleration = 0 → <b>TERMINAL VELOCITY</b></td></tr>
+    <tr><td>4. Parachute opens</td><td>Air resistance shoots up (big <b>surface area</b>)</td><td>Air resistance &gt; weight → unbalanced force <b>upwards</b> → <b>decelerates</b></td></tr>
+    <tr><td>5. Later</td><td>Air resistance decreases as speed drops</td><td>Balanced again → new, <b>slower terminal velocity</b> → gentle landing</td></tr>
+  </table>
+  <p><b>Why terminal velocity happens:</b> as speed increases, air resistance increases. Eventually air resistance equals weight, the resultant force becomes zero, and the object falls at constant speed. No unbalanced force → no acceleration.</p>
+  <div class="warn">⚠️ Terminal velocity = constant speed, NOT zero speed. The skydiver is still falling!</div>
+
+  <h2>Velocity–time graph of a parachute jump</h2>
+  <pre class="art">speed
+ (m/s)        ┌─────────────── (terminal velocity ~50 m/s)
+            ╱│                │
+          ╱  │                │   parachute opens
+        ╱    │                └─╲
+      ╱      │                   ╲______ (new slow terminal velocity ~5 m/s)
+    ╱        │
+  ╱          │
+0────────────┴─────────────────────── time</pre>
+  <ul>
+    <li>Curve flattening = acceleration decreasing (air resistance growing)</li>
+    <li>Horizontal line = balanced forces, terminal velocity</li>
+    <li>Steep drop = big upward unbalanced force (deceleration)</li>
+    <li>Final low flat line = slow terminal velocity</li>
+  </ul>
+  <div class="tip">🚀 <b>On the Moon:</b> no air → no air resistance → nothing ever balances the weight → the object keeps accelerating forever. No terminal velocity exists without air.</div>
+</section>
+
+<!-- ================= STOPPING DISTANCE ================= -->
+<section class="tab" id="stopping">
+  <h1>Lesson 8 — Stopping Distance (1.19, 1.20)</h1>
+
+  <div class="formula">Stopping distance = Thinking distance + Braking distance</div>
+
+  <h2>The two phases</h2>
+  <table>
+    <tr><th>Phase</th><th>What happens</th><th>Formula</th></tr>
+    <tr><td><b>Thinking</b> (reaction)</td><td>Driver sees the danger, brain decides, foot moves to brake — <b>car still moving at full speed</b></td><td>Thinking distance = speed × reaction time</td></tr>
+    <tr><td><b>Braking</b></td><td>Brakes create <b>friction</b> (opposes motion); kinetic energy is converted to heat; car slows to stop</td><td>Braking distance = mv² ÷ 2F (from ½mv² = F × d)</td></tr>
+  </table>
+
+  <h3>Worked examples</h3>
+  <div class="example"><h4>✏️ Thinking distance</h4>14 m/s with reaction 0.6 s → d = 14 × 0.6 = <b>8.4 m</b>.<br>Same speed, distracted, 1.5 s → d = 14 × 1.5 = <b>21 m</b>. 😬<br>On the 100 km/h highway (28 m/s), 1.5 s → d = 28 × 1.5 = <b>42 m</b>.</div>
+  <div class="example"><h4>✏️ Braking distance</h4>Family car: 900 kg, brakes 8000 N, speed 17 m/s.<br>½ × 900 × 17² = 8000 × d → d = 130 050 ÷ 8000 ≈ <b>16 m</b>.<br>Add thinking (17 × 1.0 s = 17 m) → stopping ≈ <b>33 m</b>.</div>
+
+  <h2>⚠️ The most asked "explain" question in the topic</h2>
+  <div class="warn"><b>Double the speed → quadruple the braking distance.</b><br>
+  Because KE = ½mv²: doubling v squares it (2² = 4) → 4× kinetic energy → brakes must do 4× work → 4× distance.<br><br>
+  <b>Mark-scheme phrase:</b> "Kinetic energy is proportional to the square of the speed, so doubling the speed increases the kinetic energy (and so the work done by the brakes, and braking distance) by four times."</div>
+
+  <h2>Factors affecting stopping distance — memorise the two columns</h2>
+  <table>
+    <tr><th>Problem</th><th>Thinking distance</th><th>Braking distance</th></tr>
+    <tr><td>Driver tired, drunk, on drugs</td><td>↑ longer reaction time</td><td>None (brakes don't care about the driver's state)</td></tr>
+    <tr><td>Distracted (phone, passengers)</td><td>↑ longer reaction time</td><td>None</td></tr>
+    <tr><td>Wet or icy road</td><td>None</td><td>↑ less friction</td></tr>
+    <tr><td>Worn tyres / brake pads</td><td>None</td><td>↑ less friction</td></tr>
+    <tr><td>Car overloaded (more mass)</td><td>None</td><td>↑ more KE → more distance</td></tr>
+    <tr><td>Speeding</td><td>↑ (more distance per second)</td><td>↑↑↑↑ quadrupled</td></tr>
+  </table>
+
+  <h2>The energy story</h2>
+  <ul>
+    <li>Moving car has <b>kinetic energy</b>: KE = ½mv² (J)</li>
+    <li>Brakes convert KE into <b>heat (thermal) energy</b></li>
+    <li>The KE transferred = the <b>work done</b> by the brakes: Work = F × d (J = N × m)</li>
+    <li>So <b>½mv² = F × d</b> → braking distance d = mv² ÷ 2F</li>
+  </ul>
+
+  <h2>Reaction time rider experiment</h2>
+  <p>Catch a falling ruler; convert fall distance to time: <b>d = ½at² → t = √(2d ÷ g)</b>.<br>13 cm fall → t = √(0.26 ÷ 10) ≈ <b>0.16 s</b>.</p>
+</section>
+
+<!-- ================= HOOKE'S LAW ================= -->
+<section class="tab" id="hooke">
+  <h1>Lessons 9 &amp; 10 — Hooke's Law (1.22, 1.23, 1.24)</h1>
+
+  <div class="formula">F = k × x
+  <small>F = force / N &nbsp;·&nbsp; k = spring constant / N/m &nbsp;·&nbsp; x = EXTENSION / m</small></div>
+
+  <ul>
+    <li><b>Extension</b> = stretched length − original length (<b>NOT</b> the total length — a classic trap).</li>
+    <li><b>k (spring constant)</b> = the <b>stiffness</b> of the spring — how hard it fights being stretched. Big k = stiff spring. k = gradient of the F–x graph.</li>
+    <li><b>Hooke's Law:</b> extension is <b>directly proportional</b> to force — double the force, double the extension — <b>but only up to the elastic limit</b>.</li>
+    <li>Past the <b>elastic limit</b>, the graph bends; the spring is permanently deformed (<b>plastic</b>) and won't snap back.</li>
+  </ul>
+
+  <h2>Elastic vs Plastic vs Hookean — don't mix these up</h2>
+  <table>
+    <tr><th>Term</th><th>Meaning</th><th>Force–extension graph</th></tr>
+    <tr><td><b>Elastic</b></td><td>Can stretch and <b>returns to original shape</b> when force removed</td><td>Any shape (straight or curved)</td></tr>
+    <tr><td><b>Plastic</b></td><td>Can stretch and <b>keeps the new shape</b> (permanently deformed)</td><td>—</td></tr>
+    <tr><td><b>Hookean</b></td><td>Obeys Hooke's Law</td><td><b>Straight line through the origin</b> (up to elastic limit)</td></tr>
+  </table>
+  <ul>
+    <li><b>Springs and metal wires: Hookean</b> (straight line through origin, then bend at elastic limit).</li>
+    <li><b>Rubber bands: elastic but NOT Hookean</b> — they return to shape, but their graph is a <b>curve</b>, so force is <b>not</b> directly proportional to extension. The exam loves this distinction. 🧠</li>
+  </ul>
+
+  <h2>Graph shapes</h2>
+  <pre class="art">Spring (Hookean)              Rubber band (elastic, not Hookean)
+F                                F
+│ ╱‾‾‾‾‾‾‾‾‾‾‾ elastic limit      │        ╱‾‾‾‾
+│╱  straight through origin      │      ╱
+│                                │    ╱  curve — no straight
+│                                │  ╱    part through origin
+└────────────── x                └────────────── x</pre>
+
+  <h3>Worked example</h3>
+  <div class="example"><h4>✏️ Finding k</h4>A spring extends 4 cm (0.04 m) under a 6 N load.<br>k = F ÷ x = 6 ÷ 0.04 = <b>150 N/m</b>.<br>⚠️ Always convert cm → m before dividing!</div>
+
+  <h2>Springs in series and parallel (extension)</h2>
+  <ul>
+    <li><b>Series</b> (end to end): each spring carries the full load → total extension <b>doubles</b> → system is <b>half as stiff</b> (k ÷ 2).</li>
+    <li><b>Parallel</b> (side by side): load shared between springs → each extends half → total extension <b>halves</b> → system is <b>twice as stiff</b> (k × 2).</li>
+    <li>Intuition: two springs together make it easier to stretch (series) or harder (parallel).</li>
+  </ul>
+
+  <h2>Experiment essentials (1.22 + the 5-mark method question)</h2>
+  <ol>
+    <li><b>Research question:</b> how does the extension of a spring vary with applied force?</li>
+    <li><b>IV:</b> force/load (N) · <b>DV:</b> extension (cm/m) · <b>Controls:</b> same spring, same clamp/setup.</li>
+    <li>Measure the spring's <b>original length</b> with a ruler (read at eye level to avoid parallax error).</li>
+    <li>Add masses one at a time; record length after each; <b>extension = new length − original length</b>.</li>
+    <li><b>Repeat whole run</b> and average; plot force (x) vs extension (y); draw line of best fit; circle anomalies.</li>
+    <li>Accuracy: ruler at eye level, use a pointer/backing card. Reliability: repeat + average + line of best fit.</li>
+  </ol>
+  <p><b>Good results table:</b> ① headings = quantity + unit ② units in the heading only ③ repeats taken and averaged ④ same number of decimal places throughout.</p>
+</section>
+
+<!-- ================= FORMULA BANK ================= -->
+<section class="tab" id="formulas">
+  <h1>🧮 Formula Bank — all 9 you need, with when-to-use</h1>
+
+  <table>
+    <tr><th>Formula</th><th>Use it when…</th><th>Rearrange</th></tr>
+    <tr><td><b>v = d ÷ t</b></td><td>Constant speed, or average speed (Lesson 2)</td><td>d = v × t &nbsp;·&nbsp; t = d ÷ v</td></tr>
+    <tr><td><b>a = (v − u) ÷ t</b></td><td>You know start &amp; end speed + time (Lesson 3)</td><td>v = u + at &nbsp;·&nbsp; u = v − at &nbsp;·&nbsp; t = (v−u) ÷ a</td></tr>
+    <tr><td><b>F = m × a</b></td><td>Forces, accelerations, braking (Lesson 6)</td><td>m = F ÷ a &nbsp;·&nbsp; a = F ÷ m</td></tr>
+    <tr><td><b>W = m × g</b></td><td>Weight from mass (g = 10 N/kg) (Lesson 7)</td><td>m = W ÷ g</td></tr>
+    <tr><td><b>v² = u² + 2as</b></td><td>You know distance but NOT time (Lesson 6)</td><td>a = (v²−u²) ÷ 2s &nbsp;·&nbsp; s = (v²−u²) ÷ 2a</td></tr>
+    <tr><td><b>KE = ½mv²</b></td><td>Kinetic energy of a moving object (Lesson 8)</td><td>—</td></tr>
+    <tr><td><b>Work = F × d</b></td><td>Braking: KE = work done (Lesson 8)</td><td>F = W ÷ d &nbsp;·&nbsp; d = W ÷ F</td></tr>
+    <tr><td><b>F = k × x</b></td><td>Springs, Hooke's Law (Lesson 9)</td><td>k = F ÷ x &nbsp;·&nbsp; x = F ÷ k</td></tr>
+    <tr><td><b>v = d ÷ t</b> (again!)</td><td>Thinking distance = speed × reaction time</td><td>—</td></tr>
+  </table>
+
+  <div class="formula">Stopping distance = thinking + braking
+  <small>thinking = v × t<sub>reaction</sub> &nbsp;·&nbsp; braking = ½mv² ÷ F</small></div>
+
+  <h2>Worked examples for the two "hard" formulas</h2>
+  <div class="example"><h4>✏️ v² = u² + 2as — stone down a 20 m well</h4>
+  Dropped from rest (u = 0), falls at g = 10 m/s², s = 20 m.<br>
+  v² = 0 + 2 × 10 × 20 = 400 → v = <b>20 m/s</b>.</div>
+  <div class="example"><h4>✏️ v² = u² + 2as — plane runway</h4>
+  From rest (u = 0), accelerates at 2.7 m/s² to take-off 57 m/s:<br>
+  s = 57² ÷ (2 × 2.7) = 3249 ÷ 5.4 ≈ <b>600 m</b> of runway.</div>
+  <div class="example"><h4>✏️ KE = Work — braking distance</h4>
+  Car 950 kg at 23 m/s, brakes exert 8700 N:<br>
+  ½ × 950 × 23² = 8700 × d → 251 275 = 8700d → d ≈ <b>29 m</b>.</div>
+
+  <h2>Common unit conversions</h2>
+  <ul>
+    <li>km/h → m/s: <b>÷ 3.6</b> (50 km/h = 14 m/s, 100 km/h = 28 m/s)</li>
+    <li>cm → m: <b>÷ 100</b> (4 cm = 0.04 m)</li>
+    <li>g (grams) → kg: <b>÷ 1000</b></li>
+    <li>1 minute = 60 s · 1 hour = 3600 s</li>
+  </ul>
+</section>
+
+<!-- ================= EXAM SKILLS ================= -->
+<section class="tab" id="exam">
+  <h1>🎯 Exam Skills &amp; Common Traps</h1>
+
+  <h2>The 4 steps to success (every calculation)</h2>
+  <div class="grid">
+    <div class="stat"><b>①</b><span>Formula</span></div>
+    <div class="stat"><b>②</b><span>Working</span></div>
+    <div class="stat"><b>③</b><span>Answer, 2 s.f.</span></div>
+    <div class="stat"><b>④</b><span>Units</span></div>
+  </div>
+  <p>Write the formula first even if you have no idea — physics papers give marks for the formula line. Then substitute, calculate, round to 2 significant figures, and always attach units.</p>
+
+  <h2>Command words decoded</h2>
+  <table>
+    <tr><th>Word</th><th>What they want</th></tr>
+    <tr><td><b>State / Name</b></td><td>One word or short phrase. Don't write paragraphs.</td></tr>
+    <tr><td><b>Calculate</b></td><td>Formula + working + answer + units (the 4 steps)</td></tr>
+    <tr><td><b>Explain</b></td><td>Because… so… (cause and effect). Use the word "because".</td></tr>
+    <tr><td><b>Describe</b></td><td>Say what happens, step by step, in order.</td></tr>
+    <tr><td><b>Suggest</b></td><td>Give a sensible idea (there may be many right answers).</td></tr>
+  </table>
+
+  <h2>Ready-to-paste mark-scheme phrases ✍️</h2>
+  <div class="card"><b>Vector quantity:</b> "A quantity with both magnitude (size) and direction."</div>
+  <div class="card"><b>Why terminal velocity:</b> "As the object falls, its speed increases so air resistance increases until it equals the weight. The forces are balanced, the resultant force is zero, so the object falls at constant (terminal) velocity."</div>
+  <div class="card"><b>Why measured g is lower:</b> "Air resistance acts upwards on the falling object, reducing the resultant force and so the acceleration."</div>
+  <div class="card"><b>Doubling speed:</b> "Kinetic energy is proportional to v², so doubling speed quadruples the kinetic energy and the braking distance."</div>
+  <div class="card"><b>Rubber band:</b> "The band is elastic (it returns to its original shape) but it is not Hookean, because its force–extension graph is not a straight line through the origin, so force is not directly proportional to extension."</div>
+  <div class="card"><b>Circle motion:</b> "It is accelerating because its direction is constantly changing, even though its speed is constant."</div>
+
+  <h2>The top 10 traps (marks lost every year)</h2>
+  <ol>
+    <li>Writing weight in <b>kg</b> instead of <b>N</b>.</li>
+    <li>Forgetting to convert <b>cm → m</b> (springs) or <b>km/h → m/s</b> (cars).</li>
+    <li>Using <b>total stretched length</b> instead of <b>extension</b>.</li>
+    <li>On v–t graphs: mixing up <b>gradient (acceleration)</b> and <b>area (distance)</b>.</li>
+    <li>Half the rectangle: forgetting the <b>½</b> in triangle area = ½ × b × h.</li>
+    <li>Saying terminal velocity = "stops accelerating and stops" — no, it keeps falling at constant speed.</li>
+    <li>Using F = ma with the <b>total</b> force instead of the <b>unbalanced/resultant</b> force.</li>
+    <li>Not giving units, or giving "m/s" for acceleration instead of <b>m/s²</b>.</li>
+    <li>Mixing up <b>thinking</b> factors (driver state) with <b>braking</b> factors (road, tyres, mass, speed) in the table question.</li>
+    <li>Answering an "explain" question with just a description — always include <b>"because… so…"</b>.</li>
+  </ol>
+
+  <h2>Graph questions — the checklist examiners use</h2>
+  <ul>
+    <li><b>Plotting:</b> sensible scales (use ≥ half the grid), axes labelled with quantity AND unit, points as neat crosses or dots in circles.</li>
+    <li><b>Line of best fit:</b> straight edge for straight lines; ignore outliers (circle anomalies).</li>
+    <li><b>Reading:</b> gradient = rise ÷ run using TWO points on the line (not data points); area under v–t = distance (count squares if curved).</li>
+    <li><b>IV on x-axis, DV on y-axis</b> — always.</li>
+  </ul>
+
+  <h2>Definition list — the ones they love to ask</h2>
+  <table>
+    <tr><th>Term</th><th>Definition</th></tr>
+    <tr><td>Speed</td><td>Distance travelled per unit time</td></tr>
+    <tr><td>Velocity</td><td>Speed in a given direction</td></tr>
+    <tr><td>Acceleration</td><td>Change in velocity per unit time</td></tr>
+    <tr><td>Mass</td><td>Amount of matter in an object</td></tr>
+    <tr><td>Weight</td><td>The force of gravity acting on an object's mass</td></tr>
+    <tr><td>Resultant force</td><td>The single force that has the same effect as all the forces added together</td></tr>
+    <tr><td>Elastic</td><td>Returns to its original shape when the deforming force is removed</td></tr>
+    <tr><td>Plastic</td><td>Keeps its new shape after deformation (permanently deformed)</td></tr>
+    <tr><td>Terminal velocity</td><td>The constant maximum speed reached when air resistance balances weight</td></tr>
+  </table>
+
+  <div class="tip"><b>Last piece of advice:</b> the Forces paper is a pattern. Every year asks the same ten things. Work through the formula bank once a week before the exam until you can write all 9 formulas from memory — that alone is worth a grade boundary.</div>
+</section>
+
+</main>
+
+<div class="footer">IGCSE Physics · Forces (Double Award) · Complete notes from the Y10 Forces Booklet · Made for Isaac 📚</div>
+
+<script>
+(function(){
+  // Mark JS as executed (verification marker)
+  document.body.setAttribute('data-js-ready','yes');
+  var buttons = document.querySelectorAll('nav button');
+  var tabs = document.querySelectorAll('.tab');
+  function show(name){
+    tabs.forEach(function(t){ t.classList.toggle('active', t.id === name); });
+    buttons.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-tab') === name); });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){ show(b.getAttribute('data-tab')); });
+  });
+})();
+</script>
+</body>
+</html>

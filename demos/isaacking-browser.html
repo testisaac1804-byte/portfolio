@@ -38,14 +38,22 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .blocked p{color:var(--muted);font-size:13px;max-width:420px;margin:0 auto 20px}
 .sitelist{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .sitelist .s{background:var(--panel2);border:1px solid var(--border);border-radius:999px;padding:5px 12px;font-size:12px;color:var(--muted);font-family:ui-monospace,Menlo,Consolas,monospace}
-.footer{border-top:1px solid var(--border);padding:12px 14px;background:var(--panel2);display:flex;align-items:center;gap:10px}
+.start{max-width:620px;margin:0 auto}
+.start .lead{font-size:13px;color:var(--muted);margin:0 0 18px}
+.start h3{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 10px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.tile{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px;cursor:pointer}
+.tile:hover{border-color:var(--accent)}
+.tile .fico{width:28px;height:28px;border-radius:7px;background:var(--panel2);display:flex;align-items:center;justify-content:center;font-size:14px}
+.tile .tname{font-size:13px;font-weight:600}
+.tile .tdom{font-size:11px;color:var(--muted);font-family:ui-monospace,Menlo,Consolas,monospace}
+.footer{border-top:1px solid var(--border);padding:12px 14px;background:var(--panel2)}
+.footer .row{display:flex;align-items:center;gap:10px}
 .footer .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);white-space:nowrap}
 .wl{display:flex;flex-wrap:wrap;gap:6px;flex:1}
-.wl .item{display:flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:11.5px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--text)}
-.wl .item .x{color:var(--muted);cursor:pointer;font-weight:700}
-.wl .item .x:hover{color:var(--bad)}
-.wl input{background:var(--panel);border:1px dashed var(--border);border-radius:6px;color:var(--text);padding:4px 8px;font-size:11.5px;font-family:ui-monospace,Menlo,Consolas,monospace;width:140px;outline:none}
-.wl .add{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:11.5px;cursor:pointer}
+.wl .item{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:11.5px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--text)}
+.footer .hint{margin-top:8px;font-size:11px;color:var(--muted)}
+.footer .hint code{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:1px 5px;font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--text)}
 </style>
 </head>
 <body>
@@ -59,18 +67,21 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <button class="navbtn" id="fwd" onclick="KB.go(1)" title="Forward">→</button>
     <div class="urlbar">
       <span class="lock" id="lock">🔒</span>
-      <input type="text" id="url" placeholder="Enter a URL or search…" onkeydown="if(event.key==='Enter')KB.navigate()">
+      <input type="text" id="url" placeholder="Enter a URL — search is disabled" onkeydown="if(event.key==='Enter')KB.navigate()">
     </div>
     <button class="go" onclick="KB.navigate()">Go</button>
   </div>
   <div class="viewport" id="viewport"></div>
   <div class="footer">
-    <span class="lbl">Whitelist</span>
-    <div class="wl" id="wl"></div>
+    <div class="row">
+      <span class="lbl">Whitelist</span>
+      <div class="wl" id="wl"></div>
+    </div>
+    <div class="hint">Read from <code>~/IsaacKing/whitelist.json</code> — edit the file and it applies instantly. There is no settings page and no way to add a site from inside the browser.</div>
   </div>
 </div>
 <script>
-function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function domainOf(input){
   var s=input.trim().toLowerCase();
   if(s.indexOf('http://')===0)s=s.slice(7);else if(s.indexOf('https://')===0)s=s.slice(8);
@@ -78,67 +89,89 @@ function domainOf(input){
   var slash=s.indexOf('/');if(slash!==-1)s=s.slice(0,slash);
   return s;
 }
+function hasSpace(input){return /\s/.test(String(input).trim());}
 function allowed(domain){
-  for(var i=0;i<KB.whitelist.length;i++){var w=KB.whitelist[i];if(domain===w||domain.slice(-w.length-1)===w||domain.slice(-(w.length))===w)return true;}
+  for(var i=0;i<KB.whitelist.length;i++){
+    var w=KB.whitelist[i];
+    if(domain===w||domain.slice(-(w.length+1))==='.'+w)return true;
+  }
   return false;
+}
+function renderStart(){
+  var tiles='';
+  for(var i=0;i<KB.whitelist.length;i++){
+    var d=KB.whitelist[i];
+    var n=d.split('.')[0];
+    tiles+='<div class="tile" onclick="KB.navigateTo(\''+d+'\')"><div class="fico">🔒</div><div><div class="tname">'+esc(n.charAt(0).toUpperCase()+n.slice(1))+'</div><div class="tdom">'+esc(d)+'</div></div></div>';
+  }
+  return '<div class="start"><p class="lead">No search. Type an address, or pick a site from the whitelist. Anything not on the list is refused.</p><h3>Allowed sites</h3><div class="tiles">'+tiles+'</div></div>';
 }
 function renderPage(domain){
   var name=domain.split('.')[0];
   var cap=name.charAt(0).toUpperCase()+name.slice(1);
   var known={
+    'roblox.com':'Powering Imagination',
     'wikipedia.org':'The Free Encyclopedia',
     'github.com':'Where the world builds software',
     'khanacademy.org':'Free world-class education',
     'developer.apple.com':'Apple Developer Documentation',
-    'stackoverflow.com':'Where developers learn & share',
-    'mdn.io':'MDN Web Docs'
+    'kahoot.it':'Learning games and quizzes'
   };
   var tag=known[domain]||'A whitelisted site';
-  var body='This is a simulated render of <b>'+esc(domain)+'</b> for the demo. In the real browser, the page would load here after the URL passes the whitelist check.';
-  var links='<a class="link" onclick="KB.navigateTo(\'wikipedia.org\')">Wikipedia</a> · <a class="link" onclick="KB.navigateTo(\'github.com\')">GitHub</a> · <a class="link" onclick="KB.navigateTo(\'khanacademy.org\')">Khan Academy</a>';
-  return '<div class="page"><div class="dom">https://'+esc(domain)+'/</div><h2>'+esc(cap)+'</h2><p style="color:var(--muted);margin-top:0">'+tag+'</p><p>'+body+'</p><p>Quick links: '+links+'</p></div>';
+  var body='This is a simulated render of <b>'+esc(domain)+'</b>. In the real browser a WKWebView loads the page here — but only after the address passes the whitelist check.';
+  return '<div class="page"><div class="dom">https://'+esc(domain)+'/</div><h2>'+esc(cap)+'</h2><p style="color:var(--muted);margin-top:0">'+tag+'</p><p>'+body+'</p></div>';
 }
-function renderBlocked(domain){
-  return '<div class="blocked"><div class="big">⛔</div><h2>Blocked — not on whitelist</h2><p><b>'+esc(domain)+'</b> is not an approved site. IsaacKing Browser only loads URLs that appear in the whitelist below. Add it below to unblock, or contact the administrator.</p><div class="sitelist"><span class="s">🔒 '+esc(domain)+' blocked</span></div></div>';
+function renderBlocked(domain,reason){
+  var msg=reason==='no-search'
+    ? 'IsaacKing has no search engine. Type a full address instead of a search phrase.'
+    : '<b>'+esc(domain||'')+'</b> is not on the whitelist. IsaacKing only loads addresses listed in <b>~/IsaacKing/whitelist.json</b>.';
+  var title=reason==='no-search'?'No search':'Blocked — not on whitelist';
+  var big=reason==='no-search'?'🔍':'⛔';
+  return '<div class="blocked"><div class="big">'+big+'</div><h2>'+title+'</h2><p>'+msg+'</p><div class="sitelist"><span class="s">'+esc(domain||'no-search')+'</span></div></div>';
 }
 var KB={
-  whitelist:['wikipedia.org','github.com','khanacademy.org','developer.apple.com','stackoverflow.com'],
-  history:['wikipedia.org'],pos:0,
+  whitelist:['roblox.com','wikipedia.org','github.com','khanacademy.org','developer.apple.com'],
+  history:[''],pos:0,
   render:function(){
     var url=this.history[this.pos];
     var vp=document.getElementById('viewport');
-    if(allowed(url)){vp.innerHTML=renderPage(url);document.getElementById('lock').textContent='🔒';}
-    else{vp.innerHTML=renderBlocked(url);document.getElementById('lock').textContent='⛔';}
-    document.getElementById('url').value='https://'+url;
+    if(!url){vp.innerHTML=renderStart();document.getElementById('url').value='';document.getElementById('lock').textContent='🔒';}
+    else if(this.blockedReason){vp.innerHTML=renderBlocked(url,this.blockedReason);document.getElementById('lock').textContent='⛔';}
+    else if(allowed(url)){vp.innerHTML=renderPage(url);document.getElementById('lock').textContent='🔒';}
+    else{vp.innerHTML=renderBlocked(url,'whitelist');document.getElementById('lock').textContent='⛔';}
     document.getElementById('back').disabled=this.pos===0;
     document.getElementById('fwd').disabled=this.pos===this.history.length-1;
   },
-  navigate:function(){
-    var d=domainOf(document.getElementById('url').value);
+  submit:function(raw){
+    if(hasSpace(raw)){this.push('no search — type an address',raw,'no-search');return;}
+    var d=domainOf(raw);
     if(!d)return;
+    this.push(d); 
+  },
+  push:function(d,shown,reason){
     this.history=this.history.slice(0,this.pos+1);
     this.history.push(d);this.pos++;
+    this.blockedReason=reason||null;
+    document.getElementById('url').value=shown!==undefined?shown:'https://'+d;
     this.render();
   },
-  navigateTo:function(d){document.getElementById('url').value='https://'+d;this.navigate();},
+  navigate:function(){this.submit(document.getElementById('url').value);},
+  navigateTo:function(d){document.getElementById('url').value='https://'+d;this.submit('https://'+d);},
   go:function(delta){
     var np=this.pos+delta;
     if(np<0||np>=this.history.length)return;
-    this.pos=np;this.render();
-  },
-  addWL:function(){
-    var inp=document.getElementById('wlAdd');var d=domainOf(inp.value);if(!d)return;
-    if(this.whitelist.indexOf(d)===-1)this.whitelist.push(d);
-    inp.value='';this.renderWL();
-  },
-  removeWL:function(d){
-    this.whitelist=this.whitelist.filter(function(x){return x!==d;});
-    this.renderWL();this.render();
+    this.pos=np;this.blockedReason=null;
+    var h=this.history[this.pos];
+    document.getElementById('url').value=h?'https://'+h:'';
+    this.render();
   },
   renderWL:function(){
     var el=document.getElementById('wl');var h='';
-    for(var i=0;i<this.whitelist.length;i++){var w=this.whitelist[i];h+='<span class="item">'+esc(w)+' <span class="x" onclick="KB.removeWL(\''+w+'\')">✕</span></span>';}
-    h+='<input type="text" id="wlAdd" placeholder="add domain…" onkeydown="if(event.key===\'Enter\')KB.addWL()"><button class="add" onclick="KB.addWL()">+ Add</button>';
+    for(var i=0;i<this.whitelist.length;i++){
+      var w=this.whitelist[i];
+      if(!w)continue;
+      h+='<span class="item">'+esc(w)+'</span>';
+    }
     el.innerHTML=h;
   }
 };

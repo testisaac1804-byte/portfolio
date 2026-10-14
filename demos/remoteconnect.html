@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RemoteConnect — one-click remote control</title>
+<style>
+:root{--bg:#050508;--sf:#0d0e12;--t1:#f0f0f5;--t2:#c8ccd6;--t3:#6b7080;--bd:rgba(255,255,255,.08);--ac:#6366f1;--ab:#818cf8;--ag:#10b981;--ar:#ef4444;--grad:linear-gradient(135deg,#6366f1,#8b5cf6,#06b6d4)}
+html[data-theme="light"]{--bg:#f6f7fb;--sf:#fff;--t1:#111827;--t2:#374151;--t3:#6b7280;--bd:rgba(17,24,39,.1);--ac:#4f46e5;--ab:#6366f1;--ag:#059669;--ar:#dc2626}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--t2);font-family:Inter,system-ui,-apple-system,sans-serif;line-height:1.65;padding:28px 20px 60px}
+.wrap{max-width:880px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:6px}
+h1{color:var(--t1);font-size:2.05rem;letter-spacing:-.5px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.tag{color:var(--t3);font-size:.95rem;margin-bottom:26px}
+.tgl{background:var(--sf);border:1px solid var(--bd);color:var(--t2);border-radius:9px;padding:8px 13px;cursor:pointer;font:inherit;font-size:13px;white-space:nowrap}
+.tgl:hover{border-color:var(--ab);color:var(--ab)}
+h2{color:var(--t1);font-size:1.12rem;margin:34px 0 12px;font-weight:700}
+p{margin-bottom:12px}
+/* mock controller window */
+.win{background:var(--sf);border:1px solid var(--bd);border-radius:14px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.45)}
+.bar{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--bd);background:rgba(255,255,255,.02)}
+.dot{width:11px;height:11px;border-radius:50%}
+.bar .nm{margin-left:8px;color:var(--t3);font-size:12.5px;font-weight:600}
+.body{padding:16px}
+.search{display:flex;gap:10px;margin-bottom:14px}
+.search input{flex:1;background:var(--bg);border:1px solid var(--bd);border-radius:9px;padding:10px 13px;color:var(--t1);font:inherit;font-size:14px;outline:none}
+.search input:focus{border-color:var(--ab)}
+.btn{background:var(--ac);border:none;color:#fff;border-radius:9px;padding:10px 16px;font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--ab)}
+.row{display:flex;align-items:center;gap:13px;padding:13px 14px;border:1px solid var(--bd);border-radius:11px;margin-bottom:9px;background:rgba(255,255,255,.015)}
+.row:hover{border-color:var(--ab)}
+.ico{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;font-size:18px;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25);flex:none}
+.meta{flex:1;min-width:0}
+.meta b{display:block;color:var(--t1);font-size:14px;font-weight:600}
+.meta span{color:var(--t3);font-size:12.5px;font-family:ui-monospace,Menlo,monospace}
+.go{background:transparent;border:1px solid rgba(99,102,241,.35);color:var(--ab);border-radius:8px;padding:7px 15px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.go:hover{background:rgba(99,102,241,.13)}
+.pill{font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:9999px;border:1px solid rgba(16,185,129,.3);background:rgba(16,185,129,.1);color:var(--ag)}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:13px}
+.step{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:16px}
+.step .n{width:26px;height:26px;border-radius:8px;background:var(--grad);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;margin-bottom:10px}
+.step b{display:block;color:var(--t1);margin-bottom:5px;font-size:14px}
+.step p{font-size:13.5px;color:var(--t3);margin:0}
+code{font-family:ui-monospace,Menlo,monospace;background:rgba(255,255,255,.07);padding:1.5px 6px;border-radius:5px;font-size:12.5px;color:var(--ab)}
+html[data-theme="light"] code{background:rgba(17,24,39,.06)}
+pre{background:#08080c;border:1px solid var(--bd);border-radius:11px;padding:15px 17px;overflow-x:auto;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:#c8ccd6;line-height:1.65}
+html[data-theme="light"] pre{background:#0d0e12}
+.ok{color:#34d399}.bad{color:#f87171}.dim{color:#6b7080}
+.note{border-left:3px solid var(--ac);background:rgba(99,102,241,.07);padding:11px 15px;border-radius:0 9px 9px 0;font-size:13.5px;color:var(--t3);margin:14px 0}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.tags span{font-size:11.5px;color:var(--ab);border:1px solid rgba(99,102,241,.25);background:rgba(99,102,241,.08);padding:3px 11px;border-radius:9999px;font-weight:600}
+a{color:var(--ab)}
+ul{margin:0 0 12px 20px}li{margin:4px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div>
+      <h1>RemoteConnect</h1>
+      <div class="tag">Click a name &rarr; the other machine's screen opens. Macs and Android, one app, no relay.</div>
+    </div>
+    <button class="tgl" id="t">&#9788; theme</button>
+  </div>
+
+  <div class="win">
+    <div class="bar">
+      <span class="dot" style="background:#ff5f57"></span>
+      <span class="dot" style="background:#febc2e"></span>
+      <span class="dot" style="background:#28c840"></span>
+      <span class="nm">RemoteConnect Controller</span>
+    </div>
+    <div class="body">
+      <div class="search">
+        <input value="isaac" readonly>
+        <button class="btn">Scan</button>
+      </div>
+
+      <div class="row">
+        <div class="ico">&#128421;</div>
+        <div class="meta"><b>Isaac's MacBook</b><span>192.168.1.38 &middot; vnc</span></div>
+        <span class="pill">online</span>
+        <button class="go">Connect</button>
+      </div>
+
+      <div class="row">
+        <div class="ico">&#128241;</div>
+        <div class="meta"><b>Isaac's Phone</b><span>192.168.1.101:5555 &middot; scrcpy</span></div>
+        <span class="pill">online</span>
+        <button class="go">Connect</button>
+      </div>
+    </div>
+  </div>
+
+  <h2>How it works</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="n">1</div>
+      <b>Friend installs one file</b>
+      <p>A <code>.pkg</code> whose postinstall runs as root, switches on macOS Screen Sharing and sets the shared password. No dialogs, no setup, no third-party software.</p>
+    </div>
+    <div class="step">
+      <div class="n">2</div>
+      <b>Their Mac joins the list</b>
+      <p>Saved to <code>~/.remoteconnect/friends.json</code> &mdash; outside the app bundle, so reinstalls and rebuilds never wipe it.</p>
+    </div>
+    <div class="step">
+      <div class="n">3</div>
+      <b>Click the name</b>
+      <p>Macs open <code>vnc://IP</code> in Screen Sharing. Android runs <code>scrcpy --tcpip=IP:PORT</code>, which owns the adb connection itself and mirrors the screen.</p>
+    </div>
+  </div>
+
+  <h2>Why it was harder than it looks</h2>
+  <p>The code was rarely the problem &mdash; the environment was. A phone that reboots drops off WiFi and takes a <em>new IP</em>, so every connect attempt aimed at a dead address. Rebuilding the client eleven times changed nothing; checking the network fixed the diagnosis.</p>
+
+  <p>So the controller now probes before it dials and returns its <b>step log</b> instead of a spinner:</p>
+
+<pre><span class="dim">$ click "Isaac's Phone"</span>
+
+ping 192.168.1.101: <span class="bad">NO REPLY</span>
+wireless-debugging services found: <span class="dim">none</span>
+connect 192.168.1.101:5555 <span class="bad">-> failed: Host is down</span>
+
+<span class="bad">PHONE IS OFFLINE</span> - it is not answering on the Wi-Fi network.
+On the phone: join the SAME Wi-Fi, then Settings &gt; Developer options
+&gt; Wireless debugging = ON</pre>
+
+  <div class="note">A failure that explains itself beats a button that silently does nothing. Every probe on that ladder &mdash; ping, ARP, an mDNS lookup, a 254-address parallel subnet sweep &mdash; is exposed at <code>/api/scan</code> so the UI can show real state.</div>
+
+  <h2>Things that bit me</h2>
+  <ul>
+    <li><code>adb disconnect</code> right before launching scrcpy tears down the wireless tunnel it is about to use &mdash; the mirror window flashes for one second and exits with code 2.</li>
+    <li>Android 11+ wireless debugging uses <em>random</em> ports, and the pairing port differs from the connect port. Neither is 5555 until <code>adb tcpip 5555</code> has been run once.</li>
+    <li>Without <code>--always-on-top</code> the mirror opens <em>behind</em> the controller, which users report as "the screen doesn't open".</li>
+    <li>macOS 26 refuses script-based <code>.app</code> executables, so the launcher is <code>osacompile</code>d into a universal Mach-O binary.</li>
+    <li>A <code>.pkg</code>-installed app in <code>/Applications</code> is root-owned &mdash; it cannot be replaced without admin auth, so iteration happens against a user-owned copy.</li>
+  </ul>
+
+  <div class="tags">
+    <span>macOS</span><span>pywebview + Flask</span><span>pkgbuild / productbuild</span>
+    <span>macOS ARD (kickstart)</span><span>Screen Sharing</span><span>scrcpy</span><span>adb</span><span>AppleScript</span>
+  </div>
+
+</div>
+<script>
+document.getElementById('t').onclick=function(){
+  var r=document.documentElement;
+  r.dataset.theme = r.dataset.theme==='light' ? 'dark' : 'light';
+};
+</script>
+</body>
+</html>

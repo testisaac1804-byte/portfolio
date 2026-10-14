@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arena — install guide</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0e14'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%234fc3f7' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23e8f4ff'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f6f7fb; --card:#ffffff; --bd:#e3e6ef; --t1:#15181f; --t2:#3d434f;
+    --t3:#6b7280; --ac:#4b4ee0; --ac2:#eef0ff; --ok:#0f7a4a; --okbg:#e9f8f0;
+    --warnbg:#fff8e6; --warnbd:#f0d9a0; --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--t2);
+       font:15px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
+       -webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:34px 22px 70px}
+  a{color:var(--ac)}
+  h1{font-size:30px;line-height:1.2;color:var(--t1);margin:0 0 8px;letter-spacing:-.02em}
+  h2{font-size:18px;color:var(--t1);margin:34px 0 10px}
+  p{margin:0 0 12px}
+  .sub{color:var(--t3);font-size:15px;margin-bottom:22px}
+  .hero{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:22px 0 6px}
+  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--ac);color:#fff;text-decoration:none;
+       font-weight:600;font-size:15px;padding:13px 22px;border-radius:11px;box-shadow:0 6px 18px rgba(75,78,224,.28)}
+  .btn:hover{filter:brightness(1.07)}
+  .btn.ghost{background:#fff;color:var(--t1);border:1px solid var(--bd);box-shadow:none;font-weight:500}
+  .meta{font-size:12.5px;color:var(--t3)}
+  .card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:20px 22px;margin:18px 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;margin:14px 0}
+  .feat{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px 16px}
+  .feat b{display:block;color:var(--t1);font-size:14px;margin-bottom:3px}
+  .feat span{font-size:13px;color:var(--t3);line-height:1.5}
+  .note{background:var(--warnbg);border:1px solid var(--warnbd);border-radius:11px;padding:14px 16px;font-size:14px}
+  .ok{background:var(--okbg);border:1px solid #b6e6cc;border-radius:11px;padding:14px 16px;font-size:14px;color:var(--ok)}
+  code{font-family:var(--mono);font-size:13px;background:#f1f2f6;border:1px solid var(--bd);border-radius:5px;padding:1px 6px}
+  pre{font-family:var(--mono);font-size:12.5px;background:#11141b;color:#dfe3ec;border-radius:11px;
+      padding:14px 16px;overflow:auto;line-height:1.6}
+  table{border-collapse:collapse;width:100%;font-size:14px;margin:10px 0}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd)}
+  th{color:var(--t3);font-size:12px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+  td:first-child{font-family:var(--mono);font-size:13px;color:var(--t1);white-space:nowrap}
+  ol{padding-left:22px} ol li{margin-bottom:8px}
+  .foot{margin-top:40px;font-size:13px;color:var(--t3);border-top:1px solid var(--bd);padding-top:18px}
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+  .hash{font-family:var(--mono);font-size:11px;word-break:break-all;color:var(--t3)}
+</style></head><body><div class="wrap">
+
+<h1>Arena — LAN multiplayer game</h1>
+<p class="sub">A top-down arena shooter that runs on your own Wi-Fi. One Mac runs the server, everyone
+else opens a link and plays — no internet, no account, no cloud. Real players, real time.</p>
+
+<div class="hero">
+  <a class="btn" href="https://isaac1804.com/files/installers/Arena-Join-1.0.1.pkg">⬇︎&nbsp; Download — join a game</a>
+  <a class="btn ghost" href="https://isaac1804.com/files/installers/Arena-Server-1.0.1.pkg">Host a game (27 MB)</a>
+  <span class="meta">macOS 11+ · Apple silicon<br>Join app 512 KB · Server 27 MB · both install into Applications</span>
+</div>
+
+<div class="card">
+  <b style="color:var(--t1)">Two files, two jobs.</b>
+  <p style="margin:8px 0 0">Whoever is hosting installs <b>Arena Server</b> — it starts the game, prints
+  the join address and shows a QR code. Everyone else installs <b>Arena Join</b>: it searches the Wi-Fi,
+  finds the host on its own, and opens the game in a browser. Nothing to type, nothing to configure.</p>
+</div>
+
+<h2>What it does</h2>
+<div class="grid">
+  <div class="feat"><b>Host with one double-click</b><span>Double-click Arena Server. Up comes the arena, the join link and a QR code you can show on screen.</span></div>
+  <div class="feat"><b>Joiners find you automatically</b><span>Arena Join sweeps the local network for the host — it found one in a fraction of a second when tested — instead of being told an IP address.</span></div>
+  <div class="feat"><b>Twin-stick combat</b><span>Mouse and keyboard on a Mac, touch joysticks on a phone. Move and aim independently, health bar, scoreboard, kill feed.</span></div>
+  <div class="feat"><b>Live match HUD</b><span>Health bar, player list with live scores, damage flashes and a kill feed of who got whom.</span></div>
+  <div class="feat"><b>Phones play too</b><span>On a phone the left thumb moves and the right thumb aims and fires — two separate sticks, so you can run one way and shoot the other.</span></div>
+  <div class="feat"><b>Works offline</b><span>The whole game is on your Mac. No internet needed once the files are installed — only the local network.</span></div>
+</div>
+
+<h2>Install</h2>
+<div class="cols">
+<div>
+<p><b>On the hosting Mac</b></p>
+<ol>
+  <li>Download <b>Arena Server (27 MB)</b> above.</li>
+  <li>Double-click the <code>.pkg</code>, then <b>Continue → Install</b>.</li>
+  <li>Open <b>Arena Server</b> from Applications. The arena and the join link appear.</li>
+</ol>
+</div>
+<div>
+<p><b>On every other Mac or phone</b></p>
+<ol>
+  <li>Download <b>Arena Join (512 KB)</b> above (Macs), or just scan the host's QR code with a phone camera.</li>
+  <li>Double-click the <code>.pkg</code> and install it.</li>
+  <li>Open <b>Arena Join</b> — it finds the host and opens the game. Or type the address from the host's screen into any browser.</li>
+</ol>
+</div>
+</div>
+
+<div class="note" style="margin-top:14px">
+  <b>First launch will warn you once.</b> These installers are not signed with a paid Apple Developer
+  certificate, so macOS says it can't verify the developer. To get past it: <b>right-click</b> the app in
+  Applications → <b>Open</b> → <b>Open</b> again. Or System Settings → Privacy &amp; Security →
+  <b>Open Anyway</b>. You only do this once per app.
+</div>
+
+<h2>Prefer the terminal?</h2>
+<p>Terminal-downloaded files skip the warning entirely:</p>
+<pre># host machine
+curl -L https://isaac1804.com/files/installers/Arena-Server-1.0.1.pkg -o /tmp/ArenaServer.pkg
+sudo installer -pkg /tmp/ArenaServer.pkg -target /
+
+# everyone else
+curl -L https://isaac1804.com/files/installers/Arena-Join-1.0.1.pkg -o /tmp/ArenaJoin.pkg
+sudo installer -pkg /tmp/ArenaJoin.pkg -target /</pre>
+
+<h2>Play</h2>
+<table>
+  <tr><th>Control</th><th>Does</th></tr>
+  <tr><td>W A S D / arrows</td><td>move</td></tr>
+  <tr><td>mouse</td><td>aim</td></tr>
+  <tr><td>click / Space</td><td>fire</td></tr>
+  <tr><td>left stick + fire button</td><td>move and shoot on a phone or tablet</td></tr>
+  <tr><td>right-side drag</td><td>aim on a phone — separate from the stick, so you can move one way and shoot another</td></tr>
+</table>
+
+<h2>If nobody can join</h2>
+<div class="card">
+  <p style="margin:0 0 10px"><b style="color:var(--t1)">Everyone must be on the same network.</b> That is the only requirement — no internet, no port forwarding, no accounts.</p>
+  <p style="margin:0 0 10px"><b style="color:var(--t1)">School and public Wi-Fi often block device-to-device traffic</b> (isolation), so the join app can't see the host even though you are both connected. It is not the game — the network is refusing to pass it. Turn on a <b>phone hotspot</b> and put both Macs on that; it works immediately.</p>
+  <p style="margin:0"><b style="color:var(--t1)">Still stuck?</b> Type the address shown on the host's screen straight into a browser on the other machine — that bypasses discovery and goes directly to the game.</p>
+</div>
+
+<h2>Uninstall</h2>
+<pre># drag Arena Server / Arena Join out of Applications, then remove the saved log
+rm -f ~/Library/Logs/ArenaServer.log</pre>
+
+<div class="foot">
+  Built by Isaac Chan · Two self-contained installer packages — the game, its Python runtime and its
+  client are all inside them, so there is nothing else to install.<br><br>
+  <b>Arena Server 1.0.1</b> — SHA-256<br><span class="hash">f37791b135e76f9f03e644433a0b891c82519113d4e29c56e5001d66a5234fb4</span><br><br>
+  <b>Arena Join 1.0.1</b> — SHA-256<br><span class="hash">39a65b8cbf15563f66b85d45f71470d66746b1528ff9ade70b92e84437a2913a</span>
+</div>
+
+</div></body></html>

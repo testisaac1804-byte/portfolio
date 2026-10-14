@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Isaac Browser — Maximum Privacy (Live Demo)</title>
+<meta name="description" content="Interactive demo of Isaac Browser — a maximum-privacy macOS browser with tracker blocking, anti-fingerprinting, ephemeral identity burn and a per-app CONNECT proxy.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a1a; --panel:#111125; --line:#1a1a2e; --accent:#e94560;
+  --green:#4ade80; --blue:#60a5fa; --dim:#666; --mono:"SF Mono",Menlo,Consolas,monospace;
+}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'SF Pro','Segoe UI',sans-serif;
+  background:radial-gradient(1200px 700px at 50% -15%,#16162e,#07070f 70%);
+  color:#e0e0e0; min-height:100vh; padding:12px; display:flex; flex-direction:column;
+  align-items:center; gap:9px;
+}
+.flag{
+  font:11px/1 var(--mono); letter-spacing:.08em; text-transform:uppercase;
+  color:#c98f2b; background:#c98f2b18; border:1px solid #c98f2b44;
+  padding:6px 12px; border-radius:99px;
+}
+.head{text-align:center}
+.head h1{
+  font-size:26px; font-weight:800; letter-spacing:-1px;
+  background:linear-gradient(135deg,#e94560,#0f3460);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+.head p{color:#777; font-size:12.5px; margin-top:4px}
+
+/* ══ browser chrome mock ══ */
+/* ══ stage: browser mock + control panel side by side ══ */
+.stage{
+  width:min(1200px,100%); display:grid;
+  grid-template-columns:minmax(0,1.62fr) minmax(0,1fr);
+  gap:12px; align-items:stretch;
+}
+@media(max-width:1040px){.stage{grid-template-columns:1fr}}
+.browser{
+  width:100%; background:#0d0d1c; border:1px solid #23233d;
+  border-radius:12px; overflow:hidden; box-shadow:0 26px 70px #000a;
+  display:flex; flex-direction:column;
+}
+.tabbar{
+  flex:none; height:36px; background:#12122a; display:flex; align-items:center;
+  padding:0 0 0 12px; gap:5px; border-bottom:1px solid #000;
+}
+.tab{
+  width:190px; height:30px; background:#0a0a1a; border-radius:8px 8px 0 0;
+  display:flex; align-items:center; gap:7px; padding:0 10px; font-size:12px; color:#bbb;
+}
+.tab .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);flex:none}
+.tab .tt{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tab.plus{width:30px;justify-content:center;color:#555;background:transparent;font-size:17px}
+.toolbar{
+  flex:none; height:46px; background:#0d0d1c; display:flex; align-items:center; gap:9px;
+  padding:0 14px; border-bottom:1px solid #23233d;
+}
+.lights{display:flex;gap:7px;flex:none;margin-right:4px}
+.lights i{width:12px;height:12px;border-radius:50%;display:block}
+.lights i:nth-child(1){background:#ff5f57}
+.lights i:nth-child(2){background:#febc2e}
+.lights i:nth-child(3){background:#28c840}
+.nav{width:30px;height:30px;border-radius:7px;border:none;background:transparent;color:var(--accent);
+  font-size:15px;cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}
+.nav:hover{background:#ffffff12}
+.nav:disabled{color:#4a4a5e;cursor:default}
+#urlbar{
+  flex:1; height:32px; background:#07070f; border:1px solid #2b2b47; border-radius:9px;
+  color:#f2e9ec; font:13px var(--mono); padding:0 12px; outline:none;
+}
+#urlbar:focus{border-color:var(--accent);box-shadow:0 0 0 3px #e9456026}
+.shield{
+  flex:none; font:700 11.5px var(--mono); color:var(--green); background:#4ade8014;
+  border:1px solid #4ade8033; padding:6px 11px; border-radius:8px; white-space:nowrap;
+}
+.shield.warn{color:#e0b64a;background:#e0b64a14;border-color:#e0b64a33}
+
+/* ══ page area ══ */
+.page{flex:1; min-height:300px; background:#0a0a1a; position:relative}
+.startpad{padding:20px; min-height:300px; justify-content:center; display:flex; flex-direction:column; align-items:center}
+.startpad .logo{
+  font-size:34px; font-weight:800; letter-spacing:-1px;
+  background:linear-gradient(135deg,#e94560,#0f3460);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+.startpad .tag{color:#888;font-size:12.5px;margin:4px 0 18px;display:flex;align-items:center;gap:7px}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px #4ade8066;
+  animation:pl 2s infinite}
+@keyframes pl{50%{opacity:.45}}
+.quick{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;max-width:620px;margin-top:18px}
+.chip{font-size:11.5px;color:#9aa;background:#111125;border:1px solid #23233d;
+  padding:6px 12px;border-radius:99px;cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--accent);color:#fff}
+
+/* pipeline viz */
+.pipe{margin:10px; padding:12px 16px; font:12.5px var(--mono);
+  border:1px solid #1e1e36; border-radius:10px; background:#0d0d1c}
+.pipe h3{font:600 13px -apple-system,sans-serif;color:#fff;margin-bottom:3px}
+.pipe .u{color:var(--blue);word-break:break-all;margin-bottom:10px;font-size:11.5px}
+.step{display:flex;gap:10px;align-items:flex-start;padding:5px 0;opacity:0;transform:translateY(6px);
+  transition:.3s}
+.step.in{opacity:1;transform:none}
+.step .ic{width:20px;flex:none;text-align:center}
+.step .tx{flex:1;line-height:1.5;color:#bbb}
+.step .tx b{color:#fff;font-weight:600}
+.step .ok{color:var(--green)}
+.step .blk{color:var(--accent)}
+.blocked{margin-top:10px;border:1px solid #1e1e36;border-radius:8px;padding:8px 11px;background:#08081a}
+.blocked .h{color:#e0b64a;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
+.blocked .row{display:flex;gap:8px;font-size:11px;color:#8a8a9e;padding:1px 0;opacity:0}
+.blocked .row.in{opacity:1;transition:.25s}
+.blocked .row s{color:var(--accent);text-decoration:none;flex:none}
+
+/* ══ control panel ══ */
+.panel{width:100%;display:grid;grid-template-columns:1fr;gap:12px;align-items:start}
+.card{background:#0d0d1c;border:1px solid #23233d;border-radius:12px;padding:13px}
+.card h2{font-size:13px;font-weight:600;color:#fff;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.card h2 span{font-size:11px;color:#555;font-weight:400;margin-left:auto}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.si{display:flex;align-items:center;gap:8px;font-size:11.5px;padding:8px 10px;
+  background:#111125;border:1px solid #1a1a2e;border-radius:8px;transition:.25s;cursor:pointer}
+.si .ic{font-size:13px;flex:none}
+.si .lb{flex:1;color:#888}
+.si.on{border-color:#4ade8022}
+.si.on .lb{color:var(--green)}
+.si.off{border-color:#e9456033}
+.si.off .lb{color:var(--accent)}
+.si .st{font-size:10px}
+
+.toggles{display:flex;flex-direction:column;gap:11px;margin-bottom:14px}
+.tg{display:flex;align-items:center;gap:11px;font-size:12.5px;color:#ccc}
+.tg .sub{font-size:10.5px;color:#666;display:block}
+.sw{position:relative;width:38px;height:21px;flex:none;cursor:pointer}
+.sw input{opacity:0;width:0;height:0}
+.sw .sl{position:absolute;inset:0;background:#333;border-radius:20px;transition:.25s}
+.sw .sl:before{content:"";position:absolute;width:15px;height:15px;left:3px;bottom:3px;
+  background:#fff;border-radius:50%;transition:.25s}
+.sw input:checked + .sl{background:var(--accent)}
+.sw input:checked + .sl:before{transform:translateX(17px)}
+
+.btn{width:100%;padding:11px;border:none;border-radius:10px;font-size:13px;font-weight:600;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s}
+.btn.pri{background:linear-gradient(135deg,#e94560,#c23152);color:#fff}
+.btn.pri:hover{transform:scale(1.02);box-shadow:0 0 22px #e9456044}
+.btn.pri:active{transform:scale(.98)}
+.btn.gh{background:#16162e;color:#ccc;border:1px solid #2b2b47;margin-top:8px;font-weight:400}
+.btn.gh:hover{border-color:var(--accent);color:#fff}
+
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:13px}
+.stat{background:#111125;border:1px solid #1a1a2e;border-radius:9px;padding:10px 8px;text-align:center}
+.stat b{display:block;font-size:19px;color:var(--accent);font-family:var(--mono);line-height:1.2}
+.stat span{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:.05em}
+
+.note{margin-top:12px;font-size:11px;color:#5a5a70;line-height:1.6;border-top:1px solid #1e1e36;padding-top:11px}
+.note b{color:#8a8a9e}
+.toast{position:fixed;top:18px;right:18px;background:#16162e;border:1px solid var(--accent);
+  border-radius:10px;padding:11px 18px;color:#fff;font-size:12.5px;z-index:999;
+  opacity:0;transform:translateY(-14px);transition:.28s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="flag">Simulated demo — no real network requests</div>
+
+<div class="head">
+  <h1>Isaac</h1>
+  <p>Maximum-privacy browser · macOS · PyObjC + WKWebView</p>
+</div>
+
+<div class="stage">
+
+<div class="browser">
+  <div class="tabbar">
+    <div class="lights"><i></i><i></i><i></i></div>
+    <div class="tab"><span class="dot"></span><span class="tt">Maximum Privacy</span></div>
+    <div class="tab plus">+</div>
+  </div>
+  <div class="toolbar">
+    <button class="nav" id="bk" disabled>&#8249;</button>
+    <button class="nav" id="fw" disabled>&#8250;</button>
+    <button class="nav" id="rl">&#8635;</button>
+    <button class="nav" id="hm">&#8962;</button>
+    <input id="urlbar" placeholder="Search or enter a URL…" spellcheck="false">
+    <div class="shield" id="shield">&#128737; 0 blocked</div>
+  </div>
+  <div class="page" id="page">
+    <div class="startpad" id="startpad">
+      <div class="logo">Isaac</div>
+      <div class="tag"><span class="pulse"></span> Maximum Privacy Mode</div>
+      <div class="quick">
+        <div class="chip" data-q="news.example.com">news.example.com</div>
+        <div class="chip" data-q="shop.example.com">shop.example.com</div>
+        <div class="chip" data-q="video.example.com">video.example.com</div>
+        <div class="chip" data-q="forum.example.com">forum.example.com</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="card">
+    <h2>&#128737; Privacy Shield <span>click any tile to toggle</span></h2>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <div class="card">
+    <h2>&#9881; Controls</h2>
+    <div class="toggles">
+      <label class="tg">
+        <span class="sw"><input type="checkbox" id="t-proxy"><span class="sl"></span></span>
+        <span>Per-app CONNECT proxy<span class="sub">Routes only this app — never system-wide</span></span>
+      </label>
+      <label class="tg">
+        <span class="sw"><input type="checkbox" id="t-js" checked><span class="sl"></span></span>
+        <span>JavaScript<span class="sub">Required for the start-page UI · off = fewer fingerprint surfaces</span></span>
+      </label>
+      <label class="tg">
+        <span class="sw"><input type="checkbox" id="t-stealth" checked><span class="sl"></span></span>
+        <span>Stealth mode<span class="sub">Spoofs UA, screen size, timezone</span></span>
+      </label>
+    </div>
+    <button class="btn pri" id="btn-id">&#128260; New Identity</button>
+    <button class="btn gh" id="btn-burn">&#128293; Simulate exit burn</button>
+    <div class="stats">
+      <div class="stat"><b id="s-blk">0</b><span>Trackers</span></div>
+      <div class="stat"><b id="s-req">0</b><span>Requests</span></div>
+      <div class="stat"><b id="s-id">0</b><span>Burns</span></div>
+    </div>
+    <div class="note">
+      <b>Everything is in-memory.</b> No history, cookies or cache touch the disk —
+      the data store is ephemeral and wiped on exit or when you switch away.
+    </div>
+  </div>
+</div>
+
+</div><!-- /stage -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+
+  function toast(msg) {
+    var t = $('toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(t._h); t._h = setTimeout(function () { t.classList.remove('show'); }, 2200);
+  }
+
+  // ── shield tiles ───────────────────────────────────────────────────────
+  var SHIELDS = [
+    ['&#128293;', 'No History'],      ['&#127850;', 'No Cookies'],
+    ['&#128737;&#65039;', 'Trackers Blocked'], ['&#127912;', 'Anti-Fingerprint'],
+    ['&#128683;', 'No Referrer'],     ['&#128225;', 'WebRTC Blocked'],
+    ['&#128205;', 'Geo Blocked'],     ['&#128274;', 'HTTPS Only'],
+    ['&#127760;', 'DoH DNS'],         ['&#128203;', 'Clipboard Locked']
+  ];
+  var on = {};   // shield -> bool
+
+  var grid = $('grid');
+  SHIELDS.forEach(function (s, i) {
+    var d = document.createElement('div');
+    d.className = 'si on'; d.dataset.i = i;
+    d.innerHTML = '<span class="ic">' + s[0] + '</span><span class="lb">' + s[1] +
+                  '</span><span class="st">&#9989;</span>';
+    d.addEventListener('click', function () { flip(i, d); });
+    grid.appendChild(d);
+    on[i] = true;
+  });
+
+  function flip(i, el) {
+    on[i] = !on[i];
+    el.className = 'si ' + (on[i] ? 'on' : 'off');
+    el.querySelector('.st').innerHTML = on[i] ? '&#9989;' : '&#10060;';
+    toast(SHIELDS[i][1] + (on[i] ? ' enabled' : ' disabled'));
+    refreshShieldBadge();
+  }
+
+  // ── state ──────────────────────────────────────────────────────────────
+  var S = { blocked: 0, reqs: 0, burns: 0, busy: false };
+  // Generation token: bumped whenever the page area is replaced, so in-flight
+  // animation callbacks bail out instead of appending into a detached DOM.
+  var gen = 0;
+  function superseded(g) { return g !== gen; }
+
+  function paint() {
+    $('s-blk').textContent = S.blocked;
+    $('s-req').textContent = S.reqs;
+    $('s-id').textContent = S.burns;
+    refreshShieldBadge();
+  }
+
+  function refreshShieldBadge() {
+    var el = $('shield');
+    var jsOn = $('t-js').checked, stealthOn = $('t-stealth').checked;
+    el.className = 'shield' + ((jsOn && stealthOn) ? '' : ' warn');
+    el.innerHTML = '&#128737; ' + S.blocked + ' blocked';
+  }
+
+  $('t-js').addEventListener('change', function () {
+    toast('JavaScript ' + (this.checked ? 'enabled' : 'disabled'));
+    refreshShieldBadge();
+  });
+  $('t-stealth').addEventListener('change', function () {
+    toast('Stealth mode ' + (this.checked ? 'on' : 'off'));
+    refreshShieldBadge();
+  });
+  $('t-proxy').addEventListener('change', function () {
+    toast(this.checked
+      ? 'CONNECT proxy on — this app only, system proxy untouched'
+      : 'CONNECT proxy off');
+  });
+
+  // ── the fake request pipeline ──────────────────────────────────────────
+  var TRACKERS = [
+    'doubleclick.net', 'google-analytics.com', 'scorecardresearch.com',
+    'facebook.net', 'adservice.google.com', 'criteo.com', 'taboola.com',
+    'outbrain.com', 'hotjar.com', 'mixpanel.com', 'segment.io', 'amplitude.com',
+    'branch.io', 'adjust.com', 'appsflyer.com', 'newrelic.com', 'sentry.io',
+    'optimizely.com', 'quantserve.com', 'pubmatic.com', 'rubiconproject.com',
+    'openx.net', 'casalemedia.com', 'adsrvr.org', 'bluekai.com', 'demdex.net',
+    'everesttech.net', 'adnxs.com', 'crwdcntrl.net', 'teads.tv'
+  ];
+  var current = null;
+
+  function run(query) {
+    if (S.busy) return;
+    S.busy = true;
+    var myGen = ++gen;
+    current = { tm: [], step: [] };
+    S.reqs++;
+
+    var host = query.replace(/^https?:\/\//i, '').split('/')[0];
+    var n = 4 + Math.floor(Math.random() * 9);
+
+    var picked = TRACKERS.slice().sort(function () { return Math.random() - 0.5; }).slice(0, n);
+
+    var page = $('page');
+    page.innerHTML =
+      '<div class="pipe">' +
+        '<h3>Request pipeline</h3>' +
+        '<div class="u">https://' + host + '</div>' +
+        '<div id="steps"></div>' +
+        '<div class="blocked"><div class="h">Tracker filter</div><div id="blkd"></div></div>' +
+      '</div>';
+
+    var jsOn = $('t-js').checked, stealthOn = $('t-stealth').checked, proxyOn = $('t-proxy').checked;
+    var steps = [
+      ['&#128274;', '<b>HTTPS-only</b> — plain ' + 'http://' + ' upgraded before a packet leaves', on[7]],
+      ['&#127760;', '<b>DoH DNS</b> — ' + host + ' resolved over encrypted DNS, not port 53', on[8]],
+      ['&#128225;', proxyOn
+          ? '<b>CONNECT proxy</b> — tunnelled per-app; the OS proxy setting is never touched'
+          : '<b>Direct connection</b> — proxy off, traffic goes out un-tunnelled', proxyOn],
+      ['&#127912;', stealthOn
+          ? '<b>Anti-fingerprint</b> — UA, screen size and timezone spoofed'
+          : '<b>Real identity exposed</b> — fingerprint matches this machine', stealthOn],
+      ['&#128737;&#65039;', '<b>Tracker filter</b> — ' + n + ' known trackers matched', on[2]],
+      ['&#128683;', '<b>Referrer stripped</b> — destination learns nothing about where you came from', on[4]],
+      ['&#128293;', jsOn
+          ? '<b>Page scripts run</b> — JavaScript is enabled for the start page UI'
+          : '<b>JavaScript blocked</b> — no page script executes at all', jsOn]
+    ];
+
+    var si = 0;
+    function nextStep() {
+      if (superseded(myGen)) { S.busy = false; return; }
+      if (si >= steps.length) { return blockAll(picked); }
+      var host = $('steps');
+      if (!host) { S.busy = false; return; }
+      var st = steps[si++];
+      var d = document.createElement('div');
+      d.className = 'step';
+      d.innerHTML = '<span class="ic">' + st[0] + '</span><span class="tx">' + st[1] + '</span>';
+      host.appendChild(d);
+      setTimeout(function () { d.classList.add('in'); }, 20);
+      setTimeout(nextStep, 210);
+    }
+
+    var bi = 0;
+    function blockAll(list) {
+      if (superseded(myGen)) { S.busy = false; return; }
+      if (bi >= list.length) {
+        S.busy = false;
+        toast('Page loaded · ' + list.length + ' trackers blocked');
+        var back = document.createElement('div');
+        back.style.cssText = 'padding:10px 14px;font:11.5px var(--mono);color:#666';
+        back.textContent = 'Simulated page render — the real app shows the live site here.';
+        if (page.isConnected) page.appendChild(back);
+        return;
+      }
+      var name = list[bi++];
+      S.blocked++;
+      var host2 = $('blkd');
+      if (!host2) { S.busy = false; return; }
+      var MAXROWS = 8;      // keep the list short enough to fit the portfolio's demo modal
+      if (bi <= MAXROWS) {
+        var r = document.createElement('div');
+        r.className = 'row';
+        r.innerHTML = '<s>&#10005;</s><span>' + name + '</span>';
+        host2.appendChild(r);
+        setTimeout(function () { r.classList.add('in'); }, 20);
+      }
+      if (bi === list.length && list.length > MAXROWS) {
+        var more = document.createElement('div');
+        more.className = 'row in';
+        more.innerHTML = '<s>&#8943;</s><span>+' + (list.length - MAXROWS) + ' more blocked</span>';
+        host2.appendChild(more);
+      }
+      paint();
+      setTimeout(function () { blockAll(list); }, 95);
+    }
+
+    setTimeout(nextStep, 60);
+  }
+
+  // ── URL bar ────────────────────────────────────────────────────────────
+  $('urlbar').addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter') return;
+    var v = this.value.trim();
+    if (!v) return;
+    run(v.indexOf('.') > -1 && v.indexOf(' ') === -1 ? v : v.split(/\s+/)[0] + '.example.com');
+  });
+
+  document.querySelectorAll('.chip').forEach(function (c) {
+    c.addEventListener('click', function () {
+      $('urlbar').value = c.dataset.q;
+      run(c.dataset.q);
+    });
+  });
+
+  var START_HTML = '<div class="startpad" id="startpad">' +
+      '<div class="logo">Isaac</div>' +
+      '<div class="tag"><span class="pulse"></span> Maximum Privacy Mode</div>' +
+      '<div class="quick">' +
+        '<div class="chip" data-q="news.example.com">news.example.com</div>' +
+        '<div class="chip" data-q="shop.example.com">shop.example.com</div>' +
+        '<div class="chip" data-q="video.example.com">video.example.com</div>' +
+        '<div class="chip" data-q="forum.example.com">forum.example.com</div>' +
+      '</div></div>';
+
+  function renderStart() {
+    gen++;            // invalidate any in-flight pipeline animation
+    S.busy = false;
+    current = null;
+    $('page').innerHTML = START_HTML;
+    document.querySelectorAll('#page .chip').forEach(function (c) {
+      c.addEventListener('click', function () {
+        $('urlbar').value = c.dataset.q;
+        run(c.dataset.q);
+      });
+    });
+  }
+
+  function goHome() {
+    $('urlbar').value = '';
+    renderStart();
+  }
+
+  $('hm').addEventListener('click', goHome);
+  $('rl').addEventListener('click', function () {
+    if ($('urlbar').value.trim()) { run($('urlbar').value.trim()); }
+    else { toast('Nothing to reload'); }
+  });
+
+  // ── new identity / burn ────────────────────────────────────────────────
+  $('btn-id').addEventListener('click', function () {
+    if (S.busy) return;
+    S.busy = true; S.burns++;
+    var myGen = ++gen;
+    var page = $('page');
+    var act = ['Wiping cookies…', 'Clearing cache…', 'Rotating IP fingerprint…',
+               'Resetting user agent…', 'Dropping TLS session…', 'New identity ready'];
+    page.innerHTML = '<div class="pipe"><h3>Burning identity</h3><div id="steps"></div></div>';
+    var i = 0;
+    (function go() {
+      if (superseded(myGen)) return;
+      if (i >= act.length) {
+        S.busy = false;
+        setTimeout(function () { goHome(); toast('New identity — everything burned'); }, 320);
+        return;
+      }
+      var host = $('steps');
+      if (!host) { S.busy = false; return; }
+      var d = document.createElement('div');
+      d.className = 'step';
+      d.innerHTML = '<span class="ic">&#128260;</span><span class="tx">' + act[i++] + '</span>';
+      host.appendChild(d);
+      setTimeout(function () { d.classList.add('in'); }, 20);
+      setTimeout(go, 170);
+    })();
+    paint();
+  });
+
+  $('btn-burn').addEventListener('click', function () {
+    S.blocked = 0; S.reqs = 0; S.burns++;
+    paint();
+    toast('Session data burned — counters reset');
+  });
+
+  paint();
+})();
+</script>
+</body>
+</html>

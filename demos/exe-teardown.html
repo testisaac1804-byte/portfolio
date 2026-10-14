@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomy of a Fake "DNS Optimizer" — Teardown</title>
+<meta name="description" content="Teardown of DNS一键优化.exe, a 'one-click DNS fix' distributed by an online gambling portal: what it changes on your PC, and why you shouldn't run it.">
+<style>
+:root{--bg:#050508;--sf:#0d0e12;--sf2:#13141a;--t1:#f0f0f5;--t2:#c8ccd6;--t3:#6b7080;--t4:#3d4150;--ac:#6366f1;--ab:#818cf8;--ag:#10b981;--ar:#ef4444;--am:#f59e0b;--bd:rgba(255,255,255,0.08);--grad:linear-gradient(135deg,#6366f1,#8b5cf6,#06b6d4);--code:#0a0b0f}
+html[data-theme="light"]{--bg:#f6f7fb;--sf:#ffffff;--sf2:#f1f2f7;--t1:#111827;--t2:#374151;--t3:#6b7280;--t4:#9ca3af;--ac:#4f46e5;--ab:#6366f1;--ag:#059669;--ar:#dc2626;--am:#b45309;--bd:rgba(17,24,39,0.1);--code:#0f172a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t2);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.68;-webkit-font-smoothing:antialiased;padding:0 20px 80px}
+.wrap{max-width:860px;margin:0 auto}
+a{color:var(--ab)}
+code,pre,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+
+/* theme toggle */
+#tt{position:fixed;top:16px;right:16px;z-index:9;width:38px;height:38px;border-radius:11px;border:1px solid var(--bd);background:var(--sf);color:var(--t2);font-size:16px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.25)}
+#tt:hover{border-color:var(--ab)}
+
+/* header */
+header{padding:56px 0 30px;border-bottom:1px solid var(--bd)}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-bottom:14px}
+h1{font-size:clamp(27px,5vw,40px);line-height:1.16;color:var(--t1);font-weight:800;letter-spacing:-.02em}
+.sub{font-size:16.5px;color:var(--t2);margin-top:16px;max-width:74ch}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.pill{font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:20px;border:1px solid var(--bd);background:var(--sf2);color:var(--t3);font-family:ui-monospace,Menlo,monospace}
+.pill.bad{color:var(--ar);border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.08)}
+.byline{display:flex;align-items:center;gap:14px;margin-top:26px;flex-wrap:wrap}
+.byline img{width:52px;height:52px;border-radius:13px;border:1px solid var(--bd);background:var(--sf2);padding:5px}
+.byline .who{font-size:13.5px;color:var(--t3)}
+.byline .who b{color:var(--t1);display:block;font-size:14.5px}
+
+/* sections */
+h2{font-size:22px;color:var(--t1);font-weight:750;margin:52px 0 14px;letter-spacing:-.01em;scroll-margin-top:20px}
+h2 .n{color:var(--ac);font-family:ui-monospace,Menlo,monospace;font-size:15px;margin-right:10px;font-weight:600}
+h3{font-size:16px;color:var(--t1);font-weight:700;margin:30px 0 10px}
+p{margin:0 0 15px}
+ul,ol{margin:0 0 15px 22px}
+li{margin-bottom:9px}
+strong{color:var(--t1);font-weight:650}
+.small{font-size:13.5px;color:var(--t3)}
+
+/* callouts */
+.box{border-radius:14px;padding:20px 22px;margin:26px 0;border:1px solid var(--bd);background:var(--sf)}
+.box.verdict{border-left:4px solid var(--ar);background:linear-gradient(90deg,rgba(239,68,68,.07),transparent 65%),var(--sf)}
+.box.ok{border-left:4px solid var(--ag)}
+.box.warn{border-left:4px solid var(--am)}
+.box h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:10px;font-weight:700}
+.box p:last-child{margin-bottom:0}
+.box.verdict h4{color:var(--ar)}
+
+/* code */
+pre{background:var(--code);border:1px solid var(--bd);border-radius:12px;padding:16px 18px;overflow-x:auto;font-size:12.8px;line-height:1.62;color:#c9d1d9;margin:16px 0}
+html[data-theme="light"] pre{color:#e6edf3}
+pre .c{color:#7d8590}
+pre .k{color:#ff7b72}
+pre .s{color:#a5d6ff}
+p code,li code,td code{background:var(--sf2);border:1px solid var(--bd);border-radius:5px;padding:1.5px 6px;font-size:12.6px;color:var(--t1)}
+
+/* tables */
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:13.6px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--bd);vertical-align:top}
+th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);font-weight:700}
+td:first-child{color:var(--t1);font-weight:600;white-space:nowrap}
+tbody tr:hover{background:var(--sf2)}
+.mono td,.mono th{font-family:ui-monospace,Menlo,monospace;font-size:12.4px}
+.mono td:first-child{font-weight:400;white-space:normal}
+.hl{color:var(--ar);font-weight:650}
+.hg{color:var(--ag)}
+
+/* steps */
+.step{display:flex;gap:14px;margin-bottom:18px}
+.step .num{flex:0 0 26px;height:26px;border-radius:8px;background:var(--sf2);border:1px solid var(--bd);color:var(--ab);font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:ui-monospace,Menlo,monospace;margin-top:2px}
+.step .body{flex:1;min-width:0}
+.step .body b{color:var(--t1);display:block;margin-bottom:3px;font-size:14.5px}
+
+/* checklist */
+.chk{list-style:none;margin-left:0}
+.chk li{padding-left:28px;position:relative}
+.chk li:before{content:"✓";position:absolute;left:0;top:0;color:var(--ag);font-weight:700}
+.chk.close li:before{content:"×";color:var(--ar)}
+
+.tagrow{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 20px}
+.tag{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:20px;border:1px solid var(--bd);background:var(--sf2);color:var(--t3)}
+
+footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--bd);font-size:13px;color:var(--t4);line-height:1.75}
+hr.sep{border:0;border-top:1px solid var(--bd);margin:44px 0}
+</style>
+</head>
+<body>
+<button id="tt" title="Toggle theme" aria-label="Toggle light/dark theme">☀️</button>
+
+<div class="wrap">
+
+<header>
+  <div class="kicker">Malware teardown · reverse engineering</div>
+  <h1>Anatomy of a fake “DNS optimizer”</h1>
+  <p class="sub">Someone hands you a 3.6&nbsp;MB Windows program called <code>DNS一键优化.exe</code> — “one-click DNS optimization” — because the site you want to reach won’t load. It looks like a friendly support tool. I unpacked it to find out what it actually changes on your machine, and why the honest answer is <strong>don’t run it</strong>.</p>
+  <div class="pills">
+    <span class="pill">Windows PE32</span>
+    <span class="pill">3,767,808 bytes</span>
+    <span class="pill">UPX packed</span>
+    <span class="pill bad">unsigned</span>
+    <span class="pill bad">requires administrator</span>
+  </div>
+  <div class="byline">
+    <img src="dns-exe-icon.png" alt="Icon of the DNS一键优化.exe sample">
+    <div class="who">
+      <b>Sample analysed 19 Sep 2026</b>
+      Static analysis only — the binary was never executed (a Windows PE cannot run on macOS in the first place).
+    </div>
+  </div>
+</header>
+
+<div class="box verdict">
+  <h4>Verdict</h4>
+  <p><strong>Not a password stealer — and still not safe.</strong> There is no spyware, no backdoor and no “payload” in this file. It is an unsigned, administrator-level utility that rewrites the <strong>DNS servers on every network adapter</strong> in Windows. Its purpose is to make a blocked website reachable again, and the people publishing it are the operators of that blocked website. The danger here is not a hidden virus; it is <strong>who is handing you an admin-level network tool, and what that tool is allowed to point your traffic at</strong>.</p>
+</div>
+
+<div class="tagrow">
+  <span class="tag">PE / UPX</span><span class="tag">Static analysis</span><span class="tag">DNS hijack patterns</span>
+  <span class="tag">Supply-chain trust</span><span class="tag">Social engineering</span>
+</div>
+
+<h2><span class="n">01</span>Where it came from</h2>
+
+<p>No guessing was required. macOS keeps a receipt for every downloaded file, in an extended attribute called <code>kMDItemWhereFroms</code>, plus a quarantine stamp recording which application fetched it and when:</p>
+
+<pre><span class="c">$ xattr -l DNS一键优化.exe</span>
+com.apple.metadata:kMDItemWhereFroms: https://www.218yc[.]com/static/file/DNS一键优化.exe
+                                     https://www.218yc[.]com/
+com.apple.quarantine: 0081;6aae4c6a;Chrome;67742DF8-…</pre>
+
+<p class="small">Domains on this page are written <b>defanged</b> — <code>[.]</code> stands for <code>.</code> — so nothing here can be clicked into a visit or scraped into one.</p>
+
+<table class="mono">
+  <tr><th>Field</th><th>Value</th></tr>
+  <tr><td>Download URL</td><td>https://www.218yc[.]com/static/file/DNS一键优化.exe</td></tr>
+  <tr><td>Linking page</td><td>https://www.218yc[.]com/</td></tr>
+  <tr><td>Downloaded by</td><td>Google Chrome</td></tr>
+  <tr><td>Timestamp</td><td>2026-09-19 16:48 HKT (decoded from the quarantine stamp)</td></tr>
+</table>
+
+<p><code>218yc[.]com</code> is not a software site. It is a search-engine-camouflaged front page for an unlicensed online gambling operation — a mix of scraped news snippets, bank and email links to look legitimate, and links into browser-based casino games. Its front page carries a small “self-rescue” kit for players whose connection refuses to load the site:</p>
+
+<div class="step"><div class="num">1</div><div class="body"><b>一键优化修改DNS — this file</b><span class="small">“One-click DNS optimization to fix the black screen / the game won’t open.”</span></div></div>
+<div class="step"><div class="num">2</div><div class="body"><b>寰宇浏览器 / “Huanyu browser”</b><span class="small">A promoted browser advertised as one that can “go anywhere” — i.e. reach blocked sites.</span></div></div>
+<div class="step"><div class="num">3</div><div class="body"><b>A line-check tool</b><span class="small">For diagnosing whether the casino’s servers are reachable from your connection.</span></div></div>
+
+<p>All three items solve the same problem: <strong>making a blocked website load</strong>. That framing is the whole story of this file. It is not a utility that escaped from a software vendor — it is site infrastructure, handed to players as a favour.</p>
+
+<h2><span class="n">02</span>What’s inside the file</h2>
+
+<table>
+  <tr><th>Property</th><th>Finding</th></tr>
+  <tr><td>Format</td><td>Windows PE32 GUI executable, Intel 80386</td></tr>
+  <tr><td>Size</td><td>3,767,808 bytes packed → 11,321,344 bytes unpacked</td></tr>
+  <tr><td>Packer</td><td>UPX 3.91 (sections <code>UPX0</code>/<code>UPX1</code>) — used to shrink the Qt runtime, and it hides the strings</td></tr>
+  <tr><td>Toolchain</td><td>Statically-linked <strong>Qt</strong> GUI application built with <strong>MinGW-W64 GCC 4.8.3</strong></td></tr>
+  <tr><td>Digital signature</td><td class="hl">None</td></tr>
+  <tr><td>Version resource</td><td class="hl">Absent — no publisher, product name or version to check</td></tr>
+  <tr><td>Requested privilege</td><td class="hl">requireAdministrator (UAC elevation on launch)</td></tr>
+  <tr><td>Network code</td><td class="hg">None — no HTTP client, no downloader, no socket code in the application layer</td></tr>
+</table>
+
+<p>Two of these are already the tell. The embedded manifest is stored uncompressed even inside a packed binary, so it can be read without unpacking — and it asks for <strong>full administrator rights</strong>:</p>
+
+<pre>&lt;requestedExecutionLevel level=<span class="s">"requireAdministrator"</span> uiAccess=<span class="s">"false"</span> /&gt;</pre>
+
+<p>A DNS tweak is a machine-wide network change, so admin is technically consistent. But combine that with <strong>no signature and no version information at all</strong> — you cannot verify who built this, you cannot check whether the build in front of you is the build anyone ever reviewed, and there is no update mechanism that would tell you if it changed. That is what a throwaway build looks like.</p>
+
+<h2><span class="n">03</span>The entire program, in four lines</h2>
+
+<p>Unpacked, the giveaway sits in one tight cluster of strings. The application’s own class names are <code>UDnsOptimizer</code> / <code>UDnsWindow</code>, and its working code is a thin wrapper around Windows’ own command-line network tool:</p>
+
+<pre><span class="k">netsh</span> interface ip   set dns <span class="s">"%1"</span> static <span class="s">%2</span>
+<span class="k">netsh</span> interface ip   add dns <span class="s">"%1"</span> <span class="s">%2</span> index=2
+<span class="k">netsh</span> interface ipv4 set dnsserver <span class="s">"%1"</span> static <span class="s">%2</span>
+<span class="k">netsh</span> interface ip   set dns <span class="s">"%1"</span> dhcp        <span class="c">// "reset to automatic"</span>
+
+<span class="c">// and the same change written straight into the registry:</span>
+HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\<span class="s">%1</span> → NameServer</pre>
+
+<p>The interface is one button, and the messages it shows the user are exactly what you would expect from a “fix my DNS” utility:</p>
+
+<div class="box">
+<p><strong>DNS 设置尚未优化</strong> — “DNS settings are not yet optimised”<br>
+<strong>按下 “优化” 按键, 以优化 DNS 服务器的设置。</strong> — “Press the ‘Optimize’ button to optimise the DNS server settings.”<br>
+<strong>DNS 设定中… / DNS 设置已优化 / DNS 优化失败</strong> — “Applying DNS settings… / DNS settings optimised / DNS optimisation failed”</p>
+</div>
+
+<p>Here is the part that matters. <strong>The only DNS server addresses anywhere in the binary are <code>8.8.8.8</code> and <code>8.8.4.4</code></strong> — Google Public DNS. There is no latency measurement, no comparison of providers, no “optimisation” logic of any kind. “Optimise” means one thing: <em>replace your ISP’s DNS servers with Google’s</em>.</p>
+
+<p>And it is not limited to that pair. The binary also carries hidden command-line options — <code>--adapter-index</code>, <code>--preferred-dns-server</code>, <code>--alternate-dns-server</code> — alongside programmatic entry points such as <code>setAllDnsAddressManually()</code>. In other words, <strong>whoever launches this program can point your DNS at any resolver they choose</strong>, silently, with administrator rights, on every adapter.</p>
+
+<h2><span class="n">04</span>Why a gambling site ships a DNS tool</h2>
+
+<p>Because DNS is usually what blocks it. On many networks — and especially across mainland China’s ISP resolvers — casino domains are sinkholed at the DNS layer, so the site simply won’t resolve. The standard workaround is to move resolution to a foreign resolver, and the standard pairing for that is a foreign resolver plus a proxy-capable browser. That is precisely the three-item kit on the site’s help page: <em>change the DNS, install our browser, check the line</em>.</p>
+
+<p>So the tool is not random. It is the first step of a documented access-bypass workflow, packaged as consumer-friendly “one-click” support.</p>
+
+<h2><span class="n">05</span>What I did <em>not</em> find</h2>
+
+<p>Being precise here matters, because “I found malware!” is easy to claim and hard to prove. I looked for, and did <strong>not</strong> find:</p>
+
+<ul class="chk close">
+  <li>Any command-and-control or network behaviour — no <code>InternetOpen</code>, <code>URLDownloadToFile</code> or <code>WinHttpConnect</code>; no embedded URLs or IP endpoints beyond the Qt library’s own text.</li>
+  <li>Any persistence — no <code>Run</code> registry keys, no scheduled tasks, no service installation, no startup folder drops.</li>
+  <li>Any second-stage payload, dropped file, or appended overlay data beyond the packed image.</li>
+  <li>Any modification of the hosts file, any proxy configuration change, or any tampering with UAC itself (it only <em>reads</em> the UAC state and can open the UAC settings panel).</li>
+</ul>
+
+<p>The strings that look alarming at a glance — <code>.lnk</code>, <code>NetShareEnum</code>, UNC paths — belong to the Qt and Windows shell libraries that every Qt application links, not to this program’s own logic. Reading them as intent is the classic false positive.</p>
+
+<div class="box warn">
+<h4>So why not just run it?</h4>
+<p>Because “no payload” is a statement about <em>this build, today</em>. You are still handing administrator rights to an unsigned, unversioned binary published by an unlicensed gambling operator, with no support channel, no update path and no accountability. That is a bad trade even when the binary is boring — and trojanising an update to a tool people already trust is the ordinary way this pattern goes wrong later.</p>
+</div>
+
+<h2><span class="n">06</span>Why you shouldn’t run it — five concrete reasons</h2>
+
+<ol>
+  <li><strong>Unverifiable authorship, with admin rights.</strong> No signature, no version resource, no publisher name. You cannot tell this build apart from a modified one, and it runs elevated. Everything else on this list is a consequence of that.</li>
+  <li><strong>It rewrites every network adapter, and rollback is on you.</strong> The change is applied per adapter and written into the registry. If it fails halfway, or your VPN, school or work profile depends on its own resolver, you are left with broken name resolution and no undo button — the program has no restore function beyond a blunt “set it back to automatic”.</li>
+  <li><strong>It silently redirects all your DNS traffic to a third party.</strong> Every hostname your machine looks up would go to one external resolver. That is a real privacy change, and it commonly breaks things you actually want: split-horizon internal DNS, hotel and airport captive portals, ISP or parental filtering, and some campus networks.</li>
+  <li><strong>It can be aimed at <em>any</em> resolver by whoever runs it.</strong> The <code>--preferred-dns-server</code> / <code>--alternate-dns-server</code> switches mean the “optimiser” is a generic DNS-setting engine. A launcher, an installer or a shortcut can drive it to a malicious resolver without the user ever seeing a prompt — and DNS is the layer that decides where your traffic actually goes.</li>
+  <li><strong>Provenance is disqualifying.</strong> It is distributed by an unlicensed gambling operation, from a domain dressed up to look like a news site, as part of a workflow whose purpose is to evade network controls. Nothing about that chain gives you a reason to trust it with administrator rights on your machine.</li>
+</ol>
+
+<h2><span class="n">07</span>The pattern to recognise next time</h2>
+
+<p>None of this required a malware scanner. The same five questions would have flagged it before execution:</p>
+
+<ul class="chk">
+  <li><strong>Was it pushed by a site I was trying to reach, rather than by a vendor?</strong> Support tooling that arrives <em>from</em> the thing you are trying to access is a red flag, not a courtesy.</li>
+  <li><strong>Does an unsigned binary want administrator rights?</strong> If a utility cannot be attributed to anyone and still asks for elevation, stop there.</li>
+  <li><strong>Is there no version info at all?</strong> Real software ships a publisher, product and version. A blank version tab means nobody intends to be held to it.</li>
+  <li><strong>Is the “fix” actually a bypass?</strong> “Fixes the black screen”, “works anywhere”, “unblocks the game” — these describe evading a network control, not repairing your computer.</li>
+  <li><strong>Is a browser bundled with the fix?</strong> A network setting change plus a browser the vendor controls is the two halves of a traffic redirection kit. You should not accept either half from a party you don’t trust.</li>
+</ul>
+
+<h2><span class="n">08</span>How the analysis was done</h2>
+
+<p>Entirely static — the sample was never executed, and as a Windows PE it could not have been on this machine anyway. The whole teardown ran on macOS:</p>
+
+<div class="step"><div class="num">1</div><div class="body"><b>Provenance first</b><span class="small"><code>xattr -l</code> to read <code>kMDItemWhereFroms</code> and the quarantine stamp — that alone named the source URL, the linking page, the downloading browser and the exact time.</span></div></div>
+<div class="step"><div class="num">2</div><div class="body"><b>Identify and hash</b><span class="small"><code>file</code> and <code>shasum -a 256</code> — PE32 GUI, Intel 80386, UPX compressed, plus a stable hash to work from.</span></div></div>
+<div class="step"><div class="num">3</div><div class="body"><b>Read the resources while still packed</b><span class="small">UPX leaves the <code>.rsrc</code> section uncompressed, so parsing the PE section table and dumping <code>.rsrc</code> yields the manifest (<code>requireAdministrator</code>), the icon set, and the absence of any version resource.</span></div></div>
+<div class="step"><div class="num">4</div><div class="body"><b>Unpack it</b><span class="small">Built UPX from source (it ships no macOS binaries, and the Homebrew build here can’t compile for this Mac’s architecture) and decompressed the image to 11.3&nbsp;MB.</span></div></div>
+<div class="step"><div class="num">5</div><div class="body"><b>Classify by string cluster</b><span class="small">Extracted printable runs and CJK sequences, then read the cluster around the giveaway. Qt class names revealed the app’s own function list; the MinGW build stamp identified the toolchain.</span></div></div>
+<div class="step"><div class="num">6</div><div class="body"><b>Hunt for behaviour, not vibes</b><span class="small">Grepped the API import table for network, persistence and drop primitives; grepped strings for endpoints, <code>schtasks</code>, and <code>Run</code> keys. Their absence is a finding, and it is what keeps the verdict honest.</span></div></div>
+<div class="step"><div class="num">7</div><div class="body"><b>Cross-check the delivery story</b><span class="small">Fetched the source domain and read the surrounding help page — which is how the DNS tool, the promoted browser and the line-check tool connected into one access-bypass kit.</span></div></div>
+
+<h2><span class="n">09</span>Indicators, and what to do if you already ran it</h2>
+
+<table class="mono">
+  <tr><th>Item</th><th>Value</th></tr>
+  <tr><td>Filename</td><td>DNS一键优化.exe</td></tr>
+  <tr><td>SHA-256 (packed)</td><td>6c47bebfc1a0cc53be82268de3c7c6781d89254e54421091d7fa2c26e9514b01</td></tr>
+  <tr><td>SHA-256 (unpacked)</td><td>bbfd77a19f2b98ba57c02f64bcfb3a1efa061351ca998226a26cef53118e444f</td></tr>
+  <tr><td>Distribution host</td><td>www.218yc[.]com (path: /static/file/)</td></tr>
+  <tr><td>UI / component names</td><td>UDnsOptimizer, UDnsWindow</td></tr>
+  <tr><td>Registry touch point</td><td>HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\&lt;adapter&gt; → NameServer</td></tr>
+</table>
+
+<p>If it was run on a Windows machine, check what your adapters are actually using and put them back to automatic:</p>
+
+<pre><span class="c">:: see the current DNS servers per adapter</span>
+<span class="k">netsh</span> interface ip show dns
+
+<span class="c">:: revert an adapter to the network's own resolvers</span>
+<span class="k">netsh</span> interface ip set dns <span class="s">"Wi-Fi"</span> dhcp
+<span class="k">netsh</span> interface ip set dns <span class="s">"Ethernet"</span> dhcp
+
+<span class="c">:: the registry values this tool writes</span>
+HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\</pre>
+
+<p class="small">The sample itself is deliberately not hosted here. If you want a scanner’s opinion, submit the hashes above to a service such as VirusTotal rather than running the file.</p>
+
+<hr class="sep">
+
+<div class="box">
+<p><strong>The one-line version.</strong> A friendly “one-click DNS fix” from a gambling site is not a utility — it is the first step of a network-bypass kit, it runs with administrator rights, it cannot be attributed to anyone, and it can be aimed at any resolver its launcher likes. The scan was clean. Don’t run it anyway.</p>
+</div>
+
+<footer>
+  <p><strong>Scope &amp; method:</strong> static analysis of one sample, identified by the hashes above. No dynamic execution, no sandbox run, no online reputation lookup was available from the analysing host. Findings describe this build; they are not a general claim about every “DNS optimizer”.</p>
+  <p>Written as part of an ongoing series of teardowns of files that arrive from untrusted sources. Published for education: how to read a binary, and how to notice the delivery pattern before you execute anything.</p>
+  <p>Analysed 19 Sep 2026 · published 8 Oct 2026</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  try{
+    var t=localStorage.getItem('teardown-theme');
+    if(!t&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)t='light';
+    if(t){document.documentElement.setAttribute('data-theme',t);document.getElementById('tt').textContent=t==='light'?'🌙':'☀️'}
+  }catch(e){}
+  document.getElementById('tt').addEventListener('click',function(){
+    var cur=document.documentElement.getAttribute('data-theme');
+    var next=cur==='light'?'dark':'light';
+    document.documentElement.setAttribute('data-theme',next);
+    this.textContent=next==='light'?'🌙':'☀️';
+    try{localStorage.setItem('teardown-theme',next)}catch(e){}
+  });
+})();
+</script>
+</body>
+</html>

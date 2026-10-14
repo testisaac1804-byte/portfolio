@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Isaac Browser — Maximum Privacy</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', 'Segoe UI', sans-serif;
+  background: #0a0a1a;
+  color: #e0e0e0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+.container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+}
+.logo {
+  font-size: 52px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #e94560, #0f3460);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4px;
+  letter-spacing: -1px;
+}
+.tagline {
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.status-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+.status-dot.maximum { background: #4ade80; box-shadow: 0 0 8px #4ade8066; }
+.status-dot.high { background: #facc15; }
+
+.search-container {
+  width: 100%;
+  max-width: 640px;
+  position: relative;
+}
+.search-box {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 16px;
+  background: #1a1a2e;
+  border: 2px solid #16213e;
+  border-radius: 14px;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-box:focus {
+  border-color: #e94560;
+  box-shadow: 0 0 20px rgba(233, 69, 96, 0.15);
+}
+.search-box::placeholder { color: #555; }
+.search-hint {
+  text-align: center;
+  color: #555;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+/* ── Privacy Shield Grid ── */
+.privacy-shield {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+  max-width: 600px;
+}
+.shield-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #666;
+  padding: 8px 12px;
+  background: #111125;
+  border-radius: 8px;
+  border: 1px solid #1a1a2e;
+  transition: all 0.3s;
+}
+.shield-item .icon { font-size: 14px; flex-shrink: 0; }
+.shield-item.on { border-color: #4ade8022; color: #888; }
+.shield-item.on .label { color: #4ade80; }
+.shield-item.off { border-color: #e9456033; }
+.shield-item.off .label { color: #e94560; }
+.shield-item .label { flex: 1; }
+.shield-item .status-icon { font-size: 11px; }
+
+/* ── Controls ── */
+.controls {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+}
+.controls-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #888;
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #333;
+  transition: 0.3s;
+  border-radius: 20px;
+}
+.toggle .slider:before {
+  content: "";
+  position: absolute;
+  height: 14px; width: 14px;
+  left: 3px; bottom: 3px;
+  background: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+.toggle input:checked + .slider { background: #e94560; }
+.toggle input:checked + .slider:before { transform: translateX(16px); }
+
+.btn-new-identity {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #e94560, #c23152);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-new-identity:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(233, 69, 96, 0.3);
+}
+.btn-new-identity:active { transform: scale(0.97); }
+.btn-new-identity:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Auto-burn controls ── */
+.auto-burn-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #555;
+}
+.auto-burn-row select {
+  background: #1a1a2e;
+  color: #ccc;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  outline: none;
+}
+
+/* ── Results ── */
+.results {
+  width: 100%;
+  max-width: 640px;
+  margin-top: 16px;
+  display: none;
+}
+.results.visible { display: block; }
+.result-item {
+  padding: 10px 14px;
+  background: #111125;
+  border: 1px solid #1a1a2e;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  transition: background 0.2s;
+}
+.result-item:hover { background: #1a1a2e; }
+.result-title {
+  color: #60a5fa;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 3px;
+}
+.result-title:hover { text-decoration: underline; }
+.result-url { color: #4ade80; font-size: 11px; word-break: break-all; }
+.result-snippet { color: #999; font-size: 12px; margin-top: 3px; }
+.loading { text-align: center; color: #555; padding: 16px; display: none; }
+.loading.visible { display: block; }
+.loading::after {
+  content: '';
+  display: inline-block;
+  width: 18px; height: 18px;
+  border: 2px solid #333;
+  border-top-color: #e94560;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.footer {
+  margin-top: 30px;
+  font-size: 11px;
+  color: #444;
+  text-align: center;
+  line-height: 1.6;
+}
+.footer strong { color: #666; }
+
+/* ── Notification toast ── */
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #1a1a2e;
+  border: 1px solid #e94560;
+  border-radius: 10px;
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 13px;
+  z-index: 99999;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s;
+  pointer-events: none;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="container">
+  <div class="logo">Isaac</div>
+  <div class="tagline">
+    <span class="status-dot maximum" id="privacyDot"></span>
+    <span id="privacyLabel">Maximum Privacy Mode</span>
+  </div>
+
+  <div class="search-container">
+    <input type="text" class="search-box" id="searchBox"
+           placeholder="Search or enter URL..." autofocus>
+    <div class="search-hint">
+      Press <kbd>Enter</kbd> to search &middot; Type a URL to navigate
+    </div>
+  </div>
+
+  <!-- Privacy Shield Grid -->
+  <div class="privacy-shield">
+    <div class="shield-item on">
+      <span class="icon">🔥</span>
+      <span class="label">No History</span>
+      <span class="status-icon">✅</span>
+    </div>
+    <div class="shield-item on">
+      <span class="icon">🍪</span>
+      <span class="label">No Cookies</span>
+      <span class="status-icon">✅</span>
+    </div>
+    <div class="shield-item on">
+      <span class="icon">🛡️</span>
+      <span class="label">Trackers Blocked</span>
+      <span class="status-icon">✅</span>
+    </div>
+    <div class="shield-item on">
+      <span class="icon">🎨</span>
+      <span class="label">Anti-Fingerprint</span>
+      <span class="status-icon">✅</span>
+    </div>
+    <div class="shield-item on">
+      <span class="icon">🚫</span>
+      <span class="label">No Referrer</span>
+      <span class="status-icon">✅</span>
+    </div>
+    <div class="shield-item on">
+      <span class="icon">📡</span>
+      <span class="label">WebRTC Blocked</span>
+      <span class="status-icon">✅</span>
+    </div>
+    <div class="shield-item on">
+      <span class="icon">📍</span>
+      <span class="label">Geo Blocked</span>
+      <span class="status-icon">✅</span>
+    </div>
+    <div class="shield-item on">
+      <span class="icon">🔒</span>
+      <span class="label">HTTPS Only</span>
+      <span class="status-icon">✅</span>
+    </div>
+    <div class="shield-item on" id="proxyBadge">
+      <span class="icon">🔐</span>
+      <span class="label" id="proxyLabel">Proxy Enabled</span>
+      <span class="status-icon" id="proxyStatusIcon">✅</span>
+    </div>
+    <div class="shield-item on" id="jsBadge">
+      <span class="icon">💻</span>
+      <span class="label" id="jsLabel">JavaScript OFF</span>
+      <span class="status-icon" id="jsStatusIcon">✅</span>
+    </div>
+    <div class="shield-item on" id="stealthBadge">
+      <span class="icon">👻</span>
+      <span class="label" id="stealthLabel">Stealth Mode</span>
+      <span class="status-icon" id="stealthStatusIcon">✅</span>
+    </div>
+    <div class="shield-item on" id="clipboardBadge">
+      <span class="icon">📋</span>
+      <span class="label">Clipboard Locked</span>
+      <span class="status-icon">✅</span>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="controls-row">
+      <div class="control-group">
+        <label class="toggle">
+          <input type="checkbox" id="proxyToggle" checked onchange="toggleProxy()">
+          <span class="slider"></span>
+        </label>
+        <span>Proxy</span>
+      </div>
+      <div class="control-group">
+        <label class="toggle">
+          <input type="checkbox" id="jsToggle" checked onchange="toggleJS()">
+          <span class="slider"></span>
+        </label>
+        <span>JavaScript</span>
+      </div>
+      <div class="control-group">
+        <label class="toggle">
+          <input type="checkbox" id="stealthToggle" checked onchange="toggleStealth()">
+          <span class="slider"></span>
+        </label>
+        <span>Stealth Mode</span>
+      </div>
+    </div>
+
+    <div class="auto-burn-row">
+      <span>🔄 Auto-Burn Identity:</span>
+      <select id="autoBurnSelect" onchange="setAutoBurn()">
+        <option value="0">Off</option>
+        <option value="1">Every 1 min</option>
+        <option value="5">Every 5 min</option>
+        <option value="10">Every 10 min</option>
+        <option value="15">Every 15 min</option>
+        <option value="30">Every 30 min</option>
+      </select>
+      <span id="burnCountdown" style="color:#555;font-size:11px;"></span>
+    </div>
+
+    <button class="btn-new-identity" onclick="newIdentity()">
+      <span>🔄</span> New Identity
+    </button>
+  </div>
+
+  <div class="loading" id="loading">Searching</div>
+  <div class="results" id="results"></div>
+
+  <div class="footer">
+    <strong>Isaac Browser — Maximum Privacy</strong><br>
+    No History &middot; No Cookies &middot; Tracker Blocker &middot; Anti-Fingerprint &middot; Force HTTPS<br>
+    JS Toggle &middot; Stealth Mode &middot; Auto-Burn &middot; Clear Clipboard on Exit &middot; Proxy/VPN + DoH DNS<br>
+    <strong>All data is immediately burned when you close or switch away.</strong>
+  </div>
+</div>
+
+<script>
+// ── Toast notification ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── Search ──
+const searchBox = document.getElementById('searchBox');
+const resultsEl = document.getElementById('results');
+const loadingEl = document.getElementById('loading');
+
+searchBox.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    const val = searchBox.value.trim();
+    if (!val) return;
+    if (val.includes('.') && !val.includes(' ')) {
+      let url = val;
+      if (!url.startsWith('http://') && !url.startsWith('https://'))
+        url = 'https://' + url;
+      window.location.href = url;
+    } else {
+      doSearch(val);
+    }
+  }
+});
+
+async function doSearch(query) {
+  resultsEl.classList.remove('visible');
+  loadingEl.classList.add('visible');
+  resultsEl.innerHTML = '';
+  try {
+    const resp = await fetch('/api/search?q=' + encodeURIComponent(query));
+    const data = await resp.json();
+    renderResults(data.results || []);
+  } catch(e) {
+    renderResults([]);
+  }
+  loadingEl.classList.remove('visible');
+}
+
+function renderResults(results) {
+  if (results.length === 0) {
+    resultsEl.innerHTML = '<div style="text-align:center;color:#555;padding:20px;">No results.</div>';
+    resultsEl.classList.add('visible');
+    return;
+  }
+  let html = '';
+  for (const r of results) {
+    if (!r.url) {
+      html += '<div class="result-item"><div class="result-title" style="color:#f87171;">' + esc(r.title) + '</div></div>';
+      continue;
+    }
+    html += '<div class="result-item">' +
+      '<a class="result-title" href="' + esc(r.url) + '" target="_self">' + esc(r.title) + '</a>' +
+      '<div class="result-url">' + esc(r.url) + '</div>';
+    if (r.snippet) html += '<div class="result-snippet">' + esc(r.snippet) + '</div>';
+    html += '</div>';
+  }
+  resultsEl.innerHTML = html;
+  resultsEl.classList.add('visible');
+}
+function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+// ── Proxy Toggle ──
+async function toggleProxy() {
+  const enabled = document.getElementById('proxyToggle').checked;
+  try {
+    await fetch('/api/set-proxy', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({enabled: enabled})
+    });
+    updateProxyUI(enabled);
+    showToast(enabled ? 'Proxy enabled' : 'Proxy disabled');
+  } catch(e) {}
+}
+function updateProxyUI(enabled) {
+  document.getElementById('proxyLabel').textContent = enabled ? 'Proxy Enabled' : 'Proxy Disabled';
+  document.getElementById('proxyStatusIcon').textContent = enabled ? '✅' : '❌';
+  document.getElementById('proxyBadge').className = 'shield-item' + (enabled ? ' on' : ' off');
+}
+
+// ── JavaScript Toggle ──
+async function toggleJS() {
+  const enabled = document.getElementById('jsToggle').checked;
+  try {
+    await fetch('/api/set-js', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({enabled: enabled})
+    });
+    updateJSUI(enabled);
+    showToast(enabled ? 'JavaScript enabled — reload page' : 'JavaScript disabled');
+  } catch(e) {}
+}
+function updateJSUI(enabled) {
+  document.getElementById('jsLabel').textContent = enabled ? 'JavaScript ON' : 'JavaScript OFF';
+  document.getElementById('jsStatusIcon').textContent = enabled ? '✅' : '❌';
+  document.getElementById('jsBadge').className = 'shield-item' + (enabled ? ' on' : ' off');
+}
+
+// ── Stealth Mode Toggle ──
+async function toggleStealth() {
+  const enabled = document.getElementById('stealthToggle').checked;
+  try {
+    await fetch('/api/set-stealth', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({enabled: enabled})
+    });
+    updateStealthUI(enabled);
+    showToast(enabled ? 'Stealth mode on — data wiped on window blur' : 'Stealth mode off');
+  } catch(e) {}
+}
+function updateStealthUI(enabled) {
+  document.getElementById('stealthLabel').textContent = enabled ? 'Stealth Mode' : 'Stealth Off';
+  document.getElementById('stealthStatusIcon').textContent = enabled ? '✅' : '❌';
+  document.getElementById('stealthBadge').className = 'shield-item' + (enabled ? ' on' : ' off');
+}
+
+// ── Auto-Burn ──
+async function setAutoBurn() {
+  const minutes = parseInt(document.getElementById('autoBurnSelect').value);
+  try {
+    await fetch('/api/set-auto-burn', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({minutes: minutes})
+    });
+    if (minutes > 0) {
+      showToast('Auto-burn every ' + minutes + ' min — identity auto-resets');
+    } else {
+      showToast('Auto-burn disabled');
+      document.getElementById('burnCountdown').textContent = '';
+    }
+  } catch(e) {}
+}
+
+// ── Burn countdown timer ──
+let burnRemaining = 0;
+setInterval(function() {
+  const sel = document.getElementById('autoBurnSelect');
+  const minutes = parseInt(sel.value);
+  if (minutes > 0 && document.getElementById('burnCountdown')) {
+    burnRemaining = burnRemaining <= 0 ? minutes * 60 : burnRemaining - 1;
+    const m = Math.floor(burnRemaining / 60);
+    const s = burnRemaining % 60;
+    document.getElementById('burnCountdown').textContent =
+      'Next burn: ' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  }
+}, 1000);
+
+// ── New Identity ──
+async function newIdentity() {
+  const btn = document.querySelector('.btn-new-identity');
+  btn.innerHTML = '<span>⏳</span> Clearing...';
+  btn.disabled = true;
+  try {
+    await fetch('/api/new-identity', {method: 'POST'});
+    await new Promise(r => setTimeout(r, 300));
+    window.location.href = '/newtab';
+  } catch(e) {
+    btn.innerHTML = '<span>🔄</span> New Identity';
+    btn.disabled = false;
+  }
+}
+
+// ── Load initial state ──
+async function loadState() {
+  try {
+    const resp = await fetch('/api/privacy-status');
+    const data = await resp.json();
+    
+    document.getElementById('proxyToggle').checked = data.proxy_enabled;
+    updateProxyUI(data.proxy_enabled);
+    
+    document.getElementById('jsToggle').checked = data.js_enabled;
+    updateJSUI(data.js_enabled);
+    
+    document.getElementById('stealthToggle').checked = data.stealth_mode;
+    updateStealthUI(data.stealth_mode);
+    
+    const ab = data.auto_burn_minutes;
+    if (ab > 0) {
+      document.getElementById('autoBurnSelect').value = String(ab);
+    }
+  } catch(e) {}
+}
+loadState();
+
+// ── URL bar sync from query params ──
+const q = new URLSearchParams(window.location.search).get('q');
+if (q) { searchBox.value = q; doSearch(q); }
+</script>
+</body>
+</html>

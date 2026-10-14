@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IGCSE Economics 1.1 — Market System → Market Equilibrium + Exam Skills</title>
+<style>
+:root{
+  --bg:#0f172a; --card:#1e293b; --line:#334155; --txt:#e2e8f0; --dim:#94a3b8;
+  --h2:#38bdf8; --h3:#a5f3fc; --gold:#fbbf24; --good:#4ade80; --bad:#f43f5e; --warn:#facc15;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+header{padding:26px 20px 14px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0f172a,#131f38)}
+header h1{margin:0 0 6px;font-size:26px;color:var(--h2)}
+header p{margin:0;color:var(--dim);font-size:14px}
+nav{position:sticky;top:0;z-index:20;display:flex;gap:8px;overflow-x:auto;padding:10px 14px;background:#0b1220;border-bottom:1px solid var(--line)}
+nav button{white-space:nowrap;background:#1e293b;color:var(--txt);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer}
+nav button:hover{background:#2563eb}
+nav button.on{background:#1e40af;border-color:#38bdf8;color:#fff}
+main{max-width:1080px;margin:0 auto;padding:22px 16px 90px}
+section{display:none;animation:f .18s ease-out}
+section.on{display:block}
+@keyframes f{from{opacity:.4}to{opacity:1}}
+h2{color:var(--h2);font-size:23px;margin:26px 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+h3{color:var(--h3);font-size:17px;margin:20px 0 8px}
+h4{color:var(--gold);font-size:15px;margin:16px 0 6px}
+p,li{font-size:15.5px}
+code{background:#0b1220;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:14px;color:#7dd3fc}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.kv{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kv b{color:var(--gold);display:block;font-size:14px;margin-bottom:4px}
+.kv span{font-size:14.5px;color:#cbd5e1}
+.tip{border-left:4px solid var(--h2);background:#0c1a2e;padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.warn{border-left:4px solid var(--bad);background:#220f18;padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.win{border-left:4px solid var(--good);background:#0c2218;padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.gold{border-left:4px solid var(--gold);background:#241d08;padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14.5px;display:block;overflow-x:auto}
+th{background:#334155;text-align:left;padding:8px 10px;font-size:13.5px;color:#e2e8f0}
+td{padding:8px 10px;border-top:1px solid var(--line);vertical-align:top}
+tr:hover td{background:#1b2536}
+.badge{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;margin-right:6px}
+.b-mcq{background:#1e3a8a;color:#bfdbfe}.b-1{background:#422006;color:#facc15}
+.b-2{background:#064e3b;color:#4ade80}.b-3{background:#3b0764;color:#e9d5ff}
+.b-6{background:#4c0519;color:#fda4af}.b-9{background:#0c4a6e;color:#7dd3fc}.b-12{background:#581c87;color:#f5d0fe}
+.ex{background:#0c1a2e;border:1px solid #1e3a5f;border-radius:10px;padding:14px 16px;margin:12px 0}
+.ex h4{margin-top:0}
+.dg{background:#0b1220;border:1px solid var(--line);border-radius:12px;padding:10px;margin:12px 0;text-align:center}
+.dg figcaption{font-size:13px;color:var(--dim);margin-top:4px}
+.ax{stroke:#94a3b8;stroke-width:1.6;fill:none}
+.gr{stroke:#38bdf8;stroke-width:2.4;fill:none}
+.gr2{stroke:#fbbf24;stroke-width:2.4;fill:none;stroke-dasharray:6 4}
+.gr3{stroke:#f43f5e;stroke-width:2.4;fill:none;stroke-dasharray:6 4}
+.lb{fill:#cbd5e1;font:12px sans-serif}
+.lb2{fill:#7dd3fc;font:600 12px sans-serif}
+.lb3{fill:#fbbf24;font:600 12px sans-serif}
+.dot{fill:#fbbf24}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:10px 0;overflow:hidden}
+details summary{cursor:pointer;padding:11px 14px;font-weight:600;font-size:14.5px;background:#1e293b}
+details[open] summary{border-bottom:1px solid var(--line);color:var(--h3)}
+details .in{padding:12px 16px;background:#0f172a}
+button.qa{background:#1e40af;color:#fff;border:0;border-radius:8px;padding:7px 13px;font-size:13.5px;font-weight:600;cursor:pointer;margin:6px 6px 0 0}
+button.qa:hover{background:#2563eb}
+.hide{display:none}
+.score{font-weight:700;color:var(--win);color:#4ade80}
+ol.qs li{margin-bottom:14px}
+.goal{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.goal input{width:18px;height:18px;accent-color:#38bdf8}
+.small{font-size:13.5px;color:var(--dim)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Economics 1.1 — The Market System</h1>
+  <p>1.1.1 The economic problem &nbsp;→&nbsp; PPF &nbsp;→&nbsp; Demand &nbsp;→&nbsp; Supply &nbsp;→&nbsp; Market Equilibrium &nbsp;·&nbsp; <b>Pearson Edexcel International GCSE Economics (4EC1)</b> — taught + exam skills</p>
+</header>
+
+<nav id="nav"></nav>
+
+<main>
+
+<!-- ============ START ============ -->
+<section id="s-start" class="on">
+  <h2>🚀 Start here (2 minutes)</h2>
+  <div class="gold">
+    <b>Your exam in one line:</b> Edexcel 4EC1 Paper 1 = <b>1 hour 30 min</b>, <b>80 marks</b>, <b>4 compulsory questions × 20 marks</b>. You get <b>6 multiple-choice</b> questions per paper, a <b>9-mark "assess"</b> in Q2 and Q3, and the <b>last question is always a 12-mark "evaluate"</b>. That's it. Everything below is built to feed those questions.
+  </div>
+
+  <h3>What you must be able to do by the end</h3>
+  <div class="grid">
+    <div class="kv"><b>1. Say it</b><span>Define scarcity, opportunity cost, demand, supply, equilibrium price/quantity, excess demand, excess supply.</span></div>
+    <div class="kv"><b>2. Draw it</b><span>PPF, demand curve, supply curve, equilibrium, and both shifts — fully labelled.</span></div>
+    <div class="kv"><b>3. Move it</b><span>Decide correctly: is this a <i>movement along</i> the curve (price changed) or a <i>shift</i> (anything else changed)?</span></div>
+    <div class="kv"><b>4. Chain it</b><span>Shift → new price → new quantity → who wins/loses. That chain IS the mark scheme.</span></div>
+    <div class="kv"><b>5. Balance it</b><span>For 9 and 12 marks: two viewpoints + a supported judgement. One side = capped at Level 1.</span></div>
+  </div>
+
+  <h3>60-second summary of the whole topic</h3>
+  <div class="card">
+    <p><b>Wants are unlimited, resources are finite → scarcity → we must choose → every choice has an opportunity cost.</b> A <b>PPF</b> draws those choices for a whole economy (on the line = fully used, inside = unemployed resources, outside = unobtainable; the curve shifts out with growth, in with disaster).</p>
+    <p>Zoom into one market: <b>demand</b> is "willingness <i>and</i> ability to buy at a given price" (slopes down — law of demand). <b>Supply</b> is "willingness <i>and</i> ability to sell at a given price" (slopes up — higher price = higher profit motive). Where they cross = <b>market equilibrium</b>, giving equilibrium price P<sub>e</sub> and quantity Q<sub>e</sub>. Above P<sub>e</sub> = <b>excess supply (surplus)</b>, below P<sub>e</sub> = <b>excess demand (shortage)</b>. Market forces then push price back to P<sub>e</sub> on their own.</p>
+  </div>
+
+  <div class="tip"><b>How to use this page:</b> Tab 2–6 = the teaching (read in order once). Tab 7 = diagrams you must be able to reproduce from memory. Tab 8 = exam skills + full model answers at every mark tariff. Tab 9 = practice with answers you reveal yourself.</div>
+</section>
+
+<!-- ============ 1.1.1 ============ -->
+<section id="s-problem">
+  <h2>1.1.1a–b — Scarcity, choice & opportunity cost</h2>
+
+  <h3>The whole subject in 4 moves</h3>
+  <div class="grid">
+    <div class="kv"><b>1. Wants are infinite</b><span>People always want more — new phone, bigger house, better holiday. Never satisfied.</span></div>
+    <div class="kv"><b>2. Resources are finite</b><span>Land, labour, capital and enterprise exist in limited amounts. This is <b>scarcity</b>.</span></div>
+    <div class="kv"><b>3. Therefore choose</b><span><b>The economic problem</b> = matching limited resources to unlimited wants and needs → choices must be made.</span></div>
+    <div class="kv"><b>4. Therefore cost</b><span>Choosing one thing means giving up the next best alternative = <b>opportunity cost</b>.</span></div>
+  </div>
+
+  <div class="ex">
+    <h4>Definitions the examiner wants (word-for-word level)</h4>
+    <p><b>Scarcity</b> — the basic economic problem that resources are limited in supply relative to the unlimited wants and needs of people.<br>
+    <b>The economic problem</b> — how to allocate scarce resources to satisfy unlimited wants and needs.<br>
+    <b>Needs</b> — goods/services essential for survival (food, water, shelter). <b>Wants</b> — goods/services that are desired but not essential.<br>
+    <b>Opportunity cost</b> — the benefit lost from the <b>next best alternative</b> forgone when a choice is made. <span class="small">(His teacher's wording: "the benefits lost of the next best alternative — the option you did not choose.")</span></p>
+  </div>
+
+  <div class="warn"><b>The #1 lost mark on opportunity cost:</b> students write "what you gave up". The mark needs <b>next best</b> — you only give up ONE thing (the next best alternative), not all the things you didn't buy. And it is the <b>benefit</b> lost, not the item.</div>
+
+  <h3>The 4 factors of production (all four are always scarce)</h3>
+  <table>
+    <tr><th>Factor</th><th>What it is</th><th>Reward (payment)</th><th>Island School example</th></tr>
+    <tr><td><b>Land</b></td><td>All natural resources: the land itself, oil, trees, fish, minerals, water</td><td><b>Rent</b></td><td>The site in Borrett Road; sports fields; water</td></tr>
+    <tr><td><b>Labour</b></td><td>The human effort — the number/quality of people available to work</td><td><b>Wages</b></td><td>Teachers, admin staff, caretakers</td></tr>
+    <tr><td><b>Capital</b></td><td>Man-made resources used to produce other goods: machinery, tools, equipment, finance, buildings</td><td><b>Interest</b></td><td>Buildings, laptops, desks, labs, projectors</td></tr>
+    <tr><td><b>Enterprise</b></td><td>The skill and risk-taking of the person who brings the other three together</td><td><b>Profit</b></td><td>The ESF/Principal or founder taking the risk</td></tr>
+  </table>
+  <div class="tip"><b>Reward words are free marks</b> — land=rent, labour=wages, capital=interest, enterprise=profit. Learn them as a set.</div>
+
+  <h3>The 3 fundamental economic questions</h3>
+  <div class="grid">
+    <div class="kv"><b>What to produce?</b><span>How to allocate scarce resources between competing uses — tanks or hospitals? Which goods/services?</span></div>
+    <div class="kv"><b>How to produce?</b><span>Which method — labour-intensive or capital-intensive? Efficient technology?</span></div>
+    <div class="kv"><b>For whom to produce?</b><span>How is output distributed — who gets to consume it? By price, need, or government decision?</span></div>
+  </div>
+
+  <h3>Opportunity cost for the 3 economic agents (spec 1.1.1b)</h3>
+  <table>
+    <tr><th>Agent</th><th>Decision</th><th>Opportunity cost = next best alternative forgone</th></tr>
+    <tr><td><b>Consumer</b></td><td>Buys a new bicycle with $3,000</td><td>Benefit lost from the next best thing $3,000 could have bought (e.g. a holiday)</td></tr>
+    <tr><td><b>Consumer</b></td><td>Family saves $500/month for a holiday</td><td>Benefit of what the $500/month could be spent on now</td></tr>
+    <tr><td><b>Worker</b></td><td>Employee quits her job</td><td>Lost wage + lost experience/promotion from staying</td></tr>
+    <tr><td><b>Producer</b></td><td>Bank spends 7bn rupees on 50 new branches</td><td>Benefit lost from the next preferred option (renew all ATMs / buy an insurance company / retrain staff)</td></tr>
+    <tr><td><b>Government</b></td><td>Government spends $10bn on a new airport</td><td>The public services forgone (e.g. hospitals/schools) that $10bn could have funded</td></tr>
+  </table>
+  <div class="tip"><b>Exam sentence frame (works for almost any "opportunity cost" question):</b> "The opportunity cost is the next best alternative forgone. By choosing X, the [agent] gives up the benefit of Y, which is the next most preferred option."</div>
+</section>
+
+<!-- ============ PPF ============ -->
+<section id="s-ppf">
+  <h2>1.1.1c–e — The Production Possibility Curve (PPF)</h2>
+
+  <div class="ex">
+    <b>Definition:</b> A PPF shows the <b>different combinations of two goods that can be produced if all factors of production (resources) are fully and efficiently employed.</b>
+    <ul>
+      <li><b>Assumption 1:</b> only two goods/categories are produced (e.g. consumer goods vs capital goods).</li>
+      <li><b>Assumption 2:</b> all resources are fully and efficiently used.</li>
+    </ul>
+    <p><b>Consumer goods</b> = purchased by households (B2C), e.g. food, phones. <b>Capital goods</b> = purchased by firms to produce other goods (B2B), e.g. machinery, robots.</p>
+  </div>
+
+  <div class="dg">
+    <svg viewBox="0 0 380 280" width="100%" style="max-width:420px">
+      <line class="ax" x1="55" y1="240" x2="350" y2="240"/>
+      <line class="ax" x1="55" y1="240" x2="55" y2="25"/>
+      <polygon points="350,240 343,236 343,244" fill="#94a3b8"/>
+      <polygon points="55,25 51,32 59,32" fill="#94a3b8"/>
+      <path class="gr" d="M55 40 C 110 60, 130 120, 150 160 C 175 205, 250 232, 345 238"/>
+      <path class="gr2" d="M55 22 C 118 44, 142 108, 162 152 C 190 200, 268 230, 360 236"/>
+      <path class="gr3" d="M60 70 C 108 88, 126 138, 143 172 C 165 212, 238 236, 320 241"/>
+      <circle class="dot" cx="55" cy="40" r="4"/><text class="lb2" x="46" y="33">A</text>
+      <circle class="dot" cx="120" cy="86" r="4"/><text class="lb2" x="113" y="79">B</text>
+      <circle class="dot" cx="152" cy="165" r="4"/><text class="lb2" x="145" y="182">C</text>
+      <circle class="dot" cx="300" cy="234" r="4"/><text class="lb2" x="293" y="227">D</text>
+      <circle cx="120" cy="150" r="4" fill="#94a3b8"/><text class="lb" x="128" y="154">F (inside — unemployed resources)</text>
+      <circle cx="250" cy="110" r="4" fill="#f43f5e"/><text class="lb" x="258" y="114" fill="#f43f5e">X (unobtainable)</text>
+      <text class="lb" x="200" y="264">Consumer goods</text>
+      <text class="lb" x="8" y="20">Capital goods</text>
+      <text class="lb2" x="318" y="26">PPF</text>
+      <text class="lb3" x="300" y="76">PPF₂ (growth, outward)</text>
+      <text class="lb" x="86" y="120" fill="#f43f5e">PPF₃ (inward)</text>
+      <line x1="55" y1="240" x2="55" y2="240" stroke="none"/>
+    </svg>
+    <figcaption>Fig 1 — The PPF: points A–D on the curve, F inside (unemployed), X outside (unobtainable), outward/inward shifts.</figcaption>
+  </div>
+
+  <h3>What the PPF must show (spec 1.1.1d — memorise these 5)</h3>
+  <table>
+    <tr><th>#</th><th>What it shows</th><th>Where / how</th></tr>
+    <tr><td>1</td><td>The <b>maximum productive potential</b> of an economy</td><td>Any point ON the curve (A, B, C, D) — the frontier itself</td></tr>
+    <tr><td>2</td><td><b>Fully employed vs unemployed</b> resources</td><td>ON the curve = fully employed; INSIDE (F) = unemployed/inefficient (recession, unused labour)</td></tr>
+    <tr><td>3</td><td><b>Opportunity cost</b></td><td>Moving ALONG the curve: give up some consumer goods to get more capital goods — that lost output is the opportunity cost</td></tr>
+    <tr><td>4</td><td><b>Positive / negative economic growth</b></td><td>Curve shifting OUTWARD (growth) or INWARD (negative growth)</td></tr>
+    <tr><td>5</td><td><b>Possible vs unobtainable</b> production</td><td>On or inside = possible; OUTSIDE (X) = unobtainable with current resources</td></tr>
+  </table>
+
+  <div class="ex">
+    <h4>Worked example (from your teacher's deck)</h4>
+    <p>Point B = 14m consumer + 4m capital. Point C = 8m consumer + 7m capital.<br>
+    Moving <b>B → C</b>: gain 3m capital goods, lose 6m consumer goods. <b>Opportunity cost = 6 million consumer goods.</b></p>
+    <p class="small">Write it that way in the exam: "the opportunity cost of the extra 3m capital goods is the 6m consumer goods forgone."</p>
+  </div>
+
+  <h3>Shifts of the PPF</h3>
+  <div class="grid">
+    <div class="kv" style="border-color:#4ade80"><b>OUTWARD shift = economic growth ↑</b>
+      <span>Causes: new technology/innovation · improved efficiency (higher productivity) · better education &amp; training (better labour quality) · increase in the quantity of capital or labour · discovery/extraction of new natural resources (e.g. oil).</span></div>
+    <div class="kv" style="border-color:#f43f5e"><b>INWARD shift = negative economic growth ↓</b>
+      <span>Causes: natural disasters (drought, tsunami, earthquake, floods) · war/civil conflict destroying factors of production · large-scale labour migration/emigration · natural resources running out.</span></div>
+  </div>
+
+  <h3>Movement along vs shift of the PPF — do not mix these up</h3>
+  <table>
+    <tr><th>Situation</th><th>Yes/no</th><th>What happens</th></tr>
+    <tr><td>War breaks out</td><td>✗</td><td>INWARD shift — factors of production destroyed</td></tr>
+    <tr><td>A very dry summer</td><td>✗</td><td>INWARD (or slower growth) — land/agriculture hit</td></tr>
+    <tr><td>Improved education</td><td>✗</td><td>OUTWARD — better quality labour</td></tr>
+    <tr><td>Producing more capital goods</td><td>—</td><td>MOVEMENT along the curve now, but OUTWARD shift in future (more investment → growth)</td></tr>
+    <tr><td>Discovery of new technology</td><td>✗</td><td>OUTWARD shift</td></tr>
+    <tr><td>An economy operating above potential</td><td>✗</td><td>Impossible — you cannot be outside the frontier; it only runs at max (on the curve) or below it</td></tr>
+  </table>
+  <div class="tip"><b>Top-mark insight:</b> producing more capital goods (point B rather than A) sacrifices consumption <i>now</i> but gives <b>greater growth in the future</b> — more capital = more investment = better quantity and quality of factors of production. That one sentence is why B wins the "which leads to greater growth" question.</div>
+</section>
+
+<!-- ============ DEMAND ============ -->
+<section id="s-demand">
+  <h2>1.1.3a–c — Demand</h2>
+
+  <div class="ex">
+    <b>Definition (2-mark, two parts!):</b> Demand is the <b>willingness</b> (1) <b>and ability</b> (2) of consumers to buy a good or service <b>at a given price in a given time period</b>.
+  </div>
+  <div class="warn"><b>"Willingness and ability"</b> — both words must appear. Being willing to buy a Ferrari without the money is not demand. That's why it's called <b>effective demand</b>.</div>
+
+  <h3>The law of demand</h3>
+  <div class="card">As the price of a product <b>falls</b>, quantity demanded <b>rises</b>. As the price <b>rises</b>, quantity demanded <b>falls</b>. There is an <b>inverse (negative) relationship</b> between price and quantity demanded → so the demand curve slopes <b>downwards, left to right</b>.</div>
+
+  <div class="dg">
+    <svg viewBox="0 0 380 260" width="100%" style="max-width:400px">
+      <line class="ax" x1="55" y1="215" x2="350" y2="215"/><line class="ax" x1="55" y1="215" x2="55" y2="30"/>
+      <path class="gr" d="M75 50 L330 200"/>
+      <path class="gr2" d="M140 45 L345 190"/>
+      <path class="gr3" d="M60 95 L265 235"/>
+      <line x1="75" y1="215" x2="75" y2="53" stroke="#64748b" stroke-dasharray="3 3"/>
+      <line x1="150" y1="215" x2="150" y2="117" stroke="#64748b" stroke-dasharray="3 3"/>
+      <text class="lb" x="58" y="232">Q₁</text><text class="lb" x="134" y="232">Q₂</text>
+      <text class="lb" x="22" y="205">P₁</text><text class="lb" x="22" y="115">P₂</text>
+      <circle class="dot" cx="75" cy="53" r="4"/><circle class="dot" cx="150" cy="117" r="4"/>
+      <text class="lb2" x="316" y="206">D</text>
+      <text class="lb3" x="336" y="180">D₂ ↑</text>
+      <text class="lb" x="252" y="248" fill="#f43f5e">D₃ ↓</text>
+      <text class="lb" x="150" y="252">Quantity</text><text class="lb" x="6" y="24">Price</text>
+      <text class="lb" x="86" y="70" fill="#facc15">movement (price change)</text>
+      <text class="lb" x="185" y="42" fill="#fbbf24">shift (D→D₂)</text>
+    </svg>
+    <figcaption>Fig 2 — Movement along D (price change) vs a shift of D (non-price factor). Right = increase, Left = decrease.</figcaption>
+  </div>
+
+  <h3>The two things that get confused (this is where marks die)</h3>
+  <table>
+    <tr><th>&nbsp;</th><th>MOVEMENT along the demand curve</th><th>SHIFT of the demand curve</th></tr>
+    <tr><td>Change in…</td><td><b>Change in quantity demanded</b></td><td><b>Change in demand</b></td></tr>
+    <tr><td>Caused by</td><td>ONLY a change in the <b>price of the good itself</b></td><td>Any <b>non-price determinant</b> of demand</td></tr>
+    <tr><td>What the diagram shows</td><td>Same curve, slide from P₁ to P₂</td><td>A NEW curve D₁ → D₂</td></tr>
+    <tr><td>Right/left rule</td><td>—</td><td>New curve on the RIGHT = increase; LEFT = decrease</td></tr>
+  </table>
+  <div class="warn"><b>Paper 1 killer:</b> never write "the price rose so demand shifted to the left". A price rise causes a <b>contraction of demand</b> — a <b>movement up along</b> the same curve. Marks are lost for this in MCQs and in 6/9/12-mark answers.</div>
+
+  <h3>Factors that shift demand (spec list + the 6 determinants)</h3>
+  <table>
+    <tr><th>Factor (spec wording)</th><th>Demand ↑ (shift right) if…</th><th>Demand ↓ (shift left) if…</th></tr>
+    <tr><td><b>Advertising</b></td><td>successful campaign raises awareness</td><td>—</td></tr>
+    <tr><td><b>Income</b></td><td>incomes rise (normal goods)</td><td>incomes fall; or a rise for <b>inferior goods</b></td></tr>
+    <tr><td><b>Fashion &amp; tastes</b></td><td>product becomes a fad / popular</td><td>goes out of style</td></tr>
+    <tr><td><b>Price of substitutes</b></td><td>rival's price rises → switch to this good</td><td>rival's price falls → switch away</td></tr>
+    <tr><td><b>Price of complements</b></td><td>complement gets cheaper (e.g. printers ↓ → ink cartridges ↑)</td><td>complement gets dearer (petrol ↑ → big cars ↓)</td></tr>
+    <tr><td><b>Demographic changes</b></td><td>population rise, more consumers enter the market (birth rate ↑, immigration, students arrive)</td><td>consumers leave (emigration, low birth rate, students go home for summer)</td></tr>
+    <tr><td><b>Expectations</b></td><td>consumers expect future price rises/income rises → buy now</td><td>expect prices to fall → delay purchase</td></tr>
+  </table>
+  <div class="tip"><b>Substitute vs complement in one line:</b> substitutes compete (Coke/Pepsi, Uber/MTR) — one's price ↑ makes the other's demand ↑. Complements are consumed together (cars/petrol, phones/cases) — one's price ↑ makes the other's demand ↓.</div>
+</section>
+
+<!-- ============ SUPPLY ============ -->
+<section id="s-supply">
+  <h2>1.1.3d–f — Supply</h2>
+
+  <div class="ex">
+    <b>Definition (2 marks, two parts):</b> Supply is the <b>willingness</b> and <b>ability</b> of producers to sell a good or service <b>at a given price in a given time period</b>.
+  </div>
+
+  <h3>The law of supply</h3>
+  <div class="card">As price <b>rises</b>, quantity supplied <b>rises</b>. As price <b>falls</b>, quantity supplied <b>falls</b>. <b>Positive/direct relationship</b> → the supply curve slopes <b>upwards, left to right</b>. Reason: a higher price = higher profit per unit = an <b>incentive</b> for firms to produce more (and it makes production of the extra units worthwhile).</div>
+
+  <div class="dg">
+    <svg viewBox="0 0 380 260" width="100%" style="max-width:400px">
+      <line class="ax" x1="55" y1="215" x2="350" y2="215"/><line class="ax" x1="55" y1="215" x2="55" y2="30"/>
+      <path class="gr" d="M75 200 L330 55"/>
+      <path class="gr3" d="M60 190 L300 45"/>
+      <path class="gr2" d="M105 215 L345 90"/>
+      <text class="lb2" x="318" y="60">S</text>
+      <text class="lb" x="288" y="40" fill="#f43f5e">S₂ ↓ (left)</text>
+      <text class="lb3" x="330" y="105">S₃ ↑ (right)</text>
+      <text class="lb" x="150" y="252">Quantity</text><text class="lb" x="6" y="24">Price</text>
+    </svg>
+    <figcaption>Fig 3 — Supply curve and its shifts. Costs up / taxes / bad weather / fewer sellers → shift LEFT. Costs down / subsidies / technology / good weather → shift RIGHT.</figcaption>
+  </div>
+
+  <h3>Factors that shift supply (spec list)</h3>
+  <table>
+    <tr><th>Factor (spec wording)</th><th>Supply ↑ (right) if…</th><th>Supply ↓ (left) if…</th></tr>
+    <tr><td><b>Costs of production</b></td><td>raw materials, wages, energy, rent get cheaper</td><td>costs rise (higher fertiliser, fuel, wages)</td></tr>
+    <tr><td><b>Changes in technology</b></td><td>new machinery/software improves efficiency and cuts unit costs</td><td>technology becomes outdated (machinery not replaced)</td></tr>
+    <tr><td><b>Indirect taxes</b></td><td>tax cut/removed → costs fall</td><td>new or higher tax (e.g. sales tax on tobacco) → costs rise</td></tr>
+    <tr><td><b>Subsidies</b></td><td>government subsidy reduces firms' costs → produce more</td><td>subsidy withdrawn</td></tr>
+    <tr><td><b>Natural factors</b></td><td>favourable weather — good harvest</td><td>drought, flood, hurricane, earthquake, war</td></tr>
+    <tr><td><b>Number of sellers / size of market</b></td><td>more firms enter the market</td><td>firms leave / close facilities</td></tr>
+    <tr><td><b>Expectations of producers</b></td><td>expect higher future prices → hold back now? (careful: state the reason)</td><td>expect a slump</td></tr>
+  </table>
+
+  <div class="ex">
+    <h4>Fixed supply — the Wimbledon Centre Court idea</h4>
+    <p>Some goods have <b>perfectly inelastic (fixed) supply</b>: a vertical supply curve. Wimbledon's Centre Court has a fixed number of seats — no matter how high the ticket price goes, the quantity supplied stays the same. (You'll meet this properly in 1.1.4 elasticity.)</p>
+  </div>
+
+  <table>
+    <tr><th>&nbsp;</th><th>MOVEMENT along supply</th><th>SHIFT of supply</th></tr>
+    <tr><td>Called</td><td>Change in <b>quantity supplied</b></td><td>Change in <b>supply</b></td></tr>
+    <tr><td>Caused by</td><td>Change in the <b>price of the good itself</b></td><td>Any <b>non-price determinant</b> (costs, tech, tax, subsidy, weather, sellers)</td></tr>
+    <tr><td>Diagram</td><td>Same curve, slide along it</td><td>New curve S₁ → S₂</td></tr>
+  </table>
+</section>
+
+<!-- ============ EQUILIBRIUM ============ -->
+<section id="s-eq">
+  <h2>1.1.3g–j — Market equilibrium, excess demand &amp; excess supply</h2>
+
+  <div class="ex">
+    <b>Market equilibrium</b> — the price at which <b>quantity demanded = quantity supplied</b>. The market is "cleared" — no shortage and no surplus.<br>
+    <b>Equilibrium price (P<sub>e</sub>)</b> — the price at which quantity demanded equals quantity supplied.<br>
+    <b>Equilibrium quantity (Q<sub>e</sub>)</b> — the quantity bought and sold at the equilibrium price.<br>
+    <b>Also called</b> the <b>market clearing price</b> — because at this price the market clears: every willing buyer finds a seller and vice versa, leaving no excess.
+  </div>
+
+  <div class="dg">
+    <svg viewBox="0 0 380 270" width="100%" style="max-width:420px">
+      <line class="ax" x1="55" y1="225" x2="350" y2="225"/><line class="ax" x1="55" y1="225" x2="55" y2="30"/>
+      <path class="gr" d="M80 60 L320 200"/>
+      <path class="gr3" d="M80 200 L320 60"/>
+      <line x1="200" y1="225" x2="200" y2="130" stroke="#fbbf24" stroke-dasharray="4 3"/>
+      <line x1="55" y1="130" x2="200" y2="130" stroke="#fbbf24" stroke-dasharray="4 3"/>
+      <circle class="dot" cx="200" cy="130" r="5"/>
+      <text class="lb2" x="308" y="207">D</text><text class="lb" x="308" y="68" fill="#f43f5e">S</text>
+      <text class="lb3" x="36" y="126">Pₑ</text><text class="lb3" x="190" y="243">Qₑ</text>
+      <text class="lb3" x="206" y="124">E</text>
+      <text class="lb" x="150" y="252">Quantity</text><text class="lb" x="6" y="24">Price</text>
+    </svg>
+    <figcaption>Fig 4 — Market equilibrium at E: P<sub>e</sub> and Q<sub>e</sub> where D = S.</figcaption>
+  </div>
+
+  <h3>Excess supply vs excess demand</h3>
+  <div class="grid">
+    <div class="kv" style="border-color:#f43f5e"><b>Price ABOVE P<sub>e</sub> → EXCESS SUPPLY (surplus)</b>
+      <span>Q<sub>s</sub> &gt; Q<sub>d</sub>. Firms are left with unsold stock. Rivals cut prices to clear stock → price falls back to P<sub>e</sub>.</span></div>
+    <div class="kv" style="border-color:#4ade80"><b>Price BELOW P<sub>e</sub> → EXCESS DEMAND (shortage)</b>
+      <span>Q<sub>d</sub> &gt; Q<sub>s</sub>. Consumers can't get the good (queues, rationing, black markets). Firms raise prices — buyers still willing → price rises back to P<sub>e</sub>.</span></div>
+  </div>
+
+  <div class="dg">
+    <svg viewBox="0 0 380 275" width="100%" style="max-width:430px">
+      <line class="ax" x1="55" y1="230" x2="350" y2="230"/><line class="ax" x1="55" y1="230" x2="55" y2="28"/>
+      <path class="gr" d="M80 60 L320 205"/>
+      <path class="gr3" d="M80 205 L320 60"/>
+      <line x1="55" y1="105" x2="285" y2="105" stroke="#fbbf24" stroke-dasharray="4 3"/>
+      <line x1="55" y1="165" x2="240" y2="165" stroke="#4ade80" stroke-dasharray="4 3"/>
+      <line x1="200" y1="230" x2="200" y2="132" stroke="#fbbf24" stroke-dasharray="4 3"/>
+      <line x1="55" y1="132" x2="200" y2="132" stroke="#fbbf24" stroke-dasharray="4 3"/>
+      <circle class="dot" cx="200" cy="132" r="4"/>
+      <line x1="240" y1="165" x2="240" y2="230" stroke="#4ade80" stroke-dasharray="3 3"/>
+      <line x1="285" y1="105" x2="285" y2="230" stroke="#fbbf24" stroke-dasharray="3 3"/>
+      <text class="lb2" x="300" y="212">D</text><text class="lb" x="300" y="66" fill="#f43f5e">S</text>
+      <text class="lb3" x="34" y="122">Pₑ</text><text class="lb3" x="192" y="248">Qₑ</text>
+      <text class="lb" x="248" y="112" fill="#fbbf24">Excess supply</text>
+      <text class="lb" x="150" y="182" fill="#4ade80">Excess demand</text>
+      <text class="lb" x="228" y="248">Q high</text><text class="lb" x="150" y="248">Q low</text>
+    </svg>
+    <figcaption>Fig 5 — Above P<sub>e</sub>: gap between S and D = excess supply. Below P<sub>e</sub>: excess demand (shortage).</figcaption>
+  </div>
+
+  <div class="tip"><b>How to read the gap correctly:</b> the size of the excess is always the horizontal distance between the two curves at that price. Read across from the given price to the S curve and to the D curve, then subtract. <b>Always say which is bigger.</b></div>
+
+  <h3>Worked example 1 — the Uber market (your teacher's table)</h3>
+  <table>
+    <tr><th>Price ($/km)</th><th>Q demanded (riders)</th><th>Q supplied (drivers)</th><th>Market situation</th></tr>
+    <tr><td>25</td><td>2,000</td><td>10,000</td><td>Excess supply of 8,000</td></tr>
+    <tr><td>20</td><td>4,000</td><td>8,000</td><td>Excess supply of 4,000</td></tr>
+    <tr><td><b>15</b></td><td><b>6,000</b></td><td><b>6,000</b></td><td><b>Equilibrium — P<sub>e</sub> = $15, Q<sub>e</sub> = 6,000 rides</b></td></tr>
+    <tr><td>10</td><td>8,000</td><td>4,000</td><td>Excess demand of 4,000</td></tr>
+    <tr><td>5</td><td>10,000</td><td>2,000</td><td>Excess demand of 8,000</td></tr>
+  </table>
+  <p class="small">Method: find the row where demand = supply. That row IS the equilibrium. For any other row, subtract the smaller from the bigger.</p>
+
+  <h3>Worked example 2 — the bicycle worksheet (20-140 GBP table)</h3>
+  <table>
+    <tr><th>Price (£)</th><td>20</td><td>40</td><td>60</td><td><b>80</b></td><td>100</td><td>120</td><td>140</td></tr>
+    <tr><th>Q supplied (000s)</th><td>0</td><td>15</td><td>30</td><td><b>45</b></td><td>60</td><td>75</td><td>90</td></tr>
+    <tr><th>Q demanded (000s)</th><td>100</td><td>90</td><td>80</td><td><b>70</b></td><td>60</td><td>50</td><td>40</td></tr>
+    <tr><th>Gap</th><td>Excess demand 100k</td><td>75k</td><td>50k</td><td><b>25k</b></td><td>0 = equilibrium</td><td>Excess supply 25k</td><td>50k</td></tr>
+  </table>
+  <p><b>Equilibrium price = £100.</b> At £100 quantity supplied = quantity demanded = <b>60,000 bicycles</b>.<br>
+  Sentences: "When price increases, quantity supplied <b>increases</b>." "When price increases, quantity demanded <b>decreases</b>."<br>
+  "The equilibrium price is also known as the <b>market clearing price</b>" — because at this price the market clears: all goods supplied are bought, so there is no surplus and no shortage left over.</p>
+
+  <h3>Calculating excess demand / supply (2-mark "calculate" questions)</h3>
+  <div class="ex">
+    <p><b>Excess demand = Q<sub>d</sub> − Q<sub>s</sub></b> &nbsp;&nbsp;|&nbsp;&nbsp; <b>Excess supply = Q<sub>s</sub> − Q<sub>d</sub></b></p>
+    <ul>
+      <li>Q<sub>d</sub> 4,000 chairs, Q<sub>s</sub> 7,000 → <b>excess SUPPLY of 3,000</b> (7,000 − 4,000).</li>
+      <li>Q<sub>d</sub> 10,000 mugs, Q<sub>s</sub> 3,000 → <b>excess DEMAND of 7,000</b> (10,000 − 3,000).</li>
+      <li>Q<sub>d</sub> 12,000 lemons, Q<sub>s</sub> 6,650 → <b>excess DEMAND of 5,350</b> (12,000 − 6,650).</li>
+      <li><b>Over several weeks:</b> excess 2,000 per week × 4 weeks = <b>8,000 units accumulated</b>. Always multiply when the question says "over a four-week period".</li>
+    </ul>
+  </div>
+
+  <h3>How shifts change the equilibrium (spec 1.1.3h)</h3>
+  <table>
+    <tr><th>Change</th><th>Curve</th><th>P<sub>e</sub></th><th>Q<sub>e</sub></th><th>Movement along the other curve</th></tr>
+    <tr><td>Demand ↑ (e.g. pandemic → face masks)</td><td>D shifts RIGHT (D₁→D₂)</td><td>↑</td><td>↑</td><td>Movement <b>up along</b> S — suppliers are incentivised to supply more</td></tr>
+    <tr><td>Demand ↓</td><td>D shifts LEFT</td><td>↓</td><td>↓</td><td>Movement <b>down along</b> S</td></tr>
+    <tr><td>Supply ↓ (e.g. sales tax on tobacco)</td><td>S shifts LEFT (S₁→S₂)</td><td>↑</td><td>↓</td><td>Movement <b>up along</b> D</td></tr>
+    <tr><td>Supply ↑ (e.g. subsidy / better technology)</td><td>S shifts RIGHT</td><td>↓</td><td>↑</td><td>Movement <b>down along</b> D</td></tr>
+  </table>
+  <div class="ex">
+    <h4>Model chain — face masks, Hong Kong, Covid-19 (D shifts right)</h4>
+    <p>"The pandemic is a <b>change in special circumstances</b>, a non-price determinant of demand. Consumers want more masks at every price, so demand shifts from D₁ to D₂. The equilibrium moves from A to B: equilibrium price rises from P₁ to P₂ and equilibrium quantity rises from Q₁ to Q₂. The rise in price causes a <b>movement along (extension of) the supply curve</b> — producers are incentivised by the higher price to supply more."</p>
+    <h4>Model chain — sales tax on tobacco (S shifts left)</h4>
+    <p>"The tax is a non-price determinant of supply: it raises producers' costs. Supply shifts from S₁ to S₂. Equilibrium moves from A to B: price rises from P₁ to P₂ and quantity falls from Q₁ to Q₂. The higher price causes a <b>contraction of demand</b> (movement up along the demand curve)."</p>
+  </div>
+
+  <div class="win"><b>The universal market sentence (learn this shape, swap the words):</b><br>
+  "[Factor] is a non-price determinant of [demand/supply]. This causes [demand/supply] to shift [right/left]. Equilibrium price [rises/falls] and equilibrium quantity [rises/falls]. The price change causes a movement [along] the [other] curve."</div>
+</section>
+
+<!-- ============ DIAGRAMS ============ -->
+<section id="s-diag">
+  <h2>📊 Diagram lab — what earns the 3 "draw" marks</h2>
+
+  <div class="gold"><b>Edexcel's own definition:</b> a <b>Draw</b> question is <b>3 marks = 3 separate awardable points</b>. On a supply-and-demand diagram the examiner is looking for awardable <i>labels and direction</i>, so every diagram you draw in the exam should carry all five of these:
+  <ol>
+    <li><b>Axes labelled</b> — "Price" (y) and "Quantity" (x).</li>
+    <li><b>Each curve labelled</b> — D, S, or D₁/D₂, S₁/S₂.</li>
+    <li><b>Key points marked and labelled</b> — P₁, Q₁, P₂, Q₂ and/or the equilibrium point E (or A→B).</li>
+    <li><b>Arrows in the right direction</b> — an arrow on the shifted curve (→ right or ← left) and, for market answers, a small arrow showing price ↑ or ↓.</li>
+    <li><b>Shifted curves dashed + numbered</b> (D₁→D₂) so the change is visible.</li>
+  </ol>
+  </div>
+
+  <h3>Your 6 must-draw diagrams</h3>
+  <table>
+    <tr><th>#</th><th>Diagram</th><th>Must show</th></tr>
+    <tr><td>1</td><td><b>PPF</b></td><td>Both axes labelled (capital / consumer goods), curved line, points on the curve (full employment), a point inside (unemployed), a point outside (unobtainable), outward shift arrow for growth</td></tr>
+    <tr><td>2</td><td><b>Demand curve</b></td><td>Downward-sloping D, axes labelled, movement from P₁Q₁ → P₂Q₂</td></tr>
+    <tr><td>3</td><td><b>Shift in demand</b></td><td>D₁ and dashed D₂ to the right (increase) or left (decrease), arrow showing direction</td></tr>
+    <tr><td>4</td><td><b>Supply curve / shift</b></td><td>Upward-sloping S; dashed S₂ with direction arrow</td></tr>
+    <tr><td>5</td><td><b Equilibrium</b></td><td>D and S crossing at E, dashed lines to P<sub>e</sub> and Q<sub>e</sub>, both axes labelled</td></tr>
+    <tr><td>6</td><td><b>Excess demand / excess supply</b></td><td>A price line above (surplus) or below (shortage) P<sub>e</sub>, and the <b>horizontal gap between S and D bracketed and labelled</b></td></tr>
+  </table>
+
+  <div class="warn"><b>The 3 most common diagram errors (each costs marks):</b>
+  <ol>
+    <li><b>Unlabelled axes.</b> No "Price"/"Quantity" = you've thrown away an awardable point instantly.</li>
+    <li><b>Drawing a shift when the question is a movement.</b> If the price changed, the curve does NOT move.</li>
+    <li><b>No P/Q labels or arrows</b> after a shift — the examiner can't see that you know price changed.</li>
+  </ol></div>
+  <div class="tip"><b>Speed tip:</b> in the exam, draw the diagram FIRST (2 minutes), then write the explanation referencing it. Your prose then becomes "as shown in the diagram…" and you rarely drop diagram marks.</div>
+</section>
+
+<!-- ============ EXAM SKILLS ============ -->
+<section id="s-exam">
+  <h2>🎯 Exam skills — the mark-tariff playbook (Edexcel 4EC1)</h2>
+
+  <h3>Paper 1 at a glance</h3>
+  <div class="grid">
+    <div class="kv"><b>Paper 1: Microeconomics &amp; Business Economics</b><span>4EC1/01 · <b>1h30</b> · <b>80 marks</b> · <b>4 compulsory questions × 20 marks</b> · 50% of the IGCSE · calculator allowed</span></div>
+    <div class="kv"><b>Sub-question mix</b><span>Multiple-choice (6 per paper) · short answer · data response · open-ended essay. Q2 and Q3 each contain a <b>9-mark "assess"</b>.</span></div>
+    <div class="kv"><b>The last question</b><span>Always a <b>12-mark "evaluate"</b>, linked to a context, requiring use of the data + a balanced response.</span></div>
+    <div class="kv"><b>Assessment objectives</b><span>AO1 recall 14–15% · AO2 apply 48–49% · AO3 analyse/interpret sources 23–24% · AO4 evaluate 12–13%</span></div>
+  </div>
+  <p class="small">Both papers are sat in the same series (linear). Resits mean resitting both.</p>
+
+  <h3>Command word → mark tariff → what to actually write</h3>
+  <table>
+    <tr><th>Command</th><th>Marks</th><th>AO</th><th>What the examiner wants</th><th>Your technique</th></tr>
+    <tr><td><span class="badge b-mcq">MCQ</span></td><td>1</td><td>AO1</td><td>Select the correct answer from 4 options — recall, or a calculation from given data</td><td>Underline the key word. If data is given, find the row/gap. No marks for workings.</td></tr>
+    <tr><td><span class="badge b-1">Define</span></td><td>1</td><td>AO1</td><td>Define a term from the spec</td><td>One precise sentence. Two parts (willingness AND ability) = safe, but only 1 mark is available — don't over-write.</td></tr>
+    <tr><td><span class="badge b-1">State</span></td><td>1</td><td>AO2</td><td>Give an answer — "no longer than a sentence"</td><td>Just the answer. No explanation.</td></tr>
+    <tr><td><span class="badge b-2">What is meant by</span></td><td>2</td><td>AO1</td><td>Define term x — <b>there must be TWO separate parts</b></td><td>Write two distinct halves, e.g. "The willingness and ability (1) of consumers to buy a good at a given price in a given time period (2)."</td></tr>
+    <tr><td><span class="badge b-2">Describe</span></td><td>2</td><td>AO1</td><td>Identify + briefly develop a consequence of an economic event</td><td>Point + "this means that…"</td></tr>
+    <tr><td><span class="badge b-2">Calculate</span></td><td>2</td><td>AO2</td><td>Use maths on given data</td><td><b>Show the working</b> (mark for method + mark for answer). Q<sub>d</sub> − Q<sub>s</sub> etc. Include units.</td></tr>
+    <tr><td><span class="badge b-3">Draw</span></td><td>3</td><td>AO2</td><td>A diagram with <b>two or three separate awardable points</b></td><td>Axes + curves + labels (see Diagram lab). Use a pencil and a ruler.</td></tr>
+    <tr><td><span class="badge b-3">Explain</span></td><td>3</td><td>AO2</td><td>A <b>statement of fact + TWO further expansion points</b></td><td>Give a reason, then extend it twice (they can chain or both come off the same fact). Context is set by the question.</td></tr>
+    <tr><td><span class="badge b-6">Analyse</span></td><td>6</td><td>AO2 3 + AO3 3</td><td>Extended answer expanding/exploring a concept. <b>Not two-sided</b> — a developed analysis</td><td>Chain of reasoning + use the figures from the data. "…which means…therefore…" 3–4 developed links.</td></tr>
+    <tr><td><span class="badge b-9">Assess</span></td><td>9</td><td>AO2 3 + AO3 3 + AO4 3</td><td>Weigh up factors and compare them in context — two viewpoints</td><td>Side A developed + Side B developed + a judgement that says which dominates and why.</td></tr>
+    <tr><td><span class="badge b-12">Evaluate</span></td><td>12</td><td>AO2 4 + AO3 4 + AO4 4</td><td>Apply knowledge to reach a <b>supported conclusion</b> about the situation</td><td>Balanced two-sided argument using the data + explicit supported judgement ("on balance… because…" / "it depends on…").</td></tr>
+  </table>
+
+  <h3>Timing plan (90 minutes, 80 marks ≈ 1.1 min per mark)</h3>
+  <table>
+    <tr><th>Task</th><th>Marks</th><th>Time</th></tr>
+    <tr><td>6 × MCQ</td><td>6</td><td>6 min (1 min each)</td></tr>
+    <tr><td>1–2 mark questions (definitions, state, calculate)</td><td>~2 each</td><td>2 min each</td></tr>
+    <tr><td>3-mark Draw / Explain</td><td>3</td><td>3–4 min</td></tr>
+    <tr><td>6-mark Analyse</td><td>6</td><td>7 min</td></tr>
+    <tr><td>9-mark Assess</td><td>9</td><td>11 min</td></tr>
+    <tr><td>12-mark Evaluate</td><td>12</td><td>14 min</td></tr>
+    <tr><td><b>Total per 20-mark question</b></td><td>20</td><td><b>≈ 22 min</b> — so 4 questions = 88 min + 2 min checking</td></tr>
+  </table>
+  <div class="tip"><b>Rule:</b> if you can't finish an essay, always write the <b>judgement sentence</b> before you run out of time — a supported conclusion is worth up to a third of the marks and it's the first thing missing from rushed answers.</div>
+
+  <h3>Levels: what the mark scheme actually rewards</h3>
+  <table>
+    <tr><th>Level</th><th>Analyse (6)</th><th>Assess (9)</th><th>Evaluate (12)</th><th>What it means for you</th></tr>
+    <tr><td><b>L1</b></td><td>1–2</td><td>1–3</td><td>1–4</td><td>Basic knowledge, limited application, <b>one viewpoint only</b>, no real judgement → this is the "I only gave one side" penalty box</td></tr>
+    <tr><td><b>L2</b></td><td>3–4</td><td>4–6</td><td>5–8</td><td>Partial knowledge, some analysis, more than one viewpoint but <b>unbalanced</b>, judgement attempted but not fully supported</td></tr>
+    <tr><td><b>L3</b></td><td>5–6</td><td>7–9</td><td>9–12</td><td>Clear/accurate knowledge, excellent selectivity, coherent chain of reasoning, <b>both sides balanced + a supported judgement/conclusion</b></td></tr>
+  </table>
+  <div class="gold"><b>The single most valuable exam fact on this page:</b> for the 9 and 12-markers, <b>having one viewpoint caps you at Level 1</b>. Two views but unbalanced = Level 2. Two views balanced + a supported judgement = Level 3. So: <b>always write the second side, and always finish with a judgement.</b></div>
+
+  <h3>Model answer — "What is meant by opportunity cost?" (2 marks)</h3>
+  <div class="ex">
+    <p><b>Answer:</b> "The <b>benefit lost from the next best alternative forgone</b> (1) <b>when a choice is made about how to use scarce resources</b> (2)."<br>
+    <b>Why full marks:</b> two separate awardable parts; says "next best" and "benefit lost"; links to scarcity/choice.</p>
+  </div>
+
+  <h3>Model answer — "Explain one reason why the demand curve for X may shift to the left." (3 marks)</h3>
+  <div class="ex">
+    <p><b>Answer:</b> "A fall in consumers' income (1) means consumers have less money to spend (2) so they will buy less of the product at every price, shifting demand to the left (3)."<br>
+    <b>Why 3 marks:</b> statement of fact (a reason) + two expansion points, and it lands in the context of the question. No diagram gap since the question says "explain".</p>
+  </div>
+
+  <h3>Model answer — 6-mark Analyse</h3>
+  <div class="ex">
+    <p><b>Question:</b> "With reference to the data, analyse the impact of a rise in the price of petrol on the market for large cars."</p>
+    <p><b>Answer (full marks):</b> "Petrol and large cars are <b>complementary goods</b> — they are consumed together. If the price of petrol rises (as shown by the data rising from $X to $Y), the <b>total cost of running a large car increases</b>. This reduces the demand for large cars, so the demand curve shifts to the <b>left</b> from D₁ to D₂. As a result the equilibrium price of large cars <b>falls</b> from P₁ to P₂ and the equilibrium quantity <b>falls</b> from Q₁ to Q₂. Car dealers would see <b>lower revenue</b> and may respond by cutting prices further or switching to smaller models. Buyers are better off as they pay less, but producers and their workers may face reduced sales and possible job losses."</p>
+    <p><b>Why Level 3:</b> correct term applied (complements), uses the data (AO3), a coherent chain shift → price → quantity, and a developed consequence for consumers/producers. No need for "on the other hand" — analyse is one-directional.</p>
+  </div>
+
+  <h3>Model answer — 9-mark Assess</h3>
+  <div class="ex">
+    <p><b>Question:</b> "Assess whether an increase in the price of a good will always lead to a fall in the quantity demanded."</p>
+    <p><b>Answer (Level 3):</b> "According to the <b>law of demand</b>, price and quantity demanded have an <b>inverse relationship</b>, so a rise in price should lead to a <b>contraction of demand</b> — a movement up along the demand curve. Higher prices also encourage consumers to <b>switch to substitutes</b>, which reduces demand further.</p>
+    <p><b>However</b>, this assumes ceteris paribus. If demand is <b>price inelastic</b> because the good is a <b>necessity</b>, has few substitutes or takes a small share of income, a price rise may barely reduce quantity demanded. Rising price can even coincide with rising quantity demanded if demand is shifting right at the same time — for example, during a shortage consumers expect further price rises and buy more, or when incomes rise so much that even the higher price is affordable. The data shows [quote figures].</p>
+    <p><b>On balance</b>, a price rise will normally reduce quantity demanded, but it is <b>not automatic</b>: it depends on the elasticity of demand and on what is happening to the non-price determinants at the same time."</p>
+    <p><b>Why Level 3:</b> both viewpoints, balanced, evidenced with the data, and a supported judgement that answers the "always" in the question. The word <b>"always"</b> is the cue to disagree in part.</p>
+  </div>
+
+  <h3>Model answer — 12-mark Evaluate</h3>
+  <div class="ex">
+    <p><b>Question:</b> "With reference to the information given and your knowledge of economics, evaluate the impact of the government imposing a maximum price on a good such as rented housing."</p>
+    <p><b>Answer (Level 3):</b> "A <b>maximum price</b> is a legal limit on how much firms can charge. If it is set <b>below the equilibrium price</b>, the market is artificially cheap: quantity demanded exceeds quantity supplied, creating <b>excess demand (a shortage)</b>. In the rented housing market this means more people want to rent but fewer landlords are willing to supply at the lower rent. Landlords' revenue per property falls, so they may <b>withdraw properties from the market</b> or reduce maintenance, making housing quality worse. Queues, waiting lists and possible <b>black markets</b> may develop, and allocation is no longer by price but by luck or favour.</p>
+    <p><b>On the other hand</b>, the policy has clear benefits. Existing tenants pay <b>lower rent</b>, which raises their <b>real disposable income</b> and reduces poverty and housing stress — a strong argument in a city like Hong Kong where housing is a large share of spending. It may also reduce labour mobility problems if workers can afford to live near work.</p>
+    <p><b>On balance</b>, whether the maximum price works depends on <b>how far below equilibrium it is set</b> and <b>how elastic supply is</b>. A small gap creates a small shortage; a large gap creates severe shortages and long-term under-investment in housing. The policy appears to benefit consumers in the short run but risks damaging supply and quality in the long run, so it is likely to be <b>only a partial solution</b> and would work better alongside policies to increase the supply of housing."</p>
+    <p><b>Why Level 3:</b> defines the concept, develops both sides with real consequences, quotes the data context, gives a <b>conditional</b> judgement ("depends on…") and a clear final conclusion. Note the structure: <b>define → one side → other side (explicitly signalled) → conditional judgement → conclusion</b>.</p>
+  </div>
+
+  <h3>Common mistakes table (learn these off by heart)</h3>
+  <table>
+    <tr><th>Mistake</th><th>Why it costs marks</th><th>Do this instead</th></tr>
+    <tr><td>"Demand shifted because the price changed"</td><td>Price change = movement, never a shift</td><td>A price change → <b>movement along</b> the curve (extension/contraction)</td></tr>
+    <tr><td>Writing "demand" when you mean "quantity demanded"</td><td>They are different words with different marks</td><td>Shift in demand vs movement in quantity demanded</td></tr>
+    <tr><td>Saying "supply increases" for a price rise</td><td>Price rise = movement along S, not a shift of S</td><td>Extension of supply</td></tr>
+    <tr><td>Confusing substitutes with complements</td><td>Gives the wrong direction → marks lost</td><td>Subs = compete (Coke/Pepsi). Complements = used together (car/petrol)</td></tr>
+    <tr><td>Only giving one side on a 9/12-marker</td><td><b>Hard cap at Level 1</b> (≤3 of 9, ≤4 of 12)</td><td>Always write "On the other hand…" and then judge</td></tr>
+    <tr><td>No judgement/conclusion</td><td>AO4 marks (up to a third) lost</td><td>Finish: "On balance… because…"</td></tr>
+    <tr><td>Not using the data in the extract</td><td>AO3 marks lost — the question says "with reference to the information given"</td><td>Quote a figure: "as the price rose from $X to $Y"</td></tr>
+    <tr><td>Drawing a diagram with no axis labels</td><td>Awardable point gone in a 3-mark "draw"</td><td>Label axes, curves, P/Q, arrows — always</td></tr>
+    <tr><td>Defining opportunity cost as "what you gave up"</td><td>Missing "next best alternative" / "benefit lost"</td><td>"The benefit lost from the next best alternative forgone"</td></tr>
+  </table>
+
+  <h3>Diagram-mark checklist (run this every time you draw)</h3>
+  <label class="goal"><input type="checkbox" class="ck" data-k="d1">Price axis labelled</label>
+  <label class="goal"><input type="checkbox" class="ck" data-k="d2">Quantity axis labelled</label>
+  <label class="goal"><input type="checkbox" class="ck" data-k="d3">Every curve labelled (D, S / D₁-D₂, S₁-S₂)</label>
+  <label class="goal"><input type="checkbox" class="ck" data-k="d4">Shifts drawn dashed with a direction arrow</label>
+  <label class="goal"><input type="checkbox" class="ck" data-k="d5">P and Q marked and labelled at each stage (P₁, Q₁ → P₂, Q₂)</label>
+  <label class="goal"><input type="checkbox" class="ck" data-k="d6">Equilibrium point marked (E) where D = S</label>
+  <label class="goal"><input type="checkbox" class="ck" data-k="d7">Excess demand/supply shown as the horizontal gap, bracketed and labelled</label>
+  <p class="small">Progress: <span id="prog">0</span>/7</p>
+</section>
+
+<!-- ============ PRACTICE ============ -->
+<section id="s-practice">
+  <h2>📝 Practice — with answers you reveal yourself</h2>
+  <p class="small">Attempt on paper first. Then reveal. Marking your own answer against the wording builds exam muscle much faster than reading.</p>
+
+  <h3>A. Multiple choice / 1 mark</h3>
+  <ol class="qs">
+    <li>A firm has variable cost of €25 and charges €75 per item. It sells 30,000 items. What is total revenue?<br>
+      <span class="small">A €400 &nbsp; B €30,075 &nbsp; C €750,000 &nbsp; D €2,250,000</span>
+      <br><button class="qa" data-a="qa1">Show answer</button>
+      <div id="qa1" class="hide ex"><b>D — €2,250,000.</b> Total revenue = price × quantity = €75 × 30,000 = €2,250,000. No marks for the working in an MCQ — but do it anyway to be safe.</div></li>
+    <li>Using this data, what is the equilibrium price?
+      <table><tr><th>Price (HKD)</th><td>100</td><td>110</td><td>120</td><td>130</td></tr>
+      <tr><th>Q demanded/week</th><td>900</td><td>750</td><td>600</td><td>450</td></tr>
+      <tr><th>Q supplied/week</th><td>400</td><td>500</td><td>600</td><td>700</td></tr></table>
+      <span class="small">A 100 &nbsp; B 110 &nbsp; C 120 &nbsp; D 130</span>
+      <br><button class="qa" data-a="qa2">Show answer</button>
+      <div id="qa2" class="hide ex"><b>C — 120 HKD.</b> Equilibrium is where quantity supplied exactly matches quantity demanded (600 = 600).</div></li>
+    <li>Price ($) 15/20/25/30/35 with Q<sub>d</sub> 9,000/8,000/7,000/6,000/5,000 and Q<sub>s</sub> 2,000/4,000/6,000/8,000/10,000.<br>(i) At a price of $25, what situation does the market show? &nbsp;<span class="small">A equilibrium &nbsp;B excess supply &nbsp;C excess demand &nbsp;D stockpiling</span>
+      <br><button class="qa" data-a="qa3">Show answer</button>
+      <div id="qa3" class="hide ex"><b>C — excess demand</b> (Q<sub>d</sub> 7,000 &gt; Q<sub>s</sub> 6,000, a shortage of 1,000). Watch out: $25 here is <b>not</b> the equilibrium price in this table — it's $32.50–ish between rows, so $25 gives excess demand. <b>Always read the actual row.</b></div></li>
+    <li>Using the same table: if the average price is $30 over a four-week period, how much excess will suppliers accumulate? &nbsp;<span class="small">A 2,000 &nbsp;B 8,000 &nbsp;C 24,000 &nbsp;D 32,000</span>
+      <br><button class="qa" data-a="qa4">Show answer</button>
+      <div id="qa4" class="hide ex"><b>B — 8,000 units.</b> At $30: Q<sub>s</sub> 8,000 − Q<sub>d</sub> 6,000 = 2,000 excess supply <b>per week</b>. Over four weeks: 2,000 × 4 = <b>8,000 units accumulated</b>.</div></li>
+    <li>Which statement explains why there might be a <b>decrease in the demand</b> for petrol?<br>
+      <span class="small">A An increasing number of drivers buy electric cars &nbsp;B Demand for new cars has increased &nbsp;C New technologies reduce the time needed to extract oil &nbsp;D There is an increase in world oil supplies</span>
+      <br><button class="qa" data-a="qa5">Show answer</button>
+      <div id="qa5" class="hide ex"><b>A.</b> Electric cars are substitutes for petrol-driven cars, so more EVs = fewer petrol buyers = demand for petrol shifts left. B would <i>increase</i> demand for petrol (complements). C and D affect <b>supply</b> of oil, not demand for petrol.</div></li>
+    <li>What is likely to have caused a supply curve for agricultural output to shift to the <b>left</b>?<br>
+      <span class="small">A Subsidies provided to farmers &nbsp;B Favourable weather conditions &nbsp;C Higher cost of fertilisers &nbsp;D Greater number of farmers</span>
+      <br><button class="qa" data-a="qa6">Show answer</button>
+      <div id="qa6" class="hide ex"><b>C.</b> Higher fertiliser cost raises production costs → supply shifts left. A, B and D all increase supply (shift right).</div></li>
+    <li>The supply curve for smartphones shifts to the <b>right</b>. What is likely to have caused it?<br>
+      <span class="small">A A fall in the price of laptops &nbsp;B A lower sales tax on electronic goods &nbsp;C A reduction in income tax rates &nbsp;D A fall in the price of smartphones</span>
+      <br><button class="qa" data-a="qa7">Show answer</button>
+      <div id="qa7" class="hide ex"><b>B.</b> A lower sales tax cuts producers' costs → supply shifts right. A and C affect demand. <b>D is the trap</b> — a fall in the price of smartphones causes a <b>movement along</b> the supply curve, not a shift.</div></li>
+  </ol>
+
+  <h3>B. 2-mark &amp; 3-mark</h3>
+  <ol class="qs">
+    <li><b>(2) What is meant by "excess supply"?</b><br><button class="qa" data-a="qa8">Show answer</button>
+      <div id="qa8" class="hide ex">"The situation where the <b>quantity supplied exceeds the quantity demanded</b> (1) <b>at a price above the equilibrium price</b> (2)." <span class="small">Two separate parts — the gap, and when it happens.</span></div></li>
+    <li><b>(3) Explain one reason why the demand curve for face masks shifts to the right.</b><br><button class="qa" data-a="qa9">Show answer</button>
+      <div id="qa9" class="hide ex">"A pandemic is a change in <b>special circumstances</b> — a non-price determinant of demand (1). Consumers become more worried about infection and want more masks at every price (2), so the demand curve shifts to the right (3)."</div></li>
+    <li><b>(2) Calculate: quantity demanded of lemons is 12,000 and quantity supplied is 6,650. What is the market situation?</b><br><button class="qa" data-a="qa10">Show answer</button>
+      <div id="qa10" class="hide ex">Excess <b>demand</b> (1) of <b>5,350 lemons</b> (2): 12,000 − 6,650 = 5,350. <span class="small">Method mark then answer mark — always write the subtraction.</span></div></li>
+    <li><b>(3) Draw a diagram to show the market for tobacco after the government imposes a sales tax.</b><br><button class="qa" data-a="qa11">Show answer</button>
+      <div id="qa11" class="hide ex">Your diagram needs: labelled Price/Quantity axes (1); S₁ and a dashed S₂ shifted to the <b>LEFT</b> with an arrow (2); new equilibrium marked showing P<b>↑</b> from P₁→P₂ and Q<b>↓</b> from Q₁→Q₂ (3).</div></li>
+  </ol>
+
+  <h3>C. Extended answers</h3>
+  <ol class="qs">
+    <li><b>(6) Analyse the effect of a drought on the market for wheat and on farmers' revenue.</b><br><button class="qa" data-a="qa12">Show answer</button>
+      <div id="qa12" class="hide ex">A drought is a change in the non-price determinant of supply, natural factors (1). It destroys crops and raises farmers' costs, so supply shifts to the <b>left</b> from S₁ to S₂ (2). Equilibrium price rises from P₁ to P₂ and equilibrium quantity falls from Q₁ to Q₂ (3). The higher price causes a contraction of demand — consumers who can't afford the higher price buy less (4). Farmers' revenue may actually <b>rise</b>, because wheat is a necessity with inelastic demand: the percentage fall in quantity is smaller than the percentage rise in price (5). However, farmers whose own harvest failed cannot benefit — they have nothing to sell, and may face bankruptcy (6).</div></li>
+    <li><b>(9) Assess whether a rise in the price of a good will always reduce the quantity demanded.</b><br><button class="qa" data-a="qa13">Show answer</button>
+      <div id="qa13" class="hide ex"><b>Structure for full marks (Level 3):</b><br><b>Side 1 — yes:</b> law of demand = inverse relationship; a price rise causes a contraction of demand (movement up the curve); consumers switch to substitutes. Quote the data.<br><b>Side 2 — not always:</b> if demand is price <b>inelastic</b> (necessity, few substitutes, small % of income), the fall in quantity may be tiny; if demand is simultaneously shifting right (higher incomes, a fad, expectations of further rises), quantity demanded can <b>rise</b> with price; a good can also be a <b>status/Veblen</b> good where a higher price signals quality.<br><b>Judgement:</b> "On balance a price rise normally reduces quantity demanded, but it is not automatic — it depends on elasticity and on what else is happening to the non-price determinants. The word 'always' makes the statement too strong."</div></li>
+    <li><b>(12) With reference to the information given and your knowledge of economics, evaluate the impact on the market for rented housing of the government setting a maximum rent below the equilibrium price.</b><br><button class="qa" data-a="qa14">Show answer</button>
+      <div id="qa14" class="hide ex">Use the 12-mark model answer in the <b>Exam Skills</b> tab — same structure: define the maximum price → excess demand/shortage → effects on landlords (withdraw properties, poor maintenance) and on allocation (queues, black markets) → then the benefits (lower rent, higher real disposable income, less poverty) → <b>conditional judgement</b> (depends how far below equilibrium, and how elastic supply is) → supported conclusion ("only a partial solution; needs supply-side policies too").</div></li>
+  </ol>
+
+  <h3>D. Definitions self-test (say each out loud, then check)</h3>
+  <details><summary>Show the 12 definitions you must know word-perfect</summary><div class="in">
+    <ol>
+      <li><b>Scarcity</b> — resources are limited in supply relative to unlimited wants and needs.</li>
+      <li><b>The economic problem</b> — how to allocate scarce resources to satisfy unlimited wants and needs.</li>
+      <li><b>Opportunity cost</b> — the benefit lost from the next best alternative forgone.</li>
+      <li><b>PPF</b> — the different combinations of two goods that can be produced if all resources are fully and efficiently employed.</li>
+      <li><b>Demand</b> — the willingness and ability of consumers to buy a good at a given price in a given time period.</li>
+      <li><b>Law of demand</b> — as price falls, quantity demanded rises (inverse relationship).</li>
+      <li><b>Supply</b> — the willingness and ability of producers to sell a good at a given price in a given time period.</li>
+      <li><b>Law of supply</b> — as price rises, quantity supplied rises (direct relationship).</li>
+      <li><b>Market equilibrium</b> — the price at which quantity demanded equals quantity supplied; the market is cleared of shortages and surpluses.</li>
+      <li><b>Equilibrium price</b> — the price at which quantity demanded equals quantity supplied (also the market clearing price).</li>
+      <li><b>Excess demand (shortage)</b> — quantity demanded exceeds quantity supplied, at a price below equilibrium.</li>
+      <li><b>Excess supply (surplus)</b> — quantity supplied exceeds quantity demanded, at a price above equilibrium.</li>
+    </ol>
+    <p class="small">Plus the rewards: land = rent, labour = wages, capital = interest, enterprise = profit.</p>
+  </div></details>
+
+  <h3>E. Revision plan to lock this in</h3>
+  <div class="card">
+    <ol>
+      <li><b>Day 1</b> — read tabs 2–3, then close them and write the 12 definitions + draw the PPF from memory.</li>
+      <li><b>Day 2</b> — read tabs 4–6, then draw all 6 diagrams from memory in under 8 minutes. Check against the Diagram lab.</li>
+      <li><b>Day 3</b> — write the 6-mark, 9-mark and 12-mark model answers <b>without looking</b>, then compare wording.</li>
+      <li><b>Day 4</b> — do the practice set timed: 1.1 minutes per mark. Self-mark using the common-mistakes table.</li>
+      <li><b>Day 5</b> — past papers (Paper 1, section A). Do the MCQs in 6 minutes, then one full 20-mark question in 22 minutes.</li>
+    </ol>
+    <p class="small">Your school's past papers for Economics are mirrored in your <code>portfolio-files</code> repo under <code>past papers/</code> (QP + MS PDFs) — use the real mark schemes, not just these notes, once you've nailed the basics.</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function(){
+  var tabs=[
+    ["s-start","🚀 Start here"],
+    ["s-problem","1.1.1 Scarcity & opportunity cost"],
+    ["s-ppf","PPF"],
+    ["s-demand","Demand"],
+    ["s-supply","Supply"],
+    ["s-eq","Market equilibrium"],
+    ["s-diag","📊 Diagrams"],
+    ["s-exam","🎯 Exam skills"],
+    ["s-practice","📝 Practice"]
+  ];
+  var nav=document.getElementById('nav');
+  tabs.forEach(function(t,i){
+    var b=document.createElement('button');
+    b.textContent=t[1]; b.type='button'; b.setAttribute('data-t',t[0]);
+    if(i===0) b.className='on';
+    b.addEventListener('click',function(){
+      tabs.forEach(function(x){
+        document.getElementById(x[0]).classList.remove('on');
+        nav.querySelector('button[data-t="'+x[0]+'"]').classList.remove('on');
+      });
+      document.getElementById(t[0]).classList.add('on');
+      b.classList.add('on');
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+    nav.appendChild(b);
+  });
+
+  document.querySelectorAll('button.qa').forEach(function(b){
+    b.addEventListener('click',function(){
+      var el=document.getElementById(b.getAttribute('data-a'));
+      if(!el) return;
+      el.classList.toggle('hide');
+      b.textContent = el.classList.contains('hide') ? 'Show answer' : 'Hide answer';
+    });
+  });
+
+  var KEY='econ11-diagram-checklist';
+  var cks=document.querySelectorAll('.ck'), prog=document.getElementById('prog');
+  var saved={};
+  try{ saved=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ saved={}; }
+  function upd(){
+    var n=0,o={};
+    cks.forEach(function(c){ if(c.checked){n++;} o[c.getAttribute('data-k')]=c.checked; });
+    prog.textContent=n;
+    try{ localStorage.setItem(KEY,JSON.stringify(o)); }catch(e){}
+  }
+  cks.forEach(function(c){
+    if(saved[c.getAttribute('data-k')]) c.checked=true;
+    c.addEventListener('change',upd);
+  });
+  upd();
+})();
+</script>
+</body>
+</html>
