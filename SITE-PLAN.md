@@ -269,7 +269,7 @@ shorten link, and if I put in password I can also make unlimited shorten links."
 ### 2a-ter. Link Compressor V1.3 — password admin + fixed Delete (same evening)
 
 Isaac: *"the delete button doesnt work and also i want it to make the thing fully admin controlled
-with password Isaac1804 and others can create some shorten link and nothing else."*
+with password [redacted — this doc is served publicly] and others can create some shorten link and nothing else."*
 
 - **Why Delete "didn't work"** (real bug, reproduced headlessly): the 🗑 Delete button was rendered
   for **everyone**, including visitors, and clicking it while locked did nothing except print a
@@ -277,10 +277,14 @@ with password Isaac1804 and others can create some shorten link and nothing else
   affordance level, not the API: when locked there is **no** real Delete/Log button — one
   "🔒 Log / Delete" button instead, which scrolls up, focuses the password box and explains why.
   Every admin call that returns `401` now re-locks and asks for the password again (`needPassword()`).
-- **Password admin**: the Worker now accepts **`Isaac1804`** (`LINKS_PASSWORD` secret, same password
-  as the portfolio admin) alongside the long random `LINKS_TOKEN`. Credential can arrive as the
-  `X-Link-Token` header or `?token=` / `?password=` / `?pw=`. Wrong password → `401 "Wrong admin
-  password."`; no password → `401 "Admin password required to …"`.
+- **Password admin**: the Worker accepts a memorable admin password (`LINKS_PASSWORD` secret —
+  **rotated 2026-09-30** by the Security'26 pass; the current value lives in
+  `apps/isaac-links/ADMIN-CREDENTIALS-2026-10.txt`, mode 600, never published) alongside the long
+  random `LINKS_TOKEN` (`~/.isaac-links-token`). Sent as the `X-Link-Token` header **only** — query
+  params (`?password=` / `?pw=` / `?token=`) are refused, so a secret can never leak into browser
+  history, edge logs or `Referer`. Wrong password → `401 "Wrong admin password."`; none → `401
+  "Admin password required to …"`. **5 wrong tries from one IP ⇒ 15-minute lockout**, and the lock is
+  checked *before* the credential — so while locked even the correct password or the token gets `429`.
 - **A top-of-page 🔒 Admin card** replaces the old buried token panel: password box + Unlock, a clear
   "🔓 Admin unlocked" state with a Lock-again button, and the 📈 activity card only exists when
   unlocked. Verified: wrong password rejected, unlock reveals Log/Delete/custom-name/activity,
@@ -288,9 +292,13 @@ with password Isaac1804 and others can create some shorten link and nothing else
 - **Permissions now**: visitors can `POST /api/links` (any `http(s)` link, 200/hour/IP) and follow
   `/s/<code>` — *nothing else*. The password gives the logs, the list, deleting, custom names and
   **no rate limit at all**.
-- ⚠️ **Flagged to Isaac**: `Isaac1804` is also the portfolio's `ADMIN_PASS`, which sits in the public
-  `app.js`, so this admin is a convenience lock rather than a secret; the long `LINKS_TOKEN`
-  (`~/.isaac-links-token`) remains valid and private, and either can be rotated.
+- ⚠️ **Password leak — swept 2026-10-11.** The memorable password used to be written out in this
+  public doc, in the build spec and in the generated build page. All three scrubbed and re-deployed;
+  a live scan for the literal now returns **0 hits**. Neither the portfolio (`ADMIN_HASH`, a sha256
+  compared in `login()`) nor this Worker keeps a plaintext password on the public side — both were
+  rotated on 2026-09-30, so the old string is stale, not a live credential.
+  `demos/library-kiosk.html` still prints its *demo* password on purpose (it's a sim visitors get to
+  try), so that one was deliberately left alone.
 - New focused test `test-delete-admin.py` (locked view → wrong password → unlock → delete → confirm
   the short link 404s → re-lock) plus the main suite re-run: **both ALL PASS**. The delete test
   registers the Playwright `dialog` handler *before* clicking, since an unhandled `confirm()` is
