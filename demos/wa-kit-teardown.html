@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anatomy of a WhatsApp Linked-Device Phishing Kit — mis-ws.org</title>
+<meta name="description" content="Decompiled teardown of web.mis-ws.org: a mobile-gated kit that talks victims into linking the attacker's device to their own WhatsApp.">
+<style>
+  :root{
+    --bg:#0a0c11; --panel:#11141b; --panel2:#161a23; --line:#242a37;
+    --tx:#e8eaf0; --mut:#98a1b3; --dim:#6d7686;
+    --ac:#7c8cff; --ac2:#6366f1; --ok:#34d399; --warn:#ffd166; --bad:#f87171;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.62}
+  a{color:var(--ac)}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 90px}
+
+  .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 11px;
+    color:var(--mut);letter-spacing:.1em}
+  .chip.red{border-color:#4b1f26;background:#1d1114;color:#ff9d9d}
+
+  h1{font-size:clamp(26px,4.4vw,44px);line-height:1.1;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  h1 em{font-style:normal;color:var(--ac)}
+  .deck{font-size:16.5px;color:var(--mut);max-width:78ch;margin:0 0 22px}
+  .deck b{color:var(--tx);font-weight:650}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 30px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 13px}
+  .stat .k{font:600 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .stat .v{font-size:19px;font-weight:750;margin-top:5px;letter-spacing:-.01em}
+  .stat .v small{font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0}
+
+  .call{border-left:3px solid var(--ac2);background:linear-gradient(90deg,rgba(99,102,241,.11),rgba(99,102,241,0));
+    border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 34px}
+  .call .lbl{font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ac);margin-bottom:7px}
+  .call p{margin:0;font-size:15.5px;color:#d7dbe6}
+
+  h2{font-size:12px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+    margin:44px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{margin:0 0 6px;font-size:16.5px;letter-spacing:-.01em}
+
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding-bottom:22px}
+  .step:not(:last-child):before{content:"";position:absolute;left:22px;top:38px;bottom:0;width:1px;
+    background:linear-gradient(180deg,var(--line),transparent)}
+  .num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:var(--panel2);border:1px solid var(--line);color:var(--ac);
+    font:800 13px/1 var(--mono);position:relative;z-index:1}
+  .step p{margin:6px 0 0;color:var(--mut);font-size:14.6px}
+  .step p b{color:var(--tx);font-weight:650}
+
+  .quote{background:#0f1218;border:1px solid var(--line);border-left:2px solid var(--warn);
+    border-radius:8px;padding:10px 13px;margin:10px 0 0;font-size:14px;color:#e4dcc4;
+    white-space:pre-wrap;overflow-wrap:anywhere}
+  .quote .src{display:block;margin-top:7px;font:600 10px/1 var(--mono);letter-spacing:.1em;
+    text-transform:uppercase;color:var(--dim)}
+
+  .handoff{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin:8px 0 6px;
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+  .actor{padding:14px 14px 16px;position:relative}
+  .actor + .actor{border-left:1px dashed var(--line)}
+  .actor .who{font:700 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+  .actor.v .who{color:var(--bad)} .actor.k .who{color:var(--warn)} .actor.w .who{color:var(--ok)}
+  .actor ol{margin:0;padding-left:17px;font-size:13.4px;color:var(--mut)}
+  .actor li{margin:4px 0}
+  .actor li b{color:var(--tx)}
+  .actor .tagline{margin-top:9px;font:600 10.5px/1.4 var(--mono);color:var(--dim)}
+
+  table{width:100%;border-collapse:collapse;font-size:13.8px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:700 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
+    background:#0d1016}
+  td:first-child{white-space:nowrap}
+  code,.mono{font-family:var(--mono);font-size:12.6px;color:#cfd6e6;background:#0e1117;
+    border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+  .tblwrap{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+
+  .mirror{display:grid;grid-template-columns:minmax(0,1fr) 316px;gap:20px;align-items:start}
+  @media(max-width:820px){.mirror{grid-template-columns:1fr}}
+  .phone{border:9px solid #1b1f29;border-radius:34px;background:#000;
+    box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 0 1px #2c3241;overflow:hidden;position:relative}
+  .phone:before{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);
+    width:78px;height:5px;border-radius:99px;background:#333a49;z-index:5}
+  .phone iframe{display:block;width:100%;height:600px;border:0;background:#0b141a}
+  .mirror .side p{color:var(--mut);font-size:14px;margin:0 0 12px}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+  .btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font:650 13px/1 var(--sans);
+    padding:10px 14px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--tx)}
+  .btn:hover{border-color:#3a4256;background:#1b202b}
+  .btn.pri{background:var(--ac2);border-color:var(--ac2);color:#fff}
+  .btn.pri:hover{background:#565ae8}
+  .note{font-size:12.6px;color:var(--dim);margin-top:12px;line-height:1.6}
+  .note b{color:var(--mut)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .card2{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .card2 h4{margin:0 0 6px;font-size:13.5px}
+  .card2 p{margin:0;font-size:13.4px;color:var(--mut)}
+  .card2 ul{margin:6px 0 0;padding-left:17px;font-size:13.4px;color:var(--mut)}
+  .card2 li{margin:3px 0}
+  .card2 li b{color:var(--tx)}
+
+  footer{margin-top:52px;border-top:1px solid var(--line);padding-top:18px;
+    font-size:12.6px;color:var(--dim)}
+  footer b{color:var(--mut)}
+  .warnbox{border:1px solid #4b1f26;background:#160f12;border-radius:10px;padding:12px 14px;
+    font-size:13.2px;color:#f0c9c9;margin-top:14px}
+  .warnbox b{color:#ffb4b4}
+
+  /* narrow screens (page can also be opened directly on a phone) */
+  @media(max-width:700px){
+    .handoff{grid-template-columns:1fr}
+    .actor + .actor{border-left:0;border-top:1px dashed var(--line)}
+    .quote{overflow-x:auto}
+    .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    table{min-width:520px}
+  }
+
+  /* grid children must be allowed to shrink (min-content blowout guard) */
+  .step > *, .handoff > *, .mirror > *, .grid2 > *, .tablewrap{min-width:0}
+  .step p, .step .quote{max-width:100%}
+
+  code{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <span>Security teardown · 2026-10-19</span>
+    <span>
+      <span class="chip red">live phishing infrastructure</span>
+      <span class="chip">web.mis-ws.org</span>
+    </span>
+  </div>
+
+  <h1>Anatomy of a <em>WhatsApp linked-device</em> phishing kit</h1>
+  <p class="deck">
+    <b>web.mis-ws.org</b> looks broken on a computer: 153 bytes of nothing. On a phone it opens a
+    polished 「WhatsApp 安全檢測中心」support chat that walks you through a security check. The check is
+    real — it is WhatsApp's own <i>Link a device</i> flow. The only lie is whose device is being linked.
+    <b>The victim performs the account takeover themselves</b>, with their own thumb, and thanks the
+    operator for helping.
+  </p>
+
+  <div class="stats">
+    <div class="stat"><div class="k">Domain age</div><div class="v">7 days<small> reg. 2026-10-12</small></div></div>
+    <div class="stat"><div class="k">App bundle</div><div class="v">1.19 MB<small> Vue 3, obfuscated</small></div></div>
+    <div class="stat"><div class="k">Strings decoded</div><div class="v">13,449</div></div>
+    <div class="stat"><div class="k">Pairing code</div><div class="v">8 digits<small> 120 s TTL</small></div></div>
+    <div class="stat"><div class="k">Public footprint</div><div class="v">0<small> hits, 0 crawlers</small></div></div>
+  </div>
+
+  <div class="call">
+    <div class="lbl">The one-sentence version</div>
+    <p>The kit is a fake support desk wrapped around a <b>real WhatsApp linked-device pairing session</b>.
+      It asks for your number, WhatsApp sends <i>its</i> session an 8-digit code, the chat hands you that
+      code, and you type it into your own phone — which authorises the operator's server as a device on
+      your account.</p>
+  </div>
+
+  <h2>How the flow works</h2>
+
+  <div class="step">
+    <div class="num">01</div>
+    <div>
+      <h3>Get on a phone, get past the scanners</h3>
+      <p>The server 404s every desktop user-agent, and the head script drops anything matching
+        <code>bot|spider|crawl|headlesschrome|phantomjs|selenium|puppeteer|playwright|curl/|wget</code>.
+        A second gate (<code>mgate.js</code>) then checks platform, WebGL renderer and
+        <code>userAgentData.mobile</code>. The reason is not mobile UX — <b>your WhatsApp has to be on the
+        device you are holding</b>.</p>
+      <div class="quote">nm = navigator.userAgent.toLowerCase();
+if (/bot|spider|crawl|slurp|headlesschrome|phantomjs|selenium|puppeteer|playwright|python-requests|curl\/|wget/.test(nm)) return;<span class="src">mgate.js · gate 1</span></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="num">02</div>
+    <div>
+      <h3>Open with a familiar problem</h3>
+      <p>A 「客服安全驗證」screen, then a bot pretending to be WhatsApp's security centre. The pretext is
+        deliberately vague — order, delivery, refund — so any visitor can project their own half-finished
+        transaction onto it. The menu offers 查詢訂單 / 物流配送 / 退款售後 / 人工專員; every branch ends in
+        the same place.</p>
+      <div class="quote">你好，WhatsApp 安全檢測中心，很高興為你服務！
+你的帳戶有風險提示且未進行驗證。目前需要新增官方系統裝置以解除異常，請予以配合，
+以免影響帳戶的正常使用。若因異常未能及時解除而導致帳戶封停、註銷所產生的責任及損失，均由用戶本人承擔！<span class="src">rendered chat · stage 1</span></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="num">03</div>
+    <div>
+      <h3>Ask for the number, not the password</h3>
+      <p>A card appears: 驗證手機號碼 — "enter your phone number, we'll send you a link request", with a
+        country picker defaulting to <b>+86</b>. No password, no OTP entry field of the usual shape. The
+        number is what opens a pairing session on the operator's side.</p>
+      <div class="quote">{'mode':'phone', 'client_session_key':…, 'timeout_seconds':300,
+ 'metadata':{'source':'web-kf', 'domain':location.hostname, 'ua':navigator.userAgent, 'ip':…}}<span class="src">WebSocket /api/v1/ws1 · session.start</span></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="num">04</div>
+    <div>
+      <h3>The 8-digit code — and the role reversal</h3>
+      <p>WhatsApp answers with a real pairing code. In the genuine flow that code is entered <i>on the
+        phone</i>; that is exactly what the kit tells you to do — and the instruction it gives is
+        <b>accurate</b>. Open WhatsApp → 設定 → 關聯設備 → 使用電話號碼關聯 → type the code below. The victim
+        authorises the operator's session while believing they are verifying their own account.</p>
+      <div class="quote">驗證碼獲取成功，請在有效期內完成操作。
+安全人員校驗驗證碼 · 8 位驗證碼 · 有效期 01:58
+
+1. 打開 WhatsApp，點擊「設定」
+2. 點擊「關聯設備」
+3. 點擊「使用電話號碼關聯」
+4. 複製或輸入下方驗證碼，完成關聯<span class="src">code card · stage 3</span></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="num">05</div>
+    <div>
+      <h3>Freeze the victim in place</h3>
+      <p>On success the chat does not celebrate — it manufactures a review process. "AI 檢測已完成"
+        becomes "manual review", and one line tells you the whole operation:
+        <b>do not remove the device you just linked</b>. Removing it would cut the operator off, so the
+        script reframes removal as the thing that gets you banned.</p>
+      <div class="quote">AI 檢測已完成，賬號正在轉入人工審核，請保持設備關聯狀態。
+注意：請勿在手機端移除剛關聯的設備，請返回原頁面繼續完成後續操作。<span class="src">rendered chat · stage 4</span></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="num">06</div>
+    <div>
+      <h3>Hand off to a human</h3>
+      <p>「正在為您接入人工安全專員」 is not decoration: the bot script is local, but from here every
+        message goes over <code>/session/message</code> and comes back from <code>/session/poll</code>, with
+        typing indicators and image upload. A real operator keeps the victim talking, harvests order and
+        refund details, and guards the linked device — while the account is already open to them.</p>
+      <div class="quote">POST /session/message {text}   ← operator's reply
+GET  /session/poll?afterId=…      ← delivered as chat messages
+POST /session/typing · /session/media · /session/access-check {device_id, ip}<span class="src">support-desk API</span></div>
+    </div>
+  </div>
+
+  <h2>Who does what, in the handoff</h2>
+  <div class="handoff">
+    <div class="actor v">
+      <div class="who">Victim's phone</div>
+      <ol>
+        <li>Reads the number to the "agent"</li>
+        <li>Opens <b>Settings → Linked devices</b></li>
+        <li>Chooses <b>link with phone number</b></li>
+        <li>Types the 8-digit code <b>the kit supplied</b></li>
+        <li>Believes the account was verified</li>
+      </ol>
+      <div class="tagline">→ authorises the link</div>
+    </div>
+    <div class="actor k">
+      <div class="who">Kit backend</div>
+      <ol>
+        <li>Holds a live pairing session</li>
+        <li>Submits the victim's number</li>
+        <li>Receives the 8-digit code</li>
+        <li>Renders it as a "security code"</li>
+        <li>Becomes a linked device</li>
+      </ol>
+      <div class="tagline">→ full chat &amp; contact access</div>
+    </div>
+    <div class="actor w">
+      <div class="who">WhatsApp</div>
+      <ol>
+        <li>Sees a legitimate link request</li>
+        <li>Issues a valid pairing code</li>
+        <li>Accepts the code from the phone</li>
+        <li>Syncs history to the new device</li>
+        <li>No exploit, no bug — by design</li>
+      </ol>
+      <div class="tagline">→ behaves exactly as specified</div>
+    </div>
+  </div>
+  <p class="note">Nothing in this chain is a WhatsApp vulnerability. Every step is a supported feature,
+    aimed at a human instead of a machine — which is why the kit spends its engineering budget on
+    <b>trust theatre</b>, not on exploits.</p>
+
+  <h2>If the code path fails: the QR fallback</h2>
+  <div class="grid2">
+    <div class="card2">
+      <h4>2-minute links that skip every gate</h4>
+      <p>The gate has one exception: <code>/q/&lt;6–16 chars&gt;</code> is allowed through unconditionally,
+        because that page has to open on a desktop. The kit creates one per victim with a
+        <b>120-second</b> expiry — long enough to scan, too short to report or reshare.</p>
+    </div>
+    <div class="card2">
+      <h4>Error codes are WhatsApp's own</h4>
+      <p>The backend relays WhatsApp's real failure reasons — <code>login_rejected</code>,
+        <code>device_limit</code>, <code>login_timeout</code> — then offers "scan the QR instead". Both
+        paths end the same way: the operator holds a linked device.</p>
+    </div>
+  </div>
+
+  <h2 id="mirror">The mirror</h2>
+  <div class="mirror">
+    <div>
+      <div class="phone">
+        <iframe src="./mis-ws-kit/index.html" title="Archived copy of web.mis-ws.org" loading="lazy"></iframe>
+      </div>
+      <div class="note"><b>Archived copy</b> — every file in <code>llFco8/</code> is byte-for-byte as served
+        (1.19 MB app, CSS, 13 illustrations, gate + loader chunks). One addition: <code>guard.js</code>,
+        which makes the kit's own mobile gate pass so it can render here, and hard-blocks every network call.
+        The archive cannot reach the operator's backend and cannot be used as a working kit.</div>
+    </div>
+    <div class="side">
+      <p>The capture is the real first screen: the 「客服安全驗證」gate, the bot's risk warning, the service
+        menu and the 開始驗證 button. Type nothing — the phone form is where stage 3 begins, and in the
+        archive it cannot submit anywhere.</p>
+      <div class="btnrow">
+        <a class="btn pri" href="./mis-ws-kit/index.html" target="_blank" rel="noopener">↗ Open full screen</a>
+        <a class="btn" href="./mis-ws-kit/BUNDLE.html" target="_blank" rel="noopener">App bundle, file by file</a>
+      </div>
+      <p class="note">Best viewed phone-width. The archive is a historical record — the live domain rotates
+        its entry chunk and will look different, or be gone.</p>
+    </div>
+  </div>
+
+  <h2>Indicators</h2>
+  <div class="tblwrap">
+  <div class="tablewrap"><table>
+    <tr><th>Item</th><th>Value</th></tr>
+    <tr><td>Host</td><td><code>web.mis-ws.org</code> · apex <code>mis-ws.org</code> (no A record)</td></tr>
+    <tr><td>Registered</td><td>2026-10-12 · Gname.com · NS <code>a.share-dns.com / b.share-dns.net</code></td></tr>
+    <tr><td>Edge</td><td><code>→ 9dae60af.a1vk0eiqz0.xyz → cdn.a1vk0eiqz0.xyz</code></td></tr>
+    <tr><td>Addresses</td><td><code>45.61.163.20 · 45.61.150.6 · 45.59.119.120 · 144.172.98.253 · 144.172.102.144 · 172.86.90.167</code></td></tr>
+    <tr><td>Assets</td><td><code>/llFco8/</code> — rotating entry chunk, 1.19 MB app, 13 <code>.webp</code> illustrations</td></tr>
+    <tr><td>API</td><td><code>/api/allocate</code> · <code>/api/pc-scan/&lt;code&gt;</code> · <code>/api/tg-cs/session/{health,access-check}</code> · WS <code>/api/v1/ws1</code></td></tr>
+    <tr><td>Support desk</td><td><code>/session</code> · <code>/session/message</code> · <code>/session/poll</code> · <code>/session/typing</code> · <code>/session/media</code></td></tr>
+    <tr><td>Storage keys</td><td><code>kf-wa-pairing-session</code> · <code>kf-wa-ws-path</code> · <code>kf-human-verification-passed</code></td></tr>
+    <tr><td>Analytics</td><td>Umami · website-id <code>1e2159ad-6f45-474d-9533-3ca58be064e1</code></td></tr>
+    <tr><td>Locales</td><td>zh-CN · zh-HK · zh-TW · en — auto-selected from <code>.hk/.mo/.tw</code> hosts</td></tr>
+  </table></div>
+  </div>
+
+  <h2>If someone already did it</h2>
+  <div class="warnbox">
+    <b>Removal, not passwords.</b> WhatsApp → Settings → <b>Linked devices</b> → log out every device you
+    did not add yourself (the one labelled with a browser or an unfamiliar OS is the operator's). Then turn on
+    two-step verification and tell your contacts. A linked device survives a reinstall and a password change;
+    only unlinking removes it. That 8-digit code is never needed to "verify" an account — it only ever
+    authorises a new device.
+  </div>
+
+  <footer>
+    <b>Method.</b> iPhone-Safari user-agent throughout; playwright capture of the full dependency graph;
+    obfuscator.io strings resolved by executing each file's own decoder with its rotation IIFE
+    (13,449 substitutions across four bundles); Vue app driven offline to confirm the rendered script.
+    <br><br>
+    <b>Published as an educational teardown.</b> The archive is inert by construction — network blocked at
+    the guard, no live operator endpoint reachable, no functional kit. All quotes are transcribed from the
+    captured build; nothing here was typed into the live site and no victim data was handled.
+  </footer>
+
+</div>
+</body>
+</html>

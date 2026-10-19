@@ -6,7 +6,8 @@ A Hong Kong tour guide with 143 real spots across 3 regions and 27 neighbourhood
 (Hong Kong Island, Kowloon, the New Territories). Every spot carries an actual
 photograph of the place, a rating, a description, practical tips and a location,
 with search and category filters on top. The same Python + HTML core ships as
-five real apps — macOS, Windows, Linux, Android and iPad — and also runs in the
+four installable apps — macOS, Windows, Linux and Android — plus a portable ZIP,
+an iPad Xcode project, and it also runs in the
 browser as a static build with no server behind it.
 
 **Stack / Tools:** Python, pywebview, Flask/HTTP, HTML/CSS/JS, Gradle + Android SDK, SwiftUI + WKWebView, dpkg, 7-Zip SFX, sips
@@ -14,14 +15,15 @@ browser as a static build with no server behind it.
 **Build path:**
 - V1 — Launcher, HTML UI, spots grouped by region and area, photo gallery.
 - V2 — 143 spots across 3 regions / 27 areas with real photos, search, category filters, ratings.
-- V3 — Shipped for every platform: macOS .app, Windows .exe, Linux .deb, Android APK, iPad app, plus a static browser build.
+- V3 — Shipped for desktop and Android: macOS .app, Windows .exe, Linux .deb, Android APK, portable ZIP, plus a static browser build. The iPad build is an Xcode project, not an installable .ipa.
 
 **Location:** `/Applications/HongKongTour/`
 
 ## Where it lives
 - Working folder: `/Applications/HongKongTour/`
 - Browser build on the site: `demos/hongkong-tour/` (index.html + data.json + 166 optimised photos, 29 MB)
-- Installers (built locally, not hosted — they are 292-306 MB each): `dist/HongKongTour-macOS.dmg`, `-Windows.exe`, `-linux.deb`, `-Android.apk`, `-Portable.zip`
+- Installers (built locally, published as GitHub release assets and streamed same-origin from `/files/hongkong-tour/` — 292–309 MB each): `dist/HongKongTour-macOS.dmg`, `-Windows.exe`, `-linux.deb`, `-Android.apk`, `-Portable.zip`
+- macOS first launch: the .app is ad-hoc signed (`flags=0x2(adhoc)`, no Apple Developer ID), so Gatekeeper blocks a plain double-click — right-click → Open, or System Settings → Privacy & Security → Open Anyway. `spctl -a` reporting `rejected` is expected here, not a broken build.
 - iPad/iPhone: `build/ios/HongKongTour.xcodeproj` (needs Xcode + a signing identity to produce an .ipa)
 
 ## The browser build

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bundle inventory — mis-ws.org kit archive</title>
+<style>
+  :root{--bg:#0b0d12;--panel:#12151d;--line:#232838;--tx:#e7e9ee;--dim:#98a0b3;--ac:#6f8cff;--warn:#ffd166}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif}
+  .wrap{max-width:1000px;margin:0 auto;padding:38px 22px 70px}
+  .eyebrow{font:600 11px/1 ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--ac)}
+  h1{font-size:30px;line-height:1.2;margin:12px 0 8px;letter-spacing:-.02em}
+  p.lead{color:var(--dim);max-width:70ch;margin:0 0 22px}
+  .note{border-left:3px solid var(--warn);background:rgba(255,209,102,.07);padding:12px 16px;border-radius:0 8px 8px 0;margin:0 0 26px;font-size:14px;color:#e9e2cf}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{text-align:left;font:600 10.5px/1 ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);padding:0 10px 10px;border-bottom:1px solid var(--line)}
+  td{padding:13px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  td.n,td.h{white-space:nowrap;font-family:ui-monospace,monospace;font-size:12px;color:var(--dim)}
+  td.h{color:#6b7385}
+  a{color:var(--ac);text-decoration:none;font-family:ui-monospace,monospace;font-size:12.5px}
+  a:hover{text-decoration:underline}
+  .path{font:11px/1 ui-monospace,monospace;color:#5b6274;margin-top:3px}
+  .d{color:var(--dim);font-size:12.5px;margin-top:3px;max-width:58ch}
+  tr.added td{background:rgba(111,140,255,.06)}
+  tr.added b{color:var(--ac)}
+  .foot{margin-top:26px;color:#6b7385;font-size:12.5px}
+  @media(max-width:720px){
+    .wrap{padding:26px 16px 56px}
+    table,thead,tbody,tr,td,th{display:block}
+    thead{display:none}
+    tr{border-bottom:1px solid var(--line);padding:10px 0}
+    td{border:0;padding:3px 0}
+    td.n,td.h{display:inline-block;margin-right:14px}
+  }
+</style></head>
+<body><div class="wrap">
+  <div class="eyebrow">Archive inventory</div>
+  <h1>The app bundle, file by file</h1>
+  <p class="lead">Eleven files, 1.23 MB of code, one phishing product. Every row links to the exact bytes served by
+  <code>web.mis-ws.org</code> on capture day — click to download rather than open, because they are minified on purpose.</p>
+
+  <div class="note"><b>Why it looks like noise.</b> The whole application is obfuscated with a string-table transform: identifiers renamed to
+  <code>a0_0x10903e</code>, every literal replaced by an index into a shuffled array that is decoded through a self-defending rotation loop.
+  Opening a chunk in a tab shows you that array, not the program. The readable version comes from resolving the 13,449 substitution calls —
+  that is what the teardown walks through.</div>
+
+  <table>
+    <thead><tr><th>File</th><th>Size</th><th>SHA-256</th><th>What it is</th></tr></thead>
+    <tbody>
+<tr><td><a href="./index.html" download>index.html</a><div class="path">index.html/</div></td><td class="n">2 KB</td><td class="h">5782652f5429f9c2</td><td><b>Shell</b><div class="d">Entry document. Server-side gate markers: five noindex metas, mobile-only precondition, the app root and the gate script tags.</div></td></tr>
+<tr><td><a href="./llFco8/mrdoZ7lOmsmiO2EK.js" download>mrdoZ7lOmsmiO2EK.js</a><div class="path">llFco8/</div></td><td class="n">6 KB</td><td class="h">d3f72dc47645dd4d</td><td><b>Entry chunk</b><div class="d">First JS executed. Wraps everything in an anti-debug IIFE (webdriver / devtools-timing / window-size checks) and mounts the boot component.</div></td></tr>
+<tr><td><a href="./llFco8/rMMvYjUC2OMjmaUv-CxxESmdC.js" download>rMMvYjUC2OMjmaUv-CxxESmdC.js</a><div class="path">llFco8/</div></td><td class="n">7 KB</td><td class="h">0421a110d1c077b8</td><td><b>Stage-2 loader</b><div class="d">Second loader, own rotated string table. Sequence-walks its own decode table before continuing.</div></td></tr>
+<tr><td><a href="./llFco8/Ya0GiQViKSAoSBPd-CzaoCS8e.js" download>Ya0GiQViKSAoSBPd-CzaoCS8e.js</a><div class="path">llFco8/</div></td><td class="n">7 KB</td><td class="h">89ed09d4df0785dc</td><td><b>Gate + dep map</b><div class="d">Installs the gate, then dynamically imports the Vue app with its CSS dep map.</div></td></tr>
+<tr><td><a href="./llFco8/xSgpjQlwJiVazovM-C7bOig6j.js" download>xSgpjQlwJiVazovM-C7bOig6j.js</a><div class="path">llFco8/</div></td><td class="n">9 KB</td><td class="h">3082acd72aab307f</td><td><b>Preload helper</b><div class="d">Tiny module-federation-style resolver: builds asset URLs, resolves them against import.meta, injects them as modulepreload links.</div></td></tr>
+<tr><td><a href="./llFco8/mgate.js" download>mgate.js</a><div class="path">llFco8/</div></td><td class="n">3 KB</td><td class="h">582ea1f36e9007ca</td><td><b>Client gate</b><div class="d">Decides whether the visitor is a real phone: UA regex, platform, WebGL renderer allow/deny list, navigator.userAgentData.mobile, WebDriver.</div></td></tr>
+<tr><td><a href="./llFco8/6pHhaKvzZfqoKOjN-DpnwfnMB.js" download>6pHhaKvzZfqoKOjN-DpnwfnMB.js</a><div class="path">llFco8/</div></td><td class="n">1.14 MB</td><td class="h">6f70035c3a8cd76c</td><td><b>Vue application</b><div class="d">The product. 1.19 MB: Vue 3 runtime, four locales, the whole bot script, the fake-chat UI, the pairing client and the operator-chat API client.</div></td></tr>
+<tr><td><a href="./llFco8/GbdDzTQ6mWpLgsXz.css" download>GbdDzTQ6mWpLgsXz.css</a><div class="path">llFco8/</div></td><td class="n">53 KB</td><td class="h">e98648c1995ffe2c</td><td><b>Stylesheet</b><div class="d">Reproduces WhatsApp&#x27;s visual language: bubble radii, tail geometry, header green, timestamp typography, system-font stack.</div></td></tr>
+<tr><td><a href="./script.js" download>script.js</a><div class="path">script.js/</div></td><td class="n">5 KB</td><td class="h">5da9e457232b0fb1</td><td><b>Analytics</b><div class="d">Umami, third-party. Loaded by the shell; the archive guard blocks its beacon so nothing reports anywhere.</div></td></tr>
+<tr class="added"><td><a href="./guard.js" download>guard.js</a><div class="path">guard.js/</div></td><td class="n">5 KB</td><td class="h">ee2a8a5e5c43b54b</td><td><b>ADDED BY ME</b><div class="d">Not part of the kit. Spoofs the phone signals the gate wants, pins /llFco8/ asset paths into this folder, and blocks every outbound request.</div></td></tr>
+    </tbody>
+  </table>
+
+  <p class="foot">13 images (2.07 MB): the four warning illustrations, the service-menu graphic and the phone-settings screenshots the
+  bot script shows at each stage, in zh-CN / zh-HK / en-US variants. Served as WebP with hash filenames from the same folder.</p>
+  <p class="foot">Archive of a criminal kit, kept inert: <code>guard.js</code> blocks every outbound request, so this copy cannot pair, poll or report.
+  Analysis at <a href="./../wa-kit-teardown.html">the teardown</a>.</p>
+</div></body></html>
