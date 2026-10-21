@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>붉은별 3.0 — building a Red Star OS + Kwangmyong simulator · Isaac</title>
-<meta name="description" content="A 303 KB single-file Red Star OS 3.0 simulator populated from a real Kwangmyong address table: 49 entries, 24 page builders, 22 apps, a working watermark and a read-only account — with the research, the verification and the honest limits.">
+<meta name="description" content="A 304 KB single-file rebuild of the Red Star OS 3.0 desktop: shell, 22 apps, a watermark that rewrites the file, a genuinely read-only guest, and a 49-entry sample of the Kwangmyong address book. Research, verification and honest limits. A separate project from Kwangmyong Network 3.0.">
 <style>
   :root{
     --bg:#0a0c11; --panel:#11141b; --panel2:#161a23; --line:#242a37;
@@ -110,15 +110,15 @@
     </span>
   </div>
 
-  <h1>붉은별 3.0 — a <em>Red Star OS</em> simulator with a real Kwangmyong address book</h1>
-  <p class="deck">A 2013-era North Korean desktop, rebuilt as <b>one 303 KB HTML file</b> that never touches
-  the network. The interesting part isn't the wallpaper — it's that every address in it came from a published
-  table, every dead end behaves like the real intranet would, and the copy-protection theatre (watermarking,
-  watch logs, read-only guests) actually works instead of being decoration.</p>
+  <h1>붉은별 3.0 — rebuilding the <em>Red Star OS</em> desktop</h1>
+  <p class="deck">A 2013-era North Korean operating system, rebuilt as <b>one 304 KB HTML file</b> that never
+  touches the network: menu bar, dock, traffic lights, Sogwang Office, the Naenara browser, the media mark
+  that rewrites a copied file, and a guest account that genuinely cannot buy, send or save. It browses a
+  <b>49-entry sample</b> of the Kwangmyong address book — the network itself is a separate project.</p>
 
   <div class="stats">
-    <div class="stat"><div class="k">Artifact</div><div class="v">303,793 B <small>single file</small></div></div>
-    <div class="stat"><div class="k">Catalogue</div><div class="v">49 <small>45 addresses + 4 services</small></div></div>
+    <div class="stat"><div class="k">Artifact</div><div class="v">304,777 B <small>single file</small></div></div>
+    <div class="stat"><div class="k">Catalogue</div><div class="v">49 <small>sample addresses, not the net</small></div></div>
     <div class="stat"><div class="k">Apps</div><div class="v">22 <small>+ 41 terminal spellings</small></div></div>
     <div class="stat"><div class="k">Page builders</div><div class="v">24 <small>6 site categories</small></div></div>
     <div class="stat"><div class="k">Self-test</div><div class="v">45 <small>assertions</small></div></div>
@@ -134,7 +134,30 @@
     <a class="btn pri" href="./redstar-sim.html">▶ Run the simulator</a>
     <a class="btn" href="./redstar-sim-mirror/">Byte-identical mirror</a>
     <a class="btn" href="../prompts/redstar-sim-prompt.md">Build spec</a>
+    <a class="btn" href="./kwangmyong-sim.html">Companion: the network</a>
   </div>
+
+  <h2>Two projects, not one</h2>
+  <p>This is the <b>second</b> DPRK simulator on this site, and the two are deliberately separate — different
+  shells, different data, different jobs. <a href="./kwangmyong-sim.html">Kwangmyong Network 3.0</a> owns the
+  intranet: 136 catalogue entries, 30 hand-built services, a Windows-like taskbar. This one owns the machine
+  that browses it: a macOS-like desk, 22 apps, the media mark, the read-only guest. The 49 addresses here are
+  a sample chosen to prove the browser, the watch log and the watermark interlock — not a replacement for the
+  full network.</p>
+  <div class="tblwrap"><table>
+    <thead><tr><th></th><th>Kwangmyong Network 3.0</th><th>붉은별 3.0 (this page)</th></tr></thead>
+    <tbody>
+      <tr><td>Owns</td><td>the intranet and its content</td><td>the operating system and its rules</td></tr>
+      <tr><td>Catalogue</td><td>136 entries, 106 generated pages, 30 hand-built services</td><td>49-entry sample: 45 addresses + 4 services</td></tr>
+      <tr><td>Shell</td><td>Windows-like taskbar, start menu, tray</td><td>macOS-like menu bar, dock, traffic-light controls</td></tr>
+      <tr><td>Builds</td><td>Korean + English, 72/72 self-test</td><td>Korean + English, 45/45 self-test</td></tr>
+      <tr><td>Signature apps</td><td>은정 cloud, 류경오락장 games, 철벽 filter editor, 무병 checker, graded exam</td><td>Sogwang Office, Bokem, SamTaeSong IDE, activity monitor, media mark</td></tr>
+      <tr><td>Copy protection</td><td>watch log; logout refusal</td><td>watermark rewrites the copied file; guest account enforced read-only</td></tr>
+      <tr><td>Open</td><td><a href="./kwangmyong-sim.html">English build</a> · <a href="./kwangmyong-sim-ko.html">Korean</a></td><td><a href="./redstar-sim.html">this build</a> · <a href="./redstar-sim-mirror/">mirror</a></td></tr>
+    </tbody>
+  </table></div>
+  <p class="note" style="color:var(--mut);font-size:13px">Same research lineage, different artifact. Nothing is
+  shared at runtime: no common file, no common script, no iframe between them.</p>
 
   <h2>Try it without leaving this page</h2>
   <div class="frame"><iframe src="./redstar-sim.html" title="Red Star OS 3.0 simulator" loading="lazy"></iframe></div>
@@ -145,7 +168,8 @@
   <p>Two constraints shaped everything. First: use <b>the saved hosts, not invented ones</b>. A 2016 table of
   Kwangmyong addresses (33 rows) plus 12 addresses read off press photographs of a 2015 Rason tourist chart plus
   four services that only appear in reporting — 49 catalogue entries in six categories, each with the address the
-  source gives.</p>
+  source gives. <b>This build uses a 49-entry sample of that table</b>; the full 136-entry catalogue belongs to the
+  <a href="./kwangmyong-sim.html">Kwangmyong Network 3.0</a> project.</p>
   <p>Second: <b>search online to keep improving</b>, which meant the visual and behavioural claims had to be
   sourced rather than guessed. Red Star OS 3.0 is a KDE-based Linux distribution by the Korea Computer Center;
   its shell imitates macOS (top menu bar, Dock, traffic-light controls on the <em>left</em>); Naenara is a Firefox
@@ -277,8 +301,8 @@ flows: boot → empty-password refusal → login → home page → blocked host 
   <div class="tblwrap">
   <table>
     <tr><th>Item</th><th>Value</th></tr>
-    <tr><td>Artifact</td><td><code>303,793 bytes</code>, one <code>&lt;script&gt;</code>, zero external URLs</td></tr>
-    <tr><td>sha256</td><td><code>289c2228d3c7680885d6797c9c2cf8436058f9873c810d87ba092a9a31f2edb0</code></td></tr>
+    <tr><td>Artifact</td><td><code>304,777 bytes</code>, one <code>&lt;script&gt;</code>, zero external URLs</td></tr>
+    <tr><td>sha256</td><td><code>b8cc407f24d32b1f940bef75214a7f1316761925d6ab65378b2890a98117a6a3</code></td></tr>
     <tr><td>Source</td><td>4,768 lines across 15 parts (10 JS, 5 CSS) + build script</td></tr>
     <tr><td>Data</td><td>49 entries · 24 page builders · 22 apps · 10 goods · 6 mail · 14 dictionary entries · 6 quiz questions</td></tr>
     <tr><td>Terminal</td><td>29 commands / 41 spellings, with ↑↓ history</td></tr>

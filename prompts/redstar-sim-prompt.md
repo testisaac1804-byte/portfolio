@@ -1,4 +1,8 @@
-# Build spec — 붉은별 3.0 / Red Star OS + Kwangmyong simulator
+# Build spec — 붉은별 3.0 (Red Star OS desktop simulator)
+
+> This is the **operating-system** project. The intranet it browses is a 49-entry sample of the
+> Kwangmyong address book; the full 136-entry network is a separate project, Kwangmyong Network 3.0
+> (`prompts/kwangmyong-sim-prompt.md`). Do not fold them together.
 
 **Goal.** One offline HTML file that behaves like a 2013 North Korean desktop (Red Star OS 3.0, KCC) browsing
 the Kwangmyong intranet, where the site list is a **real published address table** rather than invented

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>붉은별 3.0 — Red Star OS 시뮬</title>
-<meta name="description" content="Offline educational simulator of Red Star OS 3.0 and the Kwangmyong intranet. No network access.">
+<title>붉은별 3.0 — Red Star OS 데스크톱 시뮬</title>
+<meta name="description" content="Offline educational simulator of the Red Star OS 3.0 desktop (KCC, 2013): shell, apps, watermarking, read-only guest. The intranet it browses is a 49-entry sample of the Kwangmyong address book — the full 136-site network is a separate project. No network access.">
 <style>
 /* ============================================================
    css1 — tokens, reset, boot, login, toast, modal
@@ -1000,7 +1000,7 @@ table.kp a:hover{text-decoration:underline}
   <div class="bt-sub">Red Star OS 3.0 · KCC</div>
   <div class="bt-bar"><i id="btBar"></i></div>
   <div class="bt-log mono" id="btLog"></div>
-  <div class="bt-foot">조선민주주의인민공화국 · 광명망 시뮬레이션<br>오프라인 교육용 · 실제 망에 접속하지 않습니다</div>
+  <div class="bt-foot">조선민주주의인민공화국 · 붉은별 3.0 데스크톱<br>오프라인 교육용 · 실제 망에 접속하지 않습니다</div>
 </div>
 
 <!-- ============ login ============ -->
@@ -1010,7 +1010,7 @@ table.kp a:hover{text-decoration:underline}
       <path fill="#e0193a" stroke="#ff8fa0" stroke-width="1.5" d="M50 6 62 35 93 35 68 55 78 88 50 69 22 88 32 55 7 35 38 35Z"/>
     </svg>
     <div class="lg-title">붉은별 3.0</div>
-    <div class="lg-ver">RED STAR OS · 광명망</div>
+    <div class="lg-ver">RED STAR OS 3.0 · 붉은별</div>
     <div class="lg-users" id="lgUsers"></div>
     <div class="lg-field">
       <input id="lgPw" type="password" placeholder="암호" autocomplete="off"
@@ -4588,6 +4588,11 @@ window.RS = (function () {
         '<li>' + T('매체 표시(© KCC): 외부매체로 복사할 때 단말기 번호와 시각을 넣습니다.', 'The media mark (© KCC): copies to external media carry the terminal ID and time.') + '</li>' +
         '<li>' + T('감시기록: 련결, 차단, 복사, 인쇄가 모두 기록되고 사용자는 지울 수 없습니다.', 'Watch log: visits, blocks, copies and prints are recorded and users cannot erase them.') + '</li>' +
       '</ul>' +
+      '<h3>' + T('별개의 과제', 'A separate project') + '</h3>' +
+      '<ul class="ab-ul">' +
+        '<li>' + T('이 화면은 운영체제를 본뜬 과제입니다. 광명망 자체 — 봉사대상 136개 — 는 별개의 과제 《광명 네트웍 3.0》에서 다룹니다.', 'This is the operating-system project. The intranet itself — 136 catalogue entries — is a separate project, Kwangmyong Network 3.0.') + '</li>' +
+        '<li>' + T('여기 실린 49개 주소는 그 령역의 표본이며, 탐색기·감시·매체 표시가 어떻게 맞물리는지를 보이기 위한 것입니다.', 'The 49 addresses here are a sample of that territory, kept so the browser, the watch log and the media mark can be shown working together.') + '</li>' +
+      '</ul>' +
       '<h3>' + T('자료의 출처', 'Sources') + '</h3>' +
       '<ul class="ab-ul mono" style="font-size:10.5px">' +
         '<li>Kwangmyong address table, “As of May 2016” — github.com/Alyzana/kwang-myong-addresses (33 rows used here).</li>' +
@@ -4683,7 +4688,7 @@ window.RS = (function () {
       set('#mbUserN', u.name); set('#mbAv', u.av || u.name.slice(0, 1));
       const av = RS.$('#mbAv'); if (av) av.textContent = u.av || u.name.slice(0, 1);
     }
-    document.title = T('붉은별 3.0 — 광명망 시뮬', 'Red Star OS 3.0 — Kwangmyong sim');
+    document.title = T('붉은별 3.0 — Red Star OS 데스크톱 시뮬', 'Red Star OS 3.0 — desktop sim');
     RS.updateWatch();
   };
   RS.updateWatch = function () {
