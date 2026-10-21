@@ -283,6 +283,7 @@ flows: boot → empty-password refusal → login → home page → blocked host 
     <tr><td>Data</td><td>49 entries · 24 page builders · 22 apps · 10 goods · 6 mail · 14 dictionary entries · 6 quiz questions</td></tr>
     <tr><td>Terminal</td><td>29 commands / 41 spellings, with ↑↓ history</td></tr>
     <tr><td>Mirror</td><td><code>demos/redstar-sim-mirror/index.html</code> — byte-identical to the desktop artifact</td></tr>
+    <tr><td>Served copy</td><td>Cloudflare Pages adds two tags at <code>&lt;/head&gt;</code> on the way out — its analytics beacon and this site's skin engine (+390 B). Strip those and the served file equals the repo file byte for byte; the artifact itself is unchanged.</td></tr>
     <tr><td>Tests</td><td>45 in-page assertions + 3-width layout probe + 14 browser flows, all passing</td></tr>
   </table>
   </div>
