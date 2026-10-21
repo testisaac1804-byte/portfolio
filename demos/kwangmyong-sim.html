@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kwangmyong Network 3.0 — Simulator (English)</title>
-<meta name="description" content="Educational simulation of the DPRK national intranet (Kwangmyong), in English: a browser with the catalogue of registered sites, intranet e-mail, e-commerce, censored search and a device-level surveillance log. Single self-contained HTML file. The Korean build (Kwangmyong-sim.html) is unchanged.">
+<title>Kwangmyong 3.0 — the DPRK intranet, network only (simulator)</title>
+<meta name="description" content="Educational simulation of the DPRK national intranet (Kwangmyong) — the network only, not the computer: one browser, the catalogue of registered sites, intranet e-mail, e-commerce, censored search and the device log. Single self-contained HTML file. The Korean build (Kwangmyong-sim.html) is the older full-desktop version, unchanged.">
 <style>
 /* ================= Kwangmyong simulator — OS chrome ================= */
 :root{
@@ -2110,7 +2110,7 @@ KP.EUNJEONG = {
       + (arg === 'nomore' ? '<p class="kp-sm kp-bad">보관공간이 모자랍니다. 자료를 지우고 다시 올리십시오.</p>' : ''));
     main += KP.card('자료 올리기', '<p><input class="kp-in kp-file" id="euN" placeholder="자료이름 (예: 실습총화.hwp)">'
       + ' <select class="kp-in kp-sel" id="euK"><option>문서</option><option>사진</option><option>도면</option><option>자료</option></select>'
-      + ' <a class="kp-btn" data-act="cloudUp">올리기</a></p><p class="kp-sm">Uploaded files also appear in the document store.</p>');
+      + ' <a class="kp-btn" data-act="cloudUp">올리기</a></p><p class="kp-sm">Uploaded files appear in your own account only, not on the open network.</p>');
     var side = KP.sideBlock('자료 열기', '<p class="kp-sm">' + (K.BR.cloudOpen === undefined || K.BR.cloudOpen === null ? '자료를 눌러 내용을 봅니다.' : '《' + KP.esc((files[K.BR.cloudOpen] || {}).n || '') + '》을 열었습니다.') + '</p>');
     if (K.BR.cloudOpen !== undefined && K.BR.cloudOpen !== null && files[K.BR.cloudOpen]){
       var f = files[K.BR.cloudOpen];
@@ -3857,14 +3857,14 @@ K.ABOUT = {
       + '</div>';
     if (t === 'how'){
       h += '<div class="kp-card"><h4>How to use</h4><ul class="kp-ul">'
-        + '<li><b>Desktop icons</b> open on a double click; items on the <b>dock</b> below open on a single click.</li>'
-        + '<li><b>Naenara Explorer</b> is the only browser on this device. Type a network address in the address bar and press <b>Open</b>. '
+        + '<li><b>One window, one page.</b> The bar across the top switches services; the browser’s address bar opens sites by address or by name.</li>'
+        + '<li><b>Naenara Explorer</b> is the only browser on this network. Type a network address in the address bar and press <b>Open</b>. '
         + 'Examples: <span class="kp-mono">www.sciteco.aca.kp</span>, <span class="kp-mono">search.kp</span>, <span class="kp-mono">10.76.1.11</span></li>'
         + '<li>The <b>site catalogue</b> on the home page lists every service on the network; click a name to open its page.</li>'
-        + '<li>Try the <b>terminal</b>: <span class="kp-mono">도움</span>, <span class="kp-mono">목록</span>, '
-        + '<span class="kp-mono">find</span>, <span class="kp-mono">ping google.com</span>, <span class="kp-mono">log</span></li>'
+        + '<li>The address bar also takes names: <span class="kp-mono">도움</span>, <span class="kp-mono">목록</span>, '
+        + '<span class="kp-mono">cooks</span>, <span class="kp-mono">news</span>, <span class="kp-mono">shop</span>, <span class="kp-mono">log</span></li>'
         + '<li><b>◉ Surveillance</b> shows the access record so far, including any attempt to reach an outside address.</li>'
-        + '<li><b>Permissions</b> differ by account: signed in as <b>visitor</b>, shop payments and outgoing mail are refused.</li>'
+        + '<li><b>Permissions</b> differ by account: with the <b>visitor</b> account, shop payments and outgoing mail are refused.</li>'
         + '<li>Things to try: buy something in the shop (mind the payment balance), sit a distance-learning exam, play in the Ryugyong amusement park, watch a Manbang broadcast.</li></ul></div>';
     } else if (t === 'real'){
       h += '<div class="kp-card"><h4>Reported facts this simulation is built on</h4><ul class="kp-ul">'
@@ -3897,7 +3897,7 @@ K.ABOUT = {
         + '<li>Sit an exam in distance learning; 60 points or more earns a certificate.</li>'
         + '<li>Register the device at the Ministry of People’s Security, then add a word to the censorship dictionary in the Firewall and search for it.</li>'
         + '<li>From Sili Mail, try sending a letter to <span class="kp-mono">…@gmail.com</span>.</li>'
-        + '<li>In the terminal type <span class="kp-mono">find</span> and <span class="kp-mono">netstat</span>.</li>'
+        + '<li>Try an address that does not exist, and one that is outside the network, and compare the two notices.</li>'
         + '<li>Sign in as the <b>visitor</b> account, then try to pay in the shop.</li></ol></div>';
     } else if (t === 'src'){
       h += '<div class="kp-card"><h4>Sources</h4><ul class="kp-ul">'
@@ -3910,7 +3910,7 @@ K.ABOUT = {
       h += '<div class="kp-card"><h4>What this is</h4>'
         + '<p>A simulation of the <b>Kwangmyong Network</b>: an educational model of what the DPRK’s national intranet looks like and '
         + 'which services can be reached on it.</p>'
-        + '<p>It is a model, so it connects to no real network. Every screen, news item, product, letter and record was written for this simulation.</p>'
+        + '<p>It is a model, so it connects to no real network. Every screen, news item, product, letter and record was written for this simulation. This build is <b>the network only</b>: no desktop, no login, no terminal — the machine around the network is a separate build.</p>'
         + '<p>But the <b>list of services</b> is not invented: it follows published survey material (the 2016 home page index and later lists). '
         + 'The <b>Reported facts</b> tab shows what is real and what is modelled.</p></div>';
       h += '<div class="kp-card"><h4>Contents</h4><ol class="kp-ol">'
@@ -5781,6 +5781,383 @@ K.initOuter = function(){
       }
     }
     return out;
+  };
+})();
+
+/* =======================================================================
+   net_shell.js — EN BUILD ONLY (network, not the machine)
+
+   The simulator models the Kwangmyong INTRANET — the closed national
+   network — not a desktop computer. The whole operating-system layer
+   (boot sequence, login screen, wallpaper, start menu, desktop icons,
+   dock, settings, document store, terminal) is part of the machine and
+   belongs to a different build, so here it is removed from the product:
+
+     * no boot / no login  — you are on the network, not signing in
+     * no desktop chrome   — one browser fills the screen
+     * no OS apps          — settings, files, terminal are not installed
+     * a thin network bar  — the services that actually exist on the net
+
+   Everything the network does (portal, 136 sites, search, mail, shops,
+   Manbang, the catalogue, the device log) is untouched.
+   ======================================================================= */
+(function(){
+  'use strict';
+
+  var OS_APPS = ['set', 'files', 'term'];
+
+  var SVC = [
+    ['br',    '⌂', 'Browser',   '내나라 탐색기'],
+    ['search','⌕', 'Search',    '광명 검색'],
+    ['mail',  '✉', 'Mail',      '실리 우편'],
+    ['shop',  '▣', 'Store',     '만물상'],
+    ['vod',   '▶', 'Manbang',   '만방'],
+    ['dir',   '▤', 'Catalogue', '봉사대상 일람'],
+    ['sec',   '◉', 'Log',       '감시기록'],
+    ['about', '?', 'About',     '도움말']
+  ];
+
+  var CSS = [
+    /* --- the machine goes away --- */
+    'body.netmode #bootScreen,body.netmode #lockScreen,body.netmode #wallpaper,',
+    'body.netmode #menubar,body.netmode #icons,body.netmode #dock,',
+    'body.netmode #dockPlaceholder,body.netmode .mb-drop,body.netmode #simBanner,',
+    'body.netmode #firstRun{display:none!important}',
+    'body.netmode #desktop{padding-top:0;background:#08121d}',
+    'body.netmode #winLayer{inset:auto;top:42px;left:0;right:0;bottom:0}',
+    'body.netmode .win{left:0!important;top:0!important;width:100%!important;',
+    'height:100%!important;border:0;border-radius:0;box-shadow:none;background:#0b1826}',
+    'body.netmode .win-title,body.netmode .win-status,body.netmode .win-resize{display:none!important}',
+    'body.netmode .win-body{height:100%}',
+    'body.netmode #selftest{display:none!important}',
+    /* a phone gets icons only: the bar must never scroll sideways */
+    '@media (max-width:960px){#netbar .nb-sub,#netbar .nb-clock,#netbar .nb-test,#netbar .nb-sim,#netbar .nb-title em{display:none}'
+      + '#netbar .nb-btn span{display:none}#netbar .nb-btn{padding:0 10px;font-size:15px}#netbar .nb-title{font-size:12px}}',
+    '@media (max-width:560px){#netbar .nb-title{display:none}#netbar .nb-brand{padding-right:2px}}',
+    '#netbar{overflow:hidden}',
+    /* --- the network bar --- */
+    '#netbar{position:absolute;top:0;left:0;right:0;height:42px;z-index:200;display:flex;',
+    'align-items:center;gap:2px;padding:0 8px;background:linear-gradient(#102438,#0a1727);',
+    'border-bottom:1px solid #24425f;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;',
+    'overflow-x:auto;overflow-y:hidden;box-shadow:0 2px 12px rgba(0,0,0,.45)}',
+    '#netbar .nb-brand{display:flex;align-items:center;gap:7px;padding:0 10px 0 2px;',
+    'border-right:1px solid #24425f;margin-right:5px;white-space:nowrap}',
+    '#netbar .nb-star{color:#c1121f;font-size:15px}',
+    '#netbar .nb-title{color:#e7effa;font-size:12px;font-weight:700;letter-spacing:.02em}',
+    '#netbar .nb-title em{display:block;font-style:normal;font-size:9px;font-weight:400;',
+    'color:#8fa7bf;letter-spacing:.10em;text-transform:uppercase}',
+    '#netbar .nb-btn{display:flex;align-items:center;gap:5px;height:27px;padding:0 9px;',
+    'border:1px solid transparent;border-radius:6px;background:none;color:#c3d4e6;',
+    'font-size:11.5px;line-height:1;cursor:pointer;white-space:nowrap}',
+    '#netbar .nb-btn i{font-style:normal;font-size:12px;color:#8fb6dd;opacity:.95}',
+    '#netbar .nb-btn:hover{background:rgba(40,90,138,.45);border-color:#2c5074;color:#fff}',
+    '#netbar .nb-btn.on{background:rgba(30,84,132,.72);border-color:#3f7cb0;color:#fff}',
+    '#netbar .nb-btn.on i{color:#cfe6ff}',
+    '#netbar .nb-sp{flex:1 1 auto;min-width:8px}',
+    '#netbar .nb-chip{height:22px;display:flex;align-items:center;gap:5px;padding:0 8px;',
+    'border-radius:11px;border:1px solid #6d2028;background:rgba(193,18,31,.16);',
+    'color:#f0c2c6;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;cursor:pointer;white-space:nowrap}',
+    '#netbar .nb-chip:hover{background:rgba(193,18,31,.3);color:#fff}',
+    '#netbar .nb-test{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#8fbf9a;',
+    'border:1px solid #24503a;background:rgba(30,90,60,.18);border-radius:10px;padding:2px 8px;cursor:pointer}',
+    '#netbar .nb-test.bad{color:#f0b4b4;border-color:#6d2028;background:rgba(120,20,28,.25)}',
+    '#netbar .nb-lang,#netbar .nb-clock{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;',
+    'color:#a9c0d6;border:1px solid #24425f;border-radius:5px;padding:3px 7px;cursor:pointer;',
+    'background:rgba(18,40,62,.6);white-space:nowrap}',
+    '#netbar .nb-lang:hover,#netbar .nb-clock:hover{color:#fff;border-color:#3f7cb0}',
+    '#netbar .nb-clock{cursor:default}',
+    '@media (max-width:720px){#netbar .nb-btn span{display:none}#netbar .nb-title em{display:none}}'
+  ].join('');
+
+  function E(id){ return document.getElementById(id); }
+  function style(){
+    if (E('netCss')) return;
+    var s = document.createElement('style');
+    s.id = 'netCss';
+    s.appendChild(document.createTextNode(CSS));
+    document.head.appendChild(s);
+  }
+
+  /* ------------------------------------------------ the network bar */
+  function barHTML(){
+    var h = '<div class="nb-brand"><span class="nb-star">★</span>'
+      + '<span class="nb-title">Kwangmyong 3.0<em>the intranet, not the machine</em></span></div>';
+    for (var i = 0; i < SVC.length; i++){
+      var s = SVC[i];
+      h += '<button class="nb-btn" id="nbBtn_' + s[0] + '" data-nb="' + s[0] + '"'
+        + ' title="' + (K.lang === 'en' ? s[2] : s[3]) + '">'
+        + '<i>' + s[1] + '</i><span>' + s[2] + '</span></button>';
+    }
+    h += '<div class="nb-sp"></div>'
+      + '<button class="nb-chip" id="nbSim" title="What is this?">simulation</button>'
+      + '<span class="nb-test" id="nbTest" title="Self-test — click to run again">self-test ·</span>'
+      + '<span class="nb-clock" id="nbClock">Pyongyang --:--:--</span>';
+    return h;
+  }
+
+  function buildBar(){
+    var old = E('netbar'); if (old) old.parentNode.removeChild(old);
+    var b = document.createElement('div');
+    b.id = 'netbar';
+    b.innerHTML = barHTML();
+    var d = E('desktop');
+    if (d) d.insertBefore(b, d.firstChild);
+    b.addEventListener('click', function(ev){
+      var t = ev.target.closest ? ev.target.closest('[data-nb]') : null;
+      if (t){ K.NET.go(t.getAttribute('data-nb')); return; }
+      if (ev.target.closest('#nbSim')){ K.simNote(); return; }
+      if (ev.target.closest('#nbTest')){ K.NET.runTest(true); }
+    });
+  }
+
+  function paint(){
+    var open = K.WM.wins || {};
+    for (var i = 0; i < SVC.length; i++){
+      var id = SVC[i][0], b = E('nbBtn_' + id);
+      if (!b) continue;
+      var on = !!open[id];
+      b.className = 'nb-btn' + (on ? ' on' : '');
+    }
+    var c = E('nbClock');
+    if (c){
+      var d = new Date();
+      c.textContent = 'Pyongyang ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds())
+        + '  ' + (d.getMonth() + 1) + '/' + d.getDate();
+    }
+  }
+
+  /* ------------------------------------------------ behaviour */
+  K.NET = {
+    on: true,
+
+    go: function(id){
+      for (var w in K.WM.wins){ if (K.WM.wins[w]){ try { K.WM.close(w); } catch(e){} } }
+      if (id === 'br'){ K.BR.openWindow(); }
+      else K.UI.openApp(id);
+      paint();
+    },
+
+    runTest: function(loud){
+      var pass = 0, total = 0, ok = false;
+      try { ok = K.selftest(); } catch(e){ ok = false; }
+      total = (K.tests || []).length;
+      for (var i = 0; i < total; i++) if (K.tests[i].ok) pass++;
+      var chip = E('nbTest');
+      if (chip){
+        chip.textContent = 'self-test ' + pass + '/' + total;
+        chip.className = 'nb-test' + (pass === total && total ? '' : ' bad');
+        chip.title = 'Self-test — ' + pass + ' of ' + total + ' checks pass. Click to run again.';
+      }
+      if (loud) K.toast('<b>Self-test ' + pass + '/' + total + '</b> — ' + (pass === total ? 'all checks pass' : 'see console'));
+      return pass === total;
+    },
+
+    start: function(){
+      style();
+      document.body.classList.add('netmode');
+
+      /* no account, no password: the network is the product */
+      K.user = K.USERS[0];
+      K.lu = 0;
+      K.booted = true;
+      K.state.firstRun = false;
+      K.store.set('km3_seen_v1', 1);
+      K.store.set('km3_seen', 1);
+
+      /* the machine's apps are not installed on the network */
+      for (var i = 0; i < OS_APPS.length; i++) delete K.APPS[OS_APPS[i]];
+
+      var d = E('desktop'); if (d) d.hidden = false;
+      if (K.lang !== 'en') K.setLang('en');
+      buildBar();
+
+      /* one page at a time: opening a service replaces the current one */
+      var _openApp = K.UI.openApp;
+      K.UI.openApp = function(id, arg){
+        for (var w in K.WM.wins){ if (K.WM.wins[w] && w !== id){ try { K.WM.close(w); } catch(e){} } }
+        var r = _openApp.call(K.UI, id, arg);
+        paint();
+        return r;
+      };
+
+      /* open on the portal, as the intranet's first page */
+      K.BR.openWindow('www.sciteco.aca.kp');
+
+      setInterval(paint, 1000);
+      paint();
+
+      /* the build verifies itself on load, as the full build did */
+      setTimeout(function(){ K.NET.runTest(false); }, 300);
+    }
+  };
+
+  /* ------------------------------------------------ boot interception */
+  var _init = K.init;
+  K.init = function(){
+    K.boot = function(){};          /* no boot sequence: there is no machine to boot */
+    _init.call(K);
+    K.NET.start();
+  };
+
+  /* ------------------------------------------------ network-only self-test
+     Deliberately a different suite from the full-desktop build: the seven
+     checks that drove the terminal, the document store and the settings
+     panel left with those apps. What remains is the network — the data,
+     every page, every way of reaching one, and the absence of the OS. */
+  K.selftest = function(){
+    var box = E('selftest');
+    var snapshot = JSON.stringify({ cart:K.state.cart, wallet:K.state.wallet, log:K.state.log.length });
+    var savedUser = K.user, fails = [], i, j;
+    K.tests = [];
+    K._silent = true;
+    try {
+      t('SITES rows = RAW rows', K.SITES.length === K.RAW.length);
+      t('at least 100 registered sites', K.SITES.length >= 100);
+      t('every site has a name', K.SITES.every(function(s){ return !!s.ko && !!s.en; }));
+      var pubAddr = K.SITES.filter(function(s){ return !!(s.ip || s.host); }).length;
+      t('80%+ of sites have a published address (' + Math.round(pubAddr / K.SITES.length * 100) + '%)', pubAddr / K.SITES.length >= 0.8);
+      t('every curated route key exists', Object.keys(KP.ROUTES).every(function(k){ return !!K.BYKEY[k]; }));
+
+      var badResolve = [];
+      for (i = 0; i < K.SITES.length; i++){
+        var r = K.BR.resolve(KP.addr(K.SITES[i]));
+        if (r.kind !== 'site' || r.site.i !== K.SITES[i].i) badResolve.push(K.SITES[i].ko);
+      }
+      t('all ' + K.SITES.length + ' sites resolve by address', badResolve.length === 0);
+
+      var badPage = [];
+      for (var key in KP.ROUTES){
+        try {
+          var out = KP.page(key, 'home');
+          if (!out || !out.html || out.html.length < 200) badPage.push(key + ':short');
+          else if (/undefined|NaN|\[object /.test(out.html)) badPage.push(key + ':bad-token');
+        } catch(e){ badPage.push(key + ':' + e.message); }
+      }
+      t('all ' + Object.keys(KP.ROUTES).length + ' curated pages render', badPage.length === 0);
+
+      var badGen = [];
+      for (i = 0; i < K.SITES.length; i++){
+        if (KP.hasCurated(K.SITES[i].key)) continue;
+        try {
+          var g = KP.generic(K.SITES[i], 'home');
+          if (!g.html || /undefined|NaN|\[object /.test(g.html)) badGen.push(K.SITES[i].ko);
+        } catch(e){ badGen.push(K.SITES[i].ko + ':' + e.message); }
+      }
+      t('all generated pages render', badGen.length === 0);
+
+      var cat = KP.CATALOGUE.page();
+      t('catalogue shows all ' + K.SITES.length + ' sites', cat.html.indexOf(K.SITES.length + '') >= 0);
+      var perCat = 0;
+      for (var c in K.CATS){ for (i = 0; i < K.SITES.length; i++) if (K.SITES[i].cat === +c) perCat++; }
+      t('per-category totals add up', perCat === K.SITES.length);
+
+      /* --- the machine is gone --- */
+      t('no boot screen in the product', !E('bootScreen') || getComputedStyle(E('bootScreen')).display === 'none');
+      t('no login screen in the product', !E('lockScreen') || getComputedStyle(E('lockScreen')).display === 'none');
+      t('no desktop icons', !E('icons') || getComputedStyle(E('icons')).display === 'none');
+      t('no dock', !E('dock') || getComputedStyle(E('dock')).display === 'none');
+      t('no start menu', !E('menubar') || getComputedStyle(E('menubar')).display === 'none');
+      t('settings app not installed', !K.APPS.set);
+      t('document store not installed', !K.APPS.files);
+      t('terminal not installed', !K.APPS.term);
+      t('network bar present', !!E('netbar'));
+      t('bar offers ' + SVC.length + ' network services', document.querySelectorAll('#netbar [data-nb]').length === SVC.length);
+      t('a user is already on the network', !!K.user);
+
+      /* --- browsing --- */
+      K.UI.openApp('br');
+      t('browser window opens', !!E('win_br'));
+      var A = E('brAddr');
+      if (A){ A.value = 'www.cooks.org.kp'; K.ACT.brGo(); }
+      t('address bar opens a site', K.BR.key === 'cooks');
+      var link = document.querySelector('.br-view [data-open]');
+      if (link) link.click();
+      t('links inside a page work', K.BR.key !== 'cooks');
+      A = E('brAddr');
+      if (A){ A.value = 'google.com'; K.ACT.brGo(); }
+      t('foreign address is blocked', K.BR.key === '__blocked');
+      var actor = document.querySelector('.br-view [data-open]');
+      if (actor) actor.click();
+      t('you can leave the blocked page', K.BR.key !== '__blocked');
+      K.BR.open('www.singyo.invalid.kp');
+      t('unknown address is explained', K.BR.key === '__unknown');
+      K.BR.open('search.kp');
+      K.BR.q = '료리'; K.BR.go('home');
+      t('search returns results', /kp-hits|결과가 없습니다/.test(document.querySelector('.br-view').innerHTML));
+
+      /* --- commerce --- */
+      K.BR.open('manmulsang.com.kp');
+      var buyBtn = document.querySelector('.br-view [data-act="buy"]');
+      if (buyBtn) buyBtn.click();
+      t('store adds to the cart', K.state.cart.length > 0);
+      var cl = K.cartQty();
+      t('cart totals add up', cl >= 1 && cl === K.cartQty());
+      K.BR.go('cart');
+      var co = document.querySelector('.br-view [data-act="checkout"]');
+      var before = K.state.wallet.bal;
+      if (co) co.click();
+      t('electronic payment debits the account', K.state.wallet.bal < before);
+
+      /* --- the log --- */
+      K.UI.openApp('sec');
+      t('device log opens', !!E('win_sec'));
+      var seclen = K.state.log.length;
+      K.log('검사', '자체검사 기록', 'selftest');
+      t('device log records the visit', K.state.log.length === seclen + 1);
+
+      /* --- about --- */
+      K.UI.openApp('about');
+      t('about panel opens', !!E('win_about'));
+
+      /* --- restricted account --- */
+      var vis = K.USERS[K.USERS.length - 1];
+      t('a read-only account exists', !!vis.restricted);
+      var saveCart = K.state.cart.slice();
+      K.user = vis; K.state.cart = [{ sku:'manmulsang-쌀 (5kg)', qty:1 }];
+      var balBefore = K.state.wallet.bal;
+      KP.ACT.checkout();
+      t('read-only account cannot pay', K.state.wallet.bal === balBefore && K.state.cart.length === 1);
+      K.closeModal();
+      K.user = savedUser; K.state.cart = saveCart;
+
+      /* --- quiz + helpers --- */
+      var right = KP.RNS.quiz.map(function(q){ return q[2]; });
+      var wrong = KP.RNS.quiz.map(function(q){ return (q[2] + 1) % q[1].length; });
+      K.state.quiz = { ans:right, done:false };
+      t('quiz scores a perfect paper', KP.RNS.score()[0] === 100);
+      K.state.quiz = { ans:wrong, done:false };
+      t('quiz scores a failed paper', KP.RNS.score()[0] === 0);
+      K.state.quiz = { ans:[], done:false };
+      t('money formatting', /18[,.\s]?400/.test(K.money(18400)));
+      t('size formatting', K.size(2048) === '2 KB');
+
+      var onNet = 0;
+      for (i = 0; i < K.SITES.length; i++) if (K.SITES[i].onNet === 1) onNet++;
+      t('sites state their real-world availability (' + onNet + ')', onNet > 0);
+    } catch(e){
+      fails.push('EXCEPTION: ' + (e && e.stack ? e.stack.split('\n').slice(0, 3).join(' >> ') : e));
+      t('no exception during self-test', false);
+    }
+
+    K._silent = false;
+    K.state.cart = JSON.parse(snapshot).cart;
+    K.user = savedUser;
+    var pass = 0, failList = [];
+    for (var k = 0; k < K.tests.length; k++){ if (K.tests[k].ok) pass++; else failList.push(K.tests[k].n); }
+    var total = K.tests.length;
+    if (box){
+      box.innerHTML = '<div class="st-h"><b>self-test</b> <span class="' + (pass === total ? 'st-ok' : 'st-bad') + '">'
+        + pass + ' / ' + total + (pass === total ? ' ✓' : ' ✗') + '</span></div>'
+        + '<ol class="st-l">' + K.tests.map(function(x){ return '<li class="' + (x.ok ? 'kp-ok' : 'kp-bad') + '">' + esc(x.n) + '</li>'; }).join('') + '</ol>'
+        + (failList.length ? '<div class="kp-bad">' + esc(failList.join(' | ')) + '</div>' : '') + '</div>';
+    }
+    try { console.log('SELFTEST ' + pass + '/' + total + (pass === total ? ' OK' : ' FAILURES: ' + failList.join('; '))); } catch(e){}
+
+    /* the suite drives the browser hard; leave a visitor on the portal, not
+       in the middle of the last check */
+    try { K.WM.closeAll(); K.BR.home(); K.BR.openWindow(); } catch(e){}
+    paint();
+    return pass === total;
   };
 })();
 
