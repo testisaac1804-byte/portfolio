@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>붉은별 3.0 — building a Red Star OS + Kwangmyong simulator · Isaac</title>
+<meta name="description" content="A 303 KB single-file Red Star OS 3.0 simulator populated from a real Kwangmyong address table: 49 entries, 24 page builders, 22 apps, a working watermark and a read-only account — with the research, the verification and the honest limits.">
+<style>
+  :root{
+    --bg:#0a0c11; --panel:#11141b; --panel2:#161a23; --line:#242a37;
+    --tx:#e8eaf0; --mut:#98a1b3; --dim:#6d7686;
+    --ac:#7c8cff; --ac2:#6366f1; --ok:#34d399; --warn:#ffd166; --bad:#f87171;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.62}
+  a{color:var(--ac)}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 11px;
+    color:var(--mut);letter-spacing:.1em}
+  .chip.red{border-color:#4b1f26;background:#1d1114;color:#ff9d9d}
+  h1{font-size:clamp(26px,4.4vw,44px);line-height:1.1;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  h1 em{font-style:normal;color:var(--ac)}
+  .deck{font-size:16.5px;color:var(--mut);max-width:78ch;margin:0 0 22px}
+  .deck b{color:var(--tx);font-weight:650}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 30px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 13px}
+  .stat .k{font:600 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .stat .v{font-size:19px;font-weight:750;margin-top:5px;letter-spacing:-.01em}
+  .stat .v small{display:block;font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0;margin-top:3px;line-height:1.35}
+  .call{border-left:3px solid var(--ac2);background:linear-gradient(90deg,rgba(99,102,241,.11),rgba(99,102,241,0));
+    border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 34px}
+  .call .lbl{font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ac);margin-bottom:7px}
+  .call p{margin:0;font-size:15.5px;color:#d7dbe6}
+  h2{font-size:12px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+    margin:44px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{margin:0 0 6px;font-size:16.5px;letter-spacing:-.01em}
+  p{font-size:14.8px;color:var(--mut)}
+  p b,li b{color:var(--tx);font-weight:650}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding-bottom:22px}
+  .step:not(:last-child):before{content:"";position:absolute;left:22px;top:38px;bottom:0;width:1px;
+    background:linear-gradient(180deg,var(--line),transparent)}
+  .num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:var(--panel2);border:1px solid var(--line);color:var(--ac);
+    font:800 13px/1 var(--mono);position:relative;z-index:1}
+  .step p{margin:6px 0 0;color:var(--mut);font-size:14.6px}
+  .quote{background:#0f1218;border:1px solid var(--line);border-left:2px solid var(--warn);
+    border-radius:8px;padding:10px 13px;margin:10px 0 0;font-size:14px;color:#e4dcc4;
+    white-space:pre-wrap;overflow-wrap:anywhere}
+  .quote .src{display:block;margin-top:7px;font:600 10px/1 var(--mono);letter-spacing:.1em;
+    text-transform:uppercase;color:var(--dim)}
+  table{width:100%;border-collapse:collapse;font-size:13.8px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:700 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:#0d1016}
+  td:first-child{white-space:nowrap}
+  td code{white-space:nowrap}
+  code,.mono{font-family:var(--mono);font-size:12.6px;color:#cfd6e6;background:#0e1117;
+    border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+  .tblwrap{border:1px solid var(--line);border-radius:12px;overflow-x:auto;overflow-y:hidden;
+    -webkit-overflow-scrolling:touch}
+  pre{border:1px solid var(--line);background:#0c0f15;border-radius:10px;padding:13px 15px;
+    overflow-x:auto;font:12.4px/1.6 var(--mono);color:#c8d1e2;margin:10px 0 18px}
+  pre b{color:#8ea0ff;font-weight:600}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+  .btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font:650 13px/1 var(--sans);
+    padding:10px 14px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--tx)}
+  .btn:hover{border-color:#3a4256;background:#1b202b}
+  .btn.pri{background:var(--ac2);border-color:var(--ac2);color:#fff}
+  .btn.pri:hover{background:#565ae8}
+  .note{font-size:12.6px;color:var(--dim);margin-top:12px;line-height:1.6}
+  .note b{color:var(--mut)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .card2{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .card2 h4{margin:0 0 6px;font-size:13.5px}
+  .card2 p{margin:0;font-size:13.4px;color:var(--mut)}
+  .card2 ul{margin:6px 0 0;padding-left:17px;font-size:13.4px;color:var(--mut)}
+  .card2 li{margin:3px 0}
+  .frame{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#000;margin:8px 0 6px;
+    box-shadow:0 18px 50px rgba(0,0,0,.45)}
+  .frame iframe{display:block;width:100%;height:560px;border:0}
+  @media(max-width:760px){.frame iframe{height:420px}}
+  footer{margin-top:52px;border-top:1px solid var(--line);padding-top:18px;
+    font-size:12.6px;color:var(--dim)}
+  footer b{color:var(--mut)}
+  .warnbox{border:1px solid #4b1f26;background:#160f12;border-radius:10px;padding:12px 14px;
+    font-size:13.2px;color:#f0c9c9;margin-top:14px}
+  .warnbox b{color:#ffb4b4}
+  @media(max-width:700px){
+    .quote{overflow-x:auto}
+    table{min-width:520px}
+  }
+  .step > *, .grid2 > *, .card2 > *{min-width:0}
+  code{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <span><a href="../index.html">← Isaac's builds</a></span>
+    <span>
+      <span class="chip">Simulation · 2026</span>
+      <span class="chip red">Educational, not a copy</span>
+    </span>
+  </div>
+
+  <h1>붉은별 3.0 — a <em>Red Star OS</em> simulator with a real Kwangmyong address book</h1>
+  <p class="deck">A 2013-era North Korean desktop, rebuilt as <b>one 303 KB HTML file</b> that never touches
+  the network. The interesting part isn't the wallpaper — it's that every address in it came from a published
+  table, every dead end behaves like the real intranet would, and the copy-protection theatre (watermarking,
+  watch logs, read-only guests) actually works instead of being decoration.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="k">Artifact</div><div class="v">303,793 B <small>single file</small></div></div>
+    <div class="stat"><div class="k">Catalogue</div><div class="v">49 <small>45 addresses + 4 services</small></div></div>
+    <div class="stat"><div class="k">Apps</div><div class="v">22 <small>+ 41 terminal spellings</small></div></div>
+    <div class="stat"><div class="k">Page builders</div><div class="v">24 <small>6 site categories</small></div></div>
+    <div class="stat"><div class="k">Self-test</div><div class="v">45 <small>assertions</small></div></div>
+    <div class="stat"><div class="k">Network calls</div><div class="v">0 <small>offline by design</small></div></div>
+  </div>
+
+  <div class="call">
+    <div class="lbl">The instruction</div>
+    <p>“can you make a red star os sim with all these and search online to keep improving it”</p>
+  </div>
+
+  <div class="btnrow">
+    <a class="btn pri" href="./redstar-sim.html">▶ Run the simulator</a>
+    <a class="btn" href="./redstar-sim-mirror/">Byte-identical mirror</a>
+    <a class="btn" href="../prompts/redstar-sim-prompt.md">Build spec</a>
+  </div>
+
+  <h2>Try it without leaving this page</h2>
+  <div class="frame"><iframe src="./redstar-sim.html" title="Red Star OS 3.0 simulator" loading="lazy"></iframe></div>
+  <p class="note">Password field accepts anything — the refusal path is <code>?lang=en</code>, <code>?selftest=1</code> and
+  <code>?probe=1</code> at the end of the URL. Log in as <b>방문자 / Visitor</b> to see the read-only account.</p>
+
+  <h2>Where the content came from</h2>
+  <p>Two constraints shaped everything. First: use <b>the saved hosts, not invented ones</b>. A 2016 table of
+  Kwangmyong addresses (33 rows) plus 12 addresses read off press photographs of a 2015 Rason tourist chart plus
+  four services that only appear in reporting — 49 catalogue entries in six categories, each with the address the
+  source gives.</p>
+  <p>Second: <b>search online to keep improving</b>, which meant the visual and behavioural claims had to be
+  sourced rather than guessed. Red Star OS 3.0 is a KDE-based Linux distribution by the Korea Computer Center;
+  its shell imitates macOS (top menu bar, Dock, traffic-light controls on the <em>left</em>); Naenara is a Firefox
+  fork restricted to the Kwangmyong intranet; Sogwang Office is an OpenOffice fork. Component names —
+  Ryugyong Janggi, Bokem, SamTaeSong, UnBangUI, Crosswin, Companero, RSLogBrowser — are real, which is why two of
+  them became actual apps here instead of being mentioned in a paragraph.</p>
+
+  <div class="tblwrap">
+  <table>
+    <tr><th>Category</th><th>Entries</th><th>What it is</th><th>Example</th></tr>
+    <tr><td>infra</td><td>12</td><td>Portals, mail, search, the browser's own home</td><td><code>10.76.1.11</code> 내나라</td></tr>
+    <tr><td>dept</td><td>11</td><td>Ministry and institutional servers</td><td><code>10.41.1.2</code> 기관 사무</td></tr>
+    <tr><td>lib</td><td>9</td><td>Libraries, dictionaries, journals</td><td><code>10.30.80.101</code> 남산</td></tr>
+    <tr><td>remote</td><td>9</td><td>원격교육 bases at universities</td><td><code>10.42.1.250</code> 룡남산</td></tr>
+    <tr><td>core</td><td>4</td><td>Kim Il-Sung University, science hall</td><td><code>10.10.10.10</code> 과학기술전당</td></tr>
+    <tr><td>svc</td><td>4</td><td>Shop, mail, games, dictionary</td><td><code>10.30.40.50</code> 만물상</td></tr>
+  </table>
+  </div>
+  <p class="note">Real: the addresses, the categories, the component names, the shell grammar, the watermarking
+  behaviour. Invented: every page body, article, product, price, mail, log line, quiz question and all artwork.</p>
+
+  <h2>How an address resolves</h2>
+  <p>One function owns the whole "web". Type an IP, a <code>.kp</code> name, a Korean site name or an English one
+  and it lands in the same place; anything else has to fail the way the real network fails, not with a JavaScript
+  error.</p>
+<pre>입력 (address bar)
+  │
+  ├─ <b>10.30.80.101</b> ────────────→ exact IP match ──→ 남산 library page
+  ├─ <b>www.gpsh.edu.kp</b> ─────────→ host field  ────→ 남산 library page
+  ├─ <b>남산 / Namsan</b> ────────────→ name alias  ────→ 남산 library page
+  ├─ <b>google.com</b> ──────────────→ not in table ────→ 《접속금지》 + 감시기록 row
+  ├─ <b>8.8.8.8</b> ─────────────────→ outside 10/8 ───→ “no route”, route table shown
+  └─ <b>bogus.kp</b> ────────────────→ .kp miss ────────→ name-not-found + suggestions</pre>
+  <p>That last trio is the point. A simulator that opens every link teaches nothing about a network whose defining
+  feature is that it <em>doesn't</em> reach the open internet — so the blocked page, the unrouted page and the
+  nxdomain page are first-class, each with its own status bar, error code and log entry.</p>
+
+  <h2>Four things that had to actually work</h2>
+  <div class="grid2">
+    <div class="card2">
+      <h4>1 · The watermark is not a label</h4>
+      <p>Copying a document to 외부매체 rewrites the <em>copy's body</em> with
+      <code>© KCC · RS3-0147-KCC · 10.41.7.24 · date time</code> and tags the original. Turning the mark off is
+      refused and written to the watch log — the behaviour the real system is documented to have, reduced to
+      something you can try in two clicks.</p>
+    </div>
+    <div class="card2">
+      <h4>2 · 방문자 is genuinely read-only</h4>
+      <p>A second account, not a second theme: windows carry a READ-ONLY badge and checkout, send, save and media
+      copy each refuse and log. Every refusal is asserted, so a future edit that quietly grants write access fails
+      the self-test instead of shipping.</p>
+    </div>
+    <div class="card2">
+      <h4>3 · The shop does arithmetic</h4>
+      <p>Basket quantities, stock ceilings, 전자결제 against a 48,000원 balance, a receipt with an order number,
+      and an insufficient-funds modal when the basket exceeds it. Nothing is pre-rendered: the totals, the change
+      and the balance all come from the same state object.</p>
+    </div>
+    <div class="card2">
+      <h4>4 · One &lt;script&gt;, one gate</h4>
+      <p>Authored as 15 parts and concatenated into a single script tag, so <code>build.sh</code> can run
+      <code>node --check</code> on the assembled file and <b>refuse to write output if it doesn't parse</b>. One
+      broken part cannot ship a dead page — which matters when the whole app is one file.</p>
+    </div>
+  </div>
+
+  <h2>Version ladder — and what got cut</h2>
+  <div class="step"><div class="num">1</div><div>
+    <h3>V1 — the shell</h3>
+    <p>Boot sequence, login, desktop, Dock, window manager, Naenara with three pages. <b>Cut:</b> a 4.0-style
+    dock (visually nicer, historically wrong for 3.0 — 4.0 is the macOS-like release, 3.0's shell is the
+    KDE-derived one, so the whole thing was rebuilt around 3.0).</p>
+  </div></div>
+  <div class="step"><div class="num">2</div><div>
+    <h3>V2 — the address book</h3>
+    <p>All 49 entries, six categories, 24 page builders, the shop, mail, files, office, media, terminal.
+    <b>Cut:</b> generated pages for hosts whose real purpose is unknown — a fake "online shop" for a server that
+    the table only lists as <code>10.x</code> would be invention dressed as research. Those get an honest
+    placeholder page with the address and what the table says.</p>
+  </div></div>
+  <div class="step"><div class="num">3</div><div>
+    <h3>V3 — the honesty pass</h3>
+    <p>Two real component names became apps (Bokem encryption, SamTaeSong IDE); the layout probe, the 45-assertion
+    self-test and a visual pass at 390/768/1440 px. <b>Cut:</b> image assets. Icons are inline SVG and the OS
+    wallpapers are CSS gradients, so the file stays dependency-free and offline.</p>
+  </div></div>
+
+  <h2>Failure modes — the bugs this build actually had</h2>
+  <div class="tblwrap">
+  <table>
+    <tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+    <tr><td>Shop, mail and media windows rendered as plain stacked text</td><td>Markup and CSS were written in separate passes; class names in the JS had no rule</td><td>Audited every <code>class="…"</code> token against the CSS, then wrote the missing interiors</td></tr>
+    <tr><td>Phone layout ignored its own breakpoint</td><td>A base rule appended after the media query won the cascade</td><td>Moved responsive overrides into a final block at the end of the stylesheet</td></tr>
+    <tr><td>Self-test screenshots showed a stray “insufficient funds” dialog</td><td>The checkout assertion left its modal open</td><td>Quiet flag during the run + explicit modal close</td></tr>
+    <tr><td>Activity monitor existed in code but not in the Dock</td><td>Its maker was never added to the app registry</td><td>Added an assertion that every maker is registered — the test now catches it</td></tr>
+    <tr><td>“45 hosts” failed against 49 entries</td><td>Copy written before the last four services were added</td><td>Counts now come from the data at runtime, not from prose</td></tr>
+    <tr><td>English build leaked Korean window titles and user names</td><td><code>RS.T()</code> ran at parse time, before <code>?lang=</code> was read</td><td>Names and roles re-localised after language load</td></tr>
+  </table>
+  </div>
+
+  <h2>Verification</h2>
+  <p>Not a screenshot — a real Chromium at three widths, driving the flows and then opening <b>every app</b> to
+  measure it.</p>
+<pre>1440x900   selftest 45/45   probe_ok=True   console=0   pageerrors=0
+ 768x1024  selftest 45/45   probe_ok=True   console=0   pageerrors=0
+ 390x844   selftest 45/45   probe_ok=True   console=0   pageerrors=0
+
+flows: boot → empty-password refusal → login → home page → blocked host → IP resolve
+     → nxdomain → basket maths → checkout deduction → mail rows → terminal
+     → watermark modal → guest read-only (4 refusals) → English build</pre>
+  <p>The probe fails the build on any window outside the viewport, any window overlapping the Dock, any
+  horizontal scroll inside an app body, an empty app, a missing menu bar or Dock, or a start menu that runs off
+  the screen. Two of those caught real defects the DOM assertions were blind to.</p>
+  <div class="warnbox"><b>What a green run does not mean:</b> the probe measures geometry and presence, not taste.
+  The visual pass — screenshots at each width, looked at — still found a start menu taller than the screen, an
+  unstyled key/value block and four icons that read as blobs. Automated checks are the floor, not the finish line.</div>
+
+  <h2>Honest limits</h2>
+  <div class="warnbox">
+    <b>This is a simulation, not a copy of anything.</b> No Red Star OS code, no Kwangmyong content, no real page
+    text appears here — every article, product, price, mail, log line and quiz question was written for this build.
+    Bokem “encrypts” by scrambling characters: it is theatre, not cryptography, and the About panel says so.
+    The file makes zero network requests and the <code>10.x</code> addresses are unroutable by design — this page
+    never tries to reach them. No political claim is made; the subject is a piece of software and the network it
+    was built to browse.
+  </div>
+
+  <h2>Evidence</h2>
+  <div class="tblwrap">
+  <table>
+    <tr><th>Item</th><th>Value</th></tr>
+    <tr><td>Artifact</td><td><code>303,793 bytes</code>, one <code>&lt;script&gt;</code>, zero external URLs</td></tr>
+    <tr><td>sha256</td><td><code>289c2228d3c7680885d6797c9c2cf8436058f9873c810d87ba092a9a31f2edb0</code></td></tr>
+    <tr><td>Source</td><td>4,768 lines across 15 parts (10 JS, 5 CSS) + build script</td></tr>
+    <tr><td>Data</td><td>49 entries · 24 page builders · 22 apps · 10 goods · 6 mail · 14 dictionary entries · 6 quiz questions</td></tr>
+    <tr><td>Terminal</td><td>29 commands / 41 spellings, with ↑↓ history</td></tr>
+    <tr><td>Mirror</td><td><code>demos/redstar-sim-mirror/index.html</code> — byte-identical to the desktop artifact</td></tr>
+    <tr><td>Tests</td><td>45 in-page assertions + 3-width layout probe + 14 browser flows, all passing</td></tr>
+  </table>
+  </div>
+
+  <h2>What's next</h2>
+  <p>The obvious gap is <b>real page content</b>: the Wayback Machine has captures of the foreign-facing mirrors
+  (naenara, KCNA, Rodong Sinmun) from late 2026, and baking those into local files would let the intranet pages
+  carry real HTML instead of my written copy. The second is depth in 원격교육 — exam papers and lecture pages —
+  because that category is the least documented and the most interesting.</p>
+
+  <footer>
+    <p><b>Method.</b> Sources: the 2016 Kwangmyong address table (33 rows), the 2015 Rason chart (12 addresses),
+    Wikipedia's Red Star OS article, messaroundery's notes on 3.0 internals, and Trend Micro's 2017 write-up on
+    Naenara's hardcoded <code>10.76.1.11</code>. Every figure on this page was read back out of the built file or
+    the verification report, not remembered from the build log.</p>
+    <p><b>Honesty.</b> Simulated software, invented content, no network, no real intranet data. Built as an
+    interface study, on a desktop, offline.</p>
+  </footer>
+</div>
+</body>
+</html>
