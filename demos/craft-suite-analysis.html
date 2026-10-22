@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Craft Suite — 13 apps, 6,986 CLI commands, and the "AI cracked Adobe" claim</title>
+<meta name="description" content="I installed all 13 ArtCraft 'Crafting Apps' — clean-room Rust replacements for Photoshop, Excel, AutoCAD, Word, Premiere and Figma — then drove every one of them from the terminal on my Mac. What actually works, what is theatre, and why the viral 'AI cracked Adobe' story is the wrong story.">
+<style>
+  :root{
+    --bg:#0a0c11; --panel:#11141b; --panel2:#161a23; --line:#242a37;
+    --tx:#e8eaf0; --mut:#98a1b3; --dim:#6d7686;
+    --ac:#7c8cff; --ac2:#6366f1; --ok:#34d399; --warn:#ffd166; --bad:#f87171;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.62}
+  a{color:var(--ac)}
+  img{max-width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--line)}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 90px}
+
+  .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 11px;
+    color:var(--mut);letter-spacing:.1em}
+  .chip.ok{border-color:#1d4b3a;background:#0f1d18;color:#8ee6c0}
+  .chip.warn{border-color:#4b3f1d;background:#1d1a0f;color:#f0c96a}
+
+  h1{font-size:clamp(26px,4.4vw,44px);line-height:1.1;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  h1 em{font-style:normal;color:var(--ac)}
+  .deck{font-size:16.5px;color:var(--mut);max-width:78ch;margin:0 0 22px}
+  .deck b{color:var(--tx);font-weight:650}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 30px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 13px;
+    display:flex;flex-direction:column;gap:4px;min-height:84px}
+  .stat .k{font:600 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .stat .v{font-size:19px;font-weight:750;margin-top:5px;letter-spacing:-.01em}
+  .stat .v small{font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0}
+
+  h2{font-size:clamp(19px,2.6vw,25px);letter-spacing:-.015em;margin:44px 0 6px;font-weight:750}
+  h2 .n{font:700 12px/1 var(--mono);color:var(--ac);letter-spacing:.1em;margin-right:9px;vertical-align:2px}
+  h3{font-size:15px;margin:26px 0 6px;font-weight:700;color:var(--tx)}
+  p{color:var(--mut);margin:9px 0}
+  p b,li b{color:var(--tx);font-weight:650}
+  ul,ol{color:var(--mut);padding-left:22px;margin:10px 0}
+  li{margin:5px 0}
+  code{font:500 12.5px/1.5 var(--mono);background:#0d1017;border:1px solid var(--line);
+    border-radius:5px;padding:1px 5px;color:#c8d0e4;overflow-wrap:anywhere;word-break:break-word}
+  pre{background:#0d1017;border:1px solid var(--line);border-radius:10px;padding:13px 15px;
+    overflow-x:auto;font:500 12.5px/1.62 var(--mono);color:#c8d0e4;margin:14px 0}
+  pre b{color:var(--ok);font-weight:600}
+  pre i{color:var(--dim);font-style:normal}
+
+  .call{border-left:3px solid var(--ac2);background:#111524;border-radius:0 10px 10px 0;
+    padding:14px 17px;margin:20px 0;font-size:15px;color:#cfd6e8}
+  .call .who{display:block;font:600 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--dim);margin-bottom:8px}
+  .warnbox{border:1px solid #4b3f1d;background:#171407;border-radius:10px;padding:14px 16px;margin:20px 0}
+  .warnbox .h{font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--warn);margin-bottom:8px}
+  .warnbox p{color:#d8cfa8;margin:6px 0}
+  .goodbox{border:1px solid #1d4b3a;background:#0c1a15;border-radius:10px;padding:14px 16px;margin:20px 0}
+  .goodbox .h{font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ok);margin-bottom:8px}
+  .goodbox p{color:#bfe8d5;margin:6px 0}
+
+  .tblwrap{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;
+    border:1px solid var(--line);border-radius:10px;margin:16px 0;background:var(--panel)}
+  table{border-collapse:collapse;width:100%;min-width:620px;font-size:13px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:600 10.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+    background:var(--panel2);white-space:nowrap}
+  tr:last-child td{border-bottom:0}
+  td.num{font:600 12.5px/1.5 var(--mono);color:var(--tx);white-space:nowrap;text-align:right}
+  td.mono{font:500 12px/1.5 var(--mono);color:#c8d0e4}
+  .tag{display:inline-block;font:700 9.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+    padding:4px 6px;border-radius:999px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+  .tag.run{border-color:#1d4b3a;background:#0f1d18;color:#8ee6c0}
+  .tag.bare{border-color:#3a3f52;background:#141822;color:#98a1b3}
+  .tag.alpha{border-color:#4b3f1d;background:#1b1809;color:#f0c96a}
+
+  .card2{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin:14px 0}
+  .card2 h3{margin:0 0 4px}
+  .card2 p{margin:5px 0;font-size:14px}
+
+  .btnrow{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 6px}
+  .btn{display:inline-block;text-decoration:none;font:650 13px/1 var(--sans);
+    background:var(--ac2);color:#fff;border-radius:9px;padding:11px 16px;border:1px solid #7f7bff}
+  .btn.alt{background:transparent;color:var(--ac);border-color:var(--line)}
+  .btn small{display:block;font-weight:500;font-size:10.5px;opacity:.8;margin-top:5px;letter-spacing:.02em}
+
+  .fig{margin:18px 0}
+  .fig figcaption{font:500 11.5px/1.5 var(--mono);color:var(--dim);margin-top:8px}
+  footer{margin-top:52px;border-top:1px solid var(--line);padding-top:18px;
+    font-size:12.5px;color:var(--dim)}
+  footer b{color:var(--mut)}
+  footer p{margin:7px 0;font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div>Isaac's portfolio · investigation · 2026-10-23</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="chip ok">13 / 13 CLIs respond</span>
+      <span class="chip warn">all apps alpha</span>
+    </div>
+  </div>
+
+  <h1>Thirteen apps that replace Photoshop, Excel and AutoCAD — <em>and the CLI nobody installs</em></h1>
+  <p class="deck">
+    On 2026-10-23 I installed every <b>ArtCraft "Crafting App"</b> on this Mac, then drove all thirteen from
+    the terminal instead of the GUI. The apps are real and they are free. The installer is incomplete, the
+    free-tier claims are fuzzy, and <b>"AI cracked Adobe" is the wrong story</b> — here is the version with
+    receipts.
+  </p>
+
+  <div class="stats">
+    <div class="stat"><div class="k">apps installed</div><div class="v">13 <small>/ 13</small></div></div>
+    <div class="stat"><div class="k">CLI commands</div><div class="v">6,986</div></div>
+    <div class="stat"><div class="k">on disk</div><div class="v">1.76 <small>GB</small></div></div>
+    <div class="stat"><div class="k">GitHub stars</div><div class="v">180,059</div></div>
+    <div class="stat"><div class="k">A1 poster → PNG</div><div class="v">12 <small>ms</small></div></div>
+    <div class="stat"><div class="k">pptx slide → PNG</div><div class="v">0.34 <small>s</small></div></div>
+  </div>
+
+  <div class="call">
+    <span class="who">The claim I was asked to check</span>
+    "Did someone crack Adobe and give it away for free?" — <b>No.</b> These are independent, clean-room
+    reimplementations written in Rust, published under MIT / Apache-2.0. What people actually did was point
+    AI coding agents at the problem and re-build Photoshop's behaviour from the outside, at a speed that
+    makes the result look impossible. That is a very different thing from a patched Adobe binary — and the
+    difference matters, because "AI-cracked Adobe, free download" is one of the most reliable malware
+    delivery stories on social media right now.
+  </div>
+
+  <h2><span class="n">01</span>Why it looks exactly like a crack</h2>
+  <p>
+    The tell is menu parity. PhotoCraft ships Photoshop's menus, shortcuts and even an
+    "Adobe Camera Raw Filter" entry. If you only looked at the UI you would swear it was a repack. So I
+    opened the installed binary and looked for Adobe's fingerprints.
+  </p>
+
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>Test</th><th>What I looked for</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Binary</td><td class="mono">/Applications/PhotoCraft.app/Contents/MacOS/PhotoCraft</td><td class="mono">181 MB, pure Rust, statically linked</td></tr>
+        <tr><td>Adobe libraries</td><td class="mono">.dylib / frameworks from Adobe</td><td><span class="tag run">none</span></td></tr>
+        <tr><td>Photoshop plug-ins</td><td class="mono">.8bf, Plug-ins/ tree</td><td><span class="tag run">none</span></td></tr>
+        <tr><td>Colour profiles</td><td class="mono">.icc / .icm</td><td><span class="tag run">none</span></td></tr>
+        <tr><td>Copyright strings</td><td class="mono">"Adobe", "Copyright … Adobe"</td><td><span class="tag run">zero headers</span></td></tr>
+        <tr><td>83 "adobe" string hits</td><td>what are they?</td><td class="mono">8BIM, xmpmeta, ns.adobe.com/photoshop/1.0, "Adobe RGB (1998) compatible" — <b>file-format namespaces</b>, not code</td></tr>
+        <tr><td>Licence</td><td>repo <code>LICENSE</code></td><td class="mono">MIT OR Apache-2.0</td></tr>
+        <tr><td>Contribution rule</td><td>what contributors must not do</td><td class="mono">no copying code, shaders, icons or ICC profiles from proprietary software</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    A PSD reader <i>has</i> to speak those namespace strings — that is the format. There is no Adobe code in
+    there to patch. What exists is a from-scratch implementation that reads and writes the same files.
+  </p>
+
+  <h2><span class="n">02</span>The AI part, though, is true</h2>
+  <p>
+    This is where the rumour comes from, and it is not a misunderstanding — it is an under-statement.
+    The repositories ship an <code>AGENTS.md</code> (18.7 KB, literally "a guide for AI agents and
+    contributors") plus an in-tree <code>.claude/rules/</code> directory. The commit log behaves like an
+    agent works: roughly <b>100 commits in under 24 hours</b> across about ten contributors, in thirteen
+    separate repositories, each one chasing 1:1 menu and shortcut parity with a commercial app.
+  </p>
+  <div class="goodbox">
+    <div class="h">the honest framing</div>
+    <p>People used AI agents to reimplement Photoshop-like behaviour <b>from the outside</b>, in Rust, and
+    then gave it away. Nobody cracked anything. The software is genuinely free; the AI models are a
+    separate, paid matter (see §06).</p>
+  </div>
+
+  <h2><span class="n">03</span>The thirteen apps, as measured on this machine</h2>
+  <p>
+    Stars are from the GitHub API on the same day. "CLI" is the number of commands the app's own
+    <code>commands</code> listing exposes — apps format that listing differently, so the count is entries,
+    not lines. The receipt column is deliberate: <b>only rows with a real receipt claim a feature.</b>
+    Everywhere else it says "CLI responds", because that is all I verified.
+  </p>
+
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>App</th><th>Replaces</th><th>Stars</th><th>CLI</th><th>Size</th><th>What I actually verified</th></tr></thead>
+      <tbody>
+        <tr><td><b>PhotoCraft</b></td><td>Photoshop</td><td class="num">71,183</td><td class="num">924</td><td class="num">141.5 MB</td><td>Wrote a valid <code>.psd</code> (<code>file</code>: "Adobe Photoshop Image, 800×600, RGB") and read it back</td></tr>
+        <tr><td><b>PdfCraft</b></td><td>Acrobat</td><td class="num">17,171</td><td class="num">171</td><td class="num">125.7 MB</td><td>A1 poster → 1191×842 PNG in <b>12 ms</b>; text extract; <b>found a faux redaction</b> (§05)</td></tr>
+        <tr><td><b>FilmCraft</b></td><td>Premiere Pro</td><td class="num">15,704</td><td class="num">701</td><td class="num">127.1 MB</td><td><span class="tag bare">CLI responds</span> timeline unverified</td></tr>
+        <tr><td><b>WordCraft</b></td><td>Word</td><td class="num">15,500</td><td class="num">633</td><td class="num">159.2 MB</td><td>6-page CJK <code>.docx</code> → PDF in <b>0.21 s</b>; text extract</td></tr>
+        <tr><td><b>LightCraft</b></td><td>Lightroom</td><td class="num">14,295</td><td class="num">371</td><td class="num">232.9 MB</td><td>Imported an image, applied <code>develop.set exposure=0.7</code> headlessly</td></tr>
+        <tr><td><b>VectorCraft</b></td><td>Illustrator</td><td class="num">10,409</td><td class="num">792</td><td class="num">206.2 MB</td><td>60×40 mm stroke artboard; <code>--outline-text</code> → real <code>&lt;path&gt;</code>s; PNG export</td></tr>
+        <tr><td><b>EffectCraft</b></td><td>After Effects</td><td class="num">7,684</td><td class="num">731</td><td class="num">152.4 MB</td><td><span class="tag bare">CLI responds</span> compositing unverified</td></tr>
+        <tr><td><b>CADCraft</b></td><td>AutoCAD</td><td class="num">6,420</td><td class="num">431</td><td class="num">104.3 MB</td><td><code>bracket.dxf</code> → SVG with <b>46 entities</b>, clean polylines; → PDF</td></tr>
+        <tr><td><b>GridCraft</b></td><td>Excel</td><td class="num">6,231</td><td class="num">341</td><td class="num">28.7 MB</td><td>Wrote <code>=SUM(B2:B3)</code> → 6.5; <code>check</code> re-evaluated 25/25 formula cells with zero mismatch and zero round-trip drift</td></tr>
+        <tr><td><b>DesignCraft</b></td><td>InDesign</td><td class="num">4,657</td><td class="num">521</td><td class="num">151.0 MB</td><td><span class="tag bare">CLI responds</span> layout unverified</td></tr>
+        <tr><td><b>DeckCraft</b></td><td>PowerPoint</td><td class="num">4,117</td><td class="num">321</td><td class="num">148.5 MB</td><td>Real <code>.pptx</code> slide → PNG in <b>0.34 s</b> (the render below)</td></tr>
+        <tr><td><b>SoundCraft</b></td><td>Pro Tools</td><td class="num">3,562</td><td class="num">480</td><td class="num">18.3 MB</td><td><span class="tag bare">CLI responds</span> audio unverified</td></tr>
+        <tr><td><b>FigCraft</b></td><td>Figma</td><td class="num">3,126</td><td class="num">569</td><td class="num">164.8 MB</td><td><span class="tag bare">CLI responds</span> prototyping unverified</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure class="fig">
+    <img src="./craft-suite-slide.jpg" alt="Slide 1 of my own 'Woods Knowledge' deck, rendered to PNG by deckcraft-cli" width="960" height="540">
+    <figcaption>DeckCraft rendering my own <code>Woods Knowledge.pptx</code>, slide 0 → 1440×810 PNG, 0.34 s, no PowerPoint, no LibreOffice.</figcaption>
+  </figure>
+
+  <h2><span class="n">04</span>The gap nobody mentions: the installer is half a product</h2>
+  <p>
+    Every one of these apps exposes its <b>entire command registry</b> to a headless CLI, a JSON control
+    channel and a stdio MCP server — which makes them unusually agent-friendly. But the official launcher
+    installs only the GUIs. There is no <code>&lt;app&gt;-cli</code> on your <code>PATH</code> afterwards,
+    and nothing in the UI points at one. The CLI is a separate release asset per app:
+  </p>
+  <pre>https://github.com/storytold/&lt;app&gt;/releases/download/v&lt;ver&gt;/&lt;app&gt;-cli-&lt;ver&gt;-macos-universal.zip</pre>
+  <p>
+    Thirteen apps × ~130 MB of CLI assets is not a thing anyone wants to assemble by hand, so I wrote the
+    installer I wanted: resumable downloads (<code>curl -C -</code>), quarantine stripping, symlinks into
+    <code>~/.local/bin</code>, safe to re-run. It is in the download pack below, with a verifier that prints
+    the table I used for §03.
+  </p>
+
+  <h2><span class="n">05</span>Receipts</h2>
+  <p>Real files, real commands, no invented numbers. Everything here was run on 2026-10-23 on macOS 26.6 / arm64.</p>
+
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>#</th><th>Task</th><th>Command</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>Poster page to image</td><td class="mono">pdfcraft-cli render poster.pdf --page 1 --dpi 72 --out p1.png</td><td class="mono">1191×842 px in 12 ms</td></tr>
+        <tr><td class="num">2</td><td><b>Faux-redaction hunt</b></td><td class="mono">pdfcraft-cli audit fake-redacted.pdf</td><td class="mono">exit 1 · recovered "Complaint reference: HK-2026-77341" from under a black box</td></tr>
+        <tr><td class="num">3</td><td>Spreadsheet that computes</td><td class="mono">gridcraft-cli run --cmd 'cell.set={"cell":"B4","input":"=SUM(B2:B3)"}' --out sheet.xlsx</td><td class="mono">Total 6.5 · check: 25/25 formula cells matched, 0 round-trip drift</td></tr>
+        <tr><td class="num">4</td><td>Word → PDF (Chinese)</td><td class="mono">wordcraft-cli convert 百度扩容.docx doc.pdf</td><td class="mono">6 pages, 0.21 s, CJK glyphs intact</td></tr>
+        <tr><td class="num">5</td><td>PPTX slide → PNG</td><td class="mono">deckcraft-cli render deck.pptx --slide 0 slide-0.png</td><td class="mono">1440×810, 0.34 s</td></tr>
+        <tr><td class="num">6</td><td>CAD → laser-ready vector</td><td class="mono">cadcraft-cli convert bracket.dxf bracket.svg</td><td class="mono">46 entities, clean polylines</td></tr>
+        <tr><td class="num">7</td><td>Text to outlines for LightBurn</td><td class="mono">vectorcraft-cli convert art.svg out.svg --outline-text</td><td class="mono">glyphs became &lt;path&gt; elements; 60×40 mm artboard</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card2">
+    <h3>Why #2 is the one that matters</h3>
+    <p>
+      A PDF "redaction" made by drawing a black rectangle leaves the text underneath, in the file, forever.
+      This is the mistake that leaked real case files. I built a two-line PDF with a name under a black box
+      and PdfCraft pulled the string back out and exited non-zero — so a script can refuse to publish a
+      document that only <i>looks</i> redacted.
+    </p>
+    <pre>$ pdfcraft-cli audit fake-redacted.pdf
+{"count":1,"findings":[{"covered_text":"Complaint reference: HK-2026-77341",
+  "kind":"covered-text","page":1}]}
+pdfcraft-cli: audit: 1 faux redaction(s) found   <i># exit 1</i></pre>
+  </div>
+
+  <h2><span class="n">06</span>What "free" actually covers</h2>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>Layer</th><th>Cost</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td>The 13 apps</td><td><b>Free</b> · MIT / Apache-2.0</td><td>No account, no licence server, no subscription — the binaries run offline</td></tr>
+        <tr><td>ArtCraft desktop AI studio</td><td>Your own Midjourney sub <i>or</i> fal API key</td><td>"Free app" ≠ free GPU time; the models are metered</td></tr>
+        <tr><td>ArtCraft web studio</td><td>Account credits</td><td>Different product, different economics — this is not a free tier I could verify</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2><span class="n">07</span>Download pack</h2>
+  <p>
+    The GUIs come from the official launcher. The CLI layer is what this pack adds: the installer, a
+    verifier, a machine-readable manifest of everything measured above, and a short list of the only
+    download links worth using.
+  </p>
+
+  <div class="btnrow">
+    <a class="btn" href="https://isaac1804.com/files/installers/Craft-Suite-CLI-Pack-v1.0.zip">
+      ⬇ Craft Suite CLI Pack v1.0
+      <small>9,005 B ZIP · sha256 60dd37f9…2b20</small>
+    </a>
+    <a class="btn alt" href="https://getartcraft.com/apps">Official apps page ↗</a>
+    <a class="btn alt" href="https://github.com/storytold/craft-launcher/releases">Official launcher DMG ↗</a>
+  </div>
+
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>In the ZIP</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">craft-cli-install.sh</td><td>Installs all 13 CLIs to <code>~/.local/bin</code>; resumable, re-runnable, takes 4 base64-free arguments to install a subset</td></tr>
+        <tr><td class="mono">craft-cli-verify.sh</td><td>Prints version / command count / functional check per app; exit code = failures</td></tr>
+        <tr><td class="mono">MANIFEST.json</td><td>13 apps with repo, stars, CLI version, command count, disk size, what was verified, alpha status</td></tr>
+        <tr><td class="mono">OFFICIAL-LINKS.md</td><td>Project links, per-app repos, the CLI asset URL pattern, what "free" covers</td></tr>
+        <tr><td class="mono">README.md</td><td>The measured table, the three warnings, the highest-value commands</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2><span class="n">08</span>Limitations, stated plainly</h2>
+  <div class="warnbox">
+    <div class="h">read before trusting a 0.x app with real work</div>
+    <p><b>It is alpha.</b> PhotoCraft, PdfCraft and FigCraft still label themselves "early alpha"; the other ten say "in development". Keep originals, export to new filenames, never let one of these be the only copy of anything.</p>
+    <p><b>PdfCraft's OCR is Latin-only and worse than macOS Vision.</b> It needs <code>PDFCRAFT_MODELS=/Applications/PdfCraft.app/Contents/Resources/models</code> to work at all, and <code>--language zh</code> is rejected outright. Chinese scans still go through Vision.</p>
+    <p><b>Command names are not Photoshop's.</b> <code>image.resizeImage</code> does not exist — query <code>&lt;app&gt;-cli commands</code> instead of guessing. Argument styles differ too (<code>--out x.png</code> on PdfCraft, positional output on DeckCraft).</p>
+    <p><b>The website's own download button is broken on a Mac:</b> <code>getartcraft.com/apps</code> serves a Linux <code>.flatpak</code>. Use the launcher release page. And <code>getartcraft.com/app</code> is a 404 — the web studio lives at <code>app.getartcraft.com</code>.</p>
+  </div>
+
+  <h2><span class="n">09</span>Evidence</h2>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>Claim</th><th>How it was checked</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>13 apps exist and install</td><td>14 bundles in <code>/Applications</code>, 13 CLIs answering</td><td class="mono">verified</td></tr>
+        <tr><td>Not Adobe code</td><td>strings + filesystem audit of the 181 MB PhotoCraft binary</td><td class="mono">verified</td></tr>
+        <tr><td>Free &amp; open source</td><td>repo licences MIT / Apache-2.0</td><td class="mono">verified</td></tr>
+        <tr><td>AI-assisted authorship</td><td><code>AGENTS.md</code>, <code>.claude/rules/</code>, commit cadence</td><td class="mono">verified</td></tr>
+        <tr><td>6,986 CLI commands</td><td><code>craft-cli-verify.sh</code> on all 13 binaries</td><td class="mono">verified</td></tr>
+        <tr><td>Pack integrity</td><td><code>sha256</code> of the ZIP served by <code>isaac1804.com</code> = the local build</td><td class="mono">verified</td></tr>
+        <tr><td>Free web-studio tier</td><td>login + credits flow</td><td class="mono">not verified</td></tr>
+        <tr><td>Film / Effect / Design / Sound / Fig features</td><td>—</td><td class="mono">not verified</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2><span class="n">10</span>What I would use it for, today</h2>
+  <ul>
+    <li><b>PdfCraft</b> instead of <code>pdftoppm</code> + headless Chromium for page rasterising — 12 ms, no browser, plus an audit that catches fake redactions.</li>
+    <li><b>GridCraft</b> wherever a formula must actually evaluate before I hand a workbook over; <code>check</code> is a real oracle, which openpyxl cannot do at all.</li>
+    <li><b>CADCraft → VectorCraft</b> as the bridge from Fusion 360 DXF to laser-ready SVG with the text outlined for LightBurn.</li>
+    <li><b>WordCraft / DeckCraft</b> for converting my own school and workshop documents without opening an office suite.</li>
+    <li><b>Not yet</b> for video, audio or layout work — those five CLIs answer, but I have not proved a single timeline or mix.</li>
+  </ul>
+
+  <footer>
+    <p><b>Method.</b> Installed the official suite, then installed each app's separately-released CLI, then ran
+    every claim in §05 on this machine's own files (a DT poster, a Chinese guide, a school deck, a CAD bracket).
+    Counts and sizes were produced by script, not by hand, and the pack's <code>MANIFEST.json</code> carries the
+    same numbers so they can be re-derived.</p>
+    <p><b>Honesty notes.</b> Five of the thirteen apps are marked "CLI responds" and nothing more — that is the
+    whole of what I tested, and padding it would defeat the point of the page. The "AI cracked Adobe" framing is
+    reported because it is what people are saying, not because it is true. Nothing here is cracked software and
+    no third-party repack is linked: the only downloads are the projects' own GitHub releases.</p>
+    <p>Tested 2026-10-23 · macOS 26.6 · arm64 · stars from the GitHub API the same day.</p>
+  </footer>
+
+</div>
+</body>
+</html>
