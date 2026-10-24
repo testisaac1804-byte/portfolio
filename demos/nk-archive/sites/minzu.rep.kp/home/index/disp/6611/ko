@@ -1,0 +1,634 @@
+
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>민주조선 | 조선민주주의인민공화국 최고인민회의 상임위원회 및 내각기관지</title>
+    <meta charset="utf8"/>
+    <link rel="icon" href="/resource/images/cholima.png" type="image/x-icon" />
+    <link href="/resource/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/skin/default.css">
+    <link rel="stylesheet" href="/css/blueimp-gallery.min.css">
+    <link href="/css/style_gallery.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resource/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/first_ko.css">
+    <script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+        <link href="/assets/css/nivo-lightbox.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/css/font.css">
+</head> 
+<body id="top" style="background-color: #fff;font-family:KPCheonRiMa; min-width: 1100px;  "> 
+    <header id="header"   >  
+        <div class="fixedMenu" style="background: url(/resource/custom/header_bg_right_1.png)  repeat-x ; " >
+            <div style="background: url(/resource/custom/header_bg_left.png) no-repeat left 0;   height: 85px; font-family: 'KPCheonRiMa';">   
+                <div class="container" style="background: url(/resource/header_back.jpg) no-repeat center top ; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; min-width:100%!important; "  >
+                    <ul class="menu_top" style="padding-right: 15px;">
+                        <form id="lang" method="post" action="/home/index">
+                            <input id="language" name="language" value="" hidden />
+                            <input id="page" name="page" value="disp" hidden />
+                            <input type="hidden" name="_csrf" value="4479ca0bfaa9ec64f722508fdb00b29c"/>
+                        </form>
+                        <li>
+                            <a style="background-color: #004df3;"  href = "/home/index/disp/0/ko">조선어                            </a>
+                        </li>
+                        <li>
+                            <a  href = " /home/index/disp/0/en">
+                                English                            </a>
+                        </li>
+                        <li>
+                            <a  href ="/home/index/disp/0/ch">
+                                 汉语                            </a>
+                        </li>
+                    </ul> 
+                    <div class="logo " style="padding-left: 10%;">
+                        <a href="/Home/index/first/0/ko" onclick="setPage('first');" style="display:block;margin-bottom:5px;"><img src="/resource/logo.png"></a>
+                    </div> 
+                </div>
+                <div class="mobile1" style="font-family:'KPCheonRiMa'; ">
+                    <div class="rightPart1" style="  font-family: 'KPCheonRiMa';  font: inherit; ">
+                        <b>  
+                            <ul class="menubar1" style="font-family:'KPCheonRiMa';font-size: 13px; " > 
+                                <li   >
+                                    <a href="/home/index/first/0/ko"  style=" /* text-shadow: 1px 1px 1px #000!important;*/font-family:'KPCheonRiMa'; " >
+                                        <b>첫페지</b>
+                                    </a>
+                                </li>
+                                <li   >
+                                    <a  href="/home/index/revolution/0/ko"     >
+                                        <b>혁명활동소식</b>
+                                    </a>
+                                </li  >
+                                <li   >
+                                    <a  href="/home/index/power_news/0/ko"    >
+                                        <b>정권기관소식</b>
+                                    </a>
+                                </li>
+                                <li class="has-dropdown"  >
+                                    <a href="/home/index/all_view/0/ko"     >
+                                     <font  ><b>분야별기사</b></font></a>
+                                     <ul class="dropdown" style="width: 200px;padding-right: 10px;padding-left: 0px;">
+                                            <li>
+                                                <a href="/home/index/politics/0/ko"  >정치 
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/home/index/economy/0/ko"  >경제                                                </a>
+                                            </li>
+                                            <li>
+                                                <a  href="/home/index/culture/0/ko"  >문화                                                </a>
+                                            </li>
+                                            <li style="padding-bottom:px;">
+                                                <a  href="/home/index/tourist/0/ko "  >관광,명승지                                                </a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="/home/index/overseas/0/ko"  >해외동포                                                </a>
+                                            </li>
+                                            <li>
+                                                <a  href="/home/index/international/0/ko"  >국제적련대성                                                </a>
+                                            </li>
+                                    </ul>
+                                </li>
+                                <li  class="has-dropdown">
+                                    <a  href="/home/index/media/0/ko"  > <font   ><b> 다매체</b></font></a>
+                                    <ul class="dropdown" style="padding-right: 10px;padding-left: 0px;">
+                                        <li><a href="/home/index/photos/0/ko"  >사진</a></li>
+                                        <li><a  href="/home/index/video/0/ko"  >동영상</a>
+                                        </li> 
+                                    </ul>
+                                </li>    
+                                <li  class=" dropdown">
+                                    <div class="btn-group pull-right">
+                                        <a  href="/home/index/search/0/ko"  class=" btn-sm btn-outline dropdown-toggle">검색</a>
+                                                                            </div> 
+                                </li>  
+                             </ul>      
+                        </b>
+                    </div>
+                </div> 
+                <div style="clear: box;height: 20px;"></div>
+            </div>       
+         </div>
+    </header> 
+    <style type="text/css">
+        .modal-backdrop{
+            z-index: 0;
+        }
+    </style> 
+
+
+
+<style type="text/css"> 
+
+	.search-result-counter
+
+	 {
+
+	 	box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);height: 44px;line-height: 24px;padding: 10px;text-align: center;border-radius: 100px;width: 44px;
+
+	 }
+
+	 div p{
+
+	 	margin: 0 0 0px;
+
+	 }
+
+</style>
+
+<div class="col-sm-12" >
+
+	<div style="height: 109px;"></div>
+
+
+
+	<div class="widget"  >			                
+
+	    <div class="widget-body" style=" margin-right: 2%;margin-left: 2%;">
+
+	        <form id="myform" method="get">
+
+
+	            <div class="row" id="img_content" name="img_content" style="margin-bottom: 35px; ">
+
+	            	 
+                    <table id="simple-table" style="width: 100%;" > 
+					    <tbody >
+					    	<tr>
+						    	<td align="center" style="padding-left: 10%;padding-right: 10%; text-align: center;font-size: 24px; font-family: KPCheonRiMa; line-height: 1.3;color: black;padding-bottom:15px ">
+									  <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서</nobr> 조선인민군 해군 구축함 진수기념식에서 연설을 하시였다  
+								</td>
+							</tr>
+				    	 
+				    						    		<tr>
+				    			<td>
+				    				<div>
+					    					<a data-target="#photo" data-toggle="modal" style="float:right;font-size: 30px;" >
+					    						<i class="fa fa-camera"></i>
+					    					</a>
+					    					<div id="revolution">
+					    						 <div class="modal fade" id="photo" tabindex="-1" role="basic" aria-hidden="true"   style="height: 100%;">
+											                <div class="  modal-dialog " style="width:100%; margin-top: 0px; background-color: white;"  >
+											                    <div class="modal-content" >
+											                    	<div class="modal-header" style="padding: 25px ;">
+											                    		<p align="center" style="padding-left: 10%;padding-right: 10%; text-align: center;font-size: 24px; font-family: KPCheonRiMa; line-height: 1.3;color: black; ">
+											                    		 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서</nobr> 조선인민군 해군 구축함 진수기념식에서 연설을 하시였다  
+											                    		</p>
+											                            <span class="close " data-dismiss="modal" aria-hidden="true" style="color: black;">x</span>
+											                        </div>    
+											                        <div class="modal-body" style="background-color: #ea0c0c;">
+											                        	<div class="row" id="ModalHeight" style=" margin-top: 100px;">
+											                        		<dir class="col-md-2">
+											                        			<div  >
+											                            														                            				<div style="text-align: center;">
+																							<a data-slide="prev"  href="#carousel2" class="left carousel-control" style="left: 100px;">
+																		                        <span class="icon-prev" id='vector' name='prev'   style=" color:white;font-size: 50px;"></span>
+																		                    </a>
+																	                    </div>
+																	                																                </div>
+											                        		</dir>
+											                        		<div class="col-md-8">
+													                        	<div class="carousel slide" id="carousel2" >
+							                                						<div class="carousel-inner"  >
+														                        													                                			<div  id = "image0" class="item active" >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-055.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >1/2</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image1" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-056.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >2/2</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            														                        		</div>
+													                    		</div>
+												                    		</div>
+												                    		<dir class="col-md-2">
+												                    																		                		<a data-slide="next"  href="#carousel2" class="right carousel-control" style="right: 100px;" >
+																                        <span class="icon-next" id="vector1" style=" color:white;font-size: 50px; top:20px;"></span>
+																                    </a>
+																                												                    		</dir>
+												                    	</div>
+											                        </div>
+											                    </div>
+											                </div>
+											            </div>
+					    					</div>
+				    				</div>
+				    			</td>
+				    		</tr>
+					    		
+						
+							<tr>
+
+								<td  > 
+
+                                    <div class="panel panel-primary" style=" border-width: 0px;border-right:0px;border-left: 0px;text-indent: 12px;">
+
+                                        <div class="panel-body" style=" text-indent: 12px;text-align: justify;letter-spacing: 1px;font-size: 16px;font-family:KPCheonRiMa;line-height: 20px;     color: #000; line-height: 1.5; " >
+
+                                        	<style type="text/css">
+
+                                        		p{
+
+                                        			line-height: 22px;
+
+                                        			margin-top: 0px;
+
+                                        			font-family: KPCheonRiMa;
+
+                                        			font-size: 16px;
+
+                                        			color: #000;
+
+                                        			text-align: justify;
+
+                                        			text-indent: 12px;
+
+                                        			                                         		}
+
+                                        	</style>
+
+                                            <p><nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서</nobr> 6월 12일 조선인민군 해군 구축함 진수기념식에서 연설을 하시였다.<p/>
+연설은 다음과 같다.<p/>
+군사강국건설의 원대한 리상을 안고 함선공업부문의 중요전선에서 분투하고있는 선박공업부문과 여러 부문의 로동계급과 과학자，기술자，일군들！<p/>
+령해사수의 본무에 무한히 충실한 조선인민군 해군장병들과 해군대학 학생동무들！<p/>
+애국적인 국력강화사업에 남모르는 수고를 바쳐가고있는 조선소들과 배수리공장의 종업원가족 여러분！<p/>
+동지들！<p/>
+우리 해군의 급진적인 변화를 확신케 하는 두번째 신형구축함이 튼튼한 모습을 갖추고 자기의 이름을 명명받는 날을 맞게 되였습니다.<p/>
+남포조선소에 이어 두달도 못되는 기간에 련이어 신형구축함을 진수한 사실은 아마도 우리 해군의 급진적인 변화를 실감하는데 있어서 누구에게나 의심할 여지가 없을것이라고 생각합니다.<p/>
+지난 4월 남포에서 천명한바대로 이제는 해군현대화의 새시대가 도래하여 도도한 전진을 계속해가고있다는것을 충분히 느낄수 있을것입니다.<p/>
+어려움과 장애들이 의연함에도 불구하고 선진적인 해군력건설을 목적한 우리의 방대한 함선건조계획들은 가장 정확하게 빠른 속도로 추진되고있습니다.<p/>
+물론 지난달 청진에서 구축함을 진수하면서 예상치 못한 황당한 사고로 당황실색했던 일도 있었지마는 해군전력강화의 중대한 로정은 결코 지연되지 않았습니다.<p/>
+전진행정에 부득이하게 부닥치게 되고 겪을수도 있는 실패와 곡절도 아닌 순수 무책임성과 부주의와 같은 요인들로 하여 그러한 도전이 조성되였다는것이 있어서는 안될 일이지만 그것은 우리에게 손실만은 아니였다고 생각합니다.<p/>
+우리는 이 사고를 단순한 실수가 아니라 국가의 존위와 자존심을 한순간에 추락시킨 도저히 용납할수 없는 심각한 범죄적행위로 평가하고 사고발생근원을 전면적으로 파헤치는 과정에 반드시 소거되여야 할 위해로운 인자들을 낱낱이 찾아내고 해당한 조치들을 취하였으며 함의 시급한 원상복구를 중대한 정치적문제로 내세우고 전격적으로 추진하도록 하였습니다.<p/>
+결과 사고가 발생한 때로부터 두주일여만에 함을 안전하게 세우고 물에 띄웠으며 오늘은 이렇게 계획한바대로 당중앙전원회의를 앞두고 완전한 복구를 결속지었습니다.<p/>
+구축함을 복원하는 과정은 함선공업분야의 담당자들로 하여금 전문사업에 림하는 사상관점과 태도를 스스로 랭정하게 들여다보고 책임적이고 완벽한 일본새를 굳히게 하는 획기적인 계기로 되였다고 봅니다.<p/>
+이번에 이 사고복구과정에 구축함설계의 안정성과 기술적우수성이 확인되고 함선건조에 관한 발전적인 견해들도 확립되였습니다.<p/>
+또한 우리 사업의 각 분야에 내재되여있는 무경각과 무책임，안일해이와 비과학적인 사업태도，경험주의가 엄정하고도 응당한 된타격을 받았습니다.<p/>
+지금 이러한 무책임성과 비과학성으로 인한 인재，악재들은 철도와 교통，전력부문，건설장 할것없이 여러 부문，분야들에서도 일상처럼 일어나고있습니다.<p/>
+이번에 이런 무책임성과 경험주의에만 쩌든 비과학적인 태도와 관점들에 강한 타격을 주었습니다.<p/>
+어떤 의미에서는 필요한 과정을 경과한것일수도 있겠다 하는 생각을 하게 되며 앞으로의 모든 사업을 위해서는 결코 잃어버린 시간만이 아니며 우리는 이 시간에 참으로 커다란 교훈을 축적하였다고 생각합니다.<p/>
+이제는 우리 해군작전능력의 초급진적인 장성이 예측이나 가능성이 아니라 위력적인 실체들로 증명되고있으며 이 력사의 흐름은 이미 멈춰세울수 없는 줄기차고 억센 격류로 되고있습니다.<p/>
+해군력사의 새 장을 열어나가는 우리의 걸음은 거세찬 동력을 안고 가속되고있으며 보다 혁신적이고 계속적인 결과들이 준비되고있다는 이것이 오늘의 진수 및 함명명기념식이 시사하는 중대한 의미입니다.<p/>
+다목적임무수행을 사명으로 하는 《최현》급구축함 2호함의 진수는 자기의 숭고한 리상을 성취하기 위함이라면 력사가 알지 못하는 리정도 과감히 밟아나가는 우리 당，우리 인민특유의 불요불굴의 의지와 완강한 실행력을 유감없이 보여주는 또 하나의 의미깊은 사변입니다.<p/>
+이제 이 함은 함의 무장체계들을 통합체계로 구성하고 성능과 작전수행능력평가，통합운영시험 등 필요한 여러 공정수순을 거쳐 래년도 중반기에 해군에 인도되게 됩니다.<p/>
+뜻깊은 이 자리를 빌어 나는 남포조선에서 일으킨 기적의 봉화에 련대적혁신으로 화답하여 공화국의 새세대구축함 제2호를 훌륭히 건조해냄으로써 조선의 불가항력，조선사람의 기질을 힘있게 과시한 청진조선소와 라진조선소를 비롯한 선박공업부문의 로동자，기술자들과 일군들，함선공업분야에 성심을 다하고있는 련관부문에 뜨거운 감사를 표합니다.<p/>
+더불어서 《강건》호라는 영예로운 이름과 함께 자랑스러운 해군사에 특출한 위훈의 페지들을 새겨갈 구축함 해병들에게 열렬한 축하를 드립니다.<p/>
+동지들！<p/>
+이런 전함을 순수 자력으로 건조해내는 나라는 세계적으로 몇 되지 않을것입니다.<p/>
+우리 함선공업발전의 본격적인 출발은 련관공업분야가 달성할 전망목표를 제시하였으며 또한 그 과정이 발전자체를 함께 추동하고있습니다.<p/>
+조선업분야에서 혁신적인 함선무이공정이 수립된것은 물론이고 새세대구축함이라는 절대기준이 생겨난것과 관련하여 그에 걸맞는 장비들이 강도높은 요구에 부합되게 뚜렷한 도달목표를 가지고 연구개발되고있습니다.<p/>
+우선 탐지전자전분야에서의 비약을 례를 들수가 있습니다.<p/>
+구축함의 전술기술적특수성에 만족되여야 하는것과 관련하여 탐지기체계연구부문에서는 엄격한 도달기준과 목표를 가지고 연구사업에 매진한 결과 뚜렷한 진보를 이룩하였으며 이 분야의 확고한 발전전망을 열어놓았습니다.<p/>
+이같은 성과는 함선탑재용탐지기에만 머무는것이 아니라 우리의 무장장비개발생산분야전반에서의 련대적인 기술혁명이 일어날수 있게 하는 튼튼한 발판으로 되였습니다.<p/>
+또한 복합적인 함상무기통합관리체계개발을 통하여 전투환경에서의 인공지능기술리용과 그 분야의 발전방향을 확정짓게 되였습니다.<p/>
+지금 각종 수상 및 수뢰무기체계들이 새로 연구개발되고있으며 중요하게는 함선기관동력체계구성에서 일대 혁명이 예고되여있습니다.<p/>
+우리가 오늘 함선공업혁명을 본격적으로 다그칠수 있는것은 우리의 의지가 강고할뿐 아니라 그것을 실천적으로 담보할 자체의 공업적잠재력과 높은 기술력을 확보하였기때문입니다.<p/>
+우리는 함선공업의 급속한 장성발전에 대하여 응당히 자부와 긍지를 가져야 합니다.<p/>
+서부지구와 동부지구에서 굴지의 선박건조기지들이 새세대의 구축함들을 손색없이 무어냈다는것은 우리 조선업의 빠른 도약을 떠맡을 강력한 쌍기둥，힘이 형성되였음을 확인시켜주고있습니다.<p/>
+신형구축함들의 건조과정에 우리 조선업은 자력으로 대형전투함선을 개발건조하는 새로운 페지를 아로새겼으며 그 속도와 수준에서도 경이적인 기록을 창조하였을뿐 아니라 함선공업혁명을 능히 감당해낼수 있는 무진한 잠재력을 검증받았습니다.<p/>
+당의 로선과 방침을 관철하기 위한 투쟁에서 함선공업의 오늘과 래일을 떠메고나갈 주체적력량이 비상히 장성강화되고 로동계급안의 수많은 핵심들이 육성된것은 우리가 반드시 수행해야 하고 승리적으로 완성해야 할 선진해양강국건설위업에 있어서 가장 귀중하고 위력한 자원으로 됩니다.<p/>
+이번에 어려운 고비들을 수많이 넘어온 신형구축함의 건조과정을 통하여 청진과 라진의 조선소로동계급은 지난 시기 나라의 해상주권을 보위하고 해상운수와 수산업을 발전시키는데 절실한 선박들을 무어낸 자랑스러운 투쟁전통과 본태를 빛내이며 선박공업의 믿음직한 주인들로 성장하였습니다.<p/>
+특히 만사람의 사랑을 받으며 모두의 추억속에 길이 기억될 고결한 생을 빛나게 마감한 애국자도 나왔습니다.<p/>
+청진조선소 현대화직장 제관1작업반장 조금혁동무가 바로 그렇습니다.<p/>
+보고받은데 의하면 그 동무는 이번 구축함건조투쟁을 벌리는 과정에 불편한 몸으로도 현장을 떠나지 않고 오늘을 위해 심신을 다 바치다 순직하였다고 합니다.<p/>
+자기의 피타는 노력과 구슬땀이 고여진 구축함이 진수되는 날을 불과 며칠 앞두고 순직한 그 동무를 생각하자니 참으로 마음이 아픕니다.<p/>
+바로 저 함이 물리적인 부력에 의해서가 아니라 이같은 우리 로동계급의 순결무구한 애국충심에 떠받들려 저렇게 떠있다고 생각할 때 숭엄해지는 마음 끝없이 깊어집니다.<p/>
+오늘의 이 행사에 그의 안해와 아들이 참가했을것입니다.<p/>
+조금혁동무의 안해와 가족에게 심심한 위로를 전합니다. 조국은 그의 참다운 생애에 두고두고 감사하고 영원히 기억할것입니다.<p/>
+유가족에게 사회주의애국희생증을 수여해드릴것이며 함북도당과 청진조선소 당조직에서는 유가족들을 끝까지 책임지고 돌보며 아들을 <nobr>아버지처럼</nobr> 당을 위해，조국을 위해 불같이 사는 참인간으로 잘 키우도록 하겠습니다.<p/>
+당에서는 남포와 청진에서 현대적인 함선건조투쟁을 벌리는 과정에 검열되고 정신사상적으로 단련된 모범적인 성원들에게 높은 급의 국가표창을 수여하고 입당도 시키도록 하겠습니다.<p/>
+나는 더욱 강성할 조국의 래일을 위해 자기의 모든것을 다 바친 조금혁동무를 비롯한 청진조선소 로동계급의 고결한 정신세계와 투쟁공적을 높이 평가하며 해군현대화의 멈춤없는 진보를 이룩하는 길에서 영예로운 사명과 혁명적본분을 다해가고있는 선박공업부문의 전체 로동계급에게 깊은 사의를 표합니다.<p/>
+동지들！<p/>
+이번에 청진조선소에서 건조한 함은 구조와 성능，무기체계구성의 모든 요소들이 앞서 진수된 《최현》호와 동일한 초강력의 신형다목적구축함입니다.<p/>
+나는 2025년에 건조된 이 두 함선이 우리 해군의 작전능력을 향상시키는데서 커다란 역할을 하게 될것이라고 확신합니다.<p/>
+이미 천명한바대로 우리는 계속하여 이와 동일한 급 또는 그 이상급의 구축함들을 매해 두척씩 무어 해군에 취역시키게 됩니다.<p/>
+얼마전 당중앙군사위원회는 래년에 5，000t급구축함 2척을 추가로 건조하는 계획을 공식 승인하였습니다.<p/>
+이것은 공화국해군의 지위와 방위활동에서 중대하고도 사변적인 변화를 예고하고있습니다.<p/>
+이미 확정된 함선건조계획과 함선총설계에 따라 건조취역하게 되는 새세대전투함선들은 해군의 작전범위와 작전능력을 전략적인 수준으로 향상시키게 됩니다.<p/>
+해군전력이 장성할수록 우리 해군이 가닿게 되는 수역은 령해에서 멀어질것이며 해군의 작전령역이 대양에로 확대될수록 적수들의 전략적후퇴는 필연코 초래될것입니다.<p/>
+이것은 영웅적전투정신으로 영예높은 공화국해군의 위상이 령해에서만이 아니라 만리대양에서 떨쳐지게 된다는것을 의미합니다.<p/>
+동지들！<p/>
+요약해 상기시킨다면 우리 국가의 안전환경은 핵전쟁을 유발시킬수 있는 적들의 모험적인 군사력시위행위들로 하여 지상，해상，공중의 모든 령역에서 예측할수 없는 위태한 상황에 직면하여있습니다.<p/>
+그중에서도 우리 린근해역은 미해군의 핵항공모함과 핵동력잠수함들，각이한 함선들을 포함하여 핵공격수단들이 상시적으로 출몰하는 핵전쟁발발의 가장 위험한 온상으로 되고있습니다.<p/>
+미해군과 공군의 핵전략장비들의 출몰이 전혀 새롭지 않게 일상으로 느껴질만큼 변화한것이 바로 우리 국가주변의 군사정세실상입니다.<p/>
+지구상 그 어느 나라 주변에도 교전상대의 전투함선들이 방대한 규모로 집결되여 공개적인 핵전쟁연습행위를 지속적으로 감행하는 위험한 수역은 없습니다.<p/>
+최근 들어 미국과 추종국가군대의 도발적흉심은 더욱 로골화되고있으며 우리의 안전을 위협하는 도수는 분명히 위험한계를 훨씬 넘어섰습니다.<p/>
+지금의 정세하에서 우리의 결심은 분명하고도 일관합니다.<p/>
+우리는 침략적인 상대에 대하여 비등된 힘으로써 매사 반사적으로 반응할것이며 압도적인 군사적행동을 취할것입니다.<p/>
+우리가 원양작전능력을 보유하고 대양에서 해군력을 행사하는것은 국가주권과 안전리익을 수호하기 위한 필수불가결의 선택입니다.<p/>
+머지않아 적수국의 함선이 주권해역변두리를 횡행하는것을 지켜보고 앉아있는것이 얼마나 자극스럽고 기분이 좋지 않은 일인가 하는것을 적들스스로가 체험해보게 될것입니다.<p/>
+확신하건대 머지않아 태평양상에는 침략의 전초기지，모항들에로 향한 우리 전함들의 항로들이 개설될것이며 우리 동서함대들의 항해일지에는 적수국들의 주요항들과 해역명들이 기록될것입니다.<p/>
+이것은 우리 국가에 부여된 항행의 자유입니다.<p/>
+우리는 자기의 권리를 당당하게 행사할것입니다.<p/>
+맞받아 공격할 힘이 있고 그러한 능력을 갖추고있어야 침략을 막는다는 이것이 우리 해군의 지론으로 되여야 합니다.<p/>
+우리에게는 그러한 능력이 있습니다.<p/>
+또 반드시 키울것입니다.<p/>
+우리는 해군전력을 보다 전면적으로，가속적으로 진화시킴으로써 적들이 우리 주변해역에서 침략적성격의 행동을 벌릴 발상조차 하지 못하게 만들어야 합니다.<p/>
+동지들！<p/>
+해군전성시대를 열어나가는 우리의 위업이 본격적인 단계에 들어섰지만 그렇다고 하여 자만할 근거는 조금도 없습니다.<p/>
+주체적해군무력강화발전을 위한 장엄한 투쟁의 전위에 선 선박공업부문 로동계급과 과학자，기술자들은 무한한 충실성과 애국심，무시할수 없는 실력과 완강한 실천력을 백배하여 우리 당이 목표하고 결정한 위력한 전함들을 훌륭히 건조해내야 합니다.<p/>
+나의 결심은 앞으로 청진조선소를 중추로 하여 선박공업발전의 새로운 활성기를 열고 군사강국의 위상에 걸맞는 현대적인 대형군함들을 대대적으로 무어내자는것입니다.<p/>
+이제는 해양국의 미래를 대표하는 세계적인 조선업을 지향해나갈 때가 되였습니다.<p/>
+굴지의 대규모선박공업기지로서 현대산업의 풍격을 완전히 갖출수 있게 기술 및 생산공정을 대담하게 갱신하고 부족한 부분은 보충하여 현재 만들어낸 《최현》급구축함보다 더 선진적인 전투함선들을 무어내야 합니다.<p/>
+아름차겠지만 이것을 해내야만 청진조선은 우선이 부여된 자기의 원만한 역할로써 해양강국의 진모습을 그려낼수가 있습니다.<p/>
+청진조선소뿐 아니라 함선공업혁명의 일익을 맡고있는 여기 라진조선소를 비롯한 모든 선박공업기지들에서 전망목표와 당면한 사업계획들이 자기 시간표대로 진척되도록 당적，국가적힘을 집중함으로써 새로운 발전의 궤도를 확실하게 타고나가는 우리 함선공업을 전반적으로 다시한번 들어올려야 합니다.<p/>
+동지들！<p/>
+함선 한척한척의 건조，한차례한차례의 진수가 다 우리의 해상주권뿐 아니라 국가의 신성한 존엄과 권위와 직결되여있다는것을 명심하여야 합니다.<p/>
+나는 함선건조부문의 로동계급을 믿습니다.<p/>
+조선소의 로동자，기술자들과 일군들이 당중앙과 일심일체가 되여 조선업의 일대 중흥기를 열어나가는데 크게 공헌하기를 바랍니다.<p/>
+동지들！<p/>
+우리의 사랑하는 동해바다가 자기의 미더운 수호자를 반기고있습니다.<p/>
+《강건》호가 나가는 바다길로 우리 인민의 평안과 복리가 실려오게 될것입니다.<p/>
+이제 련이어 닻을 올리게 될 새세대함선들은 해상방위무력의 중추를 이루고 우리 국가의 명예와 존엄을 떨치며 전면적부흥에로 나아가는 조국과 인민의 앞길에 평화와 번영의 항로를 열어놓을것입니다.<p/>
+투사의 이름이 명명된 무적의 함선을 타고 영예로운 군무를 시작하게 되는 용감한 《강건》호 해병들！<p/>
+《최현》호와 함께 《강건》호는 우리 바다의 순결과 아름다움을 믿음직하게 지키는 무적의 전함으로 명성떨칠것입니다.<p/>
+동무들이 푸른 젊음을 안고 조국해방，조국수호의 전장에 혁혁한 위훈을 아로새긴 강건의 애국념원을 심신에 재우고 어떤 격랑도 용감히 헤가르며 승리의 항로만을 이어갈것이라 믿습니다.<p/>
+선박건조부문 일군들과 근로자들，청진조선과 라진조선의 로동계급 전체 동지들！<p/>
+우리앞에 나서고있는 력사적인 과제들을 어김없이 수행하면서 새 세기 선진해양강국을 향해 힘차게 나아갑시다.<p/>
+영웅적인 우리 로동계급 만세！<p/>
+영용한 조선의 해군 만세！<p/>
+조선민주주의인민공화국 만세！ 
+ 
+
+                                        </div>
+
+                                    </div>
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+
+					 
+
+				</div>
+
+			</form>
+
+	    </div>
+
+	</div>
+
+</div> 
+
+
+		<script type="text/javascript">
+
+			jQuery(document).ready(function($){
+
+				$(".img-responsive").bind('contextmenu',function() { return false; });
+
+			});	
+
+		</script>
+
+
+
+	
+  
+
+<script>
+
+$(document).ready(function() {
+
+    resizeImages1();
+    resizeImages2();
+
+
+
+    $(window).on('resize', function(){
+
+        resizeImages1();
+        resizeImages2();
+
+    });
+
+});
+
+function resizeImages1() {
+
+    var windowWidth = $('#dddd').innerWidth();
+
+    var width = windowWidth * 0.6;
+
+    var height = windowWidth * 0.4;
+    // $('.banner').css('width', width);
+
+    // $('.banner').css('height', height);
+
+    // $('.carousel-inner .item img').each(function() {
+
+    //     var orig_img_width = $(this).data('width');
+
+    //     var orig_img_height = $(this).data('height');
+
+    //     var orig_img_rate = orig_img_width / orig_img_height;
+
+    //     var dest_img_width = width;
+
+    //     var dest_img_height = height;
+
+    //     var margin_top = 0;
+
+    //     if (orig_img_rate >= 1.5) {
+
+    //         dest_img_width = width;
+
+    //         dest_img_height = width / orig_img_rate;
+
+    //         margin_top = (height - dest_img_height) / 2;
+
+    //     } else {
+
+    //         dest_img_width = height * orig_img_rate;
+
+    //         dest_img_height = height;
+
+    //     }
+    //     $(this).css('width', dest_img_width)
+
+    //         .css('height', dest_img_height)
+
+    //         .css('margin-top', margin_top);
+
+    // });
+    $('a.carousel-control span').each(function() {
+
+    	var top = (height - $(this).height()-10) / 2;
+
+    	$(this).css('top', top);
+
+    	$(this).css('font-size', top/2);
+    });
+
+}
+function resizeImages2() {
+    var windowWidth = $('#revolution').innerWidth();
+    var width = windowWidth * 0.6;
+    var height = windowWidth * 0.4;
+    // $('.banner').css('width', width);
+
+    // $('.banner').css('height', height);
+    // $('.carousel-inner .item img').each(function() {
+
+    //     var orig_img_width = $(this).data('width');
+
+    //     var orig_img_height = $(this).data('height');
+
+    //     var orig_img_rate = orig_img_width / orig_img_height;
+
+    //     var dest_img_width = width;
+
+    //     var dest_img_height = height;
+
+    //     var margin_top = 0;
+    //     if (orig_img_rate >= 1.5) {
+
+    //         dest_img_width = width;
+
+    //         dest_img_height = width / orig_img_rate;
+
+    //         margin_top = (height - dest_img_height) / 2;
+
+    //     } else {
+
+    //         dest_img_width = height * orig_img_rate;
+
+    //         dest_img_height = height;
+
+    //     }
+    //     $(this).css('width', dest_img_width)
+
+    //         .css('height', dest_img_height)
+
+    //         .css('margin-top', margin_top);
+
+    // });
+
+    $('#vector').each(function() {
+
+    	var top = (height - $(this).height()-10) / 2;
+
+    	$(this).css('top', top+50);
+
+    });
+
+    $('#vector1').each(function() {
+
+    	var top = (height - $(this).height()-10) / 2;
+
+    	$(this).css('top', top+50);
+
+    });
+ 
+  	$('#ModalHeight').each(function() {
+
+    	
+
+    	$(this).css('height', 200+height);
+
+    });
+}
+
+</script>     <div style="background: url(/resource/images/footer_left.png) repeat-x left 0 ;  
+
+      height: 54px; width: 100%; /*position: fixed;*/ bottom: 0; display: block; /*width*/: 100%; position: fixed;
+
+      z-index: 1002; ">     
+
+     <div   style="background: url(/resource/images/footer_right.png)  no-repeat right 0 ; 
+
+          /*box-sizing: border-box;*/
+
+          height: 54px;width: 100%; bottom: 0;display: block; position: absolute;z-index: 1002;" >
+
+       <div   style="background: url(/resource/images/footer_back.png) no-repeat center bottom ; height: 54px; width: 100%; bottom: 0;/*box-sizing: border-box;*/display: block; position: absolute;z-index: 1000;/*min-width:100%!important; */">      
+
+             <p class="" style="margin: 0 0 -10px;line-height: 52px; font-size: 20px;">
+
+                <font color="#0a43b6" face="KPCheonRiMa"  style="float: right;padding-right: 90px;  " >
+
+                  <strong>
+
+                    <b style="text-shadow:1px 1px 1px #0a43b6; ">
+
+                      저작권 2025 © 조선민주주의인민공화국 민주조선사  
+
+                    </b>
+
+                  </strong>
+
+                </font>
+
+            </p> 
+
+              <a href="#header" class="scrollup" style="margin-bottom: 30px;"><i class="fa fa-chevron-up"></i></a>  
+
+        </div>
+
+      </div> 
+
+      </div>   
+
+     <script src="/js/main.js"></script>
+
+     <script src="/resource/js/dropdown.js"></script>
+
+     <script src="/resource/js/custom.js"></script>
+
+
+
+     <!--gallery-->
+
+     <script src="/resource/js/jquery.min.js"></script>
+
+     <script src="/js/bootstrap.min.js"></script>  
+
+     <script src="/resource/js/jquery.sticky.js"></script>
+
+     <script src="/resource/js/nivo-lightbox.min.js"></script>
+
+     <script src="/resource/js/custom1.js"></script>
+
+     <script src="/resource/js/css3-animate-it.js"></script>
+
+    <script type="text/javascript" src="/resource/js/js/tms-0.3.js"></script>
+
+    <script type="text/javascript" src="/resource/js/js/tms_presets.js"></script> 
+
+    <script type="text/javascript" src="/resource/js/js/jquery.easing.1.3.js"></script> 
+
+    <script src="/resource/js/js1/plugins/blueimp/jquery.blueimp-gallery.min.js" ></script>
+
+    <script src="/resource/js/js1/jquery-2.1.1.js"></script>
+
+    <script src="/resource/js/js1/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <script src="/resource/js/js1/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <script src="/assets/css3-animate-it.js" type="text/javascript"></script>
+
+    <script src="/assets/nivo-lightbox.min.js" type="text/javascript"></script>
+
+    <script src="/assets/custom.js" type="text/javascript"></script>
+
+    </body>
+
+
+
+</html>

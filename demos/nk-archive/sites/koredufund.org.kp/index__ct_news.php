@@ -1,0 +1,550 @@
+		<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>조선교육후원기금</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="조선교육후원기금,교육기금,후원,기금,교육,fund,KEF,education,korea" name="keywords">
+	<meta content="조선교육후원기금,교육기금,후원,기금,교육,fund,KEF,education,korea" name="description">
+	
+	<!-- Favicons -->
+	<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+	<link href="assets/images/favicon.png" rel="icon">
+	
+	<!-- Plugin-CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/linearicons.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+	<link rel="stylesheet" href="assets/css/venobox.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" href="assets/vendor/datepicker/datepicker3.css">
+	
+	<!-- Main-Stylesheets -->
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+	<link rel="stylesheet" href="assets/fonts/font-awesome/css/font-awesome.min.css">
+    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+	
+	
+</head>
+<body class="ko"data-spy="scroll" data-target=".mainmenu-area">
+	<div class="sidebar">
+		<a class="webicon lang hidden-xs" href="index.php?ct=news&lang=eng" title="언어절환">En</a>
+		<a class="webicon tumblr" href="index.php?ct=map"  title="홈페지안내"><i class="fa fa-sitemap"></i></a>
+		<a class="webicon call" href="index.php?ct=calls" title="우리와의 련계"><i class="fa fa-at"></i></a>
+		<a type="button" class="webicon pinterest navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false" title="검색"><span class="fa fa-search" aria-hidden="true"></span></a>
+		<a class="webicon annual" href="index.php?ct=intro&s=5&v=0" title=""><i class="fa fa-book"></i></a>
+	</div>
+    <!-- Preloader-content -->
+    <div class="preloader">
+        <span></span>
+    </div>
+	
+	<div class="click-closed"></div>
+		  <!--/ Form Search Star /-->
+		  <div class="search_form box-collapse">
+			<div class="title-box-d">
+			</div>
+			<span class="close-box-collapse right-boxed"><i class="fa fa-close"></i></span>
+			<div class="box-collapse-wrap form">
+			  <form class="form-a">
+				<div class="row">
+					<div class="form-group">
+					  <label for="Type">검색어</label><span> (조선어와 수자만 입력가능합니다.)</span>
+					  <input type="hidden" value="csearch" name="ct">
+					  <input type="hidden" value="ko" name="lang">
+					  <input type="text" class="search-list form-control form-control-lg form-control-a" pattern="[가-힣0-9 ]+" placeholder="..." name="keyword" id="keyword" value="" required>
+					</div>
+						<div class="form-group">
+							<label for="categ1">검색분류:</label>
+							<select class="search-list form-control form-control-lg form-control-a" id="categ1" name="categ1">
+								<option value="0">---</option><option value="1">조선의 교육</option><option value="2">우리 소개</option><option value="3">새소식</option><option value="4">우리의 활동</option><option value="5">후원계획</option><option value="6">불멸의 령도</option>							</select>
+						</div>
+				  <div class="form-group">
+				  <label for="date_start">검색날자:</label>
+				  <div>
+						<div class="col-md-6">
+							<input type="text" class="search-list form-control form-control-lgform-control-a" placeholder="" required="required" type="text" id="date_start" name="date_start" value="2026.1.1." data-provide="datepicker-inline">
+						</div>
+						<div class="col-md-6">
+							<input type="text" class="search-list form-control form-control-lg form-control-a" placeholder="" required="required" id="date_end" name="date_end" value="2026.1.1." data-provide="datepicker-inline">
+						</div>
+					</div>
+				   </div>
+				  <div class="col-md-12">
+					<button type="submit" class="btn third pull-right">검색</button>
+				  </div>
+				</div>
+			  </form>
+			</div>
+		  </div>
+		  <!--/ Form Search End /-->
+    <!-- MainMenu-Area -->
+    <nav class="mainmenu-area sub" data-spy="affix" data-offset-top="200">
+            <div class="navbar-header">
+				<div class="col-xs-8 hidden-xs" style="padding-top: 7pt;">
+					<a class="collapse-logo ko" href="index.php?">
+						<img src="assets/images/m-logo.png"  style="width: 210px; height: 45px;"/>
+					</a>
+				</div>
+				<div class="col-xs-2 visible-xs padding-0" style="">
+					<button type="button" class="navbar-toggle" data-toggle="modal" data-target="#apps-modal" style="border: 1px solid #ffffff; border-radius: 1px;">
+							<span class="icon-bar" style="background-color: #ffffff;height: 2px;border-radius: 0;"></span>
+							<span class="icon-bar" style="background-color: #ffffff;height: 2px;border-radius: 0;"></span>
+							<span class="icon-bar" style="background-color: #ffffff;height: 2px;border-radius: 0;"></span>
+					</button>
+					<div class="modal fade" id="apps-modal" tabindex="-1" role="dialog" aria-hidden="true">
+						<div class="modal-sm modal-dialog modal-dialog-top" style="margin-top:0px;">
+							<div class="modal-content">
+								<!-- Apps Block -->
+								<div class="block block-themed block-transparent">
+									<div class="block-header" style="padding: 20px 10px; background:#1b3753;">
+										<ul class="block-options">
+											<li style="float: right; display: inline-block;margin: 0 2px;padding: 0;">
+												<button data-dismiss="modal" type="button"><i class="fa fa-close"></i></button>
+											</li>
+										</ul>
+									</div>
+									<div class="block-content" style="background:#f0f9f0;">
+										<ul class="nav" style="padding: 15px 20px; ">				
+											<li class="active"><a href="index.php?"><i class="fa fa-tags"></i> 첫페지</a></li>
+											<li><a href="index.php?ct=leader">
+												불멸의 령도																								</a></li>
+											<li><a href="index.php?ct=koedu">조선의 교육																								<span class="badge badge-new visible-lg">1</span>
+												<span class="badge badge-new-xs visible-prm-xs">1</span>
+																								</a></li>
+											<li><a href="index.php?ct=intro">우리 소개																								</a></li>
+											<li><a href="index.php?ct=news">새소식																								<span class="badge badge-new visible-lg">3</span>
+												<span class="badge badge-new-xs visible-prm-xs">3</span>
+																								</a></li>
+											</li>
+											<li><a href="index.php?ct=acts">우리의 활동												
+																								</a></li>
+											<li><a href="index.php?ct=plans"><span>후원계획</span>
+												
+																							</a></li>
+											<li class="menu-xs text-center" >
+												<a style="background: #1b3753 !important; color: #70c72e !important;" class="lang visible-xs col-xs-4" href="index.php?ct=news&lang=eng">En</a>
+												<a style="background: #1b3753 !important; color: #70c72e !important;" class="map visible-xs col-xs-4" href="index.php?ct=calls"><i class="fa fa-at"></i></a>
+												<a style="background: #1b3753 !important; color: #70c72e !important;" class="map visible-xs col-xs-4" href="index.php?ct=map"><i class="fa fa-sitemap"></i></a>
+											</li>
+										</ul>	
+									</div>
+								</div>
+								<!-- END Apps Block -->
+							</div>
+						</div>
+					</div>	
+				</div>
+				<div class="col-xs-8 visible-xs">
+					<a class="collapse-logo ko " style="display: block!important; " href="index.php?">
+						<img class="img-responsive" src="assets/images/m-logo.png" />
+					</a>
+				</div>
+				<div class="col-xs-2 visible-xs padding-0" style="">
+					<div class="col-xs-4 padding-0" style="padding-top:4pt!important;padding-left:15pt!important;">
+						<button class="btn btn-default navbar-toggle-box-collapse d-none d-md-block" data-toggle="class-toggle" data-target="#navbarTogglerDemo01" data-class="header-search-xs-visible" type="button" style="background:unset;color: white;">
+                            <i class="fa fa-search"></i>
+                        </button>
+					</div>		
+				</div>
+            </div>
+            <div class="collapse navbar-collapse f-gothic" id="primary_menu">
+                <ul class="nav navbar-nav mainmenu">
+                    <li><a href="index.php?">첫페지</a></li>
+										<li class=""><a href="index.php?ct=leader	">불멸의 령도												</a></li>
+					<li class=""><a href="index.php?ct=koedu">조선의 교육												<span class="badge badge-new">1</span>						</a></li>
+					<li class=""><a href="index.php?ct=intro">우리 소개												</a></li>
+					<li class="active"><a href="index.php?ct=news">새소식												<span class="badge badge-new">3</span>						</a></li>
+					<li class=""><a href="index.php?ct=acts">우리의 활동												</a></li>
+					<li class=""><a href="index.php?ct=plans">후원계획												</a></li>
+					<li class="menu-xs ">
+						<a type="button" class="navbar-toggle-box-collapse d-none d-md-block visible-xs" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false"><span class="fa fa-search" aria-hidden="true"></span></a>
+						<a class="lang visible-xs" href="index.php?ct=news&lang=eng">En</a>
+						<a class="map visible-xs" href="index.php?ct=map"><i class="fa fa-sitemap"></i></a>
+					</li>
+				</ul>
+            </div>
+    </nav>
+	<div class="mobile_nav visible-xs" data-spy="affix" data-offset-top="200">
+		<div class="nav-item">
+			<a href="index.php?">첫페지</a>
+		</div>
+				<div class="nav-item ">
+			<a href="index.php?ct=leader">불멸의 령도</a>
+		</div>
+		<div class="nav-item ">
+			<a href="index.php?ct=koedu">조선의 교육</a>
+		</div>
+		<div class="nav-item ">
+			<a href="index.php?ct=intro">우리 소개</a>
+		</div>
+		<div class="nav-item active">
+			<a href="index.php?ct=news">새소식</a>
+		</div>
+		<div class="nav-item ">
+			<a href="index.php?ct=acts">우리의 활동</a>
+		</div>
+		<div class="nav-item ">
+			<a href="index.php?ct=plans">후원계획</a>
+		</div>
+		<div class="nav-item ">
+			<a href="index.php?ct=calls">우리와의 련계</a>
+		</div>
+			<div class="nav-item">
+		</div>
+		<div class="nav-item">
+		</div>
+		</div>
+	<!-- subpage area start -->
+	<div class="list_bg bg_img1"></div>
+		<!--logo area start-->
+			<div class="logo-block col-lg-3 col-md-3 col-sm-4 col-xs-5">
+				<div class="row">
+					<div class="hidden-xs logo">
+						<a href="index.php?"><img src="assets/images/logo2.png" alt=""></a>
+					</div>
+				</div>
+			</div>
+		<!--logo area end-->
+	<!-- subpage area continue-->
+	<div class="clearfix"></div> <div class="list-block news-list container">
+	<div class="row">
+	<div class="hidden-xs drop-shadow perspective">
+		<a href="index.php?ct=news">새소식</a>
+	</div>
+	<div class="clearfix"></div>
+	<div class="col-lg-9 col-md-9 col-sm-12 left_row">
+			<!-- list area start -->
+			<div class="pull-right news_act"><ul class="pagination"><li class="active"><a>1</a></li><li><a href="index.php?ct=news&page=2" data-ci-pagination-page="2">2</a></li><li><a href="index.php?ct=news&page=3" data-ci-pagination-page="3">3</a></li><li><a href="index.php?ct=news&page=2" data-ci-pagination-page="2" rel="next"><i class="fa fa-angle-right"></i></a></li><li><a href="index.php?ct=news&page=23" data-ci-pagination-page="23"><i class="fa fa-angle-double-right"></i></a></li></ul></div>
+				<div class="clearfix"></div>
+			<ul class="content-list list-group">	
+							<li class="price-box content-item list-group-item each_gisa  wow fadeInUp" data-wow-delay="0.1s">
+					<a href="index.php?ct=cview&no=376&categ=3&page=1&s=0">	
+						<br class="visible-xs" /><div class="card pull-left padding-0">						
+														<div class="card-img">
+															<img src="data/2025/20250503_xwoc98wz4pzhuhxej9iv8nvsjwq.jpg">
+							</div>				
+						</div>
+						<div class="price-title" style="padding-left: 10px;">					
+								<div class="title strong-style">
+									<p>중화군 금산고급중학교 완공</p>
+								</div>
+								<div class="card-description summary">
+									중화군 금산고급중학교가 완공되여 4월 1일 개교하였다.…								</div>
+								<span class="date">
+									<i class="fa fa-calendar"></i>
+									2025.4.10.								</span>
+								<div class = "new-tag"> </div>						</div>
+					</a>
+				<div class="clearfix"></div>
+				</li>			
+								<li class="price-box content-item list-group-item each_gisa  wow fadeInUp" data-wow-delay="0.3s">
+					<a href="index.php?ct=cview&no=375&categ=3&page=1&s=0">	
+						<br class="visible-xs" /><div class="card pull-left padding-0">						
+														<div class="card-img">
+															<img src="data/2025/20250503_ef5skypnupmhec1lvbwibmy1oo.jpg">
+							</div>				
+						</div>
+						<div class="price-title" style="padding-left: 10px;">					
+								<div class="title strong-style">
+									<p>젖가공설비 후원</p>
+								</div>
+								<div class="card-description summary">
+									조선교육후원기금은 지난 3월말 황해북도 수안군 염소목장에 젖가공설비 일식을 후원하였다.…								</div>
+								<span class="date">
+									<i class="fa fa-calendar"></i>
+									2025.4.10.								</span>
+								<div class = "new-tag"> </div>						</div>
+					</a>
+				<div class="clearfix"></div>
+				</li>			
+								<li class="price-box content-item list-group-item each_gisa  wow fadeInUp" data-wow-delay="0.5s">
+					<a href="index.php?ct=cview&no=374&categ=3&page=1&s=0">	
+						<br class="visible-xs" /><div class="card pull-left padding-0">						
+														<div class="card-img">
+															<img src="data/2025/20250503_u7h482ehsw.jpg">
+							</div>				
+						</div>
+						<div class="price-title" style="padding-left: 10px;">					
+								<div class="title strong-style">
+									<p>과수묘목기증</p>
+								</div>
+								<div class="card-description summary">
+									조선교육후원기금은 2025년 4월초 과수전문가들의 협력밑에  1년간 자래운 우량품종의 다래묘목들을 남포시 강서구역의 소년단림에 후원하였다.…								</div>
+								<span class="date">
+									<i class="fa fa-calendar"></i>
+									2025.4.10.								</span>
+								<div class = "new-tag"> </div>						</div>
+					</a>
+				<div class="clearfix"></div>
+				</li>			
+								<li class="price-box content-item list-group-item each_gisa  wow fadeInUp" data-wow-delay="0.7s">
+					<a href="index.php?ct=cview&no=371&categ=3&page=1&s=0">	
+						<br class="visible-xs" /><div class="card pull-left padding-0">						
+														<div class="card-img">
+															<img src="data/2024/20240307_lx8d536htbcnbokl.jpg">
+							</div>				
+						</div>
+						<div class="price-title" style="padding-left: 10px;">					
+								<div class="title strong-style">
+									<p>교육후원법 발효</p>
+								</div>
+								<div class="card-description summary">
+									2023년 12월 말 조선민주주의인민공화국 최고인민회의 상임위원회 제14기 제29차전원회의에서 교육후원법이 새로 채택되였다.…								</div>
+								<span class="date">
+									<i class="fa fa-calendar"></i>
+									2024.2.1.								</span>
+														</div>
+					</a>
+				<div class="clearfix"></div>
+				</li>			
+							</ul>
+			<div class="pull-right"><ul class="pagination"><li class="active"><a>1</a></li><li><a href="index.php?ct=news&page=2" data-ci-pagination-page="2">2</a></li><li><a href="index.php?ct=news&page=3" data-ci-pagination-page="3">3</a></li><li><a href="index.php?ct=news&page=2" data-ci-pagination-page="2" rel="next"><i class="fa fa-angle-right"></i></a></li><li><a href="index.php?ct=news&page=23" data-ci-pagination-page="23"><i class="fa fa-angle-double-right"></i></a></li></ul></div>
+			<div class="clearfix"></div>
+			
+		<!-- list area end-->
+	</div>
+	<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 right_row">
+		<div class="right_title title mb-20">
+			<span class="block-title hits"><i class="fa fa-thumbs-o-up"></i> 가장</span><span>많이 열람한 기사</span>
+		</div>
+				<div class="col-md-12 wow fadeInUp " data-wow-delay="0.1s">
+			<div class="card">
+				<a class="visible-xs right_no" href="index.php?ct=cview&no=277&categ=3&page=1&s=0">1</a>
+				<a href="index.php?ct=cview&no=277&categ=3&page=1&s=0">						
+										<div class="card-img">
+												<img src="data/2020/20200422_hahenmrei2n6lnn6x311eu.jpg">
+					</div>
+					<div class="card-body">
+						<div class="card-date hidden-xs">
+							<i class="fa fa-eye"></i> <span>630</span>						</div>
+						<div class="f-gothic title strong-style">
+							<p>새초석친선재단 소독약기증</p>
+<br/>
+							<div class="visible-xs" style="color: gray;">
+								<i class="fa fa-eye"></i> <span>630</span>							</div>
+							<span class="date hidden-xs"><i class="fa fa-calendar"></i> 2020.3.24.</span>
+							
+							<div class="clearfix"></div>
+							
+						</div>
+					</div>
+				</a>					
+			</div>
+		</div>
+				<div class="col-md-12 wow fadeInUp " data-wow-delay="0.1s">
+			<div class="card">
+				<a class="visible-xs right_no" href="index.php?ct=cview&no=231&categ=3&page=1&s=0">2</a>
+				<a href="index.php?ct=cview&no=231&categ=3&page=1&s=0">						
+										<div class="card-img">
+												<img src="data/2020/20200421_fp654gn8u234of7n.jpg">
+					</div>
+					<div class="card-body">
+						<div class="card-date hidden-xs">
+							<i class="fa fa-eye"></i> <span>434</span>						</div>
+						<div class="f-gothic title strong-style">
+							<p>평원군 운봉고급중학교건설 착공</p>
+<br/>
+							<div class="visible-xs" style="color: gray;">
+								<i class="fa fa-eye"></i> <span>434</span>							</div>
+							<span class="date hidden-xs"><i class="fa fa-calendar"></i> 2020.4.10.</span>
+							
+							<div class="clearfix"></div>
+							
+						</div>
+					</div>
+				</a>					
+			</div>
+		</div>
+				<div class="col-md-12 wow fadeInUp " data-wow-delay="0.1s">
+			<div class="card">
+				<a class="visible-xs right_no" href="index.php?ct=cview&no=258&categ=3&page=1&s=0">3</a>
+				<a href="index.php?ct=cview&no=258&categ=3&page=1&s=0">						
+										<div class="card-img">
+												<img src="data/2020/20200422_n84nhpng1q233u8bj.jpg">
+					</div>
+					<div class="card-body">
+						<div class="card-date hidden-xs">
+							<i class="fa fa-eye"></i> <span>331</span>						</div>
+						<div class="f-gothic title strong-style">
+							<p>카나다 《교육의 벗》대표단 평양방문</p>
+<br/>
+							<div class="visible-xs" style="color: gray;">
+								<i class="fa fa-eye"></i> <span>331</span>							</div>
+							<span class="date hidden-xs"><i class="fa fa-calendar"></i> 2019.8.20.</span>
+							
+							<div class="clearfix"></div>
+							
+						</div>
+					</div>
+				</a>					
+			</div>
+		</div>
+				<div class="col-md-12 wow fadeInUp hidden visible-xs" data-wow-delay="0.1s">
+			<div class="card">
+				<a class="visible-xs right_no" href="index.php?ct=cview&no=274&categ=3&page=1&s=0">4</a>
+				<a href="index.php?ct=cview&no=274&categ=3&page=1&s=0">						
+										<div class="card-img">
+												<img src="data/2020/20200422_wvawdzp6av2qqkjhtyery4q28nv22nj.jpg">
+					</div>
+					<div class="card-body">
+						<div class="card-date hidden-xs">
+							<i class="fa fa-eye"></i> <span>320</span>						</div>
+						<div class="f-gothic title strong-style">
+							<p>새초석친선재단 밀가루 기증</p>
+<br/>
+							<div class="visible-xs" style="color: gray;">
+								<i class="fa fa-eye"></i> <span>320</span>							</div>
+							<span class="date hidden-xs"><i class="fa fa-calendar"></i> 2020.2.5.</span>
+							
+							<div class="clearfix"></div>
+							
+						</div>
+					</div>
+				</a>					
+			</div>
+		</div>
+			</div>
+	</div>
+</div><div>
+	<footer class="footer-area" id="contact_page">
+        <!-- Footer-Bootom -->
+        <div class="footer-bottom">
+            <div class="container-fluid">
+				<div class="col-lg-2 col-md-4 col-xs-12 text-center mt-30 border-bt-xs">
+					<div class="row">
+						<a><img src="assets/images/footer-logo.png"></a>
+					</div>
+                </div>
+                <div class="col-lg-6 col-xs-12 col-md-6 mt-15 pl-50">
+					<div class="border-right">
+						<span>여러분들과의 협력이 강화되기를 바랍니다.</span><br /><br />
+						<span class="mt-30">주소: 조선민주주의인민공화국 평양시 중구역 외성동</span><br />
+						<span>전자우편: </span><span class="useful"><a style="color: #fff;" href="mailto:koredufund@star-co.net.kp">koredufund@star-co.net.kp</a></span> <br />
+						<span>전화번호:</span><span> 00850-2-18111 ext 381-6146 / 6147 / 6148</span><br /><br />
+						<!-- other_email_contents변수값이 빈값이면 대리련계부분을 삭제한다 -->
+												<span>처음 우리와 련계하시는 분들은 아래의 주소를 리용해주십시오.</span><br />
+						<span>전자우편: </span><span class="useful"><a style="color: #fff;" href="mailto:hanshuosy@126.com">hanshuosy@126.com</a></span><br />
+						<span>전화번호: </span><span>138-4017-4569						</span>
+					</div>
+                   <div class="space-30 hidden visible-xs border-bt-xs"></div>
+                </div>
+                    <div class="col-lg-4 col-xs-12  col-md-12">
+							<div class="footer-menu">
+								<ul>
+									<li><a href="index.php?">첫페지</a></li> |
+									<li><a href="index.php?ct=leader">불멸의 령도</a></li> |
+									<li><a href="index.php?ct=koedu">조선의 교육</a></li> |
+									<li><a href="index.php?ct=intro">우리 소개</a></li> |
+									<li><a href="index.php?ct=news">새소식</a></li> |
+									<li><a href="index.php?ct=acts">우리의 활동</a></li> |
+									<li><a href="index.php?ct=plans">후원계획</a></li> 
+									
+								</ul>
+							</div>
+							<a href="http://www.dprkportal.kp/" target="_blank" class="etc_site"><img src="assets/images/sites/gwangya.png"></a>
+							<a href="http://www.naenara.com.kp/" target="_blank" class="etc_site"><img src="assets/images/sites/naenara.png"></a>
+							<a href="http://www.kcna.kp/" target="_blank" class="etc_site"><img src="assets/images/sites/kcna.png"></a>
+							<a href="http://www.yongsaeng.org.kp/" target="_blank" class="etc_site"><img src="assets/images/sites/yongsaeng.png"></a>
+                    </div>
+				<div class="clearfix"></div>
+            </div>
+        </div>
+		<div class="footer-end text-center">
+		<p class="text-center text-copyright"><span>이 제품은 콤퓨터쏘프트웨어보호법에 의하여 보호됩니다&nbsp;&nbsp;</span>&copy;2026 조선교육후원기금</p>		
+				
+		</div>
+        </div>
+        <!-- Footer-Bootom-End -->
+    </footer>
+</div>	
+</body>
+<!--Vendor-JS-->
+    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="assets/js/vendor/jquery-ui.js"></script>
+    <script src="assets/js/vendor/bootstrap.min.js"></script>
+    <!--Plugin-JS-->
+	<script>
+			var lang ='ko';
+	</script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    
+    <script src="assets/vendor/datepicker/bootstrap-datepicker.js"></script>
+	<script src="assets/js/typed.js"></script>
+    <script src="assets/js/contact-form.js"></script>
+    <script src="assets/js/ajaxchimp.js"></script>
+    <script src="assets/js/scrollUp.min.js"></script>
+    <script src="assets/js/magnific-popup.js"></script>
+    <script src="assets/js/venobox.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/circles.js"></script>
+
+	
+  	<script src="assets/js/jquery.flexslider.js"></script>
+  	<script src="assets/js/jquery-hover-effect.js"></script>
+		<script src="assets/js/bootstrap-toastr/toastr.min.js"></script>
+
+	<!--<script type="text/javascript" language="javascript" src="assets/js/jquery.dotdotdot.js"></script>-->
+	<script>
+		//count
+						var count_no = 0;
+		var categ1 = 1;
+		var lang = 'ko';
+		$(document).ready(function(){
+			// flexslider
+			  $('.flexslider').flexslider({
+				animation: "fadeInLeft",
+				controlNav: false
+			  });
+			  
+				var left = $(".mobile_nav .nav-item.active").parent().position().left;
+				if(left > $(document).width()-100){
+					if(left+$(document).width() > $(".owl-stage").width())
+						left = $(".owl-stage").width()-$(document).width()+"px";
+					else
+						left = left-40+"px";
+					css_style = "translate3d(-"+left+", 0px, 0px)";
+					$(".owl-stage").css("transform" , css_style);
+				}
+			//$('.mobile_nav').scrollLeft("-100px")
+			toastr.options.closeButton = true;
+			toastr.options.timeOut = 10000;
+					});
+		var url_hit = "index.php?ct=counts";
+		function hitCount(count_no){
+			$.post(url_hit, { count_no: count_no, categ1: categ1}, 
+			function(data){
+			}); 
+		}
+		var count_no = 0;	
+		
+		hitCount(count_no);
+		
+		function search_progress()
+			{
+				var search_value = document.getElementById("keyword").value;
+				var url_str='';
+				if($('#categ1').val()){
+					url_str += '&categ1='+$('#categ1').val();
+				} 
+				if($('#date_start').val())
+				{
+					url_str += '&date_start='+$('#date_start').val();
+				}	
+				if($('#date_end').val()){
+					url_str += '&date_end='+$('#date_end').val();
+				} 
+				
+				 
+				if(document.getElementById("content_flag").checked){
+					url_str += '&content_flag='+$('#content_flag').val();
+				}
+				location.href = "index.php?ct=csearch&keyword="+search_value+url_str;
+			}
+	
+	</script>
+    <script src="assets/js/main.js"></script>
+</html>

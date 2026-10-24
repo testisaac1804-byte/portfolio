@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="author" content="Korean Cooks" />
+	<link rel="shortcut icon" href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/images/favicon.png" />
+	<!-- Stylesheets
+	============================================= -->
+	<link rel="stylesheet" href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/css/bootstrap.css" type="text/css" />
+
+	<link rel="stylesheet" href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/css/style.css" type="text/css" />
+	<link rel="stylesheet" href="../../../../../assets/css/swiper.css" type="text/css" />
+	<link rel="stylesheet" href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/css/dark.css" type="text/css" />
+	<link rel="stylesheet" href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/css/font-icons.css" type="text/css" />
+	<link rel="stylesheet" href="../../../../../assets/css/animate.css" type="text/css" />
+	<link rel="stylesheet" href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/css/magnific-popup.css" type="text/css" />
+	<link rel="stylesheet" href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/css/responsive.css" type="text/css" />
+
+   	<script type="text/javascript" src="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/js/search.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+
+	<!-- Document Title
+	============================================= -->
+	<title>Korean Dishes</title>
+	<style>
+		#primary-menu.sub-title > ul > li, #primary-menu.sub-title.style-2 > div > ul > li {
+			background: url("https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/images/icons/menu-divider.png") no-repeat right center !important;
+			margin-left: 1px !important;
+		}
+	</style>
+        
+</head>
+
+<body class="stretched no-transition">
+
+	
+	<!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper" class="clearfix">
+
+		<!-- Header
+		============================================= -->
+		<header id="header">
+
+			<div id="header-wrap">
+
+				<div class="container clearfix">
+
+					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+					<!-- Logo
+					============================================= -->
+					<div id="logo">
+						<a href="../../../index" class="standard-logo" data-dark-logo="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/images/logo-dark.png"><img src="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/images/logo.png" alt="Korean Cooks"></a>
+						<a href="../../../index" class="retina-logo" data-dark-logo="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/images/logo-dark@2x.png"><img src="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/images/logo@2x.png" alt="Korean Cooks"></a>
+					</div><!-- #logo end -->
+
+					<!-- Language
+					============================================= -->
+                    <div style="float:right; margin-top:10px;">	
+                        <a onClick="setlang('kp')" style="color:white; font:bold; cursor:pointer;">조선어 |</a>
+                        <a onClick="setlang('en')" style="color:white; font:bold; cursor:pointer;">English</a>
+                    </div><!-- language end -->
+
+					<!-- Primary Navigation
+					============================================= -->
+					<nav id="primary-menu" class="sub-title">
+
+						<ul>
+							<li><a href="../../../cooking_introduction"><div>Introduction</div><span>료리소개</span></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/books_magazine"><div>Publications</div><span>도서, 잡지</span></a></li><li class="current"><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture"><div>Food Culture</div><span>음식문화</span></a></li><li><a href="../../../organization_activity_news"><div>Association’s Activities</div><span>협회활동소식</span></a></li>						</ul>
+
+						<!-- Top Search
+						============================================= -->
+						<div id="top-search">
+							<a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
+							<!--<form action="search.php" method="get">-->
+								<form action="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/search" id="search-form" name="search-form" method="get" accept-charset="utf-8">
+<input type="hidden" name="csrf_test_name" value="e463e8b08be735426f6493bd062804ba" style="display:none;" />
+ 
+								<input type="text" name="search_str" class="form-control" value="" placeholder="Search..." onKeyUp="javascript:gf_func_keydown(event, 'search_btn');">
+															<!--/form-->
+						</div><!-- #top-search end -->
+
+					</nav><!-- #primary-menu end -->
+
+
+				</div>
+
+			</div>
+
+		</header><!-- #header end -->
+<script>
+	var url = '7';
+	function setlang(lang){
+		if(lang=='kp'){
+			var newUrl = url.replace('/en/', '/kp/');
+			document.location.href = newUrl;
+		}
+		if(lang=='en'){
+			var newUrl = url.replace('/kp/', '/en/');
+			document.location.href = newUrl;
+		}
+	}
+</script>	
+		<section class="clearfix">
+
+		</section>		
+		<!-- Content
+		============================================= -->
+		<section id="content">
+
+			<div class="content-wrap">
+				<div class="container clearfix">
+					<div class="postcontent nobottommargin col_last clearfix">
+						
+						<div id="page-title" class="fancy-title title-bottom-border"><h5>Dishes for Lunar New Year’s Day</h5><ol class="breadcrumb">
+									<li><a href="../../../index">First Page</a></li>
+									<li class="#">Food Culture</li>
+								</ol>
+
+							</div><div class="well" style="text-align: justify;">
+									&nbsp;&nbsp;&nbsp;From ancient times the Korean people celebrated the New Year’s Day by the lunar calendar in a grand style. <br/>&nbsp;&nbsp;&nbsp;Early in the morning of the New Year’s Day, all the families would hold memorial services for their ancestors, make New Year greetings and enjoy holiday dishes. <br/>&nbsp;&nbsp;&nbsp;It was a custom in Korea to put ttokguk (rice cake soup) on the table set for memorial services on New Year’s Day with several other dishes. <br/>&nbsp;&nbsp;&nbsp;Dishes for this day include chalttok (glutinous rice cake), solgittok (steamed rice cake), jolphyon (fancy rice cake), pancakes, desserts, sujonggwa (fruit punch), sikhye (sweet rice drink), roast meats, fruits and others.  <br/>&nbsp;&nbsp;&nbsp;And ttokguk is a must dish for the day. So, Koreans called it chomsebyong, age-adding rice cake. <br/>&nbsp;&nbsp;&nbsp;The soup was originally prepared with pheasant broth, and when the pheasant was not available, chicken broth was used instead. Hence the Korean proverb, Chicken in place of pheasant. <br/>&nbsp;&nbsp;&nbsp;On New Year’s Day people drank cold liquor. Traditional liquor for New Year’s Day was Tosoju distilled from traditional Korean medicinal stuffs, including fruits of Zanthoxylum piperitum, white rhizome atractylodis, platycodon, and Siler divaricate. <br/>&nbsp;&nbsp;&nbsp;When serving the liquor, young people were the first to drink to congratulate them for their becoming mature, and the elder ones drank in the end for they repented of their becoming old. <br/>&nbsp;&nbsp;&nbsp;On New Year’s Day, all the family members got together at the house of the parents to enjoy holiday feast and welcomed the neighbours and other villagers with dishes.						
+									</div><div class="col_three_fifth nobottommargin">
+									
+									<div class="entry-image">
+										<img src="../../../../../assets/contents/cooking_house/holiday_food/7.jpg">
+									</div>
+
+								</div>
+								
+									<h4>Rice Cake Soup</h4>
+									<p style="text-align: justify;">&nbsp;&nbsp;&nbsp;Rice cake soup is a typical dish for the lunar New Year’s Day. <br/>&nbsp;&nbsp;&nbsp;As the soup was a must on the day in the southern region of the country, the local people called the rice cake of soup chomsebyong, age-adding cake, and enquired about other’s age euphemistically by asking “how many rice cake soups did you have?”  <br/>&nbsp;&nbsp;&nbsp;Pheasant stock is perfect for preparing rice cake soup, but chicken stock is also used. <br/>&nbsp;&nbsp;&nbsp;Rice cake soups have distinguishing features by region. <br/>&nbsp;&nbsp;&nbsp;In Kaesong the whole family sat together on New Year’s Eve and spent the night making bar rice cake into cocoon-shaped ones with bamboo knives. And they cooked them on the morning of the lunar New Year’s Day.  <br/>&nbsp;&nbsp;&nbsp;The cocoon-shaped rice cake was called jorangttok, as it looked like two beads stuck each other. <br/>&nbsp;&nbsp;&nbsp;Every household in the Kaesong area was said to have bamboo knives for each member. <br/>&nbsp;&nbsp;&nbsp;There is a story about jorangttok and bamboo knife. <br/>&nbsp;&nbsp;&nbsp;Kaesong was the capital of Koryo, and there lived a king with very sensitive tongue. <br/>&nbsp;&nbsp;&nbsp;He even disliked the metallic taste of the rice cake cut with the kitchen knife, so he ordered to use a wooden knife. Rice cakes cut with the wooden knife looked not so good in shape, but tasted good. <br/>&nbsp;&nbsp;&nbsp;It was widely spread among ordinary households, thus creating a custom of cutting rice cake with wooden knives in the Kaesong area.</p><div class="line"></div><h5>Foods  <span class="badge" style="color:white">5</span></h5><div id="portfolio" class="portfolio grid-container portfolio-nomargin portfolio-notitle portfolio-5 clearfix"><div class="oc-item">
+										<div class="iportfolio">
+										<div class="portfolio-image">
+											<a href="7">
+												<img src="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/contents/cooking_house/holiday_food/thumbnails/t7.jpg" alt="korean-holiday-food" style="visibility: visible; opacity: 1; display: block;">
+											</a>
+											<div class="portfolio-overlay">
+												<a href="../../../../../assets/contents/cooking_house/holiday_food/7.jpg" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
+												<a href="7" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+											</div>
+										</div>
+										<div class="portfolio-desc">
+											<h5><a href="7">Rice Cake Soup</a></h5>
+										</div>
+									</div>
+									</div><div class="oc-item">
+										<div class="iportfolio">
+										<div class="portfolio-image">
+											<a href="8">
+												<img src="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/contents/cooking_house/holiday_food/thumbnails/t8.jpg" alt="korean-holiday-food" style="visibility: visible; opacity: 1; display: block;">
+											</a>
+											<div class="portfolio-overlay">
+												<a href="../../../../../assets/contents/cooking_house/holiday_food/8.jpg" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
+												<a href="8" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+											</div>
+										</div>
+										<div class="portfolio-desc">
+											<h5><a href="8">Glutinous rice cake</a></h5>
+										</div>
+									</div>
+									</div><div class="oc-item">
+										<div class="iportfolio">
+										<div class="portfolio-image">
+											<a href="9">
+												<img src="../../../../../assets/contents/cooking_house/holiday_food/thumbnails/t9.jpg" alt="korean-holiday-food" style="visibility: visible; opacity: 1; display: block;">
+											</a>
+											<div class="portfolio-overlay">
+												<a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/contents/cooking_house/holiday_food/9.jpg" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
+												<a href="9" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+											</div>
+										</div>
+										<div class="portfolio-desc">
+											<h5><a href="9">Steamed Rice Cake</a></h5>
+										</div>
+									</div>
+									</div><div class="oc-item">
+										<div class="iportfolio">
+										<div class="portfolio-image">
+											<a href="10">
+												<img src="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/contents/cooking_house/holiday_food/thumbnails/t10.jpg" alt="korean-holiday-food" style="visibility: visible; opacity: 1; display: block;">
+											</a>
+											<div class="portfolio-overlay">
+												<a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/contents/cooking_house/holiday_food/10.jpg" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
+												<a href="10" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+											</div>
+										</div>
+										<div class="portfolio-desc">
+											<h5><a href="10">Dried Persimmon Punch</a></h5>
+										</div>
+									</div>
+									</div><div class="oc-item">
+										<div class="iportfolio">
+										<div class="portfolio-image">
+											<a href="11">
+												<img src="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/contents/cooking_house/holiday_food/thumbnails/t11.jpg" alt="korean-holiday-food" style="visibility: visible; opacity: 1; display: block;">
+											</a>
+											<div class="portfolio-overlay">
+												<a href="../../../../../assets/contents/cooking_house/holiday_food/11.jpg" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
+												<a href="11" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+											</div>
+										</div>
+										<div class="portfolio-desc">
+											<h5><a href="11">Sweet Rice Drink</a></h5>
+										</div>
+									</div>
+									</div></div>						<ul class="pagination" style="text-align: center;">
+												</ul>
+						
+					</div>
+					<div class="sidebar nobottommargin clearfix">
+						<div class="sidebar-widgets-wrap">
+							<div class="widget clearfix">
+								<div class="panel-group nobottommargin" id="accordion">
+								  <div class="panel panel-default">
+												<div class="panel-heading">
+												  <a data-toggle="collapse" data-parent="#accordion" href="#collapse_1">
+												  Folk Holiday Dishes
+												</a>
+												</div><div id="collapse_1" class="panel-collapse collapse in"><div class="panel-body">
+												  	<div class="widget widget_links clearfix">
+													  <ul><li><a style="color: #337ab7;" href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/1/7"><div>Dishes for Lunar New Year’s Day</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/1/6"><div>Dishes for Jongwoldaeborum</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/1/14"><div>Dishes for Lunar February 1</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/1/13"><div>Third Day of the Third Lunar Month & Hwajon</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/1/15"><div>15th Day of the Sixth Lunar Month & Congee with Fish</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/1/16"><div>Sambok & Tangogi Soup</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/1/17"><div>Seventh Day of the Seventh Lunar Month & Sudan</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/1/8"><div>Chusok & Songphyon</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/1/18"><div>Ninth Day of the Ninth Lunar Month & Chrysanthemum Pancake</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/1/9"><div>Tongji & Tongji Porridge</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/1/19"><div>Rapil & Roasted Sparrow</div></a></li></ul></div></div>
+												</div>
+												</div><div class="panel panel-default">
+												<div class="panel-heading">
+												  <a data-toggle="collapse" data-parent="#accordion" href="#collapse_2">
+												  Local Dishes
+												</a>
+												</div><div id="collapse_2" class="panel-collapse collapse"><div class="panel-body">
+												  	<div class="widget widget_links clearfix">
+													  <ul><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/2/9"><div>Pyongyang</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/2/10"><div>North Phyongan Province</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/2/11"><div>South Phyongan Province</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/2/12"><div>Jagang Province</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/2/13"><div>North Hamgyong Province</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/2/14"><div>South Hamgyong Province</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/2/15"><div>Ryanggang Province</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/2/16"><div>Kangwon Province</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/2/17"><div>North Hwanghae Province</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/2/18"><div>South Hwanghae Province</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/2/19"><div>Kaesong</div></a></li><li><a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/2/21"><div>Nampho</div></a></li></ul></div></div>
+												</div>
+												</div><div class="panel panel-default">
+													<div class="panel-heading">
+													  <a data-parent="#accordion" href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/3/0">
+													  Dietary Custom
+													</a>
+													
+													</div>
+													</div><div class="panel panel-default">
+													<div class="panel-heading">
+													  <a data-parent="#accordion" href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/4/0">
+													  History & Episodes
+													</a>
+													
+													</div>
+													</div><div class="panel panel-default">
+													<div class="panel-heading">
+													  <a data-parent="#accordion" href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture/5/0">
+													  Idioms & Proverbs
+													</a>
+													
+													</div>
+													</div>								  
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</section><!-- #content end -->
+
+		<!-- Footer
+		============================================= -->
+		<footer id="footer" class="dark">
+
+			<!-- Copyrights
+			============================================= -->
+			<div id="copyrights">
+
+				<div class="container clearfix">
+
+					<div class="col_half">
+						<img src="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/images/footer-logo.png" alt="Footer Logo" class="footer-logo">
+
+						Add: Ragwon-dong, Pothonggang District, Pyongyang, DPR Korea<br/>
+						Fax: 0085023814410 / Tel: 0850-2-381-8359 / <img src="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/images/mail.png">
+					</div>
+
+					<div class="col_half col_last tright">
+						<div class="copyrights-menu copyright-links fright clearfix">
+							<a href="../../../cooking_introduction">Introduction</a>/<a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/books_magazine">Publications</a>/<a href="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/index.php/first/cooking_culture">Food Culture</a>/<a href="../../../organization_activity_news">Association’s Activities</a>						</div>
+						
+					</div>
+
+				</div>
+
+			</div><!-- #copyrights end -->
+
+		</footer><!-- #footer end -->
+
+	</div><!-- #wrapper end -->
+
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop" class="icon-angle-up"></div>
+
+	<!-- External JavaScripts
+	============================================= -->
+	<script type="text/javascript" src="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/js/jquery.js"></script>
+	<script type="text/javascript" src="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/js/plugins.js"></script>
+	<!-- Footer Scripts
+	============================================= -->
+	<script type="text/javascript" src="https://web.archive.org/web/20260101im_/http://cooks.org.kp/en/assets/js/functions.js"></script>
+
+</body>
+</html>

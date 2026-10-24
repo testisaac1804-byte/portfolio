@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<script>
+// A compressed link arrives as https://a1d2.org#PAYLOAD. The part after "#" is never sent to
+// the server, so this page is the one that has to decode it - and until it does, a visitor
+// would see the home page flash. So: decide before the first paint, hide everything, and
+// show the redirect screen instead. If the hash turns out not to be a payload (or decoding
+// fails), the page is revealed again - the fallback is always the normal home page.
+(function () {
+  var raw = location.hash.slice(1);
+  if (!raw) return;
+  document.documentElement.classList.add("decoding-link");
+  window.addEventListener("DOMContentLoaded", function () {
+    function reveal() { document.documentElement.classList.remove("decoding-link"); }
+    var decoded;
+    try { decoded = decodeURIComponent(raw); } catch (e) { return reveal(); }
+    // not a payload - it is one of this page's own anchors (#projects, #contact)
+    if (document.getElementById(raw) || document.getElementById(decoded)) return reveal();
+    import("/q/decode.js").then(function (m) {
+      // confirm: show where the link goes, and let the visitor decide
+      if (!m.followHash({ confirm: true })) reveal();
+    }).catch(reveal);
+  });
+})();
+</script>
+<title>a1d2.org</title>
+<meta name="description" content="Personal site.">
+<meta name="theme-color" content="#fffdf9">
+<meta property="og:title" content="a1d2.org">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://a1d2.org/">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="link-screen" role="status" aria-live="polite">
+  <div class="link-screen-spinner" aria-hidden="true"></div>
+  <p>Redirecting…</p>
+</div>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="./">
+      <span class="name">a1d2.org</span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <!-- ============ 中文 ============ -->
+  <div id="lang-zh">
+    <section id="projects">
+      <div class="wrap">
+        <div class="project">
+          <div>
+            <h3>链接压缩器</h3>
+            <p>在浏览器里把长链接压短、并优化二维码，不需要后端。基于 p2r3 的开源项目 <a href="https://github.com/p2r3/ha.mr">ha.mr</a>（MIT）。</p>
+            <a class="more" href="q/">打开 →</a>
+          </div>
+        </div>
+
+        <p class="hint">更多陆续放上来。</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <h2>联系</h2>
+        <p>有事找我，发邮件：<a href="mailto:support@a1d2.org">support@a1d2.org</a></p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ English ============ -->
+  <div id="lang-en" hidden>
+    <section id="projects-en">
+      <div class="wrap">
+        <div class="project">
+          <div>
+            <h3>Link compressor</h3>
+            <p>Compress long links and optimise QR codes entirely in the browser, no backend. Based on <a href="https://github.com/p2r3/ha.mr">ha.mr</a> by p2r3 (MIT).</p>
+            <a class="more" href="q/">Open →</a>
+          </div>
+        </div>
+
+        <p class="hint">More to come.</p>
+      </div>
+    </section>
+
+    <section id="contact-en">
+      <div class="wrap">
+        <h2>Contact</h2>
+        <p>Email is the best way to reach me: <a href="mailto:support@a1d2.org">support@a1d2.org</a></p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <a href="mailto:support@a1d2.org">support@a1d2.org</a>
+    <div class="disclaimer">© 2026 a1d2.org</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var zh = document.getElementById('lang-zh'),
+      en = document.getElementById('lang-en');
+  function set(lang) {
+    var isZh = lang === 'zh';
+    zh.hidden = !isZh;
+    en.hidden = isZh;
+    document.documentElement.lang = isZh ? 'zh-Hans' : 'en';
+  }
+  // no language switch any more, so the browser's own language picks the block
+  set((navigator.language || 'en').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en');
+})();
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"410474eddfbb4154b2d450e8c41421e3","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

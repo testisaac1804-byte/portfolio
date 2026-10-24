@@ -31,4 +31,4 @@ Full spec already in this prompt file (single-file HTML evidence mirror in Pytho
 - functions: `_clean_filename`, `_is_absolute`, `_is_data_uri`, `_make_absolute`, `_mime_to_ext`, `main`, `mimetypes_mime`
 
 ---
-_Spec generated from the project's own files on 2026-09-28 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._
+_Spec generated from the project's own files on 2026-10-22 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._

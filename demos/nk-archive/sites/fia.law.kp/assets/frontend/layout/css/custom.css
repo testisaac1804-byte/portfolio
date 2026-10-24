@@ -1,0 +1,68 @@
+/* here you can put your own css to customize and override the theme 
+Social Shares Widget
+==================================================*/
+.w-social-shares {
+    position:absolute;
+    top:30%;
+    left: 6px;
+	width: 47px;
+    background-color:transparent;
+    margin:0;
+    padding:0;
+    z-index: 1000;
+}
+
+.w-social-shares ul.social-share-lists{
+	list-style: none;
+	padding: 0;
+}
+
+.w-social-shares ul.social-share-lists li{
+	margin-bottom: 2px;
+}
+
+.w-social-shares ul.social-share-lists li .social-item > a{
+	font-size: 34px;
+}
+
+.w-social-shares ul.social-share-lists li .social-item > span.countbox, .w-social-shares ul.social-share-lists li .social-item > a{
+	display: block;
+	text-align: center;
+}
+
+.w-social-shares ul.social-share-lists li .social-item > span.countbox{
+	background-color: #fcfcfc;
+	border: 1px solid #e1e1e1;
+	color: #898989;
+	font-size: 18px;
+	font-family: 'Roboto-Light';
+	position: relative;
+	padding: 4px 2px;
+	margin-bottom: 5px;
+}
+
+.w-social-shares ul.social-share-lists li .social-item > span.countbox:before{
+	content: " ";
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-top: 10px solid #e1e1e1;
+	bottom: -10px;
+	left: 50%;
+	margin-left: -7px;
+}
+
+.w-social-shares ul.social-share-lists li .social-item > span.countbox:after{
+	content: " ";
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-top: 10px solid #fcfcfc;
+	bottom: -8px;
+	left: 50%;
+	margin-left: -7px;
+}

@@ -1,0 +1,608 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>인민대학습당 홈페지 - 《남산》-새책소개(목록)페지</title>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="인민대학습당에 새로 들어온 도서들에 대한 종합목록을 소개합니다.">
+<meta name="keyword" content="인민대학습당,웨브싸이트,홈페지,남산,새책소개">
+<meta name="author" content="Kanegin, K.H.Y., K.S.H., KKK">
+<meta name="lang" content="ko">
+
+<link rel="shortcut icon" type="image/png" href="/assets/imgs/gpsh-icon-16.png?20240706.4.7.6">
+
+<link rel="stylesheet" href="/assets/libs/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/libs/nivo-slider/themes/light/light.min.css">
+<link rel="stylesheet" href="/assets/libs/nivo-slider/nivo-slider.min.css">
+<link rel="stylesheet" href="/assets/libs/owl-carousel/2.2.1/owl.carousel.min.css">
+<link rel="stylesheet" href="/assets/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/assets/libs/font-awesome.v6.1.2/css/all.min.css?">
+<link rel="stylesheet" href="/assets/libs/colorlib/vendor/photoswipe/css/vendor.min.css?">
+
+<link rel="stylesheet" href="/assets/css/linearicons.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/magnific-popup.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/animate.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/owl.carousel.plugin.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/global.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/font-family_ko.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/compatible.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/books.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/encyclopedia.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/rmenjoy.min.css?20240706.4.7.6">
+<link rel="manifest" href="/assets/manifest.json">
+
+<script>
+let BASE_URL = '/';
+let SITE_URL = '/index.php/ko/';
+let CURRENT_URL = 'newbooks/view_list';
+let isMobile = false;
+let localeLang = 'ko';
+</script><script src="/assets/libs/jquery/jquery-3.4.1.ex.min.js"></script>
+<script src="/assets/libs/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body class="_top" oncontextmenu="return true;">
+    <div id="preloader">
+      <div class="preload-content">
+        <div id="gpsh-load"></div>
+      </div>
+    </div>
+    <header id="divHeader" class="header-area bo00">
+  <div class="container">
+    <div class="row mx-n15">
+      <div class="col-12 px-0">
+        <nav class="navbar-expand d-inline fixed-top languagebar bo00">
+          <ul class="navbar-nav justify-content-end language header">
+                          <li class="nav-link  active">
+                <a href="#">
+                  <span class="d-inline">조선어</span>
+                  <span class="d-none">가</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/en/newbooks/view_list">
+                  <span class="d-inline">English</span>
+                  <span class="d-none">En</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/cn/newbooks/view_list">
+                  <span class="d-inline">中文</span>
+                  <span class="d-none">中</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/ru/newbooks/view_list">
+                  <span class="d-inline">Русский</span>
+                  <span class="d-none">Ру</span>
+                </a>
+              </li>
+                      </ul>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-dark" id="gpshNavbar">
+	<a class="navbar-brand" href="/index.php/ko/" title="첫페지" >
+		<img id="logo_namsan" src="/assets/imgs/namsan.png" alt="남산" />
+		<span id="domain">www.gpsh.edu.kp</span>
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gpshNav">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="gpshNav">
+	<ul class="navbar-nav ml-auto">
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">불멸의 령도</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/leader/news_list"
+        title="혁명활동">혁명활동</a>
+      <a class="dropdown-item" href="/index.php/ko/anecdote/article_list"
+        title="혁명일화">혁명일화</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/leadership"
+        title="령도업적">령도업적</a>
+    </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">소개</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/intro/index/serial#about-gpsh"
+        title="소개편집물">소개편집물</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/history#about-gpsh"
+        title="연혁">연혁</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/president#about-gpsh"
+        title="총장들">총장들</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/inside#about-gpsh"
+        title="구내전경">구내전경</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/ourfaces_list#about-gpsh"
+        title="우리모습">우리모습</a>
+    </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">강의</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/lecture/today_in7day"
+        title="주간 강의, 강습일정">주간일정</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/0"
+        title="사회과학강의">사회과학강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/1"
+        title="자연과학강의">자연과학강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/2"
+        title="새기술통보강의">새기술통보강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/3"
+        title="원격강의">원격강의</a>
+          </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 active"><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">봉사</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/rmenjoy/room"
+        title="음악감상">음악감상</a>
+      <a class="dropdown-item" href="/index.php/ko/newbooks/view_list"
+        title="도서소개">도서소개</a>
+      <a class="dropdown-item" href="/index.php/ko/oldbooks/view_list"
+        title="민족고전">민족고전</a>
+      <a class="dropdown-item" href="/index.php/ko/encyclopedia/view_list/1"
+        title="백과상식">백과상식</a>
+    </div>
+  </li>
+  <li class="nav-item px-1 "><a class="nav-link" href="/index.php/ko/libraries/index/ko-lib-cp"
+      title="도서관협회">도서관협회</a></li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">대외교류</a>
+    <div class="dropdown-menu dropdown-menu-right submenu">
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/0"
+        title="참관">참관</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/1"
+        title="도서교류">도서교류</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/2"
+        title="도서기증">도서기증</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/3"
+        title="국제토론회 및 전시회">국제토론회 및 전시회</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/4"
+        title="국제기구위탁도서관">국제기구위탁도서관</a>
+    </div>
+  </li>
+</ul>
+<div id="search-wrapper" class="d-none">
+  <form action="#" method="post">
+    <input type="text" id="search" name="search" class="search"
+      value=""
+      onkeypress="return checkProhibitionalChars('#search', '#errmsg2');"
+      placeholder="검색어를 입력하십시오." />
+    <div id="close-icon"></div>
+    <input class="d-none" type="submit" value="" />
+    <input type="hidden" name="csrftk" value="48604d35b40f3c2ae470b00cdfe9d81a" />
+    <span id="errmsg2" style="display: none;">* 경고! - 금지된 문자를 포함하고 있습니다.</span>
+  </form>
+</div>
+<script type="text/javascript">
+  $().ready(function() {
+    // 《혁명활동소식》과 《휴관일》소개에서 주체년호표기처리
+    let jucheobjs = $(".juche.date.column, #holidays p");
+    jucheobjs.each(function() {
+        juchehtml = $(this).html() || '';
+        juchehtml = juchehtml.replace(/(주체|JUCHE|主体|чучхе)\d+\((\d+)\)/ig, '$2');
+        $(this).html(juchehtml);
+    });
+    // 외부싸이트소개
+    let servicetime = $('div.service-time #accordion');
+    if (servicetime.length) {
+      let servicetimes = servicetime.children('div');
+      // 강의시간과 봉사시간소개부를 없앤다.
+      if (servicetimes.length > 2) {
+        $(servicetimes[0]).addClass('d-none'); // 강의시간
+        // $(servicetimes[1]).addClass('d-none'); // 봉사시간
+      }
+      // 외부싸이트(광야홈페지)소개부를 추가한다.
+      let gwangya = $('<div class="card mb-3"><div class="card-header"><a class="collapsed1 card-link1" data-toggle1="collapse" href="http://www.dprkportal.kp" title="www.dprkportal.kp" target="_blank"><img src="/./data/outsites/gwangya.png" width="150px" alt="www.dprkportal.kp" /></a></div>');
+      servicetime.append(gwangya);
+    }
+  });
+</script>
+	</div>
+</nav>
+      </div>
+    </div>
+  </div>
+</header>    <section class="body" style="min-height: 900px;">
+      
+<h1 class="d-none">새책소개(목록)</h1>
+
+<a href="#listForm" class="scrollto">
+  <div class="poster-area row-xs-150 row-sm-200 row-md-300 row-lg-400 bg-img bg-overlay bo03"
+    style="background-image: url(/./data/newbooks/poster_01.jpg);"></div></a>
+<form id="listForm" action="/index.php/ko/newbooks/view_search#newbooks" method="post"
+  onsubmit="return validateSearchText('#search_keyword')">
+  <div id="newbooks" class="container py-25 py-md-50 py-lg-100 books list">
+    <div class="col-sm-12 py-1 m-0 banner">
+      <div class="d-block mb-3 text-left" style="border-bottom: 2px solid #48b685;">
+        <img src="/assets/imgs/books/logo_newbooks_list_ko.png" class="title-img" alt="logo_newbook" />
+      </div>
+      <div class="row col-sm-12 result_info_wraper">
+
+	<div class="row col-md-12 col-lg-5 pt-1 mb-3 justify-content-center justify-content-md-left result_info" style="text-align: left;">
+		<span>총:&nbsp;1 359건,&nbsp;</span>
+		<span>현재&nbsp;1 / 114&nbsp;페지,&nbsp;</span>
+		<span class="">표시행수:&nbsp;</span>
+		<input type="text" name="ps" value="12" class="records-page" maxlength="2" />
+	</div>
+	<div class="row col-md-12 col-lg-7" style="text-align: center;">
+		<div id="formsearch" style="text-align: center;"
+			class="input-group input-group-sm col-sm-12 col-md-5 mb-3 justify-content-center search_form ">
+			<input class="form-control" type="text" id="search_keyword" name="search"
+				onkeypress="return checkProhibitionalChars('#search_keyword', '#errmsg2');" value=""
+				placeholder="검색어를 입력하십시오." />
+			<div class="input-group-append">
+				<input class="input-group-text rounded-right" type="image" 
+					src="/assets/imgs/search.png" alt="search icon" />
+			</div>
+			<span id="errmsg1" style="display: none;">* 알림! - 검색하려는 문자를 입력하십시오.</span>
+	        <span id="errmsg2" style="display: none;">* 경고! - 금지된 문자를 포함하고 있습니다.</span>
+			<input type="hidden" name="csrftk" value="48604d35b40f3c2ae470b00cdfe9d81a" />
+		</div>
+
+			<div class="page-nav col-sm-12 col-md-7">
+				<ul class="pagination pagination-sm justify-content-center justify-content-md-end" style="">				<li class="page-item"><a class="page-link command-disabled font-weight-bold">≪ </a></li>				<li class="page-item"><a class="page-link command-disabled">❮ </a></li>				<li class="page-item"><a class="page-link command-disabled active">1</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);">2</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(3);">3</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(4);">4</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(5);">5</a></li>				<li class="page-item"><a class="page-link command pageBreak hidden" href="javascript: pageSkip(5);">...</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);"> ❯</a></li>				<li class="page-item"><a class="page-link command font-weight-bold" href="javascript: pageSkip(114);"> ≫</a></li>			</ul>
+		</div>
+		<input type="hidden" id="pn" name="pn" value="1" />
+	</div>
+</div>
+    </div>
+    <hr />
+    <div id="newbook_list_wraper" class="books-list newbooks">
+  <div class="row">    <div class="d-inline-block col-lg-6 py-3 align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+      <a class="iframe" href="/index.php/ko/newbooks/view_meta?no=1956">
+      <div class="row">
+        <!-- Bookcover Info -->
+        <div class="col-sm-3 col-md-2 col-lg-3 px-0 text-center book-cover ">          <img src="/./data/newbooks/20251111/00.jpg" class="img-thumbnail book-cover " 
+            alt="책표지-고등교육" />
+          <img src="/assets/imgs/books/newbook_mark_ko.png" class="newbook-mark d-none" alt="newbook_mark" />
+        </div>
+        <!-- Metadata Info -->
+        <div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+          <span class="title">고등교육</span><span class="volume">(10)</span><br />
+          <span class="publisher">교육신문사</span>,
+          <span class="pubyear">2025</span>          <p class="summary chongbong">
+            《물리학과목교수에서 학생들의 연구능력을 높인 방법》을 비롯하여 실리있고 우월한 교육방법과 교육과학자료들을 소개하였다.</p>        </div>
+      </div>
+      </a>
+    </div>    <div class="d-inline-block col-lg-6 py-3 align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+      <a class="iframe" href="/index.php/ko/newbooks/view_meta?no=1957">
+      <div class="row">
+        <!-- Bookcover Info -->
+        <div class="col-sm-3 col-md-2 col-lg-3 px-0 text-center book-cover ">          <img src="/./data/newbooks/20251111/01.jpg" class="img-thumbnail book-cover " 
+            alt="책표지-교원선전수첩" />
+          <img src="/assets/imgs/books/newbook_mark_ko.png" class="newbook-mark d-none" alt="newbook_mark" />
+        </div>
+        <!-- Metadata Info -->
+        <div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+          <span class="title">교원선전수첩</span><span class="volume">(3)</span><br />
+          <span class="publisher">교육신문사</span>,
+          <span class="pubyear">2025</span>          <p class="summary chongbong">
+            《학생들의 실천능력제고를 위한 정황문제제시방법》 등 학생교양과 교육 및 교수자료들을 소개하였다.</p>        </div>
+      </div>
+      </a>
+    </div>    <div class="d-inline-block col-lg-6 py-3 align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+      <a class="iframe" href="/index.php/ko/newbooks/view_meta?no=1958">
+      <div class="row">
+        <!-- Bookcover Info -->
+        <div class="col-sm-3 col-md-2 col-lg-3 px-0 text-center book-cover ">          <img src="/./data/newbooks/20251111/02.jpg" class="img-thumbnail book-cover " 
+            alt="책표지-기술혁신" />
+          <img src="/assets/imgs/books/newbook_mark_ko.png" class="newbook-mark d-none" alt="newbook_mark" />
+        </div>
+        <!-- Metadata Info -->
+        <div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+          <span class="title">기술혁신</span><span class="volume">(10)</span><br />
+          <span class="publisher">과학백과사전출판사</span>,
+          <span class="pubyear">2025</span>          <p class="summary chongbong">
+            《다곡면틀보습제작기구》 등 농업과 화학 및 경공업, 기계와 건설, 전자와 정보, 의학과 생물부문의 연구론문들을 소개하였다.</p>        </div>
+      </div>
+      </a>
+    </div>    <div class="d-inline-block col-lg-6 py-3 align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+      <a class="iframe" href="/index.php/ko/newbooks/view_meta?no=1959">
+      <div class="row">
+        <!-- Bookcover Info -->
+        <div class="col-sm-3 col-md-2 col-lg-3 px-0 text-center book-cover ">          <img src="/./data/newbooks/20251111/03.jpg" class="img-thumbnail book-cover " 
+            alt="책표지-기초의학" />
+          <img src="/assets/imgs/books/newbook_mark_ko.png" class="newbook-mark d-none" alt="newbook_mark" />
+        </div>
+        <!-- Metadata Info -->
+        <div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+          <span class="title">기초의학</span><span class="volume">(4)</span><br />
+          <span class="publisher">과학백과사전출판사</span>,
+          <span class="pubyear">2025</span>          <p class="summary chongbong">
+            《피토신이 창상치유에 미치는 영향에 대한 실험적연구》 등 기초의학분야의 연구론문과 자료들을 소개하였다.</p>        </div>
+      </div>
+      </a>
+    </div>    <div class="d-inline-block col-lg-6 py-3 align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+      <a class="iframe" href="/index.php/ko/newbooks/view_meta?no=1960">
+      <div class="row">
+        <!-- Bookcover Info -->
+        <div class="col-sm-3 col-md-2 col-lg-3 px-0 text-center book-cover ">          <img src="/./data/newbooks/20251111/04.jpg" class="img-thumbnail book-cover " 
+            alt="책표지-조선민주주의인민공화국 과학원통보" />
+          <img src="/assets/imgs/books/newbook_mark_ko.png" class="newbook-mark d-none" alt="newbook_mark" />
+        </div>
+        <!-- Metadata Info -->
+        <div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+          <span class="title">조선민주주의인민공화국 과학원통보</span><span class="volume">(5)</span><br />
+          <span class="publisher">과학백과사전출판사</span>,
+          <span class="pubyear">2025</span>          <p class="summary chongbong">
+            《일반화된 동적계에 대한 보로노이도식구성알고리듬》 등 여러 과학부문의 연구론문들을 소개하였다.</p>        </div>
+      </div>
+      </a>
+    </div>    <div class="d-inline-block col-lg-6 py-3 align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+      <a class="iframe" href="/index.php/ko/newbooks/view_meta?no=1961">
+      <div class="row">
+        <!-- Bookcover Info -->
+        <div class="col-sm-3 col-md-2 col-lg-3 px-0 text-center book-cover ">          <img src="/./data/newbooks/20251111/05.jpg" class="img-thumbnail book-cover " 
+            alt="책표지-력사과학" />
+          <img src="/assets/imgs/books/newbook_mark_ko.png" class="newbook-mark d-none" alt="newbook_mark" />
+        </div>
+        <!-- Metadata Info -->
+        <div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+          <span class="title">력사과학</span><span class="volume">(3)</span><br />
+          <span class="publisher">과학백과사전출판사</span>,
+          <span class="pubyear">2025</span>          <p class="summary chongbong">
+            《고조선에서 노예소유자적경리의 확대와 그 가혹성에 대하여 》등 력사과학분야의 연구론문과 연구자료들을 소개하였다.</p>        </div>
+      </div>
+      </a>
+    </div>    <div class="d-inline-block col-lg-6 py-3 align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+      <a class="iframe" href="/index.php/ko/newbooks/view_meta?no=1962">
+      <div class="row">
+        <!-- Bookcover Info -->
+        <div class="col-sm-3 col-md-2 col-lg-3 px-0 text-center book-cover ">          <img src="/./data/newbooks/20251111/06.jpg" class="img-thumbnail book-cover " 
+            alt="책표지-정보과학" />
+          <img src="/assets/imgs/books/newbook_mark_ko.png" class="newbook-mark d-none" alt="newbook_mark" />
+        </div>
+        <!-- Metadata Info -->
+        <div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+          <span class="title">정보과학</span><span class="volume">(5)</span><br />
+          <span class="publisher">과학백과사전출판사</span>,
+          <span class="pubyear">2025</span>          <p class="summary chongbong">
+            《임플스잡음환경에서 동작하는 적응려파기들의 성능분석》 등 정보과학분야의 연구론문과 자료, 소개자료들을 소개하였다.</p>        </div>
+      </div>
+      </a>
+    </div>    <div class="d-inline-block col-lg-6 py-3 align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+      <a class="iframe" href="/index.php/ko/newbooks/view_meta?no=1963">
+      <div class="row">
+        <!-- Bookcover Info -->
+        <div class="col-sm-3 col-md-2 col-lg-3 px-0 text-center book-cover ">          <img src="/./data/newbooks/20251111/07.jpg" class="img-thumbnail book-cover " 
+            alt="책표지-조선녀성" />
+          <img src="/assets/imgs/books/newbook_mark_ko.png" class="newbook-mark d-none" alt="newbook_mark" />
+        </div>
+        <!-- Metadata Info -->
+        <div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+          <span class="title">조선녀성</span><span class="volume">(10)</span><br />
+          <span class="publisher">근로단체출판사</span>,
+          <span class="pubyear">2025</span>          <p class="summary chongbong">
+            《청년들이 자랑하는 애국자어머니들》 등 녀맹돌격대원들에 대한 이야기와 통신원소식, 묶음편집들을 소개하였다.</p>        </div>
+      </div>
+      </a>
+    </div>    <div class="d-inline-block col-lg-6 py-3 align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+      <a class="iframe" href="/index.php/ko/newbooks/view_meta?no=1964">
+      <div class="row">
+        <!-- Bookcover Info -->
+        <div class="col-sm-3 col-md-2 col-lg-3 px-0 text-center book-cover ">          <img src="/./data/newbooks/20251111/08.jpg" class="img-thumbnail book-cover " 
+            alt="책표지-조선문학" />
+          <img src="/assets/imgs/books/newbook_mark_ko.png" class="newbook-mark d-none" alt="newbook_mark" />
+        </div>
+        <!-- Metadata Info -->
+        <div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+          <span class="title">조선문학</span><span class="volume">(10)</span><br />
+          <span class="publisher">문학예술출판사</span>,
+          <span class="pubyear">2025</span>          <p class="summary chongbong">
+            단편소설 《별》, 《보름달》를 비롯하여 여러가지 문학작품들을 소개하였다.</p>        </div>
+      </div>
+      </a>
+    </div>    <div class="d-inline-block col-lg-6 py-3 align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+      <a class="iframe" href="/index.php/ko/newbooks/view_meta?no=1965">
+      <div class="row">
+        <!-- Bookcover Info -->
+        <div class="col-sm-3 col-md-2 col-lg-3 px-0 text-center book-cover ">          <img src="/./data/newbooks/20251111/09.jpg" class="img-thumbnail book-cover " 
+            alt="책표지-조선약학" />
+          <img src="/assets/imgs/books/newbook_mark_ko.png" class="newbook-mark d-none" alt="newbook_mark" />
+        </div>
+        <!-- Metadata Info -->
+        <div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+          <span class="title">조선약학</span><span class="volume">(3)</span><br />
+          <span class="publisher">과학백과사전출판사</span>,
+          <span class="pubyear">2025</span>          <p class="summary chongbong">
+            《인삼당귀협심증알약의 제조에 대한 연구》 등 조선약학분야의 연구론문과 자료들을 소개하였다.</p>        </div>
+      </div>
+      </a>
+    </div>    <div class="d-inline-block col-lg-6 py-3 align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+      <a class="iframe" href="/index.php/ko/newbooks/view_meta?no=1966">
+      <div class="row">
+        <!-- Bookcover Info -->
+        <div class="col-sm-3 col-md-2 col-lg-3 px-0 text-center book-cover ">          <img src="/./data/newbooks/20251111/10.jpg" class="img-thumbnail book-cover " 
+            alt="책표지-천리마" />
+          <img src="/assets/imgs/books/newbook_mark_ko.png" class="newbook-mark d-none" alt="newbook_mark" />
+        </div>
+        <!-- Metadata Info -->
+        <div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+          <span class="title">천리마</span><span class="volume">(10)</span><br />
+          <span class="publisher">천리마사</span>,
+          <span class="pubyear">2025</span>          <p class="summary chongbong">
+            《환경관리와 우리 생활》 등 여러가지 사회정치지식들과 인문지식들을 소개하였다.</p>        </div>
+      </div>
+      </a>
+    </div>    <div class="d-inline-block col-lg-6 py-3 align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+      <a class="iframe" href="/index.php/ko/newbooks/view_meta?no=1967">
+      <div class="row">
+        <!-- Bookcover Info -->
+        <div class="col-sm-3 col-md-2 col-lg-3 px-0 text-center book-cover ">          <img src="/./data/newbooks/20251111/11.jpg" class="img-thumbnail book-cover " 
+            alt="책표지-청년문학" />
+          <img src="/assets/imgs/books/newbook_mark_ko.png" class="newbook-mark d-none" alt="newbook_mark" />
+        </div>
+        <!-- Metadata Info -->
+        <div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+          <span class="title">청년문학</span><span class="volume">(10)</span><br />
+          <span class="publisher">문학예술출판사</span>,
+          <span class="pubyear">2025</span>          <p class="summary chongbong">
+            단편소설《아버지가 계신다》, 《진정》, 《마음속의 모습》 등 소설과 시, 단상과 문학평론들을 소개하였다.</p>        </div>
+      </div>
+      </a>
+    </div>  </div>
+</div>    <hr />
+    <div class="col-sm-12 py-1 m-0 footer">
+      <div class="row col-12 my-3 result_info_wraper">
+
+	<div class="row col-sm-12 col-md-7 pt-1 mb-3 justify-content-center result_info">
+		<span>총:&nbsp;1 359건,&nbsp;</span>
+		<span>현재&nbsp;1 / 114&nbsp;페지,&nbsp;</span>
+		<span class="">표시행수:&nbsp;</span>
+		<input type="text" name="ps" value="12" class="records-page" maxlength="2" />
+	</div>
+
+	<div class="page-nav col-md-5">
+		<ul class="pagination pagination-sm justify-content-center justify-content-md-end" style="">			<li class="page-item"><a class="page-link command-disabled font-weight-bold">≪ </a></li>			<li class="page-item"><a class="page-link command-disabled">❮ </a></li>			<li class="page-item"><a class="page-link command-disabled active">1</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);">2</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(3);">3</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(4);">4</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(5);">5</a></li>			<li class="page-item"><a class="page-link command pageBreak hidden" href="javascript: pageSkip(5);">...</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);"> ❯</a></li>			<li class="page-item"><a class="page-link command font-weight-bold" href="javascript: pageSkip(114);"> ≫</a></li>		</ul>
+	</div>
+</div>
+    </div>
+  </div>
+</form>
+    </section>
+    <footer class="footer-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 contact-us">
+        <ul class="contact-us text-center">
+          <li id="footer-gpsh-full-name" class="mb-4 text-white-50">
+            <i class="fa fa-map-marker fa-16 text-white-50" aria-hidden="true"></i>
+            조선민주주의인민공화국 인민대학습당</li>
+          <li id="footer-phone" class="mb-4 text-white-50">
+            <i class="fa fa-phone fa-16 text-white-50" aria-hidden="true"></i> 
+            전화번호: 850-2-18111(3818472)</li>
+          <li id="footer-email" class="mb-4 text-white-50 align-middle">
+            <i class="fa fa-envelope fa-12 text-white-50" aria-hidden="true"></i>
+            전자우편: <img src="/assets/imgs/nsj-email.png" alt="nsj-email"/></li>
+        </ul>
+      </div>
+      <div class="d-none-sm col-md-3 gpsh-outline">
+      </div>
+      <div class="col-md-4 text-center service-time">
+        <div id="accordion">
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-user-clock" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#coursetime" 
+                title="강의시간">
+                강의시간 [9:00~19:30]
+              </a>
+            </div>
+            <div id="coursetime" class="collapse" data-parent="#accordion">
+              <p class="card-body chongbong">
+                강의, 강습은 일정에 따라 진행하며 휴관일과 토요일, 일요일, 국가적명절일에는 하지 않습니다.              </p>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-briefcase-clock" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#opentime" 
+                title="봉사시간">
+                봉사시간 [9:00~18:00]
+              </a>
+            </div>
+            <div id="opentime" class="collapse" data-parent="#accordion">
+              <p class="card-body chongbong">
+                휴관일과 국가적명절을 제외한 모든 날들에 봉사합니다.              </p>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-coffee" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#holidays" 
+                title="휴 관 일">
+                휴 관 일              </a>
+            </div>
+            <div id="holidays" class="collapse" data-parent="#accordion">              <p class="card-body text-center chongbong">주체114(2025). <span
+                  class="national-holidays" title="조선민주주의인민공화국 헌법절">12.27. </span><span
+                  class="closed-holidays" title="휴관일">12.11. </span><span
+                  class="closed-holidays" title="휴관일">12.25. </span>              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+    <!-- photoswipe background
+================================================== -->
+<section>
+<div aria-hidden="true" class="pswp" role="dialog" tabindex="-1">
+
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title=
+                "Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title=
+                "Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title=
+            "Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div> <!-- end photoSwipe background -->
+</section>    <script src="/assets/libs/popper/1.16.0/umd/popper.min.js"></script>
+<script src="/assets/libs/jquery/ui/1.11.3/jquery-ui.min.js"></script>
+<!-- 
+<script src="/assets/libs/jquery/ui/jquery-ui-i18n.min.js"></script>
+-->
+<script	src="/assets/libs/nivo-slider/jquery.nivo.slider.pack.js"></script>
+<script src="/assets/libs/owl-carousel/2.2.1/owl.carousel.min.js"></script>
+<script	src="/assets/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script src="/assets/libs/mobile/fastclick.js"></script>
+<script src="/assets/libs/mobile/swiper.min.js"></script>
+<script src="/assets/libs/colorlib/vendor/parallax100/parallax100.js"></script>
+<script>
+    $('.parallax100').parallax100();
+</script>
+<script src="/assets/libs/colorlib/vendor/photoswipe/js/modernizr.js"></script>
+<script src="/assets/libs/colorlib/vendor/photoswipe/js/pace.min.js"></script>
+
+<!-- script src="/assets/js/jquery.magnific-popup.min.js?"></script -->
+<script src="/assets/js/plugins_add.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/plugins.min.js?20240706.4.7.6"></script>
+<script src="/assets/libs/colorlib/vendor/isotope/imagesloaded.pkgd.min.js"></script>
+<script src="/assets/libs/colorlib/vendor/isotope/isotope.pkgd.min.js"></script>
+<script src="/assets/js/active.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/global.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/books.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/encyclopedia.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/rmenjoy.global.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/leader.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/counter.js?20240706.4.7.6"></script>
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="/assets/libs/assets/ie8-responsive-file-warning.js"></script><![endif]-->
+<script	src="/assets/libs/assets/ie-emulation-modes-warning.js"></script>
+<!-- IE10 agent hack for Surface/desktop Windows 8 bug -->
+<script	src="/assets/libs/assets/ie10-viewport-bug-workaround.js"></script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="/assets/libs/assets/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="/assets/libs/assets/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+  </body>
+</html>

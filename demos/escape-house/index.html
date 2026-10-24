@@ -1,0 +1,1484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Escape the House — offline</title>
+<style>
+:root{
+  --ink:#0e0b09; --wall:#cbb894; --wall2:#b9a480; --floor:#8d5f38; --floor2:#77492a;
+  --paper:#f6ecd7; --gold:#e8b64c; --teal:#2f7d76; --plum:#7a3b52; --red:#c0392b;
+  --ui:#141110; --ui2:#1e1a17; --line:#3a322c; --txt:#f2e9dc; --dim:#a99584;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:#0a0908;color:var(--txt);
+  font:16px/1.45 ui-rounded,"SF Pro Rounded",-apple-system,"Segoe UI",sans-serif;overflow:hidden}
+#app{position:fixed;inset:0;display:flex;flex-direction:column}
+header.top{display:flex;align-items:center;gap:12px;padding:8px 14px;background:var(--ui);
+  border-bottom:1px solid var(--line);flex:0 0 auto;z-index:5}
+header.top h1{font-size:15px;margin:0;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+header.top .sub{font-size:12px;color:var(--dim);letter-spacing:.06em}
+header.top .spacer{flex:1}
+.btn{background:var(--ui2);color:var(--txt);border:1px solid var(--line);border-radius:9px;
+  padding:7px 12px;font:inherit;font-size:13px;cursor:pointer;transition:.15s}
+.btn:hover{background:#2a2420;border-color:#584a3f}
+.btn.gold{background:var(--gold);color:#22180a;border-color:#c99a34;font-weight:700}
+.btn.gold:hover{background:#f2c463}
+#stage{position:relative;flex:1 1 auto;overflow:hidden;background:#000}
+#room{position:absolute;inset:0}
+.arrow{position:absolute;z-index:4;width:54px;height:88px;border:0;cursor:pointer;
+  background:rgba(20,17,16,.55);color:#fff;font-size:26px;border-radius:12px;
+  display:grid;place-items:center;transition:.15s;backdrop-filter:blur(3px)}
+.arrow:hover{background:rgba(232,182,76,.9);color:#20170a}
+.arrow.off{opacity:.18;cursor:not-allowed}
+.arrow[data-d="l"]{left:14px;top:50%;transform:translateY(-50%)}
+.arrow[data-d="r"]{right:14px;top:50%;transform:translateY(-50%)}
+.arrow[data-d="u"]{left:50%;top:14px;transform:translateX(-50%) rotate(90deg)}
+.arrow[data-d="d"]{left:50%;bottom:104px;transform:translateX(-50%) rotate(90deg)}
+footer.tray{flex:0 0 auto;background:var(--ui);border-top:1px solid var(--line);
+  display:flex;align-items:center;gap:10px;padding:14px 14px 26px;min-height:96px;z-index:6}
+#arrowLayer{position:absolute;inset:0;pointer-events:none;z-index:4}
+#arrowLayer .arrow{pointer-events:auto}
+#inv{display:flex;gap:10px;flex:1;overflow-x:auto;scrollbar-width:none}
+#inv::-webkit-scrollbar{display:none}
+.slot{width:64px;height:64px;margin-bottom:2px;border-radius:12px;border:1px solid var(--line);
+  background:#241f1b;display:grid;place-items:center;cursor:pointer;position:relative;flex:0 0 auto}
+.slot.sel{border-color:var(--gold);box-shadow:0 0 0 2px rgba(232,182,76,.35) inset}
+.slot span{position:absolute;bottom:-14px;left:0;right:0;text-align:center;font-size:9px;color:var(--dim);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:64px}
+.slot svg{width:40px;height:40px}
+#tip{position:absolute;left:50%;bottom:96px;transform:translateX(-50%);max-width:min(620px,88%);
+  background:rgba(12,10,9,.92);border:1px solid var(--line);border-left:3px solid var(--gold);
+  padding:10px 14px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .25s, transform .25s;z-index:7}
+#tip.on{opacity:1;transform:translateX(-50%) translateY(-6px)}
+.lock{position:absolute;inset:0;background:rgba(6,5,4,.82);display:grid;place-items:center;z-index:20}
+.card{background:var(--ui2);border:1px solid var(--line);border-radius:16px;padding:22px;
+  width:min(420px,92vw);box-shadow:0 24px 60px rgba(0,0,0,.7)}
+.card h2{margin:0 0 6px;font-size:17px;letter-spacing:.06em}
+.card p{margin:0 0 14px;color:var(--dim);font-size:13px}
+.dials{display:flex;gap:10px;justify-content:center;margin:6px 0 16px}
+.dial{width:64px;height:80px;background:#0c0a09;border:1px solid var(--line);border-radius:10px;
+  display:grid;place-items:center;font-size:34px;font-weight:700;color:var(--gold);cursor:ns-resize;user-select:none}
+.row{display:flex;gap:8px}
+.row .btn{flex:1}
+.hot{position:absolute;cursor:pointer;border-radius:8px;transition:.12s;z-index:3}
+.hot:hover{background:rgba(232,182,76,.16);box-shadow:0 0 0 1px rgba(232,182,76,.5) inset}
+.hot.pulse{animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 1px rgba(232,182,76,.25) inset}50%{box-shadow:0 0 0 2px rgba(232,182,76,.75) inset}}
+#hintBtn{position:relative}
+#hintBtn.pulse{animation:hp 1.8s infinite;border-color:var(--gold);color:var(--gold)}
+@keyframes hp{0%,100%{box-shadow:0 0 0 0 rgba(232,182,76,0)}50%{box-shadow:0 0 0 6px rgba(232,182,76,.18)}}
+#hintBox{position:absolute;left:14px;bottom:104px;width:min(360px,86%);z-index:25;
+  background:rgba(15,12,10,.96);border:1px solid var(--line);border-left:3px solid var(--gold);
+  border-radius:12px;padding:14px 16px;transform:translateY(14px);opacity:0;pointer-events:none;
+  transition:.22s;box-shadow:0 18px 40px rgba(0,0,0,.6)}
+#hintBox.on{opacity:1;transform:none;pointer-events:auto}
+#hintBox .hh{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+#hintBox .hstep{color:var(--dim);letter-spacing:.06em}
+#hintBox p{margin:0 0 12px;font-size:14px;line-height:1.5;color:var(--txt)}
+#hintBox .hwhere{font-size:12px;color:var(--dim);margin:0 0 10px}
+#hintBox .hwhere b{color:var(--gold)}
+#hintBox .hdots{display:flex;gap:4px;margin-bottom:10px}
+#hintBox .hdots i{width:100%;height:3px;border-radius:2px;background:#312a24}
+#hintBox .hdots i.on{background:var(--teal)}
+#hintBox .hdots i.cur{background:var(--gold)}
+.btn.primary{background:var(--gold);color:#22180a;border-color:#c99a34;font-weight:700}
+.btn.primary:hover{background:#f2c463}
+.menu{position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,#1b1613,#0a0908 70%);
+  display:grid;place-items:center;z-index:30;overflow:auto}
+.menu .inner{text-align:center;padding:32px}
+.menu h1{font-size:clamp(28px,6vw,52px);margin:0 0 4px;letter-spacing:.2em;text-transform:uppercase;
+  background:linear-gradient(180deg,#f6e7bf,#c99a34);-webkit-background-clip:text;background-clip:text;color:transparent}
+.menu p{color:var(--dim);margin:0 0 28px;letter-spacing:.08em;font-size:13px}
+.levels{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.lv{width:190px;padding:18px;border-radius:14px;background:var(--ui2);border:1px solid var(--line);
+  cursor:pointer;transition:.18s;text-align:left}
+.lv:hover{transform:translateY(-3px);border-color:var(--gold)}
+.lv b{display:block;font-size:15px;margin-bottom:4px}
+.lv small{color:var(--dim);font-size:11px;letter-spacing:.05em}
+.lv.locked{opacity:.45;cursor:not-allowed}
+.lv.locked:hover{transform:none;border-color:var(--line)}
+#room{transition:opacity .22s}
+.fade{opacity:0}
+@media(max-width:760px){
+  header.top h1{font-size:13px} .slot{width:54px;height:54px} .slot svg{width:32px;height:32px}
+  .arrow{width:44px;height:70px;font-size:20px} footer.tray{min-height:74px}
+  .arrow[data-d="d"]{bottom:84px}
+}
+@media(max-width:560px){
+  #room{top:50%;bottom:auto;height:auto;aspect-ratio:16/10;transform:translateY(-50%)}
+  header.top{gap:6px;padding:6px 8px}
+  header.top h1{font-size:11.5px;letter-spacing:.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:34vw}
+  header.top .sub{display:none}
+  header.top .btn{padding:9px 10px;font-size:12px;letter-spacing:0}
+  #hintBtn .hlbl{display:none}
+  #hintBox{left:8px;right:8px;bottom:8px;width:auto}
+  .arrow{width:38px;height:56px;font-size:17px}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="top">
+    <h1 id="ttl">Escape the House</h1>
+    <span class="sub" id="sub">Level 1</span>
+    <span class="spacer"></span>
+    <button class="btn" id="hintBtn" title="Stuck? (H)">💡<span class="hlbl"> Hint</span></button>
+    <button class="btn" id="btnMenu">Menu</button>
+    <button class="btn" id="btnReset">Reset</button>
+  </header>
+  <div id="stage">
+    <div id="room"></div>
+    <div id="arrowLayer"></div>
+    <div id="hintBox"></div>
+    <div id="tip"></div>
+    <div id="modalLayer"></div>
+  </div>
+  <footer class="tray"><div id="inv"></div></footer>
+</div>
+<script>
+/* Flat-vector prop library. Each prop is an SVG string sized to fit its own viewBox.
+   Convention: stroke #2b2118, width 1.4, rounded joins — cosy illustrated look. */
+const S = (vb, body, extra = "") =>
+  `<svg viewBox="${vb}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
+     style="width:100%;height:100%;display:block" ${extra}>
+     <g stroke="#2b2118" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round">${body}</g></svg>`;
+
+const P = {};
+
+/* ---------- kitchen ---------- */
+P.fridge = S("0 0 100 200", `
+  <rect x="10" y="6" width="80" height="188" rx="8" fill="#e9e3d6"/>
+  <rect x="10" y="6" width="80" height="66" rx="8" fill="#ded6c6"/>
+  <line x1="10" y1="72" x2="90" y2="72"/>
+  <rect x="20" y="24" width="7" height="26" rx="3.5" fill="#8d8677"/>
+  <rect x="20" y="86" width="7" height="40" rx="3.5" fill="#8d8677"/>
+  <rect x="34" y="96" width="40" height="34" rx="4" fill="#f7f2e7"/>
+  <circle cx="60" cy="110" r="7" fill="#b8c9c2"/>
+  <path d="M40 42h30" stroke="#b9b0a0"/>`);
+
+P.counter = S("0 0 200 120", `
+  <rect x="6" y="10" width="188" height="14" rx="5" fill="#8a5a34"/>
+  <rect x="6" y="24" width="188" height="86" rx="5" fill="#c9a06b"/>
+  <rect x="18" y="34" width="76" height="66" rx="4" fill="#b98e5c"/>
+  <rect x="106" y="34" width="76" height="66" rx="4" fill="#b98e5c"/>
+  <circle cx="56" cy="66" r="4" fill="#6d4a2c"/><circle cx="146" cy="66" r="4" fill="#6d4a2c"/>`);
+
+P.sink = S("0 0 120 90", `
+  <rect x="8" y="8" width="104" height="18" rx="6" fill="#b9c3c0"/>
+  <rect x="20" y="26" width="80" height="44" rx="8" fill="#9aa6a3"/>
+  <rect x="28" y="34" width="64" height="28" rx="5" fill="#7d8a87"/>
+  <rect x="54" y="4" width="8" height="22" rx="3" fill="#8f9a97"/>
+  <rect x="58" y="2" width="26" height="7" rx="3.5" fill="#8f9a97"/>
+  <circle cx="14" cy="60" r="9" fill="#c0392b"/><circle cx="104" cy="60" r="9" fill="#2f7d76"/>`);
+
+P.clock = S("0 0 100 100", `
+  <circle cx="50" cy="50" r="42" fill="#f2e8d2"/><circle cx="50" cy="50" r="42" fill="none" stroke-width="5" stroke="#7a5326"/>
+  <circle cx="50" cy="50" r="34" fill="none" stroke="#c9b48a" stroke-width="1.2"/>
+  <g stroke="#3a2c1d" stroke-width="3.4"><line x1="50" y1="50" x2="50" y2="27"/><line x1="50" y1="50" x2="68" y2="58"/></g>
+  <circle cx="50" cy="50" r="4" fill="#3a2c1d"/>`);
+
+P.drawer = S("0 0 120 80", `
+  <rect x="6" y="6" width="108" height="68" rx="5" fill="#c9a06b"/>
+  <rect x="14" y="14" width="92" height="24" rx="4" fill="#b98e5c"/>
+  <rect x="14" y="44" width="92" height="22" rx="4" fill="#b98e5c"/>
+  <rect x="46" y="22" width="28" height="6" rx="3" fill="#6d4a2c"/>
+  <rect x="46" y="52" width="28" height="6" rx="3" fill="#6d4a2c"/>`);
+
+P.tape = S("0 0 120 40", `
+  <path d="M4 8h112v24H4z" fill="#e8c85c"/><path d="M4 8l6 6-6 6z" fill="#d8b544"/>
+  <text x="60" y="26" font-size="15" text-anchor="middle" fill="#3a2c1d" stroke="none"
+    font-family="ui-monospace,monospace" letter-spacing="2">4 5 19 13 15 19</text>`);
+
+/* ---------- living ---------- */
+P.couch = S("0 0 200 110", `
+  <rect x="8" y="34" width="184" height="52" rx="12" fill="#7a3b52"/>
+  <rect x="8" y="20" width="184" height="26" rx="12" fill="#8d4761"/>
+  <rect x="20" y="44" width="72" height="34" rx="8" fill="#94506b"/>
+  <rect x="108" y="44" width="72" height="34" rx="8" fill="#94506b"/>
+  <rect x="14" y="86" width="10" height="16" rx="4" fill="#5a2a3d"/>
+  <rect x="176" y="86" width="10" height="16" rx="4" fill="#5a2a3d"/>`);
+
+P.balloon = S("0 0 120 300", `
+  <path d="M60 10c22 0 36 18 36 40 0 26-16 46-36 56-20-10-36-30-36-56 0-22 14-40 36-40z" fill="#c0392b"/>
+  <path d="M60 10c-8 16-12 40-10 96" stroke="#e46a5a" stroke-width="2" fill="none"/>
+  <path d="M52 106h16l-8 10z" fill="#8e2a1f"/>
+  <path d="M60 116v168" stroke="#e6dcc8" stroke-width="2.2" fill="none" stroke-dasharray="6 5"/>`);
+
+P.painting = S("0 0 140 100", `
+  <rect x="4" y="4" width="132" height="92" rx="3" fill="#8a6a3a"/>
+  <rect x="12" y="12" width="116" height="76" fill="#e9dcc0"/>
+  <circle cx="46" cy="40" r="12" fill="#e8b64c" stroke="none"/>
+  <path d="M20 78l30-26 22 18 18-14 30 22z" fill="#6f8f7a" stroke="none"/>
+  <path d="M20 78l30-26 22 18 18-14 30 22" fill="none"/>`);
+
+P.trapdoor = S("0 0 200 80", `
+  <rect x="6" y="6" width="188" height="68" rx="4" fill="#8d5f38"/>
+  <rect x="14" y="14" width="172" height="52" rx="3" fill="#7a4f2e"/>
+  <g stroke="#5d3a20" stroke-width="2"><line x1="60" y1="14" x2="60" y2="66"/><line x1="100" y1="14" x2="100" y2="66"/><line x1="140" y1="14" x2="140" y2="66"/></g>
+  <circle cx="100" cy="40" r="8" fill="#c9a24a"/>`);
+
+P.rug = S("0 0 300 120", `
+  <ellipse cx="150" cy="60" rx="146" ry="54" fill="#6b4b6f" stroke="#4a3350"/>
+  <ellipse cx="150" cy="60" rx="112" ry="38" fill="none" stroke="#8d6a91" stroke-dasharray="8 7"/>`);
+
+/* ---------- library ---------- */
+P.bookcase = S("0 0 200 240", `
+  <rect x="6" y="6" width="188" height="228" rx="4" fill="#7a4f2e"/>
+  <rect x="16" y="16" width="168" height="208" fill="#3f2a19"/>
+  ${[0,1,2,3].map(i=>`<g>${[0,1,2,3,4,5,6,7].map(j=>{
+    const h=34+((i*7+j*3)%14), w=14+((j*5)%5);
+    const c=["#c0392b","#2f7d76","#e8b64c","#7a3b52","#5c7a4a","#b06a2c"][(i+j)%6];
+    return `<rect x="${24+j*20}" y="${214-i*50-h}" width="${w}" height="${h}" rx="2" fill="${c}"/>`;
+  }).join("")}</g>`).join("")}`);
+
+P.dartboard = S("0 0 200 200", `
+  <circle cx="100" cy="100" r="94" fill="#3f2a19"/>
+  <circle cx="100" cy="100" r="86" fill="#e9dcc0"/>
+  <circle cx="100" cy="100" r="62" fill="#2f7d76"/>
+  <circle cx="100" cy="100" r="40" fill="#c0392b"/>
+  <circle cx="100" cy="100" r="16" fill="#e8b64c"/>
+  <circle cx="100" cy="100" r="4" fill="#2b2118"/>`);
+
+P.cabinet = S("0 0 200 220", `
+  <rect x="6" y="6" width="188" height="208" rx="6" fill="#6b4a2c"/>
+  <rect x="18" y="18" width="164" height="184" rx="4" fill="#4a3320"/>
+  <rect x="26" y="26" width="70" height="168" rx="3" fill="#7d5735"/>
+  <rect x="104" y="26" width="70" height="168" rx="3" fill="#7d5735"/>
+  <circle cx="90" cy="110" r="4" fill="#d9c08a"/><circle cx="110" cy="110" r="4" fill="#d9c08a"/>`);
+
+P.switchPlate = S("0 0 60 100", `
+  <rect x="8" y="6" width="44" height="88" rx="8" fill="#e7dfcc"/>
+  <rect x="20" y="26" width="20" height="34" rx="6" fill="#9a9280"/>
+  <circle cx="30" cy="72" r="6" fill="#c9a24a"/>`);
+
+P.stairs = S("0 0 200 200", `
+  <g fill="#a87b4c">
+    <rect x="10" y="160" width="180" height="30"/><rect x="30" y="130" width="160" height="30"/>
+    <rect x="50" y="100" width="140" height="30"/><rect x="70" y="70" width="120" height="30"/>
+    <rect x="90" y="40" width="100" height="30"/>
+  </g>
+  <path d="M100 40V8" stroke="#2b2118" stroke-width="2"/>`);
+
+/* ---------- bedroom ---------- */
+P.bed = S("0 0 220 140", `
+  <rect x="6" y="26" width="208" height="22" rx="6" fill="#6b4a2c"/>
+  <rect x="10" y="46" width="200" height="62" rx="8" fill="#d9cdb6"/>
+  <rect x="10" y="46" width="200" height="34" rx="8" fill="#b7c9c4"/>
+  <rect x="90" y="40" width="60" height="30" rx="8" fill="#f2ece0"/>
+  <rect x="12" y="104" width="10" height="26" rx="4" fill="#4a3320"/>
+  <rect x="198" y="104" width="10" height="26" rx="4" fill="#4a3320"/>`);
+
+P.nightstand = S("0 0 90 90", `
+  <rect x="6" y="14" width="78" height="70" rx="4" fill="#8a5a34"/>
+  <rect x="14" y="22" width="62" height="24" rx="3" fill="#a06c40"/>
+  <rect x="14" y="52" width="62" height="24" rx="3" fill="#a06c40"/>
+  <rect x="38" y="31" width="14" height="5" rx="2.5" fill="#5d3a20"/>
+  <rect x="38" y="61" width="14" height="5" rx="2.5" fill="#5d3a20"/>`);
+
+P.lamp = S("0 0 100 140", `
+  <path d="M22 20h56l14 34H8z" fill="#e8b64c"/>
+  <rect x="46" y="54" width="8" height="56" rx="3" fill="#8a7452"/>
+  <ellipse cx="50" cy="118" rx="26" ry="7" fill="#8a7452"/>`);
+
+P.glove = S("0 0 100 100", `
+  <path d="M34 92V48c0-6 8-6 8 0v-8c0-6 8-6 8 0v-6c0-6 8-6 8 0v10c0-6 8-6 8 0v30l8-10c4-5 10 0 6 6l-12 20c-4 6-10 8-16 8H34z" fill="#d9b06a"/>
+  <rect x="26" y="86" width="52" height="10" rx="4" fill="#b8894a"/>`);
+
+/* ---------- office ---------- */
+P.desk = S("0 0 220 120", `
+  <rect x="6" y="10" width="208" height="14" rx="4" fill="#8a5a34"/>
+  <rect x="18" y="24" width="14" height="86" rx="4" fill="#6b4426"/>
+  <rect x="188" y="24" width="14" height="86" rx="4" fill="#6b4426"/>
+  <rect x="60" y="24" width="100" height="40" rx="3" fill="#7d5735"/>`);
+
+P.computer = S("0 0 160 120", `
+  <rect x="8" y="6" width="144" height="88" rx="6" fill="#d8d2c4"/>
+  <rect x="16" y="14" width="128" height="72" rx="3" fill="#1d2b2a"/>
+  <g stroke="#5fd0b6" stroke-width="2" fill="none">
+    <path d="M30 68l12-14 10 10 14-22 12 12 10-8 14 14"/>
+  </g>
+  <rect x="66" y="94" width="28" height="12" fill="#b9b2a2"/>
+  <rect x="50" y="106" width="60" height="8" rx="3" fill="#b9b2a2"/>`);
+
+P.glassCase = S("0 0 140 140", `
+  <rect x="10" y="20" width="120" height="104" rx="6" fill="#bcd6d8" opacity=".55"/>
+  <rect x="10" y="20" width="120" height="104" rx="6" fill="none"/>
+  <path d="M22 30l24 82" stroke="#e8f4f5" stroke-width="3" opacity=".8"/>
+  <rect x="6" y="120" width="128" height="14" rx="4" fill="#7d5735"/>
+  <rect x="60" y="66" width="26" height="8" rx="4" fill="#c9a24a"/>`);
+
+P.cactus = S("0 0 120 160", `
+  <rect x="34" y="112" width="52" height="42" rx="6" fill="#b06a2c"/>
+  <path d="M60 112V44" stroke="#3f7a4a" stroke-width="18" stroke-linecap="round" fill="none"/>
+  <path d="M60 84c-14 0-20-8-20-20" stroke="#3f7a4a" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M60 72c14 0 20-8 20-20" stroke="#3f7a4a" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <circle cx="60" cy="40" r="6" fill="#e8b64c"/>`);
+
+
+/* ---------- v2 props (polish) ---------- */
+P.bed2 = S("0 0 240 150", `
+  <rect x="6" y="18" width="228" height="26" rx="6" fill="#6b4a2c"/>
+  <rect x="10" y="42" width="220" height="20" rx="6" fill="#efe7d6"/>
+  <rect x="10" y="60" width="220" height="52" rx="10" fill="#b9a9b2"/>
+  <rect x="10" y="60" width="220" height="26" rx="10" fill="#cbbcc4"/>
+  <rect x="26" y="30" width="60" height="26" rx="9" fill="#f7f2e7"/>
+  <rect x="94" y="32" width="52" height="24" rx="9" fill="#efe7d6"/>
+  <rect x="14" y="110" width="12" height="30" rx="5" fill="#4a3320"/>
+  <rect x="214" y="110" width="12" height="30" rx="5" fill="#4a3320"/>`);
+
+P.keypad = S("0 0 90 130", `
+  <rect x="8" y="6" width="74" height="118" rx="8" fill="#4a4a44"/>
+  <rect x="16" y="14" width="58" height="20" rx="4" fill="#9fd8b6"/>
+  <g fill="#d9d3c2">${[0,1,2,3].map(r=>[0,1,2].map(c=>
+    `<circle cx="${28+c*17}" cy="${48+r*18}" r="5.5"/>`).join("")).join("")}</g>`);
+
+P.uvposter = S("0 0 120 160", `
+  <rect x="6" y="6" width="108" height="148" fill="#efe6cf"/>
+  <rect x="6" y="6" width="108" height="148" fill="none" stroke-width="3" stroke="#c9b48a"/>
+  <path d="M28 40h64M28 58h44M28 76h58M28 94h36" stroke="#c9b48a" stroke-width="4"/>
+  <circle cx="86" cy="120" r="16" fill="none" stroke="#a89bff" stroke-width="4" stroke-dasharray="4 4"/>`);
+
+P.labposter = S("0 0 130 170", `
+  <rect x="4" y="4" width="122" height="162" fill="#f4f0e2"/>
+  <rect x="4" y="4" width="122" height="162" fill="none" stroke-width="3" stroke="#9aa6a3"/>
+  <g fill="#7a8c88" stroke="none">${[0,1,2].map(r=>[0,1,2,3].map(c=>
+    `<rect x="${16+c*26}" y="${22+r*46}" width="20" height="38" rx="2"/>`).join("")).join("")}</g>
+  <g fill="#c0392b" stroke="none"><rect x="16" y="22" width="20" height="38" rx="2"/><rect x="94" y="114" width="20" height="38" rx="2"/></g>`);
+
+/* ---------- misc ---------- */
+P.door = S("0 0 140 220", `
+  <rect x="6" y="6" width="128" height="208" rx="4" fill="#6b4426"/>
+  <rect x="18" y="18" width="104" height="184" rx="3" fill="#8a5a34"/>
+  <circle cx="104" cy="112" r="6" fill="#e8b64c"/>
+  <rect x="34" y="40" width="72" height="60" rx="3" fill="#7d5735"/>`);
+
+P.poster = S("0 0 120 160", `
+  <rect x="6" y="6" width="108" height="148" fill="#f2e8d2"/>
+  <rect x="6" y="6" width="108" height="148" fill="none" stroke-width="3" stroke="#c9b48a"/>
+  <ellipse cx="60" cy="58" rx="30" ry="24" fill="none" stroke="#7a3b52" stroke-width="5"/>
+  <path d="M40 128l20-30 20 30z" fill="none" stroke="#7a3b52" stroke-width="5"/>`);
+
+P.window = S("0 0 140 140", `
+  <rect x="6" y="6" width="128" height="128" rx="4" fill="#7d5735"/>
+  <rect x="14" y="14" width="112" height="112" fill="#8fb4cf"/>
+  <path d="M70 14v112M14 70h112" stroke="#7d5735" stroke-width="6"/>
+  <circle cx="44" cy="40" r="12" fill="#f4e7bd"/>`);
+
+P.plant = S("0 0 100 120", `
+  <path d="M50 100V54" stroke="#3f7a4a" stroke-width="6"/>
+  <path d="M50 70c-16-4-22-18-18-30 14 2 20 12 18 30zM50 62c14-6 18-18 14-28-12 4-16 14-14 28z" fill="#4a8a56"/>
+  <path d="M34 100h32l-4 18H38z" fill="#b06a2c"/>`);
+
+P.shelf = S("0 0 200 120", `
+  <rect x="6" y="70" width="188" height="10" rx="3" fill="#8a5a34"/>
+  <rect x="20" y="30" width="18" height="40" fill="#c0392b"/>
+  <rect x="42" y="38" width="16" height="32" fill="#2f7d76"/>
+  <rect x="62" y="26" width="20" height="44" fill="#e8b64c"/>
+  <circle cx="130" cy="52" r="18" fill="#bcd6d8"/>
+  <path d="M120 66l10-24 10 24z" fill="#5c7a4a"/>`);
+
+</script>
+<script>
+/* Core engine: state, room rendering, inventory, navigation, modals, puzzles. */
+const LEVELS = {};
+const addLevel = (n, def) => { LEVELS[n] = def; };
+
+const ITEMS = {};           // all item defs across levels: id -> {name, svg}
+const G = { level: 1, room: "", inv: [], sel: null, f: {}, uv: false };
+
+const $ = s => document.querySelector(s);
+const el = (t, cls, html) => { const n = document.createElement(t); if (cls) n.className = cls;
+  if (html != null) n.innerHTML = html; return n; };
+
+let tipTimer = 0;
+function tip(text, ms = 3600) {
+  const t = $("#tip"); t.textContent = text; t.classList.add("on");
+  clearTimeout(tipTimer); tipTimer = setTimeout(() => t.classList.remove("on"), ms);
+}
+
+function save() {
+  const all = {};
+  for (const k in LEVELS) all[k] = LEVELS[k].save ? LEVELS[k].save() : null;
+  try { localStorage.setItem("escapehouse.v1", JSON.stringify({ all, level: G.level })); } catch (e) {}
+}
+function loadAll() {
+  try { return JSON.parse(localStorage.getItem("escapehouse.v1") || "{}"); } catch (e) { return {}; }
+}
+
+/* ---------------- room drawing ---------------- */
+function drawRoom() {
+  const L = LEVELS[G.level], R = L.rooms[G.room];
+  const room = $("#room");
+  room.innerHTML = "";
+  const st = $("#stage"); if (st && R.wall) st.style.background = R.wall;
+  room.style.background = `linear-gradient(180deg, ${R.wall} 0%, ${R.wall2 || R.wall} 62%, ${R.floor} 62%, ${R.floor2 || R.floor} 100%)`;
+  // floorboard lines
+  const fl = el("div");
+  fl.style.cssText = "position:absolute;left:0;right:0;bottom:0;height:38%;opacity:.18;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 38px,rgba(0,0,0,.5) 38px 40px)";
+  room.appendChild(fl);
+
+  (R.props || []).forEach(p => {
+    const d = el("div", "", String(p.svg));
+    d.style.cssText = `position:absolute;left:${p.x}%;top:${p.y}%;width:${p.w}%;height:${p.h}%;pointer-events:none;filter:drop-shadow(0 10px 14px rgba(0,0,0,.28))`;
+    room.appendChild(d);
+  });
+
+  (R.hots || []).forEach(h => {
+    const d = el("div", "hot" + (h.pulse ? " pulse" : ""));
+    d.style.cssText = `left:${h.x}%;top:${h.y}%;width:${h.w}%;height:${h.h}%`;
+    d.dataset.id = h.id;
+    if (h.uv) d.dataset.uv = "1";
+    d.onclick = ev => { ev.stopPropagation(); if (G.uv && h.uv) { tip(h.uv); return; } h.click(G, h); };
+    d.onmouseenter = () => { if (G.uv && h.uv) tip(h.uv, 8000); };
+    room.appendChild(d);
+  });
+  drawArrows();
+  drawInv();
+}
+
+function neighbor(dir) {
+  const L = LEVELS[G.level], R = L.rooms[G.room];
+  const [c, r] = R.grid;
+  const t = { l: [c - 1, r], r: [c + 1, r], u: [c, r - 1], d: [c, r + 1] }[dir];
+  for (const k in L.rooms) if (L.rooms[k].grid[0] === t[0] && L.rooms[k].grid[1] === t[1]) return k;
+  return null;
+}
+function drawArrows() {
+  const layer = $("#arrowLayer"); layer.innerHTML = "";
+  [["l", "‹"], ["r", "›"], ["u", "‹"], ["d", "‹"]].forEach(([d, ch]) => {
+    const n = neighbor(d);
+    const b = el("button", "arrow" + (n ? "" : " off"), ch);
+    b.dataset.d = d;
+    b.onclick = () => { if (!n) return; if (!G.f.unlocked.includes(n)) { tip("Locked."); return; } go(n); };
+    layer.appendChild(b);
+  });
+}
+function go(roomKey) {
+  const room = $("#room"); room.classList.add("fade");
+  setTimeout(() => { G.room = roomKey; LEVELS[G.level].enter && LEVELS[G.level].enter(G, roomKey);
+    drawRoom(); room.classList.remove("fade"); save(); }, 160);
+}
+const unlockRoom = k => { if (!G.f.unlocked.includes(k)) G.f.unlocked.push(k); drawArrows(); };
+
+/* ---------------- inventory ---------------- */
+function drawInv() {
+  const wrap = $("#inv"); wrap.innerHTML = "";
+  G.inv.forEach(id => {
+    const it = ITEMS[id]; if (!it) return;
+    const s = el("div", "slot" + (G.sel === id ? " sel" : ""), it.svg + `<span>${it.name}</span>`);
+    s.title = it.name;
+    s.onclick = () => {
+      if (G.sel === id) { G.sel = null; if (it.uv) G.uv = false; }
+      else { G.sel = id; G.uv = !!it.uv; if (G.uv) tip("UV light on — hover the walls for hidden marks."); }
+      drawInv(); save();
+    };
+    wrap.appendChild(s);
+  });
+  if (!G.inv.length) wrap.appendChild(el("div", "", `<span style="color:#a99584;font-size:13px">Inventory empty</span>`));
+}
+function has(id) { return G.inv.includes(id); }
+function give(id) {
+  if (!has(id)) { G.inv.push(id); ITEMS[id] && tip("Picked up: " + ITEMS[id].name); }
+  drawInv(); save();
+}
+function take(id) { G.inv = G.inv.filter(x => x !== id); if (G.sel === id) { G.sel = null; G.uv = false; } drawInv(); save(); }
+
+/* ---------------- modal ---------------- */
+const hb = () => `<button class="btn" onclick="showHint()" title="Stuck? (H)">💡 Stuck?</button>`;
+function modal(html, opts = {}) {
+  const layer = $("#modalLayer");
+  const wrap = el("div", "lock");
+  const card = el("div", "card", html);
+  card.onclick = e => e.stopPropagation();
+  wrap.appendChild(card);
+  if (!opts.sticky) wrap.onclick = () => closeModal();
+  layer.appendChild(wrap);
+  return { wrap, card, close: closeModal };
+}
+function closeModal() { $("#modalLayer").innerHTML = ""; activeHint = null; }
+
+/* number lock: len digits, code string */
+function codeLock({ title, hint, len, code, onSolve, hintId: hh }) {
+  activeHint = hh || null;
+  let buf = "";
+  const { card, wrap } = modal(`
+    <h2>${title}</h2><p>${hint || ""}</p>
+    <div id="codeDisp" style="font:700 34px/1 ui-monospace,monospace;letter-spacing:.32em;text-align:center;
+      color:#e8b64c;background:#0c0a09;border:1px solid #3a322c;border-radius:10px;padding:14px;margin-bottom:14px">${"_".repeat(len)}</div>
+    <div id="pad" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"></div>
+    <div class="row" style="margin-top:12px"><button class="btn" id="ck">Clear</button>${hb()}<button class="btn" id="cx">Close</button></div>`);
+  const disp = card.querySelector("#codeDisp"), pad = card.querySelector("#pad");
+  const paint = () => disp.textContent = buf.padEnd(len, "_").split("").join(" ");
+  for (let i = 1; i <= 9; i++) pad.appendChild(padBtn(String(i)));
+  pad.appendChild(el("div"));
+  const zb = padBtn("0"); zb.style.gridColumn = "2"; pad.appendChild(zb);
+  pad.appendChild(el("div"));
+  function padBtn(d) {
+    const b = el("button", "btn", d);
+    b.style.cssText = "font-size:22px;padding:12px 0";
+    b.onclick = () => {
+      if (buf.length < len) { buf += d; paint(); }
+      if (buf.length === len) setTimeout(() => {
+        if (buf === code) { closeModal(); onSolve(); }
+        else { buf = ""; paint(); disp.style.color = "#c0392b"; setTimeout(() => disp.style.color = "#e8b64c", 500); }
+      }, 220);
+    };
+    return b;
+  }
+  card.querySelector("#ck").onclick = () => { buf = ""; paint(); };
+  card.querySelector("#cx").onclick = closeModal;
+  paint();
+}
+
+/* clock puzzle: set hands via click-drag-free controls */
+function clockPuzzle({ onSolve, hintId: hh }) { activeHint = hh || null;
+  let h = 12, m = 0;
+  const { card } = modal(`<h2>The wall clock</h2><p>Two hands, one time. Something clicks when it is right.</p>
+    <div style="display:grid;place-items:center;margin:6px 0 10px"><div id="cface"></div></div>
+    <div class="row"><button class="btn" id="hIncr">Hour +</button><button class="btn" id="mIncr">Min +5</button></div>
+    <div class="row" style="margin-top:8px">${hb()}<button class="btn" id="cx">Close</button></div>`);
+  const face = card.querySelector("#cface");
+  function paint() {
+    const ha = ((h % 12) + m / 60) * 30, ma = m * 6;
+    face.innerHTML = `<svg width="190" height="190" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="92" fill="#f2e8d2" stroke="#7a5326" stroke-width="6"/>
+      ${[...Array(12)].map((_, i) => { const a = i * 30 * Math.PI / 180;
+        return `<circle cx="${100 + 74 * Math.sin(a)}" cy="${100 - 74 * Math.cos(a)}" r="4" fill="#7a5326"/>`; }).join("")}
+      <line x1="100" y1="100" x2="${100 + 44 * Math.sin(ha * Math.PI / 180)}" y2="${100 - 44 * Math.cos(ha * Math.PI / 180)}" stroke="#3a2c1d" stroke-width="7" stroke-linecap="round"/>
+      <line x1="100" y1="100" x2="${100 + 68 * Math.sin(ma * Math.PI / 180)}" y2="${100 - 68 * Math.cos(ma * Math.PI / 180)}" stroke="#3a2c1d" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="100" cy="100" r="6" fill="#3a2c1d"/></svg>`;
+  }
+  card.querySelector("#hIncr").onclick = () => { h = h % 12 + 1; paint(); check(); };
+  card.querySelector("#mIncr").onclick = () => { m = (m + 5) % 60; paint(); check(); };
+  card.querySelector("#cx").onclick = closeModal;
+  function check() { if (h === 7 && m === 30) { setTimeout(() => { closeModal(); onSolve(); }, 350); } }
+  paint();
+}
+
+
+/* letter lock: n dials, each A..Z, advances on click */
+function letterLock({ title, hint, code, onSolve }) {
+  const n = code.length, buf = code.split("").map(() => 0);
+  const { card } = modal(`<h2>${title}</h2><p>${hint || ""}</p>
+    <div id="tiles" style="display:flex;gap:8px;justify-content:center;margin:8px 0 16px"></div>
+    <div class="row">${hb()}<button class="btn" id="lx">Close</button></div>`);
+  const host = card.querySelector("#tiles");
+  function paint() {
+    host.innerHTML = "";
+    buf.forEach((v, i) => {
+      const t = el("div", "dial", String.fromCharCode(65 + v));
+      t.style.cssText = "width:52px;height:68px;font-size:26px;cursor:pointer";
+      t.onclick = () => { buf[i] = (buf[i] + 1) % 26; paint(); check(); };
+      host.appendChild(t);
+    });
+  }
+  function check() {
+    const s = buf.map(v => String.fromCharCode(65 + v)).join("");
+    if (s === code) setTimeout(() => { closeModal(); onSolve(); }, 280);
+  }
+  card.querySelector("#lx").onclick = closeModal;
+  paint();
+}
+
+/* dartboard slice puzzle — 10 wedges, click to advance; win when 5 sit at 2/6/9 */
+function slicePuzzle({ onSolve, hintId: hh }) { activeHint = hh || null;
+  const vals = [1, 3, 5, 7, 9];
+  const { card, wrap } = modal(`<h2>The dartboard</h2>
+    <p>Rotate the wedges. Five of them must line up on the three marked notches.</p>
+    <div style="display:grid;place-items:center"><div id="wheel"></div></div>
+    <div class="row" style="margin-top:12px">${hb()}<button class="btn" id="cx">Close</button></div>`);
+  const host = card.querySelector("#wheel");
+  function paint() {
+    const R = 120, cx = 130, cy = 130;
+    let paths = "";
+    vals.forEach((v, i) => {
+      const a0 = (v - 1) * 36 * Math.PI / 180 - Math.PI / 2 - 18 * Math.PI / 180;
+      const a1 = a0 + 36 * Math.PI / 180;
+      const col = ["#2f7d76", "#c0392b", "#e8b64c", "#7a3b52", "#5c7a4a"][i];
+      paths += `<path d="M${cx} ${cy} L${cx + R * Math.cos(a0)} ${cy + R * Math.sin(a0)}
+        A${R} ${R} 0 0 1 ${cx + R * Math.cos(a1)} ${cy + R * Math.sin(a1)} Z"
+        fill="${col}" stroke="#2b2118" stroke-width="2" opacity=".92" data-i="${i}" style="cursor:pointer"/>`;
+    });
+    host.innerHTML = `<svg width="260" height="260" viewBox="0 0 260 260">
+      <circle cx="130" cy="130" r="122" fill="#3f2a19"/>
+      ${[2, 6, 9].map(v => { const a = (v - 1) * 36 * Math.PI / 180 - Math.PI / 2;
+        return `<circle cx="${130 + 112 * Math.cos(a)}" cy="${130 + 112 * Math.sin(a)}" r="8" fill="none" stroke="#f6ecd7" stroke-width="3"/>`; }).join("")}
+      ${paths}<circle cx="130" cy="130" r="12" fill="#f6ecd7" stroke="#2b2118" stroke-width="2"/></svg>`;
+    host.querySelectorAll("path").forEach(p => p.onclick = () => {
+      const i = +p.dataset.i; vals[i] = vals[i] % 10 + 1; paint(); check();
+    });
+  }
+  function check() {
+    const inSet = vals.filter(v => [2, 6, 9].includes(v));
+    const ok = inSet.length === 5 && [2, 6, 9].every(v => vals.includes(v));
+    if (ok) setTimeout(() => { closeModal(); onSolve(); }, 420);
+  }
+  card.querySelector("#cx").onclick = closeModal;
+  paint();
+}
+
+/* number dial lock: n dials cycling 1..26 (the bookcase panel) */
+function numberLock({ title, hint, code, onSolve, hintId: hh }) {
+  activeHint = hh || null;
+  const n = code.length, buf = new Array(n).fill(1);
+  const { card } = modal(`<h2>${title}</h2><p>${hint || ""}</p>
+    <div id="tiles" style="display:flex;gap:6px;justify-content:center;margin:8px 0 6px"></div>
+    <p style="text-align:center;font-size:12px;color:#a99584;margin:0 0 12px">tap a dial to turn it</p>
+    <div class="row">${hb()}<button class="btn" id="lx">Close</button></div>`);
+  const host = card.querySelector("#tiles");
+  function paint() {
+    host.innerHTML = "";
+    buf.forEach((v, i) => {
+      const t = el("div", "dial", String(v));
+      t.style.cssText = "width:46px;height:62px;font-size:24px;cursor:pointer";
+      t.onclick = () => { buf[i] = buf[i] % 26 + 1; paint(); check(); };
+      host.appendChild(t);
+    });
+  }
+  function check() { if (buf.join(",") === code.join(",")) setTimeout(() => { closeModal(); onSolve(); }, 300); }
+  card.querySelector("#lx").onclick = closeModal;
+  paint();
+}
+
+/* node alignment: four nodes, tap to cycle, all must sit on their marks */
+function nodePuzzle({ onSolve, hintId: hh }) { activeHint = hh || null;
+  const target = [1, 3, 2, 0], pos = [0, 0, 0, 0];
+  const { card } = modal(`<h2>Loose wires</h2>
+    <p>Four nodes have slid out of their sockets. Tap one to push it along until every node sits on a mark.</p>
+    <div style="display:grid;place-items:center;margin:4px 0 6px"><div id="nodes"></div></div>
+    <div class="row">${hb()}<button class="btn" id="nx">Close</button></div>`);
+  const host = card.querySelector("#nodes");
+  function paint() {
+    let s = `<svg width="300" height="120" viewBox="0 0 300 120"><rect x="6" y="6" width="288" height="108" rx="10" fill="#1d2a26" stroke="#3f6b5c" stroke-width="2"/>
+      <path d="M30 60H270" stroke="#2f4a42" stroke-width="3"/>`;
+    for (let i = 0; i < 4; i++) {
+      const y = 24 + i * 24, x = 40 + pos[i] * 62;
+      const tx = 40 + target[i] * 62;
+      s += `<circle cx="${tx}" cy="${y}" r="9" fill="none" stroke="#7fd3b6" stroke-width="2" opacity=".7"/>`;
+      s += `<rect x="${x - 10}" y="${y - 10}" width="20" height="20" rx="5" fill="#e8b64c" stroke="#8a6b28" stroke-width="2" data-i="${i}" style="cursor:pointer"/>`;
+    }
+    s += `</svg>`;
+    host.innerHTML = s;
+    host.querySelectorAll("rect[data-i]").forEach(r => r.onclick = () => { pos[+r.dataset.i] = (pos[+r.dataset.i] + 1) % 4; paint(); check(); });
+  }
+  function check() { if (pos.join() === target.join()) setTimeout(() => { closeModal(); onSolve(); }, 320); }
+  card.querySelector("#nx").onclick = closeModal;
+  paint();
+}
+
+/* lights out on a square grid, solvable start */
+function lightsOut({ onSolve, hintId: hh, n = 5 }) { activeHint = hh || null;
+  let grid = new Array(n * n).fill(0);
+  const flip = (g, i) => { const r = Math.floor(i / n), c = i % n;
+    [[0,0],[1,0],[-1,0],[0,1],[0,-1]].forEach(([dr,dc]) => { const rr = r + dr, cc = c + dc;
+      if (rr >= 0 && rr < n && cc >= 0 && cc < n) g[rr * n + cc] ^= 1; }); };
+  // scramble from solved so it is always beatable
+  const seed = [1, 6, 12, 18, 21, 3, 9, 15];
+  seed.forEach(i => { if (i < n * n) flip(grid, i); });
+  const { card } = modal(`<h2>The old computer</h2>
+    <p>Every button flips itself and its neighbours. Kill every light to open the drive.</p>
+    <div style="display:grid;place-items:center;margin:6px 0"><div id="lo"></div></div>
+    <div class="row">${hb()}<button class="btn" id="ox">Close</button></div>`);
+  const host = card.querySelector("#lo");
+  function paint() {
+    const cell = 34, pad = 3, size = n * cell + pad * 2;
+    let s = `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><rect width="${size}" height="${size}" rx="8" fill="#141c19"/>`;
+    for (let i = 0; i < n * n; i++) {
+      const r = Math.floor(i / n), c = i % n;
+      s += `<rect x="${pad + c * cell + 2}" y="${pad + r * cell + 2}" width="${cell - 4}" height="${cell - 4}" rx="4"
+        fill="${grid[i] ? "#6fe3b0" : "#22302b"}" stroke="#0f1613" data-i="${i}" style="cursor:pointer"/>`;
+    }
+    host.innerHTML = s + `</svg>`;
+    host.querySelectorAll("rect[data-i]").forEach(b => b.onclick = () => {
+      flip(grid, +b.dataset.i); paint();
+      if (grid.every(v => v === 0)) setTimeout(() => { closeModal(); onSolve(); }, 420);
+    });
+  }
+  card.querySelector("#ox").onclick = closeModal;
+  paint();
+}
+
+/* ---------------- hints ---------------- */
+let hintId = null, hintTier = 0, hintShown = 0, lastAct = Date.now();
+let activeHint = null;   // set while a puzzle modal is open
+
+function hintSteps() { return (window.HINTS && window.HINTS[G.level]) || []; }
+function roomName(k) { const R = LEVELS[G.level].rooms[k]; return R ? R.name : k; }
+function nextStep() {
+  const list = hintSteps();
+  const ready = s => !s.need || s.need(G);
+  for (const s of list) if (!s.done(G) && ready(s)) return s;
+  for (const s of list) if (!s.done(G)) return s;   // nothing ready yet: point at the next wall
+  return null;
+}
+
+function stepIndex(s) { return hintSteps().indexOf(s) + 1; }
+
+function resolveStep() {
+  if (activeHint) {
+    const hit = hintSteps().find(x => x.id === activeHint && !x.done(G));
+    if (hit) return hit;
+  }
+  return nextStep();
+}
+function paintHint() {
+  const box = $("#hintBox"); if (!box) return;
+  const s = resolveStep();
+  if (!s) {
+    box.innerHTML = `<div class="hh">Everything here is done</div>
+      <p>You have solved every puzzle in this room set. Get to the way out.</p>
+      <div class="row"><button class="btn" onclick="hideHint()">Close</button></div>`;
+    return;
+  }
+  if (s.id !== hintId) { hintId = s.id; hintTier = 0; }
+  const txt = s.t[Math.min(hintTier, s.t.length - 1)];
+  const dots = hintSteps().map((x, i) => `<i class="${x.done(G) ? "on" : (x === s ? "cur" : "")}"></i>`).join("");
+  const here = s.room && s.room !== G.room
+    ? `<div class="hwhere">Not in this room — go to the <b>${roomName(s.room)}</b>.</div>` : "";
+  box.innerHTML = `<div class="hh">Hint ${Math.min(hintTier + 1, s.t.length)} of ${s.t.length}
+      <span class="hstep">${stepIndex(s)} / ${hintSteps().length}</span></div>
+    <div class="hdots">${dots}</div>
+    ${here}<p>${txt}</p>
+    <div class="row">
+      ${hintTier < s.t.length - 1 ? `<button class="btn primary" onclick="moreHint()">More help</button>` : ``}
+      <button class="btn" onclick="hideHint()">Got it</button></div>`;
+}
+function showHint() {
+  const box = $("#hintBox"); if (!box) return;
+  if (document.querySelector(".menu")) return;   /* no hint before a level is picked */
+  const s = resolveStep();
+  if (!s) { hintId = null; hintTier = 0; } else if (s.id !== hintId) { hintId = s.id; hintTier = 0; }
+  else hintTier = Math.min(hintTier + 1, 2);
+  paintHint();
+  box.classList.add("on"); $("#hintBtn") && $("#hintBtn").classList.remove("pulse");
+  lastAct = Date.now();
+}
+function moreHint() { hintTier = Math.min(hintTier + 1, 2); paintHint(); }
+function hideHint() { $("#hintBox").classList.remove("on"); }
+function registerAct() { lastAct = Date.now(); $("#hintBtn") && $("#hintBtn").classList.remove("pulse"); }
+document.addEventListener("click", registerAct, true);
+document.addEventListener("keydown", registerAct, true);
+setInterval(() => {
+  const b = $("#hintBtn"); if (!b) return;
+  if (! $("#hintBox").classList.contains("on") && Date.now() - lastAct > 55000) b.classList.add("pulse");
+}, 4000);
+
+</script>
+<script>
+/* LEVEL 1 — The House (part 1: items + kitchen / living / library) */
+Object.assign(ITEMS, {
+  ice:   { name: "Ice cube", svg: `<svg viewBox="0 0 100 100"><rect x="18" y="18" width="64" height="64" rx="12" fill="#bcdff0" stroke="#3b6f86" stroke-width="4"/><path d="M34 30l10 14M56 62l12-10" stroke="#fff" stroke-width="6" opacity=".8"/></svg>` },
+  icekey:{ name: "Ice key", svg: `<svg viewBox="0 0 100 100"><circle cx="34" cy="34" r="16" fill="none" stroke="#5fa8c6" stroke-width="9"/><path d="M46 46l30 30M64 64l10-10M70 70l10-10" stroke="#5fa8c6" stroke-width="9" stroke-linecap="round" fill="none"/></svg>` },
+  hands: { name: "Clock hands", svg: `<svg viewBox="0 0 100 100"><path d="M50 50L50 16" stroke="#3a2c1d" stroke-width="9" stroke-linecap="round"/><path d="M50 50L78 62" stroke="#3a2c1d" stroke-width="6" stroke-linecap="round"/><circle cx="50" cy="50" r="7" fill="#8a6b28"/></svg>` },
+  chain: { name: "Bike chain", svg: `<svg viewBox="0 0 100 100" fill="none" stroke="#9aa6a3" stroke-width="6"><ellipse cx="30" cy="40" rx="12" ry="7"/><ellipse cx="46" cy="48" rx="12" ry="7"/><ellipse cx="62" cy="56" rx="12" ry="7"/><ellipse cx="76" cy="64" rx="12" ry="7"/></svg>` },
+  uv:    { name: "UV light", uv: true, svg: `<svg viewBox="0 0 100 100"><rect x="30" y="22" width="40" height="22" rx="6" fill="#6c5ce7"/><path d="M34 44h32v26H34z" fill="#3f3a63"/><path d="M50 70v10" stroke="#f6ecd7" stroke-width="6"/><path d="M26 84l-10 10M74 84l10 10M50 92v12" stroke="#a89bff" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="33" r="6" fill="#cfc6ff"/></svg>` },
+  dart:  { name: "Dart", svg: `<svg viewBox="0 0 100 100"><path d="M20 80L70 30" stroke="#8a7452" stroke-width="7" stroke-linecap="round"/><path d="M64 22l16 16-14 14-16-16z" fill="#c0392b"/><path d="M16 84l12-4-8-8z" fill="#2f7d76"/></svg>` },
+  screw: { name: "Screwdriver", svg: `<svg viewBox="0 0 100 100"><path d="M22 78l34-34" stroke="#c9c2b4" stroke-width="9" stroke-linecap="round"/><path d="M54 44l16-16 10 10-16 16z" fill="#c0392b"/><path d="M18 82l6-12 6 6z" fill="#9aa6a3"/></svg>` },
+  gloves:{ name: "Gloves", svg: `<svg viewBox="0 0 100 100"><path d="M40 88V50c0-5 7-5 7 0v-8c0-5 7-5 7 0v-6c0-5 7-5 7 0v9c0-5 7-5 7 0v26l6-8c3-4 8 0 5 5l-9 16c-3 5-8 7-13 7H44z" fill="#d9b06a" stroke="#7a5326" stroke-width="4"/></svg>` },
+  goldkey:{ name: "Gold key", svg: `<svg viewBox="0 0 100 100"><circle cx="32" cy="34" r="16" fill="none" stroke="#e8b64c" stroke-width="9"/><path d="M44 46l32 32M62 64l10-10M68 70l10-10" stroke="#e8b64c" stroke-width="9" stroke-linecap="round" fill="none"/></svg>` },
+  lens:  { name: "Magnifier", svg: `<svg viewBox="0 0 100 100"><circle cx="42" cy="42" r="22" fill="#bcd6d8" opacity=".7" stroke="#8a7452" stroke-width="7"/><path d="M58 58l24 24" stroke="#8a7452" stroke-width="10" stroke-linecap="round"/></svg>` },
+});
+
+const BIKE = `<svg viewBox="0 0 200 140"><g fill="none" stroke="#2b2118" stroke-width="4">
+  <circle cx="52" cy="98" r="30"/><circle cx="150" cy="98" r="30"/><circle cx="52" cy="98" r="6" fill="#2b2118"/>
+  <path d="M52 98L86 56h44l20 42M86 56L100 98M100 98h50"/><path d="M96 46h20" stroke-width="6"/>
+  <path d="M78 46h-16M150 98l16-30"/></g>
+  <path d="M52 98l34-42" stroke="#8a6b28" stroke-width="3"/>
+  <circle cx="100" cy="98" r="9" fill="#8a6b28" stroke="#2b2118" stroke-width="3"/>
+  <path d="M64 46c8-8 18-10 28-8" stroke="#6b5a3f" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <circle cx="52" cy="46" r="7" fill="#6b5a3f"/></svg>`;
+
+const L1 = {
+  name: "The House", sub: "Level 1",
+  start: "kitchen",
+  rooms: {
+    kitchen: { name: "Kitchen", grid: [0, 1], wall: "#cbb894", wall2: "#c0ac86", floor: "#8d5f38", floor2: "#77492a",
+      props: [
+        { svg: P.fridge, x: 6, y: 16, w: 14, h: 46 },
+        { svg: P.counter, x: 30, y: 42, w: 40, h: 18 },
+        { svg: P.sink, x: 34, y: 34, w: 14, h: 14 },
+        { svg: P.clock, x: 82, y: 10, w: 11, h: 22 },
+        { svg: P.drawer, x: 66, y: 46, w: 12, h: 16 },
+        { svg: P.uvposter, x: 78, y: 36, w: 9, h: 17 },
+      ],
+      hots: [
+        { id: "fridge", x: 6, y: 16, w: 14, h: 46, click: G => {
+          if (!G.f.fridge) { G.f.fridge = 1; give("ice"); tip("A tray of ice, and a shopping note stuck to the door: 1 · 3 · 1"); }
+          else tip("A shopping note: 1 · 3 · 1. Cold, mostly."); } },
+        { id: "hot", x: 33, y: 33, w: 5, h: 7, click: G => {
+          G.f.hot = !G.f.hot;
+          tip(G.f.hot ? "The hot tap is running. Steam curls up." : "The hot tap is off."); } },
+        { id: "cold", x: 45, y: 33, w: 5, h: 7, click: G => {
+          G.f.cold = !G.f.cold; tip(G.f.cold ? "Cold water runs." : "Cold tap off."); } },
+        { id: "faucet", x: 34, y: 34, w: 14, h: 14, click: G => {
+          if (G.sel === "ice") {
+            if (!G.f.hot) { tip("The water is cold — the ice will only melt in HOT water."); return; }
+            take("ice"); give("icekey"); G.f.melt = 1; tip("The ice melts away in your hands. Inside is a key made of ice.");
+            return;
+          }
+          tip(G.f.hot ? "Steaming water. Something could melt here." : "The sink. Two taps — try turning one on."); } },
+        { id: "clock", x: 82, y: 10, w: 11, h: 22, click: G => {
+          if (G.f.clock) { tip("The face hangs open. The chain was inside."); return; }
+          if (!has("hands") && !G.f.handsIn) { tip("The clock has no hands at all — just two bare pins."); return; }
+          clockPuzzle({ hintId: "clock", onSolve: () => { G.f.clock = 1; give("chain"); tip("Click. The face swings open — a bicycle chain is coiled inside."); } }); } },
+        { id: "drawer", x: 66, y: 46, w: 12, h: 16, click: G => {
+          if (G.f.drawer) { tip("Open. The tape reads 4 · 5 · 19 · 13 · 15 · 19"); return; }
+          codeLock({ hintId: "drawer", title: "Locked drawer", hint: "Three numbers on a dial lock.", len: 3, code: "131",
+            onSolve: () => { G.f.drawer = 1; give("tape");
+              modal(`<h2>The drawer</h2><p>A strip of masking tape, peeled off something and kept:</p>
+                <div style="font:700 26px/1.5 ui-monospace,monospace;letter-spacing:.18em;text-align:center;color:#f6ecd7;background:#1b1512;border:1px solid #3a322c;border-radius:10px;padding:18px">4 · 5 · 19 · 13 · 15 · 19</div>
+                <p style="margin:12px 0 0">Numbers as letters — A is 1, B is 2.</p>
+                <div class="row" style="margin-top:14px"><button class="btn gold" onclick="closeModal()">Keep it</button></div>`); } }); } },
+        { id: "kposter", x: 84, y: 40, w: 9, h: 17, uv: "UV: A=1 · B=2 · C=3 …", click: () => tip("A faded alphabet chart. Under UV the ink looks newer.") },
+      ] },
+    living: { name: "Living room", grid: [1, 1], wall: "#c8b18d", wall2: "#bda57f", floor: "#8a5a34", floor2: "#734627",
+      props: [
+        { svg: P.couch, x: 4, y: 42, w: 34, h: 24 },
+        { svg: P.painting, x: 42, y: 12, w: 18, h: 24 },
+        { svg: P.balloon, x: 78, y: 2, w: 12, h: 62 },
+        { svg: P.rug, x: 34, y: 74, w: 32, h: 14 },
+        { svg: P.trapdoor, x: 38, y: 64, w: 24, h: 13 },
+        { svg: BIKE, x: 62, y: 52, w: 26, h: 20 },
+      ],
+      hots: [
+        { id: "balloon", x: 78, y: 2, w: 12, h: 40, click: G => {
+          if (G.f.pop) { tip("A popped balloon skin, and a rope hanging free."); return; }
+          if (G.sel === "dart") { take("dart"); G.f.pop = 1; tip("POP. The balloon bursts — a rope whips down from the ceiling."); return; }
+          tip("A balloon is wired to a rope. Something sharp would cut it."); } },
+        { id: "rope", x: 78, y: 34, w: 12, h: 30, click: G => {
+          if (G.f.stairs) { tip("The folding stairs are down."); return; }
+          if (!G.f.pop) { tip("A taut string runs from the balloon to the floor. It holds something up."); return; }
+          G.f.stairs = 1; unlockRoom("bedroom"); unlockRoom("office");
+          tip("You pull the rope — a folded staircase drops out of the ceiling."); } },
+        { id: "trapdoor", x: 38, y: 64, w: 24, h: 13, click: G => {
+          if (G.f.trap) { tip("The trapdoor is open. Down you go."); go("basementMid"); return; }
+          if (G.sel === "icekey") { G.f.trap = 1; unlockRoom("basementMid"); tip("The ice key turns. Cold air rises from below."); }
+          else tip("A padlock, freezing to the touch. It needs a key that stays cold."); } },
+        { id: "bike", x: 62, y: 52, w: 26, h: 20, click: G => {
+          if (G.f.bike) { tip("The pedals turn freely now. The wheels hum."); return; }
+          if (G.sel === "chain") { take("chain"); G.f.bike = 1; tip("You fit the chain over the cog. The back wheel spins — the bike is whole again."); return; }
+          tip("An old bike with no chain on the cog."); } },
+        { id: "painting", x: 42, y: 12, w: 18, h: 24, click: () => tip("A painting of this house, with every window painted shut.") },
+      ] },
+    library: { name: "Library", grid: [2, 1], wall: "#bfae8b", wall2: "#b09d78", floor: "#7d5735", floor2: "#68452a",
+      props: [
+        { svg: P.bookcase, x: 5, y: 12, w: 26, h: 50 },
+        { svg: P.shelf, x: 36, y: 44, w: 22, h: 16 },
+        { svg: P.door, x: 72, y: 12, w: 17, h: 50 },
+        { svg: P.rug, x: 34, y: 76, w: 28, h: 12 },
+      ],
+      hots: [
+        { id: "bookcase", x: 5, y: 12, w: 26, h: 50, click: G => {
+          if (G.f.book) { tip("The panel is open and empty. The UV lamp is yours."); return; }
+          numberLock({ hintId: "book", title: "Bookcase panel", hint: "Six brass dials, 1 to 26. The tape in the kitchen had six numbers.",
+            code: [4, 5, 19, 13, 15, 19],
+            onSolve: () => { G.f.book = 1; give("uv"); tip("The shelf slides aside: a UV lamp on a charging cradle."); } }); } },
+        { id: "shelf", x: 36, y: 44, w: 22, h: 16, click: G => {
+          if (G.f.hands) { tip("Old paperbacks, a bent bookend."); return; }
+          G.f.hands = 1; give("hands"); G.f.handsIn = 1;
+          tip("Under a stack of paperbacks: two brass clock hands."); } },
+        { id: "exit", x: 72, y: 12, w: 17, h: 50, click: G => {
+          if (!G.f.fire) { tip("The front door is deadlocked. It is not a lock that wants a key."); return; }
+          endLevel(1); } },
+      ] },
+  },
+  init() {},
+  enter(G, room) {
+    if (room === "basementMid" && !G.f.lights) tip("Pitch black down here. Feel along the wall for a switch.", 3000);
+  },
+};
+
+</script>
+<script>
+/* LEVEL 1 — part 2: bedroom / office / greenhouse / basement */
+Object.assign(ITEMS, {
+  tape: { name: "Tape", svg: `<svg viewBox="0 0 100 100"><path d="M14 40h72v20H14z" fill="#e6d6a8" stroke="#8a7452" stroke-width="3"/><path d="M20 46h56M20 52h40" stroke="#8a7452" stroke-width="3"/></svg>` },
+});
+
+Object.assign(L1.rooms, {
+  bedroom: { name: "Bedroom", grid: [0, 0], wall: "#c2a9b4", wall2: "#b79aa6", floor: "#8a5a34", floor2: "#734627",
+    props: [
+      { svg: P.bed2, x: 3, y: 40, w: 38, h: 28 },
+      { svg: P.nightstand, x: 44, y: 46, w: 12, h: 18 },
+      { svg: P.lamp, x: 45, y: 30, w: 9, h: 18 },
+      { svg: P.glove, x: 62, y: 24, w: 9, h: 14 },
+      { svg: P.keypad, x: 74, y: 22, w: 9, h: 20 },
+      { svg: P.uvposter, x: 62, y: 46, w: 9, h: 17 },
+    ],
+    hots: [
+      { id: "gloves", x: 62, y: 24, w: 9, h: 14, click: G => {
+        if (!G.f.gloves) { G.f.gloves = 1; give("gloves"); } else tip("An empty hook."); } },
+      { id: "night", x: 44, y: 48, w: 12, h: 16, click: G => {
+        if (G.f.screw) { tip("Empty now."); return; }
+        G.f.screw = 1; give("screw"); tip("A screwdriver, rolled in an old sock."); } },
+      { id: "keypad", x: 74, y: 22, w: 9, h: 20, click: G => {
+        if (G.f.keypad) { tip("Green light. The greenhouse is open."); return; }
+        if (G.sel !== "screw") { tip("A keypad behind a screwed-down cover plate."); return; }
+        codeLock({ hintId: "keypad", title: "Keypad", hint: "Three digits. The UV marks on the office wall had three.", len: 3, code: "962",
+          onSolve: () => { G.f.keypad = 1; unlockRoom("greenhouse"); tip("Green light. Somewhere a glass door unlatches."); } }); } },
+      { id: "bposter", x: 62, y: 46, w: 9, h: 17, uv: "UV: 9 · 6 · 2", click: () => tip("Faded wallpaper. Nothing without a UV light.") },
+    ] },
+
+  office: { name: "Office", grid: [1, 0], wall: "#9aa9a4", wall2: "#8d9c97", floor: "#7d5735", floor2: "#68452a",
+    props: [
+      { svg: P.desk, x: 12, y: 44, w: 42, h: 22 },
+      { svg: P.computer, x: 20, y: 28, w: 18, h: 18 },
+      { svg: P.lamp, x: 50, y: 28, w: 9, h: 17 },
+      { svg: P.window, x: 78, y: 12, w: 16, h: 22 },
+      { svg: P.plant, x: 64, y: 48, w: 9, h: 17 },
+      { svg: P.uvposter, x: 66, y: 20, w: 8, h: 15 },
+    ],
+    hots: [
+      { id: "lamp", x: 50, y: 28, w: 9, h: 17, click: G => {
+        if (G.sel === "lens") {
+          if (!G.f.lamp) { tip("The lamp is off — nothing to focus."); return; }
+          G.f.fire = 1;
+          tip("The lens throws the bulb into one hard point. The curtains brown, then catch. FIRE.");
+          return;
+        }
+        G.f.lamp = !G.f.lamp;
+        tip(G.f.lamp ? "The bulb buzzes and gets very hot." : "Click. The lamp is off."); } },
+      { id: "pc", x: 20, y: 28, w: 18, h: 18, click: G => {
+        if (G.f.disk) { tip("The drive hangs open. WELL DONE! EJECTING DISK…"); return; }
+        if (!G.f.panel) {
+          if (G.sel !== "screw") { tip("The back panel is screwed shut. The monitor still shows a cursor."); return; }
+          nodePuzzle({ onSolve: () => { G.f.panel = 1; tip("The wires seat with a click. A green button lights up — press the machine again."); } });
+          return;
+        }
+        lightsOut({ onSolve: () => { G.f.disk = 1; tip("Every light dies. The disk drive whirrs and spits out a floppy: WELL DONE! EJECTING DISK…"); } }); } },
+      { id: "oposter", x: 66, y: 20, w: 8, h: 15, uv: "UV: 9 · 6 · 2  —  a keypad code", click: () => tip("A framed certificate. Blank in this light.") },
+    ] },
+
+  greenhouse: { name: "Greenhouse", grid: [2, 0], wall: "#a9c4a0", wall2: "#9ab792", floor: "#7a5c3a", floor2: "#654a2e",
+    props: [
+      { svg: P.cactus, x: 10, y: 38, w: 12, h: 26 },
+      { svg: P.glassCase, x: 38, y: 32, w: 18, h: 26 },
+      { svg: P.plant, x: 66, y: 44, w: 10, h: 20 },
+      { svg: P.window, x: 78, y: 12, w: 16, h: 22 },
+    ],
+    hots: [
+      { id: "cactus", x: 10, y: 38, w: 12, h: 26, click: G => {
+        if (G.f.key) { tip("Just a cactus now."); return; }
+        if (G.sel !== "gloves") { tip("Thorns. You are not touching that bare-handed."); return; }
+        take("gloves"); G.f.key = 1; give("goldkey");
+        tip("You shove the pot aside — a gold key, half-buried in the soil."); } },
+      { id: "case", x: 38, y: 32, w: 18, h: 26, click: G => {
+        if (G.f.case) { tip("The case is empty."); return; }
+        if (G.sel !== "goldkey") { tip("A locked glass case. Something metal glints inside."); return; }
+        take("goldkey"); G.f.case = 1; give("lens");
+        tip("The lid lifts: a magnifying glass, wrapped in velvet."); } },
+    ] },
+
+  basementMid: { name: "Basement — landing", grid: [1, 2], wall: "#5a5148", wall2: "#4c443c", floor: "#3d352e", floor2: "#2f2922",
+    props: [
+      { svg: P.switchPlate, x: 46, y: 28, w: 6, h: 15 },
+      { svg: P.uvposter, x: 18, y: 26, w: 10, h: 18 },
+      { svg: P.stairs, x: 72, y: 30, w: 18, h: 30 },
+    ],
+    hots: [
+      { id: "switch", x: 46, y: 28, w: 6, h: 15, click: G => {
+        G.f.lights = !G.f.lights;
+        if (G.f.lights) { unlockRoom("basement1"); unlockRoom("basement2");
+          tip("The bulbs stutter on. Two more rooms appear out of the dark."); }
+        else tip("Dark again."); } },
+      { id: "mposter", x: 18, y: 26, w: 10, h: 18, uv: "UV: the clock wants its hands back", click: () => tip("A grey poster. Nothing to see by lamplight.") },
+    ] },
+
+  basement1: { name: "Basement — store", grid: [0, 2], wall: "#544b43", wall2: "#463e37", floor: "#3a332c", floor2: "#2c2620",
+    props: [
+      { svg: P.cabinet, x: 34, y: 30, w: 22, h: 36 },
+      { svg: P.dartboard, x: 64, y: 22, w: 18, h: 28 },
+      { svg: P.uvposter, x: 14, y: 26, w: 9, h: 16 },
+    ],
+    hots: [
+      { id: "cab", x: 34, y: 30, w: 22, h: 36, click: G => {
+        if (G.f.dart) { tip("Empty — the dart is yours."); return; }
+        slicePuzzle({ hintId: "dart", onSolve: () => { G.f.dart = 1; give("dart");
+          tip("The wedges lock into place. A dart rolls out of the cabinet."); } }); } },
+      { id: "b1poster", x: 14, y: 26, w: 9, h: 16, uv: "UV: 7 : 3 0", click: () => tip("A wall chart. Blank in this light.") },
+    ] },
+
+  basement2: { name: "Basement — workshop", grid: [2, 2], wall: "#544b43", wall2: "#463e37", floor: "#3a332c", floor2: "#2c2620",
+    props: [
+      { svg: P.shelf, x: 12, y: 20, w: 26, h: 18 },
+      { svg: P.cabinet, x: 56, y: 34, w: 20, h: 32 },
+      { svg: P.uvposter, x: 80, y: 24, w: 9, h: 16 },
+    ],
+    hots: [
+      { id: "wshelf", x: 12, y: 20, w: 26, h: 18, click: () => tip("Sawdust, jars, a bent nail. Nothing useful.") },
+      { id: "wcab", x: 56, y: 34, w: 20, h: 32, click: () => tip("Painted shut.") },
+      { id: "b2poster", x: 80, y: 24, w: 9, h: 16, uv: "UV: glass + heat = fire", click: () => tip("An old safety notice, sun-bleached.") },
+    ] },
+});
+
+addLevel(1, L1);
+
+</script>
+<script>
+/* LEVEL 2 — The Lab */
+Object.assign(ITEMS, {
+  beaker: { name: "Beaker", svg: `<svg viewBox="0 0 100 100"><path d="M34 18h32v20l14 44a8 8 0 0 1-8 10H28a8 8 0 0 1-8-10l14-44z" fill="#bcd6d8" opacity=".8" stroke="#3b6f86" stroke-width="4"/><path d="M30 60h40l6 22a6 6 0 0 1-6 8H30a6 6 0 0 1-6-8z" fill="#5fa8c6" opacity=".7"/></svg>` },
+  burner: { name: "Bunsen burner", svg: `<svg viewBox="0 0 100 100"><rect x="40" y="52" width="20" height="34" rx="4" fill="#8a7452"/><rect x="26" y="84" width="48" height="8" rx="4" fill="#5d4a33"/><path d="M50 52V30" stroke="#c0392b" stroke-width="6"/><path d="M50 30c-8-8 0-16 0-16s8 8 0 16z" fill="#e8b64c"/></svg>` },
+  brass: { name: "Brass key", svg: `<svg viewBox="0 0 100 100"><circle cx="32" cy="34" r="15" fill="none" stroke="#c9a24a" stroke-width="9"/><path d="M44 46l30 30M62 64l9-9M68 70l9-9" stroke="#c9a24a" stroke-width="9" fill="none" stroke-linecap="round"/></svg>` },
+  fuse:  { name: "Fuse", svg: `<svg viewBox="0 0 100 100"><rect x="22" y="40" width="56" height="22" rx="10" fill="#c9c2b4" stroke="#7a5326" stroke-width="4"/><rect x="34" y="44" width="32" height="14" rx="4" fill="#2f7d76"/><path d="M22 51H10M78 51h12" stroke="#7a5326" stroke-width="6"/></svg>` },
+  card:  { name: "Key card", svg: `<svg viewBox="0 0 100 100"><rect x="16" y="30" width="68" height="44" rx="6" fill="#e9e3d6" stroke="#7a5326" stroke-width="4"/><rect x="24" y="38" width="22" height="16" rx="3" fill="#e8b64c"/><path d="M54 42h22M54 52h22M24 64h52" stroke="#b9b0a0" stroke-width="4"/></svg>` },
+});
+
+const L2 = {
+  name: "The Lab", sub: "Level 2",
+  start: "bench",
+  rooms: {
+    bench: { name: "Chemistry bench", grid: [1, 0], wall: "#b7c4bf", wall2: "#a9b7b2", floor: "#6f6154", floor2: "#5c5045",
+      props: [
+        { svg: P.counter, x: 10, y: 40, w: 52, h: 22 },
+        { svg: P.sink, x: 16, y: 32, w: 14, h: 14 },
+        { svg: P.shelf, x: 62, y: 16, w: 28, h: 20 },
+        { svg: P.labposter, x: 68, y: 36, w: 11, h: 24 },
+      ],
+      hots: [
+        { id: "beaker", x: 36, y: 32, w: 9, h: 14, click: G => { if (!G.f.beaker) { G.f.beaker = 1; give("beaker"); } else tip("No more beakers."); } },
+        { id: "gas", x: 48, y: 34, w: 7, h: 12, click: G => { G.f.gas = !G.f.gas; tip(G.f.gas ? "Gas hisses. The burner is lit." : "Gas off."); } },
+        { id: "lposter", x: 68, y: 42, w: 11, h: 20, uv: "UV: K 19 · Ca 20 · Fe 26", click: G => {
+          tip("A periodic table poster: K = 19, Ca = 20, Fe = 26."); } },
+      ] },
+    cold: { name: "Cold room", grid: [2, 0], wall: "#9fb8c6", wall2: "#93aebb", floor: "#6c7a80", floor2: "#59676d",
+      props: [
+        { svg: P.glassCase, x: 30, y: 34, w: 22, h: 30 },
+        { svg: P.shelf, x: 60, y: 20, w: 26, h: 18 },
+      ],
+      hots: [
+        { id: "ice", x: 30, y: 34, w: 22, h: 30, click: G => {
+          if (G.f.melt) { tip("Melted. The brass key is already in your pocket."); return; }
+          if (!G.f.gas) { tip("A brass key frozen inside a block of ice. It needs heat."); return; }
+          G.f.melt = 1; give("brass"); tip("The ice cracks and slumps. You pull out a brass key."); } },
+      ] },
+    hall: { name: "Hallway", grid: [0, 0], wall: "#c3bda6", wall2: "#b5ae96", floor: "#7a6a52", floor2: "#665741",
+      props: [
+        { svg: P.cabinet, x: 20, y: 30, w: 20, h: 34 },
+        { svg: P.door, x: 62, y: 12, w: 17, h: 48 },
+      ],
+      hots: [
+        { id: "supcab", x: 20, y: 30, w: 20, h: 34, click: G => {
+          if (G.f.cab) { tip("Empty shelves."); return; }
+          codeLock({ hintId: "cab", title: "Supply cabinet", hint: "Six digits — the elements on the bench poster.", len: 6, code: "192026",
+            onSolve: () => { G.f.cab = 1; give("fuse"); give("card"); tip("Inside: a fuse and a key card."); } }); } },
+        { id: "exlab", x: 62, y: 12, w: 17, h: 48, click: G => {
+          if (!G.f.exitOpen) { tip("The lab door is sealed by an electric lock."); return; }
+          if (G.sel !== "brass") { tip("The lock is green now — but the deadbolt needs a physical key."); return; }
+          endLevel(2); } },
+      ] },
+    office: { name: "Lab office", grid: [0, 1], wall: "#b4ada2", wall2: "#a69f94", floor: "#6f6154", floor2: "#5c5045",
+      props: [
+        { svg: P.desk, x: 12, y: 42, w: 40, h: 22 },
+        { svg: P.computer, x: 20, y: 28, w: 17, h: 17 },
+        { svg: P.lamp, x: 52, y: 30, w: 9, h: 15 },
+      ],
+      hots: [
+        { id: "log", x: 20, y: 28, w: 17, h: 17, click: G => { G.f.ledger = 1; modal(`<h2>Research log</h2>
+          <div style="font:14px/1.7 ui-monospace,monospace;color:#cfc6b4;background:#141110;padding:14px;border-radius:8px">
+          03:12 — power on the server rack keeps tripping.<br>
+          03:40 — replaced the fuse. Rack code is <b style="color:#5fd0b6">815</b>.<br>
+          04:02 — the door locks behind you. Again.</div>
+          <div class="row" style="margin-top:12px"><button class="btn" onclick="closeModal()">Close</button></div>`); } },
+      ] },
+    server: { name: "Server room", grid: [1, 1], wall: "#7f8a86", wall2: "#727d79", floor: "#4f5651", floor2: "#414743",
+      props: [
+        { svg: P.cabinet, x: 14, y: 26, w: 22, h: 40 },
+        { svg: P.computer, x: 48, y: 30, w: 20, h: 18 },
+        { svg: P.switchPlate, x: 76, y: 30, w: 7, h: 16 },
+      ],
+      hots: [
+        { id: "panel", x: 76, y: 30, w: 7, h: 16, click: G => {
+          if (G.f.power) { tip("Power is on. The rack hums."); return; }
+          if (G.sel !== "fuse") { tip("The fuse socket is empty and blackened."); return; }
+          G.f.power = 1; tip("You seat the fuse. The rack wakes up — the door lock blinks green."); } },
+        { id: "rack", x: 48, y: 30, w: 20, h: 18, click: G => {
+          if (!G.f.power) { tip("Dead screen."); return; }
+          codeLock({ hintId: "exitOpen", title: "Rack keypad", hint: "Three digits — the research log.", len: 3, code: "815",
+            onSolve: () => { G.f.exitOpen = 1; tip("The electric lock releases with a clunk."); } }); } },
+      ] },
+    store: { name: "Store room", grid: [2, 1], wall: "#a89c86", wall2: "#9a8e79", floor: "#6f6154", floor2: "#5c5045",
+      props: [ { svg: P.shelf, x: 20, y: 22, w: 30, h: 18 }, { svg: P.cabinet, x: 58, y: 32, w: 20, h: 32 } ],
+      hots: [ { id: "st", x: 20, y: 22, w: 30, h: 18, click: () => tip("Bottles, all empty.") } ] },
+  },
+  enter(G, room) { if (room === "cold") tip("Your breath fogs. It is freezing in here.", 2600); },
+};
+addLevel(2, L2);
+
+</script>
+<script>
+/* LEVEL 3 — The Vault */
+Object.assign(ITEMS, {
+  torch:  { name: "Torch", svg: `<svg viewBox="0 0 100 100"><rect x="18" y="40" width="34" height="20" rx="6" fill="#3f4a52"/><path d="M52 36h14l10 14-10 14H52z" fill="#c9c2b4"/><path d="M76 44l10-6v24l-10-6z" fill="#e8b64c"/></svg>` },
+  crow:  { name: "Crowbar", svg: `<svg viewBox="0 0 100 100"><path d="M24 76l40-40" stroke="#c0392b" stroke-width="9" stroke-linecap="round"/><path d="M60 32c6-10 18-8 22 0" stroke="#c0392b" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M20 80l8-4 4 8z" fill="#7a3b52"/></svg>` },
+  batt:  { name: "Battery", svg: `<svg viewBox="0 0 100 100"><rect x="26" y="28" width="48" height="52" rx="6" fill="#2f7d76" stroke="#1d4f4a" stroke-width="4"/><rect x="42" y="20" width="16" height="8" rx="3" fill="#c9c2b4"/><path d="M50 40v20M40 50h20" stroke="#f6ecd7" stroke-width="6"/></svg>` },
+  bars:  { name: "Gold bar", svg: `<svg viewBox="0 0 100 100"><path d="M18 66l14-26h36l14 26z" fill="#e8b64c" stroke="#a8832c" stroke-width="4"/><path d="M32 40l-6 26M68 40l6 26" stroke="#a8832c" stroke-width="3"/></svg>` },
+});
+
+const L3 = {
+  name: "The Vault", sub: "Level 3",
+  start: "lobby",
+  rooms: {
+    lobby: { name: "Vault lobby", grid: [0, 0], wall: "#7d7568", wall2: "#6f6759", floor: "#3f3a33", floor2: "#332e28",
+      props: [
+        { svg: P.counter, x: 10, y: 44, w: 36, h: 20 },
+        { svg: P.drawer, x: 14, y: 30, w: 14, h: 12 },
+        { svg: P.door, x: 68, y: 10, w: 17, h: 50 },
+        { svg: P.poster, x: 46, y: 18, w: 10, h: 20 },
+      ],
+      hots: [
+        { id: "drawer3", x: 14, y: 30, w: 14, h: 12, click: G => { if (!G.f.torch) { G.f.torch = 1; give("torch"); } else tip("Empty."); } },
+        { id: "l3poster", x: 46, y: 18, w: 10, h: 20, uv: "UV: B U I L T  1 9 2 7", click: G => { if (!G.f.torch) { tip("Too dark to read."); return; } G.f.plate = 1; tip("A brass plate: BUILT 1927."); } },
+        { id: "gate", x: 68, y: 10, w: 17, h: 50, click: G => {
+          if (!G.f.vault) { tip("The way out opens only when the vault does."); return; }
+          endLevel(3); } },
+      ] },
+    corridor: { name: "Corridor", grid: [1, 0], wall: "#6c6459", wall2: "#5f584e", floor: "#3a352f", floor2: "#2e2a25",
+      props: [ { svg: P.shelf, x: 18, y: 20, w: 26, h: 16 }, { svg: P.painting, x: 56, y: 16, w: 18, h: 22 } ],
+      hots: [
+        { id: "corr", x: 18, y: 20, w: 26, h: 16, click: G => tip(G.f.torch ? "A maintenance shelf: rags, a dead bulb." : "You can barely see your hands.") },
+      ] },
+    office: { name: "Manager's office", grid: [0, 1], wall: "#8a7d6a", wall2: "#7c7060", floor: "#4a423a", floor2: "#3b342d",
+      props: [
+        { svg: P.desk, x: 12, y: 44, w: 40, h: 22 },
+        { svg: P.cabinet, x: 58, y: 30, w: 20, h: 34 },
+        { svg: P.lamp, x: 48, y: 30, w: 9, h: 15 },
+      ],
+      hots: [
+        { id: "filing", x: 58, y: 30, w: 20, h: 34, click: G => {
+          if (G.f.crow) { tip("Empty drawers."); return; }
+          codeLock({ hintId: "crow", title: "Filing cabinet", hint: "Four digits — a date on the wall plate.", len: 4, code: "1927",
+            onSolve: () => { G.f.crow = 1; give("crow"); tip("A crowbar, left behind by whoever built this place."); } }); } },
+        { id: "ledger", x: 12, y: 44, w: 40, h: 22, click: G => modal(`<h2>The ledger</h2>
+          <div style="font:14px/1.8 ui-monospace,monospace;color:#cfc6b4;background:#141110;padding:14px;border-radius:8px">
+          Deposits, 1927–1961.<br>The last page, in pencil:<br>
+          <b style="color:#e8b64c">"combination 5 · 2 · 8 · 0 — for the vault"</b></div>
+          <div class="row" style="margin-top:12px"><button class="btn" onclick="closeModal()">Close</button></div>`) },
+      ] },
+    workshop: { name: "Workshop", grid: [1, 1], wall: "#75705f", wall2: "#686353", floor: "#3f3a33", floor2: "#332e28",
+      props: [ { svg: P.cabinet, x: 22, y: 34, w: 22, h: 34 }, { svg: P.shelf, x: 58, y: 22, w: 26, h: 18 } ],
+      hots: [
+        { id: "crate", x: 22, y: 34, w: 22, h: 34, click: G => {
+          if (G.f.batt) { tip("Splintered open."); return; }
+          if (G.sel !== "crow") { tip("A crate, nailed shut. Too solid to open by hand."); return; }
+          G.f.batt = 1; give("batt"); tip("The lid gives. Inside: a heavy battery."); } },
+      ] },
+    vaultroom: { name: "Vault", grid: [2, 0], wall: "#5b554c", wall2: "#4f4a42", floor: "#37332d", floor2: "#2b2721",
+      props: [ { svg: P.cabinet, x: 34, y: 26, w: 30, h: 40 }, { svg: P.switchPlate, x: 70, y: 30, w: 7, h: 16 } ],
+      hots: [
+        { id: "vpanel", x: 70, y: 30, w: 7, h: 16, click: G => {
+          if (G.f.vault) { tip("The bolts are drawn back."); return; }
+          if (G.sel !== "batt") { tip("An electric lock with a dead battery bay."); return; }
+          codeLock({ hintId: "vault", title: "Vault keypad", hint: "Four digits — the ledger in the office.", len: 4, code: "5280",
+            onSolve: () => { G.f.vault = 1; give("bars"); tip("Bolts slide back. The vault is open — take a gold bar and run."); } }); } },
+      ] },
+    lift: { name: "Service lift", grid: [2, 1], wall: "#6b6558", wall2: "#5e594d", floor: "#3a352f", floor2: "#2e2a25",
+      props: [ { svg: P.door, x: 30, y: 14, w: 20, h: 46 }, { svg: P.switchPlate, x: 60, y: 30, w: 7, h: 16 } ],
+      hots: [ { id: "liftlever", x: 60, y: 30, w: 7, h: 16, click: G => tip(G.f.vault ? "The lift is dead — but the lobby gate is open." : "No power. And nowhere to go.") } ] },
+  },
+  enter(G, room) { if (room === "corridor" && !G.f.torch) tip("It is pitch dark in here.", 2400); },
+};
+addLevel(3, L3);
+
+</script>
+<script>
+/* Hint ladders — one entry per puzzle beat, in the order a player meets them.
+   t[0] = nudge, t[1] = clear, t[2] = the answer.  need() = prerequisites met. */
+window.HINTS = window.HINTS || {};
+
+window.HINTS[1] = [
+  { id: "ice", room: "kitchen", done: G => has("ice") || has("icekey") || G.f.melt,
+    t: ["Something in this kitchen is cold enough to keep a key frozen.",
+        "Open the refrigerator and take the ice out of the freezer tray.",
+        "Kitchen → the big white fridge on the left. Click it: you get an ice cube."] },
+
+  { id: "hot", room: "kitchen", done: G => G.f.melt,
+    t: ["Ice has to meet heat before it gives up what it is holding.",
+        "Turn on the HOT tap at the sink, then use the ice on the water.",
+        "Click the left tap at the sink (it steams), then select the ice in the tray and click the sink."] },
+
+  { id: "trapdoor", room: "living", need: G => has("icekey"), done: G => G.f.trap,
+    t: ["The house has a floor below this one.",
+        "In the living room there is a hatch in the floor with a padlock. Try the ice key on it.",
+        "Living room → the square hatch on the floor. Select the Ice key, then click the hatch."] },
+
+  { id: "lights", room: "basementMid", need: G => G.f.trap, done: G => G.f.lights,
+    t: ["You cannot search what you cannot see.",
+        "You are standing in the dark. Find the light switch on the wall.",
+        "Basement landing → the small white switch plate in the middle of the wall. Click it."] },
+
+  { id: "hands", room: "library", done: G => G.f.hands,
+    t: ["The clock in the kitchen has no hands. Somebody took them.",
+        "Look along the low shelf in the library, under the paperbacks.",
+        "Library → the low wooden shelf on the floor. Click it to get the Clock hands."] },
+
+  { id: "dart", room: "basement1", need: G => G.f.lights, done: G => G.f.dart,
+    t: ["The store room cabinet is shut by a puzzle, not a lock.",
+        "The dart cabinet has a rotating wedge dial. Five wedges must sit on the three notches.",
+        "Basement store → click the cabinet. Turn the wedges until five of them point at the three white notches (turn each wedge to 2, 6 or 9)."] },
+
+  { id: "balloon", room: "living", need: G => has("dart"), done: G => G.f.pop,
+    t: ["That balloon is holding something up.",
+        "Use the dart on the balloon in the living room.",
+        "Living room → select the Dart, then click the balloon at the right."] },
+
+  { id: "stairs", room: "living", need: G => G.f.pop, done: G => G.f.stairs,
+    t: ["Now that it has burst, look at what the balloon was tied to.",
+        "Pull the rope that is hanging free where the balloon was.",
+        "Living room → click the rope below where the balloon was. Folded stairs drop down."] },
+
+  { id: "drawer", room: "kitchen", done: G => G.f.drawer,
+    t: ["One drawer in the kitchen is locked with three little wheels.",
+        "The shopping note on the fridge has three numbers on it.",
+        "Kitchen → the drawer unit right of the counter. Code 1 · 3 · 1."] },
+
+  { id: "book", room: "library", need: G => G.f.drawer, done: G => G.f.book,
+    t: ["Six numbers on a strip of tape. Letters have numbers too.",
+        "The bookcase panel has six dials, 1 to 26. Convert each number to a letter (A=1, B=2 …).",
+        "Library → the bookcase. Dials: 4 · 5 · 19 · 13 · 15 · 19 — that spells D E S M O S."] },
+
+  { id: "screw", room: "bedroom", need: G => G.f.stairs, done: G => G.f.screw,
+    t: ["Upstairs, somebody hid a tool where you would keep a book.",
+        "The bedroom nightstand has a drawer.",
+        "Bedroom → the small table beside the bed. Click it for a screwdriver."] },
+
+  { id: "keypad", room: "bedroom", need: G => G.f.screw, done: G => G.f.keypad,
+    t: ["The cover plate on the wall unit is held by screws, and the panel behind it wants three digits.",
+        "Take the UV lamp upstairs — the office wall glows with three numbers. Then unscrew the keypad and enter them.",
+        "Bedroom → select the Screwdriver and click the keypad. Code 9 · 6 · 2 (from the office UV mark)."] },
+
+  { id: "gloves", room: "bedroom", done: G => G.f.gloves || G.f.key,
+    t: ["Anything with thorns needs a barrier.",
+        "There is a pair of gloves hanging on the bedroom wall.",
+        "Bedroom → the gloves on the hook, left of the keypad."] },
+
+  { id: "goldkey", room: "greenhouse", need: G => G.f.keypad, done: G => G.f.key,
+    t: ["The greenhouse holds something buried that the cactus is guarding.",
+        "Wear the gloves and shift the cactus pot.",
+        "Greenhouse → select the Gloves, then click the cactus. The gold key is in the soil."] },
+
+  { id: "lens", room: "greenhouse", need: G => has("goldkey"), done: G => G.f.case,
+    t: ["A small brass key opens a small glass case.",
+        "Use the gold key on the glass display case.",
+        "Greenhouse → select the Gold key, then click the glass case. Inside: a magnifying glass."] },
+
+  { id: "clock", room: "kitchen", need: G => G.f.book && G.f.hands, done: G => G.f.clock,
+    t: ["The clock face is a door. It needs hands, and it needs the right time.",
+        "Fit the clock hands, then set the clock to the time that glows under UV in the basement.",
+        "Kitchen → click the clock, set it to 7:30. It swings open and a bike chain falls out."] },
+
+  { id: "fire", room: "office", need: G => has("lens"), done: G => G.f.fire,
+    t: ["The front door has no keyhole that matters. Look for a different way to open a door.",
+        "In the office, the desk lamp gets very hot. Focus it.",
+        "Office → switch the lamp on, then select the Magnifier and click the lamp. Fire."] },
+
+  { id: "exit", room: "library", need: G => G.f.fire, done: G => G.f.done,
+    t: ["Something is burning. The house will not stay shut much longer.",
+        "With the fire lit, the front door in the library finally gives.",
+        "Library → click the front door on the right."] },
+];
+
+</script>
+<script>
+/* Hint ladders for Level 2 (The Lab) and Level 3 (The Vault). */
+
+window.HINTS[2] = [
+  { id: "beaker", room: "bench", done: G => G.f.beaker,
+    t: ["Start with the glassware on the bench.",
+        "Take the beaker from the chemistry bench.",
+        "Lab bench → click the beaker standing beside the burner."] },
+
+  { id: "gas", room: "bench", done: G => G.f.gas,
+    t: ["There is a burner, and nothing burning.",
+        "Turn the gas on under the Bunsen burner.",
+        "Lab bench → the little tap beside the burner. Click it; you should hear gas."] },
+
+  { id: "melt", room: "cold", done: G => G.f.melt, need: G => G.f.gas,
+    t: ["Something in the cold room is frozen inside something else.",
+        "With the burner lit, use heat on the block of ice in the cold room.",
+        "Cold room → click the ice block. The brass key inside is yours."] },
+
+  { id: "cab", room: "hall", done: G => G.f.cab,
+    t: ["The supply cabinet in the hallway wants six digits, and the bench poster has the elements for them.",
+        "Use the periodic table poster: K, Ca, Fe — their atomic numbers give the six digits.",
+        "Hallway → supply cabinet. Code 19 20 26 (K=19, Ca=20, Fe=26)."] },
+
+  { id: "power", room: "server", need: G => has("fuse"), done: G => G.f.power,
+    t: ["The server rack is dead. Something is missing from the socket.",
+        "Use the fuse from the supply cabinet on the rack's fuse panel.",
+        "Server room → select the Fuse, then click the small panel on the wall."] },
+
+  { id: "exitOpen", room: "server", need: G => G.f.power, done: G => G.f.exitOpen,
+    t: ["Now the rack has power. It wants a code — the research log in the lab office has one.",
+        "Read the research log, then enter its three digits at the rack keypad.",
+        "Server room → click the rack and enter 8 · 1 · 5."] },
+
+  { id: "leave", room: "hall", need: G => G.f.exitOpen, done: G => G.f.done,
+    t: ["The electric lock is green. That does not open a deadbolt.",
+        "Go back to the lab door in the hallway with the brass key in hand.",
+        "Hallway → select the Brass key, then click the exit door."] },
+];
+
+window.HINTS[3] = [
+  { id: "torch", room: "lobby", done: G => G.f.torch,
+    t: ["This place is dark, and the first problem is simply seeing.",
+        "There is a torch in a drawer in the lobby.",
+        "Vault lobby → click the drawer on the left. Take the torch."] },
+
+  { id: "plate", room: "lobby", need: G => G.f.torch, done: G => G.f.plate,
+    t: ["Buildings like this have a date on them somewhere.",
+        "With the torch, read the brass plate in the lobby.",
+        "Vault lobby → with the torch in your bag, click the brass plate: BUILT 1927."] },
+
+  { id: "crow", room: "office", need: G => G.f.plate, done: G => G.f.crow,
+    t: ["Four digits. You have just read a year.",
+        "The manager's office filing cabinet opens with that year.",
+        "Manager's office → filing cabinet, code 1 · 9 · 2 · 7. Inside: a crowbar."] },
+
+  { id: "ledger", room: "office", done: G => G.f.ledger,
+    t: ["Managers keep records.",
+        "Read the ledger on the desk in the manager's office.",
+        "Manager's office → click the open ledger: the vault code is 5280."] },
+
+  { id: "batt", room: "workshop", need: G => has("crow"), done: G => G.f.batt,
+    t: ["A nailed crate will not open politely.",
+        "Use the crowbar on the crate in the workshop.",
+        "Workshop → select the Crowbar, then click the crate. Inside: a battery."] },
+
+  { id: "vault", room: "vaultroom", need: G => has("batt"), done: G => G.f.vault,
+    t: ["The vault lock has no power, and a code you have already read.",
+        "Fit the battery to the vault panel, then enter the ledger's four digits.",
+        "Vault → select the Battery, click the panel, then code 5 · 2 · 8 · 0."] },
+
+  { id: "out", room: "lobby", need: G => G.f.vault, done: G => G.f.done,
+    t: ["You have what you came for. The gate will know.",
+        "Go back to the lobby gate now that the vault is open.",
+        "Vault lobby → click the gate on the right."] },
+];
+
+</script>
+<script>
+/* Boot: menu, saves, endings, keyboard */
+const LVKEY = n => "escapehouse.lv" + n;
+
+function save() {
+  try {
+    localStorage.setItem(LVKEY(G.level), JSON.stringify({ room: G.room, inv: G.inv, f: G.f }));
+    localStorage.setItem("escapehouse.last", String(G.level));
+  } catch (e) {}
+}
+function loadLv(n) {
+  try { return JSON.parse(localStorage.getItem(LVKEY(n)) || "null"); } catch (e) { return null; }
+}
+function clearLv(n) { try { localStorage.removeItem(LVKEY(n)); } catch (e) {} }
+
+function freshState(n, saved) {
+  const L = LEVELS[n];
+  G.level = n; G.sel = null; G.uv = false;
+  if (saved && L.rooms[saved.room]) {
+    G.room = saved.room; G.inv = saved.inv || []; G.f = saved.f || {};
+    if (!G.f.unlocked) G.f.unlocked = [];
+  } else {
+    G.room = L.start; G.inv = []; G.f = { unlocked: [L.start] };
+    // level defaults
+    if (n === 1) G.f = { unlocked: ["kitchen", "living", "library"] };
+    if (n === 2) G.f = { unlocked: ["bench", "hall", "cold", "office", "server", "store"] };
+    if (n === 3) G.f = { unlocked: ["lobby", "corridor", "office", "workshop", "vaultroom", "lift"] };
+  }
+  if (!Array.isArray(G.f.unlocked)) G.f.unlocked = [L.start];
+}
+
+function header(n) {
+  const L = LEVELS[n];
+  document.getElementById("ttl").textContent = "Escape — " + L.name;
+  document.getElementById("sub").textContent = L.sub;
+}
+
+function startLevel(n, fresh) {
+  closeModal();
+  hideHint(); hintId = null; hintTier = 0; registerAct();
+  const saved = fresh ? null : loadLv(n);
+  freshState(n, saved);
+  header(n);
+  const old = document.querySelector(".menu"); if (old) old.remove();
+  const hbtn = $("#hintBtn"); if (hbtn) hbtn.style.display = "";
+  go(G.room);
+  if (!saved && n === 1) setTimeout(() => tip("You wake in a kitchen you don't recognise. The door is deadlocked.", 4600), 700);
+  save();
+}
+
+function endLevel(n) {
+  G.f.done = true; save();
+  const next = n < 3 ? n + 1 : null;
+  const { card } = modal(`
+    <h2 style="color:#e8b64c">${n === 3 ? "You're out." : "Level " + n + " complete"}</h2>
+    <p>${n === 1 ? "The door swings open onto cold night air." : n === 2 ? "The lab door gives and the corridor beyond is empty." : "The vault gate opens. Sunlight, at last."}</p>
+    <div class="row">
+      ${next ? `<button class="btn gold" id="nx">Level ${next} →</button>` : ""}
+      <button class="btn" id="mn">Menu</button>
+    </div>`, { sticky: true });
+  card.querySelector("#mn").onclick = () => { closeModal(); showMenu(); };
+  if (next) card.querySelector("#nx").onclick = () => startLevel(next, false);
+}
+
+function showMenu() {
+  closeModal();
+  const last = +(localStorage.getItem("escapehouse.last") || 0);
+  const m = el("div", "menu");
+  const cards = [1, 2, 3].map(n => {
+    const L = LEVELS[n], s = loadLv(n);
+    const done = s && s.f && s.f.done;
+    return `<div class="lv ${n > 1 && !loadLv(n - 1) && !last ? "" : ""}" data-n="${n}">
+      <b>${n}. ${L.name}</b>
+      <small>${s && s.f && s.f.done ? "✓ completed" : s ? "in progress" : "not started"} · ${Object.keys(L.rooms).length} rooms</small></div>`;
+  }).join("");
+  m.innerHTML = `<div class="inner">
+    <h1>Escape</h1>
+    <p>three levels · nine rooms · one way out</p>
+    <div class="levels">${cards}</div>
+    <p style="margin-top:26px;font-size:12px;opacity:.75;letter-spacing:.02em">pick an item in the tray, then click the thing you want to use it on</p>
+    <p style="margin-top:6px;font-size:11px;opacity:.5">arrow keys move between rooms · progress saves automatically</p>
+  </div>`;
+  m.querySelectorAll(".lv").forEach(c => c.onclick = () => startLevel(+c.dataset.n, false));
+  const hb0 = $("#hintBtn"); if (hb0) hb0.style.display = "none";
+  document.getElementById("stage").appendChild(m);
+}
+
+document.getElementById("btnMenu").onclick = showMenu;
+document.getElementById("btnReset").onclick = () => {
+  const { card } = modal(`<h2>Reset this level?</h2><p>Your progress in ${LEVELS[G.level].name} will be erased.</p>
+    <div class="row"><button class="btn" id="y">Reset</button><button class="btn" id="n">Cancel</button></div>`, { sticky: true });
+  card.querySelector("#y").onclick = () => { clearLv(G.level); startLevel(G.level, true); };
+  card.querySelector("#n").onclick = closeModal;
+};
+
+document.getElementById("hintBtn").onclick = () => {
+  const box = $("#hintBox");
+  if (box.classList.contains("on")) hideHint(); else showHint();
+};
+
+document.addEventListener("keydown", e => {
+  if (e.key === "h" || e.key === "H") {
+    const box = $("#hintBox");
+    if (box.classList.contains("on")) hideHint(); else showHint();
+    return;
+  }
+  if (document.querySelector(".lock")) { if (e.key === "Escape") closeModal(); return; }
+  const map = { ArrowLeft: "l", ArrowRight: "r", ArrowUp: "u", ArrowDown: "d" };
+  const d = map[e.key]; if (!d) return;
+  const btn = document.querySelector(`.arrow[data-d="${d}"]`);
+  if (btn && !btn.classList.contains("off")) btn.click();
+});
+
+/* first paint */
+freshState(1, loadLv(1));
+header(1);
+go(G.room);
+showMenu();
+
+</script>
+</body>
+</html>

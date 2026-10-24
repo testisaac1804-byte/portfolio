@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content="대외홈페지 《영생》2.0은 인터네트를 통하여 위대한 수령 김일성동지와 위대한 령도자 김정일동지, 경애하는 김정은동지의 위대성과 불멸의 업적, 우리 공화국의 자랑찬 발전행로와 사회주의문명을 누려가는 우리 인민들의 모습, 기부사업에 적극 참가하고있는 조선인민들과 해외동포, 외국인들, 기금활동소식들을 글과 사진, 동영상으로 소개선전하는 홈페지입니다."/>
+        <meta name="keyword" content="김일성김정일기금리사회, 김일성김정일기금, 대외홈페지, 영생,  위대성, 불멸의 업적, 공화국, 사회주의, 문명, 인민, 기부, 창립경위, 사명, 기금증서, 기금규약, 기금회원규정, 기금출판물, 회고, 해외동포, 외국인, 기금활동, 소식, 조선인민, 글, 사진, 동영상, 소개, 선전, 기부증서, 마음, 그리움, 략력, 로작, 일화, 절세위인"/>
+        <title>영생</title>
+        
+        <!--plugins-->
+        <link href="/css/plugins/plugins.css" rel="stylesheet"/>
+        <link href="/css/font-awesome.css" rel="stylesheet"/>
+
+        <link href="/images/logo-dark.png" rel="shortcut icon" />
+        <link href="/plugins/masterslider/style/masterslider.css" rel="stylesheet">
+        <link href="/plugins/data-tables/datatables.min.css" rel="stylesheet" type="text/css" />
+        <link href="/plugins/data-tables/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+
+        
+        <link href="/css/site.css" rel="stylesheet">
+        <link href="/css/imgviedeo.css" rel="stylesheet">
+ 
+                        <link href="/css/style.css" rel="stylesheet">  
+                  
+        
+        <link href="/css/swiper.min.css" rel="stylesheet">
+
+        <link href="/css/slick.css" rel="stylesheet">
+        <link href="/css/slick-theme.css" rel="stylesheet">
+
+        <!-- jQuery plugins. -->
+        <script src="/js/bundle/bundle.js" type="text/javascript"></script>
+		<script src="/js/app.js" type="text/javascript"></script>
+		<script src="/plugins/masterslider/masterslider.min.js"></script>
+        <script src="/js/swiper.min.js"></script>
+        
+    </head>
+    <body id="body"> 
+        <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 hidden-md-down justify-content-between d-flex">
+                         <div class="text-left lang-pc">
+                            <ul class="info list-inline" style="margin-top: 5px;">
+                                <li class="hidden-xs-down list-inline-item"> <a  href="/index.php?lang=ko" style="font-family:WKLChongbong">조선어</a></li>
+                                <li class="hidden-xs-down list-inline-item"> <a  href="/index.php?lang=ru" style="font-family:arial;">русский язык</a></li>
+                                <li class="hidden-xs-down list-inline-item"> <a  href="/index.php?lang=cn">汉语</a></li>
+                                <li class="hidden-xs-down list-inline-item"> <a  href="/index.php?lang=en">English</a></li>
+                            </ul>
+                        </div>
+                        <div class="text-left lang-mv">
+                            <ul class="info list-inline" style="margin-top: 5px;">
+                                <li class="hidden-xs-down list-inline-item"> <a  href="/index.php?lang=ko" style="font-family:WKLChongbong">KP</a></li>
+                                <li class="hidden-xs-down list-inline-item"> <a  href="/index.php?lang=ru" style="font-family:arial;">Ru</a></li>
+                                <li class="hidden-xs-down list-inline-item"> <a  href="/index.php?lang=cn">Ch</a></li>
+                                <li class="hidden-xs-down list-inline-item"> <a  href="/index.php?lang=en">En</a></li>
+                            </ul>
+                        </div>
+                        <div class="text-right" style="padding-top:1px;">
+                            <form>
+                                <input type="text" id="serchbox" name="serchbox" class="form-control" style="height: 28px; padding:10px 17px" value=""
+                                placeholder="검색어를 입력하십시오."  autocomplete="off">
+                                <span class="search-close" style="right: 20px;">
+                                    <i class="ion-ios-search"></i>
+                                </span>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div><!--상단 끝-->
+        </div>
+        <nav class="navbar navbar-expand-md navbar-light bg-faded yamm">
+            <div class="container">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div style="display:flex;">
+                    <a class="navbar-brand" href="/index.php?lang=ko">
+                        <img src="/images/logo-dark.png" class="img-fluid"  title="" />
+                    </a>
+                    <div class="v-mark">
+                    <a href="/index.php?lang=ko">
+                        <img src="/images/mark.png" class="img-mark" alt="" />
+                    </a>
+                        <br>
+                        <span style="color:#fff;font-weight:500;"><b>김일성김정일</b>기금</span>
+                    </div>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="dropdown nav-item">
+                            <a href="/index.php/leader/ldmng?lang=ko" 
+                            style="color:#fff;" class="nav-link">위인의 업적</a> 
+                        </li>
+                        <li class="dropdown nav-item">
+                            <a href="/index.php/republic/ldmng?lang=ko" 
+                            style="color:#fff;" class="nav-link">공화국의 발전행로</a>
+                        </li>
+                        <li class="dropdown nav-item">
+                            <a href="/index.php/abouts/ldmng?lang=ko&idx=0" 
+                            style="color:#fff;" class="nav-link">기금에 대하여</a>
+                        </li>
+                        <li class="dropdown nav-item">
+                            <a href="/index.php/news/ldmng?lang=ko" 
+                            style="color:#7b7b82;" class="nav-link">기금활동소식</a>
+                        </li>
+                        <li class="dropdown nav-item">
+                            <a href="/index.php/world/ldmng?lang=ko"  
+                            style="color:#fff;"                            class="nav-link" >그리움의 세계</a>
+                        </li>
+                        <li class="dropdown nav-item">
+                            <a href="/index.php/videos/ldmng?lang=ko" 
+                            style="color:#fff;" class="nav-link">동영상</a>
+                        </li>
+                        <li class="dropdown nav-item">
+                            <a href="/index.php/news/moremng?lang=ko" 
+                            style="color:#fff;" class="nav-link">반향</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav><!--차례 끝-->
+<div class="container">
+    <input type="hidden" id="pagename" value="기금활동소식">
+    <div class="space-30"></div>
+    <div class="container mn-v">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="a-157 a-grad-1">
+                    <h5 style="margin-top:.2rem;margin-bottom:.2rem;color:#fff;">
+                    기금활동소식  (16)
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="photo-liat">
+        <div class="row lead-photo pc-view">
+            <div class="col-md-4 lead-list" style="border-radius:15px;">
+                <table id="sample_1" class="table table-striped table-bordered table-hover hide" width="96%">
+                    <thead style="display:none;">
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                                                <tr>
+                            <td>1</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(54)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        로씨야 떼오찌히오께안유한책임회사 사장에게 기부증서 수여                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-12-02]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>2</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(53)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        중국 베이징조아국제문화교류중심 리사장에게 기부증서 수여                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-12-02]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>3</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(52)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        <nobr><b><nobr><b>김일성</b></nobr><nobr><b>김정일</b></nobr></b></nobr>기금에 단체의 명의로 기부                                         &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-12-02]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>4</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(49)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        재일본조선인축하단 기금에 기부                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-11-05]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>5</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(48)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        총련 조선대학교 졸업학년학생조국방문단 기금에 기부                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-11-05]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>6</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(47)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        기금총회-2025 참가자들을 위한 연회 진행                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-10-30]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>7</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(46)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        기금총회-2025 참가자들의 친선련환모임 진행                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-10-30]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>8</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(45)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        기금총회대표단 평양시내 여러곳 참관                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-10-30]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>9</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(44)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        <nobr><b><nobr><b>김일성</b></nobr><nobr><b>김정일</b></nobr></b></nobr>기금총회-2025 진행                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-10-30]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>10</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(43)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        금수산태양궁전을 찾아 경의 표시                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-10-30]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>11</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(42)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        기금 기부증서 수여                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-10-08]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>12</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(23)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        경애하는 <nobr><b>김정은</b></nobr>동지께 기금리사회 명예리사가 꽃바구니를 보내여왔다                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-09-18]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>13</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(29)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        경애하는 <nobr><b>김정은</b></nobr>동지께 기금리사회 성원들이 꽃바구니를 보내여왔다                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-09-02]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>14</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(31)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        중국 동항시 쌍흠무역유한공사 총경리에게 기부증서 수여                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-08-02]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>15</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(30)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        경애하는 <nobr><b>김정은</b></nobr>동지께 기금리사회 명예리사가 꽃바구니를 보내여왔다                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-08-02]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>16</td>
+                            <td style="padding: 10px 5px;" onclick="detailview(32)">
+                                <div class="td-row">
+                                    <div class="content-first" style="text-align: justify;">
+                                        중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여                                        &nbsp;<i class='ion-camera'></i>
+                                    </div>
+                                    <div class="content-secont">[2025-07-28]</div>
+                                </div>
+                            </td>
+                        </tr>
+                                            </tbody>
+                </table>
+            </div>
+            <div class="col-md-8 leader-daily">
+                <div class="a-130 a-bg-red">
+                    <div class="a-130-c">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="title" class="sub-title"></div>
+                                <div id="slider" style="padding:0 5px;"></div>
+                                <div id="content"  class="contents-view"></div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div class="row lead-photo mobil-view" style="padding:0;">
+            <div class="panel-group" id="accordion">
+                <table id="sample_2" class="table table-striped table-bordered table-hover hide" width="96%">
+                    <thead style="display:none;">
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col54" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse54"  onclick="mdetailview(54)">
+                                                로씨야 떼오찌히오께안유한책임회사 사장에게 기부증서 수여&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-12-02]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse54"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider54" style="padding:0 5px;"></div>
+                                            <div id="content54" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col53" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse53"  onclick="mdetailview(53)">
+                                                중국 베이징조아국제문화교류중심 리사장에게 기부증서 수여&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-12-02]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse53"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider53" style="padding:0 5px;"></div>
+                                            <div id="content53" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col52" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse52"  onclick="mdetailview(52)">
+                                                <b>김일성</b><b>김정일</b>기금에 단체의 명의로 기부 &nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-12-02]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse52"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider52" style="padding:0 5px;"></div>
+                                            <div id="content52" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col49" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse49"  onclick="mdetailview(49)">
+                                                재일본조선인축하단 기금에 기부&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-11-05]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse49"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider49" style="padding:0 5px;"></div>
+                                            <div id="content49" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col48" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse48"  onclick="mdetailview(48)">
+                                                총련 조선대학교 졸업학년학생조국방문단 기금에 기부&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-11-05]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse48"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider48" style="padding:0 5px;"></div>
+                                            <div id="content48" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col47" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse47"  onclick="mdetailview(47)">
+                                                기금총회-2025 참가자들을 위한 연회 진행&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-10-30]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse47"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider47" style="padding:0 5px;"></div>
+                                            <div id="content47" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col46" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse46"  onclick="mdetailview(46)">
+                                                기금총회-2025 참가자들의 친선련환모임 진행&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-10-30]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse46"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider46" style="padding:0 5px;"></div>
+                                            <div id="content46" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col45" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse45"  onclick="mdetailview(45)">
+                                                기금총회대표단 평양시내 여러곳 참관&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-10-30]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse45"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider45" style="padding:0 5px;"></div>
+                                            <div id="content45" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col44" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse44"  onclick="mdetailview(44)">
+                                                <b>김일성</b><b>김정일</b>기금총회-2025 진행&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-10-30]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse44"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider44" style="padding:0 5px;"></div>
+                                            <div id="content44" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col43" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse43"  onclick="mdetailview(43)">
+                                                금수산태양궁전을 찾아 경의 표시&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-10-30]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse43"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider43" style="padding:0 5px;"></div>
+                                            <div id="content43" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col42" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse42"  onclick="mdetailview(42)">
+                                                기금 기부증서 수여&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-10-08]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse42"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider42" style="padding:0 5px;"></div>
+                                            <div id="content42" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col23" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse23"  onclick="mdetailview(23)">
+                                                경애하는 <b>김정은</b>동지께 기금리사회 명예리사가 꽃바구니를 보내여왔다&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-09-18]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse23"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider23" style="padding:0 5px;"></div>
+                                            <div id="content23" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col29" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse29"  onclick="mdetailview(29)">
+                                                경애하는 <b>김정은</b>동지께 기금리사회 성원들이 꽃바구니를 보내여왔다&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-09-02]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse29"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider29" style="padding:0 5px;"></div>
+                                            <div id="content29" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col31" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse31"  onclick="mdetailview(31)">
+                                                중국 동항시 쌍흠무역유한공사 총경리에게 기부증서 수여&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-08-02]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse31"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider31" style="padding:0 5px;"></div>
+                                            <div id="content31" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col30" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse30"  onclick="mdetailview(30)">
+                                                경애하는 <b>김정은</b>동지께 기금리사회 명예리사가 꽃바구니를 보내여왔다&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-08-02]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse30"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider30" style="padding:0 5px;"></div>
+                                            <div id="content30" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td style="padding: 10px 5px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div>
+                                            <a id="col32" class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#collapse32"  onclick="mdetailview(32)">
+                                                중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여&nbsp;<i class='ion-camera'></i>
+                                            </a>
+                                        </div>
+                                        <div style="text-align:right;color:#8b1f1f;">
+                                            <span>[2025-07-28]</span>
+                                        </div>
+                                    </div>
+                                    <div id="collapse32"
+                                        class='panel-collapse collapse'                                     
+                                     >
+                                        <div class="panel-body">
+                                            <div id="slider32" style="padding:0 5px;"></div>
+                                            <div id="content32" class="contents-view">
+				                    중국 료녕태성국제무역유한공사 총경리와 김형직사범대학에서 공부하고있는 류학생들에게 기부증서 수여</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                     
+                    </tbody>
+                </table>
+            </div>           
+        </div>
+        <div class="space-30"></div>
+    </div>
+</div>
+<script src="/js/slick.min.js"></script>
+<script type="text/javascript">
+		jQuery(document).ready(function() {
+            detailview(54);
+            mdetailview();
+
+		});    
+		
+        function detailview(idx) {
+            if(idx != undefined){
+                $.ajax({
+                    url: "/index.php/world/detailview",
+                    type: "get",
+                    data: {idx: idx},
+                    success:function (result){
+                        if(result!= null) {
+                            var _temp = JSON.parse(result);
+                            $('#content').empty();
+                            $('#title').empty();
+                            $('#slider').empty();
+                            var alt="";
+                            var title="";
+                                                                $('#title').append(_temp[0]['title_ko'].replace(/김일성/g, '<nobr><b>김일성</b></nobr>').replace(/김정일/g, "<nobr><b>김정일</b></nobr>").replace(/김정은/g, '<nobr><b>김정은</b></nobr>'));
+                                    var retext = _temp[0]['contents_ko'].replace(/김일성/g, '<nobr><b>김일성</b></nobr>').replace(/김정일/g, "<nobr><b>김정일</b></nobr>").replace(/김정은/g, '<nobr><b>김정은</b></nobr>');
+                                    $('#content').append(retext);
+
+                                    alt = _temp[0]['meta_ko'];
+                                    title =  _temp[0]['title_ko'];
+                            
+                            var arrImg = _temp[0]['images'].split(/,/);
+                            if(arrImg.length > 0 && arrImg[0] != "") {
+                                var imgcontent="";
+                                imgcontent +="<div class='product-images'>";
+                                    for(i=0;i<arrImg.length;i++) {
+                                        imgcontent +="<div>";
+                                            imgcontent +="<div class='image-imitation'>";
+                                                imgcontent +="<img src='/yongsaeng_data/contents/world/"+arrImg[i]+"' class='leader-fluid' alt='"+alt+"'>";
+                                            imgcontent +="</div>";
+                                        imgcontent +="</div>";
+                                    }
+                                imgcontent +="</div>";
+                                $('#slider').append(imgcontent);
+                                $('.leader-fluid').css("max-width", $(".product-images").width());
+                            }
+                            sendStatistics(title , idx);
+                            destroyCarousel();
+                            slickCarousel();
+                        }
+                    }
+                });
+            }
+        }
+
+        var oneClick=0;
+        function mdetailview(idx) {
+            if(idx != undefined)
+            {
+                $.ajax({
+                    url: "/index.php/world/detailview",
+                    type: "get", 
+                    data: {idx: idx},
+                    success:function (result){
+                        if(result!= null) {
+                                var _temp = JSON.parse(result);
+                                $('#content'+idx).empty();
+                                $('#slider'+idx).empty();
+                                var alt="";
+                                var _title = "";
+                                                                        var retext = _temp[0]['contents_ko'].replace(/김일성/g, '<nobr><b>김일성</b></nobr>').replace(/김정일/g, "<nobr><b>김정일</b></nobr>").replace(/김정은/g, '<nobr><b>김정은</b></nobr>');
+                                        $('#content'+idx).append(retext);
+
+                                        alt = _temp[0]['meta_ko'];
+                                        _title = _temp[0]['title_ko'];
+                                
+                                var arrImg = _temp[0]['images'].split(/,/);
+                                if(arrImg.length > 0 && arrImg[0] != "") {
+                                var imgcontent="";
+                                    imgcontent +="<div class='product-images'>";
+                                        for(i=0;i<arrImg.length;i++) {
+                                            imgcontent +="<div>";
+                                                imgcontent +="<div class='image-imitation'>";
+                                                    imgcontent +="<img src='/yongsaeng_data/contents/world/"+arrImg[i]+"' class='leader-fluid' alt='"+alt+"'>";
+                                                imgcontent +="</div>";
+                                            imgcontent +="</div>";
+                                        }
+                                    imgcontent +="</div>";
+                                    $('#slider'+idx).append(imgcontent);
+                                }
+                                
+                                // destroyCarousel(); 
+                                // slickCarousel();
+                                //20251126 수정
+                                // if(oneClick == 0){
+                                //     oneClick=1;
+                                //     $('#col'+idx).click();
+                                // }
+                                
+                                sendStatistics(_title, idx);
+                            }
+                    }
+                });
+            }
+        }
+
+        function slickCarousel() {
+            $('.product-images').slick({
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2500,
+                speed: 500,
+            });
+        }
+        
+        function destroyCarousel() {
+            if ($('.product-images').hasClass('slick-initialized')) {
+                 try{
+                    $('.product-images').slick('destroy');
+                 }
+                 catch(err) {}
+            }      
+        }
+        function sendStatistics(curTitle,idx) {   
+            curTitle = getTextFromHtml(curTitle);
+            title = $("#pagename").val()+"-"+curTitle;
+            var page = "/index.php/statistics/alizer_count";
+            var curType = "기사";
+            var curLang = "ko";
+            var link_url = window.location.href;
+            if(idx !== undefined){
+                link_url = link_url.replace("ldmng","rdmng");
+                var idxId = link_url.lastIndexOf("&idx=");
+                if(idxId >=0 ) link_url = link_url.substr(0,idxId);
+                link_url += "&idx=" + idx;
+            }
+            sendRequest(page, "POST" , 
+            {  
+                "title" : title,
+                "type" : curType,
+                "lang" : curLang,
+                "url" : link_url
+            });
+        }
+	</script>
+		<input type="text" id="hidden_lang" value="ko" style="display:none;"/>
+		<div id="footer" class="m-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="space-30"></div>
+                        <div class="footer-col">
+                            <p>&copy; 2025  년 <b>김일성김정일</b>기금</p>
+                            <p><i class="ion-home" style="font-family:WKLChongbong !important;"></i> 조선민주주의인민공화국 평양시 중구역 오탄동</p>
+                            <p><i class="ion-iphone"></i> +850-2-18111(18222-18999)<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(ext.381-8133)</br></p>
+                            <p><i class="ion-email"></i> KKF@star-co.net.kp</p>
+                        </div>
+                        <div class="space-30"></div>
+                    </div><!--col-4 end-->
+                    <div class="col-md-2">
+                        <div class="footer-col">
+                            
+                        </div> 
+                    </div><!--latest post col end-->
+                    <div class="col-md-5">
+                        <div class="footer-col">
+                            
+                        </div>
+                    </div><!--get in touch col end-->
+                </div><!--footer main row end-->  
+            </div><!--container-->
+        </div><!--footer end-->
+		
+		<div id="modal-form" class="modal fade" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-12 b-r">
+								<div>
+									<span  id="mtitle"></span><br><br>
+									<button type="button" class="sbtn" onclick="modalok()">예</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+        <!--back to top-->
+        <a href="#" class="scrollToTop"><i class="ion-android-arrow-dropup-circle"></i></a>
+        <!--back to top end-->
+        <script src="/js/master-slider-home.js"></script>
+        <script src="/plugins/data-tables/datatables.min.js" type="text/javascript"></script>
+        <script src="/plugins/data-tables/datatables.bootstrap.js" type="text/javascript"></script>
+
+
+        <script src="/js/my_ajax.js" type="text/javascript"></script>
+        
+	</body>
+    <script type="text/javascript">
+		
+        var TableDatatablesEditable1 = function () {
+			var initTable1 = function () {
+
+				var table = $('#sample_1'); 
+
+				// begin first table
+				table.dataTable({
+
+					"language": {
+						"aria": {
+							"sortAscending": ": activate to sort column ascending",
+							"sortDescending": ": activate to sort column descending"
+						},
+						"emptyTable": "현시할 내용이 없습니다.",
+						"info": "총 _TOTAL_ 개의 자료 현시",
+						"infoEmpty": "검색결과가 없습니다.",
+						"infoFiltered": "(검색령역 1 부터 _MAX_ 까지)",
+						"lengthMenu": " _MENU_행",
+						"search": "검색:",
+						"zeroRecords": "일치하는 내용이 없습니다.",
+						"paginate": {
+							"previous":"이전",
+							"next": "다음",
+							"last": "마지막",
+							"first": "처음"
+						}
+					},
+
+					"bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+					"lengthMenu": [
+						[10, 20, 30, -1],
+						[10, 20, 30, "전체"] // change per page values here
+					],
+					// set the initial value
+					"pageLength": 10,            
+					"pagingType": "bootstrap_full_number",
+					"columnDefs": [
+						{  // set default column settings
+							'orderable': false,
+							'targets': [0]
+						}, 
+						{
+							"searchable": false,
+							"targets": [0]
+						},
+						{
+							"className": "dt-right", 
+							//"targets": [2]
+						}
+					],
+					"order": [
+						// [1, "desc"]
+					] // set first column as a default sort by asc
+				});
+
+				table.find('.group-checkable').change(function () {
+					var set = jQuery(this).attr("data-set");
+					var checked = jQuery(this).is(":checked");
+					jQuery(set).each(function () {
+						if (checked) {
+							$(this).prop("checked", true);
+							$(this).parents('tr').addClass("active");
+							var obj=$(this);
+							var dtnum=obj.data('val');
+							ind = allNums.indexOf(dtnum+"|");
+							if(ind < 0) {
+								allNums+=dtnum+"|";
+								$('#check_no').val(allNums);
+							}
+						} else {
+							$(this).prop("checked", false);
+							$(this).parents('tr').removeClass("active");
+							var obj=$(this);
+							var dtnum=obj.data('val');
+							ind = allNums.indexOf(dtnum+"|");
+							if(ind >= 0) {
+								allNums = allNums.replace(dtnum+"|","");
+								$('#check_no').val(allNums);
+							}
+						}
+					});
+				});
+
+				table.on('change', 'tbody tr .checkboxes', function (e) {
+					$(this).parents('tr').toggleClass("active");
+					var obj=$(this);
+					var dtnum=obj.data('val');
+					ind = allNums.indexOf(dtnum+"|");
+					if(obj.prop("checked")==true) {
+						if(ind < 0) {
+							allNums+=dtnum+"|";
+							$('#check_no').val(allNums);
+						}
+					}
+					else {
+						if(ind >= 0) {
+							allNums = allNums.replace(dtnum+"|","");
+						}
+						$('#check_no').val(allNums);
+					}
+				});
+			}
+			return {
+				//main function to initiate the module
+				init: function () {
+					if (!jQuery().dataTable) {
+						return;
+					}
+
+					initTable1();	
+				}
+			};
+		}();
+
+        var TableDatatablesEditable2 = function () {
+			var initTable1 = function () {
+
+				var table = $('#sample_2');
+
+				// begin first table
+				table.dataTable({
+
+					"language": {
+						"aria": {
+							"sortAscending": ": activate to sort column ascending",
+							"sortDescending": ": activate to sort column descending"
+						},
+						"emptyTable": "현시할 내용이 없습니다.",
+						"info": "총 _TOTAL_ 개의 자료 현시",
+						"infoEmpty": "검색결과가 없습니다.",
+						"infoFiltered": "(검색령역 1 부터 _MAX_ 까지)",
+						"lengthMenu": " _MENU_행",
+						"search": "검색:",
+						"zeroRecords": "일치하는 내용이 없습니다.",
+						"paginate": {
+							"previous":"이전",
+							"next": "다음",
+							"last": "마지막",
+							"first": "처음"
+						}
+					},
+
+					"bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+					"lengthMenu": [
+						[10, 20, 30, -1],
+						[10, 20, 30, "전체"] // change per page values here
+					],
+					// set the initial value
+					"pageLength": 10,            
+					"pagingType": "bootstrap_full_number",
+					"columnDefs": [
+						{  // set default column settings
+							'orderable': false,
+							'targets': [0]
+						}, 
+						{
+							"searchable": false,
+							"targets": [0]
+						},
+						{
+							"className": "dt-right", 
+							//"targets": [2]
+						}
+					],
+					"order": [
+						// [1, "desc"]
+					] // set first column as a default sort by asc
+				});
+
+				
+			}
+			return {
+				//main function to initiate the module
+				init: function () {
+					if (!jQuery().dataTable) {
+						return;
+					}
+
+					initTable1();	
+				}
+			};
+		}();
+
+		var TableDatatablesEditable3 = function () {
+			var initTable3 = function () {
+
+				var table = $('#sample_3');
+
+				// begin first table
+				table.dataTable({
+
+					"language": {
+						"aria": {
+							"sortAscending": ": activate to sort column ascending",
+							"sortDescending": ": activate to sort column descending"
+						},
+						"emptyTable": "현시할 내용이 없습니다.",
+						"info": "총 _TOTAL_ 개의 자료 현시",
+						"infoEmpty": "검색결과가 없습니다.",
+						"infoFiltered": "(검색령역 1 부터 _MAX_ 까지)",
+						"lengthMenu": " _MENU_행",
+						"search": "검색:",
+						"zeroRecords": "일치하는 내용이 없습니다.",
+						"paginate": {
+							"previous":"이전",
+							"next": "다음",
+							"last": "마지막",
+							"first": "처음"
+						}
+					},
+
+					"bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+					"lengthMenu": [
+						[4, 8, 12, -1],
+						[4, 8, 12, "전체"] // change per page values here
+					],
+					// set the initial value
+					"pageLength": 4,            
+					"pagingType": "bootstrap_full_number",
+					"columnDefs": [
+						{  // set default column settings
+							'orderable': false,
+							'targets': [0]
+						}, 
+						{
+							"searchable": false,
+							"targets": [0]
+						},
+						{
+							"className": "dt-right", 
+							//"targets": [2]
+						}
+					],
+					"order": [
+						// [1, "desc"]
+					] // set first column as a default sort by asc
+				});
+
+				
+			}
+			return {
+				//main function to initiate the module
+				init: function () {
+					if (!jQuery().dataTable) {
+						return;
+					}
+
+					initTable3();	
+				}
+			};
+		}();
+
+		jQuery(document).ready(function() {
+			$("body").on('click','.ion-ios-search-strong',function(){
+				$(".form-control").focus();
+			});
+            TableDatatablesEditable1.init();
+            TableDatatablesEditable2.init();
+			TableDatatablesEditable3.init();
+			jQuery("#owl-partners").owlCarousel({
+				loop:true,
+				margin:0,
+				nav:false,
+				responsive:{
+					0:{
+						items:1
+					},
+					600:{
+						items:3
+					},
+					1000:{
+						items:6
+					}
+				}
+			});
+
+		
+		});  
+    	var videoBox=$('.video-box i');
+		videoBox.on('click',function(){
+			var video='<iframe class="embed-responsive-item"  allowfullscreen src="'+ $(this).attr('data-video')+'"></iframe>';
+			$(this).replaceWith(video);
+        });
+
+        $("#serchbox").bind("keypress", function(event) {
+			$("#serchbox").attr("autocomplete", "off");
+            if (event.which == 13) {
+                event.preventDefault();
+                var word = $("#serchbox").val();
+				//sh work 2025-9-8
+				if(word == "")
+				{
+				
+					showError("검색어를 정확히 입력하십시오");
+					return;
+				}
+				else if($("#hidden_lang").val() != "en" && containsEnglishAB(word)) {
+					location.href="/index.php/search/ldmng?lang=ko&empty=1";
+					return;
+				}else if($("#hidden_lang").val()=="en" && contains(word)){
+					location.href="/index.php/search/ldmng?lang=ko&empty=1";
+				}
+				else {
+					var sp = text_check(word);
+					if(sp != 0) {
+						showError("특수문자는 입력할수 없습니다.");
+						return;
+					}
+				}
+                location.href="/index.php/search/ldmng?lang=ko&word=" + word;
+            }
+        });
+
+		function showError(text) {
+			$('#mtitle').empty();
+			$('#mtitle').append(text);
+			$('#modal-form').modal('show');
+			$(".form-control").css('border','solid 1px #ff0000');
+		}
+
+		function containsEnglishAB(text) {
+			var i;
+			for(i=0; i<text.length; i++) {
+				var code = text.charCodeAt(i);
+				if((code >= 65 && code <= 90) || (code >= 97 && code <= 123) ||(code == 39))
+					return true;
+			}
+		}
+		function contains(text){
+			var i;
+			for(i=0;i<text.length;i++){
+				var code = text.charCodeAt(i);
+				if(code == 39)
+				return true;
+			}
+		}
+
+		function text_check(text){
+			var str_check=0;
+			var aaa1=text;
+			var len1=aaa1.length;
+			var i1=0;
+			var m1=0;
+			var j1;
+			var astr_0 =',<,>,;,{,},@,#,^,&,|,`,$,%,*,-,+,~,?,(,),[,],:,",/';
+			var astr_1=astr_0.split(",");
+			for(i1=0;i1<len1;i1++){
+				var text_str=aaa1.substring(i1,i1+1);
+				for(j1=1;j1<26;j1++){
+					if(text_str==astr_1[astr_1.length-j1]){
+						m1++;
+					}
+				}
+				if(m1!=0){
+					str_check++;
+					m1=0;
+				}else{
+					m1=0;
+				}
+			}
+			return str_check;
+		}
+		function text(text){
+			var str_check=0;
+			var aaa1=text;
+			var len1=aaa1.length;
+			var i1=0;
+			var m1=0;
+			var j1;
+			var astr_0 =',b,r,n,b,s,p';
+			var astr_1=astr_0.split(",");
+			for(i1=0;i1<len1;i1++){
+				var text_str=aaa1.substring(i1,i1+1);
+				for(j1=1;j1<7;j1++){
+					if(text_str==astr_1[astr_1.length-j1]){
+						m1++;
+					}
+				}
+				if(m1!=0){
+					str_check++;
+					m1=0;
+				}else{
+					m1=0;
+				}
+			}
+			return str_check;
+		}
+
+		function modalok(){
+            $('#modal-form').modal('hide');
+			$(".form-control").css('border','');
+        }
+        
+        window.addEventListener( "mousewheel",
+            function(e) {
+                if (e.ctrlKey == true || e.metaKey == true)
+            e.preventDefault();
+            },
+            { capture: false, passive: false, once: false }
+        );
+
+        document.addEventListener("keydown",
+            function(e) {
+            if (
+                e.keyCode == 17 ||
+                e.keyCode == 187 ||
+                e.keyCode == 189 ||
+                e.keyCode == 109 ||
+                e.keyCode == 107
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+	</script>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DOORS — a hotel with a hundred doors</title>
+<meta name="description" content="A first-person hotel of one hundred doors. Something moves between them. Browser game, no downloads.">
+<style>
+/* ── tokens ───────────────────────────────────────────────────────────── */
+:root{
+  --bg:#07070a; --bg2:#0d0d12; --panel:#101017;
+  --ink:#ece7dd; --ink-dim:#9d968a; --ink-faint:#6b655c;
+  --blood:#b3261e; --blood-lt:#e0493c;
+  --brass:#c8a45c; --brass-dim:#8a7442;
+  --line:rgba(200,164,92,.22);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px;
+  --r:3px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);-webkit-font-smoothing:antialiased}
+canvas{display:block;position:fixed;inset:0;width:100%;height:100%;touch-action:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+#app{position:fixed;inset:0}
+
+/* ── screens ──────────────────────────────────────────────────────────── */
+.screen{position:fixed;inset:0;display:none;place-items:center;padding:var(--s5);
+  background:radial-gradient(120% 90% at 50% 30%,rgba(8,8,12,.86),rgba(4,4,6,.975));
+  z-index:20;overflow:auto}
+.screen.on{display:grid}
+.panel{width:min(560px,100%);text-align:center;position:relative}
+.panel.wide{width:min(880px,100%)}
+
+/* ── type ─────────────────────────────────────────────────────────────── */
+.wordmark{font-family:var(--serif);font-size:clamp(56px,15vw,112px);line-height:.92;
+  letter-spacing:.16em;margin:0 0 var(--s2);font-weight:400;
+  color:#f2ece2;text-shadow:0 0 62px rgba(179,38,30,.35)}
+.wordmark span{color:var(--blood);text-shadow:0 0 34px rgba(224,73,60,.55)}
+.tagline{font-family:var(--serif);font-style:italic;font-size:clamp(14px,3.6vw,18px);
+  color:var(--ink-dim);margin:0 0 var(--s6);letter-spacing:.02em}
+.eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--brass-dim);
+  margin:0 0 var(--s3)}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(26px,6vw,38px);margin:0 0 var(--s2);
+  letter-spacing:.06em}
+.sub{color:var(--ink-dim);font-size:14px;line-height:1.55;margin:0 0 var(--s5);max-width:44ch;
+  margin-inline:auto}
+
+/* ── buttons ──────────────────────────────────────────────────────────── */
+.stack{display:grid;gap:var(--s2);max-width:340px;margin:0 auto}
+.btn{display:flex;align-items:center;justify-content:center;gap:var(--s2);
+  min-height:52px;padding:0 var(--s5);border:1px solid var(--line);border-radius:var(--r);
+  background:linear-gradient(180deg,rgba(28,28,36,.9),rgba(14,14,19,.9));
+  font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);
+  transition:border-color .16s,background .16s,transform .06s}
+.btn:hover{border-color:var(--brass);background:linear-gradient(180deg,rgba(40,34,26,.95),rgba(20,17,13,.95))}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.btn.primary{border-color:var(--blood);color:#f6ece8;
+  background:linear-gradient(180deg,#7d1d16,#4a100c)}
+.btn.primary:hover{background:linear-gradient(180deg,#a02519,#5d140e);border-color:var(--blood-lt)}
+.btn.ghost{background:none;border-color:rgba(255,255,255,.10);color:var(--ink-dim);
+  letter-spacing:.12em;min-height:44px;font-size:12px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;gap:var(--s2);justify-content:center;flex-wrap:wrap}
+
+/* ── floor list ───────────────────────────────────────────────────────── */
+.floors{display:grid;gap:10px;text-align:left;margin:0 0 var(--s5)}
+.floor{display:grid;grid-template-columns:1fr auto;gap:4px var(--s4);align-items:start;
+  padding:14px 16px;border:1px solid rgba(255,255,255,.07);border-radius:var(--r);
+  background:rgba(255,255,255,.018)}
+.floor.playable{border-color:var(--line);background:linear-gradient(180deg,rgba(40,32,20,.35),rgba(14,14,19,.5))}
+.floor h3{font-family:var(--serif);font-weight:400;font-size:17px;margin:0;letter-spacing:.04em}
+.floor .kind{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);
+  margin:0 0 3px}
+.floor p{grid-column:1/-1;margin:6px 0 0;font-size:12.5px;line-height:1.5;color:var(--ink-dim)}
+.chip{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;padding:4px 8px;border-radius:99px;
+  border:1px solid currentColor;white-space:nowrap;align-self:start}
+.chip.live{color:#8fd6a0}
+.chip.dev{color:var(--ink-faint)}
+
+/* ── how to play ──────────────────────────────────────────────────────── */
+.keys{display:grid;gap:8px;text-align:left;margin:0 0 var(--s5)}
+.krow{display:grid;grid-template-columns:112px 1fr;gap:var(--s3);align-items:baseline;
+  padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.055);font-size:13px}
+.krow b{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--brass);
+  background:rgba(200,164,92,.10);border:1px solid var(--line);border-radius:2px;
+  padding:3px 6px;text-align:center;font-weight:400}
+.krow span{color:var(--ink-dim);line-height:1.45}
+.note{font-size:12px;color:var(--ink-faint);line-height:1.55;margin:var(--s4) 0 0}
+
+/* ── settings ─────────────────────────────────────────────────────────── */
+.setrow{display:grid;grid-template-columns:1fr 150px 42px;gap:var(--s3);align-items:center;
+  margin:0 0 var(--s4);font-size:13px;text-align:left}
+.setrow label{color:var(--ink-dim)}
+.setrow output{font-family:var(--mono);font-size:11px;color:var(--brass);text-align:right}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:22px;background:none}
+input[type=range]::-webkit-slider-runnable-track{height:2px;background:rgba(255,255,255,.16)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;margin-top:-6px;
+  border-radius:50%;background:var(--brass);border:0}
+input[type=range]:focus-visible{outline:2px solid var(--brass);outline-offset:4px}
+
+/* ── HUD ──────────────────────────────────────────────────────────────── */
+#hud{position:fixed;inset:0;display:none;pointer-events:none;z-index:10;
+  font-family:var(--sans);--safe:max(16px,env(safe-area-inset-left))}
+#hud.on{display:block}
+.plaque{position:absolute;top:var(--s4);left:var(--safe);display:flex;align-items:center;gap:10px;
+  padding:7px 12px 7px 10px;border-radius:2px;
+  background:linear-gradient(180deg,#2a2317,#15110b);border:1px solid #6d5c33;
+  box-shadow:0 2px 10px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.10)}
+.plaque .lbl{font-size:9px;letter-spacing:.2em;color:#9c8850;text-transform:uppercase}
+.plaque .num{font-family:var(--serif);font-size:21px;line-height:1;color:#e8d3a0;letter-spacing:.06em;
+  min-width:2.1ch;text-align:right}
+#hud .pause{position:absolute;top:var(--s4);right:var(--s4);pointer-events:auto;
+  width:40px;height:40px;border:1px solid var(--line);border-radius:2px;color:var(--ink-dim);
+  display:grid;place-items:center;background:rgba(6,6,9,.6);font-size:13px}
+#hud .pause:hover{color:var(--ink);border-color:var(--brass)}
+.bars{position:absolute;left:var(--safe);bottom:calc(34px + env(safe-area-inset-bottom));display:grid;gap:5px;width:164px}
+.bar{height:5px;background:rgba(255,255,255,.10);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;width:100%;transition:width .18s linear}
+.bar.hp>i{background:linear-gradient(90deg,#8d2b22,#d24a38)}
+.bar.st>i{background:linear-gradient(90deg,#4d4432,#a8915f)}
+.bar-lbl{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink-faint)}
+.items{position:absolute;right:var(--s4);bottom:calc(34px + env(safe-area-inset-bottom));display:flex;gap:6px;align-items:flex-end}
+.slot{width:42px;height:42px;border:1px solid rgba(255,255,255,.10);border-radius:2px;
+  background:rgba(6,6,9,.55);display:grid;place-items:center;position:relative;
+  font-family:var(--mono);font-size:11px;color:var(--ink-dim)}
+.slot.has{border-color:var(--line);color:var(--brass);background:rgba(30,24,14,.6)}
+.slot .n{position:absolute;right:2px;bottom:1px;font-size:8.5px;letter-spacing:0;color:var(--ink-dim)}
+.slot svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.4}
+#cross{position:absolute;left:50%;top:50%;width:3px;height:3px;margin:-1.5px 0 0 -1.5px;
+  border-radius:50%;background:rgba(255,255,255,.5);opacity:0;transition:opacity .2s}
+#cross.on{opacity:1}
+#prompt{position:absolute;left:50%;top:calc(50% + 24px);transform:translateX(-50%);
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#efe8dc;
+  background:rgba(6,6,9,.72);border:1px solid var(--line);border-radius:2px;padding:7px 12px;
+  white-space:nowrap;opacity:0;transition:opacity .14s}
+#prompt.on{opacity:1}
+#hint{position:absolute;left:50%;bottom:96px;transform:translateX(-50%);max-width:min(520px,80vw);
+  text-align:center;font-family:var(--serif);font-style:italic;font-size:15px;line-height:1.5;
+  color:#e4dccd;text-shadow:0 2px 10px #000;opacity:0;transition:opacity .5s}
+#hint.on{opacity:1}
+#title-card{position:absolute;left:50%;top:18%;transform:translateX(-50%);text-align:center;
+  opacity:0;transition:opacity .8s}
+#title-card.on{opacity:1}
+#title-card .lbl{font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--brass-dim)}
+#title-card .big{font-family:var(--serif);font-size:clamp(30px,7vw,52px);letter-spacing:.10em;
+  color:#f0e9dc;text-shadow:0 0 40px rgba(0,0,0,.9)}
+#title-card .small{font-family:var(--serif);font-style:italic;color:var(--ink-dim);font-size:14px}
+#flash{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;z-index:12;
+  transition:opacity .35s}
+#vign{position:fixed;inset:0;pointer-events:none;z-index:9;opacity:0;transition:opacity .3s;
+  background:radial-gradient(120% 100% at 50% 50%,transparent 40%,rgba(120,10,6,.55) 100%)}
+
+/* ── touch ────────────────────────────────────────────────────────────── */
+#touch{position:fixed;inset:0;display:none;z-index:11;pointer-events:none}
+#touch.on{display:block}
+#stick{position:absolute;left:20px;bottom:28px;width:118px;height:118px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.28);pointer-events:auto;
+  touch-action:none}
+#stick i{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;
+  border-radius:50%;background:rgba(230,225,215,.24);border:1px solid rgba(255,255,255,.3)}
+#tbtns{position:absolute;right:18px;bottom:26px;display:grid;gap:10px;justify-items:end}
+.tbtn{pointer-events:auto;width:64px;height:64px;border-radius:50%;font-size:10px;letter-spacing:.1em;
+  border:1px solid rgba(255,255,255,.2);background:rgba(10,10,14,.55);color:#e6e0d4;
+  display:grid;place-items:center;text-transform:uppercase}
+.tbtn:active{background:rgba(80,20,16,.7)}
+#tlook{position:absolute;inset:0;pointer-events:auto;touch-action:none}
+
+/* ── misc ─────────────────────────────────────────────────────────────── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);margin:0 0 var(--s5)}
+.stat{border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:12px 8px}
+.stat b{display:block;font-family:var(--serif);font-size:22px;color:var(--brass);font-weight:400}
+.stat span{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint)}
+.foot{position:fixed;bottom:14px;left:0;right:0;text-align:center;font-size:10.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:#3f3b35;z-index:21;pointer-events:none;transition:opacity .3s}
+body.playing .foot{opacity:0}
+@media (pointer:coarse), (max-width:560px){
+  /* thumb territory is bottom-left and bottom-right; keep the readouts up top */
+  .bars{left:var(--safe);top:66px;bottom:auto;width:118px;gap:4px}
+  .items{right:var(--s4);top:66px;bottom:auto}
+  .slot{width:38px;height:38px}
+  .plaque .num{font-size:18px}
+}
+@media (max-width:480px){
+  .wordmark{letter-spacing:.10em}
+  .btn{min-height:50px;font-size:12px;letter-spacing:.14em}
+  .floor{grid-template-columns:1fr;gap:6px}
+  .chip{justify-self:start}
+  .krow{grid-template-columns:96px 1fr;font-size:12.5px}
+  .setrow{grid-template-columns:1fr 90px 34px}
+  .stats{grid-template-columns:1fr;gap:8px}
+  .stat{display:flex;justify-content:space-between;align-items:baseline}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="vign"></div>
+  <div id="flash"></div>
+
+  <!-- HUD -->
+  <div id="hud">
+    <div class="plaque"><span class="lbl">Door</span><span class="num" id="hud-door">1</span></div>
+    <button class="pause" id="btn-pause" aria-label="Pause">❚❚</button>
+    <div id="cross"></div>
+    <div id="prompt"></div>
+    <div id="hint"></div>
+    <div id="title-card"><div class="lbl" id="tc-lbl">Floor 1</div>
+      <div class="big" id="tc-big">The Hotel</div>
+      <div class="small" id="tc-small"></div></div>
+    <div class="bars">
+      <div class="bar-lbl"><span>Health</span><span id="hp-num">100</span></div>
+      <div class="bar hp"><i id="hp-fill"></i></div>
+      <div class="bar-lbl" style="margin-top:2px"><span>Breath</span><span id="st-num"></span></div>
+      <div class="bar st"><i id="st-fill"></i></div>
+    </div>
+    <div class="items">
+      <div class="slot" id="slot-key" title="Key"><svg viewBox="0 0 24 24"><circle cx="8" cy="12" r="3.2"/><path d="M11.2 12H20M17 12v3M14 12v2.2"/></svg><span class="n"></span></div>
+      <div class="slot" id="slot-pick" title="Lockpick"><svg viewBox="0 0 24 24"><path d="M4 20l7-7M14 6l4 4M18 4l2 2-4 4-2-2z"/></svg><span class="n" id="pick-n"></span></div>
+      <div class="slot" id="slot-torch" title="Torch"><svg viewBox="0 0 24 24"><path d="M9 3h6v4l-1 2v11h-4V9L9 7z"/><path d="M12 1v1"/></svg><span class="n" id="torch-n"></span></div>
+    </div>
+  </div>
+
+  <!-- touch -->
+  <div id="touch">
+    <div id="tlook"></div>
+    <div id="stick"><i id="stick-nub"></i></div>
+    <div id="tbtns">
+      <button class="tbtn" id="tb-act">Use</button>
+      <button class="tbtn" id="tb-hide">Hide</button>
+      <button class="tbtn" id="tb-torch">Torch</button>
+    </div>
+  </div>
+
+  <!-- loading -->
+  <div class="screen on" id="loading">
+    <div class="panel">
+      <p class="eyebrow">Loading the hotel</p>
+      <div style="height:2px;background:rgba(255,255,255,.10);overflow:hidden;margin:0 auto 14px;max-width:260px">
+        <div id="load-bar" style="height:100%;width:8%;background:var(--brass);transition:width .3s"></div></div>
+      <p class="sub" style="margin:0">Building rooms, mixing sounds.</p>
+    </div>
+  </div>
+
+  <!-- lobby -->
+  <div class="screen" id="lobby">
+    <div class="panel">
+      <h1 class="wordmark">DOO<span>R</span>S</h1>
+      <p class="tagline">a hotel with a hundred doors</p>
+      <div class="stack">
+        <button class="btn primary" id="btn-play">Enter Floor 1 · The Hotel</button>
+        <button class="btn" id="btn-backdoor">The Backdoor · −50 → −01</button>
+        <div class="row">
+          <button class="btn ghost" id="btn-floors">Floors</button>
+          <button class="btn ghost" id="btn-howto">How to play</button>
+          <button class="btn ghost" id="btn-settings">Settings</button>
+        </div>
+      </div>
+      <p class="note" id="lobby-note">Headphones recommended. The hotel is louder than it looks.</p>
+    </div>
+  </div>
+
+  <!-- floors -->
+  <div class="screen" id="floors">
+    <div class="panel wide">
+      <p class="eyebrow">Official floors</p>
+      <h2>Where this game goes</h2>
+      <p class="sub">Two are playable in this build. The rest are listed exactly as they are in the
+        game's own roadmap — not playable, not faked.</p>
+      <div class="floors" id="floor-list"></div>
+      <button class="btn ghost" id="btn-floors-back">Back</button>
+    </div>
+  </div>
+
+  <!-- how to play -->
+  <div class="screen" id="howto">
+    <div class="panel">
+      <p class="eyebrow">Survive</p>
+      <h2>How to play</h2>
+      <div class="keys">
+        <div class="krow"><b>W A S D</b><span>Walk. Walking is loud — the hotel hears it.</span></div>
+        <div class="krow"><b>Shift</b><span>Sprint. Faster, much louder.</span></div>
+        <div class="krow"><b>Ctrl</b><span>Crouch. Silent, slow. The only way past The Figure.</span></div>
+        <div class="krow"><b>Mouse</b><span>Look. Click to capture the cursor.</span></div>
+        <div class="krow"><b>E</b><span>Open doors, take items, throw breakers, hide.</span></div>
+        <div class="krow"><b>F</b><span>Torch. Battery drains; it is the only light in dead rooms.</span></div>
+        <div class="krow"><b>Esc</b><span>Pause.</span></div>
+      </div>
+      <p class="note">Rush comes when the lights stutter — hide in a wardrobe. Screech only leaves
+        if you look straight at it. When something says TURN AROUND, walk backwards. And never,
+        ever run near The Figure.</p>
+      <button class="btn ghost" id="btn-howto-back">Back</button>
+    </div>
+  </div>
+
+  <!-- settings -->
+  <div class="screen" id="settings">
+    <div class="panel">
+      <p class="eyebrow">Options</p>
+      <h2>Settings</h2>
+      <div class="setrow"><label for="s-sens">Look sensitivity</label>
+        <input type="range" id="s-sens" min="30" max="220" value="100"><output id="o-sens">100%</output></div>
+      <div class="setrow"><label for="s-vol">Volume</label>
+        <input type="range" id="s-vol" min="0" max="100" value="70"><output id="o-vol">70%</output></div>
+      <div class="setrow"><label for="s-quality">Render scale</label>
+        <input type="range" id="s-quality" min="50" max="100" value="100"><output id="o-quality">100%</output></div>
+      <button class="btn ghost" id="btn-settings-back">Back</button>
+    </div>
+  </div>
+
+  <!-- pause -->
+  <div class="screen" id="pause">
+    <div class="panel">
+      <p class="eyebrow" id="pause-at">Door 1</p>
+      <h2>Paused</h2>
+      <div class="stack">
+        <button class="btn primary" id="btn-resume">Resume</button>
+        <button class="btn ghost" id="btn-pause-settings">Settings</button>
+        <button class="btn ghost" id="btn-quit">Abandon run</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- death -->
+  <div class="screen" id="dead">
+    <div class="panel">
+      <p class="eyebrow" id="dead-at">Door 1</p>
+      <h2 style="color:#e8c9c4">You died</h2>
+      <p class="sub" id="dead-cause">Something found you.</p>
+      <div class="stats">
+        <div class="stat"><b id="dead-doors">0</b><span>Doors</span></div>
+        <div class="stat"><b id="dead-time">0:00</b><span>Survived</span></div>
+        <div class="stat"><b id="dead-deaths">1</b><span>Deaths</span></div>
+      </div>
+      <div class="stack">
+        <button class="btn primary" id="btn-retry">Try the door again</button>
+        <button class="btn ghost" id="btn-dead-lobby">Return to lobby</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- win -->
+  <div class="screen" id="won">
+    <div class="panel">
+      <p class="eyebrow">Floor 1 · The Hotel</p>
+      <h2 style="letter-spacing:.18em">ESCAPED</h2>
+      <p class="sub" id="won-line">The elevator closes on a hundred doors.</p>
+      <div class="stats">
+        <div class="stat"><b id="won-doors">100</b><span>Doors</span></div>
+        <div class="stat"><b id="won-time">0:00</b><span>Time</span></div>
+        <div class="stat"><b id="won-deaths">0</b><span>Deaths</span></div>
+      </div>
+      <div class="stack">
+        <button class="btn" id="btn-again">Run it again</button>
+        <button class="btn ghost" id="btn-won-lobby">Lobby</button>
+      </div>
+      <p class="note" style="margin-top:22px">Floor 2 — The Mines is not in this build. It begins
+        where this elevator ends: at the bottom of a crashed lift.</p>
+    </div>
+  </div>
+
+  <p class="foot">fan-made browser tribute · no assets from the original game</p>
+</div>
+<script src="assets/three.min.js"></script>
+<script src="js/core.js"></script>
+<script src="js/world.js"></script>
+<script src="js/entities.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

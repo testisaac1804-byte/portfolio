@@ -24,4 +24,4 @@ Casio fx-CG50 add-in toolchain (C), part of Isaac's calculator-game collection.
 - `2048.cg-50.g3a` — 50 KB (compiled Casio add-in, binary — not line-counted)
 
 ---
-_Spec generated from the project's own files on 2026-09-28 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._
+_Spec generated from the project's own files on 2026-10-22 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._

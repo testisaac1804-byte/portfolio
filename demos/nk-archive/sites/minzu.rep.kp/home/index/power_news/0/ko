@@ -1,0 +1,431 @@
+
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>민주조선 | 조선민주주의인민공화국 최고인민회의 상임위원회 및 내각기관지</title>
+    <meta charset="utf8"/>
+    <link rel="icon" href="/resource/images/cholima.png" type="image/x-icon" />
+    <link href="/resource/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/skin/default.css">
+    <link rel="stylesheet" href="/css/blueimp-gallery.min.css">
+    <link href="/css/style_gallery.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resource/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/first_ko.css">
+    <script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+        <link href="/assets/css/nivo-lightbox.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/css/font.css">
+</head> 
+<body id="top" style="background-color: #fff;font-family:KPCheonRiMa; min-width: 1100px;  "> 
+    <header id="header"   >  
+        <div class="fixedMenu" style="background: url(/resource/custom/header_bg_right_1.png)  repeat-x ; " >
+            <div style="background: url(/resource/custom/header_bg_left.png) no-repeat left 0;   height: 85px; font-family: 'KPCheonRiMa';">   
+                <div class="container" style="background: url(/resource/header_back.jpg) no-repeat center top ; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; min-width:100%!important; "  >
+                    <ul class="menu_top" style="padding-right: 15px;">
+                        <form id="lang" method="post" action="/home/index">
+                            <input id="language" name="language" value="" hidden />
+                            <input id="page" name="page" value="power_news" hidden />
+                            <input type="hidden" name="_csrf" value="4bdad80ffea6cb500f9a4d75097a3c01"/>
+                        </form>
+                        <li>
+                            <a style="background-color: #004df3;"  href = "/home/index/power_news/0/ko">조선어                            </a>
+                        </li>
+                        <li>
+                            <a  href = " /home/index/power_news/0/en">
+                                English                            </a>
+                        </li>
+                        <li>
+                            <a  href ="/home/index/power_news/0/ch">
+                                 汉语                            </a>
+                        </li>
+                    </ul> 
+                    <div class="logo " style="padding-left: 10%;">
+                        <a href="/Home/index/first/0/ko" onclick="setPage('first');" style="display:block;margin-bottom:5px;"><img src="/resource/logo.png"></a>
+                    </div> 
+                </div>
+                <div class="mobile1" style="font-family:'KPCheonRiMa'; ">
+                    <div class="rightPart1" style="  font-family: 'KPCheonRiMa';  font: inherit; ">
+                        <b>  
+                            <ul class="menubar1" style="font-family:'KPCheonRiMa';font-size: 13px; " > 
+                                <li   >
+                                    <a href="/home/index/first/0/ko"  style=" /* text-shadow: 1px 1px 1px #000!important;*/font-family:'KPCheonRiMa'; " >
+                                        <b>첫페지</b>
+                                    </a>
+                                </li>
+                                <li   >
+                                    <a  href="/home/index/revolution/0/ko"     >
+                                        <b>혁명활동소식</b>
+                                    </a>
+                                </li  >
+                                <li   >
+                                    <a  href="/home/index/power_news/0/ko" class="active1"   >
+                                        <b>정권기관소식</b>
+                                    </a>
+                                </li>
+                                <li class="has-dropdown"  >
+                                    <a href="/home/index/all_view/0/ko"     >
+                                     <font  ><b>분야별기사</b></font></a>
+                                     <ul class="dropdown" style="width: 200px;padding-right: 10px;padding-left: 0px;">
+                                            <li>
+                                                <a href="/home/index/politics/0/ko"  >정치 
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/home/index/economy/0/ko"  >경제                                                </a>
+                                            </li>
+                                            <li>
+                                                <a  href="/home/index/culture/0/ko"  >문화                                                </a>
+                                            </li>
+                                            <li style="padding-bottom:px;">
+                                                <a  href="/home/index/tourist/0/ko "  >관광,명승지                                                </a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="/home/index/overseas/0/ko"  >해외동포                                                </a>
+                                            </li>
+                                            <li>
+                                                <a  href="/home/index/international/0/ko"  >국제적련대성                                                </a>
+                                            </li>
+                                    </ul>
+                                </li>
+                                <li  class="has-dropdown">
+                                    <a  href="/home/index/media/0/ko"  > <font   ><b> 다매체</b></font></a>
+                                    <ul class="dropdown" style="padding-right: 10px;padding-left: 0px;">
+                                        <li><a href="/home/index/photos/0/ko"  >사진</a></li>
+                                        <li><a  href="/home/index/video/0/ko"  >동영상</a>
+                                        </li> 
+                                    </ul>
+                                </li>    
+                                <li  class=" dropdown">
+                                    <div class="btn-group pull-right">
+                                        <a  href="/home/index/search/0/ko"  class=" btn-sm btn-outline dropdown-toggle">검색</a>
+                                                                            </div> 
+                                </li>  
+                             </ul>      
+                        </b>
+                    </div>
+                </div> 
+                <div style="clear: box;height: 20px;"></div>
+            </div>       
+         </div>
+    </header> 
+    <style type="text/css">
+        .modal-backdrop{
+            z-index: 0;
+        }
+    </style>
+<div id="content1" style=" top: 80px;position: absolute;" >
+	<div class="revolContent" >
+		<div class="row" >
+			<div class="powerheader col-sm-12" style="background: linear-gradient(to right, #0a43b6, #2e49e2, #2e49e2,#69b2f1,#2e49e2, #2e49e2,#0a43b6); border-bottom: 5px solid  #0a43b6;    " >
+				<h1 ><a href="/home/index/power_news/0/ko"><font style="font-size: 28px;font-family: 'KPCheonRiMa';" color="#fff" ><b>정 권 기 관 소 식</b></font></a></h1>
+			</div>
+		</div>
+		<div class="row">	
+			<div class="col-sm-12">
+				<table id="simple-table" class="table table-striped table-bordered table-hover" style="border:0px solid black;">
+					<style type="text/css">
+						.search-result-counter
+						 {
+						 	box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);
+						 	height: 35px;
+						 	line-height: 24px;
+						 	padding: 8px;
+						 	text-align: center;
+						 	border-radius: 100px;
+						 	width: 35px;
+						 }
+					</style> 
+
+					<tbody>
+							
+							<tr style="vertical-align: bottom;font-family: 'KPCheonRiMa';margin-top: 12px;"   >
+							<td style="border: 0px;padding-bottom: 0px; width: 40px; padding-left: 50px;">
+								<div class="search-result-counter" style="background-color: #cadafc;">
+									1
+								</div>
+							</td>
+							<td style="border: 1px; border-bottom:1px dashed #c1c1c1; text-align: left; border-bottom-style: dashed;font-size: 16px;vertical-align: bottom;" >
+
+								<a href="/Home/index/disp/6528/ko" rol="button">
+								조선민주주의인민공화국 최고인민회의 상임위원회 제14기 제35차전원회의 진행
+								</a>
+										<img src="/./resource/images/camera.png">
+								
+								&nbsp&nbsp
+								<font size='3'  color="#173ae8">
+									[2025.5.30.]
+								</font>
+							</td>
+							
+							<tr style="vertical-align: bottom;font-family: 'KPCheonRiMa';margin-top: 12px;"   >
+							<td style="border: 0px;padding-bottom: 0px; width: 40px; padding-left: 50px;">
+								<div class="search-result-counter" style="background-color: #cadafc;">
+									2
+								</div>
+							</td>
+							<td style="border: 1px; border-bottom:1px dashed #c1c1c1; text-align: left; border-bottom-style: dashed;font-size: 16px;vertical-align: bottom;" >
+
+								<a href="/Home/index/disp/6529/ko" rol="button">
+								최룡해동지가 총련결성 70돐 재일본조선인감사단을 만났다
+								</a>
+										<img src="/./resource/images/camera.png">
+								
+								&nbsp&nbsp
+								<font size='3'  color="#173ae8">
+									[2025.5.30.]
+								</font>
+							</td>
+							
+							<tr style="vertical-align: bottom;font-family: 'KPCheonRiMa';margin-top: 12px;"   >
+							<td style="border: 0px;padding-bottom: 0px; width: 40px; padding-left: 50px;">
+								<div class="search-result-counter" style="background-color: #cadafc;">
+									3
+								</div>
+							</td>
+							<td style="border: 1px; border-bottom:1px dashed #c1c1c1; text-align: left; border-bottom-style: dashed;font-size: 16px;vertical-align: bottom;" >
+
+								<a href="/Home/index/disp/6518/ko" rol="button">
+								조선민주주의인민공화국 사회안전상이 로씨야내무성대표단을 만났다
+								</a>
+										<img src="/./resource/images/camera.png">
+								
+								&nbsp&nbsp
+								<font size='3'  color="#173ae8">
+									[2025.5.29.]
+								</font>
+							</td>
+							
+							<tr style="vertical-align: bottom;font-family: 'KPCheonRiMa';margin-top: 12px;"   >
+							<td style="border: 0px;padding-bottom: 0px; width: 40px; padding-left: 50px;">
+								<div class="search-result-counter" style="background-color: #cadafc;">
+									4
+								</div>
+							</td>
+							<td style="border: 1px; border-bottom:1px dashed #c1c1c1; text-align: left; border-bottom-style: dashed;font-size: 16px;vertical-align: bottom;" >
+
+								<a href="/Home/index/disp/6519/ko" rol="button">
+								조선민주주의인민공화국 사회안전성 부상과 로씨야련방 내무성 부상사이의 회담 진행
+								</a>
+										<img src="/./resource/images/camera.png">
+								
+								&nbsp&nbsp
+								<font size='3'  color="#173ae8">
+									[2025.5.29.]
+								</font>
+							</td>
+							
+							<tr style="vertical-align: bottom;font-family: 'KPCheonRiMa';margin-top: 12px;"   >
+							<td style="border: 0px;padding-bottom: 0px; width: 40px; padding-left: 50px;">
+								<div class="search-result-counter" style="background-color: #cadafc;">
+									5
+								</div>
+							</td>
+							<td style="border: 1px; border-bottom:1px dashed #c1c1c1; text-align: left; border-bottom-style: dashed;font-size: 16px;vertical-align: bottom;" >
+
+								<a href="/Home/index/disp/6515/ko" rol="button">
+								로씨야에 가는 조선민주주의인민공화국 국가보위상일행 출발
+								</a>
+								
+								&nbsp&nbsp
+								<font size='3'  color="#173ae8">
+									[2025.5.28.]
+								</font>
+							</td>
+							
+							<tr style="vertical-align: bottom;font-family: 'KPCheonRiMa';margin-top: 12px;"   >
+							<td style="border: 0px;padding-bottom: 0px; width: 40px; padding-left: 50px;">
+								<div class="search-result-counter" style="background-color: #cadafc;">
+									6
+								</div>
+							</td>
+							<td style="border: 1px; border-bottom:1px dashed #c1c1c1; text-align: left; border-bottom-style: dashed;font-size: 16px;vertical-align: bottom;" >
+
+								<a href="/Home/index/disp/6504/ko" rol="button">
+								조선민주주의인민공화국 최고인민회의 상임위원회가 재일본조선인총련합회 중앙상임위원회에 축전을 보내였다
+								</a>
+								
+								&nbsp&nbsp
+								<font size='3'  color="#173ae8">
+									[2025.5.26.]
+								</font>
+							</td>
+							
+							<tr style="vertical-align: bottom;font-family: 'KPCheonRiMa';margin-top: 12px;"   >
+							<td style="border: 0px;padding-bottom: 0px; width: 40px; padding-left: 50px;">
+								<div class="search-result-counter" style="background-color: #cadafc;">
+									7
+								</div>
+							</td>
+							<td style="border: 1px; border-bottom:1px dashed #c1c1c1; text-align: left; border-bottom-style: dashed;font-size: 16px;vertical-align: bottom;" >
+
+								<a href="/Home/index/disp/6506/ko" rol="button">
+								성，중앙기관 일군들 윁남사회주의공화국대사관을 조의방문
+								</a>
+										<img src="/./resource/images/camera.png">
+								
+								&nbsp&nbsp
+								<font size='3'  color="#173ae8">
+									[2025.5.26.]
+								</font>
+							</td>
+							
+							<tr style="vertical-align: bottom;font-family: 'KPCheonRiMa';margin-top: 12px;"   >
+							<td style="border: 0px;padding-bottom: 0px; width: 40px; padding-left: 50px;">
+								<div class="search-result-counter" style="background-color: #cadafc;">
+									8
+								</div>
+							</td>
+							<td style="border: 1px; border-bottom:1px dashed #c1c1c1; text-align: left; border-bottom-style: dashed;font-size: 16px;vertical-align: bottom;" >
+
+								<a href="/Home/index/disp/6501/ko" rol="button">
+								조선민주주의인민공화국 최고인민회의 상임위원회가 윁남사회주의공화국 국가장의위원회에 조전을 보내였다
+								</a>
+								
+								&nbsp&nbsp
+								<font size='3'  color="#173ae8">
+									[2025.5.25.]
+								</font>
+							</td>
+							
+							<tr style="vertical-align: bottom;font-family: 'KPCheonRiMa';margin-top: 12px;"   >
+							<td style="border: 0px;padding-bottom: 0px; width: 40px; padding-left: 50px;">
+								<div class="search-result-counter" style="background-color: #cadafc;">
+									9
+								</div>
+							</td>
+							<td style="border: 1px; border-bottom:1px dashed #c1c1c1; text-align: left; border-bottom-style: dashed;font-size: 16px;vertical-align: bottom;" >
+
+								<a href="/Home/index/disp/6493/ko" rol="button">
+								외무상 최선희동지 타이왕국 외무상에게 축전
+								</a>
+								
+								&nbsp&nbsp
+								<font size='3'  color="#173ae8">
+									[2025.5.24.]
+								</font>
+							</td>
+							
+							<tr style="vertical-align: bottom;font-family: 'KPCheonRiMa';margin-top: 12px;"   >
+							<td style="border: 0px;padding-bottom: 0px; width: 40px; padding-left: 50px;">
+								<div class="search-result-counter" style="background-color: #cadafc;">
+									10
+								</div>
+							</td>
+							<td style="border: 1px; border-bottom:1px dashed #c1c1c1; text-align: left; border-bottom-style: dashed;font-size: 16px;vertical-align: bottom;" >
+
+								<a href="/Home/index/disp/6494/ko" rol="button">
+								외무상 최선희동지에게 타이왕국 외무상이 축전
+								</a>
+								
+								&nbsp&nbsp
+								<font size='3'  color="#173ae8">
+									[2025.5.24.]
+								</font>
+							</td>
+						
+						
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6 col-sm-6">
+				<ul class="pagination pagination-sm no-margin pull-right" id="pagenation_wrapper" style="padding-bottom: 50px;">
+				   <li class="active"><a href="#"><b>1</b></a></li><li><a href="/home/index/power_news?&pageStep=10&amp;per_page=10" data-ci-pagination-page="2">2</a></li><li><a href="/home/index/power_news?&pageStep=10&amp;per_page=20" data-ci-pagination-page="3">3</a></li><li><a href="/home/index/power_news?&pageStep=10&amp;per_page=10" data-ci-pagination-page="2" rel="next">&gt;</a></li><li><a href="/home/index/power_news?&pageStep=10&amp;per_page=280" data-ci-pagination-page="29">>></a></li>
+			    </ul>
+		    </div>
+			<div style="clear:both;"></div>
+			<div style="clear:both;height: 30px;"></div>
+		</div>
+	</div>
+</div>     <div style="background: url(/resource/images/footer_left.png) repeat-x left 0 ;  
+
+      height: 54px; width: 100%; /*position: fixed;*/ bottom: 0; display: block; /*width*/: 100%; position: fixed;
+
+      z-index: 1002; ">     
+
+     <div   style="background: url(/resource/images/footer_right.png)  no-repeat right 0 ; 
+
+          /*box-sizing: border-box;*/
+
+          height: 54px;width: 100%; bottom: 0;display: block; position: absolute;z-index: 1002;" >
+
+       <div   style="background: url(/resource/images/footer_back.png) no-repeat center bottom ; height: 54px; width: 100%; bottom: 0;/*box-sizing: border-box;*/display: block; position: absolute;z-index: 1000;/*min-width:100%!important; */">      
+
+             <p class="" style="margin: 0 0 -10px;line-height: 52px; font-size: 20px;">
+
+                <font color="#0a43b6" face="KPCheonRiMa"  style="float: right;padding-right: 90px;  " >
+
+                  <strong>
+
+                    <b style="text-shadow:1px 1px 1px #0a43b6; ">
+
+                      저작권 2025 © 조선민주주의인민공화국 민주조선사  
+
+                    </b>
+
+                  </strong>
+
+                </font>
+
+            </p> 
+
+              <a href="#header" class="scrollup" style="margin-bottom: 30px;"><i class="fa fa-chevron-up"></i></a>  
+
+        </div>
+
+      </div> 
+
+      </div>   
+
+     <script src="/js/main.js"></script>
+
+     <script src="/resource/js/dropdown.js"></script>
+
+     <script src="/resource/js/custom.js"></script>
+
+
+
+     <!--gallery-->
+
+     <script src="/resource/js/jquery.min.js"></script>
+
+     <script src="/js/bootstrap.min.js"></script>  
+
+     <script src="/resource/js/jquery.sticky.js"></script>
+
+     <script src="/resource/js/nivo-lightbox.min.js"></script>
+
+     <script src="/resource/js/custom1.js"></script>
+
+     <script src="/resource/js/css3-animate-it.js"></script>
+
+    <script type="text/javascript" src="/resource/js/js/tms-0.3.js"></script>
+
+    <script type="text/javascript" src="/resource/js/js/tms_presets.js"></script> 
+
+    <script type="text/javascript" src="/resource/js/js/jquery.easing.1.3.js"></script> 
+
+    <script src="/resource/js/js1/plugins/blueimp/jquery.blueimp-gallery.min.js" ></script>
+
+    <script src="/resource/js/js1/jquery-2.1.1.js"></script>
+
+    <script src="/resource/js/js1/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <script src="/resource/js/js1/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <script src="/assets/css3-animate-it.js" type="text/javascript"></script>
+
+    <script src="/assets/nivo-lightbox.min.js" type="text/javascript"></script>
+
+    <script src="/assets/custom.js" type="text/javascript"></script>
+
+    </body>
+
+
+
+</html>

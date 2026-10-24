@@ -1,0 +1,259 @@
+.animate-box {
+    opacity: 0;
+}
+.animate-box.animated {
+    opacity: 1;
+}
+
+.left-menu-container {
+    padding: 0;
+    height: 100%;
+}
+
+.left-menu {
+    margin-right: 10px;
+    padding-left: 0px;
+    text-align: center;
+    position: relative;
+    -webkit-transition: all .7s ease-in-out;
+    -o-transition: all .7s ease-in-out;
+    transition: all .7s ease-in-out;
+}
+
+.left-menu > li {
+    border-top: solid 2px #5c9bd1;
+}
+.left-menu > li > a {
+    display: block;
+    background-color: #347ab8;
+    color: #ffffff;
+    font-weight: 700;
+    margin-right: 30px;
+    border-bottom-right-radius: 60px;
+}
+
+.left-menu > li:hover > a,
+.left-menu > li.active-item > a {
+    color: #dae84d;
+}
+
+#intro-container {
+    padding: 10px;
+    background-color: #d4d2c3;
+}
+#intro-container .sub-container {
+    background-color: #ffffff;
+    min-height: 450px;
+}
+.sub-container > .row .block-container {
+    margin-bottom: 10px;
+}
+.sub-container > .row {
+    margin: 0;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.new_icon {
+    background: red;
+    width: 80px;
+    line-height: 20px;
+    font-size: 14px;
+    color: white;
+    display: inline-block;
+    transform: rotate(45deg);
+    text-align: center;
+    position: absolute;
+    right: -18px;
+    top: 12px;
+}
+
+.data-item {
+    width: 100%;
+    display: inline-block;
+    cursor: pointer;
+}
+.data-item img {
+    width: 100%;
+}
+
+.has_new_icon {
+    overflow: hidden;
+    position: relative;
+}
+
+.block-img {
+    position: relative;
+    text-align: center;
+}
+.item-overlay {
+    -webkit-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    font-size: 14px;
+    z-index: 10001;
+    cursor: pointer;
+}
+.item-overlay .fa {
+    position: relative;
+    top: 45%;
+    font-size: 2.5em;
+    color: #fff;
+}
+
+.block-container {
+    padding: 5px 5px;
+}
+.block-container {
+    border: solid 1px transparent;
+}
+.block-container:hover {
+    border: solid 1px #b5b79f;
+}
+
+.block-container:hover .item-overlay {
+    opacity: 1;
+}
+
+.block-desc {
+    text-align: center;
+    color: #000000;
+    margin-top: 10px;
+}
+.block-desc .item-title {
+    min-height: 3em;
+}
+
+.p-dropdown {
+    font-size: 1em;
+}
+
+#video-modal .modal-body video {
+    width: 100%;
+}
+
+.search-content .media-category {
+    background-color: #2250fc;
+    color: #ffffff;
+    font-size: 13px;
+    padding: 2px 16px;
+    border-radius: 50px;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    z-index: 3;
+    margin-right: 0;
+}
+
+.search-content .media-category.book {
+    background-color: #2250fc;
+}
+.search-content .media-category.korfilm {
+    background-color: #2250fc;
+}
+.search-content .media-category.fes {
+    background-color: #2250fc;
+}
+.search-content .media-category.karaok {
+    background-color: #2250fc;
+}
+.search-content .media-category.program {
+    background-color: #2250fc;
+}
+.search-content .media-category.exchanage-1 {
+    background-color: #2250fc;
+}
+.search-content .media-category.exchanage-2 {
+    background-color: #2250fc;
+}
+.search-content .media-category.exchanage-3 {
+    background-color: #2250fc;
+}
+
+.news-dialog .block-content, {
+    margin-bottom: 10px;
+    text-indent: 0.4em;
+}
+.news-dialog .block-content p {
+    margin-bottom: 0px;
+}
+.news-dialog .block-content .created {
+    font-size: 0.8em;
+    margin-left: 15px;
+}
+
+.modal-content .text-content {
+    text-indent: 0.8em;
+}
+
+.august {
+    font-size: 115%;
+    font-weight: bold;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+
+.left-menu .menu-item a {
+    position: relative;
+}
+.left-menu .menu-item a .badge {
+    position: absolute;
+    border-radius: 1rem;
+}
+
+.badge {
+    font-size: 60%;
+}
+
+.left-menu .menu-item a .badge.new-item {
+    color: #dc3545;
+    font-size: 50%;
+    top: -20px;
+    position: relative;
+}
+
+.search-info {
+    padding-left: 6%;
+    padding-right: 20px;
+    background-color: #e2e0e0;
+}
+.search-info p {
+    margin-bottom: 0px;
+}
+
+.item-sub-info {
+    font-size: 95%;
+}
+.item-sub-info .item-category {
+    float: left;
+}
+.item-sub-info .item-created {
+    float: right;
+}
+.item-sub-info .item-created i {
+    padding-right: 0.5rem;
+}
+
+.search-highlight {
+    font-weight: 700;
+    color: #ff0000;
+}
+
+.block-created {
+    font-size: 90%;
+    text-align: right;
+}
+
+.mfp-title {
+    text-align: center;
+}

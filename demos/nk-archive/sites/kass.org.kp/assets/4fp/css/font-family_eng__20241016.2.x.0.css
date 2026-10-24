@@ -1,0 +1,121 @@
+﻿@charset "UTF-8";
+@font-face {
+    font-family: PnPCheongPongChe;
+    src: url('../../fonts/Chongbong.ttf') format('truetype');
+}
+
+* {
+    font-family: Tahoma, Arial, "KP CheonRiMa", "천리마", "PRK P Gothic", "WKGothic"
+}
+
+p {
+    width: 100%;
+    text-indent: 16px;
+}
+
+.social-network a,
+.social-network .kor a {
+    font-family: Tahoma, Arial, "PnPCheongPongChe", "KP CheongPong", "청봉", "PRK P Chongbong";
+    letter-spacing: 0;
+}
+
+.social-network .chi a,
+.social-network .jap a {
+    font-family: Tahoma, Arial, SimSun, "Open Sans", "KP CheongPong", "청봉", "PRK P Chongbong";
+}
+
+.social-network .eng a,
+.social-network .rus a,
+.social-network .fra a,
+.social-network .esp a,
+.social-network .arb a {
+    font-family: Tahoma, Arial, "Open Sans", "KP CheongPong", "청봉", "PRK P Chongbong";
+}
+
+.social-network .rus a {
+    letter-spacing: -0.5px;
+}
+
+.breadcrumb a,
+.horizontal li>a {
+    font-family: Tahoma, Arial, "Open Sans", "KP CheongPong", "청봉", "PRK P Chongbong";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.title {
+    word-break: break-word!important
+}
+
+h1.class.title {
+    font-family: Tahoma, Arial, "WKWGothic", "KP CheonRiMa", "천리마", "PRK P Gothic", "WKGothic"
+}
+
+.chongbong,
+#leader_content p,
+p#words,
+p#words *,
+.text p,
+.text p *,
+.contents p,
+.contents p *,
+.book-metadata .summary,
+.book-metadata .summary * {
+    font-family: Century, Centaur, "KP CheongPong", "청봉", "PRK P Chongbong"
+}
+
+.gothic,
+.text .say,
+.text p.say *,
+.contents p.say,
+.contents p.say *,
+.room.introduction,
+.lblTitle.oldbook.ko,
+.title.lecture,
+.teacher.lecture,
+.room.date.time.lecture,
+.room.date.time.lecture *,
+.ui-datepicker select,
+.ui-datepicker option,
+p#words.bulhu,
+p#words.bulhu * {
+    font-family: Tahoma, Arial, Verdana, "KP CheonRiMa", "천리마", "PRK P Gothic", "WKGothic"
+}
+
+.bukul,
+.puskul,
+h2.room_label {
+    font-family: Tahoma, Arial, "KP PusKul", "PRK P Bukul", "붓글"
+}
+
+.myongjo,
+.kwangmyeong,
+#immortality_song,
+#immortal_classical_song {
+    font-family: Century, Centaur, SimSun, "PRK P Myongjo", "KP KwangMyeong", "광명"
+}
+
+input[type=password],
+a.file-type,
+a.file-type *,
+span.file-type {
+    font-family: Tahoma, Arial, Verdana
+}
+
+td p b,
+p#words,
+p#words b {
+    font-size: 110%
+}
+
+.leader_activity_title {
+    letter-spacing: 0
+}
+
+.post-single .post-body h4 {
+    word-break: keep-all
+}

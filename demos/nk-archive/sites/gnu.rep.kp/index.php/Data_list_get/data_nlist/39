@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>민족대단결</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=yes">
+  <!-- Place your favicon.ico and apple-touch-icon.png in the template root directory -->
+  <link href="../../../mark.png" rel="shortcut icon">  
+<link href="../../../resources/style/style.css" rel="stylesheet"> 
+<link href="../../../resources/style/common.css" rel="stylesheet"> 
+<link href="../../../resources/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../../../resources/js/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" type="text/css">
+<link href="../../../resources/js/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css">
+<link href="../../../resources/style/theme.css" rel="stylesheet" type="text/css">
+<link href="../../../resources/style/theme-elements.css" rel="stylesheet" type="text/css">
+<link href="../../../resources/style/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="../../../resources/assets/global/css/components-rounded.min.css" rel="stylesheet" type="text/css">
+<link href="../../../resources/js/vendor/magnific-popup/magnific-popup.min.css" rel="stylesheet" type="text/css">
+<link href="../../../resources/style/default.css" rel="stylesheet" type="text/css">
+<link href="../../../resources/js/vendor/animate/animate.min.css" rel="stylesheet" type="text/css">  	
+
+<link href="../../../resources/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+ <link href="../../../resources/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+ <link href="../../../resources/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body  onSelectStart="return false" onDragStart="return false">
+	<header id="header" >
+    <div class="container">
+    
+      <div id="logo" class="pull-left">
+        <a href="../../../index.html">
+		  <img  src="../../../resources/img/gnu_mark.png" alt="" />
+		</a>
+      </div>
+       <div class="header-search hidden-xs">
+			<form id="searchForm" action="https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/search" method="post">
+				<div class="input-group">
+					<input type="text" class="form-control" name="q"  id="q" placeholder="검색..." required>         
+					<input type="hidden" name="token_name" value="d16a9f5c1720512dff4fa32e934fc2a2">	
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+						</span>
+				</div>
+			</form>
+		</div> 
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+			<li class="menu-active">           	
+				<a href="../../../index.html" >첫페지</a>				
+			</li>			
+          <li class="menu-has-children"><a >조선의 홈페지들</a>
+            <ul>
+               <li><a href="http://www.vok.rep.kp">조선의 소리</a></li>
+				<li><a href="http://www.mfa.gov.kp">조선민주주의인민공화국 외무성</a></li>
+				<li><a href="http://www.naenara.com.kp">내나라</a></li>
+				<li><a href="http://www.rodong.rep.kp">로동신문</a></li>
+				<li><a href="http://www.minzu.rep.kp">민주조선</a></li>
+				<li><a href="http://www.youth.rep.kp">청년전위</a></li>												   
+				<li><a href="http://www.kass.org.kp">주체</a></li>
+				<li><a href="http://www.fia.law.kp">조선민주주의인민공화국 금융정보국</a></li>
+				<li><a href="http://www.knic.com.kp">조선민족보험총회사</a></li>
+				<li><a href="http://www.kftrade.com.kp">조선의 무역</a></li>
+				<li><a href="http://www.korart.sca.kp">조선예술</a></li>	 
+				<li><a href="http://www.korfilm.com.kp">조선영화</a></li>
+				<li><a href="http://www.cooks.org.kp">조선료리</a></li>
+				<li><a href="http://www.sdprk.org.kp">조선체육</a></li>
+				<li><a href="http://www.tourismdprk.gov.kp">조선관광</a></li>
+				<li><a href="http://www.kiyctc.com.kp">조선국제청소년려행사</a></li>											 
+				<li><a href="http://www.dprkportal.kp">광야</a></li>
+				<li><a href="http://www.mediaryugyong.com.kp">류경</a></li>												 
+				<li><a href="http://www.friend.com.kp">벗</a></li>												 
+				<li><a href="http://www.gpsh.edu.kp">남산</a></li>												  
+				<li><a href="http://www.korelcfund.org.kp">로인들을 위하여</a></li>
+				<li><a href="http://www.manmulsang.com.kp">만물상</a></li>
+				<li><a href="http://www.kut.edu.kp">김책공업종합대학</a></li>
+				<li><a href="http://www.mirae.aca.kp">미래</a></li>	   
+            </ul>
+          </li>         
+        </ul>
+      </nav><!-- #nav-menu-container -->
+											
+    </div>
+  </header><!-- #header --><div class="row">
+<div class="detail-content" align="center">
+            <div class="col-lg-1"></div> 
+			<div class="col-lg-3">
+                
+                                    <div class="portlet light portlet-fit ">                                        
+                                        <div class="portlet-body">
+                                            <div class="mt-element-list" style="text-align:left">
+                                                <div class="mt-list-head list-news ext-1 font-white bg-yellow-crusta">
+                                                    <div class="list-head-title-container">
+                                                        <h3 class="list-title">전 체 </h3>
+                                                    </div>
+                                                    <div class="list-count pull-right bg-yellow-saffron"><h5 style="font-weight:bold">213</h5></div>
+                                                </div>                                               
+												<div class="mt-list-container list-news ext-2">
+                                                    <ul>
+                                                        <li class="mt-list-item">
+															  <div class="list-item-content">
+                                                                <h3 class="uppercase bold">
+																<a href='24'>세기의 위인  <span class='badge badge-default pull-right bold'  >60</span></a>
+                                                                </h3>                                                              
+                                                            </div>
+                                                        </li>                                                     
+                                                       
+                                                    </ul>
+                                                </div>
+												<div class="mt-list-container list-news ext-2">
+                                                    <ul>
+                                                        <li class="mt-list-item">                                                            
+															  <div class="list-item-content">
+                                                                <h3 class="uppercase bold">
+																<a href='1'>위인전기 <span class='badge badge-default pull-right bold'  >6</span></a>
+                                                                </h3>                                                              
+                                                            </div>
+                                                        </li>                                                     
+                                                       
+                                                    </ul>
+                                                </div>
+												<div class="mt-list-container list-news ext-2">
+                                                    <ul>
+                                                        <li class="mt-list-item">                                                           
+															  <div class="list-item-content">
+                                                                <h3 class="uppercase bold">
+																<a href='39'>특집 	<span class='badge badge-default pull-right bold'  >20</span></a>
+                                                                </h3>                                                              
+                                                            </div>
+                                                        </li>                                                     
+                                                       
+                                                    </ul>
+                                                </div>
+                                                <div class="mt-list-container list-news ext-2">
+                                                    <ul>
+                                                        <li class="mt-list-item">                                                           
+															  <div class="list-item-content">
+                                                                <h3 class="uppercase bold">
+																<a href='28'>우리 민족끼리 	<span class='badge badge-default pull-right bold'  >2</span></a>
+                                                                </h3>                                                              
+                                                            </div>
+                                                        </li>                                                     
+                                                       
+                                                    </ul>
+                                                </div>
+												<div class="mt-list-container list-news ext-2">
+                                                    <ul>
+                                                        <li class="mt-list-item">                                                            
+															  <div class="list-item-content">
+                                                                <h3 class="uppercase bold">
+																<a href='32'>우리 말 상식 	<span class='badge badge-default pull-right bold'  >5</span></a>
+                                                                </h3>                                                              
+                                                            </div>
+                                                        </li>                                                     
+                                                       
+                                                    </ul>
+                                                </div>
+												<div class="mt-list-container list-news ext-2">
+                                                    <ul>
+                                                        <li class="mt-list-item">
+                                                            	 <div class="list-item-content">
+                                                                <h3 class="uppercase bold">
+																<a href='2'>조국현실 	<span class='badge badge-default pull-right bold'  >20</span></a>
+                                                                </h3>                                                              
+                                                            </div>
+                                                        </li>                                                     
+                                                       
+                                                    </ul>
+                                                </div>
+												<div class="mt-list-container list-news ext-2">
+                                                    <ul>
+                                                        <li class="mt-list-item">
+															  <div class="list-item-content">
+                                                                <h3 class="uppercase bold">
+																<a href='https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/Data_list_get/data_nlist/33'>아시는지요 	<span class='badge badge-default pull-right bold'  >20</span></a>
+                                                                </h3>                                                              
+                                                            </div>
+                                                        </li>                                                     
+                                                       
+                                                    </ul>
+                                                </div>
+												<div class="mt-list-container list-news ext-2">
+                                                    <ul>
+                                                        <li class="mt-list-item">                                                        
+															  <div class="list-item-content">
+                                                                <h3 class="uppercase bold">
+																<a href='https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/Data_list_get/data_nlist/9'>관 광 	<span class='badge badge-default pull-right bold'  >20</span></a>
+                                                                </h3>                                                              
+                                                            </div>
+                                                        </li>                                                     
+                                                       
+                                                    </ul>
+                                                </div>
+												<div class="mt-list-container list-news ext-2">
+                                                    <ul>
+                                                        <li class="mt-list-item">                                                       
+															  <div class="list-item-content">
+                                                                <h3 class="uppercase bold">
+																<a href='https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/Data_list_get/data_nlist/40'>문 예 <span class='badge badge-default pull-right bold'  >60</span></a>
+                                                                </h3>                                                              
+                                                            </div>
+                                                        </li>                                                     
+                                                       
+                                                    </ul>
+                                                </div>
+												<div class="mt-list-container list-news ext-2">
+                                                    <ul>
+                                                        <li class="mt-list-item">                                                       
+															  <div class="list-item-content">
+                                                                <h3 class="uppercase bold">
+																<a href='https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/Data_list_get/data_nlist/29'>시사론단 <span class='badge badge-default pull-right bold'  >0</span></a>
+                                                                </h3>                                                              
+                                                            </div>
+                                                        </li>                                                     
+                                                       
+                                                    </ul>
+                                                </div>											
+                                            </div>
+                                        </div>
+                                    </div>
+                 </div>
+
+
+			<div class="col-lg-7" style="padding-top:10px">
+						
+			
+						<div class="row">
+							<div class="col-md-12">
+								<div class="note note-success">	
+									<div class="sub-title2">
+									<div ><span>특집 </span></div>
+									</div>
+								</div>	
+							</div>
+						</div>
+				
+				
+						<div class="detail-content-body" >	
+							
+							<table  style="width:100%;"  id="delist">			
+							<thead>
+                              <tr>
+                                  <th class="hidden-480" align=center>제 목</th>
+                                 <th class="hidden-480"  style='text-align:center'>등록날자</th>
+                                
+                              </tr>
+                           </thead>
+						   <tbody>
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='trtxt1' pdid=ipe231223005 ><a style ='text-decoration:none;' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/Data_detail_common/NgetDetail/ipe231223005/39><span class='trtxt'>-&nbsp;새해의 첫 기슭에서</span></a><div style='text-align:left;font-size:16px;color:#777;cursor:point'>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&nbsp;...</div></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2024.1.1</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe231024004><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe231024004><span class='trtxt'>-&nbsp;조선의 특산, 그 향취를 따라서(2)<br>개성고려인삼&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.11.29</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe231012006><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe231012006><span class='trtxt'>-&nbsp;조선의 특산, 그 향취를 따라서(3)<br>금강산특산물&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.11.29</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe231011001><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe231011001><span class='trtxt'>-&nbsp;새로 발굴된 명간고래화석&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.10.21</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe231011002><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe231011002><span class='trtxt'>-&nbsp;10월의 환희&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.10.11</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe230819009><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe230819009><span class='trtxt'>-&nbsp;경축의 9월&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.9.11</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe230728001><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe230728001><span class='trtxt'>-&nbsp;기적의 45일&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.7.28</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe230707001><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe230707001><span class='trtxt'>-&nbsp;이민위천의 한평생&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.7.7</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe230614001><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe230614001><span class='trtxt'>-&nbsp;공화국의 첫 세대 과학자들&nbsp;&nbsp;-리승기-&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.6.14</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='trtxt1' pdid=ipe230522008 ><a style ='text-decoration:none;' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/Data_detail_common/NgetDetail/ipe230522008/39><span class='trtxt'>-&nbsp;번영하라 나의 수도</span></a><div style='text-align:left;font-size:16px;color:#777;cursor:point'>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&nbsp;...</div></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.6.12</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe230515017><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe230515017><span class='trtxt'>-&nbsp;해님과 붉은넥타이&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.6.6</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe230531001><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe230531001><span class='trtxt'>-&nbsp;우리는 행복해요&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.5.31</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='trtxt1' pdid=ipe230419001 ><a style ='text-decoration:none;' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/Data_detail_common/NgetDetail/ipe230419001/39><span class='trtxt'>-&nbsp;근로하는 인민의 세상</span></a><div style='text-align:left;font-size:16px;color:#777;cursor:point'>
+
+
+
+
+
+
+
+
+
+&nbsp;...</div></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.4.30</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe230412003><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe230412003><span class='trtxt'>-&nbsp;인류의 영원한 태양&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.4.14</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe230215011><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe230215011><span class='trtxt'>-&nbsp;백두산의 아들&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.2.16</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe221222002><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe221222002><span class='trtxt'>-&nbsp;공화국의 첫 과학명인들 (계응상)&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.2.14</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe230115001><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe230115001><span class='trtxt'>-&nbsp;인민의 대의원&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2023.1.18</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='trtxt1' pdid=ipe221214010 ><a style ='text-decoration:none;' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/Data_detail_common/NgetDetail/ipe221214010/39><span class='trtxt'>-&nbsp;태양의 축복받은 행복동이들</span></a><div style='text-align:left;font-size:16px;color:#777;cursor:point'>
+
+
+
+
+
+
+&nbsp;...</div></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2022.12.21</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe221216005><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe221216005><span class='trtxt'>-&nbsp;불같은 한생&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2022.12.16</td>									
+										</tr>
+										
+																						
+
+										<tr>
+										<td class="detail_td" style="width:80%">
+										<div class='item' PDID=ipe221125003><a style ='text-decoration:none;' class='overlay-wrapper' data-toggle='modal' data-target='#myModal' href=https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/index.php/data_detail_common/data_videos/ipe221125003><span class='trtxt'>-&nbsp;국사중의 국사&nbsp;&nbsp;</span>&nbsp;&nbsp;<i class = 'fa fa-video-camera' style='font-size:20px'></i><br/></a></div>										</td>
+										
+										<td class='detail_td'  style='text-align:center'>2022.12.13</td>									
+										</tr>
+										
+																  </tbody>
+								</table>
+							
+							</div>
+						
+				</div>
+		</div>
+        <div class="col-lg-1"></div>
+</div>
+
+<div id="detail_icon_Id" >
+			<a href='../../../index.html' data-toggle="tooltip" class="detail_iconb" id="go2"  ><span   title="첫페지로"><i class="fa fa-home"  ></i></span></a>
+			
+</div>
+
+<div class="modal fade" id="myModal" role="dialog" align="center">
+    <div class="modal-dialog"> 
+      <div class="modal-content">        
+      </div>      
+    </div>
+</div> 
+
+<div class="modal fade" id="myModal1" role="dialog" align="center">
+    <div class="modal-dialog1">    
+      <div class="modal-content">                
+      </div>      
+    </div>
+</div> 
+  
+	
+<div class="footer-container" >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 " >
+					<div class="text-center">
+						<a href="#" class="scrollup"><i class="fa fa-angle-up fa-3x" style="color:white"></i></a>
+					</div><div class="footer-copyright">
+                    평양방송《민족대단결》편집부<br>WWW.GNU.REP.KP</div>
+                </div>
+
+			</div>
+		</div>
+</div>
+
+ <script src="../../../resources/js/jquery.min.js"></script>
+<script src="../../../resources/style/bootstrap/js/bootstrap.js"></script>
+<script src="../../../resources/js/vendor/jquery.appear/jquery.appear.min.js"></script>
+<script src="../../../resources/js/vendor/jquery.easing/jquery.easing.min.js"></script>
+<script src="../../../resources/js/jquery.isotope.min.js"></script>
+<script src="../../../resources/js/functions.js"></script>
+<script src="../../../resources/js/jquery.gritter.min.js"></script>
+<script src="../../../resources/js/stellar.min.js"></script>
+<script src="../../../resources/js/owl.carousel/owl.carousel.min.js"></script>
+<script src="../../../resources/js/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="../../../resources/js/superfish/superfish.min.js"></script>
+ <script src="../../../resources/js/morphext/morphext.min.js"></script>
+  <script src="../../../resources/js/stickyjs/sticky.js"></script>
+  <script src="../../../resources/js/wow.min.js"></script>
+
+<script src="../../../resources/js/common.min.js" ></script>
+<script src="../../../resources/js/common.js" ></script>
+<script src="../../../resources/js/theme.js"></script>
+  <script src="../../../resources/js/custom.js"></script>
+  <script src="../../../resources/js/theme.init.js"></script>
+  
+<script src="../../../resources/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="../../../resources/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+ <script src="../../../resources/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+ <script src="../../../resources/assets/global/scripts/app.min.js" type="text/javascript"></script>
+ <script src="../../../resources/assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
+ 
+
+
+</body>
+</html>

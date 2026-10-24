@@ -1,0 +1,460 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en"">
+  <head>
+    <title>주체 | 절세위인들</title>
+    
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="keywords" content="김일성,김정일,김정은,사회과학원,주체사상연구원" />
+<meta name="description" content="조선사회과학자협회 홈페지 - 《주체》" />
+<meta name="author" content="Completed by YH.P and Kanegin at 2024-10-05" />
+<!-- css -->
+<link href="//www.kass.org.kp/assets/css/bootstrap.ex.min.css" rel="stylesheet" />
+<link href="//www.kass.org.kp/assets/css/bootstrap.min.css" rel="stylesheet" />
+<link href="//www.kass.org.kp/assets/css/jquery.fancybox-thumbs.min.css" rel="stylesheet" />
+<link href="//www.kass.org.kp/assets/4fp/libs/font-awesome.v6.1.2/css/all.min.css" rel="stylesheet" />
+<link href="//www.kass.org.kp/assets/css/style.min.css" rel="stylesheet" />
+<link href="//www.kass.org.kp/assets/4fp/css/font-family_kor.css?20241016.2.x.0" rel="stylesheet" />
+
+<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<link rel="shortcut icon" href="//www.kass.org.kp/assets/4fp/favicon.ico" />
+<link rel="manifest" href="//www.kass.org.kp/assets/4fp/manifest.json" />
+<!-- link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet" / -->
+<!-- link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet" / -->
+<style type="text/css">
+	/*Style Switcher
+------------------------------------*/
+i.style-switcher-btn {
+   right: 0;
+   top: 37px;
+   color: #fff;
+   font-size: 18px;
+   cursor: pointer;
+   z-index: 555555;
+   position: fixed;
+   padding: 7px 9px;
+   background: #585f69;
+   border-radius: 6px 0 0 6px !important;   
+}
+
+i.style-switcher-btn:hover {
+   background:#707985;
+}
+
+i.style-switcher-btn-option {
+   top: 38px;
+   background: #9097a0;
+}
+
+i.style-switcher-btn-option:hover {
+   background: #707985;
+}
+
+.style-switcher {
+   right: 0;
+   top: 37px;
+   width: 205px;
+   display: none;
+   z-index: 555555;
+   position: fixed;
+   background: #585f69;
+   border: solid 1px #666d76;
+   padding: 15px 15px 15px 20px;
+   border-radius: 6px 0 0 6px !important;
+}
+
+.style-switcher-inner {
+   background: #9097a0;
+}
+
+.style-switcher .theme-close {
+   top: 10px;
+   right: 6px;
+   position: absolute;
+}
+
+.style-switcher .theme-close i {
+   color: #fff;
+   cursor: pointer;
+   font-size: 18px;
+   padding: 5px 7px;
+   background: #464e5b;
+}
+
+.style-switcher .theme-close i:hover {
+   color: #464e5b;
+   background: #fff;
+ }
+
+.style-switcher .theme-heading {
+   color: #fff;
+   font-size: 16px;
+   margin-bottom: 10px;
+   text-transform: uppercase;
+}
+
+.style-switcher-logo  {
+   margin-top: 10px;
+   padding-top: 15px;
+   border-top: solid 1px #4c5159;
+}
+
+.style-switcher-logo a {
+   display: block;
+   text-align: center;
+}
+
+.style-switcher ul {
+   margin-bottom: 0;
+}
+
+.style-switcher li {
+   width: 26px;
+   height: 26px;
+   cursor: pointer;
+   background: #c00;
+   margin: 0 5px 5px 0;
+   display: inline-block;
+}
+
+.style-switcher li.last {
+   margin-right: 0;
+}
+
+.style-switcher li:hover,
+.style-switcher li.theme-active {
+   border: solid 2px #fff;
+}
+
+.style-switcher a.btn-u-green.active-switcher-btn {
+   border: solid 1px #eee;
+   background: #2ecc71 !important;
+}
+
+.style-switcher a.btn-u-sea.active-switcher-btn {
+   border: solid 1px #eee;
+   background: #1abc9c !important;
+}
+
+.style-switcher li.theme-default {
+   background: #72c02c;
+}
+.style-switcher li.theme-blue {
+   background: #3498db;
+}
+.style-switcher li.theme-orange {
+   background: #e67e22;
+}
+.style-switcher li.theme-red {
+   background: #e74c3c;
+}
+.style-switcher li.theme-light {
+   background: #ecf0f1;
+}
+</style>
+<link rel="stylesheet" href="//www.kass.org.kp/assets/css/color/default.css" id="style_color">
+
+<!-- importamt jss -->
+<script src="//www.kass.org.kp/assets/4fp/libs/jquery/jquery-3.4.1.ex.min.js"></script>
+<script src="//www.kass.org.kp/assets/4fp/js/jquery.1.10.2.js"></script>
+<script src="//www.kass.org.kp/assets/4fp/js/jquery.easing.1.3.js"></script>
+<script src="//www.kass.org.kp/assets/4fp/libs/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body class="_top" oncontextmenu="return true;" style="background-color: rgba(220, 187, 126, 0.38);  ?>); ">
+    
+    <div id="preloader">
+      <div class="preload-content">
+        <div id="kass-load"></div>
+      </div>
+    </div>
+    <header id="wrapper" class="sticky">
+	<div class="languagebar top" style="background-image: url(//www.kass.org.kp/assets/imgs/lauguage.png);background-size: 100% 100%">
+		<div class="container-lg">
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-5 col-sm-5 col-md-8 col-lg-8 navbar navbar-expand-md catalogue-navi justify-content-center">
+					<button class="navbar-toggler dropdown-toggle navbar-light" type="button" data-toggle="dropdown" data-target="#languageNavi">
+						<span class="subTitle"></span>
+					</button>
+					<div id="languageNavi" class="collapse navbar-collapse justify-content-center">
+						<ul class="navbar-nav social-network mt-1">
+							<li class="nav-item kor active"><a href="//www.kass.org.kp/index.php/lang/cookie/kor/L2luZGV4LnBocC9ncmVhdD9sYW5nPWtvcg" title="">조선어</a></li>
+							<li class="nav-item eng"><a href="//www.kass.org.kp/index.php/lang/cookie/eng/L2luZGV4LnBocC9ncmVhdD9sYW5nPWtvcg" title="">English</a></li>
+							<li class="nav-item chi"><a href="//www.kass.org.kp/index.php/lang/cookie/chi/L2luZGV4LnBocC9ncmVhdD9sYW5nPWtvcg" title="">中国语</a></li>
+							<li class="nav-item rus"><a href="//www.kass.org.kp/index.php/lang/cookie/rus/L2luZGV4LnBocC9ncmVhdD9sYW5nPWtvcg" title="">Русский</a></li>
+							<li class="nav-item jap"><a href="//www.kass.org.kp/index.php/lang/cookie/jap/L2luZGV4LnBocC9ncmVhdD9sYW5nPWtvcg" title="">日本語</a></li>
+							<li class="nav-item fra"><a href="//www.kass.org.kp/index.php/lang/cookie/fra/L2luZGV4LnBocC9ncmVhdD9sYW5nPWtvcg" title="">Français</a></li>
+							<li class="nav-item esp"><a href="//www.kass.org.kp/index.php/lang/cookie/esp/L2luZGV4LnBocC9ncmVhdD9sYW5nPWtvcg" title="">Español</a></li>
+													</ul>
+					</div>
+				</div>
+				<div class="col-6 col-sm-6 col-md-3 col-lg-3 pt-1">
+					<div class="input-append">
+						<form method="GET" name="search_form">
+							<input type="hidden" name="_token" value="0d84640567d26ad5eddc9d4f2acbeec4" />
+							<input type="hidden" name="lang" value="kor" />
+							<div id="formsearch" class="input-group input-group-sm justify-content-center search_form">
+								<input class="form-control" type="text" id="appendedInputButton" name="search"
+									onkeypress="return checkProhibitionalChars('#appendedInputButton', '#errmsg2');" 
+									placeholder="검색단어를 입력하십시오" value="" maxlength="100" />
+								<div class="input-group-append">
+									<button class="btn btn-sm btn-theme" type="submit">검색</button>
+								</div>
+							</div>
+							<span id="errmsg1" class="d-none">검색어를 입력하십시오.</span>
+							<span id="errmsg2" class="d-none">금지문자입니다.</span>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="menubar" style="background-image: url(//www.kass.org.kp/assets/imgs/menubar.png); background-size: 100% 100%">
+		<div class="container-lg">
+			<div class="row">
+				<div class="col-1">
+					<div class="logo-container row">
+						<div class="logo-image">
+							<a href="//www.kass.org.kp/index.php/home?lang=kor" class="brand logo-nav">
+								<img alt="logo" class="logo_juche" src="//www.kass.org.kp/assets/imgs/logo/logo_juche1.png" />
+								<img alt="logo" class="logo_earth" src="//www.kass.org.kp/assets/imgs/logo/logo_earth.png" />
+							</a>
+						</div>
+						<div class="logo-text d-none">
+							<a href="//www.kass.org.kp/index.php/home?lang=kor">
+								<h1 id="colorlib-logo" class="logo-caption title">주체</h1>
+								<span class="logo-site"><i>www.kass.org.kp</i></span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-11 horizontal">
+					<div class="navbar navbar-static-top justify-content-end">
+						<div class="navigation">
+							<nav>
+								<ul class="nav topnav">
+									<li class=""><a href="//www.kass.org.kp/index.php/home?lang=kor"><i class="icon-home mr-1"></i>첫페지</a></li>
+									<li class=" active"><a href="//www.kass.org.kp/index.php/great?lang=kor#great">절세위인들</a></li>
+									<li class=""><a href="//www.kass.org.kp/index.php/course?lang=kor#course"><nobr><b class='zonham'>김일성-김정일</b></nobr>주의강좌</a></li>
+									<li class=""><a href="//www.kass.org.kp/index.php/korea?lang=kor#korea">조선개관</a></li>
+									<li class=""><a href="//www.kass.org.kp/index.php/wvkorea?lang=kor#wvkorea">세계가 본 조선</a></li>
+									<li class="dropdown "><a href="#">다매체 <i class="icon-angle-down"></i></a>
+										<ul class="dropdown-menu bold">
+											<li ><a href="//www.kass.org.kp/index.php/multi/photo?lang=kor#photo" class="dropdown-item">사진</a></li>
+											<li ><a href="//www.kass.org.kp/index.php/multi/video?lang=kor#video" class="dropdown-item">동영상</a></li>
+										</ul>
+									</li>
+									<li class=""><a href="//www.kass.org.kp/index.php/ebook?lang=kor#ebook">도서, 잡지</a></li>
+									<li class=""><a href="//www.kass.org.kp/index.php/news?lang=kor#news">연구조직활동소식</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+    <section class="body" >
+      <section style=" background-image: url(//www.kass.org.kp/assets/imgs/back.png); background-size: 100% 100%;">
+	<div class="top_banner" style="background-image: url(//www.kass.org.kp/assets/imgs/topbanner_pattern.png); background-size: 100% 100%">
+		<div class="container-lg">
+			<div class="row nomargin">
+				<div class="col-12">
+					<h2 class="banner_title">절세위인들</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>      <section class="">
+	<div class="container-lg">
+		<div class="row my-4 great1">
+			<div class="sidebar col-4">
+				<div class="accordion">					<div class="accordion-heading">
+						<a class="accordion-toggle "
+							href="//www.kass.org.kp/index.php/great/list/great/1?lang=kor">
+							<i class="icon-book"></i><nobr>위대한</nobr> <nobr>수령</nobr> <nobr><b class='zonham'>김일성</b>동지</nobr>						</a>					</div>					<div class="accordion-heading">
+						<a class="accordion-toggle "
+							href="//www.kass.org.kp/index.php/great/list/great/2?lang=kor">
+							<i class="icon-book"></i><nobr>위대한</nobr> <nobr>령도자</nobr> <nobr><b class='zonham'>김정일</b>동지</nobr>						</a>					</div>					<div class="accordion-heading">
+						<a class="accordion-toggle active"
+							href="//www.kass.org.kp/index.php/great/list/great/3?lang=kor">
+							<i class="icon-book"></i><nobr>경애하는</nobr> <nobr><b class='zonham'>김정은</b>동지</nobr>						</a>							<div class="accordion-body" style="height: auto;">
+								<div class="accordion-inner">										<p><a class="chongbong"
+												href="//www.kass.org.kp/index.php/great/list/work/3/7?lang=kor">로작</a>										</p>										<p><a class="chongbong"
+												href="//www.kass.org.kp/index.php/great/list/great/3/8?lang=kor">사상리론</a>										</p>										<p><a class="chongbong"
+												href="//www.kass.org.kp/index.php/great/list/great/3/9?lang=kor">령도풍모</a>										</p>										<p><a class="chongbong"
+												href="//www.kass.org.kp/index.php/great/list/famous/3/13?lang=kor">명언</a>										</p>										<p><a class="chongbong"
+												href="//www.kass.org.kp/index.php/great/list/revolution/3/10?lang=kor">혁명활동소식</a><i class="icon icon-caret-right"></i>										</p>								</div>
+							</div>					</div>				</div>
+			</div>
+			<div class="col-8 content-table ">
+				<table class="table table-hover tablesorter" id="large">
+					<colgroup>
+						<col width="6%">
+						<col width="80%">
+						<col width="14%">
+					</colgroup>
+					<thead style="">
+					<tr>
+						<th class="text-center">번호</th>
+						<th class="text-center">제목</th>
+						<th class="text-center">날자</th>
+					</tr>
+					</thead>
+					<tbody>						<tr>
+							<td class="text-center">1</td>
+							<td class="">
+								<a href="//www.kass.org.kp/index.php/revolution/view/488?lang=kor">
+									﻿사회주의애국청년동맹창립 80돐 기념대회에서 한 <nobr><b class='zonham'>김정은</b>동지</nobr>의 연설								</a>								<a class="hover-wrap fancybox1" data-fancybox-group="thumb" data-title="﻿사회주의애국청년동맹창립 80돐 기념대회에서 한 <nobr><b class='zonham'>김정은</b>동지</nobr>의 연설" title="﻿사회주의애국청년동맹창립 80돐 기념대회에서 한 김정은동지의 연설" target="_blank"
+									href="//www.kass.org.kp/index.php/revolution/photo_view/488?lang=kor" onclick="hit('revolution', '', '488')"><i class="fa fa-images"></i></a>							</td>
+							<td class="text-center pub-date">2026.1.17</td>
+						</tr>						<tr>
+							<td class="text-center">2</td>
+							<td class="">
+								<a href="//www.kass.org.kp/index.php/revolution/view/487?lang=kor">
+									﻿사회주의애국청년동맹창립 80돐 기념대회 성대히 진행								</a>								<a class="hover-wrap fancybox1" data-fancybox-group="thumb" data-title="﻿사회주의애국청년동맹창립 80돐 기념대회 성대히 진행" title="﻿사회주의애국청년동맹창립 80돐 기념대회 성대히 진행" target="_blank"
+									href="//www.kass.org.kp/index.php/revolution/photo_view/487?lang=kor" onclick="hit('revolution', '', '487')"><i class="fa fa-images"></i></a>							</td>
+							<td class="text-center pub-date">2026.1.17</td>
+						</tr>						<tr>
+							<td class="text-center">3</td>
+							<td class="">
+								<a href="//www.kass.org.kp/index.php/revolution/view/484?lang=kor">
+									﻿<nobr>경애하는</nobr> <nobr><b class='zonham'>김정은</b>동지</nobr>께서 완공단계에 들어선 화성지구 4단계 건설사업을 현지에서 지도하시였다								</a>								<a class="hover-wrap fancybox1" data-fancybox-group="thumb" data-title="﻿<nobr>경애하는</nobr> <nobr><b class='zonham'>김정은</b>동지</nobr>께서 완공단계에 들어선 화성지구 4단계 건설사업을 현지에서 지도하시였다" title="﻿경애하는 김정은동지께서 완공단계에 들어선 화성지구 4단계 건설사업을 현지에서 지도하시였다" target="_blank"
+									href="//www.kass.org.kp/index.php/revolution/photo_view/484?lang=kor" onclick="hit('revolution', '', '484')"><i class="fa fa-images"></i></a>							</td>
+							<td class="text-center pub-date">2026.1.11</td>
+						</tr>						<tr>
+							<td class="text-center">4</td>
+							<td class="">
+								<a href="//www.kass.org.kp/index.php/revolution/view/483?lang=kor">
+									﻿<nobr>경애하는</nobr> <nobr><b class='zonham'>김정은</b>동지</nobr>께서 해외군사작전 전투위훈기념관건설장을 찾으시였다								</a>								<a class="hover-wrap fancybox1" data-fancybox-group="thumb" data-title="﻿<nobr>경애하는</nobr> <nobr><b class='zonham'>김정은</b>동지</nobr>께서 해외군사작전 전투위훈기념관건설장을 찾으시였다" title="﻿경애하는 김정은동지께서 해외군사작전 전투위훈기념관건설장을 찾으시였다" target="_blank"
+									href="//www.kass.org.kp/index.php/revolution/photo_view/483?lang=kor" onclick="hit('revolution', '', '483')"><i class="fa fa-images"></i></a>							</td>
+							<td class="text-center pub-date">2026.1.6</td>
+						</tr>						<tr>
+							<td class="text-center">5</td>
+							<td class="">
+								<a href="//www.kass.org.kp/index.php/revolution/view/481?lang=kor">
+									﻿<nobr>경애하는</nobr>  <nobr><b class='zonham'>김정은</b>동지</nobr>께서 신의주온실종합농장건설장을 찾으시고 새해를 맞이한 청년건설자들을 축하격려해주시였다								</a>								<a class="hover-wrap fancybox1" data-fancybox-group="thumb" data-title="﻿<nobr>경애하는</nobr>  <nobr><b class='zonham'>김정은</b>동지</nobr>께서 신의주온실종합농장건설장을 찾으시고 새해를 맞이한 청년건설자들을 축하격려해주시였다" title="﻿경애하는  김정은동지께서 신의주온실종합농장건설장을 찾으시고 새해를 맞이한 청년건설자들을 축하격려해주시였다" target="_blank"
+									href="//www.kass.org.kp/index.php/revolution/photo_view/481?lang=kor" onclick="hit('revolution', '', '481')"><i class="fa fa-images"></i></a>							</td>
+							<td class="text-center pub-date">2026.1.3</td>
+						</tr>						<tr>
+							<td class="text-center">6</td>
+							<td class="">
+								<a href="//www.kass.org.kp/index.php/revolution/view/482?lang=kor">
+									﻿신의주온실종합농장건설에 동원된 청년전위,군인건설자들앞에서 한 <nobr><b class='zonham'>김정은</b>동지</nobr>의 축하연설								</a>								<a class="hover-wrap fancybox1" data-fancybox-group="thumb" data-title="﻿신의주온실종합농장건설에 동원된 청년전위,군인건설자들앞에서 한 <nobr><b class='zonham'>김정은</b>동지</nobr>의 축하연설" title="﻿신의주온실종합농장건설에 동원된 청년전위,군인건설자들앞에서 한 김정은동지의 축하연설" target="_blank"
+									href="//www.kass.org.kp/index.php/revolution/photo_view/482?lang=kor" onclick="hit('revolution', '', '482')"><i class="fa fa-images"></i></a>							</td>
+							<td class="text-center pub-date">2026.1.3</td>
+						</tr>						<tr>
+							<td class="text-center">7</td>
+							<td class="">
+								<a href="//www.kass.org.kp/index.php/revolution/view/479?lang=kor">
+									﻿<nobr>경애하는</nobr> <nobr><b class='zonham'>김정은</b>동지</nobr>께서 새해 2026년에 즈음하여 금수산태양궁전을 찾으시였다								</a>								<a class="hover-wrap fancybox1" data-fancybox-group="thumb" data-title="﻿<nobr>경애하는</nobr> <nobr><b class='zonham'>김정은</b>동지</nobr>께서 새해 2026년에 즈음하여 금수산태양궁전을 찾으시였다" title="﻿경애하는 김정은동지께서 새해 2026년에 즈음하여 금수산태양궁전을 찾으시였다" target="_blank"
+									href="//www.kass.org.kp/index.php/revolution/photo_view/479?lang=kor" onclick="hit('revolution', '', '479')"><i class="fa fa-images"></i></a>							</td>
+							<td class="text-center pub-date">2026.1.2</td>
+						</tr>						<tr>
+							<td class="text-center">8</td>
+							<td class="">
+								<a href="//www.kass.org.kp/index.php/revolution/view/480?lang=kor">
+									﻿<nobr>경애하는</nobr> <nobr><b class='zonham'>김정은</b>동지</nobr>께서 2026년 설맞이공연에 출연하는 학생소년들을 만나시고 축복의 기념사진을 찍으시였다								</a>								<a class="hover-wrap fancybox1" data-fancybox-group="thumb" data-title="﻿<nobr>경애하는</nobr> <nobr><b class='zonham'>김정은</b>동지</nobr>께서 2026년 설맞이공연에 출연하는 학생소년들을 만나시고 축복의 기념사진을 찍으시였다" title="﻿경애하는 김정은동지께서 2026년 설맞이공연에 출연하는 학생소년들을 만나시고 축복의 기념사진을 찍으시였다" target="_blank"
+									href="//www.kass.org.kp/index.php/revolution/photo_view/480?lang=kor" onclick="hit('revolution', '', '480')"><i class="fa fa-images"></i></a>							</td>
+							<td class="text-center pub-date">2026.1.2</td>
+						</tr>						<tr>
+							<td class="text-center">9</td>
+							<td class="">
+								<a href="//www.kass.org.kp/index.php/revolution/view/475?lang=kor">
+									﻿새해 2026년을 맞으며 경축공연 성황리에 진행								</a>								<a class="hover-wrap fancybox1" data-fancybox-group="thumb" data-title="﻿새해 2026년을 맞으며 경축공연 성황리에 진행" title="﻿새해 2026년을 맞으며 경축공연 성황리에 진행" target="_blank"
+									href="//www.kass.org.kp/index.php/revolution/photo_view/475?lang=kor" onclick="hit('revolution', '', '475')"><i class="fa fa-images"></i></a>							</td>
+							<td class="text-center pub-date">2026.1.1</td>
+						</tr>						<tr>
+							<td class="text-center">10</td>
+							<td class="">
+								<a href="//www.kass.org.kp/index.php/revolution/view/476?lang=kor">
+									﻿신년경축행사에서 한 <nobr><b class='zonham'>김정은</b>동지</nobr>의 연설								</a>								<a class="hover-wrap fancybox1" data-fancybox-group="thumb" data-title="﻿신년경축행사에서 한 <nobr><b class='zonham'>김정은</b>동지</nobr>의 연설" title="﻿신년경축행사에서 한 김정은동지의 연설" target="_blank"
+									href="//www.kass.org.kp/index.php/revolution/photo_view/476?lang=kor" onclick="hit('revolution', '', '476')"><i class="fa fa-images"></i></a>							</td>
+							<td class="text-center pub-date">2026.1.1</td>
+						</tr>					</tbody>
+				</table>
+				<div class="text-center">
+					<div class="pagination justify-content-center">
+						<ul><li class="active"><a>1</a></li><li><a href="//www.kass.org.kp/index.php/great/list/revolution/3/0/2?lang=kor" data-ci-pagination-page="2">2</a></li><li><a href="//www.kass.org.kp/index.php/great/list/revolution/3/0/3?lang=kor" data-ci-pagination-page="3">3</a></li><li><a href="//www.kass.org.kp/index.php/great/list/revolution/3/0/2?lang=kor" data-ci-pagination-page="2" rel="next">&gt;</a></li><li><a href="//www.kass.org.kp/index.php/great/list/revolution/3/0/38?lang=kor" data-ci-pagination-page="38">마지막</a></li></ul>					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+    </section>
+    <footer style="background-color: #5f2a07;">
+    <div id="sub-footer">
+        <div class="container-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="copyright text-center">
+                        <span class="mt-1">조선민주주의인민공화국 평양시 우편함 제128호</span>
+		                <span class="mt-1 ml-3"><nobr><i class="fa fa-envelope"></i> kasssg@star-co.net.kp</nobr></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+<a href="#" class="scrollup"><i class="icon-angle-up icon-square icon-bglight icon-2x active"></i></a>
+    
+<script type="text/javascript">
+    let base_url = '//www.kass.org.kp/';
+    let site_url = '//www.kass.org.kp/index.php';
+    let _token   = '0d84640567d26ad5eddc9d4f2acbeec4';
+    let datapath = 'public/';
+    let DATAPATH = 'public/';
+    let lang = 'kor';
+    let select_page = '페지선택';
+    let message_empty = '자료가 존재하지 않습니다.';
+</script>
+
+<script src="//www.kass.org.kp/assets/js/fancy/custom.min.js?20241016.2.x.0"></script>
+<script src="//www.kass.org.kp/assets/js/fancy/jquery.fancybox-thumbs.min.js"></script>
+<script src="//www.kass.org.kp/assets/js/leader.min.js?20241016.2.x.0"></script>
+<script src="//www.kass.org.kp/assets/js/global.min.js?20241016.2.x.0"></script>
+<script type="text/javascript">
+
+function handleSwitcher() {    
+        var panel = jQuery('.style-switcher');
+
+        jQuery('.style-switcher-btn').click(function () {
+            jQuery('.style-switcher').show();
+        });
+
+        jQuery('.theme-close').click(function () {
+            jQuery('.style-switcher').hide();
+        });
+        
+        jQuery('li', panel).click(function () {
+            var color = jQuery(this).attr("data-style");
+            var data_header = jQuery(this).attr("data-header");
+            setColor(color, data_header);
+            jQuery('.list-unstyled li', panel).removeClass("theme-active");
+            jQuery(this).addClass("theme-active");
+        });
+
+        var setColor = function (color, data_header) {
+            jQuery('#style_color').attr("href", "//www.kass.org.kp/assets/css/color/" + color + ".css");
+            if(data_header == 'light'){
+                jQuery('#style_color-header-1').attr("href", "assets/css/themes/headers/header1-" + color + ".css");
+                jQuery('#logo-header').attr("src", "assets/img/logo1-" + color + ".png");
+                jQuery('#logo-footer').attr("src", "assets/img/logo2-" + color + ".png");
+            } else if(data_header == 'dark'){
+                jQuery('#style_color-header-2').attr("href", "assets/css/themes/headers/header2-" + color + ".css");
+                jQuery('#logo-header').attr("src", "assets/img/logo1-" + color + ".png");
+                jQuery('#logo-footer').attr("src", "assets/img/logo2-" + color + ".png");
+            }
+        }
+    }
+
+jQuery(document).ready(function(){
+	jQuery(".style-switcher").bind("click", handleSwitcher());	
+});
+</script>  </body>
+</html>

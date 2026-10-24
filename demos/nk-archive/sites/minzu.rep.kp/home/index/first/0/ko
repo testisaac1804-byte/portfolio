@@ -1,0 +1,1739 @@
+
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>민주조선 | 조선민주주의인민공화국 최고인민회의 상임위원회 및 내각기관지</title>
+    <meta charset="utf8"/>
+    <link rel="icon" href="/resource/images/cholima.png" type="image/x-icon" />
+    <link href="/resource/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/skin/default.css">
+    <link rel="stylesheet" href="/css/blueimp-gallery.min.css">
+    <link href="/css/style_gallery.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resource/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/first_ko.css">
+    <script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+        <link href="/assets/css/nivo-lightbox.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/css/font.css">
+</head> 
+<body id="top" style="background-color: #fff;font-family:KPCheonRiMa; min-width: 1100px;  "> 
+    <header id="header"   >  
+        <div class="fixedMenu" style="background: url(/resource/custom/header_bg_right_1.png)  repeat-x ; " >
+            <div style="background: url(/resource/custom/header_bg_left.png) no-repeat left 0;   height: 85px; font-family: 'KPCheonRiMa';">   
+                <div class="container" style="background: url(/resource/header_back.jpg) no-repeat center top ; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; min-width:100%!important; "  >
+                    <ul class="menu_top" style="padding-right: 15px;">
+                        <form id="lang" method="post" action="/home/index">
+                            <input id="language" name="language" value="" hidden />
+                            <input id="page" name="page" value="first" hidden />
+                            <input type="hidden" name="_csrf" value="46c13d813b6690e68fb48372ff5f7eb7"/>
+                        </form>
+                        <li>
+                            <a style="background-color: #004df3;"  href = "/home/index/first/0/ko">조선어                            </a>
+                        </li>
+                        <li>
+                            <a  href = " /home/index/first/0/en">
+                                English                            </a>
+                        </li>
+                        <li>
+                            <a  href ="/home/index/first/0/ch">
+                                 汉语                            </a>
+                        </li>
+                    </ul> 
+                    <div class="logo " style="padding-left: 10%;">
+                        <a href="/Home/index/first/0/ko" onclick="setPage('first');" style="display:block;margin-bottom:5px;"><img src="/resource/logo.png"></a>
+                    </div> 
+                </div>
+                <div class="mobile1" style="font-family:'KPCheonRiMa'; ">
+                    <div class="rightPart1" style="  font-family: 'KPCheonRiMa';  font: inherit; ">
+                        <b>  
+                            <ul class="menubar1" style="font-family:'KPCheonRiMa';font-size: 13px; " > 
+                                <li   >
+                                    <a href="/home/index/first/0/ko" class="active1" style=" /* text-shadow: 1px 1px 1px #000!important;*/font-family:'KPCheonRiMa'; " >
+                                        <b>첫페지</b>
+                                    </a>
+                                </li>
+                                <li   >
+                                    <a  href="/home/index/revolution/0/ko"     >
+                                        <b>혁명활동소식</b>
+                                    </a>
+                                </li  >
+                                <li   >
+                                    <a  href="/home/index/power_news/0/ko"    >
+                                        <b>정권기관소식</b>
+                                    </a>
+                                </li>
+                                <li class="has-dropdown"  >
+                                    <a href="/home/index/all_view/0/ko"     >
+                                     <font  ><b>분야별기사</b></font></a>
+                                     <ul class="dropdown" style="width: 200px;padding-right: 10px;padding-left: 0px;">
+                                            <li>
+                                                <a href="/home/index/politics/0/ko"  >정치 
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/home/index/economy/0/ko"  >경제                                                </a>
+                                            </li>
+                                            <li>
+                                                <a  href="/home/index/culture/0/ko"  >문화                                                </a>
+                                            </li>
+                                            <li style="padding-bottom:px;">
+                                                <a  href="/home/index/tourist/0/ko "  >관광,명승지                                                </a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="/home/index/overseas/0/ko"  >해외동포                                                </a>
+                                            </li>
+                                            <li>
+                                                <a  href="/home/index/international/0/ko"  >국제적련대성                                                </a>
+                                            </li>
+                                    </ul>
+                                </li>
+                                <li  class="has-dropdown">
+                                    <a  href="/home/index/media/0/ko"  > <font   ><b> 다매체</b></font></a>
+                                    <ul class="dropdown" style="padding-right: 10px;padding-left: 0px;">
+                                        <li><a href="/home/index/photos/0/ko"  >사진</a></li>
+                                        <li><a  href="/home/index/video/0/ko"  >동영상</a>
+                                        </li> 
+                                    </ul>
+                                </li>    
+                                <li  class=" dropdown">
+                                    <div class="btn-group pull-right">
+                                        <a  href="/home/index/search/0/ko"  class=" btn-sm btn-outline dropdown-toggle">검색</a>
+                                                                            </div> 
+                                </li>  
+                             </ul>      
+                        </b>
+                    </div>
+                </div> 
+                <div style="clear: box;height: 20px;"></div>
+            </div>       
+         </div>
+    </header> 
+    <style type="text/css">
+        .modal-backdrop{
+            z-index: 0;
+        }
+    </style>
+<link rel="stylesheet" type="text/css" href="/./assets/global/css/components.min.css">
+<style type="text/css">
+
+</style>
+
+ 	<div id="content1" style="top:70px; background: url(/resource/images/first_back.png) no-repeat center  top  ; width: 100%; padding: 0; background-color: #fff; position: absolute;">
+		<div id="main1" style="padding-left: 5%;padding-right: 5%;" >
+			<div class="row" >
+				<div class="col-sm-6"  style="margin-top: 40px;padding-right: 3%;">
+					<div style="width: 100%;left: 0;">
+						<div class="box1 box-bordered1">
+							<div class="box-title1"  style="border-bottom-color: #f7030c;">
+
+								<a href="/home/index/revolution/0/ko" style="color: #000;" ><h3><font face="KPCheonRiMa" color="#f7030c"> 혁명활동소식 </font></h3></a>
+
+							</div>
+
+							<div class="box-content1">
+								 <ul  style="padding: 0px;">
+								 	
+										<div style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+									 		<div class="row"  >
+									 			<div class="col-lg-12" >
+									 				<div class="col-lg-12" style="line-height: 16px;" >
+									 					<a href="/Home/index/disp/6526/ko" style="color: #000;"> 
+
+														조선로동당 중앙군사위원회 제8기 제8차확대회의 진행 
+														</a>
+																<img src="/./resource/images/camera.png">
+																												<font color="#173ae8">[2025.5.30.]</font>													
+									 				</div>									 				 
+									 			</div>									 			 
+									 		</div>
+									 	</div>
+
+								 	
+										<div style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+									 		<div class="row"  >
+									 			<div class="col-lg-12" >
+									 				<div class="col-lg-12" style="line-height: 16px;" >
+									 					<a href="/Home/index/disp/6527/ko" style="color: #000;"> 
+
+														<nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서</nobr> 조선인민군 대련합부대 포병구분대들사이의 포사격경기를 참관하시였다 
+														</a>
+																<img src="/./resource/images/camera.png">
+																												<font color="#173ae8">[2025.5.30.]</font>													
+									 				</div>									 				 
+									 			</div>									 			 
+									 		</div>
+									 	</div>
+
+								 	
+										<div style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+									 		<div class="row"  >
+									 			<div class="col-lg-12" >
+									 				<div class="col-lg-12" style="line-height: 16px;" >
+									 					<a href="/Home/index/disp/6499/ko" style="color: #000;"> 
+
+														김  정  은<br>결성세대의 애국정신을 이어 재일조선인운동의 <nobr>위대한</nobr> 새 력사를 써나가자 
+														</a>
+																												<font color="#173ae8">[2025.5.25.]</font>													
+									 				</div>									 				 
+									 			</div>									 			 
+									 		</div>
+									 	</div>
+
+								 	
+										<div style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+									 		<div class="row"  >
+									 			<div class="col-lg-12" >
+									 				<div class="col-lg-12" style="line-height: 16px;" >
+									 					<a href="/Home/index/disp/6476/ko" style="color: #000;"> 
+
+														새로 건조한 구축함진수식 진행 
+														</a>
+																												<font color="#173ae8">[2025.5.22.]</font>													
+									 				</div>									 				 
+									 			</div>									 			 
+									 		</div>
+									 	</div>
+
+								 	
+										<div style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+									 		<div class="row"  >
+									 			<div class="col-lg-12" >
+									 				<div class="col-lg-12" style="line-height: 16px;" >
+									 					<a href="/Home/index/disp/6461/ko" style="color: #000;"> 
+
+														<nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서</nobr> 현철해동지 서거 ３돐에 즈음하여 신미리애국렬사릉을 찾으시였다 
+														</a>
+																<img src="/./resource/images/camera.png">
+																												<font color="#173ae8">[2025.5.19.]</font>													
+									 				</div>									 				 
+									 			</div>									 			 
+									 		</div>
+									 	</div>
+
+								 	
+								 </ul>
+
+							</div> 
+
+						</div>
+
+					</div>
+
+
+
+					<div style="width: 100%;left: 0;" >
+						<div class="box1  box-bordered1" >
+							<div class="box-title1" style="border-bottom-color:#3bacce;">
+								<a href="/home/index/power_news/0/ko"><h3><font face="KPCheonRiMa" color="#3bacce" ><b>정권기관소식</b></font></h3>
+
+								</a>  
+							</div>
+
+							<div class="box-content1">
+								 <ul  style="padding: 0px;vertical-align: top;">
+							 	
+									<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1;padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"   ">
+								 			<div class="col-lg-12" >
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6528/ko" style="color: #000;">
+
+													조선민주주의인민공화국 최고인민회의 상임위원회 제14기 제35차전원회의 진행
+													</a>
+
+															<img src="/./resource/images/camera.png">
+
+													
+													<font color="#173ae8">[2025.5.30.]</font>
+								 				</div>
+								 			</div>	
+								 		</div>
+								 	</div>
+
+							 	
+									<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1;padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"   ">
+								 			<div class="col-lg-12" >
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6529/ko" style="color: #000;">
+
+													최룡해동지가 총련결성 70돐 재일본조선인감사단을 만났다
+													</a>
+
+															<img src="/./resource/images/camera.png">
+
+													
+													<font color="#173ae8">[2025.5.30.]</font>
+								 				</div>
+								 			</div>	
+								 		</div>
+								 	</div>
+
+							 	
+									<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1;padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"   ">
+								 			<div class="col-lg-12" >
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6518/ko" style="color: #000;">
+
+													조선민주주의인민공화국 사회안전상이 로씨야내무성대표단을 만났다
+													</a>
+
+															<img src="/./resource/images/camera.png">
+
+													
+													<font color="#173ae8">[2025.5.29.]</font>
+								 				</div>
+								 			</div>	
+								 		</div>
+								 	</div>
+
+							 	
+									<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1;padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"   ">
+								 			<div class="col-lg-12" >
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6519/ko" style="color: #000;">
+
+													조선민주주의인민공화국 사회안전성 부상과 로씨야련방 내무성 부상사이의 회담 진행
+													</a>
+
+															<img src="/./resource/images/camera.png">
+
+													
+													<font color="#173ae8">[2025.5.29.]</font>
+								 				</div>
+								 			</div>	
+								 		</div>
+								 	</div>
+
+							 	
+									<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1;padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"   ">
+								 			<div class="col-lg-12" >
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6515/ko" style="color: #000;">
+
+													로씨야에 가는 조선민주주의인민공화국 국가보위상일행 출발
+													</a>
+
+													
+													<font color="#173ae8">[2025.5.28.]</font>
+								 				</div>
+								 			</div>	
+								 		</div>
+								 	</div>
+
+							 	
+							 </ul>
+							</div>
+						</div>
+					 </div>
+				</div>
+
+								<div class="col-sm-6" style="margin-top: 40px;padding-left: 3%;">
+					<div class="box1  box-bordered1" ">
+						<div class="box-title1" style="border-bottom-color: #9fc2e4;">
+							<a href="/home/index/all_view/0/ko" >
+								<h3> <font face="KPCheonRiMa" color="#53697e"><b>최근소식</b></font></h3>
+							</a>  
+						</div>
+
+						<div class="box-content1" style="  ">
+							 <ul  style="padding: 0px;">
+							 	
+								 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"  >
+								 			<div class="col-lg-12">
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6530/ko" style="color: #000;">
+
+													총련결성 ７０돐경축 음악무용종합공연 《언제나 빛나라 우리의 총련》 진행
+													</a>
+
+													
+													<font color="#173ae8">[2025.5.30.]</font>
+								 				</div>
+								 			</div>
+								 		</div>
+
+								 		<div style=""></div>
+								 	</div>
+
+							 	
+								 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"  >
+								 			<div class="col-lg-12">
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6532/ko" style="color: #000;">
+
+													총련결성 ７０돐 재일본조선인감사단 여러곳 참관
+													</a>
+
+															<img src="/./resource/images/camera.png">
+
+													
+													<font color="#173ae8">[2025.5.30.]</font>
+								 				</div>
+								 			</div>
+								 		</div>
+
+								 		<div style=""></div>
+								 	</div>
+
+							 	
+								 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"  >
+								 			<div class="col-lg-12">
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6533/ko" style="color: #000;">
+
+													황해남도에서 해주농업제품생산사업소 새로 건설
+													</a>
+
+													
+													<font color="#173ae8">[2025.5.30.]</font>
+								 				</div>
+								 			</div>
+								 		</div>
+
+								 		<div style=""></div>
+								 	</div>
+
+							 	
+								 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"  >
+								 			<div class="col-lg-12">
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6534/ko" style="color: #000;">
+
+													로씨야내무성대표단 귀국
+													</a>
+
+													
+													<font color="#173ae8">[2025.5.30.]</font>
+								 				</div>
+								 			</div>
+								 		</div>
+
+								 		<div style=""></div>
+								 	</div>
+
+							 	
+								 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"  >
+								 			<div class="col-lg-12">
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6535/ko" style="color: #000;">
+
+													조선민주주의인민공화국 국가보위상이 제１３차 안전문제담당 고위대표들의 국제상봉에서 연설
+													</a>
+
+													
+													<font color="#173ae8">[2025.5.30.]</font>
+								 				</div>
+								 			</div>
+								 		</div>
+
+								 		<div style=""></div>
+								 	</div>
+
+							 	
+								 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"  >
+								 			<div class="col-lg-12">
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6536/ko" style="color: #000;">
+
+													높이 평가해주신 애국심
+													</a>
+
+													
+													<font color="#173ae8">[2025.5.30.]</font>
+								 				</div>
+								 			</div>
+								 		</div>
+
+								 		<div style=""></div>
+								 	</div>
+
+							 	
+								 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"  >
+								 			<div class="col-lg-12">
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6537/ko" style="color: #000;">
+
+													따뜻한 축복
+													</a>
+
+													
+													<font color="#173ae8">[2025.5.30.]</font>
+								 				</div>
+								 			</div>
+								 		</div>
+
+								 		<div style=""></div>
+								 	</div>
+
+							 	
+								 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"  >
+								 			<div class="col-lg-12">
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6520/ko" style="color: #000;">
+
+													로씨야내무성대표단 여러곳 참관
+													</a>
+
+															<img src="/./resource/images/camera.png">
+
+													
+													<font color="#173ae8">[2025.5.29.]</font>
+								 				</div>
+								 			</div>
+								 		</div>
+
+								 		<div style=""></div>
+								 	</div>
+
+							 	
+								 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"  >
+								 			<div class="col-lg-12">
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6521/ko" style="color: #000;">
+
+													개건된 두만강역 준공식 진행
+													</a>
+
+															<img src="/./resource/images/camera.png">
+
+													
+													<font color="#173ae8">[2025.5.29.]</font>
+								 				</div>
+								 			</div>
+								 		</div>
+
+								 		<div style=""></div>
+								 	</div>
+
+							 	
+								 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 5px;padding-bottom: 5px;">
+
+								 		<div class="row"  >
+								 			<div class="col-lg-12">
+								 				<div class="col-lg-12" style="line-height: 16px;">
+								 					<a href="/Home/index/disp/6522/ko" style="color: #000;">
+
+													개건된 수양산종합식료공장 준공식 진행
+													</a>
+
+													
+													<font color="#173ae8">[2025.5.29.]</font>
+								 				</div>
+								 			</div>
+								 		</div>
+
+								 		<div style=""></div>
+								 	</div>
+
+							 	
+							 </ul>
+						</div>
+					</div>
+				</div> 
+			</div>
+
+		<!-- 	<div style="clear: box;height: 120px;"></div> -->
+
+			<div class="row-fluid1">
+				<div class="col-lg-12"   >
+					<div class="box1 box-bordered1">
+						<div class="box-content2" style="padding-top: 30px;padding-bottom: 0px;" >
+							 <div id="wrapper">
+						        <div class="wrapper wrapper-content">
+           							 <div class="row animatedParent">
+						                	<div class="row gallery-item" style="padding-left: 10px;padding-right: 10px; "  >
+						                		
+
+				                
+		                                		
+		                                		<div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go"  id="media" name="media"   align="middle" style="  font-size: 14px;font-family: KPCheonRiMa;float: left; padding-right: : 1px; ">
+
+													<a href="/uploads/photo/2025/04/2025-04-03-011.jpg" data-lightbox-gallery="gallery1"   style="color: #000;">
+
+														<!-- <div class="row">
+
+															<div class="col-sm-12"> -->
+
+																<div class=" banner0" style="background-color: rgb(60, 60, 60); border: 2px solid #f8f8f8; max-height: auto;max-width: auto;min-height: auto;min-width: auto;     ">
+
+																	<img alt="image" 
+
+																		id = "image0"
+
+				                                       					name = "image0"
+
+				                                       					class="img-responsive"
+
+				                                       					src="/uploads/photo/2025/04/2025-04-03-011.jpg"
+
+				                                       					data-width=""
+
+				                                       					data-height=""
+
+				                                       					style="  max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+
+							                					<!-- </div>
+
+															</div> -->
+
+														</div>
+
+								                		<div >질좋은 천을 더 많이<br>-<nobr>김정숙</nobr>평양방직공장에서-	</div>
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/04/2025-04-03-012.jpg" data-lightbox-gallery="gallery1">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/04/2025-04-03-013.jpg" data-lightbox-gallery="gallery1">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/04/2025-04-03-014.jpg" data-lightbox-gallery="gallery1">
+
+													</a>
+
+											</div>
+		                                		
+		                                		<div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go"  id="media" name="media"   align="middle" style="  font-size: 14px;font-family: KPCheonRiMa;float: left; padding-right: : 1px; ">
+
+													<a href="/uploads/photo/2025/03/2025-03-15-038.jpg" data-lightbox-gallery="gallery2"   style="color: #000;">
+
+														<!-- <div class="row">
+
+															<div class="col-sm-12"> -->
+
+																<div class=" banner1" style="background-color: rgb(60, 60, 60); border: 2px solid #f8f8f8; max-height: auto;max-width: auto;min-height: auto;min-width: auto;     ">
+
+																	<img alt="image" 
+
+																		id = "image1"
+
+				                                       					name = "image1"
+
+				                                       					class="img-responsive"
+
+				                                       					src="/uploads/photo/2025/03/2025-03-15-038.jpg"
+
+				                                       					data-width=""
+
+				                                       					data-height=""
+
+				                                       					style="  max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+
+							                					<!-- </div>
+
+															</div> -->
+
+														</div>
+
+								                		<div >식수절을 맞으며<br>－모란봉에서－	</div>
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/03/2025-03-15-039.jpg" data-lightbox-gallery="gallery2">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/03/2025-03-15-040.jpg" data-lightbox-gallery="gallery2">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/03/2025-03-15-041.jpg" data-lightbox-gallery="gallery2">
+
+													</a>
+
+											</div>
+		                                		
+		                                		<div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go"  id="media" name="media"   align="middle" style="  font-size: 14px;font-family: KPCheonRiMa;float: left; padding-right: : 1px; ">
+
+													<a href="/uploads/photo/2025/02/2025-02-26-119.jpg" data-lightbox-gallery="gallery3"   style="color: #000;">
+
+														<!-- <div class="row">
+
+															<div class="col-sm-12"> -->
+
+																<div class=" banner2" style="background-color: rgb(60, 60, 60); border: 2px solid #f8f8f8; max-height: auto;max-width: auto;min-height: auto;min-width: auto;     ">
+
+																	<img alt="image" 
+
+																		id = "image2"
+
+				                                       					name = "image2"
+
+				                                       					class="img-responsive"
+
+				                                       					src="/uploads/photo/2025/02/2025-02-26-119.jpg"
+
+				                                       					data-width=""
+
+				                                       					data-height=""
+
+				                                       					style="  max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+
+							                					<!-- </div>
+
+															</div> -->
+
+														</div>
+
+								                		<div >인민들의 호평을 받는 명제품을 생산하기 위해<br>-평양강냉이가공공장에서-	</div>
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-26-120.jpg" data-lightbox-gallery="gallery3">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-26-121.jpg" data-lightbox-gallery="gallery3">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-26-122.jpg" data-lightbox-gallery="gallery3">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-26-123.jpg" data-lightbox-gallery="gallery3">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-26-124.jpg" data-lightbox-gallery="gallery3">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-26-125.jpg" data-lightbox-gallery="gallery3">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-26-126.jpg" data-lightbox-gallery="gallery3">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-26-127.jpg" data-lightbox-gallery="gallery3">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-26-128.jpg" data-lightbox-gallery="gallery3">
+
+													</a>
+
+											</div>
+		                                		
+		                                		<div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go"  id="media" name="media"   align="middle" style="  font-size: 14px;font-family: KPCheonRiMa;float: left; padding-right: : 1px; ">
+
+													<a href="/uploads/photo/2025/02/2025-02-21-005.jpg" data-lightbox-gallery="gallery4"   style="color: #000;">
+
+														<!-- <div class="row">
+
+															<div class="col-sm-12"> -->
+
+																<div class=" banner3" style="background-color: rgb(60, 60, 60); border: 2px solid #f8f8f8; max-height: auto;max-width: auto;min-height: auto;min-width: auto;     ">
+
+																	<img alt="image" 
+
+																		id = "image3"
+
+				                                       					name = "image3"
+
+				                                       					class="img-responsive"
+
+				                                       					src="/uploads/photo/2025/02/2025-02-21-005.jpg"
+
+				                                       					data-width=""
+
+				                                       					data-height=""
+
+				                                       					style="  max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+
+							                					<!-- </div>
+
+															</div> -->
+
+														</div>
+
+								                		<div >제품의 질보장에 박차를<br>-봉화데트론섬유생산공장에서-	</div>
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-21-006.jpg" data-lightbox-gallery="gallery4">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-21-007.jpg" data-lightbox-gallery="gallery4">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-21-008.jpg" data-lightbox-gallery="gallery4">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-21-009.jpg" data-lightbox-gallery="gallery4">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-21-010.jpg" data-lightbox-gallery="gallery4">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-21-011.jpg" data-lightbox-gallery="gallery4">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-21-012.jpg" data-lightbox-gallery="gallery4">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-21-013.jpg" data-lightbox-gallery="gallery4">
+
+													</a>
+
+											</div>
+		                                		 <div style="clear: both;height: 9px;"></div>
+
+		                                			
+		                                		<div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go"  id="media" name="media"   align="middle" style="  font-size: 14px;font-family: KPCheonRiMa;float: left; padding-right: : 1px; ">
+
+													<a href="/uploads/photo/2025/02/2025-02-19-007.jpg" data-lightbox-gallery="gallery5"   style="color: #000;">
+
+														<!-- <div class="row">
+
+															<div class="col-sm-12"> -->
+
+																<div class=" banner4" style="background-color: rgb(60, 60, 60); border: 2px solid #f8f8f8; max-height: auto;max-width: auto;min-height: auto;min-width: auto;     ">
+
+																	<img alt="image" 
+
+																		id = "image4"
+
+				                                       					name = "image4"
+
+				                                       					class="img-responsive"
+
+				                                       					src="/uploads/photo/2025/02/2025-02-19-007.jpg"
+
+				                                       					data-width=""
+
+				                                       					data-height=""
+
+				                                       					style="  max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+
+							                					<!-- </div>
+
+															</div> -->
+
+														</div>
+
+								                		<div >생산에서 혁신을일으키고 있다<br>-<nobr>김정숙</nobr>평양제사공장-	</div>
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-19-008.jpg" data-lightbox-gallery="gallery5">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-19-009.jpg" data-lightbox-gallery="gallery5">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-19-010.jpg" data-lightbox-gallery="gallery5">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-19-011.jpg" data-lightbox-gallery="gallery5">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/02/2025-02-19-012.jpg" data-lightbox-gallery="gallery5">
+
+													</a>
+
+											</div>
+		                                		
+		                                		<div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go"  id="media" name="media"   align="middle" style="  font-size: 14px;font-family: KPCheonRiMa;float: left; padding-right: : 1px; ">
+
+													<a href="/uploads/photo/2025/01/2025-01-15-052.jpg" data-lightbox-gallery="gallery6"   style="color: #000;">
+
+														<!-- <div class="row">
+
+															<div class="col-sm-12"> -->
+
+																<div class=" banner5" style="background-color: rgb(60, 60, 60); border: 2px solid #f8f8f8; max-height: auto;max-width: auto;min-height: auto;min-width: auto;     ">
+
+																	<img alt="image" 
+
+																		id = "image5"
+
+				                                       					name = "image5"
+
+				                                       					class="img-responsive"
+
+				                                       					src="/uploads/photo/2025/01/2025-01-15-052.jpg"
+
+				                                       					data-width=""
+
+				                                       					data-height=""
+
+				                                       					style="  max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+
+							                					<!-- </div>
+
+															</div> -->
+
+														</div>
+
+								                		<div >삼지연종합전람관에 꾸려진 백두산지질전시장	</div>
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/01/2025-01-15-053.jpg" data-lightbox-gallery="gallery6">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/01/2025-01-15-054.jpg" data-lightbox-gallery="gallery6">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/01/2025-01-15-055.jpg" data-lightbox-gallery="gallery6">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/01/2025-01-15-056.jpg" data-lightbox-gallery="gallery6">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/01/2025-01-15-057.jpg" data-lightbox-gallery="gallery6">
+
+													</a>
+
+											</div>
+		                                		
+		                                		<div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go"  id="media" name="media"   align="middle" style="  font-size: 14px;font-family: KPCheonRiMa;float: left; padding-right: : 1px; ">
+
+													<a href="/uploads/photo/2025/01/2025-01-05-001.jpg" data-lightbox-gallery="gallery7"   style="color: #000;">
+
+														<!-- <div class="row">
+
+															<div class="col-sm-12"> -->
+
+																<div class=" banner6" style="background-color: rgb(60, 60, 60); border: 2px solid #f8f8f8; max-height: auto;max-width: auto;min-height: auto;min-width: auto;     ">
+
+																	<img alt="image" 
+
+																		id = "image6"
+
+				                                       					name = "image6"
+
+				                                       					class="img-responsive"
+
+				                                       					src="/uploads/photo/2025/01/2025-01-05-001.jpg"
+
+				                                       					data-width=""
+
+				                                       					data-height=""
+
+				                                       					style="  max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+
+							                					<!-- </div>
+
+															</div> -->
+
+														</div>
+
+								                		<div >조선옷을 사랑하는 우리 인민들	</div>
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/01/2025-01-05-002.jpg" data-lightbox-gallery="gallery7">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/01/2025-01-05-003.jpg" data-lightbox-gallery="gallery7">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/01/2025-01-05-004.jpg" data-lightbox-gallery="gallery7">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/01/2025-01-05-005.jpg" data-lightbox-gallery="gallery7">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/01/2025-01-05-006.jpg" data-lightbox-gallery="gallery7">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/01/2025-01-05-007.jpg" data-lightbox-gallery="gallery7">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2025/01/2025-01-05-008.jpg" data-lightbox-gallery="gallery7">
+
+													</a>
+
+											</div>
+		                                		
+		                                		<div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go"  id="media" name="media"   align="middle" style="  font-size: 14px;font-family: KPCheonRiMa;float: left; padding-right: : 1px; ">
+
+													<a href="/uploads/photo/2024/10/2024-10-14-007.jpg" data-lightbox-gallery="gallery8"   style="color: #000;">
+
+														<!-- <div class="row">
+
+															<div class="col-sm-12"> -->
+
+																<div class=" banner7" style="background-color: rgb(60, 60, 60); border: 2px solid #f8f8f8; max-height: auto;max-width: auto;min-height: auto;min-width: auto;     ">
+
+																	<img alt="image" 
+
+																		id = "image7"
+
+				                                       					name = "image7"
+
+				                                       					class="img-responsive"
+
+				                                       					src="/uploads/photo/2024/10/2024-10-14-007.jpg"
+
+				                                       					data-width=""
+
+				                                       					data-height=""
+
+				                                       					style="  max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+
+							                					<!-- </div>
+
+															</div> -->
+
+														</div>
+
+								                		<div >가금부문의 본보기-광천닭공장	</div>
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-008.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-009.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-010.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-011.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-012.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-013.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-014.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-015.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-016.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-017.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-018.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-019.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-020.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-021.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+													
+
+													<a href="/uploads/photo/2024/10/2024-10-14-022.jpg" data-lightbox-gallery="gallery8">
+
+													</a>
+
+											</div>
+							            </div>
+
+							    </div> 
+
+						</div> 
+
+						<div id="wrapper" style="background-color: #00000040;   ">
+
+						        <div class="wrapper wrapper-content" style="padding-bottom: 0px!important; ">
+
+           							 <div class="row animatedParent">
+
+						                	<div class="row gallery-item" style="padding-left: 10px;padding-right: 10px; ">
+
+						               			      
+
+											        <!-- <div class="col-sm-3"></div> -->
+
+											        <div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go" align="middle" style="font-size: 14px;font-family: KPCheonRiMa; " align="middle" id="media">
+
+										                <a class="video_image"  data-target="#video0" data-toggle="modal" title="평양보링관을 찾아서" style="color: #000;">
+
+
+
+															<img src="/uploads/video/2025/05/bowling.jpg" class="img-responsive" alt="img" style="/*width: 300px;height: 160px;*/ max-height: auto;max-width: auto;min-height: auto;min-width: auto;">	
+
+															<div class="overlay-button"></div>	
+
+															<div style="width: 90%;">
+
+																평양보링관을 찾아서
+															</div>	
+
+										                </a>
+
+											        </div>
+
+											            <div class="modal fade" id="video0" tabindex="-1" role="basic" aria-hidden="true"   >
+
+											            	<script type="text/javascript">
+
+											            		var s= window.screen.availHeight;
+											            		s=(s - 500)/2 - 90;
+											            		$("#video0").css({ "top" :s  });
+
+											            	</script>
+
+											                <div class="  modal-dialog " style="width: 70%"  >
+
+											                    <div class="modal-content" >
+
+											                        <div class="modal-header" style="padding: 5px !important">
+
+											                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" value="0" style="margin-top: 8px!important;margin-right: 8px;"  ></button>
+
+											                            <h4 class="modal-title" style="text-align: center;font-family: 'KPCheonRiMa'">
+
+											                            	평양보링관을 찾아서</h4>
+
+											                        </div>
+
+											                        <div class="modal-body">
+
+											                            <video  class="vd" controls autobuffer="true" id='obj_vi0' style="width: 100%;">
+
+											                                <source src='/uploads/video/2025/05/2025-05-31-001.mp4' type="video/mp4">
+
+											                            </video>
+
+											                        </div>
+											                    </div>
+											                </div>
+
+											            </div>
+
+											          
+
+											        <!-- <div class="col-sm-3"></div> -->
+
+											        <div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go" align="middle" style="font-size: 14px;font-family: KPCheonRiMa; " align="middle" id="media">
+
+										                <a class="video_image"  data-target="#video1" data-toggle="modal" title="제23차 평양봄철국제상품전람회" style="color: #000;">
+
+
+
+															<img src="/uploads/video/2025/05/jonlam.jpg" class="img-responsive" alt="img" style="/*width: 300px;height: 160px;*/ max-height: auto;max-width: auto;min-height: auto;min-width: auto;">	
+
+															<div class="overlay-button"></div>	
+
+															<div style="width: 90%;">
+
+																제23차 평양봄철국제상품전람회
+															</div>	
+
+										                </a>
+
+											        </div>
+
+											            <div class="modal fade" id="video1" tabindex="-1" role="basic" aria-hidden="true"   >
+
+											            	<script type="text/javascript">
+
+											            		var s= window.screen.availHeight;
+											            		s=(s - 500)/2 - 90;
+											            		$("#video1").css({ "top" :s  });
+
+											            	</script>
+
+											                <div class="  modal-dialog " style="width: 70%"  >
+
+											                    <div class="modal-content" >
+
+											                        <div class="modal-header" style="padding: 5px !important">
+
+											                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" value="1" style="margin-top: 8px!important;margin-right: 8px;"  ></button>
+
+											                            <h4 class="modal-title" style="text-align: center;font-family: 'KPCheonRiMa'">
+
+											                            	제23차 평양봄철국제상품전람회</h4>
+
+											                        </div>
+
+											                        <div class="modal-body">
+
+											                            <video  class="vd" controls autobuffer="true" id='obj_vi1' style="width: 100%;">
+
+											                                <source src='/uploads/video/2025/05/2025-05-15-001.mp4' type="video/mp4">
+
+											                            </video>
+
+											                        </div>
+											                    </div>
+											                </div>
+
+											            </div>
+
+											          
+
+											        <!-- <div class="col-sm-3"></div> -->
+
+											        <div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go" align="middle" style="font-size: 14px;font-family: KPCheonRiMa; " align="middle" id="media">
+
+										                <a class="video_image"  data-target="#video2" data-toggle="modal" title="복받은 가정들에 넘치는 기쁨" style="color: #000;">
+
+
+
+															<img src="/uploads/video/2025/04/happy families.jpg" class="img-responsive" alt="img" style="/*width: 300px;height: 160px;*/ max-height: auto;max-width: auto;min-height: auto;min-width: auto;">	
+
+															<div class="overlay-button"></div>	
+
+															<div style="width: 90%;">
+
+																복받은 가정들에 넘치는 기쁨
+															</div>	
+
+										                </a>
+
+											        </div>
+
+											            <div class="modal fade" id="video2" tabindex="-1" role="basic" aria-hidden="true"   >
+
+											            	<script type="text/javascript">
+
+											            		var s= window.screen.availHeight;
+											            		s=(s - 500)/2 - 90;
+											            		$("#video2").css({ "top" :s  });
+
+											            	</script>
+
+											                <div class="  modal-dialog " style="width: 70%"  >
+
+											                    <div class="modal-content" >
+
+											                        <div class="modal-header" style="padding: 5px !important">
+
+											                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" value="2" style="margin-top: 8px!important;margin-right: 8px;"  ></button>
+
+											                            <h4 class="modal-title" style="text-align: center;font-family: 'KPCheonRiMa'">
+
+											                            	복받은 가정들에 넘치는 기쁨</h4>
+
+											                        </div>
+
+											                        <div class="modal-body">
+
+											                            <video  class="vd" controls autobuffer="true" id='obj_vi2' style="width: 100%;">
+
+											                                <source src='/uploads/video/2025/04/2025-04-23-001.mp4' type="video/mp4">
+
+											                            </video>
+
+											                        </div>
+											                    </div>
+											                </div>
+
+											            </div>
+
+											          
+
+											        <!-- <div class="col-sm-3"></div> -->
+
+											        <div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go" align="middle" style="font-size: 14px;font-family: KPCheonRiMa; " align="middle" id="media">
+
+										                <a class="video_image"  data-target="#video3" data-toggle="modal" title="인민이 선호하는 제품으로" style="color: #000;">
+
+
+
+															<img src="/uploads/video/2025/04/preferable products.jpg" class="img-responsive" alt="img" style="/*width: 300px;height: 160px;*/ max-height: auto;max-width: auto;min-height: auto;min-width: auto;">	
+
+															<div class="overlay-button"></div>	
+
+															<div style="width: 90%;">
+
+																인민이 선호하는 제품으로
+															</div>	
+
+										                </a>
+
+											        </div>
+
+											            <div class="modal fade" id="video3" tabindex="-1" role="basic" aria-hidden="true"   >
+
+											            	<script type="text/javascript">
+
+											            		var s= window.screen.availHeight;
+											            		s=(s - 500)/2 - 90;
+											            		$("#video3").css({ "top" :s  });
+
+											            	</script>
+
+											                <div class="  modal-dialog " style="width: 70%"  >
+
+											                    <div class="modal-content" >
+
+											                        <div class="modal-header" style="padding: 5px !important">
+
+											                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" value="3" style="margin-top: 8px!important;margin-right: 8px;"  ></button>
+
+											                            <h4 class="modal-title" style="text-align: center;font-family: 'KPCheonRiMa'">
+
+											                            	인민이 선호하는 제품으로</h4>
+
+											                        </div>
+
+											                        <div class="modal-body">
+
+											                            <video  class="vd" controls autobuffer="true" id='obj_vi3' style="width: 100%;">
+
+											                                <source src='/uploads/video/2025/04/2025-04-09-001.mp4' type="video/mp4">
+
+											                            </video>
+
+											                        </div>
+											                    </div>
+											                </div>
+
+											            </div>
+
+											    
+											</div>
+
+							            </div>
+
+								</div> 
+
+							</div> 
+
+						</div>
+
+					</div> 
+
+				</div>
+
+			</div>
+
+		 	<div style="margin-bottom: 0px!important;" >
+
+				<a href="/home/index/history/0/ko">
+
+					<img src="/resource/slide1_Layer_1.png" width="100%">
+
+				</a>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<script type="text/javascript">
+
+
+
+    $(document).ready(function(){
+
+        $(".close").click(function(){
+
+            var num = this.value;
+
+            var str = "obj_vi"+num;
+
+            var x = document.getElementById(str);
+
+            x.pause();
+
+        }); 
+
+    });
+
+    
+
+    $(document).ready(function(){
+
+        $(".nivo-lightbox-image").click(function(){
+
+            alert("addfe");
+
+        }); 
+
+    });
+
+</script>
+
+<style type="text/css">
+
+	 .modal-body{
+		padding:0px !important;
+	}
+
+	.modal-header{
+		padding:0px !important; 
+	}
+
+	.video_image .overlay-button {
+	position: absolute;
+	top: 44%;
+	left: 50%;
+	width: 100px;
+	height: 100px;
+	margin: -50px 0 0 -50px;
+	background: url(/resource/custom/bigplay.svg) no-repeat;
+}
+
+.video_image:hover .overlay-button {
+	background-position: 0 -100px;
+}
+</style>
+
+<style type="text/css">
+
+    .vd{
+
+        text-align: center;
+
+    }
+
+</style>
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+
+	    resizeImages();
+
+	    $(window).on('resize', function(){
+
+	        resizeImages();
+
+	    });
+
+	});
+
+	function resizeImages() {
+
+	    var windowWidth = $('#media').innerWidth();
+	    var width = windowWidth;
+	    var height = width * 0.66;
+
+	    $('.banner').css('width', width);
+	    $('.banner').css('height', height);
+	    $('.animated img').each(function() {
+	        var orig_img_width = $(this).data('width');
+	        var orig_img_height = $(this).data('height');
+	        var orig_img_rate = orig_img_width / orig_img_height;
+	        var dest_img_width = width;
+	        var dest_img_height = height;
+
+	        var margin_top = 0;
+
+				if (orig_img_rate > 1) {
+
+					dest_img_height =   width / orig_img_rate;
+
+					if (dest_img_height - height > 0) {
+
+						dest_img_height = height;
+
+						dest_img_width = height *orig_img_rate;
+
+					}
+
+				} 
+
+				else{
+
+					dest_img_width = orig_img_rate * height;
+
+					if (dest_img_width - width > 0 ) {
+
+						dest_img_height =  width * orig_img_rate;
+
+						dest_img_width = width;
+
+					}
+
+				} 
+
+				var margin_top = (height - dest_img_height ) / 2; 
+
+	        	$(this).css('width', dest_img_width)
+
+	            .css('height', dest_img_height)
+
+	            .css('margin-top', margin_top)
+
+	            .css('margin-bottom', margin_top);
+	    });
+	}	
+
+</script>     <div style="background: url(/resource/images/footer_left.png) repeat-x left 0 ;  
+
+      height: 54px; width: 100%; /*position: fixed;*/ bottom: 0; display: block; /*width*/: 100%; position: fixed;
+
+      z-index: 1002; ">     
+
+     <div   style="background: url(/resource/images/footer_right.png)  no-repeat right 0 ; 
+
+          /*box-sizing: border-box;*/
+
+          height: 54px;width: 100%; bottom: 0;display: block; position: absolute;z-index: 1002;" >
+
+       <div   style="background: url(/resource/images/footer_back.png) no-repeat center bottom ; height: 54px; width: 100%; bottom: 0;/*box-sizing: border-box;*/display: block; position: absolute;z-index: 1000;/*min-width:100%!important; */">      
+
+             <p class="" style="margin: 0 0 -10px;line-height: 52px; font-size: 20px;">
+
+                <font color="#0a43b6" face="KPCheonRiMa"  style="float: right;padding-right: 90px;  " >
+
+                  <strong>
+
+                    <b style="text-shadow:1px 1px 1px #0a43b6; ">
+
+                      저작권 2025 © 조선민주주의인민공화국 민주조선사  
+
+                    </b>
+
+                  </strong>
+
+                </font>
+
+            </p> 
+
+              <a href="#header" class="scrollup" style="margin-bottom: 30px;"><i class="fa fa-chevron-up"></i></a>  
+
+        </div>
+
+      </div> 
+
+      </div>   
+
+     <script src="/js/main.js"></script>
+
+     <script src="/resource/js/dropdown.js"></script>
+
+     <script src="/resource/js/custom.js"></script>
+
+
+
+     <!--gallery-->
+
+     <script src="/resource/js/jquery.min.js"></script>
+
+     <script src="/js/bootstrap.min.js"></script>  
+
+     <script src="/resource/js/jquery.sticky.js"></script>
+
+     <script src="/resource/js/nivo-lightbox.min.js"></script>
+
+     <script src="/resource/js/custom1.js"></script>
+
+     <script src="/resource/js/css3-animate-it.js"></script>
+
+    <script type="text/javascript" src="/resource/js/js/tms-0.3.js"></script>
+
+    <script type="text/javascript" src="/resource/js/js/tms_presets.js"></script> 
+
+    <script type="text/javascript" src="/resource/js/js/jquery.easing.1.3.js"></script> 
+
+    <script src="/resource/js/js1/plugins/blueimp/jquery.blueimp-gallery.min.js" ></script>
+
+    <script src="/resource/js/js1/jquery-2.1.1.js"></script>
+
+    <script src="/resource/js/js1/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <script src="/resource/js/js1/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <script src="/assets/css3-animate-it.js" type="text/javascript"></script>
+
+    <script src="/assets/nivo-lightbox.min.js" type="text/javascript"></script>
+
+    <script src="/assets/custom.js" type="text/javascript"></script>
+
+    </body>
+
+
+
+</html>

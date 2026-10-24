@@ -1,0 +1,848 @@
+
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>민주조선 | 조선민주주의인민공화국 최고인민회의 상임위원회 및 내각기관지</title>
+    <meta charset="utf8"/>
+    <link rel="icon" href="/resource/images/cholima.png" type="image/x-icon" />
+    <link href="/resource/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/skin/default.css">
+    <link rel="stylesheet" href="/css/blueimp-gallery.min.css">
+    <link href="/css/style_gallery.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resource/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/first_ko.css">
+    <script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+        <link href="/assets/css/nivo-lightbox.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/css/font.css">
+</head> 
+<body id="top" style="background-color: #fff;font-family:KPCheonRiMa; min-width: 1100px;  "> 
+    <header id="header"   >  
+        <div class="fixedMenu" style="background: url(/resource/custom/header_bg_right_1.png)  repeat-x ; " >
+            <div style="background: url(/resource/custom/header_bg_left.png) no-repeat left 0;   height: 85px; font-family: 'KPCheonRiMa';">   
+                <div class="container" style="background: url(/resource/header_back.jpg) no-repeat center top ; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; min-width:100%!important; "  >
+                    <ul class="menu_top" style="padding-right: 15px;">
+                        <form id="lang" method="post" action="/home/index">
+                            <input id="language" name="language" value="" hidden />
+                            <input id="page" name="page" value="disp" hidden />
+                            <input type="hidden" name="_csrf" value="01befa469fd90b3ecc7ac529309f75fe"/>
+                        </form>
+                        <li>
+                            <a style="background-color: #004df3;"  href = "/home/index/disp/0/ko">조선어                            </a>
+                        </li>
+                        <li>
+                            <a  href = " /home/index/disp/0/en">
+                                English                            </a>
+                        </li>
+                        <li>
+                            <a  href ="/home/index/disp/0/ch">
+                                 汉语                            </a>
+                        </li>
+                    </ul> 
+                    <div class="logo " style="padding-left: 10%;">
+                        <a href="/Home/index/first/0/ko" onclick="setPage('first');" style="display:block;margin-bottom:5px;"><img src="/resource/logo.png"></a>
+                    </div> 
+                </div>
+                <div class="mobile1" style="font-family:'KPCheonRiMa'; ">
+                    <div class="rightPart1" style="  font-family: 'KPCheonRiMa';  font: inherit; ">
+                        <b>  
+                            <ul class="menubar1" style="font-family:'KPCheonRiMa';font-size: 13px; " > 
+                                <li   >
+                                    <a href="/home/index/first/0/ko"  style=" /* text-shadow: 1px 1px 1px #000!important;*/font-family:'KPCheonRiMa'; " >
+                                        <b>첫페지</b>
+                                    </a>
+                                </li>
+                                <li   >
+                                    <a  href="/home/index/revolution/0/ko"     >
+                                        <b>혁명활동소식</b>
+                                    </a>
+                                </li  >
+                                <li   >
+                                    <a  href="/home/index/power_news/0/ko"    >
+                                        <b>정권기관소식</b>
+                                    </a>
+                                </li>
+                                <li class="has-dropdown"  >
+                                    <a href="/home/index/all_view/0/ko"     >
+                                     <font  ><b>분야별기사</b></font></a>
+                                     <ul class="dropdown" style="width: 200px;padding-right: 10px;padding-left: 0px;">
+                                            <li>
+                                                <a href="/home/index/politics/0/ko"  >정치 
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/home/index/economy/0/ko"  >경제                                                </a>
+                                            </li>
+                                            <li>
+                                                <a  href="/home/index/culture/0/ko"  >문화                                                </a>
+                                            </li>
+                                            <li style="padding-bottom:px;">
+                                                <a  href="/home/index/tourist/0/ko "  >관광,명승지                                                </a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="/home/index/overseas/0/ko"  >해외동포                                                </a>
+                                            </li>
+                                            <li>
+                                                <a  href="/home/index/international/0/ko"  >국제적련대성                                                </a>
+                                            </li>
+                                    </ul>
+                                </li>
+                                <li  class="has-dropdown">
+                                    <a  href="/home/index/media/0/ko"  > <font   ><b> 다매체</b></font></a>
+                                    <ul class="dropdown" style="padding-right: 10px;padding-left: 0px;">
+                                        <li><a href="/home/index/photos/0/ko"  >사진</a></li>
+                                        <li><a  href="/home/index/video/0/ko"  >동영상</a>
+                                        </li> 
+                                    </ul>
+                                </li>    
+                                <li  class=" dropdown">
+                                    <div class="btn-group pull-right">
+                                        <a  href="/home/index/search/0/ko"  class=" btn-sm btn-outline dropdown-toggle">검색</a>
+                                                                            </div> 
+                                </li>  
+                             </ul>      
+                        </b>
+                    </div>
+                </div> 
+                <div style="clear: box;height: 20px;"></div>
+            </div>       
+         </div>
+    </header> 
+    <style type="text/css">
+        .modal-backdrop{
+            z-index: 0;
+        }
+    </style>
+<link href="/resource/css/home.css" rel="stylesheet" />
+<div class="main-container container-fluid">
+    <!-- Page Container -->
+    <div class="page-container" style="position: absolute;top: 85px;width: 100%;">
+        <div class="row"  style=" ">
+            <div class="powerheader" style="background: linear-gradient(5deg, #4b16cc ,#bea1f7 );border-bottom:5px solid #784ce2 ; " >
+                <h1 >
+                    <a href="/home/index/disp/0/ko">
+                        <font style="font-size: 28px;font-family: 'KPCheonRiMa';" color="#fff" >
+                            <b>
+                                문  화
+                                
+                            </b>
+                        </font>
+                    </a>
+                </h1>
+            </div>
+            <div class="col-sm-3">
+                <style type="text/css">
+                    a.list-group-item:hover, a.list-group-item:focus{
+                        background-color: #d2cdce;
+                    }
+                    a>span:hover{
+                        color: blue;
+                    }
+                    a>span.active{
+                        color: red;
+                    }
+
+                </style>
+                <div class="list-group" id="sidebar" style="font-color:#000; position: relative;width: 280px;height: 700px; box-shadow: 5px 1px 20px rgba(195, 205, 218, 1);">                    
+                        <div style="height: 10px;"></div>
+                            <li style="text-align: center; " >
+                                <i class="menu-icon"></i>
+                                <a  style="border: 0px;" class="list-group-item" href='/home/index/all_view/0/ko' style="border-top: 0px;border: 0px;">
+                                    <span style="font-size: 17px;font-weight: bold;" class=" ">
+                                        전체보기
+                                    </span>
+                                </a>
+                            </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/politics/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">정  치</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/economy/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">경  제</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/culture/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="active" style="font-size: 17px;font-weight: bold;">문  화</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/tourist/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">관광,명승지</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/overseas/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">해 외 동 포</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/international/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">국제적련대성</span>
+                                    </a>
+                                </li>
+                                              
+                </div>
+            </div>
+
+        
+         
+
+
+
+<style type="text/css"> 
+
+	.search-result-counter
+
+	 {
+
+	 	box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);height: 44px;line-height: 24px;padding: 10px;text-align: center;border-radius: 100px;width: 44px;
+
+	 }
+
+	 div p{
+
+	 	margin: 0 0 0px;
+
+	 }
+
+</style>
+
+<div class="col-sm-9" >
+
+	<div style="height: 0px;"></div>
+
+
+
+	<div class="widget"  >			                
+
+	    <div class="widget-body" style=" margin-right: 0%;margin-left: 0%;">
+
+	        <form id="myform" method="get">
+
+
+	            <div class="row" id="img_content" name="img_content" style="margin-bottom: 35px; ">
+
+	            	 
+                    <table id="simple-table" style="width: 100%;" > 
+					    <tbody >
+					    	<tr>
+						    	<td align="center" style="padding-left: 10%;padding-right: 10%; text-align: center;font-size: 24px; font-family: KPCheonRiMa; line-height: 1.3;color: black;padding-bottom:15px ">
+									  우리 나라 문단의 첫 위포국가창작상 수상자－최련  
+								</td>
+							</tr>
+				    	 
+				    									<tr>
+								<td>
+									<div class="wrapper wrapper-content" align="center" style="padding-top:0px;padding-bottom:0px;">
+										<div class="row" id="dddd" style=" margin-left: 0px;margin-right: 0px;">
+											<div class="col-sm-1" style="float: left;"></div>
+											<div class="col-sm-1" id="prev_view" name="prev_view"  align="right">
+																								<a data-slide="prev"  href="#carousel2" class="left carousel-control" style="background-image: none;">
+							                        <span class="icon-prev" id='prev' name='prev'   style="  /*left: 10px;*//*font-size: 100px;*/ margin-top: 0px;margin-left: 0px; /*top:50%;*/ color: #d2b90d;"></span>
+							                    </a>
+							                    											</div>
+        									<div id = "img_view" name = "img_view" class="col-sm-8" style="/*width: 60%; */float: left"  >
+
+					                            <div class="carousel slide" id="carousel2">
+
+					                                <div class="carousel-inner"  >
+
+														
+				                                			<div id = "image0" class="item active">
+				                                				<!--  <div class="banner"  style=" ">
+
+				                                       				<img alt="image" id = "image0"
+
+				                                       					name = "image0"
+
+				                                       					class="img-responsive"
+
+				                                       					src="/uploads/photo/2025/06/2025-06-17-001.jpg"
+
+				                                       					data-width=""
+
+				                                       					data-height=""
+
+				                                       					style="cursor: none; border: 5px solid rgb(234, 208, 150);">
+
+				                                       			</div>  -->
+				                                       			<!--	
+			                                						<script type="text/javascript">
+			                                							 if (window.innerWidth >= 3200) {  
+			                                							 	
+			                                							 	    
+																		 	 	var para = document.createElement("img");
+																				para.src = "/uploads/photo/2025/06/2025-06-17-001-4k.jpg";
+																				para.style.cursor = "none";
+																				var element = document.getElementById("image0");
+																				element.appendChild(para);
+			                                							 }else if(window.innerWidth < 3200 && window.innerWidth > 1440){
+				                                							 	var para = document.createElement("img");
+																				para.src = "/uploads/photo/2025/06/2025-06-17-001.jpg";
+																				para.style.cursor = "none";
+																				var element = document.getElementById("image0");
+																				element.appendChild(para);
+																			
+																			}else{
+																				    
+																		 	 	var para = document.createElement("img");
+																				para.src = "/uploads/photo/2025/06/2025-06-17-001-k.jpg";
+																				para.style.cursor = "none";
+																				var element = document.getElementById("image0");
+																				element.appendChild(para);
+																			}
+
+			                                						</script>
+			                                						-->
+					                                       				<img  id = "image0"
+					                                       					name = "image0"
+					                                       					class="img-responsive"
+					                                       					src="/uploads/photo/2025/06/2025-06-17-001.jpg"
+					                                       					data-width=""
+					                                       					data-height=""
+					                                       					style="cursor: none; ">
+					                                        	
+						                                        	<div style="height: 25px;margin-top: 3px;">
+
+						                                        		<font size="4">1/3</font>
+
+						                                        	</div>
+
+						                                        
+				                                   			</div>
+
+				                                		
+				                                			<div id = "image1" class="item ">
+				                                				<!--  <div class="banner"  style=" ">
+
+				                                       				<img alt="image" id = "image1"
+
+				                                       					name = "image1"
+
+				                                       					class="img-responsive"
+
+				                                       					src="/uploads/photo/2025/06/2025-06-17-002.jpg"
+
+				                                       					data-width=""
+
+				                                       					data-height=""
+
+				                                       					style="cursor: none; border: 5px solid rgb(234, 208, 150);">
+
+				                                       			</div>  -->
+				                                       			<!--	
+			                                						<script type="text/javascript">
+			                                							 if (window.innerWidth >= 3200) {  
+			                                							 	
+			                                							 	    
+																		 	 	var para = document.createElement("img");
+																				para.src = "/uploads/photo/2025/06/2025-06-17-002-4k.jpg";
+																				para.style.cursor = "none";
+																				var element = document.getElementById("image1");
+																				element.appendChild(para);
+			                                							 }else if(window.innerWidth < 3200 && window.innerWidth > 1440){
+				                                							 	var para = document.createElement("img");
+																				para.src = "/uploads/photo/2025/06/2025-06-17-002.jpg";
+																				para.style.cursor = "none";
+																				var element = document.getElementById("image1");
+																				element.appendChild(para);
+																			
+																			}else{
+																				    
+																		 	 	var para = document.createElement("img");
+																				para.src = "/uploads/photo/2025/06/2025-06-17-002-k.jpg";
+																				para.style.cursor = "none";
+																				var element = document.getElementById("image1");
+																				element.appendChild(para);
+																			}
+
+			                                						</script>
+			                                						-->
+					                                       				<img  id = "image1"
+					                                       					name = "image1"
+					                                       					class="img-responsive"
+					                                       					src="/uploads/photo/2025/06/2025-06-17-002.jpg"
+					                                       					data-width=""
+					                                       					data-height=""
+					                                       					style="cursor: none; ">
+					                                        	
+						                                        	<div style="height: 25px;margin-top: 3px;">
+
+						                                        		<font size="4">2/3</font>
+
+						                                        	</div>
+
+						                                        
+				                                   			</div>
+
+				                                		
+				                                			<div id = "image2" class="item ">
+				                                				<!--  <div class="banner"  style=" ">
+
+				                                       				<img alt="image" id = "image2"
+
+				                                       					name = "image2"
+
+				                                       					class="img-responsive"
+
+				                                       					src="/uploads/photo/2025/06/2025-06-17-003.jpg"
+
+				                                       					data-width=""
+
+				                                       					data-height=""
+
+				                                       					style="cursor: none; border: 5px solid rgb(234, 208, 150);">
+
+				                                       			</div>  -->
+				                                       			<!--	
+			                                						<script type="text/javascript">
+			                                							 if (window.innerWidth >= 3200) {  
+			                                							 	
+			                                							 	    
+																		 	 	var para = document.createElement("img");
+																				para.src = "/uploads/photo/2025/06/2025-06-17-003-4k.jpg";
+																				para.style.cursor = "none";
+																				var element = document.getElementById("image2");
+																				element.appendChild(para);
+			                                							 }else if(window.innerWidth < 3200 && window.innerWidth > 1440){
+				                                							 	var para = document.createElement("img");
+																				para.src = "/uploads/photo/2025/06/2025-06-17-003.jpg";
+																				para.style.cursor = "none";
+																				var element = document.getElementById("image2");
+																				element.appendChild(para);
+																			
+																			}else{
+																				    
+																		 	 	var para = document.createElement("img");
+																				para.src = "/uploads/photo/2025/06/2025-06-17-003-k.jpg";
+																				para.style.cursor = "none";
+																				var element = document.getElementById("image2");
+																				element.appendChild(para);
+																			}
+
+			                                						</script>
+			                                						-->
+					                                       				<img  id = "image2"
+					                                       					name = "image2"
+					                                       					class="img-responsive"
+					                                       					src="/uploads/photo/2025/06/2025-06-17-003.jpg"
+					                                       					data-width=""
+					                                       					data-height=""
+					                                       					style="cursor: none; ">
+					                                        	
+						                                        	<div style="height: 25px;margin-top: 3px;">
+
+						                                        		<font size="4">3/3</font>
+
+						                                        	</div>
+
+						                                        
+				                                   			</div>
+
+				                                		
+					                                </div>
+
+					                   			</div>
+
+						                	</div>
+						                	<div class="col-sm-1" style="/*width: 5%; */float: left;/* margin-right: 15%;*/ position:relative;"
+
+						                		id="next_view" name="next_view" >  
+
+						                		
+						                		<a data-slide="next" href="#carousel2" class="right carousel-control" style="background-image: none;">
+
+							                        <span class="icon-next" style="/*left:-30px;*//*font-size: 100px;*/margin-top: 0px;margin-right: 0px;/* top: 50%;*/color: #d2b90d;"></span>
+
+							                    </a>
+
+							                    
+						                	</div>
+						                	
+						                	<div class="col-sm-1" ></div>
+
+						                </div>
+
+					            	</div>
+
+								</td>
+
+							</tr>
+								
+						
+							<tr>
+
+								<td  > 
+
+                                    <div class="panel panel-primary" style=" border-width: 0px;border-right:0px;border-left: 0px;text-indent: 12px;">
+
+                                        <div class="panel-body" style=" text-indent: 12px;text-align: justify;letter-spacing: 1px;font-size: 16px;font-family:KPCheonRiMa;line-height: 20px;     color: #000; line-height: 1.5; " >
+
+                                        	<style type="text/css">
+
+                                        		p{
+
+                                        			line-height: 22px;
+
+                                        			margin-top: 0px;
+
+                                        			font-family: KPCheonRiMa;
+
+                                        			font-size: 16px;
+
+                                        			color: #000;
+
+                                        			text-align: justify;
+
+                                        			text-indent: 12px;
+
+                                        			                                         		}
+
+                                        	</style>
+
+                                            <p>세계지적소유권기구(위포)는&nbsp; ２년전부터 해당 기구성원국들과 공동으로 위포국가상을 수여하고 있다．<p/>
+얼마전 세계지적소유권기구는 장편소설 《청춘을 푸르게 하라》（２０２３년）를 창작한 <nobr><b style=font-size:1.11em>김일성</b>종합대학</nobr> 조선어문학부 교원 박사 부교수 최련에게 위포국가창작상을 수여한다는 소식을 알려왔다．<p/>
+이로써 최련은 우리 나라 문단에서 첫 위포국가창작상 수상자가 되였다． 
+
+<p>&nbsp; 
+
+<p style="text-align:center"><strong>원형들－녀성과학자</strong> 
+
+<p>&nbsp; 
+
+<p>최련은 지난 시기 창작적개성이 뚜렷한 작품들을 수많이 창작했다．<p/>
+단편소설 《따뜻한 꿈》(２００２년)，단편소설 《바다를 푸르게 하라》（２００４년），수필들인 《사랑과 조국》，《눈빛》 등이 그의 대표작이다．<p/>
+장편소설창작은 이번이 처음이다．<p/>
+창작된 작품들에서 공통점으로 찾는것은 강의한 의지를 지닌 녀성과학자들을 원형으로 그린것이다．<p/>
+위포국가창작상을 받은 장편소설의 주인공 역시 높은 리상과 포부를 지닌 녀성과학자이다．<p/>
+이러한 창작은 그의 생활체험과도 관계된다．<p/>
+그의 <nobr>아버지는</nobr> 이름난 설계가였고 어머니는 수학교원이였으며 언니들도 자연과학을 좋아했다．<p/>
+이러한 가정적환경은 그에게 어려서부터 과학에 무척 흥미를 가지게 했다．&nbsp;<p/>
+학생들에게 문학을 가르치는 교단에 선 후에도 그는 현대과학기술과 관련한 저서들과 잡지들을 즐겨보군 했고 과학인재들과도 친교를 맺고 지내군 한다．<p/>
+그의 이러한 생활은 그가 꿈꾸는 작품창작의 생활바탕이였다． 
+
+<p>&nbsp; 
+
+<p style="text-align:center"><strong>１０년만에 낳은 《자식》</strong> 
+
+<p>&nbsp; 
+
+<p>창작가들은 자기들이 창작한 작품을 두고 《제 자식》과 같다고들 한다．<p/>
+한것은 그 작품들에 창작가의 고뇌와 애정，땀과 열정이 소중히 깃들어있기때문이다．<p/>
+위포국가창작상을 받은 이 작품도 다를바 없다．<p/>
+처음에 최련은 이 작품창작을 시작하여 ５년만에 초고를 내놓을수 있게 되였다．<p/>
+그런데 작품이 완성단계에 이르렀을 때 그는 제스스로가 작품초고를 전면부정하고 덮어버렸다．<p/>
+그가 선망의 눈길로 바라보며 작품의 원형으로 그린 인물이 소설의 초고를 거의 완성한 그 ５년간에 때이른 성공에 도취되여 변해버렸던것이다.&nbsp; &nbsp;<p/>
+그의 이 《성공》과 자만은 최련을 슬프게 했고 고통스럽게 하였다.<p/>
+최련은 이것을 두고 《참된 인격이란 어떤것인가. 참된 창조, 참된 평가의 기준은 어디에 있는가.》라는 문제를 두고 다시금 파고들게 되였다．<p/>
+그는 다시 시작했다．물론 쉽지 않았다. 교육사업도 가정적의무도 다같이 걸머져야 했다.<p/>
+하지만 그는 포기하지 않았다.<p/>
+첨단과학기술의 길을 개척하고 걸어가는 <nobr><b style=font-size:1.11em>김일성</b>종합대학의</nobr> 참다운 과학자들의 참모습을 원형으로 하는 작품창작에 달라붙었으며 하여 그는 꼭 １０년만에 자기가 꿈꾸어온 장편소설창작을 완성하게 되였다．<p/>
+그토록 오래고도 힘든 길을 포기하지 않고 끝까지 걸어온 최련，<p/>
+그를 두고 사람들은 문학앞에 성실하고 인간적으로 진실하고 량심적이며 억세인 녀성이라고 말한다. 
+
+<p>&nbsp; 
+
+<p style="text-align:center"><strong>어둠속의 빛</strong> 
+
+<p>&nbsp; 
+
+<p>장편소설 《청춘을 푸르게 하라》는 ２０２３년에 창작된 작품들가운데서 가장 우수한 작품들중 하나라는 평가를 받았다．<p/>
+소설은 국가망싸이트에 오른지 얼마되지 않아 보급과 인기에 있어서，현실물작품구입순위에서 1위를 차지했고 지난해 １０월 과학기술전당에서 《혁신과 부흥》이라는 주제로 진행된 《지적소유권사업발전전람회－２０２４》에서 단연 １등으로 평가되였다．<p/>
+이 도서는 독자들 특히 어려운 과학탐구의 길을 걷는 개척자들에게서 《빛》이라는 힘있는 평가도 받았다．<p/>
+수많은 독자들은 훌륭한 소설을 창작한 최련에게 존경의 뜻을 표시하고있다．<p/>
+자신이 창작한 장편소설이 누구나 즐겨읽는 작품이 되여 그들이 걷는 인생의 길에 참다운 애국，진정한 삶의 가치와 보람，행복이란 무엇인가를 다시한번 새겨주는 《빛》이 되여주기를 바랐던 최련의 목표는 현실로 이루어졌다．<p/>
+그는 이렇게 말했다．<p/>
+《사실 소설창작이 부진상태로 안타까움에 모대길 때 나의 마음속고충을 헤아려주며 앞길을 밝혀준 한줄기，한줄기 〈빛〉들이 있었습니다．<p/>
+소설창작을 위해 함께 고심해준 대학의 스승들과 동료들의 고무였고 교육자라는&nbsp; 같은 직업의 길을 걷는것으로 하여 그 누구보다 리해해준 남편의 격려였습니다．그리고 나를 존경하고 따르던 제자들의 모습이 장편소설창작에로 향한 나의 걸음을 재촉해주었습니다．》<p/>
+그는 자기가 창작한 작품에 위포국가창작상이 수여된데 대해 기쁨을 금치 못해하며 룡남산의 정서가 장편소설 《청춘을 푸르게 하라》를 낳았다，이곳에서 교육과 창작사업을 하고있는것을 행운으로 간직하고 늘 출발선에 선 마음으로 과학자들의 생활을 그린 소설들을 더 많이 창작하겠다고 했다．<p/>
+자기의 창조물로 조국의 전진에 한줄기 《빛》이라도 더해주기 위해 쉬임없이，곧바로 달려야 한다는 결심과 각오로 충만된 최련의 창작활동은 오늘도 계속되고있다． 
+
+<p style="text-align:right">글 본사기자 김 련 화<br />
+사진 본사기자 리 광 민 
+ 
+
+                                        </div>
+
+                                    </div>
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+
+					 
+
+				</div>
+
+			</form>
+
+	    </div>
+
+	</div>
+
+</div> 
+
+
+  
+
+<script>
+
+$(document).ready(function() {
+
+    resizeImages1();
+    resizeImages2();
+
+
+
+    $(window).on('resize', function(){
+
+        resizeImages1();
+        resizeImages2();
+
+    });
+
+});
+
+function resizeImages1() {
+
+    var windowWidth = $('#dddd').innerWidth();
+
+    var width = windowWidth * 0.6;
+
+    var height = windowWidth * 0.4;
+    // $('.banner').css('width', width);
+
+    // $('.banner').css('height', height);
+
+    // $('.carousel-inner .item img').each(function() {
+
+    //     var orig_img_width = $(this).data('width');
+
+    //     var orig_img_height = $(this).data('height');
+
+    //     var orig_img_rate = orig_img_width / orig_img_height;
+
+    //     var dest_img_width = width;
+
+    //     var dest_img_height = height;
+
+    //     var margin_top = 0;
+
+    //     if (orig_img_rate >= 1.5) {
+
+    //         dest_img_width = width;
+
+    //         dest_img_height = width / orig_img_rate;
+
+    //         margin_top = (height - dest_img_height) / 2;
+
+    //     } else {
+
+    //         dest_img_width = height * orig_img_rate;
+
+    //         dest_img_height = height;
+
+    //     }
+    //     $(this).css('width', dest_img_width)
+
+    //         .css('height', dest_img_height)
+
+    //         .css('margin-top', margin_top);
+
+    // });
+    $('a.carousel-control span').each(function() {
+
+    	var top = (height - $(this).height()-10) / 2;
+
+    	$(this).css('top', top);
+
+    	$(this).css('font-size', top/2);
+    });
+
+}
+function resizeImages2() {
+    var windowWidth = $('#revolution').innerWidth();
+    var width = windowWidth * 0.6;
+    var height = windowWidth * 0.4;
+    // $('.banner').css('width', width);
+
+    // $('.banner').css('height', height);
+    // $('.carousel-inner .item img').each(function() {
+
+    //     var orig_img_width = $(this).data('width');
+
+    //     var orig_img_height = $(this).data('height');
+
+    //     var orig_img_rate = orig_img_width / orig_img_height;
+
+    //     var dest_img_width = width;
+
+    //     var dest_img_height = height;
+
+    //     var margin_top = 0;
+    //     if (orig_img_rate >= 1.5) {
+
+    //         dest_img_width = width;
+
+    //         dest_img_height = width / orig_img_rate;
+
+    //         margin_top = (height - dest_img_height) / 2;
+
+    //     } else {
+
+    //         dest_img_width = height * orig_img_rate;
+
+    //         dest_img_height = height;
+
+    //     }
+    //     $(this).css('width', dest_img_width)
+
+    //         .css('height', dest_img_height)
+
+    //         .css('margin-top', margin_top);
+
+    // });
+
+    $('#vector').each(function() {
+
+    	var top = (height - $(this).height()-10) / 2;
+
+    	$(this).css('top', top+50);
+
+    });
+
+    $('#vector1').each(function() {
+
+    	var top = (height - $(this).height()-10) / 2;
+
+    	$(this).css('top', top+50);
+
+    });
+ 
+  	$('#ModalHeight').each(function() {
+
+    	
+
+    	$(this).css('height', 200+height);
+
+    });
+}
+
+</script>     <div style="background: url(/resource/images/footer_left.png) repeat-x left 0 ;  
+
+      height: 54px; width: 100%; /*position: fixed;*/ bottom: 0; display: block; /*width*/: 100%; position: fixed;
+
+      z-index: 1002; ">     
+
+     <div   style="background: url(/resource/images/footer_right.png)  no-repeat right 0 ; 
+
+          /*box-sizing: border-box;*/
+
+          height: 54px;width: 100%; bottom: 0;display: block; position: absolute;z-index: 1002;" >
+
+       <div   style="background: url(/resource/images/footer_back.png) no-repeat center bottom ; height: 54px; width: 100%; bottom: 0;/*box-sizing: border-box;*/display: block; position: absolute;z-index: 1000;/*min-width:100%!important; */">      
+
+             <p class="" style="margin: 0 0 -10px;line-height: 52px; font-size: 20px;">
+
+                <font color="#0a43b6" face="KPCheonRiMa"  style="float: right;padding-right: 90px;  " >
+
+                  <strong>
+
+                    <b style="text-shadow:1px 1px 1px #0a43b6; ">
+
+                      저작권 2025 © 조선민주주의인민공화국 민주조선사  
+
+                    </b>
+
+                  </strong>
+
+                </font>
+
+            </p> 
+
+              <a href="#header" class="scrollup" style="margin-bottom: 30px;"><i class="fa fa-chevron-up"></i></a>  
+
+        </div>
+
+      </div> 
+
+      </div>   
+
+     <script src="/js/main.js"></script>
+
+     <script src="/resource/js/dropdown.js"></script>
+
+     <script src="/resource/js/custom.js"></script>
+
+
+
+     <!--gallery-->
+
+     <script src="/resource/js/jquery.min.js"></script>
+
+     <script src="/js/bootstrap.min.js"></script>  
+
+     <script src="/resource/js/jquery.sticky.js"></script>
+
+     <script src="/resource/js/nivo-lightbox.min.js"></script>
+
+     <script src="/resource/js/custom1.js"></script>
+
+     <script src="/resource/js/css3-animate-it.js"></script>
+
+    <script type="text/javascript" src="/resource/js/js/tms-0.3.js"></script>
+
+    <script type="text/javascript" src="/resource/js/js/tms_presets.js"></script> 
+
+    <script type="text/javascript" src="/resource/js/js/jquery.easing.1.3.js"></script> 
+
+    <script src="/resource/js/js1/plugins/blueimp/jquery.blueimp-gallery.min.js" ></script>
+
+    <script src="/resource/js/js1/jquery-2.1.1.js"></script>
+
+    <script src="/resource/js/js1/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <script src="/resource/js/js1/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <script src="/assets/css3-animate-it.js" type="text/javascript"></script>
+
+    <script src="/assets/nivo-lightbox.min.js" type="text/javascript"></script>
+
+    <script src="/assets/custom.js" type="text/javascript"></script>
+
+    </body>
+
+
+
+</html>

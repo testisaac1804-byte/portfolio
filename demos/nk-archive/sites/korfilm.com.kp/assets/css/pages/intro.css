@@ -1,0 +1,126 @@
+#type-4{
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+}
+#type-4>div.content{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+#type-4>div.content>.item{
+    text-align: center;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+}
+#type-4>div.content>.item > .avatar{
+    margin-bottom: 10px;
+    flex-grow: 1;
+}
+#type-4>div.content>.item > .avatar img{
+    max-width: 203px;
+    cursor: pointer;
+}
+
+#type-5{
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+}
+#type-5>div.content{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+#type-5>div.content>.item{
+    text-align: center;
+    margin-bottom: 25px;
+}
+#type-5>div.content>.item>div{
+    border: 1px solid #565656;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    height:100%;
+}
+#type-5>div.content>.item   .avatar{
+    margin-bottom: 10px;
+    flex-grow: 1;
+}
+#type-5>div.content>.item   .avatar img{
+    max-width: 313px;
+    cursor: pointer;
+    width:100%;
+}
+
+.modal-body img{
+    width: 100%;
+}
+
+.intro-3-container {
+    padding: 10px;
+    background-color: #fff;
+    text-align: center;
+    height: 100%;
+}
+
+.intro-title-3 {
+    color: #2e59f5;
+    font-weight: 700;
+    margin-top: 10px;
+}
+.intro-text-3 {
+    padding: 10px;
+    text-align: justify;
+    text-indent: 1em;
+}
+.intro-title-3.red {
+    color: #ff0000;
+}
+.intro-3-container.blue {
+    padding: 10px;
+    text-align: center;
+    height: 100%;
+    background: #8589ff;
+    background: -webkit-linear-gradient(#2e59f5, #d0defd);
+    background: -o-linear-gradient(#2e59f5, #d0defd);
+    background: -moz-linear-gradient(#2e59f5, #d0defd);
+    background: linear-gradient(#2e59f5, #d0defd);
+}
+
+.base-title {
+    text-align: center;
+    margin: auto auto;
+    border-bottom: solid 2px #e9ad57;
+    font-weight: 700;
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+.base-item {
+    font-size: 18px;
+    font-weight: 700;
+    color: #10b990;
+}
+
+.part-3 {
+    background: #f4f7fe;
+    height: 100%;
+}
+.part-3 .base-list {
+    padding-top: 20px;
+}
+.part-3 .base-list ul {
+    padding-left: 0px;
+}
+.part-3 .base-list ul > li {
+    margin-bottom: 10px;
+}
+
+.intro-tv > img {
+    width: 100%;
+}
+
+.left-menu .menu-item a .badge {
+    bottom: 15px;
+}

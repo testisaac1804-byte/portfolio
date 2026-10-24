@@ -1,0 +1,368 @@
+﻿
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>내나라 - 조선민주주의인민공화국</title>
+	<meta charset="utf8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" >
+	<meta name="robots" content="all" >
+	<meta name="keywords" content="korea, DPRK, DPR of Korea, naenara">
+    <meta name="description" content="Articles about politics, economy, culture, history, sports, tourism in DPRK" >
+	<link rel="icon" href="/assets/favicon.ico" type="image/x-icon" >
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" >
+	<link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css" >
+	<link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/font-awesome.min.css" >
+	<link rel="stylesheet" type="text/css" href="/css/header/header.css" >
+	<link rel="stylesheet" type="text/css" href="/css/header/header_ko.css" >
+	<link rel="stylesheet" type="text/css" href="/assets/sidebar.css" >
+	<link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" >
+	<link href="/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" >
+
+	<script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/js/search/index.js" type="text/javascript"></script>
+</head> 
+<body>
+<header>
+	<div class="container">
+		<div class="firstMark text-center">
+			<div>
+				<img alt="naenara-image" src="/images/first/flag.png">
+				<a href="/main/index/ko/first"><img alt="naenara-image" src="/images/first/mark.png"></a>
+			</div>
+			<span>조선민주주의인민공화국</span>
+			<span>www.naenara.com.kp</span>
+		</div>
+		<div class="rightMenu">
+			<div class="pageSub drop">
+				<span class="dropbtn"><i class="icon-list"></i></span>
+				<div class="content">
+											<a href="/main/index/ko/first" class="">첫페지</a>
+											<a href="/main/index/ko/news" class="">소식, 기사</a>
+											<a href="/main/index/ko/politics?arg_val=leader3" class="">조선개관</a>
+											<a href="/main/index/ko/trade" class="">경제, 무역</a>
+											<a href="/main/index/ko/society" class="page-active">사회문화</a>
+											<a href="/main/index/ko/history" class="">력사</a>
+											<a href="/main/index/ko/tourism" class="">관광</a>
+									</div>
+			</div>
+			<div class="sideSub drop">
+				<span class="dropbtn"><i class="fa icon-wallet"></i></span>
+				<div class="content">
+					<a href="/main/index/ko/photo"><span>사 진</span></a>
+					<a href="/main/index/ko/video"><span>동영상</span></a>
+					<a href="/main/index/ko/music"><span></span></a>
+					<a href="http://www.korstamp.com.kp" target="_blank"><span>우표</span></a>
+					<a href="/main/index/ko/gallery"><span>선전화</span></a>
+					<a href="/main/index/ko/fineart"><span>미술</span></a>
+				</div>
+			</div>
+
+			<div class="langSub drop" id="ko">
+								<span class="dropbtn"><i class="fa fa-language"></i>조선어<i class="fa fa-angle-down"></i> </span>
+				<div class="content">
+				<a href="/main/index/ko/society" class="lang-ko">조선어</a><a href="/main/index/en/society" class="lang-en">English</a><a href="/main/index/fr/society" class="lang-fr">Français</a><a href="/main/index/sp/society" class="lang-sp">Español</a><a href="/main/index/ge/society" class="lang-ge">Deutsch</a><a href="/main/index/ru/society" class="lang-ru">Русский</a><a href="/main/index/ch/society" class="lang-ch">汉语</a><a href="/main/index/ja/society" class="lang-ja">日本語</a><a href="/main/index/ar/society" class="lang-ar">العربية</a>				</div>
+			</div>
+					</div>
+		<ul class="menubar">
+							<li><a href="/main/index/ko/first" class="">첫페지</a></li>
+							<li><a href="/main/index/ko/news" class="">소식, 기사</a></li>
+							<li><a href="/main/index/ko/politics?arg_val=leader3" class="">조선개관</a></li>
+							<li><a href="/main/index/ko/trade" class="">경제, 무역</a></li>
+							<li><a href="/main/index/ko/society" class="page-active">사회문화</a></li>
+							<li><a href="/main/index/ko/history" class="">력사</a></li>
+							<li><a href="/main/index/ko/tourism" class="">관광</a></li>
+					</ul>
+				<form class="searchbox text-center" action="/main/search_first" method="get" enctype="multipart/form-data">
+			<input type="text" placeholder="검색어를 입력하십시오." value="" name="sVal" class="sval" onkeydown="searchResult(event)"/>
+			<input type="hidden" name="csrf_test_name" value="3d903eb92a216acf8fec542bd5fd2341" />
+		</form>
+
+		<h3 class="site-comma"><span>NAENARA.COM.KP</span><span>조선민주주의인민공화국의 정치, 경제, 문화 등 전반에 대한 유익한 정보발생거점</span></h3> 
+	</div>
+	<div class='space1'></div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<head>
+    <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css">
+    <link href="/assets/pages/css/portfolio.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/society/society.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/cubeportfolio/css/cubeportfolio.css" rel="stylesheet" type="text/css" />
+    <script>
+        $(document).ready(function(){
+
+           viewContents('0','1');
+
+        });
+    </script>
+
+</head>
+
+<section id="society_body">
+    <div class="portlet box">
+        <div class="portlet-title" style="padding:0px;background-color:#9cbe2d;">
+
+            <a href="javascript:window.open('/main/index/ko/society', '_self');" style="text-decoration:none;">
+                <span class="society_txt"><font style="font-size:16px">사회문화</font></span>
+                <img src="/img/society/header_ko.jpg" width="100%" class="society_img" />
+            </a>
+            <div class="dropdown">
+                <i class="fa fa-list" data-toggle="dropdown" style="cursor:pointer;font-size:20px">
+                </i>
+                <ul class="dropdown-menu pull-right">
+                <li><a href="#" onclick="viewContents(`1`,`1`);"  class="category-item">과학,교육(74)</a></li><li><a href="#" onclick="viewContents(`2`,`1`);"  class="category-item">문학예술(28)</a></li><li><a href="#" onclick="viewContents(`3`,`1`);"  class="category-item">체육(36)</a></li><li><a href="#" onclick="viewContents(`4`,`1`);"  class="category-item">보건(55)</a></li><li><a href="#" onclick="viewContents(`5`,`1`);"  class="category-item">자연환경(132)</a></li><li><a href="#" onclick="viewContents(`6`,`1`);"  class="category-item">생활(150)</a></li><li><a href="#" onclick="viewContents(`7`,`1`);"  class="category-item">기구,기금(7)</a></li><li><a href="#" onclick="viewContents(`8`,`1`);"  class="category-item">음식문화(18)</a></li><li><a href="#" onclick="viewContents(`9`,`1`);"  class="category-item">인물(13)</a></li>                    <!-- <li><a href="#" onclick="viewContents('1','1');" >과학,교육</a></li>
+
+                    <li><a href="#" onclick="viewContents('2','1');">문학예술</a></li>
+
+                    <li><a href="#" onclick="viewContents('3','1');">체육</a></li>
+
+                    <li><a href="#" onclick="viewContents('4','1');">보건</a></li>
+
+                    <li><a href="#" onclick="viewContents('5','1');">자연환경</a></li>
+
+                    <li><a href="#" onclick="viewContents('6','1');">생활</a></li>
+
+                    <li><a href="#" onclick="viewContents('7','1');">기구,기금</a></li>
+
+                    <li><a href="#" onclick="viewContents('8','1');">음식문화</a></li>
+
+                    <li><a href="#" onclick="viewContents('9','1');">인물</a></li> -->
+
+                    <li><a class="list-toggle-container collapsed" href = "/main/index/ko/fineart" target="_self">미술</a></li>
+                    
+                    </a>
+
+                    <li><a class="list-toggle-container collapsed"  href="/main/index/ko/music" target="_self">음악</a></li>
+
+                    </a>
+                    <li><a class="list-toggle-container collapsed"  href="http://www.korean-books.com.kp/ko/" target="_self">책방</a></li> </ul>            </div>
+        </div>
+    	<div class="row" style="padding-top: 10px;">
+
+    		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12 "  >
+
+                <div class="portlet-body">
+
+                    <div class="mt-element-list">
+
+                        <div class="mt-list-container list-simple ext-1 group">
+
+                            <ul>
+                                <li class="mt-list-item done category-item" onclick="viewContents(`1`,`1`);" ><i class="fa fa-angle-double-right"></i>과학,교육(74)</li><li class="mt-list-item done category-item" onclick="viewContents(`2`,`1`);" ><i class="fa fa-angle-double-right"></i>문학예술(28)</li><li class="mt-list-item done category-item" onclick="viewContents(`3`,`1`);" ><i class="fa fa-angle-double-right"></i>체육(36)</li><li class="mt-list-item done category-item" onclick="viewContents(`4`,`1`);" ><i class="fa fa-angle-double-right"></i>보건(55)</li><li class="mt-list-item done category-item" onclick="viewContents(`5`,`1`);" ><i class="fa fa-angle-double-right"></i>자연환경(132)</li><li class="mt-list-item done category-item" onclick="viewContents(`6`,`1`);" ><i class="fa fa-angle-double-right"></i>생활(150)</li><li class="mt-list-item done category-item" onclick="viewContents(`7`,`1`);" ><i class="fa fa-angle-double-right"></i>기구,기금(7)</li><li class="mt-list-item done category-item" onclick="viewContents(`8`,`1`);" ><i class="fa fa-angle-double-right"></i>음식문화(18)</li><li class="mt-list-item done category-item" onclick="viewContents(`9`,`1`);" ><i class="fa fa-angle-double-right"></i>인물(13)</li>
+                                <!-- <li class="mt-list-item done" onclick="viewContents('1','1');" class = "active"><i class="fa fa-angle-double-right"></i>과학,교육</li>
+
+                                <li class="mt-list-item done" onclick="viewContents('2','1');"><i class="fa fa-angle-double-right"></i>문학예술</li>
+
+                                <li class="mt-list-item done" onclick="viewContents('3','1');"><i class="fa fa-angle-double-right"></i>체육</li>
+
+                                <li class="mt-list-item done" onclick="viewContents('4','1');"><i class="fa fa-angle-double-right"></i>보건</li>
+
+                                <li class="mt-list-item done" onclick="viewContents('5','1');"><i class="fa fa-angle-double-right"></i>자연환경</li>
+
+                                <li class="mt-list-item done" onclick="viewContents('6','1');"><i class="fa fa-angle-double-right"></i>생활</li>
+
+                                <li class="mt-list-item done" onclick="viewContents('7','1');"><i class="fa fa-angle-double-right"></i>기구,기금</li>
+
+                                <li class="mt-list-item done" onclick="viewContents('8','1');"><i class="fa fa-angle-double-right"></i>음식문화</li>
+
+                                <li class="mt-list-item done" onclick="viewContents('9','1');"><i class="fa fa-angle-double-right"></i>인물</li> -->
+
+                            </ul>
+                            <hr>
+
+            			    <a class="list-toggle-container collapsed" href = "/main/index/ko/fineart" target="_self">
+                            
+                             <div class="list-toggle done uppercase"  style="color:#000;"><i class="fa fa-file-image-o" style="padding-right: 20px;"></i><strong>미술</strong></div>
+                            </a>
+
+                            <a class="list-toggle-container collapsed"  href="/main/index/ko/music" target="_blank" >
+
+                                <div class="list-toggle done uppercase" style="color:#000;"><i class="fa fa-music" style="padding-right: 15px;"></i> <strong>음악</strong>
+
+                                </div>
+
+                            </a>
+
+                            <a class="list-toggle-container collapsed"  href="http://www.korean-books.com.kp/index.php/Main/firstpage/ko/" target="_blank">
+                                <div class="list-toggle done uppercase" style="color:#000;"><i class="fa fa-book" style="padding-right: 15px;"></i> <strong>책방</strong>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="space-12"></div>   
+
+                <center><a href="/sites/kfpd" target="_blank"><img src="/images_k/society/banner.gif" class="col-md-12 img-thumbnail"></a></center>
+
+
+                <center><img src="/images_k/society/film.gif" class="col-md-12 img-thumbnail" data-toggle="modal" data-target="#Modal" onclick=viewArticle('ko',"film","0")></center>
+                
+                <center><a href="/images/literature/ko.pdf" target="_blank"><img src="/images/literature/art_ko.png" class="col-md-12 img-thumbnail"></a></center>
+
+                </div>
+
+
+
+    		<div id="display" class="col-lg-10 col-md-9 col-sm-9 col-xs-12" >
+
+                <div id="societyPanel" style="padding-left: 12px;">
+
+                </div>
+
+        	</div>
+            <div class=" col-xs-12 phone_show">
+                <center><a href="/sites/kfpd/" target="_blank"><img src="/images_k/society/banner.gif" class="col-md-12 img-thumbnail"></a></center>
+                <center><a href="/main/index/ko/haeyang"><img src="/img/society/haeyang_ko.jpg" class="col-md-12 img-thumbnail" > </a></center>
+                <center><img src="/images_k/society/figure.gif" class="col-md-12 img-thumbnail" data-toggle="modal" data-target="#Modal" onclick=viewArticle('ko',"figure","0")></center>
+
+                <center><img src="/images_k/society/film.gif" class="col-md-12 img-thumbnail" data-toggle="modal" data-target="#Modal" onclick=viewArticle('ko',"film","0")></center>
+
+
+                <center><img src="/images_k/society/marathon.gif" class="col-md-12 img-thumbnail" data-toggle="modal" data-target="#Modal" onclick=viewArticle('ko',"marathon","0")></center>
+
+                <center><img src="/images_k/society/spring.gif" class="col-md-12 img-thumbnail" data-toggle="modal" data-target="#Modal" onclick=viewArticle('ko',"spring","0")></center>
+
+                <center><img src="/images_k/society/art2018.jpg" class="col-md-12 img-thumbnail" onclick="arirang()"></center>
+<!--                     <center>
+                    <div class="portfolio-content portfolio-4">
+
+                        <div id="js-grid-full-width" class="cbp">
+                            <!-- <img src="/images_k/society/art2018.jpg" class="col-md-12 img-thumbnail"> -->
+
+                        </div>
+                    </div>
+                    </center> 
+
+                </div>
+
+            </div>    
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="Modal" role="dialog">
+    <div class="modal-dialog modal-lg modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          
+        </div>
+        <div class=" modal-lg modal-sm" id="news" style="padding: 8px;">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-remove"></i></button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<p id="part" hidden></p>
+
+
+<script src="/js/society/society.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/cubeportfolio/js/jquery.cubeportfolio.js" type="text/javascript"></script>
+ <script src="/assets/pages/scripts/portfolio-4.js" type="text/javascript"></script>
+
+<footer>
+
+	<div class="contact text-center" onclick="openModal()">
+		<span><i class="icon-pointer"></i>조선민주주의인민공화국 평양시 서성구역 서천동</span>
+		<span><i class="icon-call-end"></i>850-2-18111(8456), 850-2-3814598</span>
+		<span><i class="icon-envelope"></i>flph@star-co.net.kp</span>
+		<!-- <span class="socicons">
+			<a href="#" target="_blank"><i class="fa fa-skype"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-google-plus"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-vimeo"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-play"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-flickr"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-pinterest"></i></a>
+		</span> -->
+		<span>저작권© 조선민주주의인민공화국 외국문출판사<br>
+			2004년 - 2026년		</span>
+	</div>
+
+</footer>
+
+<div class="modal fade bs-modal-lg" id="modal_view" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg" style="max-width: 900px!important">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+
+                <h4 class="modal-title" style="font-size:14px;"></h4>
+
+            </div>
+
+            <div class="modal-body"></div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class='fa fa-remove'></i></button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<button onclick="topFunction()" id="toTop" title="Go to top">&nbsp;<i class='fa fa-chevron-up'></i>&nbsp;</button>
+
+<script type="text/javascript" src="/assets/public_code/common.js"></script>
+</body>
+
+</html>
+<!-- 0.1602 -->

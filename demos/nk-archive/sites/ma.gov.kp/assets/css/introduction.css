@@ -1,0 +1,26 @@
+.about-content {
+    /* background: linear-gradient(rgb(145, 161, 233), rgb(159, 182, 236)); */
+    padding-left: 10%;
+    padding-right: 7%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    /* font-size: 22px; */
+    color: white;
+    letter-spacing: 0px;
+    line-height: 1.5;
+    word-break: keep-all;
+}
+
+.rev-content {
+    background: linear-gradient(rgb(255, 60, 60), rgb(255, 40, 40));
+    padding-left: 10%;
+    padding-right: 7%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-size: 22px;
+    color: white;
+    letter-spacing: 0px;
+    line-height: 1.5;
+}

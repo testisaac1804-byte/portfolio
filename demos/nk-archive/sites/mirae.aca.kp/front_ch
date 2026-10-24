@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>未来</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+        <link href="/assets/layouts/layout5/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/layouts/layout5/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/layouts/layout5/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/layouts/layout5/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <link href="/include/style1.css" rel="stylesheet" type="text/css" />
+    <link href="/include/slippry.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="/include/css/animate.css" rel="stylesheet">
+    <link href="/include/css/dlmenu.css" rel="stylesheet">
+            <link href="/include/new/css/bootstrap.min.css" rel="stylesheet">
+            <link href="/include/new/css/fancybox/jquery.fancybox.css" rel="stylesheet">
+            <link href="/include/new/css/jcarousel.css" rel="stylesheet">
+            <link href="/include/new/css/flexslider.css" rel="stylesheet">
+            <link href="/include/new/css/style.css" rel="stylesheet">
+            <link href="/include/new/skins/default.css" rel="stylesheet">
+            <link href="/include/css/login.css" rel="stylesheet">
+    
+</head>
+
+<body style="min-width: 1280px; max-width: 2000px;margin: 0 auto !important;"><section id="header1" style="padding:0;">
+    <div class="row" style="background-position:right top;background-repeat: repeat-x; background-image: url('include/images/bg1.jpg');">
+        <div class="col-md-4" style="height: 137px;padding: 0px;background-repeat:no-repeat;background-image: url('include/images/new_bg.png');">
+            <div href="index.html"><img src="include/images/mark1.png" alt="" style="height: 137px;" title="" /></div>
+        </div>
+        <div class="col-md-8">
+            <div>
+                <nav id="nav-menu-container" style="padding-left: 5%; padding-top:2.5%;">
+                    <nav class="nav social-nav pull-right hidden-sm-down" style="padding-right: 5%">
+                        <a href="front" style="font-family: WKGothic, WKSystem, WKRGothic; color: #dddddd; font-weight: 900; font-size: 30px;">조선어&nbsp;&nbsp;</a>
+                        <a href="front_en" style="font-family: Times New Roman; color: #dddddd; font-weight: 900; font-size: 30px;">English&nbsp;&nbsp;</a>
+                        <a href="front_ch" style="font-family: SimSun; color: #ffffff;  font-weight: 900; font-size: 30px;">汉语</a>
+                    </nav>
+                </nav>
+            </div>
+            <div style="padding-top:5%;">
+                <h2 style="font-family: SimSun; color: #4db6cc; font-size: 40px; font-family: SimSun; text-shadow: 2px 2px 4px #b0b0b0;text-align:center; ">
+                    立足本国，放眼世界！
+                </h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- end header -->
+<section id="featured">
+    <!-- start slider -->
+    <div class="container-fluid" style="padding: 15px;">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mt-element-list" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.11), 0 6px 20px 0 rgba(0,0,0,0.08);">
+                    <div class="mt-list-head list-simple bg-red" style="padding: 10px !important;">
+                        <a class="list-head-title-container" href="le_mr_aderworks_ch">
+                            <h3 class="list-title" style="font-size : 27px; padding-right:0px; letter-spacing:5px;text-align:center;font-family: SimSun; color: #fffba7;">伟大的领导</h3>
+                        </a>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="scroller" style="height:290px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+                            <ul>
+                                                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <!-- Slider -->
+                <div id="main-slider" class="flexslider" style="margin-right: 20px;">
+                    <ul class="slides">
+                        <li>
+                            <img src="include/images/front/center_1.jpg" style="min-height: 340px;" alt="과학기술전당" />
+
+                        </li>
+                        <li>
+                            <img src="include/images/front/center_2.jpg" style="min-height: 340px;" alt="전자열람실" />
+
+                        </li>
+                        <li>
+                            <img src="include/images/front/center_3.jpg" style="min-height: 340px;" alt="과학기술전당" />
+
+                        </li>
+                    </ul>
+                </div>
+                <!-- end slider -->
+            </div>
+        </div>
+    </div>
+</section>
+<section class="callaction " style="padding-top: 15px; background-color: #2a5b82;">
+    <div class="row" style="height:100%;">
+        <div class="tabbable-line" style="text-align:center;">
+            <ul class="nav nav-tabs" style="padding-left: 0px;float: none; list-style: none; display: inline-block;">
+                                <li class="active"><a href="/front_ch" style="font-size: 25px; font-family: SimSun; color: rgba(255,255,255,0.84);padding-left: 20px; padding-right: 20px;"><i class="fa   fa-home"></i>首页</a></li>
+                                <li ><a href="/al_mr_ertlist_ch" style="font-size: 25px; font-family: SimSun; color: rgba(255,255,255,0.84);padding-left: 20px; padding-right: 20px;"><i class="fa   fa-bell-o"></i>展览会</a></li>
+                                <li ><a href="/wo_mr_rldexchange_ch" style="font-size: 25px; font-family: SimSun; color: rgba(255,255,255,0.84);padding-left: 20px; padding-right: 20px;"><i class="fa  fa-globe"></i>国际交流</a></li>
+                                <li ><a href="/re_mr_searchresults_ch" style="font-size: 25px; font-family: SimSun; color: rgba(255,255,255,0.84);padding-left: 20px; padding-right: 20px;"><i class="fa fa-trophy"></i> 科技成果</a></li>
+                                <li ><a href="/re_mr_scientist_ch" style="font-size: 25px; font-family: SimSun; color: rgba(255,255,255,0.84);padding-left: 20px; padding-right: 20px;"><i class="fa  fa-user"></i>介绍科学家</a></li>
+                                <li ><a href="/fu_mr_llsearch_ch" style="font-size: 25px; font-family: SimSun; color: rgba(255,255,255,0.84);padding-left: 20px; padding-right: 20px;"><i class="fa  fa-search"></i>全部搜索</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section id="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="box">
+                <div class="col-md-6" style="padding-left:80px;">
+                    <a href="le_mr_adersh_ch" style="position:absolute;left:10px; background-color: rgba(241,240,240,0.83); padding-right: 5px; box-shadow: 0 4px 8px 5px rgba(0,0,0,0.11), 0 6px 6px 0 rgba(0,0,0,0.08);">
+                        <div class="box-bottom" style="padding-right: 0px; width: 65px; height: 325px;">
+                            <div style="font-size: 25px; line-height: 1.1em; font-family: SimSun; color: #ffffff; width: 39px; padding-left: 21px;">为了建设科学技术强国</div>
+                        </div>
+                    </a>
+                    <div>
+                        <table class="table table-striped able-hover" id="spread-table" style="">
+                            <thead>
+                                <tr>
+                                    <th width="90%" style="font-family: SimSun; font-size: 21px; letter-spacing:5px; background-color: #ffffff; color: #000000; text-align: center"> 标题 </th>
+                                </tr>
+                            </thead>
+                                                                                        <tr>
+                                    <td>
+                                        <a href="Re_mr_searchwork_ch/sh_mr_owData/781" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">给科学家灌输爱国精神</a>
+									                                     </td>
+                                </tr>
+                                                            <tr>
+                                    <td>
+                                        <a href="Re_mr_searchwork_ch/sh_mr_owData/774" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">祝贺科学家的成就</a>
+									                                     </td>
+                                </tr>
+                                                            <tr>
+                                    <td>
+                                        <a href="Re_mr_searchwork_ch/sh_mr_owData/773" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">学习之家</a>
+									                                         <a href="front_ch/sh_mr_owPicture/773" target="blank">[<i class="fa fa-camera"></i>]</a>
+                                                                        </td>
+                                </tr>
+                                                            <tr>
+                                    <td>
+                                        <a href="Re_mr_searchwork_ch/sh_mr_owData/772" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">解决室内装饰问题</a>
+									                                     </td>
+                                </tr>
+                                                            <tr>
+                                    <td>
+                                        <a href="Re_mr_searchwork_ch/sh_mr_owData/771" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">万能法宝</a>
+									                                     </td>
+                                </tr>
+                                                            <tr>
+                                    <td>
+                                        <a href="Re_mr_searchwork_ch/sh_mr_owData/770" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">深切关心的问题</a>
+									                                     </td>
+                                </tr>
+                                                            <tr>
+                                    <td>
+                                        <a href="Re_mr_searchwork_ch/sh_mr_owData/769" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">屡次予以莫大信任</a>
+									                                     </td>
+                                </tr>
+                                                    </table>
+                    </div>
+
+                </div>
+                <div class="col-md-6 mt-element-ribbon" style="border-color: #f0f0f0; padding-top: 18px;">
+                    <a href="al_mr_ertlist_ch" class="ribbon ribbon-border-hor ribbon-clip ribbon-color-danger ribbon-border-dash-hor uppercase" style="font-family: SimSun; font-size: 25px;border-color: #DDDCDC">
+                        <div class="ribbon-sub ribbon-clip" style="background-color: #0a6aa1; border-color: white">
+                        </div>
+                        科技展
+                    </a>
+                    <div style="background-color: #f9f8f8">
+                        <div id="main-slider-pic" style="padding:2%;padding-top:30px;">
+                            <ul id="slippry-slider">
+                                                                    <li>
+                                        <img src="include/images/front/pic_ch/alert_ch1.jpg" alt="" style="width: 550px;  padding: 30px; margin-left: 70px;">
+                                    </li>
+                                                                    <li>
+                                        <img src="include/images/front/pic_ch/alert_ch2.jpg" alt="" style="width: 550px;  padding: 30px; margin-left: 70px;">
+                                    </li>
+                                                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- divider -->
+</section>
+</div>
+<div class="container-fluid" style="padding-bottom: 50px;">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="box">
+                    <div class="col-md-6">
+                        <a href="wo_mr_rldexchange_ch" class="" style="background-color: RGBA(0, 118,145,0.83); padding: 10px; box-shadow: 0 4px 8px 5px rgba(0,0,0,0.11), 0 6px 6px 0 rgba(0,0,0,0.08);font-family: SimSun; font-size: 25px;color: white;">
+                            国际交流与合作
+                        </a>
+                        <div class=" aligncenter" style="width: 100%; padding-top: 25px;">
+                            <table class="table table-striped able-hover" id="spread-table">
+                                <thead>
+                                    <tr>
+                                        <th width="90%" style="font-family: SimSun;font-size: 21px; letter-spacing:5px; background-color: #ffffff; color: #000000; text-align: center"> 标题 </th>
+                                    </tr>
+                                </thead>
+                                                                                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="re_mr_searchresults_ch" class="" style="background-color: rgba(112, 0,110,0.83); padding : 10px; box-shadow: 0 4px 8px 5px rgba(0,0,0,0.11), 0 6px 6px 0 rgba(0,0,0,0.08);font-family: SimSun;font-size: 25px;color: white;">
+                            科技成果
+                        </a>
+                        <div class=" aligncenter" style="width: 100%; padding-top: 25px;">
+                            <table class="table table-striped able-hover" id="spread-table">
+                                <thead>
+                                    <tr>
+                                        <th width="90%" style="font-family: SimSun;font-size: 21px; letter-spacing:5px; background-color: #ffffff; color: #000000; text-align: center"> 标题 </th>
+                                    </tr>
+                                </thead>
+                                                                                                    <tr>
+                                        <td>
+                                        <a href="Re_mr_searchwork_ch/sh_mr_owData/776" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">为了农业生产</a>
+									                                        <a href="front_ch/sh_mr_owPicture/776" target="blank">[<i class="fa fa-camera"></i>]</a>
+                                                                            </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>
+                                        <a href="Re_mr_searchwork_ch/sh_mr_owData/775" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">新建家禽研究院本院地区</a>
+									                                        <a href="front_ch/sh_mr_owPicture/775" target="blank">[<i class="fa fa-camera"></i>]</a>
+                                                                            </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>
+                                        <a href="Re_mr_searchwork_ch/sh_mr_owData/767" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">献出一切智慧和热情</a>
+									                                        <a href="front_ch/sh_mr_owPicture/767" target="blank">[<i class="fa fa-camera"></i>]</a>
+                                                                            </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>
+                                        <a href="Re_mr_searchwork_ch/sh_mr_owData/766" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">为了育种新品种食用菌</a>
+									                                        <a href="front_ch/sh_mr_owPicture/766" target="blank">[<i class="fa fa-camera"></i>]</a>
+                                                                            </td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>
+                                        <a href="Re_mr_searchwork_ch/sh_mr_owData/752" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">高效能的种衣剂“丰年苗1”号</a>
+									                                        </td>
+                                    </tr>
+                                                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a><div class="site-footer">
+    <div style="background-color: #2a5b82;">
+        <div class="container" style="width: 95%; padding-top: 5px; padding: 20px;">
+            <div class="row" style="letter-spacing: 1.5px">
+
+                <div class="footer_cell" style="text-align: center;">
+                    <span class="site_info font-grey-cascade" style="line-height: 2em; font-size: 10pt;">&copy; 朝鲜民主主义人民共和国国家科学技术委员会<br />
+                        地址：平壤市牡丹峰区长村1洞 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        电话：00850-2-18111(Ext.431-8625) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电子邮箱： pptayang<span>＠</span>star-co.net.kp
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;传真：00850-2-381-1200 </span>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div><script>
+    var site_url = '/';
+</script>
+<script src="/include/js/modernizr.custom.js"></script>
+<script src="/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<script src="/include/js/datatables.min.js" type="text/javascript"></script>
+<script src="/include/js/datatables.bootstrap.js" type="text/javascript"></script>
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="/assets/global/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+<script src="/assets/lib/counterup/counterup.min.js"></script>
+<script src="/assets/superfish/superfish.min.js"></script>
+<script src="/assets/stickyjs/sticky.js"></script>
+<script src="/assets/global/scripts/app.min.js" type="text/javascript"></script>
+<script src="/include/js/jquery.dlmenu.js"></script>
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN THEME LAYOUT SCRIPTS -->
+<script src="/assets/layouts/layout5/scripts/layout.min.js" type="text/javascript"></script>
+<script src="/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+<script src="/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+<script src="/include/js/wow.js"></script>
+<script src="/include/my.js"></script>
+<script src="/include/slippry.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#slippry-slider').slippry(
+            defaults = {
+                transition: 'vertical',
+                useCSS: true,
+                speed: 1000,
+                pause: 7000,
+                initSingle: false,
+                auto: true,
+                preload: 'visible',
+                pager: false,
+            }
+        )
+    });
+</script>
+
+    <script src="/include/new/js/jquery.easing.1.3.js" type="text/javascript"></script>
+    <script src="/include/new/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/include/new/js/jquery.fancybox.pack.js" type="text/javascript"></script>
+    <script src="/include/new/js/jquery.fancybox-media.js" type="text/javascript"></script>
+    <script src="/include/new/js/google-code-prettify/prettify.js" type="text/javascript"></script>
+    <script src="/include/new/js/portfolio/jquery.quicksand.js" type="text/javascript"></script>
+    <script src="/include/new/js/portfolio/setting.js" type="text/javascript"></script>
+    <script src="/include/new/js/jquery.flexslider.js" type="text/javascript"></script>
+    <script src="/include/new/js/animate.js" type="text/javascript"></script>
+    <script src="/include/new/js/custom.js" type="text/javascript"></script>
+    <script src="/include/new/js/my.js" type="text/javascript"></script>
+    <script src="/include/js/login_ch.js" type="text/javascript"></script>
+
+</body>
+
+</html>

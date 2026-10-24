@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <meta charset="utf-8" />
+        <title>Friend-DPRK | Home</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta content="website FRIEND, edited in DPRK" name="description" />
+        <meta content="FRIEND Ediitor" name="author" />
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/assets/friend/standard/img/friend.ico" type="image/x-icon" />
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+        <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link href="/assets/global/plugins/cubeportfolio/css/cubeportfolio.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/global/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/global/css/components.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/pages/css/portfolio.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/layouts/layout3/css/custom.min.css" rel="stylesheet" type="text/css" />
+
+        <link href="/assets/friend/standard/css/flexslider.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/friend/standard/css/imageviewer.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/friend/standard/css/main.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/friend/standard/css/articles.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/lang/fra.css" rel="stylesheet" type="text/css" />
+
+        <script src="/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    </head>
+    <!-- END HEAD -->
+
+
+    <body class="page-container-bg-solid page-header-menu-fixed page-header-top-fixed"><!--  -->
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+
+                    <!-- BEGIN HEADER -->
+                    <header class="page-header">
+                        <!-- BEGIN HEADER TOP -->
+                        <div class="page-header-top">
+                            <div class="container-full">
+                                <!-- BEGIN LOGO -->
+                                <div class="page-logo">
+                                    <a href="/">
+                                        <img src="/assets/friend/standard/img/mark_home.png" alt="header-mark" title="www.friend.com.kp" class="header-mark" />
+                                    </a>
+                                </div>
+                                <div id="address" class="text-shadow-gray1">www.friend.com.kp</div>                                    
+                                <div class="visit-count">
+                                    <span class="bold font-white">Visite</span> <i class="glyphicon glyphicon-star-empty"></i>  
+                                    <span class="bold font-white">Entière : </span>18,621,827 | 
+                                    <span class="bold font-white">Hier : </span>39,071 | 
+                                    <span class="bold font-white">Aujourd'hui : </span>21,212                                </div>
+                               <!-- END LOGO -->
+                                <!-- BEGIN TOP NAVIGATION MENU -->
+                                <div class="top-menu">
+                                    <ul class="nav navbar-nav pull-right">
+
+    <!-- BEGIN 종합탐색 --> 
+    <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar" style="margin-top:4px;padding-right:10px;max-width:250px;">
+    <form class="search-all-form" method="GET" action="/index.php/fra/search/asearch">
+        <div class="input-group border-radius16" style="border:1px solid #ccc;overflow:hidden; background:white;">
+            <input type="hidden" id="token" name="token" value="512684140e6557d1146d4a80a4d28ac9e0b7fe1a2de5a3518bff69004c10dc37">
+            <input type="text" class="form-control" style="border:0" placeholder="Search ..." id="asearch" name="asearch" />
+            <span class="input-group-btn">
+                <a href="javascript:$('.search-all-form').submit();" class="btn submit my-sbtn" title="Search title">
+                    <i class="icon-magnifier"></i>
+                </a>
+               <a href="javascript:$('.search-all-form').attr('action','/index.php/fra/search/asearchall').submit();" class="btn my-sbtn" title="Search title and content">
+                    <i class="icon-magnifier-add"></i>
+                </a>
+            </span>
+        </div>    
+    </form>
+    </li>
+    <!-- END 종합탐색 --> 
+
+
+
+
+    <!-- BEGIN 최근도서 
+    <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <i style="font-size:24px;" class="icon-notebook" title="Infothèque"></i>
+                    </a>
+        <ul class="dropdown-menu">
+            <li class="top-menu-ebook">
+                <h3><strong>0</strong> nouveaux livres. <a href="/index.php/fra/elibs" title="View all"><i class="icon-arrow-right"></i></a></h3>
+                
+            </li>
+            <li>
+                <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                                         <li>
+                        <a href="/index.php/fra/elibs/view/402">
+                            <span class="time">07/29</span>
+                            <span class="details">
+                                <i class="fa fa-edit"></i>
+                                <span>СТРАНА УТРЕННЕЙ СВЕЖЕСТИ</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/elibs/view/401">
+                            <span class="time">07/22</span>
+                            <span class="details">
+                                <i class="fa fa-edit"></i>
+                                <span>Au nom de notre fraternité</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/elibs/view/400">
+                            <span class="time">07/15</span>
+                            <span class="details">
+                                <i class="fa fa-edit"></i>
+                                <span>ХРАНИ, КОРЕЯ, ВСЁ, ЧТО СЕРДЦУ СВЯТО</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/elibs/view/399">
+                            <span class="time">07/10</span>
+                            <span class="details">
+                                <i class="fa fa-book"></i>
+                                <span>소년단기발높이 강국의 미래를 향하여 나아가자</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/elibs/view/398">
+                            <span class="time">07/09</span>
+                            <span class="details">
+                                <i class="fa fa-book"></i>
+                                <span><nobr>위대한 수령님</nobr>의 뜻을 받들어 내 나라, 내 조국을 더욱 부강하게 하자</span>
+                            </span>
+                        </a>
+                    </li>
+                                    </ul>
+            </li>
+        </ul>
+    </li>-->
+   <!-- END 최근도서 -->
+
+    <!-- BEGIN 새로 등록된 기사 
+   <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <i style="font-size:24px;" class="icon-docs" title="Articles"></i>
+                    </a>
+        <ul class="dropdown-menu">
+            <li class="top-menu-article">
+                <h3><strong>0</strong> nouveaux articles. <a href="/index.php/fra/articles" title="View all"><i class="icon-arrow-right"></i></a></h3>
+           </li>
+            <li>
+                <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                                         <li>
+                        <a href="/index.php/fra/articles/view/9758">
+                            <span class="time">07/29</span>
+                            <span class="details">
+                                <i class="fa fa-file-text-o"></i>
+                                <span>Orme kimhwadang</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/articles/view/9762">
+                            <span class="time">07/29</span>
+                            <span class="details">
+                                <i class="fa fa-file-text-o"></i>
+                                <span>Problème des équipements qu’il s’est intéressé profondément</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/articles/view/9766">
+                            <span class="time">07/29</span>
+                            <span class="details">
+                                <i class="fa fa-file-text-o"></i>
+                                <span>Le paysage et les gens aussi se changent</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/articles/view/9770">
+                            <span class="time">07/29</span>
+                            <span class="details">
+                                <i class="fa fa-file-text-o"></i>
+                                <span>La hauteur de la RPD de Corée (6)</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/articles/view/9774">
+                            <span class="time">07/29</span>
+                            <span class="details">
+                                <i class="fa fa-file-text-o"></i>
+                                <span>Aspect admirable (2)</span>
+                            </span>
+                        </a>
+                    </li>
+                                    </ul>
+            </li>
+        </ul>
+    </li>-->
+    <!-- END 새로 등록된 기사 -->
+
+    <!-- BEGIN 새로 등록된 다매체 
+    <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <i style="font-size:24px;margin-top:2px;" class="icon-camera" title="Photo & Vidéos"></i>
+                    </a>
+        <ul class="dropdown-menu">
+            <li class="top-menu-media">
+                <h3><strong>0</strong> nouveaux media. <a href="/index.php/fra/media" title="View all"><i class="icon-arrow-right"></i></a></h3>
+             </li>
+            <li>
+                <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                                         <li>
+                        <a href="/index.php/fra/media/view/2156">
+                            <span class="time">07/29</span>
+                            <span class="details">
+                                <i class="icon-camera"></i>
+                                <span>Grotte de Song-am</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/media/view/2154">
+                            <span class="time">07/22</span>
+                            <span class="details">
+                                <i class="icon-camera"></i>
+                                <span>Kaeson Youth Park</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/media/view/2155">
+                            <span class="time">07/22</span>
+                            <span class="details">
+                                <i class="icon-camcorder"></i>
+                                <span>Peintures dessinées par le vétéran de guerre</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/media/view/2152">
+                            <span class="time">07/06</span>
+                            <span class="details">
+                                <i class="icon-camera"></i>
+                                <span>L’abondance des kiwis</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/media/view/2149">
+                            <span class="time">07/05</span>
+                            <span class="details">
+                                <i class="icon-camera"></i>
+                                <span>L’enthousiasme</span>
+                            </span>
+                        </a>
+                    </li>
+                                    </ul>
+            </li>
+        </ul>
+    </li>-->
+   <!-- END 새로 등록된 다매체 -->
+
+
+
+
+    <li class="droddown dropdown-separator">
+        <span class="separator"></span>
+    </li>
+
+    <!-- BEGIN 사용자 DROPDOWN -->
+    <li class="dropdown dropdown-user dropdown-dark">
+
+
+       
+           <a href="/index.php/ul" class="dropdown-toggle" data-hover="dropdown" data-close-others="true">
+            <i style="font-size:24px;" class="icon-user"></i>
+            <span class="username">Login</span>
+        </a>
+
+            </li>
+    <!-- END USER LOGIN DROPDOWN -->
+
+    <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+    <li class="dropdown dropdown-extended quick-sidebar-toggler">
+        <span class="sr-only">Friends</span>
+        <i id="friends-small" class="icon-logout"></i>
+        <img src="/assets/friend/standard/img/logo.png" width=60 class="icon-logout" id="friends" />
+        <span class="badge badge-warning badge-roundless" style="position:absolute;right:10px;bottom:2px;">
+            2</span>
+    </li>
+    <!-- END QUICK SIDEBAR TOGGLER -->
+</ul>
+
+<!-- BEGIN QUICK SIDEBAR -->
+<a href="javascript:;" class="page-quick-sidebar-toggler">
+    <i class="icon-login"></i>
+</a>
+<div class="page-quick-sidebar-wrapper" data-close-on-body-click="false">
+    <div class="page-quick-sidebar">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="javascript:;" data-target="#quick_sidebar_tab_1" data-toggle="tab" style="font-size:larger;">Friends                    <span class="badge badge-warning badge-roundless">2</span>
+                </a>
+                <ul class="orgs">
+                
+                    <li><a href="/pices">
+
+                        <img src="/assets/friend/standard/img/pices.png" title="Société de Pyongyang pour l’échange culturel international
+www.friend.com.kp/pices">
+                                            </a></li>
+                                                    <li><a href="http://www.koart.sca.kp" target="links">
+                        <img src="/assets/friend/standard/img/koart.png" title="www.koart.sca.kp">
+                    </a></li>
+                                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- END QUICK SIDEBAR -->
+
+                                </div>
+                                <!-- END TOP NAVIGATION MENU -->
+                            </div>
+                        </div>
+                        <!-- END HEADER TOP -->
+                        <!-- BEGIN HEADER MENU -->
+                        <div class="page-header-menu">
+                            <div class="container-full">
+
+                                <!-- BEGIN MEGA MENU -->
+<div class="hor-menu">
+    <ul class="nav navbar-nav">
+
+
+                <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
+            <a href="/"> Home<span class="arrow"></span></a>
+                    </li>
+                <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
+            <a href="/index.php/fra/elibs"> Infothèque<span class="arrow"></span></a>
+                        <ul class="dropdown-menu pull-left">
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/elibs/list/book" class="nav-link  "> 
+                        Livres  </a>
+                </li>
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/elibs/list/poem" class="nav-link  "> 
+                        Poèmes  </a>
+                </li>
+                            </ul>
+                    </li>
+                <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown active">
+            <a href="/index.php/fra/articles"> Articles<span class="arrow"></span></a>
+                        <ul class="dropdown-menu pull-left">
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/articles/list/paekdu" class="nav-link  "> 
+                        Les grands Hommes  </a>
+                </li>
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/articles/list/InfoDPRK" class="nav-link  "> 
+                        La RPDC d'aujourd'hui  </a>
+                </li>
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/articles/list/arirang" class="nav-link  "> 
+                        L'histoire longue et la culture brillante  </a>
+                </li>
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/articles/list/intRel" class="nav-link  "> 
+                        L'amité et la solidarité  </a>
+                </li>
+                            </ul>
+                    </li>
+                <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
+            <a href="/index.php/fra/media"> Photo & Vidéos<span class="arrow"></span></a>
+                        <ul class="dropdown-menu pull-left">
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/media/list/photo" class="nav-link  "> 
+                        Photos  </a>
+                </li>
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/media/list/video" class="nav-link  "> 
+                        Vidéos  </a>
+                </li>
+                            </ul>
+                    </li>
+        
+
+    </ul>
+</div>
+<!-- END MEGA MENU -->
+                                
+                                <!-- 언어설정목록 -->
+                                <div class="btn-group" id="lang-menu">
+                                    <a class="btn white " href="javascript:;" data-toggle="dropdown">
+                                        <i class="icon-globe"></i> Français                                        <i class="fa fa-angle-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                    <li>    <a href="/index.php/lang/kor">        <i>KP</i> 조선어 </a></li><li>    <a href="/index.php/lang/eng">        <i>EN</i> English </a></li><li>    <a href="/index.php/lang/rus">        <i>RU</i> Pусский </a></li><li>    <a href="/index.php/lang/fra">        <i>FR</i> Français </a></li>                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- END HEADER MENU -->
+                    </header>
+                    <!-- END HEADER -->
+                    
+                </div>
+            </div>
+
+            <div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+
+
+                            
+                            
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container-fluid">
+
+                            <div style="height:40px;"></div>                                    
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+                                        <div class="portlet light portlet-fit ">
+
+<div class="articles view  col-md-8">
+
+	<div class="wrapper">
+	  	<ul class="detail-nav" >
+							<li class="left"><a href="/index.php/fra/articles/view/9343/1"><i class="fa fa-chevron-circle-left" title=""></i></a></li> 
+										<li class="right"><a href="/index.php/fra/articles/view/9335/1"><i class="fa fa-chevron-circle-right" title=""></i></a></li> 
+						<li><a class="button" href="/">Retourne</a></li>
+			<div style="clear:both;"></div>
+		</ul>
+
+
+		<div style="position:relative;">
+
+						<div class="detail-nav-title">
+							<div><a href="/index.php/fra/articles/view/9343/1"><i class="fa fa-chevron-circle-left"></i> Bilan annuel de l’Association d’amitié Angleterre-Corée</a></div> 
+										<div><a href="/index.php/fra/articles/view/9335/1"><i class="fa fa-chevron-circle-right"></i> La tâche qu’il s’est chargée personnellement  </a></div> 
+						</div>
+			
+			<div id="backboard"></div>
+<div id="image-gallery">
+
+    <div class="image-container"></div>
+
+    <i class="icon-arrow-left prev"></i>
+    <i class="icon-arrow-right next"></i>
+
+    <div class="footer-info">
+        <div class="sub-title"></div>
+        <div><span class="title"></span> (<span class="current"></span>/<span class="total"></span>)</div>
+    </div>
+
+    <div class="btn-close"></div>
+</div>   
+
+
+<div id="video-pad" class="player" style="position:fixed;">
+    <video class="embed-responsive-item" controls="controls" id="video-tag" autoplay="autoplay" style="width:100%;max-width:1000px;vertical-align:middle;">
+        <source id="video-src" src="" type="video/mp4">
+        <!-- <source id="player" src="1.mp3" type="audio/mp3"> -->
+        Your browser does not support the video tag.    </video>
+	<div class="btn-close"></div>
+    <div class="footer-info">
+        <div class="title"></div>
+    </div>
+</div>
+
+
+ 
+<div class="note note-info" style="margin-bottom: 0;">
+	<div class="detail-articles">
+		<div class="detail-td-info-top">
+			<div class="detail-td-kind"><i class="fa fa-file-text-o"></i> L'amité et la solidarité</div>
+			<div class="detail-td-title">Points essentiels d’organisation du concours international des œuvres littéraires et artistiques</div>
+			<div class="detail-td-rec-date rec-date">2024-04-01</div>
+			<div class="detail-td-count">
+				<div class="detail-td-read-count read-count"><span>Visite</span>1226 </div>
+				<div class="detail-td-sel-count sel-count"><span>Bon</span>0 </div>
+			</div>
+		</div>
+		<div class="detail-td-content"><p style="text-indent: 0px; font-size: 22px; font-weight: bold; text-align: center; line-height: 30px;"><b><br />
+Points essentiels d&rsquo;organisation du</b><b> concours<br />
+international des &oelig;uvres litt&eacute;raires et artistiques<br />
+<br />
+</b><b> </b></p>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">Vivre en harmonie et d&eacute;velopper dans un monde pacifique sans agression et sans guerre est l&rsquo;intention et le d&eacute;sir communs de l&rsquo;humanit&eacute; progressiste. </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">Pourtant &agrave; cause des autorit&eacute;s et arbitraires ainsi que des man&oelig;uvres d&rsquo;agression et d&rsquo;ing&eacute;rence des puissances imp&eacute;rialistes qui se r&eacute;v&egrave;lent davantage de jour en jour, la dignit&eacute; des pays souverains est viol&eacute;e atrocement et de nombreux peuples succombent dans la souffrance et dans le malheur. Cette situation tragique continue &agrave; se produire dans tous les coins du monde.</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">M&ecirc;me dans cette situation politique internationale, la RPD de Cor&eacute;e et le peuple cor&eacute;en ont poss&eacute;d&eacute;, portant haut le drapeau de l&rsquo;ind&eacute;pendance contre l&rsquo;imp&eacute;rialisme et de la prosp&eacute;rit&eacute; par ses propres forces, les forces d&rsquo;autod&eacute;fense nationale que personne ne puisse convoiter, en &eacute;tendant ainsi une nouvelle &eacute;poque pour la restauration totale d&rsquo;Etat. Ils &eacute;largissent et d&eacute;veloppent les relations de bon voisinage et d&rsquo;amiti&eacute; et de coop&eacute;ration avec les pays aspirant &agrave; l&rsquo;ind&eacute;pendance et &agrave; la paix. Cela provoque de grands soutiens et sympathies de l&rsquo;humanit&eacute; progressiste du monde.         </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">Ce que la RPD de Cor&eacute;e est devenue ainsi une forteresse puissante d&rsquo;ind&eacute;pendance contre l&rsquo;imp&eacute;rialisme et brille comme phare d&rsquo;esp&eacute;rance de l&rsquo;humanit&eacute; progressiste, on ne peut pas penser sans les exploits immortels du Pr&eacute;sident <b><nobr><strong><b>Kim&nbsp;Il&nbsp;Sung</b></strong></nobr> </b>et du Dirigeant <b><nobr><strong><b>Kim&nbsp;Jong&nbsp;Il</b></strong></nobr></b>. De bonne heure, ils ont cr&eacute;&eacute;, d&eacute;velopp&eacute; et approfondi les id&eacute;es immortelles du Juche pour diriger en victoire l&rsquo;&eacute;dification de la puissance socialiste de souverainet&eacute;, d&rsquo;ind&eacute;pendance et d&rsquo;autod&eacute;fense ainsi que la cause de l&rsquo;&eacute;mancipation du monde. Et ils ont joui du respect et de la v&eacute;n&eacute;ration sans bornes de la part de tous les peuples du monde par leurs qualit&eacute;s morales nobles et par leur prestige moral.               </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">Aujourd&rsquo;hui, le peuple cor&eacute;en avance de mani&egrave;re victorieuse la cause historique de la puissance et des forces du pays en l&rsquo;emportant avec d&eacute;termination sur les d&eacute;fis et difficult&eacute;s de toutes sortes de l&rsquo;histoire sous la direction sage du respect&eacute; camarade <b><nobr><strong><b>Kim&nbsp;Jong&nbsp;Un</b></strong></nobr></b>, grand Homme &eacute;minent sans &eacute;gal, et joue v&eacute;ritablement un grand r&ocirc;le pour sauvegarder la paix et la s&eacute;curit&eacute; du monde.  </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">Et c&rsquo;est pourquoi, de nombreuses personnalit&eacute;s de diff&eacute;rents pays du monde &eacute;prises de justice et de v&eacute;rit&eacute; cr&eacute;ent et publient des &oelig;uvres litt&eacute;raires et artistiques de toutes sortes &agrave; la louange des grands Hommes sans &eacute;gal et en soutien de la cause juste du peuple cor&eacute;en. Cela est devenu un courant du temps.     </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">A l&rsquo;occasion du 115<sup>e</sup> anniversaire de la naissance du Pr&eacute;sident <b><nobr><strong><b>Kim&nbsp;Il&nbsp;Sung</b></strong></nobr></b> et du 85<sup>e</sup> anniversaire de la naissance du Dirigeant <b><nobr><strong><b>Kim&nbsp;Jong&nbsp;Il</b></strong></nobr></b> dont on va c&eacute;l&eacute;brer en 2027, le Comit&eacute; pour les relations culturelles avec l&rsquo;&eacute;tranger, le Comit&eacute; central de l&rsquo;Union des &eacute;crivains de Cor&eacute;e et le Comit&eacute; central de l&rsquo;Union des journalistes de Cor&eacute;e organisent, en conformit&eacute; avec les sentiments et les demandes unanimes des peuples progressistes du monde, le concours international des &oelig;uvres litt&eacute;raires et artistiques comme ceci.</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">1.     Participant</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">Ceux qui esp&egrave;rent les relations culturelles notamment les &eacute;crivains, hommes de presse et hommes litt&eacute;raires qui ont le sentiment amical envers la RPD de Cor&eacute;e, les gens qui soutiennent la juste lutte du peuple cor&eacute;en avec le sentiment d&rsquo;amiti&eacute; et de solidarit&eacute; envers la RPD de Cor&eacute;e peuvent participer n&rsquo;importe qui.     </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">2.     P&eacute;riode de recrutement</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">Avril 2024 &ndash; avril 2027</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">3.     Sujet des &oelig;uvres</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">-     Sur les exploits immortels du Pr&eacute;sident <b><nobr><strong><b>Kim&nbsp;Il&nbsp;Sung</b></strong></nobr></b> et du Dirigeant <b><nobr><strong><b>Kim&nbsp;Jong&nbsp;Il</b></strong></nobr></b> qui ont accompli pour la R&eacute;volution cor&eacute;enne et pour la cause de l&rsquo;&eacute;mancipation du monde</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">-     Sur l&rsquo;aspect de grandeur du respect&eacute; camarade <b><nobr><strong><b>Kim&nbsp;Jong&nbsp;Un</b></strong></nobr></b>, Pr&eacute;sident des affaires d&rsquo;Etat de la RPD de Cor&eacute;e</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">-     La pr&eacute;sentation du r&eacute;gime socialiste de la RPD de Cor&eacute;e</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">-     Les contenus concernant l&rsquo;histoire, culture et les us et coutumes tr&egrave;s anciens de la Cor&eacute;e  </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">-     Les contenus traitant l&rsquo;amiti&eacute; et la solidarit&eacute; avec le peuple cor&eacute;en         </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">4.     Cat&eacute;gorie des &oelig;uvres litt&eacute;raires et artistiques</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">Livre de th&eacute;orie sociopolitique, livre pr&eacute;sentant la RPD de Cor&eacute;e, souvenirs, journal de voyage, roman, essai litt&eacute;raire, po&eacute;sie, paroles, article, album de dessins etc.      </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">5.     M&eacute;thode d&rsquo;envoi des &oelig;uvres</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">On peut envoyer &agrave; travers l&rsquo;ambassade de la RPD de Cor&eacute;e r&eacute;sidant au pays correspondant ou par la poste et par le courrier &eacute;lectronique au comit&eacute; d&rsquo;organisation du concours international des &oelig;uvres litt&eacute;raires et artistiques, ou on peut apporter directement &agrave; l&rsquo;occasion de la visite &agrave; Pyongyang.</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">6.     Jury et bilan</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">- Jury</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">Le Comit&eacute; non permanent constitu&eacute; par les membres correspondants du Comit&eacute; pour les relations culturelles avec l&rsquo;&eacute;tranger de la RPDC, du Comit&eacute; central de l&rsquo;Union des &eacute;crivains de Cor&eacute;e et du Comit&eacute; central de l&rsquo;Union des journalistes de Cor&eacute;e.</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">- Bilan</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">Le bilan se tiendra en 2027 &agrave; Pyongyang, capitale de la RPD de Cor&eacute;e, &agrave; l&rsquo;occasion du 115<sup>e</sup> anniversaire de la naissance du Pr&eacute;sident <b><nobr><strong><b>Kim&nbsp;Il&nbsp;Sung</b></strong></nobr></b>.</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">Aux gens qui ont envoy&eacute; des livres et des &oelig;uvres litt&eacute;raires et artistiques excellents &agrave; la mise au concours seront distribu&eacute;s les prix et dipl&ocirc;mes d&rsquo;honneur, les titres d&rsquo;&eacute;crivain d&rsquo;honneur du Comit&eacute; central de l&rsquo;Union des &eacute;crivains de Cor&eacute;e et les titres de journaliste d&rsquo;honneur du Comit&eacute; central de l&rsquo;Union des journalistes de Cor&eacute;e</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">* Les livres et les &oelig;uvres litt&eacute;raires artistiques publi&eacute;s ou pr&eacute;sent&eacute;s pr&eacute;alablement dans la p&eacute;riode de la conf&eacute;rence du bilan de concours international des &oelig;uvres litt&eacute;raires et artistiques tenue en avril 2022 par l&rsquo;Internet jusqu'en avril 2024, seront examin&eacute;s et dress&eacute;s au bilan.   </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> </div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">7.     Adresse de contact</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">Comit&eacute; d&rsquo;organisation du concours international des &oelig;uvres litt&eacute;raires et artistiques :</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">E-mail: <a href="mailto:dmw@star-co.net.kp">dmw@star-co.net.kp</a>,</div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;">Web: <a href="../../../../index.html">www.friend.com.kp</a></div>
+<div style="font-size: 16px; text-align: justify; text-indent: 20px; line-height: 25px;"> <br />
+<br />
+<br />
+ </div>
+<div style="font-size: 16px; text-align: center; text-indent: 20px; line-height: 25px;">Comit&eacute; pour les relations culturelles avec l&rsquo;&eacute;tranger</div>
+<div style="font-size: 16px; text-align: center; text-indent: 20px; line-height: 25px;">Comit&eacute; central de l&rsquo;Union des &eacute;crivains de Cor&eacute;e</div>
+<div style="font-size: 16px; text-align: center; text-indent: 20px; line-height: 25px;">Comit&eacute; central de l&rsquo;Union des journalistes de Cor&eacute;e</div>
+<div style="font-size: 16px; text-align: center; text-indent: 20px; line-height: 25px;">Pyongyang, le premier avril 2024</div>
+<div style="font-size: 16px; text-align: center; text-indent: 20px; line-height: 25px;"> </div>
+<p> </p></div>
+
+		<div class="btn-appraisal" lng="fra" ctrl="articles" idx="9347">
+			<button class="btn btn-primary mt-sweetalert uppercase " data-title="Etes-vous satisfait avec cet article(media)?" data-type="warning" data-allow-outside-click="false" data-show-confirm-button="true" data-show-cancel-button="true" data-cancel-button-class="btn-danger" data-cancel-button-text="Non." data-confirm-button-text="Oui, ça me plaît." data-confirm-button-class="btn-info" >Appréciation</button>
+		</div>
+	</div>
+</div>
+
+		</div>
+
+	  	<ul class="detail-nav" >
+							<li class="left"><a href="/index.php/fra/articles/view/9343/1"><i class="fa fa-chevron-circle-left" title=""></i></a></li> 
+										<li class="right"><a href="/index.php/fra/articles/view/9335/1"><i class="fa fa fa-chevron-circle-right" title=""></i></a></li> 
+						<li><a class="button" href="/">Retourne</a></li>
+			<div style="clear:both;"></div>
+		</ul>
+
+	</div>
+
+	<!-- 상세보기 아래의 목록표시 -->
+	<div>
+			</div>
+</div>
+
+<!-- 페지마무리처리 for float... -->
+
+<div class="right-banner col-md-4">
+
+	
+	<!-- 
+	페지내부에서의 목록(home or right-banner) 표시부분품
+	
+	매 controller의 목록보기 및 상세보기(내용아래부분의 목록표시)시에
+	호출된다 
+	
+	$page_list : 목록보기인 경우 page-list, 상세보기인 경우 detail-list
+
+<div class="elibs_right_banner list">
+ -->
+<div class="elibs_right_banner block">
+
+	<h3>
+		<i class="icon-notebook"></i> Infothèque 
+		<a href="/index.php/fra/elibs/list/all" title="de plus..."><i class="icon-arrow-right"></i></a>
+	</h3>
+
+	<!-- 목록표 -->
+	<!-- 
+	listview 또는 block-view에서의 목록부분표시 
+	
+-->
+
+	<!-- 목록표 -->
+	<!-- <ul class="page-table"> -->
+	<ul class="list-table">
+
+	<!-- 검색목록이 있으면 현시 -->
+	
+			<li class="list-tr" idx="402" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/402/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-edit"></i>
+					</div>
+					<div class="title-cont">
+						СТРАНА УТРЕННЕЙ СВЕЖЕСТИ&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-07-29 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="401" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/401/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-edit"></i>
+					</div>
+					<div class="title-cont">
+						Au nom de notre fraternité&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-07-22 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="400" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/400/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-edit"></i>
+					</div>
+					<div class="title-cont">
+						ХРАНИ, КОРЕЯ, ВСЁ, ЧТО СЕРДЦУ СВЯТО&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-07-15 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="399" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/399/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-book"></i>
+					</div>
+					<div class="title-cont">
+						소년단기발높이 강국의 미래를 향하여 나아가자&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-07-10 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			
+
+	</ul>
+
+
+</div>
+
+	
+	<!-- 
+	페지내부에서의 목록(home or right-banner) 표시부분품
+	
+	매 controller의 목록보기 및 상세보기(내용아래부분의 목록표시)시에
+	호출된다 
+	
+	$page_list : 목록보기인 경우 page-list, 상세보기인 경우 detail-list
+
+<div class="photos_right_banner list">
+ -->
+<div class="photos_right_banner block">
+
+	<h3>
+		<i class="icon-camera"></i> Photos 
+		<a href="/index.php/fra/media/list/photo" title="de plus..."><i class="icon-arrow-right"></i></a>
+	</h3>
+
+	<!-- 목록표 -->
+	<!-- 
+	listview 또는 block-view에서의 목록부분표시 
+-->
+
+	<!-- 목록표 -->
+	<div class="portfolio-content portfolio-2 list-table">
+	    <div id="js-grid-mosaic" class="cbp-l-grid-mosaic cbp-caption-active cbp-caption-zoom cbp-ready" style="text-align:center;">
+	        <div class="web-design graphic" >
+
+			
+		        <div class="cbp-item-wrapper two-part">
+		            
+		            <a href="/index.php/fra/media/view/2156/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042156.frd"  alt="Grotte de Song-am" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">21</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">Grotte de Song-am									</div>
+			                        <div class="media-inner-rec-date">2024-07-29</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper two-part">
+		            
+		            <a href="/index.php/fra/media/view/2154/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042154.frd"  alt="Kaeson Youth Park" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">13</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">Kaeson Youth Park									</div>
+			                        <div class="media-inner-rec-date">2024-07-22</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper two-part">
+		            
+		            <a href="/index.php/fra/media/view/2152/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042152.frd"  alt="L’abondance des kiwis" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">2</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">L’abondance des kiwis									</div>
+			                        <div class="media-inner-rec-date">2024-07-06</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper two-part">
+		            
+		            <a href="/index.php/fra/media/view/2151/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042151.frd"  alt="Dans la maison du thé Unjong" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">1</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">Dans la maison du thé Unjong									</div>
+			                        <div class="media-inner-rec-date">2024-07-05</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper two-part">
+		            
+		            <a href="/index.php/fra/media/view/2150/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042150.frd"  alt="La mine d’Unryul" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">1</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">La mine d’Unryul									</div>
+			                        <div class="media-inner-rec-date">2024-07-05</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper two-part">
+		            
+		            <a href="/index.php/fra/media/view/2149/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042149.frd"  alt="L’enthousiasme" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">1</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">L’enthousiasme									</div>
+			                        <div class="media-inner-rec-date">2024-07-05</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper two-part">
+		            
+		            <a href="/index.php/fra/media/view/2148/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042148.frd"  alt="L’aspect heureux des enfants" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">5</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">L’aspect heureux des enfants									</div>
+			                        <div class="media-inner-rec-date">2024-07-04</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper two-part">
+		            
+		            <a href="/index.php/fra/media/view/2147/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042147.frd"  alt="A la plaine aux ondulations dorées" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">1</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">A la plaine aux ondulations dorées									</div>
+			                        <div class="media-inner-rec-date">2024-07-03</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+	        </div>
+	    </div>
+	</div>
+
+
+
+
+
+
+
+</div>
+	
+	<!-- 
+	페지내부에서의 목록(home or right-banner) 표시부분품
+	
+	매 controller의 목록보기 및 상세보기(내용아래부분의 목록표시)시에
+	호출된다 
+	
+	$page_list : 목록보기인 경우 page-list, 상세보기인 경우 detail-list
+
+<div class="videos_right_banner list">
+ -->
+<div class="videos_right_banner block">
+
+	<h3>
+		<i class="icon-camcorder"></i> Vidéos 
+		<a href="/index.php/fra/media/list/video" title="de plus..."><i class="icon-arrow-right"></i></a>
+	</h3>
+
+	<!-- 목록표 -->
+	<!-- 
+	listview 또는 block-view에서의 목록부분표시 
+-->
+
+	<!-- 목록표 -->
+	<div class="portfolio-content portfolio-2 list-table">
+	    <div id="js-grid-mosaic" class="cbp-l-grid-mosaic cbp-caption-active cbp-caption-zoom cbp-ready" style="text-align:center;">
+	        <div class="web-design graphic" >
+
+			
+		        <div class="cbp-item-wrapper two-part">
+		            
+		            <a href="/index.php/fra/media/view/2155/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042155.frd"  alt="Peintures dessinées par le vétéran de guerre" border="0" />
+															<div class="media-td-cover-cap-video"><i class="fa fa-play-circle-o"></i></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">Peintures dessinées par le vétéran de guerre									</div>
+			                        <div class="media-inner-rec-date">2024-07-22</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper two-part">
+		            
+		            <a href="/index.php/fra/media/view/2153/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042153.frd"  alt="Lac Mongumpo, lieu pittoresque de la mer ouest" border="0" />
+															<div class="media-td-cover-cap-video"><i class="fa fa-play-circle-o"></i></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">Lac Mongumpo, lieu pittoresque de la mer ouest									</div>
+			                        <div class="media-inner-rec-date">2024-07-04</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper two-part">
+		            
+		            <a href="/index.php/fra/media/view/2127/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202406/042127.frd"  alt="Parc aquatique de Munsu" border="0" />
+															<div class="media-td-cover-cap-video"><i class="fa fa-play-circle-o"></i></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">Parc aquatique de Munsu									</div>
+			                        <div class="media-inner-rec-date">2024-06-19</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper two-part">
+		            
+		            <a href="/index.php/fra/media/view/2109/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202406/042109.frd"  alt="Notre détachement" border="0" />
+															<div class="media-td-cover-cap-video"><i class="fa fa-play-circle-o"></i></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">Notre détachement									</div>
+			                        <div class="media-inner-rec-date">2024-06-05</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+	        </div>
+	    </div>
+	</div>
+
+
+
+
+
+
+
+</div>
+
+</div>
+<div style="clear:both;"></div>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+            </div>
+            </div>
+
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                    <!-- BEGIN FOOTER -->
+
+                    <!-- BEGIN PRE-FOOTER -->
+                    <div class="page-prefooter">
+                        <div class="container-fluid">
+                            <ul class="orgs">
+    <li><a href="/pices">
+        <img src="/assets/friend/standard/img/pices.png" title="Société de Pyongyang pour l’échange culturel international
+www.friend.com.kp/pices"></a>
+            </li>
+    
+    <!-- 외부홈페지 -->
+        <li><a href="http://www.koart.sca.kp" target="friends">
+        <img src="/assets/friend/standard/img/koart.png" title="www.koart.sca.kp">
+    </a></li>
+    </ul>
+                        </div>
+                    </div>
+                    <!-- END PRE-FOOTER -->
+                    <!-- BEGIN INNER FOOTER -->
+                   <div class="page-footer">
+                        <div class="container-fluid" style="padding:0 10px;"><span style="padding:0 2px;">www.friend.com.kp  Pyongyang, DPRK</span></div>
+                    </div>
+                    <div class="scroll-to-top">
+                        <i class="icon-arrow-up"></i>
+                    </div>
+                    <!-- END INNER FOOTER -->
+                    <!-- END FOOTER -->
+                </div>
+            </div>
+        </div>
+
+        <!--[if lt IE 9]>
+<script src="/assets/global/plugins/respond.min.js"></script>
+<script src="/assets/global/plugins/excanvas.min.js"></script> 
+<script src="/assets/global/plugins/ie8.fix.min.js"></script> 
+<![endif]-->
+        <!-- BEGIN CORE PLUGINS -->
+        <script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+        <script src="/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+        <script src="/assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="/assets/pages/scripts/ui-bootbox.min.js" type="text/javascript"></script>
+        <script src="/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+        <!-- END CORE PLUGINS -->
+
+        <script src="/assets/global/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
+        <script src="/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js" type="text/javascript"></script>
+        <script src="/assets/global/scripts/app.min.js" type="text/javascript"></script>
+        <script src="/assets/pages/scripts/portfolio-1.min.js" type="text/javascript"></script>
+        <script src="/assets/pages/scripts/ui-sweetalert.js" type="text/javascript"></script>
+        <script src="/assets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
+        <script src="/assets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
+        <script src="/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+        <script src="/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+        <script src="/assets/pages/scripts/ui-blockui.min.js" type="text/javascript"></script>
+
+        <script src="/assets/friend/standard/js/flexslider.js" type="text/javascript"></script>
+        <script src="/assets/friend/standard/js/imageviewer.js" type="text/javascript"></script>
+        <script src="/assets/friend/standard/js/main.js" type="text/javascript"></script>
+
+        <script>
+        
+            $(function()
+            {
+                $('#clickmewow').click(function()
+                {
+                    $('#radio1003').attr('checked', 'checked');
+                });
+
+
+                //media-view에서 사진즉시현시 등 동적으로 첨부되는 함수처리에 필요 
+                if(typeof openMedia === 'function')openMedia();
+
+                //alert - 광고
+                
+                
+            })
+
+        </script>
+
+        <script src="/assets/friend/standard/js/lang/fra.js" type="text/javascript"></script>
+
+                
+    </body>
+
+</html>

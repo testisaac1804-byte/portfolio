@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html data-style-switcher-options="{'changeLogo': false, 'borderRadius': 0, 'colorPrimary': '#da7940', 'colorSecondary': '#312227', 'colorTertiary': '#efece8', 'colorQuaternary': '#101019'}">
+
+    <head>
+        <!-- Basic -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+
+        <title>PICES</title>    
+
+        <meta name="keywords" content="평양국제문화교류회, PICES, Pyongyang" />
+        <meta content="website PICES, edited in DPRK" name="description" />
+        <meta content="TKOL, KIM JONG HO" name="author" />
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/assets/pices/img/pices.ico" type="image/x-icon" />
+
+        <!-- Mobile Metas -->
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <!-- Vendor CSS -->
+        <link rel="stylesheet" href="/assets/global/plugins/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/global/plugins/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/assets/global/plugins/animate/animate.min.css">
+        <link rel="stylesheet" href="/assets/global/plugins/simple-line-icons/css/simple-line-icons.min.css">
+        <link rel="stylesheet" href="/assets/global/plugins/owl.carousel/assets/owl.carousel.min.css">
+        <link rel="stylesheet" href="/assets/global/plugins/owl.carousel/assets/owl.theme.default.min.css">
+        <link rel="stylesheet" href="/assets/global/plugins/magnific-popup/magnific-popup.min.css">
+
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="/assets/pices/css/theme.css">
+        <link rel="stylesheet" href="/assets/pices/css/theme-elements.css">
+        <link rel="stylesheet" href="/assets/pices/css/theme-blog.css">
+
+        <!-- Current Page CSS -->
+        <link rel="stylesheet" href="/assets/global/plugins/rs-plugin/css/settings.css">
+        <link rel="stylesheet" href="/assets/global/plugins/rs-plugin/css/layers.css">
+        <link rel="stylesheet" href="/assets/global/plugins/rs-plugin/css/navigation.css">
+
+        <!-- Skin CSS -->
+        <link rel="stylesheet" href="/assets/pices/css/skin-pices.css">
+
+        <!-- main CSS -->
+        <link rel="stylesheet" href="/assets/pices/css/pices.css">
+        <link rel="stylesheet" href="/assets/lang/en.css">
+
+        <!-- Head Libs -->
+        <script src="/assets/global/plugins/modernizr/modernizr.min.js"></script>
+    </head>
+
+    <body class="loading-overlay-showing" data-loading-overlay>
+
+         <div class="loading-overlay">
+            <div class="bounce-loader">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+
+        <div class="body">
+            <header id="header" class="header-narrow header-semi-transparent-light" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 88, 'stickySetTop': '0px', 'stickyChangeLogo': false}">
+                <div class="header-body">
+                    <div class="header-container container">
+                        <div class="header-row">
+                            <div class="header-column">
+                                <div class="header-logo">
+                                    <a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en">
+                                                                                <img alt="PICES" width="90" height="41" src="/assets/pices/img/logo-en.png">
+                                                                            </a>
+                                </div>
+                            </div>
+                            <div class="header-column">
+                                <div class="header-row">
+                                    <div class="header-nav pt-xs">
+                                        <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">
+                                            <i class="fa fa-bars"></i>
+                                        </button>
+                                        <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse m-none">
+                                            <nav>
+                                                <ul class="nav nav-pills" id="mainNav">
+                                                    <li class="active dropdown-full-color dropdown-primary">
+                                                        <a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en">
+                                                            Home                                                        </a>
+                                                    </li>
+                                                    <li class=" dropdown-full-color dropdown-primary">
+                                                        <a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/gallery">
+                                                            Photos & Videos                                                        </a>
+                                                    </li>
+                                                   <li class=" dropdown dropdown-full-color dropdown-primary">
+                                                        <a class="dropdown-toggle" href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/activity">
+                                                            Introduce                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                <a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/activity"><i class="fa fa-refresh"></i> Activity</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/statute"><i class="fa fa-book"></i> Statute</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="dropdown dropdown-primary">
+                                                        <a href="#" class="dropdown-toggle">
+                                                            <i class="fa fa-globe"></i> English                                                        </a>
+                                                        <ul class="dropdown-menu dropdown-menu-right">
+
+                                                            
+                                                            <li>
+                                                                <a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/kp">
+                                                                    <span class="lang-cap text-uppercase">kp</span> 조선어                                                                </a>
+                                                            </li>
+ 
+                                                            
+                                                            <li>
+                                                                <a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en">
+                                                                    <span class="lang-cap text-uppercase">en</span> English                                                                </a>
+                                                            </li>
+ 
+                                                            
+                                                            <li>
+                                                                <a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/fr">
+                                                                    <span class="lang-cap text-uppercase">fr</span> Français                                                                </a>
+                                                            </li>
+ 
+                                                            
+                                                            <li>
+                                                                <a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/cn">
+                                                                    <span class="lang-cap text-uppercase">cn</span> 汉语                                                                </a>
+                                                            </li>
+ 
+                                                            
+                                                        </ul>
+                                                    </li>
+
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div role="main" class="main">
+                                
+			<div role="main" class="main">
+
+				<!--  Start : rev slider  -->
+				<div class="slider-container rev_slider_wrapper" style="height: 100%;" id="start">
+					<div id="revolutionSlider" class="slider rev_slider manual">
+						<ul>
+																						<li data-transition="fade">
+								<img src="/assets/pices/img/slide-4.jpg"  
+									alt=""
+									data-bgposition="center center" 
+									data-bgfit="cover" 
+									data-bgrepeat="no-repeat" 
+									data-bgparallax="1" 
+									class="rev-slidebg">
+								<div class="tp-caption"
+									data-x="['left','left','left','left']"
+									data-hoffset="['200','100','50','50']"
+									data-y="center"
+									data-voffset="['-20','-40','-80','-50']"
+									data-start="800"
+									data-transform_in="y:[-300%];opacity:0;s:200;">
+									<img src="/assets/pices/img/slide-4-3.png"/>
+								</div>
+								<div class="tp-caption"
+									data-x="['left','left','left','left']" data-hoffset="['50','-50','-70','-20']"
+									data-y="center" data-voffset="['100','80','40','60']"
+									data-start="1500"
+									data-transform_in="y:[-300%];opacity:0;s:200;">
+									<img src="/assets/pices/img/slide-4-1.png"/>
+								</div>
+								<div class="tp-caption"
+									data-x="['left','left','left','left']" data-hoffset="['250','150','100','100']"
+									data-y="center" data-voffset="['200','180','140','170']"
+									data-start="2200"
+									data-transform_in="y:[-300%];opacity:0;s:200;">
+									<img src="/assets/pices/img/slide-4-2.png"/>
+								</div>
+								<div class="tp-caption"
+									data-x="['left','left','left','left']" data-hoffset="['650','550','400','300']"
+									data-y="center" data-voffset="['-80','-80','-120','-80']"
+									data-start="3000"
+									data-transform_in="opacity:0;s:600;">
+									<img src="/assets/pices/img/slide-4-4-en.png"/>
+								</div>
+							</li>
+																						<li data-transition="fade">
+								<img src="/assets/pices/img/slide-2.jpg"  
+									alt=""
+									data-bgposition="center center" 
+									data-bgfit="cover" 
+									data-bgrepeat="no-repeat" 
+									data-bgparallax="1" 
+									class="rev-slidebg">
+
+								<h1 class="tp-caption custom-secondary-font text-color-light"
+									data-x="['left','left','left','left']" data-hoffset="['30','30','30','30']"
+									data-y="center" data-voffset="['-80','-80','-80','-40']"
+									data-start="800"
+									data-transform_in="y:[-300%];opacity:0;s:500;" style="font-size: 20px; padding-left:10px;line-height:24px;">Pyongyang International<br> Cultural Exchange Society</h1>
+
+								<div class="tp-caption custom-secondary-font font-weight-bold text-color-light"
+									data-x="['left','left','left','left']" data-hoffset="['30','30','30','30']"
+									data-y="center" data-voffset="['-20','-20','-20','2']"
+									data-start="800"
+									data-transform_in="y:[-300%];opacity:0;s:500;" style="font-size: 40px;">5<sup>th</sup> foundation</div>
+
+								<div class="tp-caption font-weight-bold text-color-tertiary"
+									data-x="['left','left','left','left']" data-hoffset="['30','30','30','30']"
+									data-y="center" data-voffset="['60','60','60','100']"
+									data-start="1500"
+									style="font-size: 1.1em; padding: 15px 15px; font-weight:100!imortant;"
+									data-transform_in="y:[-300%];opacity:0;s:500;">Exchange between writers ...</div>
+
+								<div class="tp-caption font-weight-bold text-color-tertiary"
+									data-x="['left','left','left','left']" data-hoffset="['30','30','30','30']"
+									data-y="center" data-voffset="['90','90','90','100']"
+									data-start="2200"
+									style="font-size: 1.1em; padding: 15px 15px; font-weight:100!imortant;"
+									data-transform_in="y:[-300%];opacity:0;s:500;">Book writting assistance ...</div>
+							</li>
+																						<li data-transition="fade">
+								<img src="/assets/pices/img/slide-1.jpg"  
+									alt=""
+									data-bgposition="center center" 
+									data-bgfit="cover" 
+									data-bgrepeat="no-repeat" 
+									data-bgparallax="1" 
+									class="rev-slidebg">
+
+								<h1 class="tp-caption custom-secondary-font text-color-light"
+									data-x="['left','left','left','left']" data-hoffset="['30','30','30','30']"
+									data-y="center" data-voffset="['-80','-80','-80','-40']"
+									data-start="800"
+									data-transform_in="y:[-300%];opacity:0;s:500;" style="font-size: 20px; padding-left:10px;line-height:24px;">Pyongyang International<br> Cultural Exchange Society</h1>
+
+								<div class="tp-caption custom-secondary-font font-weight-bold text-color-light"
+									data-x="['left','left','left','left']" data-hoffset="['30','30','30','30']"
+									data-y="center" data-voffset="['-20','-20','-20','2']"
+									data-start="800"
+									data-transform_in="y:[-300%];opacity:0;s:500;" style="font-size: 40px;">5<sup>th</sup> foundation</div>
+
+								<div class="tp-caption font-weight-bold text-color-tertiary"
+									data-x="['left','left','left','left']" data-hoffset="['30','30','30','30']"
+									data-y="center" data-voffset="['60','60','60','100']"
+									data-start="1500"
+									style="font-size: 1.1em; padding: 15px 15px; font-weight:100!imortant;"
+									data-transform_in="y:[-300%];opacity:0;s:500;">Exhibition or Fair ...</div>
+
+								<div class="tp-caption font-weight-bold text-color-tertiary"
+									data-x="['left','left','left','left']" data-hoffset="['30','30','30','30']"
+									data-y="center" data-voffset="['90','90','90','100']"
+									data-start="2200"
+									style="font-size: 1.1em; padding: 15px 15px; font-weight:100!imortant;"
+									data-transform_in="y:[-300%];opacity:0;s:500;">Cultural exchange ...</div>
+							</li>													</ul>
+					</div>
+				</div>
+				<section class="looking-for custom-position-1">
+					<div class="container custom-md-border-top">
+						<div class="row">
+							<div class="col-sm-6 col-md-7">
+								<div class="looking-for-box" style="padding-top:20px;">
+	<span>the 8th Asian Children’s Drawing Exhibition</span>
+	<a href="/pices/index.php/en/gallery" style="text-decoration:none;"><h2 style="font-size:30px;">Happy smile of the children</h2></a>
+</div>							</div>
+							<div class="col-sm-3 col-md-3">
+								<a class="text-decoration-none" href="mailto:dmw@star-co.net.kp" target="_blank">
+									<span class="custom-call-to-action mt-xlg">
+										<span class="action-title text-color-primary bgothic-font">Email us</span>
+										<span class="action-info text-color-light arial-font">dmw@star-co.net.kp</span>
+									</span>
+								</a>
+							</div>
+							<div class="col-sm-3 col-md-2">
+								<a class="text-decoration-none" href="/" title="www.friend.com.kp">
+									<img id="looking-for-logo-friend" src="/assets/pices/img/logo-friend.png">
+								</a>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!--  before : 교류회소개, 사진주문 ... -->
+									<section class="section section-no-border m-none" id="intro">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-md-3" id="intro-logo">
+				<img src="/assets/pices/img/logo-pices.png">
+			</div>
+			<div class="col-sm-8 col-md-9">
+				<h2 class="font-weight-bold text-color-dark">Pyongyang International Cultural Exchange Society</h2>
+				<div>
+					<p>The Pyongyang International Cultural Exchange Society (PICES) was founded in Pyongyang on October 18, 2017, with the aim of giving wide publicity to the time-honored history, culture and traditions of Korea and developing cultural exchange and cooperation with organizations and individual personages of different countries, thus contributing to the development of human culture and the building of a just and peaceful new world.</p><p>The PICES is a nonprofit social organization which realizes cultural exchanges with organizations and personages of different countries and regions of the world.</p><p>The PICES works with relative independence in the territory of the DPRK.</p><p>The Headquarters of the PICES is seated in Pyongyang, DPRK.</p>
+				</div>
+				<a class="btn btn-primary" href="/pices/index.php/en/statute"><i class="fa fa-book"></i> Statute</a>
+			</div>
+		</div>
+	</div>
+</section>													<section class="section section-primary section-no-border m-none">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-10">
+								<span class="custom-text-color-3 text-md">PICES hopes international exchange of photos ...</span>
+								<h2 class="font-weight-bold custom-text-color-3 m-none">If you are interested in exchange of photos with us
+ ...</h2>
+							</div>
+							<div class="col-md-2">
+								<a href="mailto:dmw@star-co.net.kp" class="btn btn-tertiary text-color-dark custom-btn-style-1 mt-sm">Exchange</a>
+							</div>
+						</div>
+					</div>
+				</section>				
+				<!--  사진소개 - 특집  -->
+				<section class="section section-no-border custom-position-relative custom-section-padding-1 custom-overflow-hidden background-color-light m-none" id="photo-gallery">
+										<img class="custom-cloud left-pos hidden-xs appear-animation" data-appear-animation="customFadeInLeftNoRotate" data-appear-animation-delay="0" data-plugin-options="{'accY': -300}" src="/assets/pices/img/gallery/left-cloud.png" alt />
+					<div class="custom-big-square left-pos hidden-xs custom-box-shadow appear-animation" data-appear-animation="customFadeInLeft" data-appear-animation-delay="500" data-plugin-options="{'accY': -300}" style="background: url('/assets/pices/img/gallery/01.jpg'); background-size: cover;"></div>
+					<div class="custom-small-square left-pos hidden-xs custom-box-shadow appear-animation" data-appear-animation="customFadeInLeft" data-appear-animation-delay="1000" data-plugin-options="{'accY': -300}" style="background: url('/assets/pices/img/gallery/02.jpg'); background-size: cover;"></div>
+					<img class="custom-cloud right-pos hidden-xs appear-animation" data-appear-animation="customFadeInRightNoRotate" data-appear-animation-delay="0" data-plugin-options="{'accY': -300}" src="/assets/pices/img/gallery/right-cloud.png" alt />
+					<div class="custom-big-square right-pos hidden-xs custom-box-shadow appear-animation" data-appear-animation="customFadeInRight" data-appear-animation-delay="500" data-plugin-options="{'accY': -300}" style="background: url('/assets/pices/img/gallery/03.jpg'); background-size: cover;"></div>
+					<div class="custom-small-square right-pos hidden-xs custom-box-shadow appear-animation" data-appear-animation="customFadeInRight" data-appear-animation-delay="1000" data-plugin-options="{'accY': -300}" style="background: url('/assets/pices/img/gallery/04.jpg'); background-size: cover;"></div>
+					<div class="container">
+						<div class="row center">
+							<div class="col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
+								<a href="/pices/index.php/en/gallery/view/PGVC8C86727" style="text-decoration:none;"><h2 class="font-weight-bold"><span style="font-size:2rem;color:red;display:block;">Photos & Videos</span>Happy smile of the children</h2></a>
+								<p>The PICES encourages to organizes and execute at home and abroad an exhibition or fair of the books, photographs, works of art, embroidery and other creations of culture in order to strengthen cultural relations with various counties of the world.</p>
+								<a href="/pices/index.php/en/gallery" class="btn btn-primary custom-btn-style-1 text-uppercase mt-xlg">Photos & Videos</a>
+							
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="section-secondary custom-section-padding-2" style="margin-top:-150px;">
+					<div class="container">
+						<div class="row">
+						<div class="col-md-12">
+							<div class="masonry-loader masonry-loader-loaded">
+								<div class="masonry" data-plugin-masonry="" data-plugin-options="{'itemSelector': '.masonry-item'}">
+
+																	<div class="masonry-item ">
+
+										<!-- new-mark -->
+                                        										<!-- -------- -->
+
+										<a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/gallery/view/PGPC2C53167">
+											<span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+												<span class="thumb-info-wrapper">
+													<img src="/pices/gallery/photo/thumb/PGPC2C531670.jpg" class="img-responsive" alt="">
+													<span class="thumb-info-title">
+														<span class="thumb-info-inner">Patriotic Mind</span>
+														<span class="thumb-info-type">Personal appearance</span>
+													</span>
+													<span class="thumb-info-action"><span class="thumb-info-action-icon">
+																											<i class="fa fa-camera text-md"> 1</i>
+																										</span></span>
+												</span>
+											</span>
+										</a>
+									</div>
+																	<div class="masonry-item ">
+
+										<!-- new-mark -->
+                                        										<!-- -------- -->
+
+										<a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/gallery/view/PGPC8C22705">
+											<span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+												<span class="thumb-info-wrapper">
+													<img src="/pices/gallery/photo/thumb/PGPC8C227050.jpg" class="img-responsive" alt="">
+													<span class="thumb-info-title">
+														<span class="thumb-info-inner">on the bank of the Taedong River</span>
+														<span class="thumb-info-type">Personal appearance</span>
+													</span>
+													<span class="thumb-info-action"><span class="thumb-info-action-icon">
+																											<i class="fa fa-camera text-md"> 1</i>
+																										</span></span>
+												</span>
+											</span>
+										</a>
+									</div>
+																	<div class="masonry-item ">
+
+										<!-- new-mark -->
+                                        										<!-- -------- -->
+
+										<a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/gallery/view/PGPC0C93096">
+											<span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+												<span class="thumb-info-wrapper">
+													<img src="/pices/gallery/photo/thumb/PGPC0C930960.jpg" class="img-responsive" alt="">
+													<span class="thumb-info-title">
+														<span class="thumb-info-inner">Daesong Department Store</span>
+														<span class="thumb-info-type">Personal appearance</span>
+													</span>
+													<span class="thumb-info-action"><span class="thumb-info-action-icon">
+																											<i class="fa fa-camera text-md"> 1</i>
+																										</span></span>
+												</span>
+											</span>
+										</a>
+									</div>
+																	<div class="masonry-item ">
+
+										<!-- new-mark -->
+                                        										<!-- -------- -->
+
+										<a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/gallery/view/PGPC0B58245">
+											<span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+												<span class="thumb-info-wrapper">
+													<img src="/pices/gallery/photo/thumb/PGPC0B582450.jpg" class="img-responsive" alt="">
+													<span class="thumb-info-title">
+														<span class="thumb-info-inner">Daesong Department Store</span>
+														<span class="thumb-info-type">Building</span>
+													</span>
+													<span class="thumb-info-action"><span class="thumb-info-action-icon">
+																											<i class="fa fa-camera text-md"> 1</i>
+																										</span></span>
+												</span>
+											</span>
+										</a>
+									</div>
+																	<div class="masonry-item ">
+
+										<!-- new-mark -->
+                                        										<!-- -------- -->
+
+										<a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/gallery/view/PGPD2C18249">
+											<span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+												<span class="thumb-info-wrapper">
+													<img src="/pices/gallery/photo/thumb/PGPD2C182490.jpg" class="img-responsive" alt="">
+													<span class="thumb-info-title">
+														<span class="thumb-info-inner">National character reflected in the child’s mind</span>
+														<span class="thumb-info-type">Personal appearance</span>
+													</span>
+													<span class="thumb-info-action"><span class="thumb-info-action-icon">
+																											<i class="fa fa-camera text-md"> 1</i>
+																										</span></span>
+												</span>
+											</span>
+										</a>
+									</div>
+																	<div class="masonry-item ">
+
+										<!-- new-mark -->
+                                        										<!-- -------- -->
+
+										<a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/gallery/view/PGPD2C38775">
+											<span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+												<span class="thumb-info-wrapper">
+													<img src="/pices/gallery/photo/thumb/PGPD2C387750.jpg" class="img-responsive" alt="">
+													<span class="thumb-info-title">
+														<span class="thumb-info-inner">National character reflected in the child’s mind</span>
+														<span class="thumb-info-type">Personal appearance</span>
+													</span>
+													<span class="thumb-info-action"><span class="thumb-info-action-icon">
+																											<i class="fa fa-camera text-md"> 1</i>
+																										</span></span>
+												</span>
+											</span>
+										</a>
+									</div>
+																	<div class="masonry-item ">
+
+										<!-- new-mark -->
+                                        										<!-- -------- -->
+
+										<a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/gallery/view/PGPB5B71212">
+											<span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+												<span class="thumb-info-wrapper">
+													<img src="/pices/gallery/photo/thumb/PGPB5B712120.jpg" class="img-responsive" alt="">
+													<span class="thumb-info-title">
+														<span class="thumb-info-inner">the Statue of Chollima</span>
+														<span class="thumb-info-type">Building</span>
+													</span>
+													<span class="thumb-info-action"><span class="thumb-info-action-icon">
+																											<i class="fa fa-camera text-md"> 1</i>
+																										</span></span>
+												</span>
+											</span>
+										</a>
+									</div>
+																	<div class="masonry-item ">
+
+										<!-- new-mark -->
+                                        										<!-- -------- -->
+
+										<a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/gallery/view/PGPH0A09588">
+											<span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+												<span class="thumb-info-wrapper">
+													<img src="/pices/gallery/photo/thumb/PGPH0A095880.jpg" class="img-responsive" alt="">
+													<span class="thumb-info-title">
+														<span class="thumb-info-inner">Moran Hill</span>
+														<span class="thumb-info-type">Scene</span>
+													</span>
+													<span class="thumb-info-action"><span class="thumb-info-action-icon">
+																											<i class="fa fa-camera text-md"> 1</i>
+																										</span></span>
+												</span>
+											</span>
+										</a>
+									</div>
+																	<div class="masonry-item ">
+
+										<!-- new-mark -->
+                                        										<!-- -------- -->
+
+										<a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/gallery/view/PGPA4B17211">
+											<span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+												<span class="thumb-info-wrapper">
+													<img src="/pices/gallery/photo/thumb/PGPA4B172110.jpg" class="img-responsive" alt="">
+													<span class="thumb-info-title">
+														<span class="thumb-info-inner">Tower of the Juche Idea</span>
+														<span class="thumb-info-type">Building</span>
+													</span>
+													<span class="thumb-info-action"><span class="thumb-info-action-icon">
+																											<i class="fa fa-camera text-md"> 1</i>
+																										</span></span>
+												</span>
+											</span>
+										</a>
+									</div>
+																	<div class="masonry-item ">
+
+										<!-- new-mark -->
+                                        										<!-- -------- -->
+
+										<a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/gallery/view/PGPB6C31498">
+											<span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+												<span class="thumb-info-wrapper">
+													<img src="/pices/gallery/photo/thumb/PGPB6C314980.jpg" class="img-responsive" alt="">
+													<span class="thumb-info-title">
+														<span class="thumb-info-inner">Patriotic Mind</span>
+														<span class="thumb-info-type">Personal appearance</span>
+													</span>
+													<span class="thumb-info-action"><span class="thumb-info-action-icon">
+																											<i class="fa fa-camera text-md"> 1</i>
+																										</span></span>
+												</span>
+											</span>
+										</a>
+									</div>
+																	<div class="masonry-item ">
+
+										<!-- new-mark -->
+                                        										<!-- -------- -->
+
+										<a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/gallery/view/PGPB6C38183">
+											<span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+												<span class="thumb-info-wrapper">
+													<img src="/pices/gallery/photo/thumb/PGPB6C381830.jpg" class="img-responsive" alt="">
+													<span class="thumb-info-title">
+														<span class="thumb-info-inner">Patriotic Mind</span>
+														<span class="thumb-info-type">Personal appearance</span>
+													</span>
+													<span class="thumb-info-action"><span class="thumb-info-action-icon">
+																											<i class="fa fa-camera text-md"> 3</i>
+																										</span></span>
+												</span>
+											</span>
+										</a>
+									</div>
+																	<div class="masonry-item ">
+
+										<!-- new-mark -->
+                                        										<!-- -------- -->
+
+										<a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/gallery/view/PGPB5B11389">
+											<span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+												<span class="thumb-info-wrapper">
+													<img src="/pices/gallery/photo/thumb/PGPB5B113890.jpg" class="img-responsive" alt="">
+													<span class="thumb-info-title">
+														<span class="thumb-info-inner">Samjiyon City</span>
+														<span class="thumb-info-type">Building</span>
+													</span>
+													<span class="thumb-info-action"><span class="thumb-info-action-icon">
+																											<i class="fa fa-camera text-md"> 2</i>
+																										</span></span>
+												</span>
+											</span>
+										</a>
+									</div>
+								
+
+
+								</div>
+							<div class="bounce-loader"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>
+						</div>
+						<div class="row center">
+								<a class="btn btn-primary" href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en/gallery">Photos & Videos</a>
+						</div>
+					</div>
+					</div>
+				</section>
+
+				<!--  after : 열람신청  -->
+													<section class="section section-no-border background-color-light m-none" id="activity">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12 col-sm-8 col-md-offset-0 col-sm-offset-2">
+								<h2 class="font-weight-bold"><i class="fa fa-refresh"></i> Activities</h2>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4 col-sm-8 col-md-offset-0 col-sm-offset-2">
+								<article class="custom-post-blog">
+									<span class="thumb-info custom-thumb-info-2">
+										<span class="thumb-info-wrapper">
+											<a href="/pices/index.php/en/activity">
+												<img src="/assets/pices/img/act-1.jpg" alt="" class="img-responsive">
+											</a>
+										</span>
+										<span class="thumb-info-caption custom-box-shadow" style="padding:10px!important;text-align:center">
+											<span class="thumb-info-caption-text" style="margin:0!important;">
+												<h4 class="font-weight-bold mb-lg" style="margin:0!important;">
+													<a href="/pices/index.php/en/activity" class="text-decoration-none custom-secondary-font text-color-dark" style="font-family:chongbong!important;font-size:.8em;">
+														Discussion on book writing with a Russian writer
+													</a>
+												</h4>
+											</span>
+										</span>
+									</span>
+								</article>
+							</div>
+							<div class="col-md-4 col-sm-8 col-md-offset-0 col-sm-offset-2">
+								<article class="custom-post-blog">
+									<span class="thumb-info custom-thumb-info-2">
+										<span class="thumb-info-wrapper">
+											<a href="/pices/index.php/en/activity">
+												<img src="/assets/pices/img/act-2.jpg" alt="" class="img-responsive">
+											</a>
+										</span>
+										<span class="thumb-info-caption custom-box-shadow" style="padding:10px!important;text-align:center">
+											<span class="thumb-info-caption-text" style="margin:0!important;">
+												<h4 class="font-weight-bold mb-lg" style="margin:0!important;">
+													<a href="/pices/index.php/en/activity" class="text-decoration-none custom-secondary-font text-color-dark" style="font-family:chongbong!important;font-size:.8em;">
+														Organizing visits to different places for book writing of a German writer
+													</a>
+												</h4>
+											</span>
+										</span>
+									</span>
+								</article>
+							</div>
+							<div class="col-md-4 col-sm-8 col-md-offset-0 col-sm-offset-2">
+								<article class="custom-post-blog">
+									<span class="thumb-info custom-thumb-info-2">
+										<span class="thumb-info-wrapper">
+											<a href="/pices/index.php/en/activity">
+												<img src="/assets/pices/img/act-3.jpg" alt="" class="img-responsive">
+											</a>
+										</span>
+										<span class="thumb-info-caption custom-box-shadow" style="padding:10px!important;text-align:center">
+											<span class="thumb-info-caption-text" style="margin:0!important;">
+												<h4 class="font-weight-bold mb-lg" style="margin:0!important;">
+													<a href="/pices/index.php/en/activity" class="text-decoration-none custom-secondary-font text-color-dark" style="font-family:chongbong!important;font-size:.8em;">
+														Mr. Gerard Depardieu, a French actor visits the DPR Korea
+													</a>
+												</h4>
+											</span>
+										</span>
+									</span>
+								</article>
+							</div>
+						</div>
+						<div class="row center" style="padding:50px 0 0;">
+								<a class="btn btn-primary" href="/pices/index.php/en/activity"><i class="fa fa-refresh"></i> Activities</a>
+						</div>
+					</div>
+				</section>				
+
+			<footer id="footer" class="background-color-secondary custom-footer m-none">
+				<div class="container">
+										<div class="row center">
+						<div class="col-md-12">
+							<a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en" class="text-decoration-none">
+								<img src="/assets/pices/img/logo-pices.png" width="150" alt class="img-responsive custom-img-responsive-center" />
+							</a>
+						</div>
+					</div>
+					<hr class="solid tall custom-hr-color-1">
+					<div class="row center" id="footer-contacts">
+						<div class="col-md-4 custom-sm-margin-bottom-1">
+							<i class="fa fa-map-marker text-color-primary custom-icon-size-1"></i>
+							<p>
+								<strong class="text-color-light text-lg">Address</strong></br>
+								Ryonhwa2–dong, Central District<br> Pyongyang, DPR Korea							</p>
+						</div>
+						<div class="col-md-4 custom-sm-margin-bottom-1">
+							<i class="fa fa-phone text-color-primary custom-icon-size-1"></i>
+							<p>
+								<strong class="text-color-light text-lg">Phone</strong></br> 
+								<span style="font-family:arial;">850-2-18111/18999<br>(381-8048)</span>
+							</p>
+						</div>
+						<div class="col-md-4">
+							<i class="fa fa-envelope text-color-primary custom-icon-size-1"></i>
+							<p>
+								<strong class="text-color-light text-lg">Email</strong></br>
+								<a href="mailto:dmw@star-co.net.kp">dmw@star-co.net.kp</a>							</p>
+						</div>
+					</div>
+					<hr class="solid tall custom-hr-color-1">
+										<div class="row center">
+						<div class="col-md-2"><a href="https://web.archive.org/web/20260101im_/http://friend.com.kp/pices/index.php/en">
+                            							<img alt="PICES" width="120" src="/assets/pices/img/logo-en.png">
+						</a></div>
+						<div class="col-md-8" style="padding:20px 30px;">
+							<p class="center" style="font-family:arial;color:gray;">PICES © Copyright 2017-2026. All Rights Reserved.</p>
+						</div>
+						<div class="col-md-2"><a href="/">
+							<img src="/assets/pices/img/logo-friend.png" width="100" />
+						</a></div>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+		<!-- Vendor -->
+		<script src="/assets/global/plugins/jquery.min.js"></script>
+		<script src="/assets/global/plugins/jquery.appear/jquery.appear.min.js"></script>
+		<script src="/assets/global/plugins/jquery.easing/jquery.easing.min.js"></script>
+		<script src="/assets/global/plugins/jquery-cookie/jquery-cookie.min.js"></script>
+		<script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="/assets/global/plugins/common/common.min.js"></script>
+		<script src="/assets/global/plugins/jquery.validation/jquery.validation.min.js"></script>
+		<script src="/assets/global/plugins/jquery.easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+		<script src="/assets/global/plugins/jquery.gmap/jquery.gmap.min.js"></script>
+		<script src="/assets/global/plugins/jquery.lazyload/jquery.lazyload.min.js"></script>
+		<script src="/assets/global/plugins/isotope/jquery.isotope.min.js"></script>
+		<script src="/assets/global/plugins/owl.carousel/owl.carousel.min.js"></script>
+		<script src="/assets/global/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+		<script src="/assets/global/plugins/vide/vide.min.js"></script>
+		<script src="/assets/global/plugins/jquery.countdown/jquery.countdown.min.js"></script>
+		
+		<!-- Theme Base, Components and Settings -->
+		<script src="/assets/pices/js/theme.js"></script>
+		
+		<!-- Current Page Vendor and Views -->
+		<script src="/assets/global/plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+		<script src="/assets/global/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+
+		<!-- Current Page Vendor and Views -->
+		<script src="/assets/pices/js/views/view.contact.js"></script>
+
+		<!-- Demo -->
+		<script src="/assets/pices/js/pices.js"></script>
+		
+		<!-- Theme Custom -->
+		<script src="/assets/pices/js/custom.js"></script>
+		
+		<!-- Theme Initialization Files -->
+		<script src="/assets/pices/js/theme.init.js"></script>
+
+	</body>
+</html>

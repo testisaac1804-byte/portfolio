@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 梗史 · Meme History of 2026</title>
+<style>
+  :root{
+    --ink:#1b1917;
+    --paper:#f7f0e4;
+    --card:#fffdf8;
+    --pink:#ff5d8f;
+    --yellow:#ffc93c;
+    --blue:#3f74ff;
+    --green:#17a673;
+    --purple:#8b5cf6;
+    --grey:#8a8279;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background-color:var(--paper);
+    background-image:radial-gradient(#d9cfc0 0.7px, transparent 0.7px);
+    background-size:14px 14px;
+    color:var(--ink);
+    font-family:"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.7;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,240,228,.93);
+    backdrop-filter:blur(8px);
+    border-bottom:2px solid var(--ink);
+  }
+  .topbar .inner{
+    max-width:1120px;margin:0 auto;padding:10px 22px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  .brand{font-weight:900;letter-spacing:.06em;font-size:14px;white-space:nowrap}
+  .brand em{font-style:normal;background:var(--yellow);padding:1px 6px;border:2px solid var(--ink);border-radius:6px;margin-left:4px}
+  .search{
+    flex:1;min-width:180px;display:flex;align-items:center;gap:8px;
+    background:#fff;border:2px solid var(--ink);border-radius:999px;
+    padding:6px 14px;box-shadow:3px 3px 0 rgba(27,25,23,.85);
+  }
+  .search input{
+    border:0;outline:0;background:transparent;font:inherit;font-size:14px;width:100%;color:var(--ink);
+  }
+  .search input::placeholder{color:#a79e93}
+  .count{font-size:12px;font-weight:700;color:var(--grey);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .clear{
+    border:2px solid var(--ink);background:#fff;border-radius:999px;font:inherit;font-size:12px;
+    font-weight:700;padding:4px 10px;cursor:pointer;box-shadow:2px 2px 0 rgba(27,25,23,.8);
+  }
+  .clear:active{transform:translate(2px,2px);box-shadow:none}
+
+  /* ---------- hero ---------- */
+  header.hero{padding:64px 0 30px;position:relative;overflow:hidden}
+  .kicker{
+    display:inline-block;font-size:12px;font-weight:800;letter-spacing:.22em;
+    background:var(--ink);color:var(--paper);padding:5px 12px;border-radius:4px;
+  }
+  h1{
+    font-size:clamp(56px,13vw,132px);line-height:.92;margin:18px 0 6px;
+    letter-spacing:-.03em;font-weight:900;
+  }
+  h1 .stroke{
+    -webkit-text-stroke:3px var(--ink);
+    color:transparent;
+  }
+  .hero .sub{
+    font-size:clamp(15px,2.2vw,20px);font-weight:700;margin:10px 0 22px;
+  }
+  .hero .sub span{background:linear-gradient(transparent 62%, var(--yellow) 62%);padding:0 2px}
+  .hero p.deck{max-width:640px;font-size:15px;color:#4a443d;margin:0 0 26px}
+  .stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+  .stat{
+    background:#fff;border:2px solid var(--ink);border-radius:12px;padding:10px 16px;
+    box-shadow:4px 4px 0 rgba(27,25,23,.88);min-width:110px;
+  }
+  .stat b{display:block;font-size:26px;line-height:1.1;font-variant-numeric:tabular-nums}
+  .stat span{font-size:11px;letter-spacing:.12em;color:var(--grey);font-weight:700}
+
+  .stickers{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .sticker{
+    font-size:12px;font-weight:800;padding:5px 12px;border:2px solid var(--ink);border-radius:999px;
+    background:#fff;box-shadow:2px 2px 0 var(--ink);
+  }
+  .sticker.p{background:#ffe3ec}
+  .sticker.y{background:#fff0c2}
+  .sticker.b{background:#e2eaff}
+  .sticker.g{background:#d9f7ea}
+
+  /* ---------- month nav ---------- */
+  nav.months{
+    display:flex;gap:8px;flex-wrap:wrap;padding:14px 0 26px;
+    border-bottom:2px dashed #c9bda9;
+  }
+  nav.months a{
+    text-decoration:none;color:var(--ink);font-size:12px;font-weight:800;
+    border:2px solid var(--ink);border-radius:8px;padding:4px 10px;background:#fff;
+    box-shadow:2px 2px 0 rgba(27,25,23,.85);
+  }
+  nav.months a:hover{background:var(--yellow)}
+
+  /* ---------- sections ---------- */
+  section{padding:52px 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:26px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(24px,4vw,34px);margin:0;font-weight:900;letter-spacing:-.01em}
+  .sec-head .hint{font-size:13px;color:var(--grey);font-weight:600}
+
+  /* essay */
+  .essay{display:grid;gap:16px}
+  .essay .block{
+    background:var(--card);border:2px solid var(--ink);border-radius:14px;
+    padding:20px 22px;box-shadow:5px 5px 0 rgba(27,25,23,.88);
+  }
+  .essay h3{margin:0 0 8px;font-size:17px;font-weight:900}
+  .essay p{margin:0;font-size:14.5px;color:#3d3831;line-height:1.9}
+
+  /* themes */
+  .themes{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+  .theme{
+    background:#fff;border:2px solid var(--ink);border-radius:14px;padding:18px;
+    box-shadow:4px 4px 0 rgba(27,25,23,.88);
+  }
+  .theme .num{font-size:11px;font-weight:900;letter-spacing:.2em;color:var(--grey)}
+  .theme h3{margin:6px 0 6px;font-size:18px;font-weight:900}
+  .theme p{margin:0;font-size:13.5px;color:#453f38;line-height:1.85}
+
+  /* month */
+  .month{border-top:3px solid var(--ink);padding-top:26px;margin-top:44px}
+  .month:first-of-type{border-top:0;margin-top:0}
+  .month-head{display:flex;align-items:flex-start;gap:18px;margin-bottom:22px}
+  .mnum{
+    font-size:clamp(48px,10vw,84px);font-weight:900;line-height:.8;
+    -webkit-text-stroke:2.5px var(--ink);color:transparent;letter-spacing:-.04em;
+    font-variant-numeric:tabular-nums;flex:none;
+  }
+  .mmeta{padding-top:4px}
+  .mmeta .cn{font-size:20px;font-weight:900;letter-spacing:.06em}
+  .mmeta .note{font-size:13.5px;color:#5b534a;margin-top:2px}
+  .mcount{font-size:11px;font-weight:800;color:var(--grey);letter-spacing:.1em;margin-top:6px}
+
+  /* cards */
+  .big-list{display:grid;gap:20px;margin-bottom:20px}
+  .card{
+    background:var(--card);border:2px solid var(--ink);border-radius:16px;
+    padding:20px 22px;box-shadow:6px 6px 0 rgba(27,25,23,.9);
+    transition:transform .16s ease, box-shadow .16s ease;
+  }
+  .card:hover{transform:translate(-2px,-2px);box-shadow:9px 9px 0 rgba(27,25,23,.9)}
+  .card.hl{border-left:9px solid var(--pink)}
+  .card.hl[data-tag="谐音空耳"]{border-left-color:var(--blue)}
+  .card.hl[data-tag="舞蹈挑战"]{border-left-color:var(--purple)}
+  .card.hl[data-tag="AI与科技"]{border-left-color:var(--green)}
+  .card.hl[data-tag="老梗翻红"]{border-left-color:var(--yellow)}
+  .card-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+  .pill{
+    font-size:11px;font-weight:800;letter-spacing:.04em;
+    border:2px solid var(--ink);border-radius:999px;padding:2px 9px;background:#fff;
+  }
+  .pill[data-tag="反差萌"]{background:#ffe3ec}
+  .pill[data-tag="谐音空耳"]{background:#e2eaff}
+  .pill[data-tag="影视二创"]{background:#fff0c2}
+  .pill[data-tag="舞蹈挑战"]{background:#eee3ff}
+  .pill[data-tag="AI与科技"]{background:#d9f7ea}
+  .pill[data-tag="自嘲情绪"]{background:#f0ece4}
+  .pill[data-tag="可爱生物"]{background:#ffe9d6}
+  .pill[data-tag="老梗翻红"]{background:#fff6cc}
+  .when{font-size:11px;font-weight:700;color:var(--grey);letter-spacing:.1em;margin-left:auto;font-variant-numeric:tabular-nums}
+  .card h3{margin:4px 0 6px;font-size:clamp(21px,3.2vw,28px);font-weight:900;letter-spacing:-.01em;line-height:1.25}
+  .card .origin{font-size:13px;color:#6b635a;margin:0 0 12px;font-weight:600}
+  .story p{margin:0 0 11px;font-size:14.5px;line-height:1.95;color:#332e28}
+  .story p:last-child{margin-bottom:0}
+  .story p:first-child::first-letter{}
+  .meta-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+  .meta-box{
+    border:2px dashed #bfb3a0;border-radius:12px;padding:11px 13px;background:#fffaf0;
+  }
+  .meta-box b{display:block;font-size:11px;letter-spacing:.16em;color:var(--grey);margin-bottom:4px}
+  .meta-box p{margin:0;font-size:13px;line-height:1.8;color:#3d3831}
+  .src{margin-top:12px;font-size:11.5px;color:#8a8279}
+  .src a{color:#7a4bd6;text-decoration:none;border-bottom:1px solid #d7c9f5;margin-right:10px}
+  .src a:hover{border-bottom-color:#7a4bd6}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .card.sm{padding:15px 16px;border-radius:13px;box-shadow:4px 4px 0 rgba(27,25,23,.88)}
+  .card.sm:hover{box-shadow:6px 6px 0 rgba(27,25,23,.9)}
+  .card.sm h4{margin:6px 0 5px;font-size:16px;font-weight:900;line-height:1.35}
+  .card.sm .origin{margin:0 0 6px;font-size:12px;line-height:1.6}
+  .card.sm .story p{font-size:13px;line-height:1.85;margin:0;color:#3d3831}
+
+  .empty{
+    display:none;text-align:center;padding:40px 20px;color:var(--grey);
+    font-size:14px;font-weight:700;border:2px dashed #c9bda9;border-radius:14px;
+  }
+
+  /* footer */
+  footer.foot{border-top:3px solid var(--ink);padding:36px 0 70px;margin-top:30px}
+  footer.foot h2{font-size:22px;margin:0 0 12px;font-weight:900}
+  footer.foot p{font-size:13px;color:#4a443d;margin:0 0 10px;max-width:760px;line-height:1.9}
+  footer.foot .links{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 18px}
+  footer.foot .links a{
+    font-size:11.5px;font-weight:700;color:var(--ink);text-decoration:none;
+    border:1px solid #b9ac97;border-radius:999px;padding:3px 10px;background:#fff;
+  }
+  footer.foot .links a:hover{background:var(--yellow);border-color:var(--ink)}
+  .sig{font-size:11px;letter-spacing:.16em;color:#a09789;margin-top:26px}
+
+  @media (max-width:640px){
+    .meta-row{grid-template-columns:1fr}
+    .month-head{gap:12px}
+    header.hero{padding:40px 0 20px}
+    .card{padding:16px 15px}
+    section{padding:38px 0}
+  }
+  @media print{
+    body{background:#fff}
+    .topbar,nav.months,.clear{display:none}
+    .card,.essay .block,.theme{box-shadow:none;break-inside:avoid;page-break-inside:avoid}
+    .card:hover{transform:none;box-shadow:none}
+    section{padding:24px 0}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="inner">
+    <div class="brand">2026 梗史 <em>MEME HISTORY</em></div>
+    <label class="search">
+      <span aria-hidden="true">🔍</span>
+      <input id="q" type="search" placeholder="搜梗名、出处、故事里的关键词…（例如：糍粑 / 蜘蛛侠 / 7352）" autocomplete="off">
+    </label>
+    <span class="count" id="count">—</span>
+    <button class="clear" id="clear" type="button">清空</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="kicker">JAN — AUG 2026 · 网络梗编年史</span>
+    <h1>2026<span class="stroke">梗史</span></h1>
+    <p class="sub">这一年，我们把狠话<span>说得很可爱</span>。</p>
+    <p class="deck">
+      从春晚一个敷衍的鼓掌，到八月同时爆掉的三个梗——这是一份带背景故事的 2026 网络梗档案。
+      每条都写了：它从哪来、为什么火、现在怎么用。你点名的那几个（MJ、牛来、胆子真是肥嘟嘟的、
+      《我的前半生》翻红、正太扭腰、命运你假糍粑、来杯好茶摇一摇）都在，另外补了四十多条。
+    </p>
+    <div class="stats">
+      <div class="stat"><b id="statN">—</b><span>条梗</span></div>
+      <div class="stat"><b>8</b><span>个月</span></div>
+      <div class="stat"><b>5</b><span>个母题</span></div>
+      <div class="stat"><b id="statL">—</b><span>篇长背景</span></div>
+    </div>
+    <div class="stickers">
+      <span class="sticker p">狠话软说</span>
+      <span class="sticker b">空耳成灾</span>
+      <span class="sticker y">老剧翻红</span>
+      <span class="sticker g">手搓打败 AI</span>
+      <span class="sticker">情绪出口</span>
+    </div>
+  </header>
+
+  <nav class="months" id="monthnav"></nav>
+
+  <section id="read">
+    <div class="sec-head">
+      <h2>怎么读这一年</h2>
+      <span class="hint">四个变化，解释了为什么 2026 的梗长得不一样</span>
+    </div>
+    <div class="essay" id="essay"></div>
+  </section>
+
+  <section id="themes">
+    <div class="sec-head">
+      <h2>五个母题</h2>
+      <span class="hint">几乎所有爆款都能归到这五类里</span>
+    </div>
+    <div class="themes" id="themes"></div>
+  </section>
+
+  <section id="timeline">
+    <div class="sec-head">
+      <h2>编年史</h2>
+      <span class="hint">按月份排；粉色左边框的是长背景条目</span>
+    </div>
+    <div id="timeline-body"></div>
+    <div class="empty" id="empty">没有匹配的梗。换个关键词试试，比如「外卖」「蜘蛛侠」「围棋」。</div>
+  </section>
+
+  <footer class="foot">
+    <h2>关于这份档案</h2>
+    <p>
+      收录范围是 2026 年 1–8 月在中文互联网（抖音、微博、B 站、小红书、新闻媒体）形成规模传播的梗，
+      共 <b id="footN">—</b> 条，其中 <b id="footL">—</b> 条附完整背景故事。9–10 月的新梗还在结算中，暂不收入，避免把还在发酵的东西写死。
+    </p>
+    <p>
+      需要说明的是：部分条目（尤其「胆子真是肥嘟嘟的」「MJ」）的源头本身存在虚构或未经官方确认的成分，
+      档案里已如实标注。梗的传播从来不依赖它是不是真的——这本身也是 2026 年的一个特征。
+      条目整理自公开报道与百科，链接附在每条下方；简短的条目只保留了一句出处，没有单独列链接。
+    </p>
+    <div class="links">
+      <a href="https://zh.wikipedia.org/wiki/牛来" target="_blank" rel="noopener">维基：牛来</a>
+      <a href="https://memepedia.miraheze.org/wiki/胆子真是肥嘟嘟的" target="_blank" rel="noopener">Meme Wiki</a>
+      <a href="https://www.163.com/dy/article/L44TLQL305189I0Q.html" target="_blank" rel="noopener">《我的前半生》翻红分析</a>
+      <a href="https://tech.china.com/articles/20260729/202607291928708.html" target="_blank" rel="noopener">正太扭腰出处</a>
+      <a href="https://www.sina.cn/news/detail/5326413945114560.html" target="_blank" rel="noopener">命运你假糍粑</a>
+      <a href="https://news.qq.com/rain/a/20260711V08L4L00" target="_blank" rel="noopener">来杯好茶摇一摇</a>
+      <a href="https://www.bjnews.com.cn/detail/1786783512168828.html" target="_blank" rel="noopener">新京报：牛来</a>
+      <a href="https://jianghu.taobao.com/detail/47301_84291361" target="_blank" rel="noopener">2026 上半年梗盘点</a>
+    </div>
+    <div class="sig">COMPILED 2026-10-20 · 仅供玩梗与文化记录</div>
+  </footer>
+
+</div>
+
+<script>
+const META = {
+ "themes": [
+  {
+   "k": "反差萌",
+   "d": "狠话软说。把「胆子真肥」改成「胆子真是肥嘟嘟的」，把威胁说成撒娇，攻击性瞬间变成可爱。2026 年最主流的语法：凶的外壳，萌的内核。"
+  },
+  {
+   "k": "空耳与谐音",
+   "d": "听错比听懂更好玩。「命运你假慈悲」听成「命运你假糍粑」，「谁承想」说成「随橙想」，「让人笑话」变成「样银笑幻」。梗不再是词，而是一段可以被模仿的口音。"
+  },
+  {
+   "k": "老东西翻红",
+   "d": "2017 年的电视剧、1991 年的星爷台词、2013 年的伤感歌，在 2026 年被重新挖出来当新梗用。互联网的素材库已经满了，大家开始考古。"
+  },
+  {
+   "k": "手搓与反 AI",
+   "d": "《牛来》用五年、两个人、一台闲鱼电脑手搓出来，粗糙到成为奇观。当 AI 能一键生成一切，笨拙反而成了最稀缺的真诚——这是 2026 年最大的情绪反转。"
+  },
+  {
+   "k": "情绪出口",
+   "d": "水逆、职场、内耗、不想上班。这一年的梗很少纯粹为了好笑，多半是给一种说不出口的情绪找一个可以复制的句式：说出来，就算处理过了。"
+  }
+ ],
+ "essay": [
+  {
+   "h": "一、梗的单位变了：从「词」变成「一段表演」",
+   "p": "2025 年的梗还是一个词：活人感、赛博对账。2026 年的梗基本是一整句、一段音频、一个动作——「胆子真是肥嘟嘟的啊」「命运你假糍粑」「来杯好茶摇一摇」「正太扭腰」。它们必须被演出来才成立：要有语气、有卡点、有表情。所以今年的爆款几乎都从抖音和 B 站的二创里长出来，而不是从文字里。"
+  },
+  {
+   "h": "二、来源变了：一半是考古，一半是伪造",
+   "p": "《我的前半生》是 2017 年的剧，豆瓣 6.4 分，当年被骂狗血；《赌侠2》是 1991 年的电影；《喜欢》是 2013 年的歌。它们在 2026 年被重新发现，因为短视频把「旧素材 + 新语境」的成本降到了零。而「胆子真是肥嘟嘟的」更极端：它根本不是真事，是网友写的「捡手机文学」——一张假聊天记录，比真新闻传播得更快。"
+  },
+  {
+   "h": "三、情绪变了：从玩梗到用梗",
+   "p": "「命运你假糍粑」是水逆时的统一口径，「我将辞职认真研究这只负鼠」是上班族的合法逃亡，「酸黄瓜」是自嘲普通。梗的功能从「让人笑」变成「替人说话」。判断一个梗能不能活过三个月，看它能不能被用在真实的坏心情里——能，就活；只能当笑话，就死。"
+  },
+  {
+   "h": "四、最大的反转：粗糙打败了精致",
+   "p": "《牛来》首周票房 7352 元、观影不到 300 人，最后卖了 6423 万。它的画面粗糙到像 2009 年的课件，但它是两个人花五年、用 SketchUp 一帧一帧手写出来的。AI 越强，手搓越贵。这一年最响的掌声，给的不是最完美的作品，而是最不肯放弃的那个人。"
+  }
+ ]
+};
+const ENTRIES = [
+ {
+  "m": 1,
+  "name": "沈腾鼓掌",
+  "tag": "影视二创",
+  "tier": 2,
+  "origin": "2026 年春晚，沈腾在节目里的一个鼓掌镜头。",
+  "story": [
+   "巴掌抬得很高，落下去很轻，脸上笑着，眼神是空的。这个「敷衍但体面」的鼓掌被截成表情包，成了打工人应对领导画饼、亲戚催婚、听人讲废话时的标准反应：表面配合，内心已走。"
+  ]
+ },
+ {
+  "m": 1,
+  "name": "我的身材很曼妙",
+  "tag": "自嘲情绪",
+  "tier": 2,
+  "origin": "一位卖家被顾客追问「裤子显胯宽吗」，不正面回答，开始陶醉式自夸。",
+  "story": [
+   "「不知道，我的身材很曼妙。」答非所问，但气势十足。后来变成万能句式：遇到任何不想回答的问题，先夸自己一句，再把问题晾在原地。"
+  ]
+ },
+ {
+  "m": 1,
+  "name": "爱你老己 / 老来得己",
+  "tag": "谐音空耳",
+  "tier": 2,
+  "origin": "「爱自己」的谐音写法，年初开始刷屏。",
+  "story": [
+   "把「爱自己」写成「爱你老己」，像在跟一个很老、很累的自己说话。emo、加班、被生活按住的时候，用它安慰自己，比直接说「要爱自己」少一点说教味。"
+  ]
+ },
+ {
+  "m": 1,
+  "name": "随橙想",
+  "tag": "谐音空耳",
+  "tier": 2,
+  "origin": "歌手乌兰图雅在一次采访里把「谁承想」说成「随橙想」，又把「鼓励」说成「古力」。",
+  "story": [
+   "两个口误被剪在一起，魔性到洗脑。网友开始用「随橙想」代替「没想到」，用「古力」代替「鼓励」，模仿的重点不是词义，是那个拐弯的发音。"
+  ]
+ },
+ {
+  "m": 1,
+  "name": "不讲不讲",
+  "tag": "自嘲情绪",
+  "tier": 2,
+  "origin": "短视频家庭短剧里，奶奶在爸爸批评孙子时用来打断说教的口头禅。",
+  "story": [
+   "本意是「好了好了别说了」。到了评论区，它变成一种高级拱火：嘴上劝架，实际把火往上浇，「不讲不讲，再说孩子就要哭了」。"
+  ]
+ },
+ {
+  "m": 1,
+  "name": "哭哭马",
+  "tag": "可爱生物",
+  "tier": 2,
+  "origin": "马年的一只委屈脸毛绒马玩偶。",
+  "story": [
+   "脸是塌的，眼睛是湿的，一副「我什么都懂但我不说」的表情。被用来做丧萌自嘲：不吵不闹，只是很委屈地存在着。"
+  ]
+ },
+ {
+  "m": 1,
+  "name": "马到（倒）成功",
+  "tag": "谐音空耳",
+  "tier": 2,
+  "origin": "马年祝福语的黑色反向改写。",
+  "story": [
+   "「马到成功」改成「马倒成功」，一句祝福变成一句诅咒式的自嘲。过年期间被大量用在「今年一定倒」的许愿里，属于马年专属的一年生梗。"
+  ]
+ },
+ {
+  "m": 2,
+  "name": "我要验牌！给我擦皮鞋",
+  "tag": "影视二创",
+  "tier": 2,
+  "origin": "周星驰《赌侠2：上海滩赌圣》里「法国赌神」的嚣张台词，配一口魔性法语腔。",
+  "story": [
+   "三十多年前的台词被重新剪出来，因为那种「明明在耍无赖却理直气壮」的语气太好用。现在多用于摆谱、装降维打击，或者反过来幽默认怂。"
+  ]
+ },
+ {
+  "m": 2,
+  "name": "比比拉布",
+  "tag": "谐音空耳",
+  "tier": 2,
+  "origin": "一个没有含义的语气词，二月突然全网刷屏。",
+  "story": [
+   "没有出处，没有意思，就是顺口。这类「无意义音节梗」每年都会出现一个，靠的是发音的黏性——说一次就想说第二次。"
+  ]
+ },
+ {
+  "m": 2,
+  "name": "紫薯精",
+  "tag": "影视二创",
+  "tier": 2,
+  "origin": "周小闹在短剧《饭店的寒假工》里一人分饰多角，其中「孙晓晓」常年穿紫色工作服。",
+  "story": [
+   "因为一身紫被叫「紫薯精」。角色爱耍小聪明、在职场里作妖甩锅，于是这个词变成了对那类同事的代号：活不多干，锅一定不背。"
+  ]
+ },
+ {
+  "m": 2,
+  "name": "样银笑幻",
+  "tag": "谐音空耳",
+  "tier": 2,
+  "origin": "东北话「让人笑话」的谐音写法。",
+  "story": [
+   "四个字打出来像外语，念出来全场秒懂。东北口音梗在 2026 年持续输出，靠的就是这种「看着不像中文、听着特别亲切」的错位感。"
+  ]
+ },
+ {
+  "m": 2,
+  "name": "西南麻醉师",
+  "tag": "自嘲情绪",
+  "tier": 2,
+  "origin": "春节前后爆火的酒席梗，指云贵川渝桂农村红白喜事上专职倒酒劝酒的亲戚。",
+  "story": [
+   "手里拎着不锈钢酒壶，腰上别着纸杯，专门负责把客人喝到「断片」——不是医院里的麻醉师，是把人喝到全麻的酒席 NPC。过年返乡的年轻人用它形容那场躲不掉的酒局。"
+  ]
+ },
+ {
+  "m": 3,
+  "name": "我的刀盾",
+  "tag": "谐音空耳",
+  "tier": 2,
+  "origin": "空耳梗，三月在评论区刷屏。",
+  "story": [
+   "念出来毫无逻辑，但节奏很顺，适合在任何视频下面接一句。属于典型的「无意义但上头」型梗，寿命短，传播快。"
+  ]
+ },
+ {
+  "m": 3,
+  "name": "夯爆了",
+  "tag": "自嘲情绪",
+  "tier": 2,
+  "origin": "网络流行语，意思是很厉害、强到极点。",
+  "story": [
+   "比「绝了」更土，比「牛」更用力。用来夸人、夸作品、夸一顿饭都行，语气越夸张越对味。"
+  ]
+ },
+ {
+  "m": 3,
+  "name": "养龙虾",
+  "tag": "AI与科技",
+  "tier": 2,
+  "origin": "AI 智能体 OpenClaw 的 logo 长得像一只龙虾，被网友起了外号「龙虾」。",
+  "story": [
+   "「养龙虾」= 养一个 AI 替自己干活，自己摸鱼。这是 2026 年对 AI 最轻松的一种说法：不讨论取代，只讨论谁替我上班。同一年《牛来》用纯手搓对抗 AI，两种情绪并存。"
+  ]
+ },
+ {
+  "m": 3,
+  "name": "酱板鸭",
+  "tag": "AI与科技",
+  "tier": 2,
+  "origin": "AI 短剧《雪山救狐狸》里，一只酱板鸭成精后对侠客喊「我才是真爱过你的那个」。",
+  "story": [
+   "剧情莫名其妙，台词理直气壮，成了「全网新案底」。它同时也是 AI 生成内容进入短剧生产的标志性事件：成本极低，产出极怪。"
+  ]
+ },
+ {
+  "m": 3,
+  "name": "低山臭水遇知音",
+  "tag": "自嘲情绪",
+  "tier": 2,
+  "origin": "「高山流水遇知音」的接地气改写。",
+  "story": [
+   "用来形容三观一致、爱好一样、一起干傻事的朋友——不是高雅知音，是臭味相投的搭子。越自贬，越亲密。"
+  ]
+ },
+ {
+  "m": 3,
+  "name": "Color walk",
+  "tag": "自嘲情绪",
+  "tier": 2,
+  "origin": "春季流行的一种散步玩法：出门前随机抽一个颜色，然后在城市里找这个颜色的东西。",
+  "story": [
+   "把城市当巨型盲盒，不赶进度，只找快乐。它是「精神内耗」这个词流行几年之后，年轻人给出的一个低成本解法：不解决问题，先出门走走。"
+  ]
+ },
+ {
+  "m": 4,
+  "name": "SBTI 人格测试",
+  "tag": "自嘲情绪",
+  "tier": 2,
+  "origin": "戏仿 MBTI 的自嘲式测试，四月刷屏。",
+  "story": [
+   "四个字母变成一堆扎心标签，用荒诞的归类回应内卷和焦虑。大家心里都清楚它不准，但要的就是那句「你就是这样的人」带来的解脱感。"
+  ]
+ },
+ {
+  "m": 4,
+  "name": "眼睛瞎在手机上",
+  "tag": "自嘲情绪",
+  "tier": 2,
+  "origin": "博主翻唱改编的歌曲《手机害人不浅》，歌词是「眼睛瞎在手机上，手也烂在手机上」。",
+  "story": [
+   "配上夸张表情，把「沉迷手机」唱成一种集体病症。四月的短视频里几乎每个自嘲熬夜的段子都用它当 BGM。"
+  ]
+ },
+ {
+  "m": 4,
+  "name": "禅者行脚",
+  "tag": "影视二创",
+  "tier": 2,
+  "origin": "僧人演绎的禅意舞蹈《禅者行脚》被配上动感电子音乐。",
+  "story": [
+   "严肃的宗教动作 + 蹦迪的鼓点，反差强到出圈。「跳跃不是罪过」也跟着变成一句用于自我开脱的台词。"
+  ]
+ },
+ {
+  "m": 4,
+  "name": "我杀猪养你啊",
+  "tag": "影视二创",
+  "tier": 2,
+  "origin": "古装剧《逐玉》里，屠户女主樊长玉对落难的侯爷谢征说的告白。",
+  "story": [
+   "「你留下，我杀猪养你。」没有玫瑰，没有承诺，只有一门手艺和一句兜底。它打破古偶的悬浮情话，把「女性供养者」摆到台面上，被叫做当代最动情的乱世情话。"
+  ]
+ },
+ {
+  "m": 4,
+  "name": "粉底液将军",
+  "tag": "影视二创",
+  "tier": 2,
+  "origin": "网友对《逐玉》男主角的吐槽。",
+  "story": [
+   "身为将军，妆容精致、脸比女主还干净，没有半点杀伐气。这个词后来泛指所有「打仗像拍美妆广告」的古装角色。"
+  ]
+ },
+ {
+  "m": 4,
+  "name": "我又贪了",
+  "tag": "自嘲情绪",
+  "tier": 2,
+  "origin": "《逐玉》里女主角的台词。",
+  "story": [
+   "明知不该、却忍不住，用三个字承认自己的贪心。减肥、熬夜、回前任消息，任何「说了不做」的瞬间都能用。"
+  ]
+ },
+ {
+  "m": 5,
+  "name": "我将辞职认真研究这只负鼠",
+  "tag": "可爱生物",
+  "tier": 2,
+  "origin": "五月「背手负鼠」表情包爆火：一只负鼠背着手，站姿淡定得像个退休老干部。",
+  "story": [
+   "网友以夸张自嘲的口吻宣布「我将辞职认真研究这只负鼠」。不是真的辞职，是把「想逃离工作」翻译成一件荒诞但无害的事。负鼠的淡定，正好是打工人最缺的东西。"
+  ]
+ },
+ {
+  "m": 5,
+  "name": "不舒服文学",
+  "tag": "影视二创",
+  "tier": 2,
+  "origin": "王鹤棣在综艺《亲爱的客栈 2026》里说了一句「当时确实不舒服」。",
+  "story": [
+   "一句含糊、礼貌、什么都没说的回应，被提炼成一种文体：用最客气的话表达最不想配合的态度。适用于所有不想解释、又不想撕破脸的场合。"
+  ]
+ },
+ {
+  "m": 5,
+  "name": "伦敦未必有我忧郁",
+  "tag": "自嘲情绪",
+  "tier": 2,
+  "origin": "用阴雨多雾的伦敦做参照物，来夸张形容自己的丧。",
+  "story": [
+   "「伦敦未必有我忧郁」——把城市拟人化，再把自己抬到比城市更惨的位置。丧到这个程度，反而有点好笑。"
+  ]
+ },
+ {
+  "m": 5,
+  "name": "丫够燥的",
+  "tag": "自嘲情绪",
+  "tier": 2,
+  "origin": "北京方言与摇滚文化混出来的说法。",
+  "story": [
+   "直译是「你这家伙可真能折腾、真够狂野」。可以骂人，也可以夸现场气氛炸，全看语气。属于那种一说出口就自带北京胡同背景音的词。"
+  ]
+ },
+ {
+  "m": 5,
+  "name": "不再依赖哥哥算长大吗",
+  "tag": "自嘲情绪",
+  "tier": 2,
+  "origin": "网上流行的撒娇式句式：「不再依赖 XX 算长大吗」。",
+  "story": [
+   "固定提问，固定反转答案：「算，但没用。」用它调侃亲密关系里的依赖与嘴硬——明明还想依赖，偏要先问一句算不算长大。"
+  ]
+ },
+ {
+  "m": 5,
+  "name": "嘉豪",
+  "tag": "自嘲情绪",
+  "tier": 2,
+  "origin": "男生穿黑衣、戴口罩模仿 Alan Walker 的视频。",
+  "story": [
+   "每个学校都有这么一个人：自认为很酷，实际用力过猛。网友把这类中二少年统称「嘉豪」，还衍生出「豪情在天」「豪到你了？」等一整套黑话。毕业多年的人玩这个梗，其实是在笑当年的自己。"
+  ]
+ },
+ {
+  "m": 6,
+  "name": "扛住了柴米油盐的麻烦",
+  "tag": "影视二创",
+  "tier": 2,
+  "origin": "歌手阿肆《喜欢》里的歌词：「扛住了柴米油盐的麻烦，却扛不住对你的喜欢」。",
+  "story": [
+   "前半句是成年人的坚强，后半句是瞬间破防。被用来感慨：生活那么难都过了，偏偏在某个不重要的人身上垮掉。"
+  ]
+ },
+ {
+  "m": 6,
+  "name": "Emily 你个恋爱脑",
+  "tag": "影视二创",
+  "tier": 2,
+  "origin": "2026 年高考英语读写题：Emily 受困脱险后，仍冒着大雪坐火车去见男友。",
+  "story": [
+   "考生出了考场第一件事不是对答案，是吐槽 Emily。一场考试把「恋爱脑」三个字送上了热搜，也让这个英文名成了年度最冤的角色。"
+  ]
+ },
+ {
+  "m": 6,
+  "name": "不要像牛舌低头",
+  "tag": "影视二创",
+  "tier": 2,
+  "origin": "悬疑喜剧《低智商犯罪》里，反派周荣跑路受挫，把墙上的励志标语「永远不要向生活低头」看错成「永远不要向牛舌低头」。",
+  "story": [
+   "他不但信了，还踹翻牌子、命令手下去挖牛舌。一个错字把励志片变成荒诞剧，这句台词也成了「理解错但执行得很彻底」的代名词。"
+  ]
+ },
+ {
+  "m": 7,
+  "name": "来杯好茶摇一摇",
+  "tag": "影视二创",
+  "tier": 1,
+  "origin": "《崩坏：星穹铁道》与茶百道联名活动的推广曲歌词，经博主 Sigh 混音后爆红。",
+  "story": [
+   "原曲是游戏联名的广告歌，命里注定只该在便利店门口循环。但它的旋律太顺、配音演员的咬字太魔性，被博主 Sigh 重新混音之后，变成了一段「听一句就会跟着摇」的音频。",
+   "真正让它破圈的是角色梗：游戏里的爻光被配上「吉星高照爻一爻」，一个本来很正经的仙舟角色，被网友摇成了求好运的吉祥物。几天之内相关播放破亿，评论区全是「摇一摇」。",
+   "商业端反应比梗还快。霸王茶姬顺势推「摇摇沙」，把一段二创音频变成了真实的杯子和吸管。这是 2026 年最典型的一条路径：广告歌 → 混音 → 全民卡点 → 品牌反向接梗。"
+  ],
+  "why": "旋律洗脑 + 动作简单（摇杯子）+ 角色可供二创 + 品牌立刻跟上。四件事同时发生，才叫爆款。",
+  "use": "「今天运气不错。」「来杯好茶摇一摇。」——求好运、开新局、抽卡前都能用。",
+  "src": [
+   [
+    "腾讯新闻",
+    "https://news.qq.com/rain/a/20260711V08L4L00"
+   ],
+   [
+    "梗百科 Wiki",
+    "https://meme.fandom.com/zh/wiki/来杯好茶摇一摇"
+   ]
+  ]
+ },
+ {
+  "m": 7,
+  "name": "正太扭腰",
+  "tag": "舞蹈挑战",
+  "tier": 1,
+  "origin": "TF 家族四代练习生张奕然，在《突围Ⅱ》舞蹈考核里跳改编版 aespa《Whiplash》。",
+  "story": [
+   "原曲是女团的强攻型舞曲，考核时被改成男团版，加了顶胯和扭腰。张奕然一张没长开的娃娃脸，配上这套动作，反差强到粉丝立刻把片段截出来，取名「正太扭腰」。",
+   "7 月 26 到 27 日，#正太扭腰编进Whiplash# 冲上热搜。动作幅度不大、只卡重拍，普通人对着镜子也能扭两下——这是它能变成挑战赛的关键：门槛低到不存在。",
+   "更出圈的是配套文案：「隔壁班转来一个正太，他靠正太扭腰吸引了很多妹子，我们都扭不过他……左边画个虫虫，右边画个龙龙。」这段早年鬼畜音频的台词被捞回来，和张奕然的视频绑死，评论区开始整段接龙。",
+   "随后范丞丞、田嘉瑞、余承恩等艺人跟跳，AI 二创把「正太」扩展到婴儿、养老院、机器人，梗彻底离开了原舞台。"
+  ],
+  "why": "少年脸 × 侵略性动作的反差；卡点精准、易模仿；配一段可接龙的洗脑课文，传播成本几乎为零。",
+  "use": "「隔壁班转来一个正太……」后面直接接课文；发自拍视频挂 #正太扭腰挑战，不是正太也能蹭。",
+  "src": [
+   [
+    "中华网",
+    "https://tech.china.com/articles/20260729/202607291928708.html"
+   ],
+   [
+    "新浪新闻",
+    "https://www.sina.cn/news/article/nimqyip4199258.html"
+   ]
+  ]
+ },
+ {
+  "m": 7,
+  "name": "命运你假糍粑",
+  "tag": "谐音空耳",
+  "tier": 1,
+  "origin": "谐音梗，原型是「命运你假慈悲」，2026 年 7 月在抖音爆火。",
+  "story": [
+   "原句应该是「命运你假慈悲」——一句很文艺的控诉。但抖音的音频把它念糊了，听起来像「命运你假糍粑」，一个柔软、黏糯、完全没有攻击性的食物。",
+   "真正让它病毒式扩散的是成套结构：「命运你假糍粑 / 命运你阿帕次 / 命运你配十八个币 / 命运你 satisfaction」。四句毫无逻辑地排在一起，像一段咒语，配同一个 BGM，谁都能往里填自己的倒霉事。",
+   "7 月它跨圈进了电竞。PEL 夏季赛直接把「命运难料你假糍粑」当官方话题标签，用来形容赛场局势瞬息万变——一支队伍刚被看好就翻车，解说和观众同时刷这四个字。",
+   "它的功能非常明确：水逆、抽卡歪了、考试翻车、喜欢的人不喜欢你。不是求解决办法，是把「凭什么」说出口。"
+  ],
+  "why": "谐音制造荒诞感，成套句式提供可复制性，统一 BGM 降低参与门槛。它不解释情绪，它就是情绪本身。",
+  "use": "「命运你假糍粑。」——任何期待落空的瞬间。进阶版连刷四句，气势更足。",
+  "src": [
+   [
+    "新浪新闻",
+    "https://www.sina.cn/news/detail/5326413945114560.html"
+   ],
+   [
+    "新浪新闻",
+    "https://www.sina.cn/news/detail/5319793569958373.html"
+   ]
+  ]
+ },
+ {
+  "m": 7,
+  "name": "印尼咳嗽药",
+  "tag": "影视二创",
+  "tier": 2,
+  "origin": "印尼止咳药 OBH Combi 的电视广告配乐，被搬进国内做手势舞。",
+  "story": [
+   "一段几十年前的东南亚广告曲，因为旋律太上头，被配上「咳嗽舞」手势。文化错位本身就是笑点：没人知道歌词在唱什么，但所有人都学会了那个动作。"
+  ]
+ },
+ {
+  "m": 7,
+  "name": "GGEZ",
+  "tag": "影视二创",
+  "tier": 2,
+  "origin": "电竞老词 GG EZ（Good Game, Easy），2026 年夏天被改成手势舞。",
+  "story": [
+   "原本是赢家带点欠揍的收场语，配上手势之后彻底破圈。现在不打游戏的人也会在赢了一局桌游之后比划一下，气人效果不减。"
+  ]
+ },
+ {
+  "m": 7,
+  "name": "加麻不加辣",
+  "tag": "谐音空耳",
+  "tier": 2,
+  "origin": "德云社孟鹤堂把 BIGBANG 的歌空耳成「加麻不加辣」，后来撞上麻辣烫点单术语。",
+  "story": [
+   "相声里的空耳梗沉了几年，2026 年夏天被重新捞起来，因为「加麻不加辣」正好是一句真实的点单话。梗和生活在同一个句子里会合，传播就没有阻力。"
+  ]
+ },
+ {
+  "m": 7,
+  "name": "新天地国际生",
+  "tag": "自嘲情绪",
+  "tier": 2,
+  "origin": "上海新天地一带扎堆拍抖舞视频的年轻人。",
+  "story": [
+   "字面是「国际学校学生」，实际九成是调侃：穿搭像假洋气留学生、动作像统一培训过。它精准描述了那种「很努力地想显得松弛」的状态。"
+  ]
+ },
+ {
+  "m": 7,
+  "name": "老叟戏顽童",
+  "tag": "影视二创",
+  "tier": 2,
+  "origin": "围棋圈「炸鱼」梗：高手开小号虐菜，像老人逗小孩下棋。",
+  "story": [
+   "配上一句「这盘棋，分明就是老叟戏顽童」，把碾压说得文雅又欠打。衍生出的「泥肘」（「你走」的喊法）和「鱼需慢慢炸，心急则泥肘」一起，成了围棋区和短剧区共用的黑话。"
+  ]
+ },
+ {
+  "m": 8,
+  "name": "MJ",
+  "tag": "影视二创",
+  "tier": 1,
+  "origin": "《蜘蛛侠：崭新之日》上映期间，抖音私信和群聊里输入「MJ」或「小蜘蛛」会触发蜘蛛侠掉下来送爱心的特效。",
+  "story": [
+   "MJ 是玛丽·简（Mary Jane）的缩写，彼得·帕克这辈子最放不下的人。电影里彼得和 MJ 的关系是这一部最锋利的部分，抖音的彩蛋则把它做成了一个可以互动的甜点：在聊天框打下三个字母，屏幕上方掉下一个蜘蛛侠，递给你一颗心。",
+   "8 月 4 日前后，这个玩法在抖音炸开。「在聊天框里输入 mj 有小惊喜」的提示被疯狂转发，无数人半夜给朋友发 MJ，等那颗心掉下来。8 月 5 日，蜘蛛侠官方抖音账号亲自下场，一边玩彩蛋，一边把电影里彼得和 MJ 的虐心对话剪进去——搞笑和刀感同时拉满。",
+   "传播很快走向反面。有人不分场合地在所有评论区刷 MJ，于是出现了「MJ 狗」「MJ 小鬼」这样的贬称，专门指那些把彩蛋玩成骚扰的人。一个彩蛋从浪漫变成公害，只用了不到一周。",
+   "也有媒体核查后指出，抖音官方从未正式公布过这个特效，早期并不存在人人可触发的彩蛋；但传播早就不需要官方授权了。这是 2026 年很典型的一件事：真实性不影响参与度。"
+  ],
+  "why": "三个字母、零成本、有情感内核（彼得与 MJ）、还能截图炫耀。传播门槛低到只需要会打字。",
+  "use": "给朋友私信发一个「MJ」，然后等。或者用来调侃乱刷的人：「又来个 MJ 狗。」",
+  "src": [
+   [
+    "新浪新闻",
+    "https://k.sina.cn/article_7879849970_1d5acf7f206801e4fk.html"
+   ],
+   [
+    "新浪新闻（核查）",
+    "https://k.sina.cn/article_7879776731_1d5abd9db06801d6lc.html"
+   ]
+  ]
+ },
+ {
+  "m": 8,
+  "name": "牛来",
+  "tag": "AI与科技",
+  "tier": 1,
+  "origin": "国产动画电影《牛来》，2026 年 8 月 5 日上映。导演信雨萌，编剧与配音是他的母亲孙丽芳。",
+  "story": [
+   "它本来是一部没人知道的电影。上映前只放出一张水墨风海报，正片却是粗糙的三维动画，画面和海报差了二十年。上映 9 天，票房 7352 元，观影人次不到 300，排片一度缩到没有。",
+   "然后「牛来票房 7352 元没有万」上了热搜。人们涌进影院，不是为了看一部好电影，是为了看一个奇观：一部在 2026 年还能粗糙成这样的院线动画。",
+   "背景故事比电影本身更像电影。信雨萌景观设计出身，没学过动画，用建筑业的 SketchUp 建模，一帧一帧手写关键帧，机器 24 小时不关，烧坏过主板。母亲孙丽芳没学过编剧和配乐，负责故事、音乐和全部配音，片尾曲也是她自己唱的。两个人做了五年，没有投资，设备是从闲鱼淘的家用电脑。电影 2021 年立项，那年是牛年，父亲也属牛，所以叫《牛来》。",
+   "B 站的二创把它推成了一场狂欢。「一声妈妈喊出整个盛夏」这类剪辑铺满首页，观众驱车三十公里去看，把它当成一次行为艺术。最终票房 6423 万，翻了将近一万倍。豆瓣开分后好评差评两极，柱状图被说成像牛角——「C 型评分」，又成了一个梗。",
+   "德国之声把它叫做「年轻人的反 AI 狂欢」。这个说法抓住了要害：当一键生成变得廉价，一个人花五年把一件事做坏，反而成了最贵的东西。"
+  ],
+  "why": "极致的粗糙 + 极致的真诚 + 一个可以被嘲笑的数字（7352 元）。它同时满足了看笑话和被打动两种需求，而这两种需求在 2026 年都很大。",
+  "use": "「这不就是牛来吗。」——形容制作粗糙但充满执念的作品。或者「7352 元没有万」，形容惨到成为话题。",
+  "src": [
+   [
+    "维基百科",
+    "https://zh.wikipedia.org/wiki/牛来"
+   ],
+   [
+    "新京报",
+    "https://www.bjnews.com.cn/detail/1786783512168828.html"
+   ],
+   [
+    "德国之声",
+    "https://www.dw.com/zh/牛来票房奇迹反ai审判丑狂欢/a-78460923"
+   ]
+  ]
+ },
+ {
+  "m": 8,
+  "name": "胆子真是肥嘟嘟的",
+  "tag": "反差萌",
+  "tier": 1,
+  "origin": "2026 年 8 月流传的一张外卖平台聊天记录截图，属网友创作的「捡手机文学」，不是真事。",
+  "story": [
+   "截图里的对话很短：顾客让骑手顺路带包烟，骑手说「带是不可能带的」；顾客说有 100 元小费，骑手问「多少」；这时商家插进来一句「骑手你休息下，这单我来送」——想抢这 100 块。骑手当场回怼：「抢生意抢到我头上来了」「胆子真是肥嘟嘟的啊」「不打听打听我是谁」。",
+   "笑点在语气。原本该说「胆子真肥」，他加了叠词变成「肥嘟嘟」——一个描述婴儿脸颊的词，被用来放狠话。凶狠的外壳，萌系的内核，听上去像一只气鼓鼓的小动物在虚张声势。",
+   "第二个笑点是名字。截图里骑手显示为「骑手王李东」，网友读成「骑手王」李东，仿佛外卖界有一位姓李的江湖大佬。「不打听打听我是谁」在这个读法下变得无比合理。",
+   "扩散之后，外卖平台的黄色袋鼠 logo 被集体 P 成肥嘟嘟的圆脸，形成一波「肥嘟嘟浪潮」。到八月中，只要评论区出现袋鼠头像，下面就一定有人接这四个字。它也顺利变成了一句万能威胁：「你抢我奶茶？胆子真是肥嘟嘟的。」"
+  ],
+  "why": "狠话软说的反差 + 极短的对话 + 一个可无限套用的句式。它甚至不需要是真的——假截图比真新闻更适合当梗，因为没有当事人会出来澄清。",
+  "use": "「胆子真是肥嘟嘟的啊。」后面接「不打听打听我是谁」效果翻倍。适合轻怼、撒娇式威胁、抓包朋友偷吃。",
+  "src": [
+   [
+    "Meme Wiki",
+    "https://memepedia.miraheze.org/wiki/胆子真是肥嘟嘟的"
+   ],
+   [
+    "腾讯新闻",
+    "https://news.qq.com/rain/a/20260911A0E08J00"
+   ],
+   [
+    "新浪新闻",
+    "https://ent.sina.cn/2026-08-20/detail-ininwtuc6885106.d.html"
+   ]
+  ]
+ },
+ {
+  "m": 8,
+  "name": "《我的前半生》翻红",
+  "tag": "老梗翻红",
+  "tier": 1,
+  "origin": "2017 年播出的都市剧，马伊琍、雷佳音、靳东、袁泉、吴越主演。豆瓣 6.4 分，当年被骂狗血、三观不正。",
+  "story": [
+   "九年之后，它在没有任何官方宣发的情况下重回顶流。近 30 天内，仅抖音一个平台，相关话题播放增量就超过 49 亿次。一部老剧，靠网友自发玩梗，打赢了 2026 年的暑期档。",
+   "导火索是一场台风。上海暴雨，梧桐区积水，社交媒体上开始刷一句九年前的台词：「贺涵能来接我吗。」无数人站在积水里演罗子君，配同一段 BGM。雨下的不是水，是回忆。",
+   "接着是配角全面开花。薛甄珠去公司找小三的名段被剪成爽文；陈俊生的头像和网名成了「中年出轨男」的标准模板；「贺涵」从当年的理想男友，被重新评价成控制欲的代名词。",
+   "最大的反转在结局。当年罗子君拒绝贺涵、独自南下，被骂「不知好歹」；2026 年，这个结局被赞「超前」——女性成长不靠男人。据媒体报道，这个走向是马伊琍坚持改的。制片人黄澜回应翻红时，把它归因于好演员、热梗传播与「罗子君式」成长叙事的三重共振。",
+   "它跟《牛来》是同一年发生的两件事，指向同一个事实：2026 年的观众不再相信新东西一定更好。他们宁愿回到旧素材里，找出当年没看懂的部分。"
+  ],
+  "why": "台词可截、角色可骂、结局可争。它提供的不只是怀旧，是一场全民参与的重新审判——每个人都能在里面找到一个想骂的人。",
+  "use": "「贺涵能来接我吗。」——下雨天、加班、任何想被接走的时刻。或者「薛甄珠式上门」，形容战斗力爆表的长辈。",
+  "src": [
+   [
+    "网易/凤凰网",
+    "https://www.163.com/dy/article/L44TLQL305189I0Q.html"
+   ],
+   [
+    "新浪新闻",
+    "https://ent.sina.cn/2026-08-12/detail-inimzqcs5355535.d.html"
+   ],
+   [
+    "腾讯新闻",
+    "https://news.qq.com/rain/a/20260831A0CN2900"
+   ]
+  ]
+ },
+ {
+  "m": 8,
+  "name": "华晨宇壮壮妈",
+  "tag": "影视二创",
+  "tier": 2,
+  "origin": "华晨宇某次直播烫了一头泡面爆炸卷发，轮廓撞脸《大耳朵图图》里壮壮的妈妈。",
+  "story": [
+   "蓬松、炸开、头顶一圈复古大妈卷。网友一句「壮壮妈」就把造型定型了，之后所有泡面头都叫壮壮妈头。这类梗的寿命通常等于发型保持的时间。"
+  ]
+ },
+ {
+  "m": 8,
+  "name": "中国热梗出海",
+  "tag": "老梗翻红",
+  "tier": 2,
+  "origin": "一个现象级条目：国内抖音、B 站、小红书的梗被搬到 TikTok、X，外国人跟着玩。",
+  "story": [
+   "科目三、YYDS、666、City 不 City 都走过这条路。2026 年的新版本是 Chinamaxxing——外国人模仿喝热水、泡脚、练八段锦，自称进入「非常中式的人生阶段」。梗出海之后通常只剩外壳，但外壳也能火，这本身就是乐子。"
+  ]
+ }
+];
+</script>
+<script>
+(function(){
+  const MONTH_CN = ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"];
+  const MONTH_NOTE = {
+    1:"一年从一个敷衍的鼓掌开始。",
+    2:"春节档：酒席、短剧，和一整月的口音。",
+    3:"AI 开始被当成同事，而不是新闻。",
+    4:"古偶贡献了这一年最硬的一句情话。",
+    5:"一只负鼠替所有上班族辞了一次职。",
+    6:"高考英语卷贡献了一个恋爱脑。",
+    7:"整个七月都在同一个 BGM 上摇。",
+    8:"全年最重的一个月：三个爆款同时发生。"
+  };
+
+  const $ = (s, r) => (r||document).querySelector(s);
+  const $$ = (s, r) => Array.from((r||document).querySelectorAll(s));
+  const esc = s => String(s==null?"":s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+  /* ---- essay ---- */
+  $("#essay").innerHTML = META.essay.map(b =>
+    '<div class="block"><h3>' + esc(b.h) + '</h3><p>' + esc(b.p) + '</p></div>'
+  ).join("");
+
+  /* ---- themes ---- */
+  $("#themes").innerHTML = META.themes.map((t,i) =>
+    '<div class="theme"><div class="num">0' + (i+1) + ' / THEME</div><h3>' + esc(t.k) + '</h3><p>' + esc(t.d) + '</p></div>'
+  ).join("");
+
+  /* ---- sort ---- */
+  const list = ENTRIES.slice().sort((a,b) => a.m - b.m || (b.tier||2) - (a.tier||2));
+
+  /* ---- month nav ---- */
+  const months = [...new Set(list.map(e => e.m))];
+  $("#monthnav").innerHTML = months.map(m =>
+    '<a href="#m' + m + '">' + MONTH_CN[m-1] + '</a>'
+  ).join("");
+
+  /* ---- render ---- */
+  function pill(tag){ return '<span class="pill" data-tag="' + esc(tag) + '">' + esc(tag) + '</span>'; }
+
+  function bigCard(e){
+    const paras = (e.story||[]).map(p => '<p>' + esc(p) + '</p>').join("");
+    const why = e.why ? '<div class="meta-box"><b>为什么火</b><p>' + esc(e.why) + '</p></div>' : "";
+    const use = e.use ? '<div class="meta-box"><b>怎么用</b><p>' + esc(e.use) + '</p></div>' : "";
+    const meta = (why||use) ? '<div class="meta-row">' + why + use + '</div>' : "";
+    const src = (e.src && e.src.length)
+      ? '<div class="src">来源：' + e.src.map(s => '<a href="' + esc(s[1]) + '" target="_blank" rel="noopener">' + esc(s[0]) + '</a>').join("") + '</div>'
+      : "";
+    return '<article class="card hl" data-tag="' + esc(e.tag) + '" data-search="' + esc(searchText(e)) + '">' +
+      '<div class="card-top">' + pill(e.tag) + '<span class="when">2026.' + String(e.m).padStart(2,"0") + '</span></div>' +
+      '<h3>' + esc(e.name) + '</h3>' +
+      '<p class="origin">' + esc(e.origin) + '</p>' +
+      '<div class="story">' + paras + '</div>' + meta + src +
+      '</article>';
+  }
+
+  function smallCard(e){
+    const paras = (e.story||[]).map(p => '<p>' + esc(p) + '</p>').join("");
+    return '<article class="card sm" data-tag="' + esc(e.tag) + '" data-search="' + esc(searchText(e)) + '">' +
+      '<div class="card-top">' + pill(e.tag) + '</div>' +
+      '<h4>' + esc(e.name) + '</h4>' +
+      '<p class="origin">' + esc(e.origin) + '</p>' +
+      '<div class="story">' + paras + '</div>' +
+      '</article>';
+  }
+
+  function searchText(e){
+    return [e.name, e.origin, e.tag, (e.story||[]).join(" "), e.why||"", e.use||""].join(" ");
+  }
+
+  const body = $("#timeline-body");
+  body.innerHTML = months.map(m => {
+    const items = list.filter(e => e.m === m);
+    const bigs = items.filter(e => e.tier === 1);
+    const smalls = items.filter(e => e.tier !== 1);
+    return '<div class="month" id="m' + m + '">' +
+      '<div class="month-head">' +
+        '<div class="mnum">' + String(m).padStart(2,"0") + '</div>' +
+        '<div class="mmeta">' +
+          '<div class="cn">' + MONTH_CN[m-1] + '</div>' +
+          '<div class="note">' + esc(MONTH_NOTE[m] || "") + '</div>' +
+          '<div class="mcount">' + items.length + ' 条</div>' +
+        '</div>' +
+      '</div>' +
+      (bigs.length ? '<div class="big-list">' + bigs.map(bigCard).join("") + '</div>' : "") +
+      (smalls.length ? '<div class="grid">' + smalls.map(smallCard).join("") + '</div>' : "") +
+      '</div>';
+  }).join("");
+
+  /* ---- counts ---- */
+  const total = list.length;
+  $("#statN").textContent = total;
+  $("#footN").textContent = total;
+  $("#statL").textContent = list.filter(e => e.tier === 1).length;
+  $("#footL").textContent = list.filter(e => e.tier === 1).length;
+  $("#count").textContent = "全部 " + total + " 条";
+
+  /* ---- filter ---- */
+  const q = $("#q");
+  let activeTag = null;
+
+  function apply(){
+    const term = q.value.trim().toLowerCase();
+    let shown = 0;
+    $$(".month").forEach(sec => {
+      let secShown = 0;
+      $$(".card", sec).forEach(card => {
+        const hitQ = !term || card.dataset.search.toLowerCase().indexOf(term) > -1;
+        const hitT = !activeTag || card.dataset.tag === activeTag;
+        const ok = hitQ && hitT;
+        card.style.display = ok ? "" : "none";
+        if(ok){ shown++; secShown++; }
+      });
+      const grid = $(".grid", sec);
+      if(grid) grid.style.display = secShown ? "" : "none";
+      const bigs = $(".big-list", sec);
+      if(bigs) bigs.style.display = secShown ? "" : "none";
+      sec.style.display = secShown ? "" : "none";
+    });
+    $("#empty").style.display = shown ? "none" : "block";
+    $("#count").textContent = (term || activeTag)
+      ? "找到 " + shown + " / " + total
+      : "全部 " + total + " 条";
+  }
+
+  q.addEventListener("input", apply);
+  $("#clear").addEventListener("click", () => {
+    q.value = ""; activeTag = null;
+    $$(".pill[data-tag]").forEach(p => p.style.outline = "");
+    apply();
+  });
+
+  document.addEventListener("click", ev => {
+    const p = ev.target.closest(".pill[data-tag]");
+    if(!p) return;
+    const tag = p.dataset.tag;
+    activeTag = (activeTag === tag) ? null : tag;
+    $$(".pill[data-tag]").forEach(x => x.style.outline = (x.dataset.tag === activeTag) ? "3px solid #1b1917" : "");
+    apply();
+    $("#timeline").scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
+  document.addEventListener("keydown", ev => {
+    if(ev.key === "Escape"){ q.value = ""; activeTag = null; $$(".pill[data-tag]").forEach(x => x.style.outline=""); apply(); }
+  });
+})();
+</script>
+</body>
+</html>

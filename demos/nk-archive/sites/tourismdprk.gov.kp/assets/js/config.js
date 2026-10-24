@@ -1,0 +1,1 @@
+window['api_url'] = "http://www.tourismdprk.gov.kp/api/v1";

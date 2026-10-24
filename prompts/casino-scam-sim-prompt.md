@@ -35,3 +35,11 @@
 - 內部連結全部指向本地頁（`index.html` → `sim.html`），無外部依賴。
 - `sim.js` 內無 `fetch` / `XMLHttpRequest` —— 確認不會對外連線。
 - 無障礙：所有「開啟」按鈕導向本地模擬頁，不會觸發真實賭場網址。
+
+## V3 — 完整調查分析 + 兩站全資產鏡像（2026-10-19）
+
+- `analysis.html`：把 `investigation-file.md` 的 197 行調查整理成 9 節的公開報告 —— 摘要對照表、218/213 入口鏈、門戶池與註冊時間、SDK 後端、`*cne.com` 自建 NS 指紋、單一 Cloudflare 帳戶指紋、AES-256-ECB API 加密、代理佣金追蹤、47 個 IP 清單、時間線、打擊面排序、十條辨識紅旗、方法與限制。
+- `door.html`：213 門戶頁（`欢迎回家`）最新全資產鏡像；所有 `href`/`src` 外部連結已移除。
+- `hub.html`：218 備用網址站最新全資產鏡像，素材目錄改名為 `hub_files/`。
+- 兩個鏡像都插入 `evidence-mirror guard`：攔截 `window.open`、外部 `a[href]` 點擊與外部 form submit，並在頂部顯示「Unofficial educational replica」橫幅。
+- **修正陷阱**：儲存頁內有多個 `</body>`（瀏覽器擴充套件的 `<template>` 內也有），橫幅必須插在**最後一個** `</body>` 之前，否則會落進 template 而永不顯示 —— 用 `rfind` 而非 `replace(..., 1)`。

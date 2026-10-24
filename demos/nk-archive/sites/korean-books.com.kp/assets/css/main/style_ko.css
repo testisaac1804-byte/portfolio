@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+@font-face {
+	font-family: "WKGOTHIC";
+	src: url('https://web.archive.org/web/20260101im_/http://korean-books.com.kp/assets/fonts/wklgoth.ttf') format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "WKCHONGBONG";
+	src: url('https://web.archive.org/web/20260101im_/http://korean-books.com.kp/assets/fonts/wkwchbo.ttf') format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+section,
+td,
+div,
+span,
+tr,
+label,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+select,
+p,
+a {
+	font-family: Arial, "WKGOTHIC", "WKCHONGBONG", "Dotum" !important;
+	text-decoration: none !important;
+	font-size: 12px !important;
+}
+
+#PlNewBookFrame1 {
+    float: left;
+    background-color: #fffef3;
+    border: 1px solid #ecd689;
+    /* background-position: center bottom; */
+    text-align: center;
+    background-image: url(https://web.archive.org/web/20260101im_/http://korean-books.com.kp/assets/images/new-mark-ko.png);
+}
+
+#PlNewBookFrame2 {
+    float: left;
+    background-color: #fffef3;
+    border: 1px solid #ecd689;
+    /* background-position: center bottom; */
+    text-align: center;
+    background-image: url(https://web.archive.org/web/20260101im_/http://korean-books.com.kp/assets/images/new-mark-ko.png);
+}

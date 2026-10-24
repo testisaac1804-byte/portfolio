@@ -1,0 +1,643 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+<TITLE>Air Koryo</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="" />
+<meta name="keywords" content="AirKoryo, Pyongyang, DPRK, Korea, airline, Koryo, 平壤, 朝鲜, 航空, 高丽, 고려항공, 평양, 조선, 항공, online flight booking, book flights, online travel booking, online booking" />
+<meta name="robots" content="*" />
+<link rel="icon" href="skin/frontend/default/images/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="skin/frontend/default/images/favicon.ico" type="image/x-icon" />
+
+<!--including general css files -->
+<link rel="stylesheet" type="text/css" href="skin/frontend/default/css/styles.css" media="all" />
+<link rel="stylesheet" type="text/css" href="skin/frontend/default/css/dhtmlx/dhtmlxcalendar.css" media="all" />
+<link rel="stylesheet" type="text/css" href="skin/frontend/default/css/dhtmlx/skins/dhtmlxcalendar_dhx_skyblue.css" media="all" />
+<link rel="stylesheet" type="text/css" href="skin/frontend/default/css/jquery-ui/jquery-ui-1.8.1.custom.css" media="all" />
+
+<!--including additional css files -->
+<link rel="stylesheet" type="text/css" href="skin/frontend/default/css/menu.css" media="all" />
+
+<!--including general js files-->
+<script type="text/javascript" src="js/jquery-the-last.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.4.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.ui.position.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.ui.autocomplete.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.ui.combo.js"></script>
+<script type="text/javascript" src="js/def_label.js"></script>
+<script type="text/javascript" src="js/search_common_js.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/multilang.js"></script>
+<script type="text/javascript" src="js/login_panel.js"></script>
+<script type="text/javascript" src="js/dhtmlx/dhtmlxcalendar.js"></script>
+
+<!--including additional js files-->
+
+
+<!--[if lt IE 11]>
+<link rel="stylesheet" type="text/css" href="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/skin/frontend/default/css/styles-ie.css" media="all" />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel="stylesheet" type="text/css" href="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/skin/frontend/default/css/styles-below-ie7.css" media="all" />
+<![endif]-->
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/skin/frontend/default/css/styles-ie6.css" media="all" />
+<script type="text/javascript" src="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/js/ie6.js"></script>
+<![endif]-->
+
+<link rel="stylesheet" type="text/css" href="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/skin/frontend/default/css/styles_en.css" media="all" />
+
+<script>
+    function refreshTopCaptcha() {
+        $('#img_top_captcha').attr('src', $('#img_top_captcha').attr('src'));
+        $('#top_captcha_code').focus();
+    }
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('#top_login_form').submit(function(){
+            $('#btn_top_login').click();
+            return false;
+        });
+
+        $('#top_link_login').click(function(){
+            WaitStart();
+            myajax(
+                "/customer/account/getServerKey",
+                "csrf_airkoryo_name=1d9d78331272d5cb0166b0f8b003e423",
+                "text",
+                function( res ) {
+                    WaitStop();
+                    $('#server_key').val(res);
+                    $('#lang_list').hide();
+                    $('#login_panel').slideDown(400, function(){
+                        $('#top_login_email').focus();
+                    });
+                }
+            );
+            return false;
+        });
+
+        $('#login_panel input').live('keydown', function(evt){
+            if (evt.keyCode == 13) {
+                $('#btn_top_login').click();
+                return false;
+            }
+        });
+
+        $('#btn_top_login').click(function(){
+
+            if ($('#top_login_form').validRequired() == false)
+                return false;
+
+            $('#top_login_message_container').hide();
+            $.ajax({
+                url: "https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/customer/account/loginajax",
+                type: "POST",
+                dataType: "json",
+                data: $('#top_login_form').serialize(),
+                success: function( res ) {
+                    if (res.is_valid == 0) {
+                        if (res.captcha == 1) {
+                            $('#img_top_captcha').attr('src', "https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/customer/account/genCaptcha");
+                            $('#top_captcha_row').show("fast");
+                        }
+                        $('#top_login_message').html(res.msg);
+                        $('#top_login_message_container').show("fast");
+                    } else {
+                        if (res.redirect == 1)
+                            document.location.href = "https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/booking/order/list";
+                        else
+                        document.location.href = "https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/customer/account";
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class="page-container">
+    <div class="page home">
+        <div id="login_panel" class="top-panel">
+        <form id="top_login_form" method="post" action="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/customer/account/loginajax">
+            <input type="hidden" name="csrf_airkoryo_name" value="1d9d78331272d5cb0166b0f8b003e423" />
+            <input type="hidden" id="server_key" name="server_key" value=""/>
+
+            <div class="panel-content">
+                <ul class="form-list">
+                    <li>
+                        <label for="top_login_email">Email Address<span class="required">*</span></label>
+                        <div>
+                            <input type="text" name="login_email" id="top_login_email" class="input-text required-entry"/>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="top_login_password">Password<span class="required">*</span></label>
+                        <div>
+                            <input type="password" autocomplete="off" name="login_password" id="top_login_password" class="input-text required-entry"/>
+                        </div>
+                    </li>
+                    <li id="top_captcha_row" class="no-display">
+                        <input type="text" class="input-text w50 required-entry f-left" id="top_captcha_code" name="captcha_code" style="margin-top: 10px;"/>
+                        <iframe id="img_top_captcha" class="f-left"  width="140px" height="50px" frameborder="0"></iframe>
+                        <a class="f-left" style="margin-top: 15px;" href="javascript:refreshTopCaptcha()"><img src="skin/frontend/default/images/reload.gif" title="Refresh image"/></a>
+                        <div class="clear"></div>
+                    </li>
+                    <li>
+                        <ul id="top_login_message_container" class="no-display messages">
+                            <li id="top_login_message" class="error-msg"></li>
+                        </ul>
+                    </li>
+                    <li class="last" style="margin-top: 5px;">
+                        <a class="f-left colorful" href="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/customer/account/forgotpassword">Forgot your password?</a>
+                        <button id="btn_top_login" type="submit" class="f-right button button-flat"><span><span>Login</span></span></button>
+                        <div class="clear"></div>
+                    </li>
+                </ul>
+            </div>
+            <ul class="panel-border">
+                <li class="panel-tab-l"></li>
+                <li class="panel-tab-m"></li>
+                <li class="panel-tab-r"></li>
+            </ul>
+        </form>
+        </div>
+        <div class="header-container">
+            <a class="logo" href="index____lang_zh_CN.html"><img src="skin/frontend/default/images/logo.gif"/></a>
+            <div class="header">
+                <ul class="block-top">
+                    <li class="lang-panel">
+                        <a href="javascript:void(0)" class="btn-switch-lang">English</a>
+                        <ul id="lang_list">
+                                                            <li><a href="index____lang_en_US.html">English</a></li>
+                                                            <li><a href="index____lang_ko_KP.html">조선어</a></li>
+                                                            <li><a href="index____lang_zh_CN.html">中文</a></li>
+                                                    </ul>
+                    </li>
+                    <li>
+                        <a href="index.html"><span>Home</span></a>
+                    </li>
+
+                                            <li>
+                            <a href="javascript:void(0)" id="top_link_login"><span>Login</span></a>
+                        </li>
+                        <li class="last">
+                            <a href="customer/account/create"><span>Register</span></a>
+                        </li>
+                                    </ul>
+            </div>
+            <div class="clear"></div>
+            <div class="nav-container">
+                <!-- menu start -->
+                <ul id="nav" class="nav-panel">
+                                            <li class="level0    parent" onmouseover="$(this).addClass('over')" onmouseout="$(this).removeClass('over')">
+
+                            <a href="javascript:void(0)"><span>Plan Flights</span></a>
+                                                            <ul>
+                                                                            <li class="level1 "><a href="flight/book"><span>Book a Flight</span></a></li>
+                                                                            <li class="level1 "><a href="flight/status"><span>Today's Flight</span></a></li>
+                                                                            <li class="level1 "><a href="flight/timetable"><span>Time Table</span></a></li>
+                                                                    </ul>
+                                                    </li>
+                                            <li class="level0    parent" onmouseover="$(this).addClass('over')" onmouseout="$(this).removeClass('over')">
+
+                            <a href="javascript:void(0)"><span>Information</span></a>
+                                                            <ul>
+                                                                            <li class="level1 "><a href="notice-to-passengers"><span>Notice to Passengers</span></a></li>
+                                                                            <li class="level1 "><a href="service/assistance"><span>Special Passengers</span></a></li>
+                                                                            <li class="level1 "><a href="service/baggage"><span>Baggage</span></a></li>
+                                                                            <li class="level1  last"><a href="service/checkin"><span>Check-in Procedure</span></a></li>
+                                                                    </ul>
+                                                    </li>
+                                            <li class="level0    parent" onmouseover="$(this).addClass('over')" onmouseout="$(this).removeClass('over')">
+
+                            <a href="javascript:void(0)"><span>Contact</span></a>
+                                                            <ul>
+                                                                            <li class="level1  last"><a href="contact/details"><span>Airkoryo Offices</span></a></li>
+                                                                    </ul>
+                                                    </li>
+                                            <li class="level0   last " onmouseover="$(this).addClass('over')" onmouseout="$(this).removeClass('over')">
+
+                            <a href="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/cargo"><span>Cargo</span></a>
+                                                    </li>
+                                    </ul>
+                <!-- menu end -->
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="main-frame ">
+<script type="text/javascript">
+var validation, switch_flight_type, toggle_flight_type;
+var bookable_date = "2026-01-05";
+(function($){
+    $(document).ready(function(){
+        validation = function() {
+            if ($('#depart_station_no').val() == "") {
+                alert("Please select a departure station.");
+                return false;
+            }
+            if ($('#arrive_station_no').val() == "") {
+                alert("Please select a arrival station.");
+                return false;
+            }
+            if ($('#depart_station_no').val() == $('#arrive_station_no').val()) {
+                alert("Please check your flight stations.");
+                return false;
+            }
+
+            if ($('#depart_date').hasClass("def-label") || $('#depart_date').val()=="") {
+                alert("Please enter a depature date.");
+                return false;
+            } else if ($('#depart_date').validDate() === false) {
+                alert("Please enter a valid depature date.");
+                return false;
+            }
+            if ($('#depart_date').val() < bookable_date) {
+                alert("Flights should be booked d days before taking off.");
+                return false;
+            }
+
+            if ($('#flight_type').val() == "RT") {
+                if ($('#return_date').hasClass("def-label") || $('#return_date').val()=="") {
+                    alert("Please enter a returning date.");
+                    return false;
+                } else if ($('#return_date').validDate() === false || $('#return_date').val()<$('#depart_date').val() ) {
+                    alert("Please enter a valid returning date.");
+                    return false;
+                }
+            }
+
+            var num_adults = $("[name='flight[booking_num_adu]']").val();
+            var num_children = $("[name='flight[booking_num_chi]']").val();
+            var num_infants = $("[name='flight[booking_num_inf]']").val();
+            if (isNaN(num_adults)) {
+                alert("Please select a valid adult nums.");
+                return false;
+            }
+            if (isNaN(num_children)) {
+                alert("Please select a valid children nums.");
+                return false;
+            }
+            if (isNaN(num_infants)) {
+                alert("Please select a valid infant nums.");
+                return false;
+            }
+            if (num_adults+num_children+num_infants == 0) {
+                alert("Please select at least one passenger.");
+                return false;
+            }
+            //if (num_infants > 0 && num_adults==0) {
+            if (num_adults==0) {
+                alert("Please select at least one adult.");
+                return false;
+            }
+
+            $('#sform').submit();
+        }
+
+        switch_flight_type = function(ftype) {
+            if (ftype == "") ftype = "RT";
+            $('#flight_type_selector a').removeClass("active");
+            if (ftype == "OW") {
+                $('#selector_image').removeClass("on");
+                $('#selector_image').prev().children('a').addClass("active");
+                $('.td-return').hide();
+                $('#btn_search').parent().attr("colspan", "4");
+            } else if (ftype == "RT") {
+                $('#selector_image').addClass("on");
+                $('#selector_image').next().children('a').addClass("active");
+                $('.td-return').show();
+                $('#btn_search').parent().attr("colspan", "2");
+            }
+            $('#flight_type').val(ftype);
+        }
+        toggle_flight_type = function() {
+            if ($('#selector_image').hasClass("on"))
+                switch_flight_type("OW");
+            else
+                switch_flight_type("RT");
+        }
+    });
+
+})(jQuery);
+</script>
+<script type="text/javascript">
+
+    (function($){
+
+        function station_selector(option) {
+            $select = $(option).parent();
+            $select.nextAll('input[type=hidden]').val( $select.val() );
+        }
+
+        $(document).ready(function(){
+            $('#depart_date').turnOffAutocomplete();
+            $('#return_date').turnOffAutocomplete();
+            var departDate = new dhtmlXCalendarObject(["depart_date"]);
+            var returnDate = new dhtmlXCalendarObject(["return_date"]);
+            departDate.hideTime();
+            departDate.setDateFormat("%Y-%m-%d");
+            departDate.loadUserLanguage("");
+            departDate.attachEvent("onClick", function (){
+                $('#depart_date').change();
+                returnDate._activeDate = departDate.getDate();
+                returnDate.setSensitiveRange(departDate.getDate(), null);
+            });
+
+            returnDate.hideTime();
+            returnDate.setDateFormat("%Y-%m-%d");
+            returnDate.loadUserLanguage("");
+            returnDate.attachEvent("onClick", function (){
+                $('#return_date').change();
+                departDate.setSensitiveRange(departDate.getDate(), returnDate.getDate());
+            });
+            departDate.setSensitiveRange(bookable_date, null);
+            returnDate.setSensitiveRange(bookable_date, null);
+
+            $('#booking_num_adu').combobox({maxlen: 2, name: "flight[booking_num_adu]"});
+            $('#booking_num_chi').combobox({maxlen: 2, name: "flight[booking_num_chi]"});
+            $('#booking_num_inf').combobox({maxlen: 2, name: "flight[booking_num_inf]"});
+            $('#booking_class').combobox({readonly: true});
+
+            $('#selector_image').click(toggle_flight_type);
+
+            $('#depart_station').combobox({readonly: true, label: "From", width: "305px", _selected: station_selector});
+            $('#arrive_station').combobox({readonly: true, label: "To", width: "305px", _selected: station_selector});
+
+            $('#btn_search').click(function(){
+                setTimeout(function(){
+                    validation();
+                }, 120);
+                return false;
+            });
+
+            $('#btn_search_status').click(function(){
+                setTimeout(function(){
+                    validationStatus();
+                }, 120);
+                return false;
+            });
+
+            $('#quick_panel_menu a').click(function(){
+                if ($(this).hasClass('active')) return;
+
+                $(this).closest('ul').find('.active').removeClass('active');
+                $(this).addClass('active');
+
+                var id = $(this).attr('rel');
+                $('.quick-panel').hide();
+                $('#'+id).show();
+            });
+
+            $('#status_flight_no').turnOffAutocomplete();
+            $('#status_flight_date').turnOffAutocomplete();
+            var flightDate = new dhtmlXCalendarObject(["status_flight_date"]);
+            flightDate.hideTime();
+            flightDate.setDateFormat("%Y-%m-%d");
+            flightDate.loadUserLanguage("");
+            flightDate.attachEvent("onClick", function (){
+                $('#status_flight_date').change();
+            });
+
+            $('#status_depart_station').combobox({readonly: true, label: "From", width: "305px", _selected: station_selector});
+            $('#status_arrive_station').combobox({readonly: true, label: "To", width: "305px", _selected: station_selector});
+
+        });
+    })(jQuery);
+</script>
+
+<div class="banner">
+</div>
+<div id="quick_panel">
+    <!--<ul id="quick_panel_menu">
+        <li><a href="javascript:void(0)" id="btn_quick_flights" rel="quick_search_panel" class="active">[[label _="Find Flights"]]</a></li>
+        <li class="last"><a href="javascript:void(0)" id="btn_quick_status" rel="quick_status_panel">[[label _="Flight Status"]]</a></li>
+    </ul>-->
+    <div class="quick-panel-content">
+        <form id="sform" method="post" action="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/flight/book/choose">
+            <input type="hidden" name="csrf_airkoryo_name" value="1d9d78331272d5cb0166b0f8b003e423" />
+            <input type="hidden" name="server_key" value="1467103eddd529689a2406b644b8ea54"/>
+            <div id="quick_search_panel" class="quick-panel">
+                <ul id="flight_type_selector">
+                    <li><a href="javascript:switch_flight_type('OW')">One Way</a></li>
+                    <li id="selector_image" class="on"></li>
+                    <li><a class="active" href="javascript:switch_flight_type('RT')">Return Trip</a></li>
+                </ul>
+                <input type="hidden" name="flight[flight_type]" id="flight_type" value="RT"/>
+                <div id="flight_query" class="search-form">
+                    <ul class="mb15">
+                        <li>
+                            <select id="depart_station"">
+                                                                    <option value="8">China/Beijing (PEK)</option>
+                                                                    <option value="1">DPRK/Pyongyang (FNJ)</option>
+                                                                    <option value="3">China/Shenyang (SHE)</option>
+                                                                    <option value="9">Russia/Vladivostok (VVO)</option>
+                                                            </select>
+                            <input type="hidden" id="depart_station_no" name="flight[depart_station_no]" value=""/>
+                        </li>
+                        <li><input type="text" class="input-text input-cal" id="depart_date" name="flight[depart_date]" maxlength="10" _label="Depart.Date"/></li>
+                        <li class="last">
+                            <table class="passenger-nums">
+                                <tr>
+                                    <td>
+                                        <label for="booking_num_adu">Adults(12+)</label>
+                                        <select id="booking_num_adu">
+                                                                                            <option value="0" >0</option>
+                                                                                            <option value="1" selected>1</option>
+                                                                                            <option value="2" >2</option>
+                                                                                            <option value="3" >3</option>
+                                                                                            <option value="4" >4</option>
+                                                                                            <option value="5" >5</option>
+                                                                                    </select>
+                                    </td>
+                                    <td>
+                                        <label for="booking_num_chi">Children(2-11)</label>
+                                        <select id="booking_num_chi">
+                                                                                            <option value="0">0</option>
+                                                                                            <option value="1">1</option>
+                                                                                            <option value="2">2</option>
+                                                                                            <option value="3">3</option>
+                                                                                    </select>
+                                    </td>
+                                    <td class="last">
+                                        <label for="booking_num_inf">Infants(0-2)</label>
+                                        <select id="booking_num_inf">
+                                                                                            <option value="0">0</option>
+                                                                                            <option value="1">1</option>
+                                                                                            <option value="2">2</option>
+                                                                                            <option value="3">3</option>
+                                                                                    </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <select id="arrive_station">
+                                                                    <option value="8">China/Beijing (PEK)</option>
+                                                                    <option value="1">DPRK/Pyongyang (FNJ)</option>
+                                                                    <option value="3">China/Shenyang (SHE)</option>
+                                                                    <option value="9">Russia/Vladivostok (VVO)</option>
+                                                            </select>
+                            <input type="hidden" id="arrive_station_no" name="flight[arrive_station_no]" value=""/>
+                        </li>
+                        <li class="td-return"><input type="text" class="input-text input-cal" id="return_date" name="flight[return_date]" _label="Return.Date"/></li>
+                        <li class="last f-right">
+                            <button class="button" type="submit" id="btn_search"><span><span>Search</span></span></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+        <!--<form id="tform" method="post" action="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/flight/status/search">
+            <input type="hidden" name="server_key" value="1467103eddd529689a2406b644b8ea54"/>
+        <div id="quick_status_panel" class="no-display quick-panel">
+            <h3>[[label _="Please select flight number or flight cities."]]</h3>
+            <div class="search-form">
+                <ul class="f-column">
+                    <li>
+                        <input type="text" class="input-text w200" name="status[flight_no]" id="status_flight_no" _label="[[label _='Flight Number']]"/>
+                    </li>
+                    <li><label>[[label _="or"]]</label></li>
+                    <li class="last">
+                        <div class="mb15">
+                            <select id="status_depart_station">
+                                [[html_options options=$stations]]
+                            </select>
+                            <input type="hidden" id="status_depart_station_no" name="status[depart_station_no]"/>
+                        </div>
+                        <div>
+                            <select id="status_arrive_station">
+                                [[html_options options=$stations]]
+                            </select>
+                            <input type="hidden" id="status_arrive_station_no" name="status[arrive_station_no]"/>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="t-column right">
+                    <div class="mb15">
+                        <input type="text" class="input-text input-cal" id="status_flight_date" name="status[flight_date]" maxlength="10" _label="[[label _='Flight Date']]"/>
+                    </div>
+                    <div>
+                        <button class="button" type="submit" id="btn_search_status"><span><span>[[label _="Search"]]</span></span></button>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        </form>-->
+    </div>
+</div>
+</form>
+
+<div class="home-content">
+    <div class="fare-panel">
+        <div class="header">
+            <h3>Fares</h3>
+        </div>
+        <div class="fare-list">
+            <ul>
+                                <li>
+                    <div class="flight-info">
+                        <div class="station-info">
+                            <span class="city-name">Vladivostok <span class="station-code">(VVO)</span></span>
+                        </div>
+                        <div class="arrow">></div>
+                        <div class="station-info">
+                            <span class="city-name">Pyongyang<span class="station-code">FNJ</span></span>
+                        </div>
+                    </div>
+                    <div class="fare">265  USD</div>
+                </li>
+                                <li>
+                    <div class="flight-info">
+                        <div class="station-info">
+                            <span class="city-name">Beijing <span class="station-code">(BJS)</span></span>
+                        </div>
+                        <div class="arrow">></div>
+                        <div class="station-info">
+                            <span class="city-name">Pyongyang<span class="station-code">FNJ</span></span>
+                        </div>
+                    </div>
+                    <div class="fare">1760  CNY</div>
+                </li>
+                                <li>
+                    <div class="flight-info">
+                        <div class="station-info">
+                            <span class="city-name">Shenyang <span class="station-code">(SHE)</span></span>
+                        </div>
+                        <div class="arrow">></div>
+                        <div class="station-info">
+                            <span class="city-name">Pyongyang<span class="station-code">FNJ</span></span>
+                        </div>
+                    </div>
+                    <div class="fare">1180  CNY</div>
+                </li>
+                            </ul>
+            <div class="description">
+                Prices shown are basic fare, not including taxes.            </div>
+            <!--<div class="more-tools">
+                <a href="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/flight/fares">[[label _="View All Fares"]]<small> &raquo;</small></a>
+            </div>-->
+        </div>
+    </div>
+    <div class="contact-list">
+        <div class="header">
+            <h3>Airkoryo Offices</h3>
+        </div>
+        <div class="list-2column">
+            <ul>
+                <li><a href="contact/details">Headquarter</a></li>
+                <li><a href="contact/details">Beijing</a></li>
+                <li><a href="contact/details">Shenyang</a></li>
+                <li><a href="contact/details">Shanghai</a></li>
+                <li><a href="contact/details">Dandong</a></li>
+                <!--<li><a href="contact/details">[[label _="Kuala Lumpur"]]</a></li>-->
+            </ul>
+            <ul>
+                <li><a href="contact/details">Moscow</a></li>
+                <li><a href="contact/details">Vladivostok</a></li>
+                <li><a href="contact/details">Berlin</a></li>
+                <!--<li><a href="contact/details">[[label _="Bangkok"]]</a></li>-->
+                <li><a href="contact/details">Kuwait</a></li>
+            </ul>
+        </div>
+        <div class="more-tools">
+            <a href="contact/details">View More<small> &raquo;</small></a>
+        </div>
+    </div>
+    <div class="r-panel">
+        <div id="online_booking_guide">
+            <a href="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/online-booking-guide"><img src="skin/frontend/default/images/en/booking.jpg"/></a>
+        </div>
+        <div id="emergency_call">
+            <img src="skin/frontend/default/images/en/emergency.jpg"/>
+        </div>
+    </div>
+</div>
+
+<div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="footer-container">
+    <div class="footer">
+        <ul class="links">
+            <li><a href="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/about-us">About Us</a></li>
+            <li><a href="contact/details">Contact Us</a></li>
+            <li><a href="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/regulations">General Conditions</a></li>
+            <li class="last"><a href="https://web.archive.org/web/20260101im_/http://www.airkoryo.com.kp/site-map">Site Map</a></li>
+            <!--<li class="last"><a href="index____lang_zh_CN.html">[[label _="Browser Supports"]]</a></li>-->
+        </ul>
+        <address>Copyright &copy; 2016, Air Koryo. All rights reserved.</address>
+    </div>
+</div>
+
+</BODY>
+</HTML>
+

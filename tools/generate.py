@@ -176,6 +176,11 @@ def main():
         dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS]
         if '.git' in root.split(os.sep): continue
         if '.pio' in root.split(os.sep): continue
+        # the NK archive is a byte-identical preservation mirror: generating
+        # listings inside it would add files that were never captured
+        if os.path.relpath(root, DEPLOY).replace(os.sep, '/').startswith('demos/nk-archive/sites'):
+            dirs[:] = []
+            continue
         if os.path.abspath(root) == DEPLOY: continue  # never overwrite the portfolio index.html
         # Don't clobber a real app/hub page: only regenerate folders whose existing
         # index.html is a generated listing or that have none. (Generated listings

@@ -95,6 +95,24 @@ Verified after going live: every URL returns `200` with a `Content-Length`
 matching the local file, `Accept-Ranges: bytes`, a mid-file range request returns
 `206` with the right `Content-Range` and bytes matching the local file at that
 offset, and a download cut short at 1 MB and resumed with `curl -C -` finishes
-byte-identical (SHA-256 match). The uploads themselves were resumable too — the
-uploader skips any asset already present at the right size, so re-running never
-re-uploads a finished file.
+byte-identical (SHA-256 match). That was later taken further: the full
+309,378,949 B DMG was pulled end-to-end through the Worker (3.7 MB/s, 83 s) and
+hashed identical, and the 306 MB `<code>.exe</code>` was cut at 125,829,120 B then
+resumed to completion, also SHA-256 identical — which is the only test that
+catches a streaming proxy that truncates while still returning correct headers.
+The uploads themselves were resumable too — the uploader skips any asset already
+present at the right size, so re-running never re-uploads a finished file.
+
+## Full analysis and mirror copy
+
+- **Full analysis** — `/portfolio/analysis/hongkong-tour/`: a standalone
+  single-file page (~26 KB) covering the data model, the seven delivery targets,
+  the five packaging traps with root causes, what is actually proven (with the
+  check that proves it) and the known gaps. Light theme, in-page TOC, tables
+  wrapped in scroll containers so a phone never scrolls sideways.
+- **Full mirror copy** — https://hongkong-tour.pages.dev/: a separate Cloudflare
+  Pages project (`hongkong-tour`) deploying the same 170 files / 28 MB / 166
+  photos, so the browser build survives the portfolio site breaking. Verified
+  standalone: 3 regions, 27 areas and 143 spots read from its own `data.json`,
+  search returns results, a photo decodes at 1000×750, zero 4xx and zero JS
+  errors (11/11 checks).

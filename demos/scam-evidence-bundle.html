@@ -134,7 +134,7 @@ img{max-width:100%;border-radius:8px;margin:8px 0}
 let framesHtml = '';
 for(let i=1; i<=17; i++){
   let ts = [10,30,60,120,180,300,420,540,660,780,900,480,600,720,840,960,120][i-1] || i*60;
-  framesHtml += `<div><img src="about:blank#frame-frame_${ts}s.jpg" onerror="this.parentElement.innerHTML='<div style=background:#1a1a2e;height:300px;display:flex;align-items:center;justify-content:center;color:var(--muted)>🖼️ ${Math.floor(ts/60)}:${String(ts%60).padStart(2,\"0\")}</div>'"><div style="font-size:10px;color:var(--muted);text-align:center">${Math.floor(ts/60)}:${String(ts%60).padStart(2,'0')}</div></div>`;
+  framesHtml += `<div><img src="about:blank#frame-frame_${ts}s.jpg" onerror="this.parentElement.innerHTML='<div style=background:#1a1a2e;height:300px;display:flex;align-items:center;justify-content:center;color:var(--muted)>🖼️ ${Math.floor(ts/60)}:${String(ts%60).padStart(2,"0")}</div>'"><div style="font-size:10px;color:var(--muted);text-align:center">${Math.floor(ts/60)}:${String(ts%60).padStart(2,'0')}</div></div>`;
 }
 document.getElementById('frames-grid').innerHTML = framesHtml;
 </script>

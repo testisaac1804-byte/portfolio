@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Mirae</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+        <link href="/assets/layouts/layout5/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/layouts/layout5/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/layouts/layout5/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/layouts/layout5/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <link href="/include/style1.css" rel="stylesheet" type="text/css" />
+    <link href="/include/slippry.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="/include/css/animate.css" rel="stylesheet">
+    <link href="/include/css/dlmenu.css" rel="stylesheet">
+            <link href="/include/new/css/bootstrap.min.css" rel="stylesheet">
+            <link href="/include/new/css/fancybox/jquery.fancybox.css" rel="stylesheet">
+            <link href="/include/new/css/jcarousel.css" rel="stylesheet">
+            <link href="/include/new/css/flexslider.css" rel="stylesheet">
+            <link href="/include/new/css/style.css" rel="stylesheet">
+            <link href="/include/new/skins/default.css" rel="stylesheet">
+            <link href="/include/css/login.css" rel="stylesheet">
+    
+</head>
+
+<body style="min-width: 1280px; max-width: 2000px;margin: 0 auto !important;"><section id="header1" style="padding:0;">
+	<div class="row" style="background-position:right top;background-repeat: repeat-x; background-image: url('include/images/bg1.jpg');">
+		<div class="col-md-4" style="height: 137px;padding: 0px;background-repeat:no-repeat;background-image: url('include/images/new_bg.png');">
+			<div href="index.html"><img src="include/images/mark1.png" alt="" style="height: 137px;" title="" /></div>
+		</div>
+		<div class="col-md-8">
+			<div>
+				<nav id="nav-menu-container" style="padding-left: 5%; padding-top:2.5%;">
+					<nav class="nav social-nav pull-right hidden-sm-down" style="padding-right: 5%">
+						<a href="front" style="font-family: WKGothic, WKSystem, WKRGothic; color: #dddddd; font-weight: 900; font-size: 30px;">조선어&nbsp;&nbsp;</a>
+						<a href="front_en" style="font-family: Times New Roman; color: #ffffff; font-weight: 900; font-size: 30px;">English&nbsp;&nbsp;</a>
+						<a href="front_ch" style="font-family: SimSun; color: #dddddd;  font-weight: 900; font-size: 30px;">汉语</a>
+					</nav>
+				</nav>
+			</div>
+			<div style="padding-top:5%;">
+				<h2 style="color: #4db6cc; font-size: 25px; font-family: WKSystem; text-shadow: 2px 2px 4px #b0b0b0;text-align:center;">
+					Keep your feet planted firmly on this land and look out over the world!
+				</h2>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- end header -->
+<section id="featured">
+	<!-- start slider -->
+	<div class="container-fluid" style="padding: 15px;">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="mt-element-list" style=" box-shadow: 0 4px 8px 0 rgba(0,0,0,0.11), 0 6px 20px 0 rgba(0,0,0,0.08);">
+					<div class="mt-list-head list-simple bg-red" style="padding: 10px !important;">
+						<a class="list-head-title-container" href="le_mr_aderworks_en">
+							<h3 class="list-title" style="font-size : 25px; padding-right:0px; text-align:center; color: #fffba7;">Great Leadership</h3>
+
+						</a>
+					</div>
+					<div class="portlet-body">
+						<div class="scroller" style="height:290px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+							<ul>
+																	<li class="odd" style=" padding-top: 15px;">
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/1009" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">Supreme Leader <strong class="name-nowrap">Kim Jong Un</strong> Breaks Ground First for Construction of Pyongyang General Hospital</a>
+									                                        <a href="front_en/sh_mr_owPicture/1009" target="blank">[<i class="fa fa-camera"></i>]</a>
+                                    									</li>
+															</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<!-- Slider -->
+				<div id="main-slider" class="flexslider" style="margin-right: 20px;">
+					<ul class="slides">
+						<li>
+							<img src="include/images/front/center_1.jpg" style="min-height: 340px;" alt="과학기술전당" />
+						</li>
+						<li>
+							<img src="include/images/front/center_2.jpg" style="min-height: 340px;" alt="전자열람실" />
+
+						</li>
+						<li>
+							<img src="include/images/front/center_3.jpg" style="min-height: 340px;" alt="과학기술전당" />
+
+						</li>
+					</ul>
+				</div>
+				<!-- end slider -->
+			</div>
+		</div>
+	</div>
+</section>
+<section class="callaction " style="padding-top: 15px; background-color: #2a5b82;">
+	<div class="tabbable-line" style="text-align:center;">
+		<ul class="nav nav-tabs" style="padding-left: 0px;float: none; list-style: none; display: inline-block;">
+						<li class="active"><a href="/front_en" style="font-size: 21px; font-family: WKSystem; color: rgba(255,255,255,0.84);padding-left: 10px; padding-right: 10px;"><i class="fa   fa-home"></i>Home</a></li>
+						<li ><a href="/al_mr_ertlist_en" style="font-size: 21px; font-family: WKSystem; color: rgba(255,255,255,0.84);padding-left: 10px; padding-right: 10px;"><i class="fa   fa-bell-o"></i>Festivals and Exhibitions</a></li>
+						<li ><a href="/wo_mr_rldexchange_en" style="font-size: 21px; font-family: WKSystem; color: rgba(255,255,255,0.84);padding-left: 10px; padding-right: 10px;"><i class="fa  fa-globe"></i>International Exchange</a></li>
+						<li ><a href="/re_mr_searchresults_en" style="font-size: 21px; font-family: WKSystem; color: rgba(255,255,255,0.84);padding-left: 10px; padding-right: 10px;"><i class="fa fa-trophy"></i>Sci-Tech Achievements</a></li>
+						<li ><a href="/re_mr_scientist_en" style="font-size: 21px; font-family: WKSystem; color: rgba(255,255,255,0.84);padding-left: 10px; padding-right: 10px;"><i class="fa  fa-user"></i>Scientists</a></li>
+			
+			<li ><a href="/fu_mr_llsearch_en" style="font-size: 21px; font-family: WKSystem; color: rgba(255,255,255,0.84);padding-left: 10px; padding-right: 10px;"><i class="fa  fa-search"></i>Search</a></li>
+			</li>
+		</ul>
+	</div>
+</section>
+<section id="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="box">
+				<div class="col-md-6" style="padding-left:140px;">
+					<a href="le_mr_adersh_en" style="position:absolute;left:10px; background-color: rgba(241,240,240,0.83); padding-right: 5px; box-shadow: 0 4px 8px 5px rgba(0,0,0,0.11), 0 6px 6px 0 rgba(0,0,0,0.08);">
+
+
+						<div class="box-bottom" style="padding-right: 0px; width: 125px; height: 325px;">
+							<div style="font-size: 25px; line-height: 1.1em; font-family: WKWgothic; color: #ffffff; padding: 20px; padding-top: 70px;">For Sci-Tech Power</div>
+						</div>
+					</a>
+					<div>
+						<table class="table table-striped able-hover" id="spread-table">
+							<thead>
+								<tr>
+									<th width="90%" style="font-size: 21px; letter-spacing:5px; background-color: #ffffff; color: #000000; text-align: center"> Title </th>
+								</tr>
+							</thead>
+																						<tr>
+									<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/1868" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">First Guidance Trip of New Year</a>
+									 									</td>
+								</tr>
+															<tr>
+									<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/1867" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">Implanting Patriotism in Scientists</a>
+									 									</td>
+								</tr>
+															<tr>
+									<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/1866" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">To Prove in Practice</a>
+									 									</td>
+								</tr>
+															<tr>
+									<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/1865" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">True Meaning of Modernization</a>
+									 									</td>
+								</tr>
+															<tr>
+									<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/1864" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">Most Important Source of the Country</a>
+									 									</td>
+								</tr>
+															<tr>
+									<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/1863" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">For the People’s Benefits</a>
+									 									</td>
+								</tr>
+															<tr>
+									<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/1862" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">Officials Should Take the Lead</a>
+									 									</td>
+								</tr>
+													</table>
+					</div>
+				</div>
+				<div class="col-md-6 mt-element-ribbon" style="border-color: #f0f0f0; padding-top: 18px;">
+					<a href="al_mr_ertlist_en" class="ribbon ribbon-border-hor ribbon-clip ribbon-color-danger ribbon-border-dash-hor" style="font-family: WKWgothic; font-size: 25px;border-color: #DDDCDC">
+						<div class="ribbon-sub ribbon-clip" style="background-color: #0a6aa1; border-color: white">
+						</div>
+						Sci-Tech Festival and Exhibition
+					</a>
+					<div style="background-color: #f9f8f8">
+						<div id="main-slider-pic" style="padding:2%;padding-top:30px;">
+							<ul id="slippry-slider">
+																	<li>
+										<img src="include/images/front/pic_eng/alert_eng1.jpg" alt="" style="width: 550px;  padding: 30px; margin-left: 70px;">
+									</li>
+																	<li>
+										<img src="include/images/front/pic_eng/alert_eng2.jpg" alt="" style="width: 550px;  padding: 30px; margin-left: 70px;">
+									</li>
+															</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- divider -->
+</section>
+</div>
+<div class="container-fluid" style="padding-bottom: 50px;">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="row">
+				<div class="box">
+					<div class="col-md-6">
+						<a href="wo_mr_rldexchange_en" class="" style="background-color: RGBA(0, 118,145,0.83); padding: 10px; box-shadow: 0 4px 8px 5px rgba(0,0,0,0.11), 0 6px 6px 0 rgba(0,0,0,0.08);font-family: WKWgothic;font-size: 25px;color: white;">
+							International Exchange and Cooperation
+						</a>
+						<div class=" aligncenter" style="width: 90%; padding-top: 25px;">
+							<table class="table table-striped able-hover" id="spread-table">
+								<thead>
+									<tr>
+										<th width="90%" style="font-size: 21px; letter-spacing:5px; background-color: #ffffff; color: #000000; text-align: center"> Title </th>
+									</tr>
+								</thead>
+																									<tr>
+										<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/986" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">Pyongyang Int'l Exhibition of Green Building Materials, Furniture</a>
+									 										</td>
+									</tr>
+																	<tr>
+										<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/964" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">DPRK-China Sci-Tech Exhibition in Health and Sports Field</a>
+									 										</td>
+									</tr>
+																	<tr>
+										<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/913" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">2019-2022 DPRK-Bulgaria Plan for Cooperation in Education and Culture Signed</a>
+									 										</td>
+									</tr>
+																	<tr>
+										<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/869" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">Pyongyang Int'l Sci-Tech Exhibition of Health and Medical Appliances Held</a>
+									 										</td>
+									</tr>
+																	<tr>
+										<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/848" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">Pyongyang Medical Science Symposium on Diabetes Held</a>
+									 										</td>
+									</tr>
+															</table>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<a href="re_mr_searchresults_en" class="" style="background-color: rgba(112, 0,110,0.83); padding : 10px; box-shadow: 0 4px 8px 5px rgba(0,0,0,0.11), 0 6px 6px 0 rgba(0,0,0,0.08);font-family: WKWgothic;font-size: 25px;color: white;">
+							Sci-Tech Achievements
+						</a>
+						<div class=" aligncenter" style="width: 100%; padding-top: 25px;">
+							<table class="table table-striped able-hover" id="spread-table">
+								<thead>
+									<tr>
+										<th width="90%" style="font-size: 21px; letter-spacing:5px; background-color: #ffffff; color: #000000; text-align: center"> Title </th>
+									</tr>
+								</thead>
+																									<tr>
+										<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/1853" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">With Determination to Contribute to Agricultural Production</a>
+									                                         <a href="front_en/sh_mr_owPicture/1853" target="blank">[<i class="fa fa-camera"></i>]</a>
+                                    										</td>
+									</tr>
+																	<tr>
+										<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/1852" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">Academy of Poultry Science Renovated</a>
+									                                         <a href="front_en/sh_mr_owPicture/1852" target="blank">[<i class="fa fa-camera"></i>]</a>
+                                    										</td>
+									</tr>
+																	<tr>
+										<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/1844" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">To Breed New Species of Mushroom</a>
+									                                         <a href="front_en/sh_mr_owPicture/1844" target="blank">[<i class="fa fa-camera"></i>]</a>
+                                    										</td>
+									</tr>
+																	<tr>
+										<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/1843" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">Devoting Wisdom and Enthusiasm</a>
+									                                         <a href="front_en/sh_mr_owPicture/1843" target="blank">[<i class="fa fa-camera"></i>]</a>
+                                    										</td>
+									</tr>
+																	<tr>
+										<td>
+                                        <a href="Re_mr_searchwork_en/sh_mr_owData/1836" style="font-family : 'PRK P Gothic'; font-size: 15px;" target="blank">Efficient Seed-Coating Material Phungnyonmo-1</a>
+									 										</td>
+									</tr>
+															</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+<div class="site-footer">
+    <div style="background-color: #2a5b82;">
+        <div class="container" style="width: 95%; padding-top: 5px; padding: 20px;">
+            <div class="row" style="letter-spacing: 1.5px">
+
+                <div class="footer_cell" style="text-align: center;">
+                    <span class="site_info font-grey-cascade" style="line-height: 2em; font-size: 10pt;">&copy; State Commission of Science and Technology of DPRK<br />
+                        Address: Kinmaul-dong No. 1, Moranbong District, Pyongyang &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Tel: 00850-2-18111(Ext.431-8625) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e-mail: pptayang<span>＠</span>star-co.net.kp
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fax: 00850-2-381-1200 </span>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div><script>
+    var site_url = '/';
+</script>
+<script src="/include/js/modernizr.custom.js"></script>
+<script src="/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<script src="/include/js/datatables.min.js" type="text/javascript"></script>
+<script src="/include/js/datatables.bootstrap.js" type="text/javascript"></script>
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="/assets/global/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+<script src="/assets/lib/counterup/counterup.min.js"></script>
+<script src="/assets/superfish/superfish.min.js"></script>
+<script src="/assets/stickyjs/sticky.js"></script>
+<script src="/assets/global/scripts/app.min.js" type="text/javascript"></script>
+<script src="/include/js/jquery.dlmenu.js"></script>
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN THEME LAYOUT SCRIPTS -->
+<script src="/assets/layouts/layout5/scripts/layout.min.js" type="text/javascript"></script>
+<script src="/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+<script src="/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+<script src="/include/js/wow.js"></script>
+<script src="/include/my.js"></script>
+<script src="/include/slippry.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#slippry-slider').slippry(
+            defaults = {
+                transition: 'vertical',
+                useCSS: true,
+                speed: 1000,
+                pause: 7000,
+                initSingle: false,
+                auto: true,
+                preload: 'visible',
+                pager: false,
+            }
+        )
+    });
+</script>
+
+    <script src="/include/new/js/jquery.easing.1.3.js" type="text/javascript"></script>
+    <script src="/include/new/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/include/new/js/jquery.fancybox.pack.js" type="text/javascript"></script>
+    <script src="/include/new/js/jquery.fancybox-media.js" type="text/javascript"></script>
+    <script src="/include/new/js/google-code-prettify/prettify.js" type="text/javascript"></script>
+    <script src="/include/new/js/portfolio/jquery.quicksand.js" type="text/javascript"></script>
+    <script src="/include/new/js/portfolio/setting.js" type="text/javascript"></script>
+    <script src="/include/new/js/jquery.flexslider.js" type="text/javascript"></script>
+    <script src="/include/new/js/animate.js" type="text/javascript"></script>
+    <script src="/include/new/js/custom.js" type="text/javascript"></script>
+    <script src="/include/new/js/my.js" type="text/javascript"></script>
+    <script src="/include/js/login_en.js" type="text/javascript"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en" dir="ltr"> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang="en" dir="ltr"> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9" lang="en" dir="ltr"> <![endif]--><!--[if gt IE 8]><!--><html class="no-js" dir="ltr" lang="en"><!--<![endif]--><head><title>KOREA MA</title><meta http-equiv="Content-type" content="text/html; charset=UTF-8" >
+<meta name="description" content="조선민주주의인민공화국 국가해사감독국, MARITIME ADMINISTRATION OF DPR KOREA" >
+<meta name="keywords" content="국가해사감독국,중앙해상탐색구조 조종소,중앙해상환경보호 조종소,평양국제해사정보교류소, MARITIME ADMINISTRATION, Maritime news, Maritime laws, Ship, Seaf arer" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+<meta name="apple-mobile-web-app-capable" content="yes" >
+<link href="../../../assets/img/favicon.ico" rel="shortcut icon" type="image/x-icon" >
+<link href="../../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" >
+<link href="../../../assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" >
+<link href="../../../assets/plugins/toastr/css/toastr.css" rel="stylesheet" type="text/css" >
+<link href="../../../assets/css/animate.css" rel="stylesheet" type="text/css" >
+<link href="../../../assets/css/elements.css" rel="stylesheet" type="text/css" >
+<link href="../../../assets/css/custom.css" rel="stylesheet" type="text/css" >
+<link href="../../../assets/css/header.css" rel="stylesheet" type="text/css" >
+<link href="../../../assets/css/style.css" rel="stylesheet" type="text/css" >
+<link href="../../../assets/css/theme-colors/dark-blue.css" rel="stylesheet" type="text/css" >
+<link href="../../../assets/backend/css/pages/buttons.css" rel="stylesheet" type="text/css" >
+<link href="../../../assets/css/home.css" rel="stylesheet" type="text/css" >
+<link href="../../../assets/plugins/table/datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" >
+<link href="../../../assets/plugins/table/select2/css/select2.min.css" rel="stylesheet" type="text/css" >
+<link href="../../../assets/plugins/table/select2/css/select2-bootstrap.css" rel="stylesheet" type="text/css" >
+<script >var site_url = "https://web.archive.org/web/20260101im_/http://ma.gov.kp/index.php";</script></head><body >
+<header class="header-top clearfix">
+		
+<div class="container wide_screen">
+
+	<div class="container_panel" >
+		<div>
+			<div class="top" >
+				<div class="container wide_screen">
+					
+					<a href="#" class="navbar-brand">
+							<img src="../../../assets/img/en/logo.png" 
+							class="logo_position_en" alt="Mark of Maritime Administration of DPR Korea">
+					</a>
+				</div>   
+				
+				<div class="header_height">
+					<div class="right-menu" >
+						<div>
+							<a href="ko"  
+								data-toggle="tooltip" title="Switch Language">
+								<div class="lang"></div>
+							</a>
+						</div> 
+					</div>
+				</div>      
+			</div>
+			<div class="header">
+				<div class="navbar navbar-default" role="navigation">
+					<div class="wide_screen">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+								<span class="sr-only"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+
+						<div class="collapse navbar-collapse navbar-responsive-collapse">
+							<ul class="nav navbar-nav navbar-left">
+								<li ><a href="../../home/index/en" >Home</a></li>
+								<li >
+									<a href="../../leaders/index/en" >Great Leadership<span id="active_label_count" class="label-notify" ></span>
+									</a>
+
+								</li>
+								<li 
+									class="dropdown"								>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" >About us</a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="../../introduction/index/en">Maritime Administration</a></li>
+										<li><a href="../../introduction/aboutmrcc/en">Maritime Rescue Coordination Center of DPR Korea</a></li>
+										<li><a href="../../introduction/aboutkmepc/en">Korea Maritime Environmental Protection Center</a></li>
+										<li><a href="../../introduction/aboutpimic/en">Pyongyang International Maritime Information Center</a></li>
+									</ul>
+								</li>
+								<li class="active">
+									<a href="en">Maritime News<span id="news_label_count" class="label-notify"></span>
+									</a></li>
+								<li >
+									<a href="../../laws/index/en">Maritime Laws<span id="laws_label_count" class="label-notify"></span>
+									</a></li>
+								<li ><a href="../../shipdata/index/en" >Ship/Seafarer</a></li>
+								<li >
+									<a href="../../today/index/en" >Korea Today<span id="today_label_count" class="label-notify"></span>
+									</a></li>
+								<li class="search">
+										<div id="search-trigger">Search:</div>
+										<input id="search_str_top" type="text" placeholder="Search" >
+										</li>								
+							</ul>
+						</div>
+					</div>    
+				</div>    
+			</div>
+			
+		</div> 
+		
+	</div>
+    
+</div>
+</header>
+<div class="header_bottom"></div>
+<div class="container body_wide_screen">
+
+    <div class="row">
+        
+        <div class="col-md-12" >
+            <div class="text-left">
+                <h3 class="border-primary-green heading_border">
+                    <span class="heading_border bg-green">
+                        <i class="fa fa-comments"></i> Maritime News                    </span>
+                </h3>
+            </div>
+            <div class="col-md-12">
+                <div class="panel panel-success filterable">
+                    <div class="panel-body table-responsive" >
+                        <table class="table table-hover" id="table1">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Date</th>
+                                    <!-- <th></th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="firstcol"><p data-toggle="modal" onclick="getBlog('https://web.archive.org/web/20260101im_/http://ma.gov.kp/index.php/home/getArtistContent/en/1571/Maritime News')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span >Aiming at effective impelementation of SOLAS</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comments" ></i></p></td><td class="secondcol"><i class="fa fa-calendar" ></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2025.10.30.</td></tr><tr><td class="firstcol"><p data-toggle="modal" onclick="getBlog('https://web.archive.org/web/20260101im_/http://ma.gov.kp/index.php/home/getArtistContent/en/1548/Maritime News')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span >World Maritime Day 2025</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comments" ></i></p></td><td class="secondcol"><i class="fa fa-calendar" ></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2025.9.28.</td></tr><tr><td class="firstcol"><p data-toggle="modal" onclick="getBlog('https://web.archive.org/web/20260101im_/http://ma.gov.kp/index.php/home/getArtistContent/en/1549/Maritime News')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span >Aiming at green shipping</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comments" ></i></p></td><td class="secondcol"><i class="fa fa-calendar" ></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2025.9.28.</td></tr><tr><td class="firstcol"><p data-toggle="modal" onclick="getBlog('https://web.archive.org/web/20260101im_/http://ma.gov.kp/index.php/home/getArtistContent/en/1424/Maritime News')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span >For Prompt Response to Marine Weather Warnings</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comments" ></i></p></td><td class="secondcol"><i class="fa fa-calendar" ></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2025.4.28.</td></tr><tr><td class="firstcol"><p data-toggle="modal" onclick="getBlog('https://web.archive.org/web/20260101im_/http://ma.gov.kp/index.php/home/getArtistContent/en/1393/Maritime News')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span >On International Women’s Day </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comments" ></i></p></td><td class="secondcol"><i class="fa fa-calendar" ></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2025.3.26.</td></tr><tr><td class="firstcol"><p data-toggle="modal" onclick="getBlog('https://web.archive.org/web/20260101im_/http://ma.gov.kp/index.php/home/getArtistContent/en/1394/Maritime News')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span >Putting spurs to the E-working system </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comments" ></i></p></td><td class="secondcol"><i class="fa fa-calendar" ></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2025.3.26.</td></tr><tr><td class="firstcol"><p data-toggle="modal" onclick="getBlog('https://web.archive.org/web/20260101im_/http://ma.gov.kp/index.php/home/getArtistContent/en/1304/Maritime News')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span >To further improve the maritime performance</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comments" ></i></p></td><td class="secondcol"><i class="fa fa-calendar" ></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2025.2.28.</td></tr><tr><td class="firstcol"><p data-toggle="modal" onclick="getBlog('https://web.archive.org/web/20260101im_/http://ma.gov.kp/index.php/home/getArtistContent/en/627/Maritime News')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span >Law of DPRK on Registration of Ships Amended</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comments" ></i></p></td><td class="secondcol"><i class="fa fa-calendar" ></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2023.10.31.</td></tr><tr><td class="firstcol"><p data-toggle="modal" onclick="getBlog('https://web.archive.org/web/20260101im_/http://ma.gov.kp/index.php/home/getArtistContent/en/882/Maritime News')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span >International Day for Womenin Maritime Event Held</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comments" ></i></p></td><td class="secondcol"><i class="fa fa-calendar" ></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2023.5.30.</td></tr><tr><td class="firstcol"><p data-toggle="modal" onclick="getBlog('https://web.archive.org/web/20260101im_/http://ma.gov.kp/index.php/home/getArtistContent/en/1128/Maritime News')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span >Making Head way to Up lift of E-working system</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comments" ></i></p></td><td class="secondcol"><i class="fa fa-calendar" ></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2022.7.29.</td></tr><tr><td class="firstcol"><p data-toggle="modal" onclick="getBlog('https://web.archive.org/web/20260101im_/http://ma.gov.kp/index.php/home/getArtistContent/en/1161/Maritime News')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span >The DPRK Participated in NCSR9</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comments" ></i></p></td><td class="secondcol"><i class="fa fa-calendar" ></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2022.7.29.</td></tr><tr><td class="firstcol"><p data-toggle="modal" onclick="getBlog('https://web.archive.org/web/20260101im_/http://ma.gov.kp/index.php/home/getArtistContent/en/1182/Maritime News')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span >For Prompt Response to Marine Weather Warnings</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-comments" ></i></p></td><td class="secondcol"><i class="fa fa-calendar" ></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2022.7.29.</td></tr>                                
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container wide_screen footer_left" >
+    <div class="row">
+        <div class="col-md-6">
+            <p class="brand">
+                Maritime Administration of DPR Korea<br>
+            </p>
+            <div class="row footer_bottom" ></div>
+            <p class="text"><i class="fa fa-home"></i>&nbsp;Address:  Ryonhwa-Dong No.2, Central District, Pyongyang, DPR Korea</p>
+            <p class="text"><i class="fa fa-phone"></i>&nbsp;Tel: 00850-2-18111 Ext. 381-8059</p>
+            <p class="text"><i class="fa fa-hdd-o"></i>&nbsp;Fax: 00850-2-381 4410</p>
+            <p class="text"><i class="fa fa-envelope"></i>&nbsp;E-mail: mab@silibank.net.kp</p>
+        </div>
+        
+        <div class="col-md-6">
+            <p class="brand">Partnership Department</p>
+            <div class="row footer_bottom" ></div>
+            <div class="row footer_relation">
+                
+                <div class="col-md-3">
+                    <a class="relation" href="../../../contents/index.html"  target="_blank">
+                        <img  src="../../../assets/img/relation/kcs_ico.png " alt="Mark of Korea Classfication Society">
+                    </a>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <a class="relation" href="../../../contents/index.html"  target="_blank">
+                        <img  src="../../../assets/img/relation/kmcc_ico.png "  alt="Mark of KMCC">
+                    </a>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <a class="relation" href="../../../contents/index.html"  target="_blank">
+                        <img src="../../../assets/img/relation/kmepf_ico.png " alt="Mark of Korea Maritime Environmental Protection Center">
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row footer_space" ></div>
+    
+    <div class="row">
+        <div class="col-md-12 footer_right" >
+            <p class="text" > 
+                <i class="fa fa-anchor"></i>&nbsp;Copyright © 2020 Maritime Administration of DPR Korea            </p>
+        </div>
+     </div>    
+</div>
+
+<div class="modal fade modal-fade-in-scale-up" tabindex="-1" 
+            id="modal-1" role="dialog" aria-labelledby="modalLabelfade" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style=" width: 1400px;" role="document">
+            <div class="modal-content" >
+                <div class="modal-header title-style" >
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h4 class="modal-title" >
+                    </h4>
+                </div>
+                <div class="modal-body" >
+                </div>
+            </div>
+        </div>
+</div>
+
+
+<script src="../../../assets/plugins/jquery-1.11.3.min.js"></script><script src="../../../assets/plugins/bootstrap/js/bootstrap.min.js"></script><script src="../../../assets/js/custom.js"></script><script src="../../../assets/js/en/scrolltopcontrol.js"></script><script src="../../../assets/js/search.js"></script><script src="../../../assets/js/scustom.js"></script><script src="../../../assets/js/modal_common.js"></script><script src="../../../assets/js/notify.js"></script><script src="../../../assets/plugins/table/datatables/js/en/jquery.dataTables.js"></script><script src="../../../assets/plugins/table/datatables/js/dataTables.bootstrap.js"></script><script src="../../../assets/plugins/table/datatables/js/dataTables.responsive.js"></script><script src="../../../assets/plugins/table/select2/js/select2.js"></script><script src="../../../assets/js/pages/table-advanced.js"></script></body></html>

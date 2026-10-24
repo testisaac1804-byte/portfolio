@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Escape House — a Desmos escape room, rebuilt as one offline file</title>
+<meta name="description" content="Build notes for Escape House: a Desmos activity reverse-engineered into an 85,196-byte single-file game — 21 rooms, 6 lock mechanics, the original's exact codes, and a three-tier hint system that knows what you have already solved.">
+<style>
+  :root{
+    --bg:#0a0c11; --panel:#11141b; --panel2:#161a23; --line:#242a37;
+    --tx:#e8eaf0; --mut:#98a1b3; --dim:#6d7686;
+    --ac:#7c8cff; --ac2:#6366f1; --ok:#34d399; --warn:#ffd166; --bad:#f87171;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.62}
+  a{color:var(--ac)}
+  img{max-width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--line)}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 90px}
+
+  .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 11px;
+    color:var(--mut);letter-spacing:.1em}
+  .chip.ok{border-color:#1d4b3a;background:#0f1d18;color:#8ee6c0}
+
+  h1{font-size:clamp(26px,4.4vw,44px);line-height:1.1;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  h1 em{font-style:normal;color:var(--ac)}
+  .deck{font-size:16.5px;color:var(--mut);max-width:78ch;margin:0 0 22px}
+  .deck b{color:var(--tx);font-weight:650}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 30px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 13px;
+    display:flex;flex-direction:column;gap:4px;min-height:84px}
+  .stat .k{font:600 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .stat .v{font-size:19px;font-weight:750;margin-top:5px;letter-spacing:-.01em}
+  .stat .v small{font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0}
+
+  .call{border-left:3px solid var(--ac2);background:linear-gradient(90deg,rgba(99,102,241,.11),rgba(99,102,241,0));
+    border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 34px}
+  .call .lbl{font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ac);margin-bottom:7px}
+  .call p{margin:0;font-size:15.5px;color:#d7dbe6}
+
+  h2{font-size:12px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+    margin:44px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{margin:0 0 6px;font-size:16.5px;letter-spacing:-.01em}
+  p{color:var(--mut)}
+
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding-bottom:22px}
+  .step:not(:last-child):before{content:"";position:absolute;left:22px;top:38px;bottom:0;width:1px;
+    background:linear-gradient(180deg,var(--line),transparent)}
+  .num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:var(--panel2);border:1px solid var(--line);color:var(--ac);
+    font:800 13px/1 var(--mono);position:relative;z-index:1}
+  .step p{margin:6px 0 0;color:var(--mut);font-size:14.6px}
+  .step p b{color:var(--tx);font-weight:650}
+
+  .quote{background:#0f1218;border:1px solid var(--line);border-left:2px solid var(--warn);
+    border-radius:8px;padding:10px 13px;margin:10px 0 0;font-size:14px;color:#e4dcc4;
+    white-space:pre-wrap;overflow-wrap:anywhere;font-family:var(--mono)}
+  .quote .src{display:block;margin-top:7px;font:600 10px/1 var(--mono);letter-spacing:.1em;
+    text-transform:uppercase;color:var(--dim)}
+
+  .tblwrap{border:1px solid var(--line);border-radius:12px;overflow-x:auto;overflow-y:hidden;
+    -webkit-overflow-scrolling:touch}
+  table{width:100%;border-collapse:collapse;font-size:13.8px;min-width:520px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:700 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
+    background:#0d1016}
+  td:first-child{white-space:nowrap}
+  td code{white-space:nowrap}
+  code,.mono{font-family:var(--mono);font-size:12.6px;color:#cfd6e6;background:#0e1117;
+    border:1px solid var(--line);border-radius:5px;padding:1px 5px;
+    white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+
+  pre{background:#0d1016;border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+    overflow-x:auto;font-family:var(--mono);font-size:12.4px;line-height:1.62;color:#cfd6e6;margin:14px 0 0}
+  pre b{color:var(--ok);font-weight:700}
+  pre i{color:var(--dim);font-style:normal}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .card2{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .card2 h4{margin:0 0 6px;font-size:13.5px}
+  .card2 p{margin:0;font-size:13.4px;color:var(--mut)}
+  .card2 ul{margin:6px 0 0;padding-left:17px;font-size:13.4px;color:var(--mut)}
+  .card2 li{margin:3px 0}
+  .card2 li b{color:var(--tx)}
+
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+  .btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font:650 13px/1 var(--sans);
+    padding:10px 14px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--tx)}
+  .btn:hover{border-color:#3a4256;background:#1b202b}
+  .btn.pri{background:var(--ac2);border-color:var(--ac2);color:#fff}
+  .btn.pri:hover{background:#565ae8}
+
+  .warnbox{border:1px solid #4b1f26;background:#160f12;border-radius:10px;padding:12px 14px;
+    font-size:13.2px;color:#f0c9c9;margin-top:14px}
+  .warnbox b{color:#ffb4b4}
+  .warnbox ul{margin:8px 0 0;padding-left:18px}
+  .warnbox li{margin:5px 0}
+
+  figure{margin:16px 0 0}
+  figcaption{font-size:12.4px;color:var(--dim);margin-top:7px}
+
+  footer{margin-top:52px;border-top:1px solid var(--line);padding-top:18px;
+    font-size:12.6px;color:var(--dim)}
+  footer b{color:var(--mut)}
+  footer p{font-size:12.6px}
+  @media(max-width:700px){ table{min-width:560px} }
+  .step > *, .grid2 > *{min-width:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <span class="chip ok">build notes · 2026-10-23</span>
+    <span>Escape House</span>
+    <span class="chip">85,196 bytes · sha 4076ac12</span>
+  </div>
+
+  <h1>Escape House — a Desmos escape room, rebuilt as <em>one offline file</em></h1>
+
+  <p class="deck">The original is a Desmos activity: rooms, codes, items and flags all living inside a graphing
+  calculator's expression list. This is a rebuild of it as a <b>single 85,196-byte HTML file</b> that opens with
+  no network, no assets and no install — <b>21 rooms across three levels</b>, six lock mechanics, the original's
+  exact codes, and a <b>three-tier hint system</b> that reads your own save file to know which step you are stuck on.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="k">expressions read</div><div class="v">794 <small>in the state</small></div></div>
+    <div class="stat"><div class="k">clickable hotspots</div><div class="v">55 <small>mapped</small></div></div>
+    <div class="stat"><div class="k">shipped file</div><div class="v">85,196 <small>bytes, one file</small></div></div>
+    <div class="stat"><div class="k">source</div><div class="v">1,473 <small>lines / 10 files</small></div></div>
+    <div class="stat"><div class="k">rooms</div><div class="v">21 <small>9 + 6 + 6</small></div></div>
+    <div class="stat"><div class="k">lock mechanics</div><div class="v">6 <small>locks · 32 hints</small></div></div>
+  </div>
+
+  <div class="call">
+    <div class="lbl">the ask, verbatim</div>
+    <p>“can you make the game fully follow the original version and add a hit button on the top that helps
+    poeple who are doing the thing and they dont know how to do”</p>
+    <p style="margin-top:8px;color:var(--dim);font-size:13.4px">Two requirements, and the second one is a design
+    problem rather than a feature: a hint button that is useful <em>while</em> somebody is inside a puzzle,
+    not only between puzzles.</p>
+  </div>
+
+  <h2>1 · what the original actually is</h2>
+
+  <p>The Desmos activity stores its whole game in the expression list. Reading the exported state gives the
+  real structure — not what the screenshots look like, but what the author wired up:</p>
+
+  <div class="tblwrap" style="margin-top:14px">
+    <table>
+      <thead><tr><th>evidence</th><th>count</th><th>what it gave me</th></tr></thead>
+      <tbody>
+        <tr><td><code>expressions.list</code></td><td>794</td><td>576 expressions, 175 images, 42 folders, 1 text note</td></tr>
+        <tr><td><code>clickableInfo</code></td><td>55</td><td>every hotspot's click action, in Desmos action-list form</td></tr>
+        <tr><td>folders</td><td>42</td><td>the author's own grouping: room art, puzzle art, state machine, item art</td></tr>
+        <tr><td>rooms (by coordinates)</td><td>9</td><td>each room is a fixed viewport + <code>P_{centerScene}</code>; nine centres cluster on a 3×3 grid</td></tr>
+        <tr><td><code>uploads.desmos.com</code></td><td>175</td><td>every image is a public URL, so clue art could be downloaded and read</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:14px">The flags are brace-named, which is why naive grep misses them: the switch is
+  <code>u_{lightsOn}</code>, the trapped door is <code>u_{iceKey}</code>, the dart is <code>u_{sedDart}</code>.
+  Strip the braces and the whole dependency graph falls out of the click actions. Every code in this rebuild came
+  out of that graph — <code>131</code> on the kitchen drawer, <code>962</code> on the bedroom keypad,
+  <code>4 5 19 13 15 19</code> on the bookcase panel (A1Z26 for DESMOS), and <code>7:30</code> for the clock.</p>
+
+  <h2>2 · the chain, as the author wired it</h2>
+
+  <p>Eleven items, each one opening exactly one thing. Nothing is decorative: every item in the original's
+  inventory has a consumer, and every consumer has a producer.</p>
+
+  <div class="tblwrap" style="margin-top:14px">
+    <table>
+      <thead><tr><th>item</th><th>found</th><th>used on</th><th>opens</th></tr></thead>
+      <tbody>
+        <tr><td>Ice cube</td><td>kitchen fridge</td><td>hot tap</td><td>ice key</td></tr>
+        <tr><td>Ice key</td><td>made at the sink</td><td>living-room trapdoor</td><td>basement landing</td></tr>
+        <tr><td>Dart</td><td>basement store, slice wheel</td><td>balloon</td><td>the rope, then the stairs</td></tr>
+        <tr><td>Gloves</td><td>bedroom wall</td><td>greenhouse cactus</td><td>gold key</td></tr>
+        <tr><td>Gold key</td><td>cactus</td><td>glass case</td><td>magnifier</td></tr>
+        <tr><td>Magnifier</td><td>glass case</td><td>desk lamp</td><td>fire (needs the lamp on too)</td></tr>
+        <tr><td>Screwdriver</td><td>bedroom nightstand</td><td>bedroom keypad <em>and</em> office computer</td><td>greenhouse door · computer panel</td></tr>
+        <tr><td>Clock hands</td><td>library shelf</td><td>kitchen clock</td><td>bike chain (clock face opens)</td></tr>
+        <tr><td>Bike chain</td><td>inside the clock</td><td>living-room bike</td><td>nothing — pure payoff</td></tr>
+        <tr><td>UV light</td><td>library bookcase panel</td><td>walls in every room</td><td>the codes you cannot see otherwise</td></tr>
+        <tr><td>Tape</td><td>kitchen drawer</td><td>(read directly)</td><td>the bookcase code</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>3 · six locks, none of them a text input</h2>
+
+  <div class="tblwrap" style="margin-top:14px">
+    <table>
+      <thead><tr><th>lock</th><th>interaction</th><th>where</th><th>code</th></tr></thead>
+      <tbody>
+        <tr><td>3-digit dial</td><td>three wheels, click to advance each digit</td><td>kitchen drawer</td><td><code>1·3·1</code></td></tr>
+        <tr><td>Three-key keypad</td><td>7-segment style pad, needs the screwdriver to expose it</td><td>bedroom</td><td><code>9·6·2</code></td></tr>
+        <tr><td>Six number dials</td><td>six wheels running 1–26, because the code is a word</td><td>library bookcase</td><td><code>4 5 19 13 15 19</code></td></tr>
+        <tr><td>Clock</td><td>fit the hands, then set 7:30 — the face swings open</td><td>kitchen</td><td><code>7:30</code></td></tr>
+        <tr><td>Slice wheel</td><td>five wedges rotate; every wedge must land on 2, 6 or 9</td><td>basement dart cabinet</td><td>—</td></tr>
+        <tr><td>Node panel</td><td>four wires click round a cycle until they line up, then the power button</td><td>office computer</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>4 · the two mechanics the first pass missed</h2>
+
+  <div class="step">
+    <div class="num">1</div>
+    <div>
+      <h3>The clock is a container, not a clue</h3>
+      <p>The first rebuild used the clock as a wall code only. In the original the clock takes <b>two</b> inputs —
+      the hands from the library shelf and the time from a UV mark in the basement — and then <b>opens</b>, with
+      the bike chain inside. That chain is the only thing that makes the living-room bike do anything, and the bike
+      is a dead end on purpose: the author put a payoff there with no lock behind it.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="num">2</div>
+    <div>
+      <h3>The computer is three puzzles in a row</h3>
+      <p>Screwdriver to open the panel → four nodes to align → power button → <b>lights-out grid</b> → the disk
+      drive ejects. The first pass collapsed all of that into a single click. Also corrected: the screwdriver in the
+      original opens the <em>computer panel</em>, not the keypad — the keypad's gate is its own flag
+      (<code>u_{keypadOpen}</code>), and the two were being conflated because both are in the bedroom.</p>
+    </div>
+  </div>
+
+  <h2>5 · the hint system</h2>
+
+  <p class="deck" style="font-size:15px">The request was a button for people “doing the thing and they don't know
+  how to do”. A single “here's the answer” button fails that: it either spoils the puzzle or says nothing useful.
+  So the hint is a <b>ladder</b> — three rungs per puzzle beat, and it knows which beats you have already passed.</p>
+
+  <div class="grid2" style="margin-top:14px">
+    <div class="card2">
+      <h4>Rung 1 · direction</h4>
+      <p>No answer, no object, no room unless you are lost. “Something in the kitchen is cold enough to lock
+      a key.” Enough to restart a stalled player.</p>
+    </div>
+    <div class="card2">
+      <h4>Rung 2 · the move</h4>
+      <p>“Open the fridge and take the ice cube, then select it and click the hot tap.” The action, in order,
+      still without handing over a code.</p>
+    </div>
+    <div class="card2">
+      <h4>Rung 3 · the answer</h4>
+      <p>The code itself, plus the room it belongs to. Only on the third ask for the same beat — a player who
+      re-asks twice has stopped enjoying being stuck.</p>
+    </div>
+    <div class="card2">
+      <h4>Where it lives</h4>
+      <p>Header button and the <code>H</code> key; plus a <b>💡 Stuck?</b> button inside every lock panel, so the
+      hint is reachable from behind the modal backdrop — the exact moment it is needed.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px">How a hint is chosen</h3>
+  <pre><i>// one beat = one line of puzzle progress</i>
+HINTS[level] = [ { id, room, <b>done(G)</b>, <b>need(G)</b>, t:[rung1, rung2, rung3] } … ]
+
+resolveStep():
+  1. if a lock panel is open        → the beat that panel belongs to   <i>(context wins)</i>
+  2. else first beat where          !done(G)  &&  need(G)              <i>(never a step you cannot reach)</i>
+  3. else                           → "everything here is done, head for the exit"
+
+escalation:  new beat → rung 1 · same beat again → rung 2 · again → rung 3 (capped)
+idle:        55 s with no click → the button itself starts pulsing</pre>
+
+  <p style="margin-top:14px">Three properties that matter more than the wording:</p>
+  <div class="card2" style="margin-top:10px">
+    <ul>
+      <li><b>State-derived, not scripted.</b> <code>done(G)</code> reads the same save object the game writes, so a
+      hint cannot be out of date after a reload or a level restart.</li>
+      <li><b>Context beats order.</b> Open the drawer with the ice still in the fridge and you get the drawer hint
+      (beat 9), not the ice hint (beat 1) that a strict sequence would return.</li>
+      <li><b>Steps you cannot reach are skipped.</b> <code>need(G)</code> keeps the ladder from telling a player to
+      go and use an item they have not found yet.</li>
+    </ul>
+  </div>
+
+  <p style="margin-top:16px">32 beats across the three levels — 18 in the house, 7 in the lab, 7 in the vault.
+  The counter (<code>9 / 18</code>) and the dots are the player's own progress bar; they are not decoration, they
+  are the reason the ladder feels like help rather than a walkthrough.</p>
+
+  <figure>
+    <img src="./escape-house-shots/hint-lock.png" alt="The drawer lock open, with the hint card showing the drawer beat over the dim backdrop">
+    <figcaption>Inside a lock: the hint card floats above the modal backdrop (z-index 25, between the lock layer
+    and the menu) and already points at the drawer beat, not at the first unsolved thing in the list.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="./escape-house-shots/mobile.png" alt="The game at 390 px wide with the hint card open">
+    <figcaption>390 px: the room becomes a fixed-aspect illustration band instead of stretching its props, the
+    header stays on one line, and the hint card is full-width and dismissible.</figcaption>
+  </figure>
+
+  <h2>6 · where this is not the original</h2>
+
+  <div class="warnbox">
+    <b>Read this before comparing the two side by side.</b>
+    <ul>
+      <li><b>The art is redrawn, not lifted.</b> Every prop in this build is procedural SVG I wrote (fridge,
+      counter, clock, bookcase, bike, cactus, server rack). The original's 175 images are the activity author's
+      artwork and were not shipped. Layout, hotspots and codes match; brushwork does not.</li>
+      <li><b>Four UV clues exist, their room assignment is inferred.</b> The codes are exact —
+      <code>131</code>, <code>962</code>, <code>4 5 19 13 15 19</code>, <code>7:30</code> — but the clue
+      <em>graphics</em> are polygons drawn in the graph, not images, so the state dump cannot say which wall
+      carries which number. The placement here is chosen so the chain stays solvable in one direction.</li>
+      <li><b>The lights-out grid is 5×5, not 8×8.</b> The original uses 64 cells. 64 in a modal on a phone is a
+      different game; the mechanic is identical, the difficulty is not.</li>
+      <li><b>No hard mode.</b> The original carries an unused <code>hardMode</code> switch; it is not wired up
+      here yet.</li>
+      <li><b>Levels 2 and 3 are mine.</b> The Desmos activity has the house. The Lab and The Vault are new content
+      built on the same engine and the same hint ladder.</li>
+    </ul>
+  </div>
+
+  <h2>7 · what broke, and what it taught</h2>
+
+  <div class="tblwrap" style="margin-top:14px">
+    <table>
+      <thead><tr><th>symptom</th><th>cause</th><th>fix</th></tr></thead>
+      <tbody>
+        <tr><td>UV marks never appeared</td><td>the rebuilt UV item was missing its <code>uv:true</code> flag, so selecting it never set the lighting state</td><td>flag restored on the item definition</td></tr>
+        <tr><td>Slice wheel could not be solved by keyboard or automation</td><td><code>SVGElement</code> has no <code>.click()</code> — the test harness threw, the real mouse never did</td><td>tests dispatch a real <code>MouseEvent</code>; game code unchanged</td></tr>
+        <tr><td>Node puzzle rendered one node</td><td>a stray <code>&lt;/svg&gt;</code> inside the per-node loop closed the SVG after the first rect</td><td>close the SVG after the loop</td></tr>
+        <tr><td>H key did nothing with a lock open</td><td>the key handler bailed whenever a modal existed — the one moment the hint is wanted</td><td>only arrow keys are blocked by modals</td></tr>
+        <tr><td>Hint always showed the earliest unsolved step</td><td><code>paintHint()</code> re-resolved the step and ignored the context set by the open panel</td><td>one <code>resolveStep()</code> shared by both paths</td></tr>
+        <tr><td>Props squashed on a phone</td><td>percentage boxes against a tall viewport; “fixing” it with <code>preserveAspectRatio</code> broke the desktop composition instead</td><td>fixed-aspect room band under 560 px, art untouched</td></tr>
+        <tr><td>Keyboard room arrows dead</td><td>handler queried <code>nav.arrow</code>; the buttons are <code>.arrow[data-d]</code></td><td>selector corrected</td></tr>
+        <tr><td>Drawer and poster overlapped</td><td>both placed by eye at 62 % and 84 %</td><td>re-laid the kitchen wall: fridge 5–19 %, counter 28–64 %, drawer 66–78 %, clock 82–92 %</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>8 · evidence</h2>
+
+  <div class="tblwrap" style="margin-top:14px">
+    <table>
+      <thead><tr><th>artifact</th><th>bytes</th><th>sha256</th><th>note</th></tr></thead>
+      <tbody>
+        <tr><td>playable copy</td><td>85,196</td><td><code>4076ac12e04f0e82…</code></td><td><code>/demos/escape-house/</code> — served byte-identical</td></tr>
+        <tr><td>mirror</td><td>85,196</td><td><code>4076ac12e04f0e82…</code></td><td><code>/demos/escape-house-mirror/</code> — same hash as the file on the Desktop</td></tr>
+        <tr><td>source</td><td>85,545</td><td>—</td><td>10 files, 1,473 lines, built by <code>python3 build.py</code></td></tr>
+        <tr><td>verification</td><td>—</td><td>—</td><td>automated playthrough of level 1 in headless Chrome: all 18 hint beats resolved, level completes; levels 2–3 hint ladders driven live</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:14px">Both copies are excluded from the site's skin injection
+  (<code>SKIP_PREFIX</code> in <code>theme-inject.py</code>), so what the server sends is the file itself — no
+  injected switcher floating over the inventory tray, no rewritten markup.</p>
+
+  <div class="btnrow">
+    <a class="btn pri" href="./escape-house/">▶ Play it</a>
+    <a class="btn" href="./escape-house-mirror/">Full mirror</a>
+    <a class="btn" href="../prompts/escape-house-prompt.md">Build spec</a>
+  </div>
+
+  <h2>9 · what's next</h2>
+  <ul style="color:var(--mut);font-size:14.4px">
+    <li>Wire the original's <code>hardMode</code>: one rung instead of three, for players who want the ladder to
+      give only a direction.</li>
+    <li>An 8×8 lights-out behind an “authentic” toggle, keeping 5×5 as the default.</li>
+    <li>Re-draw the nine house rooms at the original's density — right now each room carries 3–6 props where the
+      activity has 15–25.</li>
+  </ul>
+
+  <footer>
+    <p><b>Method.</b> The Desmos activity state was exported and parsed rather than screenshotted: 794 expressions
+    walked for <code>clickableInfo</code> actions, brace-named flags normalised, and every code read out of a
+    comparison against a literal array in the graph. The rebuild was then re-derived from that graph and verified
+    by playing it — a scripted headless-Chrome run that clicks real hotspots through the full level-1 chain and
+    asserts each hint beat flips to done.</p>
+    <p><b>Honesty notes.</b> Art is redrawn SVG, not the original's images (section 6). The UV clue graphics could
+    not be read out of the state dump, so their room placement is inferred while their codes are exact. The
+    screenshot above is the real game at 1440×900 and 390×844, not a mockup. Number checks: 794 expressions and
+    55 clickable hotspots counted from the export; 85,196 bytes from <code>wc -c</code>; 1,473 lines from
+    <code>wc -l</code> across the ten source files.</p>
+  </footer>
+
+</div>
+</body>
+</html>

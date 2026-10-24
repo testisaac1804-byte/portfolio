@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Korean Film</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <meta name="keyword" content="Korean Film Art, Photo, Video, Film Festival">
+    <meta name="description" content="Korean Film-Home">
+    <meta name="robots" content="ALL">
+    <meta name="googole" content="notranslate">
+    <meta name="author" content="Korea Film Export & Import Corporation">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="bb0ad6061e04b739de3066c81dc72c3e">
+
+    <link href="/assets/images/favicon.png" rel="icon">
+
+    <!-- PLUGINS -->
+    <link href="/assets/plugins/polo/css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="/assets/plugins/polo/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- end: PLUGINS -->
+    <link href="/assets/css/custom.css" rel="stylesheet" type="text/css">
+
+    <link href="/assets/css/pages/common.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/responsive.css" rel="stylesheet" type="text/css">
+
+    <!--Plugins-->
+    <script src="/assets/plugins/polo/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/assets/plugins/polo/js/plugins.min.js" type="text/javascript"></script>
+    <script src="/assets/plugins/polo/js/functions.js" type="text/javascript"></script>
+
+    <link href="/assets/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css">
+    <script src="/assets/plugins/toastr/toastr.min.js" type="text/javascript"></script>
+
+    <script src="/assets/plugins/waypoints/jquery.waypoints.min.js" type="text/javascript"></script>
+
+    <script src="/assets/js/common.js"></script>
+    <script src="/assets/js/utils.js"></script>
+
+    <style>
+        body *{
+          font-family: sans-serif        }
+
+        @media(max-width:479px){
+            .site-address{
+                display: none;
+            }
+            #mark_img{
+                height: 90%;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <input type="hidden" id="base_url" value="/">
+    <input type="hidden" id="is_first_page" value="1">
+    <!-- Body Inner -->
+    <div class="body-inner">
+        <!-- Header -->
+        <header id="header" class="header-always-fixed">
+            <div class="header-inner first-page">
+                <!--banner-->
+                <div class="banner">
+                    <a class="go-home" href="/en/index">
+                        <img id="mark_img" src="/assets/images/top_mark.png" alt="Korean Film">
+                    </a>
+                    <img class="banner-text" src="/assets/images/top_text.png">
+                    <a class="site-address self-responsive" href="../index.html">www.korfilm.com.kp</a>
+
+                    <!--Header Extras-->
+                    <div class="header-extras">
+                        <ul>
+                            <li>
+                                <div class="p-dropdown">
+                                    <a href="javascript:;" class="lang-sel"><i class="icon-globe"></i><span>English</span></a>
+                                    <ul class="p-dropdown-content">
+                                                                                    <li><a class="font-main" href="javascript:changelang('korean')">조선어</a></li>
+                                                                                    <li><a class="font-sans" href="javascript:changelang('english')">English</a></li>
+                                                                                    <li><a class="font-sans" href="javascript:changelang('russian')">Русский язык</a></li>
+                                                                                    <li><a class="font-sans" href="javascript:changelang('chinese')">中文</a></li>
+                                                                            </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div> <!--end: Header Extras-->
+
+                    <!-- Search -->
+                    <div class="header-search">
+                        <div class="search-container">
+                            <form id="frm_search" action="/en/search" method="get">
+                                <input type="hidden" id="query_txt" name="query_txt">
+                                <input type="hidden" id="order_item" name="order_item" value="created">
+                                <input type="hidden" id="order_type" name="order_type" value="desc">
+                                <input type="hidden" name="x_csrf_token" value="bb0ad6061e04b739de3066c81dc72c3e">
+                            </form>
+                            <input type="text" id="search_txt" value="" placeholder="Enter a search word." />
+                            <span id="btn_search" title="Search"><i class="icon-search"></i></span>
+                        </div>
+                    </div> <!-- end: Search -->
+                </div> <!--end: banner-->
+
+                <!--Navigation Resposnive Trigger-->
+                <div id="mainMenu-trigger-bar" class="p-dropdown">
+                    <a href="javascript:;" class="nav-button toggle-bar"><span class="lines"></span></a>
+                    <div class="p-dropdown-content">
+                        <ul class="primary-links">
+                            <li class="primary-item item active-item"><a href="/en/index">Home</a></li>
+                            <li class="primary-item item "><a href="/en/intro">History</a></li>
+                            <li class="primary-item item "><a href="/en/kofilm">Korean Film</a></li>
+                            <li class="primary-item item "><a href="/en/festival">Film Festival</a></li>
+                            <li class="primary-item item "><a href="/en/finishedaction">Exchange of film</a></li>
+                        </ul>
+                    </div>
+                </div> <!--end: Navigation Resposnive Trigger-->
+
+                <!--Navigation-->
+                <div id="mainMenu" class="menu-right">
+                    <nav class="m-r-10">
+                        <ul class="primary-links self-responsive">
+                            <li class="primary-item menu-item active-menu">
+                                <a href="/en/index">Home</a>
+                            </li>
+                            <li class="primary-item menu-item ">
+                                <a href="/en/intro">History</a>
+                            </li>
+                            <li class="primary-item menu-item ">
+                                <a href="/en/kofilm">Korean Film</a>
+                            </li>
+                            <li class="primary-item menu-item ">
+                                <a href="/en/festival">Film Festival</a>
+                            </li>
+                            <li class="primary-item menu-item ">
+                                <a href="/en/finishedaction">Exchange of film</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div> <!--end: Navigation-->
+
+                <!--Dots Menu -->
+                <nav id="dotsMenu">
+                    <ul>
+                        <li class="item-newfilm"><a href="/en/index/active/1"><span>New Film</span><i class="fa fa-video-camera"></i></a></li>
+                        <li class="item-addfilm"><a href="/en/index/active/2"><span>Additional Film</span><i class="fa fa-video-camera"></i></a></li>
+                        <li class="item-photo"><a href="/en/index/active/3"><span>Introduction of Photograph</span><i class="fa fa-camera-retro"></i></a></li>
+                        <!-- <li class="item-karaok"><a href="/en/index/active/4"><span>Film Music</span><i class="fa fa-music"></i></a></li> -->
+                        <li class="item-program"><a href="/en/index/active/5"><span>Presentation</span><i class="fa fa-film"></i></a></li>
+                        <li class="item-news"><a href="javascript:;" class="first-show-news"><span>News</span><i class="fa fa-wifi"></i></a></li>
+                    </ul>
+                </nav>
+                <!--End: Dots Menu -->
+            </div>
+        </header> <!-- end: Header -->
+
+        <!-- Content -->
+        <section id="page-content" class="first-page">
+            <link href="/assets/css/pages/first.css" rel="stylesheet" type="text/css">
+
+<script src="/assets/plugins/3d-carousel/js/JHUltimate3DCarousel.min.js"></script>
+<script src="/assets/plugins/3d-carousel/js/JH3DCarousel.js"></script>
+<script src="/assets/js/3dcarousel-custom.js"></script>
+
+<section class="part-1" id="part_1">
+    <img class="back-img" id="back_img" src="/assets/images/first/background.jpg" alt="Korean Film">
+    <div class="row">
+        <div class="col-md-6 col-sm-6 offset-md-1 offset-sm-1">
+            <div style="position: relative">
+                <div id="home-banner" class="carousel-3d-classic"></div>
+                <div id="carousel-data" style="display: none;">
+                    <!-- category  -->
+                    <div data-cat="category-one">
+                                                    <ul>
+                                <li data-url="link:javascript:" data-target="_self"></li>
+                                <li data-thumbnail-path="/media/slide/slide1762216630.4156.jpg"></li>
+                                <li data-thumbnail-text='' data-thumbnail-text-title-offset="10" data-thumbnail-text-offset-top="10" data-thumbnail-text-offset-bottom="7">
+                                    <p class="largeLabel"></p>
+                                    <p class="smallLabel">
+                                        <span></span>
+                                        &nbsp;
+                                        <span></span>
+                                    </p>
+                                </li>
+                            </ul>
+                                                    <ul>
+                                <li data-url="link:javascript:" data-target="_self"></li>
+                                <li data-thumbnail-path="/media/slide/thumb_english1765340632.7523.jpg"></li>
+                                <li data-thumbnail-text='' data-thumbnail-text-title-offset="10" data-thumbnail-text-offset-top="10" data-thumbnail-text-offset-bottom="7">
+                                    <p class="largeLabel"></p>
+                                    <p class="smallLabel">
+                                        <span></span>
+                                        &nbsp;
+                                        <span></span>
+                                    </p>
+                                </li>
+                            </ul>
+                                                    <ul>
+                                <li data-url="link:javascript:" data-target="_self"></li>
+                                <li data-thumbnail-path="/media/slide/thumb_english1765340565.2823.jpg"></li>
+                                <li data-thumbnail-text='' data-thumbnail-text-title-offset="10" data-thumbnail-text-offset-top="10" data-thumbnail-text-offset-bottom="7">
+                                    <p class="largeLabel"></p>
+                                    <p class="smallLabel">
+                                        <span></span>
+                                        &nbsp;
+                                        <span></span>
+                                    </p>
+                                </li>
+                            </ul>
+                                                    <ul>
+                                <li data-url="link:javascript:" data-target="_self"></li>
+                                <li data-thumbnail-path="/media/slide/thumb_english1765340514.5143.jpg"></li>
+                                <li data-thumbnail-text='' data-thumbnail-text-title-offset="10" data-thumbnail-text-offset-top="10" data-thumbnail-text-offset-bottom="7">
+                                    <p class="largeLabel"></p>
+                                    <p class="smallLabel">
+                                        <span></span>
+                                        &nbsp;
+                                        <span></span>
+                                    </p>
+                                </li>
+                            </ul>
+                                                    <ul>
+                                <li data-url="link:javascript:" data-target="_self"></li>
+                                <li data-thumbnail-path="/media/slide/thumb_english1766665560.766.jpg"></li>
+                                <li data-thumbnail-text='' data-thumbnail-text-title-offset="10" data-thumbnail-text-offset-top="10" data-thumbnail-text-offset-bottom="7">
+                                    <p class="largeLabel"></p>
+                                    <p class="smallLabel">
+                                        <span></span>
+                                        &nbsp;
+                                        <span></span>
+                                    </p>
+                                </li>
+                            </ul>
+                                                    <ul>
+                                <li data-url="link:javascript:" data-target="_self"></li>
+                                <li data-thumbnail-path="/media/slide/thumb_english1765340454.8964.jpg"></li>
+                                <li data-thumbnail-text='' data-thumbnail-text-title-offset="10" data-thumbnail-text-offset-top="10" data-thumbnail-text-offset-bottom="7">
+                                    <p class="largeLabel"></p>
+                                    <p class="smallLabel">
+                                        <span></span>
+                                        &nbsp;
+                                        <span></span>
+                                    </p>
+                                </li>
+                            </ul>
+                                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="film-bar">
+    <img src="/assets/images/first/film-bar.png">
+</section>
+<section class="part-actions">
+    <div class="first-part p-t-30 m-b-20">
+        <div class="row first-group self-responsive">
+            <div id="newfilm-item" class="col-sm-2 offset-sm-1 item-carousel group-item" data-animate="zoomIn" data-animate-delay="100" data-target="#newfilm">
+                <a href="javascript:;" title="New Film">
+                    <div class="item-img">
+                        <img src="/assets/images/first/newfilm.png" alt="New Film">
+                    </div>
+                    <div class="item-text">
+                        <p class="text-center">New Film                                                            <span class="badge badge-danger"> 13 </span>
+                                                     </p>
+                    </div>
+                </a>
+            </div>
+            <div id="addfilm-item" class="col-sm-2 item-carousel group-item" data-animate="zoomIn" data-animate-delay="200" data-target="#addfilm">
+                <a href="javascript:;" title="Additional Film">
+                    <div class="item-img">
+                        <img src="/assets/images/first/addfilm-1.png" alt="Additional Film">
+                    </div>
+                    <div class="item-text">
+                        <p class="text-center">Additional Film                                                    </p>
+                    </div>
+                </a>
+            </div>
+            <div id="photo-item" class="col-sm-2 item-carousel group-item" data-animate="zoomIn" data-animate-delay="300" data-target="#photo">
+                <a href="javascript:;" title="Introduction of Photograph">
+                    <div class="item-img">
+                        <img src="/assets/images/first/photo.png" alt="Introduction of Photograph">
+                    </div>
+                    <div class="item-text">
+                        <p class="text-center">Introduction of Photograph                                                    </p>
+                    </div>
+                </a>
+            </div>
+            <div id="program-item" class="col-sm-2 item-carousel group-item" data-animate="zoomIn" data-animate-delay="500" data-target="#program">
+                <a href="javascript:;" title="Presentation">
+                    <div class="item-img">
+                        <img src="/assets/images/first/program.png" alt="Presentation">
+                    </div>
+                    <div class="item-text">
+                        <p class="text-center">Presentation                                                    </p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-2 first-show-news group-item" data-animate="zoomIn" data-animate-delay="600">
+                <a href="javascript:;" title="News">
+                    <div class="item-img">
+                        <img src="/assets/images/first/news.png" alt="News">
+                    </div>
+                    <div class="item-text">
+                        <p class="text-center">News                                                    </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div id="newfilm" class="row item-content">
+            <div class="col-md-12">
+                <div class="row carousel-container hide">
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 loading">
+                            <div class="block-container self-responsive ani-box">
+                                <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '789', 1)">
+                                    <div class="block-img">
+                                        <img data-src="/media/kofilm/thumb/thumb_english1766665420.3309.jpg" src="" alt="“Legacy of the Veteran” Part 9"/>
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title">“Legacy of the Veteran” Part 9</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.12.25.</i>
+                                        </p>
+                                    </div>
+                                                                            <div class="new_icon">New</div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 loading">
+                            <div class="block-container self-responsive ani-box">
+                                <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '788', 1)">
+                                    <div class="block-img">
+                                        <img data-src="/media/kofilm/thumb/thumb_english1766665236.4897.jpg" src="" alt="“Legacy of the Veteran” Part 8"/>
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title">“Legacy of the Veteran” Part 8</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.12.25.</i>
+                                        </p>
+                                    </div>
+                                                                            <div class="new_icon">New</div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 loading">
+                            <div class="block-container self-responsive ani-box">
+                                <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '787', 1)">
+                                    <div class="block-img">
+                                        <img data-src="/media/kofilm/thumb/thumb_english1766665045.8561.jpg" src="" alt="“Legacy of the Veteran” Part 7"/>
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title">“Legacy of the Veteran” Part 7</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.12.25.</i>
+                                        </p>
+                                    </div>
+                                                                            <div class="new_icon">New</div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 loading">
+                            <div class="block-container self-responsive ani-box">
+                                <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '786', 1)">
+                                    <div class="block-img">
+                                        <img data-src="/media/kofilm/thumb/thumb_english1766664855.1484.jpg" src="" alt="“Legacy of the Veteran” Part 6"/>
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title">“Legacy of the Veteran” Part 6</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.12.25.</i>
+                                        </p>
+                                    </div>
+                                                                            <div class="new_icon">New</div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 loading">
+                            <div class="block-container self-responsive ani-box">
+                                <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '785', 1)">
+                                    <div class="block-img">
+                                        <img data-src="/media/kofilm/thumb/thumb_english1766664219.2923.jpg" src="" alt="“Legacy of the Veteran” Part 5"/>
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title">“Legacy of the Veteran” Part 5</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.12.25.</i>
+                                        </p>
+                                    </div>
+                                                                            <div class="new_icon">New</div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 loading">
+                            <div class="block-container self-responsive ani-box">
+                                <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '784', 1)">
+                                    <div class="block-img">
+                                        <img data-src="/media/kofilm/thumb/thumb_english1766663955.0851.jpg" src="" alt="“Legacy of the Veteran” Part 4"/>
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title">“Legacy of the Veteran” Part 4</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.12.25.</i>
+                                        </p>
+                                    </div>
+                                                                            <div class="new_icon">New</div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 loading">
+                            <div class="block-container self-responsive ani-box">
+                                <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '783', 1)">
+                                    <div class="block-img">
+                                        <img data-src="/media/kofilm/thumb/thumb_english1766663612.0825.jpg" src="" alt="“Legacy of the Veteran” Part 3"/>
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title">“Legacy of the Veteran” Part 3</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.12.25.</i>
+                                        </p>
+                                    </div>
+                                                                            <div class="new_icon">New</div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 loading">
+                            <div class="block-container self-responsive ani-box">
+                                <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '782', 1)">
+                                    <div class="block-img">
+                                        <img data-src="/media/kofilm/thumb/thumb_english1766663041.7083.jpg" src="" alt="“Legacy of the Veteran” Part 2"/>
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title">“Legacy of the Veteran” Part 2</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.12.25.</i>
+                                        </p>
+                                    </div>
+                                                                            <div class="new_icon">New</div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 loading">
+                            <div class="block-container self-responsive ani-box">
+                                <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '781', 1)">
+                                    <div class="block-img">
+                                        <img data-src="/media/kofilm/thumb/thumb_english1766662566.2279.jpg" src="" alt="“Legacy of the Veteran” Part 1"/>
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title">“Legacy of the Veteran” Part 1</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.12.25.</i>
+                                        </p>
+                                    </div>
+                                                                            <div class="new_icon">New</div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 loading">
+                            <div class="block-container self-responsive ani-box">
+                                <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '780', 1)">
+                                    <div class="block-img">
+                                        <img data-src="/media/kofilm/thumb/thumb_english1765340135.2813.jpg" src="" alt="The Golden Woolen Clothes of Singsing"/>
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The Golden Woolen Clothes of...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.12.10.</i>
+                                        </p>
+                                    </div>
+                                                                            <div class="new_icon">New</div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 loading">
+                            <div class="block-container self-responsive ani-box">
+                                <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '779', 1)">
+                                    <div class="block-img">
+                                        <img data-src="/media/kofilm/thumb/thumb_english1765339905.4986.jpg" src="" alt="The Ship Made by Nam I"/>
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title">The Ship Made by Nam I</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.12.10.</i>
+                                        </p>
+                                    </div>
+                                                                            <div class="new_icon">New</div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 loading">
+                            <div class="block-container self-responsive ani-box">
+                                <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '778', 1)">
+                                    <div class="block-img">
+                                        <img data-src="/media/kofilm/thumb/thumb_english1765339580.2686.jpg" src="" alt="Meaningful Soldiers' Days"/>
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title">Meaningful Soldiers' Days</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.12.10.</i>
+                                        </p>
+                                    </div>
+                                                                            <div class="new_icon">New</div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6 loading">
+                            <div class="block-container self-responsive ani-box">
+                                <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '777', 1)">
+                                    <div class="block-img">
+                                        <img data-src="/media/kofilm/thumb/thumb_english1765334898.6697.jpg" src="" alt="Footsteps"/>
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title">Footsteps</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.12.10.</i>
+                                        </p>
+                                    </div>
+                                                                            <div class="new_icon">New</div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                    </div>
+            </div>
+        </div>
+
+        <div id="addfilm" class="row item-content">
+            <div class="col-md-12">
+                <div class="row carousel-container hide">
+                                    </div>
+            </div>
+        </div>
+
+        <div id="photo" class="row item-content">
+            <div class="col-md-12">
+                <div class="row carousel-container hide" data-lightbox="gallery">
+                                    </div>
+            </div>
+        </div>
+        <div id="program" class="row item-content">
+            <div class="col-md-12">
+                <div class="row carousel-container hide">
+                                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bar-container row">
+        <div class="col-md-4 col-sm-5 col-5 left-bar"></div>
+        <div class="col-md-8 col-sm-7 col-7 right-bar"></div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var $is_first_news_list = '0';
+        var $active = '';
+        var $active_first = '';
+
+        if ($active == '1') {
+            $active_first = "#newfilm-item";
+        } else if ($active == '2') {
+            $active_first = "#addfilm-item";
+        } else if ($active == '3') {
+            $active_first = "#photo-item";
+        } else if ($active == '4') {
+            $active_first = "#karaok-item";
+        } else if ($active == '5') {
+            $active_first = "#program-item";
+        }
+
+        if ($active_first != '')
+        {
+            $($active_first).trigger("click");
+        }
+
+        if ($is_first_news_list == '1')
+        {
+            $("#first-news-modal .modal-dialog").css("top", "15%");
+            $("#first-news-modal").modal("show");
+        }
+
+        $(window).scroll(function () {
+            if ($("#is_first_page").val() == '1')
+            {
+                if ($(window).scrollTop() > 0)
+                {
+                    $("#header .header-inner").removeClass("first-page");
+                }
+                else
+                {
+                    $("#header .header-inner").addClass("first-page");
+                }
+            }
+        });
+    });
+</script>
+        </section> <!-- end: Content -->
+
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="footer-content">
+                <div class="footer-div">
+                    <div class="mark-item">
+                        <img src="/assets/images/mark.png" width=100>
+                        <p class="name">Korea Film Export & Import Corporation</p>
+                    </div>
+                    <div class="sub-info">
+                        <p>Add: Ryonghung-dong No.2, Taesong District, Pyongyang</p>
+                        <p>Tel: 850-2-18111(381-8034)</p>
+                    </div>
+                    <div class="sub-info">
+                        <p>Fax: 850-2-381-2100(ICC-388)</p>
+                        <p>E-mail: korfilm@star-co.net.kp</p>
+                    </div>
+                </div>
+                <div class="footer-bottom text-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>2022 @ Korea Film Export & Import Corporation</p>
+                            <p><a href="http://www.dprkportal.kp" target="_blank"><img src="/assets/images/sites/gwangya.png"></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div> <!-- end: Body Inner -->
+
+    <!-- Modal -->
+    <div id="first-news-modal" class="modal fade news-dialog" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">News</h4>
+                </div>
+                <div class="modal-body">
+                                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="news-modal" class="modal fade news-dialog" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">News</h4>
+                </div>
+                <div class="modal-body">
+                                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="video-modal" class="modal video fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <iframe src="" style="width:100%;height:470px;border:0px"></iframe>
+                    </div>
+                    <div class="text-content text-justify" style="padding-top:15px">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll top -->
+    <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
+
+    <script src="/assets/js/my-waypoint.js"></script>
+    <script type="text/javascript">
+
+        $("div[role='dialog']").on('hide.bs.modal',function(){
+            var ifr = $(this).find('iframe');
+            ifr.attr('src', '');
+        });
+
+        $("div[role='dialog']").on('shown.bs.modal',function(){
+
+        });
+
+        function showVideo($type, $id, $is_content_text)
+        {
+            var $url = '';
+
+            $("#video-modal .text-content").removeClass("hide");
+            if ($is_content_text == '0')
+                $("#video-modal .text-content").addClass("hide");
+
+            if ($type == 'base') {
+                $url = "/en/base/get-info/" + $id;
+            } else if ($type == 'karaok') {
+                $url = "/en/intro/karaok/get-info/" + $id;
+            } else if ($type == 'program') {
+                $url = "/en/intro/program/get-info/" + $id;
+            } else if ($type == 'kofilm') {
+                $url = "/en/kofilm/get-info/" + $id;
+            } else if ($type == 'prize') {
+                $url = "/en/festival/get-info/" + $id;
+            } else if ($type == 'special') {
+                $url = "/en/festival/special/get-info/" + $id;
+            } else if ($type == 'exchange_1') {
+                $url = "/en/finishedaction/exchange-1/get-info/" + $id;
+            } else if ($type == 'exchange_3') {
+                $url = "/en/finishedaction/exchange-3/get-info/" + $id;
+            } else {
+                return;
+            }
+
+            $.ajax({
+                url: $url,
+                type: "get",
+                dataType: "json",
+                success: function(data){
+                    var $no_msg = 'The data does not exist.';
+
+                    $("#video-modal h4.modal-title").html(data.title);
+
+                    if (data.movie == '' || data.movie == null)
+                    {
+                        $("#video-modal iframe").addClass("hide");
+                        $("#video-modal iframe").attr("src", '');
+
+                        toastr.warning($no_msg);
+                    }
+                    else
+                    {
+                        $("#video-modal iframe").removeClass("hide");
+                        $("#video-modal iframe").attr("src", base_url(data.hls));
+
+                        $("#video-modal .text-content").html(data.desc);
+
+                        $("#video-modal").modal("show");
+                    }
+                }
+            });
+        }
+
+        function changelang(lang_val)
+        {
+            $.ajax({
+                url: "/changelang",
+                data: {
+                    lang: lang_val
+                },
+                success: function(data){
+                    document.location.href = data;
+                }
+            });
+        }
+
+        $(function(){
+
+        });
+
+        function IncReadNum(type,id)
+        {
+            $.ajax({
+                url: '/welcome/increadnum',
+                method: 'post',
+                data: {
+                    id: id,
+                    type: type
+                }
+            });
+        }
+
+        function searchData()
+        {
+            var $query_txt = $("#search_txt").val();
+
+            if ($query_txt != '')
+            {
+                $("#query_txt").val($query_txt);
+                $("#frm_search").submit();
+            }
+        }
+
+        $("#search_txt").on("keyup", function(e) {
+            if (e.keyCode === 13) {
+                searchData()
+            }
+        })
+
+        $("#btn_search").on("click", function() {
+            searchData()
+        })
+
+        $(".first-group .item-carousel").on("click", function(){
+            if (!$(this).hasClass("active-item"))
+            {
+                var $obj = $(this).data("target");
+
+                $(".first-group .group-item").removeClass('active-item');
+                $(this).addClass('active-item');
+
+                $(".carousel-container").addClass("hide");
+
+                $($obj + " .carousel-container .ani-box").removeClass("zoomIn");
+                $($obj + " .carousel-container .ani-box").removeClass("animated");
+                $($obj + " .carousel-container").removeClass("hide");
+
+                $($obj + ' .ani-box').each(function(){
+                    var $el_img = $(this).find(".block-img").find("img");
+                    $el_img.prop("src", $el_img.data("src"));
+                });
+
+                $($obj + ' .ani-box').each(function(k){
+                    var el = $(this);
+
+                    setTimeout( function () {
+                        el.parents(".loading").removeClass("loading");
+
+                        el.addClass('zoomIn animated');
+                    },  k * 100, 'easeInOutExpo' );
+                });
+
+                $(window).scrollTop($(".part-1").height());
+            }
+        })
+
+        $(".first-show-news").on("click", function(){
+            var $news_count = '0';
+
+            if (parseInt($news_count) > 0)
+            {
+                $("#news-modal .modal-dialog").css("top", "15%");
+                $("#news-modal").modal("show");
+            }
+            else
+            {
+                toastr.warning('The data does not exist.');
+            }
+        })
+
+        $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+            // Modify options, control originalOptions, store jqXHR, etc
+            var $type = options.type;
+            if ($type.toLocaleUpperCase() === "POST")
+            {
+                if (options.url.indexOf(":20191") < 0  && options.url.indexOf(":20206") < 0 )
+                {
+                    var $token = $("meta[name='csrf-token']").attr('content');
+
+                    if (options.contentType === false) // this is form data
+                    {
+                        options.data.append('x_csrf_token', $token);
+                    }
+                    else // otherwise
+                    {
+                        options.data = options.data + '&x_csrf_token=' + $token;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
+

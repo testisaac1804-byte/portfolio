@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MacAdBlock — analysis</title>
+<style>
+  :root{
+    --bg:#0a0c11; --panel:#11141b; --panel2:#161a23; --line:#242a37;
+    --tx:#e8eaf0; --mut:#98a1b3; --dim:#6d7686;
+    --ac:#7c8cff; --ac2:#6366f1; --ok:#34d399; --warn:#ffd166; --bad:#f87171;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.62}
+  a{color:var(--ac)}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 90px}
+
+  .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 11px;
+    color:var(--mut);letter-spacing:.1em}
+  .chip.red{border-color:#4b1f26;background:#1d1114;color:#ff9d9d}
+
+  h1{font-size:clamp(26px,4.4vw,44px);line-height:1.1;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  h1 em{font-style:normal;color:var(--ac)}
+  .deck{font-size:16.5px;color:var(--mut);max-width:78ch;margin:0 0 22px}
+  .deck b{color:var(--tx);font-weight:650}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 30px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 13px}
+  .stat .k{font:600 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .stat .v{font-size:19px;font-weight:750;margin-top:5px;letter-spacing:-.01em}
+  .stat .v small{font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0}
+
+  .call{border-left:3px solid var(--ac2);background:linear-gradient(90deg,rgba(99,102,241,.11),rgba(99,102,241,0));
+    border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 34px}
+  .call .lbl{font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ac);margin-bottom:7px}
+  .call p{margin:0;font-size:15.5px;color:#d7dbe6}
+
+  h2{font-size:12px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+    margin:44px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{margin:0 0 6px;font-size:16.5px;letter-spacing:-.01em}
+
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding-bottom:22px}
+  .step:not(:last-child):before{content:"";position:absolute;left:22px;top:38px;bottom:0;width:1px;
+    background:linear-gradient(180deg,var(--line),transparent)}
+  .num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:var(--panel2);border:1px solid var(--line);color:var(--ac);
+    font:800 13px/1 var(--mono);position:relative;z-index:1}
+  .step p{margin:6px 0 0;color:var(--mut);font-size:14.6px}
+  .step p b{color:var(--tx);font-weight:650}
+
+  .quote{background:#0f1218;border:1px solid var(--line);border-left:2px solid var(--warn);
+    border-radius:8px;padding:10px 13px;margin:10px 0 0;font-size:14px;color:#e4dcc4;
+    white-space:pre-wrap;overflow-wrap:anywhere}
+  .quote .src{display:block;margin-top:7px;font:600 10px/1 var(--mono);letter-spacing:.1em;
+    text-transform:uppercase;color:var(--dim)}
+
+  .handoff{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin:8px 0 6px;
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+  .actor{padding:14px 14px 16px;position:relative}
+  .actor + .actor{border-left:1px dashed var(--line)}
+  .actor .who{font:700 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+  .actor.v .who{color:var(--bad)} .actor.k .who{color:var(--warn)} .actor.w .who{color:var(--ok)}
+  .actor ol{margin:0;padding-left:17px;font-size:13.4px;color:var(--mut)}
+  .actor li{margin:4px 0}
+  .actor li b{color:var(--tx)}
+  .actor .tagline{margin-top:9px;font:600 10.5px/1.4 var(--mono);color:var(--dim)}
+
+  table{width:100%;border-collapse:collapse;font-size:13.8px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:700 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
+    background:#0d1016}
+  td:first-child{white-space:nowrap}
+  code,.mono{font-family:var(--mono);font-size:12.6px;color:#cfd6e6;background:#0e1117;
+    border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+  .tblwrap{border:1px solid var(--line);border-radius:12px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+
+  .mirror{display:grid;grid-template-columns:minmax(0,1fr) 316px;gap:20px;align-items:start}
+  @media(max-width:820px){.mirror{grid-template-columns:1fr}}
+  .phone{border:9px solid #1b1f29;border-radius:34px;background:#000;
+    box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 0 1px #2c3241;overflow:hidden;position:relative}
+  .phone:before{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);
+    width:78px;height:5px;border-radius:99px;background:#333a49;z-index:5}
+  .phone iframe{display:block;width:100%;height:600px;border:0;background:#0b141a}
+  .mirror .side p{color:var(--mut);font-size:14px;margin:0 0 12px}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+  .btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font:650 13px/1 var(--sans);
+    padding:10px 14px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--tx)}
+  .btn:hover{border-color:#3a4256;background:#1b202b}
+  .btn.pri{background:var(--ac2);border-color:var(--ac2);color:#fff}
+  .btn.pri:hover{background:#565ae8}
+  .note{font-size:12.6px;color:var(--dim);margin-top:12px;line-height:1.6}
+  .note b{color:var(--mut)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .card2{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .card2 h4{margin:0 0 6px;font-size:13.5px}
+  .card2 p{margin:0;font-size:13.4px;color:var(--mut)}
+  .card2 ul{margin:6px 0 0;padding-left:17px;font-size:13.4px;color:var(--mut)}
+  .card2 li{margin:3px 0}
+  .card2 li b{color:var(--tx)}
+
+  footer{margin-top:52px;border-top:1px solid var(--line);padding-top:18px;
+    font-size:12.6px;color:var(--dim)}
+  footer b{color:var(--mut)}
+  .warnbox{border:1px solid #4b1f26;background:#160f12;border-radius:10px;padding:12px 14px;
+    font-size:13.2px;color:#f0c9c9;margin-top:14px}
+  .warnbox b{color:#ffb4b4}
+
+  /* narrow screens (page can also be opened directly on a phone) */
+  @media(max-width:700px){
+    .handoff{grid-template-columns:1fr}
+    .actor + .actor{border-left:0;border-top:1px dashed var(--line)}
+    .quote{overflow-x:auto}
+    .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    table{min-width:520px}
+  }
+
+  /* grid children must be allowed to shrink (min-content blowout guard) */
+  .step > *, .handoff > *, .mirror > *, .grid2 > *, .tablewrap{min-width:0}
+  .step p, .step .quote{max-width:100%}
+
+  code{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div>Analysis · system-level build</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="chip">macOS 26.6</span>
+      <span class="chip">Python 3</span>
+      <span class="chip">launchd</span>
+      <span class="chip red">DNS :53</span>
+    </div>
+  </div>
+
+  <h1>MacAdBlock — a DNS sinkhole that <em>survives its own controls</em></h1>
+  <p class="deck">A system-wide ad blocker for macOS with one hard constraint: <b>no terminal commands, ever</b>.
+  Holding that line forced the whole architecture — a root daemon on port 53, a launchd job that restarts it,
+  a PyObjC panel with Install/Uninstall buttons — and it turned out the hard part was never the DNS server.
+  It was <b>three caches I didn't own</b> sitting between my answer and the browser.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="k">Code</div><div class="v">1,142 <small>lines</small></div></div>
+    <div class="stat"><div class="k">Blocked domains</div><div class="v">143,596</div></div>
+    <div class="stat"><div class="k">Blocklist size</div><div class="v">718 <small>KB</small></div></div>
+    <div class="stat"><div class="k">Per entry</div><div class="v">5 <small>bytes</small></div></div>
+    <div class="stat"><div class="k">HTTP endpoints</div><div class="v">11</div></div>
+    <div class="stat"><div class="k">Real bugs fixed</div><div class="v">5</div></div>
+  </div>
+
+  <div class="call">
+    <div class="lbl">The constraint, in his words</div>
+    <p>“can you just make the adblocker no need to do any terminal stuff and just work”<br>
+       “i dont want it to quit chrome everytime i add new block domain”</p>
+  </div>
+
+  <h2>The shape of it</h2>
+  <p style="color:var(--mut);font-size:15px;max-width:80ch">Every DNS query the Mac makes is answered by a
+  Python server listening on <code>127.0.0.1:53</code> as root. It checks an allowlist, then a 143,596-entry
+  hashed blocklist, and either answers <code>0.0.0.0</code> (the sinkhole) or forwards upstream (Quad9 → Cloudflare → Google). A second thread serves an HTTP panel on <code>:8053</code> that reads and writes the same state.</p>
+
+<pre class="mono" style="display:block;padding:16px;border-radius:12px;border:1px solid var(--line);background:#0e1117;overflow-x:auto;line-height:1.7">  app / browser / any process
+        │  getaddrinfo("ads.example.com")
+        ▼
+  mDNSResponder  ── system DNS = 127.0.0.1 ──►  127.0.0.1:53   (root, launchd)
+                                                     │
+                                        ┌────────────┴────────────┐
+                                        ▼                         ▼
+                                  allowlist hit?            hash lookup
+                                  → forward upstream        (sorted 40-bit hashes)
+                                        │                         │
+                                        ▼                    ┌────┴────┐
+                                  9.9.9.9 / 1.1.1.1          hit      miss
+                                                              │         │
+                                                        0.0.0.0    forward + cache</pre>
+
+  <h2>Version ladder — what each pass cut</h2>
+  <div class="step"><div class="num">1</div><div>
+    <h3>V1 — hosts file</h3>
+    <p>A generated <code>/etc/hosts</code>. Zero code, zero daemon, and one fatal property: it needs
+    <code>sudo</code> after every list change, which is exactly the terminal workflow that was banned.</p>
+  </div></div>
+  <div class="step"><div class="num">2</div><div>
+    <h3>V2 — DNS server on :8054 + pfctl redirect</h3>
+    <p>A real Python sinkhole. It worked, and it needed a <b>pf rule</b> to redirect 53 → 8054 on top of a
+    <code>networksetup</code> call — two root operations that both fail silently if you get them wrong.
+    This is the version that shipped bugs: pausing the blocker closed the DNS socket entirely, so the whole
+    machine lost DNS instead of merely unblocking.</p>
+  </div></div>
+  <div class="step"><div class="num">3</div><div>
+    <h3>V3 — bind :53 directly as a launchd daemon <span class="chip" style="margin-left:6px">shipped</span></h3>
+    <p>If the process runs as root from boot, it can own port 53 itself and <b>the pf rule disappears</b>.
+    One <code>launchctl</code> load, one DNS pointer, no packet filter. The GUI gained Install / Uninstall
+    buttons so the install is a click, not a script.</p>
+  </div></div>
+
+  <h2>The five bugs that actually mattered</h2>
+  <div class="grid2">
+    <div class="card2"><h4>1 · Pause killed DNS for the whole Mac</h4>
+      <p>Toggling off closed the listening socket, so clients got <em>connection refused</em> instead of
+      “nothing is filtered right now”. Fix: the socket stays open forever; a paused server answers by
+      forwarding everything. A pause should be invisible, not fatal.</p></div>
+    <div class="card2"><h4>2 · Toggle race → two workers, double answers</h4>
+      <p>Rapid on/off calls spawned overlapping worker threads on the same socket. Fix: a
+      <code>threading.Lock()</code> guards the worker lifecycle and the new worker waits for the old one to
+      exit before binding.</p></div>
+    <div class="card2"><h4>3 · Unblock didn't unblock</h4>
+      <p>Removing a domain from the custom list left it blocked, because the same domain also lives in the
+      143k main list. Fix: unblock <em>also</em> writes an allowlist entry, and the allowlist is consulted
+      before any blocklist. Removal is now a real bypass, not a list edit.</p></div>
+    <div class="card2"><h4>4 · Adding a block quit Chrome</h4>
+      <p>The first “make it instant” attempt flushed browser caches with <code>pkill -HUP</code> — which
+      restarts Chrome under the user. Fix: only the macOS resolver cache is flushed
+      (<code>dscacheutil</code> + <code>mDNSResponder</code> HUP). No user process is ever signalled.</p></div>
+    <div class="card2"><h4>5 · GUI died on launch, twice</h4>
+      <p><code>rumps</code> / <code>NSStatusItem</code> is broken on macOS 26, so the menu-bar app was
+      rewritten in raw PyObjC. Then a Python method used as a main-thread callback had the wrong arity —
+      PyObjC requires Objective-C selector shape, so it became <code>updateInstallStatus_(self, installed)</code>.</p></div>
+    <div class="card2"><h4>+ Install/Uninstall that lied</h4>
+      <p>The panel showed “Install Daemon” while the daemon was already loaded: the check only ran on the
+      failure path. Fix: detect the plist on launch and set the button title from the real state, both ways.</p></div>
+  </div>
+
+  <h2>Anatomy 1 — 143,596 domains in 718 KB</h2>
+  <p style="color:var(--mut);font-size:14.8px">Storing domain strings would cost ~3 MB and a string compare per
+  query. Instead the build step hashes every domain with <b>FNV-1a truncated to 40 bits</b> and writes the
+  sorted hashes as 5 bytes each: <code>143,596 × 5 = 717,980 bytes</code>. A lookup is a binary search over a
+  <code>bytes</code> object — no dict, no allocation, ~17 comparisons instead of a linear scan.</p>
+  <div class="tblwrap" style="margin-top:12px"><table>
+    <thead><tr><th>Property</th><th>Value</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td>Hash</td><td class="mono">FNV-1a &amp; 0xFFFFFFFFFF</td><td>Cheap, no dependency, stable across rebuilds.</td></tr>
+      <tr><td>Entry size</td><td class="mono">5 bytes</td><td>718 KB fits in L2; whole list loads at boot in one read.</td></tr>
+      <tr><td>Lookup</td><td class="mono">bisect over bytes</td><td>~17 steps for 143k entries; no Python dict churn.</td></tr>
+      <tr><td>Subdomain rule</td><td class="mono">block parent → children</td><td>Blocking <code>toddleapp.com</code> catches <code>web.</code>, <code>api.</code>, everything.</td></tr>
+      <tr><td>Custom list</td><td class="mono">set() of strings</td><td>User domains are few; exact match is cheaper than hashing.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Anatomy 2 — the three DNS caches I don't own</h2>
+  <p style="color:var(--mut);font-size:14.8px">This is the part that ate the session. Proof first: with
+  <code>toddleapp.com</code> in the blocklist, <code>dig @127.0.0.1 toddleapp.com</code> returned
+  <code>0.0.0.0</code> — and Chrome loaded the page anyway. Three independent caches sit between the answer
+  and the pixels, and each one fails differently:</p>
+  <div class="tblwrap" style="margin-top:12px"><table>
+    <thead><tr><th>Layer</th><th>Lifetime</th><th>How it was beaten</th></tr></thead>
+    <tbody>
+      <tr><td>macOS resolver</td><td>seconds → minutes</td><td>Flushed on every write: <code>dscacheutil -flushcache</code> + <code>killall -HUP mDNSResponder</code>.</td></tr>
+      <tr><td>Chrome internal resolver</td><td>holds an IP for the life of the process</td><td><b>Cannot be flushed from outside.</b> Cleared via <code>chrome://net-internals/#dns</code> → “Clear host cache”, or by restarting Chrome.</td></tr>
+      <tr><td>DNS-over-HTTPS</td><td>per request</td><td>Chrome’s “Use secure DNS” bypasses :53 entirely. Must be off — then Chrome uses the system resolver again.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warnbox" style="border-color:#4b3f1f;background:#161205;color:#f0e0c9">
+    <b>The honest ceiling:</b> a locally-installed blocker can make <em>new</em> lookups fail instantly, but it
+    cannot reach into a running browser’s private cache. “Block it” is therefore two different promises: the
+    resolver stops answering <b>immediately</b>; an already-cached hostname only dies when the browser drops it.
+    Pretending otherwise was the bug behind three rounds of “it still loads”.
+  </div>
+
+  <h2>Contract — what the daemon exposes</h2>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Endpoint</th><th>Effect</th><th>Why it exists</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">GET /api/status</td><td>running yes/no</td><td>What the panel polls; smallest possible health check.</td></tr>
+      <tr><td class="mono">GET /api/stats</td><td>counters, clients, query log, lists</td><td>One call paints the entire dashboard — no per-widget round trips.</td></tr>
+      <tr><td class="mono">GET /api/toggle</td><td>pause / resume</td><td>Lock-protected; socket stays open (bug 1).</td></tr>
+      <tr><td class="mono">GET /api/addblock</td><td>block + flush resolver cache</td><td>Blocking must be true when the call returns, not “eventually”.</td></tr>
+      <tr><td class="mono">GET /api/unblock</td><td>remove custom + allowlist + flush</td><td>Makes removal beat the 143k main list (bug 3).</td></tr>
+      <tr><td class="mono">GET /api/allow</td><td>bypass the main list</td><td>False positives are real (<code>h-adashx.ut.taobao.com</code> is genuine Taobao telemetry).</td></tr>
+      <tr><td class="mono">GET /api/disallow</td><td>drop the bypass</td><td>Reversible allowlist, with its own cache flush.</td></tr>
+      <tr><td class="mono">GET /api/ban</td><td>ban a client IP</td><td>Per-device kill switch for the LAN clients on :53.</td></tr>
+      <tr><td class="mono">GET /api/reload</td><td>re-read blocklist.bin</td><td>Rebuild the list without restarting the daemon.</td></tr>
+      <tr><td class="mono">GET /api/reset</td><td>zero the counters</td><td>Measurement hygiene after a test run.</td></tr>
+      <tr><td class="mono">GET /api/clearlog</td><td>clear the ring buffer</td><td>1,000-query buffer; clears without touching state.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Failure modes, and what they actually were</h2>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Symptom</th><th>Cause</th><th>Handling</th></tr></thead>
+    <tbody>
+      <tr><td>“I blocked X but it still loads”</td><td>Browser internal DNS cache (and DoH before that)</td><td>Resolver flushed on write; DoH off; documented <code>chrome://net-internals/#dns</code></td></tr>
+      <tr><td>“I removed X but it's still blocked”</td><td>X is also in the 143k main list</td><td>Unblock writes an allowlist entry that is checked first</td></tr>
+      <tr><td>“Blocking a domain quits Chrome”</td><td><code>pkill -HUP</code> broadcast to browsers</td><td>Removed; only the system resolver is signalled</td></tr>
+      <tr><td>“<code>toddleapp</code> won't block”</td><td>Blocked <code>web.toddleapp.com</code>; the app used the apex</td><td>Block the parent; subdomains inherit</td></tr>
+      <tr><td>Paused → every site times out</td><td>Worker dropped queries while paused</td><td>Accepted as correct: a paused filter must not answer for others. Socket stays open.</td></tr>
+      <tr><td>Daemon “running” but nothing resolves</td><td>The plist path had become an <b>empty directory</b>; launchd crash-looped with <code>can't open file</code></td><td><code>KeepAlive</code> + verify by <code>pgrep</code> <em>and</em> a real <code>dig</code>, never by launchd status alone</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Evidence</h2>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Artifact</th><th>Bytes</th><th>SHA-256 (first 16)</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">src/macadblock.py</td><td class="mono">26,357</td><td class="mono">c47128c7d9370a14</td></tr>
+      <tr><td class="mono">src/macadblock_gui.py</td><td class="mono">15,159</td><td class="mono">9712dcc41f3e1bde</td></tr>
+      <tr><td class="mono">macadblock.sh</td><td class="mono">3,313</td><td class="mono">e461d6566fb6ccba</td></tr>
+      <tr><td class="mono">blocklist/blocklist.bin</td><td class="mono">717,980</td><td class="mono">24face9053e46270</td></tr>
+      <tr><td class="mono">demos/macadblock-mirror/index.html</td><td class="mono">6,692</td><td class="mono">8f5f93e571a6274f</td></tr>
+      <tr><td class="mono">demos/macadblock.html <span class="chip" style="padding:2px 6px">canned</span></td><td class="mono">9,683</td><td class="mono">ff681c6a0ed98ce2</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">The mirror is the dashboard <b>exactly</b> as the daemon served it — same bytes, same hash. It has
+  no data of its own: opened from the portfolio it will sit empty, because it fetches
+  <code>/api/stats</code> from a daemon that isn't running in your browser. That is what the mirror is <em>for</em>
+  (proof of the real artifact). To actually see the panel, open the <b>canned dashboard</b>, which is the same
+  HTML with <code>window.fetch</code> stubbed to a recorded stats response.</p>
+
+  <h2>Honest limitations</h2>
+  <div class="warnbox">
+    <b>1 · Install is one password, not zero clicks.</b> Binding :53 and pointing system DNS at
+    <code>127.0.0.1</code> are root operations. The panel asks through the normal macOS authorisation dialog —
+    no terminal, but not magic.<br><br>
+    <b>2 · DNS-level blocking has a floor.</b> Apps with hardcoded IPs, a VPN, or their own DoH endpoint ignore
+    this entirely. It filters names, not packets.<br><br>
+    <b>3 · 40-bit hashes can collide.</b> With 143,596 entries the birthday probability of at least one
+    collision is ≈0.9%. A collision <em>over-blocks</em> one unrelated domain (fail-closed); it never lets a
+    blocked one through. Widening to 64 bits is a rebuild, not a redesign.<br><br>
+    <b>4 · The list is borrowed, not audited.</b> StevenBlack + Hagezi, 143,596 entries, rebuilt by
+    <code>tools/build_blocklist.py</code>. False positives are expected; the allowlist is the answer, and
+    <code>h-adashx.ut.taobao.com</code> is a live example of a genuine tracking domain that a user may want.
+  </div>
+
+  <h2>What's next</h2>
+  <div class="grid2">
+    <div class="card2"><h4>Ship the .pkg</h4><p>The panel and daemon work from source; a signed installer with
+      the plist pre-installed would make the first run two clicks instead of one password prompt plus a
+      python path.</p></div>
+    <div class="card2"><h4>Per-client rules</h4><p>The daemon already counts per client IP (and can ban one).
+      The obvious next step is per-device blocklists — the kid's iPad and my laptop shouldn't share a policy.</p></div>
+  </div>
+
+  <div class="btnrow">
+    <a class="btn pri" href="./macadblock.html">Open the canned dashboard</a>
+    <a class="btn" href="./macadblock-mirror/">Byte-identical mirror</a>
+    <a class="btn" href="../">← Portfolio</a>
+  </div>
+
+  <footer>
+    <b>Method.</b> Every number here was re-derived from the source or the running daemon —
+    <code>102</code> lines of shell, <code>676 + 364</code> lines of Python, <code>717,980 ÷ 5 = 143,596</code>
+    entries, hashes from <code>shasum -a 256</code>. Behaviour claims come from <code>dig</code> against
+    <code>127.0.0.1:53</code> and from the API returning the same values the panel displays.<br><br>
+    <b>Honesty notes.</b> The canned dashboard's query log is a recorded snapshot, not a live feed — the domain
+    names in it are the ones this build was actually tested against (<code>doubleclick.net</code>,
+    <code>roblox.com</code>, <code>toddleapp.com</code>, <code>h-adashx.ut.taobao.com</code> …), and the
+    counters are illustrative. The mirror's served copy differs from the repo file only by the two tags the
+    host injects (skin engine + analytics beacon); the repo bytes and the hash above are untouched.
+    Bugs 1–5 were all observed live in this build, not predicted.
+  </footer>
+</div>
+</body>
+</html>

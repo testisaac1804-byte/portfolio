@@ -26,4 +26,4 @@ Python + pyautogui + Tkinter. Types text character-by-character (bypasses Google
 - `Macro Typer.command` — 3 lines (Shell)
 
 ---
-_Spec generated from the project's own files on 2026-09-28 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._
+_Spec generated from the project's own files on 2026-10-22 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._

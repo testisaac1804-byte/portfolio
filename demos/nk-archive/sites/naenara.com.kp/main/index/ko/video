@@ -1,0 +1,204 @@
+﻿
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>내나라 - 조선민주주의인민공화국</title>
+	<meta charset="utf8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" >
+	<meta name="robots" content="all" >
+	<meta name="keywords" content="korea, DPRK, DPR of Korea, naenara">
+    <meta name="description" content="Articles about politics, economy, culture, history, sports, tourism in DPRK" >
+	<link rel="icon" href="/assets/favicon.ico" type="image/x-icon" >
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" >
+	<link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css" >
+	<link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/font-awesome.min.css" >
+	<link rel="stylesheet" type="text/css" href="/css/header/header.css" >
+	<link rel="stylesheet" type="text/css" href="/css/header/header_ko.css" >
+	<link rel="stylesheet" type="text/css" href="/assets/sidebar.css" >
+	<link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" >
+	<link href="/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" >
+
+	<script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/js/search/index.js" type="text/javascript"></script>
+</head> 
+<body>
+<header>
+	<div class="container">
+		<div class="firstMark text-center">
+			<div>
+				<img alt="naenara-image" src="/images/first/flag.png">
+				<a href="/main/index/ko/first"><img alt="naenara-image" src="/images/first/mark.png"></a>
+			</div>
+			<span>조선민주주의인민공화국</span>
+			<span>www.naenara.com.kp</span>
+		</div>
+		<div class="rightMenu">
+			<div class="pageSub drop">
+				<span class="dropbtn"><i class="icon-list"></i></span>
+				<div class="content">
+											<a href="/main/index/ko/first" class="">첫페지</a>
+											<a href="/main/index/ko/news" class="">소식, 기사</a>
+											<a href="/main/index/ko/politics?arg_val=leader3" class="">조선개관</a>
+											<a href="/main/index/ko/trade" class="">경제, 무역</a>
+											<a href="/main/index/ko/society" class="">사회문화</a>
+											<a href="/main/index/ko/history" class="">력사</a>
+											<a href="/main/index/ko/tourism" class="">관광</a>
+									</div>
+			</div>
+			<div class="sideSub drop">
+				<span class="dropbtn"><i class="fa icon-wallet"></i></span>
+				<div class="content">
+					<a href="/main/index/ko/photo"><span>사 진</span></a>
+					<a href="/main/index/ko/video"><span>동영상</span></a>
+					<a href="/main/index/ko/music"><span></span></a>
+					<a href="http://www.korstamp.com.kp" target="_blank"><span>우표</span></a>
+					<a href="/main/index/ko/gallery"><span>선전화</span></a>
+					<a href="/main/index/ko/fineart"><span>미술</span></a>
+				</div>
+			</div>
+
+			<div class="langSub drop" id="ko">
+								<span class="dropbtn"><i class="fa fa-language"></i>조선어<i class="fa fa-angle-down"></i> </span>
+				<div class="content">
+				<a href="/main/index/ko/video" class="lang-ko">조선어</a><a href="/main/index/en/video" class="lang-en">English</a><a href="/main/index/fr/video" class="lang-fr">Français</a><a href="/main/index/sp/video" class="lang-sp">Español</a><a href="/main/index/ge/video" class="lang-ge">Deutsch</a><a href="/main/index/ru/video" class="lang-ru">Русский</a><a href="/main/index/ch/video" class="lang-ch">汉语</a><a href="/main/index/ja/video" class="lang-ja">日本語</a><a href="/main/index/ar/video" class="lang-ar">العربية</a>				</div>
+			</div>
+					</div>
+		<ul class="menubar">
+							<li><a href="/main/index/ko/first" class="">첫페지</a></li>
+							<li><a href="/main/index/ko/news" class="">소식, 기사</a></li>
+							<li><a href="/main/index/ko/politics?arg_val=leader3" class="">조선개관</a></li>
+							<li><a href="/main/index/ko/trade" class="">경제, 무역</a></li>
+							<li><a href="/main/index/ko/society" class="">사회문화</a></li>
+							<li><a href="/main/index/ko/history" class="">력사</a></li>
+							<li><a href="/main/index/ko/tourism" class="">관광</a></li>
+					</ul>
+				<form class="searchbox text-center" action="/main/search_first" method="get" enctype="multipart/form-data">
+			<input type="text" placeholder="검색어를 입력하십시오." value="" name="sVal" class="sval" onkeydown="searchResult(event)"/>
+			<input type="hidden" name="csrf_test_name" value="48f325955f05324cc0e3e8a4d03a04a0" />
+		</form>
+
+		<h3 class="site-comma"><span>NAENARA.COM.KP</span><span>조선민주주의인민공화국의 정치, 경제, 문화 등 전반에 대한 유익한 정보발생거점</span></h3> 
+	</div>
+	<div class='space1'></div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/css/video/video_ko.css" rel="stylesheet" type="text/css" />
+
+<div class="phototitle">동영상</div>
+
+<div class="container">
+    <div class="mainframe">
+        <div style="background-image:url(/images/video-gallery/280.gif);" title="화보 《조선》 2025년 12월호"  fname="Korea202512"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:15:38></h5></div><div style="background-image:url(/images/video-gallery/279.gif);" title="누구나 즐겨 찾는 미림승마구락부"  fname="MirimRiding"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:02:58></h5></div><div style="background-image:url(/images/video-gallery/278.gif);" title="동명왕릉"  fname="MausoleumKingTongmyong"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:04:52></h5></div><div style="background-image:url(/images/video-gallery/277.gif);" title="온넋으로 듣는 바이올린소리"  fname="violon"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:04:45></h5></div><div style="background-image:url(/images/video-gallery/276.gif);" title="화보 《조선》 2025년 11월호"  fname="Korea202511"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:14:18></h5></div><div style="background-image:url(/images/video-gallery/275.gif);" title="화보 《조선》 2025년 특간호"  fname="PictorialSpecialIssue2025"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:18:23></h5></div><div style="background-image:url(/images/video-gallery/274.gif);" title="조로청년친선련환모임 진행"  fname="FriendshipGathering"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:03:05></h5></div><div style="background-image:url(/images/video-gallery/273.gif);" title="평양양로원"  fname="OldPeople’sHome"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:03:25></h5></div><div style="background-image:url(/images/video-gallery/272.gif);" title="조선로동당창건 80돐경축 중앙산업미술전시회 개막"  fname="80sanobmisul"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:02:11></h5></div><div style="background-image:url(/images/video-gallery/271.gif);" title="화보 《조선》 2025년 10월호"  fname="Korea202510"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:19:49></h5></div><div style="background-image:url(/images/video-gallery/270.gif);" title="개성의 박연폭포"  fname="Pakyon"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:02:47></h5></div><div style="background-image:url(/images/video-gallery/269.gif);" title="세계문화 및 자연유산 금강산"  fname="MtKumgangCultural"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:02:46></h5></div><div style="background-image:url(/images/video-gallery/268.gif);" title="화보 《조선》 2025년 9월호"  fname="Korea202509"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:15:44></h5></div><div style="background-image:url(/images/video-gallery/267.gif);" title="화보 《조선》 2025년 8월호"  fname="Korea202508"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:14:11></h5></div><div style="background-image:url(/images/video-gallery/266.gif);" title="해마다 달라지는 평양의 모습"  fname="PyongyangSkyline"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:07:25></h5></div><div style="background-image:url(/images/video-gallery/265.gif);" title="누구나 좋아하는 평양랭면"  fname="Noodles"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:02:31></h5></div><div style="background-image:url(/images/video-gallery/264.gif);" title="대전해방작전"  fname="Taejon"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:05:40></h5></div><div style="background-image:url(/images/video-gallery/263.gif);" title="희열이 넘치는 곳"  fname="Huiyol"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:00:58></h5></div><div style="background-image:url(/images/video-gallery/261.gif);" title="력사유적 법운암"  fname="PobunHermitage"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:03:41></h5></div><div style="background-image:url(/images/video-gallery/260.gif);" title="화보 《조선》 2025년 7월호"  fname="Korea202507"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:13:55></h5></div><div style="background-image:url(/images/video-gallery/259.gif);" title="6.25미제반대투쟁의 날에 즈음하여 복수결의모임들과  군중집회들 진행"  fname="RevengeonUS2025.6.25"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:02:57></h5></div><div style="background-image:url(/images/video-gallery/258.gif);" title="중앙동물원에서"  fname="Zoom"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:02:17></h5></div><div style="background-image:url(/images/video-gallery/257.gif);" title="광명을 주는 집"  fname="Light"><h4 style="background-image:url(/images/home/player-3.png)" id="video_img_css"></h4><h5><00:04:27></h5></div>    </div>
+
+    <div class="navigation">
+        <a href="/Main/index/ko/video?pgNum=0"><img style="cursor:pointer;" src="/assets/img/img_first.png"></a>
+        <a href="/Main/index/ko/video?pgNum=-1"><img style="cursor:pointer;margin-left:2px;" src="/assets/img/img_prev.png"></a>
+        <label style="margin-left:7px;">1/6</label>
+        <a href="/Main/index/ko/video?pgNum=1"><img style="cursor:pointer;margin-left:7px;" src="/assets/img/img_next.png"></a>
+        <a href="/Main/index/ko/video?pgNum=5"><img style="cursor:pointer;margin-left:2px;" src="/assets/img/img_last.png"></a>
+    </div>
+</div>
+<div class="v_modal">
+    <div class="v_modal-content">
+    </div>
+    <div class="v_video_title" style="text-align:center;color:white;margin-top:10px;"></div>
+</div>
+
+<script type="text/javascript" src="/js/video/video.js" ></script><footer>
+
+	<div class="contact text-center" onclick="openModal()">
+		<span><i class="icon-pointer"></i>조선민주주의인민공화국 평양시 서성구역 서천동</span>
+		<span><i class="icon-call-end"></i>850-2-18111(8456), 850-2-3814598</span>
+		<span><i class="icon-envelope"></i>flph@star-co.net.kp</span>
+		<!-- <span class="socicons">
+			<a href="#" target="_blank"><i class="fa fa-skype"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-google-plus"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-vimeo"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-play"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-flickr"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-pinterest"></i></a>
+		</span> -->
+		<span>저작권© 조선민주주의인민공화국 외국문출판사<br>
+			2004년 - 2026년		</span>
+	</div>
+
+</footer>
+
+<div class="modal fade bs-modal-lg" id="modal_view" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg" style="max-width: 900px!important">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+
+                <h4 class="modal-title" style="font-size:14px;"></h4>
+
+            </div>
+
+            <div class="modal-body"></div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class='fa fa-remove'></i></button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<button onclick="topFunction()" id="toTop" title="Go to top">&nbsp;<i class='fa fa-chevron-up'></i>&nbsp;</button>
+
+<script type="text/javascript" src="/assets/public_code/common.js"></script>
+</body>
+
+</html>
+<!-- 0.0011 -->

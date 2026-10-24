@@ -1,0 +1,392 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 5, 2017, 11:57:09 AM
+    Author     : Administrator
+*/
+.site_info  {
+    display: inline-block;
+    font-family: wksystem;
+    font-size: 12pt;
+    text-align: center;
+    color: white;!important;
+}
+.content{
+    width: 1250px;     
+
+    margin:0px auto !important;
+    padding: 0px auto !important;
+    height:825px;
+}
+.margin-left-25{
+    margin-left:25px;
+}
+.content .works_area{
+    width:290px;
+    height: 240px;
+}
+.row{
+    margin:0px auto !important;
+}
+.row .block_l{
+    width:955px;
+}
+.row .block_r{
+    width:278px;
+    height:490px;
+}
+.row .leader_vbox{
+    width:100%;
+    height:450px;
+    background-color: #518ecd;
+    border-left: 1px solid #3470a6;
+    border-right: 1px solid #3470a6;
+    border-bottom: 1px solid #3470a6;
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+}
+.prow{
+    height:232px;
+}
+.leader_vbox .leader_box{
+    width:271px;
+    height:447px;
+    border:1px solid #dcebfe;
+    border-bottom-left-radius: 3px !important;
+    border-bottom-right-radius: 3px !important;
+    border-top-right-radius: 3px !important;
+    border-top-left-radius: 3px !important;
+    background-color:#dcebfe;
+    margin-left:2px;
+    overflow:visible;
+}
+.work_header{
+    width:290px;
+    height:41px;
+    background:url(../images/wroks_title.gif) no-repeat;
+}
+.work_header_en{
+    width:290px;
+    height:41px;
+    background:url(../images/wroks_titleEng.gif) no-repeat;
+}
+.work_header_ch{
+    width:290px;
+    height:41px;
+    background:url(../images/wroks_titleCh.gif) no-repeat;
+}
+.work_header img{
+    margin-left:69px;
+    margin-top:8px;
+}
+.leader_sh_header{
+    width:278px;
+    height:45px;
+    background:url(../images/s_leader.gif) no-repeat;
+}
+.leader_sh_header img{
+    margin-left:14px;
+    margin-top:10px;
+}
+.leader_box ul{
+    padding-left:22px;
+}
+.leader_box li{    
+    color:#2864a2;
+    font-family: PRK P Chongbong;
+    font-size:11pt;
+    margin-top:10px;
+    list-style: outside circle;
+}
+.brow{
+    min-height:300px;
+}
+.brow .world_ex_wbox{
+    width:401px;
+    height:300px;
+}
+.black_ul a{
+    color:#494343;
+}
+.world_ex_box{
+    width:100%;
+    height:280px;
+}
+.world_ex_box li{
+    margin-top:5px;
+}
+.world_ex_box a{
+    color:#5a5a5a;
+    font-family: PRK P Chongbong;
+    font-size:11pt;
+}
+.alert_area a{
+    font-family:PRK P Chongbong;
+    font-size: 11pt;
+    line-height:2;
+    color:#alert_area;
+}
+.vhr{
+    height:2px;
+    width:246px;
+    margin-left: 12px;
+    background-color:#1c65aa;
+    margin-bottom:8px
+}
+.gbox{
+    border:1px solid #afc5b9;
+}
+.paper_wbox{
+    width:406px;
+    height:300px;
+}
+.row .alert_l{
+    width:100%;
+    height:245px;
+}
+.alert_icon{
+    width:49px;
+    height:245px;
+    background:url(../images/alert_l.gif) no-repeat;
+}
+.alert_vbox{
+    width:895px;
+    height:243px;
+    background-color:#81beeb;
+    border-top:1px solid #4a90c1;
+    border-bottom:1px solid #4a90c1;
+    border-right:1px solid #4a90c1;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+}
+.alert_content{
+    height:236px;
+    width:892px;   
+    margin-top:2px;
+    border-top:1px solid #4990be;
+    border-bottom:1px solid #4990be;
+    border-right:1px solid #4990be;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    background-color:white;
+}
+.content .works_main{
+    width:290px;
+    height:200px;
+    overflow: auto;
+    background-color: #fbcfd0;    
+    border-left: 1px solid #9d2123;
+    border-right: 1px solid #9d2123;
+    border-bottom: 1px solid #9d2123;
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+}
+.alert_area{
+    width:550px;
+    height:290px;
+}
+.scare_vbox{
+    width:335px;
+    height:290px;
+}
+.scare_vbox .scare_header{
+    height: 33px;
+    margin-top:8px;
+    border-bottom:1px solid #1b66aa;
+    width:310px;
+}
+.scare_box{
+    width:100%;
+    height:192px;
+    overflow: auto;
+}
+.scare_ul li{
+    margin-top: 10px;
+}
+.scare_ul a{
+    font-family: PRK P Chongbong;
+    font-size: 11pt;
+    color:black;
+}
+.row .main_slider{
+    width:635px;
+    height: 240px;
+    text-align:center;
+    margin-left:5px;
+    /*border:1px solid #02480c;*/
+    /*border-radius: 8px !important;*/
+}
+.row .main_slider .ls-glass{
+    background-color:#fffeff !important;
+}
+.ptitle{
+    font-size:18pt;
+    font-weight:bold;
+    font-family:'wchongbong';
+    display:block;    
+    margin-bottom:0px !important;
+    margin-top:0px !important;
+}
+.pbox .pheader{
+    height:44px;
+    margin-bottom:4px;
+}
+.pbox .pbox_body{
+    border-bottom-left-radius:  8px !important;
+    border-bottom-right-radius: 8px !important;
+    border:1px solid #e1e1e1;
+    border-top:2px solid #e1e1e1 !important;
+}
+.pheader i{
+    font-size:18pt;
+    margin-right: 3px;
+}
+.works a{
+    font-size:11pt;
+    font-family: PRK P Chongbong;
+    color:#7c3839;
+    line-height: 1;
+    /*-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;*/
+}
+.tune {
+     font-size:11pt;
+}
+.works{
+    padding-left: 0px !important;
+}
+.works li{
+    margin-top:10px;
+    list-style:inside square;
+    padding-left:5px;
+    padding-top:4px;
+    padding-bottom:4px;
+}
+.works li.even{
+    background-color:#fbdddd;
+}
+.modal-body{
+    font-size:10pt !important;
+    font-family: 'pgothic';
+    line-height: 2 !important;
+}
+.works a:hover{
+    color:blue;
+    text-decoration: none;
+}
+.modal{
+    border-radius: 5px !important;
+}
+.world_ex_header{
+    width:401px;
+    height:29px;
+    background:url(../images/world_ex.gif) no-repeat;
+}
+.sc_result_header{
+    width:401px;
+    height:29px;
+    background:url(../images/sc_result.gif) no-repeat;
+}
+.world_ex_header_en{
+    width:600;
+    height:29px;
+    background:url(../images/world_exEng.gif) no-repeat;
+}
+.sc_result_header_en{
+    width:600px;
+    height:29px;
+    background:url(../images/sc_resultEng.gif) no-repeat;
+}
+.world_ex_header_en img , .sc_result_header_en img  {
+    margin-left:22px;
+    margin-top:4px;
+}
+.world_ex_header_ch{
+    width:600;
+    height:29px;
+    background:url(../images/world_exCh.gif) no-repeat;
+}
+.sc_result_header_ch{
+    width:600px;
+    height:29px;
+    background:url(../images/sc_resultCh.gif) no-repeat;
+}
+.world_ex_header_ch img , .sc_result_header_ch img  {
+    margin-left:22px;
+    margin-top:4px;
+}
+.paper_box_header{
+    width:406px;
+    height:29px;
+    background:url(../images/paper_icon.gif) no-repeat;
+}
+.world_ex_header img , .sc_result_header img  {
+    margin-left:22px;
+    margin-top:4px;
+}
+.paper_box_header img{
+    margin-left:24px;
+    margin-top:4px;
+}
+
+.name-nowrap {
+    white-space: nowrap;
+}
+strong {
+	font-weight : bold !important;
+}
+@media only screen and (max-device-width: 768px) {
+    .content{
+        width:100%;
+    }
+    .row .block_l{
+        width:100%;
+    }
+    .main_slider{
+        margin-top: 1rem;
+    }
+    .alert_icon{
+        display:none;
+    }
+    .alert_vbox{
+        width:100% !important;
+        border-top-color:transparent;
+        border-right-color: transparent;
+        background-color: transparent;
+    }
+    .alert_content{
+        width:100% !important;
+        border-bottom-color: transparent !important;
+        border-top-color:transparent;
+        border-right-color: transparent;
+
+    }
+}
+
+.mytooltip {
+  position: relative;
+  display: inline-block;
+/*  border-bottom: 1px dotted black;*/
+}
+
+.mytooltip .mytooltiptext {
+  visibility: hidden;
+  background-color: #999999;
+  color: #fff;
+  text-align: right;
+  border-radius: 6px;
+  padding: 5px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  right: 105%;
+}
+
+.mytooltip:hover .mytooltiptext {
+  visibility: visible;
+}

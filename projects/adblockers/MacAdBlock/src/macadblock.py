@@ -19,7 +19,26 @@ MASK = (1 << (HASH_BYTES * 8)) - 1
 FNV_OFFSET = 0xcbf29ce484222325
 FNV_PRIME = 0x100000001b3
 U64 = (1 << 64) - 1
-UPSTREAM_DNS = [('9.9.9.9', 53), ('1.1.1.1', 53)]  # Quad9 + Cloudflare fallback
+def _upstreams():
+    # Order matters: the first that answers wins, so put a resolver your ISP does
+    # not throttle first. The HGC/sweetpotato router throttles 1.1.1.1, which is
+    # why 8.8.8.8 is in the chain; override with
+    #   MACADBLOCK_UPSTREAM="1.2.3.4,5.6.7.8"  (comma separated, :port optional)
+    env = os.environ.get('MACADBLOCK_UPSTREAM', '').strip()
+    if env:
+        out = []
+        for part in env.split(','):
+            part = part.strip()
+            if not part:
+                continue
+            host, _, port = part.partition(':')
+            out.append((host, int(port) if port else 53))
+        if out:
+            return out
+    return [('9.9.9.9', 53), ('1.1.1.1', 53), ('8.8.8.8', 53)]
+
+
+UPSTREAM_DNS = _upstreams()  # Quad9 -> Cloudflare -> Google
 BLOCKLIST_PATH = os.path.join(os.path.dirname(__file__), '..', 'blocklist', 'blocklist.bin')
 BIND_ADDR = '0.0.0.0'
 DNS_PORT = 53  # Direct port 53 (requires root)

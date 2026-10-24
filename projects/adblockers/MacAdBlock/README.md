@@ -1,77 +1,90 @@
 # MacAdBlock — macOS DNS Sinkhole Ad-Blocker
 
-A Pi-hole-style DNS ad-blocker for your Mac. **Same approach as the ESP32-C3 adblock project**: stores domain hashes on disk (not in RAM), binary-searches them for fast lookups. Blocks ads, trackers, and malware at the DNS level.
+A Pi-hole-style DNS ad-blocker for one Mac, with one hard rule: **no terminal commands to use it**. The
+server binds port 53 itself as a root launchd daemon, so there is no `pfctl` redirect and no manual
+`networksetup` step — the GUI's Install button does the whole setup (one macOS password dialog).
 
 ## How it works
 
 ```
-query in ──▶ extract domain ──▶ FNV-1a hash (+ parent suffixes)
-         ──▶ binary-search the blocklist hash file
-              ├─ hit  ──▶ answer 0.0.0.0   (sinkholed)
-              └─ miss ──▶ forward to Quad9, relay the reply
+query in ──▶ extract domain ──▶ allowlist?  ──yes──▶ forward upstream
+                                     │no
+                                     ▼
+                    FNV-1a hash + parent suffixes ──▶ binary search blocklist.bin
+                                     ├─ hit  ──▶ answer 0.0.0.0   (sinkholed)
+                                     └─ miss ──▶ forward to Quad9 → Cloudflare fallback
 ```
 
 - **143,596 domains** blocked (StevenBlack base + Hagezi Light)
-- **0.68 MB** blocklist file (5-byte FNV-1a hashes)
-- **~18 reads** per lookup (binary search)
-- **Zero collisions** at this size
+- **718 KB** blocklist file — 5 bytes per entry, 40-bit FNV-1a hashes, sorted
+- **~17 comparisons** per lookup (binary search over a `bytes` object)
+- **11 HTTP endpoints** on `:8053` drive the dashboard
 
 ## Files
 
 | File | Purpose |
 |------|---------|
-| `src/macadblock.py` | Core DNS + HTTP server |
-| `src/macadblock_gui.py` | macOS menu bar GUI (rumps) |
-| `macadblock.sh` | CLI start/stop/status |
-| `tools/build_blocklist.py` | Rebuild blocklist from StevenBlack + Hagezi |
+| `src/macadblock.py` | Core DNS server (:53) + HTTP API (:8053) |
+| `src/macadblock_gui.py` | PyObjC control panel — Install / Uninstall / Set DNS / pause |
+| `macadblock.sh` | CLI: install, uninstall, start, stop, status, toggle, reload, stats |
+| `com.isaac.macadblock.plist` | LaunchDaemon definition (root, KeepAlive) |
+| `tools/build_blocklist.py` | Rebuild the blocklist from StevenBlack + Hagezi |
 | `blocklist/blocklist.bin` | The hash blocklist |
-| `MacAdBlock.app` | Clickable macOS app (on Desktop) |
 
 ## Usage
 
-### GUI (menu bar)
-1. Double-click **MacAdBlock.app** on your Desktop
-2. The shield icon (🛡️) appears in your menu bar
-3. Click **Start Blocker** to begin blocking
-4. Optional: **Setup: Port 53 Redirect** (sudo once) — redirects system DNS port 53 → 8054
-5. Optional: **Set DNS → 127.0.0.1** (sudo once) — makes your whole Mac use the blocker
-6. Open the **Dashboard** in your browser for stats
+### GUI
+1. Run `python3 src/macadblock_gui.py` (or the packaged app)
+2. **Install Daemon** → one password dialog → daemon loaded, bound to :53, DNS pointed at 127.0.0.1
+3. Pause / resume from the same panel; **Uninstall Daemon** removes it and returns DNS to DHCP
 
 ### CLI
 ```bash
-./macadblock.sh start          # Start the DNS server (no root)
-./macadblock.sh stop           # Stop
-./macadblock.sh status         # Check if running
-./macadblock.sh setup-pf       # Setup port redirect 53→8054 (one-time sudo)
-./macadblock.sh set-dns        # Set system DNS to 127.0.0.1
-./macadblock.sh reset-dns      # Reset DNS to DHCP
+./macadblock.sh install        # copy plist to /Library/LaunchDaemons + load (sudo)
+./macadblock.sh status         # running? + domain count, hit counts, q/m
+./macadblock.sh toggle         # pause / resume (socket stays open)
+./macadblock.sh reload         # re-read blocklist.bin without restarting
+./macadblock.sh set-dns        # point active interfaces at 127.0.0.1
+./macadblock.sh reset-dns      # back to DHCP
+./macadblock.sh uninstall      # unload + remove plist + reset DNS
 ```
 
 ### Dashboard
-Open **http://127.0.0.1:8053** in your browser to see:
-- Live blocked/allowed stats
-- Per-client breakdown
-- Ban/unban clients
-- Add custom blocked domains
+Open **http://127.0.0.1:8053** — blocked/allowed counters, per-client breakdown, ban a client,
+custom block list, allowlist, and a 1,000-entry query log.
 
 ### Test it works
 ```bash
-# After starting the blocker:
-dig @127.0.0.1 -p 8054 doubleclick.net   # → 0.0.0.0 (blocked)
-dig @127.0.0.1 -p 8054 google.com        # → real IP (forwarded)
+dig @127.0.0.1 doubleclick.net   # → 0.0.0.0   (blocked)
+dig @127.0.0.1 apple.com         # → real IP   (forwarded)
 ```
 
-## Architecture (no root needed)
+## Two caches you don't own
 
-The DNS server listens on **port 8054** (no root required). To intercept standard DNS (port 53), a one-time `pfctl` redirect is used:
-```
-port 53 → pf redirect → port 8054 → MacAdBlock → Quad9
-```
+Blocking takes effect on the **next lookup**, but a browser that already resolved the name keeps its own
+copy. That is why adding a rule flushes the macOS resolver (`dscacheutil` + `mDNSResponder` HUP) but never
+signals a browser process:
+
+- macOS resolver cache — flushed automatically on every add/remove.
+- Chrome's internal host cache — survives for the life of the process; clear it at
+  `chrome://net-internals/#dns` → *Clear host cache*, or restart the browser.
+- Chrome's "Use secure DNS" (DoH) — bypasses this blocker entirely; it must be off.
+
+## Notes / limits
+
+- DNS-level filtering only. Hardcoded IPs, a VPN, or an app's own DoH endpoint ignore it.
+- 40-bit hashes: with 143,596 entries the chance of one colliding pair is ≈0.9%. A collision
+  **over-blocks** an unrelated domain (fail-closed); it never lets a blocked one through. Widening to
+  64 bits is a rebuild, not a redesign.
+- The list is borrowed (StevenBlack + Hagezi), not audited — false positives happen. Use the allowlist
+  (`/api/allow?d=…`) rather than editing the source list; `h-adashx.ut.taobao.com` is a real example.
+- Blocking a **parent** domain covers all its subdomains; blocking `web.example.com` does not block
+  `example.com`.
 
 ## Rebuild the blocklist
 ```bash
-python3 tools/build_blocklist.py
-# Upload to dashboard or restart the server
+python3 tools/build_blocklist.py      # writes blocklist/blocklist.bin
+./macadblock.sh reload                # pick it up without a restart
 ```
 
 ## Credits

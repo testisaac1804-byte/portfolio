@@ -1,0 +1,893 @@
+@media (max-width: 479px) {
+    .banner-text {
+        height: 20%;
+    }
+
+    #search_txt {
+        width: calc(100vw - 170px);
+    }
+
+    #header,
+    #header .header-inner, #header #header-wrap {
+        height: 130px;
+    }
+    #mainMenu nav,
+    .header-extras,
+    .header-search {
+        line-height: 50px;
+    }
+    .banner{
+        height: 80px;
+    }
+
+    .site-address.self-responsive {
+        font-size: 14px;
+    }
+
+    #mainMenu nav > ul > li > a {
+        font-size: 16px;
+    }
+
+    .header-extras {
+        font-size: 12px;
+    }
+
+    .intro-1-container.self-responsive {
+        padding-top: 30px;
+    }
+    .intro-1-container.self-responsive .intro-title-1 {
+        font-size: 20px;
+    }
+    .intro-1-container.self-responsive .intro-text-1 {
+        font-size: 14px;
+    }
+
+    .first-group.self-responsive > .group-item > a {
+        font-size: 16px;
+        padding: 10px 10px;
+    }
+    .first-group.self-responsive > .group-item > a > .item-img > img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .intro-text-2.self-responsive {
+        font-size: 16px;
+    }
+    .intro-text-2.self-responsive .highlight-text {
+        font-size: 18px;
+    }
+
+    .base-title.self-responsive {
+        width: 200px;
+        font-size: 20px;
+    }
+    .base-item.self-responsive {
+        font-size: 18px;
+    }
+
+    .intro-3-container.self-responsive .intro-text-3 {
+        font-size: 18px;
+    }
+
+    .left-menu.self-responsive > li {
+        margin-bottom: 20px;
+    }
+    .left-menu.self-responsive > li > a {
+        padding: 6px 10px;
+        font-size: 18px;
+    }
+
+    .category-list.self-responsive .category-item {
+        font-size: 14px;
+    }
+
+    .block-container.self-responsive {
+        font-size: 14px;
+    }
+
+    .festival-content {
+        font-size: 13px;
+    }
+
+    .p-dropdown .p-dropdown-content > li a,
+    .p-dropdown ul.p-dropdown-content > li a {
+        line-height: 24px;
+    }
+
+    .item-overlay .fa {
+        font-size: 2em;
+    }
+}
+
+@media (min-width: 479px) {
+    .banner-text {
+        height: 30%;
+    }
+    #header,
+    #header .header-inner, #header #header-wrap {
+        height: 130px;
+    }
+    #mainMenu nav,
+    .header-extras,
+    .header-search {
+        line-height: 50px;
+    }
+    .banner{
+        height: 80px;
+    }
+
+    .site-address.self-responsive {
+        font-size: 14px;
+    }
+
+    #mainMenu nav > ul > li > a {
+        font-size: 16px;
+    }
+
+    .header-extras {
+        font-size: 12px;
+    }
+
+    .intro-1-container.self-responsive {
+        padding-top: 30px;
+    }
+    .intro-1-container.self-responsive .intro-title-1 {
+        font-size: 20px;
+    }
+    .intro-1-container.self-responsive .intro-text-1 {
+        font-size: 14px;
+    }
+
+    .first-group.self-responsive > .group-item > a {
+        font-size: 16px;
+        padding: 10px 10px;
+    }
+    .first-group.self-responsive > .group-item > a > .item-img > img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .intro-text-2.self-responsive {
+        font-size: 16px;
+    }
+    .intro-text-2.self-responsive .highlight-text {
+        font-size: 18px;
+    }
+
+    .base-title.self-responsive {
+        width: 200px;
+        font-size: 20px;
+    }
+    .base-item.self-responsive {
+        font-size: 18px;
+    }
+
+    .intro-3-container.self-responsive .intro-text-3 {
+        font-size: 18px;
+    }
+
+    .left-menu.self-responsive > li {
+        margin-bottom: 20px;
+    }
+    .left-menu.self-responsive > li > a {
+        padding: 6px 10px;
+        font-size: 18px;
+    }
+
+    .category-list.self-responsive .category-item {
+        font-size: 14px;
+    }
+
+    .block-container.self-responsive {
+        font-size: 14px;
+    }
+
+    .festival-content {
+        font-size: 13px;
+    }
+
+    .p-dropdown .p-dropdown-content > li a,
+    .p-dropdown ul.p-dropdown-content > li a {
+        line-height: 24px;
+    }
+
+    .item-overlay .fa {
+        font-size: 2em;
+    }
+}
+
+@media (min-width: 768px) {
+    #header,
+    #header .header-inner, #header #header-wrap {
+        height: 130px;
+    }
+    #mainMenu nav,
+    .header-extras,
+    .header-search {
+        line-height: 50px;
+    }
+    .banner{
+        height: 80px;
+    }
+
+    .site-address.self-responsive {
+        font-size: 14px;
+    }
+
+    #mainMenu nav > ul > li > a {
+        font-size: 16px;
+    }
+
+    .header-extras {
+        font-size: 12px;
+    }
+
+    .intro-1-container.self-responsive {
+        padding-top: 30px;
+    }
+    .intro-1-container.self-responsive .intro-title-1 {
+        font-size: 20px;
+    }
+    .intro-1-container.self-responsive .intro-text-1 {
+        font-size: 14px;
+    }
+
+    .first-group.self-responsive > .group-item > a {
+        font-size: 17px;
+        padding: 10px 20px;
+    }
+    .first-group.self-responsive > .group-item > a > .item-img > img {
+        width: 65px;
+        height: 65px;
+    }
+
+    .intro-text-2.self-responsive {
+        font-size: 16px;
+    }
+    .intro-text-2.self-responsive .highlight-text {
+        font-size: 18px;
+    }
+
+    .base-title.self-responsive {
+        width: 200px;
+        font-size: 20px;
+    }
+    .base-item.self-responsive {
+        font-size: 18px;
+    }
+
+    .intro-3-container.self-responsive .intro-text-3 {
+        font-size: 18px;
+    }
+
+    .left-menu.self-responsive > li {
+        margin-bottom: 20px;
+    }
+    .left-menu.self-responsive > li > a {
+        padding: 6px 10px;
+        font-size: 18px;
+    }
+
+    .category-list.self-responsive .category-item {
+        font-size: 14px;
+    }
+
+    .block-container.self-responsive {
+        font-size: 14px;
+    }
+
+    .festival-content {
+        font-size: 13px;
+    }
+
+    .p-dropdown .p-dropdown-content > li a,
+    .p-dropdown ul.p-dropdown-content > li a {
+        line-height: 24px;
+    }
+
+    .item-overlay .fa {
+        font-size: 2em;
+    }
+}
+
+@media (min-width: 992px) {
+    #header,
+    #header .header-inner, #header #header-wrap {
+        height: 130px;
+    }
+    #mainMenu nav,
+    .header-extras,
+    .header-search {
+        line-height: 50px;
+    }
+    .banner{
+        height: 80px;
+    }
+
+    .site-address.self-responsive {
+        font-size: 14px;
+    }
+
+    #mainMenu nav > ul > li > a {
+        font-size: 12px;
+        padding: 15px 2px;
+    }
+
+    .header-extras {
+        font-size: 12px;
+    }
+
+    .intro-1-container.self-responsive {
+        padding-top: 30px;
+    }
+    .intro-1-container.self-responsive .intro-title-1 {
+        font-size: 20px;
+    }
+    .intro-1-container.self-responsive .intro-text-1 {
+        font-size: 14px;
+    }
+
+    .first-group.self-responsive > .group-item > a {
+        font-size: 18px;
+        padding: 10px 30px;
+    }
+    .first-group.self-responsive > .group-item > a > .item-img > img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .intro-text-2.self-responsive {
+        font-size: 16px;
+    }
+    .intro-text-2.self-responsive .highlight-text {
+        font-size: 18px;
+    }
+
+    .base-title.self-responsive {
+        width: 200px;
+        font-size: 20px;
+    }
+    .base-item.self-responsive {
+        font-size: 18px;
+    }
+
+    .intro-3-container.self-responsive .intro-text-3 {
+        font-size: 18px;
+    }
+
+    .left-menu.self-responsive > li {
+        margin-bottom: 20px;
+    }
+    .left-menu.self-responsive > li > a {
+        padding: 6px 10px;
+        font-size: 18px;
+    }
+
+    .category-list.self-responsive .category-item {
+        font-size: 14px;
+    }
+
+    .block-container.self-responsive {
+        font-size: 14px;
+    }
+
+    .festival-content {
+        font-size: 14px;
+    }
+
+    .p-dropdown .p-dropdown-content > li a,
+    .p-dropdown ul.p-dropdown-content > li a {
+        line-height: 24px;
+    }
+}
+
+@media (min-width: 1200px) {
+    #header,
+    #header .header-inner, #header #header-wrap {
+        height: 130px;
+    }
+    #mainMenu nav,
+    .header-extras,
+    .header-search {
+        line-height: 50px;
+    }
+    .banner{
+        height: 80px;
+    }
+
+    .site-address.self-responsive {
+        font-size: 14px;
+    }
+
+    #mainMenu nav > ul > li > a {
+        font-size: 14px;
+        padding: 15px 3px;
+    }
+
+    .header-extras {
+        font-size: 13px;
+    }
+
+    .intro-1-container.self-responsive {
+        padding-top: 30px;
+    }
+    .intro-1-container.self-responsive .intro-title-1 {
+        font-size: 20px;
+    }
+    .intro-1-container.self-responsive .intro-text-1 {
+        font-size: 14px;
+    }
+
+    .first-group.self-responsive > .group-item > a {
+        font-size: 18px;
+        padding: 10px 20px;
+    }
+    .first-group.self-responsive > .group-item > a > .item-img > img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .intro-text-2.self-responsive {
+        font-size: 16px;
+    }
+    .intro-text-2.self-responsive .highlight-text {
+        font-size: 18px;
+    }
+
+    .base-title.self-responsive {
+        width: 200px;
+        font-size: 20px;
+    }
+    .base-item.self-responsive {
+        font-size: 18px;
+    }
+
+    .intro-3-container.self-responsive .intro-text-3 {
+        font-size: 18px;
+    }
+
+    .left-menu.self-responsive > li {
+        margin-bottom: 18px;
+    }
+    .left-menu.self-responsive > li > a {
+        padding: 6px 10px;
+        font-size: 17px;
+    }
+
+    .category-list.self-responsive .category-item {
+        font-size: 14px;
+    }
+
+    .block-container.self-responsive {
+        font-size: 14px;
+    }
+
+    .festival-content {
+        font-size: 14px;
+    }
+
+    .p-dropdown .p-dropdown-content > li a,
+    .p-dropdown ul.p-dropdown-content > li a {
+        line-height: 26px;
+    }
+    .p-dropdown .p-dropdown-content, 
+    .p-dropdown ul.p-dropdown-content {
+        min-width: 100px;
+    }
+
+    .footer-content {
+        font-size: 14px;
+    }
+
+    .item-overlay .fa {
+        font-size: 2.5em;
+    }
+
+    .modal .modal-content .modal-header .modal-title {
+        font-size: 1.3em;
+    }
+    .button.btn,
+    .btn:not(.close):not(.mfp-close),
+    .modal p,
+    .modal-content .text-content {
+        font-size: 1em;
+    }
+}
+
+@media (min-width: 1400px) {
+    #header,
+    #header .header-inner, #header #header-wrap {
+        height: 150px;
+    }
+    #mainMenu nav,
+    .header-extras,
+    .header-search {
+        line-height: 50px;
+    }
+    .banner{
+        height: 100px;
+    }
+
+    .site-address.self-responsive {
+        font-size: 16px;
+    }
+
+    #mainMenu nav > ul > li > a {
+        font-size: 18px;
+        padding: 15px 10px;
+    }
+
+    .header-extras {
+        font-size: 15px;
+    }
+
+    .intro-1-container.self-responsive {
+        padding-top: 50px;
+    }
+    .intro-1-container.self-responsive .intro-title-1 {
+        font-size: 20px;
+    }
+    .intro-1-container.self-responsive .intro-text-1 {
+        font-size: 14px;
+    }
+
+    .first-group.self-responsive > .group-item > a {
+        font-size: 18px;
+        padding: 10px 25px;
+    }
+    .first-group.self-responsive > .group-item > a > .item-img > img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .intro-text-2.self-responsive {
+        font-size: 16px;
+    }
+    .intro-text-2.self-responsive .highlight-text {
+        font-size: 20px;
+    }
+
+    .base-title.self-responsive {
+        width: 240px;
+        font-size: 20px;
+    }
+    .base-item.self-responsive {
+        font-size: 18px;
+    }
+
+    .intro-3-container.self-responsive .intro-text-3 {
+        font-size: 18px;
+    }
+
+    .left-menu.self-responsive > li {
+        margin-bottom: 20px;
+    }
+    .left-menu.self-responsive > li > a {
+        padding: 7px 10px;
+        font-size: 18px;
+    }
+
+    .category-list.self-responsive .category-item {
+        font-size: 14px;
+    }
+
+    .block-container.self-responsive {
+        font-size: 16px;
+    }
+
+    .festival-content {
+        font-size: 16px;
+    }
+
+    .p-dropdown .p-dropdown-content > li a,
+    .p-dropdown ul.p-dropdown-content > li a {
+        line-height: 29px;
+    }
+
+    .footer-content {
+        font-size: 16px;
+    }
+
+    .item-overlay .fa {
+        font-size: 2.8em;
+    }
+
+    .modal .modal-content .modal-header .modal-title {
+        font-size: 1.4em;
+    }
+    .button.btn,
+    .btn:not(.close):not(.mfp-close),
+    .modal p,
+    .modal-content .text-content {
+        font-size: 1.1em;
+    }
+}
+
+@media (min-width: 1600px) {
+    #header,
+    #header .header-inner, #header #header-wrap {
+        height: 172px;
+    }
+    #mainMenu nav,
+    .header-extras,
+    .header-search {
+        line-height: 52px;
+    }
+    .banner{
+        height: 120px;
+    }
+
+    .site-address.self-responsive {
+        font-size: 18px;
+    }
+
+    #mainMenu nav > ul > li > a {
+        font-size: 20px;
+        padding: 15px 10px;
+    }
+
+    .header-extras {
+        font-size: 17px;
+    }
+
+    .intro-1-container.self-responsive {
+        padding-top: 70px;
+    }
+    .intro-1-container.self-responsive .intro-title-1 {
+        font-size: 22px;
+    }
+    .intro-1-container.self-responsive .intro-text-1 {
+        font-size: 16px;
+    }
+
+    .first-group.self-responsive > .group-item > a {
+        font-size: 20px;
+        padding: 10px 25px;
+    }
+    .first-group.self-responsive > .group-item > a > .item-img > img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .intro-text-2.self-responsive {
+        font-size: 18px;
+    }
+    .intro-text-2.self-responsive .highlight-text {
+        font-size: 24px;
+    }
+
+    .base-title.self-responsive {
+        width: 320px;
+        font-size: 24px;
+    }
+    .base-item.self-responsive {
+        font-size: 22px;
+    }
+
+    .intro-3-container.self-responsive .intro-text-3 {
+        font-size: 18px;
+    }
+
+    .left-menu.self-responsive > li {
+        margin-bottom: 20px;
+    }
+    .left-menu.self-responsive > li > a {
+        padding: 7px 10px;
+        font-size: 20px;
+    }
+
+    .category-list.self-responsive .category-item {
+        font-size: 16px;
+    }
+
+    .block-container.self-responsive {
+        font-size: 18px;
+    }
+
+    .festival-content {
+        font-size: 18px;
+    }
+
+    .p-dropdown .p-dropdown-content > li a,
+    .p-dropdown ul.p-dropdown-content > li a {
+        line-height: 33px;
+    }
+
+    .p-dropdown .p-dropdown-content,
+    .p-dropdown ul.p-dropdown-content {
+        min-width: 150px;
+    }
+
+    #dotsMenu:before {
+        width: 40px;
+    }
+
+    #dotsMenu ul li {
+        margin-bottom: 30px;
+    }
+
+    #dotsMenu ul li a {
+        left: -23px;
+    }
+
+    #dotsMenu a .fa {
+        font-size: 27px;
+    }
+
+    .footer-content {
+        font-size: 18px;
+    }
+
+    .item-overlay .fa {
+        font-size: 3.2em;
+    }
+
+    .modal .modal-content .modal-header .modal-title {
+        font-size: 1.6em;
+    }
+    .button.btn,
+    .btn:not(.close):not(.mfp-close),
+    .modal p,
+    .modal-content .text-content {
+        font-size: 1.2em;
+    }
+
+    #scrollTop {
+        height: 50px;
+        width: 50px;
+    }
+    #scrollTop i {
+        line-height: 49px !important;
+        width: 49px !important;
+        height: 49px !important;
+        font-size: 20px !important;
+    }
+    #scrollTop:hover i {
+        transform: translate(0, -49px) !important;
+    }
+}
+
+@media (min-width: 1800px) {
+    #header,
+    #header .header-inner, #header #header-wrap {
+        height: 218px;
+    }
+    #mainMenu nav,
+    .header-extras,
+    .header-search {
+        line-height: 58px;
+    }
+    .banner{
+        height: 160px;
+    }
+
+    .site-address.self-responsive {
+        font-size: 20px;
+    }
+
+    #mainMenu nav > ul > li > a {
+        font-size: 23px;
+        padding: 15px 10px;
+    }
+
+    .header-extras {
+        font-size: 20px;
+    }
+
+    .intro-1-container.self-responsive {
+        padding-top: 70px;
+    }
+    .intro-1-container.self-responsive .intro-title-1 {
+        font-size: 28px;
+    }
+    .intro-1-container.self-responsive .intro-text-1 {
+        font-size: 20px;
+    }
+
+    .first-group.self-responsive > .group-item > a {
+        font-size: 26px;
+        padding: 10px 35px;
+    }
+    .first-group.self-responsive > .group-item > a > .item-img > img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .intro-text-2.self-responsive {
+        font-size: 22px;
+    }
+    .intro-text-2.self-responsive .highlight-text {
+        font-size: 26px;
+    }
+
+    .base-title.self-responsive {
+        width: 350px;
+        font-size: 28px;
+    }
+    .base-item.self-responsive {
+        font-size: 26px;
+    }
+
+    .intro-3-container.self-responsive .intro-text-3 {
+        font-size: 24px;
+    }
+
+    .left-menu.self-responsive > li {
+        margin-bottom: 26px;
+    }
+    .left-menu.self-responsive > li > a {
+        padding: 10px 10px;
+        font-size: 26px;
+    }
+
+    .category-list.self-responsive .category-item {
+        font-size: 18px;
+    }
+
+    .block-container.self-responsive {
+        font-size: 18px;
+    }
+
+    .festival-content {
+        font-size: 18px;
+    }
+
+    .p-dropdown .p-dropdown-content > li a,
+    .p-dropdown ul.p-dropdown-content > li a {
+        line-height: 35px;
+    }
+
+    .p-dropdown .p-dropdown-content, 
+    .p-dropdown ul.p-dropdown-content {
+        min-width: 170px;
+    }
+
+    #dotsMenu:before {
+        width: 45px;
+    }
+
+    #dotsMenu ul li {
+        margin-bottom: 35px;
+    }
+
+    #dotsMenu ul li a {
+        left: -25px;
+    }
+
+    #dotsMenu a .fa {
+        font-size: 30px;
+    }
+
+    .footer-content {
+        font-size: 20px;
+    }
+
+    .item-overlay .fa {
+        font-size: 3.5em;
+    }
+
+    .modal .modal-content .modal-header .modal-title {
+        font-size: 1.8em;
+    }
+    .button.btn,
+    .btn:not(.close):not(.mfp-close),
+    .modal p,
+    .modal-content .text-content {
+        font-size: 1.2em;
+    }
+
+    #scrollTop {
+        height: 60px;
+        width: 60px;
+    }
+    #scrollTop i {
+        line-height: 59px !important;
+        width: 59px !important;
+        height: 59px !important;
+        font-size: 24px !important;
+    }
+    #scrollTop:hover i {
+        transform: translate(0, -59px) !important;
+    }
+}

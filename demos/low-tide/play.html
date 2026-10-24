@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Low Tide — the harbour after dark</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070b0f'/%3E%3Cpath d='M6 22h20M9 22V12l7-5 7 5v10' stroke='%23e6b062' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --ink:#070b0f; --ink2:#0b1218; --paper:#d8dee2; --dim:rgba(216,222,226,.5);
+    --faint:rgba(216,222,226,.22); --amber:#e6b062; --warn:#cf5a44;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;background:var(--ink);color:var(--paper);font-family:var(--sans);overflow:hidden}
+  canvas{display:block;width:100%;height:100%}
+  #stage{position:fixed;inset:0}
+  .layer{position:fixed;inset:0;pointer-events:none}
+
+  /* ---------- atmosphere ---------- */
+  #vignette{background:radial-gradient(120% 90% at 50% 45%,transparent 38%,rgba(0,0,0,.55) 82%,rgba(0,0,0,.86) 100%)}
+  #grain{opacity:.055;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+  #flash{background:#000;opacity:0;transition:opacity .5s ease}
+  #scrim{background:linear-gradient(180deg,rgba(4,7,10,.72),transparent 26%,transparent 62%,rgba(4,7,10,.78))}
+
+  /* ---------- HUD ---------- */
+  #hud{opacity:0;transition:opacity .6s ease}
+  #hud.on{opacity:1}
+  .label{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);font-weight:600}
+
+  #objectives{position:absolute;top:22px;left:24px;display:flex;flex-direction:column;gap:9px}
+  #objectives .row{display:flex;align-items:center;gap:9px}
+  #objectives .dot{width:7px;height:7px;border:1px solid rgba(216,222,226,.42);border-radius:50%;flex:0 0 auto;transition:.35s}
+  #objectives .row.done .dot{background:var(--amber);border-color:var(--amber);box-shadow:0 0 9px rgba(230,176,98,.6)}
+  #objectives .row.done .name{color:var(--dim);text-decoration:line-through;text-decoration-color:rgba(230,176,98,.5)}
+  #objectives .name{font-size:10px;letter-spacing:.18em;color:rgba(216,222,226,.82);font-weight:600;transition:.35s}
+  #objectives .where{font-size:9px;letter-spacing:.14em;color:rgba(216,222,226,.3);margin-left:2px}
+
+  #clock{position:absolute;top:22px;right:24px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:rgba(216,222,226,.42)}
+
+  #torch{position:absolute;bottom:26px;left:24px;width:150px}
+  #torch .bar{height:3px;background:rgba(216,222,226,.14);margin-top:7px;overflow:hidden}
+  #torch .fill{height:100%;width:100%;background:linear-gradient(90deg,#8d7a56,var(--amber));transition:width .12s linear}
+  #torch.low .fill{background:linear-gradient(90deg,#7a4436,var(--warn))}
+  #torch.dead .fill{background:rgba(207,90,68,.55);animation:pulse 1.4s ease-in-out infinite}
+  #torch .hint{font-size:9px;letter-spacing:.16em;color:rgba(216,222,226,.3);margin-top:6px}
+  #torch.low .hint{color:var(--warn)}
+  @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+
+  #noise{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);text-align:center}
+  #noise .pips{display:flex;gap:4px;justify-content:center;margin-bottom:6px}
+  #noise .pip{width:3px;height:9px;background:rgba(216,222,226,.16);transition:background .1s,height .1s}
+  #noise .pip.on{background:rgba(216,222,226,.72)}
+  #noise .pip.hot{background:var(--warn);height:13px}
+  #noise .label{font-size:8.5px;letter-spacing:.26em}
+
+  #hint{position:absolute;bottom:88px;left:50%;transform:translateX(-50%);text-align:center;
+    opacity:0;transition:opacity .18s}
+  #hint.on{opacity:1}
+  #hint .key{display:inline-block;border:1px solid rgba(230,176,98,.6);color:var(--amber);
+    font-family:var(--mono);font-size:10px;padding:2px 7px;letter-spacing:.1em;margin-right:8px}
+  #hint .txt{font-size:10px;letter-spacing:.2em;color:rgba(230,176,98,.9)}
+  #hint .ring{width:120px;height:2px;background:rgba(230,176,98,.2);margin:9px auto 0}
+  #hint .ring i{display:block;height:100%;width:0;background:var(--amber)}
+
+  #reticle{position:absolute;top:50%;left:50%;width:3px;height:3px;margin:-1.5px 0 0 -1.5px;
+    border-radius:50%;background:rgba(216,222,226,.36)}
+
+  /* ---------- screens ---------- */
+  .screen{position:fixed;inset:0;display:none;place-items:center;pointer-events:auto;
+    /* 0.72 was too thin: a lit crate behind the copy showed through as a bright band across
+       the second paragraph on the menu, so the scrim now starts where it used to end. */
+    background:radial-gradient(90% 70% at 50% 40%,rgba(6,10,14,.94),rgba(4,7,10,.975))}
+  .screen.on{display:grid}
+  /* the win screen is the one reveal in the game, so its scrim is a ramp rather than a
+     blanket: dark under the card on the left, open on the right where the beam sweeps. */
+  #won{background:linear-gradient(100deg,rgba(4,7,10,.95),rgba(4,7,10,.9) 40%,rgba(4,7,10,.52) 66%,rgba(4,7,10,.34))}
+  .card{width:min(560px,88vw);padding:0 0 4px}
+  .eyebrow{font-size:9.5px;letter-spacing:.34em;color:rgba(216,222,226,.42);margin-bottom:18px}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,8.6vw,86px);letter-spacing:.16em;
+    line-height:.94;color:#dbe3e7;text-shadow:0 3px 40px rgba(0,0,0,.85)}
+  h1 span{display:block;font-size:.34em;letter-spacing:.42em;color:rgba(216,222,226,.42);
+    margin-top:14px;font-family:var(--sans);font-weight:600}
+  .lede{margin-top:26px;font-size:13.5px;line-height:1.68;color:rgba(216,222,226,.72);max-width:46ch}
+  .lede em{color:var(--amber);font-style:normal}
+  .lede b{color:#e8eef1;font-weight:600}
+  .rules{margin-top:22px;display:grid;gap:8px}
+  .rules div{display:flex;gap:11px;font-size:11.5px;line-height:1.5;color:rgba(216,222,226,.56)}
+  .rules i{color:var(--amber);font-style:normal;font-family:var(--mono);font-size:10px;padding-top:1px}
+  .keys{margin-top:26px;display:flex;flex-wrap:wrap;gap:6px 14px}
+  .keys span{font-size:9.5px;letter-spacing:.14em;color:rgba(216,222,226,.36)}
+  .keys b{color:rgba(216,222,226,.72);font-family:var(--mono);font-weight:500;letter-spacing:.06em}
+  button{font-family:var(--sans);cursor:pointer;border:0;background:none;color:inherit}
+  .go{margin-top:30px;display:inline-flex;align-items:center;gap:14px;padding:14px 26px;
+    border:1px solid rgba(230,176,98,.45);color:var(--amber);font-size:11px;letter-spacing:.26em;
+    font-weight:600;text-transform:uppercase;transition:.22s;background:rgba(230,176,98,.04)}
+  .go:hover{background:rgba(230,176,98,.12);border-color:rgba(230,176,98,.85)}
+  .go:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+  .go i{width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor;
+    transform:rotate(45deg);display:block;transition:.22s;margin-right:2px}
+  .go:hover i{transform:rotate(45deg) translate(4px,-4px)}
+  .fine{margin-top:18px;font-size:9.5px;letter-spacing:.15em;color:rgba(216,222,226,.28)}
+
+  #won h1{font-size:clamp(36px,6.4vw,62px)}
+  .stats{margin-top:24px;display:flex;gap:34px}
+  .stats div{display:flex;flex-direction:column;gap:5px}
+  .stats .k{font-size:9px;letter-spacing:.24em;color:rgba(216,222,226,.34)}
+  .stats .v{font-family:var(--mono);font-size:19px;color:#e2e9ec;letter-spacing:.04em}
+  #dead .card{text-align:left}
+  #dead h1{font-size:clamp(30px,5.4vw,50px);letter-spacing:.1em;color:#c9d2d7}
+  #dead .sub{margin-top:16px;font-size:12px;letter-spacing:.16em;color:rgba(207,90,68,.8)}
+
+  /* ---------- touch ---------- */
+  #touch{display:none}
+  #touch.on{display:block}
+  #stick{position:absolute;left:22px;bottom:96px;width:112px;height:112px;border:1px solid rgba(216,222,226,.18);
+    border-radius:50%;pointer-events:auto}
+  #stick i{position:absolute;top:50%;left:50%;width:42px;height:42px;margin:-21px 0 0 -21px;
+    border-radius:50%;background:rgba(216,222,226,.2)}
+  .tbtn{position:absolute;right:20px;bottom:96px;width:62px;height:62px;border:1px solid rgba(216,222,226,.22);
+    border-radius:50%;display:grid;place-items:center;font-size:9px;letter-spacing:.12em;
+    color:rgba(216,222,226,.72);pointer-events:auto;background:rgba(8,12,16,.4)}
+  .tbtn:active{background:rgba(230,176,98,.2);border-color:var(--amber)}
+  #t_use{right:20px;bottom:172px}
+  #t_crank{right:96px;bottom:96px}
+  #t_torch{right:96px;bottom:172px}
+
+  @media (max-width:640px){
+    #objectives{top:16px;left:16px;gap:7px}
+    #objectives .where{display:none}
+    #clock{top:16px;right:16px;font-size:10px}
+    #torch{left:16px;bottom:auto;top:96px;width:110px}
+    #noise{bottom:auto;top:96px;left:auto;right:16px;transform:none}
+    .lede{font-size:12.5px;line-height:1.6}
+    .keys{display:none}
+    #hint{bottom:150px}
+  }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div class="layer" id="scrim"></div>
+<div class="layer" id="vignette"></div>
+<div class="layer" id="grain"></div>
+<div class="layer" id="flash"></div>
+
+<div class="layer" id="hud">
+  <div id="objectives">
+    <div class="row" data-b="A"><span class="dot"></span><span class="name">Breaker A</span><span class="where">boathouse</span></div>
+    <div class="row" data-b="B"><span class="dot"></span><span class="name">Breaker B</span><span class="where">harbour-master's cabin</span></div>
+    <div class="row" data-b="C"><span class="dot"></span><span class="name">Breaker C</span><span class="where">pier head</span></div>
+  </div>
+  <div id="clock">00:00</div>
+  <div id="torch">
+    <div class="label">Hand-crank torch</div>
+    <div class="bar"><div class="fill"></div></div>
+    <div class="hint" id="torchhint">F to light · hold R to crank</div>
+  </div>
+  <div id="noise">
+    <div class="pips"><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i></div>
+    <div class="label">sound</div>
+  </div>
+  <div id="hint"><span class="key">E</span><span class="txt">HOLD TO THROW THE BREAKER</span><div class="ring"><i></i></div></div>
+  <div id="reticle"></div>
+</div>
+
+<div class="layer" id="touch">
+  <div id="stick"><i></i></div>
+  <div class="tbtn" id="t_use">USE</div>
+  <div class="tbtn" id="t_crank">CRANK</div>
+  <div class="tbtn" id="t_torch">LIGHT</div>
+</div>
+
+<div class="screen on" id="menu">
+  <div class="card">
+    <div class="eyebrow">HARBOUR · 03:14 · FORCE 5</div>
+    <h1>LOW TIDE<span>the harbour after dark</span></h1>
+    <p class="lede">The navigation lamp went out with a boat still outside. You are the only one left on the pier,
+      and the power is three breakers away — boathouse, cabin, pier head.
+      <b>Something in the water is blind.</b> It cannot see your torch. It hears your feet, your breath, and the
+      ratchet of the crank. <em>Light costs noise.</em></p>
+    <div class="rules">
+      <div><i>01</i><span>Standing still is the only silence you have. Crouch and it may lose you.</span></div>
+      <div><i>02</i><span>To crank the torch you must stop — the ratchet is the loudest thing you own.</span></div>
+      <div><i>03</i><span>Throwing a breaker is a clunk the whole harbour hears. Do it, then move.</span></div>
+    </div>
+    <div class="keys">
+      <span><b>WASD</b> walk</span><span><b>SHIFT</b> run (loud)</span><span><b>CTRL</b> crouch</span>
+      <span><b>F</b> torch</span><span><b>R</b> crank</span><span><b>E</b> hold to throw</span><span><b>ESC</b> pause</span>
+    </div>
+    <button class="go" id="startBtn">Enter the pier <i></i></button>
+    <div class="fine">Headphones. Best in the dark. Sound is the only warning you get.</div>
+  </div>
+</div>
+
+<div class="screen" id="paused">
+  <div class="card">
+    <div class="eyebrow">PAUSED</div>
+    <h1>Hold still.<span>it is still out there</span></h1>
+    <button class="go" id="resumeBtn">Back to the pier <i></i></button>
+    <div class="fine">Click anywhere to recapture the mouse.</div>
+  </div>
+</div>
+
+<div class="screen" id="dead">
+  <div class="card">
+    <div class="eyebrow">THE PIER · <span id="d_eyebrow">--:--</span></div>
+    <h1>It found<br>the noise.</h1>
+    <div class="sub">Your breakers still hold. The lamp is still out.</div>
+    <div class="stats">
+      <div><span class="k">BREAKERS</span><span class="v" id="d_breakers">0 / 3</span></div>
+      <div><span class="k">TIMES TAKEN</span><span class="v" id="d_deaths">1</span></div>
+    </div>
+    <button class="go" id="retryBtn">Go back out <i></i></button>
+  </div>
+</div>
+
+<div class="screen" id="won">
+  <div class="card">
+    <div class="eyebrow">HARBOUR · <span id="w_eyebrow">--:--</span></div>
+    <h1>The lamp is lit.</h1>
+    <p class="lede">The beam found the boat at the mouth of the harbour. Nobody on the quay ever asked how you
+      got the power back — or why you came up the pier at a walk, not a run.</p>
+    <div class="stats">
+      <div><span class="k">TIME</span><span class="v" id="w_time">—</span></div>
+      <div><span class="k">TIMES TAKEN</span><span class="v" id="w_deaths">—</span></div>
+      <div><span class="k">BREAKERS</span><span class="v" id="w_breakers">3 / 3</span></div>
+    </div>
+    <button class="go" id="againBtn">Go out again <i></i></button>
+  </div>
+</div>
+
+<script src="assets/three.min.js"></script>
+<script src="assets/GLTFLoader.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,1057 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>인민대학습당 홈페지 - 《남산》-민족고전(목록)페지</title>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="인민대학습당에 장서되여있는 민족고전들을 목록형식으로 소개합니다.">
+<meta name="keyword" content="인민대학습당,웨브싸이트,홈페지,남산,민족고전,見睫錄,견첩록,決訟類聚補,결송류취보,經山集,경산집,經世遺表,경세유표,古今釋林,고금석림,高麗史,고려사,高麗史節要,고려사절요,攷事撮要,고사촬요,國朝五禮儀,국조오례의,東國史略,동국사략,東人之文,동인지문,大東詩選,대동시선">
+<meta name="author" content="Kanegin, K.H.Y., K.S.H., KKK">
+<meta name="lang" content="ko">
+
+<link rel="shortcut icon" type="image/png" href="/assets/imgs/gpsh-icon-16.png?20240706.4.7.6">
+
+<link rel="stylesheet" href="/assets/libs/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/libs/nivo-slider/themes/light/light.min.css">
+<link rel="stylesheet" href="/assets/libs/nivo-slider/nivo-slider.min.css">
+<link rel="stylesheet" href="/assets/libs/owl-carousel/2.2.1/owl.carousel.min.css">
+<link rel="stylesheet" href="/assets/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/assets/libs/font-awesome.v6.1.2/css/all.min.css?">
+<link rel="stylesheet" href="/assets/libs/colorlib/vendor/photoswipe/css/vendor.min.css?">
+
+<link rel="stylesheet" href="/assets/css/linearicons.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/magnific-popup.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/animate.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/owl.carousel.plugin.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/global.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/font-family_ko.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/compatible.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/books.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/encyclopedia.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/rmenjoy.min.css?20240706.4.7.6">
+<link rel="manifest" href="/assets/manifest.json">
+
+<script>
+let BASE_URL = '/';
+let SITE_URL = '/index.php/ko/';
+let CURRENT_URL = 'oldbooks/view_list';
+let isMobile = false;
+let localeLang = 'ko';
+</script><script src="/assets/libs/jquery/jquery-3.4.1.ex.min.js"></script>
+<script src="/assets/libs/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body class="_top" oncontextmenu="return true;">
+    <div id="preloader">
+      <div class="preload-content">
+        <div id="gpsh-load"></div>
+      </div>
+    </div>
+    <header id="divHeader" class="header-area bo00">
+  <div class="container">
+    <div class="row mx-n15">
+      <div class="col-12 px-0">
+        <nav class="navbar-expand d-inline fixed-top languagebar bo00">
+          <ul class="navbar-nav justify-content-end language header">
+                          <li class="nav-link  active">
+                <a href="#">
+                  <span class="d-inline">조선어</span>
+                  <span class="d-none">가</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/en/oldbooks/view_list">
+                  <span class="d-inline">English</span>
+                  <span class="d-none">En</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/cn/oldbooks/view_list">
+                  <span class="d-inline">中文</span>
+                  <span class="d-none">中</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/ru/oldbooks/view_list">
+                  <span class="d-inline">Русский</span>
+                  <span class="d-none">Ру</span>
+                </a>
+              </li>
+                      </ul>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-dark" id="gpshNavbar">
+	<a class="navbar-brand" href="/index.php/ko/" title="첫페지" >
+		<img id="logo_namsan" src="/assets/imgs/namsan.png" alt="남산" />
+		<span id="domain">www.gpsh.edu.kp</span>
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gpshNav">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="gpshNav">
+	<ul class="navbar-nav ml-auto">
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">불멸의 령도</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/leader/news_list"
+        title="혁명활동">혁명활동</a>
+      <a class="dropdown-item" href="/index.php/ko/anecdote/article_list"
+        title="혁명일화">혁명일화</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/leadership"
+        title="령도업적">령도업적</a>
+    </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">소개</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/intro/index/serial#about-gpsh"
+        title="소개편집물">소개편집물</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/history#about-gpsh"
+        title="연혁">연혁</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/president#about-gpsh"
+        title="총장들">총장들</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/inside#about-gpsh"
+        title="구내전경">구내전경</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/ourfaces_list#about-gpsh"
+        title="우리모습">우리모습</a>
+    </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">강의</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/lecture/today_in7day"
+        title="주간 강의, 강습일정">주간일정</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/0"
+        title="사회과학강의">사회과학강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/1"
+        title="자연과학강의">자연과학강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/2"
+        title="새기술통보강의">새기술통보강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/3"
+        title="원격강의">원격강의</a>
+          </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 active"><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">봉사</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/rmenjoy/room"
+        title="음악감상">음악감상</a>
+      <a class="dropdown-item" href="/index.php/ko/newbooks/view_list"
+        title="도서소개">도서소개</a>
+      <a class="dropdown-item" href="/index.php/ko/oldbooks/view_list"
+        title="민족고전">민족고전</a>
+      <a class="dropdown-item" href="/index.php/ko/encyclopedia/view_list/1"
+        title="백과상식">백과상식</a>
+    </div>
+  </li>
+  <li class="nav-item px-1 "><a class="nav-link" href="/index.php/ko/libraries/index/ko-lib-cp"
+      title="도서관협회">도서관협회</a></li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">대외교류</a>
+    <div class="dropdown-menu dropdown-menu-right submenu">
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/0"
+        title="참관">참관</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/1"
+        title="도서교류">도서교류</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/2"
+        title="도서기증">도서기증</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/3"
+        title="국제토론회 및 전시회">국제토론회 및 전시회</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/4"
+        title="국제기구위탁도서관">국제기구위탁도서관</a>
+    </div>
+  </li>
+</ul>
+<div id="search-wrapper" class="d-none">
+  <form action="#" method="post">
+    <input type="text" id="search" name="search" class="search"
+      value=""
+      onkeypress="return checkProhibitionalChars('#search', '#errmsg2');"
+      placeholder="검색어를 입력하십시오." />
+    <div id="close-icon"></div>
+    <input class="d-none" type="submit" value="" />
+    <input type="hidden" name="csrftk" value="f5f0e6af3841a8cd3622218537e9d651" />
+    <span id="errmsg2" style="display: none;">* 경고! - 금지된 문자를 포함하고 있습니다.</span>
+  </form>
+</div>
+<script type="text/javascript">
+  $().ready(function() {
+    // 《혁명활동소식》과 《휴관일》소개에서 주체년호표기처리
+    let jucheobjs = $(".juche.date.column, #holidays p");
+    jucheobjs.each(function() {
+        juchehtml = $(this).html() || '';
+        juchehtml = juchehtml.replace(/(주체|JUCHE|主体|чучхе)\d+\((\d+)\)/ig, '$2');
+        $(this).html(juchehtml);
+    });
+    // 외부싸이트소개
+    let servicetime = $('div.service-time #accordion');
+    if (servicetime.length) {
+      let servicetimes = servicetime.children('div');
+      // 강의시간과 봉사시간소개부를 없앤다.
+      if (servicetimes.length > 2) {
+        $(servicetimes[0]).addClass('d-none'); // 강의시간
+        // $(servicetimes[1]).addClass('d-none'); // 봉사시간
+      }
+      // 외부싸이트(광야홈페지)소개부를 추가한다.
+      let gwangya = $('<div class="card mb-3"><div class="card-header"><a class="collapsed1 card-link1" data-toggle1="collapse" href="http://www.dprkportal.kp" title="www.dprkportal.kp" target="_blank"><img src="/./data/outsites/gwangya.png" width="150px" alt="www.dprkportal.kp" /></a></div>');
+      servicetime.append(gwangya);
+    }
+  });
+</script>
+	</div>
+</nav>
+      </div>
+    </div>
+  </div>
+</header>    <section class="body" style="min-height: 900px;">
+      
+<h1 class="d-none">민족고전(목록)</h1>
+
+<a href="#listForm" class="scrollto">
+  <div class="poster-area row-xs-150 row-sm-200 row-md-300 row-lg-400 bg-img bg-overlay bo03"
+    style="background-image: url(/./data/oldbooks/poster_01.jpg);"></div></a>
+<form id="listForm" action="/index.php/ko/oldbooks/view_search#oldbooks" method="post"
+  onsubmit="return validateSearchText('#search_keyword')">
+  <div id="oldbooks" class="container py-25 py-md-50 py-lg-100 books list">
+    <div class="col-sm-12 py-1 m-0 banner">
+      <div class="d-block mb-3 text-left" style="border-bottom: 2px solid #48b685;">
+        <img src="/assets/imgs/books/logo_oldbooks_ko.png" class="title-img" alt="oldbook_logo" />
+      </div>
+      <div class="row col-sm-12 result_info_wraper">
+
+	<div class="row col-md-12 col-lg-5 pt-1 mb-3 justify-content-center justify-content-md-left result_info" style="text-align: left;">
+		<span>총:&nbsp;397건,&nbsp;</span>
+		<span>현재&nbsp;1 / 34&nbsp;페지,&nbsp;</span>
+		<span class="">표시행수:&nbsp;</span>
+		<input type="text" name="ps" value="12" class="records-page" maxlength="2" />
+	</div>
+	<div class="row col-md-12 col-lg-7" style="text-align: center;">
+		<div id="formsearch" style="text-align: center;"
+			class="input-group input-group-sm col-sm-12 col-md-5 mb-3 justify-content-center search_form ">
+			<input class="form-control" type="text" id="search_keyword" name="search"
+				onkeypress="return checkProhibitionalChars('#search_keyword', '#errmsg2');" value=""
+				placeholder="검색어를 입력하십시오." />
+			<div class="input-group-append">
+				<input class="input-group-text rounded-right" type="image" 
+					src="/assets/imgs/search.png" alt="search icon" />
+			</div>
+			<span id="errmsg1" style="display: none;">* 알림! - 검색하려는 문자를 입력하십시오.</span>
+	        <span id="errmsg2" style="display: none;">* 경고! - 금지된 문자를 포함하고 있습니다.</span>
+			<input type="hidden" name="csrftk" value="f5f0e6af3841a8cd3622218537e9d651" />
+		</div>
+
+			<div class="page-nav col-sm-12 col-md-7">
+				<ul class="pagination pagination-sm justify-content-center justify-content-md-end" style="">				<li class="page-item"><a class="page-link command-disabled font-weight-bold">≪ </a></li>				<li class="page-item"><a class="page-link command-disabled">❮ </a></li>				<li class="page-item"><a class="page-link command-disabled active">1</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);">2</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(3);">3</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(4);">4</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(5);">5</a></li>				<li class="page-item"><a class="page-link command pageBreak hidden" href="javascript: pageSkip(5);">...</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);"> ❯</a></li>				<li class="page-item"><a class="page-link command font-weight-bold" href="javascript: pageSkip(34);"> ≫</a></li>			</ul>
+		</div>
+		<input type="hidden" id="pn" name="pn" value="1" />
+	</div>
+</div>
+    </div>
+    <hr />
+        <div class="books-list oldbooks">
+      <div class="row">        <div class="d-inline-block col-12 py-3 align-top align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+          <a class="iframe" href="/index.php/ko/oldbooks/view_meta?no=554">
+            <!-- Bookcover Info -->
+            <div class="mx-3 float-center float-md-left book-cover" style="max-width: 260px; height: auto;">
+                              <img src="/./data/oldbooks/20251126/24_16380/01.jpg" class="img-thumbnail book-cover" style="max-height:220px;" 
+                  alt="책표지-見睫錄 " />
+                          </div>
+            <!-- Metadata Info -->
+            <div class="pt-3 pt-sm-0 px-2 text-left metadata">
+                                                              
+                                  <nobr><span class="key title">[기본제목]</span></nobr>
+                  <span class="value title">見睫錄 </span>
+                                                              
+                                  <nobr><span class="key">[권차번호]</span></nobr>
+                  <span class="value">卷3</span>
+                                                              
+                                  <nobr><span class="key">[권책수]</span></nobr>
+                  <span class="value">6卷14册</span>
+                                                              
+                                  <nobr><span class="key">[번역제목]</span></nobr>
+                  <span class="value">견첩록</span>
+                                                                                                                                                                                                                                                                                              
+                                  <nobr><span class="key">[판본]</span></nobr>
+                  <span class="value">사진본</span>
+                                                              
+                                  <nobr><span class="key">[본문언어]</span></nobr>
+                  <span class="value">한문</span>
+                                                                                              
+                                  <nobr><span class="key">[행자수]</span></nobr>
+                  <span class="value">행자수부정 </span>
+                                                                                                                                                                                                                              
+                                  <nobr><span class="key">[장정]</span></nobr>
+                  <span class="value">양장</span>
+                                                                                              
+                                  <nobr><span class="key">[종이질]</span></nobr>
+                  <span class="value">인화지</span>
+                                                                                              
+                                  <nobr><span class="key">[형태주기]</span></nobr>
+                  <span class="value">원본은 필사본</span>
+                                                              
+                                                                              
+                                  <br />
+                  <span class="key">[해제]</span>
+                                      <p class="value summary chongbong">조선봉건국가의 여러 부문의 력사를 기록한 도서. 6권 6책의 필사본인데 편찬자와 편찬년대가 알려져있지 않다. 제1권은 11류, 제2권은 6류, 제3권은 5류, 제4권은 12류, 제5권은 13류, 제6권은 19류로서 모두 66개 항목으로 되여있다. 조선봉건국가의 여러가지 력사기록들을 추려서 항목별로 엮어놓았다. 《견첩록》은 풍속, 군사, 토지제도와 조세 및 부역제도, 무기, 전쟁, 사변, 사화, 당파관계, 나라의 여러가지 제도와 의식, 과거, 인재선발, 관직 등의 항목을 설정하여놓아서 보기에 편리하다. 이 책은 봉건사회사 특히  ...</p>
+                                                                          </div>
+          </a>
+        </div>        <div class="d-inline-block col-12 py-3 align-top align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+          <a class="iframe" href="/index.php/ko/oldbooks/view_meta?no=555">
+            <!-- Bookcover Info -->
+            <div class="mx-3 float-center float-md-right book-cover" style="max-width: 260px; height: auto;">
+                              <img src="/./data/oldbooks/20251126/24_00327/01.jpg" class="img-thumbnail book-cover" style="max-height:220px;" 
+                  alt="책표지-決訟類聚補" />
+                          </div>
+            <!-- Metadata Info -->
+            <div class="pt-3 pt-sm-0 px-2 text-left metadata">
+                                                              
+                                  <nobr><span class="key title">[기본제목]</span></nobr>
+                  <span class="value title">決訟類聚補</span>
+                                                                                              
+                                  <nobr><span class="key">[권책수]</span></nobr>
+                  <span class="value">1册</span>
+                                                              
+                                  <nobr><span class="key">[번역제목]</span></nobr>
+                  <span class="value">결송류취보</span>
+                                                                                                                                                                                                                                                                                              
+                                  <nobr><span class="key">[판본]</span></nobr>
+                  <span class="value">필사본</span>
+                                                              
+                                  <nobr><span class="key">[본문언어]</span></nobr>
+                  <span class="value">한문</span>
+                                                                                              
+                                  <nobr><span class="key">[행자수]</span></nobr>
+                  <span class="value">행자수부정 </span>
+                                                                                                                              
+                                  <nobr><span class="key">[어미]</span></nobr>
+                  <span class="value">상하내향4판화문흑어미 </span>
+                                                              
+                                  <nobr><span class="key">[반광크기]</span></nobr>
+                  <span class="value">20.9×15.4 </span>
+                                                              
+                                  <nobr><span class="key">[광곽]</span></nobr>
+                  <span class="value">사주쌍변 </span>
+                                                              
+                                  <nobr><span class="key">[장정]</span></nobr>
+                  <span class="value">선장 </span>
+                                                              
+                                  <nobr><span class="key">[책크기]</span></nobr>
+                  <span class="value">28.5×21.5</span>
+                                                              
+                                  <nobr><span class="key">[종이질]</span></nobr>
+                  <span class="value">백지</span>
+                                                                                                                              
+                                                                              
+                                  <br />
+                  <span class="key">[해제]</span>
+                                      <p class="value summary chongbong">1707년에 출판된 조선봉건국가의 법률관계 책.봉건통치배들이 저들의 계급적지배를 위하여 봉건통치를 강화하는데 리용한 반인민적악법을 묶어놓은 책이다. 편찬자는 알려져있지 않으며 목판본으로 출판되였다. 이 책은 지방관리들이 소송문제를 처리하며 재판을 진행하는데 참고로 되는 사항들을 분류하여 엮은것인데 그 이전에 편찬된 《사송류취》와 《결송류취》 등을 대본으로 하고 일부 내용을 보충하여 편찬하였다. 책의 머리말부분에는 법례와 당시 다섯가지 기본형벌인 5형(태형, 장형, 도형, 류형, 사형)의 그림설명을 붙이고 본문에는 도적,  ...</p>
+                                                                          </div>
+          </a>
+        </div>        <div class="d-inline-block col-12 py-3 align-top align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+          <a class="iframe" href="/index.php/ko/oldbooks/view_meta?no=556">
+            <!-- Bookcover Info -->
+            <div class="mx-3 float-center float-md-left book-cover" style="max-width: 260px; height: auto;">
+                              <img src="/./data/oldbooks/20251126/24_00396/01.jpg" class="img-thumbnail book-cover" style="max-height:220px;" 
+                  alt="책표지-經山集 " />
+                          </div>
+            <!-- Metadata Info -->
+            <div class="pt-3 pt-sm-0 px-2 text-left metadata">
+                                                              
+                                  <nobr><span class="key title">[기본제목]</span></nobr>
+                  <span class="value title">經山集 </span>
+                                                              
+                                  <nobr><span class="key">[권차번호]</span></nobr>
+                  <span class="value">卷5~6</span>
+                                                              
+                                  <nobr><span class="key">[권책수]</span></nobr>
+                  <span class="value">23卷11册</span>
+                                                              
+                                  <nobr><span class="key">[번역제목]</span></nobr>
+                  <span class="value">경산집</span>
+                                                              
+                                  <nobr><span class="key">[기본저자]</span></nobr>
+                  <span class="value">鄭元容</span>
+                                                              
+                                  <nobr><span class="key">[번역자명]</span></nobr>
+                  <span class="value">정원용</span>
+                                                                                                                              
+                                  <nobr><span class="key">[발행년도]</span></nobr>
+                  <span class="value">1896</span>
+                                                                                              
+                                  <nobr><span class="key">[왕조년도]</span></nobr>
+                  <span class="value">고종33</span>
+                                                              
+                                  <nobr><span class="key">[판본]</span></nobr>
+                  <span class="value">목활자본</span>
+                                                              
+                                  <nobr><span class="key">[본문언어]</span></nobr>
+                  <span class="value">한문</span>
+                                                                                              
+                                  <nobr><span class="key">[행자수]</span></nobr>
+                  <span class="value">중자10행20자 </span>
+                                                                                                                              
+                                  <nobr><span class="key">[어미]</span></nobr>
+                  <span class="value">상하내향흑어미 </span>
+                                                              
+                                  <nobr><span class="key">[반광크기]</span></nobr>
+                  <span class="value">21.7×15.1 </span>
+                                                              
+                                  <nobr><span class="key">[광곽]</span></nobr>
+                  <span class="value">사주단변 </span>
+                                                              
+                                  <nobr><span class="key">[장정]</span></nobr>
+                  <span class="value">선장 </span>
+                                                              
+                                  <nobr><span class="key">[책크기]</span></nobr>
+                  <span class="value">31.6×20.3</span>
+                                                              
+                                  <nobr><span class="key">[종이질]</span></nobr>
+                  <span class="value">백지</span>
+                                                                                                                              
+                                                                              
+                                  <br />
+                  <span class="key">[해제]</span>
+                                      <p class="value summary chongbong">조선봉건국가의 관료이며 학자인 정원용의 시문집.정원용(1783－1873)의 손자 정범조가 1896년에 23권 11책으로 출판하였다. 20권은 원집이고 3권은 부록이다. 이 책의 많은 부분을 차지하고있는것은 산문이며 시는 궁중연회에서 읊었거나 산천경개를 유람하면서 즉흥적으로 읊은 운문이다. 《경산집》은 조선봉건국가의 문학사연구에 참고가 된다.</p>
+                                                                          </div>
+          </a>
+        </div>        <div class="d-inline-block col-12 py-3 align-top align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+          <a class="iframe" href="/index.php/ko/oldbooks/view_meta?no=557">
+            <!-- Bookcover Info -->
+            <div class="mx-3 float-center float-md-right book-cover" style="max-width: 260px; height: auto;">
+                              <img src="/./data/oldbooks/20251126/24_18322/01.jpg" class="img-thumbnail book-cover" style="max-height:220px;" 
+                  alt="책표지-經世遺表 " />
+                          </div>
+            <!-- Metadata Info -->
+            <div class="pt-3 pt-sm-0 px-2 text-left metadata">
+                                                              
+                                  <nobr><span class="key title">[기본제목]</span></nobr>
+                  <span class="value title">經世遺表 </span>
+                                                              
+                                  <nobr><span class="key">[권차번호]</span></nobr>
+                  <span class="value">16卷1册 3부</span>
+                                                              
+                                  <nobr><span class="key">[권책수]</span></nobr>
+                  <span class="value">16卷1册</span>
+                                                              
+                                  <nobr><span class="key">[번역제목]</span></nobr>
+                  <span class="value">경세유표</span>
+                                                              
+                                  <nobr><span class="key">[기본저자]</span></nobr>
+                  <span class="value">丁若鏞</span>
+                                                              
+                                  <nobr><span class="key">[번역자명]</span></nobr>
+                  <span class="value">정약용</span>
+                                                                                                                              
+                                  <nobr><span class="key">[발행년도]</span></nobr>
+                  <span class="value">1914 </span>
+                                                                                                                              
+                                  <nobr><span class="key">[판본]</span></nobr>
+                  <span class="value">신식활자본</span>
+                                                              
+                                  <nobr><span class="key">[본문언어]</span></nobr>
+                  <span class="value">한문</span>
+                                                                                              
+                                  <nobr><span class="key">[행자수]</span></nobr>
+                  <span class="value">중자20행44자 </span>
+                                                                                                                              
+                                  <nobr><span class="key">[어미]</span></nobr>
+                  <span class="value">무어미 </span>
+                                                              
+                                  <nobr><span class="key">[반광크기]</span></nobr>
+                  <span class="value">17.5×11.6 </span>
+                                                              
+                                  <nobr><span class="key">[광곽]</span></nobr>
+                  <span class="value">사주쌍변 </span>
+                                                              
+                                  <nobr><span class="key">[장정]</span></nobr>
+                  <span class="value">선장 </span>
+                                                              
+                                  <nobr><span class="key">[책크기]</span></nobr>
+                  <span class="value">21.7×15.2</span>
+                                                              
+                                  <nobr><span class="key">[종이질]</span></nobr>
+                  <span class="value">개량지</span>
+                                                                                                                              
+                                                                              
+                                  <br />
+                  <span class="key">[해제]</span>
+                                      <p class="value summary chongbong">1817년에 실학자 정약용이 조선봉건국가의 일부 통치기구와 토지제도를 고칠데 대한 의견을 적은 책.《방례초본》이라고도 한다. 책은 필사본으로 전해지다가 1914년에 43권으로 출판되였다. 《경세유표》는 천관수제, 지관수제, 균역사목추의 등으로 구성되여있다. 《경세유표》의 앞부분에는 조선봉건국가의 중앙관청들인 6조에 소속된 지방관청들의 정원수와 임무 등이 적혀있다. 그에 의하면 각 조에 소속된 종래의 관청들을 일부 페지, 통합, 분할하며 그 이름을 고치거나 새로 설치하는 방법으로 각 조에 일률적으로 20개씩의 관청을 두어 모두  ...</p>
+                                                                          </div>
+          </a>
+        </div>        <div class="d-inline-block col-12 py-3 align-top align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+          <a class="iframe" href="/index.php/ko/oldbooks/view_meta?no=558">
+            <!-- Bookcover Info -->
+            <div class="mx-3 float-center float-md-left book-cover" style="max-width: 260px; height: auto;">
+                              <img src="/./data/oldbooks/20251126/24_16391/01.jpg" class="img-thumbnail book-cover" style="max-height:220px;" 
+                  alt="책표지-古今釋林 " />
+                          </div>
+            <!-- Metadata Info -->
+            <div class="pt-3 pt-sm-0 px-2 text-left metadata">
+                                                              
+                                  <nobr><span class="key title">[기본제목]</span></nobr>
+                  <span class="value title">古今釋林 </span>
+                                                              
+                                  <nobr><span class="key">[권차번호]</span></nobr>
+                  <span class="value">卷25</span>
+                                                                                              
+                                  <nobr><span class="key">[번역제목]</span></nobr>
+                  <span class="value">고금석림</span>
+                                                                                                                                                                                                                                                                                              
+                                  <nobr><span class="key">[판본]</span></nobr>
+                  <span class="value">사진본</span>
+                                                              
+                                  <nobr><span class="key">[본문언어]</span></nobr>
+                  <span class="value">한문</span>
+                                                                                              
+                                  <nobr><span class="key">[행자수]</span></nobr>
+                  <span class="value">행자수부정 </span>
+                                                                                                                                                                                                                              
+                                  <nobr><span class="key">[장정]</span></nobr>
+                  <span class="value">양장</span>
+                                                                                              
+                                  <nobr><span class="key">[종이질]</span></nobr>
+                  <span class="value">인화지</span>
+                                                                                              
+                                  <nobr><span class="key">[형태주기]</span></nobr>
+                  <span class="value">원본은 필사본</span>
+                                                              
+                                                                              
+                                  <br />
+                  <span class="key">[해제]</span>
+                                      <p class="value summary chongbong">1789년에 리의봉이 편찬한 어휘집. 이 책은 리의봉(1733－1801)이 동방의 여러 나라말들을 1 400～1 500종의 책에서 수만개의 어휘를 수집하여 40권으로 묶은것이다. 책은 1 《별국방언》, 2 《력대방언》, 3 《락민어록》, 4 《도가어록》, 5 《석씨어록》, 6 《전기어록》, 7 《화한어록》, 8 《삼학역어》, 10 《사이역어》, 11 《원명리학》, 부록 《라려리두》의 체계로 구성되여있다. 《별국방언》, 《력대방언》, 《락민어록》, 《도가어록》, 《전기어록》에는 중국의 여러 시대의 각 지방의 어휘들이,  ...</p>
+                                                                          </div>
+          </a>
+        </div>        <div class="d-inline-block col-12 py-3 align-top align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+          <a class="iframe" href="/index.php/ko/oldbooks/view_meta?no=559">
+            <!-- Bookcover Info -->
+            <div class="mx-3 float-center float-md-right book-cover" style="max-width: 260px; height: auto;">
+                              <img src="/./data/oldbooks/20251126/24_01115/01.jpg" class="img-thumbnail book-cover" style="max-height:220px;" 
+                  alt="책표지-高麗史 " />
+                          </div>
+            <!-- Metadata Info -->
+            <div class="pt-3 pt-sm-0 px-2 text-left metadata">
+                                                              
+                                  <nobr><span class="key title">[기본제목]</span></nobr>
+                  <span class="value title">高麗史 </span>
+                                                              
+                                  <nobr><span class="key">[권차번호]</span></nobr>
+                  <span class="value">卷47~87</span>
+                                                              
+                                  <nobr><span class="key">[권책수]</span></nobr>
+                  <span class="value">139卷3册</span>
+                                                              
+                                  <nobr><span class="key">[번역제목]</span></nobr>
+                  <span class="value">고려사</span>
+                                                              
+                                  <nobr><span class="key">[기본저자]</span></nobr>
+                  <span class="value">鄭麟趾 等 撰</span>
+                                                              
+                                  <nobr><span class="key">[번역자명]</span></nobr>
+                  <span class="value">정린지 등 찬</span>
+                                                                                                                              
+                                  <nobr><span class="key">[발행년도]</span></nobr>
+                  <span class="value">1957 </span>
+                                                              
+                                  <nobr><span class="key">[발행지]</span></nobr>
+                  <span class="value">평양</span>
+                                                                                              
+                                  <nobr><span class="key">[판본]</span></nobr>
+                  <span class="value">신식활자본</span>
+                                                              
+                                  <nobr><span class="key">[본문언어]</span></nobr>
+                  <span class="value">한문</span>
+                                                                                              
+                                  <nobr><span class="key">[행자수]</span></nobr>
+                  <span class="value">행자수부정 </span>
+                                                                                                                              
+                                  <nobr><span class="key">[어미]</span></nobr>
+                  <span class="value">무어미</span>
+                                                                                                                              
+                                  <nobr><span class="key">[장정]</span></nobr>
+                  <span class="value">양장 </span>
+                                                              
+                                  <nobr><span class="key">[책크기]</span></nobr>
+                  <span class="value">21.5×14.8</span>
+                                                              
+                                  <nobr><span class="key">[종이질]</span></nobr>
+                  <span class="value">양지</span>
+                                                                                                                              
+                                                                              
+                                  <br />
+                  <span class="key">[해제]</span>
+                                      <p class="value summary chongbong">모두 139권이다. 《고려사》편찬사업은 조선봉건왕조가 세워진 첫해인 1392년부터 시작되여 《고려국사》(1395년), 《권초고려사》(1442년) 등을 내오다가 1440년대에 기본적으로 완성되고 1451년에 김종서(1390－1453), 정린지(1396－1478) 등에 의하여 최종적으로 결속되였다. 고려의 전사를 쓰는 일이 이렇게 여러번 반복되며 오랜 시일을 끌게 된것은 어떻게 하나 고려의 력사를 저들에게 유리하게 쓰려는 봉건통치배들의 정치적목적과 리해관계와 관련되여있었다. 《고려사》편찬에서 리용된 기본사료는 당시까지 남아있던  ...</p>
+                                                                          </div>
+          </a>
+        </div>        <div class="d-inline-block col-12 py-3 align-top align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+          <a class="iframe" href="/index.php/ko/oldbooks/view_meta?no=560">
+            <!-- Bookcover Info -->
+            <div class="mx-3 float-center float-md-left book-cover" style="max-width: 260px; height: auto;">
+                              <img src="/./data/oldbooks/20251126/24_00951/01.jpg" class="img-thumbnail book-cover" style="max-height:220px;" 
+                  alt="책표지-高麗史節要 " />
+                          </div>
+            <!-- Metadata Info -->
+            <div class="pt-3 pt-sm-0 px-2 text-left metadata">
+                                                              
+                                  <nobr><span class="key title">[기본제목]</span></nobr>
+                  <span class="value title">高麗史節要 </span>
+                                                              
+                                  <nobr><span class="key">[권차번호]</span></nobr>
+                  <span class="value">卷33</span>
+                                                                                              
+                                  <nobr><span class="key">[번역제목]</span></nobr>
+                  <span class="value">고려사절요</span>
+                                                                                                                                                                                                                                                                                              
+                                  <nobr><span class="key">[판본]</span></nobr>
+                  <span class="value">필사본</span>
+                                                              
+                                  <nobr><span class="key">[본문언어]</span></nobr>
+                  <span class="value">한문</span>
+                                                                                              
+                                  <nobr><span class="key">[행자수]</span></nobr>
+                  <span class="value">중자10행19자 </span>
+                                                                                                                              
+                                  <nobr><span class="key">[어미]</span></nobr>
+                  <span class="value">무어미 </span>
+                                                              
+                                  <nobr><span class="key">[반광크기]</span></nobr>
+                  <span class="value">19×15.4 </span>
+                                                              
+                                  <nobr><span class="key">[광곽]</span></nobr>
+                  <span class="value">사주쌍변 </span>
+                                                              
+                                  <nobr><span class="key">[장정]</span></nobr>
+                  <span class="value">선장 </span>
+                                                              
+                                  <nobr><span class="key">[책크기]</span></nobr>
+                  <span class="value">30×20.5</span>
+                                                              
+                                  <nobr><span class="key">[종이질]</span></nobr>
+                  <span class="value">백지</span>
+                                                                                                                              
+                                                                              
+                                  <br />
+                  <span class="key">[해제]</span>
+                                      <p class="value summary chongbong"> 1451년－1452년에 김종서, 정린지 등이 편년체로 편찬한 고려력사책.1453년에 출판하였다. 모두 35권이다. 《고려사절요》에는 고려의 정치, 경제, 문화, 군사 등 사회생활로부터 자연현상에 이르기까지의 다양한 내용들이 수록되여있다. 정치관계자료로는 국가기구, 관직제도, 형벌제도, 인민들의 반침략, 반봉건투쟁자료들이 있다. 경제관계자료로는 토지제도, 조세제도 등 여러가지가 있으며 교육, 예술 등 문화관계자료, 군사제도, 국방대책 등 군사관계자료들이 있다. 자연관계자료로는 천문, 지리, 자연재해 등 자료들이 있다. 이밖에  ...</p>
+                                                                          </div>
+          </a>
+        </div>        <div class="d-inline-block col-12 py-3 align-top align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+          <a class="iframe" href="/index.php/ko/oldbooks/view_meta?no=561">
+            <!-- Bookcover Info -->
+            <div class="mx-3 float-center float-md-right book-cover" style="max-width: 260px; height: auto;">
+                              <img src="/./data/oldbooks/20251126/24_01107/01.jpg" class="img-thumbnail book-cover" style="max-height:220px;" 
+                  alt="책표지-攷事撮要 " />
+                          </div>
+            <!-- Metadata Info -->
+            <div class="pt-3 pt-sm-0 px-2 text-left metadata">
+                                                              
+                                  <nobr><span class="key title">[기본제목]</span></nobr>
+                  <span class="value title">攷事撮要 </span>
+                                                              
+                                  <nobr><span class="key">[권차번호]</span></nobr>
+                  <span class="value">卷4</span>
+                                                                                              
+                                  <nobr><span class="key">[번역제목]</span></nobr>
+                  <span class="value">고사촬요</span>
+                                                                                                                                                                                                                                                                                              
+                                  <nobr><span class="key">[판본]</span></nobr>
+                  <span class="value">금속활자본</span>
+                                                              
+                                  <nobr><span class="key">[본문언어]</span></nobr>
+                  <span class="value">한문</span>
+                                                                                              
+                                  <nobr><span class="key">[행자수]</span></nobr>
+                  <span class="value">중자11행19자 </span>
+                                                                                                                              
+                                  <nobr><span class="key">[어미]</span></nobr>
+                  <span class="value">상하내향4판화문흑어미 </span>
+                                                              
+                                  <nobr><span class="key">[반광크기]</span></nobr>
+                  <span class="value">21.2×14.1 </span>
+                                                              
+                                  <nobr><span class="key">[광곽]</span></nobr>
+                  <span class="value">사주쌍변 </span>
+                                                              
+                                  <nobr><span class="key">[장정]</span></nobr>
+                  <span class="value">선장 </span>
+                                                              
+                                  <nobr><span class="key">[책크기]</span></nobr>
+                  <span class="value">29.3×17.9</span>
+                                                              
+                                  <nobr><span class="key">[종이질]</span></nobr>
+                  <span class="value">백지</span>
+                                                                                                                              
+                                                                              
+                                  <br />
+                  <span class="key">[해제]</span>
+                                      <p class="value summary chongbong">16세기 전반기 어숙권이 봉건관료들과 량반들의 사회정치생활에 필요한 상식자료들을 편람형식으로 묶어놓은 책. 1554년에 최명길이 증수하여 출판하였다. 3권으로 되여있다. 책은 당시 봉건관료들이 참고서로 리용하고있던 《제왕력년기》와 《요집》 등을 기초로 하고 거기에 일상생활에 필요한 자료들을 보충하여 편찬하였다. 책은 그후 여러번 수정보충되여 편찬되였다. 우리 나라 문관, 무관의 옷차림제도, 문묘나 종묘에서 제사지내는 문관, 무관, 이름있는 공신들에 대한 자료들이 실려있다. 또한 명나라왕조의 연혁, 관직제도, 행정구역,  ...</p>
+                                                                          </div>
+          </a>
+        </div>        <div class="d-inline-block col-12 py-3 align-top align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+          <a class="iframe" href="/index.php/ko/oldbooks/view_meta?no=562">
+            <!-- Bookcover Info -->
+            <div class="mx-3 float-center float-md-left book-cover" style="max-width: 260px; height: auto;">
+                              <img src="/./data/oldbooks/20251126/24_01376/01.jpg" class="img-thumbnail book-cover" style="max-height:220px;" 
+                  alt="책표지-國朝五禮儀 " />
+                          </div>
+            <!-- Metadata Info -->
+            <div class="pt-3 pt-sm-0 px-2 text-left metadata">
+                                                              
+                                  <nobr><span class="key title">[기본제목]</span></nobr>
+                  <span class="value title">國朝五禮儀 </span>
+                                                              
+                                  <nobr><span class="key">[권차번호]</span></nobr>
+                  <span class="value">卷8</span>
+                                                              
+                                  <nobr><span class="key">[권책수]</span></nobr>
+                  <span class="value">8卷6册</span>
+                                                              
+                                  <nobr><span class="key">[번역제목]</span></nobr>
+                  <span class="value">국조오례의</span>
+                                                              
+                                  <nobr><span class="key">[기본저자]</span></nobr>
+                  <span class="value">成宗 命編</span>
+                                                              
+                                  <nobr><span class="key">[번역자명]</span></nobr>
+                  <span class="value">성종 명 편</span>
+                                                                                                                                                                                                                              
+                                  <nobr><span class="key">[판본]</span></nobr>
+                  <span class="value">목판본</span>
+                                                              
+                                  <nobr><span class="key">[본문언어]</span></nobr>
+                  <span class="value">한문</span>
+                                                                                              
+                                  <nobr><span class="key">[행자수]</span></nobr>
+                  <span class="value">중자10행17자 </span>
+                                                                                                                              
+                                  <nobr><span class="key">[어미]</span></nobr>
+                  <span class="value">상하내향4판화문흑어미 </span>
+                                                              
+                                  <nobr><span class="key">[반광크기]</span></nobr>
+                  <span class="value">21.5×16.6 </span>
+                                                              
+                                  <nobr><span class="key">[광곽]</span></nobr>
+                  <span class="value">사주단변 </span>
+                                                              
+                                  <nobr><span class="key">[장정]</span></nobr>
+                  <span class="value">선장 </span>
+                                                              
+                                  <nobr><span class="key">[책크기]</span></nobr>
+                  <span class="value">32.4×22.2</span>
+                                                              
+                                  <nobr><span class="key">[종이질]</span></nobr>
+                  <span class="value">백지</span>
+                                                                                                                              
+                                                                              
+                                  <br />
+                  <span class="key">[해제]</span>
+                                      <p class="value summary chongbong">조선봉건왕조시기 량반통치계급이 봉건통치와 저들의 생활에서 지켜야 할 례식과 의식, 규범에 대하여 쓴 책.신숙주(1417－1475), 강희맹(1424－1483) 등이 8권 8책으로 1474년에 편찬하였다. 조선봉건왕조통치배들은 15세기 전반기 봉건왕실과 량반지배계급의 《권위》와 《위신》을 높이는데 복무하는 봉건적인 허례허식에 대한 규범집인 《오례》를 《세종실록》의 부록으로 출판하였다. 그후 《오례》를 보충완성할 목적으로 1474년에 국가적사업으로 《국조오례의서례》(5권2책)를 작성하였으며 이어 《국조오례의》를 편찬완료하였다.  ...</p>
+                                                                          </div>
+          </a>
+        </div>        <div class="d-inline-block col-12 py-3 align-top align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+          <a class="iframe" href="/index.php/ko/oldbooks/view_meta?no=563">
+            <!-- Bookcover Info -->
+            <div class="mx-3 float-center float-md-right book-cover" style="max-width: 260px; height: auto;">
+                              <img src="/./data/oldbooks/20251126/24_20478/01.jpg" class="img-thumbnail book-cover" style="max-height:220px;" 
+                  alt="책표지-東國史略" />
+                          </div>
+            <!-- Metadata Info -->
+            <div class="pt-3 pt-sm-0 px-2 text-left metadata">
+                                                              
+                                  <nobr><span class="key title">[기본제목]</span></nobr>
+                  <span class="value title">東國史略</span>
+                                                                                              
+                                  <nobr><span class="key">[권책수]</span></nobr>
+                  <span class="value">4卷4冊</span>
+                                                              
+                                  <nobr><span class="key">[번역제목]</span></nobr>
+                  <span class="value">동국사략</span>
+                                                                                                                                                                                              
+                                  <nobr><span class="key">[발행년도]</span></nobr>
+                  <span class="value">1906 </span>
+                                                                                              
+                                  <nobr><span class="key">[왕조년도]</span></nobr>
+                  <span class="value">광무10</span>
+                                                              
+                                  <nobr><span class="key">[판본]</span></nobr>
+                  <span class="value">신식활자본</span>
+                                                              
+                                  <nobr><span class="key">[본문언어]</span></nobr>
+                  <span class="value">국한문</span>
+                                                                                                                                                                                                                                                                                              
+                                  <nobr><span class="key">[장정]</span></nobr>
+                  <span class="value">선장</span>
+                                                                                              
+                                  <nobr><span class="key">[종이질]</span></nobr>
+                  <span class="value">양지</span>
+                                                                                                                              
+                                                                              
+                                  <br />
+                  <span class="key">[해제]</span>
+                                      <p class="value summary chongbong">1403년에 권근 등이 고대로부터 고려까지의 력사를 쓴 책.모두 6권 2책으로 되여있다. 저자들은 통사체계에 립각하여 《삼국사기》와 《삼국유사》에 서술되여있는 여러가지 력사적인 사건들가운데서 중요하다고 인정한 사실들을 추려내고 또 다른 력사자료들을 참고하여 이 책을 썼다. 특별히 중요하다고 인정하는 사항들에 대하여서는 저자들의 견해를 첨부하였다. 《동국사략》은 비교적 알기 쉽게 씌여진 통사로서 편사학연구에 참고로 된다.</p>
+                                                                          </div>
+          </a>
+        </div>        <div class="d-inline-block col-12 py-3 align-top align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+          <a class="iframe" href="/index.php/ko/oldbooks/view_meta?no=544">
+            <!-- Bookcover Info -->
+            <div class="mx-3 float-center float-md-left book-cover" style="max-width: 260px; height: auto;">
+                              <img src="/./data/oldbooks/20251030/24_16504/01.jpg" class="img-thumbnail book-cover" style="max-height:220px;" 
+                  alt="책표지-東人之文 " />
+                          </div>
+            <!-- Metadata Info -->
+            <div class="pt-3 pt-sm-0 px-2 text-left metadata">
+                                                              
+                                  <nobr><span class="key title">[기본제목]</span></nobr>
+                  <span class="value title">東人之文 </span>
+                                                              
+                                  <nobr><span class="key">[권차번호]</span></nobr>
+                  <span class="value">卷46/6</span>
+                                                                                              
+                                  <nobr><span class="key">[번역제목]</span></nobr>
+                  <span class="value">동인지문</span>
+                                                                                                                                                                                                                                                                                              
+                                  <nobr><span class="key">[판본]</span></nobr>
+                  <span class="value">사진본</span>
+                                                              
+                                  <nobr><span class="key">[본문언어]</span></nobr>
+                  <span class="value">한문</span>
+                                                                                              
+                                  <nobr><span class="key">[행자수]</span></nobr>
+                  <span class="value">행자수부정 </span>
+                                                                                                                                                                                                                              
+                                  <nobr><span class="key">[장정]</span></nobr>
+                  <span class="value">양장</span>
+                                                                                              
+                                  <nobr><span class="key">[종이질]</span></nobr>
+                  <span class="value">인화지</span>
+                                                                                                                                                              
+                                  <br />
+                  <span class="key">[해제]</span>
+                                      <p class="value summary chongbong"> 1338년에 최해가 편찬한 력대작품선집.전 25권. 《동인문》이라고도 한다. 14세기초에 김태현(1261－1330)이 만든 《동국문감》을 정리하고 거기에 더 많은 자료들을 새로 보충하여 편찬한것으로 짐작된다. 이 작품선집은 편찬된 다음해에 초판이 나왔고 그후 1355년에 다시 출판되였다. 그러나 《동문선》이 편찬되던 15세기에 벌써 《동인지문》은 거의나 인멸되여 전하지 못하였다. 다만 《동문선》에 최해(1287－1340)가 쓴 이 책의 서문이 실리였고 20세기에 들어와서 책의 일부가 발견됨으로써 그 편찬체계와 내용을  ...</p>
+                                                                          </div>
+          </a>
+        </div>        <div class="d-inline-block col-12 py-3 align-top align-top books-item wow fadeInUpBig" data-wow-delay="0.1s">
+          <a class="iframe" href="/index.php/ko/oldbooks/view_meta?no=545">
+            <!-- Bookcover Info -->
+            <div class="mx-3 float-center float-md-right book-cover" style="max-width: 260px; height: auto;">
+                              <img src="/./data/oldbooks/20251030/24_01399/01.jpg" class="img-thumbnail book-cover" style="max-height:220px;" 
+                  alt="책표지-大東詩選 " />
+                          </div>
+            <!-- Metadata Info -->
+            <div class="pt-3 pt-sm-0 px-2 text-left metadata">
+                                                              
+                                  <nobr><span class="key title">[기본제목]</span></nobr>
+                  <span class="value title">大東詩選 </span>
+                                                              
+                                  <nobr><span class="key">[권차번호]</span></nobr>
+                  <span class="value">卷5~6</span>
+                                                              
+                                  <nobr><span class="key">[권책수]</span></nobr>
+                  <span class="value">12卷5册</span>
+                                                              
+                                  <nobr><span class="key">[번역제목]</span></nobr>
+                  <span class="value">대동시선</span>
+                                                              
+                                  <nobr><span class="key">[기본저자]</span></nobr>
+                  <span class="value">張志淵 編</span>
+                                                              
+                                  <nobr><span class="key">[번역자명]</span></nobr>
+                  <span class="value">장지연 편</span>
+                                                                                                                              
+                                  <nobr><span class="key">[발행년도]</span></nobr>
+                  <span class="value">1918 </span>
+                                                                                                                              
+                                  <nobr><span class="key">[판본]</span></nobr>
+                  <span class="value">신식활자본</span>
+                                                              
+                                  <nobr><span class="key">[본문언어]</span></nobr>
+                  <span class="value">한문</span>
+                                                                                                                                                                                              
+                                  <nobr><span class="key">[어미]</span></nobr>
+                  <span class="value">무어미 </span>
+                                                              
+                                  <nobr><span class="key">[반광크기]</span></nobr>
+                  <span class="value">17.4×11.8 </span>
+                                                              
+                                  <nobr><span class="key">[광곽]</span></nobr>
+                  <span class="value">사주쌍변 </span>
+                                                              
+                                  <nobr><span class="key">[장정]</span></nobr>
+                  <span class="value">선장 </span>
+                                                              
+                                  <nobr><span class="key">[책크기]</span></nobr>
+                  <span class="value">22.1×15.1</span>
+                                                              
+                                  <nobr><span class="key">[종이질]</span></nobr>
+                  <span class="value">양지</span>
+                                                                                                                                                              
+                                  <br />
+                  <span class="key">[해제]</span>
+                                      <p class="value summary chongbong"> 1919년에 장지연이 편찬한 우리 나라 력대 고전시가작품선집. 전 12권. 장지연(1864－1921)은 앞선 시대에 편찬된 《동문선》, 《청구풍아》, 《기아》, 《동시선》, 《소대풍요》, 《풍요속선》, 《풍요삼선》, 《대동명시》 등 작품집들에서 민족시가문학의 유구한 력사와 발전면모를 보여주는데 도움이 된다고 인정되는 작품들을 추려내고 거기에 일련의 새로운 작품들을 보충하여 이 책을 묶었다. 이 책의 편찬목적은 일제의 가혹한 민족문화말살정책으로 말미암아 민족문화유산이 류실되는것을 막고 민족정신을 되살리려는데 있었다. 이로부터  ...</p>
+                                                                          </div>
+          </a>
+        </div>      </div>
+    </div>
+    <hr />
+    <div class="col-sm-12 py-1 m-0 footer">
+      <div class="row col-12 my-3 result_info_wraper">
+
+	<div class="row col-sm-12 col-md-7 pt-1 mb-3 justify-content-center result_info">
+		<span>총:&nbsp;397건,&nbsp;</span>
+		<span>현재&nbsp;1 / 34&nbsp;페지,&nbsp;</span>
+		<span class="">표시행수:&nbsp;</span>
+		<input type="text" name="ps" value="12" class="records-page" maxlength="2" />
+	</div>
+
+	<div class="page-nav col-md-5">
+		<ul class="pagination pagination-sm justify-content-center justify-content-md-end" style="">			<li class="page-item"><a class="page-link command-disabled font-weight-bold">≪ </a></li>			<li class="page-item"><a class="page-link command-disabled">❮ </a></li>			<li class="page-item"><a class="page-link command-disabled active">1</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);">2</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(3);">3</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(4);">4</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(5);">5</a></li>			<li class="page-item"><a class="page-link command pageBreak hidden" href="javascript: pageSkip(5);">...</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);"> ❯</a></li>			<li class="page-item"><a class="page-link command font-weight-bold" href="javascript: pageSkip(34);"> ≫</a></li>		</ul>
+	</div>
+</div>
+    </div>
+  </div>
+</form>
+    </section>
+    <footer class="footer-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 contact-us">
+        <ul class="contact-us text-center">
+          <li id="footer-gpsh-full-name" class="mb-4 text-white-50">
+            <i class="fa fa-map-marker fa-16 text-white-50" aria-hidden="true"></i>
+            조선민주주의인민공화국 인민대학습당</li>
+          <li id="footer-phone" class="mb-4 text-white-50">
+            <i class="fa fa-phone fa-16 text-white-50" aria-hidden="true"></i> 
+            전화번호: 850-2-18111(3818472)</li>
+          <li id="footer-email" class="mb-4 text-white-50 align-middle">
+            <i class="fa fa-envelope fa-12 text-white-50" aria-hidden="true"></i>
+            전자우편: <img src="/assets/imgs/nsj-email.png" alt="nsj-email"/></li>
+        </ul>
+      </div>
+      <div class="d-none-sm col-md-3 gpsh-outline">
+      </div>
+      <div class="col-md-4 text-center service-time">
+        <div id="accordion">
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-user-clock" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#coursetime" 
+                title="강의시간">
+                강의시간 [9:00~19:30]
+              </a>
+            </div>
+            <div id="coursetime" class="collapse" data-parent="#accordion">
+              <p class="card-body chongbong">
+                강의, 강습은 일정에 따라 진행하며 휴관일과 토요일, 일요일, 국가적명절일에는 하지 않습니다.              </p>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-briefcase-clock" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#opentime" 
+                title="봉사시간">
+                봉사시간 [9:00~18:00]
+              </a>
+            </div>
+            <div id="opentime" class="collapse" data-parent="#accordion">
+              <p class="card-body chongbong">
+                휴관일과 국가적명절을 제외한 모든 날들에 봉사합니다.              </p>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-coffee" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#holidays" 
+                title="휴 관 일">
+                휴 관 일              </a>
+            </div>
+            <div id="holidays" class="collapse" data-parent="#accordion">              <p class="card-body text-center chongbong">주체114(2025). <span
+                  class="national-holidays" title="조선민주주의인민공화국 헌법절">12.27. </span><span
+                  class="closed-holidays" title="휴관일">12.11. </span><span
+                  class="closed-holidays" title="휴관일">12.25. </span>              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+    <!-- photoswipe background
+================================================== -->
+<section>
+<div aria-hidden="true" class="pswp" role="dialog" tabindex="-1">
+
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title=
+                "Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title=
+                "Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title=
+            "Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div> <!-- end photoSwipe background -->
+</section>    <script src="/assets/libs/popper/1.16.0/umd/popper.min.js"></script>
+<script src="/assets/libs/jquery/ui/1.11.3/jquery-ui.min.js"></script>
+<!-- 
+<script src="/assets/libs/jquery/ui/jquery-ui-i18n.min.js"></script>
+-->
+<script	src="/assets/libs/nivo-slider/jquery.nivo.slider.pack.js"></script>
+<script src="/assets/libs/owl-carousel/2.2.1/owl.carousel.min.js"></script>
+<script	src="/assets/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script src="/assets/libs/mobile/fastclick.js"></script>
+<script src="/assets/libs/mobile/swiper.min.js"></script>
+<script src="/assets/libs/colorlib/vendor/parallax100/parallax100.js"></script>
+<script>
+    $('.parallax100').parallax100();
+</script>
+<script src="/assets/libs/colorlib/vendor/photoswipe/js/modernizr.js"></script>
+<script src="/assets/libs/colorlib/vendor/photoswipe/js/pace.min.js"></script>
+
+<!-- script src="/assets/js/jquery.magnific-popup.min.js?"></script -->
+<script src="/assets/js/plugins_add.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/plugins.min.js?20240706.4.7.6"></script>
+<script src="/assets/libs/colorlib/vendor/isotope/imagesloaded.pkgd.min.js"></script>
+<script src="/assets/libs/colorlib/vendor/isotope/isotope.pkgd.min.js"></script>
+<script src="/assets/js/active.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/global.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/books.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/encyclopedia.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/rmenjoy.global.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/leader.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/counter.js?20240706.4.7.6"></script>
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="/assets/libs/assets/ie8-responsive-file-warning.js"></script><![endif]-->
+<script	src="/assets/libs/assets/ie-emulation-modes-warning.js"></script>
+<!-- IE10 agent hack for Surface/desktop Windows 8 bug -->
+<script	src="/assets/libs/assets/ie10-viewport-bug-workaround.js"></script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="/assets/libs/assets/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="/assets/libs/assets/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+  </body>
+</html>

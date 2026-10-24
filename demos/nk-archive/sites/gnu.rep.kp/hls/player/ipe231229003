@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="kp">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="assets/img/favicon.ico">
+        <title>ipe231229003 - 동영상재생기</title>
+        <link href="http://www.gnu.rep.kp/hls/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="http://www.gnu.rep.kp/hls/assets/video.js/video-js.min.css" rel="stylesheet" type="text/css"/>
+        <link href="http://www.gnu.rep.kp/hls/assets/css/player.css" rel="stylesheet" type="text/css"/>
+        <link rel="image_src" href="http://www.gnu.rep.kp/hls/assets/img/recorder.gif" />
+        <meta property="fb:app_id"             content="774958212660408" />
+        <meta property="og:url"                content="http://www.gnu.rep.kp/hls/embed//ipe231229003" />
+        <meta property="og:type"               content="video.other" />
+        <meta property="og:title"              content="ipe231229003 - 동영상재생기" />
+        <meta property="og:description"        content=" - ipe231229003" />
+        <meta property="og:image"              content="http://www.gnu.rep.kp/hls/assets/img/recorder.gif" />
+        <script src="http://www.gnu.rep.kp/hls/assets/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script>
+            var webSiteRootURL = 'http://www.gnu.rep.kp/hls/';
+        </script>
+        <script src="http://www.gnu.rep.kp/hls/assets/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="http://www.gnu.rep.kp/hls/assets/video.js/video.min.js" type="text/javascript"></script>
+        <script src="http://www.gnu.rep.kp/hls/assets/video.js/lang/kp.js" type="text/javascript"></script>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="http://www.gnu.rep.kp/hls/assets/img/favicon.png">
+<link href="http://www.gnu.rep.kp/hls/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script src="http://www.gnu.rep.kp/hls/assets/js/jquery-3.3.1.min.js"></script>
+<script>
+    var webSiteRootURL = "http://www.gnu.rep.kp/hls/";
+    var player;
+    var doNotFloatVideo = false;
+</script>
+
+<!-- Skins Head Begin -->
+    <link href="http://www.gnu.rep.kp/hls/assets/css/skins/pyb.css" rel="stylesheet" type="text/css"/><!-- Skins Head End -->
+
+<!-- Thumbnails Head Begin -->
+    <!-- Thumbnails Head End -->
+        <style>
+            body {
+                padding: 0 !important;
+                margin: 0 !important;
+                overflow: hidden;
+            }
+            .video-js {
+                position: static;
+            }
+        </style>
+    </head>
+
+    <body>
+                    <video style="width: 100%; height: 100%; top: 0; background-color:#000000;" playsinline webkit-playsinline poster="http://www.gnu.rep.kp/hls/assets/img/recorder.gif"
+                    controls                       class="video-js vjs-default-skin vjs-16-9 embed-responsive-item vjs-big-play-centered" id="mainAudio"  data-setup='{"fluid": true }'>
+               <source src="http://www.gnu.rep.kp/hls/videos/pyb_ipe231229003/ipe231229003.mp3?token=eyJzYWx0IjoiNWU0ZTUzOGM2NTAwMyIsInRva2VuVGltZU91dCI6IjMwMCIsImZpbGVuYW1lIjoiaXBlMjMxMjI5MDAzIiwidGltZSI6MTcwNTAzNDQwMn0=" type="audio/mpeg">                <p>웨브열람기가 HTML5를 지원하지 않습니다.</p>
+            </video>
+<!--            <audio style="width: 100%; height: 100%;"  id="mainAudio" controls  class="center-block video-js vjs-default-skin vjs-big-play-centered vjs-16-9" id="mainAudio"  data-setup='{ "fluid": true }'
+                   poster="http://www.gnu.rep.kp/hls/assets/img/recorder.gif">
+                                                   <source src="http://www.gnu.rep.kp/hls/videos/pyb_ipe231229003/ipe231229003.mp3?token=eyJzYWx0IjoiNWU0ZTUzOGM2NTAwMyIsInRva2VuVGltZU91dCI6IjMwMCIsImZpbGVuYW1lIjoiaXBlMjMxMjI5MDAzIiwidGltZSI6MTcwNTAzNDQwMn0=" type="audio/mpeg" />
+                                        </audio> -->
+            <script>
+                $(document).ready(function () {
+                    $('#mainAudio').bind('contextmenu', function () {
+                        return false;
+                    });
+                    if (typeof player === 'undefined') {
+                        player = videojs('mainAudio');
+                    }
+                                        setTimeout(function () {
+                            if (typeof player === 'undefined') {
+                                player = videojs('mainAudio');
+                            }
+                            try {
+                                player.currentTime(0);
+                                player.play();
+                            } catch (e) {
+                                setTimeout(function () {
+                                    player.currentTime(0);
+                                    player.play();
+                                }, 1000);
+                            }
+                        }, 150);
+                                });
+            </script>
+                <script>
+    window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+        if (url == "") {
+            url = "embed in html";
+        }
+        $.ajax({
+            url: webSiteRootURL + "objects/ajaxErrorCatcher.php?error=" + encodeURI("JS-Err: " + errorMsg + " @ line " + lineNumber + " in file " + url + " at visit on /hls/player/ipe231229003"),
+            context: document.body
+        }).done(function () {
+            console.log("Javascript오유가 발생하면 관리자에게 문의하여주십시오. \r\n Msg:" + errorMsg + " \r\n Url: " + url + ", line: " + lineNumber + ", Address: /hls/player/ipe231229003");
+        });
+        return false;
+    }
+</script>
+<script src="http://www.gnu.rep.kp/hls/assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="http://www.gnu.rep.kp/hls/assets/video.js/videojs.hotkeys.min.js" type="text/javascript"></script>
+
+<!-- Thumbnails Foot Begin -->
+<!-- Thumbnails Foot End -->
+<!-- Hotkey Foot Begin -->
+<script> $( document ).ready(function() {videojs('mainAudio').ready(function() {this.hotkeys({ seekStep: 5,enableVolumeScroll: true,alwaysCaptureHotkeys: true,enableFullscreen: true,fullscreenKey: function(event, player) { return (event.which ===70); },playPauseKey: function(event, player) { return (event.which ===32); },volumeUpKey: function(event, player) { return (event.which === 107); },
+                 volumeDownKey: function(event, player) { return (event.which === 109);},enableModifiersForNumbers: false
+                 });
+        });});</script><!-- Hotkey Foot End -->
+<textarea id="elementToCopy" style="
+          filter: alpha(opacity=0);
+          -moz-opacity: 0;
+          -khtml-opacity: 0;
+          opacity: 0;
+          position: absolute;
+          z-index: -9999;
+          top: 0;
+          left: 0;
+          pointer-events: none;"></textarea>    </body>
+</html>

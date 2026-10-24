@@ -1,0 +1,826 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>인민대학습당 홈페지 - 《남산》-백과상식(목록)페지</title>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="백과상식자료들을 목록형식으로 소개합니다.">
+<meta name="keyword" content="인민대학습당,웨브싸이트,홈페지,남산,백과상식">
+<meta name="author" content="Kanegin, K.H.Y., K.S.H., KKK">
+<meta name="lang" content="ko">
+
+<link rel="shortcut icon" type="image/png" href="/assets/imgs/gpsh-icon-16.png?20240706.4.7.6">
+
+<link rel="stylesheet" href="/assets/libs/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/libs/nivo-slider/themes/light/light.min.css">
+<link rel="stylesheet" href="/assets/libs/nivo-slider/nivo-slider.min.css">
+<link rel="stylesheet" href="/assets/libs/owl-carousel/2.2.1/owl.carousel.min.css">
+<link rel="stylesheet" href="/assets/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/assets/libs/font-awesome.v6.1.2/css/all.min.css?">
+<link rel="stylesheet" href="/assets/libs/colorlib/vendor/photoswipe/css/vendor.min.css?">
+
+<link rel="stylesheet" href="/assets/css/linearicons.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/magnific-popup.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/animate.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/owl.carousel.plugin.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/global.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/font-family_ko.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/compatible.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/books.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/encyclopedia.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/rmenjoy.min.css?20240706.4.7.6">
+<link rel="manifest" href="/assets/manifest.json">
+
+<script>
+let BASE_URL = '/';
+let SITE_URL = '/index.php/ko/';
+let CURRENT_URL = 'encyclopedia/view_list/1';
+let isMobile = false;
+let localeLang = 'ko';
+</script><script src="/assets/libs/jquery/jquery-3.4.1.ex.min.js"></script>
+<script src="/assets/libs/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body class="_top" oncontextmenu="return true;">
+    <div id="preloader">
+      <div class="preload-content">
+        <div id="gpsh-load"></div>
+      </div>
+    </div>
+    <header id="divHeader" class="header-area bo00">
+  <div class="container">
+    <div class="row mx-n15">
+      <div class="col-12 px-0">
+        <nav class="navbar-expand d-inline fixed-top languagebar bo00">
+          <ul class="navbar-nav justify-content-end language header">
+                          <li class="nav-link  active">
+                <a href="#">
+                  <span class="d-inline">조선어</span>
+                  <span class="d-none">가</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/en/encyclopedia/view_list/1">
+                  <span class="d-inline">English</span>
+                  <span class="d-none">En</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/cn/encyclopedia/view_list/1">
+                  <span class="d-inline">中文</span>
+                  <span class="d-none">中</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/ru/encyclopedia/view_list/1">
+                  <span class="d-inline">Русский</span>
+                  <span class="d-none">Ру</span>
+                </a>
+              </li>
+                      </ul>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-dark" id="gpshNavbar">
+	<a class="navbar-brand" href="/index.php/ko/" title="첫페지" >
+		<img id="logo_namsan" src="/assets/imgs/namsan.png" alt="남산" />
+		<span id="domain">www.gpsh.edu.kp</span>
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gpshNav">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="gpshNav">
+	<ul class="navbar-nav ml-auto">
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">불멸의 령도</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/leader/news_list"
+        title="혁명활동">혁명활동</a>
+      <a class="dropdown-item" href="/index.php/ko/anecdote/article_list"
+        title="혁명일화">혁명일화</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/leadership"
+        title="령도업적">령도업적</a>
+    </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">소개</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/intro/index/serial#about-gpsh"
+        title="소개편집물">소개편집물</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/history#about-gpsh"
+        title="연혁">연혁</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/president#about-gpsh"
+        title="총장들">총장들</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/inside#about-gpsh"
+        title="구내전경">구내전경</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/ourfaces_list#about-gpsh"
+        title="우리모습">우리모습</a>
+    </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">강의</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/lecture/today_in7day"
+        title="주간 강의, 강습일정">주간일정</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/0"
+        title="사회과학강의">사회과학강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/1"
+        title="자연과학강의">자연과학강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/2"
+        title="새기술통보강의">새기술통보강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/3"
+        title="원격강의">원격강의</a>
+          </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 active"><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">봉사</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/rmenjoy/room"
+        title="음악감상">음악감상</a>
+      <a class="dropdown-item" href="/index.php/ko/newbooks/view_list"
+        title="도서소개">도서소개</a>
+      <a class="dropdown-item" href="/index.php/ko/oldbooks/view_list"
+        title="민족고전">민족고전</a>
+      <a class="dropdown-item" href="/index.php/ko/encyclopedia/view_list/1"
+        title="백과상식">백과상식</a>
+    </div>
+  </li>
+  <li class="nav-item px-1 "><a class="nav-link" href="/index.php/ko/libraries/index/ko-lib-cp"
+      title="도서관협회">도서관협회</a></li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">대외교류</a>
+    <div class="dropdown-menu dropdown-menu-right submenu">
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/0"
+        title="참관">참관</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/1"
+        title="도서교류">도서교류</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/2"
+        title="도서기증">도서기증</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/3"
+        title="국제토론회 및 전시회">국제토론회 및 전시회</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/4"
+        title="국제기구위탁도서관">국제기구위탁도서관</a>
+    </div>
+  </li>
+</ul>
+<div id="search-wrapper" class="d-none">
+  <form action="#" method="post">
+    <input type="text" id="search" name="search" class="search"
+      value=""
+      onkeypress="return checkProhibitionalChars('#search', '#errmsg2');"
+      placeholder="검색어를 입력하십시오." />
+    <div id="close-icon"></div>
+    <input class="d-none" type="submit" value="" />
+    <input type="hidden" name="csrftk" value="8daff4115098bfd15c9e1ca8d68bcb5e" />
+    <span id="errmsg2" style="display: none;">* 경고! - 금지된 문자를 포함하고 있습니다.</span>
+  </form>
+</div>
+<script type="text/javascript">
+  $().ready(function() {
+    // 《혁명활동소식》과 《휴관일》소개에서 주체년호표기처리
+    let jucheobjs = $(".juche.date.column, #holidays p");
+    jucheobjs.each(function() {
+        juchehtml = $(this).html() || '';
+        juchehtml = juchehtml.replace(/(주체|JUCHE|主体|чучхе)\d+\((\d+)\)/ig, '$2');
+        $(this).html(juchehtml);
+    });
+    // 외부싸이트소개
+    let servicetime = $('div.service-time #accordion');
+    if (servicetime.length) {
+      let servicetimes = servicetime.children('div');
+      // 강의시간과 봉사시간소개부를 없앤다.
+      if (servicetimes.length > 2) {
+        $(servicetimes[0]).addClass('d-none'); // 강의시간
+        // $(servicetimes[1]).addClass('d-none'); // 봉사시간
+      }
+      // 외부싸이트(광야홈페지)소개부를 추가한다.
+      let gwangya = $('<div class="card mb-3"><div class="card-header"><a class="collapsed1 card-link1" data-toggle1="collapse" href="http://www.dprkportal.kp" title="www.dprkportal.kp" target="_blank"><img src="/./data/outsites/gwangya.png" width="150px" alt="www.dprkportal.kp" /></a></div>');
+      servicetime.append(gwangya);
+    }
+  });
+</script>
+	</div>
+</nav>
+      </div>
+    </div>
+  </div>
+</header>    <section class="body" style="min-height: 900px;">
+      
+<h1 class="d-none">백과상식(목록)</h1>
+
+<a href="#encyclopedias" class="scrollto">
+  <div class="poster-area row-xs-150 row-sm-200 row-md-300 row-lg-400 bg-img bg-overlay bo03"
+    style="background-image: url(/./data/encyclopedia/poster_01.jpg);"></div></a>
+<form id="listForm" action="/index.php/ko/encyclopedia/view_search/1#encyclopedias" method="post"
+  onsubmit="return validateSearchText('#search_keyword')">
+  <div id="encyclopedias" class="container-fluid container-lg py-25 py-md-50 py-lg-100 pedia list">
+    <div class="col-sm-12 py-1 m-0">
+      <div class="d-block mb-3 align-bottom" style="border-bottom: 2px solid #008877;">
+        <img class="title-img"
+          src="/assets/imgs/encyclopedia/logo_pedia_list_ko.png" alt="logo_encyclopedia" />
+                <a href="?vm=list-view#encyclopedias">
+          <div class="toggle-viewmode list-view float-right mr-3" title="제목라렬방식"></div></a>
+      </div>
+      <div class="row col-sm-12 result_info_wraper">
+
+	<div class="row col-md-12 col-lg-5 pt-1 mb-3 justify-content-center justify-content-md-left result_info" style="text-align: left;">
+		<span>총:&nbsp;661건,&nbsp;</span>
+		<span>현재&nbsp;1 / 56&nbsp;페지,&nbsp;</span>
+		<span class="">표시행수:&nbsp;</span>
+		<input type="text" name="ps" value="12" class="records-page" maxlength="2" />
+	</div>
+	<div class="row col-md-12 col-lg-7" style="text-align: center;">
+		<div id="formsearch" style="text-align: center;"
+			class="input-group input-group-sm col-sm-12 col-md-5 mb-3 justify-content-center search_form ">
+			<input class="form-control" type="text" id="search_keyword" name="search"
+				onkeypress="return checkProhibitionalChars('#search_keyword', '#errmsg2');" value=""
+				placeholder="검색어를 입력하십시오." />
+			<div class="input-group-append">
+				<input class="input-group-text rounded-right" type="image" 
+					src="/assets/imgs/search.png" alt="search icon" />
+			</div>
+			<span id="errmsg1" style="display: none;">* 알림! - 검색하려는 문자를 입력하십시오.</span>
+	        <span id="errmsg2" style="display: none;">* 경고! - 금지된 문자를 포함하고 있습니다.</span>
+			<input type="hidden" name="csrftk" value="8daff4115098bfd15c9e1ca8d68bcb5e" />
+		</div>
+
+			<div class="page-nav col-sm-12 col-md-7">
+				<ul class="pagination pagination-sm justify-content-center justify-content-md-end" style="">				<li class="page-item"><a class="page-link command-disabled font-weight-bold">≪ </a></li>				<li class="page-item"><a class="page-link command-disabled">❮ </a></li>				<li class="page-item"><a class="page-link command-disabled active">1</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);">2</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(3);">3</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(4);">4</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(5);">5</a></li>				<li class="page-item"><a class="page-link command pageBreak hidden" href="javascript: pageSkip(5);">...</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);"> ❯</a></li>				<li class="page-item"><a class="page-link command font-weight-bold" href="javascript: pageSkip(56);"> ≫</a></li>			</ul>
+		</div>
+		<input type="hidden" id="pn" name="pn" value="1" />
+	</div>
+</div>
+    </div>    <section id="thumb-view" class="blog_ms_area p_100">
+      <div class="container-fluid">
+        <div class="row mx-n15 blog_ms_inner pedias">          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="blog_ms_item pedia_item">
+              <div id="no-2524" class="blog_ms_img pedia_img">
+                <img src="" alt="사진0-부정맥을 예방하려면">
+              </div>
+              <div class="blog_ms_text pedia_text">
+                <h3>부정맥을 예방하려면</h3>
+                <div class="contents  p-0">
+                  <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>부정맥을 예방하려면</title>
+</head>
+<body>
+<h1 align="center">부정맥을 예방하려면</h1> 
+<p>부정맥은 심장활동의 빈도, 규칙성 또는 순서가 비정상인것을 통털어 이르는 말이다.</p>
+<p>부정맥은 발생부위에 따라 정맥동성부정맥, 심실성부정맥, 자극전도장애 등으로 분류된다.</p>
+<p>부정맥은 심한 스트레스, 음주, 흡연, 심장질병, 갑상선기능항진증, 유전, 전해질이상, 페질병 등의 원인으로 생기게 되고 심장근육에 문제가 생기는 고혈압이나 감기비루스 등에 의해서도 발생할수 있다.</p>
+<p>부정맥을 예방하려면 금연, 금주하는것이 좋으며 카페인이 많이 들어있는 음식을 삼가하는것이 좋다.</p>
+<p>평상시 동물성기름보다도 식물성기름을 섭취하는것이 좋다.스트레스를 해소하기 위하여 노력하는것이 좋으며 규칙적인 운동을 하는것도 예방에 도움이 된다.</p>
+<p>콜레스테롤이 많이 함유된 음식은 1주일에 2회정도만 섭취하는것이 좋다.</p>
+<p></p>
+<p></p>
+<p></p>
+
+</body>
+</html>
+                </div>
+                <a class="iframe read-more" href="/index.php/ko/encyclopedia/view_detail_1?no=2524">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="blog_ms_item pedia_item">
+              <div id="no-2523" class="blog_ms_img pedia_img">
+                <img src="" alt="사진0-더위해소에 효과적인 매운 음식과 더운물목욕">
+              </div>
+              <div class="blog_ms_text pedia_text">
+                <h3>더위해소에 효과적인 매운 음식과 더운물목욕</h3>
+                <div class="contents  p-0">
+                  <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>더위해소에 효과적인 매운 음식과 더운물목욕</title>
+</head>
+<body>
+<h1 align="center">더위해소에 효과적인 매운 음식과 더운물목욕</h1> 
+<p>세계적으로 더운 지역에 있는 나라들에서는 매운 음식을 즐겨먹는다.</p>
+<p>매운 음식을 먹으면 땀을 흘리게 되는데 그러면 체온이 떨어진다.</p>
+<p>무더운 여름철에 사람들은 찬 음료나 에스키모, 시원한 수박으로 갈증을 해소하군 한다.</p>
+<p>그러나 찬 음식을 먹으면 얼마 지나지 않아 체온이 다시 올라가기때문에 효과적인 더위해소방도가 못된다.</p>
+<p>체온이 급속히 떨어지면 인체는 신속히 체온을 정상상태로 되돌려놓게 되므로 오히려 더운감을 느끼게 된다. 하지만 매운 음식을 먹으면 체온이 대기온도와 같아지면서 피순환이 빨라지고 땀이 나기 시작한다. </p>
+<p>즉 수분이 증발되면서 시원한감을 느끼게 된다.</p>
+<p>땀을 많이 흘린 다음에는 될수록 더운물목욕을 해야 한다.</p>
+<p>땀을 흘리면 모세혈관이 확장되는데 이때 찬물로 목욕하면 피줄이 수축되면서 몸안의 열이 빠져나가지 못한다.</p>
+<p>무더운 여름철 매운 음식을 먹고 더운물목욕을 하면 예상밖의 더위해소효과를 볼수 있다. </p>
+<p></p>
+<p></p>
+<p></p>
+
+</body>
+</html>
+                </div>
+                <a class="iframe read-more" href="/index.php/ko/encyclopedia/view_detail_1?no=2523">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="blog_ms_item pedia_item">
+              <div id="no-2522" class="blog_ms_img pedia_img">
+                <img src="" alt="사진0-위산역류현상이 나타날 때">
+              </div>
+              <div class="blog_ms_text pedia_text">
+                <h3>위산역류현상이 나타날 때</h3>
+                <div class="contents  p-0">
+                  <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>위산역류현상이 나타날 때</title>
+</head>
+<body>
+<h1 align="center">위산역류현상이 나타날 때</h1> 
+<p>위산은 위선벽체세포에서 분비되는 염산이다.</p>
+<p>위에서는 위산이 계속 분비되며 그 분비률은 낮과 밤에 따라 변화되는데 사람이 잠에 들면 몇시간은 최고로 높다가 깨여나기 전에 제일 낮다. </p>
+<p>만약 위산분비가 지나치면 위산이 우로 올라온다.</p>
+<p>위산이 올라오는 느낌이 있으면 그것은 몸에서 내보내는 치료요구신호이다. </p>
+<p>지나친 위산분비는 정서변화로도 생길수 있으며 정신이 지나치게 긴장되여있거나 지나친 피로 혹은 정서가 좋지 못할 때에는 대뇌피질기능이 장애되고 나아가서 위산분비가 촉진될수 있다.</p>
+<p>항상 위산이 올라오는 느낌이 있는것은 또한 레제르핀, 아스피린, 졸론과 같은 약물에 의해 위산분비가 지나친것일수도 있다.</p>
+<p>일부 소화되기 힘든 음식, 과잉의 당분도 위장안에서 발효되여 위산분비를 유발시킨다.</p>
+<p>위가 나쁜 사람들이 지나치게 뜨거운 차나 국을 마시는것은 좋지 않다.</p>
+<p>또한 술은 위에 대한 자극이 세기때문에 마시지 않는것이 좋다.</p>
+<p>기름에 볶거나 튀긴 음식을 먹지 말아야 한다.</p>
+<p></p>
+<p></p>
+<p></p>
+
+</body>
+</html>
+                </div>
+                <a class="iframe read-more" href="/index.php/ko/encyclopedia/view_detail_1?no=2522">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="blog_ms_item pedia_item">
+              <div id="no-2521" class="blog_ms_img pedia_img">
+                <img src="" alt="사진0-영양제의 효과적인 섭취">
+              </div>
+              <div class="blog_ms_text pedia_text">
+                <h3>영양제의 효과적인 섭취</h3>
+                <div class="contents  p-0">
+                  <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>영양제의 효과적인 섭취</title>
+</head>
+<body>
+<h1 align="center">영양제의 효과적인 섭취</h1> 
+<p>종합비타민에 포함되여있는 칼시움과 아연, 마그네시움, 동 등의 원소들은 위산이 분비되여야 쉽게 흡수된다.</p>
+<p>때문에 식사중이나 식사후 15min이내에 섭취하면 효과가 좋다.</p>
+<p>비타민A, D, E 등의 지용성비타민도 식후에 먹는것이 좋다.</p>
+<p>빈혈이 있을 때 사용하는 철분제는 다른 성분과 달리 음식물이 있으면 흡수가 잘 안되기때문에 빈속에 먹는것이 좋다.</p>
+<p>속이 불편한 경우에는 식후에 사용하되 귤이나 레몬즙과 함께 먹는것이 좋다. 왜냐하면 철분과 칼시움성분은 비타민C흡수를 도와주기때문이다.</p>
+<p>대부분의 종합영양제는 록차, 홍차, 커피 등과 함께 먹으면 차의 탄닌성분이나 카페인성분이 흡수를 저애할수 있기때문에 물과 함께 사용하여야 한다. </p>
+<p>스테로이드제 등의 면역관련약재를 사용할 때 비타민제를 쓰면 부작용이 일어날수 있으므로 주의하여야 한다.</p>
+<p>비타민제는 개봉한 후에 6개월이내에 사용하는것이 좋다. </p>
+<p>간혹 랭장고에 영양제를 보관하는 경우가 있는데 랭장고문을 자주 여닫게 되면 외부와의 기온차이로 인해 수분이 생기고 곰팽이가 끼거나 변질될수 있다. 따라서 서늘한 곳에 보관해야 한다.</p>
+<p></p>
+<p></p>
+<p></p>
+
+</body>
+</html>
+                </div>
+                <a class="iframe read-more" href="/index.php/ko/encyclopedia/view_detail_1?no=2521">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="blog_ms_item pedia_item">
+              <div id="no-2520" class="blog_ms_img pedia_img">
+                <img src="" alt="사진0-병치료에 리용할수 있는 닭알">
+              </div>
+              <div class="blog_ms_text pedia_text">
+                <h3>병치료에 리용할수 있는 닭알</h3>
+                <div class="contents  p-0">
+                  <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>병치료에 리용할수 있는 닭알</title>
+</head>
+<body>
+<h1 align="center">병치료에 리용할수 있는 닭알</h1> 
+<p>심한 위 및 장경련때에는 끓여서 식힌 물 한고뿌에 생신한 닭알흰자위를 풀어 마신다.</p>
+<p>닭알흰자위는 위안의 산도를 빨리 그리고 안전하게 낮추는데 리용된다.</p>
+<p>소화불량때에는 소금에 약간 절인 닭알흰자위를 먹으면 좋다.</p>
+<p>편두통을 비롯한 머리아픔때에는 닭알과 더운 우유를 잘 혼합한것을 매일 마시면 효과가 있다.</p>
+<p>신경통에는 푹 삶은 닭알을 절반으로 갈라 제일 아픈 부위에 붙인다.</p>
+<p>발육이 뜬 어린이들에게는 두고뿌정도의 더운 우유에 생신한 닭알을 잘 풀어 하루에 3~4번씩 먹인다.</p>
+<p>화상자리에는 닭알흰자위와 노란자위를 잘 풀어 자주 바른다.</p>
+<p></p>
+<p></p>
+<p></p>
+
+</body>
+</html>
+                </div>
+                <a class="iframe read-more" href="/index.php/ko/encyclopedia/view_detail_1?no=2520">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="blog_ms_item pedia_item">
+              <div id="no-2519" class="blog_ms_img pedia_img">
+                <img src="" alt="사진0-로화를 지연시키는 방법">
+              </div>
+              <div class="blog_ms_text pedia_text">
+                <h3>로화를 지연시키는 방법</h3>
+                <div class="contents  p-0">
+                  <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>로화를 지연시키는 방법</title>
+</head>
+<body>
+<h1 align="center">로화를 지연시키는 방법</h1> 
+<p>•기름기있는 음식과 단음식은 적당히 먹여야 한다.</p>
+<p>비타민과 무기영양원소가 들어있는 음식물을 택하며 기름기있는 음식물과 단음식은 적당히 먹어야 한다.</p>
+<p>•걷기운동을 정상적으로 해야 한다.</p>
+<p>가볍게 걸으면 피순환이 촉진되며 긴장이 풀리고 근육기능이 세진다.</p>
+<p>몸의 긴장도를 풀기 위하여 여러가지 알맞는 운동을 하여야 한다.</p>
+<p>•일상적으로 머리를 많이 써야 한다.</p>
+<p>외국어학습, 수자풀이 등을 알맞춤히 하면 뇌기능이 좋아진다.</p>
+<p>•콜레스테롤을 낮추어야 한다.</p>
+<p>동물성지방을 적게 먹고 과일과 남새, 물고기, 섬유질이 들어있는 콩, 귀밀을 많이 먹는것이 좋다.</p>
+<p>•아침, 저녁으로 5min정도씩 몸펴기동작을 몇번씩 하여야 한다.</p>
+<p>•담배를 끊어야 한다.</p>
+<p>담배를 많이 피우면 심장, 페가 나빠지고 피부에 주름이 많이 생긴다.</p>
+<p>•몸이 비대한 사람은 몸무게를 줄여야 한다.</p>
+<p>리상적인 몸무게의 20%를 초과하면 음식을 조절하여야 한다.</p>
+<p></p>
+<p></p>
+<p></p>
+
+</body>
+</html>
+                </div>
+                <a class="iframe read-more" href="/index.php/ko/encyclopedia/view_detail_1?no=2519">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="blog_ms_item pedia_item">
+              <div id="no-2518" class="blog_ms_img pedia_img">
+                <img src="" alt="사진0-귀중한 문화유산-고려종이">
+              </div>
+              <div class="blog_ms_text pedia_text">
+                <h3>귀중한 문화유산-고려종이</h3>
+                <div class="contents  p-0">
+                  <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>귀중한 문화유산-고려종이</title>
+</head>
+<body>
+<h1 align="center">귀중한 문화유산-고려종이</h1> 
+<p>고려에서는 종이생산을 위하여 그 주요원료인 닥나무를 여러 지방에 많이 심도록 하였는데 그것은 닥나무의 특성과 관련되였다.</p>
+<p>닥나무는 다른 나무와 달리 껍질의 섬유소함량은 66%이고 섬유소의 길이는 17~18㎜로서 종이생산에 유용하게 쓰이며 그것으로는 현재도 인쇄용지, 등사지, 포장지 등 질좋은 고급종이를 생산하며 천, 노끈, 포대, 멍석 등도 만들었다.</p>
+<p>고려에서는 닥나무와 같은 종이원료를 가지고 다음과 같은 생산공정에 따라 종이를 생산하였다.</p>
+<p>우선 닥나무를 겨울에 베여다가 가마에서 찐 다음 껍질을 벗겨 말리는데 이것을 흑피라고 하였다.</p>
+<p>이 흑피를 물에 하루쯤 담그어 불군 다음 겉껍질을 벗겨 해빛에 말리였다. 이렇게 만들어진것이 백피인데 그것을 다시 재물에 깨끗이 빨아내고 표백장에서 한번 더 바랜다. 그다음 바랜 백피섬유를 나무방망이로 두드려 틀에 넣고 풀과 섞어 종이원료액을 만들었다. </p>
+<p>이렇게 얻어낸 종이원료액을 대발을 친 나무틀우에 골고루 펴놓으면 종이생산의 기본공정이 끝나는데 이때에 원료액을 틀우에 골고루 어떻게 잘 펴는가에 따라 종이의 두께와 질이 결정되였다.</p>
+<p>마지막으로 말린 종이를 다듬이질하여 매끈하게 가공하여 종이제작을 완성하였다.</p>
+<p>고려에서는 여기에 여러가지 원료를 더 배합하고 만드는 수법을 달리하면서 다양한 종류의 종이를 생산하였다.</p>
+<p></p>
+<p></p>
+<p></p>
+
+</body>
+</html>
+                </div>
+                <a class="iframe read-more" href="/index.php/ko/encyclopedia/view_detail_1?no=2518">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="blog_ms_item pedia_item">
+              <div id="no-2517" class="blog_ms_img pedia_img">
+                <img src="" alt="사진0-고구려시기에 발전한 전통의학">
+              </div>
+              <div class="blog_ms_text pedia_text">
+                <h3>고구려시기에 발전한 전통의학</h3>
+                <div class="contents  p-0">
+                  <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>고구려시기에 발전한 전통의학</title>
+</head>
+<body>
+<h1 align="center">고구려시기에 발전한 전통의학</h1> 
+<p>우리 민족은 예로부터 효능높은 약과 침, 뜸, 부항, 안마, 훈증, 찜질, 기후료법을 비롯한 독특한 민간료법들을 창안하여 사람들의 병치료와 예방, 건강증진에 활용해왔으며 그 과정에 우리 민족의 신체적특성과 생활습성에 맞는 우리 식의 전통의학을 창조하고 끊임없이 발전시켜왔다.</p>
+<p>고구려시기에 특히 침치료법이 발전하였다.</p>
+<p>고구려에서 침구술이 발전할수 있은것은 세계적으로 가장 일찌기 돌침을 병치료에 리용한 고조선의 치료성과를 계승하였을뿐 아니라 높은 수준에 있던 금속가공기술로 여러가지 형태의 금속침을 만들어쓸수 있었던 사정과 관련된다.</p>
+<p>고구려시기 침치료법과 함께 약물치료법도 당시로서는 높은 수준에서 발전하였다.</p>
+<p>세계에서 처음으로 삼을 발견하고 병치료와 예방에 리용하였으며 그 지식을 이웃나라들에까지 보급한 고구려에서는 삼밖에도 여러가지 효능있는 약재들을 탐구리용하였다.</p>
+<p>고구려의 약물료법에서 특기할만한것은 금속제약물을 리용한것이다.</p>
+<p>고구려에서는 금을 약으로 리용하였는데 이것은 당시의 제약기술과 약물지식이 높은 수준에 있었다는것을 보여준다.</p>
+<p></p>
+<p></p>
+<p></p>
+
+</body>
+</html>
+                </div>
+                <a class="iframe read-more" href="/index.php/ko/encyclopedia/view_detail_1?no=2517">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="blog_ms_item pedia_item">
+              <div id="no-2515" class="blog_ms_img pedia_img">
+                <img src="" alt="사진0-15세기의 재능있는 시인 박은">
+              </div>
+              <div class="blog_ms_text pedia_text">
+                <h3>15세기의 재능있는 시인 박은</h3>
+                <div class="contents  p-0">
+                  <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>15세기의 재능있는 시인 박은</title>
+</head>
+<body>
+<h1 align="center">15세기의 재능있는 시인 박은</h1> 
+<p>량반가문의 자손으로 태여나 어려서부터 남달리 총명하고 글재주가 뛰여났던 박은은 당대 사회현실을 진실하게 반영하고 사상예술적으로 우수한 시들을 창작한것으로 하여 후세의 많은 문인들로부터 시적재능에 대한 높은 평가를 받게 되였다.</p>
+<p>박은은 17살이 되던 해에 과거에 급제하여 벼슬길에 나섰는데 생활에서 늘 바른말을 잘하고 성격이 강인하였다고 한다.</p>
+<p>죽음도 두려워하지 않는 이런 강인한 성격과 립장으로 하여 박은은 연산군을 끼고 권세를 부리던 류자광을 비롯한 보수파량반들의 모함에 걸려 옥에 갇히기까지 하였다.</p>
+<p>박은은 세상을 바로잡아보려는 뜻을 품고 벼슬길에 다시 올라 지제교에 임명되였으나 그 다음해 갑자사화가 일어나면서 화를 입고 류배살이를 하다가 100날도 못되여 의금부에 다시 투옥되였으며 애젊은 나이에 처형당하였다.</p>
+<p>박은이 지닌 정치적립장과 강의한 인간성은 그가 죽음을 앞두고도 전혀 신색이 변하지 않고 하늘을 바라보며 웃기만 하였다는 사실 하나만을 놓고서도 잘 알수 있다.</p>
+<p>재능있는 시인이였던 박은의 창작활동시기는 길지 않았지만 뛰여난 창작적재능으로 하여 그의 이름은 후세에 전해지였다.</p>
+<p>박은의 시문집으로는 《읍취헌유고》가 전해지고있다.</p>
+<p></p>
+<p></p>
+<p></p>
+
+</body>
+</html>
+                </div>
+                <a class="iframe read-more" href="/index.php/ko/encyclopedia/view_detail_1?no=2515">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="blog_ms_item pedia_item">
+              <div id="no-2484" class="blog_ms_img pedia_img">
+                <img src="" alt="사진0-록두의 약리작용">
+              </div>
+              <div class="blog_ms_text pedia_text">
+                <h3>록두의 약리작용</h3>
+                <div class="contents movie p-0">
+                  <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>록두의 약리작용</title>
+<meta name="width" content="600">
+<meta name="height" content="480">
+</head>
+<body>
+<h1 align="center">록두의 약리작용</h1>
+<div class="poster" align="center" >
+<video class="poster pedia" preload="auto" controls="controls"  style="width: 100%; height: auto;">
+	<source src="/./data/encyclopedia/social/ko_60_so251124_01_cp_ko_m/ko_60_so251124_01_cp_ko_m.mp4" type="video/mp4" />
+</video>
+</div>
+</body>
+</html>
+                  <ul>
+                    <li class="d-none"><i class="fa fa-user"></i> kanegin</li>
+                    <li><i class="fa fa-clock"></i> 2025.11.24.</li>
+                    <li class="d-none"><i class="fa fa-heart"></i> 100</li>
+                  </ul>                </div>
+                <a class="iframe read-more" href="/index.php/ko/encyclopedia/view_detail_1?no=2484">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="blog_ms_item pedia_item">
+              <div id="no-2483" class="blog_ms_img pedia_img">
+                <img src="" alt="사진0-력사유적 륙승정">
+              </div>
+              <div class="blog_ms_text pedia_text">
+                <h3>력사유적 륙승정</h3>
+                <div class="contents movie p-0">
+                  <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>력사유적 륙승정</title>
+<meta name="width" content="600">
+<meta name="height" content="480">
+</head>
+<body>
+<h1 align="center">력사유적 륙승정</h1>
+<div class="poster" align="center" >
+<video class="poster pedia" preload="auto" controls="controls"  style="width: 100%; height: auto;">
+	<source src="/./data/encyclopedia/social/ko_60_so251124_00_cp_ko_m/ko_60_so251124_00_cp_ko_m.mp4" type="video/mp4" />
+</video>
+</div>
+</body>
+</html>
+                  <ul>
+                    <li class="d-none"><i class="fa fa-user"></i> kanegin</li>
+                    <li><i class="fa fa-clock"></i> 2025.11.24.</li>
+                    <li class="d-none"><i class="fa fa-heart"></i> 100</li>
+                  </ul>                </div>
+                <a class="iframe read-more" href="/index.php/ko/encyclopedia/view_detail_1?no=2483">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="blog_ms_item pedia_item">
+              <div id="no-2446" class="blog_ms_img pedia_img">
+                <img src="" alt="사진0-식생활과 건강">
+              </div>
+              <div class="blog_ms_text pedia_text">
+                <h3>식생활과 건강</h3>
+                <div class="contents  p-0">
+                  <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>식생활과 건강</title>
+</head>
+<body>
+<h1 align="center">식생활과 건강</h1> 
+<p>어떤 식료품들은 사람의 건강에 유익하지만 잘못 먹으면 도리여 해를 줄수 있다.</p>
+<p>홍당무우： 담배를 피우는 사람이 홍당무우에 들어있는 β‐카로틴을 많이 섭취하면 눈과 손바닥이 노랗게 변할수 있고 심하면 페암이 발생할 위험성이 커지므로 지나치게 먹지 말아야 한다.</p>
+<p>고등어, 멸치： 잔등이 푸른 물고기는 푸린이라는 단백질대사산물을 많이 함유하고있기때문에 통풍환자가 지나치게 섭취하면 뇨산수값이 더욱 높아져 병을 악화시킬수 있다.</p>
+<p>마늘, 은행： 다 같이 건강식품이지만 출혈위험성이 있으므로 출혈성질병이 있는 사람들은 조심해야 한다.</p>
+<p>굳은열매류： 락화생, 잣 등의 굳은열매는 로화방지 및 항암효과가 있지만 편두통환자는 주의해야 한다. 그것은 굳은열매류에 들어있는 성분이 머리아픔을 발생시키기때문이다.</p>
+<p></p>
+<p></p>
+<p></p>
+
+</body>
+</html>
+                </div>
+                <a class="iframe read-more" href="/index.php/ko/encyclopedia/view_detail_1?no=2446">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>        </div>
+      </div>
+    </section>    <div class="col-sm-12 py-1 m-0 encyclopedia footer">
+      <div class="row col-12 my-3 result_info_wraper">
+
+	<div class="row col-sm-12 col-md-7 pt-1 mb-3 justify-content-center result_info">
+		<span>총:&nbsp;661건,&nbsp;</span>
+		<span>현재&nbsp;1 / 56&nbsp;페지,&nbsp;</span>
+		<span class="">표시행수:&nbsp;</span>
+		<input type="text" name="ps" value="12" class="records-page" maxlength="2" />
+	</div>
+
+	<div class="page-nav col-md-5">
+		<ul class="pagination pagination-sm justify-content-center justify-content-md-end" style="">			<li class="page-item"><a class="page-link command-disabled font-weight-bold">≪ </a></li>			<li class="page-item"><a class="page-link command-disabled">❮ </a></li>			<li class="page-item"><a class="page-link command-disabled active">1</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);">2</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(3);">3</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(4);">4</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(5);">5</a></li>			<li class="page-item"><a class="page-link command pageBreak hidden" href="javascript: pageSkip(5);">...</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);"> ❯</a></li>			<li class="page-item"><a class="page-link command font-weight-bold" href="javascript: pageSkip(56);"> ≫</a></li>		</ul>
+	</div>
+</div>
+    </div>
+  </div>
+</form>
+    </section>
+    <footer class="footer-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 contact-us">
+        <ul class="contact-us text-center">
+          <li id="footer-gpsh-full-name" class="mb-4 text-white-50">
+            <i class="fa fa-map-marker fa-16 text-white-50" aria-hidden="true"></i>
+            조선민주주의인민공화국 인민대학습당</li>
+          <li id="footer-phone" class="mb-4 text-white-50">
+            <i class="fa fa-phone fa-16 text-white-50" aria-hidden="true"></i> 
+            전화번호: 850-2-18111(3818472)</li>
+          <li id="footer-email" class="mb-4 text-white-50 align-middle">
+            <i class="fa fa-envelope fa-12 text-white-50" aria-hidden="true"></i>
+            전자우편: <img src="/assets/imgs/nsj-email.png" alt="nsj-email"/></li>
+        </ul>
+      </div>
+      <div class="d-none-sm col-md-3 gpsh-outline">
+      </div>
+      <div class="col-md-4 text-center service-time">
+        <div id="accordion">
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-user-clock" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#coursetime" 
+                title="강의시간">
+                강의시간 [9:00~19:30]
+              </a>
+            </div>
+            <div id="coursetime" class="collapse" data-parent="#accordion">
+              <p class="card-body chongbong">
+                강의, 강습은 일정에 따라 진행하며 휴관일과 토요일, 일요일, 국가적명절일에는 하지 않습니다.              </p>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-briefcase-clock" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#opentime" 
+                title="봉사시간">
+                봉사시간 [9:00~18:00]
+              </a>
+            </div>
+            <div id="opentime" class="collapse" data-parent="#accordion">
+              <p class="card-body chongbong">
+                휴관일과 국가적명절을 제외한 모든 날들에 봉사합니다.              </p>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-coffee" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#holidays" 
+                title="휴 관 일">
+                휴 관 일              </a>
+            </div>
+            <div id="holidays" class="collapse" data-parent="#accordion">              <p class="card-body text-center chongbong">주체114(2025). <span
+                  class="national-holidays" title="조선민주주의인민공화국 헌법절">12.27. </span><span
+                  class="closed-holidays" title="휴관일">12.11. </span><span
+                  class="closed-holidays" title="휴관일">12.25. </span>              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+    <!-- photoswipe background
+================================================== -->
+<section>
+<div aria-hidden="true" class="pswp" role="dialog" tabindex="-1">
+
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title=
+                "Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title=
+                "Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title=
+            "Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div> <!-- end photoSwipe background -->
+</section>    <script src="/assets/libs/popper/1.16.0/umd/popper.min.js"></script>
+<script src="/assets/libs/jquery/ui/1.11.3/jquery-ui.min.js"></script>
+<!-- 
+<script src="/assets/libs/jquery/ui/jquery-ui-i18n.min.js"></script>
+-->
+<script	src="/assets/libs/nivo-slider/jquery.nivo.slider.pack.js"></script>
+<script src="/assets/libs/owl-carousel/2.2.1/owl.carousel.min.js"></script>
+<script	src="/assets/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script src="/assets/libs/mobile/fastclick.js"></script>
+<script src="/assets/libs/mobile/swiper.min.js"></script>
+<script src="/assets/libs/colorlib/vendor/parallax100/parallax100.js"></script>
+<script>
+    $('.parallax100').parallax100();
+</script>
+<script src="/assets/libs/colorlib/vendor/photoswipe/js/modernizr.js"></script>
+<script src="/assets/libs/colorlib/vendor/photoswipe/js/pace.min.js"></script>
+
+<!-- script src="/assets/js/jquery.magnific-popup.min.js?"></script -->
+<script src="/assets/js/plugins_add.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/plugins.min.js?20240706.4.7.6"></script>
+<script src="/assets/libs/colorlib/vendor/isotope/imagesloaded.pkgd.min.js"></script>
+<script src="/assets/libs/colorlib/vendor/isotope/isotope.pkgd.min.js"></script>
+<script src="/assets/js/active.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/global.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/books.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/encyclopedia.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/rmenjoy.global.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/leader.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/counter.js?20240706.4.7.6"></script>
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="/assets/libs/assets/ie8-responsive-file-warning.js"></script><![endif]-->
+<script	src="/assets/libs/assets/ie-emulation-modes-warning.js"></script>
+<!-- IE10 agent hack for Surface/desktop Windows 8 bug -->
+<script	src="/assets/libs/assets/ie10-viewport-bug-workaround.js"></script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="/assets/libs/assets/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="/assets/libs/assets/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+  </body>
+</html>

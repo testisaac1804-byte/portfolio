@@ -1,0 +1,77 @@
+.nav-container { padding:0 30px; margin-left: 410px; margin-top: 36px; }
+.nav-panel { display: flex; justify-content: center; }
+
+#nav { }
+
+/************** ALL LEVELS  *************/ /* Style consistent throughout all nav levels */
+#nav li { position:relative; text-align:left; }
+#nav li.over { z-index:99; }
+#nav li.active { z-index:100; } /* to prevent the li separator from showing through on mouseover on li */
+#nav a,
+#nav a:hover { display:block; text-decoration:none; }
+#nav span { display:block; /*cursor:pointer;*/ }
+#nav a { line-height:1.3em; }
+
+
+/************ 1ST LEVEL  ***************/
+#nav li { float:left; height: 34px; }
+#nav li.level0 { text-align: center; margin-right: 30px; }
+#nav a { float:left; padding:0 14px; color:#639AB1; line-height:27px; font-size: 18px; font-family: Arial; }
+#nav li.over { background: transparent; }
+#nav li.over a { color:#0078D2; /*font-size: 22px;*/ }
+
+
+/************ 1ST LEVEL RESET ************/
+#nav ul li,
+#nav ul li.active { float:none; height:auto; background:none; margin:0; }
+#nav ul a,
+#nav ul a:hover { float:none; padding:0; line-height:1.3em; }
+#nav ul li.over a,
+#nav ul li.over a:hover,
+#nav ul a,
+#nav li.active li { font-weight:normal; }
+
+
+/************ 2ND LEVEL ************/
+#nav ul { position:absolute; width:189px; top:34px; left:-10000px; padding: 0 0 0px; background: #fff; -moz-opacity:.9; -webkit-opacity:.9; filter:alpha(opacity=90); opacity:.9; }
+#nav ul ul  { border-top:0; padding-top:2px; left:100px; top:13px; }
+
+/* Show menu */
+#nav li.over ul { left:5px; }
+#nav li.over ul ul { left:-10000px; }
+#nav li.over ul li.over ul { left:100px; }
+
+#nav ul li { }
+#nav ul li a { font-size: 14px; }
+#nav ul li a:hover { background:#d0dfe2; }
+#nav li.over ul a,
+#nav ul li.active a,
+#nav ul li a,
+#nav ul li a:hover { padding: 3px 5px; color: #001e54; }
+#nav ul span,
+#nav ul li.last li span { padding:5px 15px; }
+#nav ul li.last span,
+#nav ul li.last li.last span { background:none; }
+#nav ul li.last { padding-bottom:3px; }
+
+#nav ul li.parent a,
+#nav ul li.parent li.parent a { background-position:100% 100%; background-repeat:no-repeat; }
+#nav ul li.parent li a,
+#nav ul li.parent li.parent li a { background-image:none; }
+
+/************ 3RD+ LEVEL ************/
+/* Cursors */
+#nav li.parent a,
+#nav li.parent li.parent a,
+#nav li.parent li.parent li.parent a { cursor:default; }
+
+#nav li.parent li a,
+#nav li.parent li.parent li a,
+#nav li.parent li.parent li.parent li a { cursor:pointer; }
+
+/* Show menu */
+#nav ul ul ul { left:-10000px; }
+#nav li.over ul li.over ul ul { left:-10000px;}
+#nav li.over ul li.over ul li.over ul { left:100px; }
+
+#nav:after { content:"."; display:block; clear:both; font-size:0; line-height:0; height:0; overflow:hidden;  }

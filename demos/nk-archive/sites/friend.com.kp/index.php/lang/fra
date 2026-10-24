@@ -1,0 +1,2889 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <!-- BEGIN HEAD -->
+    <head>
+        <meta charset="utf-8" />
+        <title>Friend-DPRK | Home</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta content="website FRIEND, edited in DPRK" name="description" />
+        <meta content="FRIEND Ediitor" name="author" />
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="/assets/friend/standard/img/friend.ico" type="image/x-icon" />
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+        <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link href="/assets/global/plugins/cubeportfolio/css/cubeportfolio.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/global/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/global/css/components.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/pages/css/portfolio.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/layouts/layout3/css/custom.min.css" rel="stylesheet" type="text/css" />
+
+        <link href="/assets/friend/standard/css/flexslider.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/friend/standard/css/imageviewer.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/friend/standard/css/main.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/friend/standard/css/home.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/lang/fra.css" rel="stylesheet" type="text/css" />
+
+        <script src="/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    </head>
+    <!-- END HEAD -->
+
+
+    <body class="page-container-bg-solid page-header-menu-fixed page-header-top-fixed"><!--  -->
+        <div class="page-wrapper">
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-top">
+
+                    <!-- BEGIN HEADER -->
+                    <header class="page-header">
+                        <!-- BEGIN HEADER TOP -->
+                        <div class="page-header-top">
+                            <div class="container-full">
+                                <!-- BEGIN LOGO -->
+                                <div class="page-logo">
+                                    <a href="/">
+                                        <img src="/assets/friend/standard/img/mark_home.png" alt="header-mark" title="www.friend.com.kp" class="header-mark" />
+                                    </a>
+                                </div>
+                                <div id="address" class="text-shadow-gray1">www.friend.com.kp</div>                                    
+                                <div class="visit-count">
+                                    <span class="bold font-white">Visite</span> <i class="glyphicon glyphicon-star-empty"></i>  
+                                    <span class="bold font-white">Entière : </span>18,623,291 | 
+                                    <span class="bold font-white">Hier : </span>39,071 | 
+                                    <span class="bold font-white">Aujourd'hui : </span>22,677                                </div>
+                               <!-- END LOGO -->
+                                <!-- BEGIN TOP NAVIGATION MENU -->
+                                <div class="top-menu">
+                                    <ul class="nav navbar-nav pull-right">
+
+    <!-- BEGIN 종합탐색 --> 
+    <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar" style="margin-top:4px;padding-right:10px;max-width:250px;">
+    <form class="search-all-form" method="GET" action="/index.php/fra/search/asearch">
+        <div class="input-group border-radius16" style="border:1px solid #ccc;overflow:hidden; background:white;">
+            <input type="hidden" id="token" name="token" value="f62e545b8e0a1eb6d5ea149c5bfce304afa3dba9c873877944452069f9ff78dc">
+            <input type="text" class="form-control" style="border:0" placeholder="Search ..." id="asearch" name="asearch" />
+            <span class="input-group-btn">
+                <a href="javascript:$('.search-all-form').submit();" class="btn submit my-sbtn" title="Search title">
+                    <i class="icon-magnifier"></i>
+                </a>
+               <a href="javascript:$('.search-all-form').attr('action','/index.php/fra/search/asearchall').submit();" class="btn my-sbtn" title="Search title and content">
+                    <i class="icon-magnifier-add"></i>
+                </a>
+            </span>
+        </div>    
+    </form>
+    </li>
+    <!-- END 종합탐색 --> 
+
+
+
+
+    <!-- BEGIN 최근도서 
+    <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <i style="font-size:24px;" class="icon-notebook" title="Infothèque"></i>
+                    </a>
+        <ul class="dropdown-menu">
+            <li class="top-menu-ebook">
+                <h3><strong>0</strong> nouveaux livres. <a href="/index.php/fra/elibs" title="View all"><i class="icon-arrow-right"></i></a></h3>
+                
+            </li>
+            <li>
+                <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                                         <li>
+                        <a href="/index.php/fra/elibs/view/402">
+                            <span class="time">07/29</span>
+                            <span class="details">
+                                <i class="fa fa-edit"></i>
+                                <span>СТРАНА УТРЕННЕЙ СВЕЖЕСТИ</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/elibs/view/401">
+                            <span class="time">07/22</span>
+                            <span class="details">
+                                <i class="fa fa-edit"></i>
+                                <span>Au nom de notre fraternité</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/elibs/view/400">
+                            <span class="time">07/15</span>
+                            <span class="details">
+                                <i class="fa fa-edit"></i>
+                                <span>ХРАНИ, КОРЕЯ, ВСЁ, ЧТО СЕРДЦУ СВЯТО</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/elibs/view/399">
+                            <span class="time">07/10</span>
+                            <span class="details">
+                                <i class="fa fa-book"></i>
+                                <span>소년단기발높이 강국의 미래를 향하여 나아가자</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/elibs/view/398">
+                            <span class="time">07/09</span>
+                            <span class="details">
+                                <i class="fa fa-book"></i>
+                                <span><nobr>위대한 수령님</nobr>의 뜻을 받들어 내 나라, 내 조국을 더욱 부강하게 하자</span>
+                            </span>
+                        </a>
+                    </li>
+                                    </ul>
+            </li>
+        </ul>
+    </li>-->
+   <!-- END 최근도서 -->
+
+    <!-- BEGIN 새로 등록된 기사 
+   <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <i style="font-size:24px;" class="icon-docs" title="Articles"></i>
+                    </a>
+        <ul class="dropdown-menu">
+            <li class="top-menu-article">
+                <h3><strong>0</strong> nouveaux articles. <a href="/index.php/fra/articles" title="View all"><i class="icon-arrow-right"></i></a></h3>
+           </li>
+            <li>
+                <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                                         <li>
+                        <a href="/index.php/fra/articles/view/9758">
+                            <span class="time">07/29</span>
+                            <span class="details">
+                                <i class="fa fa-file-text-o"></i>
+                                <span>Orme kimhwadang</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/articles/view/9762">
+                            <span class="time">07/29</span>
+                            <span class="details">
+                                <i class="fa fa-file-text-o"></i>
+                                <span>Problème des équipements qu’il s’est intéressé profondément</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/articles/view/9766">
+                            <span class="time">07/29</span>
+                            <span class="details">
+                                <i class="fa fa-file-text-o"></i>
+                                <span>Le paysage et les gens aussi se changent</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/articles/view/9770">
+                            <span class="time">07/29</span>
+                            <span class="details">
+                                <i class="fa fa-file-text-o"></i>
+                                <span>La hauteur de la RPD de Corée (6)</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/articles/view/9774">
+                            <span class="time">07/29</span>
+                            <span class="details">
+                                <i class="fa fa-file-text-o"></i>
+                                <span>Aspect admirable (2)</span>
+                            </span>
+                        </a>
+                    </li>
+                                    </ul>
+            </li>
+        </ul>
+    </li>-->
+    <!-- END 새로 등록된 기사 -->
+
+    <!-- BEGIN 새로 등록된 다매체 
+    <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <i style="font-size:24px;margin-top:2px;" class="icon-camera" title="Photo & Vidéos"></i>
+                    </a>
+        <ul class="dropdown-menu">
+            <li class="top-menu-media">
+                <h3><strong>0</strong> nouveaux media. <a href="/index.php/fra/media" title="View all"><i class="icon-arrow-right"></i></a></h3>
+             </li>
+            <li>
+                <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                                         <li>
+                        <a href="/index.php/fra/media/view/2156">
+                            <span class="time">07/29</span>
+                            <span class="details">
+                                <i class="icon-camera"></i>
+                                <span>Grotte de Song-am</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/media/view/2154">
+                            <span class="time">07/22</span>
+                            <span class="details">
+                                <i class="icon-camera"></i>
+                                <span>Kaeson Youth Park</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/media/view/2155">
+                            <span class="time">07/22</span>
+                            <span class="details">
+                                <i class="icon-camcorder"></i>
+                                <span>Peintures dessinées par le vétéran de guerre</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/media/view/2152">
+                            <span class="time">07/06</span>
+                            <span class="details">
+                                <i class="icon-camera"></i>
+                                <span>L’abondance des kiwis</span>
+                            </span>
+                        </a>
+                    </li>
+                                        <li>
+                        <a href="/index.php/fra/media/view/2149">
+                            <span class="time">07/05</span>
+                            <span class="details">
+                                <i class="icon-camera"></i>
+                                <span>L’enthousiasme</span>
+                            </span>
+                        </a>
+                    </li>
+                                    </ul>
+            </li>
+        </ul>
+    </li>-->
+   <!-- END 새로 등록된 다매체 -->
+
+
+
+
+    <li class="droddown dropdown-separator">
+        <span class="separator"></span>
+    </li>
+
+    <!-- BEGIN 사용자 DROPDOWN -->
+    <li class="dropdown dropdown-user dropdown-dark">
+
+
+       
+           <a href="/index.php/ul" class="dropdown-toggle" data-hover="dropdown" data-close-others="true">
+            <i style="font-size:24px;" class="icon-user"></i>
+            <span class="username">Login</span>
+        </a>
+
+            </li>
+    <!-- END USER LOGIN DROPDOWN -->
+
+    <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+    <li class="dropdown dropdown-extended quick-sidebar-toggler">
+        <span class="sr-only">Friends</span>
+        <i id="friends-small" class="icon-logout"></i>
+        <img src="/assets/friend/standard/img/logo.png" width=60 class="icon-logout" id="friends" />
+        <span class="badge badge-warning badge-roundless" style="position:absolute;right:10px;bottom:2px;">
+            2</span>
+    </li>
+    <!-- END QUICK SIDEBAR TOGGLER -->
+</ul>
+
+<!-- BEGIN QUICK SIDEBAR -->
+<a href="javascript:;" class="page-quick-sidebar-toggler">
+    <i class="icon-login"></i>
+</a>
+<div class="page-quick-sidebar-wrapper" data-close-on-body-click="false">
+    <div class="page-quick-sidebar">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="javascript:;" data-target="#quick_sidebar_tab_1" data-toggle="tab" style="font-size:larger;">Friends                    <span class="badge badge-warning badge-roundless">2</span>
+                </a>
+                <ul class="orgs">
+                
+                    <li><a href="/pices">
+
+                        <img src="/assets/friend/standard/img/pices.png" title="Société de Pyongyang pour l’échange culturel international
+www.friend.com.kp/pices">
+                                            </a></li>
+                                                    <li><a href="http://www.koart.sca.kp" target="links">
+                        <img src="/assets/friend/standard/img/koart.png" title="www.koart.sca.kp">
+                    </a></li>
+                                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- END QUICK SIDEBAR -->
+
+                                </div>
+                                <!-- END TOP NAVIGATION MENU -->
+                            </div>
+                        </div>
+                        <!-- END HEADER TOP -->
+                        <!-- BEGIN HEADER MENU -->
+                        <div class="page-header-menu">
+                            <div class="container-full">
+
+                                <!-- BEGIN MEGA MENU -->
+<div class="hor-menu">
+    <ul class="nav navbar-nav">
+
+
+                <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown active">
+            <a href="/"> Home<span class="arrow"></span></a>
+                    </li>
+                <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
+            <a href="/index.php/fra/elibs"> Infothèque<span class="arrow"></span></a>
+                        <ul class="dropdown-menu pull-left">
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/elibs/list/book" class="nav-link  "> 
+                        Livres  </a>
+                </li>
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/elibs/list/poem" class="nav-link  "> 
+                        Poèmes  </a>
+                </li>
+                            </ul>
+                    </li>
+                <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
+            <a href="/index.php/fra/articles"> Articles<span class="arrow"></span></a>
+                        <ul class="dropdown-menu pull-left">
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/articles/list/paekdu" class="nav-link  "> 
+                        Les grands Hommes  </a>
+                </li>
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/articles/list/InfoDPRK" class="nav-link  "> 
+                        La RPDC d'aujourd'hui  </a>
+                </li>
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/articles/list/arirang" class="nav-link  "> 
+                        L'histoire longue et la culture brillante  </a>
+                </li>
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/articles/list/intRel" class="nav-link  "> 
+                        L'amité et la solidarité  </a>
+                </li>
+                            </ul>
+                    </li>
+                <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
+            <a href="/index.php/fra/media"> Photo & Vidéos<span class="arrow"></span></a>
+                        <ul class="dropdown-menu pull-left">
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/media/list/photo" class="nav-link  "> 
+                        Photos  </a>
+                </li>
+                                <li aria-haspopup="true" class=" ">
+                    <a href="/index.php/fra/media/list/video" class="nav-link  "> 
+                        Vidéos  </a>
+                </li>
+                            </ul>
+                    </li>
+        
+
+    </ul>
+</div>
+<!-- END MEGA MENU -->
+                                
+                                <!-- 언어설정목록 -->
+                                <div class="btn-group" id="lang-menu">
+                                    <a class="btn white " href="javascript:;" data-toggle="dropdown">
+                                        <i class="icon-globe"></i> Français                                        <i class="fa fa-angle-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                    <li>    <a href="/index.php/lang/kor">        <i>KP</i> 조선어 </a></li><li>    <a href="/index.php/lang/eng">        <i>EN</i> English </a></li><li>    <a href="/index.php/lang/rus">        <i>RU</i> Pусский </a></li><li>    <a href="/index.php/lang/fra">        <i>FR</i> Français </a></li>                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- END HEADER MENU -->
+                    </header>
+                    <!-- END HEADER -->
+                    
+                </div>
+            </div>
+
+            <div class="page-wrapper-row full-height">
+                <div class="page-wrapper-middle">
+                    <!-- BEGIN CONTAINER -->
+                    <div class="page-container">
+                        <!-- BEGIN CONTENT -->
+                        <div class="page-content-wrapper">
+                            <!-- BEGIN CONTENT BODY -->
+
+
+                            
+                            
+                            <!-- BEGIN PAGE CONTENT BODY -->
+                            <div class="page-content">
+                                <div class="container-fluid">
+
+                                                                <!-- BEGIN PAGE BREADCRUMBS -->
+                                    <!-- BEGIN PAGE BREADCRUMBS -->
+<ul class="page-breadcrumb breadcrumb font-blue-soft" id="art-path">
+    <li>
+        Home   </li>
+    </ul>
+<!-- END PAGE BREADCRUMBS -->
+                                    <!-- END PAGE BREADCRUMBS -->
+                                                                
+                                    <!-- BEGIN PAGE CONTENT INNER -->
+                                    <div class="page-content-inner">
+                                        <div class="portlet light portlet-fit ">
+<!-- 광고부분 -->
+<!-- <div id="revs-home-wrapper"> -->
+<div class="row">
+
+    <!-- <div class="home revs" id="revs-home"> -->
+    <div class="col-md-6 hidden-xs hidden-sm">
+        <!-- 혁명활동소식 -->
+                    <!-- 
+	페지내부에서의 목록(home or right-banner) 표시부분품
+	
+	매 controller의 목록보기 및 상세보기(내용아래부분의 목록표시)시에
+	호출된다 
+	
+	$page_list : 목록보기인 경우 page-list, 상세보기인 경우 detail-list
+
+<div class="revs list">
+ -->
+<div class="revs block">
+
+	<h3>
+		<span style="color:red;"><img src="/assets/friend/standard/img/redflag.png" />Direction éminente</span> 
+		<a href="/index.php/fra/revs/list/all" title="de plus..."><i class="icon-arrow-right"></i></a>
+	</h3>
+
+	<!-- 목록표 -->
+	<!-- 
+	listview 또는 block-view에서의 목록부분표시 
+	
+-->
+
+	<!-- 목록표 -->
+	<!-- <ul class="page-table"> -->
+	<ul class="list-table">
+
+	<!-- 검색목록이 있으면 현시 -->
+	
+			<li class="list-tr" idx="3382" page="1" lng="fra">
+				<a href="/index.php/fra/revs/view/3382/1">
+								<!-- 목록의 한개 항목현시 -->
+			<div class="list-td-info-full">
+
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Respected Comrade <nobr><strong><b>Kim&nbsp;Jong&nbsp;Un</b></strong></nobr> Receives Russian Foreign Minister&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2023-10-20 
+				</div>
+
+			</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="3379" page="1" lng="fra">
+				<a href="/index.php/fra/revs/view/3379/1">
+								<!-- 목록의 한개 항목현시 -->
+			<div class="list-td-info-full">
+
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Respected Comrade <nobr><strong><b>Kim&nbsp;Jong&nbsp;Un</b></strong></nobr> Sends Greetings to President Xi Jinping&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2023-10-01 
+				</div>
+
+			</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="3376" page="1" lng="fra">
+				<a href="/index.php/fra/revs/view/3376/1">
+								<!-- 목록의 한개 항목현시 -->
+			<div class="list-td-info-full">
+
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Respected Comrade <nobr><strong><b>Kim&nbsp;Jong&nbsp;Un</b></strong></nobr> Sends Reply Message to Cuban President&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2023-09-27 
+				</div>
+
+			</div>
+				</a>
+			</li>
+
+		
+			
+
+	</ul>
+
+
+</div>
+            </div>
+
+    <!-- <div id="org-banner-home"> -->
+    <div class="col-md-6" id="org-banner-home">
+        <div id="news-bar">
+            <!-- top news bar -->
+                            <div style="width:80%;margin:auto;min-width:200px;color:#f63;text-align:center;padding:0 0 10px 0;margin-top:-40px;"><span style="font-size:larger;font-weight:bold;"><i class="icon-note"></i>  Points essentiels d’organisation du concours<br> international des œuvres littéraires et artistiques</span><br>
+                <a href="/index.php/kor/articles/view/9344" style="font-family:청봉;color:#36f" target="_book">조선어 | </a>
+                <a href="/index.php/eng/articles/view/9345" style="font-family:vernada;color:#36f" target="_book">English | </a>
+                <a href="/index.php/rus/articles/view/9346" style="font-family:vernada;color:#36f" target="_book">Pусский | </a>
+                <a href="/index.php/fra/articles/view/9347" style="font-family:vernada;color:#36f" target="_book">Français | </a>
+                <a href="/index.php/eng/articles/view/9348" style="font-family:vernada;color:#36f" target="_book">Español</a>
+                 </div>            
+
+        </div>
+
+        <div class="home" id="org-banner">
+            <ul class="slides" style="display:none;">
+                                <li>
+                    <a href="/">
+                        <img src="/assets/friend/standard/img/main-banner-en-1.jpg" />
+                    </a>
+                </li>
+                                <li>
+                    <a href="http://localhost/pices/index.php/fr/gallery">
+                        <img src="/assets/friend/standard/img/main-banner-en-2.jpg" />
+                    </a>
+                </li>
+                            </ul>
+            <div style="clear:both;"></div>
+        </div>
+
+        <div id="spec_art" style="display:none;">
+                    </div>
+    </div>
+
+    <!-- <div class="home revs" id="revs-home-copy"> -->
+    <div class="hidden-md hidden-lg">
+        <!-- 
+	페지내부에서의 목록(home or right-banner) 표시부분품
+	
+	매 controller의 목록보기 및 상세보기(내용아래부분의 목록표시)시에
+	호출된다 
+	
+	$page_list : 목록보기인 경우 page-list, 상세보기인 경우 detail-list
+
+<div class="revs list">
+ -->
+<div class="revs block">
+
+	<h3>
+		<span style="color:red;"><img src="/assets/friend/standard/img/redflag.png" />Direction éminente</span> 
+		<a href="/index.php/fra/revs/list/all" title="de plus..."><i class="icon-arrow-right"></i></a>
+	</h3>
+
+	<!-- 목록표 -->
+	<!-- 
+	listview 또는 block-view에서의 목록부분표시 
+	
+-->
+
+	<!-- 목록표 -->
+	<!-- <ul class="page-table"> -->
+	<ul class="list-table">
+
+	<!-- 검색목록이 있으면 현시 -->
+	
+			<li class="list-tr" idx="3382" page="1" lng="fra">
+				<a href="/index.php/fra/revs/view/3382/1">
+								<!-- 목록의 한개 항목현시 -->
+			<div class="list-td-info-full">
+
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Respected Comrade <nobr><strong><b>Kim&nbsp;Jong&nbsp;Un</b></strong></nobr> Receives Russian Foreign Minister&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2023-10-20 
+				</div>
+
+			</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="3379" page="1" lng="fra">
+				<a href="/index.php/fra/revs/view/3379/1">
+								<!-- 목록의 한개 항목현시 -->
+			<div class="list-td-info-full">
+
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Respected Comrade <nobr><strong><b>Kim&nbsp;Jong&nbsp;Un</b></strong></nobr> Sends Greetings to President Xi Jinping&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2023-10-01 
+				</div>
+
+			</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="3376" page="1" lng="fra">
+				<a href="/index.php/fra/revs/view/3376/1">
+								<!-- 목록의 한개 항목현시 -->
+			<div class="list-td-info-full">
+
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Respected Comrade <nobr><strong><b>Kim&nbsp;Jong&nbsp;Un</b></strong></nobr> Sends Reply Message to Cuban President&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2023-09-27 
+				</div>
+
+			</div>
+				</a>
+			</li>
+
+		
+			
+
+	</ul>
+
+
+</div>
+    </div>
+</div>
+
+
+
+
+<!-- 사진과 벗 ** 사진소개판 -->
+<!-- <div class="home photo" id="photos-home-wrapper"> -->
+<div class="row" id="photos-home-wrapper" style="margin-top:20px!important;">
+
+    <!-- main-board -->
+    <div id="main-board" class="col-md-4 hidden-xs hidden-sm"><ul class="slides">
+                <li><a href="/index.php/fra/media/view/2156">
+            <ul class="board-item">
+                <li class="photos-board-image"><img src="/fdata/202407/042156.frd" /></li>
+                <li><span class="photos-board-rec-date">2024-07-29</span> </li>
+                <li style="height:100px;color:#afa;">
+                    <span class="photos-board-title">Grotte de Song-am</span>
+                                            <i class="fa fa-camera"></i> 21                                    </li>
+            </ul>
+        </a></li>
+                <li><a href="/index.php/fra/media/view/2154">
+            <ul class="board-item">
+                <li class="photos-board-image"><img src="/fdata/202407/042154.frd" /></li>
+                <li><span class="photos-board-rec-date">2024-07-22</span> </li>
+                <li style="height:100px;color:#afa;">
+                    <span class="photos-board-title">Kaeson Youth Park</span>
+                                            <i class="fa fa-camera"></i> 13                                    </li>
+            </ul>
+        </a></li>
+                <li><a href="/index.php/fra/media/view/2152">
+            <ul class="board-item">
+                <li class="photos-board-image"><img src="/fdata/202407/042152.frd" /></li>
+                <li><span class="photos-board-rec-date">2024-07-06</span> </li>
+                <li style="height:100px;color:#afa;">
+                    <span class="photos-board-title">L’abondance des kiwis</span>
+                                            <i class="fa fa-camera"></i> 2                                    </li>
+            </ul>
+        </a></li>
+                <li><a href="/index.php/fra/media/view/2151">
+            <ul class="board-item">
+                <li class="photos-board-image"><img src="/fdata/202407/042151.frd" /></li>
+                <li><span class="photos-board-rec-date">2024-07-05</span> </li>
+                <li style="height:100px;color:#afa;">
+                    <span class="photos-board-title">Dans la maison du thé Unjong</span>
+                                            <i class="fa fa-camera"></i> 1                                    </li>
+            </ul>
+        </a></li>
+                <li><a href="/index.php/fra/media/view/2150">
+            <ul class="board-item">
+                <li class="photos-board-image"><img src="/fdata/202407/042150.frd" /></li>
+                <li><span class="photos-board-rec-date">2024-07-05</span> </li>
+                <li style="height:100px;color:#afa;">
+                    <span class="photos-board-title">La mine d’Unryul</span>
+                                            <i class="fa fa-camera"></i> 1                                    </li>
+            </ul>
+        </a></li>
+                <li><a href="/index.php/fra/media/view/2149">
+            <ul class="board-item">
+                <li class="photos-board-image"><img src="/fdata/202407/042149.frd" /></li>
+                <li><span class="photos-board-rec-date">2024-07-05</span> </li>
+                <li style="height:100px;color:#afa;">
+                    <span class="photos-board-title">L’enthousiasme</span>
+                                            <i class="fa fa-camera"></i> 1                                    </li>
+            </ul>
+        </a></li>
+                <li><a href="/index.php/fra/media/view/2148">
+            <ul class="board-item">
+                <li class="photos-board-image"><img src="/fdata/202407/042148.frd" /></li>
+                <li><span class="photos-board-rec-date">2024-07-04</span> </li>
+                <li style="height:100px;color:#afa;">
+                    <span class="photos-board-title">L’aspect heureux des enfants</span>
+                                            <i class="fa fa-camera"></i> 5                                    </li>
+            </ul>
+        </a></li>
+                <li><a href="/index.php/fra/media/view/2147">
+            <ul class="board-item">
+                <li class="photos-board-image"><img src="/fdata/202407/042147.frd" /></li>
+                <li><span class="photos-board-rec-date">2024-07-03</span> </li>
+                <li style="height:100px;color:#afa;">
+                    <span class="photos-board-title">A la plaine aux ondulations dorées</span>
+                                            <i class="fa fa-camera"></i> 1                                    </li>
+            </ul>
+        </a></li>
+                <li><a href="/index.php/fra/media/view/2155">
+            <ul class="board-item">
+                <li class="photos-board-image"><img src="/fdata/202407/042155.frd" /></li>
+                <li><span class="photos-board-rec-date">2024-07-22</span> </li>
+                <li style="height:100px;color:#afa;">
+                    <span class="photos-board-title">Peintures dessinées par le vétéran de guerre</span>
+                                            <i class="fa fa-video-camera"></i>
+                                    </li>
+            </ul>
+        </a></li>
+                <li><a href="/index.php/fra/media/view/2153">
+            <ul class="board-item">
+                <li class="photos-board-image"><img src="/fdata/202407/042153.frd" /></li>
+                <li><span class="photos-board-rec-date">2024-07-04</span> </li>
+                <li style="height:100px;color:#afa;">
+                    <span class="photos-board-title">Lac Mongumpo, lieu pittoresque de la mer ouest</span>
+                                            <i class="fa fa-video-camera"></i>
+                                    </li>
+            </ul>
+        </a></li>
+                <li><a href="/index.php/fra/media/view/2127">
+            <ul class="board-item">
+                <li class="photos-board-image"><img src="/fdata/202406/042127.frd" /></li>
+                <li><span class="photos-board-rec-date">2024-06-19</span> </li>
+                <li style="height:100px;color:#afa;">
+                    <span class="photos-board-title">Parc aquatique de Munsu</span>
+                                            <i class="fa fa-video-camera"></i>
+                                    </li>
+            </ul>
+        </a></li>
+            </ul></div>
+
+    <!-- list-board -->
+    <div  id="list-board" class="col-md-8">
+        <ul>
+            <li class="home photo">
+                <!-- 
+	페지내부에서의 목록(home or right-banner) 표시부분품
+	
+	매 controller의 목록보기 및 상세보기(내용아래부분의 목록표시)시에
+	호출된다 
+	
+	$page_list : 목록보기인 경우 page-list, 상세보기인 경우 detail-list
+
+<div class="photo list">
+ -->
+<div class="photo block">
+
+	<h3>
+		Photos 
+		<a href="/index.php/fra/media/list/photo" title="de plus..."><i class="icon-arrow-right"></i></a>
+	</h3>
+
+	<!-- 목록표 -->
+	<!-- 
+	listview 또는 block-view에서의 목록부분표시 
+-->
+
+	<!-- 목록표 -->
+	<div class="portfolio-content portfolio-2 list-table">
+	    <div id="js-grid-mosaic" class="cbp-l-grid-mosaic cbp-caption-active cbp-caption-zoom cbp-ready" style="text-align:center;">
+	        <div class="web-design graphic" >
+
+			
+		        <div class="cbp-item-wrapper four-part">
+		            
+		            <a href="/index.php/fra/media/view/2156/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042156.frd"  alt="Grotte de Song-am" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">21</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">Grotte de Song-am									</div>
+			                        <div class="media-inner-rec-date">2024-07-29</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper four-part">
+		            
+		            <a href="/index.php/fra/media/view/2154/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042154.frd"  alt="Kaeson Youth Park" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">13</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">Kaeson Youth Park									</div>
+			                        <div class="media-inner-rec-date">2024-07-22</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper four-part">
+		            
+		            <a href="/index.php/fra/media/view/2152/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042152.frd"  alt="L’abondance des kiwis" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">2</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">L’abondance des kiwis									</div>
+			                        <div class="media-inner-rec-date">2024-07-06</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper four-part">
+		            
+		            <a href="/index.php/fra/media/view/2151/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042151.frd"  alt="Dans la maison du thé Unjong" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">1</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">Dans la maison du thé Unjong									</div>
+			                        <div class="media-inner-rec-date">2024-07-05</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper four-part">
+		            
+		            <a href="/index.php/fra/media/view/2150/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042150.frd"  alt="La mine d’Unryul" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">1</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">La mine d’Unryul									</div>
+			                        <div class="media-inner-rec-date">2024-07-05</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper four-part">
+		            
+		            <a href="/index.php/fra/media/view/2149/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042149.frd"  alt="L’enthousiasme" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">1</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">L’enthousiasme									</div>
+			                        <div class="media-inner-rec-date">2024-07-05</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper four-part">
+		            
+		            <a href="/index.php/fra/media/view/2148/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042148.frd"  alt="L’aspect heureux des enfants" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">5</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">L’aspect heureux des enfants									</div>
+			                        <div class="media-inner-rec-date">2024-07-04</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper four-part">
+		            
+		            <a href="/index.php/fra/media/view/2147/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042147.frd"  alt="A la plaine aux ondulations dorées" border="0" />
+															<div class="media-td-cover-cap"><i class="glyphicon glyphicon-camera"></i> <span style="">1</span></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">A la plaine aux ondulations dorées									</div>
+			                        <div class="media-inner-rec-date">2024-07-03</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+	        </div>
+	    </div>
+	</div>
+
+
+
+
+
+
+
+</div>
+            </li>
+            <li class="home video">            
+                <!-- 
+	페지내부에서의 목록(home or right-banner) 표시부분품
+	
+	매 controller의 목록보기 및 상세보기(내용아래부분의 목록표시)시에
+	호출된다 
+	
+	$page_list : 목록보기인 경우 page-list, 상세보기인 경우 detail-list
+
+<div class="video list">
+ -->
+<div class="video block">
+
+	<h3>
+		Vidéos 
+		<a href="/index.php/fra/media/list/video" title="de plus..."><i class="icon-arrow-right"></i></a>
+	</h3>
+
+	<!-- 목록표 -->
+	<!-- 
+	listview 또는 block-view에서의 목록부분표시 
+-->
+
+	<!-- 목록표 -->
+	<div class="portfolio-content portfolio-2 list-table">
+	    <div id="js-grid-mosaic" class="cbp-l-grid-mosaic cbp-caption-active cbp-caption-zoom cbp-ready" style="text-align:center;">
+	        <div class="web-design graphic" >
+
+			
+		        <div class="cbp-item-wrapper three-part">
+		            
+		            <a href="/index.php/fra/media/view/2155/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042155.frd"  alt="Peintures dessinées par le vétéran de guerre" border="0" />
+															<div class="media-td-cover-cap-video"><i class="fa fa-play-circle-o"></i></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">Peintures dessinées par le vétéran de guerre									</div>
+			                        <div class="media-inner-rec-date">2024-07-22</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper three-part">
+		            
+		            <a href="/index.php/fra/media/view/2153/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202407/042153.frd"  alt="Lac Mongumpo, lieu pittoresque de la mer ouest" border="0" />
+															<div class="media-td-cover-cap-video"><i class="fa fa-play-circle-o"></i></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">Lac Mongumpo, lieu pittoresque de la mer ouest									</div>
+			                        <div class="media-inner-rec-date">2024-07-04</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+		        <div class="cbp-item-wrapper three-part">
+		            
+		            <a href="/index.php/fra/media/view/2127/1" class="cbp-caption cbp-lightbox">
+
+			            <div class="cbp-caption-defaultWrap">
+							<img class="media-td-cover" src="/fdata/202406/042127.frd"  alt="Parc aquatique de Munsu" border="0" />
+															<div class="media-td-cover-cap-video"><i class="fa fa-play-circle-o"></i></div>
+										            </div>
+
+			            <div class="cbp-caption-activeWrap">
+			                <div class="cbp-l-caption-alignCenter">
+			                    <div class="cbp-l-caption-body">
+			                        <div class="media-inner-title">Parc aquatique de Munsu									</div>
+			                        <div class="media-inner-rec-date">2024-06-19</div>
+		                        
+			                    </div>
+			                </div>
+			            </div>
+		            </a>
+		        </div>
+			
+	        </div>
+	    </div>
+	</div>
+
+
+
+
+
+
+
+</div>
+            </li>
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+
+
+
+
+
+<!-- 자료실 -->
+<div class="home articles" id="articles-home">
+
+    <h3><i class="icon-docs"></i> Articles</h3>
+
+    <div class="row">
+        <div class="col-md-6"><!-- 
+	페지내부에서의 목록(home or right-banner) 표시부분품
+	
+	매 controller의 목록보기 및 상세보기(내용아래부분의 목록표시)시에
+	호출된다 
+	
+	$page_list : 목록보기인 경우 page-list, 상세보기인 경우 detail-list
+
+<div class="paekdu list">
+ -->
+<div class="paekdu block">
+
+	<h3>
+		Les grands Hommes 
+		<a href="/index.php/fra/articles/list/paekdu" title="de plus..."><i class="icon-arrow-right"></i></a>
+	</h3>
+
+	<!-- 목록표 -->
+	<!-- 
+	listview 또는 block-view에서의 목록부분표시 
+	
+-->
+
+	<!-- 목록표 -->
+	<!-- <ul class="page-table"> -->
+	<ul class="list-table">
+
+	<!-- 검색목록이 있으면 현시 -->
+	
+			<li class="list-tr" idx="9770" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9770/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				La hauteur de la RPD de Corée (6)&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-29 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9762" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9762/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Problème des équipements qu’il s’est intéressé profondément&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-29 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9754" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9754/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Ordres de la victoire&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-22 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9750" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9750/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Le quartier d’état-major suprême était toujours avec l’armée et le peuple en lutte&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-22 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9731" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9731/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				La lumière devenue claire&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-15 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9711" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9711/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Le sol et le fumier&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-15 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9679" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9679/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Les pas lourds et les pas légers &nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-15 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9691" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9691/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				La hauteur de la RPD de Corée&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-11 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9687" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9687/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				La raison que le train est arrêté&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-11 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9675" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9675/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Attention de publique du mondeconcentrée&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-06 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			
+
+	</ul>
+
+
+</div>
+</div>
+        <div class="col-md-6"><!-- 
+	페지내부에서의 목록(home or right-banner) 표시부분품
+	
+	매 controller의 목록보기 및 상세보기(내용아래부분의 목록표시)시에
+	호출된다 
+	
+	$page_list : 목록보기인 경우 page-list, 상세보기인 경우 detail-list
+
+<div class="intRel list">
+ -->
+<div class="intRel block">
+
+	<h3>
+		L'amité et la solidarité 
+		<a href="/index.php/fra/articles/list/intRel" title="de plus..."><i class="icon-arrow-right"></i></a>
+	</h3>
+
+	<!-- 목록표 -->
+	<!-- 
+	listview 또는 block-view에서의 목록부분표시 
+	
+-->
+
+	<!-- 목록표 -->
+	<!-- <ul class="page-table"> -->
+	<ul class="list-table">
+
+	<!-- 검색목록이 있으면 현시 -->
+	
+			<li class="list-tr" idx="9778" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9778/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				La tenue de la cérémonie à l’occasion de la Journée internationale des sages-femmes 2024&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-29 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9727" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9727/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				La tenue des cérémonies de félicitations dans plusieurs pays à l’occasion du 112<sup>e</sup> anniversaire de la naissance du Président <nobr><strong><b>Kim&nbsp;Il&nbsp;Sung</b></strong></nobr>&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-15 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9707" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9707/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				La tenue du séminaire conjoint des partis politiques et des organisations de Russie à l’occasion du 5e anniversaire de la visite historique du respecté camarade <nobr><strong><b>Kim&nbsp;Jong&nbsp;Un</b></strong></nobr> sur la Fédération de Russie&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-11 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9683" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9683/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				La tenue du séminaire sous les auspices de l’Association d’amitié avec la Corée siégeant à l’Espagne&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-11 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9603" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9603/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Les personnalités biélorusses ont souligné&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-06-12 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9554" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9554/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Cérémonies de célébration dans plusieurs pays du monde&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-06-01 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9550" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9550/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				La tenue des cérémonies commémoratives en Indonésie&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-05-31 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9546" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9546/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				La tenue du meeting de célébration et de la projection de film en Suisse&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-05-30 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9542" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9542/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Séance de lecture à Biélorussie&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-05-29 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9538" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9538/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Représentation du ballet russe La belle au bois dormant&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-05-28 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			
+
+	</ul>
+
+
+</div>
+</div>
+        <div class="col-md-6"><!-- 
+	페지내부에서의 목록(home or right-banner) 표시부분품
+	
+	매 controller의 목록보기 및 상세보기(내용아래부분의 목록표시)시에
+	호출된다 
+	
+	$page_list : 목록보기인 경우 page-list, 상세보기인 경우 detail-list
+
+<div class="InfoDPRK list">
+ -->
+<div class="InfoDPRK block">
+
+	<h3>
+		La RPDC d'aujourd'hui 
+		<a href="/index.php/fra/articles/list/InfoDPRK" title="de plus..."><i class="icon-arrow-right"></i></a>
+	</h3>
+
+	<!-- 목록표 -->
+	<!-- 
+	listview 또는 block-view에서의 목록부분표시 
+	
+-->
+
+	<!-- 목록표 -->
+	<!-- <ul class="page-table"> -->
+	<ul class="list-table">
+
+	<!-- 검색목록이 있으면 현시 -->
+	
+			<li class="list-tr" idx="9774" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9774/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Aspect admirable (2)&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-29 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9766" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9766/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-cover">
+					<img src="/fdata/202407/userfiles/image/a9763.jpg" />
+				</div>
+				<div class="list-td-info">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Le paysage et les gens aussi se changent&nbsp <i class="fa fa-camera"></i>				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-29 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+									<div class="list-td-cont-str">
+Le paysage et les gens aussi se changent
+
+
+
+  
+
+
+La ferme Taeun de l&rsquo;arrondissement de Usi, province du Jagang, est un villag... </div>
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9743" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9743/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-cover">
+					<img src="/fdata/202407/userfiles/image/a9740.jpg" />
+				</div>
+				<div class="list-td-info">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Le vrai âge du vieux de 80 ans (1)&nbsp <i class="fa fa-camera"></i>				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-22 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+									<div class="list-td-cont-str">
+Le vrai &acirc;ge du vieux de 80 ans (1)
+
+
+
+
+
+
+Le vieux dans la photo est M. Pak Sung Nam, homme de science du Peuple, acad&eacute;micien par... </div>
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9739" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9739/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Parfum des fleurs dans le quartier des hôpitaux&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-22 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9723" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9723/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Produits laitiers qui suivent les enfants&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-15 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9715" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9715/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Aspect admirable (1)&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-15 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9699" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9699/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-cover">
+					<img src="/fdata/202407/userfiles/image/a9696.jpg" />
+				</div>
+				<div class="list-td-info">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Joie du travail&nbsp <i class="fa fa-camera"></i>				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-11 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+									<div class="list-td-cont-str">
+
+Joie du travail
+
+
+
+
+
+
+
+
+
+Voici les jeunes tisseuses de l&rsquo;usine textile <nobr>Kim&nbsp;Jong&nbsp;Suk</nobr> de Pyongyang qui d&eacute;vouent leur sinc&eac... </div>
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9695" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9695/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-cover">
+					<img src="/fdata/202407/userfiles/image/a9692.jpg" />
+				</div>
+				<div class="list-td-info">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Des objets de rebut en ceux précieux&nbsp <i class="fa fa-camera"></i>				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-11 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+									<div class="list-td-cont-str">
+Des objets de rebut en ceux pr&eacute;cieux
+
+
+
+
+
+
+
+
+Les produits qu&rsquo;on voit dans la photo sont les meubles fabriqu&eacute;s par les s... </div>
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9663" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9663/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Journée de travail du soir extraordinaire&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-03 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9659" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9659/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-cover">
+					<img src="/fdata/202407/userfiles/image/a9656.jpg" />
+				</div>
+				<div class="list-td-info">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Scènes où il n’y a pas de tribune&nbsp <i class="fa fa-camera"></i>				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-01 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+									<div class="list-td-cont-str">
+Sc&egrave;nes o&ugrave; il n&rsquo;y a pas de tribune
+
+
+
+En g&eacute;n&eacute;ral si on dit la sc&egrave;ne, revient naturellement d&rsquo;abord... </div>
+							</div>
+				</a>
+			</li>
+
+		
+			
+
+	</ul>
+
+
+</div>
+</div>
+        <div class="col-md-6"><!-- 
+	페지내부에서의 목록(home or right-banner) 표시부분품
+	
+	매 controller의 목록보기 및 상세보기(내용아래부분의 목록표시)시에
+	호출된다 
+	
+	$page_list : 목록보기인 경우 page-list, 상세보기인 경우 detail-list
+
+<div class="arirang list">
+ -->
+<div class="arirang block">
+
+	<h3>
+		L'histoire longue et la culture brillante 
+		<a href="/index.php/fra/articles/list/arirang" title="de plus..."><i class="icon-arrow-right"></i></a>
+	</h3>
+
+	<!-- 목록표 -->
+	<!-- 
+	listview 또는 block-view에서의 목록부분표시 
+	
+-->
+
+	<!-- 목록표 -->
+	<!-- <ul class="page-table"> -->
+	<ul class="list-table">
+
+	<!-- 검색목록이 있으면 현시 -->
+	
+			<li class="list-tr" idx="9758" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9758/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Orme kimhwadang&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-29 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9735" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9735/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Tombeau de Mun Rae, vestiges de conservation&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-22 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9719" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9719/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-cover">
+					<img src="/fdata/202407/userfiles/image/a9716.jpg" />
+				</div>
+				<div class="list-td-info">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Porte-lune du Chilbo maritime&nbsp <i class="fa fa-camera"></i>				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-15 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+									<div class="list-td-cont-str">
+Porte-lune du Chilbo maritime
+
+
+
+
+
+
+La porte-lune du Chilbo maritime, site naturel prot&eacute;g&eacute; par la loi, est un des endroits reno... </div>
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9703" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9703/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Pavillon Pubyok&nbsp <i class="fa fa-camera"></i>				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-11 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9655" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9655/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Lieu pittoresque Sinphyong-kumgang&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-07-02 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9635" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9635/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Lieu pittoresque Myongsasimni&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-06-29 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9631" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9631/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-cover">
+					<img src="/fdata/202406/userfiles/image/a9628.jpg" />
+				</div>
+				<div class="list-td-info">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Rocher d’arc-en-ciel du Chilbo maritime&nbsp <i class="fa fa-camera"></i>				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-06-26 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+									<div class="list-td-cont-str">
+Rocher d&rsquo;arc-en-ciel du Chilbo maritime
+
+
+
+
+
+
+Au Chilbo maritime, lieu pittoresque qui se trouve &agrave; l&rsquo;arrondissement de Myo... </div>
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9607" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9607/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Légende des monts Chilbo&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-06-20 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9583" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9583/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Cascade Kuryong&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-06-15 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="9566" page="1" lng="fra">
+				<a href="/index.php/fra/articles/view/9566/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+			
+				<!-- 제목 -->
+				<div class="list-td-title">
+				Jeux folkloriques – glissade en luge&nbsp				</div>
+
+				<!-- 게재날자 -->
+				<div class="list-td-rec-date">2024-06-04 
+				</div>
+				<!-- 열람수 -->
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 -->
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div>
+				<!-- 내용개요 -->
+							</div>
+				</a>
+			</li>
+
+		
+			
+
+	</ul>
+
+
+</div>
+</div>
+    </div>
+
+</div>
+
+
+
+
+
+
+<!-- 전자도서관 -->
+<div class="home elibs" id="elibs-home">
+
+    <h3><i class="icon-notebook"></i> Infothèque</h3>
+
+    <div class="row">
+
+    <div class="col-md-5">
+        <!-- 
+	페지내부에서의 목록(home or right-banner) 표시부분품
+	
+	매 controller의 목록보기 및 상세보기(내용아래부분의 목록표시)시에
+	호출된다 
+	
+	$page_list : 목록보기인 경우 page-list, 상세보기인 경우 detail-list
+
+<div class="poem list">
+ -->
+<div class="poem block">
+
+	<h3>
+		Poèmes 
+		<a href="/index.php/fra/elibs/list/poem" title="de plus..."><i class="icon-arrow-right"></i></a>
+	</h3>
+
+	<!-- 목록표 -->
+	<!-- 
+	listview 또는 block-view에서의 목록부분표시 
+	
+-->
+
+	<!-- 목록표 -->
+	<!-- <ul class="page-table"> -->
+	<ul class="list-table">
+
+	<!-- 검색목록이 있으면 현시 -->
+	
+			<li class="list-tr" idx="402" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/402/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-edit"></i>
+					</div>
+					<div class="title-cont">
+						СТРАНА УТРЕННЕЙ СВЕЖЕСТИ&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-07-29 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="401" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/401/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-edit"></i>
+					</div>
+					<div class="title-cont">
+						Au nom de notre fraternité&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-07-22 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="400" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/400/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-edit"></i>
+					</div>
+					<div class="title-cont">
+						ХРАНИ, КОРЕЯ, ВСЁ, ЧТО СЕРДЦУ СВЯТО&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-07-15 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="396" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/396/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-edit"></i>
+					</div>
+					<div class="title-cont">
+						РОССИИ И КОРЕЕ В ДРУЖБЕ ЖИТЬ&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-07-02 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="395" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/395/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-edit"></i>
+					</div>
+					<div class="title-cont">
+						La cheville ouvrière de Songun&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-06-25 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="389" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/389/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-edit"></i>
+					</div>
+					<div class="title-cont">
+						«НАРОД» – СВЯТОЕ СЛОВО&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-06-21 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="386" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/386/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-edit"></i>
+					</div>
+					<div class="title-cont">
+						Parti du travail de Corée&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-06-11 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="385" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/385/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-edit"></i>
+					</div>
+					<div class="title-cont">
+						Intrépide Guide&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-06-04 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="384" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/384/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-edit"></i>
+					</div>
+					<div class="title-cont">
+						La tragédie de l’histoire&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-05-28 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="383" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/383/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-edit"></i>
+					</div>
+					<div class="title-cont">
+						Le fleuron de la science juchéenne&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-05-21 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			
+
+	</ul>
+
+
+</div>
+    </div>
+
+    <div class="col-md-7">
+                <div class="list book-cover-home">
+                                    <a href="/index.php/fra/elibs/view/399">
+                        <img class="list-tr" idx="399" src="/fdata/../fdata/202407/05399.frd" />
+                    </a>
+                                    <a href="/index.php/fra/elibs/view/398">
+                        <img class="list-tr" idx="398" src="/fdata/../fdata/202407/05398.frd" />
+                    </a>
+                                    <a href="/index.php/fra/elibs/view/397">
+                        <img class="list-tr" idx="397" src="/fdata/../fdata/202407/05397.frd" />
+                    </a>
+                                    <a href="/index.php/fra/elibs/view/393">
+                        <img class="list-tr" idx="393" src="/fdata/../fdata/202406/05393.frd" />
+                    </a>
+                
+        </div>
+
+
+        <!-- 
+	페지내부에서의 목록(home or right-banner) 표시부분품
+	
+	매 controller의 목록보기 및 상세보기(내용아래부분의 목록표시)시에
+	호출된다 
+	
+	$page_list : 목록보기인 경우 page-list, 상세보기인 경우 detail-list
+
+<div class="book list">
+ -->
+<div class="book block">
+
+	<h3>
+		Livres 
+		<a href="/index.php/fra/elibs/list/book" title="de plus..."><i class="icon-arrow-right"></i></a>
+	</h3>
+
+	<!-- 목록표 -->
+	<!-- 
+	listview 또는 block-view에서의 목록부분표시 
+	
+-->
+
+	<!-- 목록표 -->
+	<!-- <ul class="page-table"> -->
+	<ul class="list-table">
+
+	<!-- 검색목록이 있으면 현시 -->
+	
+			<li class="list-tr" idx="399" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/399/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-book"></i>
+					</div>
+					<div class="title-cont">
+						소년단기발높이 강국의 미래를 향하여 나아가자&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-07-10 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="398" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/398/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-book"></i>
+					</div>
+					<div class="title-cont">
+						<nobr>위대한 수령님</nobr>의 뜻을 받들어 내 나라, 내 조국을 더욱 부강하게 하자&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-07-09 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="397" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/397/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-book"></i>
+					</div>
+					<div class="title-cont">
+						Evergreen Thoughts of The World Greatest Leader President <nobr><strong><b>Kim&nbsp;Il&nbsp;Sung</b></strong></nobr>&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-07-06 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="393" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/393/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-book"></i>
+					</div>
+					<div class="title-cont">
+						On Correctly Analyzing and Reviewing the History of the Preceding Revolutionary Ideology of the Working Class&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-06-22 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			<li class="list-tr" idx="392" page="1" lng="fra">
+				<a href="/index.php/fra/elibs/view/392/1">
+								<!-- 목록의 한개 항목현시 -->
+							<div class="list-td-info-full">
+							<!-- 제목 -->
+				<div class="list-td-title">
+					<div class="title-icon">
+						<i class="fa fa-book"></i>
+					</div>
+					<div class="title-cont">
+						Abuses of Socialism are Intolerable&nbsp						<!-- 게재날자 -->
+						<div class="list-td-rec-date">2024-06-20 
+						</div>
+					</div>
+				</div>
+
+				<!-- 열람수 --
+				<div class="list-td-read-count" title="Visite"><span>0</span> </div>
+				<!-- 추천수 --
+				<div class="list-td-sel-count" title="Bon"><span>0</span> </div> -->
+			</div>
+
+
+
+
+				</a>
+			</li>
+
+		
+			
+
+	</ul>
+
+
+</div>
+    </div>
+
+    </div>
+
+
+</div>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- END PAGE CONTENT INNER -->
+                                </div>
+                            </div>
+                            <!-- END PAGE CONTENT BODY -->
+                            <!-- END CONTENT BODY -->
+                        </div>
+                        <!-- END CONTENT -->
+                    </div>
+                    <!-- END CONTAINER -->
+                </div>
+            </div>
+            </div>
+            </div>
+
+            <div class="page-wrapper-row">
+                <div class="page-wrapper-bottom">
+                    <!-- BEGIN FOOTER -->
+
+                    <!-- BEGIN PRE-FOOTER -->
+                    <div class="page-prefooter">
+                        <div class="container-fluid">
+                            <ul class="orgs">
+    <li><a href="/pices">
+        <img src="/assets/friend/standard/img/pices.png" title="Société de Pyongyang pour l’échange culturel international
+www.friend.com.kp/pices"></a>
+            </li>
+    
+    <!-- 외부홈페지 -->
+        <li><a href="http://www.koart.sca.kp" target="friends">
+        <img src="/assets/friend/standard/img/koart.png" title="www.koart.sca.kp">
+    </a></li>
+    </ul>
+                        </div>
+                    </div>
+                    <!-- END PRE-FOOTER -->
+                    <!-- BEGIN INNER FOOTER -->
+                   <div class="page-footer">
+                        <div class="container-fluid" style="padding:0 10px;"><span style="padding:0 2px;">www.friend.com.kp  Pyongyang, DPRK</span></div>
+                    </div>
+                    <div class="scroll-to-top">
+                        <i class="icon-arrow-up"></i>
+                    </div>
+                    <!-- END INNER FOOTER -->
+                    <!-- END FOOTER -->
+                </div>
+            </div>
+        </div>
+
+        <!--[if lt IE 9]>
+<script src="/assets/global/plugins/respond.min.js"></script>
+<script src="/assets/global/plugins/excanvas.min.js"></script> 
+<script src="/assets/global/plugins/ie8.fix.min.js"></script> 
+<![endif]-->
+        <!-- BEGIN CORE PLUGINS -->
+        <script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+        <script src="/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+        <script src="/assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="/assets/pages/scripts/ui-bootbox.min.js" type="text/javascript"></script>
+        <script src="/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+        <!-- END CORE PLUGINS -->
+
+        <script src="/assets/global/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js" type="text/javascript"></script>
+        <script src="/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js" type="text/javascript"></script>
+        <script src="/assets/global/scripts/app.min.js" type="text/javascript"></script>
+        <script src="/assets/pages/scripts/portfolio-1.min.js" type="text/javascript"></script>
+        <script src="/assets/pages/scripts/ui-sweetalert.js" type="text/javascript"></script>
+        <script src="/assets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
+        <script src="/assets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
+        <script src="/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+        <script src="/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+        <script src="/assets/pages/scripts/ui-blockui.min.js" type="text/javascript"></script>
+
+        <script src="/assets/friend/standard/js/flexslider.js" type="text/javascript"></script>
+        <script src="/assets/friend/standard/js/imageviewer.js" type="text/javascript"></script>
+        <script src="/assets/friend/standard/js/main.js" type="text/javascript"></script>
+
+        <script>
+        
+            $(function()
+            {
+                $('#clickmewow').click(function()
+                {
+                    $('#radio1003').attr('checked', 'checked');
+                });
+
+
+                //media-view에서 사진즉시현시 등 동적으로 첨부되는 함수처리에 필요 
+                if(typeof openMedia === 'function')openMedia();
+
+                //alert - 광고
+                
+                
+            })
+
+        </script>
+
+        <script src="/assets/friend/standard/js/lang/fra.js" type="text/javascript"></script>
+
+                
+    </body>
+
+</html>

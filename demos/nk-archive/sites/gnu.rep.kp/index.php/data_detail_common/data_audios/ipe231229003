@@ -1,0 +1,37 @@
+<div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"  >&times;</button>
+		  
+</div>
+
+ <div class="modal-body" >
+ <div class="playerContainer1" id='audioId'>
+		<iframe class="player" src="../../../hls/player/ipe231229003" scrolling="no" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+</div>  
+</div>  
+
+ 
+<script> 
+	$("#myModal1").on('hide.bs.modal', function () {
+         $("#audioId").html("");
+    });
+
+$(".trtxt").each(function(){
+	$(this).bind('click',function(){
+	var PDID=$(this).attr('pdid');
+			var spath="https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/hls/player/";				
+	 $("#myModal1").on('show.bs.modal', function () {
+            $("#audioId").html("<iframe class='player' src= '"+spath+PDID+"' scrolling='no' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>");	
+			});
+	 });
+});
+$(".trtxt1").each(function(){
+	$(this).bind('click',function(){
+	var PDID=$(this).attr('pdid');
+			var spath="https://web.archive.org/web/20260101im_/http://www.gnu.rep.kp/hls/player/";				
+	 $("#myModal1").on('show.bs.modal', function () {
+            $("#audioId").html("<iframe class='player' src= '"+spath+PDID+"' scrolling='no' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>");	
+			});
+	 });
+});
+</script>
+

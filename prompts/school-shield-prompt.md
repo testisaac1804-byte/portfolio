@@ -31,4 +31,4 @@ Network shield — toggles school-filter DNS blocking.
 - functions: `_disable_all`, `_is_doh_running`, `_require_root`, `_run_pfctl`, `_start_doh_background`, `_stop_doh_background`, `_write_rules`, `create_app`, `dashboard`, `disable_killswitch`, `enable_killswitch`, `get_current_dns`, `get_current_wifi`, `get_network_info`, `is_school_network`, `main`
 
 ---
-_Spec generated from the project's own files on 2026-09-28 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._
+_Spec generated from the project's own files on 2026-10-22 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._

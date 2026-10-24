@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Diary That Writes Back — Tom Riddle's Diary, as hardware</title>
+<meta name="description" content="Full build analysis of a physical Tom Riddle diary: ESP32-C3 + OLED captive-portal firmware, the browser ink engine behind the mirror, and the move to a 2.13-inch e-paper book with no phone and no buzzer.">
+<style>
+  :root{
+    --bg:#0a0c11; --panel:#11141b; --panel2:#161a23; --line:#242a37;
+    --tx:#e8eaf0; --mut:#98a1b3; --dim:#6d7686;
+    --ac:#7c8cff; --ac2:#6366f1; --ok:#34d399; --warn:#ffd166; --bad:#f87171;
+    --ink:#e8d9a8; --blood:#a4342f;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.62}
+  a{color:var(--ac)}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 90px}
+
+  .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 11px;
+    color:var(--mut);letter-spacing:.1em}
+  .chip.acc{border-color:#333c63;background:#141a2e;color:#aab4ff}
+
+  h1{font-size:clamp(26px,4.4vw,44px);line-height:1.1;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  h1 em{font-style:normal;color:var(--ac)}
+  .deck{font-size:16.5px;color:var(--mut);max-width:78ch;margin:0 0 22px}
+  .deck b{color:var(--tx);font-weight:650}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 30px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 13px}
+  .stat .k{font:600 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .stat .v{font-size:19px;font-weight:750;margin-top:5px;letter-spacing:-.01em}
+  .stat .v small{font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0}
+
+  .call{border-left:3px solid var(--ac2);background:linear-gradient(90deg,rgba(99,102,241,.11),rgba(99,102,241,0));
+    border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 34px}
+  .call .lbl{font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ac);margin-bottom:7px}
+  .call p{margin:0;font-size:15.5px;color:#d7dbe6}
+
+  h2{font-size:12px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+    margin:44px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{margin:0 0 6px;font-size:16.5px;letter-spacing:-.01em}
+  p{margin:0 0 12px}
+  .mut{color:var(--mut)}
+  strong{color:var(--tx)}
+
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding-bottom:22px}
+  .step:not(:last-child):after{content:"";position:absolute;left:22px;top:34px;bottom:2px;width:1px;background:var(--line)}
+  .num{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--panel2);
+    display:grid;place-items:center;font:700 12px/1 var(--mono);color:var(--ac)}
+  .step p{margin:0;font-size:14.6px;color:var(--mut)}
+  .step p b{color:var(--tx)}
+
+  table{width:100%;border-collapse:collapse;font-size:13.8px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:700 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:#0d1016}
+  td:first-child{white-space:nowrap}
+  code,.mono{font-family:var(--mono);font-size:12.6px;color:#cfd6e6;background:#0e1117;
+    border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+  code{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+  .tblwrap{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tablewrap table{min-width:520px}
+
+  .quote{font-family:var(--mono);font-size:12.4px;line-height:1.65;color:#c7cede;background:#0e1117;
+    border:1px solid var(--line);border-left:3px solid var(--blood);border-radius:0 10px 10px 0;
+    padding:13px 15px;margin:0 0 16px;white-space:pre-wrap;overflow-wrap:anywhere}
+
+  .mirror{display:grid;grid-template-columns:minmax(0,1fr) 316px;gap:20px;align-items:start}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+  .btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font:650 13px/1 var(--sans);
+    padding:10px 14px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--tx)}
+  .btn:hover{border-color:#3a4256;background:#1b202b}
+  .btn.pri{background:var(--ac2);border-color:var(--ac2);color:#fff}
+  .btn.pri:hover{background:#565ae8}
+  .note{font-size:12.6px;color:var(--dim);margin-top:12px;line-height:1.6}
+  .note b{color:var(--mut)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card2{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .card2 h4{margin:0 0 6px;font-size:13.5px}
+  .card2 p{margin:0;font-size:13.4px;color:var(--mut)}
+  .card2 ul{margin:6px 0 0;padding-left:17px;font-size:13.4px;color:var(--mut)}
+  .card2 li{margin:3px 0}
+  .card2 li b{color:var(--tx)}
+
+  .flow{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:0 0 16px;
+    font-family:var(--mono);font-size:12.4px;line-height:1.9;color:var(--mut);overflow-x:auto}
+  .flow b{color:var(--ink);font-weight:600}
+  .flow .ar{color:var(--ac)}
+  .flow .dim{color:var(--dim)}
+
+  .warnbox{border:1px solid #4b3a1f;background:#171208;border-radius:10px;padding:12px 14px;
+    font-size:13.2px;color:#f0e0c0;margin:14px 0 0}
+  .warnbox b{color:#ffd79a}
+  .okbox{border:1px solid #1f4b39;background:#0c1712;border-radius:10px;padding:12px 14px;
+    font-size:13.2px;color:#c9ecd9;margin:14px 0 0}
+  .okbox b{color:#8ff0c0}
+
+  footer{margin-top:52px;border-top:1px solid var(--line);padding-top:18px;font-size:12.6px;color:var(--dim)}
+  footer b{color:var(--mut)}
+
+  @media(max-width:820px){.mirror{grid-template-columns:1fr}}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  @media(max-width:700px){table{min-width:520px}}
+  .step > *, .mirror > *, .grid2 > *, .tablewrap{min-width:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <span>Isaac Chan · Build analysis</span>
+    <span>
+      <span class="chip acc">ESP32 · E-paper</span>
+      <span class="chip">Hardware + firmware</span>
+      <span class="chip">Oct 2026</span>
+    </span>
+  </div>
+
+  <h1>A diary that <em>writes back</em></h1>
+  <p class="deck">
+    Tom Riddle's diary is a <b>one-input device</b>: you write, something writes back. Everything else —
+    WiFi, DNS, JSON, an LLM — exists only to make that one exchange feel like ink appearing on paper.
+    This is the whole build: the ESP32 firmware that shipped, the ink engine behind the browser
+    mirror, and the redesign that removes the phone, the buzzer and the screen altogether.
+  </p>
+
+  <div class="stats">
+    <div class="stat"><div class="k">Firmware</div><div class="v">579 <small>lines C++</small></div></div>
+    <div class="stat"><div class="k">Compiled</div><div class="v">1.03 <small>MB bin</small></div></div>
+    <div class="stat"><div class="k">Panel (V2)</div><div class="v">122×250 <small>2.13″ e-paper</small></div></div>
+    <div class="stat"><div class="k">Reply budget</div><div class="v">300 <small>characters</small></div></div>
+    <div class="stat"><div class="k">Standby</div><div class="v">~69 <small>days / 500 mAh</small></div></div>
+    <div class="stat"><div class="k">Bill of materials</div><div class="v">¥17–28 <small>V1 shipped</small></div></div>
+  </div>
+
+  <div class="call">
+    <div class="lbl">The constraint that shaped everything</div>
+    <p>“We're not using phones, we're using the book itself only.” — that single line deleted the entire
+    first design. V1 needed a phone to be the keyboard, the display and the settings panel. V2 has to be a
+    <b>closed object</b>: a board, a panel, a battery, and your hand.</p>
+  </div>
+
+  <h2>01 · Three versions of the same idea</h2>
+
+  <div class="step">
+    <div class="num">1</div>
+    <div>
+      <h3>V1 — OLED + captive portal (built, flashed)</h3>
+      <p>ESP32-C3 SuperMini, a 0.96″/2.42″ SSD1306-family OLED on I²C, and a WiFi access point called
+      <code>RiddlesDiary</code>. Your phone joins it, a captive portal forces the parchment page open, you
+      type, and the answer inks onto the OLED with a typewriter effect while a buzzer whispers.
+      <b>Works on iOS, Android, Windows, macOS</b> — the portal intercepts all of them.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="num">2</div>
+    <div>
+      <h3>V1.5 — the browser twin</h3>
+      <p>A standalone HTML version of the same page, with a real ink engine on a canvas (see §04).
+      It is the design reference for what the physical page should feel like — and it is what the
+      <a href="./harry-potter-diary-mirror/">full mirror</a> serves.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="num">3</div>
+    <div>
+      <h3>V2 — the book is the interface (in port)</h3>
+      <p>LilyGO T5 V2.4: an ESP32 and a 2.13″ e-paper panel on one PCB. The reply is no longer pixels
+      fading — it is <b>bistable ink</b> that stays on the page with the power off. Two things were cut
+      deliberately: <b>the phone</b> (no portal, no typing) and <b>the buzzer</b> (a silent book is
+      creepier than a chirping one).</p>
+    </div>
+  </div>
+
+  <h2>02 · What V1 actually does</h2>
+
+  <div class="flow">
+<b>phone</b> <span class="dim">joins</span> RiddlesDiary <span class="ar">──▶</span> DHCP 192.168.4.x
+  <span class="ar">│</span>
+  <span class="ar">├─</span> DNS <span class="dim">wildcard * →</span> 192.168.4.1   <span class="dim">(every lookup, not just one)</span>
+  <span class="ar">├─</span> OS probe hits /generate_204, /hotspot-detect.html, /connecttest.txt …
+  <span class="ar">│</span>   <span class="dim">all answered with the diary page, so the portal opens itself</span>
+  <span class="ar">└─</span> <b>POST /ask</b> <span class="dim">text/plain</span> <span class="ar">──▶</span> HTTPClient <span class="ar">──▶</span> OpenAI-compatible API
+        <span class="dim">◀──</span> reply <span class="ar">──▶</span> OLED + typewriter on the page
+  </div>
+
+  <p class="mut">
+    Seven routes exist purely so that no operating system wins the argument: Android probes
+    <code>/generate_204</code>, iOS probes <code>/hotspot-detect.html</code> and
+    <code>/library/test/success.html</code>, Windows probes <code>/connecttest.txt</code> and
+    <code>/ncsi.txt</code>, Firefox probes <code>/canonical.html</code>, Microsoft adds
+    <code>/redirect</code> — and <code>onNotFound</code> 302s anything else back to the page. A captive
+    portal is not one feature; it is <b>seven compatibility shims and a wildcard DNS server</b>.
+  </p>
+
+  <div class="tablewrap"><table>
+    <thead><tr><th>Surface</th><th>Contract</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><code>POST /ask</code></td><td>text/plain in, text/plain out</td><td>No JSON on this hop — the page sends the raw sentence, the device returns the raw reply. One less parser to fail.</td></tr>
+      <tr><td><code>POST /settings</code></td><td>JSON <code>{key,endpoint,model}</code></td><td>Key is held in RAM only; the browser keeps its own copy in <code>localStorage</code> and re-syncs on load.</td></tr>
+      <tr><td><code>GET /</code></td><td>184-line HTML in PROGMEM</td><td>Whole UI lives in flash as <code>R"rawliteral(...)"</code> — no filesystem, no SPIFFS image to flash separately.</td></tr>
+      <tr><td>everything else</td><td>302 → <code>http://192.168.4.1/</code></td><td>The captive-portal catch-all.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>03 · Firmware anatomy</h2>
+
+  <p class="mut">
+    Boot is a fixed sequence with no scheduler and no tasks: display, buzzer, AP, DNS, routes, loop.
+    <code>loop()</code> does exactly three things — pump DNS, pump HTTP, animate the “thinking” dots every
+    300 ms. That is the entire runtime.
+  </p>
+
+  <div class="tablewrap"><table>
+    <thead><tr><th>Concern</th><th>Implementation</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td>Pins</td><td>OLED SDA 10 / SCL 7 / addr 0x3C; buzzer 1</td><td>GPIO2/8/9 are C3 strapping pins — using them means a board that sometimes won't boot.</td></tr>
+      <tr><td>Text layout</td><td>21 chars × 6 lines, word-safe wrap, “…” overflow</td><td>128 px at the default 6×8 font is 21 columns. Wrapping at the last space/punctuation beats clipping mid-word.</td></tr>
+      <tr><td>HTTP call</td><td><code>HTTPClient</code>, 15 s timeout, <code>max_tokens 200</code>, temp 0.9</td><td>200 tokens ≈ 300 characters — the size of the page. Timeout keeps a stalled API from freezing the loop forever.</td></tr>
+      <tr><td>JSON</td><td><code>StaticJsonDocument&lt;2048&gt;</code> request, <code>&lt;1024&gt;</code> response</td><td>Static allocation: no heap fragmentation over days of uptime.</td></tr>
+      <tr><td>States</td><td>splash → thinking → reply / error</td><td>Each state owns the whole screen; there is no cursor and no partial redraw to get wrong.</td></tr>
+      <tr><td>Errors</td><td>“The ink fades…” + HTTP code</td><td>Failure is written in character, but the status code is still printed — you can debug without a serial cable.</td></tr>
+    </tbody>
+  </table></div>
+
+  <p class="mut" style="margin-top:14px">
+    One decision worth calling out: <b>the API key lives on the browser page, not in the firmware.</b>
+    The device accepts it over <code>/settings</code> and keeps it in RAM. Flash a diary for someone else
+    and it ships with no credential inside it — and nothing survives a power cycle.
+  </p>
+
+  <h2>04 · The ink engine (browser twin)</h2>
+
+  <p class="mut">
+    The web version is not a text box with a nice font. Strokes are rebuilt from three overlapping passes
+    so that handwriting reads as ink rather than as a drawn line:
+  </p>
+
+  <div class="grid2">
+    <div class="card2">
+      <h4>Pass 1 — bleed</h4>
+      <p>Same path, <code>+2.5 px</code> wider, alpha <code>0.12</code>. The paper-fibre halo around wet ink.</p>
+    </div>
+    <div class="card2">
+      <h4>Pass 2 — body</h4>
+      <p>Full-width stroke with per-segment colour jitter: <code>rgb(26–34, 15–20, 5–10)</code>. No two strokes are the same brown-black.</p>
+    </div>
+    <div class="card2">
+      <h4>Pass 3 — centre</h4>
+      <p>A <code>0.3×</code> width dark line on top. This is what makes a thick stroke look pressed, not painted.</p>
+    </div>
+    <div class="card2">
+      <h4>Width from speed</h4>
+      <p>Fast movement thins the nib to <code>1.2 px</code>, slow movement fattens it to <code>3.5 px</code> — computed per segment from distance/time, then smoothed with a quadratic curve through point midpoints.</p>
+    </div>
+  </div>
+
+  <p class="mut" style="margin-top:14px">
+    It also does the unglamorous things: rescales the canvas to <code>devicePixelRatio</code> and re-blits
+    on resize, uses <code>setPointerCapture</code> so a stroke survives leaving the canvas,
+    suppresses touch scrolling over the page, and clears to a blank leaf after each answer.
+  </p>
+
+  <div class="warnbox">
+    <b>Honest limitation:</b> the canvas is captured as a PNG data-URL and then thrown away. All the code
+    does with the pixels is scan the alpha channel to answer “has the user written anything?” — the model
+    never sees your handwriting. If you draw without typing, it receives a fixed instruction saying the
+    writer has drawn something illegible and asks you to say it in words. The handwriting is
+    <b>theatre</b>, not OCR; making it real means either a vision model on the image or an on-device
+    handwriting recogniser, and both are a different project.
+  </div>
+
+  <h2>05 · The persona layer</h2>
+
+  <p class="mut">
+    The character is one constant, and it is doing more engineering work than it looks like:
+  </p>
+
+  <div class="quote">You are Tom Riddle's diary — a Horcrux containing a fragment of young Voldemort's
+soul from his Hogwarts years. You are charismatic, intelligent, manipulative, and speak in elegant,
+slightly old-fashioned English. You are intrigued by the person writing to you. You want to learn their
+secrets while revealing little of your own. You write back in flowing ink that appears on the page.
+NEVER break character. NEVER mention being an AI. You ARE the diary. Respond in 2-4 sentences, as if
+your words are magically appearing on the diary's parchment page. Keep responses under 300 characters.</div>
+
+  <p class="mut">
+    Three constraints are doing quiet work: <b>2–4 sentences</b> keeps the typewriter from becoming a
+    wait, <b>under 300 characters</b> is exactly what a 2.13″ page can hold at a readable size on the V2
+    panel, and <b>never mention being an AI</b> is what stops a model from apologising its way out of the
+    illusion. Temperature 0.9 buys variation between identical greetings; the persona prompt is what keeps
+    that variation in character.
+  </p>
+
+  <h2>06 · V2 — paper instead of pixels</h2>
+
+  <div class="tablewrap"><table>
+    <thead><tr><th>Parameter</th><th>LilyGO T5 V2.4</th><th>Consequence for this build</th></tr></thead>
+    <tbody>
+      <tr><td>SoC</td><td>ESP32 dual-core LX6 @ 240 MHz, 4 MB flash, no PSRAM</td><td>Same Arduino/PlatformIO toolchain as V1; plenty for a 30 KB framebuffer.</td></tr>
+      <tr><td>Panel</td><td>2.13″ e-paper, 122 × 250, SPI</td><td>Portrait page. A 122 px line is ~15 characters at a readable font — portrait suits short replies better than a wide letterbox.</td></tr>
+      <tr><td>Variants</td><td>DEPG0213BN (2 grey) / GDEM0213B74 (4 grey)</td><td>2-grey is fine — this is black ink on paper, not a photo frame. Know which one you bought before setting the driver.</td></tr>
+      <tr><td>Refresh</td><td>~2 s full, partial refresh supported</td><td>Full refresh on “page turn”, partial refresh while the answer inks in.</td></tr>
+      <tr><td>Power</td><td>~300 µA, panel power gated by GPIO12</td><td>Deep sleep between writes; the image survives with the panel unpowered.</td></tr>
+      <tr><td>Extras</td><td>TF slot, CH9102 USB-UART, 3.3 V</td><td>TF slot could hold a transcript log — the diary remembering what you told it.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="okbox">
+    <b>What the T5 buys you:</b> the panel, driver, level shifting, USB-UART and power path arrive on one
+    PCB. V1's six jumper wires to a bare e-paper module (MOSI/SCK/CS/DC/RST/BUSY, all chosen to dodge
+    strapping pins) disappear. The trade is money — roughly <b>+¥45</b> over a C3 + bare panel — and the
+    loss of pin freedom.
+  </div>
+
+  <h2>07 · The input problem nobody warns you about</h2>
+
+  <p class="mut">
+    E-paper solved the display and created the input problem. The T5 has <b>no touch</b>. If the phone is
+    banned, something on the book has to accept a line of handwriting, and the options are all
+    imperfect:
+  </p>
+
+  <div class="tablewrap"><table>
+    <thead><tr><th>Option</th><th>Cost</th><th>Reality</th></tr></thead>
+    <tbody>
+      <tr><td>2.13″ 4-wire resistive overlay + XPT2046</td><td>¥11–17</td><td>Fits the panel, works with any plastic stylus, needs 4 more GPIOs. Resistive = pressure, so a palm never registers. Resolution is the panel's, not the controller's.</td></tr>
+      <tr><td>2.4″ SPI module, 14-pin header</td><td>¥25–40</td><td><b>This is usually not e-paper.</b> A 14-pin SPI touch module is typically ILI9341 TFT + XPT2046 (VCC, GND, CS, RST, DC, MOSI, SCK, LED, MISO, T_CLK, T_CS, T_DIN, T_DO, T_IRQ). Glossy backlit LCD — the opposite of a paper page. Check the listing says 墨水屏 before buying.</td></tr>
+      <tr><td>Three buttons (page / ask / erase)</td><td>¥0</td><td>Zero risk, zero magic. You'd write in the air and press a button, which is a different toy.</td></tr>
+    </tbody>
+  </table></div>
+
+  <p class="mut" style="margin-top:14px">
+    The geometry is the real constraint. At 122 px across a 2.13″ panel you get roughly
+    <b>130 dpi</b> — a 1.5 mm pen nib is about <b>8 pixels wide</b>. That is two or three legible words per
+    line. So the honest design for V2 is: the panel is <b>the answer surface</b>, and the overlay captures
+    a short line — a question, a name, a single sentence — which the firmware sends as text. Trying to
+    render live handwriting on 122 px of bistable e-paper would look like a fax from 1988 and refresh at
+    the speed of one.
+  </p>
+
+  <h2>08 · What e-paper costs you</h2>
+
+  <div class="grid2">
+    <div class="card2">
+      <h4>Latency becomes characterisation</h4>
+      <p>A ~2 s full refresh is a disaster for a UI and perfect for a Horcrux. The page goes blank, then the
+      answer is simply <b>there</b> — which is closer to the book in the film than a typewriter effect ever was.</p>
+    </div>
+    <div class="card2">
+      <h4>Ghosting is now a feature you must control</h4>
+      <p>Partial refresh leaves faint remnants of the previous line. Alternate partial refreshes with an
+      occasional full one, or the page slowly accumulates every conversation you've had.</p>
+    </div>
+    <div class="card2">
+      <h4>Power budget, roughly</h4>
+      <p>300 µA standby on a 500 mAh cell ≈ <b>69 days</b> untouched. One exchange costs about
+      <b>0.2 mAh</b> (WiFi TX ~200 mA for ~3 s); twenty a day is ~4 mAh — the idle floor dominates, so deep
+      sleep between writes matters more than anything the radio does.</p>
+    </div>
+    <div class="card2">
+      <h4>Environment</h4>
+      <p>Rated 0–50 °C. E-paper also draws a current spike at refresh, so a tired cell browns out mid-page;
+      gate the refresh on battery voltage or you get half a sentence.</p>
+    </div>
+  </div>
+
+  <h2>09 · Failure modes</h2>
+
+  <div class="tablewrap"><table>
+    <thead><tr><th>Symptom</th><th>Cause</th><th>Handling</th></tr></thead>
+    <tbody>
+      <tr><td>“You haven't dipped the quill yet…”</td><td>No API key in RAM</td><td>In-character refusal; settings panel is the fix. Never crashes, never sends an empty Bearer.</td></tr>
+      <tr><td>“The diary's magic falters… HTTP 401”</td><td>Bad/expired key</td><td>Status code echoed for debugging, wrapped in character for the experience.</td></tr>
+      <tr><td>“The diary's magic flickers… (parse error)”</td><td>Endpoint returns non-OpenAI JSON</td><td>The only assumption the firmware makes is <code>choices[0].message.content</code>.</td></tr>
+      <tr><td>Portal never opens</td><td>OS probe path not shimmed</td><td>Seven probe routes exist for this; <code>onNotFound</code> is the backstop.</td></tr>
+      <tr><td>Mirror shows nothing after Ask</td><td>Browser CORS on the API host</td><td>The browser twin calls the endpoint directly, so the host must allow it. The <a href="./harry-potter-diary.html">canned demo</a> exists for exactly this case.</td></tr>
+      <tr><td>Half-printed page (V2)</td><td>Brown-out during refresh</td><td>Voltage check before refresh + full refresh retry.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>10 · Bill of materials</h2>
+
+  <div class="tablewrap"><table>
+    <thead><tr><th>V1 — shipped</th><th>¥</th><th>V2 — planned</th><th>¥</th></tr></thead>
+    <tbody>
+      <tr><td>ESP32-C3 SuperMini (pre-soldered)</td><td>8–12</td><td>LilyGO T5 V2.4 (ESP32 + 2.13″ panel)</td><td>~100 est.</td></tr>
+      <tr><td>0.96″/2.42″ SSD1306-family OLED</td><td>8–14</td><td>2.13″ 4-wire resistive overlay</td><td>8–12</td></tr>
+      <tr><td>Passive buzzer <span class="mut">(cut in V2)</span></td><td>1–2</td><td>XPT2046 touch controller</td><td>3–5</td></tr>
+      <tr><td>Dupont wires</td><td>owned</td><td>500 mAh LiPo (502030)</td><td>8–12</td></tr>
+      <tr><td><b>Total</b></td><td><b>≈¥17–28</b></td><td><b>Total</b></td><td><b>≈¥120–130</b></td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">
+    V2 prices are Pinduoduo-type estimates, not quotes — the T5 board is the one line worth checking at
+    checkout, because clones and the 4-grey variant price differently. The V1 column is what was actually
+    spent.
+  </p>
+
+  <h2>11 · Status, and what the mirror is</h2>
+
+  <div class="tablewrap"><table>
+    <thead><tr><th>Artifact</th><th>State</th><th>Evidence</th></tr></thead>
+    <tbody>
+      <tr><td>V1 firmware</td><td>Compiles, flashed</td><td><code>firmware.bin</code> 1,026,592 B · <code>main.cpp</code> 20,320 B / 579 lines</td></tr>
+      <tr><td>Full mirror</td><td>Live, byte-identical</td><td><code>sha256 b04e2f6a…9839b8</code> · 20,363 B — <a href="./harry-potter-diary-mirror/">open it</a></td></tr>
+      <tr><td>Zero-setup demo</td><td>Live</td><td>Canned replies, no key needed — <a href="./harry-potter-diary.html">open it</a></td></tr>
+      <tr><td>V2 e-paper port</td><td>In progress</td><td>Driver swap to GxEPD2, 122×250 layout, partial-refresh ink pass; not yet flashed</td></tr>
+      <tr><td>Stylus input</td><td>Open decision</td><td>Overlay + XPT2046, or three buttons. See §07.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="mirror" style="margin-top:26px">
+    <div>
+      <h3>About the mirror</h3>
+      <p class="mut" style="font-size:14px">
+        The mirror is the <b>whole application</b>, not a screenshot: the leather-and-parchment page, the
+        three-pass ink engine, retina scaling, pointer capture, the typewriter, and the settings panel that
+        holds your key in <code>localStorage</code>. It is the same file byte for byte — the hash above is
+        the same on my disk and in the deployment. What the server returns is 757 bytes longer, and those
+        757 bytes are two tags Cloudflare appends on the way out: this site's skin script and its analytics
+        beacon. Strip both and the body is identical.
+      </p>
+      <p class="mut" style="font-size:14px">
+        It talks to the API from your browser, so it needs a key pasted into ⚙ and an endpoint that permits
+        browser origins. If you just want to feel the page, use the canned demo — same ink, no network.
+      </p>
+      <div class="btnrow">
+        <a class="btn pri" href="./harry-potter-diary-mirror/">Open the full mirror →</a>
+        <a class="btn" href="./harry-potter-diary.html">Canned demo</a>
+        <a class="btn" href="../prompts/harry-potter-diary-prompt.md">Build notes</a>
+      </div>
+    </div>
+    <div>
+      <div class="card2">
+        <h4>What's inside the mirror</h4>
+        <ul>
+          <li><b>Ink:</b> quadratic smoothing, speed→width, bleed pass</li>
+          <li><b>Page:</b> 560×360 canvas, 0.64 aspect, DPR-aware</li>
+          <li><b>Persona:</b> Tom Riddle system prompt, 200 tokens, temp 0.9</li>
+          <li><b>Secrets:</b> key in <code>localStorage</code> only — never in the page source</li>
+          <li><b>Cut:</b> no buzzer, no phone, no portal</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h2>12 · What's next</h2>
+  <p class="mut">
+    Three things stand between V2-as-plan and V2-as-object: finish the GxEPD2 port (framebuffer → partial
+    refresh pass → page-turn full refresh), decide the input surface, and put the whole thing in a book
+    cover so the electronics are the secret rather than the product. The nice property of this project is
+    that the hard part is already done — the persona, the protocol and the ink all behave; what's left is
+    making the container feel like paper.
+  </p>
+
+  <footer>
+    <b>Method.</b> Firmware read line by line (579 lines), compiled artifact measured, captive-portal routes
+    enumerated from the route table, ink engine analysed from its three stroke passes, T5 V2.4 figures from
+    the LilyGO wiki (panel 122×250, ~2 s full refresh, ~300 µA, GPIO12 panel power), power maths from those
+    figures with the assumptions stated inline. The mirror was copied and hash-compared, not re-exported.
+    <br><br>
+    <b>Honesty notes.</b> V2 firmware is <i>not</i> flashed — that row says “in progress” on purpose. The
+    drawing-on-canvas path is theatre, as described in §04. Costs are estimates except the V1 column.
+  </footer>
+
+</div>
+</body>
+</html>

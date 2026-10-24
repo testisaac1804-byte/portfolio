@@ -1,0 +1,209 @@
+/*
+ * Skin for jPlayer Plugin (jQuery JavaScript Library)
+ * http://www.jplayer.org
+ *
+ * Skin Name: Blue Monday
+ *
+ * Copyright (c) 2010 - 2014 Happyworm Ltd
+ * Licensed under the MIT license.
+ *  - http://www.opensource.org/licenses/mit-license.php
+ *
+ * Author: Silvia Benvenuti
+ * Skin Version: 5.1 (jPlayer 2.8.0)
+ * Date: 13th November 2014
+ */
+.jp-audio {
+	font-size: 15px;
+	color: #fff;
+	background-color:#000;
+}
+
+.jp-interface {
+	background-color:#222; /*controls color*/
+	height:35px;
+}
+.jp-video .jp-interface{/*video controls tag안에 넣기*/
+	position: absolute;
+	bottom: 0;
+}
+.jp-controls {
+	margin-top: 7px;
+	cursor: pointer;
+}
+/* @group progress bar */
+
+.jp-progress {
+	overflow:hidden;
+	background-color: #e2e3e4;
+	height:10px;
+	margin-top: 2.5px;
+	margin-left: 10px;
+	text-align: center;
+	width: 100%;
+}
+
+.jp-seek-bar {
+	background: #eee;
+	height:100%;
+	cursor: pointer;
+	text-align: center;
+}
+.jp-play-bar {
+	background: url("jplayer.jpg") 0 -218px repeat;
+	height:100%;
+}
+
+/* @group volume controls */
+.jp-volume-controls {
+	margin-top: 6px;
+	cursor: pointer;
+}
+.jp-volume-bar {
+	overflow:hidden;
+	background: #eee;
+	height:5px;
+	cursor: pointer;
+	margin-top: 9px;
+	margin-left: 15px;
+	width: 100%;
+}
+.jp-volume-bar-value {
+	background: url("jplayer.jpg") 0 -256px repeat-x;
+	height:5px;
+}
+
+/* @end */
+
+/* @group current time and duration */
+
+.jp-time-holder {
+	color: #ffffff;
+	margin-top: 11px;
+
+}
+
+.jp-current-time,
+.jp-duration {
+	font-size:.85em;
+	font-style: normal;
+	position: relative;
+
+}
+.jp-current-time {
+	float: left;
+	display:inline;
+	cursor:default;
+	text-align: center;
+}
+.jp-duration {
+	float: right;
+	display:inline;
+	text-align: center;
+	cursor:pointer;
+	margin-right: 2%;
+}
+.jp-video-full .jp-duration {
+	float: right;
+	display:inline;
+	text-align: center;
+	cursor:pointer;
+	margin-right: 2%;
+}
+/*full screen css*/
+.jp-full-screen{
+	display: block;
+	text-align: center;
+	cursor: pointer;
+}
+/*end*/
+/*show/hide css at full screen*/
+.jp-full-screen .jp-gui {
+	position: relative;
+	left: 0;
+	width:100%;
+	height:100%;
+
+}
+.jp-video-full .jp-interface {
+	position: absolute !important; position: static; /* Rules for IE6 (full-screen) */
+	bottom: 0px;
+	left: 0;
+	height: 43px;
+}
+.jp-video-full .jp-progress{
+	width: 107%;
+}
+.jp-video-full .jp-mute{
+
+}
+/*show/hide end*/
+.jp-video-full .jp-video-play {
+	margin-top:-370px;
+	height:570px;
+}
+.jp-video-270p .jp-video-play {
+	margin-top:-270px;
+	height:270px;
+}
+.jp-video-full .jp-video-play-icon {
+	position:absolute;
+	display:block;
+	width: 112px;
+	height: 100px;
+	left: 45%;
+	bottom: 45%;
+	background: url("bigplay.png") 0 0 no-repeat;
+	text-indent:-9999px;
+	border:none;
+	cursor:pointer;
+}
+.jp-video-270p .jp-video-play-icon {
+	position:absolute;
+	display:block;
+	width: 112px;
+	height: 100px;
+
+	left: 45%;
+	bottom: 35%;
+	background: url("bigplay.png") 0 0 no-repeat;
+	text-indent:-9999px;
+	border:none;
+	cursor:pointer;
+	background-size: 60%;
+}
+
+.jp-video-270p .jp-seeking-bg {
+	position:absolute;
+	display:block;
+	width: 112px;
+	height: 40px;
+	left: 48%;
+	bottom: 5%;
+	background: url("loading.gif") no-repeat;
+
+}
+.jp-video-270p .jp-video-loading{
+	margin-top: -270px;
+	height:270px;
+}
+.jp-state-full-screen .jp-seeking-bg {
+	position:absolute;
+	display:block;
+	width: 112px;
+	height: 40px;
+	left: 45%;
+	bottom: 30%;
+	background: url("loading.gif") no-repeat;
+
+}
+.jp-state-full-screen .jp-video-loading{
+	padding-top: 70px;
+	height: 170px;
+}
+.jp-video-full .jp-restore-screen{
+	display: block;
+	text-align: center;
+	cursor: pointer;
+	margin-left: 50%;
+}
+/* @end */

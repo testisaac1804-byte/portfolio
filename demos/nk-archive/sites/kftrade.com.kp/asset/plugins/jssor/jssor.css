@@ -1,0 +1,137 @@
+
+.jssorb05 {position: absolute;}
+.jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
+    position: absolute;
+    /* size of bullet elment */
+    width: 16px;
+    height: 16px;
+    background: url(../images/b14.png) no-repeat;
+    overflow: hidden;
+    cursor: pointer;
+}
+.jssorb05 div { background-position: -7px -7px; }
+.jssorb05 div:hover, .jssorb05 .av:hover { background-position: -37px -7px; }
+.jssorb05 .av { background-position: -67px -7px; }
+.jssorb05 .dn, .jssorb05 .dn:hover { background-position: -97px -7px; }
+
+.jssora12l, .jssora12r {
+    display: block;
+    position: absolute;
+    /* size of arrow element */
+    width: 30px;
+    height: 46px;
+    cursor: pointer;
+    background: url(../images/a15.png) no-repeat;
+    overflow: hidden;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 3px;
+    opacity: 0.5;
+}
+.jssora12l:hover, .jssora12r:hover{
+    background-color: rgba(255,255,255,0.8);
+    opacity: 1;
+    box-shadow: 0px 0px 5px #333;
+}
+.jssora12l { background-position: -16px -37px; }
+.jssora12r { background-position: -75px -37px; }
+.jssora12l:hover { background-position: -136px -37px; }
+.jssora12r:hover { background-position: -195px -37px; }
+.jssora12l.jssora12ldn { background-position: -256px -37px; }
+.jssora12r.jssora12rdn { background-position: -315px -37px; }
+
+
+
+.jssora05l, .jssora05r {
+    display: block;
+    position: absolute;
+    /* size of arrow element */
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background: url(../img/a17.png) no-repeat;
+    overflow: hidden;
+}
+.jssora05l { background-position: -10px -40px; }
+.jssora05r { background-position: -70px -40px; }
+.jssora05l:hover { background-position: -130px -40px; }
+.jssora05r:hover { background-position: -190px -40px; }
+.jssora05l.jssora05ldn { background-position: -250px -40px; }
+.jssora05r.jssora05rdn { background-position: -310px -40px; }
+
+.jssort01 {
+    position: absolute;
+    /* size of thumbnail navigator container */
+    width: 600px;
+    height: 100px;
+}
+
+.jssort01 .p {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 72px;
+}
+
+.jssort01 .t {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.jssort01 .w {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.jssort01 .c {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 76px;
+    height: 68px;
+    border: #aaa 2px solid;
+    box-sizing: content-box;
+    background: url(../img/t01.png) -800px -800px no-repeat;
+    _background: none;
+}
+
+.jssort01 .pav .c {
+    top: 2px;
+    _top: 0px;
+    left: 2px;
+    _left: 0px;
+    width: 76px;
+    height: 68px;
+    border: #000 0px solid;
+    _border: #f00 2px solid;
+    background-position: 50% 50%;
+}
+
+.jssort01 .p:hover .c {
+    top: 0px;
+    left: 0px;
+    width: 78px;
+    height: 70px;
+    border: #00f 1px solid;
+    background-position: 50% 50%;
+}
+
+.jssort01 .p.pdn .c {
+    background-position: 50% 50%;
+    width: 76px;
+    height: 68px;
+    border: #000 2px solid;
+}
+
+* html .jssort01 .c, * html .jssort01 .pdn .c, * html .jssort01 .pav .c {
+    /* ie quirks mode adjust */
+    width /**/: 80px;
+    height /**/: 72px;
+}

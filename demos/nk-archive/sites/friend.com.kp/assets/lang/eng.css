@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+/** font definition **/
+@font-face { font-family:gothic; src:url('font/arial.ttf') format('truetype');}
+@font-face { font-family:bgothic; src:url('font/ariblk.ttf') format('truetype');}
+@font-face { font-family:chongbong; src:url('font/times.ttf') format('truetype');}
+@font-face { font-family:bchongbong; src:url('font/timesbd.ttf') format('truetype');}
+@font-face { font-family:gungso; src:url('font/COOPBL.TTF') format('truetype');}
+@font-face { font-family:rgothic; src:url('font/ARLRDBD.TTF') format('truetype');}
+/* --------------------- */
+
+body { font-size: 140%; font-family: gothic; }
+h1, h2, h3, h4, h5, h6{ font-family: gothic;}
+/*div { font-size: 1.025em; }*/
+
+

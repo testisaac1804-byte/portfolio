@@ -1,0 +1,565 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>인민대학습당 홈페지 - 《남산》-혁명일화(목록)페지</title>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="경애하는 총비서동지께서 혁명과 건설을 령도하시던 나날에 남기신 혁명일화들을 목록형식으로 소개합니다.">
+<meta name="keyword" content="인민대학습당,웨브싸이트,홈페지,남산,혁명일화,전자도서실,과학기술,버섯,생명선,과학기술적담보,과학기술보급실,야전,학교,평양교원대학,원아교육,어머니교실,료양소,온천,환자치료,포장공정,제품,포장곽겉면,의료용침대,묘향산의료기구공장,사회주의보건,재보,바다가양식사업소건설착공식,락원군,조국해방전쟁,고전적명작,《조국의 품》,지방발전，지방공업공장，농촌혁명강령,과학자,조선소년단,군사복무,《무지개》호,당창건,모래알,대동강,과학기술전당,기념비적건축물,보급기지">
+<meta name="author" content="Kanegin, K.H.Y., K.S.H., KKK">
+<meta name="lang" content="ko">
+
+<link rel="shortcut icon" type="image/png" href="/assets/imgs/gpsh-icon-16.png?20240706.4.7.6">
+
+<link rel="stylesheet" href="/assets/libs/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/libs/nivo-slider/themes/light/light.min.css">
+<link rel="stylesheet" href="/assets/libs/nivo-slider/nivo-slider.min.css">
+<link rel="stylesheet" href="/assets/libs/owl-carousel/2.2.1/owl.carousel.min.css">
+<link rel="stylesheet" href="/assets/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/assets/libs/font-awesome.v6.1.2/css/all.min.css?">
+<link rel="stylesheet" href="/assets/libs/colorlib/vendor/photoswipe/css/vendor.min.css?">
+
+<link rel="stylesheet" href="/assets/css/linearicons.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/magnific-popup.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/animate.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/owl.carousel.plugin.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/global.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/font-family_ko.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/compatible.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/books.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/encyclopedia.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/rmenjoy.min.css?20240706.4.7.6">
+<link rel="manifest" href="/assets/manifest.json">
+
+<script>
+let BASE_URL = '/';
+let SITE_URL = '/index.php/ko/';
+let CURRENT_URL = 'anecdote/article_list';
+let isMobile = false;
+let localeLang = 'ko';
+</script><script src="/assets/libs/jquery/jquery-3.4.1.ex.min.js"></script>
+<script src="/assets/libs/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body class="_top" oncontextmenu="return true;">
+    <div id="preloader">
+      <div class="preload-content">
+        <div id="gpsh-load"></div>
+      </div>
+    </div>
+    <header id="divHeader" class="header-area bo00">
+  <div class="container">
+    <div class="row mx-n15">
+      <div class="col-12 px-0">
+        <nav class="navbar-expand d-inline fixed-top languagebar bo00">
+          <ul class="navbar-nav justify-content-end language header">
+                          <li class="nav-link  active">
+                <a href="#">
+                  <span class="d-inline">조선어</span>
+                  <span class="d-none">가</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/en/anecdote/article_list">
+                  <span class="d-inline">English</span>
+                  <span class="d-none">En</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/cn/anecdote/article_list">
+                  <span class="d-inline">中文</span>
+                  <span class="d-none">中</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/ru/anecdote/article_list">
+                  <span class="d-inline">Русский</span>
+                  <span class="d-none">Ру</span>
+                </a>
+              </li>
+                      </ul>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-dark" id="gpshNavbar">
+	<a class="navbar-brand" href="/index.php/ko/" title="첫페지" >
+		<img id="logo_namsan" src="/assets/imgs/namsan.png" alt="남산" />
+		<span id="domain">www.gpsh.edu.kp</span>
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gpshNav">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="gpshNav">
+	<ul class="navbar-nav ml-auto">
+  <li class="nav-item dropdown submenu px-1 active"><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">불멸의 령도</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/leader/news_list"
+        title="혁명활동">혁명활동</a>
+      <a class="dropdown-item" href="/index.php/ko/anecdote/article_list"
+        title="혁명일화">혁명일화</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/leadership"
+        title="령도업적">령도업적</a>
+    </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">소개</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/intro/index/serial#about-gpsh"
+        title="소개편집물">소개편집물</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/history#about-gpsh"
+        title="연혁">연혁</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/president#about-gpsh"
+        title="총장들">총장들</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/inside#about-gpsh"
+        title="구내전경">구내전경</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/ourfaces_list#about-gpsh"
+        title="우리모습">우리모습</a>
+    </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">강의</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/lecture/today_in7day"
+        title="주간 강의, 강습일정">주간일정</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/0"
+        title="사회과학강의">사회과학강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/1"
+        title="자연과학강의">자연과학강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/2"
+        title="새기술통보강의">새기술통보강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/3"
+        title="원격강의">원격강의</a>
+          </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">봉사</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/rmenjoy/room"
+        title="음악감상">음악감상</a>
+      <a class="dropdown-item" href="/index.php/ko/newbooks/view_list"
+        title="도서소개">도서소개</a>
+      <a class="dropdown-item" href="/index.php/ko/oldbooks/view_list"
+        title="민족고전">민족고전</a>
+      <a class="dropdown-item" href="/index.php/ko/encyclopedia/view_list/1"
+        title="백과상식">백과상식</a>
+    </div>
+  </li>
+  <li class="nav-item px-1 "><a class="nav-link" href="/index.php/ko/libraries/index/ko-lib-cp"
+      title="도서관협회">도서관협회</a></li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">대외교류</a>
+    <div class="dropdown-menu dropdown-menu-right submenu">
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/0"
+        title="참관">참관</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/1"
+        title="도서교류">도서교류</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/2"
+        title="도서기증">도서기증</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/3"
+        title="국제토론회 및 전시회">국제토론회 및 전시회</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/4"
+        title="국제기구위탁도서관">국제기구위탁도서관</a>
+    </div>
+  </li>
+</ul>
+<div id="search-wrapper" class="d-none">
+  <form action="#" method="post">
+    <input type="text" id="search" name="search" class="search"
+      value=""
+      onkeypress="return checkProhibitionalChars('#search', '#errmsg2');"
+      placeholder="검색어를 입력하십시오." />
+    <div id="close-icon"></div>
+    <input class="d-none" type="submit" value="" />
+    <input type="hidden" name="csrftk" value="e5174c5b20b0f4513df3db763a1c3817" />
+    <span id="errmsg2" style="display: none;">* 경고! - 금지된 문자를 포함하고 있습니다.</span>
+  </form>
+</div>
+<script type="text/javascript">
+  $().ready(function() {
+    // 《혁명활동소식》과 《휴관일》소개에서 주체년호표기처리
+    let jucheobjs = $(".juche.date.column, #holidays p");
+    jucheobjs.each(function() {
+        juchehtml = $(this).html() || '';
+        juchehtml = juchehtml.replace(/(주체|JUCHE|主体|чучхе)\d+\((\d+)\)/ig, '$2');
+        $(this).html(juchehtml);
+    });
+    // 외부싸이트소개
+    let servicetime = $('div.service-time #accordion');
+    if (servicetime.length) {
+      let servicetimes = servicetime.children('div');
+      // 강의시간과 봉사시간소개부를 없앤다.
+      if (servicetimes.length > 2) {
+        $(servicetimes[0]).addClass('d-none'); // 강의시간
+        // $(servicetimes[1]).addClass('d-none'); // 봉사시간
+      }
+      // 외부싸이트(광야홈페지)소개부를 추가한다.
+      let gwangya = $('<div class="card mb-3"><div class="card-header"><a class="collapsed1 card-link1" data-toggle1="collapse" href="http://www.dprkportal.kp" title="www.dprkportal.kp" target="_blank"><img src="/./data/outsites/gwangya.png" width="150px" alt="www.dprkportal.kp" /></a></div>');
+      servicetime.append(gwangya);
+    }
+  });
+</script>
+	</div>
+</nav>
+      </div>
+    </div>
+  </div>
+</header>    <section class="body" style="min-height: 900px;">
+      
+<h1 class="d-none">혁명일화(목록)</h1>
+
+<a href="#anecdotes" class="scrollto">
+  <div class="poster-area row-xs-150 row-sm-200 row-md-300 row-lg-400 bg-img bg-overlay bo01"
+    style="background-image: url(/./data/anecdote/poster_01.jpg);"></div></a>
+<form id="listForm" action="/index.php/ko/anecdote/article_search#anecdotes" method="post"
+  onsubmit="return validateSearchText('#search_keyword')">
+  <div id="anecdotes" class="container py-25 py-md-50 py-lg-100 anecdote list">
+    <div class="col-sm-12 py-1 m-0 banner">
+      <div class="d-block d-flex flex-row mb-3" style="border-bottom: 2px solid #da3b3b;">
+        <h2 class="pl-3 display-0 text-left text-danger gothic">혁명일화</h2>
+                <div class="ml-auto" style="padding-top: 20px;">
+          <a href="?vm=list-view#anecdotes">
+            <div class="toggle-viewmode list-view mr-3" title="제목라렬방식"></div></a>
+        </div>
+      </div>
+      <div class="row col-sm-12 result_info_wraper">
+
+	<div class="row col-md-12 col-lg-5 pt-1 mb-3 justify-content-center justify-content-md-left result_info" style="text-align: left;">
+		<span>총:&nbsp;36건,&nbsp;</span>
+		<span>현재&nbsp;1 / 3&nbsp;페지,&nbsp;</span>
+		<span class="">표시행수:&nbsp;</span>
+		<input type="text" name="ps" value="12" class="records-page" maxlength="2" />
+	</div>
+	<div class="row col-md-12 col-lg-7" style="text-align: center;">
+		<div id="formsearch" style="text-align: center;"
+			class="input-group input-group-sm col-sm-12 col-md-5 mb-3 justify-content-center search_form ">
+			<input class="form-control" type="text" id="search_keyword" name="search"
+				onkeypress="return checkProhibitionalChars('#search_keyword', '#errmsg2');" value=""
+				placeholder="검색어를 입력하십시오." />
+			<div class="input-group-append">
+				<input class="input-group-text rounded-right" type="image" 
+					src="/assets/imgs/search.png" alt="search icon" />
+			</div>
+			<span id="errmsg1" style="display: none;">* 알림! - 검색하려는 문자를 입력하십시오.</span>
+	        <span id="errmsg2" style="display: none;">* 경고! - 금지된 문자를 포함하고 있습니다.</span>
+			<input type="hidden" name="csrftk" value="e5174c5b20b0f4513df3db763a1c3817" />
+		</div>
+
+			<div class="page-nav col-sm-12 col-md-7">
+				<ul class="pagination pagination-sm justify-content-center justify-content-md-end" style="">				<li class="page-item"><a class="page-link command-disabled font-weight-bold">≪ </a></li>				<li class="page-item"><a class="page-link command-disabled">❮ </a></li>				<li class="page-item"><a class="page-link command-disabled active">1</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);">2</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(3);">3</a></li>				<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);"> ❯</a></li>				<li class="page-item"><a class="page-link command font-weight-bold" href="javascript: pageSkip(3);"> ≫</a></li>			</ul>
+		</div>
+		<input type="hidden" id="pn" name="pn" value="1" />
+	</div>
+</div>
+    </div>    <hr />
+    <section class="blog_ms_area p_100">
+      <div class="container">
+        <div class="row blog_ms_inner py-5 articles anecdotes">          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div id="no-39" class="blog_ms_item article_item">
+              <div class="blog_ms_img article_img d-none">              </div>
+              <div class="blog_ms_text article_text">
+                <h3>전자도서실에서 강조하신 문제</h3>                  <div class="contents p-0">
+                    <p>2013년 10월 어느날 <nobr>경애하는</nobr> <nobr>총비서동지</nobr>께서 새로 건설한 중앙버섯연구소를 찾으시였을 때에 있은 일이다.</p>
+	<p>이날 연구소를 돌아보시던 <nobr>경애하는</nobr> 그이께서는 이곳에 꾸려진 전자도서실에도 들리시였다.</p>                  </div>                <a class="read-more"
+                  href="/index.php/ko/anecdote/article_view?no=39#anecdote_content">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div id="no-38" class="blog_ms_item article_item">
+              <div class="blog_ms_img article_img d-none">              </div>
+              <div class="blog_ms_text article_text">
+                <h3>누구나 다 거쳐야 하는 야전학교</h3>                  <div class="contents p-0">
+                    <p><nobr>경애하는</nobr> <nobr>총비서동지</nobr>께서 2014년 5월 어느한 공장에 새로 꾸려진 과학기술보급실을 돌아보실 때였다.</p>
+	<p>짧은 기간에 과학기술보급실을 훌륭히 일떠세운데 대하여 만족을 표시하시는 <nobr>경애하는</nobr> 그이를 우러르며 일군들은 감격을 금할수 없었다.</p>                  </div>                <a class="read-more"
+                  href="/index.php/ko/anecdote/article_view?no=38#anecdote_content">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div id="no-37" class="blog_ms_item article_item">
+              <div class="blog_ms_img article_img d-none">              </div>
+              <div class="blog_ms_text article_text">
+                <h3>기쁨속에 돌아보신 어머니교실</h3>                  <div class="contents p-0">
+                    	<p>2018년 1월 평양교원대학의 여러곳을 돌아보시면서 개건현대화정형과 교수교양실태를 구체적으로 료해하시던 <nobr>경애하는</nobr> <nobr>총비서동지</nobr>께서는 어머니교실에도 들리시였다.</p>                  </div>                <a class="read-more"
+                  href="/index.php/ko/anecdote/article_view?no=37#anecdote_content">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div id="no-36" class="blog_ms_item article_item">
+              <div class="blog_ms_img article_img d-none">              </div>
+              <div class="blog_ms_text article_text">
+                <h3>무엇보다 중요한 문제</h3>                  <div class="contents p-0">
+                    	<p>어느해인가 <nobr>경애하는</nobr> <nobr>총비서동지</nobr>께서 한 료양소를 찾으신적이 있었다.</p>                  </div>                <a class="read-more"
+                  href="/index.php/ko/anecdote/article_view?no=36#anecdote_content">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div id="no-35" class="blog_ms_item article_item">
+              <div class="blog_ms_img article_img d-none">              </div>
+              <div class="blog_ms_text article_text">
+                <h3>몸소 명안도 밝혀주시며</h3>                  <div class="contents p-0">
+                    	<p>2023년 5월 <nobr>경애하는</nobr> <nobr>총비서동지</nobr>께서 어느한 공장을 찾으시였을 때에 있은 일이다.</p>                  </div>                <a class="read-more"
+                  href="/index.php/ko/anecdote/article_view?no=35#anecdote_content">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div id="no-34" class="blog_ms_item article_item">
+              <div class="blog_ms_img article_img d-none">              </div>
+              <div class="blog_ms_text article_text">
+                <h3>우리의 힘, 우리의 기술로</h3>                  <div class="contents p-0">
+                    	<p>2022년 11월 어느날 <nobr>경애하는</nobr> <nobr>총비서동지</nobr>께서는 묘향산의료기구공장 침대분공장을 찾으시였다.</p>
+	<p>생산현장을 돌아보신 <nobr>경애하는</nobr> <nobr>총비서동지</nobr>께서는 공장에서 개발생산한 의료용침대들이 꽉 들어차있는 제품진렬실에도 들리시였다.</p>
+                  </div>                <a class="read-more"
+                  href="/index.php/ko/anecdote/article_view?no=34#anecdote_content">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div id="no-33" class="blog_ms_item article_item">
+              <div class="blog_ms_img article_img d-none">              </div>
+              <div class="blog_ms_text article_text">
+                <h3>귀중한 재보</h3>                  <div class="contents p-0">
+                    <p>무릇 더없이 귀중하고 보배로운것을 두고 재보라고 한다.</p>
+<p>사람마다 소중히 간직하는 재보들은 각이하지만 락원군사람들이 제일 값비싼 재보, 대를 두고 물려줄 제일가는 재보로 여기는것이 있다.</p>
+                  </div>                <a class="read-more"
+                  href="/index.php/ko/anecdote/article_view?no=33#anecdote_content">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div id="no-32" class="blog_ms_item article_item">
+              <div class="blog_ms_img article_img d-none">              </div>
+              <div class="blog_ms_text article_text">
+                <h3>《조국의 품》</h3>                  <div class="contents p-0">
+                    <p><nobr>위대한</nobr> <nobr>장군님</nobr>께서 가렬한 조국해방전쟁이 한창이던 1952년 8월 최고사령부에서 친히 지으신 불후의 고전적명작 <b class="name">《조국의 품》</b>.</p>
+<p>구절구절을 외워볼수록 절세위인의 조국관이 숭엄히 어려온다.</p>
+                  </div>                <a class="read-more"
+                  href="/index.php/ko/anecdote/article_view?no=32#anecdote_content">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div id="no-31" class="blog_ms_item article_item">
+              <div class="blog_ms_img article_img d-none">              </div>
+              <div class="blog_ms_text article_text">
+                <h3><nobr>위대한</nobr> 선언</h3>                  <div class="contents p-0">
+                    <p>《지방발전 20×10 정책》의 첫 산아인 성천군 지방공업공장 준공식에서 하신 <nobr>경애하는</nobr> <nobr>총비서동지</nobr>의 연설에 접하고 온 나라가 격정의 불도가니마냥 세차게 끓어번지고있다.</p>
+                  </div>                <a class="read-more"
+                  href="/index.php/ko/anecdote/article_view?no=31#anecdote_content">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div id="no-30" class="blog_ms_item article_item">
+              <div class="blog_ms_img article_img d-none">              </div>
+              <div class="blog_ms_text article_text">
+                <h3>소중히 여겨주신 희망</h3>                  <div class="contents p-0">
+                    <p>2012년 6월 어느날이였다.</p>
+<p>조선소년단창립 66돐 경축 조선소년단 전국련합단체대회에 몸소 참석하시여 뜻깊은 연설을 하신데 이어 2만여명의 소년단대표들과 함께 음악회도 관람하신 <nobr>경애하는</nobr> <nobr>총비서동지</nobr>께서는 공연이 끝난 후 모범소년단원들을 가까이 불러주시고 그들의 앞날의 포부에 대해서도 물어주시였다.</p>
+                  </div>                <a class="read-more"
+                  href="/index.php/ko/anecdote/article_view?no=30#anecdote_content">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div id="no-29" class="blog_ms_item article_item">
+              <div class="blog_ms_img article_img d-none">              </div>
+              <div class="blog_ms_text article_text">
+                <h3>모래알들을 모아 큰 산을 쌓아야 한다</h3>                  <div class="contents p-0">
+                    <p>당창건 70돐을 앞둔 그해의 9월이였다. </p>
+<p>대동강에 행복의 새배를 띄워주신 <nobr>경애하는</nobr> <nobr>총비서동지</nobr>께서는 자신의 절절한 심정을 담아 《무지개》호는 인민을 위하여 우리가 해야 할 일에 비추어볼 때 하나의 모래알이나 같다고, 우리는 이런 모래알들을 모아 큰 산을 쌓아야 한다고 말씀하시였다.</p>
+                  </div>                <a class="read-more"
+                  href="/index.php/ko/anecdote/article_view?no=29#anecdote_content">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>          <div class="col-xs-12 col-md-6 col-lg-4">
+            <div id="no-28" class="blog_ms_item article_item">
+              <div class="blog_ms_img article_img d-none">              </div>
+              <div class="blog_ms_text article_text">
+                <h3>통속적인 가르치심에 담으신 뜻</h3>                  <div class="contents p-0">
+                    <p>2015년 2월 어느날 <nobr>경애하는</nobr> <nobr>총비서동지</nobr>께서 찬바람이 불어치는 험한 날씨도 마다하지 않으시고 과학기술전당건설장을 찾으시였을 때의 일이다.</p>
+<p>현지에 게시해놓은 조감도를 보아주신 <nobr>경애하는</nobr> <nobr>총비서동지</nobr>께서는 과학기술전당이 정말 멋있다고, 과학기술전당형성안이 잘되였다고 말씀하시였다.</p>
+                  </div>                <a class="read-more"
+                  href="/index.php/ko/anecdote/article_view?no=28#anecdote_content">
+                  기사보기</a>
+              </div>
+            </div>
+          </div>        </div>
+      </div>
+    </section>
+    <hr />    <div class="col-sm-12 py-1 m-0 footer">
+      <div class="row col-12 my-3 result_info_wraper">
+
+	<div class="row col-sm-12 col-md-7 pt-1 mb-3 justify-content-center result_info">
+		<span>총:&nbsp;36건,&nbsp;</span>
+		<span>현재&nbsp;1 / 3&nbsp;페지,&nbsp;</span>
+		<span class="">표시행수:&nbsp;</span>
+		<input type="text" name="ps" value="12" class="records-page" maxlength="2" />
+	</div>
+
+	<div class="page-nav col-md-5">
+		<ul class="pagination pagination-sm justify-content-center justify-content-md-end" style="">			<li class="page-item"><a class="page-link command-disabled font-weight-bold">≪ </a></li>			<li class="page-item"><a class="page-link command-disabled">❮ </a></li>			<li class="page-item"><a class="page-link command-disabled active">1</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);">2</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(3);">3</a></li>			<li class="page-item"><a class="page-link command" href="javascript: pageSkip(2);"> ❯</a></li>			<li class="page-item"><a class="page-link command font-weight-bold" href="javascript: pageSkip(3);"> ≫</a></li>		</ul>
+	</div>
+</div>
+    </div>
+  </div>
+</form>
+<script>
+  $(document).ready(function() {
+    let key = $('input#search_keyword').val();
+    if (key === undefined || key === '') return;
+    let lang = (localeLang === undefined) ? 'ko' : localeLang;
+    hilightSearchKey(lang, key, 'anecdote', 'div.article_text', 'h3', 'p');
+    hilightSearchKey(lang, key, 'anecdote', 'a.anecdote');
+  });
+</script>
+    </section>
+    <footer class="footer-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 contact-us">
+        <ul class="contact-us text-center">
+          <li id="footer-gpsh-full-name" class="mb-4 text-white-50">
+            <i class="fa fa-map-marker fa-16 text-white-50" aria-hidden="true"></i>
+            조선민주주의인민공화국 인민대학습당</li>
+          <li id="footer-phone" class="mb-4 text-white-50">
+            <i class="fa fa-phone fa-16 text-white-50" aria-hidden="true"></i> 
+            전화번호: 850-2-18111(3818472)</li>
+          <li id="footer-email" class="mb-4 text-white-50 align-middle">
+            <i class="fa fa-envelope fa-12 text-white-50" aria-hidden="true"></i>
+            전자우편: <img src="/assets/imgs/nsj-email.png" alt="nsj-email"/></li>
+        </ul>
+      </div>
+      <div class="d-none-sm col-md-3 gpsh-outline">
+      </div>
+      <div class="col-md-4 text-center service-time">
+        <div id="accordion">
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-user-clock" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#coursetime" 
+                title="강의시간">
+                강의시간 [9:00~19:30]
+              </a>
+            </div>
+            <div id="coursetime" class="collapse" data-parent="#accordion">
+              <p class="card-body chongbong">
+                강의, 강습은 일정에 따라 진행하며 휴관일과 토요일, 일요일, 국가적명절일에는 하지 않습니다.              </p>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-briefcase-clock" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#opentime" 
+                title="봉사시간">
+                봉사시간 [9:00~18:00]
+              </a>
+            </div>
+            <div id="opentime" class="collapse" data-parent="#accordion">
+              <p class="card-body chongbong">
+                휴관일과 국가적명절을 제외한 모든 날들에 봉사합니다.              </p>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-coffee" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#holidays" 
+                title="휴 관 일">
+                휴 관 일              </a>
+            </div>
+            <div id="holidays" class="collapse" data-parent="#accordion">              <p class="card-body text-center chongbong">주체114(2025). <span
+                  class="national-holidays" title="조선민주주의인민공화국 헌법절">12.27. </span><span
+                  class="closed-holidays" title="휴관일">12.11. </span><span
+                  class="closed-holidays" title="휴관일">12.25. </span>              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+    <!-- photoswipe background
+================================================== -->
+<section>
+<div aria-hidden="true" class="pswp" role="dialog" tabindex="-1">
+
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title=
+                "Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title=
+                "Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title=
+            "Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div> <!-- end photoSwipe background -->
+</section>    <script src="/assets/libs/popper/1.16.0/umd/popper.min.js"></script>
+<script src="/assets/libs/jquery/ui/1.11.3/jquery-ui.min.js"></script>
+<!-- 
+<script src="/assets/libs/jquery/ui/jquery-ui-i18n.min.js"></script>
+-->
+<script	src="/assets/libs/nivo-slider/jquery.nivo.slider.pack.js"></script>
+<script src="/assets/libs/owl-carousel/2.2.1/owl.carousel.min.js"></script>
+<script	src="/assets/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script src="/assets/libs/mobile/fastclick.js"></script>
+<script src="/assets/libs/mobile/swiper.min.js"></script>
+<script src="/assets/libs/colorlib/vendor/parallax100/parallax100.js"></script>
+<script>
+    $('.parallax100').parallax100();
+</script>
+<script src="/assets/libs/colorlib/vendor/photoswipe/js/modernizr.js"></script>
+<script src="/assets/libs/colorlib/vendor/photoswipe/js/pace.min.js"></script>
+
+<!-- script src="/assets/js/jquery.magnific-popup.min.js?"></script -->
+<script src="/assets/js/plugins_add.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/plugins.min.js?20240706.4.7.6"></script>
+<script src="/assets/libs/colorlib/vendor/isotope/imagesloaded.pkgd.min.js"></script>
+<script src="/assets/libs/colorlib/vendor/isotope/isotope.pkgd.min.js"></script>
+<script src="/assets/js/active.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/global.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/books.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/encyclopedia.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/rmenjoy.global.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/leader.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/counter.js?20240706.4.7.6"></script>
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="/assets/libs/assets/ie8-responsive-file-warning.js"></script><![endif]-->
+<script	src="/assets/libs/assets/ie-emulation-modes-warning.js"></script>
+<!-- IE10 agent hack for Surface/desktop Windows 8 bug -->
+<script	src="/assets/libs/assets/ie10-viewport-bug-workaround.js"></script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="/assets/libs/assets/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="/assets/libs/assets/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+  </body>
+</html>

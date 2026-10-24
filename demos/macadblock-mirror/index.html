@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>MacAdBlock</title><style>
+*{box-sizing:border-box}
+body{font:14px/1.5 system-ui,-apple-system,sans-serif;margin:0;background:#0d1117;color:#c9d1d9}
+header{background:#161b22;padding:12px 20px;border-bottom:1px solid #30363d;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:10}
+h1{margin:0;font-size:17px;white-space:nowrap}h1 span{color:#8b949e;font-weight:400;font-size:13px;margin-left:6px}
+.toggle{position:relative;display:inline-block;width:44px;height:24px;cursor:pointer;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0}
+.slider{position:absolute;inset:0;background:#21262d;border-radius:24px;transition:.25s}
+.slider::before{content:"";position:absolute;height:18px;width:18px;left:3px;bottom:3px;background:#8b949e;border-radius:50%;transition:.25s}
+.toggle input:checked+.slider{background:#238636}
+.toggle input:checked+.slider::before{background:#fff;transform:translateX(20px)}
+.wrap{padding:16px 20px;max-width:1100px;margin:auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px}
+.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px 14px}
+.card .v{font-size:20px;font-weight:700;line-height:1.2}.card .l{color:#8b949e;font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.b{color:#f85149}.a{color:#3fb950}.q{color:#58a6ff}
+table{width:100%;border-collapse:collapse;background:#161b22;border-radius:8px;overflow:hidden;margin-bottom:16px;font-size:13px}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid #21262d}
+th{background:#21262d;color:#8b949e;font-weight:500;text-transform:uppercase;font-size:11px;letter-spacing:.5px}
+tr:hover td{background:#1c2128}
+.tag{display:inline-block;background:#30363d;border-radius:4px;padding:1px 6px;font-size:10px;font-weight:500}
+.tag.blocked{background:#3d1f1f;color:#f85149}.tag.allowed{background:#1a3326;color:#3fb950}
+button{background:#21262d;color:#c9d1d9;border:1px solid #30363d;border-radius:5px;padding:3px 8px;cursor:pointer;font-size:12px}
+button:hover{background:#30363d}button.danger{border-color:#f8514940;color:#f85149}
+input{background:#0d1117;border:1px solid #30363d;color:#c9d1d9;border-radius:5px;padding:5px 8px;font-size:13px}
+input:focus{outline:none;border-color:#58a6ff}
+h2{font-size:13px;color:#8b949e;margin:20px 0 8px;text-transform:uppercase;letter-spacing:.5px}
+.row{display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.mono{font-family:'SF Mono',Menlo,monospace;font-size:12px}
+.empty{color:#484f58;font-style:italic;padding:8px 0}
+.actions{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.actions button{font-size:11px;padding:4px 10px}
+</style></head><body>
+<header>
+<label class=toggle><input type=checkbox id=tog onchange=toggle()><span class=slider></span></label>
+<h1>🛡️ MacAdBlock <span id=host></span></h1>
+</header>
+<div class=wrap>
+<div class=cards id=sys></div>
+
+<div class=actions>
+<button onclick=reload()>🔄 Reload Blocklist</button>
+<button onclick=resetStats()>📊 Reset Stats</button>
+<button onclick=clearLog()>🗑️ Clear Log</button>
+</div>
+
+<h2>Recent Queries</h2>
+<table id=ql><thead><tr><th>Time</th><th>Domain</th><th>Client</th><th>Action</th></tr></thead><tbody></tbody></table>
+
+<h2>Clients</h2>
+<table id=ct><thead><tr><th>Client</th><th>Blocked</th><th>Allowed</th><th></th></tr></thead><tbody></tbody></table>
+
+<h2>Custom Blocked Domains</h2>
+<div class=row><input id=dom placeholder="ads.example.com" size=28><button onclick=addDom()>+ Block</button></div>
+<table id=cl><tbody></tbody></table>
+
+<h2>Allowlist (never block)</h2>
+<div class=row><input id=alw placeholder="example.com" size=28><button onclick=addAllow()>+ Allow</button></div>
+<table id=alt><tbody></tbody></table>
+</div>
+
+<script>
+async function api(p){let r=await fetch(p);return r.json()}
+function fmt(n){return n.toLocaleString()}
+function fmtTime(t){let d=new Date(t*1000);return d.toLocaleTimeString()}
+function fmtUptime(s){let h=Math.floor(s/3600),m=Math.floor((s%3600)/60);return h+'h '+m+'m'}
+
+async function load(){
+let s=await api('/api/stats');
+tog.checked=s.running;
+host.textContent=(s.running?'ON':'OFF')+' · '+fmt(s.qpm)+' q/m · uptime '+fmtUptime(s.uptime);
+sys.innerHTML=[
+['Blocked',fmt(s.blocked),'b'],['Allowed',fmt(s.allowed),'a'],
+['Blocklist',fmt(s.num_hashes),'q'],['Clients',s.clients.length,''],
+['Size',(s.blocklist_size/1048576).toFixed(2)+' MB','']
+].map(c=>'<div class=card><div class="v '+c[2]+'">'+c[1]+'</div><div class=l>'+c[0]+'</div></div>').join('');
+
+// Query log
+ql.tBodies[0].innerHTML=(s.queries||[]).reverse().map(q=>
+'<tr><td class=mono>'+fmtTime(q.time)+'</td><td class=mono>'+q.domain+'</td><td class=mono>'+q.client+'</td><td><span class="tag '+q.action+'">'+q.action+'</span></td></tr>'
+).join('')||'<tr><td colspan=4 class=empty>no queries yet</td></tr>';
+
+// Clients
+ct.tBodies[0].innerHTML=s.clients.sort((a,b)=>(b.blocked+b.allowed)-(a.blocked+a.allowed)).map(c=>
+'<tr><td class=mono>'+c.ip+(c.banned?' <span class=tag style="background:#3d1f1f;color:#f85149">BANNED</span>':'')+'</td>'+
+'<td class=b>'+fmt(c.blocked)+'</td><td class=a>'+fmt(c.allowed)+'</td>'+
+'<td><button class=danger onclick="api(\'/api/ban?ip='+c.ip+'\').then(load)">'+(c.banned?'Unban':'Ban')+'</button></td></tr>'
+).join('')||'<tr><td colspan=4 class=empty>no clients yet</td></tr>';
+
+// Custom blocked
+cl.tBodies[0].innerHTML=s.custom.map(d=>'<tr><td class=mono>'+d+'</td><td style=text-align:right><button class=danger onclick="api(\'/api/unblock?d='+encodeURIComponent(d)+'\').then(load)">remove</button></td></tr>').join('')||'<tr><td class=empty>none</td></tr>';
+
+// Allowlist
+alt.tBodies[0].innerHTML=(s.allowlist||[]).map(d=>'<tr><td class=mono>'+d+'</td><td style=text-align:right><button class=danger onclick="api(\'/api/disallow?d='+encodeURIComponent(d)+'\').then(load)">remove</button></td></tr>').join('')||'<tr><td class=empty>none</td></tr>';
+}
+
+function toggle(){api('/api/toggle').then(load)}
+function addDom(){let d=dom.value.trim();if(d){api('/api/addblock?d='+encodeURIComponent(d)).then(()=>{dom.value='';load()})}}
+function addAllow(){let d=alw.value.trim();if(d){api('/api/allow?d='+encodeURIComponent(d)).then(()=>{alw.value='';load()})}}
+function reload(){api('/api/reload').then(r=>{if(r.ok)alert('Blocklist reloaded: '+r.num_hashes+' entries')})}
+function resetStats(){if(confirm('Reset all stats?'))api('/api/reset').then(load)}
+function clearLog(){api('/api/clearlog').then(load)}
+load();setInterval(load,2000);
+</script></body></html>

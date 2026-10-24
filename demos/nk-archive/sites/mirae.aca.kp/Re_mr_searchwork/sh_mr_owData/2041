@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>기사</title>     
+	<link href="/include/new/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/include/style1.css" rel="stylesheet" type="text/css" />  
+	<script src="/include/lib/assets/global/plugins/jquery.min.js" type="text/javascript"></script>	
+	<script src="/include/lib/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<style>   
+		html , body{
+			text-align:center;
+		}         
+		h3{
+			font-size:20pt;
+			margin:20px 50px;
+			padding:0px auto;
+			text-align:center;
+			font-weight: normal;
+			line-height: 1.5;
+			font-family: PRK P Chongbong, WKRGothic;
+			color:red;
+		}
+		.vcontent{
+			font-size: 15px;
+			margin:0px 50px;
+			padding:0px auto;
+			line-height: 1.9;
+			overflow: auto;
+			font-family: PRK P Chongbong, WKRGothic;
+			text-indent: 18px;
+
+		}
+		.name-nowrap {
+			white-space: nowrap;
+		}
+		strong.name-nowrap {
+			font-size: larger !important;
+		}
+	</style>
+</head>
+
+<body style="height:100%;">       
+	<h3 class=' ClsFontKo '>가치있는 과학연구성과를 이룩하기 위하여</h3>
+			<div class="vcontent  ClsFontKo " style="text-align: justify !important;">
+			국가과학원 생물공학분원 게놈생물안전성연구소의 과학자들이 가치있는 과학연구성과들을 이룩하기 위해 노력하고있다.		</div>
+	</body>
+</html>

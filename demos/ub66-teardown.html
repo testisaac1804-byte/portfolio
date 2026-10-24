@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Universe Browser (寰宇瀏覽器) — ub66.com: Analysis &amp; Archive</title>
+<style>
+  :root{
+    --bg:#f7f6f3; --panel:#fff; --ink:#1b1a18; --muted:#5f5c56; --line:#e2ded6;
+    --red:#b3261e; --redbg:#fdf1f0; --amber:#8a5a00; --amberbg:#fdf6e6;
+    --green:#1e6b3a; --greenbg:#eef7f1; --blue:#1a4f8a; --bluebg:#eef3fa;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans TC",sans-serif;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px 90px}
+  code,pre,.mono{font-family:var(--mono);font-size:.86em}
+  code{background:#efece5;padding:.12em .38em;border-radius:4px;
+       white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+  a{color:var(--blue)}
+  h1{font-size:clamp(26px,5vw,40px);line-height:1.15;letter-spacing:-.02em;margin:0 0 10px}
+  h2{font-size:clamp(20px,3.4vw,25px);letter-spacing:-.01em;margin:52px 0 14px;
+     padding-bottom:8px;border-bottom:2px solid var(--line)}
+  h3{font-size:17px;margin:30px 0 8px}
+  p{margin:0 0 14px}
+  ul,ol{margin:0 0 16px;padding-left:22px}
+  li{margin:6px 0}
+  small{color:var(--muted)}
+
+  header.hero{padding:52px 0 26px;border-bottom:1px solid var(--line);margin-bottom:8px}
+  .eyebrow{font:600 11px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .verdict{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;
+           font:700 12px/1 var(--mono);letter-spacing:.1em;padding:9px 14px;border-radius:999px;
+           text-transform:uppercase;margin-bottom:18px}
+  .sub{font-size:17px;color:var(--muted);max-width:62ch}
+
+  .box{border:1px solid var(--line);border-left-width:4px;background:var(--panel);
+       border-radius:8px;padding:18px 20px;margin:20px 0}
+  .box.red{border-left-color:var(--red);background:var(--redbg)}
+  .box.amber{border-left-color:#c98a00;background:var(--amberbg)}
+  .box.green{border-left-color:var(--green);background:var(--greenbg)}
+  .box.blue{border-left-color:var(--blue);background:var(--bluebg)}
+  .box h4{margin:0 0 8px;font-size:15px;letter-spacing:.01em}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px;background:var(--panel)}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#efece5;font-weight:650;font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;color:#4a4741}
+  td.k{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+  .tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:8px}
+  .tbl-scroll table{margin:0;border:none}
+
+  .pill{display:inline-block;font:600 11px/1 var(--mono);padding:4px 8px;border-radius:5px;
+        letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+  .pill.bad{background:#f9dcd9;color:#8c1c15}
+  .pill.warn{background:#fbeecb;color:#6f4800}
+  .pill.ok{background:#d9ecdf;color:#155733}
+  .pill.info{background:#dde7f4;color:#17406f}
+
+  .chain{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:18px 0;
+         font-family:var(--mono);font-size:12.5px}
+  .chain span.node{background:var(--panel);border:1px solid #d7d2c7;border-radius:6px;padding:9px 12px;word-break:break-all}
+  .chain span.arrow{color:var(--muted);font-size:15px}
+
+  figure{margin:26px 0}
+  figcaption{font-size:13px;color:var(--muted);margin-top:8px;text-align:center}
+
+  /* ---- phone frame for the exhibit ---- */
+  #mirror{scroll-margin-top:20px}
+  .phone-wrap{display:flex;justify-content:center;margin:26px 0 10px}
+  .phone{width:390px;max-width:100%;height:740px;background:#141210;border-radius:38px;
+         padding:12px;box-shadow:0 24px 60px rgba(0,0,0,.28),0 0 0 1px #2a2723 inset}
+  .phone .screen{width:100%;height:100%;border-radius:28px;overflow:hidden;background:#fff;position:relative}
+  .phone iframe{width:100%;height:100%;border:0;display:block;background:#fff}
+  .exhibit-note{text-align:center;font-size:13.5px;color:var(--muted);max-width:60ch;margin:12px auto 0}
+
+  .methods{font-size:14px;color:#403d37}
+  .methods li{margin:8px 0}
+  footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+  .kbd{font-family:var(--mono);font-size:12px;background:#efece5;border:1px solid #ddd8cc;
+       border-bottom-width:2px;border-radius:4px;padding:1px 5px}
+  @media (max-width:560px){
+    .phone{width:100%;height:660px;border-radius:26px;padding:8px}
+    .phone .screen{border-radius:20px}
+    h2{margin-top:40px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">Security teardown &middot; archived 19 Oct 2026</div>
+  <div class="verdict">&#9679; Do not install</div>
+  <h1>Universe Browser / 寰宇瀏覽器<br><span style="color:var(--muted);font-size:.62em;font-weight:500">ub66.com — "哪里都能去！" (go anywhere)</span></h1>
+  <p class="sub">
+    A browser marketed as the fastest, most private, safest way to browse — independently
+    reported to behave like malware, and tied to the illegal-gambling cybercrime economy of
+    Southeast Asia. Below: what researchers found, and what I verified directly against the
+    live site, the Windows launcher and the Android package.
+  </p>
+</header>
+
+<div class="box red">
+  <h4>Bottom line</h4>
+  <p>
+    <strong>Do not install this, and treat <code>ub66.com</code> as unsafe.</strong>
+    In October 2025 the network-security firm <strong>Infoblox</strong>, working with the
+    <strong>UN Office on Drugs and Crime (UNODC)</strong>, published research finding the
+    Windows build covertly installs background programs, behaves like a keylogger, disables
+    browser security features, routes traffic through China, and is distributed through a
+    network of illegal gambling sites. My own inspection of the current build (below) confirms
+    the operator identity, the China-hosted proxy infrastructure and a cluster of dangerous
+    engineering choices — including a publicly distributed APK that is <em>debuggable</em>.
+  </p>
+</div>
+
+<h2>1 &middot; What the site claims</h2>
+<p>The landing page is a single static screen with three promises and a download button:</p>
+<div class="tbl-scroll">
+<table>
+  <tr><th>Claim on ub66.com</th><th>Original Chinese</th></tr>
+  <tr><td>"Fastest Browser — use unique technology to improve the internet speed"</td><td>浏览速度更快 · 寰宇独家线路加速技术</td></tr>
+  <tr><td>"Best Secure — keep you away from danger"</td><td>最佳的安全性 · 保护您远离危险</td></tr>
+  <tr><td>"Most Private — simple settings to avoid privacy leaks"</td><td>最高级别的隐私保护 · 免设置，隐私不外露</td></tr>
+</table>
+</div>
+<p>
+  It is served in five languages — Simplified Chinese, Traditional Chinese, English, Korean and
+  Vietnamese — which matches the audience the researchers describe: users across Asia trying to
+  reach sites blocked or illegal in their own jurisdiction.
+</p>
+
+<h2>2 &middot; What independent researchers found</h2>
+<p>
+  Infoblox and UNODC reverse-engineered the Windows build. Their findings were covered by
+  <a href="https://www.wired.com/story/universe-browser-malware-gambling-networks/">WIRED</a>,
+  <a href="https://www.androidauthority.com/universe-privacy-browser-malware-3609655/">Android Authority</a>
+  and <a href="https://www.gadgets360.com/apps/news/universe-browser-malware-keylogging-security-tools-threat-report-9508567">Gadgets 360</a>.
+  Their conclusion: the features are <em>"consistent with remote access trojans (RATs) and other malware."</em>
+</p>
+<div class="tbl-scroll">
+<table>
+  <tr><th>Finding</th><th>What it means</th></tr>
+  <tr><td><strong>Keylogging</strong></td><td>Records keystrokes typed by the user.</td></tr>
+  <tr><td><strong>Traffic via China</strong></td><td>All browsing inside the browser is routed through servers in China.</td></tr>
+  <tr><td><strong>Silent background installs</strong></td><td>Covertly installs several programs that run in the background.</td></tr>
+  <tr><td><strong>Tampering with the device</strong></td><td>Alters the device's network connections and settings.</td></tr>
+  <tr><td><strong>Security features removed</strong></td><td>Right-click, settings and developer tools disabled; the browser runs with flags that disable sandboxing and legacy-SSL protections.</td></tr>
+  <tr><td><strong>Screenshot exfiltration</strong></td><td>Installs an extension able to upload screenshots to domains linked to the browser.</td></tr>
+  <tr><td><strong>Environment probing</strong></td><td>On launch, checks the user's location, language, and whether it is running inside a virtual machine / sandbox.</td></tr>
+</table>
+</div>
+<div class="box amber">
+  <h4>Who is behind it</h4>
+  <p>
+    Infoblox traced the browser's web infrastructure to <strong>BBIN</strong> (also Baoying Group),
+    an iGaming software supplier founded in Taiwan in 1999 and now based largely in the
+    Philippines — grouped by researchers as threat actor <strong>"Vault Viper"</strong>, connected
+    to money laundering, illegal online gambling, human trafficking and forced-labour scam
+    compounds. Researchers say the browser was advertised <em>only</em> on the domains Vault Viper
+    controls, typically linked at the bottom of casino sites next to the BBIN logo — and that in
+    criminal hands it would be <em>"the perfect tool to identify wealthy players and obtain access
+    to their machine."</em>
+  </p>
+</div>
+
+<h2>3 &middot; What I verified myself</h2>
+<p>
+  Independent inspection of the live site and the current binaries on 19 October 2026, without
+  executing anything. This section is my own evidence; it corroborates the research above and adds
+  detail the press coverage did not have.
+</p>
+
+<h3>3.1 &middot; Hosting and registration</h3>
+<div class="tbl-scroll">
+<table>
+  <tr><th>Item</th><th>Observation</th></tr>
+  <tr><td class="k">www.ub66.com</td><td>HTTP 200 but <strong>no ordinary web server</strong>: response headers are Google Cloud Storage (<code>x-goog-generation</code>, <code>server: UploadServer</code>) served through CloudFront (<code>x-amz-cf-pop: HKG1</code>). The site is a static bucket, not an operated web application.</td></tr>
+  <tr><td class="k">DNS</td><td>Resolves to AWS CloudFront edge IPs (<code>54.230.70.x</code>); name servers are AWS Route 53.</td></tr>
+  <tr><td class="k">WHOIS</td><td>Registered <strong>2014-03-17</strong> via GoDaddy, expires 2027-03-17, registrant redacted. Mail handled by GoDaddy (<code>smtp.secureserver.net</code>).</td></tr>
+  <tr><td class="k">Analytics</td><td>Two Google Analytics properties on every page: legacy <code>UA-105143657-1</code> and GA4 <code>G-CE11RD4VBG</code>.</td></tr>
+</table>
+</div>
+
+<h3>3.2 &middot; The download chain</h3>
+<p>
+  The download button does not link to a file. It goes to a gate page that runs a
+  <strong>fake CAPTCHA</strong> and then looks up the payload path from a JSON manifest:
+</p>
+<div class="chain">
+  <span class="node">www.ub66.com/download.html</span><span class="arrow">&rarr;</span>
+  <span class="node">files/files.json</span><span class="arrow">&rarr;</span>
+  <span class="node">cdn.n4dhx7bt.com<br>/files/2lDT9zYt…/</span><span class="arrow">&rarr;</span>
+  <span class="node">UniverseBrowser.apk<br>UB-Launcher.exe</span>
+</div>
+<p>What <code>files/files.json</code> currently returns:</p>
+<pre style="background:#efece5;padding:14px;border-radius:8px;overflow-x:auto;margin:0 0 16px"><code>{"windows": "files/2lDT9zYtHf2hdZvAarEhmA/UB-Launcher.exe",
+ "android": "files/2lDT9zYtHf2hdZvAarEhmA/UniverseBrowser.apk",
+ "ios":     "https://apps.apple.com/cn/app/…id1541131030"}</code></pre>
+
+<div class="box red">
+  <h4>Two anti-automation tricks in the download gate</h4>
+  <ul>
+    <li>
+      <strong>The CAPTCHA is fake.</strong> <code>download.html</code> generates a 4-digit code in
+      JavaScript (<code>getRandomNumber()</code>), draws it to a canvas, and compares your input
+      against the same variable in the same page. No server is asked. It stops nothing except
+      crawlers and sandbox scanners that won't solve it.
+    </li>
+    <li>
+      <strong>The download is deliberately delayed</strong> by a random 500&ndash;1500&nbsp;ms
+      (<code>getRandomTime()</code>) after a correct code, and retry limits are surfaced as
+      server errors. This is sandbox-evasion pacing, not user experience.
+    </li>
+  </ul>
+</div>
+
+<h3>3.3 &middot; The payload host mints a new timestamp on every request</h3>
+<p>
+  <code>cdn.n4dhx7bt.com</code> is an eight-character random domain registered
+  <strong>2021-09-29</strong> at GoDaddy, delegated to throwaway-looking name servers
+  (<code>snm1z3c.88ylccne.com</code>), fronted by CloudFront. Requesting the same APK three times
+  in six seconds:
+</p>
+<div class="tbl-scroll">
+<table>
+  <tr><th>Request</th><th><code>Last-Modified</code> returned</th><th>Actual time</th></tr>
+  <tr><td>1st</td><td class="k">Mon, 19-Oct-2026 15:11:38 GMT</td><td class="k">15:11:5x</td></tr>
+  <tr><td>2nd</td><td class="k">Mon, 19-Oct-2026 15:11:41 GMT</td><td class="k">15:11:5x</td></tr>
+  <tr><td>3rd</td><td class="k">Mon, 19-Oct-2026 15:11:58 GMT</td><td class="k">15:11:5x</td></tr>
+</table>
+</div>
+<p>
+  The file does not change (identical <code>Content-Length</code> every time) — the header is
+  <strong>generated from the clock at request time</strong>. The effect: every download looks like a
+  freshly built, never-before-seen file. Cache validation, "have I seen this binary" reputation
+  lookups and timestamp correlation against a known sample all stop working. This is a
+  deliberate anti-forensics measure, and it is not something a legitimate software CDN does.
+</p>
+
+<h3>3.4 &middot; The Windows "launcher"</h3>
+<div class="tbl-scroll">
+<table>
+  <tr><th>Property</th><th>Result</th></tr>
+  <tr><td>Filename</td><td class="k">UB-Launcher.exe</td></tr>
+  <tr><td>Type</td><td class="k">PE32 executable (GUI) Intel 80386, <strong>UPX compressed</strong>, stripped to external PDB</td></tr>
+  <tr><td>Size</td><td class="k">4,806,656 bytes</td></tr>
+  <tr><td>SHA-256</td><td class="k" style="white-space:normal;word-break:break-all">0592aad472bbadeb6edc55573d7bcd2cff560504de5c94d8e1600188f143e523</td></tr>
+  <tr><td>Signature</td><td><span class="pill bad">none</span> no code-signing certificate — Windows will warn on execution</td></tr>
+  <tr><td>Imports visible</td><td><code>WS2_32</code> (network), <code>CRYPT32</code>, <code>ADVAPI32</code>, <code>SHELL32</code>, <code>OPENGL32</code>, <code>OLEAUT32</code></td></tr>
+</table>
+</div>
+<p>
+  The file is named a <em>launcher</em> and is packaged with <strong>UPX</strong>, which compresses
+  the executable so its real code and strings are not visible until it decompresses itself in
+  memory. UPX is a legitimate packer, but on a consumer download with no code signature it is the
+  standard way to make static analysis and signature-based antivirus fail. This matches the
+  researchers' observation that the browser "covertly installs several programs" — a launcher is
+  exactly the component that fetches and installs the rest.
+</p>
+
+<h3>3.5 &middot; The Android package identifies its owner in the code</h3>
+<p>
+  <code>UniverseBrowser.apk</code> is 131,428,100 bytes, 6,078 files, built on a Chromium base
+  (<code>lib/arm64-v8a/libchrome.so</code>, <code>SplitChromeApplication</code>) — version string
+  <code>120.0.0.2102</code>. Its identity fields resolve the ownership question outright:
+</p>
+<div class="tbl-scroll">
+<table>
+  <tr><th>Field</th><th>Value</th><th>Note</th></tr>
+  <tr><td>Package name</td><td class="k">bbin.mobile.browser</td><td><span class="pill bad">BBIN</span> the company name is the package namespace</td></tr>
+  <tr><td>Signing certificate</td><td class="k">O=bbin, OU=bbin, CN=kingsley, C=tw</td><td><span class="pill bad">self-signed</span> an individual developer cert, not an organisational one</td></tr>
+  <tr><td>SHA-256</td><td class="k" style="white-space:normal;word-break:break-all">9aa99f839ef5fc2fc12c85fb46898aad1dc886b1282d9cf7684c9d46170ab4a6</td></tr>
+  <tr><td><code>debuggable</code></td><td class="k">true</td><td><span class="pill bad">critical</span> a production build left debuggable — anyone with ADB can attach a debugger and run code in the app's context</td></tr>
+  <tr><td><code>allowBackup</code></td><td class="k">false</td><td>app data deliberately not exportable</td></tr>
+</table>
+</div>
+<p>
+  The certificate and the package name are hard, first-party evidence for the link the researchers
+  established from web infrastructure: the app <em>is</em> a BBIN product, signed by a developer in
+  Taiwan. There is no third party to blame here.
+</p>
+
+<h3>3.6 &middot; Permissions: far beyond what a browser needs</h3>
+<p>A browser needs the network, storage and notifications. This one also asks for:</p>
+<div class="tbl-scroll">
+<table>
+  <tr><th>Permission</th><th>Why it matters in a browser</th></tr>
+  <tr><td class="k">READ_CONTACTS<br>GET_ACCOUNTS<br>MANAGE_ACCOUNTS<br>USE_CREDENTIALS</td><td><span class="pill bad">danger</span> Read the address book and enumerate/manage the accounts on the device. No browsing feature requires this.</td></tr>
+  <tr><td class="k">ACCESS_FINE_LOCATION<br>ACCESS_COARSE_LOCATION</td><td><span class="pill bad">danger</span> Precise location — matching the researchers' finding that the app checks where you are.</td></tr>
+  <tr><td class="k">CREDENTIAL_MANAGER_*</td><td><span class="pill bad">danger</span> Participate in the platform credential flow — the code path that hands saved passwords to apps and sites.</td></tr>
+  <tr><td class="k">DOWNLOAD_WITHOUT_NOTIFICATION</td><td><span class="pill bad">danger</span> Download files <strong>without showing the user a notification</strong>.</td></tr>
+  <tr><td class="k">REQUEST_INSTALL_PACKAGES</td><td><span class="pill bad">danger</span> Prompt the user to install <em>other</em> APKs. Together with the line above this is the classic dropper combination.</td></tr>
+  <tr><td class="k">QUERY_ALL_PACKAGES</td><td><span class="pill warn">high</span> Enumerate every app installed on the phone — a fingerprinting and targeting signal.</td></tr>
+  <tr><td class="k">RECORD_AUDIO · CAMERA</td><td><span class="pill warn">high</span> Microphone and camera access.</td></tr>
+  <tr><td class="k">RECEIVE_BOOT_COMPLETED<br>FOREGROUND_SERVICE</td><td><span class="pill warn">high</span> Start itself at boot and keep running in the foreground.</td></tr>
+  <tr><td class="k">READ/WRITE_EXTERNAL_STORAGE<br>READ_MEDIA_IMAGES/VIDEO/AUDIO</td><td><span class="pill warn">high</span> Broad access to the phone's files and media.</td></tr>
+  <tr><td class="k">NFC · BLUETOOTH_*</td><td>Peripheral access a browser has no reason to want.</td></tr>
+</table>
+</div>
+<p>
+  Taken one at a time each has a story. Taken together — contacts, accounts, credentials, precise
+  location, silent downloads, ability to install further apps, autostart — the set describes a
+  data-collection and payload-delivery platform that happens to render web pages.
+</p>
+
+<h3>3.7 &middot; Inside the "acceleration technology": an SSH tunnel written in Go</h3>
+<p>
+  The claimed "寰宇独家线路加速技术" (exclusive line-acceleration technology) is
+  <code>lib/arm64-v8a/libgojni.so</code> — a 14&nbsp;MB Go library whose internal package paths
+  (normally stripped in release builds) are intact:
+</p>
+<pre style="background:#efece5;padding:14px;border-radius:8px;overflow-x:auto;margin:0 0 16px"><code>/gomobile/src/ub66.com/HttpProxy/dududu/pkg/tunnel/ssh.go
+/gomobile/src/ub66.com/HttpProxy/dududu/pkg/tunnel/tunnel.go
+/gomobile/src/ub66.com/HttpProxy/dududu/pkg/failover/txt_lookup.go
+/gomobile/src/ub66.com/HttpProxy/dududu/pkg/secretutil/rc4.go
+/gomobile/src/ub66.com/HttpProxy/dududu/pkg/secretutil/teapotparser.go
+/gomobile/src/ub66.com/HttpProxy/dududu/pkg/route/route.go
+/gomobile/src/ub66.com/HttpProxy/dududu/pkg/forwarder/forwarder.go</code></pre>
+<p>Read together, that is the whole architecture, and none of it is "acceleration":</p>
+<ul>
+  <li><strong><code>tunnel/ssh.go</code></strong> — the proxy is carried over <strong>SSH tunnels</strong> (it links <code>golang.org/x/crypto/ssh</code>). Your HTTP traffic is wrapped in an SSH session to their server, so it leaves your network looking like an SSH connection, not a web request.</li>
+  <li><strong><code>secretutil/rc4.go</code> + <code>teapotparser.go</code></strong> — a custom framing protocol internally called <em>"teapot"</em> with <strong>RC4</strong> obfuscation. RC4 is cryptographically broken and deprecated everywhere else; here its job is to hide the traffic from inspection, not to protect it.</li>
+  <li><strong><code>failover/txt_lookup.go</code></strong> — the client finds its proxy servers through <strong>DNS TXT records</strong>. That is a takedown-resistance design: block or seize a host, change one TXT record, every installed client migrates. It also means the server list is invisible in the page source, the store listing, and to anyone who doesn't query TXT.</li>
+  <li><strong><code>route/route.go</code></strong> — maintains a local database of the domains you visit (<code>formatAndHashDomain</code>, <code>getRootDomain</code>, an SQLite store). The client keeps a record of your browsing destinations on disk.</li>
+</ul>
+
+<div class="box red">
+  <h4>Live DNS TXT records on ub66.com — the failover channel is real</h4>
+  <p><code>dig ub66.com TXT</code> currently returns two opaque 33-character tokens:</p>
+  <pre style="background:#fff;padding:12px;border-radius:6px;overflow-x:auto;margin:10px 0 0"><code>"hhpnzkm1dcgb4jgds9w5kk41c8k8qf63"
+"vggo8v3u1fs7rv3or2fhc7rmej"</code></pre>
+  <p style="margin-top:10px">
+    These are not SPF, DKIM or domain-verification records — they are not in the formats those use.
+    They are the kind of payload the <code>txt_lookup</code> failover path is built to consume.
+  </p>
+</div>
+
+<h3>3.8 &middot; Where the tunnel actually goes: Alibaba Cloud, mainland China</h3>
+<p>
+  The library contains hardcoded server addresses and a bootstrap resolver. Geolocating them:
+</p>
+<div class="tbl-scroll">
+<table>
+  <tr><th>Address</th><th>Location</th><th>Operator</th><th>Role</th></tr>
+  <tr><td class="k">223.5.5.5:53</td><td>Hangzhou, Zhejiang, <strong>China</strong></td><td>Aliyun (Alibaba)</td><td><span class="pill warn">bootstrap DNS</span> AliDNS, used to resolve before the tunnel is up</td></tr>
+  <tr><td class="k">47.107.54.97</td><td>Shenzhen, Guangdong, <strong>China</strong></td><td>Aliyun (AS37963)</td><td><span class="pill bad">tunnel endpoint</span></td></tr>
+  <tr><td class="k">47.107.59.28</td><td>Shenzhen, Guangdong, <strong>China</strong></td><td>Aliyun (AS37963)</td><td><span class="pill bad">tunnel endpoint</span></td></tr>
+  <tr><td class="k">47.243.69.88</td><td>Hong Kong</td><td>Alibaba Cloud HK (AS45102)</td><td><span class="pill bad">tunnel endpoint</span></td></tr>
+</table>
+</div>
+<p>
+  This is the concrete form of the researchers' "routes traffic through servers in China": at least
+  two hardcoded proxy endpoints sit on Alibaba Cloud in <strong>Shenzhen, mainland China</strong>,
+  with a Hong Kong node and a Chinese DNS resolver baked in. Combined with the SSH + RC4 + TXT
+  design, the picture is a private, obfuscated, China-rooted tunnel that the operator can re-point
+  at will — and every byte you browse inside this browser passes through it in the clear at the
+  exit.
+</p>
+
+<div class="box green">
+  <h4>An honest correction: it is not a device-wide VPN</h4>
+  <p>
+    Headlines saying it "routes <em>all</em> internet traffic through China" are easy to misread. I
+    checked the manifest for a <code>VpnService</code>, accessibility service or device-admin
+    receiver — <strong>none are declared</strong>. The proxy is
+    <code>org.chromium.base.local_proxy.ProtectorService</code>, a Chromium component that redirects
+    <em>this browser's own</em> traffic into the Go tunnel. So: pages you open in Universe Browser
+    go through their servers; the rest of your phone's traffic does not. That is a meaningful limit
+    on the damage — and it is still more than enough to expose everything you do in the app they
+    built to be the thing you browse with.
+  </p>
+</div>
+
+<h3>3.9 &middot; The iOS version and the app-store footprint</h3>
+<div class="tbl-scroll">
+<table>
+  <tr><th>Field</th><th>Value</th></tr>
+  <tr><td>App Store name</td><td>寰宇浏览器安全版 ("safe version")</td></tr>
+  <tr><td>Seller</td><td><strong>CYBERLAND GAME STUDIO CO., LTD.</strong> — a "game studio" publishing a browser</td></tr>
+  <tr><td>Bundle ID</td><td class="k">com.bbin.Titanic</td></tr>
+  <tr><td>Version / updated</td><td class="k">28.110.10 · released 2026-10-14 (actively maintained)</td></tr>
+  <tr><td>Rating</td><td class="k">2.99 / 5 from 620 ratings</td></tr>
+  <tr><td>Older iOS app (id1109296472)</td><td><span class="pill bad">gone</span> no longer returned by the App Store lookup API — delisted</td></tr>
+  <tr><td>Google Play</td><td><span class="pill bad">absent</span> Android distribution is sideloaded APKs only</td></tr>
+</table>
+</div>
+<p>
+  The bundle identifier <code>com.bbin.Titanic</code> and the developer certificate
+  <code>O=bbin</code> agree: the iOS app is BBIN's too, published under a game-studio entity. The
+  older listing having disappeared while the "safe version" replaced it is consistent with an app
+  that gets removed and re-published rather than one that sits in a store on its merits. That it
+  is <em>not on Google Play</em> is the single loudest signal here — sideloading is how Android
+  malware is delivered, because it skips store review entirely.
+</p>
+
+<h2>4 &middot; Threat model: who is actually harmed</h2>
+<p>Three distinct groups, with different exposure:</p>
+<ul>
+  <li>
+    <strong>Gambling users (the intended market).</strong> The browser is pushed from casino sites
+    to players who need to reach them. The operator then sits between the player and the world with
+    a keylogger-capable client, contact and account access, and the ability to install more. The
+    research conclusion is blunt: in criminal hands it identifies wealthy players and gets access
+    to their machine.
+  </li>
+  <li>
+    <strong>Anyone who installs it to "unblock" something.</strong> You trade a block you can see
+    for a middleman you cannot. Logins you type, pages you load, and the destinations you visit are
+    all visible to the exit node — an exit node in mainland China, selected by DNS records the
+    operator controls.
+  </li>
+  <li>
+    <strong>Bystanders.</strong> Contact and account permissions mean the harm does not stop at the
+    installer.
+  </li>
+</ul>
+
+<h2 id="mirror">5 &middot; The archived page</h2>
+<p>
+  A byte-faithful archive of the live landing page, captured 19 October 2026, running in a phone
+  frame. It is the real page — same HTML, CSS, images and JavaScript — with three deliberate
+  changes, because a live malicious-adjacent page should not be republished with its wires
+  attached:
+</p>
+<ol>
+  <li>All outbound network is blocked (<code>guard.js</code>): cross-origin requests, WebSockets
+      and beacons fail. <strong>Verified: zero external requests on load.</strong></li>
+  <li>The download flow is disabled. The QR code and download button explain that this is an
+      archive instead of producing a payload path. <strong>No APK or EXE is hosted here.</strong></li>
+  <li>The two Google Analytics beacons were removed so the archive does not report to the
+      operator's analytics property from this site.</li>
+</ol>
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="screen">
+      <iframe src="./ub66-mirror/index.html" title="Archived copy of ub66.com (inert)" referrerpolicy="no-referrer"></iframe>
+    </div>
+  </div>
+</div>
+<p class="exhibit-note">
+  Try the buttons — the archive refuses, and the bar at the bottom of the frame marks it as a
+  stored copy. The download gate page (<code>download.html</code>) is archived too, including its
+  fake canvas CAPTCHA, but its payload lookup is blocked.
+</p>
+
+<h2>6 &middot; If you already installed it</h2>
+<ol>
+  <li><strong>Android:</strong> Settings &rarr; Apps &rarr; Universe Browser &rarr; Uninstall. Then run a Play Protect scan and change passwords for anything you signed into inside that browser, starting with email and banking. Revoke any account access you granted it.</li>
+  <li><strong>Windows:</strong> uninstall "Universe Browser"/"UB Launcher" from Apps &amp; Features, then run a full scan with Microsoft Defender or Malwarebytes. Because the launcher is UPX-packed and installs further components, a clean scan is not proof — if it ran on a machine that holds accounts you care about, treat the machine as potentially compromised.</li>
+  <li><strong>iOS:</strong> delete the app; it has far less reach than the other builds but still sits between you and every site you visited.</li>
+  <li><strong>Then:</strong> if you used it to reach anything sensitive, change those credentials from a different, clean device.</li>
+</ol>
+
+<h2>7 &middot; What to use instead</h2>
+<ul>
+  <li><strong>Privacy without a middleman:</strong> Firefox with Strict Tracking Protection, Brave, or Tor Browser.</li>
+  <li><strong>If you genuinely need to reach a blocked site:</strong> a reputable paid VPN with a published no-logs audit — Mullvad, ProtonVPN, IVPN. Not a "VPN browser" from a casino-adjacent vendor, and not a free APK.</li>
+  <li><strong>Rule of thumb:</strong> if a browser is distributed by sideloaded APK from a gambling site, no amount of "military-grade privacy" copy on the landing page changes what it is.</li>
+</ul>
+
+<h2>8 &middot; Method, hashes and limits</h2>
+<p><strong>What I did:</strong> fetched the site and its assets with a desktop Chrome user-agent; read the shipped JavaScript (including the download gate); resolved DNS and WHOIS; fetched the APK and the Windows launcher over HTTPS and analysed them <strong>statically only</strong> — file type, hashes, PE metadata, the compiled manifest, the signing certificate and embedded strings. Nothing was executed, installed, or run in a sandbox with network access.</p>
+<div class="tbl-scroll">
+<table>
+  <tr><th>Artifact</th><th>Bytes</th><th>SHA-256</th></tr>
+  <tr><td class="k">index.html (live, original bytes)</td><td class="k">3,571</td><td class="k" style="white-space:normal;word-break:break-all">efb29a5f7500ea006b3a865dc9110ce7783b7a742dd7eebe9beeca0085084a59</td></tr>
+  <tr><td class="k">download.html (live)</td><td class="k">6,253</td><td class="k" style="white-space:normal;word-break:break-all">2a2bb560c23aa327f0df96d4a4f75770bffe320b0e9668d6cc3a68e683836b21</td></tr>
+  <tr><td class="k">UB-Launcher.exe</td><td class="k">4,806,656</td><td class="k" style="white-space:normal;word-break:break-all">0592aad472bbadeb6edc55573d7bcd2cff560504de5c94d8e1600188f143e523</td></tr>
+  <tr><td class="k">UniverseBrowser.apk</td><td class="k">131,428,100</td><td class="k" style="white-space:normal;word-break:break-all">9aa99f839ef5fc2fc12c85fb46898aad1dc886b1282d9cf7684c9d46170ab4a6</td></tr>
+</table>
+</div>
+<div class="box blue">
+  <h4>Limits of this analysis — stated plainly</h4>
+  <ul>
+    <li>I did <strong>not</strong> run the Windows build or the APK, so I have not reproduced keylogging or runtime behaviour myself. Those findings are Infoblox's and UNODC's, cited above; my work corroborates the identity, infrastructure and design, not the runtime telemetry.</li>
+    <li>The <strong>link to illegal gambling sites</strong> comes from the researchers' infrastructure mapping. The ub66.com landing page itself contains no casino content, no gambling links and no BBIN branding — the tie is in the operator identity (package <code>bbin.*</code>, certificate <code>O=bbin</code>), not on the page.</li>
+    <li>The DNS TXT tokens are consistent with the <code>txt_lookup</code> failover design and are not standard SPF/DKIM/verification formats, but I have not decrypted them, so I present that as strong inference rather than proof.</li>
+    <li>The dynamic <code>Last-Modified</code> header is a fact I measured. <em>Why</em> it is done is my inference — a legitimate CDN has no reason to do it.</li>
+  </ul>
+</div>
+<div class="box amber">
+  <h4>Why the binaries are not republished here</h4>
+  <p>
+    This exhibit archives a public marketing page. It deliberately does <strong>not</strong> host,
+    mirror or re-share <code>UB-Launcher.exe</code> or <code>UniverseBrowser.apk</code>. The hashes
+    and file sizes are published so anyone can identify a copy they encounter; the files themselves
+    stay where they are. Analysing a sample is not the same as distributing it.
+  </p>
+</div>
+
+<footer>
+  <p>
+    Analysis and archive, 19 October 2026. Prior research: Infoblox Threat Intelligence with UNODC
+    ROSEA Pacific, <em>"Vault Viper: High-Stakes Hidden Threats"</em>; reporting by WIRED, Android
+    Authority and Gadgets 360.
+  </p>
+  <p>
+    Original page archived from <code>https://www.ub66.com/</code>. Quotes from the page are
+    reproduced for identification and criticism. This page is independent analysis, not affiliated
+    with the vendor.
+  </p>
+</footer>
+
+</div>
+</body>
+</html>

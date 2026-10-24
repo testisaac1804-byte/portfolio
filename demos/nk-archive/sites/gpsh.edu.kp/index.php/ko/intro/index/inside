@@ -1,0 +1,652 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>인민대학습당 홈페지 - 《남산》-구내전경페지</title>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="인민대학습당의 내부전경(층별 방배치도)를 소개하고 해당 구역(열람실, 강의실)들에 대한 상세소개를 안내합니다.">
+<meta name="keyword" content="인민대학습당,웨브싸이트,홈페지,남산,인민대학습당소개,내부전경,층별 방배치도,열람실,강의실">
+<meta name="author" content="Kanegin, K.H.Y., K.S.H., KKK">
+<meta name="lang" content="ko">
+
+<link rel="shortcut icon" type="image/png" href="/assets/imgs/gpsh-icon-16.png?20240706.4.7.6">
+
+<link rel="stylesheet" href="/assets/libs/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/libs/nivo-slider/themes/light/light.min.css">
+<link rel="stylesheet" href="/assets/libs/nivo-slider/nivo-slider.min.css">
+<link rel="stylesheet" href="/assets/libs/owl-carousel/2.2.1/owl.carousel.min.css">
+<link rel="stylesheet" href="/assets/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/assets/libs/font-awesome.v6.1.2/css/all.min.css?">
+<link rel="stylesheet" href="/assets/libs/colorlib/vendor/photoswipe/css/vendor.min.css?">
+
+<link rel="stylesheet" href="/assets/css/linearicons.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/magnific-popup.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/animate.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/owl.carousel.plugin.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/global.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/font-family_ko.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/compatible.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/books.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/encyclopedia.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/rmenjoy.min.css?20240706.4.7.6">
+<link rel="manifest" href="/assets/manifest.json">
+
+<script>
+let BASE_URL = '/';
+let SITE_URL = '/index.php/ko/';
+let CURRENT_URL = 'intro/index/inside';
+let isMobile = false;
+let localeLang = 'ko';
+</script><script src="/assets/libs/jquery/jquery-3.4.1.ex.min.js"></script>
+<script src="/assets/libs/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body class="_top" oncontextmenu="return true;">
+    <div id="preloader">
+      <div class="preload-content">
+        <div id="gpsh-load"></div>
+      </div>
+    </div>
+    <header id="divHeader" class="header-area bo00">
+  <div class="container">
+    <div class="row mx-n15">
+      <div class="col-12 px-0">
+        <nav class="navbar-expand d-inline fixed-top languagebar bo00">
+          <ul class="navbar-nav justify-content-end language header">
+                          <li class="nav-link  active">
+                <a href="#">
+                  <span class="d-inline">조선어</span>
+                  <span class="d-none">가</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/en/intro/index/inside">
+                  <span class="d-inline">English</span>
+                  <span class="d-none">En</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/cn/intro/index/inside">
+                  <span class="d-inline">中文</span>
+                  <span class="d-none">中</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/ru/intro/index/inside">
+                  <span class="d-inline">Русский</span>
+                  <span class="d-none">Ру</span>
+                </a>
+              </li>
+                      </ul>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-dark" id="gpshNavbar">
+	<a class="navbar-brand" href="/index.php/ko/" title="첫페지" >
+		<img id="logo_namsan" src="/assets/imgs/namsan.png" alt="남산" />
+		<span id="domain">www.gpsh.edu.kp</span>
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gpshNav">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="gpshNav">
+	<ul class="navbar-nav ml-auto">
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">불멸의 령도</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/leader/news_list"
+        title="혁명활동">혁명활동</a>
+      <a class="dropdown-item" href="/index.php/ko/anecdote/article_list"
+        title="혁명일화">혁명일화</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/leadership"
+        title="령도업적">령도업적</a>
+    </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 active"><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">소개</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/intro/index/serial#about-gpsh"
+        title="소개편집물">소개편집물</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/history#about-gpsh"
+        title="연혁">연혁</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/president#about-gpsh"
+        title="총장들">총장들</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/inside#about-gpsh"
+        title="구내전경">구내전경</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/ourfaces_list#about-gpsh"
+        title="우리모습">우리모습</a>
+    </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">강의</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/lecture/today_in7day"
+        title="주간 강의, 강습일정">주간일정</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/0"
+        title="사회과학강의">사회과학강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/1"
+        title="자연과학강의">자연과학강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/2"
+        title="새기술통보강의">새기술통보강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/3"
+        title="원격강의">원격강의</a>
+          </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">봉사</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/rmenjoy/room"
+        title="음악감상">음악감상</a>
+      <a class="dropdown-item" href="/index.php/ko/newbooks/view_list"
+        title="도서소개">도서소개</a>
+      <a class="dropdown-item" href="/index.php/ko/oldbooks/view_list"
+        title="민족고전">민족고전</a>
+      <a class="dropdown-item" href="/index.php/ko/encyclopedia/view_list/1"
+        title="백과상식">백과상식</a>
+    </div>
+  </li>
+  <li class="nav-item px-1 "><a class="nav-link" href="/index.php/ko/libraries/index/ko-lib-cp"
+      title="도서관협회">도서관협회</a></li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">대외교류</a>
+    <div class="dropdown-menu dropdown-menu-right submenu">
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/0"
+        title="참관">참관</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/1"
+        title="도서교류">도서교류</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/2"
+        title="도서기증">도서기증</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/3"
+        title="국제토론회 및 전시회">국제토론회 및 전시회</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/4"
+        title="국제기구위탁도서관">국제기구위탁도서관</a>
+    </div>
+  </li>
+</ul>
+<div id="search-wrapper" class="d-none">
+  <form action="#" method="post">
+    <input type="text" id="search" name="search" class="search"
+      value=""
+      onkeypress="return checkProhibitionalChars('#search', '#errmsg2');"
+      placeholder="검색어를 입력하십시오." />
+    <div id="close-icon"></div>
+    <input class="d-none" type="submit" value="" />
+    <input type="hidden" name="csrftk" value="b0a2d9a3b30494569fb0129e51baddb8" />
+    <span id="errmsg2" style="display: none;">* 경고! - 금지된 문자를 포함하고 있습니다.</span>
+  </form>
+</div>
+<script type="text/javascript">
+  $().ready(function() {
+    // 《혁명활동소식》과 《휴관일》소개에서 주체년호표기처리
+    let jucheobjs = $(".juche.date.column, #holidays p");
+    jucheobjs.each(function() {
+        juchehtml = $(this).html() || '';
+        juchehtml = juchehtml.replace(/(주체|JUCHE|主体|чучхе)\d+\((\d+)\)/ig, '$2');
+        $(this).html(juchehtml);
+    });
+    // 외부싸이트소개
+    let servicetime = $('div.service-time #accordion');
+    if (servicetime.length) {
+      let servicetimes = servicetime.children('div');
+      // 강의시간과 봉사시간소개부를 없앤다.
+      if (servicetimes.length > 2) {
+        $(servicetimes[0]).addClass('d-none'); // 강의시간
+        // $(servicetimes[1]).addClass('d-none'); // 봉사시간
+      }
+      // 외부싸이트(광야홈페지)소개부를 추가한다.
+      let gwangya = $('<div class="card mb-3"><div class="card-header"><a class="collapsed1 card-link1" data-toggle1="collapse" href="http://www.dprkportal.kp" title="www.dprkportal.kp" target="_blank"><img src="/./data/outsites/gwangya.png" width="150px" alt="www.dprkportal.kp" /></a></div>');
+      servicetime.append(gwangya);
+    }
+  });
+</script>
+	</div>
+</nav>
+      </div>
+    </div>
+  </div>
+</header>    <section class="body" style="min-height: 900px;">
+      
+<a href="#about-gpsh" class="scrollto">
+  <div class="poster-area row-xs-150 row-sm-200 row-md-300 row-lg-400 bg-img bg-overlay bo03"
+    style="background-image: url(/./data/intro/poster_01.jpg); background-size: cover;
+      background-position: center;"></div></a>
+<div id="about-gpsh" class="container-fluid py-25 py-md-50 py-lg-100">
+  <div class="row">
+
+    <nav class="vertical-nav bo08">
+  <a href="#0" class="vertical-nav__close" title="닫기"><span></span></a>
+
+  <div class="vertical-nav__content">
+    <h3>인민대학습당소개</h3>
+    <ul class="vertical-nav__list nav-pills">
+          <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/index/serial#about-gpsh"
+        title="소개편집물">소개편집물</a></li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/index/history#about-gpsh"
+        title="연혁">연혁</a></li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/index/duty#about-gpsh"
+        title="사명,임무">사명,임무</a></li>
+        <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/index/operating#about-gpsh"
+        title="운영체계">운영체계</a></li>
+
+          <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/index/president#about-gpsh"
+        title="총장들">총장들</a></li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/index/merits#about-gpsh"
+        title="공로자들">공로자들</a></li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/index.php/ko/intro/index/inside#about-gpsh"
+        title="구내전경">구내전경</a></li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/ourfaces_list#about-gpsh"
+        title="우리모습">우리모습</a></li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/index/outside#about-gpsh"
+        title="외부풍경">외부풍경</a></li>
+        </ul>
+  </div>
+</nav>
+    <div class="d-flex">
+      <a class="vertical-nav-toggle twinkle" href="#0">
+        <span class="vertical-nav-text"></span>
+        <span class="vertical-nav-icon"></span>
+      </a>
+      <h2 class="display-5 text-left mb-4 pl-5 bukul toptitle">인민대학습당소개</h2>
+    </div>
+  </div>
+  <div class="row mx-n15">
+    <div class="col-12">
+      
+<h1 class="d-none">구내전경</h1>
+<div id="floor" class="container">
+  <div class="tabbedPanels">
+    <ul class="nav nav-pills tabs">
+                  <li class="nav-item"> <a class="nav-link" id="f1-link" href="#panel1" tabindex="1">1층</a></li>
+                  <li class="nav-item"> <a class="nav-link" id="f2-link" href="#panel2" tabindex="2">2층</a></li>
+                  <li class="nav-item"> <a class="nav-link" id="f3-link" href="#panel3" tabindex="3">3층</a></li>
+                  <li class="nav-item"> <a class="nav-link" id="f4-link" href="#panel4" tabindex="4">4층</a></li>
+                  <li class="nav-item"> <a class="nav-link" id="f5-link" href="#panel5" tabindex="5">5층</a></li>
+          </ul>
+    <div class="panelContainer">
+                  <div id="panel1" class="panel">
+        <div class="text introfloor" style="text-align: center;">
+          <img src="/./data/intro/ko/roomguide/1f.png" 
+              class="floormap" usemap="#1fmap" alt="1층" 
+              data-ow="800"
+              data-oh="741" />
+          <map name="1fmap" id="1fmap">
+                                                      <area class="iframe" shape="rect" coords="19,31,131,134"  
+                    href="/index.php/ko/intro/room?no=1003" 
+                    alt="열람실1" data-orgcoords="19,31,131,134">
+                                                      <area class="iframe" shape="rect" coords="186,53,296,133"  
+                    href="/index.php/ko/intro/room?no=1004" 
+                    alt="열람실2" data-orgcoords="186,53,296,133">
+                                                      <area class="iframe" shape="rect" coords="300,10,454,132"  
+                    href="/index.php/ko/intro/room?no=1005" 
+                    alt="열람실3" data-orgcoords="300,10,454,132">
+                                                      <area class="iframe" shape="rect" coords="17,523,130,630"  
+                    href="/index.php/ko/intro/room?no=1028" 
+                    alt="열람실4" data-orgcoords="17,523,130,630">
+                                                      <area class="iframe" shape="rect" coords="635,332,791,407"  
+                    href="/index.php/ko/intro/room?no=1018" 
+                    alt="400석강의실" data-orgcoords="635,332,791,407">
+                                                      <area class="iframe" shape="rect" coords="635,258,790,333"  
+                    href="/index.php/ko/intro/room?no=1019" 
+                    alt="400석강의실" data-orgcoords="635,258,790,333">
+                                                      <area class="iframe" shape="rect" coords="340,189,430,470"  
+                    href="/index.php/ko/intro/room?no=1029" 
+                    alt="로작서고" data-orgcoords="340,189,430,470">
+                                                      <area class="iframe" shape="rect" coords="430,189,544,470"  
+                    href="/index.php/ko/intro/room?no=1037" 
+                    alt="대출서고" data-orgcoords="430,189,544,470">
+                                                      <area class="iframe" shape="rect" coords="300,189,338,228"  
+                    href="/index.php/ko/intro/room?no=1042" 
+                    alt="사회과학문답실" data-orgcoords="300,189,338,228">
+                                                      <area class="iframe" shape="rect" coords="186,235,312,425"  
+                    href="/index.php/ko/intro/room?no=centerhall" 
+                    alt="콤퓨터종합검색홀(중앙홀)" data-orgcoords="186,235,312,425">
+                                                                                                                </map>
+        </div>
+      </div>
+                  <div id="panel2" class="panel">
+        <div class="text introfloor" style="text-align: center;">
+          <img src="/./data/intro/ko/roomguide/2f.png" 
+              class="floormap" usemap="#2fmap" alt="2층" 
+              data-ow="800"
+              data-oh="741" />
+          <map name="2fmap" id="2fmap">
+                                                      <area class="iframe" shape="rect" coords="17,31,130,132"  
+                    href="/index.php/ko/intro/room?no=2006" 
+                    alt="열람실5" data-orgcoords="17,31,130,132">
+                                                      <area class="iframe" shape="rect" coords="186,52,295,133"  
+                    href="/index.php/ko/intro/room?no=2010" 
+                    alt="열람실6" data-orgcoords="186,52,295,133">
+                                                      <area class="iframe" shape="rect" coords="299,11,450,130"  
+                    href="/index.php/ko/intro/room?no=2011" 
+                    alt="열람실7" data-orgcoords="299,11,450,130">
+                                                      <area class="iframe" shape="rect" coords="455,522,566,611"  
+                    href="/index.php/ko/intro/room?no=2030" 
+                    alt="열람실8" data-orgcoords="455,522,566,611">
+                                                      <area class="iframe" shape="rect" coords="298,523,450,650"  
+                    href="/index.php/ko/intro/room?no=2031" 
+                    alt="열람실9" data-orgcoords="298,523,450,650">
+                                                      <area class="iframe" shape="rect" coords="20,526,130,632"  
+                    href="/index.php/ko/intro/room?no=2038" 
+                    alt="열람실10" data-orgcoords="20,526,130,632">
+                                                      <area class="iframe" shape="rect" coords="67,253,181,406"  
+                    href="/index.php/ko/intro/room?no=2003" 
+                    alt="열람실12" data-orgcoords="67,253,181,406">
+                                                      <area class="iframe" shape="rect" coords="343,187,543,468"  
+                    href="/index.php/ko/intro/room?no=2024" 
+                    alt="2층서고" data-orgcoords="343,187,543,468">
+                                                      <area class="iframe" shape="rect" coords="639,259,789,403"  
+                    href="/index.php/ko/intro/room?no=2020" 
+                    alt="800석강의실" data-orgcoords="639,259,789,403">
+                                                      <area class="iframe" shape="rect" coords="564,53,612,115"  
+                    href="/index.php/ko/intro/room?no=2014" 
+                    alt="강의실1" data-orgcoords="564,53,612,115">
+                                                                                                                                    <area class="iframe" shape="rect" coords="298,430,337,470"  
+                    href="/index.php/ko/intro/room?no=2040" 
+                    alt="자연과학문답실" data-orgcoords="298,430,337,470">
+                                                      <area class="iframe" shape="rect" coords="66,409,130,494"  
+                    href="/index.php/ko/intro/room?no=2001" 
+                    alt="강의실10" data-orgcoords="66,409,130,494">
+                                                      <area class="iframe" shape="rect" coords="66,165,130,249"  
+                    href="/index.php/ko/intro/room?no=2005" 
+                    alt="강의실8" data-orgcoords="66,165,130,249">
+                                  </map>
+        </div>
+      </div>
+                  <div id="panel3" class="panel">
+        <div class="text introfloor" style="text-align: center;">
+          <img src="/./data/intro/ko/roomguide/3f.png" 
+              class="floormap" usemap="#3fmap" alt="3층" 
+              data-ow="800"
+              data-oh="741" />
+          <map name="3fmap" id="3fmap">
+                                                      <area class="iframe" shape="rect" coords="19,29,131,133"  
+                    href="/index.php/ko/intro/room?no=3001" 
+                    alt="음악감상실" data-orgcoords="19,29,131,133">
+                                                      <area class="iframe" shape="rect" coords="185,52,295,132"  
+                    href="/index.php/ko/intro/room?no=3003" 
+                    alt="열람실13" data-orgcoords="185,52,295,132">
+                                                      <area class="iframe" shape="rect" coords="297,9,452,135"  
+                    href="/index.php/ko/intro/room?no=3004" 
+                    alt="열람실14" data-orgcoords="297,9,452,135">
+                                                      <area class="iframe" shape="rect" coords="454,53,560,133"  
+                    href="/index.php/ko/intro/room?no=3006" 
+                    alt="열람실15" data-orgcoords="454,53,560,133">
+                                                                                <area class="iframe" shape="rect" coords="455,519,545,611"  
+                    href="/index.php/ko/intro/room?no=3023" 
+                    alt="애국도서열람실" data-orgcoords="455,519,545,611">
+                                                                                <area class="iframe" shape="rect" coords="341,188,543,314"  
+                    href="/index.php/ko/intro/room?no=3038_0" 
+                    alt="3층서고" data-orgcoords="341,188,543,314">
+                                                      <area class="iframe" shape="rect" coords="341,315,543,472"  
+                    href="/index.php/ko/intro/room?no=3038_1" 
+                    alt="음악서고" data-orgcoords="341,315,543,472">
+                                                                                                                                                                                        <area class="iframe" shape="rect" coords="19,522,128,633"  
+                    href="/index.php/ko/intro/room?no=3031" 
+                    alt="국제기구위탁도서관" data-orgcoords="19,522,128,633">
+                                                                                      </map>
+        </div>
+      </div>
+                  <div id="panel4" class="panel">
+        <div class="text introfloor" style="text-align: center;">
+          <img src="/./data/intro/ko/roomguide/4f.png" 
+              class="floormap" usemap="#4fmap" alt="4층" 
+              data-ow="700"
+              data-oh="620" />
+          <map name="4fmap" id="4fmap">
+                                                      <area class="iframe" shape="rect" coords="104,14,204,150"  
+                    href="/index.php/ko/intro/room?no=4015" 
+                    alt="열람실17" data-orgcoords="104,14,204,150">
+                                                      <area class="iframe" shape="rect" coords="104,470,204,606"  
+                    href="/index.php/ko/intro/room?no=4013" 
+                    alt="열람실18" data-orgcoords="104,470,204,606">
+                                                      <area class="iframe" shape="rect" coords="284,82,598,336"  
+                    href="/index.php/ko/intro/room?no=4014_0" 
+                    alt="4층서고(국문)" data-orgcoords="284,82,598,336">
+                                                      <area class="iframe" shape="rect" coords="284,338,598,536"  
+                    href="/index.php/ko/intro/room?no=4014_1" 
+                    alt="4층서고(특허)" data-orgcoords="284,338,598,536">
+                                  </map>
+        </div>
+      </div>
+                  <div id="panel5" class="panel">
+        <div class="text introfloor" style="text-align: center;">
+          <img src="/./data/intro/ko/roomguide/5f.png" 
+              class="floormap" usemap="#5fmap" alt="5층" 
+              data-ow="640"
+              data-oh="530" />
+          <map name="5fmap" id="5fmap">
+                                                                                <area class="iframe" shape="rect" coords="12,152,182,382"  
+                    href="/index.php/ko/intro/room?no=5003" 
+                    alt="열람실20" data-orgcoords="12,152,182,382">
+                                                      <area class="iframe" shape="rect" coords="258,50,560,486"  
+                    href="/index.php/ko/intro/room?no=5004" 
+                    alt="5층서고" data-orgcoords="258,50,560,486">
+                                  </map>
+        </div>
+      </div>
+          </div>
+  </div>
+</div>
+<script>
+  var actionPanel = "";
+  // recalculate the map coords
+  function recalculateMapCoords() {
+    if (actionPanel == "") return;
+    var $img = $(actionPanel + " img.floormap");
+    var oiW = $img.data("ow");
+    var oiH = $img.data("oh");
+    var riW = $img.width();
+    var riH = $img.height();
+    //alert($img.attr("alt") + "'s floors image's size: (oiW x oiH): " + oiW + " x " + oiH + ", (riW x riH): " + riW+ " x " + riH);
+    if (oiW == riW && oiH == riH)
+      return;
+    var usemap = $img.attr("usemap");
+    $(usemap + " area.iframe").each(function (index) {
+      var $this = $(this);
+      var newcoords = "";
+      var shape = $this.attr('shape');
+      var orgcoords = $this.data('orgcoords').split(',');
+      orgcoords.forEach(function (value, index, array) {
+        if ((index % 2) == 0)
+          newcoords += Math.round(parseInt(value) * riW / oiW); 
+        else
+          newcoords += Math.round(parseInt(value) * riH / oiH); 
+        newcoords += (index < (orgcoords.length -1)) ? "," : "";
+      });
+      $this.attr('coords', newcoords);
+    });
+  }
+  $().ready(function() {
+    //recalculateMapCoords();
+    $(window).resize(recalculateMapCoords);
+    $('area.iframe').fancybox({
+      type: 'iframe',
+      padding: 3
+    });
+    $(".tabs a").click(function () {
+      // save $(this) in a variable for efficiency
+      var $this = $(this);
+      // hide panels
+      $(".panel").hide();
+      $(".tabs a.active").removeClass("active");
+      // add active state to new tab
+      $this.addClass("active").blur();
+      // retrieve href from link (is id of panel to display)
+      var panel = $this.attr("href");
+      // show panel
+      $(panel).fadeIn(250);
+      // recalculate a map's coords
+      actionPanel = panel;
+      recalculateMapCoords();
+      // call counter
+      var title = ($(panel + " img").length) ? $(panel + " img").attr("alt") : null;
+      counter("intro/0", title, panel);
+      // save an actived panel in cookie
+      setCookie("floor_actived_panel", $(panel).attr("id"), 0.1);
+      // don't follow link down page
+      return (false);
+    }); // end click
+    // open first tab
+    var panelid = getCookie("floor_actived_panel");
+    if (panelid == "")
+      $(".tabs li:first a").click();
+    else
+      $(".tabs a[href='#"+panelid+"']").click();
+  });
+</script>    </div>
+  </div>
+</div>
+    </section>
+    <footer class="footer-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 contact-us">
+        <ul class="contact-us text-center">
+          <li id="footer-gpsh-full-name" class="mb-4 text-white-50">
+            <i class="fa fa-map-marker fa-16 text-white-50" aria-hidden="true"></i>
+            조선민주주의인민공화국 인민대학습당</li>
+          <li id="footer-phone" class="mb-4 text-white-50">
+            <i class="fa fa-phone fa-16 text-white-50" aria-hidden="true"></i> 
+            전화번호: 850-2-18111(3818472)</li>
+          <li id="footer-email" class="mb-4 text-white-50 align-middle">
+            <i class="fa fa-envelope fa-12 text-white-50" aria-hidden="true"></i>
+            전자우편: <img src="/assets/imgs/nsj-email.png" alt="nsj-email"/></li>
+        </ul>
+      </div>
+      <div class="d-none-sm col-md-3 gpsh-outline">
+      </div>
+      <div class="col-md-4 text-center service-time">
+        <div id="accordion">
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-user-clock" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#coursetime" 
+                title="강의시간">
+                강의시간 [9:00~19:30]
+              </a>
+            </div>
+            <div id="coursetime" class="collapse" data-parent="#accordion">
+              <p class="card-body chongbong">
+                강의, 강습은 일정에 따라 진행하며 휴관일과 토요일, 일요일, 국가적명절일에는 하지 않습니다.              </p>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-briefcase-clock" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#opentime" 
+                title="봉사시간">
+                봉사시간 [9:00~18:00]
+              </a>
+            </div>
+            <div id="opentime" class="collapse" data-parent="#accordion">
+              <p class="card-body chongbong">
+                휴관일과 국가적명절을 제외한 모든 날들에 봉사합니다.              </p>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-coffee" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#holidays" 
+                title="휴 관 일">
+                휴 관 일              </a>
+            </div>
+            <div id="holidays" class="collapse" data-parent="#accordion">              <p class="card-body text-center chongbong">주체114(2025). <span
+                  class="national-holidays" title="조선민주주의인민공화국 헌법절">12.27. </span><span
+                  class="closed-holidays" title="휴관일">12.11. </span><span
+                  class="closed-holidays" title="휴관일">12.25. </span>              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+    <!-- photoswipe background
+================================================== -->
+<section>
+<div aria-hidden="true" class="pswp" role="dialog" tabindex="-1">
+
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title=
+                "Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title=
+                "Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title=
+            "Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div> <!-- end photoSwipe background -->
+</section>    <script src="/assets/libs/popper/1.16.0/umd/popper.min.js"></script>
+<script src="/assets/libs/jquery/ui/1.11.3/jquery-ui.min.js"></script>
+<!-- 
+<script src="/assets/libs/jquery/ui/jquery-ui-i18n.min.js"></script>
+-->
+<script	src="/assets/libs/nivo-slider/jquery.nivo.slider.pack.js"></script>
+<script src="/assets/libs/owl-carousel/2.2.1/owl.carousel.min.js"></script>
+<script	src="/assets/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script src="/assets/libs/mobile/fastclick.js"></script>
+<script src="/assets/libs/mobile/swiper.min.js"></script>
+<script src="/assets/libs/colorlib/vendor/parallax100/parallax100.js"></script>
+<script>
+    $('.parallax100').parallax100();
+</script>
+<script src="/assets/libs/colorlib/vendor/photoswipe/js/modernizr.js"></script>
+<script src="/assets/libs/colorlib/vendor/photoswipe/js/pace.min.js"></script>
+
+<!-- script src="/assets/js/jquery.magnific-popup.min.js?"></script -->
+<script src="/assets/js/plugins_add.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/plugins.min.js?20240706.4.7.6"></script>
+<script src="/assets/libs/colorlib/vendor/isotope/imagesloaded.pkgd.min.js"></script>
+<script src="/assets/libs/colorlib/vendor/isotope/isotope.pkgd.min.js"></script>
+<script src="/assets/js/active.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/global.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/books.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/encyclopedia.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/rmenjoy.global.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/leader.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/counter.js?20240706.4.7.6"></script>
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="/assets/libs/assets/ie8-responsive-file-warning.js"></script><![endif]-->
+<script	src="/assets/libs/assets/ie-emulation-modes-warning.js"></script>
+<!-- IE10 agent hack for Surface/desktop Windows 8 bug -->
+<script	src="/assets/libs/assets/ie10-viewport-bug-workaround.js"></script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="/assets/libs/assets/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="/assets/libs/assets/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+  </body>
+</html>

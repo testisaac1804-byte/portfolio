@@ -1,0 +1,1 @@
+import{g as a,j as n,o,c as s,n as r}from"./Vd8lgA-y.js";const m=a({__name:"index",async setup(c){let e,t;return[e,t]=n(()=>r("/workspace/generate")),await e,t(),(_,p)=>(o(),s("div"))}});export{m as default};

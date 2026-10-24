@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="zh-cn" lang="zh">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!-- ARCHIVE GUARD (added by the archiver, not part of the original site) -->
+ <script src="guard.js"></script>
+ <link rel="stylesheet" href="css/pico.min.css">
+ <script src="js/utilities.js"></script>
+ <!-- Google Analytics + GA4 tags removed by the archiver; the download
+      payload path (files/files.json -> cdn.n4dhx7bt.com) is blocked. -->
+ <script>window.dataLayer=window.dataLayer||[];function gtag(){}window.ga=function(){};window.ga.create=function(){};</script>
+ <style>
+ #error-message {
+ color: red;
+ }
+ </style>
+ <title>下载寰宇浏览器</title>
+</head>
+<body>
+<header class="container">
+
+ <section id="preview">
+ <h2>下载寰宇浏览器</h2>
+ <p></p>
+ <article aria-busy="true" id="loading"></article>
+
+ <article id="code" hidden>
+ <canvas id="canvas"></canvas>
+ </article>
+
+ <form id="form">
+ <div class="grid">
+ <input type="number" id="code-input" name="code" placeholder="请输入验证码" aria-label="First name" required="true">
+ <h2 id="error-message" hidden>验证码输入错误!!</h2>
+ <button id="download">下载</button>
+ <button class="contrast" id="reload" hidden>更新验证码</button>
+ </div>
+ </form>
+ </section>
+</header>
+
+
+</body>
+<script>
+ document.getElementById('form').onsubmit = () => { return false };
+ document.getElementById('reload').onclick = () => {
+ document.location.reload();
+ };
+
+ function showDownloadMessage(message, reloadVisible = true) {
+ let errorDom = document.getElementById("error-message");
+ if (errorDom) {
+ errorDom.innerText = message;
+ setDomVisible("error-message", true);
+ }
+ setDomVisible("download", false);
+ setDomVisible("reload", reloadVisible);
+ }
+
+ function showFileNotFound() {
+ showDownloadMessage("档案不存在");
+ }
+
+ function showTryAgainLater() {
+ showDownloadMessage("目前无法下载，请稍后再试。");
+ }
+
+ function showLimitation() {
+ showDownloadMessage("已达下载重试次数上限，请稍后再试。");
+ }
+
+ function handleDownloadResponseStatus(status) {
+ switch (status) {
+ case 404:
+ showFileNotFound();
+ break;
+ case 429:
+ showLimitation();
+ break;
+ default:
+ showTryAgainLater();
+ }
+ }
+
+ async function checkDownloadAvailable(downloadLink) {
+ try {
+ let response = await fetch(downloadLink, {
+ method: "HEAD",
+ cache: "no-store"
+ });
+
+ if (response.ok) {
+ return true;
+ }
+
+ if (response.status === 405) {
+ return true;
+ }
+
+ handleDownloadResponseStatus(response.status);
+ return false;
+ } catch (error) {
+ return true;
+ }
+ }
+
+ async function fetchDownloadLink() {
+ let filesJsonURL = "files/files.json";
+
+ let response;
+ try {
+ response = await fetch(filesJsonURL, { cache: "no-store" });
+ } catch (error) {
+ showTryAgainLater();
+ return;
+ }
+
+ if ( ! response.ok) {
+ handleDownloadResponseStatus(response.status);
+ return;
+ }
+
+ let json;
+ try {
+ json = await response.json();
+ } catch (error) {
+ showTryAgainLater();
+ return;
+ }
+
+ ANDROID_DOWNLOAD_LINK = HOST_NAME + json.android;
+ WEB_DOWNLOAD_LINK = ANDROID_DOWNLOAD_LINK;
+ IOS_DOWNLOAD_LINK = json.ios;
+
+ var downloadLink = getDownloadLink();
+ ga('send', 'event', 'Link', 'Click', downloadLink);
+ gtag('event', 'click', {
+ 'link': downloadLink
+ });
+
+ let available = await checkDownloadAvailable(downloadLink);
+ if ( ! available) {
+ return;
+ }
+
+ location.href = downloadLink;
+ }
+
+ function loadCode() {
+ // TODO: load code image from remote
+ let code = getRandomNumber();
+ loadCodeImage(code);
+ setDomVisible("loading", false);
+ setDomVisible("code", true);
+
+ let downloadDom = document.getElementById("download");
+ downloadDom.onclick = function () {
+ let inputDom = document.getElementById("code-input");
+ let inputValue = inputDom.value;
+ if (inputValue.length === 0) {
+ inputDom.setAttribute("aria-invalid", "true");
+ return;
+ }
+
+ downloadDom.innerText = "";
+ downloadDom.setAttribute("aria-busy", "true")
+
+ setTimeout(function() {
+ if (inputValue !== code) {
+ ga('send', 'event', 'verify', 'failed');
+ gtag('event', 'verify', {
+ 'verify_result': 'failed'
+ });
+ downloadDom.onclick = () => {};
+ inputDom.setAttribute("aria-invalid", "true");
+ setDomVisible("download", false);
+ setDomVisible("error-message", true);
+ setDomVisible("reload", true);
+ return;
+ }
+
+ ga('send', 'event', 'verify', 'verified');
+ gtag('event', 'verify', {
+ 'verify_result': 'verified'
+ });
+ inputDom.setAttribute("aria-invalid", "false");
+ setTimeout(startDownload, getRandomTime());
+ }, getRandomTime());
+ }
+ }
+
+ function setDomVisible(domId, visible) {
+ let dom = document.getElementById(domId);
+ if ( ! dom) {
+ return;
+ }
+
+ if (visible) {
+ dom.removeAttribute("hidden");
+ } else {
+ dom.setAttribute("hidden", "true");
+ }
+ }
+
+ function loadCodeImage(code) {
+ let canvas = document.getElementById("canvas");
+ let ctx = canvas.getContext("2d");
+
+ let loading = document.getElementById("loading");
+ canvas.style.width = loading.style.width;
+ canvas.style.height = loading.style.height;
+ canvas.width = loading.offsetWidth;
+ canvas.height = loading.offsetHeight;
+
+ ctx.fillStyle = "white";
+ ctx.fillRect(0, 0, canvas.width, canvas.height);
+ ctx.textAlign = "center";
+ ctx.textBaseline = "middle";
+ ctx.font = '64px serif';
+ let textMetrics = ctx.measureText(code);
+ ctx.strokeText(code, textMetrics.width, 50);
+ }
+
+ function getRandomNumber() {
+ let randomNumber = Math.floor(Math.random() * 10000) + Date.now()
+ let numberString = randomNumber.toString()
+ return numberString.substring(numberString.length - 4);
+ }
+
+ function getRandomTime() {
+ return Math.floor(Math.random() * 1000) + 500;
+ }
+
+ function startDownload() {
+ let downloadDom = document.getElementById("download");
+ downloadDom.setAttribute("aria-busy", "false")
+ downloadDom.innerText = "请稍后，下载即将开始";
+ downloadDom.setAttribute("disabled", "true")
+ fetchDownloadLink();
+ }
+
+ setTimeout(loadCode, getRandomTime());
+</script>
+</html>

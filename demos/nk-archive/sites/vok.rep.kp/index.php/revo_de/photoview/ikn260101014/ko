@@ -1,0 +1,53 @@
+				
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>
+  조선의 소리  </title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+		<meta content="조선,Корея,朝鮮,Korea,Corée,Corea,كوريا,vok,film,music,공화국,republic,最高指導者,Supreme Leader" name="keywords">
+ 		 <meta content="Голос Кореи,Voice of Korea,Voz de Corea,صوت كوريا ,Stimme Koreas,공화국" name="description">
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+        <link href="../../../../resources/assets/global/plugins/font-awesome/css/font-awesome.min__v_3.1.1.css" rel="stylesheet" type="text/css" />
+        <link href="https://web.archive.org/web/20260101im_/http://www.vok.rep.kp/resources/assets/global/plugins/bootstrap/css/bootstrap.min.css?v=3.1.1" rel="stylesheet" type="text/css" />
+		<script src="https://web.archive.org/web/20260101im_/http://www.vok.rep.kp/resources/assets/global/plugins/jquery.min.js?v=3.1.1" type="text/javascript"></script>
+		<script src="https://web.archive.org/web/20260101im_/http://www.vok.rep.kp/resources/js/slide_revodaily.js?v=3.1.1" type="text/javascript"></script>
+		<style>
+			.img-slide { display: none; cursor:none}
+		</style>
+	<body style="background-color:#ae0101" >   
+	<i id='closePhoto' class='fa fa-power-off' style='position: absolute; bottom: 10px; right: 20px; font-size: 30px; color: #fff; cursor: pointer;'></i>
+		<input type='hidden' id='imageCnt' value='1'>
+	<div id='revodaily_slider_container' class='august-img' style='margin: 10px auto; overflow: hidden;object-fit: contain;'>
+	<img class='img-slide' src='https://web.archive.org/web/20260101im_/http://www.vok.rep.kp/resources/cbc_pddata/cbc_ikn260101014/2-001.jpg' alt='경애하는 김정은동지께서 신년경축행사에 참가한 해외작전부대 지휘관가족들을 만나시고 기념사진을 찍으시였다'>	</div>
+	<div id='revodaily_slider_navigator' style='margin: 5px auto; text-align: center;'>
+		<i id='arrowleft' class='fa fa-arrow-circle-o-left' style='font-size: 30px;  color: #fff; cursor: pointer;'></i>
+		<span id='imagePaging' style='margin: 0px 30px; vertical-align: text-bottom; font-size: 150%; color: #fff;'></span>
+		<i id='arrowright' class='fa fa-arrow-circle-o-right' style='font-size: 30px;  color: #fff; cursor: pointer;'></i>
+	</div>
+  <script>
+    window.addEventListener( "mousewheel",
+    function(e) {
+    if (e.ctrlKey == true || e.metaKey == true)
+    e.preventDefault();
+    },
+    { capture: false, passive: false, once: false }
+    );
+    document.addEventListener("keydown",
+    function(e) {
+    if (
+    e.keyCode == 17 ||
+    e.keyCode == 187 ||
+    e.keyCode == 189 ||
+    e.keyCode == 109 ||
+    e.keyCode == 107
+    ) {
+    e.preventDefault();
+    return false;
+    }
+    });
+  </script>
+</body>
+</html>

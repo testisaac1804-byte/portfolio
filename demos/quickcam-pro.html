@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-no-skin>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -103,7 +103,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helv
 .tool-item .tool-name { font-size: 11px; font-weight: 500; }
 .tool-item .tool-desc { font-size: 10px; color: var(--text-secondary); }
 @media (max-width: 1200px) { #left-panel { width: 240px; min-width: 240px; } #right-panel { width: 280px; min-width: 280px; } }
-@media (max-width: 768px) { #left-panel, #right-panel { display: none; } }
+@media (max-width: 1024px) { #left-panel, #right-panel { display: none; } }
 </style>
 </head>
 <body>
@@ -222,7 +222,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helv
 // ============================================
 const TOOL_LIBRARY = [
   // Per F1 guide: "The Manufacturing Centre will use a 1/4" (6.35mm) Ball Nose cutter"
-  { id: 'T01', name: '1/4" Ball Nose', diameter: 6.35, radius: 3.175, type: 'ball', desc: 'Standard finishing tool (per F1 guide)', slot: 1, default: true },
+  { id: 'T01', name: '1/4" Ball Nose', diameter: 6.35, radius: 3.175, type: 'ball', desc: 'Standard finishing tool — Manufacturing Centre tool (F1 guide)', slot: 1, default: true, guide: true },
   { id: 'T02', name: '6mm Ball Nose', diameter: 6.0, radius: 3.0, type: 'ball', desc: 'Metric equivalent ball nose', slot: 2 },
   { id: 'T03', name: '3mm Ball Nose', diameter: 3.0, radius: 1.5, type: 'ball', desc: 'Fine finishing detail work', slot: 3 },
   { id: 'T04', name: '6mm End Mill', diameter: 6.0, radius: 0, type: 'end', desc: 'Flat bottom roughing', slot: 4 },
@@ -230,10 +230,14 @@ const TOOL_LIBRARY = [
   { id: 'T06', name: '2mm End Mill', diameter: 2.0, radius: 0, type: 'end', desc: 'Fine detail roughing', slot: 6 },
   { id: 'T07', name: '1mm V-Bit', diameter: 1.0, radius: 0, type: 'vbit', desc: 'Engraving / chamfer', slot: 7 },
   { id: 'T08', name: '90° V-Bit', diameter: 6.0, radius: 0, type: 'vbit', desc: 'Chamfering edges', slot: 8 },
-  { id: 'T09', name: '6.35mm Drill', diameter: 6.35, radius: 0, type: 'drill', desc: 'Axle hole drilling (per F1 guide)', slot: 9 },
+  { id: 'T09', name: '6.35mm Axle Ball Nose', diameter: 6.35, radius: 3.175, type: 'ball', desc: 'Axle holes — Manufacturing Centre drills these with the 6.35mm ball nose (F1 guide)', slot: 9, guide: true },
   { id: 'T10', name: '3mm Drill', diameter: 3.0, radius: 0, type: 'drill', desc: 'Pilot holes', slot: 10 },
   { id: 'T11', name: '1.5mm Engraver', diameter: 1.5, radius: 0, type: 'engrave', desc: 'Fine text/detail', slot: 11 },
-  { id: 'T12', name: '8mm Face Mill', diameter: 8.0, radius: 0, type: 'face', desc: 'Facing / leveling', slot: 12 }
+  { id: 'T12', name: '8mm Face Mill', diameter: 8.0, radius: 0, type: 'face', desc: 'Facing / leveling', slot: 12 },
+  { id: 'T13', name: '1/8" Ball Nose', diameter: 3.175, radius: 1.5875, type: 'ball', desc: 'Small ball nose for tight features', slot: 13 },
+  { id: 'T14', name: '1/4" End Mill', diameter: 6.35, radius: 0, type: 'end', desc: 'Imperial flat roughing', slot: 14 },
+  { id: 'T15', name: '1/8" End Mill', diameter: 3.175, radius: 0, type: 'end', desc: 'Imperial flat roughing (small)', slot: 15 },
+  { id: 'T16', name: '12mm End Mill', diameter: 12.0, radius: 0, type: 'end', desc: 'Heavy stock removal', slot: 16 }
 ];
 
 // ============================================
@@ -288,11 +292,12 @@ function resizeCanvas() {
 }
 window.addEventListener('resize', resizeCanvas);
 
-let cam = { rotX: -25, rotY: 45, zoom: 1, panX: 0, panY: 0 };
+let cam = { rotX: -25, rotY: 45, zoom: 1, panX: 0, panY: 0, target: { x: 111.5, y: 25, z: 32.5 }, fitScale: 0.55 };
+let _frameSig = '';
 let isDragging = false, lastMouse = { x: 0, y: 0 }, dragMode = 'rotate';
 
-canvas.addEventListener('mousedown', e => { isDragging = true; lastMouse = { x: e.clientX, y: e.clientY }; dragMode = e.shiftKey ? 'pan' : 'rotate'; });
-window.addEventListener('mouseup', () => isDragging = false);
+canvas.addEventListener('mousedown', e => { isDragging = true; state._dragging = true; lastMouse = { x: e.clientX, y: e.clientY }; dragMode = e.shiftKey ? 'pan' : 'rotate'; });
+window.addEventListener('mouseup', () => { if (isDragging) { isDragging = false; state._dragging = false; requestRender(); } });
 canvas.addEventListener('mousemove', e => {
   if (!isDragging) return;
   const dx = e.clientX - lastMouse.x, dy = e.clientY - lastMouse.y;
@@ -311,6 +316,7 @@ function requestRender() {
 
 function render() {
   const w = canvas.width, h = canvas.height;
+  ensureFraming();
   ctx.clearRect(0, 0, w, h);
   ctx.fillStyle = '#0d1117'; ctx.fillRect(0, 0, w, h);
   drawGrid(w, h);
@@ -339,17 +345,74 @@ function render() {
 function project(v, w, h) {
   const rx = cam.rotX * Math.PI / 180, ry = cam.rotY * Math.PI / 180;
   const cosX = Math.cos(rx), sinX = Math.sin(rx), cosY = Math.cos(ry), sinY = Math.sin(ry);
-  const x1 = v[0] * cosY - v[2] * sinY;
-  const z1 = v[0] * sinY + v[2] * cosY;
-  const y1 = v[1] * cosX - z1 * sinX;
-  const z2 = v[1] * sinX + z1 * cosX;
-  const s = Math.min(w, h) * 0.4 * cam.zoom / 300;
+  // translate so the camera looks at the scene centre (never a billet corner)
+  const px = v[0] - cam.target.x, py = v[1] - cam.target.y, pz = v[2] - cam.target.z;
+  const x1 = px * cosY - pz * sinY;
+  const z1 = px * sinY + pz * cosY;
+  const y1 = py * cosX - z1 * sinX;
+  const z2 = py * sinX + z1 * cosX;
+  const s = (cam.fitScale || 0.55) * cam.zoom;
   return [w/2 + x1 * s + cam.panX, h/2 - y1 * s + cam.panY, z2];
 }
 
+// ============================================
+// Scene framing: bounding-sphere fit so the model can NEVER leave the view,
+// no matter how it is rotated. Re-fitted whenever the scene changes.
+// ============================================
+function sceneBounds() {
+  const b = state.billet;
+  let mn = [0, 0, 0], mx = [b.x, b.y, b.z];
+  let mmn = null, mmx = null;
+  if (state.mesh && state.mesh.triangles && state.mesh.triangles.length) {
+    const tris = state.mesh.triangles;
+    mmn = [Infinity, Infinity, Infinity]; mmx = [-Infinity, -Infinity, -Infinity];
+    // stride-sample for speed on huge meshes (still exact enough for framing)
+    const stride = Math.max(1, Math.floor(tris.length / 4000));
+    for (let i = 0; i < tris.length; i += stride) {
+      const tri = tris[i];
+      for (let k = 0; k < 3; k++) {
+        const t = transformVertex(tri[k]);
+        for (let a = 0; a < 3; a++) {
+          if (t[a] < mn[a]) mn[a] = t[a];
+          if (t[a] > mx[a]) mx[a] = t[a];
+          if (t[a] < mmn[a]) mmn[a] = t[a];
+          if (t[a] > mmx[a]) mmx[a] = t[a];
+        }
+      }
+    }
+  }
+  return { mn, mx, mmn, mmx };
+}
+
+function fitViewToScene(keepZoom) {
+  const { mn, mx, mmn, mmx } = sceneBounds();
+  // centre on the whole scene so the block stays anchored
+  cam.target = { x: (mn[0] + mx[0]) / 2, y: (mn[1] + mx[1]) / 2, z: (mn[2] + mx[2]) / 2 };
+  const w = canvas.width || 800, h = canvas.height || 500;
+  // zoom to the MODEL when there is one, so the part fills the view; fall back to the block
+  const box = state.mesh ? { a: mmn, b: mmx } : { a: mn, b: mx };
+  // rotation-invariant radius -> the framing holds for every orientation
+  const r = 0.5 * Math.hypot(box.b[0] - box.a[0], box.b[1] - box.a[1], box.b[2] - box.a[2]) * 1.15;
+  cam.fitScale = Math.min(w, h) * 0.42 / Math.max(r, 5);
+  cam.panX = 0; cam.panY = 0;
+  if (!keepZoom) cam.zoom = 1;
+  _frameSig = frameSignature();
+}
+
+function frameSignature() {
+  const b = state.billet, r = state.modelRotation, s = state.scale, p = state.modelPosition;
+  const n = state.mesh ? state.mesh.triangles.length : 0;
+  return [b.x, b.y, b.z, r.x, r.y, r.z, s, p.x, p.y, p.z, n, canvas.width, canvas.height].join('|');
+}
+
+function ensureFraming() {
+  if (frameSignature() !== _frameSig) fitViewToScene(true);
+}
+
+
 function drawGrid(w, h) {
   ctx.strokeStyle = 'rgba(48,54,61,0.5)'; ctx.lineWidth = 0.5;
-  const s = Math.min(w, h) * 0.4 * cam.zoom / 300;
+  const s = (cam.fitScale || 0.55) * cam.zoom;
   const cx = w/2 + cam.panX, cy = h/2 + cam.panY;
   for (let i = -10; i <= 10; i++) {
     ctx.beginPath(); ctx.moveTo(cx + i*40*s, cy - 200*s); ctx.lineTo(cx + i*40*s, cy + 200*s); ctx.stroke();
@@ -650,45 +713,41 @@ function drawCutPlane(w, h) {
 // ============================================
 // FIXED: Model orientation with proper rotation
 // ============================================
-function transformVertex(v) {
-  let x = v[0], y = v[1], z = v[2];
-  
-  // Translate to mesh center first, so rotation pivots around mesh center
-  const cx = (state.meshBounds.minX + state.meshBounds.maxX) / 2;
-  const cy = (state.meshBounds.minY + state.meshBounds.maxY) / 2;
-  const cz = (state.meshBounds.minZ + state.meshBounds.maxZ) / 2;
-  x -= cx; y -= cy; z -= cz;
-  
-  // Apply model rotation (X, Y, Z axes)
+// Model matrix: rotate about the MACHINE axes — Z first (align the part), then Y, then X.
+// Order matters: applying X first would swing the part sideways once Z is applied.
+function modelMat() {
   const rx = state.modelRotation.x * Math.PI / 180;
   const ry = state.modelRotation.y * Math.PI / 180;
   const rz = state.modelRotation.z * Math.PI / 180;
-  
-  // Rotate around X
-  let y1 = y * Math.cos(rx) - z * Math.sin(rx);
-  let z1 = y * Math.sin(rx) + z * Math.cos(rx);
-  y = y1; z = z1;
-  
-  // Rotate around Y
-  let x1 = x * Math.cos(ry) + z * Math.sin(ry);
-  let z2 = -x * Math.sin(ry) + z * Math.cos(ry);
-  x = x1; z = z2;
-  
-  // Rotate around Z
-  let x2 = x * Math.cos(rz) - y * Math.sin(rz);
-  let y2 = x * Math.sin(rz) + y * Math.cos(rz);
-  x = x2; y = y2;
-  
-  // Apply scale
-  const scale = state.scale / 100;
-  
-  // Apply position offset to place at billet center
+  const cx = Math.cos(rx), sx = Math.sin(rx);
+  const cy = Math.cos(ry), sy = Math.sin(ry);
+  const cz = Math.cos(rz), sz = Math.sin(rz);
+  return {
+    // R = Rx · Ry · Rz
+    M00: cy*cz,  M01: -cy*sz,               M02: sy,
+    M10: cx*sz + sx*sy*cz, M11: cx*cz - sx*sy*sz, M12: -sx*cy,
+    M20: sx*sz - cx*sy*cz, M21: sx*cz + cx*sy*sz, M22: cx*cy,
+    msc: state.scale / 100,
+    bcx: (state.meshBounds.minX + state.meshBounds.maxX) / 2,
+    bcy: (state.meshBounds.minY + state.meshBounds.maxY) / 2,
+    bcz: (state.meshBounds.minZ + state.meshBounds.maxZ) / 2,
+    offX: state.billet.x / 2 + state.modelPosition.x,
+    offY: state.billet.y / 2 + state.modelPosition.y,
+    offZ: state.billet.z / 2 + state.modelPosition.z
+  };
+}
+
+function transformVertex(v, m) {
+  m = m || modelMat();
+  const dx = v[0] - m.bcx, dy = v[1] - m.bcy, dz = v[2] - m.bcz;
   return [
-    x * scale + state.modelPosition.x,
-    y * scale + state.modelPosition.y,
-    z * scale + state.modelPosition.z
+    (m.M00*dx + m.M01*dy + m.M02*dz) * m.msc + m.offX,
+    (m.M10*dx + m.M11*dy + m.M12*dz) * m.msc + m.offY,
+    (m.M20*dx + m.M21*dy + m.M22*dz) * m.msc + m.offZ
   ];
 }
+
+
 
 // ============================================
 // NEW: Auto-fit mesh to billet on load
@@ -711,17 +770,46 @@ function autoFitMesh() {
   
   state.meshBounds = { minX, maxX, minY, maxY, minZ, maxZ };
   
-  // Set to 1:1 scale (actual size)
-  state.scale = 100;
-  
-  // transformVertex now centers mesh at origin before rotation,
-  // so position offset just needs to place it at billet center
+  const d = [maxX - minX, maxY - minY, maxZ - minZ];
   const b = state.billet;
-  state.modelPosition.x = b.x / 2;
-  state.modelPosition.y = b.y / 2;
-  state.modelPosition.z = b.z / 2;
   
-  showToast('Model loaded at 1:1 scale (actual size)', 'info');
+  // --- 1. Orient: longest axis -> billet X (block length), height stays on Z ---
+  state.modelRotation.x = 0; state.modelRotation.y = 0; state.modelRotation.z = 0;
+  if (d[1] >= d[0] && d[1] >= d[2]) {
+    // length is on Y -> rotate -90° about Z so +Y maps to +X
+    state.modelRotation.z = -90;
+  } else if (d[2] >= d[0] && d[2] >= d[1]) {
+    // length is on Z -> rotate +90° about Y so +Z maps to +X
+    state.modelRotation.y = 90;
+  }
+  
+  // --- 2. Size of the model AFTER that rotation ---
+  const rz = state.modelRotation.z * Math.PI / 180;
+  const ry = state.modelRotation.y * Math.PI / 180;
+  let rd = d.slice();
+  if (Math.abs(Math.round(state.modelRotation.z)) === 90) rd = [d[1], d[0], d[2]];
+  if (Math.abs(Math.round(state.modelRotation.y)) === 90) rd = [d[2], rd[1], rd[0]];
+  
+  // --- 3. Uniform scale that fits the billet (capped at 1:1 = 100%) ---
+  const rawFit = Math.min(b.x / rd[0], b.y / rd[1], b.z / rd[2]);
+  const fitsAt1to1 = rawFit >= 1;
+  const fit = Math.min(rawFit, 1) * 0.98;
+  state.scale = Math.max(1, Math.min(100, Math.floor(fit * 1000) / 10));
+  
+  // --- 4. Offset semantics: 0,0,0 = dead centre of the billet ---
+  state.modelPosition.x = 0;
+  state.modelPosition.y = 0;
+  state.modelPosition.z = 0;
+  
+  fitViewToScene(false);
+  
+  const pct = state.scale;
+  const finalD = rd.map(v => (v * pct / 100).toFixed(1)).join(' × ');
+  if (fitsAt1to1) {
+    showToast(`Model ${rd.map(v=>v.toFixed(1)).join('×')} mm fits at 1:1 — placed in the billet`, 'success');
+  } else {
+    showToast(`Model ${rd.map(v=>v.toFixed(1)).join('×')} mm is bigger than the ${b.x}×${b.y}×${b.z} block — scaled to ${pct}% (${finalD} mm)`, 'warning');
+  }
 }
 
 function drawMesh(w, h) {
@@ -729,62 +817,78 @@ function drawMesh(w, h) {
   const matColors = { balsa: [212,165,116], hardwood: [139,105,20], aluminium: [192,192,192], acrylic: [232,232,232], foam: [240,230,210] };
   const mc = matColors[state.material] || [200,200,200];
   const lightDir = [0.3, 0.5, 0.8];
-  
-  // Get model rotation for transforming normals
-  const mrx = state.modelRotation.x * Math.PI / 180;
-  const mry = state.modelRotation.y * Math.PI / 180;
-  const mrz = state.modelRotation.z * Math.PI / 180;
-  const cosX = Math.cos(mrx), sinX = Math.sin(mrx);
-  const cosY = Math.cos(mry), sinY = Math.sin(mry);
-  const cosZ = Math.cos(mrz), sinZ = Math.sin(mrz);
-  
-  // Get camera direction for backface culling
+
+  // ---- model matrix, computed ONCE (same function the rest of the app uses) ----
+  const m = modelMat();
+  const M00 = m.M00, M01 = m.M01, M02 = m.M02;
+  const M10 = m.M10, M11 = m.M11, M12 = m.M12;
+  const M20 = m.M20, M21 = m.M21, M22 = m.M22;
+  const msc = m.msc, bcx = m.bcx, bcy = m.bcy, bcz = m.bcz;
+  const offX = m.offX, offY = m.offY, offZ = m.offZ;
+
+  // ---- camera: direction toward camera + projection constants, computed ONCE ----
   const rx = cam.rotX * Math.PI / 180, ry = cam.rotY * Math.PI / 180;
-  const camDir = [Math.sin(ry) * Math.cos(rx), Math.sin(rx), Math.cos(ry) * Math.cos(rx)];
+  const camDir = [Math.sin(ry) * Math.cos(rx), -Math.sin(rx), Math.cos(ry) * Math.cos(rx)];
+  const cX = Math.cos(rx), sX = Math.sin(rx), cY = Math.cos(ry), sY = Math.sin(ry);
+  const ps = (cam.fitScale || 0.55) * cam.zoom;
+  const hw = w/2 + cam.panX, hh = h/2 + cam.panY;
+  const tgx = cam.target.x, tgy = cam.target.y, tgz = cam.target.z;
+
   let totalFaces = 0, visibleFaces = 0;
-  
-  state.mesh.triangles.forEach(tri => {
+  // draft mode: while the user is dragging, draw every Nth face (snaps back on release)
+  const stride = state._dragging ? 2 : 1;
+
+  const tris = state.mesh.triangles;
+  const shadeCols = [];
+  for (let i = 0; i < 16; i++) {
+    const sh = 0.30 + (i / 15) * 0.70;
+    shadeCols.push(`rgb(${Math.min(255, Math.round(mc[0]*sh))},${Math.min(255, Math.round(mc[1]*sh))},${Math.min(255, Math.round(mc[2]*sh))})`);
+  }
+
+  for (let ti = 0; ti < tris.length; ti += stride) {
+    const tri = tris[ti];
     const v0 = tri[0], v1 = tri[1], v2 = tri[2];
-    // Compute normal from original vertices
+
+    // face normal in model space (winding is outward, verified on import)
     let nx = (v1[1]-v0[1])*(v2[2]-v0[2])-(v1[2]-v0[2])*(v2[1]-v0[1]);
     let ny = (v1[2]-v0[2])*(v2[0]-v0[0])-(v1[0]-v0[0])*(v2[2]-v0[2]);
     let nz = (v1[0]-v0[0])*(v2[1]-v0[1])-(v1[1]-v0[1])*(v2[0]-v0[0]);
-    const len = Math.sqrt(nx*nx+ny*ny+nz*nz); if (len < 0.001) return;
+    const len = Math.sqrt(nx*nx+ny*ny+nz*nz);
+    if (len < 1e-6) continue;
     nx /= len; ny /= len; nz /= len;
     totalFaces++;
-    
-    // Rotate normal by model rotation (same as transformVertex does to vertices)
-    // Rotate around X
-    let ny1 = ny * cosX - nz * sinX;
-    let nz1 = ny * sinX + nz * cosX;
-    ny = ny1; nz = nz1;
-    // Rotate around Y
-    let nx1 = nx * cosY + nz * sinY;
-    let nz2 = -nx * sinY + nz * cosY;
-    nx = nx1; nz = nz2;
-    // Rotate around Z
-    let nx2 = nx * cosZ - ny * sinZ;
-    let ny2 = nx * sinZ + ny * cosZ;
-    nx = nx2; ny = ny2;
-    
-    // Backface culling: compare rotated normal against camera direction
-    const dotCam = nx*camDir[0] + ny*camDir[1] + nz*camDir[2];
-    if (dotCam > 0) return; // Face points away from camera
+
+    // rotate normal into world space
+    const wnx = M00*nx + M01*ny + M02*nz;
+    const wny = M10*nx + M11*ny + M12*nz;
+    const wnz = M20*nx + M21*ny + M22*nz;
+
+    // backface cull: keep faces whose outward normal points toward the camera
+    if (wnx*camDir[0] + wny*camDir[1] + wnz*camDir[2] <= 0) continue;
     visibleFaces++;
-    
-    const dot = Math.max(0, nx*lightDir[0]+ny*lightDir[1]+nz*lightDir[2]);
-    const shade = 0.3 + dot * 0.7;
-    const r = Math.min(255, Math.floor(mc[0]*shade)), g = Math.min(255, Math.floor(mc[1]*shade)), b = Math.min(255, Math.floor(mc[2]*shade));
-    
-    const tv0 = transformVertex(v0);
-    const tv1 = transformVertex(v1);
-    const tv2 = transformVertex(v2);
-    
-    const p0 = project(tv0, w, h), p1 = project(tv1, w, h), p2 = project(tv2, w, h);
-    ctx.fillStyle = `rgb(${r},${g},${b})`; ctx.strokeStyle = `rgba(${r*0.7},${g*0.7},${b*0.7},0.3)`; ctx.lineWidth = 0.3;
-    ctx.beginPath(); ctx.moveTo(p0[0], p0[1]); ctx.lineTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.closePath(); ctx.fill(); ctx.stroke();
-  });
-  
+
+    const dot = Math.max(0, wnx*lightDir[0] + wny*lightDir[1] + wnz*lightDir[2]);
+    ctx.fillStyle = shadeCols[(dot * 15 + 0.5) | 0];
+
+    // transform + project the three vertices inline (no per-vertex trig)
+    ctx.beginPath();
+    for (let k = 0; k < 3; k++) {
+      const vk = tri[k];
+      const dx = vk[0] - bcx, dy = vk[1] - bcy, dz = vk[2] - bcz;
+      const wx = (M00*dx + M01*dy + M02*dz) * msc + offX;
+      const wy = (M10*dx + M11*dy + M12*dz) * msc + offY;
+      const wz = (M20*dx + M21*dy + M22*dz) * msc + offZ;
+      const px = wx - tgx, py = wy - tgy, pz = wz - tgz;
+      const x1 = px*cY - pz*sY;
+      const z1 = px*sY + pz*cY;
+      const y1 = py*cX - z1*sX;
+      const sx = hw + x1*ps, sy = hh - y1*ps;
+      if (k === 0) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+    }
+    ctx.closePath();
+    ctx.fill();
+  }
+
   // Store stats for display
   state._renderStats = { total: totalFaces, visible: visibleFaces };
 }
@@ -1082,11 +1186,11 @@ function processFile(file) {
       state.meshBounds = { minX, maxX, minY, maxY, minZ, maxZ };
       state.mesh = mesh;
     
-      // Auto-fit mesh to billet
+      // Auto-fit mesh to billet (orientation + scale + framing)
       autoFitMesh();
       
       // Update UI
-      document.getElementById('pi-scale').textContent = '100% (1:1)';
+      document.getElementById('pi-scale').textContent = state.scale + '%';
     
       document.getElementById('pi-model').textContent = file.name;
       document.getElementById('pi-tris').textContent = mesh.numTriangles.toLocaleString();
@@ -1129,39 +1233,43 @@ document.getElementById('drop-zone').addEventListener('drop', e => {
   const file = e.dataTransfer.files[0]; if (file) processFile(file);
 });
 
-function loadSampleModel() {
+function buildSampleCar() {
   const triangles = [];
-  const addTri = (v0, v1, v2) => {
-    const nx = (v1[1]-v0[1])*(v2[2]-v0[2])-(v1[2]-v0[2])*(v2[1]-v0[1]);
-    const ny = (v1[2]-v0[2])*(v2[0]-v0[0])-(v1[0]-v0[0])*(v2[2]-v0[2]);
-    const nz = (v1[0]-v0[0])*(v2[1]-v0[1])-(v1[1]-v0[1])*(v2[0]-v0[0]);
-    const len = Math.sqrt(nx*nx+ny*ny+nz*nz);
-    const normal = len > 0 ? [nx/len, ny/len, nz/len] : [0,0,1];
-    triangles.push([v0, v1, v2, normal]);
+  const quad = (a, b, c, d) => {
+    triangles.push([a, b, c]); triangles.push([a, c, d]);
   };
-  const body = [[0,0,10],[200,0,10],[200,30,10],[0,30,10],[50,15,25],[150,15,25]];
-  addTri(body[0], body[1], body[4]); addTri(body[1], body[5], body[4]);
-  addTri(body[1], body[2], body[5]); addTri(body[2], body[3], body[5]);
-  addTri(body[3], body[0], body[4]); addTri(body[3], body[4], body[5]);
-  addTri(body[0], body[4], body[1]); addTri(body[2], body[3], body[5]);
+  // axis-aligned box with outward (CCW) winding on every face
+  const box = (x0, y0, z0, x1, y1, z1) => {
+    const p = (x, y, z) => [x, y, z];
+    quad(p(x0,y0,z1), p(x1,y0,z1), p(x1,y1,z1), p(x0,y1,z1)); // +Z
+    quad(p(x0,y0,z0), p(x0,y1,z0), p(x1,y1,z0), p(x1,y0,z0)); // -Z
+    quad(p(x0,y1,z0), p(x0,y1,z1), p(x1,y1,z1), p(x1,y1,z0)); // +Y
+    quad(p(x0,y0,z0), p(x1,y0,z0), p(x1,y0,z1), p(x0,y0,z1)); // -Y
+    quad(p(x1,y0,z0), p(x1,y1,z0), p(x1,y1,z1), p(x1,y0,z1)); // +X
+    quad(p(x0,y0,z0), p(x0,y0,z1), p(x0,y1,z1), p(x0,y1,z0)); // -X
+  };
+  // a simple 200 x 50 x 25 F1 shape: floor, nose, cockpit, sidepods, wings
+  box(10, 14, 3, 190, 36, 9);        // floor pan
+  box(150, 19, 5, 196, 31, 12);      // nose
+  box(178, 6, 1, 196, 44, 4);        // front wing
+  box(84, 19, 9, 122, 31, 21);       // cockpit
+  box(30, 19, 9, 90, 31, 17);        // engine cover
+  box(58, 8, 6, 138, 18, 15);        // left sidepod
+  box(58, 32, 6, 138, 42, 15);       // right sidepod
+  box(14, 10, 16, 30, 40, 21);       // rear wing
+  box(150, 10, 13, 168, 40, 16);     // front wing upper flap
+  return triangles;
+}
+
+function loadSampleModel(silent) {
+  const triangles = buildSampleCar();
   state.mesh = { triangles, numTriangles: triangles.length };
-  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, minZ = Infinity, maxZ = -Infinity;
-  triangles.forEach(tri => {
-    tri.slice(0, 3).forEach(v => {
-      minX = Math.min(minX, v[0]); maxX = Math.max(maxX, v[0]);
-      minY = Math.min(minY, v[1]); maxY = Math.max(maxY, v[1]);
-      minZ = Math.min(minZ, v[2]); maxZ = Math.max(maxZ, v[2]);
-    });
-  });
-  state.meshBounds = { minX, maxX, minY, maxY, minZ, maxZ };
-  
-  // Auto-fit sample model to billet
   autoFitMesh();
-  
-  document.getElementById('pi-model').textContent = 'Sample F1 Car';
-  document.getElementById('pi-tris').textContent = triangles.length.toLocaleString();
-  showToast('Sample F1 car loaded', 'success');
+  const pm = document.getElementById('pi-model'); if (pm) pm.textContent = 'Sample F1 Car';
+  const pt = document.getElementById('pi-tris'); if (pt) pt.textContent = triangles.length.toLocaleString();
+  if (!silent) showToast('Sample F1 car loaded — import an STL to replace it', 'success');
   requestRender();
+  return state.mesh;
 }
 
 function setView(view) {
@@ -1173,7 +1281,7 @@ function setView(view) {
   }
   requestRender();
 }
-function resetView() { cam = { rotX: -25, rotY: 45, zoom: 1, panX: 0, panY: 0 }; requestRender(); }
+function resetView() { cam.rotX = -25; cam.rotY = 45; fitViewToScene(false); requestRender(); }
 function updateView() {
   state.showShaded = document.getElementById('view-shaded').checked;
   state.showWireframe = document.getElementById('view-wire').checked;
@@ -1338,16 +1446,16 @@ function selectTool(toolId) {
 }
 
 function renderToolsPanel(panel) {
-  let html = '<div class="param-group"><h4>Denford F1 Tool Library</h4><p style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">Click to select tool for machining.</p>';
+  let html = '<div class="param-group"><h4>Denford F1 Tool Library</h4><p style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">' + TOOL_LIBRARY.length + ' cutters. Click to select. ⚙ = the tool the Manufacturing Centre actually uses (F1 Design Guide). Balsa allows stepdown up to 300% of tool diameter.</p>';
   TOOL_LIBRARY.forEach(tool => {
     const active = state.cutter && state.cutter.id === tool.id ? 'active' : '';
     html += `<div class="tool-item ${active}" onclick="selectTool('${tool.id}');renderRightPanel()">
       <div class="tool-icon">${tool.type === 'ball' ? '🔵' : tool.type === 'end' ? '⬛' : tool.type === 'vbit' ? '🔺' : tool.type === 'drill' ? '🔩' : '🔧'}</div>
       <div class="tool-info">
-        <div class="tool-name">${tool.name}</div>
+        <div class="tool-name">${tool.name}${tool.guide ? ' <span style="color:#3fb950;font-size:10px;">⚙ Mfg Centre</span>' : ''}</div>
         <div class="tool-desc">${tool.desc}</div>
       </div>
-      <div style="font-size:10px;color:var(--text-secondary);">Slot ${tool.slot}</div>
+      <div style="font-size:10px;color:var(--text-secondary);text-align:right;">⌀${tool.diameter}mm<br>Slot ${tool.slot}</div>
     </div>`;
   });
   html += '</div>';
@@ -1488,145 +1596,159 @@ const MATERIAL_PROPS = {
 
 function calculateToolpath() {
   if (!state.mesh) { showToast('Import a model first', 'warning'); return; }
-  
-  showToast('Calculating toolpath...', 'info');
-  
-  // Use setTimeout to allow UI to update
+
+  showToast('Calculating toolpath…', 'info');
+
   setTimeout(() => {
-    state.toolpath = [];
     const b = state.billet;
-    const toolRadius = state.cutter ? state.cutter.radius : 3.175;
-    const cutZ = Math.abs(state.cutDepth);
-    const safeZ = b.z + 10;
-    
-    // Reduced resolution for better performance
-    const gridRes = 50; // 50x50 instead of 100x100
-    const cellW = b.x / gridRes;
-    const cellH = b.y / gridRes;
-    const heightmap = new Float32Array(gridRes * gridRes).fill(-Infinity);
-    
-    // Rasterize mesh triangles into heightmap
-    const mb = state.meshBounds;
-    const meshCX = (mb.minX + mb.maxX) / 2;
-    const meshCY = (mb.minY + mb.maxY) / 2;
-    
-    state.mesh.triangles.forEach(tri => {
-      const v0 = tri[0], v1 = tri[1], v2 = tri[2];
-      const xs = [v0[0] - meshCX, v1[0] - meshCX, v2[0] - meshCX];
-      const ys = [v0[1] - meshCY, v1[1] - meshCY, v2[1] - meshCY];
-      const zs = [v0[2], v1[2], v2[2]];
-      
-      const minX = Math.max(0, Math.floor((Math.min(...xs) + b.x/2) / cellW));
-      const maxX = Math.min(gridRes - 1, Math.ceil((Math.max(...xs) + b.x/2) / cellW));
-      const minY = Math.max(0, Math.floor((Math.min(...ys) + b.y/2) / cellH));
-      const maxY = Math.min(gridRes - 1, Math.ceil((Math.max(...ys) + b.y/2) / cellH));
-      
+    const m = modelMat();                    // same transform the viewer draws with
+    const cutZ = Math.abs(state.cutDepth) || 0;
+    const safeZ = Math.min(b.z + 10, b.z + 10);
+
+    // --- 1. Heightmap of the part, rasterised in BILLET space -----------------
+    const res = 100;
+    const cellW = b.x / res, cellH = b.y / res;
+    const hm = new Float32Array(res * res).fill(-Infinity);
+
+    for (let ti = 0; ti < state.mesh.triangles.length; ti++) {
+      const tri = state.mesh.triangles[ti];
+      const A = transformVertex(tri[0], m), B = transformVertex(tri[1], m), C = transformVertex(tri[2], m);
+      const minX = Math.max(0, Math.floor(Math.min(A[0], B[0], C[0]) / cellW));
+      const maxX = Math.min(res - 1, Math.ceil(Math.max(A[0], B[0], C[0]) / cellW));
+      const minY = Math.max(0, Math.floor(Math.min(A[1], B[1], C[1]) / cellH));
+      const maxY = Math.min(res - 1, Math.ceil(Math.max(A[1], B[1], C[1]) / cellH));
+      const ax = B[0]-A[0], ay = B[1]-A[1], bx2 = C[0]-A[0], by2 = C[1]-A[1];
+      const d = ax*by2 - ay*bx2;
+      if (Math.abs(d) < 1e-9) continue;
       for (let gy = minY; gy <= maxY; gy++) {
+        const py = (gy + 0.5) * cellH;
         for (let gx = minX; gx <= maxX; gx++) {
-          const px = (gx + 0.5) * cellW - b.x/2;
-          const py = (gy + 0.5) * cellH - b.y/2;
-          const ax = xs[1] - xs[0], ay = ys[1] - ys[0];
-          const bx = xs[2] - xs[0], by = ys[2] - ys[0];
-          const cx = px - xs[0], cy = py - ys[0];
-          const d = ax * by - ay * bx;
-          if (Math.abs(d) < 0.0001) continue;
-          const u = (cx * by - cy * bx) / d;
-          const v = (ax * cy - ay * cx) / d;
-          if (u >= 0 && v >= 0 && u + v <= 1) {
-            const z = zs[0] + u * (zs[1] - zs[0]) + v * (zs[2] - zs[0]);
-            const idx = gy * gridRes + gx;
-            if (z > heightmap[idx]) heightmap[idx] = z;
-          }
+          const px = (gx + 0.5) * cellW;
+          const cx = px - A[0], cy = py - A[1];
+          const u = (cx*by2 - cy*bx2) / d;
+          const v = (ax*cy - ay*cx) / d;
+          if (u < -0.001 || v < -0.001 || u + v > 1.001) continue;
+          const z = A[2] + u*(B[2]-A[2]) + v*(C[2]-A[2]);
+          const idx = gy*res + gx;
+          if (z > hm[idx]) hm[idx] = z;
         }
       }
-    });
-    
-    // Store heightmap for simulation
-    state.heightmap = heightmap;
-    state.heightmapRes = gridRes;
+    }
+    state.heightmap = hm;
+    state.heightmapRes = res;
     state.heightmapCellW = cellW;
     state.heightmapCellH = cellH;
-    
-    // Initialize cut map
-    state.cutMap = new Float32Array(gridRes * gridRes);
-    for (let i = 0; i < state.cutMap.length; i++) {
-      state.cutMap[i] = b.z;
+
+    // highest surface in a 3x3 neighbourhood (keeps the cutter off the part)
+    function surfAt(gx, gy) {
+      let h = -Infinity;
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+        const x = gx+dx, y = gy+dy;
+        if (x < 0 || x >= res || y < 0 || y >= res) continue;
+        const v = hm[y*res + x];
+        if (v > h) h = v;
+      }
+      return h;
     }
-    
-    // Reduced passes for better performance
-    const stepover = Math.max(1.0, toolRadius * 0.8); // Larger stepover
-    const layerDepth = Math.max(1.0, toolRadius * 0.5); // Fewer layers
-    
-    const yStart = state.sideB ? b.y - toolRadius : toolRadius;
-    const yEnd = state.sideB ? toolRadius : b.y - toolRadius;
-    const yStep = state.sideB ? -stepover : stepover;
-    
-    // Only 2-3 roughing layers instead of many
-    const numLayers = Math.min(3, Math.ceil((b.z - cutZ) / layerDepth));
-    
-    for (let layer = 0; layer < numLayers; layer++) {
-      const layerZ = b.z - (layer * layerDepth);
-      const zLevel = Math.max(layerZ, cutZ);
-      
-      for (let y = yStart; state.sideB ? y >= yEnd : y <= yEnd; y += yStep) {
-        const gy = Math.floor(y / cellH);
-        if (gy < 0 || gy >= gridRes) continue;
-        
-        const passIdx = Math.abs(Math.round((y - yStart) / yStep));
-        const forward = passIdx % 2 === 0;
-        const xStart = forward ? toolRadius : b.x - toolRadius;
-        const xEnd = forward ? b.x - toolRadius : toolRadius;
-        const xStep = forward ? stepover : -stepover;
-        
-        // Only add rapid move at start of each Y pass
-        state.toolpath.push([xStart, y, safeZ, 'rapid']);
-        
-        for (let x = xStart; forward ? x <= xEnd : x >= xEnd; x += xStep) {
-          const gx = Math.floor(x / cellW);
-          if (gx < 0 || gx >= gridRes) continue;
-          const idx = gy * gridRes + gx;
-          const surfZ = heightmap[idx];
-          
-          if (surfZ > -Infinity) {
-            const targetZ = Math.max(surfZ + toolRadius, zLevel);
-            const cutAtZ = Math.max(targetZ, 0);
-            
-            // Only add cut points, not rapid/plunge for every point
-            state.toolpath.push([x, y, cutAtZ, 'cut']);
+    function look(x, y) {
+      const gx = Math.min(res-1, Math.max(0, Math.floor(x / cellW)));
+      const gy = Math.min(res-1, Math.max(0, Math.floor(y / cellH)));
+      return surfAt(gx, gy);
+    }
+
+    // --- 2. Selected plans (default: rough + finish, like the F1 workflow) ----
+    const selected = state.plans.length ? state.plans.slice() : ['Roughing X-Axis', 'Raster Pass'];
+    const toolOf = id => TOOL_LIBRARY.find(t => t.id === id) || state.cutter || TOOL_LIBRARY[0];
+
+    state.toolpath = [];
+    state.planRanges = [];
+    const pts = state.toolpath;
+
+    const yMin = 0, yMax = b.y, xMin = 0, xMax = b.x;
+
+    function rasterPass(toolR, step, dirY, zFor, feedScale) {
+      step = Math.max(0.35, step);
+      const margin = Math.max(toolR, 0.5);
+      const count = dirY ? Math.ceil((xMax - xMin - 2*margin) / step) : Math.ceil((yMax - yMin - 2*margin) / step);
+      for (let k = 0; k <= count; k++) {
+        const across = margin + k*step;
+        const fwd = k % 2 === 0;
+        if (!dirY) {
+          const y = Math.min(yMax - margin, across);
+          const x0 = fwd ? xMin + margin : xMax - margin;
+          const x1 = fwd ? xMax - margin : xMin + margin;
+          const dx = fwd ? step : -step;
+          pts.push([x0, y, safeZ, 'rapid']);
+          let plunged = false;
+          for (let x = x0; fwd ? x <= x1 + 1e-6 : x >= x1 - 1e-6; x += dx) {
+            const z = zFor(x, y);
+            if (z === null) continue;
+            if (!plunged) { pts.push([x, y, z, 'plunge']); plunged = true; }
+            else pts.push([x, y, z, 'cut']);
           }
+          if (plunged) pts.push([x1, y, safeZ, 'rapid']);
+        } else {
+          const x = Math.min(xMax - margin, across);
+          const y0 = fwd ? yMin + margin : yMax - margin;
+          const y1 = fwd ? yMax - margin : yMin + margin;
+          const dy = fwd ? step : -step;
+          pts.push([x, y0, safeZ, 'rapid']);
+          let plunged = false;
+          for (let y = y0; fwd ? y <= y1 + 1e-6 : y >= y1 - 1e-6; y += dy) {
+            const z = zFor(x, y);
+            if (z === null) continue;
+            if (!plunged) { pts.push([x, y, z, 'plunge']); plunged = true; }
+            else pts.push([x, y, z, 'cut']);
+          }
+          if (plunged) pts.push([x, y1, safeZ, 'rapid']);
         }
       }
     }
-    
-    // Single finishing pass with larger stepover
-    const fineStep = Math.max(0.8, toolRadius * 0.4);
-    for (let y = yStart; state.sideB ? y >= yEnd : y <= yEnd; y += fineStep) {
-      const gy = Math.floor(y / cellH);
-      if (gy < 0 || gy >= gridRes) continue;
-      
-      const passIdx = Math.abs(Math.round((y - yStart) / fineStep));
-      const forward = passIdx % 2 === 0;
-      const xStart = forward ? toolRadius : b.x - toolRadius;
-      const xEnd = forward ? b.x - toolRadius : toolRadius;
-      const xStep = forward ? fineStep : -fineStep;
-      
-      state.toolpath.push([xStart, y, safeZ, 'rapid']);
-      
-      for (let x = xStart; forward ? x <= xEnd : x >= xEnd; x += xStep) {
-        const gx = Math.floor(x / cellW);
-        if (gx < 0 || gx >= gridRes) continue;
-        const idx = gy * gridRes + gx;
-        const surfZ = heightmap[idx];
-        
-        if (surfZ > -Infinity) {
-          const finishZ = Math.max(surfZ + toolRadius * 0.3, cutZ);
-          state.toolpath.push([x, y, finishZ, 'cut']);
+
+    for (const planName of selected) {
+      const plan = MACHINING_PLANS.find(p => p.name === planName);
+      if (!plan) continue;
+      const tool = toolOf(plan.tool);
+      const toolR = tool.radius || 0;
+      const toolDia = tool.diameter || 6;
+      const step = Math.max(0.35, (plan.stepover / 100) * toolDia);
+      const dirY = plan.angle === 90 || plan.angle === 270 || /Y-Axis|Y Parallel/.test(plan.name);
+      const startIdx = pts.length;
+
+      if (plan.type === 'roughing') {
+        const layerStep = Math.max(0.8, (plan.stepdown / 100) * toolDia);
+        for (let layerZ = b.z - layerStep; layerZ > cutZ - 1e-6; layerZ -= layerStep) {
+          const zL = Math.max(layerZ, cutZ);
+          const zFor = (x, y) => {
+            const h = look(x, y);
+            const z = (h === -Infinity) ? zL : Math.max(zL, h + toolR);
+            return Math.max(cutZ, Math.min(b.z, z));
+          };
+          rasterPass(toolR, step, dirY, zFor);
         }
+        // final roughing pass at the cut-depth floor across the whole block
+        rasterPass(toolR, step, dirY, () => cutZ);
+      } else {
+        // finishing / fine finishing: follow the part surface
+        const zFor = (x, y) => {
+          const h = look(x, y);
+          if (h === -Infinity) return null;               // nothing to finish there
+          const z = h + toolR * (tool.type === 'ball' ? 1.0 : 0.02);
+          return Math.max(cutZ, Math.min(b.z, z));
+        };
+        rasterPass(toolR, step, dirY, zFor);
       }
+      state.planRanges.push({ name: planName, from: startIdx, to: pts.length });
     }
-    
-    document.getElementById('pi-plans').textContent = state.plans.length;
-    showToast('Toolpath calculated: ' + state.toolpath.length + ' points', 'success');
+
+    // --- 3. Simulation state ------------------------------------------------
+    state.cutMap = new Float32Array(res * res).fill(b.z);
+    state._prevSimIdx = 0; state._lastSimIdx = -1;
+    state.simulation.progress = 0;
+
+    const el = document.getElementById('pi-plans');
+    if (el) el.textContent = selected.length;
+    showToast(`Toolpath: ${pts.length.toLocaleString()} points · ${selected.length} plan${selected.length>1?'s':''} (${selected.join(' + ')})`, 'success');
     requestRender();
   }, 10);
 }
@@ -1672,25 +1794,27 @@ function generateGCodeText() {
     gcode += `N0210 G04 P2000 (Dwell 2s)\n`;
     gcode += `N0220 \n`;
     
-    // Toolpath
+    // Toolpath — honour move types and plan boundaries
     if (state.toolpath.length > 0) {
-      // Write each plan as a section
-      if (state.plans.length > 0) {
-        state.plans.forEach((planName, pi) => {
-          const plan = MACHINING_PLANS.find(p => p.name === planName);
-          gcode += `N${(230 + pi * 10).toString().padStart(4,'0')} (${planName.toUpperCase()})\n`;
-        });
-      } else {
-        gcode += `N0230 (ROUGHING PASS)\n`;
+      let n = 230;
+      const line = (cmd, pt, feed) => {
+        let s = `N${(n++).toString().padStart(4,'0')} ${cmd} X${pt[0].toFixed(3)} Y${pt[1].toFixed(3)} Z${pt[2].toFixed(3)}`;
+        if (feed) s += ` F${feed}`;
+        return s + '\n';
+      };
+      const ranges = state.planRanges && state.planRanges.length ? state.planRanges : null;
+      const sections = ranges || [{ name: (state.plans[0] || 'ROUGHING PASS'), from: 0, to: state.toolpath.length }];
+      for (const sec of sections) {
+        gcode += `N${(n++).toString().padStart(4,'0')} (${String(sec.name).toUpperCase()})\n`;
+        for (let i = sec.from; i < sec.to; i++) {
+          const pt = state.toolpath[i];
+          const type = pt[3] || 'cut';
+          if (type === 'rapid') gcode += line('G00', pt, null);
+          else if (type === 'plunge') gcode += line('G01', pt, Math.round(feed * 0.35));
+          else gcode += line('G01', pt, feed);
+        }
+        gcode += `N${(n++).toString().padStart(4,'0')} G00 Z${(state.billet.z + 10).toFixed(1)} (retract)\n`;
       }
-      gcode += `N0240 \n`;
-      
-      state.toolpath.forEach((pt, i) => {
-        const lineNum = 250 + i;
-        const cmd = i === 0 ? 'G00' : 'G01';
-        const feedStr = i === 0 ? '' : ` F${feed}`;
-        gcode += `N${lineNum.toString().padStart(4,'0')} ${cmd} X${pt[0].toFixed(3)} Y${pt[1].toFixed(3)} Z${pt[2].toFixed(3)}${feedStr}\n`;
-      });
     }
   }
   
@@ -1760,7 +1884,9 @@ window.addEventListener('DOMContentLoaded', () => {
   resizeCanvas();
   renderRightPanel();
   requestRender();
-  showToast('QuickCAM Pro ready — Import a model to begin', 'success');
+  // Show something in the viewport on first run; importing an STL replaces it.
+  if (!state.mesh) loadSampleModel(true);
+  showToast('QuickCAM Pro ready — import an STL to begin', 'success');
 });
 </script>
 </body>

@@ -1,0 +1,121 @@
+@charset "UTF-8";
+@font-face {
+    font-family: PnPCheongPongChe;
+    src: url('../../fonts/Chongbong.ttf') format('truetype');
+}
+
+body, h1, h2, h3, h4, h5, h6, span, div, p, strong, b .title>h1
+.title h1 *,
+.title h2 *{
+    font-family: PnPCheongPongChe;
+    
+}
+
+
+
+p {
+    width: 100%;
+    text-indent: 16px;
+}
+
+.social-network a,
+.social-network .kor a {
+    font-family: PnPCheongPongChe,Century, Centaur, "PnPCheongPongChe", "KP CheongPong", "청봉", "PRK P Chongbong";
+    letter-spacing: 0;
+}
+
+.social-network .chi a,
+.social-network .jap a {
+    font-family: Century, Centaur, SimSun, "Open Sans", "KP CheongPong", "청봉", "PRK P Chongbong";
+}
+
+.social-network .eng a,
+.social-network .rus a,
+.social-network .fra a,
+.social-network .esp a,
+.social-network .arb a {
+    font-family: Century, Centaurl, "Open Sans", "KP CheongPong", "청봉", "PRK P Chongbong";
+}
+
+.social-network .rus a {
+    letter-spacing: -0.5px;
+}
+
+.breadcrumb a,
+.horizontal li>a {
+    font-family: Century, Centaur, "PnPCheongPongChe", "KP CheongPong", "청봉", "PRK P Chongbong";
+}
+
+.revolution .title h1,
+.course .title,
+.wvkorea .domain .title,
+h1.title,
+#anecdotes h2 {
+    font-family: Tahoma, Arial, "WKWGothic", "KP CheonRiMa", "천리마", "PRK P Gothic", "WKGothic", "PnPCheongPongChe"
+}
+
+.chongbong,
+p#words,
+p#words *,
+.text p,
+.text p *,
+.contents p,
+.contents p *,
+.kass p,
+.kass p *,
+p.contents,
+p.contents~p,
+tbody td a,
+tbody td a *,
+.da-slide p,
+.da-slide p *,
+.notice .title,
+.notice .item {
+    font-family: Century, Centaur, "PnPCheongPongChe", "KP CheongPong", "청봉", "PRK P Chongbong"
+}
+
+.gothic,
+.revolution .item .title a,
+.text .say,
+.text p.say *,
+.contents p.say,
+.contents p.say *,
+p#words.bulhu,
+p#words.bulhu * {
+    font-family: Tahoma, Arial, Verdana, "KP CheonRiMa", "천리마", "PRK P Gothic", "WKGothic", "PnPCheongPongChe"
+}
+
+.bukul,
+.puskul,
+h2.room_label {
+    font-family: Tahoma, Arial, "KP PusKul", "PRK P Bukul", "붓글", "PnPCheongPongChe"
+}
+
+.myongjo,
+.kwangmyeong,
+#immortality_song,
+#immortal_classical_song {
+    font-family: Century, Centaur, SimSun, "PRK P Myongjo", "KP KwangMyeong", "광명"
+}
+
+input[type=password],
+a.file-type,
+a.file-type *,
+span.file-type {
+    font-family: Tahoma, Arial, Verdana
+}
+
+td p b,
+p#words,
+p#words b {
+    font-size: 110%
+}
+
+#course .part .title {
+    word-break: keep-all !important;
+    white-space: break-spaces;
+}
+
+i.fa {
+    font-family: var(--fa-style-family, "Font Awesome 6 Free") !important;
+}

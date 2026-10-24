@@ -1,0 +1,251 @@
+﻿
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>내나라 - 조선민주주의인민공화국</title>
+	<meta charset="utf8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" >
+	<meta name="robots" content="all" >
+	<meta name="keywords" content="korea, DPRK, DPR of Korea, naenara">
+    <meta name="description" content="Articles about politics, economy, culture, history, sports, tourism in DPRK" >
+	<link rel="icon" href="/assets/favicon.ico" type="image/x-icon" >
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" >
+	<link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css" >
+	<link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/font-awesome.min.css" >
+	<link rel="stylesheet" type="text/css" href="/css/header/header.css" >
+	<link rel="stylesheet" type="text/css" href="/css/header/header_ko.css" >
+	<link rel="stylesheet" type="text/css" href="/assets/sidebar.css" >
+	<link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" >
+	<link href="/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" >
+
+	<script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/js/search/index.js" type="text/javascript"></script>
+</head> 
+<body>
+<header>
+	<div class="container">
+		<div class="firstMark text-center">
+			<div>
+				<img alt="naenara-image" src="/images/first/flag.png">
+				<a href="/main/index/ko/first"><img alt="naenara-image" src="/images/first/mark.png"></a>
+			</div>
+			<span>조선민주주의인민공화국</span>
+			<span>www.naenara.com.kp</span>
+		</div>
+		<div class="rightMenu">
+			<div class="pageSub drop">
+				<span class="dropbtn"><i class="icon-list"></i></span>
+				<div class="content">
+											<a href="/main/index/ko/first" class="">첫페지</a>
+											<a href="/main/index/ko/news" class="">소식, 기사</a>
+											<a href="/main/index/ko/politics?arg_val=leader3" class="">조선개관</a>
+											<a href="/main/index/ko/trade" class="">경제, 무역</a>
+											<a href="/main/index/ko/society" class="">사회문화</a>
+											<a href="/main/index/ko/history" class="">력사</a>
+											<a href="/main/index/ko/tourism" class="">관광</a>
+									</div>
+			</div>
+			<div class="sideSub drop">
+				<span class="dropbtn"><i class="fa icon-wallet"></i></span>
+				<div class="content">
+					<a href="/main/index/ko/photo"><span>사 진</span></a>
+					<a href="/main/index/ko/video"><span>동영상</span></a>
+					<a href="/main/index/ko/music"><span></span></a>
+					<a href="http://www.korstamp.com.kp" target="_blank"><span>우표</span></a>
+					<a href="/main/index/ko/gallery"><span>선전화</span></a>
+					<a href="/main/index/ko/fineart"><span>미술</span></a>
+				</div>
+			</div>
+
+			<div class="langSub drop" id="ko">
+								<span class="dropbtn"><i class="fa fa-language"></i>조선어<i class="fa fa-angle-down"></i> </span>
+				<div class="content">
+				<a href="/main/index/ko/photo" class="lang-ko">조선어</a><a href="/main/index/en/photo" class="lang-en">English</a><a href="/main/index/fr/photo" class="lang-fr">Français</a><a href="/main/index/sp/photo" class="lang-sp">Español</a><a href="/main/index/ge/photo" class="lang-ge">Deutsch</a><a href="/main/index/ru/photo" class="lang-ru">Русский</a><a href="/main/index/ch/photo" class="lang-ch">汉语</a><a href="/main/index/ja/photo" class="lang-ja">日本語</a><a href="/main/index/ar/photo" class="lang-ar">العربية</a>				</div>
+			</div>
+					</div>
+		<ul class="menubar">
+							<li><a href="/main/index/ko/first" class="">첫페지</a></li>
+							<li><a href="/main/index/ko/news" class="">소식, 기사</a></li>
+							<li><a href="/main/index/ko/politics?arg_val=leader3" class="">조선개관</a></li>
+							<li><a href="/main/index/ko/trade" class="">경제, 무역</a></li>
+							<li><a href="/main/index/ko/society" class="">사회문화</a></li>
+							<li><a href="/main/index/ko/history" class="">력사</a></li>
+							<li><a href="/main/index/ko/tourism" class="">관광</a></li>
+					</ul>
+				<form class="searchbox text-center" action="/main/search_first" method="get" enctype="multipart/form-data">
+			<input type="text" placeholder="검색어를 입력하십시오." value="" name="sVal" class="sval" onkeydown="searchResult(event)"/>
+			<input type="hidden" name="csrf_test_name" value="f7f3971f3b83d6cdb251aa52faba207c" />
+		</form>
+
+		<h3 class="site-comma"><span>NAENARA.COM.KP</span><span>조선민주주의인민공화국의 정치, 경제, 문화 등 전반에 대한 유익한 정보발생거점</span></h3> 
+	</div>
+	<div class='space1'></div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/css/photo/photo_ko.css" rel="stylesheet" type="text/css" />
+<div class="phototitle">사진소개</div>
+
+<div class="container">
+	<div class="mainframe">
+						<div style="background-image:url(/images/photo-gallery/0105.gif)" 
+					 fname="icecream" ftitle="대성산아이스크림공장" 
+					 fdate="2025-10-16"></div>
+						<div style="background-image:url(/images/photo-gallery/0104.gif)" 
+					 fname="Pachungan" ftitle="중앙동물원 파충관" 
+					 fdate="2025-06-17"></div>
+						<div style="background-image:url(/images/photo-gallery/0103.gif)" 
+					 fname="Masikryong" ftitle="마식령스키장" 
+					 fdate="2025-02-20"></div>
+						<div style="background-image:url(/images/photo-gallery/0102.gif)" 
+					 fname="MunsuWaterPark" ftitle="문수물놀이장" 
+					 fdate="2024-10-11"></div>
+						<div style="background-image:url(/images/photo-gallery/0101.gif)" 
+					 fname="MtPaektuGeopark" ftitle="백두산지질공원" 
+					 fdate="2024-07-30"></div>
+						<div style="background-image:url(/images/photo-gallery/0100.gif)" 
+					 fname="gumgyang" ftitle="금강산" 
+					 fdate="2024-07-29"></div>
+						<div style="background-image:url(/images/photo-gallery/0099.gif)" 
+					 fname="PyongyangOrphanage" ftitle="평양애육원의 원아들" 
+					 fdate="2024-06-22"></div>
+						<div style="background-image:url(/images/photo-gallery/0098.gif)" 
+					 fname="chilbo" ftitle="조선의 명산 칠보산" 
+					 fdate="2024-05-17"></div>
+						<div style="background-image:url(/images/photo-gallery/0097.gif)" 
+					 fname="Okryuhospital" ftitle="옥류아동병원" 
+					 fdate="2024-02-28"></div>
+						<div style="background-image:url(/images/photo-gallery/0096.gif)" 
+					 fname="mirim" ftitle="미림승마구락부" 
+					 fdate="2023-11-27"></div>
+						<div style="background-image:url(/images/photo-gallery/0095.gif)" 
+					 fname="middleschool" ftitle="평양중등학원" 
+					 fdate="2023-11-22"></div>
+						<div style="background-image:url(/images/photo-gallery/military70.gif)" 
+					 fname="military70" ftitle="<nobr>위대한</nobr> 조국해방전쟁승리 70돐경축 열병식" 
+					 fdate="2023-08-02"></div>
+						<div style="background-image:url(/images/photo-gallery/1.gif)" 
+					 fname="songhua" ftitle="송화거리" 
+					 fdate="2023-06-08"></div>
+						<div style="background-image:url(/images/photo-gallery/military.gif)" 
+					 fname="military2023" ftitle="조선인민군창건 75돐경축 열병식" 
+					 fdate="2023-02-10"></div>
+						<div style="background-image:url(/images/photo-gallery/0093.gif)" 
+					 fname="gumya" ftitle="금야의 습지" 
+					 fdate="2023-01-16"></div>
+						<div style="background-image:url(/images/photo-gallery/0092.gif)" 
+					 fname="ryonpo" ftitle="련포온실농장" 
+					 fdate="2022-11-07"></div>
+						<div style="background-image:url(/images/photo-gallery/0091.gif)" 
+					 fname="paekdu" ftitle="백두대지의 경관" 
+					 fdate="2022-11-03"></div>
+						<div style="background-image:url(/images/photo-gallery/0090.gif)" 
+					 fname="Insam" ftitle="조선의 특산 개성고려인삼" 
+					 fdate="2022-08-09"></div>
+			</div>
+
+	<div class="navigation">
+		<a href="/index.php/Main/index/ko/photo?pgNum=0"><img style="cursor:pointer;" src="/assets/img/img_first.png"></a>
+		<a href="/index.php/Main/index/ko/photo?pgNum=-1"><img style="cursor:pointer;margin-left:2px;" src="/assets/img/img_prev.png"></a>
+		<label style="margin-left:7px;">1/2</label>
+		<a href="/index.php/Main/index/ko/photo?pgNum=1"><img style="cursor:pointer;margin-left:7px;" src="/assets/img/img_next.png"></a>
+		<a href="/index.php/Main/index/ko/photo?pgNum=1"><img style="cursor:pointer;margin-left:2px;" src="/assets/img/img_last.png"></a>
+	</div>
+</div>
+<script type="text/javascript" src="/js/photo/photo_ko.js" ></script><footer>
+
+	<div class="contact text-center" onclick="openModal()">
+		<span><i class="icon-pointer"></i>조선민주주의인민공화국 평양시 서성구역 서천동</span>
+		<span><i class="icon-call-end"></i>850-2-18111(8456), 850-2-3814598</span>
+		<span><i class="icon-envelope"></i>flph@star-co.net.kp</span>
+		<!-- <span class="socicons">
+			<a href="#" target="_blank"><i class="fa fa-skype"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-google-plus"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-vimeo"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-play"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-flickr"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-pinterest"></i></a>
+		</span> -->
+		<span>저작권© 조선민주주의인민공화국 외국문출판사<br>
+			2004년 - 2026년		</span>
+	</div>
+
+</footer>
+
+<div class="modal fade bs-modal-lg" id="modal_view" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg" style="max-width: 900px!important">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+
+                <h4 class="modal-title" style="font-size:14px;"></h4>
+
+            </div>
+
+            <div class="modal-body"></div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class='fa fa-remove'></i></button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<button onclick="topFunction()" id="toTop" title="Go to top">&nbsp;<i class='fa fa-chevron-up'></i>&nbsp;</button>
+
+<script type="text/javascript" src="/assets/public_code/common.js"></script>
+</body>
+
+</html>
+<!-- 0.0007 -->

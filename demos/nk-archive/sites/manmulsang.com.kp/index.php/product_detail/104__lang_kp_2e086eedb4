@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta name="keywords" content="472세트화장품(조)" />
+<meta name="description" content="조선의 특산" />   
+<meta name="robots" content="ALL">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>
+		만물상-연풍상업정보기술사
+	</title>
+<link rel="icon" type="image/png" href="../../static/image/favicon.png" />
+<link rel="stylesheet" type="text/css" href="../../static/js/ui/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="../../static/js/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../../static/fonts/fontawesome/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="../../static/js/slick/slick.css" />
+<link rel="stylesheet" type="text/css" href="../../static/js/slick/slick-theme.css" />
+<link rel="stylesheet" type="text/css" href="../../static/js/fancybox/dist/jquery.fancybox.css" />
+<link rel="stylesheet" type="text/css" href="../../static/css/style1-kp.css" />
+		
+    </head>
+	<body>
+		<div class="loading-wrapp"><i class="fa fa-spinner fa-spin"></i></div>
+		<header class="header">
+    <section class="container">
+        <h1 class="col-sm-4 logo pt-35 pb-10">
+            <a href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/home?lang=kp">
+                <img src="../../static/image/logo.png" alt="만물상" />
+            </a>
+        </h1>
+        <div class="col-sm-4 search text-center pt-90">
+            <div class="search-intro">
+                <div class="hide-search-bar">
+                    <form class="search-form" action="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/product_list" method="GET" id="SearchForm" name="SearchForm" onsubmit="return validateForm('kp')">
+                        <input type="hidden" name="lang" value="kp" />
+                        <input type="hidden" id="t" name="t" value="true" />
+                        <input type="text" class="form-control search-txt" id="s" name="s" placeholder="검색어를 입력하십시오." value="" oninput="$('#'+this.id).val(letterFilter(this.value))" autocomplete = "off"/>
+                        <a href="javascript:void(0);" class="search-btn" onclick="onSearchtype('kp')"><i class="fa fa-search"></i></a>
+                    </form>
+                </div>
+            </div>            
+        </div>
+        <div class="col-sm-4 text-center pt-98 pb-10">
+            <a href="?lang=kp" class="lang active">조선어</a> 
+            <a href="?lang=en" class="lang ">English</a> 
+            <a href="?lang=cn" class="lang ">中文</a>
+        </div>
+    </section>     
+
+    <nav class="top-menu">
+        <div class="container">
+            <div class="main-category-list text-center">
+                <div class="title">
+                    <i class="fa fa-bars"></i>
+                                            <span>상품분류</span>
+                                    </div>
+                <div class="category-all passive">
+                    <ul>
+                        <li>
+                            <a href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/product_list/0?lang=kp">                            
+                            전체                            
+                            </a>
+                        </li>
+                                                <li>
+                            <a href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/product_list/1434057346?lang=kp">                            
+                            신발/가방                            
+                            </a>
+                        </li>
+                                                <li>
+                            <a href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/product_list/1434058084?lang=kp">                            
+                            화장품/위생용품                            
+                            </a>
+                        </li>
+                                                <li>
+                            <a href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/product_list/1434058228?lang=kp">                            
+                            식료품                            
+                            </a>
+                        </li>
+                                                <li>
+                            <a href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/product_list/1434058277?lang=kp">                            
+                            보건의료품                            
+                            </a>
+                        </li>
+                                                <li>
+                            <a href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/product_list/1434058343?lang=kp">                            
+                            악기/체육기재                            
+                            </a>
+                        </li>
+                                                <li>
+                            <a href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/product_list/1514174054?lang=kp">                            
+                            공예품                            
+                            </a>
+                        </li>
+                                                <li>
+                            <a href="../product_list/1500532439__lang_kp_2e086eedb4">                            
+                            관광                            
+                            </a>
+                        </li>
+                                                <li>
+                            <a href="../product_list/1500532511__lang_kp_2e086eedb4">                            
+                            특산물                            
+                            </a>
+                        </li>
+                                            </ul>
+                </div>
+            </div>
+            <nav class="clearfix">
+                <ul class="top-category">
+                    <li>
+                        <a class="loading" href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/home?lang=kp">첫페지</a>
+                    </li>
+                    <li>
+                        <a href="../product_list/1500532511__lang_kp_2e086eedb4" class="">
+                        조선특산품                        </a>
+                    </li>
+                    <li>
+                        <a href="../company_list__lang_kp_2e086eedb4" class="active">
+                        기업소개                        </a>
+                    </li>
+                    <li>
+                        <a href="../brand_list__lang_kp_2e086eedb4" class = "">
+                            상표들                        </a>
+                    </li>
+                    <li>
+                        <a href="../product_list/1500532439__lang_kp_2e086eedb4" class="">
+                            관광                        </a>
+                    </li>           
+                    <li>
+                        <a href="../manmulsang__lang_kp_2e086eedb4" class="">
+                            연풍상업정보기술사                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="pullcontainer">
+                <a href="#" id="pull"><i class="fa fa-bars fa-2x" id="ipull"></i></a>
+            </div>
+        </div>
+    </nav>  
+</header>
+
+
+
+
+		<main class="main-block">
+			<section class="enterprise-product-block">
+	<div class="container">
+		<div class="enterprise-banner">
+    <section class="e-banner">
+        <img src="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp//uploads/images/enterprise/2019_06/cosmetics_b.jpg" alt="" />
+    </section>    
+    <section class="e-tab">
+        <div class="enterprise-pullcontainer">
+            <a href="#" id="enterprise-pull">
+                <i class="fa fa-bars fa-2x" id="enterprise-ipull"></i>
+            </a>
+        </div>
+        <nav class="e-tab-list">
+            <ul>
+                <li class="">
+                    <a href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/company/Cosmetics?lang=kp">
+                    소개                    </a>
+                </li>
+                                                   
+                                                <li class="">
+                    <a href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/company_connection_method/Cosmetics?lang=kp">
+                    련계정보                    </a>
+                </li>
+                            </ul>
+        </nav>                
+    </section>     
+</div> 		<section class="goods-detail-block">
+			<section class="goods-detail-image col-sm-4">
+				<section class="large-image">
+					<a id="product_image" href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/uploads/images/product/2019_6/b6c21c9b2e0190fe0abe5fba0e35b225/472.jpg" class="pro-fancy" data-fancybox="group">
+						<img id="product_large_image" src="../../uploads/images/product/2019_6/b6c21c9b2e0190fe0abe5fba0e35b225/472-400.jpg" alt="472세트화장품(조)" />
+						<div class="product-big-image"></div>
+					</a>
+				</section>
+				<section class="short-images">
+					<ul>
+												<li>
+							<a class="product_tiny_image" onclick="onTinyImageClicked('472', 'jpg', 'uploads/images/product/2019_6/b6c21c9b2e0190fe0abe5fba0e35b225/');">
+								<img src="../../uploads/images/product/2019_6/b6c21c9b2e0190fe0abe5fba0e35b225/472-50.jpg" alt="472세트화장품(조)" />
+							</a>
+													</li>
+											</ul>
+				</section>
+			</section>
+			<section class="goods-detail-info col-sm-6">
+				<section class="product-main-detail">
+					<section class="product-attribute basic-info">
+						<div class="cur-product-name">
+							<h1>472세트화장품(조)</h1>
+						</div>
+					</section>
+					<section class="product-attribute">
+						<div class="product-label">
+							<label>열람수</label>:
+						</div>
+						<div class="">
+							<span>2 336</span>
+						</div>
+					</section>
+					<section class="product-attribute">
+						<div class="product-label">
+							<label>단위</label>:
+						</div>
+						<div class="">
+							<span>조선화장품무역회사</span>
+						</div>
+					</section>
+									</section>				
+			</section>
+			<section class="link-product">
+				<div class="link-title">
+					<span>련관상품</span>
+				</div>
+				<div class="link-product-main">
+					<ul>
+											<li>
+							<a href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/product_detail/117?lang=kp">
+								<div class="link-product-img">
+									<img src="../../uploads/images/product/2019_6/4fc5889abc2f734a7402f3e00883c5cc/863-100.jpg" alt="만물상"/>
+								</div>
+								<div class="link-product-title">
+									<span class="letter">863검버섯방지크림</span>
+								</div>
+							</a>
+						</li>
+											<li>
+							<a href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/product_detail/122?lang=kp">
+								<div class="link-product-img">
+									<img src="../../uploads/images/product/2019_6/c88fad9943af53d47e04082759d9d4cb/561-100.jpg" alt="만물상"/>
+								</div>
+								<div class="link-product-title">
+									<span class="letter">561세면크림</span>
+								</div>
+							</a>
+						</li>
+											<li>
+							<a href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/product_detail/128?lang=kp">
+								<div class="link-product-img">
+									<img src="../../uploads/images/product/2019_6/63526a2b515dd4eea1995dbfc500a604/1-100.jpg" alt="만물상"/>
+								</div>
+								<div class="link-product-title">
+									<span class="letter">불로초샴푸, 린스, 몸물비누</span>
+								</div>
+							</a>
+						</li>
+										</ul>
+				</div>
+			</section>
+		</section>
+				<section class="product-other-detail">
+			<div class="product-label">
+				<label class="four-letter-label">상세정보:</label>
+			</div>
+			<div class="product-description">
+				<span><p>
+ 효능: 건성피부에 알맞는 보습화장품입니다. 히알루론산과 고려약추출물을 첨가하였으므로 건조한 피부를 신속히 개선하여 광택과 탄력을 보장해주며 로화를 지연시켜줍니다. 수렴성살결물, 보습성살결물, 머리영양물, 물크림, 크림, 밤크림, 분크림으로 구성되여있습니다.<br />
+ 사용방법: 수렴성살결물-보습성살결물-물크림-크림-분크림의 순서로 바르며 밤크림은 저녁에 사용하는것이 좋습니다.&nbsp; 머리영양물은 머리를 감은 후 사용하여주십시오.<br />
+ <br />
+ 422수렴성살결물<br />
+ 주원료: 글리세린, 에틸알콜, 레몬산, 개성고려인삼 및 고려약추출물, 향료<br />
+ 효능: 확장된 털구멍, 땀구멍을 수축시켜 피부를 팽팽하고 탄력있으며 섬세하게 해줄뿐아니라 여러가지 피부병을 예방합니다.<br />
+ 사용방법: 한증, 면도후 적당한 량을 얼굴과 목부위에 골고루 바르고 가볍게 두드려 흡수시킵니다.<br />
+ <br />
+ 422보습성살결물<br />
+ 주원료: 글리세린, 프로필렌글리콜, 피롤리돈카르본산나트리움, 에틸알콜,&nbsp; 개성고려인삼 및 고려약추출물, 비타민C, 향료<br />
+ 효능: 천연보습인자들을 함유하고있으므로 피부수분을 정상으로 유지해주고 피부세포를 활성화시켜 피부가 마르지 않고 부드러우며 매끈하고 탄력있게 해줍니다.<br />
+ 사용방법: 세면후 적당한 량을 얼굴에 골고루 바르고 가볍게 두드려 흡수시킵니다.<br />
+ <br />
+ 422물크림<br />
+ 주원료: 스쿠알란, 미리스틴산이소프로필, 개성고려인삼 및 고려약추출물, 비타민E, 히알루론산, 향료<br />
+ 효능: 히알루론산과 같은 천연보습인자와 고려약추출물들을 함유하고있으므로 피부의 수분손실을 막고 수분보유능력을 높여주며 피부세포를 활성화시킴으로써 피부가 부드럽고 매끈하며 탄력있게 해줍니다.<br />
+ 사용방법: 살결물을 바른 후 적당한 량을 얼굴과 목부위에 가볍게 안마하여 흡수시킵니다.<br />
+ <br />
+ 441크림<br />
+ 주원료: 스쿠알란, 미리스틴산이소프로필, 세틸알콜, 자외선흡수제, 개성고려인삼 및 고려약추출물, 히알루론산, 비타민E, 향료<br />
+ 효능: 히알루론산과 자외선흡수제를 함유하고있으므로 보습작용과 함께 자외선으로부터 피부를 보호하고 사용후 부드럽고 탄력이 있으며 건강한 피부로 만들어줍니다.<br />
+ 사용방법: 살결물이나 물크림을 사용한 후 적당한 량을 얼굴과 목부위에 바르고 가볍게 비벼주십시오.<br />
+ <br />
+ 441분크림<br />
+ 주원료: 스테아린산, 미리스틴산이소프로필, 나노이산화티탄, 자외선흡수제, 히알루론산, 개성고려인삼 및 고려약추출물,비타민E, 향료<br />
+ 효능: 피부의 흠집과 어두운 피부색을 가리워주어 피부가 맑고 생기있어보이게 해주며 자외선에 의한 로화를 막아주고 히알루론산과 개성고려인삼추출물을 함유하고있으므로 피부를 부드럽고 윤택있게 해줍니다.<br />
+ 사용방법: 크림 또는 물크림을 사용한 후 적당한 량을 얼굴과 목부위에 고르롭게 바릅니다.<br />
+ <br />
+ 441밤크림<br />
+ 주원료: 스쿠알란, 세틸알콜, 미리스틴산이소프로필, 히알루론산, 개성고려인삼 및 고려약추출물, 비타민E, 살구씨기름, 향료<br />
+ 효능: 영양물질들을 피부의 깊은 층까지 침투시켜 건조하고 거친 피부를 신속히 개선하여 부드럽고 윤택하게 해주며 건조로 인한 피부로화와 주름을 방지합니다.<br />
+ 사용방법: 저녁에 살결물을 사용한 후 적당한 량을 바르고 가볍게 안마하여 흡수시킵니다.<br />
+ <br />
+ 422머리영양제<br />
+ 주원료: 개성고려인삼추출물, 에틸알콜, 박하뇌, 히알루론산, 향료<br />
+ 효능: 머리피부와 머리칼을 보호하고 비듬과 탈모를 방지하며 머리카락에 광택을 줍니다.<br />
+ 사용방법: 머리를 감은 후 또는 일상적으로 적당한 량을 머리피부와 머리카락에 골고루 바르고 머리를 빗습니다. 주의: 눈에 들어 가지 않도록 주의하여주십시오.</p>
+</span>
+			</div>
+		</section>
+			</div>
+</section>		</main>
+		<footer class="footer">
+    <section class="container">
+        <nav class="bottom-menu desc">
+
+            <a href="http://www.kftrade.com.kp" target='_blank' style=" bottom: 3px; left: 30%; opacity: 1; cursor: pointer; z-index:  99999999;"><img class="kftrade" alt ='조선의 무역' src="../../static/image/kftrade.png" style="width: 200px"></a>
+            <a href="http://www.dprkportal.kp" target='_blank' style="bottom: 3px; left: 55%; opacity: 1; cursor: pointer; z-index:  99999999;"><img class="dprkportal" alt ='광야' src="../../static/image/dprkportal.png" style="width: 200px"></a>
+                
+            <ul>
+                <li>
+                    <a href="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/index.php/home?lang=kp">첫페지</a>
+                </li>
+                <li>
+                    <a href="../product_list/1500532511__lang_kp_2e086eedb4">조선특산품</a>
+                </li>
+                <li>
+                    <a href="../company_list__lang_kp_2e086eedb4">기업소개</a>
+                </li>
+                <li>
+                    <a href="../brand_list__lang_kp_2e086eedb4">상표</a>
+                </li>
+                <li>
+                    <a href="../product_list/1500532439__lang_kp_2e086eedb4">관광</a>
+                </li>                
+                <li>
+                    <a href="../manmulsang__lang_kp_2e086eedb4">연풍상업정보기술사</a>
+                </li>                
+            </ul>
+        </nav>
+        <nav class="bottom-menu">
+			<ul class="cur-contact">
+				<li>
+					<i class="fa fa-phone"></i>
+					<b>전화번호</b>	: 0085-02-18111-341-8120
+				</li>
+				<li>
+					<i class="fa fa-fax"></i>
+					<b>확스</b>	: 0085-02-381-4109
+				</li>
+				<li>
+					<i class="fa fa-envelope"></i>
+					<b>전자우편</b>: mms@star-co.net.kp
+				</li>
+			</ul>
+		</nav>
+    </section>
+</footer>		<script src="../../static/js/jquery-3.2.0.min.js" type="text/javascript"></script>
+<script src="../../static/js/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
+<script src="../../static/js/slick/slick.min.js" type="text/javascript"></script>
+<script src="../../static/js/plugins1.js" type="text/javascript"></script>
+<script src="../../static/js/ui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/static/js/ckeditor/ckeditor.js" type="text/javascript"></script>
+<script src="https://web.archive.org/web/20260101im_/http://manmulsang.com.kp/ckfinder/ckfinder.js" type="text/javascript"></script>
+<script src="../../static/js/fancybox/dist/jquery.fancybox.min.js" type="text/javascript"></script>
+<script src="../../static/js/back-to-top.js"></script>
+<script src="../../static/js/main.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function onSearchtype(language){      
+        Searchval = $('#s').val();
+        if(Searchval == '' && language == 'kp'){
+            alert("검색어를 입력하십시오.");
+        }else if (Searchval == '' && language == 'en') {
+            alert('Please insert keywords');
+        }else if(Searchval == '' && language == 'cn'){
+            alert('请输入您要搜索的商品关键字');
+        }else{
+             if(language == 'kp'){
+                var filter = /^[a-z]{1,2}$/gi;
+                if(filter.test(Searchval)){
+                   alert( "검색어를 정확히 입력하십시오." );
+                   return false;
+                }
+                filter = /^[a-z]{3,5}$/gi;
+                if(filter.test(Searchval)){
+                   $('#t').val(false);
+                }
+            }else if(language == 'cn'){
+                var filter = /^[a-z]{1,2}$/gi;
+                if(filter.test(Searchval)){
+                   alert( "请把检索词正确输入" );
+                   return false;
+                }
+                filter = /^[a-z]{3,5}$/gi;
+                if(filter.test(Searchval)){
+                   $('#t').val(false);
+                }
+            }
+            document.SearchForm.submit();
+        }
+    }
+
+    function onTinyImageClicked(filename, ext, directory) {
+        $('#product_large_image').attr('src', '../../index__lang_cn_db385b3521.html' + directory + filename + '-400.' + ext);
+        var $product_img = $("#product_large_image");
+        $product_img.trigger('zoom.destroy');
+        $product_img.zoom({url: '../../index__lang_cn_db385b3521.html' + directory + filename + '.' + ext, target: '.product-big-image'});
+    }
+    function validateForm(language) {
+        Searchval = $('#s').val();
+        if(Searchval == '' && language == 'kp'){
+            alert("검색어를 입력하십시오.");
+            return false;
+        }else if (Searchval == '' && language == 'en') {
+            alert('Please insert keywords');
+            return false;
+        }else if(Searchval == '' && language == 'cn'){
+            alert('请输入您要搜索的商品关键字');
+            return false;
+        }else{
+            if(language == 'kp'){
+                var filter = /^[a-z]{1,2}$/gi;
+                if(filter.test(Searchval)){
+                   alert( "검색어를 정확히 입력하십시오." );
+                   return false;
+                }
+                filter = /^[a-z]{3,5}$/gi;
+                if(filter.test(Searchval)){
+                   $('#t').val(false);
+                }
+            }else if(language == 'cn'){
+                var filter = /^[a-z]{1,2}$/gi;
+                if(filter.test(Searchval)){
+                   alert( "请把检索词正确输入" );
+                   return false;
+                }
+                filter = /^[a-z]{3,5}$/gi;
+                if(filter.test(Searchval)){
+                   $('#t').val(false);
+                }
+            }
+            return true;
+        }
+        return true;
+    }
+    function letterFilter(value){
+      var filter = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+      return value.replace(filter, "");      
+     }
+</script>	</body>
+</html>

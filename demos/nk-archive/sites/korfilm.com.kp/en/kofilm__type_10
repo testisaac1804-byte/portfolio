@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Korean Film</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <meta name="keyword" content="Korean Film Art, Photo, Video, Film Festival">
+    <meta name="description" content="Korean Film-Korean Film">
+    <meta name="robots" content="ALL">
+    <meta name="googole" content="notranslate">
+    <meta name="author" content="Korea Film Export & Import Corporation">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="9ff7492e8560ede2be1c3b8f3bfdd1f7">
+
+    <link href="/assets/images/favicon.png" rel="icon">
+
+    <!-- PLUGINS -->
+    <link href="/assets/plugins/polo/css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="/assets/plugins/polo/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- end: PLUGINS -->
+    <link href="/assets/css/custom.css" rel="stylesheet" type="text/css">
+
+    <link href="/assets/css/pages/common.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/responsive.css" rel="stylesheet" type="text/css">
+
+    <!--Plugins-->
+    <script src="/assets/plugins/polo/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/assets/plugins/polo/js/plugins.min.js" type="text/javascript"></script>
+    <script src="/assets/plugins/polo/js/functions.js" type="text/javascript"></script>
+
+    <link href="/assets/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css">
+    <script src="/assets/plugins/toastr/toastr.min.js" type="text/javascript"></script>
+
+    <script src="/assets/plugins/waypoints/jquery.waypoints.min.js" type="text/javascript"></script>
+
+    <script src="/assets/js/common.js"></script>
+    <script src="/assets/js/utils.js"></script>
+
+    <style>
+        body *{
+          font-family: sans-serif        }
+
+        @media(max-width:479px){
+            .site-address{
+                display: none;
+            }
+            #mark_img{
+                height: 90%;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <input type="hidden" id="base_url" value="/">
+    <input type="hidden" id="is_first_page" value="0">
+    <!-- Body Inner -->
+    <div class="body-inner">
+        <!-- Header -->
+        <header id="header" class="header-always-fixed">
+            <div class="header-inner ">
+                <!--banner-->
+                <div class="banner">
+                    <a class="go-home" href="/en/index">
+                        <img id="mark_img" src="/assets/images/top_mark.png" alt="Korean Film">
+                    </a>
+                    <img class="banner-text" src="/assets/images/top_text.png">
+                    <a class="site-address self-responsive" href="../index.html">www.korfilm.com.kp</a>
+
+                    <!--Header Extras-->
+                    <div class="header-extras">
+                        <ul>
+                            <li>
+                                <div class="p-dropdown">
+                                    <a href="javascript:;" class="lang-sel"><i class="icon-globe"></i><span>English</span></a>
+                                    <ul class="p-dropdown-content">
+                                                                                    <li><a class="font-main" href="javascript:changelang('korean')">조선어</a></li>
+                                                                                    <li><a class="font-sans" href="javascript:changelang('english')">English</a></li>
+                                                                                    <li><a class="font-sans" href="javascript:changelang('russian')">Русский язык</a></li>
+                                                                                    <li><a class="font-sans" href="javascript:changelang('chinese')">中文</a></li>
+                                                                            </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div> <!--end: Header Extras-->
+
+                    <!-- Search -->
+                    <div class="header-search">
+                        <div class="search-container">
+                            <form id="frm_search" action="/en/search" method="get">
+                                <input type="hidden" id="query_txt" name="query_txt">
+                                <input type="hidden" id="order_item" name="order_item" value="created">
+                                <input type="hidden" id="order_type" name="order_type" value="desc">
+                                <input type="hidden" name="x_csrf_token" value="9ff7492e8560ede2be1c3b8f3bfdd1f7">
+                            </form>
+                            <input type="text" id="search_txt" value="" placeholder="Enter a search word." />
+                            <span id="btn_search" title="Search"><i class="icon-search"></i></span>
+                        </div>
+                    </div> <!-- end: Search -->
+                </div> <!--end: banner-->
+
+                <!--Navigation Resposnive Trigger-->
+                <div id="mainMenu-trigger-bar" class="p-dropdown">
+                    <a href="javascript:;" class="nav-button toggle-bar"><span class="lines"></span></a>
+                    <div class="p-dropdown-content">
+                        <ul class="primary-links">
+                            <li class="primary-item item "><a href="/en/index">Home</a></li>
+                            <li class="primary-item item "><a href="/en/intro">History</a></li>
+                            <li class="primary-item item active-item"><a href="/en/kofilm">Korean Film</a></li>
+                            <li class="primary-item item "><a href="/en/festival">Film Festival</a></li>
+                            <li class="primary-item item "><a href="/en/finishedaction">Exchange of film</a></li>
+                        </ul>
+                    </div>
+                </div> <!--end: Navigation Resposnive Trigger-->
+
+                <!--Navigation-->
+                <div id="mainMenu" class="menu-right">
+                    <nav class="m-r-10">
+                        <ul class="primary-links self-responsive">
+                            <li class="primary-item menu-item ">
+                                <a href="/en/index">Home</a>
+                            </li>
+                            <li class="primary-item menu-item ">
+                                <a href="/en/intro">History</a>
+                            </li>
+                            <li class="primary-item menu-item active-menu">
+                                <a href="/en/kofilm">Korean Film</a>
+                            </li>
+                            <li class="primary-item menu-item ">
+                                <a href="/en/festival">Film Festival</a>
+                            </li>
+                            <li class="primary-item menu-item ">
+                                <a href="/en/finishedaction">Exchange of film</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div> <!--end: Navigation-->
+
+                <!--Dots Menu -->
+                <nav id="dotsMenu">
+                    <ul>
+                        <li class="item-newfilm"><a href="/en/index/active/1"><span>New Film</span><i class="fa fa-video-camera"></i></a></li>
+                        <li class="item-addfilm"><a href="/en/index/active/2"><span>Additional Film</span><i class="fa fa-video-camera"></i></a></li>
+                        <li class="item-photo"><a href="/en/index/active/3"><span>Introduction of Photograph</span><i class="fa fa-camera-retro"></i></a></li>
+                        <!-- <li class="item-karaok"><a href="/en/index/active/4"><span>Film Music</span><i class="fa fa-music"></i></a></li> -->
+                        <li class="item-program"><a href="/en/index/active/5"><span>Presentation</span><i class="fa fa-film"></i></a></li>
+                        <li class="item-news"><a href="javascript:;" class="first-show-news"><span>News</span><i class="fa fa-wifi"></i></a></li>
+                    </ul>
+                </nav>
+                <!--End: Dots Menu -->
+            </div>
+        </header> <!-- end: Header -->
+
+        <!-- Content -->
+        <section id="page-content" class="">
+            <link href="/assets/css/pages/korfilm.css" rel="stylesheet" type="text/css">
+
+<div class="row intro-body p-t-20" style="min-height: calc(100vh - 340px);">
+	<div class="col-md-3 left-menu-container" id="left-menu-container">
+        <ul id="left-menu" class="left-menu self-responsive">
+            <li class="menu-item "><a href="/en/kofilm?type=0">All<span class="badge badge-info"> 324</span><span class="badge new-item">+3</span></a></li>
+                            <li class="menu-item "><a href="/en/kofilm?type=9">Feature Film<span class="badge badge-info"> 235</span><span class="badge new-item"></span></a></li>
+                            <li class="menu-item active-item"><a href="/en/kofilm?type=10">Documentary<span class="badge badge-info"> 34</span><span class="badge new-item"></span></a></li>
+                            <li class="menu-item "><a href="/en/kofilm?type=11">Animation<span class="badge badge-info"> 38</span><span class="badge new-item">+1</span></a></li>
+                            <li class="menu-item "><a href="/en/kofilm?type=12">TV Drama<span class="badge badge-info"> 17</span><span class="badge new-item">+2</span></a></li>
+                    </ul>
+	</div>
+	<div class="col-md-9" id="intro-container">
+                    <div class="sub-container">
+                <div class="row">
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '776', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1763853322.2795.jpg" alt="Through Loyal Offensive, Fierce 24-7 Struggle and Resolute Lightning Campaign">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> Through Loyal Offensive, Fierce...</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2025.11.23.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '757', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1762215558.5441.jpg" alt="">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"></p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2025.11.04.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '756', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1762215133.7297.jpg" alt="Orangchon Power Station, a Proud Creation of the Struggle for Defending Party Policy">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> Orangchon Power Station, a Proud...</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2025.11.04.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="/en/kofilm/media-list/152" class="data-item has_new_icon">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1750549927.2003.jpg" alt="Meritorious Persons Socialist Patriotism">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-folder-open-o"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> Meritorious Persons Socialist...<br>(1-4)</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2025.06.17.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '728', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1747438035.651.jpg" alt="Strong Sport Wind in the Year 2023">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">Strong Sport Wind in the Year 2023</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2025.05.17.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '716', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1745882138.6648.jpg" alt="Always as in the Days of Military Service">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> Always as in the Days of Military...</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2025.04.29.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '703', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1742421073.2608.jpg" alt="On the Road of Selfless, Devoted Service for the People">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> On the Road of Selfless, Devoted...</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2025.03.19.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '666', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1730484044.6268.jpg" alt="Opening a New Era of Rural Rejuvenation(1)">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> Opening a New Era of Rural...</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2024.11.01.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="/en/kofilm/media-list/6" class="data-item has_new_icon">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1707329224.1662.jpg" alt="The ideal street of people constructed with the great and long-cherished ambition">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-folder-open-o"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> The ideal street of people...<br>(1-2)</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2024.10.01.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '659', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1725901311.3712.jpg" alt="Strong Sport Wind in the Year 2022">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">Strong Sport Wind in the Year 2022</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2024.09.09.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '653', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1722531729.2982.jpg" alt="Strong Sport Wind in the Year 2021">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">Strong Sport Wind in the Year 2021</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2024.08.01.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '644', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1720390764.839.jpg" alt="The Eternal Sun of Mankind">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">The Eternal Sun of Mankind</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2024.07.08.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="/en/kofilm/media-list/198" class="data-item has_new_icon">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1598982134.1351.jpg" alt="Covering the Country with Trees and Flowers">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-folder-open-o"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> Covering the Country with Trees...<br>(1-2)</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2024.05.08.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '628', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1711950579.4749.jpg" alt="In the Hearts of Mankind Forever">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">In the Hearts of Mankind Forever</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2024.04.01.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '627', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1711950465.4994.jpg" alt="We Live with the Great Leader in Our Hearts Forever">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> We Live with the Great Leader in Our...</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2024.04.01.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '620', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1709423378.9366.jpg" alt="Bringing the Flower Garden of Communist Virtue into Bloom">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> Bringing the Flower Garden of...</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2024.03.03.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '619', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1709423241.342.jpg" alt="Cradle Filled with Affection">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">Cradle Filled with Affection</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2024.03.03.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '613', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1707331535.0396.jpg" alt="Eight Famous Scenes in Mt.Paektu">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">Eight Famous Scenes in Mt.Paektu</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2024.02.07.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '610', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1707329351.7359.jpg" alt="The Embrace the People Live in">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">The Embrace the People Live in</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2024.02.07.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '600', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1702928159.9266.jpg" alt="Phungsan Dog, National Dog of the DPRK">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> Phungsan Dog, National Dog of the...</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2023.12.18.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '574', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1691432376.268.jpg" alt="Masters of the Youth Power">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">Masters of the Youth Power</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2023.08.07.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '549', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1683306618.0862.jpg" alt="Prosperous Pyongyang">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">Prosperous Pyongyang</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2023.05.05.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '446', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1664997749.168.jpg" alt="Chilbo, a Famous Mountain in Korea">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">Chilbo, a Famous Mountain in Korea</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2022.10.05.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '394', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1658860637.0589.jpg" alt="Socialism is Our Home">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">Socialism is Our Home</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2022.07.26.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '392', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1656547813.7259.jpg" alt="Natural History Museum and Central Zoo Attract People">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> Natural History Museum and...</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2022.06.30.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '365', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1655853592.4204.jpg" alt="Outcry of Mothers">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">Outcry of Mothers</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2022.06.22.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '363', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1655853130.3085.jpg" alt="Strong Sport Wind in the Year 2019">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">Strong Sport Wind in the Year 2019</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2022.06.22.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '313', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1638655341.4968.jpg" alt="Persons with Academic Degrees and Titles Who Live Up to the Trust of the Party">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> Persons with Academic Degrees and...</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2021.12.04.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '301', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1638237773.3704.jpg" alt="Creators of the History of Gold Sea">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">Creators of the History of Gold Sea</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2021.11.30.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '287', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1635448605.3044.jpg" alt="By Dint of the Spirit of Self-Reliance and the Strength of Science and Technology">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> By Dint of the Spirit of...</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2021.10.28.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '210', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1616804361.2413.jpg" alt="A Great Harmonious Family">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">A Great Harmonious Family</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2021.03.27.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '187', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1611601192.9193.jpg" alt="The Children Laugh and Sing in Happiness">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title"> The Children Laugh and Sing in...</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2021.01.26.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '184', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1611600444.261.jpg" alt="Mausoleum of King Tongmyong">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">Mausoleum of King Tongmyong</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2021.01.26.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                                                    <a href="javascript:;" class="data-item has_new_icon" onclick="showVideo('kofilm', '135', 1)">
+                                        <div class="block-img">
+                                            <img src="" data-src="/media/kofilm/thumb/thumb_english1598985800.8718.jpg" alt="Historic Relics in Pyongyang">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-play-circle"></i>
+                                        </span>
+                                        </div>
+                                        <div class="block-desc">
+                                            <p class="item-title">Historic Relics in Pyongyang</p>
+                                            <p class="block-created">
+                                                <i class="fa fa-calendar">&nbsp;2020.09.02.</i>
+                                            </p>
+                                        </div>
+                                                                            </a>
+                                                            </div>
+                        </div>
+                                    </div>
+            </div>
+        	</div>
+</div>
+        </section> <!-- end: Content -->
+
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="footer-content">
+                <div class="footer-div">
+                    <div class="mark-item">
+                        <img src="/assets/images/mark.png" width=100>
+                        <p class="name">Korea Film Export & Import Corporation</p>
+                    </div>
+                    <div class="sub-info">
+                        <p>Add: Ryonghung-dong No.2, Taesong District, Pyongyang</p>
+                        <p>Tel: 850-2-18111(381-8034)</p>
+                    </div>
+                    <div class="sub-info">
+                        <p>Fax: 850-2-381-2100(ICC-388)</p>
+                        <p>E-mail: korfilm@star-co.net.kp</p>
+                    </div>
+                </div>
+                <div class="footer-bottom text-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>2022 @ Korea Film Export & Import Corporation</p>
+                            <p><a href="http://www.dprkportal.kp" target="_blank"><img src="/assets/images/sites/gwangya.png"></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div> <!-- end: Body Inner -->
+
+    <!-- Modal -->
+    <div id="first-news-modal" class="modal fade news-dialog" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">News</h4>
+                </div>
+                <div class="modal-body">
+                                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="news-modal" class="modal fade news-dialog" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">News</h4>
+                </div>
+                <div class="modal-body">
+                                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="video-modal" class="modal video fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <iframe src="" style="width:100%;height:470px;border:0px"></iframe>
+                    </div>
+                    <div class="text-content text-justify" style="padding-top:15px">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll top -->
+    <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
+
+    <script src="/assets/js/my-waypoint.js"></script>
+    <script type="text/javascript">
+
+        $("div[role='dialog']").on('hide.bs.modal',function(){
+            var ifr = $(this).find('iframe');
+            ifr.attr('src', '');
+        });
+
+        $("div[role='dialog']").on('shown.bs.modal',function(){
+
+        });
+
+        function showVideo($type, $id, $is_content_text)
+        {
+            var $url = '';
+
+            $("#video-modal .text-content").removeClass("hide");
+            if ($is_content_text == '0')
+                $("#video-modal .text-content").addClass("hide");
+
+            if ($type == 'base') {
+                $url = "/en/base/get-info/" + $id;
+            } else if ($type == 'karaok') {
+                $url = "/en/intro/karaok/get-info/" + $id;
+            } else if ($type == 'program') {
+                $url = "/en/intro/program/get-info/" + $id;
+            } else if ($type == 'kofilm') {
+                $url = "/en/kofilm/get-info/" + $id;
+            } else if ($type == 'prize') {
+                $url = "/en/festival/get-info/" + $id;
+            } else if ($type == 'special') {
+                $url = "/en/festival/special/get-info/" + $id;
+            } else if ($type == 'exchange_1') {
+                $url = "/en/finishedaction/exchange-1/get-info/" + $id;
+            } else if ($type == 'exchange_3') {
+                $url = "/en/finishedaction/exchange-3/get-info/" + $id;
+            } else {
+                return;
+            }
+
+            $.ajax({
+                url: $url,
+                type: "get",
+                dataType: "json",
+                success: function(data){
+                    var $no_msg = 'The data does not exist.';
+
+                    $("#video-modal h4.modal-title").html(data.title);
+
+                    if (data.movie == '' || data.movie == null)
+                    {
+                        $("#video-modal iframe").addClass("hide");
+                        $("#video-modal iframe").attr("src", '');
+
+                        toastr.warning($no_msg);
+                    }
+                    else
+                    {
+                        $("#video-modal iframe").removeClass("hide");
+                        $("#video-modal iframe").attr("src", base_url(data.hls));
+
+                        $("#video-modal .text-content").html(data.desc);
+
+                        $("#video-modal").modal("show");
+                    }
+                }
+            });
+        }
+
+        function changelang(lang_val)
+        {
+            $.ajax({
+                url: "/changelang",
+                data: {
+                    lang: lang_val
+                },
+                success: function(data){
+                    document.location.href = data;
+                }
+            });
+        }
+
+        $(function(){
+
+        });
+
+        function IncReadNum(type,id)
+        {
+            $.ajax({
+                url: '/welcome/increadnum',
+                method: 'post',
+                data: {
+                    id: id,
+                    type: type
+                }
+            });
+        }
+
+        function searchData()
+        {
+            var $query_txt = $("#search_txt").val();
+
+            if ($query_txt != '')
+            {
+                $("#query_txt").val($query_txt);
+                $("#frm_search").submit();
+            }
+        }
+
+        $("#search_txt").on("keyup", function(e) {
+            if (e.keyCode === 13) {
+                searchData()
+            }
+        })
+
+        $("#btn_search").on("click", function() {
+            searchData()
+        })
+
+        $(".first-group .item-carousel").on("click", function(){
+            if (!$(this).hasClass("active-item"))
+            {
+                var $obj = $(this).data("target");
+
+                $(".first-group .group-item").removeClass('active-item');
+                $(this).addClass('active-item');
+
+                $(".carousel-container").addClass("hide");
+
+                $($obj + " .carousel-container .ani-box").removeClass("zoomIn");
+                $($obj + " .carousel-container .ani-box").removeClass("animated");
+                $($obj + " .carousel-container").removeClass("hide");
+
+                $($obj + ' .ani-box').each(function(){
+                    var $el_img = $(this).find(".block-img").find("img");
+                    $el_img.prop("src", $el_img.data("src"));
+                });
+
+                $($obj + ' .ani-box').each(function(k){
+                    var el = $(this);
+
+                    setTimeout( function () {
+                        el.parents(".loading").removeClass("loading");
+
+                        el.addClass('zoomIn animated');
+                    },  k * 100, 'easeInOutExpo' );
+                });
+
+                $(window).scrollTop($(".part-1").height());
+            }
+        })
+
+        $(".first-show-news").on("click", function(){
+            var $news_count = '0';
+
+            if (parseInt($news_count) > 0)
+            {
+                $("#news-modal .modal-dialog").css("top", "15%");
+                $("#news-modal").modal("show");
+            }
+            else
+            {
+                toastr.warning('The data does not exist.');
+            }
+        })
+
+        $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+            // Modify options, control originalOptions, store jqXHR, etc
+            var $type = options.type;
+            if ($type.toLocaleUpperCase() === "POST")
+            {
+                if (options.url.indexOf(":20191") < 0  && options.url.indexOf(":20206") < 0 )
+                {
+                    var $token = $("meta[name='csrf-token']").attr('content');
+
+                    if (options.contentType === false) // this is form data
+                    {
+                        options.data.append('x_csrf_token', $token);
+                    }
+                    else // otherwise
+                    {
+                        options.data = options.data + '&x_csrf_token=' + $token;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
+

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>218 / 213 賭博詐騙網絡 — 完整調查分析</title>
+<meta name="description" content="永誠貴賓會 (218) 與 PG娛樂 (213) 兩個非法離岸賭博推廣網絡的完整基礎設施分析：域名池、註冊商、DNS 指紋、IP、API 加密、代理後台、追蹤系統與打擊面。">
+<style>
+:root{--bg:#0d0e12;--sf:#14151a;--sf2:#191b22;--t1:#f0f0f5;--t2:#c8ccd6;--t3:#7c8296;--ab:#818cf8;--ag:#10b981;--rd:#ef4444;--am:#f59e0b;--bd:rgba(255,255,255,.07)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t2);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang HK","Noto Sans TC",sans-serif;font-size:15px;line-height:1.75;padding:0 20px 80px}
+.wrap{max-width:980px;margin:0 auto}
+header{padding:44px 0 28px;border-bottom:1px solid var(--bd);margin-bottom:28px}
+.kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ab);font-weight:700;margin-bottom:10px}
+h1{font-size:clamp(26px,4.4vw,40px);line-height:1.2;color:var(--t1);letter-spacing:-.5px;margin-bottom:12px}
+.lede{font-size:16px;color:var(--t3);max-width:760px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{font-size:12px;padding:5px 11px;border-radius:100px;border:1px solid var(--bd);background:var(--sf);color:var(--t3)}
+.chip b{color:var(--t2);font-weight:600}
+.warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.35);border-radius:10px;padding:14px 18px;font-size:13.5px;margin:24px 0;color:#fca5a5}
+.warn b{color:#fecaca}
+nav.toc{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:18px 22px;margin:28px 0 36px}
+nav.toc h2{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:12px;font-weight:700}
+nav.toc ol{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:4px 24px;counter-reset:t}
+nav.toc li{counter-increment:t;font-size:14px}
+nav.toc a{color:var(--t2);text-decoration:none;display:block;padding:3px 0}
+nav.toc a:before{content:counter(t) ". ";color:var(--ab);font-variant-numeric:tabular-nums}
+nav.toc a:hover{color:var(--ab)}
+section{margin:44px 0}
+h2{font-size:23px;color:var(--t1);letter-spacing:-.3px;margin-bottom:8px;padding-top:8px;scroll-margin-top:20px}
+h2 .n{color:var(--ab);font-size:14px;font-variant-numeric:tabular-nums;display:block;margin-bottom:2px;letter-spacing:.1em}
+h3{font-size:17px;color:var(--t1);margin:28px 0 10px;font-weight:650}
+h4{font-size:14px;color:var(--am);margin:20px 0 6px;font-weight:650;letter-spacing:.02em}
+p{margin:10px 0}
+ul,ol{margin:10px 0 10px 22px}
+li{margin:5px 0}
+a{color:var(--ab)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.18);border-radius:4px;padding:1px 5px;color:#c7d2fe;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+pre{background:#0a0b0f;border:1px solid var(--bd);border-radius:10px;padding:16px 18px;overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.7;color:#a5b4fc;margin:14px 0;white-space:pre}
+pre b{color:var(--t1);font-weight:600}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px;display:block;overflow-x:auto;white-space:nowrap}
+th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--bd);padding:9px 12px;background:var(--sf);font-weight:700}
+td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top}
+tr:hover td{background:rgba(255,255,255,.02)}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:4px;font-weight:600}
+.tag.r{background:rgba(239,68,68,.14);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
+.tag.g{background:rgba(16,185,129,.12);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
+.tag.a{background:rgba(245,158,11,.12);color:#fcd34d;border:1px solid rgba(245,158,11,.3)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:18px 0}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:16px 18px}
+.card h4{margin:0 0 8px;color:var(--t1);font-size:14px}
+.card p{font-size:13px;margin:4px 0;color:var(--t3)}
+.card p b{color:var(--t2)}
+.kv{font-size:13px;line-height:1.9}
+.kv span{color:var(--t3);display:inline-block;min-width:88px}
+.kv b{color:var(--t2);font-weight:500}
+.callout{border-left:3px solid var(--ab);background:rgba(129,140,248,.06);border-radius:0 8px 8px 0;padding:12px 18px;margin:16px 0;font-size:13.5px}
+.callout.rd{border-color:var(--rd);background:rgba(239,68,68,.06)}
+.callout.am{border-color:var(--am);background:rgba(245,158,11,.06)}
+.steps{counter-reset:s;list-style:none;margin-left:0}
+.steps li{counter-increment:s;position:relative;padding-left:34px;margin:12px 0;font-size:14px}
+.steps li:before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:rgba(129,140,248,.15);border:1px solid rgba(129,140,248,.35);color:var(--ab);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--bd);font-size:13px;color:var(--t3)}
+footer a{text-decoration:none}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.links a{font-size:13px;padding:8px 14px;border-radius:8px;border:1px solid var(--bd);background:var(--sf);text-decoration:none;color:var(--t2)}
+.links a:hover{border-color:rgba(129,140,248,.4);color:var(--ab)}
+.small{font-size:12.5px;color:var(--t3)}
+hr{border:0;border-top:1px solid var(--bd);margin:34px 0}
+@media(max-width:640px){body{padding:0 14px 60px}h2{font-size:20px}table{font-size:12.5px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Case Study · Infrastructure Teardown</div>
+  <h1>218 / 213 賭博詐騙網絡<br>完整調查分析</h1>
+  <p class="lede">永誠貴賓會（218 系列）與 PG娛樂（213 系列）—— 兩個以香港及內地賭客為目標的離岸非法賭博推廣網絡。本文逐層拆解入口鏈、域名池、DNS 指紋、IP 基建、API 加密、代理後台、佣金追蹤與可打擊面。</p>
+  <div class="meta">
+    <span class="chip">分析日期 <b>2026-09-17</b></span>
+    <span class="chip">最後更新 <b>2026-10-19</b></span>
+    <span class="chip">樣本 <b>2 個活躍網絡 · 60+ 域名 · 47 IP</b></span>
+    <span class="chip">方法 <b>DNS / WHOIS / 頁面捕獲 / JS 逆向</b></span>
+  </div>
+</header>
+
+<div class="warn">
+  <b>⚠️ 教育用途聲明</b> — 本頁是反詐騙調查報告，不是賭博推廣。文中所有域名、IP、客服連結僅為證據記錄與辨識用途；<b>請勿前往、勿註冊、勿存款</b>。這些站點屬非法離岸賭博，存款不受任何法律保障，且普遍與洗錢、詐騙及個資販賣相關。本頁與任何真實公司、品牌均無關聯。
+</div>
+
+<nav class="toc">
+  <h2>目錄</h2>
+  <ol>
+    <li><a href="#s1">執行摘要</a></li>
+    <li><a href="#s2">218 網絡：永誠貴賓會</a></li>
+    <li><a href="#s3">213 網絡：PG娛樂</a></li>
+    <li><a href="#s4">共用基建指紋</a></li>
+    <li><a href="#s5">IP 與託管清單</a></li>
+    <li><a href="#s6">時間線</a></li>
+    <li><a href="#s7">打擊面（Takedown）</a></li>
+    <li><a href="#s8">十條辨識紅旗</a></li>
+    <li><a href="#s9">方法、證據與限制</a></li>
+    <li><a href="#s10">建置與驗證紀錄</a></li>
+  </ol>
+</nav>
+
+<!-- ============ 1 ============ -->
+<section id="s1">
+<h2><span class="n">SECTION 01</span>執行摘要</h2>
+<p>兩個網絡表面無關（不同品牌、不同註冊商、不同技術棧），但運作模式完全一致：<b>用一個多年前註冊的「乾淨」老域名做品牌入口</b>，實際內容放在一批<b>同日批量註冊的新域名</b>上，再以隨機子域名、備用線路、假瀏覽器、即時客服把人導向真正的原生 App。域名每週輪換，所以黑名單永遠追不上。</p>
+
+<table>
+<thead><tr><th>維度</th><th>218 — 永誠貴賓會</th><th>213 — PG娛樂</th></tr></thead>
+<tbody>
+<tr><td>平台</td><td>BBIN 白標（BB電子／BB視訊／BB體育）</td><td>TruckSDK／OpenShare 門戶網（merchant <code>FNQ2</code>）</td></tr>
+<tr><td>入口</td><td><code>218.com</code> → 假 Loading → <code>185.186.146.156:8080</code> → 218yc.com</td><td><code>213.com</code> → 302 → 隨機子域 <code>*.213NNNN.cc</code></td></tr>
+<tr><td>備用線路</td><td>2182999 / 2183111 / 2183666 / 2185666（:9900、:8866）</td><td>213h5tz*.cc（H5）＋ 213h5004–08.cc（假瀏覽器）</td></tr>
+<tr><td>註冊商</td><td>GoDaddy（批量）</td><td>Gname（批量）</td></tr>
+<tr><td>DNS</td><td>Cloudflare ＋ 自建 <code>*cne.com</code> NS 層</td><td>單一 Cloudflare 帳戶（dan / rosemary）＋ 阿里 DNS</td></tr>
+<tr><td>核心技術</td><td>Vue 原生 App ＋ AES-256-ECB API</td><td>H5 門戶 ＋ Spring Boot 網關（K8s）</td></tr>
+<tr><td>後台</td><td><b>已發現</b> <code>ag.218920.com</code>（代理／佣金／風控）</td><td>未對外暴露（僅 spring 404）</td></tr>
+<tr><td>變現方式</td><td>代理佣金 ＋ 玩家存款</td><td>代理佣金（<code>agentName=</code>）＋ App 導流</td></tr>
+</tbody>
+</table>
+
+<div class="callout rd">
+<b>為什麼這種站一定不能碰：</b>沒有牌照、沒有存款保障、沒有爭議處理機制。域名隨時被換掉、客服隨時失聯、App 是側載（sideload）安裝 —— 它同時取得你手機的完整權限。贏錢只是畫面上一串數字，出金時就會出現「流水不足」、「風控審核」、「賬戶異常」。
+</div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="s2">
+<h2><span class="n">SECTION 02</span>218 網絡 — 永誠貴賓會（BBIN 白標）</h2>
+
+<h3>2.1 入口鏈</h3>
+<pre>218.com  ──▶  假「Loading…」頁
+   └─ JS: atob("<b>aHR0cDovLzE4NS4xODYuMTQ2LjE1Njo4MDgw</b>") = http://185.186.146.156:8080
+   └─ http://185.186.146.156:8080/?r=&lt;base64(當前網址)&gt;   → 301
+   └─ https://www.218yc.com/    （TLS 指紋閘門：curl 得 000，真瀏覽器才過）</pre>
+<ul>
+  <li><b>218.com</b> — GoDaddy ＋ Domains By Proxy 私隱保護，<b>1998-04-02 註冊</b>（2031 到期）。用一個 28 年歷史的老域名做門面，是最典型的「養域名」手法：老域名在學校／公司網絡的過濾清單裡往往不在封鎖名單上。</li>
+  <li>NS = <code>clint.cloudflare.com</code> / <code>tess.cloudflare.com</code>；A 記錄指向 Cnservers 洛杉磯 <code>185.186.146.156</code>。</li>
+  <li><code>?r=</code> 參數把來源網址一併帶過去 —— 這是<b>代理分佣追蹤</b>，不是技術需要。</li>
+  <li><b>218yc.com</b>（備用網址資訊站）— 2025-09-18 才註冊，NS 是另一組 Cloudflare 帳戶（marlowe / randy），A 記錄 <code>w.218cdn.com</code> → Vultr 東京 <code>45.77.28.136</code>。這個站會<b>反覆開關</b>（09-14 封 → 09-15 開 → 09-17 再封），是運維在調閘門。</li>
+</ul>
+
+<h3>2.2 備用線路：真正的 App 就在這裡</h3>
+<table>
+<thead><tr><th>域名</th><th>端口</th><th>行為</th><th>IP（地區）</th></tr></thead>
+<tbody>
+<tr><td>2182999.com</td><td>:9900</td><td>302 → <code>/web/#/first</code> → App 200</td><td>146.88.161.34（WoodsDale「KRJPL」）</td></tr>
+<tr><td>2183111.com</td><td>:8866</td><td>同一個 App，200</td><td>146.88.161.34</td></tr>
+<tr><td>2183666.com</td><td>:9900</td><td>同一個 App，200</td><td>103.241.116.187（WoodsDale KR）</td></tr>
+<tr><td>2185666.com</td><td>:9900</td><td>同一個 App，200</td><td>103.241.116.187</td></tr>
+</tbody>
+</table>
+<p>四條線路共用同一組自建 NS：<code>SNM1A0G.317dccne.com</code> / <code>SNN3A0G.317dccne.com</code>。頁面上還列出 <code>www81019827016236468.&lt;line&gt;.com</code> —— <b>17 位數字 www 前綴</b>，同一條線路可以生成無限個唯一主機名，專門用來繞過「整域封鎖」。</p>
+
+<h3>2.3 App 內部（解包所得）</h3>
+<div class="grid2">
+  <div class="card">
+    <h4>身分與模板</h4>
+    <p><b>alias</b> = <code>ZGo4ODg2</code>（base64 → <code>dj4886</code>）</p>
+    <p><b>server alias</b> = <code>dj8886</code> · 模板 <code>dj8886</code></p>
+    <p><b>標題</b> = 永誠貴賓會 · 主題 7 · 只做手機版（max-width 454px）</p>
+  </div>
+  <div class="card">
+    <h4>追蹤與 CDN</h4>
+    <p><b>GTM</b> = <code>GTM-5PQDSQV</code></p>
+    <p><b>CDN</b> = g4.cldfvn.com / cdn4.cldfvn.com</p>
+    <p><b>遙測</b> = www992073.ats.elegancepath.online:3637</p>
+  </div>
+</div>
+<p><b>遊戲供應商</b>（i18n 字串 1,257 條，全簡中）：BBIN（BB電子／視訊／體育）、PG、CQ9、PT、PP（Pragmatic）、KY、JDB、FG、SW、SG、AW、PS、MT、ACE、KA、GTI、LEG、TP、TIAN、XBB、MegaCasino（大滿貫）、FP。玩法：百家樂、龍虎鬥、輪盤⋯⋯全部是<b>白標接入</b>，即這個品牌自己不開發遊戲，只負責拉客與收錢。</p>
+
+<h3>2.4 API 加密（已破解）</h3>
+<p>所有 <code>/entrance/api</code> 流量 = JSON → <b>AES-256-ECB</b>，金鑰 = <code>MD5(alias)</code> 的 ASCII 位元組，外層再包<b>兩層 base64</b>。這代表「加密」只是防止旁人順手讀取，不是真安全 —— 金鑰完全由 alias 推導，拿到 App 就能算出來。</p>
+<pre>3 個啟動請求：
+  lang    → 1,257 條 i18n 字串
+  init    → 197 個 key 的完整設定（CDN、連結、導航、橫幅）
+  config  → 遊戲分類（element / article / jp / casino / card / sport / live）</pre>
+<p>API 面：<code>/infe/mcenter</code>、<code>/infe/user/pwdlogin/*</code>、<code>/infe/rest/promotions/advertise/*</code>、<code>/infe/marquee/homeHotNews</code>、<code>/entrance/jackpot/jackpotPoolList</code>、<code>/entrance/offer/</code>、<code>/entrance/sendmail/sendMail</code>、<code>/m/verify/mkcode</code>（驗證碼）。</p>
+
+<h4>域名輪換系統</h4>
+<p><code>host_utils.js</code> 內建端口池 <b>9900 / 5569 / 6899 / 7730 / 8866</b>：<code>getHost()</code> 打 <code>/api/hostnames</code> → 反向代理到 <code>ai-cli.airegioncare.com/api/mem_domain</code>（AWS Global Accelerator），並用 <code>get.wadidowe.net:9988/api/get_ip</code> 取得訪客真實 IP 與 <code>key_id</code>。兩個端點其後都收緊成 <code>HIHI</code>／<code>ip_not_allow</code>。<b>這就是「為什麼網站天天換域名」的技術答案。</b></p>
+
+<h3>2.5 代理後台（公開在互聯網上）</h3>
+<div class="callout am">
+<b>ag.218920.com</b> — CNAME <code>ag-dj8886.ld0088cne.com</code> → GCP <code>34.54.245.238</code> → <code>/vi/</code> 是 Vue 3 ＋ Element Plus 的<b>完整賭場管理後台</b>，API base <code>/paa/api/</code>，回應標頭洩漏 K8s pod 名 <code>agent-cli-node-api-6cdbcb49bc-6lzhv</code>。
+</div>
+<p>從 SPA 的 JS 可見功能模塊：會員投注統計、佣金查詢、層級管理、積分記錄、現金／紅利、贏家榜、<b>域名 IP 白名單</b>、<b>登入碼</b>、存取／登入結構報表、<b>兩步驗證與設備綁定</b>、子帳號、推送中心、報表匯出、<code>/paa/api/hall/redirect</code>。<span class="tag r">高價值證據</span></p>
+
+<h3>2.6 域名家族與 <code>*cne.com</code> 指紋</h3>
+<p>218 網絡有一個非常一致的簽名：<b>自建 NS 域名全部以 <code>cne.com</code> 結尾</b>。跨 GoDaddy 與 Name.com 都出現，證明是同一個運維團隊：</p>
+<table>
+<thead><tr><th>NS 域名</th><th>服務對象</th></tr></thead>
+<tbody>
+<tr><td><code>317dccne.com</code></td><td>2182999 / 2183111 / 2183666 / 2185666 / 218920</td></tr>
+<tr><td><code>amjshcne.com</code></td><td>vir888.com、vir999.net（平台本體）</td></tr>
+<tr><td><code>wu2222cne.com</code></td><td>tripleexperience.net（假瀏覽器）</td></tr>
+<tr><td><code>jmm7788cne.com</code></td><td>kco7a3h5.com（BBIN flash loader）</td></tr>
+<tr><td><code>ld0088cne.com</code></td><td>ag.218920.com（代理後台）</td></tr>
+</tbody>
+</table>
+<p>平台本體（App 的 hostname 正則）：<code>local.vir888.net</code>、<code>www-dev.vir888.com</code>、<code>www.bb-in555.com</code>、<code>www.vir999.net</code>。其中 <b>vir888.com 註冊於 2005-11-29</b> —— 這個網絡至少運作了二十年。vir999.net 有公開的 Google Search Console 驗證 TXT，等於把營運者的 Google 帳戶指紋留在 DNS 裡。</p>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="s3">
+<h2><span class="n">SECTION 03</span>213 網絡 — PG娛樂（門戶農場）</h2>
+
+<h3>3.1 入口鏈</h3>
+<pre>213.com  ──302──▶  https://yy2iaikt.213001.cc/?agentName=ZYM   (門戶頁，200)
+                     └─ CNAME 14da6ec7.skr005.cc
+                        └─ gcdca92.cdn.skr005.cc
+                           └─ 186.240.215.18 / .47  (Iens，新加坡 geo)</pre>
+<p><b>213.com</b>：Gname 註冊、<b>1996-02-24</b>（同樣是 30 年老域名），NS 是 <code>dan/rosemary.cloudflare.com</code> —— <b>與整個 213 門戶池同一個 Cloudflare 帳戶</b>。即品牌入口已被直接接管到營運基建上。</p>
+<p>門戶頁（title「欢迎回家」）固定配置：merchant <code>FNQ2</code>、代理 <code>ZYM</code>、客服 <code>yybet213cscht.yixiangmeiju.top/kefu/…</code>（base64 解出 <code>data3:2911:89:196:0:zh:4022:131:90:data3</code>）、97 客服號 <code>219wy3sj35</code>、頁腳 <code>COPYRIGHT©2025 PG娱乐</code>。</p>
+
+<h3>3.2 門戶池（全部批量註冊）</h3>
+<table>
+<thead><tr><th>池</th><th>域名</th><th>註冊</th><th>NS</th></tr></thead>
+<tbody>
+<tr><td>主門戶</td><td>2138051–2138059.cc ＋ <b>3128060.cc</b></td><td>2026-07-24（Gname，同一分鐘）</td><td>dan/rosemary（CF）</td></tr>
+<tr><td>H5 門戶</td><td>213h5tz0069–71 → 0072–74（每週遞增）</td><td>部署當日新註冊</td><td>同上</td></tr>
+<tr><td>假瀏覽器</td><td>213h5004–08.cc（chrome / firefox / quark / 寰宇 / opera）</td><td>2026-07-24</td><td>同上</td></tr>
+<tr><td>中繼</td><td>skr004.cc ＋ skr005.cc</td><td>2025-04-30（同一分鐘）</td><td>阿里 DNS</td></tr>
+</tbody>
+</table>
+<div class="callout">
+<b>三個可直接用於執法的指紋：</b><br>
+① 18 個域名<b>共用同一對 NS</b> → 單一 Cloudflare 帳戶即可一次下架；<br>
+② 主池<b>同一分鐘</b>批量註冊（Gname）→ 同一次操作、同一個付款人；<br>
+③ 門戶池是<b>泛解析（wildcard DNS）</b> —— 任何 8 位隨機子域名都能解析，所以「換網址」成本幾乎為零。
+</div>
+<p>另注意 <code>3128060.cc</code> 這類<b>手誤域名</b>（應為 2138060）：連打字打錯的人都被接住，是典型「把 typo 也買下來」的流量收割。</p>
+
+<h3>3.3 SDK 後端</h3>
+<table>
+<thead><tr><th>主機</th><th>角色</th><th>備註</th></tr></thead>
+<tbody>
+<tr><td>gw.gwpg.cc</td><td>生產網關</td><td>→ skr004.cc → 137.220.152.41（Iens 東京）；同一 CF 帳戶</td></tr>
+<tr><td>gateway.cocokobe.com</td><td>AWS 網關</td><td>CNAME 洩漏 K8s 集群名 <b>「ccgame」</b>（AWS NLB）</td></tr>
+<tr><td>app.cocokobe.com</td><td>App 下載</td><td>CloudFront</td></tr>
+<tr><td>h5.e107–e122.cc</td><td>H5 池</td><td>CloudFront；部分已荒廢（見 §3.5）</td></tr>
+<tr><td>app-2wsx.ee131.cc / int-app-1qaz.ee131.cc</td><td>App 鏡像家族</td><td>Amazon Registrar 2023-11-08</td></tr>
+<tr><td>gymk9r.mianmashe.com</td><td>下載主機</td><td>Gname 2017-05-25</td></tr>
+<tr><td>yybet213cscht.yixiangmeiju.top</td><td>客服</td><td>138.113.55.202（Meteverse HK）</td></tr>
+<tr><td>97chat.app</td><td>97 聊天 IM</td><td>169.150.230.98（Datacamp）—— 客服號在此收客</td></tr>
+<tr><td>m1.openfpcdn.io</td><td>FingerprintJS</td><td><b>每個訪客都被取設備指紋</b></td></tr>
+</tbody>
+</table>
+
+<h3>3.4 追蹤與佣金</h3>
+<p><code>?agentName=ZYM</code> 是代理編號。所有入口、備用線路、二維碼都帶這串，玩家每一次存款都會按比例回佣給代理。<b>這就是「為什麼有人不停在群組貼連結」的商業模式</b>：不是為了賭，是為了抽佣。</p>
+
+<h3>3.5 已荒廢的 H5 池（重要觀察）</h3>
+<ul>
+  <li><code>h5.e111.cc</code> → 208.98.40.39（Sharktech 芝加哥）</li>
+  <li><code>h5.e113.cc</code> → 39.106.20.134（阿里雲北京）—— 已經改為不相關的「旅拍世界」頁面</li>
+  <li>SDK 仍然列出這些域名，但內容早已不在 → 說明<b>域名池是「用完即棄」</b>，舊域名不回收、不清理，日後可能被第三方接手（供應鏈風險）。</li>
+</ul>
+
+<h3>3.6 後台：對外沒有暴露（已驗證的否定結果）</h3>
+<p><code>admin.213001.cc</code>、<code>ag.213001.cc</code>、<code>/admin</code>、<code>/manager</code>、<code>/webadmin</code>、<code>/phpmyadmin</code> 全部落在泛解析的門戶頁（9,027 B「欢迎回家」），不是面板。<code>gw.gwpg.cc</code> 回傳 Spring Boot 風格 JSON 404 —— 商家後台是跑在 K8s「ccgame」裡的 Java 服務，<b>沒有公開入口</b>。這是有價值的結論：不是每個網絡都會像 218 那樣把代理後台放上網。</p>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="s4">
+<h2><span class="n">SECTION 04</span>共用基建指紋 — 一眼認出同一批人</h2>
+<div class="grid2">
+  <div class="card">
+    <h4>① 老域名開路</h4>
+    <p>218.com（1998）、213.com（1996）—— 品牌入口一定是多年老域名，內容一定在新域名上。老域名讓過濾器「看起來正常」。</p>
+  </div>
+  <div class="card">
+    <h4>② 同日批量註冊</h4>
+    <p>同一個註冊商、同一分鐘、同一個 NS 對。這是「同一次操作」最硬的證據，比任何內容相似度都可靠。</p>
+  </div>
+  <div class="card">
+    <h4>③ 隨機子域名＋泛解析</h4>
+    <p>8 位隨機字母前綴、17 位數字 www 前綴。目的是讓「封一個、長十個」成立。</p>
+  </div>
+  <div class="card">
+    <h4>④ 自建 NS 命名法</h4>
+    <p>218 用 <code>*cne.com</code> 家族；213 用同一個 Cloudflare 帳戶。NS 是最難洗掉的指紋。</p>
+  </div>
+  <div class="card">
+    <h4>⑤ 假「瀏覽器」</h4>
+    <p>「寰宇瀏覽器」、「chrome/firefox/quark/opera 下載頁」—— 全部是同一個 APK／側載包的包裝。</p>
+  </div>
+  <div class="card">
+    <h4>⑥ 真客服在人手 IM</h4>
+    <p>網站上沒有真客服，只有 97chat／m2gnkr 聊天窗 → 真人接手 → 引導存款。這一步才是詐騙核心。</p>
+  </div>
+</div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="s5">
+<h2><span class="n">SECTION 05</span>IP 與託管清單（47 個唯一 IP）</h2>
+<h3>218 側</h3>
+<p class="kv">
+<span>入口中繼</span><b>185.186.146.156</b>（Cnservers，洛杉磯）<br>
+<span>樞紐 CDN</span><b>45.77.28.136</b>（Vultr 東京）<br>
+<span>備用線路</span><b>146.88.161.34</b>、<b>103.241.116.187</b>（WoodsDale KR）<br>
+<span>平台開發</span><b>103.241.237.92 / .238</b>（WoodsDale 印度）<br>
+<span>217 CDN</span><b>103.53.80.225</b>（xTom 日本）<br>
+<span>假瀏覽器</span><b>103.240.219.191</b> · BBIN loader <b>103.241.113.49</b><br>
+<span>GCP</span><b>34.36.138.75</b>（m2gnkr）· <b>34.54.245.238</b>（代理後台）<br>
+<span>AWS GA</span><b>99.83.226.164 / 75.2.0.125</b>（輪換 API）· <b>76.223.106.153 / 13.248.237.124</b>（遙測）<br>
+<span>輪換出口</span><b>89.238.156.195</b>（M247 英國）
+</p>
+<h3>213 側</h3>
+<p class="kv">
+<span>門戶來源</span><b>186.240.215.18 / .47</b>、<b>186.240.219.10</b>、<b>186.240.239.8 / .10</b>（Iens，新加坡 geo）<br>
+<span>網關</span><b>137.220.152.41</b>（Iens 東京）<br>
+<span>客服</span><b>138.113.55.202</b>（Meteverse 香港）<br>
+<span>97 聊天</span><b>169.150.230.98</b>、<b>109.61.92.193</b>（Datacamp）<br>
+<span>213.com</span><b>154.219.98.13</b>（Vapeline 香港）<br>
+<span>雲端</span>CloudFront（鏡像／H5）· AWS NLB（網關）
+</p>
+<div class="callout">
+<b>托管商觀察：</b>WoodsDale、Iens、Cnservers、xTom、M247 這類「灰色容忍」主機商是整個生態的底座。它們的共同點是：接受加密貨幣付款、對投訴反應慢、IP 段可以整段更換。真正有效的打擊點是 <b>註冊商 ＋ Cloudflare ＋ 阿里雲 DNS</b>，不是主機商。
+</div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="s6">
+<h2><span class="n">SECTION 06</span>時間線</h2>
+<pre>2005  vir888.com ........... 平台域名源頭（BBIN 白標年代）
+2013  bbinproblem.support .. BBIN 官方支援域名
+2014  yixiangmeiju.top · 84992020.xyz
+2015  vir999.net · 97chat.app
+2016  bd742.com ............. 追蹤 stub
+2017  mianmashe.com ......... 213 下載主機
+2021  217jc02.com · bb-in555.com
+2022  airegioncare.com（06）· wadidowe.net（08）
+2023  218cdn.com（01）· cocokobe.com（09）· elegancepath.online（09）· ee131.cc（11）
+2024  217cdn.com（06）· m2gnkr.com（07）· cldfvn.com（11）
+2025  04-30  skr004 / skr005.cc（阿里 DNS 中繼層建好）
+      09-18  218yc.com 上線
+      10-28  vir888.net 重新註冊（2025 版重啟）
+2026  07-24  213 主門戶池批量註冊 · 213.com 轉到營運方 Cloudflare
+      09-15  H5 門戶 0069–71 當日部署
+      09-17  門戶 0072–74 上線（被捕獲）
+      10-19  新一輪捕獲：池內全部域名仍共用同一 NS 對</pre>
+<p class="small">「當日註冊、當日部署」是最值得注意的模式：門戶域名壽命以<em>天</em>計，不是以月計。</p>
+</section>
+
+<!-- ============ 7 ============ -->
+<section id="s7">
+<h2><span class="n">SECTION 07</span>打擊面（Takedown Surface）</h2>
+<table>
+<thead><tr><th>層</th><th>目標</th><th>渠道</th></tr></thead>
+<tbody>
+<tr><td>品牌入口</td><td><b>218.com</b>（GoDaddy）· <b>213.com</b>（Gname）</td><td>註冊商 abuse 表單</td></tr>
+<tr><td>樞紐與線路</td><td>218yc.com · 2182999/3111/3666/5666.com · 218920.com</td><td>GoDaddy 法務入口</td></tr>
+<tr><td>平台本體</td><td>vir888.net · vir999.net · vir888.com · bb-in555.com</td><td>各註冊商</td></tr>
+<tr><td>CDN / DNS</td><td>cldfvn.com · 218cdn.com · 217cdn.com；CF 帳戶 clint/tess、marlowe/randy、henry/kami、clyde/phoenix、razvan/ziggy、<b>dan/rosemary</b></td><td>abuse.cloudflare.com</td></tr>
+<tr><td>輪換與遙測</td><td>wadidowe.net · airegioncare.com · elegancepath.online</td><td>註冊商 ＋ AWS abuse</td></tr>
+<tr><td>213 池</td><td>2138051–59.cc · 3128060.cc · 213h5tz*.cc · 213h5*.cc · skr004/005.cc</td><td>Gname ＋ 阿里雲</td></tr>
+<tr><td>來源主機</td><td>Vultr 45.77.28.136 · WoodsDale 146.88.161.34 / 103.241.x · Cnservers 185.186.146.156 · xTom 103.53.80.225 · GCP 34.36.138.75 / 34.54.245.238</td><td>各托管商 abuse</td></tr>
+</tbody>
+</table>
+<div class="callout am">
+<b>效率排序（個人判斷）：</b>① Cloudflare（一次投訴可打掉整個 213 池的解析）→ ② Gname（213 池的註冊商，同一付款人）→ ③ GoDaddy（218 品牌與線路）→ ④ 阿里雲 DNS（skr 中繼）→ ⑤ 托管商（最慢，通常只換 IP 就復活）。
+</div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section id="s8">
+<h2><span class="n">SECTION 08</span>十條辨識紅旗（給任何人看）</h2>
+<ol class="steps">
+  <li><b>域名很老，內容很新。</b>1996／1998 年註冊的域名掛著 2025 年的賭場頁 —— 老域名只是門面。</li>
+  <li><b>網址由一堆隨機字母組成。</b><code>yy2iaikt.213001.cc</code>、<code>www81019827016236468.2182999.com</code> —— 正常人不會這樣命名。</li>
+  <li><b>一開始就是「Loading…」動畫。</b>真正的加載不需要三秒假動畫；那是為了同時跑指紋腳本與跳轉。</li>
+  <li><b>問你要不要「下載專用瀏覽器」。</b>沒有正規賭場需要你安裝一個自製瀏覽器。那是側載 APK 的包裝。</li>
+  <li><b>客服只在 97chat／Telegram／WhatsApp 出現。</b>沒有工單系統、沒有公司地址、沒有牌照號。</li>
+  <li><b>網址裡有一串 <code>?agentName=</code>。</b>你在替某個代理賺佣金，那個人可能就是你群組裡「分享好康」的人。</li>
+  <li><b>有所謂「備用線路」清單。</b>正規平台不需要每天換網址。</li>
+  <li><b>存款用 USDT／支付寶個人碼／「代付」。</b>錢一進就無法追溯，也無法退款。</li>
+  <li><b>出金要先「打流水」或「審核」。 </b>贏的錢永遠差一點才能拿。</li>
+  <li><b>頁面叫你關掉廣告攔截器或「網絡安全軟件」。</b>它想繞過的就是唯一能保護你的東西。</li>
+</ol>
+</section>
+
+<!-- ============ 9 ============ -->
+<section id="s9">
+<h2><span class="n">SECTION 09</span>方法、證據與限制</h2>
+<h3>方法</h3>
+<ul>
+  <li>DNS：<code>dig</code> NS / A / TXT / CNAME 逐域查詢，比對 NS 對與註冊時間</li>
+  <li>WHOIS：註冊商、建立日期、私隱服務、註冊國</li>
+  <li>頁面捕獲：完整 HTML ＋ 全部資產（CSS／JS／圖片／字體）保存為證據鏡像</li>
+  <li>JS 逆向：SDK 內的端點、端口池、加密方式、K8s 標頭</li>
+  <li>被動探測：只讀取公開頁面與 HTTP 標頭，<b>沒有登入、沒有註冊、沒有存款、沒有下載任何執行檔</b></li>
+</ul>
+
+<h3>證據檔案</h3>
+<ul>
+  <li><code>demos/casino-scam-sim/door.html</code> — 213 門戶頁完整鏡像（外部連結已停用）</li>
+  <li><code>demos/casino-scam-sim/hub.html</code> — 218 備用網址站完整鏡像</li>
+  <li><code>demos/casino-scam-sim/investigation-file.md</code> — 原始調查檔案（197 行，含完整表格）</li>
+  <li><code>demos/casino-scam-sim/sim.html</code> — 逐頁複刻模擬器（安全，全部按鈕只連本地）</li>
+  <li><code>demos/casino-scam-sim/tour.html</code> — 10 課深度導覽</li>
+</ul>
+
+<h3>鏡像完整性（實測）</h3>
+<ul>
+  <li><b>213 門戶</b>：HTML 內 10 張圖片全部載入；CSS 另有 4 張橫幅（<code>/img/*.png</code>）在原站已經是 404 —— 不是鏡像缺失，是原站自己壞了。</li>
+  <li><b>218 樞紐</b>：50 張 HTML 圖片全載入，另補齊 75 張 CSS 背景圖（<code>/static/images/</code>）與 61 張 <code>/static/picture/</code> 圖示。</li>
+  <li><b>原站自身缺陷</b>：<code>/static/css/fonts/font-awesome-4.2.0/fonts/*</code> 全部 404，即原站的 FontAwesome 圖示字型根本沒有部署成功。</li>
+  <li><b>鏡像防護</b>：外部 <code>a[href]</code> 點擊、<code>window.open</code>、外部表單提交全部攔截並提示；頁頂固定「教育複刻」橫幅。</li>
+</ul>
+
+<h3>限制（必須說明）</h3>
+<ul>
+  <li><b>218yc.com 的內容無法用 curl 取得</b>（TLS 指紋閘門），內容是經備用線路驗證的。</li>
+  <li><b>域名每週輪換</b>，本文任何 IP／域名都可能已失效 —— 引用前必須重新 <code>dig</code> 驗證。</li>
+  <li><b>鏡像只覆蓋被捕獲的頁面</b>：登入後的會員區、存款流程、遊戲大廳需要帳號，<b>沒有</b>亦不應該去取得。</li>
+  <li>「同一營運者」的結論基於 NS、註冊時間、IP 段與程式碼重用等<b>強相關證據</b>，並非法律意義上的同一法人。</li>
+  <li>本頁不提供任何可操作的下注、存款或聯絡渠道。</li>
+</ul>
+
+<div class="links">
+  <a href="./sim.html">▶ 互動模擬器</a>
+  <a href="./tour.html">🎓 深度導覽</a>
+  <a href="./door.html">🪞 213 鏡像</a>
+  <a href="./hub.html">🪞 218 鏡像</a>
+  <a href="./investigation-file.md">📄 原始調查檔案</a>
+</div>
+</section>
+
+<!-- ============ 10 ============ -->
+<section id="s10">
+<h2><span class="n">SECTION 10</span>建置與驗證紀錄</h2>
+<p>這一節是本頁與兩個鏡像的<b>建置紀錄</b>：做了什麼、用什麼方法驗證、以及哪些地方「看起來壞但其實是原站本身就壞」。留低紀錄的原因很簡單 —— 下次同類案件可以直接照這個流程重做。</p>
+
+<h3>交付物</h3>
+<table>
+<thead><tr><th>交付物</th><th>路徑</th><th>內容</th></tr></thead>
+<tbody>
+<tr><td>完整分析（本頁）</td><td><code>demos/casino-scam-sim/analysis.html</code></td><td>10 節：摘要、兩條入口鏈、基建指紋、IP 清單、時間線、打擊面、紅旗、方法限制、建置紀錄</td></tr>
+<tr><td>213 門戶鏡像</td><td><code>demos/casino-scam-sim/door.html</code></td><td>「欢迎回家」頁全資產複本 ＋ 外部跳轉封鎖 ＋ 教育橫幅</td></tr>
+<tr><td>218 樞紐鏡像</td><td><code>demos/casino-scam-sim/hub.html</code></td><td>「永诚贵宾会官方备用网址资讯站」全資產複本 ＋ 同上防護</td></tr>
+<tr><td>原始調查檔案</td><td><code>demos/casino-scam-sim/investigation-file.md</code></td><td>197 行完整表格版（含每個域名／IP 的原始查詢結果）</td></tr>
+<tr><td>安全模擬器 ＋ 導覽</td><td><code>sim.html</code> · <code>tour.html</code></td><td>逐頁複刻（所有按鈕只連本地）＋ 10 課深度導覽</td></tr>
+<tr><td>建置規格</td><td><code>prompts/casino-scam-sim-prompt.md</code></td><td>可重建的完整步驟、陷阱與驗證方法</td></tr>
+</tbody>
+</table>
+
+<h3>驗證（真瀏覽器，非推測）</h3>
+<table>
+<thead><tr><th>檢查</th><th>方法</th><th>結果</th></tr></thead>
+<tbody>
+<tr><td>卡片與按鈕</td><td>Playwright 載入 <code>/portfolio/</code>，定位卡片並讀取按鈕</td><td>6 個按鈕全部存在（Live Demo／完整分析／深度導覽／213 鏡像／218 鏡像／Files）</td></tr>
+<tr><td>分析頁載入</td><td>點擊按鈕 → iframe 內讀 <code>h1</code> 與 section 數</td><td>標題正確，10 個 section</td></tr>
+<tr><td>213 鏡像</td><td>直接載入 ＋ 數 <code>naturalWidth&gt;0</code> 的圖片</td><td>10/10 圖片、10 個 CSS、12 個 script、頁高 3,147px</td></tr>
+<tr><td>218 鏡像</td><td>同上</td><td>50/50 圖片、18 個 CSS、頁高 7,946px；另補 75 張 CSS 背景圖、61 個圖示</td></tr>
+<tr><td>外部跳轉防護</td><td>實際點擊 <code>https://www.218yc.com/</code> 錨點</td><td>彈出攔截提示、URL 不變（no-navigation 生效）</td></tr>
+<tr><td>手機版溢出</td><td>390px 視窗量 <code>scrollWidth</code></td><td>分析頁 390 = 390，無橫向滾動</td></tr>
+<tr><td>4xx 稽核</td><td>監聽所有 response ≥ 400</td><td>218：只有頁面自己的 <code>/api/hostnames</code>；213：只有 4 張原站已失效的 <code>/img/*.png</code></td></tr>
+</tbody>
+</table>
+
+<h3>過程中修正的兩個真問題</h3>
+<ol>
+  <li><b>橫幅掉進擴充套件 template</b>：儲存頁內有多個 <code>&lt;/body&gt;</code>（MaxAI 之類的擴充把整個 HTML 塞進 <code>&lt;template&gt;</code>），用「第一個 <code>&lt;/body&gt;</code>」插入會令橫幅落在不會渲染的 template 裡 —— HTML 原始碼搜得到、瀏覽器 DOM 卻不存在。改用<b>最後一個</b> <code>&lt;/body&gt;</code> 後才真正顯示（用 DOM 檢查驗證，不是 grep）。</li>
+  <li><b>兩個 session 同時部署</b>：部署腳本寫死同一個 <code>/tmp/isaac-site-bundle</code>，同時跑會出現 rsync 檔尾截斷並在 wrangler 之前中止，而外層 <code>| tail</code> 仍回報 exit 0。已改為先偵測、等對方完成，並以 log 內出現 <code>Deployment complete</code> 為準。</li>
+</ol>
+
+<h3>「看似缺漏、實為原站缺陷」清單</h3>
+<ul>
+  <li>213 的 4 張 CSS 橫幅（<code>/img/3edb81_700x125.png</code> 等）在原站已經 404，五個候選路徑全部試過。</li>
+  <li>218 的 FontAwesome 字型（<code>/static/css/fonts/font-awesome-4.2.0/fonts/*</code>）在原站全部 404 —— 原站的圖示字型根本沒部署成功。</li>
+  <li>218 的 <code>/api/hostnames</code> 是頁面向自己網域發的請求，鏡像內自然沒有後端；已確認無外部連線。</li>
+</ul>
+
+<h3>為何不提供更「完整」的鏡像</h3>
+<p>登入後的會員區、存款頁、遊戲大廳需要真實帳號才能取得 —— 本調查<b>沒有</b>亦<b>不會</b>註冊、存款或下載任何執行檔。因此鏡像的邊界就是「未登入前可見的公開頁面」，這一點必須誠實標明，否則任何「100% 完整鏡像」的說法都是假的。</p>
+</section>
+
+<footer>
+  <p><b>218 / 213 賭博詐騙網絡 — 完整調查分析</b> · 獨立安全研究 · 2026</p>
+  <p class="small">本頁為反詐騙教育與證據保存用途。所有商標、品牌名稱屬其各自所有者；本頁與任何真實公司、品牌或平台均無關聯，亦不代表其立場。如你或身邊的人已經存款，請立即停止並保留所有對話與轉帳記錄。</p>
+</footer>
+
+</div>
+</body>
+</html>

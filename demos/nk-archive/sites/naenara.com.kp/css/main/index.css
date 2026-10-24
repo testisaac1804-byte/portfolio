@@ -1,0 +1,659 @@
+.first-page {
+    background-color: white;
+    padding: 20px 0;
+}
+
+aside {
+    position: fixed;
+    top: 240px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+aside a {
+    position: relative;
+}
+
+aside img {
+    margin-bottom: 20px;
+}
+
+aside a span {
+    position: absolute;
+    right: 40px;
+    width: max-content;
+    width: -moz-max-content;
+    top: 5px;
+    color: black;
+    display: none;
+}
+
+aside a:hover span {
+    display: block;
+}
+
+.first-page section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+.page-info {
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+/* 혁명활동소식,최근주요소식 */
+
+.activitySection {
+    margin-bottom: 30px;
+}
+
+.activitySection .first-activity {
+    text-align: justify;
+}
+
+.speech {
+    border: 1px solid red;
+    padding: 5px 10px;
+    /* position: absolute;
+    bottom: 0; */
+    /* width: 95%; */
+    margin-bottom: 5px;
+}
+
+.speech p:nth-child(1) {
+    text-align: left;
+}
+
+.news-title {
+    font-size: 14px!important;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 30px;
+    line-height: 20px;
+}
+
+.news-title i {
+    margin-left: 6px;
+}
+
+.newsSection .news-title {
+    text-align: left;
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+.newsSection>div>div {
+    padding: 0;
+}
+
+.newsSection>div>div.col-md-6:first-child {
+    padding-right: 15px;
+}
+
+.news_list {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    list-style-type: none;
+    width: 100%;
+}
+
+.news_list li,
+.news_list p {
+    border-bottom: 1px solid grey;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+
+/* .news_list p.enter_list{
+	border-bottom: 0;
+	margin-bottom:10px;
+	cursor: pointer;
+}
+.news_list p.enter_list i{
+	margin: 0 10px;
+	font-size: 17px;
+	color: #8995be;
+}
+ */
+
+.news_list li:last-child {
+    border-bottom: 0;
+}
+
+.news_list li:hover,
+.news_list p:hover {
+    color: #9d4e5f;
+    cursor: pointer;
+}
+
+.news_list span.datec {
+    color: #5656a5;
+    margin-right: 10px;
+}
+
+.news_list i {
+    color: gray;
+}
+
+.newsArticle img.activity_img {
+    /*첫페지 영상문헌 */
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    cursor: none;
+    margin-right: 0!important;
+    margin-bottom: 0!important;
+    border-left: 10px solid white;
+    border-bottom: 10px solid white;
+    float: right!important;
+    max-height: 300px;
+    height: auto;
+    max-width: 380px;
+}
+
+.recent_list.b-left {
+    border-left: 1px solid grey;
+    padding-left: 10px;
+}
+
+.recent_photo {
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    max-height: 150px;
+    margin-bottom: 10px;
+    max-width: 150px;
+}
+
+
+/* 소식 end*/
+
+
+/* multies */
+
+#myCarousel {
+    margin-bottom: 40px;
+}
+
+#myCarousel .carousel-inner div {
+    min-height: 210px;
+    max-width: 1920px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+#myCarousel .carousel-control.right,
+.carousel-control.left {
+    background-image: none;
+}
+
+#myCarousel .glyphicon-chevron-right:before,
+.glyphicon-chevron-left:before {
+    content: none;
+}
+
+#myCarousel .carousel-control i {
+    font-size: 19px;
+    background-color: white;
+    color: black;
+    padding: 8px 6px;
+}
+
+#myCarousel .carousel-indicators {
+    bottom: -40px;
+}
+
+#myCarousel .carousel-indicators li {
+    border-radius: 10px!important;
+    border: 1px solid #564b4b;
+}
+
+#myCarousel .carousel-indicators .active {
+    background-color: red;
+}
+
+#myCarousel_sites .carousel-control {
+    background-image: none;
+    width: max-content;
+    width: -moz-max-content;
+    color: black;
+    opacity: 1;
+}
+
+#myCarousel_sites .glyphicon-chevron-right:before,
+.glyphicon-chevron-left:before {
+    content: none;
+}
+
+#myCarousel_sites i {
+    font-size: 20px;
+    margin-top: 3px;
+}
+
+.multiSection .multies {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.multiSection .contents {
+    width: 250px;
+    max-width: calc(33.3% - 10.67px);
+    min-width: 150px;
+    height: 130px;
+    margin: 0px 8px 5px;
+    position: relative;
+}
+
+.multiSection .contents:first-child {
+    margin-left: 0;
+}
+
+.multiSection .contents:last-child {
+    margin-right: 0;
+}
+
+.multiSection .contents a {
+    border: 1px solid #1bbc9b;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.multiSection .contents .icon {
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 3%;
+    left: 5%;
+    margin: 0;
+}
+
+.multiSection .contents .icon-camera {
+    bottom: -2%;
+    left: 5%;
+    font-size: 25px;
+    width: 27px;
+    height: 27px;
+    color: white;
+}
+
+.subsites div.mysites,
+.subsites div.popsites {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.subsites div img {
+    width: 90px;
+    margin: 5px 4px;
+    background-size: cover;
+}
+
+.subsites div a:first-child img {
+    margin-left: 0;
+}
+
+.subsites div a:last-child img {
+    margin-right: 0;
+}
+
+.subsites #myCarousel_sites .carousel-inner {
+    min-width: 80%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.subsites #myCarousel_sites .carousel-inner>div a {
+    display: inline-block;
+    width: 80px;
+    margin: 5px 4px;
+}
+
+
+/*혁명활동소식기사에서 사진눌렀을때 확대사진 뜨는 modal*/
+
+.table>tbody>tr>td {
+    border-top: none !important;
+}
+
+.news_modal {
+    position: fixed;
+    background-color: rgb(121, 2, 2);
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    padding-top: 70px;
+    display: none;
+    overflow-y: auto;
+}
+
+.news_modal table {
+    height: 80vh;
+    width: 100%;
+}
+
+.news_content {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.news_content .news_nav {
+    margin-top: 15px;
+    font-weight: 500;
+    color: white;
+}
+
+.activity-modal td {
+    text-align: center;
+}
+
+
+/* //end */
+
+.v_modal {
+    display: none;
+    position: fixed;
+    /* Stay in place */
+    z-index: 1000;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: #555555;
+}
+
+
+/* Modal Content (Image) */
+
+.v_modal-content {
+    margin: auto !important;
+    display: block !important;
+    width: 80% !important;
+    max-width: 700px !important;
+    top: 50%;
+    text-align: center;
+}
+
+.v_modal-content video {
+    border: 5px solid black;
+}
+
+.v_modal-content {
+    animation-name: m_zoom;
+    animation-duration: 0.6s;
+}
+
+.v_video_title {
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+}
+
+@keyframes m_zoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+@media (min-width: 1500px) {
+    .first-page .container {
+        width: 1300px;
+    }
+}
+
+@media (max-width: 1499px) {
+    .first-page .container {
+        width: 90%;
+    }
+}
+
+
+/* 화면분할방식 md에서 sm로 넘어갈때 */
+
+@media (max-width: 991px) {
+    .newsSection>div>div:first-child {
+        padding-right: 0;
+    }
+    .recent_list.b-left {
+        border-left: 0;
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .first-activity .newsArticle img.activity_img {
+        max-width: 100%;
+    }
+    .first-page aside {
+        display: none;
+    }
+    header .sideSub {
+        display: block;
+    }
+}
+
+@media (min-width: 768px) {
+    .modal-dialog {
+        width: 95%!important;
+        /* margin:30px auto; */
+    }
+}
+
+@media (max-width: 1200px) {
+    .first-activity .newsArticle img.activity_img {
+        float: none!important;
+        margin: 5px auto!important;
+        border: 0;
+    }
+    .speech {
+        position: relative;
+        width: auto;
+    }
+}
+
+
+/* 250250727 exhibition */
+
+.home-exhibition {
+    background-image: url('https://web.archive.org/web/20260101im_/http://naenara.com.kp/images/event/20251010/home.jpg');
+    background-size: cover;
+    background-position: left;
+    height: 262px;
+    margin: 0 0 10px 0;
+    position: relative;
+    /* background-position-x: -30px; */
+}
+
+.home-exhibition .home-mark {
+    height: 13px;
+    margin: 35px 15px 15px 20px;
+    max-width: 80%;
+    float: right;
+}
+
+.home-exhibition .home-statue {
+    height: 240px;
+    position: absolute;
+    margin-left: 20px;
+    bottom: 0;
+    left: 0;
+}
+
+.home-stitle {
+    position: absolute;
+    top: 28px;
+    left: 45px;
+    font-size: 13px;
+    color: white;
+}
+
+.home-exhibition .home-title {
+    position: absolute;
+    height: 50px;
+    width: 80%;
+    top: 90px;
+    left: 60%;
+    transform: translate(-50%, -6%);
+}
+
+.home-exhibition p.home-title {
+    font-size: 32px;
+    color: #b00808;
+    font-weight: bold;
+    text-align: right;
+    text-align: center;
+    text-shadow: 1px 1px 0 white, 1px -1px 0px white, -1px 1px 0 white, -1px -1px 0 white;
+}
+
+.home-exhibition .sub-title {
+    position: absolute;
+    bottom: 50px;
+    width: 75%;
+    text-align: center;
+    font-weight: bold;
+    color: #ed9300;
+    left: 60%;
+    transform: translate(-50%, -6%);
+}
+
+.home-exhibition .date {
+    color: #ed9300;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    right: 0;
+    font-family: arial;
+    margin: 18px 54px 18px 54px;
+}
+
+.military-exhibition {
+    position: relative;
+    background-image: url('https://web.archive.org/web/20260101im_/http://naenara.com.kp/images/event/20251011/back.jpg');
+    background-size: cover;
+    background-position: top center;
+    margin: 10px 15px;
+    padding: 40px 0 5px;
+    width: 100%;
+}
+
+.military-exhibition .title {
+    display: block;
+    margin: 0 auto;
+    max-width: 60vw;
+    object-fit: contain;
+}
+
+.military-exhibition p.title {
+    font-size: 24px;
+    color: #cf161b;
+    padding: 25px 160px 0 160px;
+    text-align: center;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
+.military-exhibition .image-list {
+    padding: 10px 80px 10px 80px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.military-exhibition .image-list .newsArticle {
+    height: 85px;
+    cursor: pointer;
+    margin: 5px 15px;
+    border: 1px solid white;
+}
+
+.military-exhibition .return-button {
+    position: absolute;
+    right: 60px;
+    bottom: 10px;
+    width: 40px;
+}
+
+p.stroke {
+    text-shadow: -1px -1px 0 white, 0 -1px 0 white, 1px -1px 0 white, 1px 0 0 white, 1px 1px 0 white, 0 1px 0 white, -1px 1px 0 white, -1px 0 0 white;
+}
+
+/* 20251011 */
+.mGallery .img-thumbnail {
+    max-height: 500px;
+    border: 0;
+}
+
+@media (max-width: 1200px) {
+    .home-exhibition p.home-title {
+        font-size: 20px !important;
+    }
+    .home-exhibition .sub-title {
+        font-size: 12px !important;
+        width: 60%;
+    }
+}
+
+@media (max-width: 990px) {
+    .home-exhibition p.home-title {
+        font-size: 32px !important;
+    }
+    .home-exhibition .sub-title {
+        font-size: 20px !important;
+        width: 75%;
+    }
+}
+
+@media (max-width: 800px) {
+    .home-exhibition p.home-title {
+        font-size: 20px !important;
+    }
+    .home-exhibition .sub-title {
+        font-size: 12px !important;
+        width: 60%;
+    }
+}
+
+@media (max-width: 600px) {
+    .home-exhibition p.home-title {
+        font-size: 16px !important;
+        width: 50%;
+    }
+    .home-exhibition .sub-title {
+        font-size: 8px !important;
+        width: 50%;
+    }
+}
+
+
+/* end */

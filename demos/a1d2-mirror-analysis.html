@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>a1d2.org — 234 KB, three pages, and no confirmation screen</title>
+<meta name="description" content="Teardown and offline mirror of a1d2.org: a forked ha.mr link compressor that redirects straight through with no interstitial, a stats page describing a deleted feature, Cloudflare-only hosting with a redacted registrant, and a contact address with no MX record.">
+<style>
+  :root{
+    --bg:#0a0c11; --panel:#11141b; --panel2:#161a23; --line:#242a37;
+    --tx:#e8eaf0; --mut:#98a1b3; --dim:#6d7686;
+    --ac:#7c8cff; --ac2:#6366f1; --ok:#34d399; --warn:#ffd166; --bad:#f87171;
+    --ink:#e8d9a8; --blood:#a4342f;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.62}
+  a{color:var(--ac)}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 90px}
+
+  .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 11px;
+    color:var(--mut);letter-spacing:.1em}
+  .chip.acc{border-color:#333c63;background:#141a2e;color:#aab4ff}
+
+  h1{font-size:clamp(26px,4.4vw,44px);line-height:1.1;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  h1 em{font-style:normal;color:var(--ac)}
+  .deck{font-size:16.5px;color:var(--mut);max-width:78ch;margin:0 0 22px}
+  .deck b{color:var(--tx);font-weight:650}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 30px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 13px}
+  .stat .k{font:600 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .stat .v{font-size:19px;font-weight:750;margin-top:5px;letter-spacing:-.01em}
+  .stat .v small{font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0}
+
+  .call{border-left:3px solid var(--ac2);background:linear-gradient(90deg,rgba(99,102,241,.11),rgba(99,102,241,0));
+    border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 34px}
+  .call .lbl{font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ac);margin-bottom:7px}
+  .call p{margin:0;font-size:15.5px;color:#d7dbe6}
+
+  h2{font-size:12px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+    margin:44px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{margin:0 0 6px;font-size:16.5px;letter-spacing:-.01em}
+  p{margin:0 0 12px}
+  .mut{color:var(--mut)}
+  strong{color:var(--tx)}
+
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding-bottom:22px}
+  .step:not(:last-child):after{content:"";position:absolute;left:22px;top:34px;bottom:2px;width:1px;background:var(--line)}
+  .num{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--panel2);
+    display:grid;place-items:center;font:700 12px/1 var(--mono);color:var(--ac)}
+  .step p{margin:0;font-size:14.6px;color:var(--mut)}
+  .step p b{color:var(--tx)}
+
+  table{width:100%;border-collapse:collapse;font-size:13.8px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:700 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:#0d1016}
+  td:first-child{white-space:nowrap}
+  code,.mono{font-family:var(--mono);font-size:12.6px;color:#cfd6e6;background:#0e1117;
+    border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+  code{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+  .tblwrap{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tablewrap table{min-width:520px}
+
+  .quote{font-family:var(--mono);font-size:12.4px;line-height:1.65;color:#c7cede;background:#0e1117;
+    border:1px solid var(--line);border-left:3px solid var(--blood);border-radius:0 10px 10px 0;
+    padding:13px 15px;margin:0 0 16px;white-space:pre-wrap;overflow-wrap:anywhere}
+
+  .mirror{display:grid;grid-template-columns:minmax(0,1fr) 316px;gap:20px;align-items:start}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+  .btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font:650 13px/1 var(--sans);
+    padding:10px 14px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--tx)}
+  .btn:hover{border-color:#3a4256;background:#1b202b}
+  .btn.pri{background:var(--ac2);border-color:var(--ac2);color:#fff}
+  .btn.pri:hover{background:#565ae8}
+  .note{font-size:12.6px;color:var(--dim);margin-top:12px;line-height:1.6}
+  .note b{color:var(--mut)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card2{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .card2 h4{margin:0 0 6px;font-size:13.5px}
+  .card2 p{margin:0;font-size:13.4px;color:var(--mut)}
+  .card2 ul{margin:6px 0 0;padding-left:17px;font-size:13.4px;color:var(--mut)}
+  .card2 li{margin:3px 0}
+  .card2 li b{color:var(--tx)}
+
+  .flow{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:0 0 16px;
+    font-family:var(--mono);font-size:12.4px;line-height:1.9;color:var(--mut);overflow-x:auto}
+  .flow b{color:var(--ink);font-weight:600}
+  .flow .ar{color:var(--ac)}
+  .flow .dim{color:var(--dim)}
+
+  .warnbox{border:1px solid #4b3a1f;background:#171208;border-radius:10px;padding:12px 14px;
+    font-size:13.2px;color:#f0e0c0;margin:14px 0 0}
+  .warnbox b{color:#ffd79a}
+  .okbox{border:1px solid #1f4b39;background:#0c1712;border-radius:10px;padding:12px 14px;
+    font-size:13.2px;color:#c9ecd9;margin:14px 0 0}
+  .okbox b{color:#8ff0c0}
+
+  footer{margin-top:52px;border-top:1px solid var(--line);padding-top:18px;font-size:12.6px;color:var(--dim)}
+  footer b{color:var(--mut)}
+
+  @media(max-width:820px){.mirror{grid-template-columns:1fr}}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  @media(max-width:700px){table{min-width:520px}}
+  .step > *, .mirror > *, .grid2 > *, .tablewrap{min-width:0}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <span>Isaac Chan · Site teardown</span>
+    <span>
+      <span class="chip acc">a1d2.org</span>
+      <span class="chip">Preservation mirror</span>
+      <span class="chip">Oct 2026</span>
+    </span>
+  </div>
+
+  <h1>234 KB, three pages, and <em>no confirmation screen</em></h1>
+  <p class="deck">
+    <b>a1d2.org</b> is a five-week-old personal site with exactly one project on it: a forked link compressor
+    that packs a URL into the fragment after the <code>#</code>. The compression is not the interesting part.
+    The interesting part is the code comment that says the confirmation screen was removed — and the stats
+    page that still claims it exists.
+  </p>
+
+  <div class="stats">
+    <div class="stat"><div class="k">Files</div><div class="v">12 <small>4 html · 5 js · 1 css · 2 licences</small></div></div>
+    <div class="stat"><div class="k">Total size</div><div class="v">234 <small>KB, uncompressed</small></div></div>
+    <div class="stat"><div class="k">Domain age</div><div class="v">5.5 <small>weeks at capture</small></div></div>
+    <div class="stat"><div class="k">Compression</div><div class="v">69% <small>best measured case</small></div></div>
+    <div class="stat"><div class="k">Origin IPs found</div><div class="v">0 <small>Cloudflare in front</small></div></div>
+    <div class="stat"><div class="k">Cookies</div><div class="v">0 <small>one CF beacon instead</small></div></div>
+  </div>
+
+  <div class="call">
+    <div class="lbl">The one-line version</div>
+    <p>The site is not the story — <b>the redirect is</b>. <code>a1d2.org#PAYLOAD</code> navigates instantly,
+    with no interstitial, to whatever URL the payload decodes to. Anyone can craft a payload. The only guard is
+    an <code>http(s)</code> allowlist. So a link like this is a blind jump, and the site's own copy still
+    describes a confirmation step that was deleted from the code.</p>
+  </div>
+
+  <h2>01 · What is actually there</h2>
+
+  <p>Three HTML pages, a stylesheet, and five JavaScript files. The landing page is <b>bilingual, Chinese
+  first</b> (<code>lang="zh-Hans"</code> on the document, with an English block below), and it names exactly
+  one project plus one way to make contact:</p>
+
+  <div class="quote">a1d2.org
+链接压缩器
+在浏览器里把长链接压短、并优化二维码，不需要后端。基于 p2r3 的开源项目 ha.mr（MIT）。
+打开 →
+
+Link compressor
+Compress long links and optimise QR codes entirely in the browser, no backend.
+Based on ha.mr by p2r3 (MIT).
+Open →
+
+更多陆续放上来。 / More to come.
+联系 — 有事找我，发邮件：support@a1d2.org</div>
+
+  <p>That is the entire site. The one project is a <b>fork of <code>ha.mr</code></b> (p2r3, MIT) — the files
+  keep the upstream structure (<code>compress.js</code>, <code>alphabets.js</code>, <code>main.js</code>,
+  <code>lean-qr</code>), and its own title calls it “link compressor (private)”. QR generation is
+  <b>lean-qr</b> (David Evans, MIT). There is no framework, no build step, no server-side rendering: 129 KB of
+  compression tables, 340 lines of glue, and a 7 KB QR encoder.</p>
+
+  <div class="tblwrap"><div class="tablewrap">
+  <table>
+    <tr><th>File</th><th>Size</th><th>Role</th></tr>
+    <tr><td><code>/index.html</code></td><td>4.6 KB</td><td>Landing page: title, one project, contact</td></tr>
+    <tr><td><code>/style.css</code></td><td>8.8 KB</td><td>Shared stylesheet</td></tr>
+    <tr><td><code>/q/index.html</code></td><td>6.4 KB</td><td>The compressor UI</td></tr>
+    <tr><td><code>/q/main.js</code></td><td>13.4 KB · 340 lines</td><td>Glue: hash parsing, redirect, UI updates</td></tr>
+    <tr><td><code>/q/compress.js</code></td><td>129 KB</td><td>Upstream compression algorithm (ha.mr)</td></tr>
+    <tr><td><code>/q/alphabets.js</code></td><td>57 KB</td><td>Three alphabets: 84 printable ASCII, 43 uppercase QR-safe, 3,953 emoji</td></tr>
+    <tr><td><code>/q/lean-qr/lean-qr.js</code></td><td>7 KB</td><td>QR encoder</td></tr>
+    <tr><td><code>/q/stats</code> + <code>stats.js</code></td><td>2.8 KB</td><td>A stats page that talks to an endpoint that returns 404</td></tr>
+  </table>
+  </div></div>
+
+  <h2>02 · The compressor, measured</h2>
+
+  <p>I ran the mirror's copy of the code in a real browser and fed it four URLs. The payload travels in the
+  fragment, so the domain is a fixed cost — compression only pays off on long links.</p>
+
+  <div class="tblwrap"><div class="tablewrap">
+  <table>
+    <tr><th>Input</th><th>Chars</th><th>Payload</th><th>Chars</th><th>Saving</th></tr>
+    <tr><td><code>https://en.wikipedia.org/wiki/Photography#History</code></td><td>49</td><td><code>.mGaQe0L5lmOp6Z3iW;4&amp;,SRP!</code></td><td>15</td><td><b>69%</b></td></tr>
+    <tr><td><code>https://ps.ps/?id=33</code></td><td>20</td><td><code>bisZU849/W#</code></td><td>11</td><td>45%</td></tr>
+    <tr><td><code>https://example.com/a/very/long/path?with=query&amp;and=more</code></td><td>56</td><td><code>jOID0UNb]T5=!;R5'yCyaID,cuN??JMyJxKe</code></td><td>25</td><td>55%</td></tr>
+    <tr><td><code>https://www.instagram.com/p/Cx7Qz1PtYbK/?igsh=MTZ2bXJq…</code></td><td>66</td><td><code>~j)2FvjUXC=IOJ4@FDzYaT_pgJwbGG3-F).-rvv#DC</code></td><td>42</td><td>36%</td></tr>
+  </table>
+  </div></div>
+
+  <p style="margin-top:14px">Three alphabets are in play. The payloads above use 84 printable ASCII
+  characters. A second, 43-character uppercase set is reserved for QR codes, which carry the payload in the
+  <b>path</b> (<code>/q/PAYLOAD</code>) instead of the fragment, which
+  is why <code>/q/anything</code> renders the compressor rather than a 404.</p>
+
+  <p>The third set is the party trick: <b>3,953 emoji</b>, one per entry, switched on with a UI toggle rather
+  than a URL flag — so the mode never appears in a shared link. Decoding stays unambiguous because
+  <code>textAlphabets()</code> picks the emoji table only when the payload contains a character outside the
+  ASCII alphabet, and a byte-for-byte comparison of the two tables finds no overlap. It compresses hardest of
+  the three and needs a phone keyboard to type.</p>
+
+  <p>Round-trip is <b>lossy in exactly one way</b>: an empty path segment before a query is dropped —
+  <code>https://ps.ps/?id=33</code> decodes to <code>https://ps.ps?id=33</code>. Semantically the same request
+  for virtually every server, but worth knowing if a signature ever depends on the slash.</p>
+
+  <p>The decoder earns its keep, though. Because the format carries no checksum, it re-compresses what it
+  decoded and compares against the input before trusting it:</p>
+
+  <div class="quote">// The format carries no checksum, so decoding with the WRONG alphabet can produce
+// convincing-looking nonsense (a random payload once "decoded" to a plausible youtube URL).
+// Re-compressing the result is the integrity check: only the correct alphabet reproduces the
+// payload exactly, so anything else is rejected.
+— <code>/q/main.js</code>, lines 216–219</div>
+
+  <h2>03 · The thing I got wrong, and the comment that proves it</h2>
+
+  <p>My first read of this site said it showed a “Proceed to &lt;url&gt;?” screen and that nothing was fetched
+  until you clicked. <b>That was wrong.</b> It is true of upstream <code>ha.mr</code>, which I had read about
+  before reading this fork's <code>main.js</code>. The fork deletes the interstitial, and says so in a comment:</p>
+
+  <div class="quote">const target = decompress(payload, alphabet);
+// Redirect straight through - no confirmation screen. The protocol check is not
+// decoration: a payload is opaque data that anyone can craft, so refuse anything
+// that is not http(s) instead of letting it navigate to javascript: or data: here.
+const url = new URL(target);
+if (url.protocol !== "http:" && url.protocol !== "https:") {
+  throw new Error(`Refusing to redirect to ${url.protocol}`);
+}
+window.location.replace(url.href);
+return;
+— <code>/q/main.js</code>, lines 317–326</div>
+
+  <p>I confirmed it behaviourally rather than trusting the comment: navigating to
+  <code>/q/#&lt;payload for example.com&gt;</code> landed on example.com, with the fragment gone and no
+  intermediate page. <code>location.replace</code> also means <b>no history entry</b> — the back button skips
+  the compressor entirely, so a redirected visitor cannot easily walk back to see what they clicked.</p>
+
+  <div class="warnbox">
+    <b>What this means practically.</b> An <code>a1d2.org#…</code> link is a blind jump. The fragment is never
+    sent to the server, so no filter, preview bot or link scanner can see where it goes — that is the privacy
+    feature and the attack surface at the same time. The <code>http(s)</code> allowlist stops
+    <code>javascript:</code> and <code>data:</code> payloads from running <i>on the domain</i>; it does not stop
+    the payload from pointing at a phishing page.
+  </div>
+
+  <p>The <code>/q/stats</code> page is where the fork's paperwork fell behind its code. It still describes the
+  deleted step:</p>
+
+  <div class="quote">A link is counted when its confirmation screen appears, so pressing Stop still counted.
+— <code>/q/stats</code>, live copy</div>
+
+  <p>There is no confirmation screen, and <code>main.js</code> contains <b>no <code>fetch</code> call at all</b> —
+  the counter was removed from the client. The endpoints agree: <code>GET /stats.json</code> returns the
+  site's 404 page, and <code>POST /a</code> answers <b>405</b> to every method and content-type I tried. So the
+  stats page is an orphan: a UI for a feature whose client half and server half are both gone.</p>
+
+  <h2>04 · Privacy: what it protects and what it leaks</h2>
+
+  <div class="grid2">
+    <div class="card2">
+      <h4>Genuinely private by design</h4>
+      <ul>
+        <li>The payload lives after <code>#</code>, so <b>the destination never reaches the server</b> — not in access logs, not in the CDN, not in a referrer</li>
+        <li>Compression happens in the browser; there is no API call to compress anything</li>
+        <li>No cookies, no localStorage of URLs, no third-party scripts except one beacon (below)</li>
+        <li><code>noindex, nofollow</code> on all three pages, so the site is deliberately invisible</li>
+      </ul>
+    </div>
+    <div class="card2">
+      <h4>Where it leaks anyway</h4>
+      <ul>
+        <li><b>Cloudflare Web Analytics</b> is injected into all three pages (token <code>410474ed…21e3</code>), so there <i>is</i> a third-party request per page load</li>
+        <li>The beacon posts to <code>/cdn-cgi/rum</code>; it is cookieless, but it still records the visit</li>
+        <li>Once you land on the destination, <b>that</b> site sees a referrer of <code>https://a1d2.org/</code></li>
+        <li>Anyone watching the URL bar (screen share, shoulder, screenshot) sees the whole payload</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="note" style="margin-top:14px"><b>Correcting myself again:</b> I earlier called this site free of
+  third-party requests. That was wrong — the beacon is there, which is why the mirror throws a 404 for
+  <code>/cdn-cgi/rum</code> whenever one of its pages loads.</p>
+
+  <h2>05 · Where it lives — or doesn't</h2>
+
+  <div class="flow">
+<b>a1d2.org</b> <span class="dim">A</span> <span class="ar">──▶</span> 104.21.72.240 · 172.67.155.232  <span class="dim">CLOUDFLARENET</span>
+  <span class="ar">│</span>
+  <span class="ar">├─</span> <span class="dim">cf-ray</span> …-HKG <span class="ar">──▶</span> the edge nearest <b>me</b>, not the site
+  <span class="ar">├─</span> NS <span class="dim">kehlani / ridge.ns.cloudflare.com</span>
+  <span class="ar">├─</span> RDAP <span class="ar">──▶</span> Squarespace Domains LLC · created <b>2026-09-12</b> · expires 2029
+  <span class="ar">│</span>    registrant <b>redacted</b> · DNSSEC <b>off</b> · no country anywhere
+  <span class="ar">├─</span> CT logs <span class="ar">──▶</span> exactly 3 names: apex, www, wildcard
+  <span class="ar">└─</span> MX <span class="ar">──▶</span> <b>none</b> · TXT <span class="ar">──▶</span> <b>none</b>
+  </div>
+
+  <p>There is <b>no origin IP to geolocate</b>. Every address belongs to Cloudflare's anycast range, and the
+  real server could be in a Shanghai flat, a Frankfurt VPS, or a static build with no origin at all — all three
+  produce identical headers. The registrant fields are redacted to the registrar itself, and certificate
+  transparency shows no <code>mail.</code>, <code>dev.</code> or bare-IP certificate that would leak a
+  direct-to-origin host.</p>
+
+  <p>Two consequences worth spelling out:</p>
+
+  <ul style="font-size:13.8px;color:var(--mut);padding-left:18px;line-height:1.8">
+    <li><b>The contact address cannot receive mail.</b> With no <code>MX</code> record, mail to
+    <code>support@a1d2.org</code> falls back to the A record — Cloudflare's proxy, which does not accept SMTP.
+    And with no <code>SPF</code>/<code>DMARC</code>, the domain can also be spoofed in mail.</li>
+    <li><b>The site is written for a Chinese-reading audience.</b> The landing page declares
+    <code>lang="zh-Hans"</code> and puts its Chinese block first, and the custom 404 page opens with
+    <code>页面未找到</code> before “Page not found”. That is solid evidence of <i>audience and language</i> —
+    the one thing this site does disclose — but it is not evidence of where the author is sitting. A site can
+    be written in one language from anywhere on earth.</li>
+  </ul>
+
+  <h2>06 · The mirror</h2>
+
+  <div class="mirror">
+    <div>
+      <p>Twelve files, 234 KB, no server required. This is the unusual kind of mirror that is <b>fully
+      functional offline</b>: the compressor is client-side, so it compresses, decodes and renders QR codes
+      from the local folder with the network unplugged.</p>
+
+      <div class="tblwrap"><div class="tablewrap">
+      <table>
+        <tr><th>Origin URL</th><th>Mirror path</th><th>Changed?</th></tr>
+        <tr><td><code>/</code></td><td><code>index.html</code></td><td>byte-identical</td></tr>
+        <tr><td><code>/style.css</code></td><td><code>style.css</code></td><td>byte-identical</td></tr>
+        <tr><td><code>/q/</code></td><td><code>q/index.html</code></td><td>3 refs: <code>/q/x</code> → <code>./x</code></td></tr>
+        <tr><td><code>/q/main.js</code>, <code>compress.js</code>, <code>alphabets.js</code></td><td><code>q/…</code></td><td>byte-identical</td></tr>
+        <tr><td><code>/q/lean-qr/lean-qr.js</code>, <code>/q/stats.js</code></td><td><code>q/…</code></td><td>byte-identical</td></tr>
+        <tr><td><code>/q/stats</code></td><td><code>q/stats</code></td><td>2 refs, same rule</td></tr>
+        <tr><td><code>/stats.json</code> (404)</td><td><code>404.html</code></td><td>the origin's own 404 page</td></tr>
+      </table>
+      </div></div>
+
+      <p style="margin-top:14px"><b>How to check a link without trusting it:</b> open the mirror, paste the
+      payload into the <b>Reverse</b> box — not the address bar — and it prints the destination without any
+      navigation. That is the whole safety workflow this fork removed.</p>
+
+      <div class="btnrow">
+        <a class="btn pri" href="./a1d2-mirror/">Open the mirror →</a>
+        <a class="btn" href="./a1d2-mirror/q/">Try the compressor →</a>
+        <a class="btn" href="../prompts/a1d2-mirror-prompt.md">Build notes</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="card2">
+        <h4>Works offline</h4>
+        <ul>
+          <li>Compress a URL to ASCII or emoji payload</li>
+          <li>Reverse/decode a payload you were sent</li>
+          <li>QR generation and the QR-path decode</li>
+          <li>Language toggle, both pages</li>
+        </ul>
+      </div>
+      <div class="card2" style="margin-top:12px">
+        <h4>Doesn't</h4>
+        <ul>
+          <li>Hit counting (<code>/stats.json</code> → 404)</li>
+          <li>The Cloudflare beacon (visible as a 404 for <code>/cdn-cgi/rum</code>)</li>
+          <li>Anything that needs the origin — there is nothing else</li>
+        </ul>
+      </div>
+      <p class="note"><b>Fidelity:</b> <code>MIRROR.json</code> records URL → path → sha256 for all 12 files,
+      plus the exact three-line rewrite applied to <code>q/index.html</code>.</p>
+      <p class="note"><b>Served vs archived:</b> the files on disk are byte-identical to the origin, but the
+      host does not serve them that way — Cloudflare injects one Web Analytics <code>&lt;script&gt;</code>
+      into every HTML page and rewrites <code>mailto:</code> links to <code>/cdn-cgi/l/email-protection</code>.
+      <code>.html</code> URLs also take a 308 to the extensionless path. The archive is faithful; the wire
+      copy carries the host's additions.</p>
+    </div>
+  </div>
+
+  <h2>07 · Verdict</h2>
+
+  <div class="okbox">
+    <b>Not malicious.</b> No obfuscation, no <code>eval</code>, no exfiltration, no credential form. The code is
+    careful in ways hobby projects rarely are: a protocol allowlist before navigating, a re-compression
+    integrity check because the format has no checksum, and everything computed client-side. Both dependencies
+    are MIT-licensed and correctly attributed.
+  </div>
+
+  <div class="warnbox">
+    <b>Also not trustworthy, in the sense that matters.</b> The operator is anonymous by construction (proxied,
+    redacted, <code>noindex</code>, dead contact address), the domain is five weeks old, and the one interaction
+    the site offers is an <b>instant redirect to an arbitrary URL with no preview</b>. Treat every
+    <code>a1d2.org#…</code> link as “somebody wants me to land somewhere”, decode it first, and only then decide.
+  </div>
+
+  <footer>
+    <b>Method.</b> Fetched with a plain HTTP client; headers, TLS chain and DNS read directly; RDAP for the
+    registration; certificate transparency for subdomains; behaviour verified by driving the mirrored copy in
+    headless Chromium (compression, round-trip, redirect). Safety checks were passive and read-only.
+    <br><br>
+    <b>Honesty notes.</b> Two things on this page are corrections of my own first pass, and both were caught by
+    building the mirror rather than by reading the site: there is <b>no confirmation screen</b> (that belongs to
+    upstream <code>ha.mr</code>), and there <b>is</b> a third-party beacon (Cloudflare Web Analytics). “Written
+    for a Chinese-reading audience” is quoted from the site's own markup, not an inference about a person.
+    “Where it is hosted” is unanswerable, and saying so is the finding.
+  </footer>
+
+</div>
+
+</body>
+</html>

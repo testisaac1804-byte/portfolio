@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="kp">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="assets/img/favicon.ico">
+        <title>ipe170125005 - 동영상재생기</title>
+        <link href="http://www.gnu.rep.kp/hls/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="http://www.gnu.rep.kp/hls/assets/video.js/video-js.min.css" rel="stylesheet" type="text/css"/>
+        <link href="http://www.gnu.rep.kp/hls/assets/css/player.css" rel="stylesheet" type="text/css"/>
+        <link rel="image_src" href="http://www.gnu.rep.kp/hls/videos/pyb_ipe170125005/ipe170125005.jpg" />
+        <meta property="fb:app_id"             content="774958212660408" />
+        <meta property="og:url"                content="http://www.gnu.rep.kp/hls/embed//ipe170125005" />
+        <meta property="og:type"               content="video.other" />
+        <meta property="og:title"              content="ipe170125005 - 동영상재생기" />
+        <meta property="og:description"        content=" - ipe170125005" />
+        <meta property="og:image"              content="http://www.gnu.rep.kp/hls/videos/pyb_ipe170125005/ipe170125005.jpg" />
+        <script src="http://www.gnu.rep.kp/hls/assets/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script>
+            var webSiteRootURL = 'http://www.gnu.rep.kp/hls/';
+        </script>
+        <script src="http://www.gnu.rep.kp/hls/assets/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="http://www.gnu.rep.kp/hls/assets/video.js/video.min.js" type="text/javascript"></script>
+        <script src="http://www.gnu.rep.kp/hls/assets/video.js/lang/kp.js" type="text/javascript"></script>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="http://www.gnu.rep.kp/hls/assets/img/favicon.png">
+<link href="http://www.gnu.rep.kp/hls/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script src="http://www.gnu.rep.kp/hls/assets/js/jquery-3.3.1.min.js"></script>
+<script>
+    var webSiteRootURL = "http://www.gnu.rep.kp/hls/";
+    var player;
+    var doNotFloatVideo = false;
+</script>
+
+<!-- Skins Head Begin -->
+    <link href="http://www.gnu.rep.kp/hls/assets/css/skins/pyb.css" rel="stylesheet" type="text/css"/><!-- Skins Head End -->
+
+<!-- Thumbnails Head Begin -->
+    <link href="http://www.gnu.rep.kp/hls/assets/video.js/videojs.thumbnails.css" rel="stylesheet" type="text/css"/><style>.vjs-thumbnail-holder{min-width:150px;min-height:84px;margin-left:-75px;}</style><!-- Thumbnails Head End -->
+        <style>
+            body {
+                padding: 0 !important;
+                margin: 0 !important;
+                overflow: hidden;
+            }
+            .video-js {
+                position: static;
+            }
+        </style>
+    </head>
+
+    <body>
+                    <video style="width: 100%; height: 100%; top: 0; background-color:#000000;" playsinline webkit-playsinline poster="http://www.gnu.rep.kp/hls/videos/pyb_ipe170125005/ipe170125005.jpg"
+                    controls                       class="video-js vjs-default-skin vjs-16-9 embed-responsive-item vjs-big-play-centered" id="mainVideo"  data-setup='{"fluid": true }'>
+               <source src="http://www.gnu.rep.kp/hls/videos/pyb_ipe170125005/ipe170125005/index.m3u8?token=eyJzYWx0IjoiNWU0ZTUzOGM2NTAwMyIsInRva2VuVGltZU91dCI6IjMwMCIsImZpbGVuYW1lIjoiaXBlMTcwMTI1MDA1IiwidGltZSI6MTcwNTAzMzI1N30=" type="application/x-mpegURL">                <p>웨브열람기가 HTML5를 지원하지 않습니다.</p>
+            </video>
+            <script>
+                $(document).ready(function () {
+                    //Prevent HTML5 video from being downloaded (right-click saved)?
+                    $('#mainVideo').bind('contextmenu', function () {
+                        return false;
+                    });
+                    if (typeof player === 'undefined') {
+                        player = videojs('mainVideo');
+                    }
+                                        setTimeout(function () {
+                            if (typeof player === 'undefined') {
+                                player = videojs('mainVideo');
+                            }
+                            try {
+                                player.currentTime(0);
+                                player.play();
+                            } catch (e) {
+                                setTimeout(function () {
+                                    player.currentTime(0);
+                                    player.play();
+                                }, 1000);
+                            }
+                        }, 150);
+                                });
+            </script>
+                <script>
+    window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+        if (url == "") {
+            url = "embed in html";
+        }
+        $.ajax({
+            url: webSiteRootURL + "objects/ajaxErrorCatcher.php?error=" + encodeURI("JS-Err: " + errorMsg + " @ line " + lineNumber + " in file " + url + " at visit on /hls/player/ipe170125005"),
+            context: document.body
+        }).done(function () {
+            console.log("Javascript오유가 발생하면 관리자에게 문의하여주십시오. \r\n Msg:" + errorMsg + " \r\n Url: " + url + ", line: " + lineNumber + ", Address: /hls/player/ipe170125005");
+        });
+        return false;
+    }
+</script>
+<script src="http://www.gnu.rep.kp/hls/assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="http://www.gnu.rep.kp/hls/assets/video.js/videojs.hotkeys.min.js" type="text/javascript"></script>
+
+<!-- Thumbnails Foot Begin -->
+<script src="http://www.gnu.rep.kp/hls/assets/video.js/videojs.thumbnails.js" type="text/javascript"></script><script>$(document).ready(function () { if(typeof player == 'undefined'){player = videojs('mainVideo');}player.thumbnails({0: {
+                src: 'http://www.gnu.rep.kp/hls/videos/pyb_ipe170125005/ipe170125005_thumbsSprit.jpg',
+                style: {
+                  top: '0',
+                  left: '0',
+                  width: '1500px',
+                  height: '840px',
+                  clip: 'rect(0, 150px, 84px, 0)'
+                }
+              },6: {
+            style: {
+                top: '-0px',
+                left: '-150px',
+                clip: 'rect(0, 300px, 84px, 150px)'
+            }
+          },12: {
+            style: {
+                top: '-0px',
+                left: '-300px',
+                clip: 'rect(0, 450px, 84px, 300px)'
+            }
+          },19: {
+            style: {
+                top: '-0px',
+                left: '-450px',
+                clip: 'rect(0, 600px, 84px, 450px)'
+            }
+          },25: {
+            style: {
+                top: '-0px',
+                left: '-600px',
+                clip: 'rect(0, 750px, 84px, 600px)'
+            }
+          },31: {
+            style: {
+                top: '-0px',
+                left: '-750px',
+                clip: 'rect(0, 900px, 84px, 750px)'
+            }
+          },38: {
+            style: {
+                top: '-0px',
+                left: '-900px',
+                clip: 'rect(0, 1050px, 84px, 900px)'
+            }
+          },44: {
+            style: {
+                top: '-0px',
+                left: '-1050px',
+                clip: 'rect(0, 1200px, 84px, 1050px)'
+            }
+          },50: {
+            style: {
+                top: '-0px',
+                left: '-1200px',
+                clip: 'rect(0, 1350px, 84px, 1200px)'
+            }
+          },57: {
+            style: {
+                top: '-0px',
+                left: '-1350px',
+                clip: 'rect(0, 1500px, 84px, 1350px)'
+            }
+          },63: {
+            style: {
+                top: '-84px',
+                left: '-0px',
+                clip: 'rect(84px, 150px, 168px, 0)'
+            }
+          },69: {
+            style: {
+                top: '-84px',
+                left: '-150px',
+                clip: 'rect(84px, 300px, 168px, 150px)'
+            }
+          },76: {
+            style: {
+                top: '-84px',
+                left: '-300px',
+                clip: 'rect(84px, 450px, 168px, 300px)'
+            }
+          },82: {
+            style: {
+                top: '-84px',
+                left: '-450px',
+                clip: 'rect(84px, 600px, 168px, 450px)'
+            }
+          },89: {
+            style: {
+                top: '-84px',
+                left: '-600px',
+                clip: 'rect(84px, 750px, 168px, 600px)'
+            }
+          },95: {
+            style: {
+                top: '-84px',
+                left: '-750px',
+                clip: 'rect(84px, 900px, 168px, 750px)'
+            }
+          },101: {
+            style: {
+                top: '-84px',
+                left: '-900px',
+                clip: 'rect(84px, 1050px, 168px, 900px)'
+            }
+          },108: {
+            style: {
+                top: '-84px',
+                left: '-1050px',
+                clip: 'rect(84px, 1200px, 168px, 1050px)'
+            }
+          },114: {
+            style: {
+                top: '-84px',
+                left: '-1200px',
+                clip: 'rect(84px, 1350px, 168px, 1200px)'
+            }
+          },120: {
+            style: {
+                top: '-84px',
+                left: '-1350px',
+                clip: 'rect(84px, 1500px, 168px, 1350px)'
+            }
+          },127: {
+            style: {
+                top: '-168px',
+                left: '-0px',
+                clip: 'rect(168px, 150px, 252px, 0)'
+            }
+          },133: {
+            style: {
+                top: '-168px',
+                left: '-150px',
+                clip: 'rect(168px, 300px, 252px, 150px)'
+            }
+          },139: {
+            style: {
+                top: '-168px',
+                left: '-300px',
+                clip: 'rect(168px, 450px, 252px, 300px)'
+            }
+          },146: {
+            style: {
+                top: '-168px',
+                left: '-450px',
+                clip: 'rect(168px, 600px, 252px, 450px)'
+            }
+          },152: {
+            style: {
+                top: '-168px',
+                left: '-600px',
+                clip: 'rect(168px, 750px, 252px, 600px)'
+            }
+          },159: {
+            style: {
+                top: '-168px',
+                left: '-750px',
+                clip: 'rect(168px, 900px, 252px, 750px)'
+            }
+          },165: {
+            style: {
+                top: '-168px',
+                left: '-900px',
+                clip: 'rect(168px, 1050px, 252px, 900px)'
+            }
+          },171: {
+            style: {
+                top: '-168px',
+                left: '-1050px',
+                clip: 'rect(168px, 1200px, 252px, 1050px)'
+            }
+          },178: {
+            style: {
+                top: '-168px',
+                left: '-1200px',
+                clip: 'rect(168px, 1350px, 252px, 1200px)'
+            }
+          },184: {
+            style: {
+                top: '-168px',
+                left: '-1350px',
+                clip: 'rect(168px, 1500px, 252px, 1350px)'
+            }
+          },190: {
+            style: {
+                top: '-252px',
+                left: '-0px',
+                clip: 'rect(252px, 150px, 336px, 0)'
+            }
+          },197: {
+            style: {
+                top: '-252px',
+                left: '-150px',
+                clip: 'rect(252px, 300px, 336px, 150px)'
+            }
+          },203: {
+            style: {
+                top: '-252px',
+                left: '-300px',
+                clip: 'rect(252px, 450px, 336px, 300px)'
+            }
+          },209: {
+            style: {
+                top: '-252px',
+                left: '-450px',
+                clip: 'rect(252px, 600px, 336px, 450px)'
+            }
+          },216: {
+            style: {
+                top: '-252px',
+                left: '-600px',
+                clip: 'rect(252px, 750px, 336px, 600px)'
+            }
+          },222: {
+            style: {
+                top: '-252px',
+                left: '-750px',
+                clip: 'rect(252px, 900px, 336px, 750px)'
+            }
+          },228: {
+            style: {
+                top: '-252px',
+                left: '-900px',
+                clip: 'rect(252px, 1050px, 336px, 900px)'
+            }
+          },235: {
+            style: {
+                top: '-252px',
+                left: '-1050px',
+                clip: 'rect(252px, 1200px, 336px, 1050px)'
+            }
+          },241: {
+            style: {
+                top: '-252px',
+                left: '-1200px',
+                clip: 'rect(252px, 1350px, 336px, 1200px)'
+            }
+          },248: {
+            style: {
+                top: '-252px',
+                left: '-1350px',
+                clip: 'rect(252px, 1500px, 336px, 1350px)'
+            }
+          },254: {
+            style: {
+                top: '-336px',
+                left: '-0px',
+                clip: 'rect(336px, 150px, 420px, 0)'
+            }
+          },260: {
+            style: {
+                top: '-336px',
+                left: '-150px',
+                clip: 'rect(336px, 300px, 420px, 150px)'
+            }
+          },267: {
+            style: {
+                top: '-336px',
+                left: '-300px',
+                clip: 'rect(336px, 450px, 420px, 300px)'
+            }
+          },273: {
+            style: {
+                top: '-336px',
+                left: '-450px',
+                clip: 'rect(336px, 600px, 420px, 450px)'
+            }
+          },279: {
+            style: {
+                top: '-336px',
+                left: '-600px',
+                clip: 'rect(336px, 750px, 420px, 600px)'
+            }
+          },286: {
+            style: {
+                top: '-336px',
+                left: '-750px',
+                clip: 'rect(336px, 900px, 420px, 750px)'
+            }
+          },292: {
+            style: {
+                top: '-336px',
+                left: '-900px',
+                clip: 'rect(336px, 1050px, 420px, 900px)'
+            }
+          },298: {
+            style: {
+                top: '-336px',
+                left: '-1050px',
+                clip: 'rect(336px, 1200px, 420px, 1050px)'
+            }
+          },305: {
+            style: {
+                top: '-336px',
+                left: '-1200px',
+                clip: 'rect(336px, 1350px, 420px, 1200px)'
+            }
+          },311: {
+            style: {
+                top: '-336px',
+                left: '-1350px',
+                clip: 'rect(336px, 1500px, 420px, 1350px)'
+            }
+          },318: {
+            style: {
+                top: '-420px',
+                left: '-0px',
+                clip: 'rect(420px, 150px, 504px, 0)'
+            }
+          },324: {
+            style: {
+                top: '-420px',
+                left: '-150px',
+                clip: 'rect(420px, 300px, 504px, 150px)'
+            }
+          },330: {
+            style: {
+                top: '-420px',
+                left: '-300px',
+                clip: 'rect(420px, 450px, 504px, 300px)'
+            }
+          },337: {
+            style: {
+                top: '-420px',
+                left: '-450px',
+                clip: 'rect(420px, 600px, 504px, 450px)'
+            }
+          },343: {
+            style: {
+                top: '-420px',
+                left: '-600px',
+                clip: 'rect(420px, 750px, 504px, 600px)'
+            }
+          },349: {
+            style: {
+                top: '-420px',
+                left: '-750px',
+                clip: 'rect(420px, 900px, 504px, 750px)'
+            }
+          },356: {
+            style: {
+                top: '-420px',
+                left: '-900px',
+                clip: 'rect(420px, 1050px, 504px, 900px)'
+            }
+          },362: {
+            style: {
+                top: '-420px',
+                left: '-1050px',
+                clip: 'rect(420px, 1200px, 504px, 1050px)'
+            }
+          },368: {
+            style: {
+                top: '-420px',
+                left: '-1200px',
+                clip: 'rect(420px, 1350px, 504px, 1200px)'
+            }
+          },375: {
+            style: {
+                top: '-420px',
+                left: '-1350px',
+                clip: 'rect(420px, 1500px, 504px, 1350px)'
+            }
+          },381: {
+            style: {
+                top: '-504px',
+                left: '-0px',
+                clip: 'rect(504px, 150px, 588px, 0)'
+            }
+          },387: {
+            style: {
+                top: '-504px',
+                left: '-150px',
+                clip: 'rect(504px, 300px, 588px, 150px)'
+            }
+          },394: {
+            style: {
+                top: '-504px',
+                left: '-300px',
+                clip: 'rect(504px, 450px, 588px, 300px)'
+            }
+          },400: {
+            style: {
+                top: '-504px',
+                left: '-450px',
+                clip: 'rect(504px, 600px, 588px, 450px)'
+            }
+          },407: {
+            style: {
+                top: '-504px',
+                left: '-600px',
+                clip: 'rect(504px, 750px, 588px, 600px)'
+            }
+          },413: {
+            style: {
+                top: '-504px',
+                left: '-750px',
+                clip: 'rect(504px, 900px, 588px, 750px)'
+            }
+          },419: {
+            style: {
+                top: '-504px',
+                left: '-900px',
+                clip: 'rect(504px, 1050px, 588px, 900px)'
+            }
+          },426: {
+            style: {
+                top: '-504px',
+                left: '-1050px',
+                clip: 'rect(504px, 1200px, 588px, 1050px)'
+            }
+          },432: {
+            style: {
+                top: '-504px',
+                left: '-1200px',
+                clip: 'rect(504px, 1350px, 588px, 1200px)'
+            }
+          },438: {
+            style: {
+                top: '-504px',
+                left: '-1350px',
+                clip: 'rect(504px, 1500px, 588px, 1350px)'
+            }
+          },445: {
+            style: {
+                top: '-588px',
+                left: '-0px',
+                clip: 'rect(588px, 150px, 672px, 0)'
+            }
+          },451: {
+            style: {
+                top: '-588px',
+                left: '-150px',
+                clip: 'rect(588px, 300px, 672px, 150px)'
+            }
+          },457: {
+            style: {
+                top: '-588px',
+                left: '-300px',
+                clip: 'rect(588px, 450px, 672px, 300px)'
+            }
+          },464: {
+            style: {
+                top: '-588px',
+                left: '-450px',
+                clip: 'rect(588px, 600px, 672px, 450px)'
+            }
+          },470: {
+            style: {
+                top: '-588px',
+                left: '-600px',
+                clip: 'rect(588px, 750px, 672px, 600px)'
+            }
+          },477: {
+            style: {
+                top: '-588px',
+                left: '-750px',
+                clip: 'rect(588px, 900px, 672px, 750px)'
+            }
+          },483: {
+            style: {
+                top: '-588px',
+                left: '-900px',
+                clip: 'rect(588px, 1050px, 672px, 900px)'
+            }
+          },489: {
+            style: {
+                top: '-588px',
+                left: '-1050px',
+                clip: 'rect(588px, 1200px, 672px, 1050px)'
+            }
+          },496: {
+            style: {
+                top: '-588px',
+                left: '-1200px',
+                clip: 'rect(588px, 1350px, 672px, 1200px)'
+            }
+          },502: {
+            style: {
+                top: '-588px',
+                left: '-1350px',
+                clip: 'rect(588px, 1500px, 672px, 1350px)'
+            }
+          },508: {
+            style: {
+                top: '-672px',
+                left: '-0px',
+                clip: 'rect(672px, 150px, 756px, 0)'
+            }
+          },515: {
+            style: {
+                top: '-672px',
+                left: '-150px',
+                clip: 'rect(672px, 300px, 756px, 150px)'
+            }
+          },521: {
+            style: {
+                top: '-672px',
+                left: '-300px',
+                clip: 'rect(672px, 450px, 756px, 300px)'
+            }
+          },527: {
+            style: {
+                top: '-672px',
+                left: '-450px',
+                clip: 'rect(672px, 600px, 756px, 450px)'
+            }
+          },534: {
+            style: {
+                top: '-672px',
+                left: '-600px',
+                clip: 'rect(672px, 750px, 756px, 600px)'
+            }
+          },540: {
+            style: {
+                top: '-672px',
+                left: '-750px',
+                clip: 'rect(672px, 900px, 756px, 750px)'
+            }
+          },546: {
+            style: {
+                top: '-672px',
+                left: '-900px',
+                clip: 'rect(672px, 1050px, 756px, 900px)'
+            }
+          },553: {
+            style: {
+                top: '-672px',
+                left: '-1050px',
+                clip: 'rect(672px, 1200px, 756px, 1050px)'
+            }
+          },559: {
+            style: {
+                top: '-672px',
+                left: '-1200px',
+                clip: 'rect(672px, 1350px, 756px, 1200px)'
+            }
+          },566: {
+            style: {
+                top: '-672px',
+                left: '-1350px',
+                clip: 'rect(672px, 1500px, 756px, 1350px)'
+            }
+          },572: {
+            style: {
+                top: '-756px',
+                left: '-0px',
+                clip: 'rect(756px, 150px, 840px, 0)'
+            }
+          },578: {
+            style: {
+                top: '-756px',
+                left: '-150px',
+                clip: 'rect(756px, 300px, 840px, 150px)'
+            }
+          },585: {
+            style: {
+                top: '-756px',
+                left: '-300px',
+                clip: 'rect(756px, 450px, 840px, 300px)'
+            }
+          },591: {
+            style: {
+                top: '-756px',
+                left: '-450px',
+                clip: 'rect(756px, 600px, 840px, 450px)'
+            }
+          },597: {
+            style: {
+                top: '-756px',
+                left: '-600px',
+                clip: 'rect(756px, 750px, 840px, 600px)'
+            }
+          },604: {
+            style: {
+                top: '-756px',
+                left: '-750px',
+                clip: 'rect(756px, 900px, 840px, 750px)'
+            }
+          },610: {
+            style: {
+                top: '-756px',
+                left: '-900px',
+                clip: 'rect(756px, 1050px, 840px, 900px)'
+            }
+          },616: {
+            style: {
+                top: '-756px',
+                left: '-1050px',
+                clip: 'rect(756px, 1200px, 840px, 1050px)'
+            }
+          },623: {
+            style: {
+                top: '-756px',
+                left: '-1200px',
+                clip: 'rect(756px, 1350px, 840px, 1200px)'
+            }
+          },629: {
+            style: {
+                top: '-756px',
+                left: '-1350px',
+                clip: 'rect(756px, 1500px, 840px, 1350px)'
+            }
+          }}); });</script><!-- Thumbnails Foot End -->
+<!-- Hotkey Foot Begin -->
+<script> $( document ).ready(function() {videojs('mainVideo').ready(function() {this.hotkeys({ seekStep: 5,enableVolumeScroll: true,alwaysCaptureHotkeys: true,enableFullscreen: true,fullscreenKey: function(event, player) { return (event.which ===70); },playPauseKey: function(event, player) { return (event.which ===32); },volumeUpKey: function(event, player) { return (event.which === 107); },
+                 volumeDownKey: function(event, player) { return (event.which === 109);},enableModifiersForNumbers: false
+                 });
+        });});</script><!-- Hotkey Foot End -->
+<textarea id="elementToCopy" style="
+          filter: alpha(opacity=0);
+          -moz-opacity: 0;
+          -khtml-opacity: 0;
+          opacity: 0;
+          position: absolute;
+          z-index: -9999;
+          top: 0;
+          left: 0;
+          pointer-events: none;"></textarea>    </body>
+</html>

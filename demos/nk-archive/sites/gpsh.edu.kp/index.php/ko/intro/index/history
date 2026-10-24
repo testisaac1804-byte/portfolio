@@ -1,0 +1,499 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>인민대학습당 홈페지 - 《남산》-연혁페지</title>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="인민대학습당의 연혁에 대하여 소개합니다.">
+<meta name="keyword" content="인민대학습당,웨브싸이트,홈페지,남산,인민대학습당소개,연혁,장서,목록,봉사시간,강의시간,학습당독자,열람실리용,신문,잡지">
+<meta name="author" content="Kanegin, K.H.Y., K.S.H., KKK">
+<meta name="lang" content="ko">
+
+<link rel="shortcut icon" type="image/png" href="/assets/imgs/gpsh-icon-16.png?20240706.4.7.6">
+
+<link rel="stylesheet" href="/assets/libs/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/libs/nivo-slider/themes/light/light.min.css">
+<link rel="stylesheet" href="/assets/libs/nivo-slider/nivo-slider.min.css">
+<link rel="stylesheet" href="/assets/libs/owl-carousel/2.2.1/owl.carousel.min.css">
+<link rel="stylesheet" href="/assets/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/assets/libs/font-awesome.v6.1.2/css/all.min.css?">
+<link rel="stylesheet" href="/assets/libs/colorlib/vendor/photoswipe/css/vendor.min.css?">
+
+<link rel="stylesheet" href="/assets/css/linearicons.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/magnific-popup.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/animate.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/owl.carousel.plugin.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/global.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/font-family_ko.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/compatible.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/books.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/encyclopedia.min.css?20240706.4.7.6">
+<link rel="stylesheet" href="/assets/css/rmenjoy.min.css?20240706.4.7.6">
+<link rel="manifest" href="/assets/manifest.json">
+
+<script>
+let BASE_URL = '/';
+let SITE_URL = '/index.php/ko/';
+let CURRENT_URL = 'intro/index/history';
+let isMobile = false;
+let localeLang = 'ko';
+</script><script src="/assets/libs/jquery/jquery-3.4.1.ex.min.js"></script>
+<script src="/assets/libs/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body class="_top" oncontextmenu="return true;">
+    <div id="preloader">
+      <div class="preload-content">
+        <div id="gpsh-load"></div>
+      </div>
+    </div>
+    <header id="divHeader" class="header-area bo00">
+  <div class="container">
+    <div class="row mx-n15">
+      <div class="col-12 px-0">
+        <nav class="navbar-expand d-inline fixed-top languagebar bo00">
+          <ul class="navbar-nav justify-content-end language header">
+                          <li class="nav-link  active">
+                <a href="#">
+                  <span class="d-inline">조선어</span>
+                  <span class="d-none">가</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/en/intro/index/history">
+                  <span class="d-inline">English</span>
+                  <span class="d-none">En</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/cn/intro/index/history">
+                  <span class="d-inline">中文</span>
+                  <span class="d-none">中</span>
+                </a>
+              </li>
+                          <li class="nav-link ">
+                <a href="/index.php/ru/intro/index/history">
+                  <span class="d-inline">Русский</span>
+                  <span class="d-none">Ру</span>
+                </a>
+              </li>
+                      </ul>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-dark" id="gpshNavbar">
+	<a class="navbar-brand" href="/index.php/ko/" title="첫페지" >
+		<img id="logo_namsan" src="/assets/imgs/namsan.png" alt="남산" />
+		<span id="domain">www.gpsh.edu.kp</span>
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gpshNav">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="gpshNav">
+	<ul class="navbar-nav ml-auto">
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">불멸의 령도</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/leader/news_list"
+        title="혁명활동">혁명활동</a>
+      <a class="dropdown-item" href="/index.php/ko/anecdote/article_list"
+        title="혁명일화">혁명일화</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/leadership"
+        title="령도업적">령도업적</a>
+    </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 active"><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">소개</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/intro/index/serial#about-gpsh"
+        title="소개편집물">소개편집물</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/history#about-gpsh"
+        title="연혁">연혁</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/president#about-gpsh"
+        title="총장들">총장들</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/index/inside#about-gpsh"
+        title="구내전경">구내전경</a>
+      <a class="dropdown-item" href="/index.php/ko/intro/ourfaces_list#about-gpsh"
+        title="우리모습">우리모습</a>
+    </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">강의</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/lecture/today_in7day"
+        title="주간 강의, 강습일정">주간일정</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/0"
+        title="사회과학강의">사회과학강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/1"
+        title="자연과학강의">자연과학강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/2"
+        title="새기술통보강의">새기술통보강의</a>
+            <a class="dropdown-item" href="/index.php/ko/lecture/thismonth/3"
+        title="원격강의">원격강의</a>
+          </div>
+  </li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">봉사</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/index.php/ko/rmenjoy/room"
+        title="음악감상">음악감상</a>
+      <a class="dropdown-item" href="/index.php/ko/newbooks/view_list"
+        title="도서소개">도서소개</a>
+      <a class="dropdown-item" href="/index.php/ko/oldbooks/view_list"
+        title="민족고전">민족고전</a>
+      <a class="dropdown-item" href="/index.php/ko/encyclopedia/view_list/1"
+        title="백과상식">백과상식</a>
+    </div>
+  </li>
+  <li class="nav-item px-1 "><a class="nav-link" href="/index.php/ko/libraries/index/ko-lib-cp"
+      title="도서관협회">도서관협회</a></li>
+  <li class="nav-item dropdown submenu px-1 "><a href="#" class="nav-link dropdown-toggle"
+      data-toggle="dropdown">대외교류</a>
+    <div class="dropdown-menu dropdown-menu-right submenu">
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/0"
+        title="참관">참관</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/1"
+        title="도서교류">도서교류</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/2"
+        title="도서기증">도서기증</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/3"
+        title="국제토론회 및 전시회">국제토론회 및 전시회</a>
+      <a class="dropdown-item" href="/index.php/ko/foreign/index/4"
+        title="국제기구위탁도서관">국제기구위탁도서관</a>
+    </div>
+  </li>
+</ul>
+<div id="search-wrapper" class="d-none">
+  <form action="#" method="post">
+    <input type="text" id="search" name="search" class="search"
+      value=""
+      onkeypress="return checkProhibitionalChars('#search', '#errmsg2');"
+      placeholder="검색어를 입력하십시오." />
+    <div id="close-icon"></div>
+    <input class="d-none" type="submit" value="" />
+    <input type="hidden" name="csrftk" value="2c186686c75d3c5b7047f3d22fdd8253" />
+    <span id="errmsg2" style="display: none;">* 경고! - 금지된 문자를 포함하고 있습니다.</span>
+  </form>
+</div>
+<script type="text/javascript">
+  $().ready(function() {
+    // 《혁명활동소식》과 《휴관일》소개에서 주체년호표기처리
+    let jucheobjs = $(".juche.date.column, #holidays p");
+    jucheobjs.each(function() {
+        juchehtml = $(this).html() || '';
+        juchehtml = juchehtml.replace(/(주체|JUCHE|主体|чучхе)\d+\((\d+)\)/ig, '$2');
+        $(this).html(juchehtml);
+    });
+    // 외부싸이트소개
+    let servicetime = $('div.service-time #accordion');
+    if (servicetime.length) {
+      let servicetimes = servicetime.children('div');
+      // 강의시간과 봉사시간소개부를 없앤다.
+      if (servicetimes.length > 2) {
+        $(servicetimes[0]).addClass('d-none'); // 강의시간
+        // $(servicetimes[1]).addClass('d-none'); // 봉사시간
+      }
+      // 외부싸이트(광야홈페지)소개부를 추가한다.
+      let gwangya = $('<div class="card mb-3"><div class="card-header"><a class="collapsed1 card-link1" data-toggle1="collapse" href="http://www.dprkportal.kp" title="www.dprkportal.kp" target="_blank"><img src="/./data/outsites/gwangya.png" width="150px" alt="www.dprkportal.kp" /></a></div>');
+      servicetime.append(gwangya);
+    }
+  });
+</script>
+	</div>
+</nav>
+      </div>
+    </div>
+  </div>
+</header>    <section class="body" style="min-height: 900px;">
+      
+<a href="#about-gpsh" class="scrollto">
+  <div class="poster-area row-xs-150 row-sm-200 row-md-300 row-lg-400 bg-img bg-overlay bo03"
+    style="background-image: url(/./data/intro/poster_01.jpg); background-size: cover;
+      background-position: center;"></div></a>
+<div id="about-gpsh" class="container-fluid py-25 py-md-50 py-lg-100">
+  <div class="row">
+
+    <nav class="vertical-nav bo08">
+  <a href="#0" class="vertical-nav__close" title="닫기"><span></span></a>
+
+  <div class="vertical-nav__content">
+    <h3>인민대학습당소개</h3>
+    <ul class="vertical-nav__list nav-pills">
+          <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/index/serial#about-gpsh"
+        title="소개편집물">소개편집물</a></li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/index.php/ko/intro/index/history#about-gpsh"
+        title="연혁">연혁</a></li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/index/duty#about-gpsh"
+        title="사명,임무">사명,임무</a></li>
+        <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/index/operating#about-gpsh"
+        title="운영체계">운영체계</a></li>
+
+          <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/index/president#about-gpsh"
+        title="총장들">총장들</a></li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/index/merits#about-gpsh"
+        title="공로자들">공로자들</a></li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/index/inside#about-gpsh"
+        title="구내전경">구내전경</a></li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/ourfaces_list#about-gpsh"
+        title="우리모습">우리모습</a></li>
+      <li class="nav-item ">
+        <a class="nav-link" href="/index.php/ko/intro/index/outside#about-gpsh"
+        title="외부풍경">외부풍경</a></li>
+        </ul>
+  </div>
+</nav>
+    <div class="d-flex">
+      <a class="vertical-nav-toggle twinkle" href="#0">
+        <span class="vertical-nav-text"></span>
+        <span class="vertical-nav-icon"></span>
+      </a>
+      <h2 class="display-5 text-left mb-4 pl-5 bukul toptitle">인민대학습당소개</h2>
+    </div>
+  </div>
+  <div class="row mx-n15">
+    <div class="col-12">
+      
+<style>
+#history_intro h1 { color: #007961; text-align: left; border-bottom: none; padding-left: 2em; margin-bottom: 20px; }
+#history_intro p { font-family: Cambria, Century, Centaur, Tahoma, Arial, SimSun, webWKWChongbong, "KP CheongPong", "청봉", "PRK P Chongbong"; line-height: 200%; }
+#history_intro .top-title,
+#history_intro .sub-title { font-family: "Microsoft YaHei Light", Tahoma, Arial, SimSun, webWKLGothic, "KP CheonRiMa", "천리마", "PRK P Gothic", "WKGothic"; }
+
+.sub-info p { font-size: 90%; text-indent: 18px; }
+.sub-info p.sub-title { color: #007961; font-size: 130%; font-weight: 600; letter-spacing: 3px; padding-top: 15px; padding-bottom: 8px; }
+
+#about-gpsh #history_intro>div { padding-top: 0 !important; }
+</style>
+
+<script type="text/javascript">
+  $().ready(function() {
+    checkNames('ko', "#history_intro", "h1", "p");
+  });
+</script><section id="history_intro" class="">
+  <div class="container-fluid container-lg py-75">
+    <p class="top-title">종합소개</p>
+    <h1>인민대학습당 연혁</h1>
+    <div class="row mx-n15">
+      <div class="col-lg-7 pr-3">
+        <div class="mx-0 float-center">
+          <img src="/./data/intro/history/gpsh-01.jpg" class="img-thumbnail" />
+        </div>
+        <p>인민대학습당(GPSH) (아래서부터는 학습당이라고 함.)은  조선민주주의인민공화국의 국가도서관이며 조선에서 제일 큰 도서관으로서 나라의 중요한 사회교육기지, 대문헌기지, 정보자료기지, 사회문화보급기지, 지방도서관지도기관입니다.</p>
+        <p>주체34(1945)년 11월 5일 평양시립도서관으로 개관된 후 주체37(1948)년 국립중앙도서관으로 개칭되였습니다. 그후 주체52(1963)년 국립중앙도서관이 새로 건립되고 이전 국립중앙도서관의 기능을 그대로 계승하였습니다.</p>
+        <p>조선로동당의 직접적인 지도밑에 수도의 명당자리인 남산재에 합각지붕장식의 민족적형식과 현대적인 건축기술이 응축된 건물로 새롭게 일떠선 인민대학습당은 민족최대의 명절인 태양절에 즈음하여 주체71(1982)년 4월 1일 개관되였습니다. </p>
+        <p>학습당은 2천 6백여만권의 국내외의 각종 도서들과 문서들, 다매체자료들을 보유하고있으며 매해 수십만명이상의 사람들이 찾아와 학습을 하면서 재교육도 받고있습니다.</p>
+        <p>학습당에는 20여개의 열람실들이 있는데 6 000명이상의 사람들이 동시에 사용할수 있습니다. 18살이상의 조선공민이나 다른 나라의 공민은 학습당과 련계하여 독자카드를 받아 학습당독자로 될수 있습니다.</p>
+        <p>학습당에는 또한 열람실뿐만 아니라 10여개의 강의실도 있는데 여기서는 현장에서 일하는 근로자들과 대학을 졸업한 오랜 과학자, 기술자들을 대상으로 재교육강습, 과학기술강습, 외국어강습, 정보학강습, 원격강의를 하고있습니다. 해마다 1만여명의 근로자들과 과학자, 기술자들이 인민대학습당에서 진행하는 강의, 강습을 받고있습니다.</p>
+        <p>학습당은 거대한 전자서고를 보유하고있으며 전자자료들의 수자화와 배치는 90%이상 자동화되여있습니다. 학위론문초록들, 전자도서들과 문헌들, 시청각자료들이 공개령역에 있습니다. 저작권이 있는 전자문서들에 대한 열람은 학습당구내에서만 가능합니다.</p>
+        <p>학습당은 국가전자도서관체계를 운영하며 이를 통하여 독자들은 학습당전자서고에 자유롭게 접근할수 있습니다.</p>
+        <p>학습당은 독자들과의 새로운 호상작용마당들을 연구개발하고있습니다.</p>
+        <p>주체106(2017)년에 학습당은 선진과학기술성과전시장을 개설하였습니다. 전시장에는 국내와 다른 나라에서 연구개발된 최신과학기술제품들과 자료들이 전시되여있으며 국내에서 선진적이며 효률적인 정보교류마당으로 인정받고있습니다. 여기서는 또한 국제적인 도서교류 및 도서전시회도 진행되고있습니다.</p>
+        <p>학습당은 자체의 출판기지를 가지고있으며 여기서 기관신문을 비롯한 여러종의 정기간행물들을 출판하여 전국각지에 보급하고있습니다.</p>
+        <p>학습당은 국내의 각 도, 시, 군도서관들에 대한 행정적 및 학술적지도를 하고있습니다.</p>
+        <p></p>
+      </div>
+      <div class="col-lg-5 pr-3">
+        <div class="sub-info">
+          <p class="sub-title">장서</p>
+          <p>인민대학습당은 3 000만부의 장서능력을 가지고있으며 서가의 총 연장길이는 260Km에 달합니다.</p>
+          <p>현재 보유하고있는 출판물과 각종 자료의 총수는 2천 6백만부이며 여기에는 1만 2천여종의 민족고전도 소장되여있습니다.</p>
+          <p></p>
+        </div>
+        <div class="sub-info">
+          <p class="sub-title">목록</p>
+          <p>인민대학습당은 대용량전자서고를 보유하고있으며 모든 전자자료들이 수자목록화되여 국내외에서 각이한 매체들로 출판된 기사들을 포함하는 각종 형태의 문헌들에 대한 서지기록들을 제공합니다.</p>
+          <p>모든 인터네트사용자들은 학습당의 수자목록을 무료로 자유롭게 열람할수 있습니다.</p>
+          <p>또한 전체 목록에 대한 검색을 할수 있으며 보조목록을 통하여 특정한 목록검색도 할수 있습니다.</p>
+          <p></p>
+        </div>
+        <div class="sub-info">
+          <p class="sub-title">봉사시간</p>
+          <p>학습당은 9시부터 18시까지 휴관일과 국가적명절을 제외한 모든 날에 봉사합니다. 휴관일은 매달 2주, 4주 목요일입니다.</p>
+          <p></p>
+        </div>
+        <div class="sub-info">
+          <p class="sub-title">강의시간</p>
+          <p>강의, 강습은 일정에 따라 진행하며 매주 토요일과 일요일, 휴관일, 국가적명절에는 하지 않습니다. 휴관일은 매달 2주, 4주 목요일입니다.</p>
+          <p></p>
+        </div>
+        <div class="sub-info">
+          <p class="sub-title">학습당독자</p>
+          <p>18살이상의 조선공민과 다른 나라의 공민들은 학습당과 련계하여 학습당독자로 될수 있습니다.</p>
+          <p>고급중학교 학생들은 인민대학습당 학생열람실을 리용할수 있습니다.</p>
+          <p></p>
+        </div>
+        <div class="sub-info">
+          <p class="sub-title">열람실리용</p>
+          <p>학습당독자로 등록된 사람들은 모든 열람실들을 자유롭게 리용할수 있습니다.</p>
+          <p></p>
+        </div>
+        <div class="sub-info d-none">
+          <p class="sub-title">《인민대학습당》출판사</p>
+          <p>주체71(1982)년에 인민대학습당출판사는 도서관출판부로 인정받고 도서관학에 관한 인쇄물을 출판하는 전통을 발전시키는 한편 출판유가증권을 복사 및 재인쇄, 아직 출판되지 않은 원고와 문서의 출판으로 확장하고있습니다.</p>
+          <p></p>
+        </div>
+        <div class="sub-info">
+          <p class="sub-title">신문, 잡지들</p>
+          <p>인민대학습당에서는 도서목록, 전자도서관, 최신과학기술초록 등 여러종의 신문, 잡지들을 특색있게 출판하고있습니다.</p>
+          <p>신문, 잡지들은 기부판으로서 배포됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    </div>
+  </div>
+</div>
+    </section>
+    <footer class="footer-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 contact-us">
+        <ul class="contact-us text-center">
+          <li id="footer-gpsh-full-name" class="mb-4 text-white-50">
+            <i class="fa fa-map-marker fa-16 text-white-50" aria-hidden="true"></i>
+            조선민주주의인민공화국 인민대학습당</li>
+          <li id="footer-phone" class="mb-4 text-white-50">
+            <i class="fa fa-phone fa-16 text-white-50" aria-hidden="true"></i> 
+            전화번호: 850-2-18111(3818472)</li>
+          <li id="footer-email" class="mb-4 text-white-50 align-middle">
+            <i class="fa fa-envelope fa-12 text-white-50" aria-hidden="true"></i>
+            전자우편: <img src="/assets/imgs/nsj-email.png" alt="nsj-email"/></li>
+        </ul>
+      </div>
+      <div class="d-none-sm col-md-3 gpsh-outline">
+      </div>
+      <div class="col-md-4 text-center service-time">
+        <div id="accordion">
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-user-clock" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#coursetime" 
+                title="강의시간">
+                강의시간 [9:00~19:30]
+              </a>
+            </div>
+            <div id="coursetime" class="collapse" data-parent="#accordion">
+              <p class="card-body chongbong">
+                강의, 강습은 일정에 따라 진행하며 휴관일과 토요일, 일요일, 국가적명절일에는 하지 않습니다.              </p>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-briefcase-clock" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#opentime" 
+                title="봉사시간">
+                봉사시간 [9:00~18:00]
+              </a>
+            </div>
+            <div id="opentime" class="collapse" data-parent="#accordion">
+              <p class="card-body chongbong">
+                휴관일과 국가적명절을 제외한 모든 날들에 봉사합니다.              </p>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-coffee" aria-hidden="true"></i>
+              <a class="collapsed card-link" data-toggle="collapse" href="#holidays" 
+                title="휴 관 일">
+                휴 관 일              </a>
+            </div>
+            <div id="holidays" class="collapse" data-parent="#accordion">              <p class="card-body text-center chongbong">주체114(2025). <span
+                  class="national-holidays" title="조선민주주의인민공화국 헌법절">12.27. </span><span
+                  class="closed-holidays" title="휴관일">12.11. </span><span
+                  class="closed-holidays" title="휴관일">12.25. </span>              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+    <!-- photoswipe background
+================================================== -->
+<section>
+<div aria-hidden="true" class="pswp" role="dialog" tabindex="-1">
+
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title=
+                "Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title=
+                "Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title=
+            "Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div> <!-- end photoSwipe background -->
+</section>    <script src="/assets/libs/popper/1.16.0/umd/popper.min.js"></script>
+<script src="/assets/libs/jquery/ui/1.11.3/jquery-ui.min.js"></script>
+<!-- 
+<script src="/assets/libs/jquery/ui/jquery-ui-i18n.min.js"></script>
+-->
+<script	src="/assets/libs/nivo-slider/jquery.nivo.slider.pack.js"></script>
+<script src="/assets/libs/owl-carousel/2.2.1/owl.carousel.min.js"></script>
+<script	src="/assets/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script src="/assets/libs/mobile/fastclick.js"></script>
+<script src="/assets/libs/mobile/swiper.min.js"></script>
+<script src="/assets/libs/colorlib/vendor/parallax100/parallax100.js"></script>
+<script>
+    $('.parallax100').parallax100();
+</script>
+<script src="/assets/libs/colorlib/vendor/photoswipe/js/modernizr.js"></script>
+<script src="/assets/libs/colorlib/vendor/photoswipe/js/pace.min.js"></script>
+
+<!-- script src="/assets/js/jquery.magnific-popup.min.js?"></script -->
+<script src="/assets/js/plugins_add.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/plugins.min.js?20240706.4.7.6"></script>
+<script src="/assets/libs/colorlib/vendor/isotope/imagesloaded.pkgd.min.js"></script>
+<script src="/assets/libs/colorlib/vendor/isotope/isotope.pkgd.min.js"></script>
+<script src="/assets/js/active.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/global.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/books.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/encyclopedia.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/rmenjoy.global.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/leader.min.js?20240706.4.7.6"></script>
+<script src="/assets/js/counter.js?20240706.4.7.6"></script>
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="/assets/libs/assets/ie8-responsive-file-warning.js"></script><![endif]-->
+<script	src="/assets/libs/assets/ie-emulation-modes-warning.js"></script>
+<!-- IE10 agent hack for Surface/desktop Windows 8 bug -->
+<script	src="/assets/libs/assets/ie10-viewport-bug-workaround.js"></script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="/assets/libs/assets/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="/assets/libs/assets/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+  </body>
+</html>

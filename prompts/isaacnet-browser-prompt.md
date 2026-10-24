@@ -11,7 +11,7 @@ Browser frontend for the IsaacNet proxy.
 ## Where it lives
 - Published copy on the site (working folder isn't on this Mac): `~/Desktop/portfolio-deploy/demos/isaacnet-browser.html`
 - Published copy on the site (working folder isn't on this Mac): `~/Desktop/portfolio-deploy/projects/isaacnet-browser`
-- Artefacts on the site: 5 files · 894 lines of text · 38 KB
+- Artefacts on the site: 5 files · 894 lines of text · 37 KB
 
 ## Stack
 - HTML ×2 · Python ×2 · Shell ×1
@@ -39,4 +39,4 @@ Browser frontend for the IsaacNet proxy.
 - Runs the DoH + CONNECT browser and GUARANTEES the system proxy is restored
 
 ---
-_Spec generated from the project's own files on 2026-09-28 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._
+_Spec generated from the project's own files on 2026-10-22 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._

@@ -1,0 +1,929 @@
+body {
+    margin: 0;
+}
+
+body, div, span, p, a, table, tr, td, input, select, option, h1, h2, h3, h4, h5, h6 {
+    font-family: Times New Roman, Arial, Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.honor-style {
+    font-size: 12px;
+}
+
+.Header {
+    width: 100%;
+    background-repeat: repeat-x;
+    background-image: url(https://web.archive.org/web/20260101im_/http://korean-books.com.kp/assets/images/header.png);
+}
+
+.HeaderFrame {
+    overflow: auto;
+}
+
+.HeaderFrame {
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.copyright {
+    line-height: 4px;
+}
+
+.last {
+    font-family: Times New Roman, Arial, Helvetica, sans-serif;
+}
+
+#NewBooks {
+    display: contents;
+}
+
+@media (max-width: 1000px) {
+    .HeaderFrame {
+        width: 100%;
+    }
+}
+
+#Logo {
+    width: 412px;
+    height: 113px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+#koreanbooks {
+    margin: 0 auto;
+    text-align: center;
+    color: #9a9355;
+    margin-left: 150px;
+    margin-top: -10px;
+}
+
+.LogoActive {
+    background: transparent url(https://web.archive.org/web/20260101im_/http://korean-books.com.kp/assets/images/title-ko.png) no-repeat;
+}
+
+#HfGlobalNavigationBar {
+    clear: both;
+    height: 30px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.HfgnActive {
+    float: left;
+    color: #595857;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 7px;
+    cursor: pointer;
+}
+
+.HfgnSelect {
+    float: left;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 7px;
+    cursor: pointer;
+}
+
+.HfgnSelect a {
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 7px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.HfgnActive a {
+    color: #595857;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.HfgnSplitter {
+    float: left;
+    width: 14px;
+    height: 17px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 7px;
+}
+
+#HfSearchFrame {
+    width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#HfSearchBox {
+    width: 400px;
+    height: 25px;
+    border: 1px solid #93938e;
+    margin-top: 5px;
+    margin-left: 0px;
+    font-size: 13px;
+    /* font-weight: bold; */
+    padding: 3px;
+    background-position: right center;
+    background-image: url(https://web.archive.org/web/20260101im_/http://korean-books.com.kp/assets/images/search-icon.png);
+    background-repeat: no-repeat;
+}
+
+.Hftd {
+    width: 100%;
+    height: auto;
+}
+
+.FB-Style {
+    display: flex;
+    margin: 0 auto;
+}
+
+#SplitBar1 {
+    position: relative;
+    top: -29px;
+    z-index: -1;
+    clear: both;
+    width: 100%;
+    height: 24px;
+    background-color: #efddb6;
+    background-repeat: repeat-x;
+    background-position: 0px center;
+    background-image: url(https://web.archive.org/web/20260101im_/http://korean-books.com.kp/assets/images/domain-bar.gif);
+}
+
+.PrimaryLayer {
+    clear: both;
+    /* width: 1000px; */
+    margin: 0 auto;
+    padding-top: 12px;
+    display: flex;
+}
+
+.PlWorkFrame {
+    float: left;
+    /* width: 490px; */
+    /* height: 350px; */
+    text-align: -webkit-center;
+}
+
+#PlwfItem1 {
+    background-color: #fffbcc;
+    background-image: url(https://web.archive.org/web/20260101im_/http://korean-books.com.kp/assets/images/work1-icon.png);
+}
+
+#PlwfItem2 {
+    background-color: #e4f8bf;
+    background-image: url(https://web.archive.org/web/20260101im_/http://korean-books.com.kp/assets/images/work2-icon.png);
+}
+
+#PlwfItem3 {
+    background-color: #ffd2d2;
+    background-image: url(https://web.archive.org/web/20260101im_/http://korean-books.com.kp/assets/images/work3-icon.png);
+}
+
+.PlwfActive {
+    clear: both;
+    width: 330px;
+    min-height: 96px;
+    margin-top: 18px;
+    background-repeat: no-repeat;
+    background-position: 15px 10px;
+}
+
+.PlwfActive table			{ width:250px; height:96px; }
+.PlwfActive p				{ margin-top:5px; margin-bottom:0px; }
+.PlwfActive td				{ vertical-align:middle; }
+
+#PlwfItem1Frame			{ margin-left:80px; margin-right:10px; text-align:center; }
+#PlwfItem1Frame h6			{ color:#6e5536; font-weight:bold; font-size:11px; margin: 10px; }
+#PlwfItem1Frame a:link		{ color:#4d381e; text-decoration:none; }
+#PlwfItem1Frame a:active	{ color:#4d381e; text-decoration:none; }
+#PlwfItem1Frame a:visited	{ color:#4d381e; text-decoration:none; }
+#PlwfItem1Frame a:hover	{ color:#9d4e5f; text-decoration:underline; }
+#PlwfItem2Frame			{ margin-left:80px; margin-right:10px; text-align:center; }
+#PlwfItem2Frame h6			{ color:#4c6a3f; font-weight:bold; font-size:11px; margin: 10px; }
+#PlwfItem2Frame a:link		{ color:#4c6a3f; text-decoration:none; }
+#PlwfItem2Frame a:active	{ color:#4c6a3f; text-decoration:none; }
+#PlwfItem2Frame a:visited	{ color:#4c6a3f; text-decoration:none; }
+#PlwfItem2Frame a:hover	{ color:#9d4e5f; text-decoration:underline; }
+#PlwfItem3Frame			{ margin-left:80px; margin-right:10px; text-align:center; }
+#PlwfItem3Frame h6			{ color:#39615e; font-weight:bold; font-size:11px; margin: 0px; }
+#PlwfItem3Frame a:link		{ color:#39615e; text-decoration:none; }
+#PlwfItem3Frame a:active	{ color:#39615e; text-decoration:none; }
+#PlwfItem3Frame a:visited	{ color:#39615e; text-decoration:none; }
+#PlwfItem3Frame a:hover	{ color:#9d4e5f; text-decoration:underline; }
+
+#PlNewBookFrame1 {
+    float: left;
+    background-color: #fffef3;
+    border: 1px solid #ecd689;
+    /* background-position: center bottom; */
+    text-align: center;
+}
+#PlBookFrame1 {
+    float: left;
+    background-color: #fffef3;
+    border: 1px solid #ecd689;
+    /* background-position: center bottom; */
+    text-align: center;
+}
+
+#PlNewBookFrame2 {
+    float: left;
+    background-color: #fffef3;
+    border: 1px solid #ecd689;
+    /* background-position: center bottom; */
+    text-align: center;
+}
+
+#PlBookFrame2 {
+    float: left;
+    background-color: #fffef3;
+    border: 1px solid #ecd689;
+    /* background-position: center bottom; */
+    text-align: center;
+}
+
+#PlNewBookFrame1 h6 {
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+}
+
+#PlBookFrame1 h6 {
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+}
+
+#PlNewBookFrame1 a {
+    color: black;
+    text-decoration: none;
+}
+
+#PlBookFrame1 a {
+    color: black;
+    text-decoration: none;
+}
+
+#PlNewBookFrame1 h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#PlBookFrame1 h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#PlNewBookFrame1 h5 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#PlBookFrame1 h5 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#PlNewBookFrame2 h6 {
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+}
+
+#PlBookFrame2 h6 {
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+}
+
+#PlNewBookFrame2 a {
+    color: black;
+    text-decoration: none;
+}
+
+#PlBookFrame2 a {
+    color: black;
+    text-decoration: none;
+}
+
+#PlNewBookFrame2 h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#PlBookFrame2 h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#PlNewBookFrame2 h5 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#PlBookFrame2 h5 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#PlFashionBookFrame {
+    float: left;
+    background-color: #fffef3;
+    border: 1px solid #ecd689;
+    background-position: center bottom;
+}
+
+.PlnbStyle {
+    padding-top: 20px;
+    width: 220px;
+    height: 300px;
+    margin-left: 10px;
+    margin-top: 20px;
+    background-repeat: no-repeat;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.TdStyle {
+    width: 120px;
+    height: 120px;
+    text-align: center;
+}
+
+.PlnbStyle table tbody tr td {
+    width: 120px;
+    height: 120px;
+    text-align: center;
+}
+
+.PlnbStyle table tbody tr td img {
+    cursor: pointer;
+}
+
+.PlnbStyle p img {
+    cursor: pointer;
+}
+
+.PlfbStyle {
+    padding-top: 20px;
+    width: 120px;
+    height: 300px;
+    margin-left: 10px;
+    margin-top: 20px;
+    background-repeat: no-repeat;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.SecondaryLayer {
+    clear: both;
+    /* width: 1000px; */
+    margin: 0 auto;
+    padding-top: 12px;
+    padding-bottom: 24px;
+    overflow: auto;
+}
+
+#SlMemoirsFrame {
+    float: left;
+    width: 330px;
+    height: 99px;
+    /* cursor: pointer; */
+}
+
+#SlContactFrame {
+    float: left;
+    width: 493px;
+    height: 99px;
+    background-repeat: no-repeat;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#SplitBar2 {
+    /* position: relative;
+    top: -29px; */
+    z-index: -1;
+    clear: both;
+    width: 100%;
+    height: 24px;
+    background-color: #f0f0f0;
+    background-repeat: repeat-x;
+    background-position: 0px center;
+    background-image: url(https://web.archive.org/web/20260101im_/http://korean-books.com.kp/assets/images/domain-bar.gif);
+}
+
+.MainFrame {
+    display: flex;
+    justify-content: center;
+}
+
+.LeftLayer {
+    /* margin-left: 150px; */
+}
+
+.RightLayer {
+    margin-top: 32px;
+    /* margin-left: 3rem; */
+}
+
+.RightLayer h4 {
+    margin-top: 0;
+}
+
+.RlActive {
+    width: 185px;
+    height: 150px;
+    /* border: 1px dotted; */
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.RlActive table tbody tr td img {
+    cursor: pointer;
+}
+
+.SubFrame {
+    display: flex;
+    justify-content: center;
+}
+
+.FashionBook {
+    display: flex;
+    /* margin-left: 150px; */
+}
+
+.FashionBook h4 {
+    text-align: center;
+}
+
+.FbActive {
+    width: 90px;
+    height: 110px;
+    /* border: 1px dotted; */
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+.FbActive table {
+    margin: 0 auto;
+}
+
+.FbActive table tbody tr td img {
+    cursor: pointer;
+}
+
+.FashionSite {
+    display: flex;
+    /* margin-left: 170px; */
+    margin-top: 100px;
+}
+
+@media (min-width:1600px){
+    .LeftLayer {
+        /* margin-left: 400px; */
+    }
+    .FashionBook {
+        display: flex;
+        /* margin-left: 400px; */
+    }
+    .FashionSite {
+        display: flex;
+        /* margin-left: 420px; */
+        margin-top: 100px;
+    }
+    .Language {
+        right: 450px !important;
+    }
+}
+
+@media (max-width:1250px) {
+    .LeftLayer {
+        /* margin-left: 50px; */
+    }
+    .FashionBook {
+        display: flex;
+        /* margin-left: 50px; */
+    }
+    .FashionSite {
+        display: flex;
+        /* margin-left: 70px; */
+        margin-top: 100px;
+    }
+}
+
+@media (max-width:1140px) {
+    .xGalleryItemFrame {
+        width: 50% !important;
+    }
+    .PlwfActive table {
+        width: 350px;
+        height: 96px;
+    }
+    .PlWorkFrame {
+        width: 100%;
+        float: initial;
+    }
+    .PlwfActive {
+        /* margin-left: 170px; */
+        width: 495px;
+    }
+    #PlwfItem1Frame {
+        margin-left: 100px;
+    }
+    #PlwfItem2Frame {
+        margin-left: 100px;
+    }
+    #PlwfItem3Frame {
+        margin-left: 100px;
+    }
+    #PlNewBookFrame1 {
+        /* margin-left: 170px; */
+    }
+    #PlBookFrame1 {
+        /* margin-left: 170px; */
+    }
+    #SlMemoirsFrame {
+        /* margin-left: 170px; */
+        width: 495px;
+        height: 148.5px;
+        margin-left: 10px;
+    }
+    #SlContactFrame {
+        margin-top: 10px;
+        /* margin-left: 170px; */
+        width: 495px;
+        height: 123.5px;
+        
+    }
+    .FashionBook {
+        display: flex;
+    }
+    .FashionSite {
+        display: flex;
+        margin-top: 100px;
+        margin-bottom: 20px;
+    }
+    #computer {
+        width: 0px !important;
+    }
+    .RightLayer {
+        display: none;
+    }
+    .HfgnSplitter {
+        width: 1px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .PrimaryLayer {
+        display: block;
+    }
+}
+
+@media (max-width:800px) {
+    .xGalleryItemFrame {
+        width: 50% !important;
+    }
+    #HfGlobalNavigationBar {
+        display: none;
+    }
+    .dropdown {
+        display: block !important;
+    }
+    .PlwfActive table {
+        width: 350px;
+        height: 96px;
+    }
+    .PlwfActive {
+        width: 495px;
+    }
+    #PlwfItem1Frame {
+        margin-left: 100px;
+    }
+    #PlwfItem2Frame {
+        margin-left: 100px;
+    }
+    #PlwfItem3Frame {
+        margin-left: 100px;
+    }
+    #PlNewBookFrame1 {
+    }
+    #PlBookFrame1 {
+    }
+    #SlMemoirsFrame {
+        width: 495px;
+        height: 148.5px;
+    }
+    #SlContactFrame {
+        margin-top: 10px;
+        width: 495px;
+        height: 123.5px;
+    }
+    .FashionBook {
+        display: flex;
+    }
+    .FashionSite {
+        display: flex;
+        margin-top: 100px;
+        margin-bottom: 20px;
+    }
+    #computer {
+        width: 0px !important;
+    }
+    .RightLayer {
+        display: none;
+    }
+    .HfgnSplitter {
+        width: 1px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .AdvertLayer {
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width:650px) {
+    .xGalleryItemFrame {
+        padding-left: 20px;
+    }
+    #HfSearchBox {
+        width: 95%;
+    }
+    .xGalleryItemFrame {
+        width: 40%;
+    }
+    #HfSearchFrame {
+        width: 100%;
+    }
+    .PlwfActive {
+        margin-left: 0;
+    }
+    #PlBookFrame1 {
+        margin-left: 2px;
+    }
+    #PlNewBookFrame1 {
+        margin-left: 2px;
+    }
+    .PlwfActive {
+        width: 100%;
+        height: auto;
+    }
+    .PlWorkFrame {
+        width: 100%;
+    }
+    .PlnbStyle {
+        width: 49%;
+        padding: 0;
+        margin: 0 auto;
+    }
+    #SlMemoirsFrame {
+        margin-left: 0;
+        width: 100%;
+        height: auto;
+    }
+    #SlContactFrame {
+        margin-left: 0;
+        width: 100%;
+        height: auto;
+    }
+    .FashionBook {
+        margin-left: 0;
+    }
+    .LeftLayer {
+        margin-left: 0;
+    }
+    .FashionSite {
+        margin-left: 20px;
+    }
+    #computer {
+        margin-left: 0;
+    }
+    .AdvertLayer {
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+.FsActive {
+    width: 125px;
+    height: 42px;
+}
+
+.FsActive img {
+    cursor: pointer;
+}
+
+.ComLayer {
+    margin-top: -30px;
+}
+
+#computer {
+    width: 415.5px;
+}
+
+.FooterFrame {
+    clear: both;
+    width: 100%;
+    background-color: #36393c;
+}
+
+#SplitBar3 {
+
+    z-index: -1;
+    clear: both;
+    width: 100%;
+    height: 24px;
+    background-repeat: repeat-x;
+    background-position: 0px center;
+    background-image: url(https://web.archive.org/web/20260101im_/http://korean-books.com.kp/assets/images/domain-bar.gif);
+}
+
+#FfCopyright {
+    clear: both;
+    color: white;
+    line-height: 150%;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.xGalleryFrame {
+    width: 480px;
+    overflow: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#MfGallery {
+    margin: 0 auto;
+}
+
+#MfGallery table {
+    float: left;
+    margin-left: 10px;
+}
+
+#MfNavFrame {
+    clear: both;
+    background-color: #8cc63f;
+    width: 100%;
+    overflow: auto;
+}
+
+.MfniActive {
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+.MfniSelected {
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    border: 1px solid;
+}
+
+.xGalleryFrame				{ width:480px; overflow:auto; border:1px dotted #808080;
+    padding-top:10px; padding-bottom:10px; }
+#MfGallery h2				{ width:52px; height:43px; background-repeat:no-repeat; color:white;
+     font-size:26px; font-family:Arial, Helvetica, sans-serif;
+     text-align:center; padding-top:9px; float:right; }
+
+#MfGallery a:link			{ color:#000000; text-decoration:none; }
+#MfGallery a:active		{ color:#000000; text-decoration:none; }
+#MfGallery a:visited		{ color:#000000; text-decoration:none; }
+#MfGallery a:hover			{ color:#686639; text-decoration:underline; } 
+#MfGallery h3				{ text-align:left; margin:0; }
+#MfGallery label 			{ background-color:#b8e6fd; padding-left:3px; padding-right:3px;
+    padding-top:3px; padding-bottom:2px; }
+#MfGallery img				{ cursor:pointer; }
+#MfGallery td				{ text-align:center; }
+#MfGallery h4				{ text-align:left; color:#703e60; float:left; font-size:11px; margin: 0; }
+#MfGallery h5				{ text-align:left; color:#737373; font-size:11px; margin: 0; }
+#MfGallery h1				{ text-align:left; color:#698280; clear:both; font-size:11px; margin: 0; }
+#MfGallery p				{ clear:both; text-align:left; margin-top:10px; margin-bottom:5px; }
+#MfGallery table			{ float:left; margin-left:10px; }
+.xGalleryItemFrame			{ float:left; width: 60%; }
+#MfGallery h6				{ color:#989665; font-weight:bold; text-align:left; font-size:12px; margin: 0; margin-top: 10px; }
+.rating-line				{ margin-top:3px; margin-bottom:0px; }
+
+.pagenation {
+    clear: both;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    padding-left: 60px;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.pagenation input {
+    width: 30px;
+    border-radius: 0;
+}
+
+.pagenation img {
+    cursor: pointer;
+    margin-bottom: -3px;
+}
+
+.Mfpn-visit {
+    cursor: pointer;
+    float: left;
+    width: 24px;
+    height: 21px;
+    margin-left: 3px;
+    text-align: center;
+    background-color: #9ca174;
+    color: white;
+    padding-top: 3px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.Language {
+    background-color: transparent;
+    border: 0;
+    font-weight: bold;
+    position: relative;
+    float: right;
+    right: 160px;
+}
+
+#ListTableFrame {
+    clear: both;
+    width: 100%;
+}
+
+#ListTableFrame table {
+    clear: both;
+    width: 1000px;
+    margin: 0 auto;
+    border-spacing: 2px;
+}
+
+#ListTableFrame td {
+    background-color: #e8f6f8;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #344645;
+}
+
+#ListTableFrame a:visited {
+    color: #344645;
+    text-decoration: none;
+}
+
+#ListTableFrame a:link {
+    color: #344645;
+    text-decoration: none;
+}
+
+#ListFrame {
+    width: 100%;
+}
+
+.dropdown  { 
+    width: 25%;
+    margin-top: 24px;
+    margin-left: 70%;
+    display: none;
+}
+.dropdown-menu {
+    padding-left: 0;
+    background-color: white;
+    border: 1px solid;
+    position: absolute;
+}
+
+.dropdown-menu li {
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+}
+
+.dropdown-menu li a {
+    text-decoration: none;
+    color: black;
+}

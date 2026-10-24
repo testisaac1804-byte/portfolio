@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Korean Film</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <meta name="keyword" content="Korean Film Art, Photo, Video, Film Festival">
+    <meta name="description" content="Korean Film-History">
+    <meta name="robots" content="ALL">
+    <meta name="googole" content="notranslate">
+    <meta name="author" content="Korea Film Export & Import Corporation">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="754e3320a50cee6a8f63852670f716d5">
+
+    <link href="/assets/images/favicon.png" rel="icon">
+
+    <!-- PLUGINS -->
+    <link href="/assets/plugins/polo/css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="/assets/plugins/polo/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- end: PLUGINS -->
+    <link href="/assets/css/custom.css" rel="stylesheet" type="text/css">
+
+    <link href="/assets/css/pages/common.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/responsive.css" rel="stylesheet" type="text/css">
+
+    <!--Plugins-->
+    <script src="/assets/plugins/polo/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/assets/plugins/polo/js/plugins.min.js" type="text/javascript"></script>
+    <script src="/assets/plugins/polo/js/functions.js" type="text/javascript"></script>
+
+    <link href="/assets/plugins/toastr/toastr.min.css" rel="stylesheet" type="text/css">
+    <script src="/assets/plugins/toastr/toastr.min.js" type="text/javascript"></script>
+
+    <script src="/assets/plugins/waypoints/jquery.waypoints.min.js" type="text/javascript"></script>
+
+    <script src="/assets/js/common.js"></script>
+    <script src="/assets/js/utils.js"></script>
+
+    <style>
+        body *{
+          font-family: sans-serif        }
+
+        @media(max-width:479px){
+            .site-address{
+                display: none;
+            }
+            #mark_img{
+                height: 90%;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <input type="hidden" id="base_url" value="/">
+    <input type="hidden" id="is_first_page" value="0">
+    <!-- Body Inner -->
+    <div class="body-inner">
+        <!-- Header -->
+        <header id="header" class="header-always-fixed">
+            <div class="header-inner ">
+                <!--banner-->
+                <div class="banner">
+                    <a class="go-home" href="/en/index">
+                        <img id="mark_img" src="/assets/images/top_mark.png" alt="Korean Film">
+                    </a>
+                    <img class="banner-text" src="/assets/images/top_text.png">
+                    <a class="site-address self-responsive" href="../index.html">www.korfilm.com.kp</a>
+
+                    <!--Header Extras-->
+                    <div class="header-extras">
+                        <ul>
+                            <li>
+                                <div class="p-dropdown">
+                                    <a href="javascript:;" class="lang-sel"><i class="icon-globe"></i><span>English</span></a>
+                                    <ul class="p-dropdown-content">
+                                                                                    <li><a class="font-main" href="javascript:changelang('korean')">조선어</a></li>
+                                                                                    <li><a class="font-sans" href="javascript:changelang('english')">English</a></li>
+                                                                                    <li><a class="font-sans" href="javascript:changelang('russian')">Русский язык</a></li>
+                                                                                    <li><a class="font-sans" href="javascript:changelang('chinese')">中文</a></li>
+                                                                            </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div> <!--end: Header Extras-->
+
+                    <!-- Search -->
+                    <div class="header-search">
+                        <div class="search-container">
+                            <form id="frm_search" action="/en/search" method="get">
+                                <input type="hidden" id="query_txt" name="query_txt">
+                                <input type="hidden" id="order_item" name="order_item" value="created">
+                                <input type="hidden" id="order_type" name="order_type" value="desc">
+                                <input type="hidden" name="x_csrf_token" value="754e3320a50cee6a8f63852670f716d5">
+                            </form>
+                            <input type="text" id="search_txt" value="" placeholder="Enter a search word." />
+                            <span id="btn_search" title="Search"><i class="icon-search"></i></span>
+                        </div>
+                    </div> <!-- end: Search -->
+                </div> <!--end: banner-->
+
+                <!--Navigation Resposnive Trigger-->
+                <div id="mainMenu-trigger-bar" class="p-dropdown">
+                    <a href="javascript:;" class="nav-button toggle-bar"><span class="lines"></span></a>
+                    <div class="p-dropdown-content">
+                        <ul class="primary-links">
+                            <li class="primary-item item "><a href="/en/index">Home</a></li>
+                            <li class="primary-item item active-item"><a href="/en/intro">History</a></li>
+                            <li class="primary-item item "><a href="/en/kofilm">Korean Film</a></li>
+                            <li class="primary-item item "><a href="/en/festival">Film Festival</a></li>
+                            <li class="primary-item item "><a href="/en/finishedaction">Exchange of film</a></li>
+                        </ul>
+                    </div>
+                </div> <!--end: Navigation Resposnive Trigger-->
+
+                <!--Navigation-->
+                <div id="mainMenu" class="menu-right">
+                    <nav class="m-r-10">
+                        <ul class="primary-links self-responsive">
+                            <li class="primary-item menu-item ">
+                                <a href="/en/index">Home</a>
+                            </li>
+                            <li class="primary-item menu-item active-menu">
+                                <a href="/en/intro">History</a>
+                            </li>
+                            <li class="primary-item menu-item ">
+                                <a href="/en/kofilm">Korean Film</a>
+                            </li>
+                            <li class="primary-item menu-item ">
+                                <a href="/en/festival">Film Festival</a>
+                            </li>
+                            <li class="primary-item menu-item ">
+                                <a href="/en/finishedaction">Exchange of film</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div> <!--end: Navigation-->
+
+                <!--Dots Menu -->
+                <nav id="dotsMenu">
+                    <ul>
+                        <li class="item-newfilm"><a href="/en/index/active/1"><span>New Film</span><i class="fa fa-video-camera"></i></a></li>
+                        <li class="item-addfilm"><a href="/en/index/active/2"><span>Additional Film</span><i class="fa fa-video-camera"></i></a></li>
+                        <li class="item-photo"><a href="/en/index/active/3"><span>Introduction of Photograph</span><i class="fa fa-camera-retro"></i></a></li>
+                        <!-- <li class="item-karaok"><a href="/en/index/active/4"><span>Film Music</span><i class="fa fa-music"></i></a></li> -->
+                        <li class="item-program"><a href="/en/index/active/5"><span>Presentation</span><i class="fa fa-film"></i></a></li>
+                        <li class="item-news"><a href="javascript:;" class="first-show-news"><span>News</span><i class="fa fa-wifi"></i></a></li>
+                    </ul>
+                </nav>
+                <!--End: Dots Menu -->
+            </div>
+        </header> <!-- end: Header -->
+
+        <!-- Content -->
+        <section id="page-content" class="">
+            <link href="/assets/css/pages/intro.css" rel="stylesheet" type="text/css">
+
+<div class="row intro-body p-t-20">
+	<div class="col-md-3 left-menu-container" id="left-menu-container">
+        <ul id="left-menu" class="left-menu self-responsive">
+            <li class="menu-item "><a href="/en/intro?type=6">Korean Film Art</a></li>
+            <li class="menu-item "><a href="/en/intro?type=1">Korea Film Export & Import Corporation</a></li>
+            <li class="menu-item "><a href="/en/intro?type=2">Book<span class="badge badge-info"> 9 </span><span class="badge new-item"></span></a></li>
+            <li class="menu-item "><a href="/en/intro?type=4">Program<span class="badge badge-info"> 0 </span></a></li>
+            <li class="menu-item active-item"><a href="/en/intro?type=5">Special Photos<span class="badge badge-info"> 62 </span><span class="badge new-item"></span></a></li>
+            <li class="menu-item "><a href="/en/intro?type=7">Base of creation</a></li>
+                    </ul>
+	</div>
+	<div class="col-md-9" id="intro-container">
+                        <div class="sub-container" data-lightbox="gallery">
+                <div class="row">
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1742424207.1089.jpg" class="data-item has_new_icon" data-lightbox="image" alt="On the occasion of the 83rd anniversary of the birth of    the great leader Comrade <nobr><span class='august'>Kim Jong Il</span></nobr>, the Film Week of February 16th celebration was grandly opened in Pyongyang International Cinema House.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1742424207.1089.jpg" alt="On the occasion of the 83rd anniversary of the birth of    the great leader Comrade Kim Jong Il, the Film Week of February 16th celebration was grandly opened in Pyongyang International Cinema House.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> On the occasion of the 83rd anniversary of the birth...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.03.19.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1742422343.2647.jpg" class="data-item has_new_icon" data-lightbox="image" alt="On the occasion of the 83rd anniversary of the birth of    the great leader Comrade <nobr><span class='august'>Kim Jong Il</span></nobr>, the Film Week of February 16th celebration was grandly opened in Pyongyang International Cinema House.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1742422343.2647.jpg" alt="On the occasion of the 83rd anniversary of the birth of    the great leader Comrade Kim Jong Il, the Film Week of February 16th celebration was grandly opened in Pyongyang International Cinema House.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> On the occasion of the 83rd anniversary of the birth...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2025.03.19.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1725903258.3178.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The performance commemorating 55th anniversary that Chairman  <nobr><span class='august'>Kim Jong Il</span></nobr> led the film music artistes’ first presentation of skill (2024)-10">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1725903258.3178.jpg" alt="The performance commemorating 55th anniversary that Chairman  Kim Jong Il led the film music artistes’ first presentation of skill (2024)-10">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The performance commemorating 55th anniversary...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.09.09.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1725903218.7772.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The performance commemorating 55th anniversary that Chairman  <nobr><span class='august'>Kim Jong Il</span></nobr> led the film music artistes’ first presentation of skill (2024)-9">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1725903218.7772.jpg" alt="The performance commemorating 55th anniversary that Chairman  Kim Jong Il led the film music artistes’ first presentation of skill (2024)-9">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The performance commemorating 55th anniversary...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.09.09.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1725903172.1367.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The performance commemorating 55th anniversary that Chairman  <nobr><span class='august'>Kim Jong Il</span></nobr> led the film music artistes’ first presentation of skill (2024)-8">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1725903172.1367.jpg" alt="The performance commemorating 55th anniversary that Chairman  Kim Jong Il led the film music artistes’ first presentation of skill (2024)-8">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The performance commemorating 55th anniversary...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.09.09.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1725903123.5468.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The performance commemorating 55th anniversary that Chairman  <nobr><span class='august'>Kim Jong Il</span></nobr> led the film music artistes’ first presentation of skill (2024)-7">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1725903123.5468.jpg" alt="The performance commemorating 55th anniversary that Chairman  Kim Jong Il led the film music artistes’ first presentation of skill (2024)-7">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The performance commemorating 55th anniversary...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.09.09.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1725903080.1423.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The performance commemorating 55th anniversary that Chairman  <nobr><span class='august'>Kim Jong Il</span></nobr> led the film music artistes’ first presentation of skill (2024)-6">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1725903080.1423.jpg" alt="The performance commemorating 55th anniversary that Chairman  Kim Jong Il led the film music artistes’ first presentation of skill (2024)-6">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The performance commemorating 55th anniversary...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.09.09.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1725902969.1658.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The performance commemorating 55th anniversary that Chairman  <nobr><span class='august'>Kim Jong Il</span></nobr> led the film music artistes’ first presentation of skill (2024)-5">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1725902969.1658.jpg" alt="The performance commemorating 55th anniversary that Chairman  Kim Jong Il led the film music artistes’ first presentation of skill (2024)-5">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The performance commemorating 55th anniversary...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.09.09.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1725902862.6768.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The performance commemorating 55th anniversary that Chairman  <nobr><span class='august'>Kim Jong Il</span></nobr> led the film music artistes’ first presentation of skill (2024)-4">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1725902862.6768.jpg" alt="The performance commemorating 55th anniversary that Chairman  Kim Jong Il led the film music artistes’ first presentation of skill (2024)-4">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The performance commemorating 55th anniversary...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.09.09.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1725902800.8793.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The performance commemorating 55th anniversary that Chairman  <nobr><span class='august'>Kim Jong Il</span></nobr> led the film music artistes’ first presentation of skill (2024)-3">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1725902800.8793.jpg" alt="The performance commemorating 55th anniversary that Chairman  Kim Jong Il led the film music artistes’ first presentation of skill (2024)-3">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The performance commemorating 55th anniversary...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.09.09.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1725902730.9847.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The performance commemorating 55th anniversary that Chairman  <nobr><span class='august'>Kim Jong Il</span></nobr> led the film music artistes’ first presentation of skill (2024)-2">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1725902730.9847.jpg" alt="The performance commemorating 55th anniversary that Chairman  Kim Jong Il led the film music artistes’ first presentation of skill (2024)-2">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The performance commemorating 55th anniversary...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.09.09.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1725902575.1075.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The performance commemorating 55th anniversary that Chairman  <nobr><span class='august'>Kim Jong Il</span></nobr> led the film music artistes’ first presentation of skill (2024)-1">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1725902575.1075.jpg" alt="The performance commemorating 55th anniversary that Chairman  Kim Jong Il led the film music artistes’ first presentation of skill (2024)-1">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The performance commemorating 55th anniversary...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.09.09.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1722533891.1157.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The Sci-Tech Complex newly built on the ridge of the Taedong River">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1722533891.1157.jpg" alt="The Sci-Tech Complex newly built on the ridge of the Taedong River">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The Sci-Tech Complex newly built on the ridge of the...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.08.01.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1722533937.2805.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Ryomyong Street greets bright morning">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1722533937.2805.jpg" alt="Ryomyong Street greets bright morning">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title">Ryomyong Street greets bright morning</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.08.01.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1722533984.405.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Changjon Street seen on the ridge of the Taedong River">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1722533984.405.jpg" alt="Changjon Street seen on the ridge of the Taedong River">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Changjon Street seen on the ridge of the Taedong...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.08.01.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1716920652.3742.jpg" class="data-item has_new_icon" data-lightbox="image" alt="“The Winter of Taedong Gate”Jong Yun Chol, a first-year student of the Photographing Section">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1716920652.3742.jpg" alt="“The Winter of Taedong Gate”Jong Yun Chol, a first-year student of the Photographing Section">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> “The Winter of Taedong Gate”Jong Yun Chol, a...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.05.28.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1716920697.7479.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Extracurricular practical lesson of the students of the TV Broadcasting Faculty">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1716920697.7479.jpg" alt="Extracurricular practical lesson of the students of the TV Broadcasting Faculty">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Extracurricular practical lesson of the students...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.05.28.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1712114838.7908.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Teachers and students of the TV Broadcasting Faculty who are discussing the work before the practical photographing of the TV program “Eternal Epic of Pothong River”">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1712114838.7908.jpg" alt="Teachers and students of the TV Broadcasting Faculty who are discussing the work before the practical photographing of the TV program “Eternal Epic of Pothong River”">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Teachers and students of the TV Broadcasting...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.04.01.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1712114862.2278.jpg" class="data-item has_new_icon" data-lightbox="image" alt="“With the screen taken by the students” Teachers and students of the TV Photographing Section of the TV Broadcasting Faculty">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1712114862.2278.jpg" alt="“With the screen taken by the students” Teachers and students of the TV Photographing Section of the TV Broadcasting Faculty">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> “With the screen taken by the students” Teachers and...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.04.01.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1712114879.1709.jpg" class="data-item has_new_icon" data-lightbox="image" alt="“For a newer educational achievement” Kim Ri Chol, the Dean of the TV Broadcasting Faculty">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1712114879.1709.jpg" alt="“For a newer educational achievement” Kim Ri Chol, the Dean of the TV Broadcasting Faculty">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> “For a newer educational achievement” Kim Ri Chol,...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.04.01.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1707332333.8644.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Among the performance commemorating 50th anniversary that the great leader comrade <nobr><span class='august'>Kim Jong Il</span></nobr> led the film music artistes’ first presentation of skill(June in 2019)">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1707332333.8644.jpg" alt="Among the performance commemorating 50th anniversary that the great leader comrade Kim Jong Il led the film music artistes’ first presentation of skill(June in 2019)">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Among the performance commemorating 50th...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2024.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1699829226.6844.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Teachers of film-shooting department who are intensifying their professional education through practice">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1699829226.6844.jpg" alt="Teachers of film-shooting department who are intensifying their professional education through practice">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Teachers of film-shooting department who are...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.11.12.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1699829296.5171.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Students of makeup art department who are improving their ability through film-making practice">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1699829296.5171.jpg" alt="Students of makeup art department who are improving their ability through film-making practice">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Students of makeup art department who are improving...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.11.12.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1697596525.9905.jpg" class="data-item has_new_icon" data-lightbox="image" alt="《Autumn came to the Ri Myong Su river》">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1697596525.9905.jpg" alt="《Autumn came to the Ri Myong Su river》">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title">《Autumn came to the Ri Myong Su river》</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.10.13.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1697231073.1872.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Members of the DPRK Film Delegation holding an interview with journalists and film workers of different countries in TASS of Russian Federation in October, 2015.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1697231073.1872.jpg" alt="Members of the DPRK Film Delegation holding an interview with journalists and film workers of different countries in TASS of Russian Federation in October, 2015.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Members of the DPRK Film Delegation holding an...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.10.13.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1697231096.7273.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Members of the DPRK Film Delegation discussing the issues of film collaboration and film exchange with film makers in Moscow of Russia in October, 2015.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1697231096.7273.jpg" alt="Members of the DPRK Film Delegation discussing the issues of film collaboration and film exchange with film makers in Moscow of Russia in October, 2015.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Members of the DPRK Film Delegation discussing the...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.10.13.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1697231117.9895.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Members of the DPRK Film Delegation who received a Special Diploma awarded to TV Series “Bullet-Proof Wall”(Parts 14) at the 18th Russian International Detective Film Festival in April, 2016.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1697231117.9895.jpg" alt="Members of the DPRK Film Delegation who received a Special Diploma awarded to TV Series “Bullet-Proof Wall”(Parts 14) at the 18th Russian International Detective Film Festival in April, 2016.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Members of the DPRK Film Delegation who received a...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.10.13.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1697231135.0604.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Members of the DPRK Film Delegation and the Chairman of the Organizing Committee of the Festival attended in the 18th Russian International Detective Film Festival in April, 2016.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1697231135.0604.jpg" alt="Members of the DPRK Film Delegation and the Chairman of the Organizing Committee of the Festival attended in the 18th Russian International Detective Film Festival in April, 2016.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Members of the DPRK Film Delegation and the Chairman...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.10.13.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1697231159.6584.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Members of the DPRK Film Delegation who are interviewing the President of the State University of Cinematic Art of Russia in Moscow in April, 2016.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1697231159.6584.jpg" alt="Members of the DPRK Film Delegation who are interviewing the President of the State University of Cinematic Art of Russia in Moscow in April, 2016.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Members of the DPRK Film Delegation who are...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.10.13.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1697231176.8053.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Members of the DPRK Film Delegation who received a Special Diploma awarded to Korean Feature Film “The Story of Our Home” in the international film festival held in Vladivostok of Russia in September, 2017.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1697231176.8053.jpg" alt="Members of the DPRK Film Delegation who received a Special Diploma awarded to Korean Feature Film “The Story of Our Home” in the international film festival held in Vladivostok of Russia in September, 2017.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Members of the DPRK Film Delegation who received a...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.10.13.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1697231192.443.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Members of the DPRK Film Delegation who received a Special Diploma of retrospective screening awarded to TV Series “Bullet-Proof Wall”(Parts 14) at the 20th Russian International Detective Film Festival in April, 2018.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1697231192.443.jpg" alt="Members of the DPRK Film Delegation who received a Special Diploma of retrospective screening awarded to TV Series “Bullet-Proof Wall”(Parts 14) at the 20th Russian International Detective Film Festival in April, 2018.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Members of the DPRK Film Delegation who received a...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.10.13.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1697231216.6706.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Members of the DPRK Film Delegation who made a speech in the closing ceremony of the 20th Russian International Detective Film Festival in April, 2018.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1697231216.6706.jpg" alt="Members of the DPRK Film Delegation who made a speech in the closing ceremony of the 20th Russian International Detective Film Festival in April, 2018.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Members of the DPRK Film Delegation who made a speech...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.10.13.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1697231273.5431.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Members of the DPRK Film Delegation who were commemorating  the closing ceremony of the festival with film workers who attended in the 20th Russian International Detective Film Festival">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1697231273.5431.jpg" alt="Members of the DPRK Film Delegation who were commemorating  the closing ceremony of the festival with film workers who attended in the 20th Russian International Detective Film Festival">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Members of the DPRK Film Delegation who were...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.10.13.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1697596636.7602.jpg" class="data-item has_new_icon" data-lightbox="image" alt="A film show for the Russian Embassy members in DPRK was held at the Taedongmun Cinema on August 22nd to mark the 78th anniversary of Korean liberation.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1697596636.7602.jpg" alt="A film show for the Russian Embassy members in DPRK was held at the Taedongmun Cinema on August 22nd to mark the 78th anniversary of Korean liberation.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> A film show for the Russian Embassy members in DPRK...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.10.13.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1697596619.45.jpg" class="data-item has_new_icon" data-lightbox="image" alt="A film show for the Russian Embassy members in DPRK was held at the Taedongmun Cinema on August 22nd to mark the 78th anniversary of Korean liberation.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1697596619.45.jpg" alt="A film show for the Russian Embassy members in DPRK was held at the Taedongmun Cinema on August 22nd to mark the 78th anniversary of Korean liberation.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> A film show for the Russian Embassy members in DPRK...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.10.13.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1697596595.3157.jpg" class="data-item has_new_icon" data-lightbox="image" alt="A film show for the Russian Embassy members in DPRK was held at the Taedongmun Cinema on August 22nd to mark the 78th anniversary of Korean liberation.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1697596595.3157.jpg" alt="A film show for the Russian Embassy members in DPRK was held at the Taedongmun Cinema on August 22nd to mark the 78th anniversary of Korean liberation.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> A film show for the Russian Embassy members in DPRK...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.10.13.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1688321827.7761.jpg" class="data-item has_new_icon" data-lightbox="image" alt="A teacher of the dramatic department and the students of the third year of Pyongyang University of Dramatic and Cinematic Arts who are keen on the guidance of the speech interpretation in the revolutionary drama “The Mountain Shrine”, immortal classic mas">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1688321827.7761.jpg" alt="A teacher of the dramatic department and the students of the third year of Pyongyang University of Dramatic and Cinematic Arts who are keen on the guidance of the speech interpretation in the revolutionary drama “The Mountain Shrine”, immortal classic mas">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> A teacher of the dramatic department and the...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.07.02.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1688321884.8945.jpg" class="data-item has_new_icon" data-lightbox="image" alt="A teacher of the dramatic department and the students of the third year of Pyongyang University of Dramatic and Cinematic Arts who are arranging the practical guidance for the creation of the personalities of the characters">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1688321884.8945.jpg" alt="A teacher of the dramatic department and the students of the third year of Pyongyang University of Dramatic and Cinematic Arts who are arranging the practical guidance for the creation of the personalities of the characters">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> A teacher of the dramatic department and the...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.07.02.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1688321972.5966.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The students of the third year of the dramatic section of Pyongyang University of Dramatic and Cinematic Arts who are taking practical training in creating images to sustain the individual characteristics">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1688321972.5966.jpg" alt="The students of the third year of the dramatic section of Pyongyang University of Dramatic and Cinematic Arts who are taking practical training in creating images to sustain the individual characteristics">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The students of the third year of the dramatic...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.07.02.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1688322074.1391.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The students of the third year of the dramatic section who are keen on training in the practice of acting to further emphasize the personality of the character">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1688322074.1391.jpg" alt="The students of the third year of the dramatic section who are keen on training in the practice of acting to further emphasize the personality of the character">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The students of the third year of the dramatic...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.07.02.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1688322126.8132.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The students of the dramatic section who acquire the process of achieving artistic unity between the characters and the actors themselves through imitating the actions of the characters">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1688322126.8132.jpg" alt="The students of the dramatic section who acquire the process of achieving artistic unity between the characters and the actors themselves through imitating the actions of the characters">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The students of the dramatic section who acquire the...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.07.02.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1677105108.192.jpg" class="data-item has_new_icon" data-lightbox="image" alt="A student of the dramatic section of  Pyongyang University of Dramatic and Cinematic Arts who vividly depicts the noble spiritual world of a woman soldier of the Korean People's Army.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1677105108.192.jpg" alt="A student of the dramatic section of  Pyongyang University of Dramatic and Cinematic Arts who vividly depicts the noble spiritual world of a woman soldier of the Korean People's Army.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> A student of the dramatic section of  Pyongyang...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.22.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1677105147.889.jpg" class="data-item has_new_icon" data-lightbox="image" alt="A head of the dramatic department of Pyongyang University of Dramatic and Cinematic Arts describes the rich experience gained by artistes of the preceding generation.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1677105147.889.jpg" alt="A head of the dramatic department of Pyongyang University of Dramatic and Cinematic Arts describes the rich experience gained by artistes of the preceding generation.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> A head of the dramatic department of Pyongyang...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.22.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1677105193.5689.jpg" class="data-item has_new_icon" data-lightbox="image" alt="A student of the dramatic section of Pyongyang University of Dramatic and Cinematic Arts who describes in depth the indomitable spiritual world of a woman soldier of the Korean People's Army during the war.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1677105193.5689.jpg" alt="A student of the dramatic section of Pyongyang University of Dramatic and Cinematic Arts who describes in depth the indomitable spiritual world of a woman soldier of the Korean People's Army during the war.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> A student of the dramatic section of Pyongyang...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.22.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1677105236.5619.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The students of the dramatic section of Pyongyang University of Dramatic and Cinematic Arts who are keen on practical training to experience the spiritual world of fighters.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1677105236.5619.jpg" alt="The students of the dramatic section of Pyongyang University of Dramatic and Cinematic Arts who are keen on practical training to experience the spiritual world of fighters.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The students of the dramatic section of Pyongyang...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.22.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1677105284.8119.jpg" class="data-item has_new_icon" data-lightbox="image" alt="A student of the dramatic section of Pyongyang University of Dramatic and Cinematic Arts who is keen on the training of artistic representation to make the fighter's soul as real.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1677105284.8119.jpg" alt="A student of the dramatic section of Pyongyang University of Dramatic and Cinematic Arts who is keen on the training of artistic representation to make the fighter's soul as real.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> A student of the dramatic section of Pyongyang...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.22.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1649375947.5791.jpg" class="data-item has_new_icon" data-lightbox="image" alt=""Sunflowers", a photographic work of a student in the course of photography which was winned in the national photograph competition">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1649375947.5791.jpg" alt=""Sunflowers", a photographic work of a student in the course of photography which was winned in the national photograph competition">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> "Sunflowers", a photographic work of a student in...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1649375967.1923.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Educational staffs of Pyongyang University of Dramatic and Cinematic Arts who is at the head of the mass sports activities">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1649375967.1923.jpg" alt="Educational staffs of Pyongyang University of Dramatic and Cinematic Arts who is at the head of the mass sports activities">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Educational staffs of Pyongyang University of...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1649375987.1238.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Staffs and students of Pyongyang University of Dramatic and Cinematic Arts won the top prize in the basketball match of the 51st Artistes' Sports Meeting">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1649375987.1238.jpg" alt="Staffs and students of Pyongyang University of Dramatic and Cinematic Arts won the top prize in the basketball match of the 51st Artistes' Sports Meeting">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Staffs and students of Pyongyang University of...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1649375715.0438.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Students of Pyongyang University of Dramatic and Cinematic Arts conducted the practice of making a TV broadcasting program">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1649375715.0438.jpg" alt="Students of Pyongyang University of Dramatic and Cinematic Arts conducted the practice of making a TV broadcasting program">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Students of Pyongyang University of Dramatic and...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1655859545.713.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The students do practical creation work in the area of Mt. Paektu with blizzard spirit of Mt. Paektu">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1655859545.713.jpg" alt="The students do practical creation work in the area of Mt. Paektu with blizzard spirit of Mt. Paektu">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The students do practical creation work in the area...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1655859662.2858.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The students make their way through virgin snow pointing their practical creation place to Mt. Paektu">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1655859662.2858.jpg" alt="The students make their way through virgin snow pointing their practical creation place to Mt. Paektu">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The students make their way through virgin snow...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1655859750.0384.jpg" class="data-item has_new_icon" data-lightbox="image" alt="They march forward Mt. Paektu with faith and decision to succeed to the generation of revolution firmly">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1655859750.0384.jpg" alt="They march forward Mt. Paektu with faith and decision to succeed to the generation of revolution firmly">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> They march forward Mt. Paektu with faith and...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1656560658.7729.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The students of Pyongyang University of Dramatic and Cinematic Arts who are studying the reminiscences">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1656560658.7729.jpg" alt="The students of Pyongyang University of Dramatic and Cinematic Arts who are studying the reminiscences">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The students of Pyongyang University of Dramatic...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1658867240.0837.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The Students of Pyongyang University of Dramatic and Cinematic Arts who do the photographing practice in Songhwa street, the grand monument of people's love">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1658867240.0837.jpg" alt="The Students of Pyongyang University of Dramatic and Cinematic Arts who do the photographing practice in Songhwa street, the grand monument of people's love">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The Students of Pyongyang University of Dramatic...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1658867437.3652.jpg" class="data-item has_new_icon" data-lightbox="image" alt="The Students of Pyongyang Dramatic and Cinematic Arts who apprehend the elementary course of phhotographing, learning each other">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1658867437.3652.jpg" alt="The Students of Pyongyang Dramatic and Cinematic Arts who apprehend the elementary course of phhotographing, learning each other">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> The Students of Pyongyang Dramatic and Cinematic...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1658867585.0025.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Outposts of the underground", a photograph of the student in the photographing section of Pyongyang University of Dramatic and Cinematic Arts which won the prize in the 27th national photograph competition">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1658867585.0025.jpg" alt="Outposts of the underground", a photograph of the student in the photographing section of Pyongyang University of Dramatic and Cinematic Arts which won the prize in the 27th national photograph competition">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Outposts of the underground", a photograph of the...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1658867648.1286.jpg" class="data-item has_new_icon" data-lightbox="image" alt=""A Trip to Pyongyang", a photograph of the student in the photographing section of Pyongyang University of Dramatic and Cinematic Arts which won the prize in the 27th national photograph competition">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1658867648.1286.jpg" alt=""A Trip to Pyongyang", a photograph of the student in the photographing section of Pyongyang University of Dramatic and Cinematic Arts which won the prize in the 27th national photograph competition">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> "A Trip to Pyongyang", a photograph of the student in...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1675733384.7266.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Teachers and students of Pyongyang University of Dramatic and Cinematic Arts are grasping the principles of creating a comprehensive creative work through practical practice in the creation of scenes in newly built Songhwa Street.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1675733384.7266.jpg" alt="Teachers and students of Pyongyang University of Dramatic and Cinematic Arts are grasping the principles of creating a comprehensive creative work through practical practice in the creation of scenes in newly built Songhwa Street.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Teachers and students of Pyongyang University of...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1675733487.3799.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Students in the art of theater make-up faculty of the Pyongyang University of Dramatic and Cinematic Arts are getting the knack of creating beautiful screen faces.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1675733487.3799.jpg" alt="Students in the art of theater make-up faculty of the Pyongyang University of Dramatic and Cinematic Arts are getting the knack of creating beautiful screen faces.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Students in the art of theater make-up faculty of the...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1675733570.5379.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Students of Pyongyang University of Dramatic and Cinematic Arts strive to grasp the principle of portraying film lighting through night-vision photography.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1675733570.5379.jpg" alt="Students of Pyongyang University of Dramatic and Cinematic Arts strive to grasp the principle of portraying film lighting through night-vision photography.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Students of Pyongyang University of Dramatic and...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                            <div class="col-lg-3 col-sm-4 col-6">
+                            <div class="block-container self-responsive animate-box" data-animate-effect="fadeInUp">
+                                <a href="/media/photo/thumb/thumb_english1675733618.0623.jpg" class="data-item has_new_icon" data-lightbox="image" alt="Students of Pyongyang University of Dramatic and Cinematic Arts devote their all heart into getting the knack of principle of basic shooting.">
+                                    <div class="block-img">
+                                        <img src="" data-src="/media/photo/thumb/thumb_english1675733618.0623.jpg" alt="Students of Pyongyang University of Dramatic and Cinematic Arts devote their all heart into getting the knack of principle of basic shooting.">
+                                        <span class="item-overlay">
+                                            <i class="fa fa-camera"></i>
+                                        </span>
+                                    </div>
+                                    <div class="block-desc">
+                                        <p class="item-title"> Students of Pyongyang University of Dramatic and...</p>
+                                        <p class="block-created">
+                                            <i class="fa fa-calendar">&nbsp;2023.02.07.</i>
+                                        </p>
+                                    </div>
+                                                                    </a>
+                            </div>
+                        </div>
+                                    </div>
+            </div>
+            	</div>
+</div>
+        </section> <!-- end: Content -->
+
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="footer-content">
+                <div class="footer-div">
+                    <div class="mark-item">
+                        <img src="/assets/images/mark.png" width=100>
+                        <p class="name">Korea Film Export & Import Corporation</p>
+                    </div>
+                    <div class="sub-info">
+                        <p>Add: Ryonghung-dong No.2, Taesong District, Pyongyang</p>
+                        <p>Tel: 850-2-18111(381-8034)</p>
+                    </div>
+                    <div class="sub-info">
+                        <p>Fax: 850-2-381-2100(ICC-388)</p>
+                        <p>E-mail: korfilm@star-co.net.kp</p>
+                    </div>
+                </div>
+                <div class="footer-bottom text-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>2022 @ Korea Film Export & Import Corporation</p>
+                            <p><a href="http://www.dprkportal.kp" target="_blank"><img src="/assets/images/sites/gwangya.png"></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div> <!-- end: Body Inner -->
+
+    <!-- Modal -->
+    <div id="first-news-modal" class="modal fade news-dialog" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">News</h4>
+                </div>
+                <div class="modal-body">
+                                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="news-modal" class="modal fade news-dialog" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">News</h4>
+                </div>
+                <div class="modal-body">
+                                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="video-modal" class="modal video fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <iframe src="" style="width:100%;height:470px;border:0px"></iframe>
+                    </div>
+                    <div class="text-content text-justify" style="padding-top:15px">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll top -->
+    <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
+
+    <script src="/assets/js/my-waypoint.js"></script>
+    <script type="text/javascript">
+
+        $("div[role='dialog']").on('hide.bs.modal',function(){
+            var ifr = $(this).find('iframe');
+            ifr.attr('src', '');
+        });
+
+        $("div[role='dialog']").on('shown.bs.modal',function(){
+
+        });
+
+        function showVideo($type, $id, $is_content_text)
+        {
+            var $url = '';
+
+            $("#video-modal .text-content").removeClass("hide");
+            if ($is_content_text == '0')
+                $("#video-modal .text-content").addClass("hide");
+
+            if ($type == 'base') {
+                $url = "/en/base/get-info/" + $id;
+            } else if ($type == 'karaok') {
+                $url = "/en/intro/karaok/get-info/" + $id;
+            } else if ($type == 'program') {
+                $url = "/en/intro/program/get-info/" + $id;
+            } else if ($type == 'kofilm') {
+                $url = "/en/kofilm/get-info/" + $id;
+            } else if ($type == 'prize') {
+                $url = "/en/festival/get-info/" + $id;
+            } else if ($type == 'special') {
+                $url = "/en/festival/special/get-info/" + $id;
+            } else if ($type == 'exchange_1') {
+                $url = "/en/finishedaction/exchange-1/get-info/" + $id;
+            } else if ($type == 'exchange_3') {
+                $url = "/en/finishedaction/exchange-3/get-info/" + $id;
+            } else {
+                return;
+            }
+
+            $.ajax({
+                url: $url,
+                type: "get",
+                dataType: "json",
+                success: function(data){
+                    var $no_msg = 'The data does not exist.';
+
+                    $("#video-modal h4.modal-title").html(data.title);
+
+                    if (data.movie == '' || data.movie == null)
+                    {
+                        $("#video-modal iframe").addClass("hide");
+                        $("#video-modal iframe").attr("src", '');
+
+                        toastr.warning($no_msg);
+                    }
+                    else
+                    {
+                        $("#video-modal iframe").removeClass("hide");
+                        $("#video-modal iframe").attr("src", base_url(data.hls));
+
+                        $("#video-modal .text-content").html(data.desc);
+
+                        $("#video-modal").modal("show");
+                    }
+                }
+            });
+        }
+
+        function changelang(lang_val)
+        {
+            $.ajax({
+                url: "/changelang",
+                data: {
+                    lang: lang_val
+                },
+                success: function(data){
+                    document.location.href = data;
+                }
+            });
+        }
+
+        $(function(){
+
+        });
+
+        function IncReadNum(type,id)
+        {
+            $.ajax({
+                url: '/welcome/increadnum',
+                method: 'post',
+                data: {
+                    id: id,
+                    type: type
+                }
+            });
+        }
+
+        function searchData()
+        {
+            var $query_txt = $("#search_txt").val();
+
+            if ($query_txt != '')
+            {
+                $("#query_txt").val($query_txt);
+                $("#frm_search").submit();
+            }
+        }
+
+        $("#search_txt").on("keyup", function(e) {
+            if (e.keyCode === 13) {
+                searchData()
+            }
+        })
+
+        $("#btn_search").on("click", function() {
+            searchData()
+        })
+
+        $(".first-group .item-carousel").on("click", function(){
+            if (!$(this).hasClass("active-item"))
+            {
+                var $obj = $(this).data("target");
+
+                $(".first-group .group-item").removeClass('active-item');
+                $(this).addClass('active-item');
+
+                $(".carousel-container").addClass("hide");
+
+                $($obj + " .carousel-container .ani-box").removeClass("zoomIn");
+                $($obj + " .carousel-container .ani-box").removeClass("animated");
+                $($obj + " .carousel-container").removeClass("hide");
+
+                $($obj + ' .ani-box').each(function(){
+                    var $el_img = $(this).find(".block-img").find("img");
+                    $el_img.prop("src", $el_img.data("src"));
+                });
+
+                $($obj + ' .ani-box').each(function(k){
+                    var el = $(this);
+
+                    setTimeout( function () {
+                        el.parents(".loading").removeClass("loading");
+
+                        el.addClass('zoomIn animated');
+                    },  k * 100, 'easeInOutExpo' );
+                });
+
+                $(window).scrollTop($(".part-1").height());
+            }
+        })
+
+        $(".first-show-news").on("click", function(){
+            var $news_count = '0';
+
+            if (parseInt($news_count) > 0)
+            {
+                $("#news-modal .modal-dialog").css("top", "15%");
+                $("#news-modal").modal("show");
+            }
+            else
+            {
+                toastr.warning('The data does not exist.');
+            }
+        })
+
+        $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+            // Modify options, control originalOptions, store jqXHR, etc
+            var $type = options.type;
+            if ($type.toLocaleUpperCase() === "POST")
+            {
+                if (options.url.indexOf(":20191") < 0  && options.url.indexOf(":20206") < 0 )
+                {
+                    var $token = $("meta[name='csrf-token']").attr('content');
+
+                    if (options.contentType === false) // this is form data
+                    {
+                        options.data.append('x_csrf_token', $token);
+                    }
+                    else // otherwise
+                    {
+                        options.data = options.data + '&x_csrf_token=' + $token;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
+

@@ -12,13 +12,13 @@ Self-contained single-file HTML web app.
 
 ## Where it lives
 - Published copy on the site (working folder isn't on this Mac): `~/Desktop/portfolio-deploy/demos/scam-flow-replica.html`
-- Artefacts on the site: 1 files · 580 lines of text · 36 KB
+- Artefacts on the site: 1 files · 582 lines of text · 36 KB
 
 ## Stack
 - HTML ×1
 
 ## What's in the code
-- `scam-flow-replica.html` — 580 lines (HTML)
+- `scam-flow-replica.html` — 582 lines (HTML)
 
 ## Verified in the page source
 - page title: “326929.pw — 完整诈骗流程复现 | Full Scam Flow Replica”
@@ -27,4 +27,4 @@ Self-contained single-file HTML web app.
 - UI element ids: `agent-cert`, `agent-id-input`, `agent-name`, `agent-org`, `agent-result`, `agent-role`, `doc-id`, `doc-name`, `input-idnum`, `input-name`
 
 ---
-_Spec generated from the project's own files on 2026-09-28 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._
+_Spec generated from the project's own files on 2026-10-22 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._

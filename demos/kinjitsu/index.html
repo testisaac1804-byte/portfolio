@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>「禁日」 — a photo flipbook, page by page</title>
+<meta name="description" content="「禁日」 and 「禁日」 后续: 75 photographed pages in two volumes, read page by page at their original size. Rebuilt from a 2026 AppleScript photo flipbook.">
+<meta name="theme-color" content="#0a0a0c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「禁日」 — a photo flipbook">
+<meta property="og:description" content="75 photographed pages, two volumes, opened one page at a time at their original pixel size.">
+<link rel="canonical" href="https://isaac1804.com/portfolio/demos/kinjitsu/">
+<script src="pages/manifest.js"></script>
+<style>
+:root{
+  --ink:#0a0a0c; --ink2:#131318; --ink3:#1b1b22;
+  --paper:#f7f4ed; --text:#eae7e0; --muted:#9a958c; --dim:#6f6a62;
+  --accent:#c8402c; --accent-soft:rgba(200,64,44,.14);
+  --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.06);
+  --r:14px; --r-sm:10px; --r-pill:999px;
+  --s1:8px; --s2:12px; --s3:16px; --s4:24px; --s5:32px; --s6:48px;
+  --f-ui:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang HK","Noto Sans CJK TC",sans-serif;
+  --f-cjk:"Songti SC","Hiragino Mincho ProN","Noto Serif CJK TC",serif;
+  --dur:420ms; --ease:cubic-bezier(.2,.7,.25,1);
+  --bar:56px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink); color:var(--text); font-family:var(--f-ui);
+  font-size:15px; line-height:1.5; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:var(--text)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ─────────────────────────── COVER ─────────────────────────── */
+.cover{
+  min-height:100dvh; display:grid; place-items:center;
+  padding:var(--s5) var(--s3); position:relative; overflow:hidden;
+  background:
+    radial-gradient(60% 50% at 50% 0%, rgba(200,64,44,.10), transparent 70%),
+    radial-gradient(80% 60% at 50% 110%, rgba(255,255,255,.045), transparent 70%),
+    var(--ink);
+}
+.cover::after{ /* paper grain, no image request */
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:.35;
+  background-image:radial-gradient(rgba(255,255,255,.055) 1px, transparent 1px);
+  background-size:3px 3px;
+}
+.cover-in{position:relative; width:100%; max-width:760px; text-align:center; z-index:1}
+.seal{
+  width:58px; height:58px; margin:0 auto var(--s4); border-radius:8px;
+  background:var(--accent); color:#fff; font-family:var(--f-cjk);
+  font-size:32px; line-height:58px; letter-spacing:0;
+  box-shadow:0 10px 30px rgba(200,64,44,.30), inset 0 0 0 1px rgba(255,255,255,.16);
+}
+h1.title{
+  font-family:var(--f-cjk); font-weight:600; letter-spacing:.06em;
+  font-size:clamp(52px, 13vw, 116px); line-height:1; margin:0 0 var(--s3);
+}
+.kicker{
+  margin:0 auto var(--s3); max-width:46ch; color:var(--muted);
+  font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+}
+.lede{margin:0 auto var(--s5); max-width:52ch; color:var(--text); font-size:16px; opacity:.86}
+.vols{display:grid; grid-template-columns:1fr 1fr; gap:var(--s3); margin:0 0 var(--s4); text-align:left}
+@media (max-width:560px){ .vols{grid-template-columns:1fr} }
+.vol{
+  display:flex; gap:var(--s3); align-items:center; width:100%;
+  padding:var(--s2); border:1px solid var(--line); border-radius:var(--r);
+  background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
+  transition:border-color .18s, transform .18s, background .18s;
+}
+.vol:hover{border-color:rgba(255,255,255,.24); transform:translateY(-2px)}
+.vol img{width:52px; height:74px; object-fit:cover; border-radius:6px; background:var(--ink3); flex:none}
+.vol b{display:block; font-family:var(--f-cjk); font-size:19px; letter-spacing:.04em}
+.vol span{display:block; color:var(--muted); font-size:12.5px; margin-top:2px}
+.cta{
+  display:inline-flex; align-items:center; gap:10px; min-height:52px;
+  padding:0 var(--s5); border-radius:var(--r-pill); background:var(--accent); color:#fff;
+  font-weight:600; font-size:16px; box-shadow:0 12px 34px rgba(200,64,44,.28);
+  transition:transform .18s, box-shadow .18s, filter .18s;
+}
+.cta:hover{transform:translateY(-1px); box-shadow:0 16px 40px rgba(200,64,44,.36); filter:brightness(1.05)}
+.cta.ghost{background:none; box-shadow:none; border:1px solid var(--line); color:var(--text); font-weight:500}
+.cta.ghost:hover{border-color:rgba(255,255,255,.28); transform:none}
+.cover-actions{display:flex; gap:var(--s2); justify-content:center; flex-wrap:wrap; align-items:center}
+.meta{margin:var(--s4) 0 0; color:var(--dim); font-size:12px; letter-spacing:.04em}
+.meta b{color:var(--muted); font-weight:500}
+
+/* ─────────────────────────── READER ─────────────────────────── */
+.reader{position:fixed; inset:0; display:none; background:var(--ink); z-index:10}
+.reader[data-open="1"]{display:grid; grid-template-rows:auto minmax(0,1fr) auto}
+.bar{
+  display:flex; align-items:center; gap:var(--s2); padding:0 var(--s2);
+  min-height:var(--bar);
+  border-bottom:1px solid var(--line2); background:rgba(10,10,12,.92);
+  backdrop-filter:saturate(140%) blur(12px); -webkit-backdrop-filter:saturate(140%) blur(12px);
+  min-width:0;
+}
+.bar .t{font-family:var(--f-cjk); font-size:16px; letter-spacing:.08em; white-space:nowrap}
+.iconbtn{
+  display:inline-flex; align-items:center; justify-content:center; gap:6px;
+  min-width:44px; height:36px; padding:0 10px; border-radius:9px;
+  color:var(--muted); font-size:13px; white-space:nowrap;
+  transition:background .15s, color .15s;
+}
+.iconbtn:hover{background:rgba(255,255,255,.07); color:var(--text)}
+.iconbtn[aria-pressed="true"]{background:var(--accent-soft); color:#f2b3a8}
+.bar .grow{flex:1 1 auto; min-width:0}
+.tabs{display:flex; gap:4px; padding:3px; border:1px solid var(--line2); border-radius:var(--r-pill)}
+.tabs button{padding:6px 12px; border-radius:var(--r-pill); font-size:12.5px; color:var(--muted); white-space:nowrap}
+.tabs button[aria-selected="true"]{background:rgba(255,255,255,.10); color:var(--text)}
+.count{font-variant-numeric:tabular-nums; color:var(--muted); font-size:13px; white-space:nowrap}
+.count b{color:var(--text); font-weight:600}
+@media (max-width:720px){
+  .bar .t{display:none}
+  .iconbtn .lbl{display:none}
+  .tabs button{padding:6px 9px; font-size:12px}
+}
+/* phones: the bar wraps onto two rows instead of scrolling sideways */
+@media (max-width:560px){
+  .bar{flex-wrap:wrap; padding:8px; row-gap:6px; column-gap:6px}
+  .bar .t{display:block; font-size:14px}
+  .bar .grow{display:none}
+  .count{margin-left:auto}
+  .tabs{order:3; flex:1 1 100%; justify-content:center}
+  .tabs button{flex:1 1 auto; text-align:center}
+  .iconbtn{min-width:40px; padding:0 6px}
+}
+
+.stage{
+  position:relative; overflow:hidden; display:grid; place-items:center;
+  padding:var(--s3); min-height:0;
+  background:
+    radial-gradient(70% 60% at 50% 40%, rgba(255,255,255,.05), transparent 70%),
+    var(--ink);
+  touch-action:pan-y;
+}
+.stage.actual{overflow:auto; place-items:start center; padding:var(--s3) 0}
+.book{
+  position:relative; perspective:2400px; perspective-origin:50% 50%;
+  transition:width var(--dur) var(--ease), height var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.stage.actual .book{transition:none}
+.leaf{position:absolute; inset:0; transform-style:preserve-3d; will-change:transform}
+.leaf img{
+  width:100%; height:100%; object-fit:contain; display:block; background:var(--paper);
+  box-shadow:0 24px 70px rgba(0,0,0,.62), 0 0 0 1px rgba(255,255,255,.06);
+  border-radius:2px;
+}
+.leaf.front{transform-origin:left center; z-index:2}
+.leaf.back{z-index:1}
+.leaf.front.turn-next{transform:rotateY(-104deg); transition:transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  box-shadow:-40px 20px 80px rgba(0,0,0,.75)}
+.leaf.front.pre{transform:rotateY(-104deg); transition:none}
+.leaf.front.turn-prev{transform:rotateY(0deg); transition:transform var(--dur) var(--ease)}
+.leaf.front::after{ /* inner-page shading on the turning leaf */
+  content:""; position:absolute; inset:0; border-radius:2px; pointer-events:none;
+  background:linear-gradient(90deg, rgba(0,0,0,.30), rgba(0,0,0,0) 22%, rgba(0,0,0,0) 78%, rgba(0,0,0,.10));
+  opacity:0; transition:opacity var(--dur) var(--ease);
+}
+.leaf.front.turn-next::after,.leaf.front.turn-prev::after,.leaf.front.pre::after{opacity:1}
+.leaf.hide{visibility:hidden}
+
+.edge{
+  position:absolute; top:0; bottom:0; width:min(16%, 118px); z-index:3;
+  display:grid; place-items:center; color:rgba(255,255,255,.0);
+  transition:color .18s, background .18s;
+}
+.edge.prev{left:0} .edge.next{right:0}
+.edge:hover{color:rgba(255,255,255,.62); background:linear-gradient(90deg, rgba(0,0,0,.35), transparent)}
+.edge.next:hover{background:linear-gradient(270deg, rgba(0,0,0,.35), transparent)}
+.edge:disabled{pointer-events:none; opacity:0}
+.edge span{
+  display:grid; place-items:center; width:40px; height:40px; border-radius:50%;
+  background:rgba(0,0,0,.42); border:1px solid rgba(255,255,255,.16); font-size:17px;
+}
+@media (hover:none){ .edge{color:rgba(255,255,255,.42); width:22%} }
+
+.skel{
+  position:absolute; inset:0; display:grid; place-items:center; z-index:4;
+  background:rgba(10,10,12,.55); backdrop-filter:blur(2px); pointer-events:none;
+  opacity:0; transition:opacity .2s;
+}
+.skel[data-on="1"]{opacity:1}
+.skel i{
+  width:34px; height:34px; border-radius:50%; display:block;
+  border:2px solid rgba(255,255,255,.16); border-top-color:var(--accent);
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.err{
+  position:absolute; z-index:5; inset:auto 0 50% 0; margin:0 auto; width:min(420px, 88%);
+  padding:var(--s3); border:1px solid rgba(200,64,44,.45); border-radius:var(--r);
+  background:rgba(24,16,15,.96); text-align:center; display:none;
+}
+.err[data-on="1"]{display:block}
+.err p{margin:0 0 var(--s2); font-size:14px; color:var(--text)}
+.err small{display:block; color:var(--muted); font-size:12px; margin-bottom:var(--s2)}
+.err button{border:1px solid var(--line); border-radius:var(--r-sm); padding:8px 14px; font-size:13px}
+.err button:hover{background:rgba(255,255,255,.08)}
+
+.foot{
+  display:flex; align-items:center; gap:var(--s3); padding:10px var(--s3) max(10px, env(safe-area-inset-bottom));
+  border-top:1px solid var(--line2); background:rgba(10,10,12,.94); min-width:0;
+}
+.progress{
+  flex:1 1 auto; height:20px; display:flex; align-items:center; cursor:pointer; min-width:60px;
+  background:none; border:0; padding:0;
+}
+.progress .track{position:relative; width:100%; height:4px; border-radius:999px; background:rgba(255,255,255,.12); overflow:hidden}
+.progress .fill{position:absolute; inset:0 auto 0 0; width:0%; background:var(--accent); border-radius:999px; transition:width .22s var(--ease)}
+.hint{color:var(--dim); font-size:11.5px; letter-spacing:.03em; white-space:nowrap; margin:0}
+@media (max-width:720px){ .hint{display:none} }
+
+.sheet{
+  position:absolute; left:0; right:0; bottom:0; z-index:6;
+  background:rgba(12,12,15,.97); border-top:1px solid var(--line);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  transform:translateY(102%); transition:transform .26s var(--ease);
+  max-height:46dvh; display:flex; flex-direction:column;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.sheet[data-open="1"]{transform:translateY(0)}
+.sheet header{display:flex; align-items:center; gap:var(--s2); padding:10px var(--s3); border-bottom:1px solid var(--line2)}
+.sheet header b{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); font-weight:600}
+.sheet .strip{display:flex; gap:8px; overflow:auto; padding:var(--s2) var(--s3) var(--s4); scroll-behavior:smooth}
+.sheet .strip button{flex:none; padding:0; border:2px solid transparent; border-radius:6px; line-height:0; background:var(--ink3)}
+.sheet .strip img{width:64px; height:auto; border-radius:4px; display:block; opacity:.72; transition:opacity .15s}
+.sheet .strip button:hover img{opacity:1}
+.sheet .strip button[aria-current="true"]{border-color:var(--accent)}
+.sheet .strip button[aria-current="true"] img{opacity:1}
+.sheet .strip .vsep{flex:none; width:1px; background:var(--line); margin:2px 6px}
+
+/* reduced motion: no 3D turn, just a short cross-fade */
+@media (prefers-reduced-motion:reduce){
+  :root{--dur:1ms}
+  .leaf.front.turn-next,.leaf.front.turn-prev{transition:opacity .12s linear}
+}
+</style>
+</head>
+<body>
+
+<div class="cover" id="cover">
+  <div class="cover-in">
+    <div class="seal" aria-hidden="true">禁</div>
+    <h1 class="title">禁日</h1>
+    <p class="kicker">A photo flipbook · two volumes · <span id="coverTotal">75</span> pages</p>
+    <p class="lede">Photographed page by page in February 2026 and first bundled into an AppleScript app that pushed the files into Preview. This is the same book, rebuilt: one page at a time, every page at its original size.</p>
+    <div class="vols" id="coverVols"></div>
+    <div class="cover-actions">
+      <button class="cta" id="start">Start reading <span aria-hidden="true">→</span></button>
+      <button class="cta ghost" id="resume" hidden>Continue page <span id="resumeN">1</span></button>
+    </div>
+    <p class="meta"><b id="mPages">75</b> pages · <b id="mRanges">2 volumes</b> · <b>378–1204 px</b> wide, untouched</p>
+  </div>
+</div>
+
+<div class="reader" id="reader" data-open="0" role="region" aria-label="Flipbook reader">
+  <header class="bar">
+    <button class="iconbtn" id="toCover" aria-label="Back to cover">←</button>
+    <div class="t">禁日</div>
+    <div class="tabs" id="tabs" role="tablist" aria-label="Volume"></div>
+    <div class="grow"></div>
+    <div class="count"><b id="cur">1</b> / <span id="tot">36</span></div>
+    <button class="iconbtn" id="btnSheet" aria-pressed="false" aria-label="Thumbnails">▦ <span class="lbl">Thumbs</span></button>
+    <button class="iconbtn" id="btnZoom" aria-pressed="false" aria-label="Show at original pixel size">100%</button>
+    <button class="iconbtn" id="btnFull" aria-label="Full screen">⛶ <span class="lbl">Full</span></button>
+  </header>
+
+  <div class="stage" id="stage">
+    <button class="edge prev" id="prev" aria-label="Previous page"><span aria-hidden="true">‹</span></button>
+    <div class="book" id="book">
+      <div class="leaf back"><img id="imgB" alt="" decoding="async"></div>
+      <div class="leaf front"><img id="imgA" alt="" decoding="async"></div>
+    </div>
+    <button class="edge next" id="next" aria-label="Next page"><span aria-hidden="true">›</span></button>
+    <div class="skel" id="skel" data-on="0"><i></i></div>
+    <div class="err" id="err" role="alert">
+      <p>That page didn't load.</p>
+      <small id="errMsg">The image request failed — this can happen offline.</small>
+      <button id="retry">Try again</button>
+    </div>
+  </div>
+
+  <div class="foot">
+    <button class="progress" id="progress" aria-label="Page position" aria-valuemin="1" aria-valuemax="36" aria-valuenow="1" role="slider" tabindex="0">
+      <span class="track"><span class="fill" id="fill"></span></span>
+    </button>
+    <p class="hint">← → turn · F full screen · T thumbnails · 0 original size</p>
+  </div>
+
+  <div class="sheet" id="sheet" data-open="0" aria-hidden="true">
+    <header><b>Pages</b><span style="color:var(--dim);font-size:12px" id="sheetCount"></span></header>
+    <div class="strip" id="strip"></div>
+  </div>
+</div>
+
+<p class="sr" id="live" aria-live="polite" aria-atomic="true"></p>
+
+<script>
+(function(){
+  "use strict";
+  var M = window.KJ;
+  var $ = function(id){ return document.getElementById(id); };
+
+  if(!M || !M.volumes || !M.volumes.length){
+    $("coverTotal").textContent = "0";
+    $("start").disabled = true;
+    $("start").textContent = "Pages missing";
+    return;
+  }
+
+  var REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var DUR = REDUCED ? 1 : 420;
+  var LS = "kinjitsu:progress";
+  var vols = M.volumes;
+  var total = M.total || vols.reduce(function(a,v){ return a + v.pages.length; }, 0);
+
+  var S = { v:0, p:0, busy:false, actual:false, sheet:false, loaded:{} };
+
+  /* ── progress memory ─────────────────────────────────────── */
+  function readLS(){
+    try{ var o = JSON.parse(localStorage.getItem(LS)||"null"); return o && typeof o==="object" ? o : null; }catch(e){ return null; }
+  }
+  function writeLS(){
+    try{ localStorage.setItem(LS, JSON.stringify({v:vols[S.v].id, p:S.p})); }catch(e){}
+  }
+
+  /* ── cover ───────────────────────────────────────────────── */
+  $("coverTotal").textContent = total;
+  $("mPages").textContent = total;
+  $("mRanges").textContent = vols.map(function(v){ return v.pages.length; }).join(" + ") + " pages";
+
+  var cv = $("coverVols");
+  vols.forEach(function(v, i){
+    var b = document.createElement("button");
+    b.className = "vol";
+    b.type = "button";
+    b.innerHTML = '<img alt="" src="pages/' + v.pages[0].t + '" loading="lazy">' +
+                  '<span><b></b><span></span></span>';
+    b.querySelector("b").textContent = v.title;
+    b.querySelector("span span").textContent = v.pages.length + " pages";
+    b.addEventListener("click", function(){ open(i, 0); });
+    cv.appendChild(b);
+  });
+
+  var saved = readLS();
+  if(saved){
+    var vi = vols.findIndex(function(v){ return v.id === saved.v; });
+    if(vi >= 0 && saved.p > 0 && saved.p < vols[vi].pages.length){
+      $("resume").hidden = false;
+      $("resumeN").textContent = saved.p + 1;
+      $("resume").addEventListener("click", function(){ open(vi, saved.p); });
+    }
+  }
+  $("start").addEventListener("click", function(){
+    if(saved){
+      var vi = vols.findIndex(function(v){ return v.id === saved.v; });
+      if(vi >= 0 && saved.p < vols[vi].pages.length) return open(vi, saved.p);
+    }
+    open(0, 0);
+  });
+
+  /* ── tabs ────────────────────────────────────────────────── */
+  var tabs = $("tabs");
+  vols.forEach(function(v, i){
+    var b = document.createElement("button");
+    b.type = "button"; b.role = "tab"; b.textContent = v.title;
+    b.setAttribute("aria-selected", i === 0 ? "true" : "false");
+    b.addEventListener("click", function(){ if(i !== S.v) jump(i, 0, true); });
+    tabs.appendChild(b);
+  });
+
+  /* ── page plumbing ───────────────────────────────────────── */
+  function page(v, p){ return vols[v].pages[p]; }
+  function src(v, p){ return "pages/" + page(v, p).f; }
+
+  function fitBook(){
+    var st = $("stage"), bk = $("book");
+    var pg = page(S.v, S.p);
+    if(S.actual){
+      bk.style.width = pg.w + "px"; bk.style.height = pg.h + "px";
+      return;
+    }
+    var pad = 2 * parseFloat(getComputedStyle(st).paddingLeft || "16");
+    var availW = Math.max(80, st.clientWidth - pad);
+    var availH = Math.max(80, st.clientHeight - pad);
+    var k = Math.min(availW / pg.w, availH / pg.h);
+    bk.style.width = Math.round(pg.w * k) + "px";
+    bk.style.height = Math.round(pg.h * k) + "px";
+  }
+
+  function preload(v, p){
+    if(p < 0 || p >= vols[v].pages.length) return;
+    var s = src(v, p);
+    if(S.loaded[s]) return;
+    var im = new Image();
+    im.onload = function(){ S.loaded[s] = 1; };
+    im.src = s;
+    S.loaded[s] = S.loaded[s] || 0;
+  }
+
+  function neighbours(){
+    preload(S.v, S.p + 1); preload(S.v, S.p + 2); preload(S.v, S.p - 1);
+    if(S.p === 0 && S.v > 0) preload(S.v - 1, vols[S.v-1].pages.length - 1);
+    if(S.p === vols[S.v].pages.length - 1 && S.v < vols.length - 1) preload(S.v + 1, 0);
+  }
+
+  /* ── chrome ──────────────────────────────────────────────── */
+  function chrome(){
+    var v = vols[S.v], n = v.pages.length;
+    $("cur").textContent = S.p + 1;
+    $("tot").textContent = n;
+    var pr = $("progress");
+    pr.setAttribute("aria-valuemax", n);
+    pr.setAttribute("aria-valuenow", S.p + 1);
+    pr.setAttribute("aria-valuetext", "Page " + (S.p + 1) + " of " + n + ", " + v.title);
+    $("fill").style.width = ((S.p + 1) / n * 100) + "%";
+    Array.prototype.forEach.call(tabs.children, function(b, i){
+      b.setAttribute("aria-selected", i === S.v ? "true" : "false");
+    });
+    $("prev").disabled = S.p === 0 && S.v === 0;
+    $("next").disabled = S.p === n - 1 && S.v === vols.length - 1;
+    Array.prototype.forEach.call($("strip").children, function(b){
+      if(!b.dataset || !b.dataset.key) return;
+      var on = b.dataset.key === S.v + ":" + S.p;
+      b.setAttribute("aria-current", on ? "true" : "false");
+      if(on && S.sheet) b.scrollIntoView({block:"nearest", inline:"center"});
+    });
+    $("live").textContent = v.title + ", page " + (S.p + 1) + " of " + n;
+  }
+
+  function hash(){
+    var h = "#" + vols[S.v].id + "p" + (S.p + 1);
+    if(location.hash !== h) history.replaceState(null, "", h);
+  }
+
+  function paint(){ /* set the visible (front) layer without animation */
+    var a = $("imgA");
+    $("skel").dataset.on = S.loaded[src(S.v,S.p)] ? "0" : "1";
+    a.src = src(S.v, S.p);
+    a.alt = vols[S.v].title + " — page " + (S.p + 1) + " of " + vols[S.v].pages.length;
+  }
+
+  $("imgA").addEventListener("load", function(){
+    S.loaded[src(S.v,S.p)] = 1; $("skel").dataset.on = "0"; $("err").dataset.on = "0";
+  });
+  $("imgA").addEventListener("error", function(){
+    $("skel").dataset.on = "0";
+    $("err").dataset.on = "1";
+    $("errMsg").textContent = "pages/" + page(S.v,S.p).f + " failed to load.";
+  });
+  $("retry").addEventListener("click", function(){
+    $("err").dataset.on = "0"; $("skel").dataset.on = "1";
+    var a = $("imgA"); var s = a.src.split("?")[0]; a.src = s + "?r=" + Date.now();
+  });
+
+  /* ── navigation ──────────────────────────────────────────── */
+  function open(v, p){
+    S.v = v; S.p = p;
+    $("cover").style.display = "none";
+    $("reader").dataset.open = "1";
+    fitBook(); paint(); chrome(); hash(); neighbours(); writeLS();
+    document.body.style.overflow = "hidden";
+    $("reader").setAttribute("tabindex", "-1");
+    $("reader").focus({preventScroll:true});
+  }
+
+  function step(dir){
+    if(S.busy) return;
+    var v = S.v, p = S.p + dir;
+    if(p < 0){
+      if(v === 0) return;
+      v -= 1; p = vols[v].pages.length - 1;
+    }else if(p >= vols[v].pages.length){
+      if(v === vols.length - 1) return;
+      v += 1; p = 0;
+    }
+    flip(v, p, dir > 0 ? "next" : "prev");
+  }
+
+  function flip(v, p, how){
+    S.busy = true;
+    var front = document.querySelector(".leaf.front");
+    var back = document.querySelector(".leaf.back");
+    var iA = $("imgA"), iB = $("imgB");
+    var incoming = {
+      src: "pages/" + vols[v].pages[p].f,
+      alt: vols[v].title + " — page " + (p + 1) + " of " + vols[v].pages.length
+    };
+
+    function commit(){
+      front.style.transition = "none";     // reset geometry without animating back to 0deg
+      front.className = "leaf front";
+      back.className = "leaf back";
+      S.v = v; S.p = p;
+      iA.src = incoming.src; iA.alt = incoming.alt;
+      iB.removeAttribute("src"); iB.alt = "";
+      S.loaded[incoming.src] = 1;
+      fitBook(); chrome(); hash(); neighbours(); writeLS();
+      void front.offsetWidth;
+      front.style.transition = "";
+      S.busy = false;
+    }
+
+    if(REDUCED){
+      iB.src = incoming.src; iB.alt = incoming.alt;
+      back.classList.remove("hide");
+      front.style.opacity = "0";
+      setTimeout(function(){ front.style.opacity = ""; commit(); }, 130);
+      return;
+    }
+
+    if(how === "next"){
+      iB.src = incoming.src; iB.alt = incoming.alt;
+      front.classList.add("turn-next");
+      setTimeout(commit, DUR);
+    }else{
+      iB.src = iA.getAttribute("src"); iB.alt = iA.alt;
+      iA.style.visibility = "hidden";
+      front.classList.add("pre");
+      void front.offsetWidth;
+      iA.src = incoming.src; iA.alt = incoming.alt;
+      front.classList.remove("pre");
+      front.classList.add("turn-prev");
+      setTimeout(function(){ iA.style.visibility = ""; commit(); }, DUR);
+    }
+  }
+
+  /* jump across volumes instantly (no page-turn) */
+  function jump(v, p, instant){
+    if(S.busy) return;
+    if(!instant){ return flip(v, p, p > S.p ? "next" : "prev"); }
+    S.busy = true;
+    var front = document.querySelector(".leaf.front");
+    front.style.transition = "opacity .12s linear";
+    front.style.opacity = "0";
+    setTimeout(function(){
+      S.v = v; S.p = p;
+      $("imgB").removeAttribute("src");
+      fitBook(); paint(); chrome(); hash(); neighbours(); writeLS();
+      front.style.opacity = "";
+      front.style.transition = "";
+      S.busy = false;
+    }, 130);
+  }
+
+  $("prev").addEventListener("click", function(){ step(-1); });
+  $("next").addEventListener("click", function(){ step(1); });
+
+  /* progress seek */
+  function seek(clientX){
+    var r = $("progress").getBoundingClientRect();
+    var f = Math.min(1, Math.max(0, (clientX - r.left) / r.width));
+    var n = vols[S.v].pages.length;
+    var p = Math.min(n - 1, Math.max(0, Math.round(f * (n - 1))));
+    if(p !== S.p) jump(S.v, p, false);
+  }
+  $("progress").addEventListener("pointerdown", function(e){ seek(e.clientX); });
+
+  /* ── thumbnails ──────────────────────────────────────────── */
+  (function buildStrip(){
+    var strip = $("strip");
+    vols.forEach(function(v, vi){
+      if(vi > 0){
+        var sep = document.createElement("div");
+        sep.className = "vsep"; strip.appendChild(sep);
+      }
+      v.pages.forEach(function(pg, pi){
+        var b = document.createElement("button");
+        b.type = "button";
+        b.dataset.key = vi + ":" + pi;
+        b.setAttribute("aria-label", v.title + " page " + (pi + 1));
+        b.innerHTML = '<img alt="" loading="lazy" src="pages/' + pg.t + '">';
+        b.addEventListener("click", function(){
+          if(vi === S.v) jump(vi, pi, false); else jump(vi, pi, true);
+          toggleSheet(false);
+        });
+        strip.appendChild(b);
+      });
+    });
+    $("sheetCount").textContent = total + " pages";
+  })();
+
+  function toggleSheet(on){
+    S.sheet = on === undefined ? !S.sheet : on;
+    $("sheet").dataset.open = S.sheet ? "1" : "0";
+    $("sheet").setAttribute("aria-hidden", S.sheet ? "false" : "true");
+    $("btnSheet").setAttribute("aria-pressed", S.sheet ? "true" : "false");
+    if(S.sheet) chrome();
+  }
+  $("btnSheet").addEventListener("click", function(){ toggleSheet(); });
+
+  /* ── tools ───────────────────────────────────────────────── */
+  $("btnZoom").addEventListener("click", function(){
+    S.actual = !S.actual;
+    $("stage").classList.toggle("actual", S.actual);
+    $("btnZoom").setAttribute("aria-pressed", S.actual ? "true" : "false");
+    $("btnZoom").textContent = S.actual ? "Fit" : "100%";
+    fitBook();
+  });
+
+  $("btnFull").addEventListener("click", function(){
+    var d = document;
+    if(!d.fullscreenElement){ (d.documentElement.requestFullscreen || function(){}).call(d.documentElement); }
+    else if(d.exitFullscreen){ d.exitFullscreen(); }
+  });
+
+  $("toCover").addEventListener("click", function(){
+    $("reader").dataset.open = "0";
+    $("cover").style.display = "";
+    document.body.style.overflow = "";
+    history.replaceState(null, "", location.pathname);
+    if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+    $("start").focus();
+  });
+
+  /* ── keyboard ────────────────────────────────────────────── */
+  document.addEventListener("keydown", function(e){
+    if($("reader").dataset.open !== "1") return;
+    var k = e.key;
+    if(k === "ArrowRight" || k === " " || k === "PageDown"){
+      if(k === " " && e.target && e.target.tagName === "BUTTON") return; // let the button take space
+      e.preventDefault(); step(1);
+    }
+    else if(k === "ArrowLeft" || k === "PageUp"){ e.preventDefault(); step(-1); }
+    else if(k === "Home"){ e.preventDefault(); jump(S.v, 0, true); }
+    else if(k === "End"){ e.preventDefault(); jump(S.v, vols[S.v].pages.length - 1, true); }
+    else if(k === "t" || k === "T"){ toggleSheet(); }
+    else if(k === "f" || k === "F"){ $("btnFull").click(); }
+    else if(k === "0"){ $("btnZoom").click(); }
+    else if(k === "Escape"){
+      if(S.sheet) return toggleSheet(false);
+      if(S.actual) return $("btnZoom").click();
+      $("toCover").click();
+    }
+  });
+
+  /* ── swipe ───────────────────────────────────────────────── */
+  (function swipe(){
+    var x0 = null, y0 = null, t0 = 0;
+    var st = $("stage");
+    st.addEventListener("touchstart", function(e){
+      if(e.touches.length !== 1) return;
+      x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; t0 = Date.now();
+    }, {passive:true});
+    st.addEventListener("touchend", function(e){
+      if(x0 === null) return;
+      var t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+      x0 = null;
+      if(Date.now() - t0 > 700) return;
+      if(Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy) * 1.4) step(dx < 0 ? 1 : -1);
+    }, {passive:true});
+  })();
+
+  /* ── resize + deep link ──────────────────────────────────── */
+  var rt;
+  addEventListener("resize", function(){
+    clearTimeout(rt);
+    rt = setTimeout(function(){ if($("reader").dataset.open === "1") fitBook(); }, 120);
+  });
+
+  (function deepLink(){
+    var m = /^#(v\d)p(\d+)$/.exec(location.hash || "");
+    if(!m) return;
+    var vi = vols.findIndex(function(v){ return v.id === m[1]; });
+    var pi = parseInt(m[2], 10) - 1;
+    if(vi >= 0 && pi >= 0 && pi < vols[vi].pages.length) open(vi, pi);
+  })();
+
+  // a pasted #v1p12 while already in the book is a same-document navigation: no reload, so handle it
+  addEventListener("hashchange", function(){
+    var m = /^#(v\d)p(\d+)$/.exec(location.hash || "");
+    if(!m) return;
+    var vi = vols.findIndex(function(v){ return v.id === m[1]; });
+    var pi = parseInt(m[2], 10) - 1;
+    if(vi < 0 || pi < 0 || pi >= vols[vi].pages.length) return;
+    if(vi === S.v && pi === S.p) return;
+    if($("reader").dataset.open === "1") jump(vi, pi, vi !== S.v);
+    else open(vi, pi);
+  });
+
+  document.addEventListener("fullscreenchange", function(){
+    if($("reader").dataset.open === "1") setTimeout(fitBook, 120);
+  });
+})();
+</script>
+</body>
+</html>

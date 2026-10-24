@@ -1,184 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MacAdBlock</title>
-<style>
-:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2128;--text:#e6edf3;--muted:#8b949e;--accent:#22c55e;--accentdim:rgba(34,197,94,.14);--border:#30363d;--red:#f85149}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.win{width:100%;max-width:780px;background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.55)}
-.tb{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#10151c;border-bottom:1px solid var(--border)}
-.dots{display:flex;gap:7px}
-.dot{width:12px;height:12px;border-radius:50%}
-.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
-.tb .t{flex:1;text-align:center;font-size:12.5px;color:var(--muted);letter-spacing:.3px}
-.tb .side{width:44px}
-.body{padding:22px}
-.hd{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
-.hd h1{font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px}
-.logo{width:34px;height:34px;border-radius:9px;background:var(--accentdim);display:flex;align-items:center;justify-content:center;font-size:18px}
-.pill{font-size:11px;font-weight:600;color:var(--muted);background:var(--panel2);border:1px solid var(--border);padding:4px 10px;border-radius:20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-.pill.on{color:var(--accent);border-color:rgba(34,197,94,.4);background:var(--accentdim)}
-.hero{display:flex;align-items:center;justify-content:space-between;gap:20px;background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:18px}
-.hero .left{display:flex;flex-direction:column;gap:7px}
-.label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px}
-.bigcount{font-size:40px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
-.bigcount .u{font-size:15px;color:var(--muted);font-weight:600;margin-left:6px}
-.statusline{font-size:12.5px;color:var(--muted)}
-.statusline b{color:var(--accent);font-weight:600}
-.statusline b.off{color:var(--muted)}
-.sw{position:relative;display:inline-block;width:118px;height:56px;flex-shrink:0}
-.sw input{opacity:0;width:0;height:0}
-.sl{position:absolute;inset:0;background:#21262d;border:2px solid var(--border);border-radius:40px;cursor:pointer;transition:.28s}
-.sl:before{content:"";position:absolute;height:38px;width:38px;left:7px;bottom:7px;background:#e6edf3;border-radius:50%;transition:.28s;box-shadow:0 2px 6px rgba(0,0,0,.4)}
-.sw input:checked + .sl{background:var(--accent);border-color:var(--accent)}
-.sw input:checked + .sl:before{transform:translateX(62px);background:#fff}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
-.stat{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
-.stat .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
-.stat .k{font-size:11px;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.8px}
-.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}
-.card{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:16px;overflow:hidden}
-.card h3{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.card h3 .live{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:blink 1.2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
-.log{max-height:230px;overflow-y:auto;display:flex;flex-direction:column;gap:2px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
-.log .row{display:flex;gap:8px;padding:4px 6px;border-radius:5px;align-items:center}
-.log .row:hover{background:#21262d}
-.log .ts{color:#484f58;flex-shrink:0}
-.log .flag{color:var(--accent);flex-shrink:0;font-weight:700}
-.log .dom{color:#e6edf3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rules{list-style:none;display:flex;flex-direction:column;gap:7px;max-height:230px;overflow-y:auto}
-.rules li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 9px;border-radius:6px;background:#21262d;font-size:12px}
-.rules .cnt{color:var(--muted);font-size:11px;font-family:ui-monospace,Menlo,monospace;flex-shrink:0}
-.rules .state{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
-.rules .state.off{background:#484f58}
-@media(max-width:620px){.grid2{grid-template-columns:1fr}.stats{grid-template-columns:1fr}}
+<!doctype html>
+<html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>MacAdBlock</title><style>
+*{box-sizing:border-box}
+body{font:14px/1.5 system-ui,-apple-system,sans-serif;margin:0;background:#0d1117;color:#c9d1d9}
+header{background:#161b22;padding:12px 20px;border-bottom:1px solid #30363d;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:10}
+h1{margin:0;font-size:17px;white-space:nowrap}h1 span{color:#8b949e;font-weight:400;font-size:13px;margin-left:6px}
+.toggle{position:relative;display:inline-block;width:44px;height:24px;cursor:pointer;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0}
+.slider{position:absolute;inset:0;background:#21262d;border-radius:24px;transition:.25s}
+.slider::before{content:"";position:absolute;height:18px;width:18px;left:3px;bottom:3px;background:#8b949e;border-radius:50%;transition:.25s}
+.toggle input:checked+.slider{background:#238636}
+.toggle input:checked+.slider::before{background:#fff;transform:translateX(20px)}
+.wrap{padding:16px 20px;max-width:1100px;margin:auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px}
+.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px 14px}
+.card .v{font-size:20px;font-weight:700;line-height:1.2}.card .l{color:#8b949e;font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.b{color:#f85149}.a{color:#3fb950}.q{color:#58a6ff}
+table{width:100%;border-collapse:collapse;background:#161b22;border-radius:8px;overflow:hidden;margin-bottom:16px;font-size:13px}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid #21262d}
+th{background:#21262d;color:#8b949e;font-weight:500;text-transform:uppercase;font-size:11px;letter-spacing:.5px}
+tr:hover td{background:#1c2128}
+.tag{display:inline-block;background:#30363d;border-radius:4px;padding:1px 6px;font-size:10px;font-weight:500}
+.tag.blocked{background:#3d1f1f;color:#f85149}.tag.allowed{background:#1a3326;color:#3fb950}
+button{background:#21262d;color:#c9d1d9;border:1px solid #30363d;border-radius:5px;padding:3px 8px;cursor:pointer;font-size:12px}
+button:hover{background:#30363d}button.danger{border-color:#f8514940;color:#f85149}
+input{background:#0d1117;border:1px solid #30363d;color:#c9d1d9;border-radius:5px;padding:5px 8px;font-size:13px}
+input:focus{outline:none;border-color:#58a6ff}
+h2{font-size:13px;color:#8b949e;margin:20px 0 8px;text-transform:uppercase;letter-spacing:.5px}
+.row{display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.mono{font-family:'SF Mono',Menlo,monospace;font-size:12px}
+.empty{color:#484f58;font-style:italic;padding:8px 0}
+.actions{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.actions button{font-size:11px;padding:4px 10px}
+</style><style>
+/* narrow-screen safety for the canned dashboard: keep wide data tables inside
+   their own scroll box so the page itself never scrolls sideways */
+@media (max-width:640px){
+  table{display:block;overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
+  body{padding-bottom:64px}
+}
+@media (max-width:420px){
+  h1{white-space:normal;overflow-wrap:anywhere}
+  body{padding-left:10px;padding-right:10px}
+}
 </style>
-</head>
-<body>
-<div class="win">
-  <div class="tb">
-    <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
-    <div class="t">MacAdBlock — DNS Ad-Blocker Daemon</div>
-    <div class="side"></div>
-  </div>
-  <div class="body">
-    <div class="hd">
-      <h1><span class="logo">🛡️</span> MacAdBlock</h1>
-      <span class="pill on" id="portPill">PORT 8053</span>
-    </div>
+</head><body><div id="canned-note" style="position:fixed;left:0;right:0;bottom:0;z-index:99;font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d1d9;background:#0d1117ee;border-top:1px solid #30363d;padding:7px 14px;text-align:center">CANNED SNAPSHOT — real dashboard HTML, <code>window.fetch</code> stubbed to a recorded response. No daemon, no network. <a href="./macadblock-analysis.html" style="color:#58a6ff">Read the analysis</a> · <a href="../" style="color:#58a6ff">Portfolio</a></div>
 
-    <div class="hero">
-      <div class="left">
-        <div class="label">Blocked requests</div>
-        <div class="bigcount"><span id="counter">0</span><span class="u">blocked</span></div>
-        <div class="statusline" id="statusline">Daemon <b>active</b> · filtering DNS on 127.0.0.1:8053</div>
-      </div>
-      <label class="sw">
-        <input type="checkbox" id="power" checked onchange="A.toggle(this.checked)">
-        <span class="sl"></span>
-      </label>
-    </div>
+<header>
+<label class=toggle><input type=checkbox id=tog onchange=toggle()><span class=slider></span></label>
+<h1>🛡️ MacAdBlock <span id=host></span></h1>
+</header>
+<div class=wrap>
+<div class=cards id=sys></div>
 
-    <div class="stats">
-      <div class="stat"><div class="v" id="stTotal">0</div><div class="k">Total blocked</div></div>
-      <div class="stat"><div class="v" id="stRules">12</div><div class="k">Filter rules</div></div>
-      <div class="stat"><div class="v" id="stUptime">00:00:00</div><div class="k">Uptime</div></div>
-    </div>
-
-    <div class="grid2">
-      <div class="card">
-        <h3><span class="live"></span> Blocked log</h3>
-        <div class="log" id="log"></div>
-      </div>
-      <div class="card">
-        <h3>Filter rules</h3>
-        <ul class="rules" id="rules"></ul>
-      </div>
-    </div>
-  </div>
+<div class=actions>
+<button onclick=reload()>🔄 Reload Blocklist</button>
+<button onclick=resetStats()>📊 Reset Stats</button>
+<button onclick=clearLog()>🗑️ Clear Log</button>
 </div>
+
+<h2>Recent Queries</h2>
+<table id=ql><thead><tr><th>Time</th><th>Domain</th><th>Client</th><th>Action</th></tr></thead><tbody></tbody></table>
+
+<h2>Clients</h2>
+<table id=ct><thead><tr><th>Client</th><th>Blocked</th><th>Allowed</th><th></th></tr></thead><tbody></tbody></table>
+
+<h2>Custom Blocked Domains</h2>
+<div class=row><input id=dom placeholder="ads.example.com" size=28><button onclick=addDom()>+ Block</button></div>
+<table id=cl><tbody></tbody></table>
+
+<h2>Allowlist (never block)</h2>
+<div class=row><input id=alw placeholder="example.com" size=28><button onclick=addAllow()>+ Allow</button></div>
+<table id=alt><tbody></tbody></table>
+</div>
+
+<script>/* CANNED SNAPSHOT — the real dashboard HTML with window.fetch stubbed to a recorded
+   /api/stats response, so the panel renders with no daemon running. Nothing here talks to a network. */
+window.__CANNED__={"running":true,"blocked":31847,"allowed":112904,"num_hashes":143596,"blocklist_size":717980,"clients":[{"ip":"127.0.0.1","blocked":27411,"allowed":96882},{"ip":"192.168.1.42","blocked":3312,"allowed":12088},{"ip":"192.168.1.77","blocked":1124,"allowed":3934}],"custom":["toddleapp.com","roblox.com","web.toddleapp.com"],"allowlist":["h-adashx.ut.taobao.com"],"banned":[],"uptime":9930,"qpm":41,"queries":[{"time":1756000000,"domain":"doubleclick.net","client":"127.0.0.1","action":"blocked"},{"time":1756000001,"domain":"pagead2.googlesyndication.com","client":"127.0.0.1","action":"blocked"},{"time":1756000002,"domain":"www.apple.com","client":"127.0.0.1","action":"allowed"},{"time":1756000003,"domain":"graph.facebook.com","client":"192.168.1.42","action":"blocked"},{"time":1756000004,"domain":"toddleapp.com","client":"127.0.0.1","action":"blocked"},{"time":1756000005,"domain":"api.github.com","client":"127.0.0.1","action":"allowed"},{"time":1756000006,"domain":"h-adashx.ut.taobao.com","client":"192.168.1.42","action":"allowed"},{"time":1756000007,"domain":"ssl.google-analytics.com","client":"192.168.1.77","action":"blocked"},{"time":1756000008,"domain":"fonts.gstatic.com","client":"127.0.0.1","action":"allowed"},{"time":1756000009,"domain":"ads.tiktok.com","client":"192.168.1.42","action":"blocked"},{"time":1756000010,"domain":"roblox.com","client":"127.0.0.1","action":"blocked"},{"time":1756000011,"domain":"store.steampowered.com","client":"192.168.1.77","action":"allowed"}]};
+(function(){const orig=window.fetch;window.fetch=function(u,o){
+  const s=String(u);
+  if(s.indexOf('/api/stats')>=0){return Promise.resolve({ok:true,json:()=>Promise.resolve(window.__CANNED__)});}
+  return Promise.resolve({ok:true,json:()=>Promise.resolve({ok:false,demo:true,error:'canned snapshot - controls are inert'})});
+};})();</script>
 <script>
-var A = {
-  on: true,
-  count: 0,
-  total: 1847293,
-  t0: Date.now(),
-  rules: [
-    "doubleclick.net", "google-analytics.com", "googletagmanager.com",
-    "ads.facebook.com", "tracker.google.com", "stats.wp.com",
-    "pixel.quantserve.com", "amazon-adsystem.com", "scorecardresearch.com",
-    "adservice.google.com", "taboola.com", "outbrain.com"
-  ],
-  pool: [
-    "ads.doubleclick.net", "tracker.google.com", "analytics.facebook.com",
-    "google-analytics.com", "googletagmanager.com", "adservice.google.com",
-    "stats.wp.com", "pixel.quantserve.com", "c.amazon-adsystem.com",
-    "sb.scorecardresearch.com", "cdn.taboola.com", "widgets.outbrain.com",
-    "ad-delivery.net", "pubmatic.com", "rubiconproject.com"
-  ],
-  rows: [],
-  pad: function(n){ return (n < 10 ? "0" : "") + n; },
-  ts: function(){
-    var d = new Date();
-    return A.pad(d.getHours()) + ":" + A.pad(d.getMinutes()) + ":" + A.pad(d.getSeconds());
-  },
-  toggle: function(v){
-    A.on = v;
-    var el = document.getElementById("power");
-    el.checked = v;
-    document.getElementById("statusline").innerHTML =
-      v ? 'Daemon <b>active</b> · filtering DNS on 127.0.0.1:8053' :
-          'Daemon <b class="off">stopped</b> · DNS passthrough enabled';
-    var pill = document.getElementById("portPill");
-    if (v) { pill.className = "pill on"; pill.textContent = "PORT 8053"; }
-    else { pill.className = "pill"; pill.textContent = "OFFLINE"; }
-  },
-  tick: function(){
-    if (A.on && Math.random() < 0.7) {
-      A.count++; A.total++;
-      var d = A.pool[Math.floor(Math.random() * A.pool.length)];
-      A.rows.unshift({t: A.ts(), d: d});
-      if (A.rows.length > 24) A.rows.pop();
-      A.renderLog();
-      document.getElementById("counter").textContent = A.count;
-      document.getElementById("stTotal").textContent = A.total.toLocaleString();
-    }
-    var up = Math.floor((Date.now() - A.t0) / 1000);
-    var h = A.pad(Math.floor(up / 3600));
-    var m = A.pad(Math.floor((up % 3600) / 60));
-    var s = A.pad(up % 60);
-    document.getElementById("stUptime").textContent = h + ":" + m + ":" + s;
-  },
-  renderLog: function(){
-    var html = "";
-    for (var i = 0; i < A.rows.length; i++) {
-      html += '<div class="row"><span class="ts">' + A.rows[i].t + '</span>' +
-              '<span class="flag">✕</span><span class="dom">' + A.rows[i].d + '</span></div>';
-    }
-    document.getElementById("log").innerHTML = html || '<div class="row"><span class="dom" style="color:#484f58">no requests blocked yet…</span></div>';
-  },
-  renderRules: function(){
-    var html = "";
-    for (var i = 0; i < A.rules.length; i++) {
-      html += '<li><span class="state"></span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' +
-              A.rules[i] + '</span><span class="cnt">' +
-              (Math.floor(Math.random() * 9000) + 100).toLocaleString() + '</span></li>';
-    }
-    document.getElementById("rules").innerHTML = html;
-  },
-  init: function(){
-    A.renderRules();
-    A.renderLog();
-    document.getElementById("stRules").textContent = A.rules.length;
-    document.getElementById("stTotal").textContent = A.total.toLocaleString();
-    setInterval(A.tick, 900);
-  }
-};
-A.init();
-</script>
-</body>
-</html>
+async function api(p){let r=await fetch(p);return r.json()}
+function fmt(n){return n.toLocaleString()}
+function fmtTime(t){let d=new Date(t*1000);return d.toLocaleTimeString()}
+function fmtUptime(s){let h=Math.floor(s/3600),m=Math.floor((s%3600)/60);return h+'h '+m+'m'}
+
+async function load(){
+let s=await api('/api/stats');
+tog.checked=s.running;
+host.textContent=(s.running?'ON':'OFF')+' · '+fmt(s.qpm)+' q/m · uptime '+fmtUptime(s.uptime);
+sys.innerHTML=[
+['Blocked',fmt(s.blocked),'b'],['Allowed',fmt(s.allowed),'a'],
+['Blocklist',fmt(s.num_hashes),'q'],['Clients',s.clients.length,''],
+['Size',(s.blocklist_size/1048576).toFixed(2)+' MB','']
+].map(c=>'<div class=card><div class="v '+c[2]+'">'+c[1]+'</div><div class=l>'+c[0]+'</div></div>').join('');
+
+// Query log
+ql.tBodies[0].innerHTML=(s.queries||[]).reverse().map(q=>
+'<tr><td class=mono>'+fmtTime(q.time)+'</td><td class=mono>'+q.domain+'</td><td class=mono>'+q.client+'</td><td><span class="tag '+q.action+'">'+q.action+'</span></td></tr>'
+).join('')||'<tr><td colspan=4 class=empty>no queries yet</td></tr>';
+
+// Clients
+ct.tBodies[0].innerHTML=s.clients.sort((a,b)=>(b.blocked+b.allowed)-(a.blocked+a.allowed)).map(c=>
+'<tr><td class=mono>'+c.ip+(c.banned?' <span class=tag style="background:#3d1f1f;color:#f85149">BANNED</span>':'')+'</td>'+
+'<td class=b>'+fmt(c.blocked)+'</td><td class=a>'+fmt(c.allowed)+'</td>'+
+'<td><button class=danger onclick="api(\'/api/ban?ip='+c.ip+'\').then(load)">'+(c.banned?'Unban':'Ban')+'</button></td></tr>'
+).join('')||'<tr><td colspan=4 class=empty>no clients yet</td></tr>';
+
+// Custom blocked
+cl.tBodies[0].innerHTML=s.custom.map(d=>'<tr><td class=mono>'+d+'</td><td style=text-align:right><button class=danger onclick="api(\'/api/unblock?d='+encodeURIComponent(d)+'\').then(load)">remove</button></td></tr>').join('')||'<tr><td class=empty>none</td></tr>';
+
+// Allowlist
+alt.tBodies[0].innerHTML=(s.allowlist||[]).map(d=>'<tr><td class=mono>'+d+'</td><td style=text-align:right><button class=danger onclick="api(\'/api/disallow?d='+encodeURIComponent(d)+'\').then(load)">remove</button></td></tr>').join('')||'<tr><td class=empty>none</td></tr>';
+}
+
+function toggle(){api('/api/toggle').then(load)}
+function addDom(){let d=dom.value.trim();if(d){api('/api/addblock?d='+encodeURIComponent(d)).then(()=>{dom.value='';load()})}}
+function addAllow(){let d=alw.value.trim();if(d){api('/api/allow?d='+encodeURIComponent(d)).then(()=>{alw.value='';load()})}}
+function reload(){api('/api/reload').then(r=>{if(r.ok)alert('Blocklist reloaded: '+r.num_hashes+' entries')})}
+function resetStats(){if(confirm('Reset all stats?'))api('/api/reset').then(load)}
+function clearLog(){api('/api/clearlog').then(load)}
+load();setInterval(load,2000);
+</script></body></html>

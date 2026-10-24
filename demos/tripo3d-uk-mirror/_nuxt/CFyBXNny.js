@@ -1,0 +1,1 @@
+import{S as s,k as n,U as o,n as r}from"./Vd8lgA-y.js";const i=s(async()=>{let t,a;const e=n();if(!e.user)try{[t,a]=o(()=>e.fetchMe()),await t,a()}catch{return r("/login")}if(e.user?.role!=="admin")return r("/workspace/generate")});export{i as default};

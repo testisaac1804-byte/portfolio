@@ -1,0 +1,270 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+<TITLE></TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="" />
+<meta name="keywords" content="AirKoryo, Pyongyang, DPRK, Korea, airline, Koryo, 平壤, 朝鲜, 航空, 高丽, 고려항공, 평양, 조선, 항공, online flight booking, book flights, online travel booking, online booking" />
+<meta name="robots" content="*" />
+<link rel="icon" href="http://www.airkoryo.com.kp/skin/frontend/default/images/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="http://www.airkoryo.com.kp/skin/frontend/default/images/favicon.ico" type="image/x-icon" />
+
+<!--including general css files -->
+<link rel="stylesheet" type="text/css" href="http://www.airkoryo.com.kp/skin/frontend/default/css/styles.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://www.airkoryo.com.kp/skin/frontend/default/css/dhtmlx/dhtmlxcalendar.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://www.airkoryo.com.kp/skin/frontend/default/css/dhtmlx/skins/dhtmlxcalendar_dhx_skyblue.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://www.airkoryo.com.kp/skin/frontend/default/css/jquery-ui/jquery-ui-1.8.1.custom.css" media="all" />
+
+<!--including additional css files -->
+<link rel="stylesheet" type="text/css" href="http://www.airkoryo.com.kp/skin/frontend/default/css/menu.css" media="all" />
+
+<!--including general js files-->
+<script type="text/javascript" src="http://www.airkoryo.com.kp/js/jquery-the-last.min.js"></script>
+<script type="text/javascript" src="http://www.airkoryo.com.kp/js/jquery-ui-1.8.4.custom.min.js"></script>
+<script type="text/javascript" src="http://www.airkoryo.com.kp/js/jquery/jquery.ui.position.js"></script>
+<script type="text/javascript" src="http://www.airkoryo.com.kp/js/jquery/jquery.ui.autocomplete.js"></script>
+<script type="text/javascript" src="http://www.airkoryo.com.kp/js/jquery/jquery.ui.combo.js"></script>
+<script type="text/javascript" src="http://www.airkoryo.com.kp/js/def_label.js"></script>
+<script type="text/javascript" src="http://www.airkoryo.com.kp/js/search_common_js.js"></script>
+<script type="text/javascript" src="http://www.airkoryo.com.kp/js/common.js"></script>
+<script type="text/javascript" src="http://www.airkoryo.com.kp/js/multilang.js"></script>
+<script type="text/javascript" src="http://www.airkoryo.com.kp/js/login_panel.js"></script>
+<script type="text/javascript" src="http://www.airkoryo.com.kp/js/dhtmlx/dhtmlxcalendar.js"></script>
+
+<!--including additional js files-->
+
+
+<!--[if lt IE 11]>
+<link rel="stylesheet" type="text/css" href="http://www.airkoryo.com.kp/skin/frontend/default/css/styles-ie.css" media="all" />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel="stylesheet" type="text/css" href="http://www.airkoryo.com.kp/skin/frontend/default/css/styles-below-ie7.css" media="all" />
+<![endif]-->
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="http://www.airkoryo.com.kp/skin/frontend/default/css/styles-ie6.css" media="all" />
+<script type="text/javascript" src="http://www.airkoryo.com.kp/js/ie6.js"></script>
+<![endif]-->
+
+<link rel="stylesheet" type="text/css" href="http://www.airkoryo.com.kp/skin/frontend/default/css/styles_en.css" media="all" />
+
+<script>
+    function refreshTopCaptcha() {
+        $('#img_top_captcha').attr('src', $('#img_top_captcha').attr('src'));
+        $('#top_captcha_code').focus();
+    }
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('#top_login_form').submit(function(){
+            $('#btn_top_login').click();
+            return false;
+        });
+
+        $('#top_link_login').click(function(){
+            WaitStart();
+            myajax(
+                "/customer/account/getServerKey",
+                "csrf_airkoryo_name=29f3b663fa81b0f2b1c7bf821252c157",
+                "text",
+                function( res ) {
+                    WaitStop();
+                    $('#server_key').val(res);
+                    $('#lang_list').hide();
+                    $('#login_panel').slideDown(400, function(){
+                        $('#top_login_email').focus();
+                    });
+                }
+            );
+            return false;
+        });
+
+        $('#login_panel input').live('keydown', function(evt){
+            if (evt.keyCode == 13) {
+                $('#btn_top_login').click();
+                return false;
+            }
+        });
+
+        $('#btn_top_login').click(function(){
+
+            if ($('#top_login_form').validRequired() == false)
+                return false;
+
+            $('#top_login_message_container').hide();
+            $.ajax({
+                url: "http://www.airkoryo.com.kp/customer/account/loginajax",
+                type: "POST",
+                dataType: "json",
+                data: $('#top_login_form').serialize(),
+                success: function( res ) {
+                    if (res.is_valid == 0) {
+                        if (res.captcha == 1) {
+                            $('#img_top_captcha').attr('src', "http://www.airkoryo.com.kp/customer/account/genCaptcha");
+                            $('#top_captcha_row').show("fast");
+                        }
+                        $('#top_login_message').html(res.msg);
+                        $('#top_login_message_container').show("fast");
+                    } else {
+                        if (res.redirect == 1)
+                            document.location.href = "http://www.airkoryo.com.kp/booking/order/list";
+                        else
+                        document.location.href = "http://www.airkoryo.com.kp/customer/account";
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+</HEAD>
+<BODY bgcolor="#ffffff">
+<div class="page-container">
+    <div class="page home">
+        <div id="login_panel" class="top-panel">
+        <form id="top_login_form" method="post" action="http://www.airkoryo.com.kp/customer/account/loginajax">
+            <input type="hidden" name="csrf_airkoryo_name" value="29f3b663fa81b0f2b1c7bf821252c157" />
+            <input type="hidden" id="server_key" name="server_key" value=""/>
+
+            <div class="panel-content">
+                <ul class="form-list">
+                    <li>
+                        <label for="top_login_email">Email Address<span class="required">*</span></label>
+                        <div>
+                            <input type="text" name="login_email" id="top_login_email" class="input-text required-entry"/>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="top_login_password">Password<span class="required">*</span></label>
+                        <div>
+                            <input type="password" autocomplete="off" name="login_password" id="top_login_password" class="input-text required-entry"/>
+                        </div>
+                    </li>
+                    <li id="top_captcha_row" class="no-display">
+                        <input type="text" class="input-text w50 required-entry f-left" id="top_captcha_code" name="captcha_code" style="margin-top: 10px;"/>
+                        <iframe id="img_top_captcha" class="f-left"  width="140px" height="50px" frameborder="0"></iframe>
+                        <a class="f-left" style="margin-top: 15px;" href="javascript:refreshTopCaptcha()"><img src="http://www.airkoryo.com.kp/skin/frontend/default/images/reload.gif" title="Refresh image"/></a>
+                        <div class="clear"></div>
+                    </li>
+                    <li>
+                        <ul id="top_login_message_container" class="no-display messages">
+                            <li id="top_login_message" class="error-msg"></li>
+                        </ul>
+                    </li>
+                    <li class="last" style="margin-top: 5px;">
+                        <a class="f-left colorful" href="http://www.airkoryo.com.kp/customer/account/forgotpassword">Forgot your password?</a>
+                        <button id="btn_top_login" type="submit" class="f-right button button-flat"><span><span>Login</span></span></button>
+                        <div class="clear"></div>
+                    </li>
+                </ul>
+            </div>
+            <ul class="panel-border">
+                <li class="panel-tab-l"></li>
+                <li class="panel-tab-m"></li>
+                <li class="panel-tab-r"></li>
+            </ul>
+        </form>
+        </div>
+        <div class="header-container">
+            <a class="logo" href="http://www.airkoryo.com.kp"><img src="http://www.airkoryo.com.kp/skin/frontend/default/images/logo.gif"/></a>
+            <div class="header">
+                <ul class="block-top">
+                    <li class="lang-panel">
+                        <a href="javascript:void(0)" class="btn-switch-lang">English</a>
+                        <ul id="lang_list">
+                                                            <li><a href="http://www.airkoryo.com.kp?__lang=en_US">English</a></li>
+                                                            <li><a href="http://www.airkoryo.com.kp?__lang=ko_KP">조선어</a></li>
+                                                            <li><a href="http://www.airkoryo.com.kp?__lang=zh_CN">中文</a></li>
+                                                    </ul>
+                    </li>
+                    <li>
+                        <a href="http://www.airkoryo.com.kp/"><span>Home</span></a>
+                    </li>
+
+                                            <li>
+                            <a href="javascript:void(0)" id="top_link_login"><span>Login</span></a>
+                        </li>
+                        <li class="last">
+                            <a href="http://www.airkoryo.com.kp/customer/account/create"><span>Register</span></a>
+                        </li>
+                                    </ul>
+            </div>
+            <div class="clear"></div>
+            <div class="nav-container">
+                <!-- menu start -->
+                <ul id="nav" class="nav-panel">
+                                            <li class="level0    parent" onmouseover="$(this).addClass('over')" onmouseout="$(this).removeClass('over')">
+
+                            <a href="javascript:void(0)"><span>Plan Flights</span></a>
+                                                            <ul>
+                                                                            <li class="level1 "><a href="http://www.airkoryo.com.kp/flight/book"><span>Book a Flight</span></a></li>
+                                                                            <li class="level1 "><a href="http://www.airkoryo.com.kp/flight/status"><span>Today's Flight</span></a></li>
+                                                                            <li class="level1 "><a href="http://www.airkoryo.com.kp/flight/timetable"><span>Time Table</span></a></li>
+                                                                    </ul>
+                                                    </li>
+                                            <li class="level0    parent" onmouseover="$(this).addClass('over')" onmouseout="$(this).removeClass('over')">
+
+                            <a href="javascript:void(0)"><span>Information</span></a>
+                                                            <ul>
+                                                                            <li class="level1 "><a href="http://www.airkoryo.com.kp/notice-to-passengers"><span>Notice to Passengers</span></a></li>
+                                                                            <li class="level1 "><a href="http://www.airkoryo.com.kp/service/assistance"><span>Special Passengers</span></a></li>
+                                                                            <li class="level1 "><a href="http://www.airkoryo.com.kp/service/baggage"><span>Baggage</span></a></li>
+                                                                            <li class="level1  last"><a href="http://www.airkoryo.com.kp/service/checkin"><span>Check-in Procedure</span></a></li>
+                                                                    </ul>
+                                                    </li>
+                                            <li class="level0    parent" onmouseover="$(this).addClass('over')" onmouseout="$(this).removeClass('over')">
+
+                            <a href="javascript:void(0)"><span>Contact</span></a>
+                                                            <ul>
+                                                                            <li class="level1  last"><a href="http://www.airkoryo.com.kp/contact/details"><span>Airkoryo Offices</span></a></li>
+                                                                    </ul>
+                                                    </li>
+                                            <li class="level0   last " onmouseover="$(this).addClass('over')" onmouseout="$(this).removeClass('over')">
+
+                            <a href="http://www.airkoryo.com.kp/cargo"><span>Cargo</span></a>
+                                                    </li>
+                                    </ul>
+                <!-- menu end -->
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="main-frame column1">
+
+<script type="text/javascript">
+    (function($){
+        $(document).ready(function(){
+        });
+    })(jQuery);
+</script>
+
+<div class="main">
+    <div class="page-title">
+        <h1 class="title"></h1>
+    </div>
+
+    <div class="cms-content"></div>
+</div>
+
+<div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="footer-container">
+    <div class="footer">
+        <ul class="links">
+            <li><a href="http://www.airkoryo.com.kp/about-us">About Us</a></li>
+            <li><a href="http://www.airkoryo.com.kp/contact/details">Contact Us</a></li>
+            <li><a href="http://www.airkoryo.com.kp/regulations">General Conditions</a></li>
+            <li class="last"><a href="http://www.airkoryo.com.kp/site-map">Site Map</a></li>
+            <!--<li class="last"><a href="http://www.airkoryo.com.kp">[[label _="Browser Supports"]]</a></li>-->
+        </ul>
+        <address>Copyright &copy; 2016, Air Koryo. All rights reserved.</address>
+    </div>
+</div>
+
+</BODY>
+</HTML>
+
+

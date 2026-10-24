@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>「禁日」 — rebuilding a Preview-driven flipbook as a real reader</title>
+<meta name="description" content="A 2026 AppleScript applet that pushed 75 photographed pages into Preview, rebuilt as a 75-page web reader: measured page geometry, the flip mechanics, and the verification runs.">
+<meta name="theme-color" content="#0a0c11">
+<link rel="canonical" href="https://isaac1804.com/portfolio/demos/kinjitsu-teardown">
+<style>
+  :root{
+    --bg:#0a0c11; --panel:#11141b; --panel2:#161a23; --line:#242a37;
+    --tx:#e8eaf0; --mut:#98a1b3; --dim:#6d7686;
+    --ac:#e0573f; --ac2:#c8402c; --ok:#34d399; --warn:#ffd166; --bad:#f87171;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang HK","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    --serif:"Songti SC","Hiragino Mincho ProN",serif;
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.62}
+  a{color:var(--ac)}
+  .wrap{max-width:1080px;margin:0 auto;padding:26px 22px 90px}
+  .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
+  .top a{color:var(--mut);text-decoration:none}
+  .top a:hover{color:var(--tx)}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 11px;
+    color:var(--mut);letter-spacing:.1em}
+  .chip.red{border-color:#4b1f26;background:#1d1114;color:#ff9d9d}
+  h1{font-size:clamp(27px,4.6vw,46px);line-height:1.08;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  h1 .cjk{font-family:var(--serif);font-weight:600;letter-spacing:.02em}
+  h1 em{font-style:normal;color:var(--ac)}
+  .deck{font-size:16.5px;color:var(--mut);max-width:80ch;margin:0 0 20px}
+  .deck b{color:var(--tx);font-weight:650}
+  .cta{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 28px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 17px;border-radius:10px;
+    font-weight:650;font-size:14px;text-decoration:none;border:1px solid var(--line);color:var(--tx);
+    background:var(--panel);transition:transform .15s,border-color .15s,background .15s}
+  .btn:hover{transform:translateY(-1px);border-color:#3a4458}
+  .btn.pri{background:var(--ac2);border-color:var(--ac2);color:#fff;box-shadow:0 10px 26px rgba(200,64,44,.24)}
+  .btn.pri:hover{filter:brightness(1.06);border-color:var(--ac2);transform:translateY(-1px)}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(142px,1fr));gap:10px;margin:22px 0 30px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 13px}
+  .stat .k{font:600 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .stat .v{font-size:19px;font-weight:750;margin-top:5px;letter-spacing:-.01em}
+  .stat .v small{font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0}
+
+  .strip3{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 26px;align-items:start}
+  .strip3 figure{margin:0}
+  .strip3 img{width:100%;height:auto;display:block;border-radius:7px;border:1px solid var(--line);
+    background:#1a1f29;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+  .strip3 figcaption{font:600 10px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+    color:var(--dim);margin-top:7px}
+  @media (max-width:520px){ .strip3{grid-template-columns:repeat(2,1fr)} }
+
+  .call{border-left:3px solid var(--ac2);background:linear-gradient(90deg,rgba(200,64,44,.13),rgba(200,64,44,0));
+    border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 32px}
+  .call .lbl{font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#f19a8a;margin-bottom:7px}
+  .call p{margin:0;font-size:15.5px;color:#d7dbe6}
+
+  h2{font-size:12px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+    margin:44px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{margin:0 0 6px;font-size:16.5px;letter-spacing:-.01em}
+  p{margin:0 0 14px}
+  .lead{color:var(--mut);font-size:15.5px}
+  .lead b{color:var(--tx);font-weight:650}
+
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding-bottom:22px}
+  .step:not(:last-child):before{content:"";position:absolute;left:22px;top:38px;bottom:0;width:1px;
+    background:linear-gradient(180deg,var(--line),transparent)}
+  .num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:var(--panel2);border:1px solid var(--line);color:var(--ac);
+    font:800 13px/1 var(--mono);position:relative;z-index:1}
+  .step p{margin:6px 0 0;color:var(--mut);font-size:14.6px}
+  .step p b{color:var(--tx);font-weight:650}
+
+  code,kbd{font-family:var(--mono);font-size:.88em}
+  kbd{display:inline-block;padding:1px 6px;border:1px solid var(--line);border-bottom-width:2px;
+    border-radius:5px;background:var(--panel2);color:var(--tx);font-size:11.5px;line-height:1.5}
+  pre{background:#0d1016;border:1px solid var(--line);border-radius:10px;padding:13px 14px;overflow:auto;
+    font-size:12.6px;line-height:1.6;color:#cfd6e4;margin:10px 0 18px;
+    white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+  pre .c{color:#6d7686}
+
+  .tbl{width:100%;border-collapse:collapse;margin:6px 0 20px;font-size:13.6px;display:block;overflow-x:auto}
+  .tbl th,.tbl td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);white-space:nowrap}
+  .tbl th{font:700 10px/1.3 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--dim);
+    background:#0d1016}
+  .tbl td b{color:var(--tx)}
+  .tbl tr:hover td{background:rgba(255,255,255,.022)}
+  .ok{color:var(--ok);font-weight:650}
+  .no{color:var(--bad);font-weight:650}
+  .warnc{color:var(--warn);font-weight:650}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 20px}
+  @media (max-width:680px){ .grid2{grid-template-columns:1fr} }
+  .box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 15px}
+  .box h3{font-size:14.5px;margin-bottom:8px}
+  .box ul{margin:0;padding-left:18px;color:var(--mut);font-size:13.8px}
+  .box li{margin-bottom:5px}
+  .box li b{color:var(--tx);font-weight:650}
+  .box.bad{border-color:#4b1f26;background:linear-gradient(180deg,#1b1113,#11141b)}
+  .box.good{border-color:#1f4b3a;background:linear-gradient(180deg,#0f1a17,#11141b)}
+
+  .quote{background:#0f1218;border:1px solid var(--line);border-left:2px solid var(--warn);
+    border-radius:8px;padding:10px 13px;margin:10px 0 16px;font-size:13.5px;color:#e4dcc4;
+    white-space:pre-wrap;overflow-wrap:anywhere}
+  .quote .src{display:block;margin-top:7px;font:600 10px/1 var(--mono);letter-spacing:.1em;
+    text-transform:uppercase;color:var(--dim)}
+
+  footer{margin-top:52px;padding-top:18px;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px;
+    display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+  footer a{color:var(--mut);text-decoration:none}
+  footer a:hover{color:var(--tx)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <span><a href="../">← Portfolio</a> / rebuild log</span>
+    <span class="chips">
+      <span class="chip">Feb 2026 → Oct 2026</span>
+      <span class="chip red">rewritten</span>
+      <span class="chip">no framework</span>
+    </span>
+  </div>
+
+  <h1><span class="cjk">「禁日」</span> — from a Preview puppet show to a real reader</h1>
+  <p class="deck">The first version of this flipbook was <b>two AppleScript applets</b> that carried 75 photographs
+    of pages inside their own bundles and then asked <b>Preview</b> — via the Accessibility API — to go full screen.
+    This is the same book rebuilt as a web reader: one page at a time, <b>every page at its original pixel size</b>,
+    with the page-turn, thumbnails, deep links and resume state the original never had.</p>
+
+  <div class="cta">
+    <a class="btn pri" href="./kinjitsu/">Open the flipbook →</a>
+    <a class="btn" href="./kinjitsu/#v2p1">Start at volume 2</a>
+    <a class="btn" href="../">Back to portfolio</a>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="k">Pages</div><div class="v">75 <small>36 + 39</small></div></div>
+    <div class="stat"><div class="k">Source weight</div><div class="v">41.0 <small>MB</small></div></div>
+    <div class="stat"><div class="k">Served weight</div><div class="v">9.7 <small>MB</small></div></div>
+    <div class="stat"><div class="k">Page geometries</div><div class="v">67 <small>distinct</small></div></div>
+    <div class="stat"><div class="k">Re-framed</div><div class="v">65 <small>of 75</small></div></div>
+    <div class="stat"><div class="k">Console errors</div><div class="v ok">0 <small>3 viewports</small></div></div>
+  </div>
+
+  <div class="strip3">
+    <figure><img src="./kinjitsu/pages/thumbs/v1-01.jpg" alt="Volume 1, page 1 thumbnail" loading="lazy"><figcaption>v1 · p1 · 451×563</figcaption></figure>
+    <figure><img src="./kinjitsu/pages/thumbs/v1-18.jpg" alt="Volume 1, page 18 thumbnail" loading="lazy"><figcaption>v1 · p18 · 465×581</figcaption></figure>
+    <figure><img src="./kinjitsu/pages/thumbs/v2-01.jpg" alt="Volume 2, page 1 thumbnail" loading="lazy"><figcaption>v2 · p1 · 850×1336</figcaption></figure>
+    <figure><img src="./kinjitsu/pages/thumbs/v2-39.jpg" alt="Volume 2, page 39 thumbnail" loading="lazy"><figcaption>v2 · p39 · 1168×1452</figcaption></figure>
+  </div>
+
+  <div class="call">
+    <div class="lbl">The one-line history</div>
+    <p>The original app's entire "flipbook" was three keystrokes sent to Preview — <code>⌘2</code>,
+      <code>⌥⌘1</code>, then <em>View ▸ Enter Full Screen</em> — wrapped in a <code>try</code> block that silently
+      swallowed the failure when macOS refused the Accessibility request.</p>
+  </div>
+
+  <h2>01 · What was actually in the old app</h2>
+  <p class="lead">Both bundles live in <code>/Applications/Installed Applications/</code>. They are Script Editor
+    applets, not compiled apps: same 15,094-byte <code>main.scpt</code> in each, same bundle identifier
+    <code>com.apple.ScriptEditor.id.test-flipbook</code>, same displayed name <b>"test flipbook"</b>.
+    The only real difference is the folder of photographs each one carries.</p>
+
+  <table class="tbl">
+    <thead><tr><th>Bundle</th><th>Pages</th><th>Format</th><th>Pixel sizes</th><th>Payload</th></tr></thead>
+    <tbody>
+      <tr><td><b>「禁日」.app</b></td><td>36</td><td>JPEG</td><td>378–465 × 640</td><td>2.5 MB</td></tr>
+      <tr><td><b>「禁日」 后续.app</b></td><td>39</td><td>PNG</td><td>413–1204 × 640–1734</td><td>38.5 MB</td></tr>
+    </tbody>
+  </table>
+
+  <p class="lead">Filename order was the reading order, and the filenames were unpadded —
+    <code>page 1.jpg</code>, <code>page 2.jpg</code> … <code>page 36.jpg</code>. That survives Finder's
+    numeric sort, but it is one <code>sort</code> call away from serving page 10 before page 2.</p>
+
+  <h2>02 · The 15 KB that did all the work</h2>
+  <div class="step">
+    <div class="num">1</div>
+    <div><h3>Photos were copied <em>into</em> the app</h3>
+      <p>On first run the script asked for image files and copied them into
+        <code>Contents/Resources/FlipbookPhotos/</code>, then told you to double-click the app again.
+        The bundle was the library: editing a page meant re-running that import.</p></div>
+  </div>
+  <div class="step">
+    <div class="num">2</div>
+    <div><h3>Preview was reconfigured, globally</h3>
+      <p><code>defaults write com.apple.Preview PVImageOpeningMode 1</code> — a persistent, machine-wide
+        preference so that <em>every</em> future image you open in Preview arrives in a single window,
+        whether or not you are looking at the flipbook.</p></div>
+  </div>
+  <div class="step">
+    <div class="num">3</div>
+    <div><h3>Every page was opened at once</h3>
+      <p>No lazy loading and no window management: 36 or 39 full images decoded up front, so the first
+        paint waited on the heaviest page in the set.</p></div>
+  </div>
+  <div class="step">
+    <div class="num">4</div>
+    <div><h3>System Events pressed the buttons</h3>
+      <p>Three UI-scripting calls: <code>⌘2</code> (single page), <code>⌥⌘1</code> (hide sidebar),
+        <em>View ▸ Enter Full Screen</em>. Everything the reader did was done by another app's menu, so
+        anything that changed Preview's menus broke the flipbook.</p></div>
+  </div>
+
+  <h2>03 · Why it degraded instead of failing</h2>
+  <div class="quote">error "-25211" — System Events got an error: osascript is not allowed assistive access.
+    <span class="src">what the script swallowed</span></div>
+  <p class="lead">The full-screen step sat inside <code>try … end try</code> with a fallback that simply zoomed the
+    Preview window. So when Accessibility permission was missing — after an OS update, a new machine, a reset
+    privacy database — the app <b>still opened</b>, just not full screen. Nothing reported a problem. That is the
+    worst failure mode there is: it looks like the app half-worked.</p>
+
+  <div class="grid2">
+    <div class="box bad">
+      <h3>What the old design cost</h3>
+      <ul>
+        <li><b>Machine state:</b> reads and writes a global Preview preference</li>
+        <li><b>Permission debt:</b> needs Accessibility, checked only by crashing quietly</li>
+        <li><b>Two copies:</b> the same 15 KB script shipped twice, with the pages duplicated inside them</li>
+        <li><b>No navigation:</b> no page number, no jump, no thumbnail, no resume</li>
+        <li><b>No sharing:</b> you cannot link someone to page 20</li>
+      </ul>
+    </div>
+    <div class="box good">
+      <h3>What the rebuild needs</h3>
+      <ul>
+        <li><b>One static folder:</b> <code>index.html</code> + 75 JPEGs + thumbnails</li>
+        <li><b>No permissions,</b> no other app, no OS settings touched</li>
+        <li><b>Deep links:</b> <code>#v1p12</code>, <code>#v2p20</code></li>
+        <li><b>Resume:</b> last page per volume, remembered locally</li>
+        <li><b>Native size:</b> one click for 1:1 pixels, four for fit</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>04 · The geometry problem nobody warns you about</h2>
+  <p class="lead">These are photographs of pages, so they are not one size. After the framing pass (section 07) volume 1 has
+    <b>34 distinct sizes</b> across 36 pages (378–465 wide, 539–640 tall), and volume 2 has
+    <b>36 distinct sizes</b> across 39 pages (413–1188 wide, 547–1684 tall). Aspect ratios run
+    <b>0.49 → 0.82</b>.</p>
+  <p class="lead">That single fact decides the layout. A classic two-page spread pairs leaves across a gutter, which
+    only works if paired pages share a height; here a 378 px leaf would face a 1204 px one. So the reader shows
+    <b>one page at a time</b>, sizes the stage to that page's own aspect ratio, and lets the page turn be the thing
+    that reads as a book. No stretching and no letterbox inside a fake frame — and the one crop that does happen
+    (section 07) removes dead black frame, never a resampled pixel.</p>
+
+  <table class="tbl">
+    <thead><tr><th>Volume</th><th>Pages</th><th>Distinct sizes</th><th>Aspect range</th><th>Served</th></tr></thead>
+    <tbody>
+      <tr><td><b>禁日</b></td><td>36</td><td>34</td><td>0.591 – 0.804</td><td>2.31 MB</td></tr>
+      <tr><td><b>禁日 · 后续</b></td><td>39</td><td>36</td><td>0.490 – 0.816</td><td>5.85 MB</td></tr>
+      <tr><td>Thumbnails</td><td>75</td><td>220 px wide</td><td>—</td><td>1.45 MB</td></tr>
+    </tbody>
+  </table>
+  <p class="lead">The 38.5 MB PNG volume was re-encoded to JPEG at quality 84 <b>at the same pixel dimensions</b> —
+    5.85 MB, no resampling. Total served: 9.7 MB including thumbnails. A build script asserts every output dimension against its source and stops if they
+    ever disagree.</p>
+
+  <h2>05 · How the turn works</h2>
+  <p class="lead">Two stacked layers. The <em>front</em> layer holds the page you are on; the <em>back</em> layer holds
+    whatever is being revealed. On a forward turn the back layer is loaded with the next page and the front rotates
+    <code>-104°</code> around its left edge inside a 2400 px perspective — one moving layer, one compositor-friendly
+    transform. Going back, the incoming page starts at <code>-104°</code> with transitions disabled, then animates to
+    <code>0°</code>, which reads as a page sweeping back into place.</p>
+  <p class="lead">The reset is the fiddly part: after the animation ends the front layer must be restored to
+    <code>rotateY(0)</code> <b>without</b> transitioning, or the new page visibly swings back into frame. The commit
+    step sets <code>transition:none</code>, swaps the image, forces a reflow, then clears the inline style. The
+    verification below asserts the resting transform is literally <code>none</code>.</p>
+
+  <table class="tbl">
+    <thead><tr><th>Input</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td><kbd>→</kbd> <kbd>Space</kbd> <kbd>PageDown</kbd></td><td>Next page (rolls into volume 2 at the end of volume 1)</td></tr>
+      <tr><td><kbd>←</kbd> <kbd>PageUp</kbd></td><td>Previous page (rolls back into volume 1)</td></tr>
+      <tr><td><kbd>Home</kbd> <kbd>End</kbd></td><td>First / last page of the current volume</td></tr>
+      <tr><td><kbd>T</kbd></td><td>Thumbnail drawer (75 pages, both volumes)</td></tr>
+      <tr><td><kbd>F</kbd></td><td>Full screen</td></tr>
+      <tr><td><kbd>0</kbd></td><td>Toggle original pixel size ↔ fit</td></tr>
+      <tr><td><kbd>Esc</kbd></td><td>Close drawer → leave 1:1 → back to cover</td></tr>
+      <tr><td>Swipe / click edges</td><td>Same as arrows</td></tr>
+    </tbody>
+  </table>
+
+  <h2>06 · Verification, in a real browser</h2>
+  <p class="lead">Headless Chromium, three viewports, driving the keyboard and reading the DOM back — not a
+    screenshot review. Every row below is a measured value from the run, not an intention.</p>
+
+  <table class="tbl">
+    <thead><tr><th>Check</th><th>1440×900</th><th>768×1024</th><th>390×844</th></tr></thead>
+    <tbody>
+      <tr><td>Page 1 decoded</td><td>451×563 <span class="ok">ok</span></td><td>451×563 <span class="ok">ok</span></td><td>451×563 <span class="ok">ok</span></td></tr>
+      <tr><td>Horizontal overflow</td><td class="ok">0 px</td><td class="ok">0 px</td><td class="ok">0 px</td></tr>
+      <tr><td>Top bar fits</td><td class="ok">yes</td><td class="ok">yes</td><td class="ok">yes (wraps to 2 rows)</td></tr>
+      <tr><td>Stage size</td><td>1440×803</td><td>768×927</td><td>390×706</td></tr>
+      <tr><td>Page drawn at</td><td>543×771</td><td>631×895</td><td>358×508</td></tr>
+      <tr><td><kbd>→</kbd> / <kbd>←</kbd></td><td class="ok">2/36 → 1/36</td><td class="ok">2/36 → 1/36</td><td class="ok">2/36 → 1/36</td></tr>
+      <tr><td>Rest transform</td><td class="ok">none</td><td class="ok">none</td><td class="ok">none</td></tr>
+      <tr><td>Thumbnail buttons</td><td class="ok">75</td><td class="ok">75</td><td class="ok">75</td></tr>
+      <tr><td>End of v1 + <kbd>→</kbd></td><td class="ok">1/39</td><td class="ok">1/39</td><td class="ok">1/39</td></tr>
+      <tr><td>1:1 mode</td><td class="ok">451×563</td><td class="ok">451×563</td><td class="ok">451×563</td></tr>
+      <tr><td>Console errors</td><td class="ok">0</td><td class="ok">0</td><td class="ok">0</td></tr>
+      <tr><td>Failed requests</td><td class="ok">0</td><td class="ok">0</td><td class="ok">0</td></tr>
+    </tbody>
+  </table>
+
+  <p class="lead">Separate pass for the states: a fresh visit hides <em>Continue reading</em>; reading to page 3 and
+    reloading shows <em>Continue page 3</em> and lands on 3/36; aborting one image request surfaces the error panel
+    with the exact filename (<code>pages/v1-05.jpg</code>) and a working retry; with
+    <code>prefers-reduced-motion</code> the turn becomes a 130 ms fade and navigation still works. Two bugs were
+    caught this way and fixed before deploy — a <code>Continue page 1</code> button that was visible on a fresh visit
+    because <code>.cta{display:inline-flex}</code> outranks the <code>hidden</code> attribute, and a top bar that
+    scrolled sideways at 390 px.</p>
+
+  <h2>07 · The white edges</h2>
+  <p class="lead">Every page arrived still framed by its photograph: a black caption bar across the top
+    (75–89 px on the 640-tall pages, 207–240 px on the large ones — about 13% of the page height), the photo's
+    black surround down the sides, and a bright white strip where the sheet's edge caught the light. On a dark
+    stage that reads as a pale border on some pages and a black border on others, which is exactly how it looked.</p>
+
+  <p class="lead">The build now takes the dead framing off. For each side it walks in while the line is still dark
+    (mean ≤ 120), accepts the band only if the band really is black (mean ≤ 45), then removes the pure-white rim
+    on top of that. It then refuses its own work: if more than <b>1.5% of the page's ink</b> would be lost, the page
+    is left alone. <b>65 of 75 pages</b> were re-framed, median <b>13.9%</b> of the frame, maximum 17.6%, and no
+    page lost more than <b>0.52%</b> of its ink. Nothing is resampled — the crop only moves the rectangles.</p>
+
+  <table class="tbl">
+    <thead><tr><th>Page</th><th>Was</th><th>Now</th><th>Frame removed</th><th>Ink lost</th></tr></thead>
+    <tbody>
+      <tr><td>v1 · p1</td><td>451×640</td><td>451×563</td><td>12.0%</td><td class="ok">0.01%</td></tr>
+      <tr><td>v1 · p18</td><td>465×640</td><td>465×581</td><td>9.2%</td><td class="ok">0.00%</td></tr>
+      <tr><td>v2 · p15</td><td>1196×1712</td><td>1166×1447</td><td>17.6%</td><td class="ok">0.10%</td></tr>
+      <tr><td>v2 · p39</td><td>1192×1686</td><td>1168×1452</td><td>15.6%</td><td class="ok">0.22%</td></tr>
+    </tbody>
+  </table>
+
+  <figure>
+    <img src="./kinjitsu/img/trim-v2-15.jpg" alt="Volume 2 page 15 before and after the framing pass" loading="lazy">
+    <figcaption>v2 · p15, before and after. The black caption bar goes; the sheet's own printed header
+      (「9月14日 星期六 天氣：雨」) stays, so the date is not lost with the bar. Every handwriting stroke is intact.</figcaption>
+  </figure>
+
+  <div class="call">
+    <div class="lbl">Where it declined</div>
+    <p><b>10 pages were left exactly as they were.</b> Five are dark pages — the black title cards
+      (<code>10月25日 - 到訪學校</code>, <code>家庭訪問日</code>) and the night scenes — where the black <em>is</em> the
+      artwork. The other five are pages whose only trim would have clipped a drawing that runs off
+      the sheet, so the ink test vetoed it. The first version of the detector did try to re-frame
+      <code>v1-32</code> by 58.7% of its frame; that is the failure the ink test exists to stop.</p>
+  </div>
+
+  <h2>08 · What this still doesn't do</h2>
+  <div class="grid2">
+    <div class="box">
+      <h3>Honest limits</h3>
+      <ul>
+        <li><b>The source is small.</b> Page 1 is 451 px wide; at 1440 the reader draws it 543 px wide, so it is
+          enlarged about 1.2× and looks it. 1:1 mode is there for exactly this.</li>
+        <li><b>The text is paint, not text.</b> These are photographs of pages: nothing is selectable, searchable or
+          indexed, and this Mac has no CJK OCR data installed, so I could not transcribe a single line.</li>
+        <li><b>No audio, no bookmarks,</b> no per-page notes — none of that was in the original to preserve.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Reading decisions I made</h3>
+      <ul>
+        <li><b>One continuous book.</b> The two volumes are chained (36 → 1) rather than kept apart, because the
+          second bundle carries the same script and a later page set.</li>
+        <li><b>Original page files kept.</b> The <code>.app</code> bundles were never modified; the build script only
+          reads them.</li>
+        <li><b>Filenames preserved as provenance</b> in the manifest (<code>"src":"page 7.jpg"</code>) next to the
+          normalised web name.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>09 · Rebuild it</h2>
+<pre><span class="c"># 1. stage 75 pages out of the two applets, native pixel sizes, plus thumbnails + manifest</span>
+python3 ~/scripts/build-kinjitsu.py
+<span class="c"># → v1: 36 pages, v2: 39 pages, 41.0 MB source → 8.2 MB web</span>
+
+<span class="c"># 2. take the dead framing off (black caption bar + photo surround), then re-index</span>
+python3 ~/scripts/trim-kinjitsu-pages.py --apply   <span class="c"># 65 of 75 pages, median 13.9% of the frame</span>
+python3 ~/scripts/reindex-kinjitsu.py              <span class="c"># rewrite manifest + thumbs at the new sizes</span>
+
+<span class="c"># 2. grade it in Chromium at 390 / 768 / 1440</span>
+python3 ~/scripts/verify-kinjitsu.py        <span class="c"># ends with "FAILURES: none"</span>
+
+<span class="c"># 3. states: resume, error, reduced motion</span>
+python3 ~/scripts/verify-kinjitsu-states.py</pre>
+
+  <p class="lead">The reader is one HTML file with no dependencies — no framework, no build step, no network calls
+    beyond its own images. The manifest ships as a classic <code>&lt;script&gt;</code> rather than JSON fetched over
+    <code>fetch()</code>, so the book also opens correctly straight off the filesystem.</p>
+
+  <footer>
+    <span>«禁日» flipbook · rebuilt Oct 2026 · 75 pages, two volumes</span>
+    <span><a href="./kinjitsu/">Open the reader →</a> · <a href="../">All projects</a></span>
+  </footer>
+</div>
+</body>
+</html>

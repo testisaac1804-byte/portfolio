@@ -1,0 +1,33 @@
+@font-face {
+	font-family: "PRK P Gothic";
+	src: url("../fonts/pwpugome.ttf");
+	/*src: url("../fonts/prkpgothic.TTF");*/
+}
+@font-face {
+	font-family: "WKLChongbong";
+	src: url("../fonts/wklchbo.ttf");
+	/*src: url("../fonts/wklchongbong.TTF");*/
+}
+@font-face {
+	font-family: "WKLGothic";
+	src: url("../fonts/wklgoth.ttf");
+}
+@font-face {
+	font-family: "WKWGothic";
+	src: url("../fonts/wkwgoth.ttf");
+}
+
+* {
+	/*font-family: '천리마'; */
+	/* font-family: "WKLGothic"; */
+	font-family: "Roboto", "Times New Roman", "SimHei", "WKLGothic";
+}
+
+#orgTitle span {
+	letter-spacing: 8px;
+	font-family: "WKWGothic";
+	src: url("../fonts/wkwgoth.ttf");
+	font-weight: 400;
+	font-size: 40px;
+	text-shadow: 4px 4px #000;
+}

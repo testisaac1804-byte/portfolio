@@ -1,0 +1,960 @@
+﻿
+
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <title>Juche</title>
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="김일성,김정일,김정은,사회과학원,주체사상연구원(en)" />
+<meta name="description" content="조선사회과학자협회 홈페지 - 《주체》(en)" />
+<meta name="author" content="Completed by YH.P and Kanegin at 2024-10-05" />
+<meta name="lang" content="eng">
+
+<!-- Facebook and Twitter integration -->
+<meta property="og:title" content="" />
+<meta property="og:image" content="" />
+<meta property="og:url" content="" />
+<meta property="og:site_name" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:title" content="" />
+<meta name="twitter:image" content="" />
+<meta name="twitter:url" content="" />
+<meta name="twitter:card" content="" />
+
+<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<link rel="shortcut icon" href="//kass.org.kp/assets/4fp/favicon.ico" />
+<link rel="manifest" href="//kass.org.kp/assets/4fp/manifest.json" />
+<link rel="stylesheet" href="//kass.org.kp/assets/4fp/libs/bootstrap/4.4.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="//kass.org.kp/assets/4fp/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" href="//kass.org.kp/assets/4fp/libs/font-awesome.v6.1.2/css/all.min.css" />
+<link rel="stylesheet" href="//kass.org.kp/assets/4fp/css/magnific-popup.min.css" />
+<link rel="stylesheet" href="//kass.org.kp/assets/4fp/css/animate.min.css" />
+<link rel="stylesheet" href="//kass.org.kp/assets/4fp/css/icomoon.min.css" />
+<link rel="stylesheet" href="//kass.org.kp/assets/4fp/css/owl.carousel.min.css" />
+<link rel="stylesheet" href="//kass.org.kp/assets/4fp/css/owl.theme.default.min.css" />
+<link rel="stylesheet" href="//kass.org.kp/assets/4fp/libs/fancybox/2.1.5/jquery.fancybox.min.css" />
+<link rel="stylesheet" href="//kass.org.kp/assets/4fp/libs/fancybox/2.1.5/jquery.fancybox-thumbs.min.css" />
+<link rel="stylesheet" href="//kass.org.kp/assets/4fp/css/index4firstpage.min.css?20241016.2.x.0" />
+<link rel="stylesheet" href="//kass.org.kp/assets/4fp/css/compatible.min.css" />
+
+<link rel="stylesheet" href="//kass.org.kp/assets/4fp/css/font-family_eng.css?20241016.2.x.0" />
+
+<script src="//kass.org.kp/assets/4fp/libs/jquery/jquery-3.4.1.ex.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/js/jquery.1.10.2.js"></script>
+<script src="//kass.org.kp/assets/4fp/js/jquery.easing.1.3.js"></script>
+<script src="//kass.org.kp/assets/4fp/libs/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <meta name="keywords" content="김일성,김정일,김정은,사회과학원,주체사상연구원(en)" />
+    <meta name="description" content="조선사회과학자협회 홈페지 - 《주체》(en)" />
+</head>
+
+<body data-spy="scroll" data-indicator=".navbar" data-offset="50" data-aos-easing="ease-in-sine" data-aos-duration="600" data-aos-delay="300">
+    <div id="preloader">
+      <div class="preload-content">
+        <div id="kass-load"></div>
+      </div>
+    </div>
+    <div id="colorlib-page">
+        <div class="container-wrap">
+            <!-- 특간호현시부 -->
+            
+<?
+	$path = DATAPATH_SPECIAL . 'special_edition.txt';
+	if (file_exists($path))
+		include($path);
+?>
+
+            <!-- 왼쪽 기본안내팬 -->
+            
+<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+<aside id="colorlib-aside" role="complementary" class="js-fullheight h-100">
+	<div class="logo-wrapper text-center">
+		<div class="site-logo">
+			<a href="//kass.org.kp/index.php/home?lang=eng" class="brand logo-nav">
+				<img alt="logo" class="logo_juche" src="//kass.org.kp/assets/imgs/logo/logo_juche1.png" />
+				<img alt="logo" class="logo_earth" src="//kass.org.kp/assets/imgs/logo/logo_earth.png" />
+			</a>
+		</div>
+		<a href="//kass.org.kp/index.php/home?lang=eng">
+			<h1 id="colorlib-logo" class="mt-3">Juche</h1>
+			<span class="position" class="mb-1">www.kass.org.kp</span>
+		</a>
+	</div>
+	<nav id="colorlib-main-menu" role="navigation" class="navbar vertical">
+		<div id="navbar" class="collapse">
+			<ul class="nav navbar-nav">
+							<li class="nav-item"><a class="nav-link" href="#revolution" data-nav-section="revolution">News of Revolutionary Activities</a></li>
+				<li class="nav-item"><a class="nav-link" href="#great" data-nav-section="great">Peerless Great Persons</a></li>
+				<li class="nav-item"><a class="nav-link" href="#course" data-nav-section="course">Kimilsungism-Kimjongilism Course</a></li>
+				<li class="nav-item"><a class="nav-link" href="#koroverview" data-nav-section="koroverview">DPRK Panorama</a></li>
+				<li class="nav-item"><a class="nav-link" href="#wvkorea" data-nav-section="wvkorea">The DPRK Seen by the World</a></li>
+				<li class="nav-item"><a class="nav-link" href="#photo" data-nav-section="photo">Photo</a></li>
+				<li class="nav-item"><a class="nav-link" href="#video" data-nav-section="video">Video</a></li>
+				<li class="nav-item"><a class="nav-link" href="#ebook" data-nav-section="ebook">Books and Magazines</a></li>
+				<li class="nav-item"><a class="nav-link" href="#news" data-nav-section="news">News of study groups’ activities</a></li>
+				<li class="nav-item"><a class="nav-link" href="#kass" data-nav-section="kass">KASS</a></li>
+				<li class="nav-item"><a class="nav-link" href="#sitemap" data-nav-section="sitemap">Sites</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="colorlib-footer d-none">
+		<span class="mt-1 text-center">Democratic People's Republic of Korea<br />Pyongyang City Mailbox No. 128</span>
+		<span><i class="fa fa-envelope"></i> kasssg&copy;star-co.net.kp</span>
+		<ul class="d-none">
+			<li><a href="#"><i class="icon-facebook2"></i></a></li>
+			<li><a href="#"><i class="icon-twitter2"></i></a></li>
+			<li><a href="#"><i class="icon-instagram"></i></a></li>
+			<li><a href="#"><i class="icon-linkedin2"></i></a></li>
+		</ul>
+	</div>
+
+</aside>
+
+            <div id="colorlib-main">
+                <!-- 어종선택띠 -->
+                <section class="languagebar fixed">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6 col-sm-7 col-md-9 navbar navbar-expand-md catalogue-navi justify-content-end">
+                <button class="navbar-toggler dropdown-toggle navbar-light" type="button" data-toggle="dropdown" data-target="#languageNavi">
+                    <span class="subTitle"></span>
+                </button>
+                <div id="languageNavi" class="collapse navbar-collapse justify-content-end">
+                    <ul class="navbar-nav">
+                        <li class="nav-item kor"><a class="nav-link" href="//kass.org.kp/index.php/lang/cookie/kor/L2luZGV4LnBocC9ob21lP2xhbmc9ZW5n" title="">조선어</a></li>
+                        <li class="nav-item eng active"><a class="nav-link" href="//kass.org.kp/index.php/lang/cookie/eng/L2luZGV4LnBocC9ob21lP2xhbmc9ZW5n" title="">English</a></li>
+                        <li class="nav-item chi"><a class="nav-link" href="//kass.org.kp/index.php/lang/cookie/chi/L2luZGV4LnBocC9ob21lP2xhbmc9ZW5n" title="">中国语</a></li>
+                        <li class="nav-item rus"><a class="nav-link" href="//kass.org.kp/index.php/lang/cookie/rus/L2luZGV4LnBocC9ob21lP2xhbmc9ZW5n" title="">Русский</a></li>
+                        <li class="nav-item jap"><a class="nav-link" href="//kass.org.kp/index.php/lang/cookie/jap/L2luZGV4LnBocC9ob21lP2xhbmc9ZW5n" title="">日本語</a></li>
+                        <li class="nav-item fra"><a class="nav-link" href="//kass.org.kp/index.php/lang/cookie/fra/L2luZGV4LnBocC9ob21lP2xhbmc9ZW5n" title="">Français</a></li>
+                        <li class="nav-item esp"><a class="nav-link" href="//kass.org.kp/index.php/lang/cookie/esp/L2luZGV4LnBocC9ob21lP2xhbmc9ZW5n" title="">Español</a></li>
+                                            </ul>
+                </div>
+            </div>
+            <div class="col-6 col-sm-5 col-md-3">
+                <form name="search_form" class="header-search" method="GET">
+                    <input type="hidden" name="_token" value="94ba283c650dbe44704c1e2138037ef4" />
+                    <input type="hidden" name="lang" value="eng" />
+                    <div id="formsearch" class="input-group input-group-sm justify-content-center search_form">
+                        <input class="form-control" type="text" id="appendedInputButton" name="search"
+                            onkeypress="return checkProhibitionalChars('#appendedInputButton', '#errmsg2');" 
+                            placeholder="Search of Title" value="" maxlength="100" />
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-theme" type="submit">Search</button>
+                        </div>
+                    </div>
+                    <span id="errmsg1" class="d-none">Input string to search.</span>
+                    <span id="errmsg2" class="d-none">It’s forbidden letter.</span>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+                
+                
+                <!-- 혁명활동소식소개부 -->
+                
+<section id="revolution" class="colorlib-revolution revolution js-fullheight" data-section="revolution" data-hint="혁명활동소식">
+	<div class="block remove-gap w-75 mx-auto">
+		<div class="content-wrapper">
+			<div class="title">
+				<h1>News of Revolutionary Activities</h1>
+			</div>
+			<div class="body" >
+				<div class="container pt-5 mb-2">
+					<div class="row col-sx-12 col-md-12 mx-auto pb-3">
+						<div id="revolution_lists" class="pt-4 px-2 lists">							<div class="row item wow fadeInUpBig" data-wow-delay="0.1s">
+								<div class="col-md-2 px-1 text-left text-md-center date column">
+									2025.9.10								</div>
+								<div class="col-md-10 pl-sm-4 px-md-1 text-left title column">									<a href="//kass.org.kp/index.php/revolution/view/416?lang=eng" class="caption chongbong">
+										﻿National Flag-raising and National Oath-taking Ceremony Takes Place to Mark 77<sup>th</sup> Founding anniversary of DPRK</a>									<a href="//kass.org.kp/index.php/revolution/photo_view/416?lang=eng" class="leaderphoto" target="_blank">
+										<i class="fa fa-camera" style="color:#f94617"></i></a>								</div>
+							</div>							<div class="row item wow fadeInUpBig" data-wow-delay="0.1s">
+								<div class="col-md-2 px-1 text-left text-md-center date column">
+									2025.9.10								</div>
+								<div class="col-md-10 pl-sm-4 px-md-1 text-left title column">									<a href="//kass.org.kp/index.php/revolution/view/417?lang=eng" class="caption chongbong">
+										﻿Respected Comrade <nobr><data class='zonham1'>Kim Jong Un</data></nobr>'s Speech on Occasion of 77<sup>th</sup> Anniversary of Founding of DPRK</a>									<a href="//kass.org.kp/index.php/revolution/photo_view/417?lang=eng" class="leaderphoto" target="_blank">
+										<i class="fa fa-camera" style="color:#f94617"></i></a>								</div>
+							</div>							<div class="row item wow fadeInUpBig" data-wow-delay="0.1s">
+								<div class="col-md-2 px-1 text-left text-md-center date column">
+									2025.9.10								</div>
+								<div class="col-md-10 pl-sm-4 px-md-1 text-left title column">									<a href="//kass.org.kp/index.php/revolution/view/418?lang=eng" class="caption chongbong">
+										﻿Respected Comrade <nobr><data class='zonham1'>Kim Jong Un</data></nobr> Has Photo Session with Labor Innovators and Meritorious Persons Invited to Celebrations of 77<sup>th</sup> Founding Anniversary of DPRK</a>									<a href="//kass.org.kp/index.php/revolution/photo_view/418?lang=eng" class="leaderphoto" target="_blank">
+										<i class="fa fa-camera" style="color:#f94617"></i></a>								</div>
+							</div>						</div>
+					</div>
+					<div class="toolbar">
+						<div class="col-12">
+							<div class="load-more-btn py-2 mr-5 text-right">
+								<a href="//kass.org.kp/index.php/great?lang=eng" class="btn kass-btn">View All</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<img src="//kass.org.kp/assets/imgs/bodybg/wrapper-ribbon.png" class="ribbon mx-auto" alt="wrapper-ribbon" />
+			</div>
+		</div>
+	</div>
+</section>
+
+                <!-- 절세위인소개부  -->
+                
+<section id="great" class="colorlib-great js-fullheight" data-section="great">
+	<div class="block">
+		<div class="container-fluid">
+			<div class="title" data-hint="절세위인들">
+				<h1>Peerless Great Persons</h1>
+			</div>
+			<div class="row my-70 justify-content-center">
+				<div class="col-lg-4 p-3" data-hint="great1">
+					<div class="price-table bounceinleft justify-content-center">
+						<h4 class="title js-equal-height">President <nobr><data class='zonham1'>Kim Il Sung</data></nobr></h4>
+						<div class="list py-5 w-75 mx-auto">
+							<div class="decorative">
+								<ul class="w-50 mx-auto">
+									<li><a href="//kass.org.kp/index.php/great/list/work/1/1?lang=eng" class="">Works</a></li>
+									<li><a href="//kass.org.kp/index.php/great/list/great/1/2?lang=eng" class="">Ideology and Theory</a></li>
+									<li><a href="//kass.org.kp/index.php/great/list/great/1/3?lang=eng" class="">Leadership Traits</a></li>
+									<li><a href="//kass.org.kp/index.php/great/list/famous/1/11?lang=eng" class="">Aphorisms</a></li>
+								</ul>
+								<a class="view-all" href="//kass.org.kp/index.php/great/list/great/1?lang=eng">View All</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 p-3" data-hint="great2">
+					<div class="price-table bounceinright justify-content-center">
+						<h4 class="title js-equal-height">Chairman <nobr><data class='zonham1'>Kim Jong Il</data></nobr></h4>
+						<div class="list py-5 w-75 mx-auto">
+							<div class="decorative">
+								<ul class="w-50 mx-auto">
+									<li><a href="//kass.org.kp/index.php/great/list/work/2/4?lang=eng" class="">Works</a></li>
+									<li><a href="//kass.org.kp/index.php/great/list/great/2/5?lang=eng" class="">Ideology and Theory</a></li>
+									<li><a href="//kass.org.kp/index.php/great/list/great/2/6?lang=eng" class="">Leadership Traits</a></li>
+									<li><a href="//kass.org.kp/index.php/great/list/famous/2/12?lang=eng" class="">Aphorisms</a></li>
+								</ul>
+								<a class="view-all" href="//kass.org.kp/index.php/great/list/great/2?lang=eng">View All</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 p-3" data-hint="great3">
+					<div class="price-table bounceinleft justify-content-center">
+						<h4 class="title js-equal-height">The Respected Comrade <nobr><data class='zonham1'>Kim Jong Un</data></nobr></h4>
+						<div class="list py-5 w-75 mx-auto">
+							<div class="decorative">
+								<ul class="w-50 mx-auto">
+									<li><a href="//kass.org.kp/index.php/great/list/work/3/7?lang=eng" class="">Works</a></li>
+									<li><a href="//kass.org.kp/index.php/great/list/great/3/8?lang=eng" class="">Ideology and Theory</a></li>
+									<li><a href="//kass.org.kp/index.php/great/list/great/3/9?lang=eng" class="">Leadership Traits</a></li>
+									<li><a href="//kass.org.kp/index.php/great/list/famous/3/13?lang=eng" class="">Aphorisms</a></li>
+								</ul>
+								<a class="view-all" href="//kass.org.kp/index.php/great/list/great/3?lang=eng">View All</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+                <!-- 강좌소개  -->
+                
+			
+
+<section id="course" class="fullwidth-section colorlib-course course js-fullheight" data-section="course">
+	<div class="block remove-gap">
+		<div class="container">
+			<div class="title" data-hint="김일성-김정일주의강좌">
+				<h1>Kimilsungism-Kimjongilism Course</h1>
+			</div>
+			<div class="row my-70 justify-content-center">
+				<div class="col-sm-5 col-md-4 col-lg-3 col-xl-2 part bounceinup" data-hint="총론">
+					<a href="//kass.org.kp/index.php/course/list/1?lang=eng">
+						<div class="decorative h-100">
+							<div class="space-90"></div>
+							<div class="course-table bounceinleft justify-content-center">
+								<h4 class="title">Introduction</h4>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="col-sm-5 col-md-4 col-lg-3 col-xl-2 part bounceinup" data-hint="주체사상">
+					<a href="//kass.org.kp/index.php/course/list/2?lang=eng">
+						<div class="decorative h-100">
+							<div class="space-90"></div>
+							<div class="course-table bounceinleft justify-content-center">
+								<h4 class="title">Juche Idea</h4>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="col-sm-5 col-md-4 col-lg-3 col-xl-2 part bounceinup" data-hint="주체의 혁명리론">
+					<a href="//kass.org.kp/index.php/course/list/3?lang=eng">
+						<div class="decorative h-100">
+							<div class="space-80"></div>
+							<div class="course-table bounceinleft justify-content-center">
+								<h4 class="title">Juche Theory of Revolution</h4>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="col-sm-5 col-md-4 col-lg-3 col-xl-2 part bounceinup" data-hint="주체의 령도방법">
+					<a href="//kass.org.kp/index.php/course/list/4?lang=eng">
+						<div class="decorative h-100">
+							<div class="space-80"></div>
+							<div class="course-table bounceinleft justify-content-center">
+								<h4 class="title">Juche Method of Leadership</h4>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="col-sm-5 col-md-4 col-lg-3 col-xl-2 part bounceinup" data-hint="강의">
+					<a href="//kass.org.kp/index.php/course/list/5?lang=eng">
+						<div class="decorative h-100">
+							<div class="space-70"></div>
+							<div class="course-table bounceinleft justify-content-center">
+								<img src="//kass.org.kp/assets/imgs/mike-01.png"class="mike01" alt="icon-mike" />
+								<h4 class="title mb-70">Lectures</h4>
+								<a href="//kass.org.kp/index.php/course/list/5/1?lang=eng" class="d-none"><h5 class="text-white item">Computer Courses</h5></a>
+								<a href="//kass.org.kp/index.php/course/list/5/2?lang=eng" class="d-none"><h5 class="text-white item">Lecture Plans</h5></a>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container d-none">
+		<div class="col-12">
+			<div class="load-more-btn mt-5 text-right">
+			<a href="//kass.org.kp/index.php/course?lang=eng" class="btn kass-btn">View All</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+                <!-- 조선개관  -->
+                
+<section id="koroverview" class="colorlib-koroverview js-fullheight" data-section="koroverview" data-hint="조선개관">
+	<div class="block remove-gap">
+		<div class="container-fluid">
+			<div class="title">
+				<h1>DPRK Panorama</h1>
+			</div>
+			<div class="row my-70 justify-content-center">
+				<div class="col-sm-6 col-md-12 col-lg-6">
+					<div class="screen" style="background-image: none;">
+						<div class="video-wrap">
+							<img class="thumbinals active" src="//kass.org.kp/public/bgslides/13.png" alt=" Notice Board of Politics in the DPRK" id="polity" />
+							<img class="thumbinals" src="//kass.org.kp/public/bgslides/14.png" alt="Notice Board of Economy in the DPRK" id="economy" />
+							<img class="thumbinals" src="//kass.org.kp/public/bgslides/15.png" alt="Notice Board of Culture in the DPRK" id="culture" />
+							<img class="thumbinals" src="//kass.org.kp/public/bgslides/16.png" alt="Notice Board of History in the DPRK" id="history" />
+							<img class="thumbinals" src="//kass.org.kp/public/bgslides/17.png" alt=" Notice Board of Revolutionary Battle Sites and Revolutionary Sites" id="rev_sites" />
+							<img class="thumbinals" src="//kass.org.kp/public/bgslides/18.png" alt="Notice Board of Questions and Answers" id="faq" />
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-12 col-lg-6">
+					<div id="toggle">
+						<a href="//kass.org.kp/index.php/korea/list/korea/1?lang=eng">
+							<h4 class="title bounceinup" data-hint="조선의 정치" data-target="polity">
+								<img src="//kass.org.kp/assets/imgs/policy.png" class="koview-icon" alt="icon-antena" />Politics</h4>
+						</a>
+						<div class="content d-none">
+							<div class="simple-text">
+								<div class="row">
+									<div class="col-md-12">										<a href="//kass.org.kp/index.php/korea/list/korea/1?lang=eng"><span class="view-all sm-font pull-right">View All</span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="//kass.org.kp/index.php/korea/list/korea/2?lang=eng">
+							<h4 class="title bounceinup" data-hint="조선의 경제" data-target="economy">
+								<img src="//kass.org.kp/assets/imgs/economi.png" class="koview-icon" alt="icon-economi" />Economy</h4>
+						</a>
+						<div class="content d-none">
+							<div class="simple-text">
+								<div class="row">
+									<div class="col-md-12">										<a href="//kass.org.kp/index.php/korea/list/korea/2?lang=eng"><span class="view-all sm-font pull-right">View All</span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="//kass.org.kp/index.php/korea/list/korea/3?lang=eng">
+							<h4 class="title bounceinup" data-hint="조선의 문화" data-target="culture">
+								<img src="//kass.org.kp/assets/imgs/calture.png" class="koview-icon" alt="icon-calture" />Culture</h4>
+						</a>
+						<div class="content d-none">
+							<div class="simple-text">
+								<div class="row">
+									<div class="col-md-12">										<a href="//kass.org.kp/index.php/korea/list/korea/3?lang=eng"><span class="view-all sm-font pull-right">View All</span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="//kass.org.kp/index.php/korea/list/korea/4?lang=eng">
+							<h4 class="title bounceinup" data-hint="력사와 력사" data-target="history">
+								<img src="//kass.org.kp/assets/imgs/history.png" class="koview-icon" alt="icon-history" />History and Geography </h4>
+						</a>
+						<div class="content d-none">
+							<div class="simple-text">
+								<div class="row">
+									<div class="col-md-12">										<a href="//kass.org.kp/index.php/korea/list/korea/4?lang=eng"><span class="view-all sm-font pull-right">View All</span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="//kass.org.kp/index.php/korea/list/korea/5?lang=eng">
+							<h4 class="title bounceinup" data-hint="혁명전적지,사적지" data-target="rev_sites">
+								<img src="//kass.org.kp/assets/imgs/rev-flag.png" class="koview-icon" alt="icon-rev-flag" />Revolutionary Battle Sites, Revolutionary Sites</h4>
+						</a>
+						<div class="content d-none">
+							<div class="simple-text">
+								<div class="row">
+									<div class="col-md-12">										<a href="//kass.org.kp/index.php/korea/list/korea/5?lang=eng"><span class="view-all sm-font pull-right">View All</span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="//kass.org.kp/index.php/korea/list/korea/6?lang=eng">
+							<h4 class="title bounceinup" data-hint="질문과 대답" data-target="faq">
+								<img src="//kass.org.kp/assets/imgs/faq.png" class="koview-icon" alt="icon-faq" />Q&amp;A about the DPRK</h4>
+						</a>
+						<div class="content d-none">
+							<div class="simple-text">
+								<div class="row">
+									<div class="col-md-12">										<a href="//kass.org.kp/index.php/korea/list/korea/6?lang=eng"><span class="view-all sm-font pull-right">View All</span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+                <!-- 세계가 본 조선  -->
+                
+<section id="wvkorea" class="wvkorea colorlib-wvkorea" data-section="wvkorea" data-hint="세계가 본 조선">
+	<div class="block remove-gap">
+		<div class="container-fluid">
+			<div class="title">
+				<h1 class="outline">The DPRK Seen by the World</h1>
+			</div>
+			<div class="row my-70 justify-content-center">
+				<div class="domain col-sm-6 col-xl-3 slideinleft p-3" data-hint="위인 김일성">
+					<a href="//kass.org.kp/index.php/wvkorea/list/wvkorea/1?lang=eng">
+						<div class="pane bg-img bg-overlay bo00 h-100 py-50" style="background: url(//kass.org.kp/public/bgslides/wvkorea.jpg) no-repeat; background-size: 100% 100%;">
+							<h4 class="title mb-0">Great Person <nobr><data class='zonham1'>Kim Il Sung</data></nobr></h4>
+						</div>
+					</a>
+				</div>
+				<div class="domain col-sm-6 col-xl-3 slideinright p-3" data-hint="위인 김정일">
+					<a href="//kass.org.kp/index.php/wvkorea/list/wvkorea/2?lang=eng">
+						<div class="pane bg-img bg-overlay bo00 h-100 py-50" style="background: url(//kass.org.kp/public/bgslides/wvkorea.jpg) no-repeat; background-size: 100% 100%;">
+							<h4 class="title mb-0">Great Person <nobr><data class='zonham1'>Kim Jong Il</data></nobr></h4>
+						</div>
+					</a>
+				</div>
+				<div class="domain col-sm-6 col-xl-3 slideinleft p-3" data-hint="위인 김정은">
+					<a href="//kass.org.kp/index.php/wvkorea/list/wvkorea/3?lang=eng">
+						<div class="pane bg-img bg-overlay bo00 h-100 py-50" style="background: url(//kass.org.kp/public/bgslides/wvkorea.jpg) no-repeat; background-size: 100% 100%;">
+							<h4 class="title mb-0">Great Person <nobr><data class='zonham1'>Kim Jong Un</data></nobr></h4>
+						</div>
+					</a>
+				</div>
+				<div class="domain col-sm-6 col-xl-3 slideinright p-3" data-hint="리상향">
+					<a href="//kass.org.kp/index.php/wvkorea/list/wvkorea/4?lang=eng">
+						<div class="pane bg-img bg-overlay bo00 h-100 py-50" style="background: url(//kass.org.kp/public/bgslides/23.jpg) no-repeat; background-size: 100% 100%;">
+							<h4 class="title mb-0 outline">Ideal Land</h4>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="row mx-n15 d-none">
+				<div class="col-12">
+					<div class="load-more-btn mt-5 text-right">
+					<a href="//kass.org.kp/index.php/wvkorea?lang=eng" class="btn kass-btn">View All</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+                <!-- 사진소개  -->
+                
+<section id="photo" class="photo colorlib-photo" data-section="photo" data-hint="다매체-사진">
+	<div class="title">
+		<h1>Photo</h1>
+	</div>
+	<div class="container-fluid photos-wrap">
+		<ul id="thumbs" class="row portfolio my-70 col-12 justify-content-center">			<li class="item-thumbs col-12 col-sm-6 col-md-4 col-xl-3 design pt-3" data-id="id-0">
+				<a class="fancybox1 fancybox.iframe1 fancybox-thumbs1" data-fancybox-group="thumb"
+					data-title="80<sup>th</sup> Anniversary of Korea’s Liberation Celebrated with Splendour" title="80th Anniversary of Korea’s Liberation Celebrated with Splendour"  target="_blank"
+					href="//kass.org.kp/index.php/photo_view/5617?lang=eng"
+					onclick="hit('multi', '2', '5617')">
+					<div class="image_pane" style="position: relative;">
+						<img src="//kass.org.kp/public/media/image/kor/thumbs/5617 (1).jpg" alt="80th Anniversary of Korea’s Liberation Celebrated with Splendour">
+						<span class="count-tab">19</span>
+					</div>
+					<span class="photo_title text-center font17" style="display: block;">80<sup>th</sup> Anniversary of Korea’s Liberation Celebrated with Splendour</span></a>
+			</li>			<li class="item-thumbs col-12 col-sm-6 col-md-4 col-xl-3 design pt-3" data-id="id-0">
+				<a class="fancybox1 fancybox.iframe1 fancybox-thumbs1" data-fancybox-group="thumb"
+					data-title="72<sup>nd</sup> Anniversary of Victory in the Great Fatherland Liberation War Celebrated with Splendour" title="72nd Anniversary of Victory in the Great Fatherland Liberation War Celebrated with Splendour"  target="_blank"
+					href="//kass.org.kp/index.php/photo_view/5579?lang=eng"
+					onclick="hit('multi', '2', '5579')">
+					<div class="image_pane" style="position: relative;">
+						<img src="//kass.org.kp/public/media/image/kor/thumbs/5545 (1).jpg" alt="72nd Anniversary of Victory in the Great Fatherland Liberation War Celebrated with Splendour">
+						<span class="count-tab">34</span>
+					</div>
+					<span class="photo_title text-center font17" style="display: block;">72<sup>nd</sup> Anniversary of Victory in the Great Fatherland Liberation War Celebrated with Splendour</span></a>
+			</li>			<li class="item-thumbs col-12 col-sm-6 col-md-4 col-xl-3 design pt-3" data-id="id-0">
+				<a class="fancybox1 fancybox.iframe1 fancybox-thumbs1" data-fancybox-group="thumb"
+					data-title="The 79<sup>th</sup> Founding Anniversary of the Korean Children’s Union Celebrated with Splendour" title="The 79th Founding Anniversary of the Korean Children’s Union Celebrated with Splendour"  target="_blank"
+					href="//kass.org.kp/index.php/photo_view/5521?lang=eng"
+					onclick="hit('multi', '2', '5521')">
+					<div class="image_pane" style="position: relative;">
+						<img src="//kass.org.kp/public/media/image/kor/thumbs/5498 (1).jpg" alt="The 79th Founding Anniversary of the Korean Children’s Union Celebrated with Splendour">
+						<span class="count-tab">23</span>
+					</div>
+					<span class="photo_title text-center font17" style="display: block;">The 79<sup>th</sup> Founding Anniversary of the Korean Children’s Union Celebrated with Splendour</span></a>
+			</li>			<li class="item-thumbs col-12 col-sm-6 col-md-4 col-xl-3 design pt-3" data-id="id-0">
+				<a class="fancybox1 fancybox.iframe1 fancybox-thumbs1" data-fancybox-group="thumb"
+					data-title="We Are Happy Children" title="We Are Happy Children"  target="_blank"
+					href="//kass.org.kp/index.php/photo_view/5478?lang=eng"
+					onclick="hit('multi', '2', '5478')">
+					<div class="image_pane" style="position: relative;">
+						<img src="//kass.org.kp/public/media/image/kor/thumbs/5478 (1).jpg" alt="We Are Happy Children">
+						<span class="count-tab">17</span>
+					</div>
+					<span class="photo_title text-center font17" style="display: block;">We Are Happy Children</span></a>
+			</li>			<li class="item-thumbs col-12 col-sm-6 col-md-4 col-xl-3 design pt-3" data-id="id-0">
+				<a class="fancybox1 fancybox.iframe1 fancybox-thumbs1" data-fancybox-group="thumb"
+					data-title="The DPRK young people spend their youthful days with revolutionary arms" title="The DPRK young people spend their youthful days with revolutionary arms"  target="_blank"
+					href="//kass.org.kp/index.php/photo_view/5472?lang=eng"
+					onclick="hit('multi', '2', '5472')">
+					<div class="image_pane" style="position: relative;">
+						<img src="//kass.org.kp/public/media/image/kor/thumbs/5472 (1).jpg" alt="The DPRK young people spend their youthful days with revolutionary arms">
+						<span class="count-tab">6</span>
+					</div>
+					<span class="photo_title text-center font17" style="display: block;">The DPRK young people spend their youthful days with revolutionary arms</span></a>
+			</li>			<li class="item-thumbs col-12 col-sm-6 col-md-4 col-xl-3 design pt-3" data-id="id-0">
+				<a class="fancybox1 fancybox.iframe1 fancybox-thumbs1" data-fancybox-group="thumb"
+					data-title="The 9<sup>th</sup> April Spring People’s Art Festival Held in Celebration of President <nobr><data class='zonham1'>Kim Il Sung</data></nobr>’s 113<sup>th</sup> Birth Anniversary" title="The 9th April Spring People’s Art Festival Held in Celebration of President Kim Il Sung’s 113th Birth Anniversary"  target="_blank"
+					href="//kass.org.kp/index.php/photo_view/5451?lang=eng"
+					onclick="hit('multi', '2', '5451')">
+					<div class="image_pane" style="position: relative;">
+						<img src="//kass.org.kp/public/media/image/kor/thumbs/5451 (1).jpg" alt="The 9th April Spring People’s Art Festival Held in Celebration of President Kim Il Sung’s 113th Birth Anniversary">
+						<span class="count-tab">17</span>
+					</div>
+					<span class="photo_title text-center font17" style="display: block;">The 9<sup>th</sup> April Spring People’s Art Festival Held in Celebration of President <nobr><data class='zonham1'>Kim Il Sung</data></nobr>’s 113<sup>th</sup> Birth Anniversary</span></a>
+			</li>			<li class="item-thumbs col-12 col-sm-6 col-md-4 col-xl-3 design pt-3" data-id="id-0">
+				<a class="fancybox1 fancybox.iframe1 fancybox-thumbs1" data-fancybox-group="thumb"
+					data-title="Inauguration Ceremony of 10 000 Flats at Third Stage in Hwasong Area Takes Place with Splendour" title="Inauguration Ceremony of 10 000 Flats at Third Stage in Hwasong Area Takes Place with Splendour"  target="_blank"
+					href="//kass.org.kp/index.php/photo_view/5441?lang=eng"
+					onclick="hit('multi', '2', '5441')">
+					<div class="image_pane" style="position: relative;">
+						<img src="//kass.org.kp/public/media/image/kor/thumbs/5430 (1).jpg" alt="Inauguration Ceremony of 10 000 Flats at Third Stage in Hwasong Area Takes Place with Splendour">
+						<span class="count-tab">10</span>
+					</div>
+					<span class="photo_title text-center font17" style="display: block;">Inauguration Ceremony of 10 000 Flats at Third Stage in Hwasong Area Takes Place with Splendour</span></a>
+			</li>			<li class="item-thumbs col-12 col-sm-6 col-md-4 col-xl-3 design pt-3" data-id="id-0">
+				<a class="fancybox1 fancybox.iframe1 fancybox-thumbs1" data-fancybox-group="thumb"
+					data-title="DPRK Women Support Country with Patriotic Loyalty" title="DPRK Women Support Country with Patriotic Loyalty"  target="_blank"
+					href="//kass.org.kp/index.php/photo_view/5409?lang=eng"
+					onclick="hit('multi', '2', '5409')">
+					<div class="image_pane" style="position: relative;">
+						<img src="//kass.org.kp/public/media/image/kor/thumbs/5409 (1).jpg" alt="DPRK Women Support Country with Patriotic Loyalty">
+						<span class="count-tab">21</span>
+					</div>
+					<span class="photo_title text-center font17" style="display: block;">DPRK Women Support Country with Patriotic Loyalty</span></a>
+			</li>		</ul>
+	</div>
+	<div class="container row">
+		<div class="col-12">
+			<div class="load-more-btn mr-15 text-right">
+				<a href="//kass.org.kp/index.php/multi/photo?lang=eng" class="btn kass-btn">View All</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+                <!-- 동영상소개  -->
+                
+<section id="video" class="colorlib-video" data-section="video">
+	<div class="block remove-gap">
+		<div class="container-fluid container-lg">
+			<div class="title">
+				<h1>Video</h1>
+			</div>
+			<style>
+				#multimedia-3d-carousel-fluidwidth { z-index: 99; }
+				div.JH3DCDisplayObject div:nth-child(2) {
+					background-color: rgb(207 207 207) !important;
+
+				}
+				@media screen and (min-width: 960px) {
+					#multimedia-3d-carousel-fluidwidth { padding-left: 150px !important; }
+				}
+				@media screen and (max-width: 959px){
+					#multimedia-3d-carousel-fluidwidth { padding-left: 0 !important; width: 100% !important; }
+				}
+			</style>
+			<div id="multimedia-3d-carousel" class="carousel-3d-classic" style="margin-top: 0;"></div>
+			<div id="multimedia-carousel-data" style="display: none;">
+				<div data-cat="category-one">					<ul>
+						<li data-url="//kass.org.kp/index.php/video_view/5613?lang=eng" data-target="_blank" data-alt="Video"></li>
+						<li class="img-thumbnail" data-thumbnail-path="//kass.org.kp/public/media/video/eng/5613/5613.gif" data-alt="Request of Victorious Wartime Generation"></li>
+					</ul>					<ul>
+						<li data-url="//kass.org.kp/index.php/video_view/5616?lang=eng" data-target="_blank" data-alt="Video"></li>
+						<li class="img-thumbnail" data-thumbnail-path="//kass.org.kp/public/media/video/eng/5616/5616.gif" data-alt="Revolutionary Ideology of the Great Comrade Kim Jong UnRevolutionary Philosophy (2)"></li>
+					</ul>					<ul>
+						<li data-url="//kass.org.kp/index.php/video_view/5615?lang=eng" data-target="_blank" data-alt="Video"></li>
+						<li class="img-thumbnail" data-thumbnail-path="//kass.org.kp/public/media/video/eng/5615/5615.gif" data-alt="Revolutionary Ideology of the Great Comrade Kim Jong UnRevolutionary Philosophy (1)"></li>
+					</ul>					<ul>
+						<li data-url="//kass.org.kp/index.php/video_view/5614?lang=eng" data-target="_blank" data-alt="Video"></li>
+						<li class="img-thumbnail" data-thumbnail-path="//kass.org.kp/public/media/video/eng/5614/5614.gif" data-alt="Revolutionary Ideology of the Great Comrade Kim Jong Un(Essence of the Revolutionary Ideology of the Great Comrade Kim Jong Un)"></li>
+					</ul>					<ul>
+						<li data-url="//kass.org.kp/index.php/video_view/5495?lang=eng" data-target="_blank" data-alt="Video"></li>
+						<li class="img-thumbnail" data-thumbnail-path="//kass.org.kp/public/media/video/eng/5495/5495.gif" data-alt="Daily Life in Nursery"></li>
+					</ul>					<ul>
+						<li data-url="//kass.org.kp/index.php/video_view/5496?lang=eng" data-target="_blank" data-alt="Video"></li>
+						<li class="img-thumbnail" data-thumbnail-path="//kass.org.kp/public/media/video/eng/5496/5496.gif" data-alt="Our Kindergarten Full of Happiness (1)"></li>
+					</ul>					<ul>
+						<li data-url="//kass.org.kp/index.php/video_view/5497?lang=eng" data-target="_blank" data-alt="Video"></li>
+						<li class="img-thumbnail" data-thumbnail-path="//kass.org.kp/public/media/video/eng/5497/5497.gif" data-alt="Our Kindergarten Full of Happiness (2)"></li>
+					</ul>					<ul>
+						<li data-url="//kass.org.kp/index.php/video_view/5471?lang=eng" data-target="_blank" data-alt="Video"></li>
+						<li class="img-thumbnail" data-thumbnail-path="//kass.org.kp/public/media/video/eng/5471/5471.gif" data-alt="Sportspersons Added Lustre to Country with Gold Medals (2)"></li>
+					</ul>				</div>
+			</div>
+			<div class="row mx-n15">
+				<div class="col-12">
+					<div class="load-more-btn mt-5 mr-50 text-right">
+					<a href="//kass.org.kp/index.php/multi/video?lang=eng" class="btn kass-btn" target="_blank">View All</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+						
+                <!-- 전자도서소개  -->
+                
+<section id="ebook" class="colorlib-ebook" data-section="ebook">
+	<div class="block blackish">
+		<div class="container-fluid">
+			<div class="title">
+				<h1>Books and Magazines</h1>
+			</div>
+			<div class="row my-70 justify-content-center">
+				<div class="col-12 col-sm-8 col-md-12 col-lg-8 mt-30">
+					<div class="book-label row pl-5">
+						<img src="//kass.org.kp/assets/imgs/book_icon.png" alt="book-icon" class="" style="max-width: 80px; max-height: 90px" />
+						<i class="fa fa-book d-none"></i>
+						<h3 class="bukul ml-4">Books</h3>
+					</div>
+					<div class="container row">						<div class="d-inline-block col-12 py-3 align-top books-item bounceinleft">
+							<div class="row">
+								<div class="col-sm-2 px-0 text-center book-cover latest mx-auto w-auto">
+									<a href="//kass.org.kp/index.php/ebook/view/64?lang=eng" target="_blank">
+										<img src="//kass.org.kp/public/media/cover/eng/l_019.png" class="cover" alt="A Person Brought by Kkotpun" />
+									</a>
+								</div>
+								<div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+									<h5 class="title ml-3 mb-3 text-left">A Person Brought by Kkotpun</h6>
+									<p class="comment chongbong"></p>
+								</div>
+							</div>
+						</div>						<div class="d-inline-block col-12 py-3 align-top books-item bounceinleft">
+							<div class="row">
+								<div class="col-sm-2 px-0 text-center book-cover latest mx-auto w-auto">
+									<a href="//kass.org.kp/index.php/ebook/view/32?lang=eng" target="_blank">
+										<img src="//kass.org.kp/public/media/cover/eng/l_001_2.png" class="cover" alt="Train of Life(1)" />
+									</a>
+								</div>
+								<div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+									<h5 class="title ml-3 mb-3 text-left">Train of Life(1)</h6>
+									<p class="comment chongbong">“Train of Life” is the long true-story literature depicting impressively the bibliography of Vishwanath, c<nobr>hief</nobr> editor of well-known political newspaper “Indian Times” and general-director of world-class advertising company “interads”.</p>
+								</div>
+							</div>
+						</div>						<div class="d-inline-block col-12 py-3 align-top books-item bounceinleft">
+							<div class="row">
+								<div class="col-sm-2 px-0 text-center book-cover latest mx-auto w-auto">
+									<a href="//kass.org.kp/index.php/ebook/view/78?lang=eng" target="_blank">
+										<img src="//kass.org.kp/public/media/cover/eng/l_001_2.png" class="cover" alt="Train of Life(2)" />
+									</a>
+								</div>
+								<div class="col-sm-9 col-md-10 col-lg-9 pt-3 pt-sm-0 text-center text-sm-left metadata">
+									<h5 class="title ml-3 mb-3 text-left">Train of Life(2)</h6>
+									<p class="comment chongbong">“Train of Life” is the long true-story literature depicting impressively the bibliography of Vishwanath, c<nobr>hief</nobr> editor of well-known political newspaper “Indian Times” and general-director of world-class advertising company “interads”.</p>
+								</div>
+							</div>
+						</div>					</div>
+				</div>
+				<div class="col-12 col-sm-4 col-md-12 col-lg-4 mt-30 row messagepart">
+					<div class="col-12">
+						<div class="message-header row">
+							<div class="book-label">
+								<i class="fa fa-bullhorn d-none"></i>
+								<h3 class="bukul ml-5 ml-lg-0">KASS Bulletin </h3>
+							</div>
+						</div>
+						<div class="message-kor">
+							<div class="list">								<div class="col-md-10 col-md-offset-1 py-3 messages-item bounceinright">
+									<a href="//kass.org.kp/index.php/message/view/51?lang=eng" target="_blank">
+										<img src="//kass.org.kp/assets/imgs/message/message_eng.jpg" class="cover" alt="No. 1, 2025" />
+										<p class="hos text-center">No. 1, 2025</p>
+									</a>
+								</div>								<div class="col-md-10 col-md-offset-1 py-3 messages-item bounceinright">
+									<a href="//kass.org.kp/index.php/message/view/50?lang=eng" target="_blank">
+										<img src="//kass.org.kp/assets/imgs/message/message_eng.jpg" class="cover" alt="No. 2, 2024" />
+										<p class="hos text-center">No. 2, 2024</p>
+									</a>
+								</div>								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mx-5">
+				<div class="col-12">
+					<div class="load-more-btn mt-5 text-right">
+					<a href="//kass.org.kp/index.php/ebook?lang=eng" class="btn kass-btn">View All</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+                <!-- 연구조직활동소식 -->
+                					
+
+<section id="news" class="colorlib-news action_news" data-section="news" data-hint="연구조직활동소식">
+	<div class="block remove-gap">
+		<div class="container-fluid">
+			<div class="title">
+				<h1>News of study groups’ activities</h1>
+			</div>
+			<div class="row my-70 px-3">
+				<div class="col-sx-12 col-md-12 col-lg-5">
+					<div id="action_photos" class="carousel slide float-left photos"  data-ride="carousel" 
+						style="padding-top: 20px; max-width: 500px; height: auto;">
+						<!-- The slideshow -->
+						<div class="carousel-inner">							<div class="carousel-item <?if ($key == 0): ?>active<?endif;?>">
+								<img class="img-thumbnail" src="//kass.org.kp/public/intro_kass/img5.jpg" alt="조선사회과학자협회활동사진5" >
+							</div>							<div class="carousel-item <?if ($key == 0): ?>active<?endif;?>">
+								<img class="img-thumbnail" src="//kass.org.kp/public/intro_kass/img6.jpg" alt="조선사회과학자협회활동사진6" >
+							</div>							<div class="carousel-item <?if ($key == 0): ?>active<?endif;?>">
+								<img class="img-thumbnail" src="//kass.org.kp/public/intro_kass/img4.jpg" alt="조선사회과학자협회활동사진4" >
+							</div>							<div class="carousel-item <?if ($key == 0): ?>active<?endif;?>">
+								<img class="img-thumbnail" src="//kass.org.kp/public/intro_kass/img3.jpg" alt="조선사회과학자협회활동사진3" >
+							</div>							<div class="carousel-item <?if ($key == 0): ?>active<?endif;?>">
+								<img class="img-thumbnail" src="//kass.org.kp/public/intro_kass/img2.jpg" alt="조선사회과학자협회활동사진2" >
+							</div>							<div class="carousel-item <?if ($key == 0): ?>active<?endif;?>">
+								<img class="img-thumbnail" src="//kass.org.kp/public/intro_kass/img1.jpg" alt="조선사회과학자협회활동사진1" >
+							</div>						</div>
+
+						<!-- Left and right controls -->
+						<a class="carousel-control-prev" href="#action_photos" data-slide="prev">
+							<span class="carousel-control-prev-icon"></span>
+						</a>
+						<a class="carousel-control-next" href="#action_photos" data-slide="next">
+							<span class="carousel-control-next-icon"></span>
+						</a>
+					</div>
+				</div>
+				<div id="action_lists" class="col-sx-12 col-md-12 col-lg-7 pt-3 pl-4 lists">					<div class="item d-flex">
+						<div class="no pr-2 flex-nowrap">1. </div>
+						<div class="caption flex-grow-1">
+							<a href="//kass.org.kp/index.php/news/view/1057?lang=eng" class="chongbong">Commemorative Lecture Held in Romania</a>						</div>
+						<div class="align-self-end"><span class="pub-date">2025.9.5</span></div>
+					</div>
+										<div class="item d-flex">
+						<div class="no pr-2 flex-nowrap">2. </div>
+						<div class="caption flex-grow-1">
+							<a href="//kass.org.kp/index.php/news/view/1058?lang=eng" class="chongbong">Preparatory Committees Formed in Many Countries</a>						</div>
+						<div class="align-self-end"><span class="pub-date">2025.9.5</span></div>
+					</div>
+										<div class="item d-flex">
+						<div class="no pr-2 flex-nowrap">3. </div>
+						<div class="caption flex-grow-1">
+							<a href="//kass.org.kp/index.php/news/view/1059?lang=eng" class="chongbong">Joint Seminar Held in Germany</a>						</div>
+						<div class="align-self-end"><span class="pub-date">2025.9.5</span></div>
+					</div>
+										<div class="item d-flex">
+						<div class="no pr-2 flex-nowrap">4. </div>
+						<div class="caption flex-grow-1">
+							<a href="//kass.org.kp/index.php/news/view/1060?lang=eng" class="chongbong">Seminar of Juche Idea Study Group Held in DR Congo</a>						</div>
+						<div class="align-self-end"><span class="pub-date">2025.9.5</span></div>
+					</div>
+										<div class="item d-flex">
+						<div class="no pr-2 flex-nowrap">5. </div>
+						<div class="caption flex-grow-1">
+							<a href="//kass.org.kp/index.php/news/view/1056?lang=eng" class="chongbong">Preparatory Committee for Celebration Formed in Khabarovsk of Russia</a>						</div>
+						<div class="align-self-end"><span class="pub-date">2025.8.20</span></div>
+					</div>
+										<div class="item d-flex">
+						<div class="no pr-2 flex-nowrap">6. </div>
+						<div class="caption flex-grow-1">
+							<a href="//kass.org.kp/index.php/news/view/1053?lang=eng" class="chongbong">Joint Statement Issued in Serbia</a>						</div>
+						<div class="align-self-end"><span class="pub-date">2025.7.1</span></div>
+					</div>
+									</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="col-12">
+				<div class="load-more-btn mt-5 text-right">
+					<a href="//kass.org.kp/index.php/news?lang=eng" class="btn kass-btn">View All</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+                <!-- 조선사회과학자협회소개  -->
+                
+<section id="kass" class="colorlib-kass kass" data-section="kass">
+	<div class="container my-30" data-hint="조선사회과학자협회소개">
+		<div class="title mb-70">
+			<h1>KASS</h1>
+		</div>
+		<div class="context">
+					<p>The Association was founded on November 15, 1979.</p>
+			<p>The Association is a national non-permanent academic organization embracing scholars from education and research institutions of social sciences in the DPR Korea.</p>
+			<p>The mission of the Association is (A) to coordinate in a unified way the research activities of all societies and scholars of social sciences in the DPR Korea and promote the development of the social sciences of the country by actively encouraging and supporting their research activities and (B) to make active efforts to develop academic exchange and cooperation with social science research institutions, organizations, educational institutions and individual scholars in different countries over the world.</p>
+			<p>Address of the Association: Taedongmun-dong, Junggu District, Pyongyang, DPR Korea.</p>
+
+					<p>&nbsp;</p>
+			<p class="text-center">Democratic People's Republic of Korea Pyongyang City Mailbox No. 128</p>
+			<p class="text-center"><i class="fa fa-envelope"></i> kasssg@star-co.net.kp</p>
+		</div>
+	</div>
+</section>
+
+                <!-- 외부싸이트소개  -->
+                
+<section id="sitemap" class="colorlib-sitemap" data-section="sitemap">
+	<div class="block">
+		<div class="container">
+			<div class="site-back"></div>
+			<div class="row">
+				<h4 class="site-label">Sites</h4>
+			</div>
+			<div class="siteline-carousel fadeinleft">
+				<div class="site-line">					<div class="site">
+						<a href="//www.rodong.rep.kp" title="Rodong Sinmun" target="_blank" onclick="hit('sitemap', '1', '0')">
+							<img class="img-thumbnail" src="//kass.org.kp/public/sitemap/www.rodong.rep.kp.png" alt="Rodong Sinmun" /></a>
+					</div>					<div class="site">
+						<a href="//www.kcna.kp" title="KCNA" target="_blank" onclick="hit('sitemap', '2', '0')">
+							<img class="img-thumbnail" src="//kass.org.kp/public/sitemap/www.kcna.kp.png" alt="KCNA" /></a>
+					</div>					<div class="site">
+						<a href="//www.mfa.gov.kp" title="DPRK Ministry of Foreign Affairs" target="_blank" onclick="hit('sitemap', '3', '0')">
+							<img class="img-thumbnail" src="//kass.org.kp/public/sitemap/www.mfa.gov.kp.png" alt="DPRK Ministry of Foreign Affairs" /></a>
+					</div>					<div class="site">
+						<a href="//www.yongsaeng.org.kp" title="Eternity" target="_blank" onclick="hit('sitemap', '4', '0')">
+							<img class="img-thumbnail" src="//kass.org.kp/public/sitemap/www.yongsaeng.org.kp.png" alt="Eternity" /></a>
+					</div>					<div class="site">
+						<a href="//www.naenara.com.kp" title="Nanara" target="_blank" onclick="hit('sitemap', '5', '0')">
+							<img class="img-thumbnail" src="//kass.org.kp/public/sitemap/www.naenara.com.kp.png" alt="Nanara" /></a>
+					</div>					<div class="site">
+						<a href="//www.dprkportal.kp" title="Kwangya" target="_blank" onclick="hit('sitemap', '6', '0')">
+							<img class="img-thumbnail" src="//kass.org.kp/public/sitemap/www.dprkportal.kp.png" alt="Kwangya" /></a>
+					</div>					<div class="site">
+						<a href="//www.korean-books.com.kp" title="DPRK Publications " target="_blank" onclick="hit('sitemap', '7', '0')">
+							<img class="img-thumbnail" src="//kass.org.kp/public/sitemap/www.korean-books.com.kp.png" alt="DPRK Publications " /></a>
+					</div>					<div class="site">
+						<a href="//www.korart.sca.kp" title="Korean Art" target="_blank" onclick="hit('sitemap', '8', '0')">
+							<img class="img-thumbnail" src="//kass.org.kp/public/sitemap/www.korart.sca.kp.png" alt="Korean Art" /></a>
+					</div>							
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+                <!-- 새 자료게재소식알림부  -->
+                
+<div id="notice_modal" class="notice modal fade justify-content-center js-fullheight" role="dialog" data-hint="알리는 소식">
+  <div class="modal-dialog modal-lg mx-auto">
+    <div class="modal-content" style="background: none; border: 0;">
+      <div class="modal-header p-0 border-0 justify-content-center">
+        <h4 class="title chongbong">Notice</h4>
+        <button type="button" class="close pull-right d-none" data-dismiss="modal"><span style="font-weight: bolder;color:#FDFCFC;">×</span></button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer border-0 justify-content-end">
+        <input type="checkbox" id="chknoalert" class="chknoalert mr-3"> 
+        <label class="mr-5 chongbong text-white">No show for now</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+            </div>
+            <!-- end:colorlib-main -->
+        </div>
+        <!-- end:container-wrap -->
+    </div>
+
+    
+    <!-- jQuery -->
+<script type="text/javascript">
+    let base_url = '//kass.org.kp/';
+    let site_url = '//kass.org.kp/index.php';
+    let _token   = '94ba283c650dbe44704c1e2138037ef4';
+    let datapath = 'public/';
+    let DATAPATH = 'public/';
+    let lang     = 'eng';
+</script>
+<script src="//kass.org.kp/assets/4fp/libs/popper/1.16.0/umd/popper.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/libs/jquery/ui/1.11.3/jquery-ui.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/libs/nivo-slider/jquery.nivo.slider.pack.js"></script>
+<script src="//kass.org.kp/assets/4fp/libs/owl-carousel/2.2.1/owl.carousel.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/libs/fancybox/2.1.5/jquery.fancybox-thumbs.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/libs/mobile/fastclick.js"></script>
+<script src="//kass.org.kp/assets/4fp/libs/mobile/swiper.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/libs/colorlib/vendor/parallax100/parallax100.js"></script>
+<script> $('.parallax100').parallax100(); </script>
+<script src="//kass.org.kp/assets/4fp/js/modernizr-2.6.2.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/js/plugins_add.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/js/plugins.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/libs/colorlib/vendor/isotope/imagesloaded.pkgd.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/libs/colorlib/vendor/isotope/isotope.pkgd.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/js/active.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/libs/jh/jh3dcarousel/js/JHUltimate3DCarousel.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/libs/jh/jh3dcarousel/js/JH3DCarousel.min.js"></script>
+
+<script src="//kass.org.kp/assets/4fp/js/revolution/jquery.themepunch.plugins.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/js/revolution/jquery.themepunch.revolution.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/js/onscreen.min.js?20241016.2.x.0"></script>
+<script src="//kass.org.kp/assets/4fp/js/index.min.js?20241016.2.x.0"></script>
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="//kass.org.kp/assets/4fp/libs/assets/ie8-responsive-file-warning.js"></script><![endif]-->
+<script	src="//kass.org.kp/assets/4fp/libs/assets/ie-emulation-modes-warning.js"></script>
+<!-- IE10 agent hack for Surface/desktop Windows 8 bug -->
+<script	src="//kass.org.kp/assets/4fp/libs/assets/ie10-viewport-bug-workaround.js"></script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="//kass.org.kp/assets/4fp/libs/assets/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//kass.org.kp/assets/4fp/libs/assets/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</body>
+
+</html>

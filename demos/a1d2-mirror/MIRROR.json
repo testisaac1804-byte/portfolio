@@ -1,0 +1,119 @@
+{
+ "site": "https://a1d2.org",
+ "captured": "2026-10-21",
+ "files_count": 12,
+ "total_bytes": 234169,
+ "method": "Static same-origin capture of the three HTML pages, the stylesheet and every referenced script. No origin discovery attempted. Rewrites: q/index.html and q/stats referenced root-absolute paths (/q/…); those three lines became relative. Everything else, including Cloudflare's injected Web Analytics beacon, is byte-identical.",
+ "files": {
+  "index.html": {
+   "origin": "/",
+   "status": 200,
+   "origin_bytes": 4584,
+   "origin_sha256": "d9afc85b03ed4f741c07d75410259692e7460b9f264c5189bf37e67d5c98284e",
+   "local_bytes": 4584,
+   "local_sha256": "d9afc85b03ed4f741c07d75410259692e7460b9f264c5189bf37e67d5c98284e",
+   "identical": true
+  },
+  "style.css": {
+   "origin": "/style.css",
+   "status": 200,
+   "origin_bytes": 8770,
+   "origin_sha256": "06e790250c58e5b027efa02b3d792f6cf4557b669d5cccb70c6ee12ec038e2a2",
+   "local_bytes": 8770,
+   "local_sha256": "06e790250c58e5b027efa02b3d792f6cf4557b669d5cccb70c6ee12ec038e2a2",
+   "identical": true
+  },
+  "404.html": {
+   "origin": "/this-page-does-not-exist",
+   "status": 404,
+   "origin_bytes": 970,
+   "origin_sha256": "63a32f6f7c7de3638a577662d41c7e2dd7bba84299b153e1e5c9621aadbdf985",
+   "local_bytes": 970,
+   "local_sha256": "63a32f6f7c7de3638a577662d41c7e2dd7bba84299b153e1e5c9621aadbdf985",
+   "identical": true
+  },
+  "q/index.html": {
+   "origin": "/q/",
+   "status": 200,
+   "origin_bytes": 6408,
+   "origin_sha256": "d596eb05b4ac2dc1af4a986c011b52de13c5502c60ed26e8a58d7cf23ccaf3ff",
+   "local_bytes": 6404,
+   "local_sha256": "b8caf2e05abb40dd53558041ad9d9eb9ba0679935b9679b677ef0d6283126763",
+   "identical": false,
+   "edit": "root-absolute refs rewritten to relative (./…) so the mirror works under a subpath"
+  },
+  "q/main.js": {
+   "origin": "/q/main.js",
+   "status": 200,
+   "origin_bytes": 13400,
+   "origin_sha256": "9181f251d78fd23a61e4c3a759095bf7af27594c2f1cf7e3bee5b50d0801f1a1",
+   "local_bytes": 13400,
+   "local_sha256": "9181f251d78fd23a61e4c3a759095bf7af27594c2f1cf7e3bee5b50d0801f1a1",
+   "identical": true
+  },
+  "q/compress.js": {
+   "origin": "/q/compress.js",
+   "status": 200,
+   "origin_bytes": 128993,
+   "origin_sha256": "e7622a2cccb65587455d1f96cf90f11fa28156c8b2e0e8ce399486de8aa29879",
+   "local_bytes": 128993,
+   "local_sha256": "e7622a2cccb65587455d1f96cf90f11fa28156c8b2e0e8ce399486de8aa29879",
+   "identical": true
+  },
+  "q/alphabets.js": {
+   "origin": "/q/alphabets.js",
+   "status": 200,
+   "origin_bytes": 56952,
+   "origin_sha256": "c5dd0dee3b3d87c75ef780371d86df8229c2905d3e20f60bada225b0a644f3b0",
+   "local_bytes": 56952,
+   "local_sha256": "c5dd0dee3b3d87c75ef780371d86df8229c2905d3e20f60bada225b0a644f3b0",
+   "identical": true
+  },
+  "q/stats.js": {
+   "origin": "/q/stats.js",
+   "status": 200,
+   "origin_bytes": 2168,
+   "origin_sha256": "6d726e1b4c599a917812ef1d642f2f86486b521af079824f32b7eebfc7d347cd",
+   "local_bytes": 2168,
+   "local_sha256": "6d726e1b4c599a917812ef1d642f2f86486b521af079824f32b7eebfc7d347cd",
+   "identical": true
+  },
+  "q/stats": {
+   "origin": "/q/stats",
+   "status": 200,
+   "origin_bytes": 2771,
+   "origin_sha256": "fe07b57ec163806317fee4c3ecc73276cca3abd3ae7ba82f7d3d017873fbcc97",
+   "local_bytes": 2771,
+   "local_sha256": "fe07b57ec163806317fee4c3ecc73276cca3abd3ae7ba82f7d3d017873fbcc97",
+   "identical": true
+  },
+  "q/LICENSE": {
+   "origin": "/q/LICENSE",
+   "status": 200,
+   "origin_bytes": 1061,
+   "origin_sha256": "eebfa35f45827f51435ff2af40ac079ada228291eda1d24a3e443b91432c56e5",
+   "local_bytes": 1061,
+   "local_sha256": "eebfa35f45827f51435ff2af40ac079ada228291eda1d24a3e443b91432c56e5",
+   "identical": true
+  },
+  "q/lean-qr/lean-qr.js": {
+   "origin": "/q/lean-qr/lean-qr.js",
+   "status": 200,
+   "origin_bytes": 7024,
+   "origin_sha256": "a445ebe642650282f492b0ca850513463f24210c7063136ee170907ff1f8046d",
+   "local_bytes": 7024,
+   "local_sha256": "a445ebe642650282f492b0ca850513463f24210c7063136ee170907ff1f8046d",
+   "identical": true
+  },
+  "q/lean-qr/LICENSE": {
+   "origin": "/q/lean-qr/LICENSE",
+   "status": 200,
+   "origin_bytes": 1072,
+   "origin_sha256": "2ffa965491179ee7281a6c74f841bfc89cb1bbc54c11d0aba2cf00e0db910098",
+   "local_bytes": 1072,
+   "local_sha256": "2ffa965491179ee7281a6c74f841bfc89cb1bbc54c11d0aba2cf00e0db910098",
+   "identical": true
+  }
+ },
+ "host_injection_at_serve_time": "Files are byte-faithful to the origin as archived. Served from Cloudflare Pages, every HTML page gains ONE injected script: https://static.cloudflareinsights.com/beacon.min.js (Cloudflare Web Analytics, enabled on the zone). The zone's email obfuscation also rewrites mailto: links into /cdn-cgi/l/email-protection. Measured over the wire on 2026-10-21; the archived bytes are unaffected."
+}

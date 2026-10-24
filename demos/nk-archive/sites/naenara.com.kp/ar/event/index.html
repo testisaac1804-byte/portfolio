@@ -1,0 +1,155 @@
+﻿<HTML dir = RTL><HEAD>
+		<meta name="vs_showGrid" content="True">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>
+			 Naenara		</title>
+		<LINK REL=stylesheet HREF="https://web.archive.org/web/20260101im_/http://naenara.com.kp/ar/css/style_a.css" TYPE="text/css">
+
+		<script language="JavaScript">
+		
+
+		function open_window(name, url, left, top, width, height, toolbar, menubar, statusbar, scrollbar, resizable){
+			toolbar_str = toolbar ? 'yes' : 'no';
+			menubar_str = menubar ? 'yes' : 'no';
+			statusbar_str = statusbar ? 'yes' : 'no';
+			scrollbar_str = scrollbar ? 'yes' : 'no';
+			resizable_str = resizable ? 'yes' : 'no';
+			var w = window.open(url, name, 'left='+left+',top='+top+',width='+width+',height='+height+',toolbar='+toolbar_str+',menubar='+menubar_str+',status='+statusbar_str+',scrollbars='+scrollbar_str+',resizable='+resizable_str);
+			w.focus();
+		}
+
+		function restore_img_src(name, nsdoc){
+			var img = eval((navigator.appName == 'Netscape') ? nsdoc+'.'+name : 'document.all.'+name);
+			if (name == '')
+				return;
+			if (img && img.altsrc) {
+				img.src    = img.altsrc;
+				img.altsrc = null;
+			} 
+		}
+
+		function preload_img(){ 
+			var img_list = preload_img.arguments;
+			if (document.preloadlist == null) 
+				document.preloadlist = new Array();
+			var top = document.preloadlist.length;
+			for (var i=0; i < img_list.length; i++) {
+				document.preloadlist[top+i] = new Image;
+				document.preloadlist[top+i].src = img_list[i+1];
+			} 
+		}
+		function change_img_src(name, nsdoc, rpath, preload){ 
+			var img = eval((navigator.appName == 'Netscape') ? nsdoc+'.'+name : 'document.all.'+name);
+			if (name == '')
+				return;
+			if (img) {
+				img.altsrc = img.src;
+				img.src    = rpath;
+			} 
+		}
+		function MouseOver(color){	
+			old_color = window.event.srcElement.parentElement.style.backgroundColor;
+			window.event.srcElement.parentElement.style.backgroundColor = "#F6F5F3";
+		}
+		function MouseOut(color){
+			window.event.srcElement.parentElement.style.backgroundColor = old_color;
+		}
+		
+		function OnSearch(){
+			var o_sval = document.getElementById("search_value");
+			var o_schk = document.getElementById("search_datecheck");
+			var o_skind = document.getElementById("search_kind");
+			
+			window.open("/ar/search.php?v=" + encodeURIComponent(o_sval.value) +
+				"&k=" + o_skind.value + "&size=20", 
+				"_self");
+		}
+		
+		function searchKeydown(evt){
+			evt = evt ? evt : event;
+			if(evt.keyCode==13){
+				OnSearch();
+			}
+		}
+		
+		function ChangeDate(){
+			var o_schk = document.getElementById("search_datecheck");
+			var o_sdt = document.getElementById("search_date");
+			if(o_sdt.getAttribute("disabled")){
+				o_sdt.setAttribute("disabled", false);
+			}else{
+				o_sdt.setAttribute("disabled", true);
+			}
+		}
+		function Keydown(evt, para){
+		   
+		    var val = document.getElementById(para);
+		   if(evt.keyCode==13  && isNaN(val) )	window.open("?"+  para  + "=" + (val.value) ,	"_self");
+		}
+		</script>
+        <STYLE TYPE="TEXT/CSS">
+			#MainBackground{ width:100%; position:absolute;	z-index:1; left:0; top:0; height:auto; }
+			#MainBackgroundRight{
+				width:69.99%; height:100px; float:left;
+				background-image:url("/images/__x_header/mb_right.gif");
+				background-repeat:repeat-x;
+			}
+			#MainBackgroundLeft{
+				width:29.99%; height:100px; float:right;
+				background-image:url("/images/__x_header/mb_left.gif");
+				background-repeat:repeat-x;
+			}
+	</STYLE>	
+	</HEAD>
+    
+	<BODY leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" style="text-align:center;">
+    	<div id="MainBackground">
+            <div id="MainBackgroundLeft"></div>
+            <div id="MainBackgroundRight"></div>
+        </div>
+                <div style="width:100%; height:auto; z-index:2222; position:absolute; clear:both; left:0; top:0;">
+    	<div style="width:1008px; text-align:left; margin:0 auto; height:auto;
+        	background-image:url('/images_a/dropwater.gif'); background-repeat:no-repeat; background-position:0px 60px;">
+		<TABLE cellpadding = 0 cellspacing = 0 border = 0 width = 100%>
+			<TR>
+<TD width = 441 valign = top rowspan = 2><A HREF = /ar/index.php>	<IMG src = /images_a/title_left.gif width = 441 height = 60 border = 0></A></TD><TD background = /images_a/title_back.gif width = 30%  rowspan = 2><TD width = 567 valign = top><IMG src = /images_a/title_lang.gif width = 567 height = 30 USEMAP = '#header' border = 0></TD>		<MAP NAME = "header">
+			<AREA SHAPE=RECT COORDS='0,0,36,17' HREF= 'https://web.archive.org/web/20260101im_/http://naenara.com.kp/ko/event/?' title=''>
+			<AREA SHAPE=RECT COORDS='48,0,94,17' HREF= 'https://web.archive.org/web/20260101im_/http://naenara.com.kp/en/event/?' title=''>
+			<AREA SHAPE=RECT COORDS='107,0,162,17' HREF= 'https://web.archive.org/web/20260101im_/http://naenara.com.kp/fr/event/?' title=''>
+			<AREA SHAPE=RECT COORDS='175,0,229,17' HREF= 'https://web.archive.org/web/20260101im_/http://naenara.com.kp/sp/event/?' title=''>
+			<AREA SHAPE=RECT COORDS='240,0,292,17' HREF= 'https://web.archive.org/web/20260101im_/http://naenara.com.kp/de/event/?' title=''>
+			<AREA SHAPE=RECT COORDS='302,0,353,17' HREF= 'https://web.archive.org/web/20260101im_/http://naenara.com.kp/ru/event/?' title=''>
+			<AREA SHAPE=RECT COORDS='364,0,392,17' HREF= 'https://web.archive.org/web/20260101im_/http://naenara.com.kp/ch/event/?' title=''>
+			<AREA SHAPE=RECT COORDS='404,0,449,17' HREF= 'https://web.archive.org/web/20260101im_/http://naenara.com.kp/ja/event/?' title=''>
+			<AREA SHAPE=RECT COORDS='465,0,520,17' HREF= 'https://web.archive.org/web/20260101im_/http://naenara.com.kp/ar/event/?' title=''>
+		</MAP>
+			</TR>
+			<TR>
+<TD align = left>	<IMG src = /images_a/title_home.gif border = 0>		<A HREF = /ar/ class = opt>الموقع</A></TD>			</TR>
+		</TABLE>
+		<div style="height:45px; width:100%; margin:0 auto; background-repeat:repeat-x; padding-top:3px;
+        	background-image:url('/images_a/menu_back.gif')">
+            	<P align = center style = "margin-top:0px;">		<A HREF = "https://web.archive.org/web/20260101im_/http://naenara.com.kp/ar/news/" class = menu>اخبار اخيرة</A>  &nbsp;|&nbsp;		<A HREF = "https://web.archive.org/web/20260101im_/http://naenara.com.kp/ar/great/" class = menu>السياسة</A>  &nbsp;|&nbsp;		<A HREF = "https://web.archive.org/web/20260101im_/http://naenara.com.kp/ar/trade/" class = menu>اقتصاد / تجارة</A>  &nbsp;|&nbsp;		<A HREF = "https://web.archive.org/web/20260101im_/http://naenara.com.kp/ar/society/" class = menu>مجتمع / ثقافة</A>  &nbsp;|&nbsp;		<A HREF = "https://web.archive.org/web/20260101im_/http://naenara.com.kp/ar/history/" class = menu>التاريخ / الفلكلور</A>  &nbsp;|&nbsp;		<A HREF = "https://web.archive.org/web/20260101im_/http://naenara.com.kp/ar/one/" class = menu>كوريا واحدة</A>  &nbsp;|&nbsp;		<A HREF = "https://web.archive.org/web/20260101im_/http://naenara.com.kp/ar/tourism/" class = menu>السياحة</A></P>        </div>
+     	 ﻿		<TABLE cellpadding = 0  cellspacing = 0 border = 0  style=font-size:12px align = center height=40px>
+			<TR>
+				<TD align = center  style="line-height= 18px" valign="bottom">
+				<HR style = 'width:700;height:1px;color:silver' >
+<A HREF = /ar/ class = footer>[ الموقع ]</A> &nbsp;<A HREF = /ar/news/ class = footer>[ اخبار اخيرة ]</A> &nbsp;<A HREF = /ar/great/ class = footer>[ السياسة ]</A> &nbsp;<A HREF = /ar/trade/ class = footer>[ اقتصاد / تجارة ]</A> &nbsp;<BR><A HREF = /ar/society/ class = footer>[ مجتمع / ثقافة ]</A> &nbsp;<A HREF = /ar/history/ class = footer>[ التاريخ / الفلكلور ]</A> &nbsp;<A HREF = /ar/one/ class = footer>[ كوريا واحدة ]</A> &nbsp;<A HREF = "https://web.archive.org/web/20260101im_/http://naenara.com.kp/ar/tourism/" class = footer>[السياحة]</A> &nbsp;              <HR style = 'width:700;height:1px;color:silver'> 
+				</TD>
+			</TR>
+</table>			
+<TABLE cellpadding = 0 cellspacing = 0 border = 0  style=font-size:12px align = center width = 1000 >
+			<TR>
+				
+				<TD align = center style=color:black  valign="bottom">
+						<div>Copyright © 2003 - 2015 Foreign Languages Publishing House, DPR Korea 
+					<BR>
+					<B>Homepage Address</B>: www.naenara.com.kp &nbsp;&nbsp;<B>Tel : </B> 850-2-18111EXP8456  &nbsp;&nbsp;&nbsp;<B>Fax :</B> 850-2-3814598 &nbsp;&nbsp;&nbsp;<B>E-mail : </B> <a href="mailto:flph@star-co.net.kp">flph@star-co.net.kp</a>
+				</div></TD>
+			</TR>
+		</TABLE>
+        </div>
+        </div>
+	</BODY>
+</HTML>
+

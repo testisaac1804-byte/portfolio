@@ -1,0 +1,448 @@
+/*------------------------------------------Bsgin Main settings---------------------------------------*/
+body{
+font-family:Helvetica, sans-serif;
+}
+#navigation-box {
+	margin-top: 38px;
+	background-color:#212c43;
+	min-height:60px;
+/*	position:relative;*/
+}
+#navigation-toggle {
+	display: none;
+	float: right;
+	width: 50px; 
+	height: 50px; 
+	background-color: #7ccbfc; 
+	-webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,.5); 
+	-moz-box-shadow: inset 0 1px 1px rgba(255,255,255,.5); 
+	box-shadow: inset 0 1px 1px rgba(255,255,255,.5); 
+	border: solid 1px #7ccbfc; 
+	background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.05), rgba(2,2,2,0)); 
+	background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.05), rgba(2,2,2,0)); 
+	background-image: -o-linear-gradient(bottom, rgba(0,0,0,.05), rgba(2,2,2,0)); 
+	background-image: -ms-linear-gradient(bottom, rgba(0,0,0,.05), rgba(2,2,2,0)); 
+	background-image: linear-gradient(to top, rgba(0,0,0,.05), rgba(2,2,2,0));
+	-o-transition: all 500ms ease-in;
+	-webkit-transition: all 500ms ease-in;
+	-moz-transition: all 500ms ease-in;
+	transition: all 500ms ease-in;
+}
+
+#navigation-toggle.open-menu {
+	background-color: #f29090;
+	-webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,.5);
+	-moz-box-shadow: inset 0 1px 1px rgba(255,255,255,.5);
+	box-shadow: inset 0 1px 1px rgba(255,255,255,.5);
+	border: solid 1px #f29090;
+	background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.05), rgba(2,2,2,0));
+	background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.05), rgba(2,2,2,0));
+	background-image: -o-linear-gradient(bottom, rgba(0,0,0,.05), rgba(2,2,2,0));
+	background-image: -ms-linear-gradient(bottom, rgba(0,0,0,.05), rgba(2,2,2,0));
+	background-image: linear-gradient(to top, rgba(0,0,0,.05), rgba(2,2,2,0));
+}
+
+
+.menu-icon {
+	display: block;
+	width: 20px;
+	height: 22px;
+	margin: 95px auto 0;
+	-o-transition: all 500ms ease-in;
+	-webkit-transition: all 500ms ease-in;
+	-moz-transition: all 500ms ease-in;
+	transition: all 500ms ease-in;
+}
+
+
+
+ul#navigation {
+	min-width:180px;
+}
+
+ul#navigation li {
+	position: relative;
+	padding: 4px;
+	border-bottom: 1px solid #1b253b;	
+}
+
+ul#navigation li:last-child {
+	border: none;
+}
+
+ul#navigation > li {
+	padding: 0;
+	float: left;
+	line-height: 36px;	
+	min-height: 36px;
+	border: none;
+	display: block;
+}
+
+ul#navigation a {
+	color: #fff;
+	text-decoration: none;
+	display: block;
+}
+
+ul#navigation li:hover ul {
+	display: block;
+	-webkit-animation: anime 500ms;
+	-moz-animation: anime 500ms; 
+	-o-animation: anime 500ms;
+	animation: anime 500ms;
+	
+}
+.header-left-menu{
+	float:left;
+	width:24px;
+	height:25px;
+	padding:0px;
+    background-image: url(https://web.archive.org/web/20260101im_/http://youth.rep.kp/public/images/btn_left.png);
+}
+.header-right-menu{
+	float:left;
+	width:35px;
+	height:25px;
+	padding:0px;
+    background-image: url(https://web.archive.org/web/20260101im_/http://youth.rep.kp/public/images/btn_right.png);
+}
+.header-center-menu{
+	float:left;
+	height:25px;
+	line-height:25px;
+	padding-top:3px;
+	font-weight:bold;
+    background-image: url(https://web.archive.org/web/20260101im_/http://youth.rep.kp/public/images/btn_center.png);
+}
+.cnt {
+	width:55px;
+}
+.cns {
+	margin:0px;
+}
+.page {
+	color: #ffffff;
+}
+/*------------------------------------------End Main settings---------------------------------------*/
+/*------------------------------------------Bsgin Hover settings---------------------------------------*/
+
+@media (min-width: 993px) {
+	
+ul#navigation > li > ul {
+	display: none;
+	width: 240px;
+	position: absolute;
+	padding: 10px;
+	top: 45px;
+	z-index: 30;
+	left: 0;
+	background-color:#4C4145;
+	z-index:50;
+	padding: 17px 25px 15px;
+	-webkit-transform-origin: left top;
+	-moz-transform-origin: left top;
+	-ms-transform-origin: left top;
+	transform-origin: left top;
+	
+}
+
+ul#navigation li{
+	border: none;
+}
+
+	@-moz-keyframes anime {
+	from {
+		opacity: 0;
+		-moz-transform: scaleY(0);
+		transform: scaleY(0);
+	}
+	to {
+		opacity: 1;
+		-moz-transform: scaleY(1);
+		transform: scaleY(1);
+	}
+	}
+	
+	@-webkit-keyframes anime {
+	from {
+		opacity: 0;
+		-webkit-transform: scaleY(0);
+		transform: scaleY(0);
+	}
+	to {
+		opacity: 1;
+		-webkit-transform: scaleY(1);
+		transform: scaleY(1);
+	}
+	}
+	@keyframes anime {
+	from {
+		opacity: 0;
+		-webkit-transform: scaleY(0);
+		-moz-transform: scaleY(0);
+		transform: scaleY(0);
+	}
+	to {
+		opacity: 1;
+		-webkit-transform: scaleY(1);
+		-moz-transform: scaleY(1);
+		transform: scaleY(1);
+	}
+	}
+}
+
+@media (max-width: 992px) {
+
+/*javascript use it*/
+ul#navigation.hidden-c{
+	display:none;
+}
+ul#navigation.showen-c{
+	display:block;
+}
+ul#navigation ul.showen-c{
+	display:block;
+}
+ul#navigation ul.hidden-c{
+	display:none;
+}
+.header-left-menu{
+	float:left;
+	width:24px;
+	height:25px;
+	margin-left:-25px;
+	padding:0px;
+    background-image: url(https://web.archive.org/web/20260101im_/http://youth.rep.kp/public/images/1.png);
+}
+.header-right-menu{
+	float:left;
+	width:35px;
+	height:25px;
+	padding:0px;
+    background-image: url(https://web.archive.org/web/20260101im_/http://youth.rep.kp/public/images/1.png);
+}
+
+.header-center-menu{
+	float:left;
+	height:25px;
+	line-height:25px;
+	padding:0px;
+    background-image: url(https://web.archive.org/web/20260101im_/http://youth.rep.kp/public/images/1.png);
+}
+
+/*end*/
+#navigation-toggle {
+	display: block;
+}
+
+ul#navigation {
+	display: none;
+	float: none;
+	padding: 0 15px 15px;
+	/*position: absolute;*/
+	top: 130px;
+	right: 11px;
+	background: #212c43;
+	background: rgba(33,44,67,.8);
+}
+
+ul#navigation li{
+	border-bottom: 1px solid #1b253b;
+}
+
+ul#navigation > li {
+	display: flex;
+	justify-content: start;
+	float: none;
+	margin-top: 1px;
+}
+
+ul#navigation ul{
+	position:static;
+	background: #2e292e;
+	padding: 0 5px;
+	display: none;
+	width: 180px;
+}
+
+ul#navigation li:hover ul {
+	display: none;
+}
+
+ul#navigation li:hover ul.showen-c {
+	display: block;
+}
+
+
+
+.sub-nav-toggle {
+	display:block;
+	float:right;
+	width:36px;
+	height:34px;	
+	cursor:pointer;
+	-o-transition: all 500ms ease-in;
+	-webkit-transition: all 500ms ease-in;
+	-moz-transition: all 500ms ease-in;
+	transition: all 500ms ease-in;
+	
+}
+
+}
+/*------------------------------------------End Media---------------------------------------*/
+ a:focus,
+ a:active,
+ a:hover {
+	outline: none;
+}
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+/*Custome mobile nav config*/
+@media (max-width: 992px) {  
+	#navigation-toggle,
+	#navigation-toggle.open-menu{
+		background: none;
+		border: none;
+		box-shadow: none;
+		position: absolute;
+		top: 3px;
+		right: 15px;
+	}
+
+	.header-wrapper ul#navigation{
+		right: 15px;
+		z-index: 30;
+		position: absolute !important;
+		margin-left: 0;
+		background-color: #e5513d;
+		padding: 17px 20px 15px;
+	}
+
+	ul#navigation li{
+		border: none;
+	}
+}
+@media (max-width: 1024px) {
+
+	/*javascript use it*/
+	ul#navigation.hidden-c{
+		display:none;
+	}
+	ul#navigation.showen-c{
+		display:block;
+	}
+	ul#navigation ul.showen-c{
+		display:block;
+	}
+	ul#navigation ul.hidden-c{
+		display:none;
+	}
+	.header-left-menu{
+		float:left;
+		width:24px;
+		height:25px;
+		margin-left:-25px;
+		padding:0px;
+		background-image: url(https://web.archive.org/web/20260101im_/http://youth.rep.kp/public/images/1.png);
+	}
+	.header-right-menu{
+		float:left;
+		width:35px;
+		height:25px;
+		padding:0px;
+		background-image: url(https://web.archive.org/web/20260101im_/http://youth.rep.kp/public/images/1.png);
+	}
+	
+	.header-center-menu{
+		float:left;
+		height:25px;
+		line-height:25px;
+		padding:0px;
+		background-image: url(https://web.archive.org/web/20260101im_/http://youth.rep.kp/public/images/1.png);
+	}
+	
+	/*end*/
+	#navigation-toggle {
+		display: block;
+	}
+	
+	ul#navigation {
+		display: none;
+		float: none;
+		padding: 0 15px 15px;
+		/*position: absolute;*/
+		top: 130px;
+		right: 11px;
+		background: #212c43;
+		background: rgba(33,44,67,.8);
+	}
+	
+	ul#navigation li{
+		border-bottom: 1px solid #1b253b;
+	}
+	
+	ul#navigation > li {
+		display: flex;
+		justify-content: start;
+		float: none;
+		margin-top: 1px;
+	}
+	
+	ul#navigation ul{
+		position:static;
+		background: #2e292e;
+		padding: 0 5px;
+		display: none;
+		width: 180px;
+	}
+	
+	ul#navigation li:hover ul {
+		display: none;
+	}
+	
+	ul#navigation li:hover ul.showen-c {
+		display: block;
+	}
+	
+	.sub-nav-toggle {
+		display:block;
+		float:right;
+		width:36px;
+		height:34px;	
+		cursor:pointer;
+		-o-transition: all 500ms ease-in;
+		-webkit-transition: all 500ms ease-in;
+		-moz-transition: all 500ms ease-in;
+		transition: all 500ms ease-in;
+		
+	}
+	
+}
+@media (max-width: 1024px) {  
+	#navigation-toggle,
+	#navigation-toggle.open-menu{
+		background: none;
+		border: none;
+		box-shadow: none;
+		position: absolute;
+		top: 3px;
+		right: 15px;
+	}
+
+	.header-wrapper ul#navigation{
+		right: 15px;
+		z-index: 30;
+		position: absolute !important;
+		margin-left: 0;
+		background-color: #e5513d;
+		padding: 17px 20px 15px;
+	}
+
+	ul#navigation li{
+		border: none;
+	}
+}

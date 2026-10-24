@@ -1,0 +1,25 @@
+
+@font-face {
+    font-family: 'KPCheonRiMaChe';
+    src: url('./fonts/KP CheonRiMaChe.eot'); /* IE9 Compat Modes */
+    src: url('./fonts/KP CheonRiMaChe.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./fonts/KP CheonRiMaChe.woff') format('woff'), /* Modern Browsers */
+         url('./fonts/KP CheonRiMaChe.woff2') format('woff2'), /* Modern Browsers */
+         url('./fonts/KP CheonRiMaChe.ttf') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
+@font-face {
+    font-family: 'KPCheonRiMa';
+
+    src: url('../fonts/KP CheonRiMa.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/KP CheonRiMa.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/KP CheonRiMa.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/KP CheonRiMa.woff2') format('woff2'), /* Modern Browsers */
+         url('../fonts/KP CheonRiMa.ttf') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}

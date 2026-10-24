@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hong Kong Tour — full analysis · Isaac Chan</title>
+<meta name="description" content="Full technical analysis of the Hong Kong Tour app: 143 spots, one Python core, five installable packs, the packaging traps that broke it, and the verification evidence.">
+<link rel="icon" href="/portfolio/favicon.ico">
+<style>
+  :root{
+    --ink:#14161a; --muted:#5b6472; --line:#e3e7ee; --bg:#fbfcfe; --card:#fff;
+    --accent:#1f4bd8; --accent-soft:#eef2ff; --warn:#8a4b00; --warn-bg:#fff7e6;
+    --ok:#0f6b3f; --ok-bg:#eefaf3; --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+       -webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:48px 22px 96px}
+  header.top{border-bottom:1px solid var(--line);padding-bottom:26px;margin-bottom:34px}
+  .kicker{font:600 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  h1{font-size:34px;line-height:1.2;margin:12px 0 10px;letter-spacing:-.02em}
+  .sub{font-size:18px;color:var(--muted);margin:0 0 18px;max-width:70ch}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 14px;font:13px/1.4 var(--mono);color:var(--muted)}
+  .meta b{color:var(--ink);font-weight:600}
+  nav.toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:0 0 40px}
+  nav.toc h2{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+  nav.toc ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
+  nav.toc li{margin:5px 0;font-size:14.5px}
+  nav.toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent}
+  nav.toc a:hover{border-bottom-color:var(--accent);color:var(--accent)}
+  section{margin:0 0 44px}
+  h2.sec{font-size:23px;letter-spacing:-.01em;margin:0 0 6px;padding-top:8px}
+  h2.sec .num{font:600 13px/1 var(--mono);color:var(--accent);display:block;margin-bottom:8px}
+  h3{font-size:16.5px;margin:26px 0 8px}
+  p{margin:0 0 14px}
+  .lede{font-size:17.5px;color:#2a3038}
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:16px 0 20px;
+      border:1px solid var(--line);border-radius:10px;background:var(--card)}
+  table{width:100%;border-collapse:collapse;margin:0;font-size:14.5px;background:var(--card);
+        border:none;border-radius:0;overflow:visible}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#f5f7fb;font-weight:600;font-size:13px;letter-spacing:.02em;color:#333a45}
+  tr:last-child td{border-bottom:none}
+  td.num,th.num{text-align:right;font-family:var(--mono);font-size:13.5px;white-space:nowrap}
+  code{font-family:var(--mono);font-size:.9em;background:#f2f4f8;padding:1px 5px;border-radius:5px}
+  pre{background:#0f1420;color:#dfe6f3;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px;line-height:1.55}
+  pre code{background:none;color:inherit;padding:0}
+  .trap{border:1px solid var(--line);border-left:3px solid var(--warn);background:var(--card);
+        border-radius:10px;padding:14px 18px;margin:16px 0}
+  .trap h4{margin:0 0 6px;font-size:15.5px}
+  .trap .sym{font:12px/1.4 var(--mono);color:var(--warn);background:var(--warn-bg);
+             display:inline-block;padding:2px 8px;border-radius:5px;margin-bottom:8px}
+  .trap p{margin:6px 0}
+  .trap p:last-child{margin-bottom:0}
+  .fact{border:1px solid #cfe4d8;background:var(--ok-bg);border-radius:10px;padding:12px 16px;margin:16px 0}
+  .fact b{color:var(--ok)}
+  .gap{border:1px solid #f0dcc0;background:var(--warn-bg);border-radius:10px;padding:12px 16px;margin:14px 0}
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin:5px 0}
+  .links{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:18px 0}
+  .lnk{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+       text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}
+  .lnk:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .lnk .t{font-weight:600;font-size:15px;display:block;margin-bottom:3px}
+  .lnk .u{font:12px/1.4 var(--mono);color:var(--muted);word-break:break-all}
+  footer{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:13.5px}
+  footer a{color:var(--accent);text-decoration:none}
+  .pill{display:inline-block;font:12px/1 var(--mono);padding:4px 9px;border-radius:999px;
+        background:var(--accent-soft);color:var(--accent);margin-right:6px}
+  @media(max-width:640px){nav.toc ol{columns:1}h1{font-size:27px}.wrap{padding:30px 16px 70px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="kicker">Full analysis · software &amp; apps</div>
+  <h1>Hong Kong Tour</h1>
+  <p class="sub">143 real places across three regions, built once in Python and shipped to five formats — and the packaging work turned out to be harder than the app.</p>
+  <div class="meta">
+    <span><b>143</b> spots</span>
+    <span><b>27</b> neighbourhoods</span>
+    <span><b>7</b> delivery targets</span>
+    <span><b>56/56</b> pack checks</span>
+    <span>written <b>2026-10-19</b></span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#numbers">By the numbers</a></li>
+    <li><a href="#data">The data model</a></li>
+    <li><a href="#architecture">One core, seven targets</a></li>
+    <li><a href="#traps">The five packaging traps</a></li>
+    <li><a href="#web">The browser build</a></li>
+    <li><a href="#verify">What is actually proven</a></li>
+    <li><a href="#gaps">Known gaps</a></li>
+    <li><a href="#where">Where it lives</a></li>
+    <li><a href="#repro">Reproducing it</a></li>
+  </ol>
+</nav>
+
+<section id="summary">
+  <h2 class="sec"><span class="num">01</span>Summary</h2>
+  <p class="lede">Hong Kong Tour is a guide to 143 places in Hong Kong — Hong Kong Island, Kowloon and the New Territories — split into 27 neighbourhoods. Every entry carries a real photograph of the place, a rating, a description, practical tips, a location and (where available) a map link. Search and fifteen category filters sit on top.</p>
+  <p>The interesting part is not the content, it is the delivery. One Python core — data, launcher, HTML interface — is packaged as <strong>five installable archives</strong> (macOS <code>.dmg</code>, Windows <code>.exe</code>, Linux <code>.deb</code>, portable <code>.zip</code>, Android <code>.apk</code>) plus an iOS/iPadOS Xcode project and a server-less browser build. The same code renders all of them; only the shell around it differs.</p>
+  <p>Five separate bugs came out of that packaging, and every one of them produced a file that looked plausible and was actually broken. They are documented below with root causes, because they are the reusable part of this project.</p>
+</section>
+
+<section id="numbers">
+  <h2 class="sec"><span class="num">02</span>By the numbers</h2>
+  <p>Measured from the shipped build (<code>data.json</code> and <code>dist/</code>), not from memory.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Content</th><th class="num">Value</th></tr></thead>
+    <tbody>
+      <tr><td>Spots</td><td class="num">143</td></tr>
+      <tr><td>Regions</td><td class="num">3</td></tr>
+      <tr><td>Neighbourhoods / areas</td><td class="num">27 &nbsp;(8 / 7 / 12)</td></tr>
+      <tr><td>Spots per region</td><td class="num">38 / 32 / 73</td></tr>
+      <tr><td>Categories in use</td><td class="num">15</td></tr>
+      <tr><td>Spots with a photo</td><td class="num">143 / 143</td></tr>
+      <tr><td>Spots with rating, tips, location</td><td class="num">143 / 143</td></tr>
+      <tr><td>Spots with a map link</td><td class="num">102 / 143</td></tr>
+      <tr><td>Ratings</td><td class="num">3.5 – 4.9 &nbsp;(15 values)</td></tr>
+      <tr><td>Descriptions</td><td class="num">41,678 chars &nbsp;(avg 291)</td></tr>
+      <tr><td>Tips</td><td class="num">avg 162 chars</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tw"><table>
+    <thead><tr><th>Build</th><th class="num">Size</th><th class="num">Files</th></tr></thead>
+    <tbody>
+      <tr><td>Data (<code>hk_data.py</code>)</td><td class="num">136,820 B · 1,849 lines</td><td class="num">1</td></tr>
+      <tr><td>Interface (<code>index.html</code>)</td><td class="num">22,331 B · 657 lines</td><td class="num">1</td></tr>
+      <tr><td>Launcher</td><td class="num">5,911 B · 147 lines</td><td class="num">1</td></tr>
+      <tr><td>Build tooling</td><td class="num">885 lines across 5 scripts</td><td class="num">5</td></tr>
+      <tr><td>Source photos</td><td class="num">300 MB</td><td class="num">268</td></tr>
+      <tr><td>Browser build</td><td class="num">28 MB</td><td class="num">170 &nbsp;(166 photos)</td></tr>
+      <tr><td><code>data.json</code></td><td class="num">111,088 B</td><td class="num">1</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tw"><table>
+    <thead><tr><th>Installer</th><th class="num">Exact bytes</th><th class="num">Card label</th></tr></thead>
+    <tbody>
+      <tr><td>macOS <code>.dmg</code></td><td class="num">309,378,949</td><td class="num">295 MB</td></tr>
+      <tr><td>Windows <code>.exe</code></td><td class="num">306,419,009</td><td class="num">292 MB</td></tr>
+      <tr><td>Linux <code>.deb</code></td><td class="num">306,294,892</td><td class="num">292 MB</td></tr>
+      <tr><td>Portable <code>.zip</code></td><td class="num">306,139,800</td><td class="num">292 MB</td></tr>
+      <tr><td>Android <code>.apk</code></td><td class="num">2,425,148</td><td class="num">2.3 MB</td></tr>
+    </tbody>
+  </table></div>
+  <p>Every desktop archive is roughly 300 MB while the whole dataset is 117 KB. That ratio is the honest headline of the project: the app is tiny, the <em>runtime</em> it needs is not. Bundling CPython plus pywebview plus a WebKit/WebView shell accounts for essentially all of it.</p>
+</section>
+
+<section id="data">
+  <h2 class="sec"><span class="num">03</span>The data model</h2>
+  <p>One nested dictionary: region → area → spots. Regions carry their own name, Chinese name, blurb, hero image and accent colour; areas group spots into walkable neighbourhoods.</p>
+  <pre><code>ATTRACTIONS = {
+  "hong_kong_island": {
+    "name": "香港島 Hong Kong Island", "name_cn": "香港島",
+    "description": "...", "image": "...", "color": "#1f4bd8",
+    "central": {"name": "中環 Central", "spots": [ {...}, ... ]},
+  }, ...
+}
+
+# each spot
+{"name": "中環 Central", "name_cn": "中環", "category": "neighbourhood",
+ "rating": 4.6, "description": "...", "tips": "...",
+ "location": "22.2819,114.1582", "google_maps": "...",
+ "image": "images/929d3b56ae67c1a2.jpg"}</code></pre>
+  <h3>Why the Chinese is inside <code>name</code></h3>
+  <p>The spot names embed their Chinese form (<code>"中環 Central"</code>) while <code>name_cn</code> holds the Chinese alone. The interface renders both, which originally printed <code>中環 Central 中環</code> on every card — a visible bug. The fix is a shared guard rather than a second field:</p>
+  <pre><code>function cnSuffix(name, cn) {
+  return (cn &amp;&amp; !name.includes(cn)) ? cn : '';   // '' when name already carries it
+}</code></pre>
+  <p>Used for both the area header and the spot card. This is the kind of bug that only shows up in a build where CJK actually renders, which is why the automated test now asserts the subtitle never repeats the title.</p>
+
+  <h3>Category spread</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Category</th><th class="num">Spots</th><th>Category</th><th class="num">Spots</th></tr></thead>
+    <tbody>
+      <tr><td>scenic</td><td class="num">23</td><td>museum</td><td class="num">7</td></tr>
+      <tr><td>landmark</td><td class="num">19</td><td>temple</td><td class="num">6</td></tr>
+      <tr><td>neighbourhood</td><td class="num">19</td><td>arts_culture</td><td class="num">4</td></tr>
+      <tr><td>hiking</td><td class="num">16</td><td>food</td><td class="num">2</td></tr>
+      <tr><td>beach</td><td class="num">14</td><td>nightlife</td><td class="num">1</td></tr>
+      <tr><td>market</td><td class="num">12</td><td>entertainment</td><td class="num">1</td></tr>
+      <tr><td>park</td><td class="num">10</td><td>no category</td><td class="num">1</td></tr>
+      <tr><td>shopping</td><td class="num">8</td><td></td><td class="num"></td></tr>
+    </tbody>
+  </table></div>
+  <p>Slugs are singular (<code>beach</code>, not <code>beaches</code>), and the human labels come from a single <code>CAT_LABELS</code> map that feeds both the filter chips and the tags on each card — so a chip can never say "Arts &amp; Culture" while its card says <code>arts_culture</code>.</p>
+</section>
+
+<section id="architecture">
+  <h2 class="sec"><span class="num">04</span>One core, seven targets</h2>
+  <p>The launcher starts a threaded HTTP server on port 8570 and points a native webview at it. Everything platform-specific lives in the shell around that, never in the app.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Target</th><th>Shell</th><th>How it is produced</th></tr></thead>
+    <tbody>
+      <tr><td>macOS <code>.app</code> / <code>.dmg</code></td><td>pywebview → WKWebView</td><td>App bundle + launcher script, ad-hoc signed, packed with <code>hdiutil</code></td></tr>
+      <tr><td>Windows <code>.exe</code></td><td>pywebview → Edge WebView2</td><td>7-Zip SFX self-extractor around the portable tree</td></tr>
+      <tr><td>Linux <code>.deb</code></td><td>pywebview → WebKitGTK</td><td><code>ar</code> archive written byte-by-byte by <code>make_deb.py</code></td></tr>
+      <tr><td>Portable <code>.zip</code></td><td>pywebview</td><td>Same tree, plus <code>.command</code> / <code>.bat</code> helpers</td></tr>
+      <tr><td>Android <code>.apk</code></td><td>WebView wrapper</td><td>Gradle + Android SDK, assets = the same HTML + data</td></tr>
+      <tr><td>iOS / iPadOS</td><td>SwiftUI + WKWebView</td><td>Xcode project generated by <code>gen_ios_project.py</code></td></tr>
+      <tr><td>Browser</td><td>none</td><td>Static build: <code>data.json</code> + local search index</td></tr>
+    </tbody>
+  </table></div>
+  <p>The Android and iOS builds never touch Python: they ship the HTML, CSS, JS and images, and the data arrives through the same JSON the server would have served. That keeps the APK at 2.3 MB while the desktop builds carry a whole interpreter.</p>
+</section>
+
+<section id="traps">
+  <h2 class="sec"><span class="num">05</span>The five packaging traps</h2>
+  <p>Each of these produced an artifact that passed a naive check. Each is a macOS-toolchain or hosting-limit problem, not an app problem.</p>
+
+  <div class="trap">
+    <h4>1 · The <code>.deb</code> was 96 bytes</h4>
+    <div class="sym">symptom: file exists, plausible name, no content</div>
+    <p><strong>Cause.</strong> macOS <code>ar</code> is BSD <code>ar</code>: it prepends a <code>__.SYMDEF</code> / ranlib symbol table and writes BSD-style member headers. <code>dpkg</code> expects GNU <code>ar</code>. It parsed the file, found no valid members, and the archive ended up as a 96-byte stub.</p>
+    <p><strong>Fix.</strong> <code>build/make_deb.py</code> writes the <code>ar</code> archive by hand — global magic, GNU member headers, control members stored as <code>./control</code> and <code>./md5sums</code> (no <code>DEBIAN/</code> prefix inside the member name). Never use <code>ar</code> here.</p>
+  </div>
+
+  <div class="trap">
+    <h4>2 · The Windows <code>.exe</code> was a Mac binary</h4>
+    <div class="sym">symptom: 306 MB .exe that Windows refuses to run</div>
+    <p><strong>Cause.</strong> The SFX was built from <code>7zCon.sfx</code> as shipped by Homebrew, which is a <strong>Mach-O</strong> stub, not a Windows PE. Concatenating a Mach-O stub with a payload yields a file that still says <code>.exe</code>.</p>
+    <p><strong>Fix.</strong> Pull real Windows PE stubs (<code>7zS.sfx</code>, <code>7zS2con.sfx</code>) from the <code>7z920_extra</code> package into <code>build/sfx/</code>, and verify the result: <code>verify_windows_exe.py</code> checks the <code>MZ</code> DOS header and the <code>PE\0\0</code> signature at the <code>e_lfanew</code> offset before the file is allowed into <code>dist/</code>.</p>
+  </div>
+
+  <div class="trap">
+    <h4>3 · The macOS app would not open</h4>
+    <div class="sym">symptom: double-click does nothing, no dialog</div>
+    <p><strong>Cause.</strong> Finder launches an <code>.app</code> with a minimal <code>PATH</code> that does not include Homebrew or pyenv, so the launcher's <code>python3</code> resolved to a Python without <code>pywebview</code>. The process died before a window could exist.</p>
+    <p><strong>Fix.</strong> Probe by <em>import</em>, not by path: the launcher walks a candidate list and takes the first interpreter where <code>python3 -c "import webview"</code> succeeds. A path existing is not evidence the module does.</p>
+  </div>
+
+  <div class="trap">
+    <h4>4 · Cloudflare Pages silently deletes files over 25 MiB</h4>
+    <div class="sym">symptom: deploy says success, installer URLs 404</div>
+    <p><strong>Cause.</strong> Pages hard-caps a single asset at 25 MiB, and the deploy script prunes oversized files (<code>find … -size +25600k -delete</code>) before upload. A 300 MB installer simply disappears from the bundle with no error.</p>
+    <p><strong>Fix.</strong> Keep installers out of the Pages bundle entirely.</p>
+  </div>
+
+  <div class="trap">
+    <h4>5 · GitHub refuses the files, the site refuses the size</h4>
+    <div class="sym">symptom: nowhere to put 1.2 GB of installers</div>
+    <p><strong>Cause.</strong> The repo tree rejects any file over 100 MB; <code>git push</code> fails outright. Pages rejects anything over 25 MiB. Both limits are hard.</p>
+    <p><strong>Fix.</strong> Publish the archives as <strong>GitHub release assets</strong> (2 GB per-asset limit, not part of the tree) and stream them through a small Cloudflare Worker at <code>/files/hongkong-tour/…</code>. The Worker forwards <code>Range</code> in both directions instead of buffering, so the download stays same-origin on <code>isaac1804.com</code>, hides the GitHub URL, and <strong>resumes</strong> when the connection drops — which matters on a school network.</p>
+  </div>
+</section>
+
+<section id="web">
+  <h2 class="sec"><span class="num">06</span>The browser build</h2>
+  <p>The desktop app talks to a local server (<code>/api/region</code>, <code>/api/search</code>, <code>/static/images/…</code>). On a static host there is no server, so <code>build/build_web.py</code> removes it rather than emulating it:</p>
+  <ul>
+    <li>freezes the <code>/api/region</code> response to <code>data.json</code> (111,088 B);</li>
+    <li>downscales and re-encodes photos with <code>sips -Z 1200 -s formatOptions 75</code> — 300 MB of source images become 28 MB of shipped ones;</li>
+    <li>injects a search shim that indexes the frozen data client-side;</li>
+    <li>emits a real favicon so the page does not request a missing one.</li>
+  </ul>
+  <div class="fact"><b>Two bugs the static build introduced, both caught by tests:</b>
+  <ul style="margin:8px 0 0">
+    <li>The shim built its index at <strong>parse time</strong>, before <code>loadData()</code> had populated the data — so search returned nothing. Now the index is built lazily on first search.</li>
+    <li>Search results called <code>goToSpot(spot.region_key, …)</code>, but the flattened index never set <code>region</code>/<code>region_key</code>, so jumping to a result threw. Now both are attached when each spot is indexed.</li>
+  </ul></div>
+</section>
+
+<section id="verify">
+  <h2 class="sec"><span class="num">07</span>What is actually proven</h2>
+  <p>Claims here are backed by the check that produced them, not by "it deployed".</p>
+  <div class="tw"><table>
+    <thead><tr><th>Claim</th><th>Evidence</th></tr></thead>
+    <tbody>
+      <tr><td>All six packs are valid</td><td><code>verify_all_packs.py</code> → <strong>56/56</strong> checks: DMG mounts and the app inside launches, <code>.deb</code> parses with correct members, <code>.exe</code> has an <code>MZ</code>+<code>PE</code> header, ZIP structure and helpers, APK signature and 143 spots in assets</td></tr>
+      <tr><td>Every spot has a photo</td><td><code>data.json</code> → 143/143, and the APK's assets → 143/143</td></tr>
+      <tr><td>The static demo works</td><td>Playwright: 15/15 — search, jump-to-result, category chips, no CJK duplication, no 404s, no JS errors</td></tr>
+      <tr><td>Installers download correctly</td><td>Full 309,378,949 B pull from the live URL → <strong>SHA-256 identical</strong> to the local build</td></tr>
+      <tr><td>Downloads resume</td><td>Windows <code>.exe</code> cut at 125,829,120 B then resumed → final file <strong>SHA-256 identical</strong>; all five serve <code>Accept-Ranges: bytes</code></td></tr>
+      <tr><td>The card works</td><td>Playwright on the live site: 16/16 — all actions render, clicking a download fires the same-origin URL</td></tr>
+      <tr><td>The mirror is standalone</td><td>Playwright against the mirror: 11/11 — 3 regions / 27 areas / 143 spots, search, photos decode, no 404s</td></tr>
+    </tbody>
+  </table></div>
+  <p>Two of those checks exist specifically because a <em>green-looking</em> result lied earlier: a page-level request listener cannot see a <code>window.open</code> download (it reports "no request" for a working button), and a full download is the only thing that detects a streaming proxy that truncates while returning correct headers.</p>
+</section>
+
+<section id="gaps">
+  <h2 class="sec"><span class="num">08</span>Known gaps</h2>
+  <div class="gap"><b>One spot has no category.</b> 林村許願樹 Lam Tsuen Wishing Trees (Tai Po, New Territories) is missing its <code>category</code> field, so it is invisible to every filter chip — it only appears in the unfiltered list and in search. One line of data fixes it.</div>
+  <div class="gap"><b>The content skews to the New Territories.</b> 73 of 143 spots (51%) are in the NT versus 38 on Hong Kong Island and 32 in Kowloon, largely because country parks and outlying islands carry many entries. Not wrong, but not balanced either.</div>
+  <div class="gap"><b>iOS is source, not a download.</b> The Xcode project is generated and valid, but producing an <code>.ipa</code> needs full Xcode plus a signing identity. This machine has Command Line Tools only, so no iOS build is claimed.</div>
+  <div class="gap"><b>macOS first launch needs a deliberate open.</b> The app is ad-hoc signed, so Gatekeeper blocks a plain double-click: right-click → Open, or System Settings → Privacy &amp; Security → Open Anyway. Removing that step needs a paid Apple Developer ID and notarisation.</div>
+  <div class="gap"><b>The desktop builds are heavy for what they do.</b> ~300 MB each, almost entirely interpreter and webview runtime. A rewrite in a compiled stack, or shipping the browser build as a native shell (Tauri/Wails), would plausibly land under 20 MB.</div>
+  <div class="gap"><b>Photographs are sourced from Wikimedia Commons.</b> Suitable for a personal project with attribution, but each file's licence should be audited before any commercial use. This is the one part of the project I would not call cleared.</div>
+</section>
+
+<section id="where">
+  <h2 class="sec"><span class="num">09</span>Where it lives</h2>
+  <div class="links">
+    <a class="lnk" href="/portfolio/demos/hongkong-tour/"><span class="t">Live browser demo</span><span class="u">isaac1804.com/portfolio/demos/hongkong-tour/</span></a>
+    <a class="lnk" href="https://hongkong-tour.pages.dev/" target="_blank" rel="noopener"><span class="t">Full mirror copy</span><span class="u">hongkong-tour.pages.dev</span></a>
+    <a class="lnk" href="/builds/hongkong-tour/"><span class="t">Build log</span><span class="u">isaac1804.com/builds/hongkong-tour/</span></a>
+    <a class="lnk" href="/portfolio/prompts/hongkong-tour-prompt.md"><span class="t">Build spec</span><span class="u">prompts/hongkong-tour-prompt.md</span></a>
+    <a class="lnk" href="https://isaac1804.com/files/hongkong-tour/HongKongTour-macOS.dmg"><span class="t">macOS .dmg · 295 MB</span><span class="u">/files/hongkong-tour/…</span></a>
+    <a class="lnk" href="https://isaac1804.com/files/hongkong-tour/HongKongTour-Android.apk"><span class="t">Android .apk · 2.3 MB</span><span class="u">/files/hongkong-tour/…</span></a>
+  </div>
+  <p style="margin-top:16px">All five installers are on the portfolio card's download buttons, served same-origin and resumable. Source lives at <code>/Applications/HongKongTour/</code>.</p>
+</section>
+
+<section id="repro">
+  <h2 class="sec"><span class="num">10</span>Reproducing it</h2>
+  <pre><code># run the desktop app
+cd /Applications/HongKongTour &amp;&amp; python3 hongkong_tour.py      # port 8570
+
+# rebuild the four desktop packs + Android
+cd /tmp &amp;&amp; env -u PYTHONPATH /bin/bash \
+  /Applications/HongKongTour/build/build_linux_windows.sh
+</code></pre>
+  <p>Use native <code>/bin/bash</code>: a Homebrew <code>bash</code> is x86_64 and drags the build into Rosetta, where <code>xcrun</code> and the SDK disagree. Unset <code>PYTHONPATH</code> when calling the scripts — a stale PIL in a venv breaks the image step otherwise.</p>
+  <pre><code># verify every pack
+env -u PYTHONPATH python3 /Applications/HongKongTour/build/verify_all_packs.py
+
+# rebuild the static browser build
+env -u PYTHONPATH python3 /Applications/HongKongTour/build/build_web.py</code></pre>
+</section>
+
+<footer>
+  <p><span class="pill">143 spots</span><span class="pill">27 areas</span><span class="pill">7 targets</span><span class="pill">56/56 verified</span></p>
+  <p>Written and measured 2026-10-19 · <a href="/portfolio/">← back to the portfolio</a></p>
+</footer>
+
+</div>
+</body>
+</html>

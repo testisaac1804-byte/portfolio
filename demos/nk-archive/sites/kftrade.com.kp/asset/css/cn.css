@@ -1,0 +1,16 @@
+@font-face {
+	font-family: "SimHei";
+	src: url("../fonts/simhei.ttf");
+}
+
+* {
+	font-family: "Roboto", "Times New Roman", "SimHei", "WKLGothic";
+	/* font-family: "Roboto", sans-serif; */
+}
+
+#orgTitle span {
+	letter-spacing: 8px;
+	font-family: "SimHei";
+	font-size: 40px;
+	text-shadow: 3px 3px #000;
+}

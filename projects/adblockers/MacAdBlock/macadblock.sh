@@ -1,97 +1,102 @@
 #!/bin/bash
-# macadblock v2 — start/stop/reload MacAdBlock DNS sinkhole
-# DNS on port 8054 (no root needed); pfctl redirects 53→8054
+# macadblock v3 — control the DNS sinkhole
+# The server binds port 53 directly as a root launchd daemon, so there is no
+# pfctl redirect any more: start/stop go through launchd, not nohup.
+
+LABEL="com.isaac.macadblock"
+PLIST_SRC="$(cd "$(dirname "$0")" && pwd)/$LABEL.plist"
+PLIST_DST="/Library/LaunchDaemons/$LABEL.plist"
+LOGFILE="/tmp/macadblock.log"
+API="http://127.0.0.1:8053"
 
 ACTION="${1:-status}"
-DIR="$(cd "$(dirname "$0")" && pwd)"
-SRC="$DIR/src/macadblock.py"
-PIDFILE="/tmp/macadblock.pid"
-LOGFILE="/tmp/macadblock.log"
+
+api_up() { curl -sf -m 3 "$API/api/status" >/dev/null 2>&1; }
 
 case "$ACTION" in
-  start)
-    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
-      echo "already running PID $(cat "$PIDFILE")"
-      exit 0
-    fi
-    # Kill anything holding our ports
-    kill -9 $(lsof -ti :8053 -P -n 2>/dev/null) 2>/dev/null
-    kill -9 $(lsof -ti :8054 -P -n 2>/dev/null) 2>/dev/null
-    pkill -9 -f "macadblock" 2>/dev/null
-    sleep 1
-
-    # Start server
-    nohup /usr/local/bin/python3 "$SRC" > "$LOGFILE" 2>&1 &
-    SPID=$!
-    echo $SPID > "$PIDFILE"
-
-    # Wait for HTTP server to be ready
-    for i in 1 2 3 4 5; do
-      if curl -sf http://127.0.0.1:8053/api/status >/dev/null 2>&1; then
-        break
-      fi
-      sleep 0.5
-    done
-    echo "started PID $SPID"
+  install)
+    sudo cp "$PLIST_SRC" "$PLIST_DST"
+    sudo chown root:wheel "$PLIST_DST"
+    sudo chmod 644 "$PLIST_DST"
+    sudo launchctl load -w "$PLIST_DST"
+    echo "installed + loaded $LABEL (binds :53 as root, restarts on crash)"
     ;;
+
+  uninstall)
+    sudo launchctl unload -w "$PLIST_DST" 2>/dev/null || true
+    sudo rm -f "$PLIST_DST"
+    for iface in $(networksetup -listallnetworkservices 2>/dev/null | grep -v '^An asterisk'); do
+      sudo networksetup -setdnsservers "$iface" empty 2>/dev/null || true
+    done
+    echo "uninstalled $LABEL, DNS back to DHCP"
+    ;;
+
+  start)
+    sudo launchctl load -w "$PLIST_DST" 2>/dev/null || true
+    for i in 1 2 3 4 5 6 7 8 9 10; do api_up && break; sleep 0.5; done
+    if api_up; then echo "started"; else echo "failed to start — see $LOGFILE"; exit 1; fi
+    ;;
+
   stop)
-    if [ -f "$PIDFILE" ]; then
-      kill "$(cat "$PIDFILE")" 2>/dev/null
-      rm -f "$PIDFILE"
-    fi
-    pkill -f "macadblock.py" 2>/dev/null
-    # Remove pf redirect if active
-    sudo pfctl -a com.macadblock -F all 2>/dev/null || true
+    sudo launchctl unload -w "$PLIST_DST" 2>/dev/null || true
     echo "stopped"
     ;;
+
   restart)
     "$0" stop
     sleep 1
     "$0" start
     ;;
+
   status)
-    if curl -sf http://127.0.0.1:8053/api/status >/dev/null 2>&1; then
-      if [ -f "$PIDFILE" ]; then echo "running"; else echo "running (orphaned)"; fi
+    if api_up; then
+      echo "running"
+      curl -s "$API/api/stats" | python3 -c "import sys,json;d=json.load(sys.stdin);print(f\"  {d['num_hashes']:,} domains · {d['blocklist_size']/1024:.0f} KB · {d['blocked']:,} blocked / {d['allowed']:,} allowed · {d['qpm']} q/m\")"
       exit 0
     else
-      echo "stopped"
+      echo "not running"
       exit 1
     fi
     ;;
+
   toggle)
-    curl -sf http://127.0.0.1:8053/api/toggle | python3 -c "import sys,json; d=json.load(sys.stdin); print('ON' if d.get('running') else 'OFF')"
+    curl -sf "$API/api/toggle" | python3 -c "import sys,json;d=json.load(sys.stdin);print('ON' if d.get('running') else 'OFF')"
     ;;
+
   reload)
-    curl -s http://127.0.0.1:8053/api/reload | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'reloaded: {d[\"num_hashes\"]:,} entries')"
+    curl -s "$API/api/reload" | python3 -c "import sys,json;d=json.load(sys.stdin);print(f\"reloaded: {d['num_hashes']:,} entries\")"
     ;;
+
   stats)
-    curl -s http://127.0.0.1:8053/api/stats | python3 -m json.tool
+    curl -s "$API/api/stats" | python3 -m json.tool
     ;;
-  setup-pf)
-    # One-time pf redirect: 53 → 8054
-    printf 'rdr pass on lo0 proto udp from any to 127.0.0.1 port 53 -> 127.0.0.1 port 8054\n' | \
-      sudo pfctl -a com.macadblock -f - 2>/dev/null
-    sudo pfctl -e 2>/dev/null
-    echo "✓ pf redirect: 53→8054"
-    ;;
+
   set-dns)
-    # Set DNS on active interfaces only
-    for iface in $(networksetup -listallnetworkservices 2>/dev/null | grep -v '^An asterisk' | tail -n +2); do
+    # Only interfaces that actually carry an address — a VPN or a dormant
+    # service will happily accept 127.0.0.1 and then break every lookup.
+    for iface in $(networksetup -listallnetworkservices 2>/dev/null | grep -v '^An asterisk'); do
+      dev=$(networksetup -listallhardwareports 2>/dev/null | awk -v s="$iface" '$0 ~ s {getline; getline; print $2}')
+      [ -n "$dev" ] && ! ifconfig "$dev" 2>/dev/null | grep -q "inet " && continue
       sudo networksetup -setdnsservers "$iface" 127.0.0.1 2>/dev/null || true
     done
-    echo "✓ DNS set to 127.0.0.1"
+    sudo dscacheutil -flushcache 2>/dev/null
+    echo "DNS -> 127.0.0.1"
     ;;
+
   reset-dns)
-    for iface in $(networksetup -listallnetworkservices 2>/dev/null | grep -v '^An asterisk' | tail -n +2); do
+    for iface in $(networksetup -listallnetworkservices 2>/dev/null | grep -v '^An asterisk'); do
       sudo networksetup -setdnsservers "$iface" empty 2>/dev/null || true
     done
-    echo "✓ DNS reset to DHCP"
+    sudo dscacheutil -flushcache 2>/dev/null
+    echo "DNS -> DHCP"
     ;;
+
   log)
     tail -f "$LOGFILE" 2>/dev/null || echo "no log"
     ;;
+
   *)
-    echo "Usage: $0 {start|stop|restart|status|toggle|reload|stats|setup-pf|set-dns|reset-dns|log}"
+    echo "Usage: $0 {install|uninstall|start|stop|restart|status|toggle|reload|stats|set-dns|reset-dns|log}"
     exit 1
     ;;
 esac

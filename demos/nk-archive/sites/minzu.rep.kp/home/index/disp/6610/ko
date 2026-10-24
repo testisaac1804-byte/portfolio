@@ -1,0 +1,994 @@
+
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>민주조선 | 조선민주주의인민공화국 최고인민회의 상임위원회 및 내각기관지</title>
+    <meta charset="utf8"/>
+    <link rel="icon" href="/resource/images/cholima.png" type="image/x-icon" />
+    <link href="/resource/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/skin/default.css">
+    <link rel="stylesheet" href="/css/blueimp-gallery.min.css">
+    <link href="/css/style_gallery.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resource/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/first_ko.css">
+    <script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+        <link href="/assets/css/nivo-lightbox.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/css/font.css">
+</head> 
+<body id="top" style="background-color: #fff;font-family:KPCheonRiMa; min-width: 1100px;  "> 
+    <header id="header"   >  
+        <div class="fixedMenu" style="background: url(/resource/custom/header_bg_right_1.png)  repeat-x ; " >
+            <div style="background: url(/resource/custom/header_bg_left.png) no-repeat left 0;   height: 85px; font-family: 'KPCheonRiMa';">   
+                <div class="container" style="background: url(/resource/header_back.jpg) no-repeat center top ; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; min-width:100%!important; "  >
+                    <ul class="menu_top" style="padding-right: 15px;">
+                        <form id="lang" method="post" action="/home/index">
+                            <input id="language" name="language" value="" hidden />
+                            <input id="page" name="page" value="disp" hidden />
+                            <input type="hidden" name="_csrf" value="264408a2fdb24a7d1242ece34c9eb050"/>
+                        </form>
+                        <li>
+                            <a style="background-color: #004df3;"  href = "/home/index/disp/0/ko">조선어                            </a>
+                        </li>
+                        <li>
+                            <a  href = " /home/index/disp/0/en">
+                                English                            </a>
+                        </li>
+                        <li>
+                            <a  href ="/home/index/disp/0/ch">
+                                 汉语                            </a>
+                        </li>
+                    </ul> 
+                    <div class="logo " style="padding-left: 10%;">
+                        <a href="/Home/index/first/0/ko" onclick="setPage('first');" style="display:block;margin-bottom:5px;"><img src="/resource/logo.png"></a>
+                    </div> 
+                </div>
+                <div class="mobile1" style="font-family:'KPCheonRiMa'; ">
+                    <div class="rightPart1" style="  font-family: 'KPCheonRiMa';  font: inherit; ">
+                        <b>  
+                            <ul class="menubar1" style="font-family:'KPCheonRiMa';font-size: 13px; " > 
+                                <li   >
+                                    <a href="/home/index/first/0/ko"  style=" /* text-shadow: 1px 1px 1px #000!important;*/font-family:'KPCheonRiMa'; " >
+                                        <b>첫페지</b>
+                                    </a>
+                                </li>
+                                <li   >
+                                    <a  href="/home/index/revolution/0/ko"     >
+                                        <b>혁명활동소식</b>
+                                    </a>
+                                </li  >
+                                <li   >
+                                    <a  href="/home/index/power_news/0/ko"    >
+                                        <b>정권기관소식</b>
+                                    </a>
+                                </li>
+                                <li class="has-dropdown"  >
+                                    <a href="/home/index/all_view/0/ko"     >
+                                     <font  ><b>분야별기사</b></font></a>
+                                     <ul class="dropdown" style="width: 200px;padding-right: 10px;padding-left: 0px;">
+                                            <li>
+                                                <a href="/home/index/politics/0/ko"  >정치 
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/home/index/economy/0/ko"  >경제                                                </a>
+                                            </li>
+                                            <li>
+                                                <a  href="/home/index/culture/0/ko"  >문화                                                </a>
+                                            </li>
+                                            <li style="padding-bottom:px;">
+                                                <a  href="/home/index/tourist/0/ko "  >관광,명승지                                                </a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="/home/index/overseas/0/ko"  >해외동포                                                </a>
+                                            </li>
+                                            <li>
+                                                <a  href="/home/index/international/0/ko"  >국제적련대성                                                </a>
+                                            </li>
+                                    </ul>
+                                </li>
+                                <li  class="has-dropdown">
+                                    <a  href="/home/index/media/0/ko"  > <font   ><b> 다매체</b></font></a>
+                                    <ul class="dropdown" style="padding-right: 10px;padding-left: 0px;">
+                                        <li><a href="/home/index/photos/0/ko"  >사진</a></li>
+                                        <li><a  href="/home/index/video/0/ko"  >동영상</a>
+                                        </li> 
+                                    </ul>
+                                </li>    
+                                <li  class=" dropdown">
+                                    <div class="btn-group pull-right">
+                                        <a  href="/home/index/search/0/ko"  class=" btn-sm btn-outline dropdown-toggle">검색</a>
+                                                                            </div> 
+                                </li>  
+                             </ul>      
+                        </b>
+                    </div>
+                </div> 
+                <div style="clear: box;height: 20px;"></div>
+            </div>       
+         </div>
+    </header> 
+    <style type="text/css">
+        .modal-backdrop{
+            z-index: 0;
+        }
+    </style> 
+
+
+
+<style type="text/css"> 
+
+	.search-result-counter
+
+	 {
+
+	 	box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);height: 44px;line-height: 24px;padding: 10px;text-align: center;border-radius: 100px;width: 44px;
+
+	 }
+
+	 div p{
+
+	 	margin: 0 0 0px;
+
+	 }
+
+</style>
+
+<div class="col-sm-12" >
+
+	<div style="height: 109px;"></div>
+
+
+
+	<div class="widget"  >			                
+
+	    <div class="widget-body" style=" margin-right: 2%;margin-left: 2%;">
+
+	        <form id="myform" method="get">
+
+
+	            <div class="row" id="img_content" name="img_content" style="margin-bottom: 35px; ">
+
+	            	 
+                    <table id="simple-table" style="width: 100%;" > 
+					    <tbody >
+					    	<tr>
+						    	<td align="center" style="padding-left: 10%;padding-right: 10%; text-align: center;font-size: 24px; font-family: KPCheonRiMa; line-height: 1.3;color: black;padding-bottom:15px ">
+									  새시대 함선공업혁명과 해군무력현대화의 과감한 전진발전<br>조선인민군 해군 구축함 진수기념식 성대히 진행  
+								</td>
+							</tr>
+				    	 
+				    						    		<tr>
+				    			<td>
+				    				<div>
+					    					<a data-target="#photo" data-toggle="modal" style="float:right;font-size: 30px;" >
+					    						<i class="fa fa-camera"></i>
+					    					</a>
+					    					<div id="revolution">
+					    						 <div class="modal fade" id="photo" tabindex="-1" role="basic" aria-hidden="true"   style="height: 100%;">
+											                <div class="  modal-dialog " style="width:100%; margin-top: 0px; background-color: white;"  >
+											                    <div class="modal-content" >
+											                    	<div class="modal-header" style="padding: 25px ;">
+											                    		<p align="center" style="padding-left: 10%;padding-right: 10%; text-align: center;font-size: 24px; font-family: KPCheonRiMa; line-height: 1.3;color: black; ">
+											                    		 새시대 함선공업혁명과 해군무력현대화의 과감한 전진발전<br>조선인민군 해군 구축함 진수기념식 성대히 진행  
+											                    		</p>
+											                            <span class="close " data-dismiss="modal" aria-hidden="true" style="color: black;">x</span>
+											                        </div>    
+											                        <div class="modal-body" style="background-color: #ea0c0c;">
+											                        	<div class="row" id="ModalHeight" style=" margin-top: 100px;">
+											                        		<dir class="col-md-2">
+											                        			<div  >
+											                            														                            				<div style="text-align: center;">
+																							<a data-slide="prev"  href="#carousel2" class="left carousel-control" style="left: 100px;">
+																		                        <span class="icon-prev" id='vector' name='prev'   style=" color:white;font-size: 50px;"></span>
+																		                    </a>
+																	                    </div>
+																	                																                </div>
+											                        		</dir>
+											                        		<div class="col-md-8">
+													                        	<div class="carousel slide" id="carousel2" >
+							                                						<div class="carousel-inner"  >
+														                        													                                			<div  id = "image0" class="item active" >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-001.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >1/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image1" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-002.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >2/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image2" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-003.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >3/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image3" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-004.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >4/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image4" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-005.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >5/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image5" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-006.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >6/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image6" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-007.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >7/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image7" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-008.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >8/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image8" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-009.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >9/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image9" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-010.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >10/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image10" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-011.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >11/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image11" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-012.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >12/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image12" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-013.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >13/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image13" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-014.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >14/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image14" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-015.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >15/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image15" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-016.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >16/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image16" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-017.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >17/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image17" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-018.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >18/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image18" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-019.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >19/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image19" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-020.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >20/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image20" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-021.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >21/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image21" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-022.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >22/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image22" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-023.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >23/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image23" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-024.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >24/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image24" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-025.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >25/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image25" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-026.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >26/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image26" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-027.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >27/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image27" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-028.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >28/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image28" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-029.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >29/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image29" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-030.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >30/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image30" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-031.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >31/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image31" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-032.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >32/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image32" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-033.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >33/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image33" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-034.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >34/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image34" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-035.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >35/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image35" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-036.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >36/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image36" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-037.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >37/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image37" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-038.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >38/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image38" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-039.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >39/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image39" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-040.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >40/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image40" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-041.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >41/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image41" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-042.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >42/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image42" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-043.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >43/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image43" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-044.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >44/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image44" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-045.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >45/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image45" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-046.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >46/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image46" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-047.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >47/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image47" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-048.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >48/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image48" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-049.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >49/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image49" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-050.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >50/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image50" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-051.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >51/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image51" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-052.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >52/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image52" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-053.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >53/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            													                                			<div  id = "image53" class="item " >
+													                                			<img src="/uploads/photo/2025/06/2025-06-13-054.jpg">
+										                                       																			                                        	<div style="height: 25px;margin-top: 3px; ">
+														                                        		<p style="text-align: center;color: white;">
+														                                        			<font size="4"  >54/54</font>
+														                                        		</p>
+														                                        	</div>
+													                                        										                                       					</div>
+													                            														                        		</div>
+													                    		</div>
+												                    		</div>
+												                    		<dir class="col-md-2">
+												                    																		                		<a data-slide="next"  href="#carousel2" class="right carousel-control" style="right: 100px;" >
+																                        <span class="icon-next" id="vector1" style=" color:white;font-size: 50px; top:20px;"></span>
+																                    </a>
+																                												                    		</dir>
+												                    	</div>
+											                        </div>
+											                    </div>
+											                </div>
+											            </div>
+					    					</div>
+				    				</div>
+				    			</td>
+				    		</tr>
+					    		
+						
+							<tr>
+
+								<td  > 
+
+                                    <div class="panel panel-primary" style=" border-width: 0px;border-right:0px;border-left: 0px;text-indent: 12px;">
+
+                                        <div class="panel-body" style=" text-indent: 12px;text-align: justify;letter-spacing: 1px;font-size: 16px;font-family:KPCheonRiMa;line-height: 20px;     color: #000; line-height: 1.5; " >
+
+                                        	<style type="text/css">
+
+                                        		p{
+
+                                        			line-height: 22px;
+
+                                        			margin-top: 0px;
+
+                                        			font-family: KPCheonRiMa;
+
+                                        			font-size: 16px;
+
+                                        			color: #000;
+
+                                        			text-align: justify;
+
+                                        			text-indent: 12px;
+
+                                        			                                         		}
+
+                                        	</style>
+
+                                            <p><nobr>위대한</nobr> 우리 국가의 부강과 번영의 백년대계를 강대무비의 절대적힘으로 굳건히 수호하려는 조선로동당의 억센 신념과 견결한 혁명의지는 강위력한 주체식무장장비들의 줄기찬 탄생과 더불어 공화국해군의 빛나는 전성시대를 펼치고있다.<p/>
+조선민주주의인민공화국의 해상주권과 국익을 억척으로 담보하게 될 또 한척의 다목적구축함이 그 어떤 불리한 조건에서도 좌절과 침체를 용납하지 않고 오로지 전진 또 전진만을 지향하는 우리 당의 불변의 강군건설의지를 과시하며 수호자의 성스러운 이름을 청사에 아로새기는 력사의 시각을 맞이하였다.<p/>
+주체적해군무력의 강화발전을 위한 성스러운 려정에서 완강한 분발과 억척의 투지로써 결단코 성취한 신형구축함의 련속적인 보유는 함선공업부문 로동계급의 불굴의 정신력과 우리 국력의 일대 저력의 <nobr>시위인</nobr> 동시에 조국의 안전과 세계평화를 믿음직하게 수호하기 위한 당중앙의 해양전략실현에서의 독보적인 진일보로 된다.<p/>
+조선인민군 해군 구축함 진수기념식이 6월 12일에 라진조선소에서 진행되였다.<p/>
+진수기념식에는 당과 정부，군부의 간부들과 함선공업부문의 로동계급과 과학자，기술자，일군들，조선인민군 해군장병들，구축함의 <nobr>지휘관，해병들，김정숙명칭</nobr> 해군대학 교직원，학생들，조선인민군 군종，군단급지휘관들，성，중앙기관 책임일군들이 참가하였다.<p/>
+선진해양강국에로 향한 주체조선의 원대한 리상과 도도한 기상이 용출하는 기념식장은 새시대 함선공업혁명의 력사적진흥을 견결히 가속화해나가시는 <nobr><b style=font-size:1.11em>김정은</b>동지에</nobr> 대한 절대적인 신뢰심과 날로 강대해지는 우리 국가의 무진한 힘에 대한 크나큰 긍지와 자부심으로 설레이고있었다.<p/>
+조선인민군 해군명예위병대가 영광의 시각을 기다려 엄숙히 정렬해있었다.<p/>
+<nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서</nobr> 최신예다목적구축함이 웅건하게 계류되여있는 기념식장에 도착하시자 전체 참가자들은 조국의 륭성번영과 후손만대의 평안을 위한 초행과 개척의 험로를 <nobr>위대한</nobr> 분투와 강철의 의지로 헤치시며 반만년민족사의 숙원이 가슴후련히 성취되는 해양강국건설의 일대 전성기를 열어가시는 만고절세의 애국자，백전백승의 <nobr>령장을</nobr> 우러러 최대의 영광과 경의를 삼가 드리며 열광의 환호를 터쳐올리였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>를 영접하는 의식이 있었다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서 조선인민군 해군의 영예의 군기와 명예위병대를 사열하시였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>를 해군의 주요지휘관들이 다함없는 경모의 정을 안고 정중히 맞이하였다.<p/>
+조선인민군 해군명예위병대의 분렬행진이 있었다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>를 위시하여 당과 정부의 간부들과 조선인민군 해군사령관을 비롯한 해군의 지휘성원들，조선인민군 군종，군단급단위 지휘관들，도당책임비서들，군수공업부문 일군들，함선건조부문 일군，공로자들이 <nobr>주석단에</nobr> 자리잡았다.<p/>
+조선민주주의인민공화국 국가가 장중하게 주악되였다.<p/>
+조선로동당 중앙위원회 비서 조춘룡동지가 진수기념사를 하였다.<p/>
+연설자는 함선공업부문 로동계급의 드높은 혁명적열의와 분투에 의하여 공화국해상방위력의 전렬에 들어서게 될 신형구축함 제2호를 마침내 동해의 푸른 물에 띄우고 당중앙전원회의앞에 그 결과를 보고할수 있게 된 감개를 피력하면서 이는 조선이 원하는 리상과 목표，키워가는 국력이 대양에 뻗치는 시대가 구축함의 위용넘친 실체처럼 확실하게 다가오고있음을 체감할수 있게 하는 자부할만한 경사로 된다고 말하였다.<p/>
+그는 신형다목적구축함이 해상방위를 위한 주동적인 견제력량으로서 동해는 물론 태평양을 뜨락처럼 드나들며 우리 국가의 주권에 도전하고 평화와 번영의 권리를 침해하려드는 적대세력들을 연해와 대양，지상의 그 어디에 배겨있든 섬멸의 보복타격을 가할수 있게 우리 식으로 개발되고 위력향상된 종합적인 전력을 갖춘데 대하여 언급하면서 우리 당과 국가，인민이 지향하는 해양강국의 새시대는 부인할수 없는 현실이라는것을 오늘의 진수기념식이 시위하게 될것이라고 확언하였다.<p/>
+새시대 국방공업혁명의 전방위적이고 급속한 승리적전진을 진두에서 이끄시는 <nobr><b style=font-size:1.11em>김정은</b>동지의</nobr> 정력적인 령도에 의해 1년반도 채 안되는 짧은 기간에 두척의 대형다목적구축함들을 건조해내는 경이적인 사변이 일어난 현실에 대해 언급하면서 그는 혁명공업의 변혁적결과물들을 련이어 탄생시키며 자위력강화의 전성기를 열어가는 당중앙의 탁월하고 세련된 령도를 받는 영광은 곧 함선공업부문만이 아닌 전체 국방공업전선에 나래치는 창조와 기적의 무한한 힘이라고 강조하였다.<p/>
+<nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서</nobr> 이끄시고 견인불발의 투쟁속에 얻은 소중한 경험과 교훈이 있기에 조선의 함선공업은 보다 눈부신 성과를 창조할것이라고 하면서 연설자는 <nobr>위대한</nobr> 당중앙의 사상과 령도를 충직하게 받드는 투철한 정신을 더 높이 발양하고 더 큰 창조의 힘을 키워 존엄높고 강대한 우리 조국 조선민주주의인민공화국을 세계앞에 자랑스럽게 떨치는 성스러운 투쟁에 모든것을 다해나갈 결의를 피력하였다.<p/>
+기념식에서는 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서</nobr> 친필서명하신 구축함의 등급규정과 명명에 관한 조선로동당 중앙군사위원회 명령을 조선민주주의인민공화국 국방상 노광철동지가 발표하고 함선등급 및 명명증서를 조선인민군 해군 동해함대사령관에게 전달하였다.<p/>
+조선로동당 중앙군사위원회 명령에 따라 새로 건조한 구축함을 《최현》급으로，함의 명칭을 《강건》호로 명명하였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서 조선인민군 해군 동해함대 지휘관들에게 구축함 《강건》호의 군함기를 수여하시였다.<p/>
+구축함진수를 기념하여 당중앙위원회 비서 조춘룡동지가 진수바줄을 잘랐다.<p/>
+순간 함의 고동소리와 함께 함명칭가림막이 벗겨지고 축포탄과 고무풍선들이 날아올라 하늘가를 아름답게 장식하였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서 구축함에 오르시였다.<p/>
+<nobr>최고사령관</nobr>의 첫 사열을 받는 영광의 시각을 맞이한 함은 전투적열광에 휩싸여있었다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서는 함장의 영접보고를 받으시고 함의 선수，선미갑판을 돌아보시며 해병들을 뜨겁게 격려하시였다.<p/>
+구축함에서는 조선인민군 초대총참모장이였던 항일혁명투사 강건동지의 기념상이 제막되였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서는 조선인민군의 영웅성을 대표하는 출중한 군사가이며 참다운 공산주의혁명가인 강건동지가 건국과 창군위업에 바친 그 푸른 젊음과 남진의 길에 떨치던 강용한 기개와 고귀한 정신이 그대로 함을 떠미는 추진력이 되고 일당백전투정신의 영원한 자양이 되여 새세대 해병들이 승리의 항적만을 새기게 고무하고 공화국해군의 무궁한 번영을 격려해주기를 기원하시면서 건군공신의 기념상앞에 꽃송이를 진정하시고 숭고한 경의를 표하시였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서는 구축함의 건조와 원상복원에 공헌한 함선공업부문의 과학자，기술자，로동자들을 만나시고 격려해주시였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서는 공로자들의 손을 일일이 잡아주시면서 새세대 전함건조와 함선복구에 일심분기하여 우수한 전문가적자질과 능력을 발휘함으로써 당중앙군사위원회 명령을 완벽하게 관철하는데 기여한 그들의 애국충성과 로력적위훈에 충심으로 되는 감사를 표하시였다.<p/>
+<nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서</nobr> 기념연설을 하시였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서는 구축함 2호함의 진수기념식을 성대하게 가지게 된것은 성스러운 개척의 닻을 올린 함대건설의 새시대가 도도한 전진을 계속하고있으며 세계적인 해군력건설을 목적한 우리의 방대한 함선건조계획들이 가장 정확하게 빠른 속도로 추진되고있음을 보여주고있다고 하시면서 우리 함선공업의 초급진적발전을 보여주는 변혁을 실감케 하는 매우 중대한 사변을 안아온 청진조선소와 라진조선소를 비롯한 함선공업부문의 영웅적로동계급과 련관부문 과학자，기술자들，일군들에게 뜨거운 감사를 표하시였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서는 순수 무책임성，비과학적인 경험주의로 인해 국가의 존엄과 권위를 일순간에 추락시킨 황당한 곡절이 있었지만 그 어떤 난관도 해군전력강화의 중대한 로정은 결코 지연시킬수 없었다고 하시면서 이것은 함선공업의 진보와 도약에 필수적인 자양으로서 우리의 혁명방식，발전방식의 위력에 대한 다시금의 증명으로 된다고 언급하시였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서는 오늘 함선공업혁명을 본격적으로 다그칠수 있는것은 우리의 의지가 강고할뿐 아니라 그것을 실천적으로 담보할 자체의 튼튼한 력량과 높은 기술력을 확보하였기때문이라고 하시면서 맞받아 공격할 힘이 있고 그러한 능력을 갖추고있어야 침략을 막는다는 우리 해군의 지론에 따라 래년부터 《최현》급 또는 그 이상급의 구축함들을 매해 두척씩 무어 작전수역에 배치하는것을 비롯하여 해상무력의 급진적강화를 위한 우리 당의 국방전략과 실천적조치들에 대하여 천명하시였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서는 해군전성시대를 열어나가는 우리의 위업은 본격적인 단계에 들어섰다고 하시면서 선박공업부문 로동계급이 무한한 충실성과 애국심，무시할수 없는 실력과 완강한 실천력을 백배하여 우리 당이 목표하고 결정한 군사강국의 위상에 걸맞는 현대적인 대형군함들을 대대적으로 무어냄으로써 조선업도약의 새 력사를 계속해 써나갈것이라는 기대와 확신을 표명하시였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서 연설을 마치시자 새 세기 선진해양강국을 향해 힘차게 나아가는 주체조선의 양양한 전도를 확신하며 전체 참가자들이 끓어오르는 감격과 환희에 넘쳐 터쳐올리는 폭풍같은 《만세！》의 함성이 항만을 진감하며 메아리쳤다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서는 구축함건조투쟁을 벌리다가 현장에서 순직한 청진조선소 현대화직장 제관1작업반 반장 조금혁동무의 영웅적위훈에 대해 높이 평가하시면서 그의 안해와 아들을 친히 만나 위로해주시였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서는 구축함의 주요지휘관들에게 기념동전을 수여하시고 구축함에서 복무하게 될 지휘관，해병들과 함께 구축함 《강건》호를 배경으로 건군사에 길이 빛날 뜻깊은 기념사진을 찍으시였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서는 구축함의 전체 해병들이 우리 공화국의 주권을 영예롭게 사수해온 창군세대의 <nobr>위대한</nobr> 정신과 불굴의 용감성을 굳건히 계승하여 조국앞에 세운 해군의 불멸할 공적과 영광넘친 수호의 항적을 혁혁한 공훈으로 빛내여가리라는 크나큰 믿음을 안겨주시였다.<p/>
+국가수반의 첫 사열과 따뜻한 축복을 받아안는 최상의 영광을 지닌 구축함의 전체 지휘관들과 해병들은 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께</nobr> 고마움의 인사를 삼가 올리면서 당중앙이 가리키는 승리의 항로따라 공화국해군의 영웅적인 전투정신을 힘있게 떨치며 조국의 령해를 철벽으로 지켜갈 굳은 결의를 다짐하였다.<p/>
+<nobr><b style=font-size:1.11em>김정은</b>동지</nobr>께서는 함선건조에 기여한 청진조선소와 라진조선소를 비롯한 선박건조부문의 로동계급과 과학자，기술자，기능공，일군들도 만나주시고 그들이 더욱 줄기찬 분발과 강인한 투쟁으로 무적의 전함들을 조국의 바다우에 련이어 띄움으로써 조선인민군의 강세를 끝없이 상승시키는 <nobr>위대한</nobr> 력사를 계속 힘차게 써나가기를 기대하시면서 사랑과 믿음의 화폭을 남기시였다.<p/>
+구축함의 진수를 기념하는 공연이 진행되였다.<p/>
+조선인민군 해군 구축함 《강건》호 진수기념식은 우리 해군을 국가핵억제력의 일익을 담당한 강력한 군종으로 급속히 진화시켜 국가주권과 령토완정，안전리익을 철저히 수호해나가려는 조선로동당의 드팀없는 결단과 의지의 힘있는 과시로，웅대한 포부와 리상을 안고 부흥번영의 래일을 향해 기세차게 전진하는 우리 인민의 애국투쟁에 거대한 활력을 부어주는 사변적계기로 된다.<p/>
+영광스러운 <nobr><b style=font-size:1.11em>김정은</b>시대와</nobr> 더불어 날로 드높아지는 영웅적인민해군의 명성은 굴할줄 모르는 사회주의조선의 용감성과 승리의 상징으로 찬연히 빛날것이며 만리대양에로 뻗쳐지는 전력은 정의와 평화수호의 보검으로 그 존엄과 위용을 만방에 떨치게 될것이다. 
+ 
+
+                                        </div>
+
+                                    </div>
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+
+					 
+
+				</div>
+
+			</form>
+
+	    </div>
+
+	</div>
+
+</div> 
+
+
+		<script type="text/javascript">
+
+			jQuery(document).ready(function($){
+
+				$(".img-responsive").bind('contextmenu',function() { return false; });
+
+			});	
+
+		</script>
+
+
+
+	
+  
+
+<script>
+
+$(document).ready(function() {
+
+    resizeImages1();
+    resizeImages2();
+
+
+
+    $(window).on('resize', function(){
+
+        resizeImages1();
+        resizeImages2();
+
+    });
+
+});
+
+function resizeImages1() {
+
+    var windowWidth = $('#dddd').innerWidth();
+
+    var width = windowWidth * 0.6;
+
+    var height = windowWidth * 0.4;
+    // $('.banner').css('width', width);
+
+    // $('.banner').css('height', height);
+
+    // $('.carousel-inner .item img').each(function() {
+
+    //     var orig_img_width = $(this).data('width');
+
+    //     var orig_img_height = $(this).data('height');
+
+    //     var orig_img_rate = orig_img_width / orig_img_height;
+
+    //     var dest_img_width = width;
+
+    //     var dest_img_height = height;
+
+    //     var margin_top = 0;
+
+    //     if (orig_img_rate >= 1.5) {
+
+    //         dest_img_width = width;
+
+    //         dest_img_height = width / orig_img_rate;
+
+    //         margin_top = (height - dest_img_height) / 2;
+
+    //     } else {
+
+    //         dest_img_width = height * orig_img_rate;
+
+    //         dest_img_height = height;
+
+    //     }
+    //     $(this).css('width', dest_img_width)
+
+    //         .css('height', dest_img_height)
+
+    //         .css('margin-top', margin_top);
+
+    // });
+    $('a.carousel-control span').each(function() {
+
+    	var top = (height - $(this).height()-10) / 2;
+
+    	$(this).css('top', top);
+
+    	$(this).css('font-size', top/2);
+    });
+
+}
+function resizeImages2() {
+    var windowWidth = $('#revolution').innerWidth();
+    var width = windowWidth * 0.6;
+    var height = windowWidth * 0.4;
+    // $('.banner').css('width', width);
+
+    // $('.banner').css('height', height);
+    // $('.carousel-inner .item img').each(function() {
+
+    //     var orig_img_width = $(this).data('width');
+
+    //     var orig_img_height = $(this).data('height');
+
+    //     var orig_img_rate = orig_img_width / orig_img_height;
+
+    //     var dest_img_width = width;
+
+    //     var dest_img_height = height;
+
+    //     var margin_top = 0;
+    //     if (orig_img_rate >= 1.5) {
+
+    //         dest_img_width = width;
+
+    //         dest_img_height = width / orig_img_rate;
+
+    //         margin_top = (height - dest_img_height) / 2;
+
+    //     } else {
+
+    //         dest_img_width = height * orig_img_rate;
+
+    //         dest_img_height = height;
+
+    //     }
+    //     $(this).css('width', dest_img_width)
+
+    //         .css('height', dest_img_height)
+
+    //         .css('margin-top', margin_top);
+
+    // });
+
+    $('#vector').each(function() {
+
+    	var top = (height - $(this).height()-10) / 2;
+
+    	$(this).css('top', top+50);
+
+    });
+
+    $('#vector1').each(function() {
+
+    	var top = (height - $(this).height()-10) / 2;
+
+    	$(this).css('top', top+50);
+
+    });
+ 
+  	$('#ModalHeight').each(function() {
+
+    	
+
+    	$(this).css('height', 200+height);
+
+    });
+}
+
+</script>     <div style="background: url(/resource/images/footer_left.png) repeat-x left 0 ;  
+
+      height: 54px; width: 100%; /*position: fixed;*/ bottom: 0; display: block; /*width*/: 100%; position: fixed;
+
+      z-index: 1002; ">     
+
+     <div   style="background: url(/resource/images/footer_right.png)  no-repeat right 0 ; 
+
+          /*box-sizing: border-box;*/
+
+          height: 54px;width: 100%; bottom: 0;display: block; position: absolute;z-index: 1002;" >
+
+       <div   style="background: url(/resource/images/footer_back.png) no-repeat center bottom ; height: 54px; width: 100%; bottom: 0;/*box-sizing: border-box;*/display: block; position: absolute;z-index: 1000;/*min-width:100%!important; */">      
+
+             <p class="" style="margin: 0 0 -10px;line-height: 52px; font-size: 20px;">
+
+                <font color="#0a43b6" face="KPCheonRiMa"  style="float: right;padding-right: 90px;  " >
+
+                  <strong>
+
+                    <b style="text-shadow:1px 1px 1px #0a43b6; ">
+
+                      저작권 2025 © 조선민주주의인민공화국 민주조선사  
+
+                    </b>
+
+                  </strong>
+
+                </font>
+
+            </p> 
+
+              <a href="#header" class="scrollup" style="margin-bottom: 30px;"><i class="fa fa-chevron-up"></i></a>  
+
+        </div>
+
+      </div> 
+
+      </div>   
+
+     <script src="/js/main.js"></script>
+
+     <script src="/resource/js/dropdown.js"></script>
+
+     <script src="/resource/js/custom.js"></script>
+
+
+
+     <!--gallery-->
+
+     <script src="/resource/js/jquery.min.js"></script>
+
+     <script src="/js/bootstrap.min.js"></script>  
+
+     <script src="/resource/js/jquery.sticky.js"></script>
+
+     <script src="/resource/js/nivo-lightbox.min.js"></script>
+
+     <script src="/resource/js/custom1.js"></script>
+
+     <script src="/resource/js/css3-animate-it.js"></script>
+
+    <script type="text/javascript" src="/resource/js/js/tms-0.3.js"></script>
+
+    <script type="text/javascript" src="/resource/js/js/tms_presets.js"></script> 
+
+    <script type="text/javascript" src="/resource/js/js/jquery.easing.1.3.js"></script> 
+
+    <script src="/resource/js/js1/plugins/blueimp/jquery.blueimp-gallery.min.js" ></script>
+
+    <script src="/resource/js/js1/jquery-2.1.1.js"></script>
+
+    <script src="/resource/js/js1/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <script src="/resource/js/js1/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <script src="/assets/css3-animate-it.js" type="text/javascript"></script>
+
+    <script src="/assets/nivo-lightbox.min.js" type="text/javascript"></script>
+
+    <script src="/assets/custom.js" type="text/javascript"></script>
+
+    </body>
+
+
+
+</html>

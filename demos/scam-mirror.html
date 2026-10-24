@@ -17,13 +17,13 @@
     <script src="vue.min.js"></script>
     <script src="vant.min.js"></script>
     <!--js-->
-    <script src="css/hm.js.%e4%b8%8b%e8%bd%bd"></script>
-    <script type="text/javascript" src="css/jquery.min.js.%e4%b8%8b%e8%bd%bd"></script>
-    <script type="text/javascript" src="css/bootstrap.min.js.%e4%b8%8b%e8%bd%bd"></script>
-    <script type="text/javascript" src="css/slider.js.%e4%b8%8b%e8%bd%bd"></script>
-    <script type="text/javascript" src="css/jquery.tmpl.min.js.%e4%b8%8b%e8%bd%bd"></script>
+    <script src="css/hm.js"></script>
+    <script type="text/javascript" src="css/jquery.min.js"></script>
+    <script type="text/javascript" src="css/bootstrap.min.js"></script>
+    <script type="text/javascript" src="css/slider.js"></script>
+    <script type="text/javascript" src="css/jquery.tmpl.min.js"></script>
     <script type="text/javascript">var baiduHmt = false;</script>
-    <script type="text/javascript" src="css/upow-tools.js.%e4%b8%8b%e8%bd%bd"></script>
+    <script type="text/javascript" src="css/upow-tools.js"></script>
     <style>p>span,.chayan-running,.popup-title{font:12px MfIconFont;font-weight: 600}</style>
     <script>(function() {
 
@@ -959,11 +959,63 @@
                     }
                     </style>
                     <script>
-                    $(
-                    function () {
-                    $(".slider-mobile-main ").css({"width ": $(".slider-mobile-main>li").length * 100 + "%"}) $(".slider-mobile-main>li").css({"width": 1 / $(".slider-mobile-main>li").length * 100 + "%"}) var initDataX = 0; var initDataY = 0; var shifting = 0 var boos = 0; $(".slider-mobile-main").on("touchstart", function (e) { initDataX = e.originalEvent.changedTouches[0].pageX;//获取手指按下时的坐标 initDataY = e.originalEvent.changedTouches[0].pageY;//获取手指按下时的坐标 shifting = $(this).offset().left; //获取ul偏移的left }) $(".slider-mobile-main").on("touchmove", function (e) { var x = e.originalEvent.changedTouches[0].pageX;//滑动距离 var y = e.originalEvent.changedTouches[0].pageY;//滑动距离 var slidingDistanceX = x - initDataX; var slidingDistanceY = y - initDataY; boos = slidingDistanceX if (Math.abs(slidingDistanceX) > Math.abs(slidingDistanceY)) { var left = shifting + slidingDistanceX $(this).css({"left": left + "px"}) return false } }) var num = 0; $(".slider-mobile-main").on("touchend", function (e) { var initLeft = $(this).offset().left; //获取ul偏移的距离 // var num = Math.round(-initLeft/$(".slider-mobile-main>li")[0].offsetWidth) //var num = Math.round(-initLeft/$(this).children("li")[0].offsetWidth) //var num = parseInt(-initLeft/$(this).children("li")[0].offsetWidth) if (boos > 80) { num-- } if (boos
-                      < -80) { num++ } // num=n um>= ($(".slider-mobile-main>li").length-1)?$(".slider-mobile-main>li").length-1:num;//做判断 num = num >= ($(this).children("li").length - 1) ? $(this).children("li").length - 1 : num;//做判断 num = num
-                        <=0 ? 0 : num; // $(this).css({ "left": -num * $( ".slider-mobile-main li")[0].offsetWidth + "px"}) $(this).stop().animate({ "left": -num * $(this).children( "li")[0].offsetWidth + "px"}, 400); //首页判断 if ($(this).attr( "touchend")=="slider-mobile-main-active" ) { if (num !==0 ) { $(this).find( "li[touchend='active']").attr( "data-toggle", "0"); $( ".index-page .section-cooperation .btn-mobile-more").attr( "data-status", "hide").text( "查看更多"); } } if (num==1 ) { $(this).children( "li").eq(1).find( ".application-ul-1").css({ "display": 'flex'}) } else { $(this).children( "li").eq(1).find( ".application-ul-1").css({ "display": 'none'}) } if (num==3 ) { $(this).children( "li").eq(3).find( ".content-control").css({ "display": 'block'}) } else { $(this).children( "li").eq(3).find( ".content-control").css({ "display": 'none'}) } $(this).parents( ".slider-mobile-content").next().find( "li").removeClass( "li-active") // $( ".slider-mobile-top ul li").children().removeClass( "active") $(this).parents( ".slider-mobile-content").prev().find( "li").children().removeClass( "active") $(this).parents( ".slider-mobile-content").prev().find( "li").eq(num).children().addClass( "active") // $( ".slider-mobile-bottom ul li").eq(num).addClass( "li-active") $(this).parents( ".slider-mobile-content").next().find( "li").eq(num).addClass( "li-active") // return false }) $( ".slider-mobile .slider-mobile-top ul li").click(function () { $( ".slider-mobile-main").stop().animate({ "left": -$(this).index() * $( ".slider-mobile-main li")[0].offsetWidth + "px"}, 400); $(this).siblings().children().removeClass( "active") $(this).children().addClass( "active") $(this).parents( ".slider-mobile").children( ".slider-mobile-bottom").find( "li").removeClass( "li-active") $(this).parents( ".slider-mobile").children( ".slider-mobile-bottom").find( "li").eq($(this).index()).addClass( "li-active") if ($(this).index()==1 ) { $(this).parents( ".slider-mobile").find( ".application-ul-1").css({ "display": "flex"}) } else { $(this).parents( ".slider-mobile").find( ".application-ul-1").css({ "display": "none"}) } }) } ) </script>
+$(function () {
+  var $main = $(".slider-mobile-main")
+  var $items = $main.children("li")
+  if (!$items.length) return
+  var n = $items.length
+  $main.css({ "width": n * 100 + "%" })
+  $items.css({ "width": (100 / n) + "%" })
+
+  var initX = 0, initY = 0, shifting = 0, boos = 0, num = 0
+
+  function settle(idx, $el) {
+    $el.stop().animate({ "left": -idx * $el.children("li")[0].offsetWidth + "px" }, 400)
+    $el.children("li").eq(1).find(".application-ul-1").css({ "display": idx === 1 ? "flex" : "none" })
+    $el.children("li").eq(3).find(".content-control").css({ "display": idx === 3 ? "block" : "none" })
+    var $wrap = $el.parents(".slider-mobile-content")
+    $wrap.next().find("li").removeClass("li-active")
+    $wrap.prev().find("li").children().removeClass("active")
+    $wrap.prev().find("li").eq(idx).children().addClass("active")
+    $wrap.next().find("li").eq(idx).addClass("li-active")
+  }
+
+  $main.on("touchstart", function (e) {
+    var t = e.originalEvent.changedTouches[0]
+    initX = t.pageX; initY = t.pageY
+    shifting = $(this).offset().left
+  })
+
+  $main.on("touchmove", function (e) {
+    var t = e.originalEvent.changedTouches[0]
+    var dx = t.pageX - initX, dy = t.pageY - initY
+    boos = dx
+    if (Math.abs(dx) > Math.abs(dy)) {
+      $(this).css({ "left": (shifting + dx) + "px" })
+      return false
+    }
+  })
+
+  $main.on("touchend", function () {
+    if (boos > 80) num--
+    if (boos < -80) num++
+    num = Math.min(Math.max(num, 0), n - 1)
+    boos = 0
+    settle(num, $(this))
+  })
+
+  $(".slider-mobile .slider-mobile-top ul li").click(function () {
+    var i = $(this).index()
+    settle(i, $(".slider-mobile-main"))
+    $(this).siblings().children().removeClass("active")
+    $(this).children().addClass("active")
+    var $sl = $(this).parents(".slider-mobile")
+    $sl.children(".slider-mobile-bottom").find("li").removeClass("li-active")
+    $sl.children(".slider-mobile-bottom").find("li").eq(i).addClass("li-active")
+    $sl.find(".application-ul-1").css({ "display": i === 1 ? "flex" : "none" })
+  })
+})
+</script>
                           <div class="page-content index-page">
                             <div class="container">
                               <!--banner-->
@@ -2235,9 +2287,9 @@
                             <div class="cust-3" id="toTop" style="display:none;">
                               <img src="css/icon-totop.png" alt=""></div>
                           </div>
-                          <script type="text/javascript" src="css/ScrollMagic.min.js.%e4%b8%8b%e8%bd%bd"></script>
-                          <script type="text/javascript" src="css/jquery.easing.min.js.%e4%b8%8b%e8%bd%bd"></script>
-                          <script type="text/javascript" src="css/index.js.%e4%b8%8b%e8%bd%bd"></script>
+                          <script type="text/javascript" src="css/ScrollMagic.min.js"></script>
+                          <script type="text/javascript" src="css/jquery.easing.min.js"></script>
+                          <script type="text/javascript" src="css/index.js"></script>
                           <script></script>
                           <div id="Components-footer">
                             <!--页面底部 pc-->

@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Offline Chat — a LAN chat with no internet, no install, no accounts</title>
+<meta name="description" content="Build analysis of offline_chat_v2.py: a 1,627-line Python stdlib chat server with SSE push, TLS, a pure-Python certificate generator and an in-page panic close.">
+<style>
+  :root{
+    --bg:#0a0c11; --panel:#11141b; --panel2:#161a23; --line:#242a37;
+    --tx:#e8eaf0; --mut:#98a1b3; --dim:#6d7686;
+    --ac:#7c8cff; --ac2:#6366f1; --ok:#34d399; --warn:#ffd166; --bad:#f87171;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.62}
+  a{color:var(--ac)}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 90px}
+
+  .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 11px;
+    color:var(--mut);letter-spacing:.1em}
+
+  h1{font-size:clamp(26px,4.4vw,44px);line-height:1.1;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  h1 em{font-style:normal;color:var(--ac)}
+  .deck{font-size:16.5px;color:var(--mut);max-width:78ch;margin:0 0 22px}
+  .deck b{color:var(--tx);font-weight:650}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 30px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 13px}
+  .stat .k{font:600 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .stat .v{font-size:19px;font-weight:750;margin-top:5px;letter-spacing:-.01em}
+  .stat .v small{font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0}
+
+  .call{border-left:3px solid var(--ac2);background:linear-gradient(90deg,rgba(99,102,241,.11),rgba(99,102,241,0));
+    border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 34px}
+  .call .lbl{font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ac);margin-bottom:7px}
+  .call p{margin:0;font-size:15.5px;color:#d7dbe6}
+
+  h2{font-size:12px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+    margin:44px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{margin:0 0 6px;font-size:16.5px;letter-spacing:-.01em}
+
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding-bottom:22px}
+  .step:not(:last-child):before{content:"";position:absolute;left:22px;top:38px;bottom:0;width:1px;
+    background:linear-gradient(180deg,var(--line),transparent)}
+  .num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:var(--panel2);border:1px solid var(--line);color:var(--ac);
+    font:800 13px/1 var(--mono);position:relative;z-index:1}
+  .step p{margin:6px 0 0;color:var(--mut);font-size:14.6px}
+  .step p b{color:var(--tx);font-weight:650}
+
+  .quote{background:#0f1218;border:1px solid var(--line);border-left:2px solid var(--warn);
+    border-radius:8px;padding:10px 13px;margin:10px 0 0;font-size:14px;color:#e4dcc4;
+    white-space:pre-wrap;overflow-wrap:anywhere}
+  .quote .src{display:block;margin-top:7px;font:600 10px/1 var(--mono);letter-spacing:.1em;
+    text-transform:uppercase;color:var(--dim)}
+
+  table{width:100%;border-collapse:collapse;font-size:13.8px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:700 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
+    background:#0d1016}
+  td:first-child{white-space:nowrap}
+  code,.mono{font-family:var(--mono);font-size:12.6px;color:#cfd6e6;background:#0e1117;
+    border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+  /* lifted token set ships .tblwrap as overflow:hidden — that clips wide tables on a phone */
+  .tblwrap{border:1px solid var(--line);border-radius:12px;
+    overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .card2{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .card2 h4{margin:0 0 6px;font-size:13.5px}
+  .card2 p{margin:0;font-size:13.4px;color:var(--mut)}
+  .card2 ul{margin:6px 0 0;padding-left:17px;font-size:13.4px;color:var(--mut)}
+  .card2 li{margin:3px 0}
+  .card2 li b{color:var(--tx)}
+
+  pre.flow{background:#0d1016;border:1px solid var(--line);border-radius:12px;padding:15px 16px;
+    overflow-x:auto;font:12.5px/1.75 var(--mono);color:#b9c4da;margin:0}
+
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+  .btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font:650 13px/1 var(--sans);
+    padding:10px 14px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--tx)}
+  .btn:hover{border-color:#3a4256;background:#1b202b}
+  .btn.pri{background:var(--ac2);border-color:var(--ac2);color:#fff}
+
+  footer{margin-top:52px;border-top:1px solid var(--line);padding-top:18px;
+    font-size:12.6px;color:var(--dim)}
+  footer b{color:var(--mut)}
+  .warnbox{border:1px solid #4b1f26;background:#160f12;border-radius:10px;padding:12px 14px;
+    font-size:13.2px;color:#f0c9c9;margin-top:14px}
+  .warnbox b{color:#ffb4b4}
+  .okbox{border:1px solid #1c4b38;background:#0f1714;border-radius:10px;padding:12px 14px;
+    font-size:13.2px;color:#c2ecd9;margin-top:14px}
+  .okbox b{color:#8ef0bc}
+  @media(max-width:700px){
+    .step{grid-template-columns:38px 1fr;gap:10px}
+    .wrap{padding:22px 16px 70px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <span class="chip">Build analysis</span>
+    <span class="chip">Python stdlib · 0 dependencies</span>
+    <span class="chip">2026-10-22</span>
+  </div>
+
+  <h1>Offline Chat: a multi-user chat that needs <em>zero internet</em></h1>
+  <p class="deck">One Python file is the server, the client, and the protocol. It serves a chat room over
+  whatever local network already exists — school WiFi, a phone hotspot, or a pair of Macs sharing a
+  cable — and it never opens an outbound connection. Everything below is measured from the shipped
+  <code>offline_chat_v2.py</code>, not from a plan.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="k">Server</div><div class="v">1,627 <small>lines</small></div></div>
+    <div class="stat"><div class="k">Source size</div><div class="v">70,888 <small>bytes</small></div></div>
+    <div class="stat"><div class="k">Dependencies</div><div class="v">0 <small>pip installs</small></div></div>
+    <div class="stat"><div class="k">HTTP routes</div><div class="v">7 <small>+ /files/</small></div></div>
+    <div class="stat"><div class="k">Client payload</div><div class="v">27,971 <small>bytes</small></div></div>
+    <div class="stat"><div class="k">CLI flags</div><div class="v">5</div></div>
+  </div>
+
+  <div class="call">
+    <div class="lbl">The constraint, in the user's words</div>
+    <p>"can you make me a wireless no need internet multiuser chat that has all the functions before but
+    no need internet make sure its seperate file dont delete the old ne"</p>
+    <p style="margin-top:8px">Later refinements, each of which changed the design: <em>"i said internet
+    less so people dont need to conenct any wifi or doesnt have to be on same wifi"</em> ·
+    <em>"my mac doesnt have hotspot"</em> · <em>"i dotn see create network, trust me, i actually cannot
+    open any hotspot, find another way"</em></p>
+  </div>
+
+  <h2>What it actually does</h2>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><div>
+      <h3>No tunnel, no relay, no third party</h3>
+      <p>The original <code>launcher.py</code> in this folder pipes traffic through an SSH tunnel so the
+      room is reachable across the internet. That is exactly what was removed. v2 binds
+      <code>0.0.0.0</code> and answers on the LAN interface only — <b>nothing in the request path leaves
+      the local network</b>.</p>
+    </div></div>
+    <div class="step"><div class="num">2</div><div>
+      <h3>SSE instead of WebSockets</h3>
+      <p>Server-to-client push is <code>text/event-stream</code>; client-to-server is a plain POST to
+      <code>/send</code>. No <code>websockets</code> package, no <code>uvloop</code>, no FastAPI — just
+      <code>http.server.ThreadingHTTPServer</code>. Any browser that can hold an
+      <code>EventSource</code> open is a supported client.</p>
+    </div></div>
+    <div class="step"><div class="num">3</div><div>
+      <h3>The client is the page</h3>
+      <p>The entire UI — 27,971 bytes of HTML, CSS and JS — is a Python string constant. There is no
+      <code>client/</code> folder to serve and no build step. Visiting <code>/</code> on a phone gets
+      the same bytes a Mac gets.</p>
+    </div></div>
+    <div class="step"><div class="num">4</div><div>
+      <h3>Encryption without a CA</h3>
+      <p><code>--tls</code> generates a self-signed certificate at first run and caches it in the temp
+      directory. If <code>openssl</code> exists it shells out; if it does not (stock Windows), a
+      <b>pure-Python RSA-2048 keygen plus hand-built X.509 DER</b> takes over. Browsers show the
+      familiar self-signed warning once.</p>
+    </div></div>
+    <div class="step"><div class="num">5</div><div>
+      <h3>Panic close</h3>
+      <p><code>beforeunload</code> and <code>pagehide</code> wipe <code>document.body</code> and clear
+      stored state, so closing the tab leaves a blank white page rather than a readable transcript.</p>
+    </div></div>
+  </div>
+
+  <h2>Request path</h2>
+<pre class="flow">phone / laptop / iPad
+      │  GET /                 → 27,971 B HTML shell (inline CSS + JS)
+      │  POST /auth             → room password → token
+      │  GET  /events?session_id=…  (SSE, held open)
+      │        ← welcome {user_count, is_host, history[]}
+      │        ← message / file_share / typing / reaction / user_list
+      │  POST /send             → {action: message | set_name | react | delete | claim_host | ping}
+      │  POST /upload           → multipart → /files/&lt;name&gt;
+      └  GET  /link             → the shareable LAN URL + host token
+                    │
+              [ same LAN only ]   no outbound socket is ever opened</pre>
+
+  <h2>Contract</h2>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>Route</th><th>Method</th><th>Returns</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td><code>/</code></td><td>GET</td><td>HTML shell</td><td>Client and server ship as one file</td></tr>
+        <tr><td><code>/health</code></td><td>GET</td><td><code>{status, users, tls, stealth, password_protected}</code></td><td>Proves the mode actually started</td></tr>
+        <tr><td><code>/link</code></td><td>GET</td><td><code>{link, host}</code></td><td>The only thing a guest needs to type</td></tr>
+        <tr><td><code>/auth</code></td><td>POST</td><td><code>{ok, token}</code></td><td>Password gate; wrong password is rejected server-side</td></tr>
+        <tr><td><code>/events</code></td><td>GET</td><td>SSE stream</td><td>Push without WebSockets</td></tr>
+        <tr><td><code>/send</code></td><td>POST</td><td><code>{ok}</code></td><td>Every user action, one endpoint</td></tr>
+        <tr><td><code>/upload</code></td><td>POST</td><td><code>{ok, url, name, size, mime}</code></td><td>Files land on the host disk</td></tr>
+        <tr><td><code>/files/&lt;name&gt;</code></td><td>GET</td><td>bytes</td><td>Shared files stay inside the room</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Anatomy: the certificate generator</h2>
+  <div class="grid2">
+    <div class="card2">
+      <h4>Why it exists</h4>
+      <p>Encryption is the difference between "a chat" and "a chat the network admin can read". But
+      Windows ships without <code>openssl</code>, and a dependency on <code>cryptography</code> would
+      break the zero-install promise. So the fallback builds the certificate by hand.</p>
+    </div>
+    <div class="card2">
+      <h4>What it actually does</h4>
+      <ul>
+        <li>Miller–Rabin primes → <b>RSA-2048</b> keypair in pure Python</li>
+        <li>DER writers for INTEGER, OID, SEQUENCE, BIT/OCTET STRING, UTCTime</li>
+        <li><code>sha256WithRSAEncryption</code> (1.2.840.113549.1.1.11) over the TBSCertificate</li>
+        <li>PKCS#1 v1.5 padding, then PEM at 64 columns</li>
+      </ul>
+    </div>
+  </div>
+  <div class="okbox"><b>Verified on both paths.</b> macOS/OpenSSL 3.6.3 issues the cert instantly; forcing
+  the fallback (empty <code>PATH</code>, system Python 3.9.6) still produced a 1,062-byte certificate that
+  <code>ssl.SSLContext.load_cert_chain()</code> accepts, and the HTTPS server answered
+  <code>/health</code> with <code>tls:true</code>.</div>
+
+  <h2>What broke, and what it cost</h2>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr><td>Page rendered as unstyled text, no JS ran</td>
+          <td>The template began life as an f-string, so every CSS/JS brace was written <code>{{</code>.
+          Converting it to a plain string kept <b>204 doubled braces</b> in the shipped HTML.</td>
+          <td>Collapse <code>{{</code>/<code>}}</code> once at render time, before marker substitution.</td></tr>
+        <tr><td><code>SyntaxError: Unexpected string</code> in the upload renderer</td>
+          <td><code>\'</code> inside a Python triple-quoted string is consumed by Python, so a nested
+          <code>window.open('…')</code> reached the browser with no escapes.</td>
+          <td>Dropped the nested quotes entirely: <code>window.open(this.src)</code>.</td></tr>
+        <tr><td>HTTPS probe returned exit 7</td><td>Cert generation failed before <code>bind()</code></td>
+          <td>Generate into the temp dir, retry, and fall back to pure Python.</td></tr>
+        <tr><td><code>/</code> served 0 bytes</td><td>f-string parsed <code>${…}</code> JS as Python</td>
+          <td>Markers (<code>__TLS_BADGE__</code>, <code>__PW_BADGE__</code>) + <code>.replace()</code>.</td></tr>
+        <tr><td>App died on import under Python 3.9</td><td><code>str | None</code> annotation is 3.10+</td>
+          <td><code>Optional[str]</code> — the fallback path targets older Windows/Linux installs.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warnbox">
+    <b>Honest limitations.</b> This is a <b>LAN chat</b>, not a radio. It cannot invent a network:
+    every device must be able to reach the host's IP. On a school network that isolates clients
+    (common on enterprise WiFi), two laptops on the same SSID still cannot see each other — the fix
+    there is a phone hotspot or a direct cable, not code. TLS is a <b>self-signed</b> certificate, so
+    the browser warning is expected and there is no protection against an active MITM who can already
+    intercept your LAN. The password is checked server-side but the room state lives in process memory:
+    kill the server and the transcript is gone. There are <b>no OS firewall rules</b> — earlier notes
+    calling this "firewall-proof" were wrong; it is encrypted, not firewalled.
+  </div>
+
+  <h2>Modes</h2>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>Flag</th><th>Effect</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td><code>--port N</code></td><td>Listen port, default <b>9001</b></td><td>Two rooms on one host</td></tr>
+        <tr><td><code>--tls</code></td><td>HTTPS with generated cert</td><td>Anything you would not shout</td></tr>
+        <tr><td><code>--password P</code></td><td>Room password, token required for <code>/events</code></td><td>Open hotspots</td></tr>
+        <tr><td><code>--stealth</code></td><td>Port <b>443</b> + TLS + password</td><td>Traffic that should look like ordinary HTTPS</td></tr>
+        <tr><td><code>--bind-ip IP</code></td><td>Override LAN IP detection</td><td>Multi-homed host, VPN, odd adapters</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Evidence</h2>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>Check</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Server source</td><td><code>offline_chat_v2.py</code> · 1,627 lines · 70,888 B · sha256 <code>3d265bb3…fdcf83</code></td></tr>
+        <tr><td>Launcher</td><td><code>start_chat.py</code> · 159 lines · 5,665 B · sha256 <code>55a0cf98…1f9934</code></td></tr>
+        <tr><td>Original app</td><td>Untouched: <code>offline_chat.py</code> 888 lines, <code>launcher.py</code>, <code>server/</code>, <code>client/</code></td></tr>
+        <tr><td>Real-time push</td><td>Second session joined → <code>system</code> + <code>user_list</code> + <code>message</code> frames received on a held-open SSE stream</td></tr>
+        <tr><td>Multiuser</td><td>Message from <code>sess_bob</code> stored and replayed in history to a later session</td></tr>
+        <tr><td>Password gate</td><td>Wrong password rejected; correct password returns a token that <code>/events</code> accepts</td></tr>
+        <tr><td>Client JS</td><td><code>node --check</code> parse of the 15 KB inline script → OK; CSS brace balance 0</td></tr>
+        <tr><td>Client render</td><td>Headless Chrome on the demo build: 5 message bubbles, system line, sidebar data, share link filled</td></tr>
+        <tr><td>TLS</td><td><code>/health</code> over HTTPS → <code>{"tls": true, "password_protected": true}</code></td></tr>
+        <tr><td>Python 3.9</td><td>Compiles and serves with the pure-Python cert path</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>What is still not built</h2>
+  <div class="card2">
+    <ul>
+      <li><b>A transport of its own.</b> Wi-Fi Direct / AWDL / Bluetooth pairing were considered and dropped: browsers cannot open those radios, and the host cannot create an ad-hoc network on macOS builds where "Create Network" is absent.</li>
+      <li><b>Persistence.</b> No SQLite, no log file — by design, but it means no scrollback after a restart.</li>
+      <li><b>Cross-network rooms.</b> Deliberately out of scope: the original tunnelled app already covers that case and stays in the folder.</li>
+    </ul>
+  </div>
+
+  <div class="btnrow">
+    <a class="btn pri" href="./offline-chat.html">Open the UI demo</a>
+    <a class="btn" href="./offline-chat-mirror/">Source mirror</a>
+    <a class="btn" href="../index.html">Portfolio</a>
+  </div>
+
+  <footer>
+    <p><b>Method.</b> Every figure re-derived from the shipped files on 2026-10-22: <code>wc -l</code> and
+    <code>shasum -a 256</code> for source, <code>urllib</code> for the served payload size, HTTP probes
+    for the route table, a second SSE session for the multiuser claim, and headless Chrome
+    (<code>--dump-dom</code>) for the render check. The demo page in this folder is the real served
+    markup with <code>fetch</code>/<code>EventSource</code> stubbed, so a visitor sees the actual UI
+    without a server; its badge says so.</p>
+    <p><b>Honesty notes.</b> The certificate path was tested with <code>openssl</code> present and
+    force-disabled. No claim here rests on a screenshot. The "firewall-proof" phrasing from the build
+    conversation is retracted above — encryption is not a firewall. Wi-Fi transport is not implemented,
+    and the limitation box says so rather than hiding it.</p>
+  </footer>
+</div>
+</body>
+</html>

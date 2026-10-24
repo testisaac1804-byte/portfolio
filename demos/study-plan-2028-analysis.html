@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IGCSE 2028 — 79 weeks, 185 syllabus units, zero unscheduled</title>
+<meta name="description" content="How a 79-week IGCSE scheme of work for nine subjects was generated from seven official syllabuses: unit inventory, 18-slot weekly grid, three phases, coverage assertions and the traps in the 2027-2030 syllabus versions.">
+<style>
+  :root{
+    --bg:#0a0c11; --panel:#11141b; --panel2:#161a23; --line:#242a37;
+    --tx:#e8eaf0; --mut:#98a1b3; --dim:#6d7686;
+    --ac:#7c8cff; --ac2:#6366f1; --ok:#34d399; --warn:#ffd166; --bad:#f87171;
+    --ink:#e8d9a8; --blood:#a4342f;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.62}
+  a{color:var(--ac)}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 90px}
+
+  .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 11px;
+    color:var(--mut);letter-spacing:.1em}
+  .chip.acc{border-color:#333c63;background:#141a2e;color:#aab4ff}
+
+  h1{font-size:clamp(26px,4.4vw,44px);line-height:1.1;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  h1 em{font-style:normal;color:var(--ac)}
+  .deck{font-size:16.5px;color:var(--mut);max-width:78ch;margin:0 0 22px}
+  .deck b{color:var(--tx);font-weight:650}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 30px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 13px}
+  .stat .k{font:600 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .stat .v{font-size:19px;font-weight:750;margin-top:5px;letter-spacing:-.01em}
+  .stat .v small{font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0}
+
+  .call{border-left:3px solid var(--ac2);background:linear-gradient(90deg,rgba(99,102,241,.11),rgba(99,102,241,0));
+    border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 34px}
+  .call .lbl{font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ac);margin-bottom:7px}
+  .call p{margin:0;font-size:15.5px;color:#d7dbe6}
+
+  h2{font-size:12px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+    margin:44px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{margin:0 0 6px;font-size:16.5px;letter-spacing:-.01em}
+  p{margin:0 0 12px}
+  .mut{color:var(--mut)}
+  strong{color:var(--tx)}
+
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding-bottom:22px}
+  .step:not(:last-child):after{content:"";position:absolute;left:22px;top:34px;bottom:2px;width:1px;background:var(--line)}
+  .num{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--panel2);
+    display:grid;place-items:center;font:700 12px/1 var(--mono);color:var(--ac)}
+  .step p{margin:0;font-size:14.6px;color:var(--mut)}
+  .step p b{color:var(--tx)}
+
+  table{width:100%;border-collapse:collapse;font-size:13.8px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:700 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:#0d1016}
+  td:first-child{white-space:nowrap}
+  code,.mono{font-family:var(--mono);font-size:12.6px;color:#cfd6e6;background:#0e1117;
+    border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+  code{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+  .tblwrap{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tablewrap table{min-width:520px}
+
+  .quote{font-family:var(--mono);font-size:12.4px;line-height:1.65;color:#c7cede;background:#0e1117;
+    border:1px solid var(--line);border-left:3px solid var(--blood);border-radius:0 10px 10px 0;
+    padding:13px 15px;margin:0 0 16px;white-space:pre-wrap;overflow-wrap:anywhere}
+
+  .mirror{display:grid;grid-template-columns:minmax(0,1fr) 316px;gap:20px;align-items:start}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+  .btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font:650 13px/1 var(--sans);
+    padding:10px 14px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--tx)}
+  .btn:hover{border-color:#3a4256;background:#1b202b}
+  .btn.pri{background:var(--ac2);border-color:var(--ac2);color:#fff}
+  .btn.pri:hover{background:#565ae8}
+  .note{font-size:12.6px;color:var(--dim);margin-top:12px;line-height:1.6}
+  .note b{color:var(--mut)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card2{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .card2 h4{margin:0 0 6px;font-size:13.5px}
+  .card2 p{margin:0;font-size:13.4px;color:var(--mut)}
+  .card2 ul{margin:6px 0 0;padding-left:17px;font-size:13.4px;color:var(--mut)}
+  .card2 li{margin:3px 0}
+  .card2 li b{color:var(--tx)}
+
+  .flow{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:0 0 16px;
+    font-family:var(--mono);font-size:12.4px;line-height:1.9;color:var(--mut);overflow-x:auto}
+  .flow b{color:var(--ink);font-weight:600}
+  .flow .ar{color:var(--ac)}
+  .flow .dim{color:var(--dim)}
+
+  .warnbox{border:1px solid #4b3a1f;background:#171208;border-radius:10px;padding:12px 14px;
+    font-size:13.2px;color:#f0e0c0;margin:14px 0 0}
+  .warnbox b{color:#ffd79a}
+  .okbox{border:1px solid #1f4b39;background:#0c1712;border-radius:10px;padding:12px 14px;
+    font-size:13.2px;color:#c9ecd9;margin:14px 0 0}
+  .okbox b{color:#8ff0c0}
+
+  footer{margin-top:52px;border-top:1px solid var(--line);padding-top:18px;font-size:12.6px;color:var(--dim)}
+  footer b{color:var(--mut)}
+
+  @media(max-width:820px){.mirror{grid-template-columns:1fr}}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  @media(max-width:700px){table{min-width:520px}}
+  .step > *, .mirror > *, .grid2 > *, .tablewrap{min-width:0}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="top">
+  <span>Isaac Chan · IGCSE 2028 scheme of work</span>
+  <span>
+    <span class="chip acc">9 subjects</span>
+    <span class="chip">79 weeks</span>
+    <span class="chip">Oct 2026</span>
+  </span>
+</div>
+
+<h1>79 weeks, 1,422 blocks, <em>zero unscheduled syllabus points</em></h1>
+<p class="deck">
+  A single offline HTML file that turns seven official syllabuses — Pearson 4MA1, 4SD0, 4EC1 and
+  Cambridge 0500, 0509, 0445, 0457 — into dated blocks from <b>26 Oct 2026</b> to <b>30 Apr 2028</b>.
+  The bar was not "cover the topics". It was <b>every named part of every topic</b>, each one with the
+  syllabus reference it came from, and a way to prove none had been quietly dropped.
+</p>
+
+<div class="stats">
+  <div class="stat"><div class="k">Weeks</div><div class="v">79 <small>Mon 26 Oct 2026 → Sun 30 Apr 2028</small></div></div>
+  <div class="stat"><div class="k">Blocks</div><div class="v">1,422 <small>18 per week</small></div></div>
+  <div class="stat"><div class="k">Syllabus units</div><div class="v">185 <small>all scheduled</small></div></div>
+  <div class="stat"><div class="k">Unscheduled</div><div class="v">0 <small>asserted at build time</small></div></div>
+  <div class="stat"><div class="k">File</div><div class="v">402 <small>KB, one file, no network</small></div></div>
+  <div class="stat"><div class="k">Weekly load</div><div class="v">18 <small>blocks ≈ 12 h</small></div></div>
+</div>
+
+<div class="call">
+  <div class="lbl">The constraint that shaped everything</div>
+  <p>
+    Topic headings are useless for revision. "States of matter" is not a study session — <i>gas pressure</i>,
+    <i>diffusion</i> and <i>changes of state</i> are. So the plan is built from the lowest named unit in each
+    syllabus, and every block carries the reference it came from, so a weak answer can be traced back to a
+    spec point instead of a vague topic.
+  </p>
+</div>
+
+<h2>Three checks, and they are separate</h2>
+<div class="grid2">
+  <div class="card2">
+    <h4>1 · Structure audit</h4>
+    <p>Papers, durations, marks, weights, option rules — read off the official PDF, not a revision site.
+    This is the check that catches "Edexcel Economics has a Paper 2 that was never scheduled".</p>
+  </div>
+  <div class="card2">
+    <h4>2 · Coverage</h4>
+    <p>Every sub-topic in the syllabus must appear inside a dated block. The build asserts
+    <code>unscheduled == 0</code>; the app then re-derives it live from the rendered data, so the claim
+    is visible rather than promised.</p>
+  </div>
+<!-- -->
+  <div class="card2">
+    <h4>3 · Density</h4>
+    <p>Coverage is worthless if it is one block per topic. Each unit gets a learn block plus at least one
+    spaced re-touch: 1,422 blocks for 185 units ≈ 7.7 touches per unit.</p>
+  </div>
+</div>
+
+<h2>Syllabus audit — what was actually read</h2>
+<div class="tblwrap"><div class="tablewrap">
+<table>
+  <thead><tr><th>Subject</th><th>Code</th><th>Papers</th><th>Duration · marks</th><th>Weight</th><th>Version naming 2028</th></tr></thead>
+  <tbody>
+    <tr><td>Chemistry</td><td>4SD0</td><td>1B / 1C / 1P</td><td>2 h · 110 each</td><td>33.3 % each</td><td>Issue 4 (first exam June 2019, still current)</td></tr>
+    <tr><td>Physics</td><td>4SD0</td><td>1B / 1C / 1P</td><td>2 h · 110 each</td><td>33.3 % each</td><td>Issue 4</td></tr>
+    <tr><td>Biology</td><td>4SD0</td><td>1B / 1C / 1P</td><td>2 h · 110 each</td><td>33.3 % each</td><td>Issue 4</td></tr>
+    <tr><td>Mathematics A</td><td>4MA1</td><td>Paper 1H / 2H</td><td>2 h · 100 each</td><td>50 % each</td><td>Issue 2 (first exam June 2018)</td></tr>
+    <tr><td>Economics</td><td>4EC1</td><td>Paper 1 / Paper 2</td><td>1 h 30 · 80 each</td><td>50 % each</td><td>Issue 3 (Feb 2026)</td></tr>
+    <tr><td>English (FLE)</td><td>0500</td><td>Paper 1 / Paper 2</td><td>2 h · 80 each</td><td>50 % each</td><td>2027–2029</td></tr>
+    <tr><td>Chinese (First Lang.)</td><td>0509</td><td>Paper 1 / Paper 2</td><td>2 h 15 · 60 / 2 h · 50</td><td>60 / 40</td><td>2028–2029</td></tr>
+    <tr><td>Design &amp; Technology</td><td>0445</td><td>Paper 1 / Paper 3 / Component 2</td><td>1 h 50 · 50 marks each paper</td><td>25 / 25 / 50</td><td>2028–2030</td></tr>
+    <tr><td>Global Perspectives</td><td>0457</td><td>Paper 1 / C2 / C3</td><td>1 h 25 · 70 marks</td><td>35 / 30 / 35</td><td>2028</td></tr>
+  </tbody>
+</table>
+</div></div>
+<p class="note">
+  Two traps this table exists to catch: <b>4EC1 Paper 2</b> (macro + global economy) is a whole paper the
+  first draft of the plan never scheduled, and <b>0445 has no Paper 5</b> from 2028 — what the school calls
+  "Paper 5" is Component 2, the 100-mark portfolio, which has to be built across eighteen months rather
+  than revised in April.
+</p>
+
+<h2>Coverage — 185 units, by syllabus reference</h2>
+<div class="tblwrap"><div class="tablewrap">
+<table>
+  <thead><tr><th>Subject</th><th>Units</th><th>Reference span</th><th>Blocks touching each unit</th></tr></thead>
+  <tbody>
+    <tr><td>Chemistry</td><td>21</td><td>1.1–1.4 … 4.44–4.47</td><td>2–7</td></tr>
+    <tr><td>Physics</td><td>26</td><td>1.1 … 8.7–8.10</td><td>2–7</td></tr>
+    <tr><td>Biology</td><td>21</td><td>1.1 … 5.12–5.16</td><td>2–7</td></tr>
+    <tr><td>Mathematics</td><td>36</td><td>1.1 … 6.3</td><td>2–5</td></tr>
+    <tr><td>Economics</td><td>18</td><td>1.1.1 … 2.2.3</td><td>3–5</td></tr>
+    <tr><td>Design &amp; Technology</td><td>29</td><td>1.1 … 2.5 + C2 criteria 1a–4</td><td>2–3</td></tr>
+    <tr><td>English (FLE)</td><td>12</td><td>P1 Q1–Q4, P2 1(a)/1(b)/B</td><td>3–5</td></tr>
+    <tr><td>Chinese</td><td>12</td><td>P1 S1–S3, P2 S1–S2</td><td>3–5</td></tr>
+    <tr><td>Global Perspectives</td><td>10</td><td>P1, C2, C3</td><td>2–3</td></tr>
+  </tbody>
+</table>
+</div></div>
+
+<h2>The scheduler — queues, not a hand-written table</h2>
+<div class="flow">
+<b>official PDF</b> <span class="ar">→</span> pdftotext <span class="ar">→</span> numbered-point parser <span class="ar">→</span> unit inventory (185)
+                      <span class="dim">│  ref, zh title, en title</span>
+<span class="ar">↓</span>
+<b>per-subject FIFO queue</b>  <span class="dim">(spec order, pointer reset at every phase boundary)</span>
+<span class="ar">↓</span>
+<b>fixed weekly grid</b>  Mon 2 · Tue 2 · Wed 2 · Thu 2 · Fri 2 · Sat 4 · Sun 4 = <b>18 slots</b>
+<span class="ar">↓</span>
+<span class="dim">learn slot</span> <span class="ar">→</span> next unit in the queue
+<span class="dim">drill slot</span> <span class="ar">→</span> the unit from <b>two weeks ago</b> (spaced), or this week's unit in weeks 1–2
+<span class="dim">review slot</span> <span class="ar">→</span> error log + next week's titles
+<span class="ar">↓</span>
+<b>JSON</b> <span class="ar">→</span> single HTML <span class="ar">→</span> localStorage checkboxes <span class="ar">→</span> live coverage tab
+</div>
+<p>
+  Hand-writing 1,422 blocks would have been both slow and unverifiable. Generating them from 185 units and a
+  slot grid means the coverage claim is arithmetic: the build fails loudly if any unit never appears, and the
+  app recomputes "0 / 185 complete, 185 scheduled" from the same data the user clicks.
+</p>
+
+<h2>Phase ladder</h2>
+<div class="tblwrap"><div class="tablewrap">
+<table>
+  <thead><tr><th>Phase</th><th>Weeks</th><th>Dates</th><th>What a block is</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>第一輪 · 打底</td><td>1–30</td><td>26 Oct 2026 → 23 May 2027</td><td>New unit, then the same unit two weeks later</td><td>First pass while school is still teaching it</td></tr>
+    <tr><td>第二輪 · 分類真題</td><td>31–66</td><td>24 May 2027 → 30 Jan 2028</td><td>Same unit again, as real past-paper questions marked against the scheme</td><td>Recall is not marks; the second pass is where mark-scheme wording gets learned</td></tr>
+    <tr><td>第三輪 · 全卷計時</td><td>67–79</td><td>31 Jan 2028 → 30 Apr 2028</td><td>Two subjects a week sit a full timed paper; the rest rework weak topics</td><td>25 full papers across the phase, without scheduling more past papers than exist</td></tr>
+  </tbody>
+</table>
+</div></div>
+<p class="note">
+  Phase 3 rotates the paper subjects instead of making all nine sit a paper in the same week — the first draft
+  did exactly that and produced an eight-paper week, which is not a study plan, it is a punishment.
+</p>
+
+<h2>Anatomy of a block</h2>
+<div class="quote">{"k":"w1-0","day":"一","sub":"Chem","ref":"4SD0 Chem 1.1–1.4",
+ "title":"物質三態","en":"States of matter",
+ "task":"① 讀 4SD0 Chem 1.1–1.4 官方 spec ＋課本 ... ② 做 6 題分類 past paper ③ 錯嘅即刻抄入錯題本"}</div>
+<p>
+  Seven fields, no free text: the key drives the checkbox, the reference drives the audit, the task text is
+  generated from the subject so it always says what to <i>do</i> (read → produce → practise → log errors)
+  rather than what to <i>think about</i>. The Chinese title is the label Isaac actually reads; the English
+  title is the syllabus name, kept so an adult or a tutor can map it back without translation.
+</p>
+
+<h2>What the version check found</h2>
+<div class="tblwrap"><div class="tablewrap">
+<table>
+  <thead><tr><th>Subject</th><th>Trap</th><th>Consequence if missed</th></tr></thead>
+  <tbody>
+    <tr><td>0500 English</td><td>2027–2029 syllabus rewrote Paper 1: Q2 now has (a) summary and (b) short answer; Q4 is 10 reading + 10 writing</td><td>Practising the pre-2027 paper shapes</td></tr>
+    <tr><td>0509 Chinese</td><td>2028–2029 is a different issue from 2026–2027; Paper 2 composition split changed</td><td>Wrong Paper 2 section drill</td></tr>
+    <tr><td>0445 D&amp;T</td><td>2028–2030 removes the 3-from-5 option choice and there is no Paper 5</td><td>Waiting for a "Paper 5" that will never be sat</td></tr>
+    <tr><td>4EC1 Economics</td><td>Two papers, 1 h 30 each, 80 marks — Paper 2 covers the whole macro half</td><td>Half the content unscheduled</td></tr>
+  </tbody>
+</table>
+</div></div>
+
+<div class="warnbox">
+  <b>Honest limitations.</b>
+  (1) The plan starts at Chem 1.1, Phys 1.1, Bio 1.1 — <b>it does not know the school's current position</b>;
+  if the class is already past a unit, the matching block has to be skipped forward by hand.
+  (2) D&amp;T is planned as <b>Paper 3 Materials</b>; if the school enters Graphic Products the option
+  units (2.1–2.5) change.
+  (3) 18 blocks a week ≈ 12 h is a full schedule; holidays are labelled but not lightened, and no
+  catch-up week is pre-built — a missed week is a manual decision, not an automatic reshuffle.
+  (4) Progress lives in <b>localStorage per browser</b>; it does not sync between devices and clearing site
+  data clears it.
+  (5) The 25 full papers in phase 3 assume the 2020–2027 past papers are available for each subject; if one
+  session is missing, that week becomes a second weakness week instead.
+</div>
+
+<h2>Evidence</h2>
+<div class="tblwrap"><div class="tablewrap">
+<table>
+  <thead><tr><th>Claim</th><th>How it was checked</th><th>Result</th></tr></thead>
+  <tbody>
+    <tr><td>Units</td><td>Inventory built from the parsed syllabuses</td><td>185 (Chem 21 · Phys 26 · Bio 21 · Maths 36 · Econ 18 · DT 29 · FLE 12 · CN 12 · GP 10)</td></tr>
+    <tr><td>Nothing dropped</td><td>Build assertion over block→unit references</td><td><code>unscheduled: 0</code></td></tr>
+    <tr><td>Weeks &amp; blocks</td><td>Headless DOM read of the built file</td><td>79 weeks · 1,422 blocks · 18 blocks in week 1</td></tr>
+    <tr><td>Coverage tab</td><td>185 tiles rendered, 185 marked scheduled</td><td>185 / 185</td></tr>
+    <tr><td>Interactive state</td><td>Tick a box, read back localStorage + counter</td><td><code>{"w1-0":true}</code> · "1 / 18 完成"</td></tr>
+    <tr><td>Artifact</td><td><code>shasum -a 256</code> on the local file and the repo copy</td><td><code>426b7331615f03572294e17634008b885850826b07c0980270e2a81531ba5225</code></td></tr>
+    <tr><td>Size</td><td><code>wc -c</code></td><td>411,902 bytes</td></tr>
+    <tr><td>Served copy</td><td>Live HTML vs local, after stripping Cloudflare's beacon and the site skin block</td><td>Identical body; served size is local + injected tags</td></tr>
+  </tbody>
+</table>
+</div></div>
+
+<h2>How it is used</h2>
+<div class="grid2">
+  <div class="card2">
+    <h4>Five tabs</h4>
+    <ul>
+      <li><b>本週</b> — jumps to today's week, 18 tickable blocks</li>
+      <li><b>全部週</b> — 79 cards with phase, holiday tag and per-week progress</li>
+      <li><b>課題覆蓋</b> — 185 units, green when every related block is ticked</li>
+      <li><b>卷別校對</b> — the audit tables above, inside the app</li>
+      <li><b>錯題本</b> — autosaved log</li>
+    </ul>
+  </div>
+  <div class="card2">
+    <h4>Deliberate omissions</h4>
+    <ul>
+      <li>No account, no sync, no server — it opens from the Desktop with no network</li>
+      <li>No drag-and-drop rescheduling; edits happen by regenerating from the same script</li>
+      <li>No streak gamification — a missed week should look missed, not be rewarded</li>
+    </ul>
+  </div>
+</div>
+
+<h2>What is next</h2>
+<p>
+  The generator lives at <code>~/.hermes/scripts/igcse80/</code> — <code>units.py</code> (the 185 units),
+  <code>build.py</code> (scheduler + renderer) and a headless test that asserts coverage and clicks every tab.
+  When the school's position or the D&amp;T option is confirmed, the plan is regenerated rather than patched,
+  so the coverage guarantee survives the edit.
+</p>
+
+<footer>
+  <b>Method.</b> Official syllabus PDFs → <code>pdftotext -layout</code> → numbered-point and lettered-heading
+  parsers → unit inventory → scheduled with a fixed slot grid → rendered to one self-contained HTML file →
+  verified headlessly (coverage assertion, DOM counts, checkbox persistence, tab rendering) and visually
+  (screenshots of every tab).<br>
+  <b>Honesty notes.</b> No number on this page is inherited from a previous draft: weeks, blocks, units,
+  sizes and the hash are re-derived from the current artifact. The syllabus issues are quoted with their
+  issue numbers because Pearson keeps one standing issue per specification, while Cambridge publishes a
+  version per three-year window — the table names which one covers 2028 for each subject.
+  The plan is a schedule, not a prediction: it says what to study on a given Monday, not that the result
+  is guaranteed.
+</footer>
+
+</div>
+</body>
+</html>

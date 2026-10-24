@@ -1,0 +1,1399 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="/resource/images/cholima.png" />
+    <title>Minzu Joson | Minzu Joson, the organ of the Presidium of the Supreme People’s Assembly and the Cabinet of the DPRK</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keyword" content="header,footer" />
+    <meta name="description" content="Minju,korea">
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="/css/font.css" />
+    <link rel="stylesheet" href="/assets/css/preload.min.css" />
+    <link rel="stylesheet" href="/assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="/assets/css/style.light-blue-500.min.css" />
+    <link rel="stylesheet" href="/assets/css/width-boxed.min.css" id="ms-boxed" disabled="">
+    <link rel="stylesheet" href="/css/components/gallery-cols.css" />
+    <link rel="stylesheet" href="/vendor/fancybox/css/jquery.fancybox.min.css" />
+    <!-- <link rel="stylesheet" href="/resource/css/style.css" /> -->
+
+       
+</head> 
+<body > 
+      <header class="ms-header ms-header-primary">
+        <div class="container container-full" style="width:90%;">
+          <div class="ms-title">
+            <a href="/home/index/first/0/en">
+              <img src="/resource/mark111.png" class="animated fadeInRight animation-delay-6" alt="image">
+            </a>
+          </div>
+          <div class="header-right"style="font-family:Verdana, Arial, Helvetica, sans-serif!important;">
+            
+            <a style="font-family: KPCheonRiMa;" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-6" href = "/home/index/first/0/ko">조선어            </a>
+             <a style="font-family: KPCheonRiMa;" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-7"  href = "/home/index/first/0/en">English            </a>
+           
+             <a style="font-family: KPCheonRiMa;" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8"  href = "/home/index/first/0/ch">汉语            </a>
+            <a style="font-family: Verdana, Arial, Helvetica, sans-serif!important;" class="btn-circle btn-circle-primary no-focus animated zoomInDown animation-delay-8"   href ="/home/index/first/0/ru">
+                 русский            </a>
+            
+            <a href="javascript:void(0)" class="btn-ms-menu btn-circle btn-circle-primary sb-toggle-left animated zoomInDown animation-delay-10">
+              <i class="zmdi zmdi-menu"></i>
+            </a>
+          </div>
+        </div>
+      </header>
+     <!--  <style type="text/css">
+        .navbar-static-top{
+          width: 70%;
+          float: right;
+          top: -50px;
+          box-shadow: none;
+        }
+        .animate-icon{
+          font-family: 'KPCheonRiMa';
+        }
+        .ms-navbar .navbar-nav li.dropdown .dropdown-menu{
+          background-color: #f9f9f9;
+
+        }
+        .ms-navbar .navbar-nav li.dropdown .dropdown-menu li a{
+          color: black;
+        }
+        .right-line:after{
+          border-left: none;
+        }
+      </style> -->
+      <nav class="navbar navbar-static-top yamm ms-navbar ms-navbar-primary">
+        <div class="container container-full" style="width:90%;">
+            <div class="navbar-header" >
+                <a  class="navbar-brand" href="/home/index/first/0/en">
+                <img src="/resource/mark2.png" alt="image">
+            </a>
+            </div>
+          <div  class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active">
+                <a href="/home/index/first/0/en"    class="dropdown-toggle animated fadeIn animation-delay-4" ><b style="font-family:KPCheonRiMa font-size:16px; " class="homestyle">Home</b>
+                </a>
+              </li>
+              <li  >
+                <a href="/home/index/revolution/0/en"   class="dropdown-toggle animated fadeIn animation-delay-5" ><b style="font-family:KPCheonRiMa; font-size:16px; " class="homestyle">Revolutionary Activities</b>
+                </a>
+              </li>
+              <li >
+                <a href="/home/index/power_news/0/en" class="dropdown-toggle animated fadeIn animation-delay-6" ><b style="font-family:KPCheonRiMa font-size:16px; " class="homestyle">News from power organs</b>
+                </a>
+              </li>
+              <li  >
+                <a onclick="javascript:moveall_view();" class="dropdown-toggle animated fadeIn animation-delay-7" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b style="font-family:KPCheonRiMa font-size:16px; " class="homestyle">Articles</b>
+                  <i class="zmdi zmdi-chevron-down"></i>
+                </a>
+              
+                <ul class="dropdown-menu" style="font-family: 'KP CheonRiMa';">
+                    <li  >
+                        <a href="/home/index/politics/0/en"   ><p style="font-family:KPCheonRiMa; font-size:14px; margin: 0px; " >Politics</p>
+                        </a>
+                    </li>
+                    <li >
+                        <a href="/home/index/economy/0/en"  ><p style="font-family:KPCheonRiMa; font-size:14px; margin: 0px;" >Economy</p>
+                        </a>
+                    </li>
+                    <li >
+                        <a  href="/home/index/culture/0/en"  ><p style="font-family:KPCheonRiMa; font-size:14px; margin: 0px;" >Culture</p>
+                        </a>
+                    </li>
+                    <li >
+                        <a  href="/home/index/tourist/0/en "  ><p style="font-family:KPCheonRiMa; font-size:14px; margin: 0px;" >Scenic spots & tourist attractions</p>
+                        </a>
+                    </li>
+                  
+                    <li >
+                        <a href="/home/index/overseas/0/en"  ><p style="font-family:KPCheonRiMa; font-size:14px; margin: 0px;" >Overseas Koreans</p>
+                        </a>
+                    </li>
+                    <li >
+                        <a  href="/home/index/international/0/en"  ><p style="font-family:KPCheonRiMa; font-size:14px; margin: 0px; " >International solidarity</p>
+                        </a>
+                    </li>                        
+                </ul>
+              </li>
+              <li  >
+                <a href="/home/index/media/0/en" class="dropdown-toggle animated fadeIn animation-delay-8" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b style="font-family:KPCheonRiMa; font-size:16px; " class="homestyle">Multimedia</b>
+                  <i class="zmdi zmdi-chevron-down"></i>
+                </a>
+
+              <ul class="dropdown-menu" style="font-family: 'KP CheonRiMa';">
+                  <li >
+                      <a href="/home/index/photos/0/en"  ><p style="font-family:KPCheonRiMa; font-size:14px;margin: 0px; " >Photos</p></a>
+                  </li>
+                  <li >
+                       <a  href="/home/index/video/0/en"  ><p style="font-family:KPCheonRiMa; font-size:14px; margin: 0px;" >Videos</p></a>
+                  </li> 
+              </ul>
+              </li>
+              <li >
+                <a href="/home/index/search/0/en" class="dropdown-toggle animated fadeIn animation-delay-9" ><b style="font-family:KPCheonRiMa; font-size:16px; " class="homestyle">search</b>
+                </a>
+              </li>
+            </ul>
+          </div>
+           <a href="javascript:void(0)" class="sb-toggle-left btn-navbar-menu">
+            <i class="zmdi zmdi-menu"></i>
+           </a>
+        </div>
+      </nav>
+       <div class="ms-slidebar sb-slidebar sb-left sb-style-overlay" id="ms-slidebar">
+      <div class="sb-slidebar-container">
+        <header class="ms-slidebar-header">
+          <div class="ms-slidebar-title">
+            <div class="ms-slidebar-t">
+              <img src="/resource/mark2.png" alt="image">
+            </div>
+          </div>
+        </header>
+
+        <ul class="ms-slidebar-menu" id="slidebar-menu" role="tablist" aria-multiselectable="true"style="font-family: 'KPCheonRiMa';">
+          <li class="panel" role="tab" id="sch4">
+            <a style="font-family: KPCheonRiMa;" class="collapsed" role="button" data-toggle="collapse" data-parent="#slidebar-menu" href="#sc4" aria-expanded="false" aria-controls="sc4">
+              <i class="fa fa-exchange"></i> language selection </a>
+            <ul id="sc4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sch6">
+              <li>
+                <a style="font-family: KPCheonRiMa;" href = "/home/index/first/0/ko">조선어</a>
+              </li>
+              <li>
+                <a style="font-family: KPCheonRiMa;" href = "/home/index/first/0/en">English</a>
+              </li>
+              <li>
+                <a style="font-family: KPCheonRiMa;" href = "/home/index/first/0/ch">汉语</a>
+              </li>
+              <li>
+                <a  style="font-family:Verdana, Arial, Helvetica, sans-serif!important;" href ="/home/index/first/0/ru">
+                 русский</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+          <li>
+            <a style="font-family: KPCheonRiMa;"  class="link" href="/home/index/first/0/en" >
+              <i class="zmdi zmdi-home"></i>Home </a>
+          </li> 
+          <li>
+            <a style="font-family: KPCheonRiMa;" class="link" href="/home/index/revolution/0/en" >
+              <i class="zmdi zmdi-desktop-mac"></i>Revolutionary Activities </a>
+          </li> 
+          <li>
+            <a style="font-family: KPCheonRiMa;" class="link" href="/home/index/power_news/0/en">
+              <i class="zmdi zmdi-edit"></i> News from power organs </a>
+          </li>
+
+          <li class="panel" role="tab" id="sch5">
+            <a style="font-family: KPCheonRiMa;" class="collapsed" role="button" data-toggle="collapse" data-parent="#slidebar-menu" href="#sc5" aria-expanded="false" aria-controls="sc5">
+              <i class="zmdi zmdi-shopping-basket"></i>Articles</a>
+            <ul id="sc5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sch5">
+              <li>
+                  <a style="font-family: KPCheonRiMa;" href="/home/index/politics/0/en"  >Politics                  </a>
+              </li>
+              <li>
+                <a style="font-family: KPCheonRiMa;" href="/home/index/economy/0/en"  >
+                  Economy                </a>
+              </li>
+              <li>
+                <a style="font-family: KPCheonRiMa;" href="/home/index/culture/0/en"  >Culture                </a>
+              </li>
+              <li>
+                <a style="font-family: KPCheonRiMa;"  href="/home/index/tourist/0/en "  >Scenic spots & tourist attractions</a>
+              </li>
+              <li>
+                <a style="font-family: KPCheonRiMa;" href="/home/index/overseas/0/en"  >Overseas Koreans                </a>
+              </li>
+              <li>
+                 <a style="font-family: KPCheonRiMa;" href="/home/index/international/0/en"  >International solidarity                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="panel" role="tab" id="sch6">
+            <a style="font-family: KPCheonRiMa;" class="collapsed" role="button" data-toggle="collapse" data-parent="#slidebar-menu" href="#sc6" aria-expanded="false" aria-controls="sc6">
+              <i class="zmdi zmdi-collection-image-o"></i> Multimedia </a>
+            <ul id="sc6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sch6">
+              <li>
+                <a style="font-family: KPCheonRiMa;" href="/home/index/photos/0/en"  >Photos</a>
+              </li>
+              <li>
+                <a style="font-family: KPCheonRiMa;" href="/home/index/video/0/en"  >Videos</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a style="font-family: KPCheonRiMa;" class="link" href="/home/index/search/0/en">
+              <i class="zmdi zmdi-search"></i> search</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+   
+    <style type="text/css">
+        .modal-backdrop{
+            z-index: 0;
+        }
+        .a-38-h{
+        position: absolute;
+        width: 200px;
+        margin: 0 auto;
+        top: 20px;
+        right: -65px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #fff;
+        border: 3px solid rgba(0,0,0,.05);
+        text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+        }
+        .a-bg-red{
+          background-color: red;
+        }
+    </style>
+    <script type="text/javascript">
+      function moveall_view() {
+        location.href ="/home/index/all_view/0/en";
+      }
+    </script>
+<!-- <link rel="stylesheet" type="text/css" href="/./assets/global/css/bootstrap.css">  -->
+
+
+<style type="text/css">
+	 .modal-body{
+			padding:0px !important;
+		}
+		.modal-header{
+			padding:0px !important; 
+		}
+
+		.video_image .overlay-button {
+		position: absolute;
+		top: 44%;
+		left: 50%;
+		width: 100px;
+		height: 100px;
+		margin: -50px 0 0 -50px;
+		background: url(/resource/custom/bigplay.svg) no-repeat;
+	}
+
+	.video_image:hover .overlay-button {
+		background-position: 0 -100px;
+	} 
+	.vd{
+	    text-align: center;
+	}
+</style>
+		<div id="main1" style="padding-left: 5%;padding-right: 5%;" >
+			<div class="row">
+				<div class="col-sm-12 col-lg-12"  style="padding-right: 3%;">
+					<div style="width: 100%;left: 0;">
+						<div>
+
+							<div   style="border-bottom-color: #f7030c;">
+								<a href="/home/index/revolution/0/en" style="color: #000;" ><h1 style="text-align: center;"><font style="font-size: 30px; font-family:KPCheonRiMaChe; font-weight: bold; color: red; text-align: center;"> WPK General Secretary <nobr><b style=font-size:1.11em>Kim Jong Un</b></nobr>’s Revolutionary Activities </font></h1></a>
+							</div>
+							<div class="row" style="margin-top: 30px;">
+								<div class="col-lg-6">
+		                            <article class="post">
+		                              
+                                        <div class="row">
+                                            <div class="col-lg-12" id="div_rev" oncontextmenu="return false;" style="padding-left:25px;">
+                                                                                                   
+                                                    <img alt="image" src="/uploads/photo/2025/06/2025-06-18-003.jpg" class="img-responsive" data-width="" data-height="" 
+                                                    style=" cursor: none;" >
+                                               
+                                            </div>
+                                        </div>
+		                                   
+		                            </article>
+								</div>
+								<div class="col-lg-6" >
+									<ul  style="padding: 0px;">
+									 												<div style="font-size: 16px;font-family: 'KPCheonRiMaChe';border-bottom:1px dashed #c1c1c1; line-height: 16px;">
+							 		 		<table class="table " style="margin-bottom: 0px;">
+							 		 			<tbody >
+							 		 				<tr >
+							 		 					<td style="border-top:0px; padding: 10px!important;">
+							 		 						<a href="/Home/index/disp/6622/en" style="font-family: KPCheonRiMa; color: #000;"> 
+																Respected Comrade <nobr><b style=font-size:1.11em>Kim Jong Un</b></nobr> Meets Secretary of Russian Security Council Sergei Shoigu 
+																</a>
+																		
+																    <i class="mr-2 fa fa-camera"></i>
+																																							 		 					</td>
+							 		 					<td style="border-top:0px; padding: 10px!important;vertical-align: bottom;">
+							 		 						<span style="float: right;">
+							 		 						<font size="2.4">
+							 		 							[2025.6.18.]</font>	
+							 		 						</span>
+							 		 					</td>
+							 		 				</tr>
+							 		 			</tbody>
+							 		 		</table>	
+							 					<!-- <a href="/Home/index/disp/6622/en" style="color: #000;"> 
+												Respected Comrade <nobr><b style=font-size:1.11em>Kim Jong Un</b></nobr> Meets Secretary of Russian Security Council Sergei Shoigu 
+												</a>
+														
+												    <i class="mr-2 fa fa-camera"></i>
+																								<font  style="float: right;">[2025.6.18.]</font>	
+										 				  -->
+										 	</div>
+									 												<div style="font-size: 16px;font-family: 'KPCheonRiMaChe';border-bottom:1px dashed #c1c1c1; line-height: 16px;">
+							 		 		<table class="table " style="margin-bottom: 0px;">
+							 		 			<tbody >
+							 		 				<tr >
+							 		 					<td style="border-top:0px; padding: 10px!important;">
+							 		 						<a href="/Home/index/disp/6610/en" style="font-family: KPCheonRiMa; color: #000;"> 
+																Respected Comrade <nobr><b style=font-size:1.11em>Kim Jong Un</b></nobr> Gives Field Guidance at Major Munitions Industry Enterprise 
+																</a>
+																		
+																    <i class="mr-2 fa fa-camera"></i>
+																																							 		 					</td>
+							 		 					<td style="border-top:0px; padding: 10px!important;vertical-align: bottom;">
+							 		 						<span style="float: right;">
+							 		 						<font size="2.4">
+							 		 							[2025.6.14.]</font>	
+							 		 						</span>
+							 		 					</td>
+							 		 				</tr>
+							 		 			</tbody>
+							 		 		</table>	
+							 					<!-- <a href="/Home/index/disp/6610/en" style="color: #000;"> 
+												Respected Comrade <nobr><b style=font-size:1.11em>Kim Jong Un</b></nobr> Gives Field Guidance at Major Munitions Industry Enterprise 
+												</a>
+														
+												    <i class="mr-2 fa fa-camera"></i>
+																								<font  style="float: right;">[2025.6.14.]</font>	
+										 				  -->
+										 	</div>
+									 												<div style="font-size: 16px;font-family: 'KPCheonRiMaChe';border-bottom:1px dashed #c1c1c1; line-height: 16px;">
+							 		 		<table class="table " style="margin-bottom: 0px;">
+							 		 			<tbody >
+							 		 				<tr >
+							 		 					<td style="border-top:0px; padding: 10px!important;">
+							 		 						<a href="/Home/index/disp/6608/en" style="font-family: KPCheonRiMa; color: #000;"> 
+																 Vigorous Advance and Development of Revolution in Warship-building Industry and Modernization of Naval Forces in New Era <br> Ceremony of Launching Destroyer of KPA Navy Takes Place with Splendour 
+																</a>
+																		
+																    <i class="mr-2 fa fa-camera"></i>
+																																							 		 					</td>
+							 		 					<td style="border-top:0px; padding: 10px!important;vertical-align: bottom;">
+							 		 						<span style="float: right;">
+							 		 						<font size="2.4">
+							 		 							[2025.6.13.]</font>	
+							 		 						</span>
+							 		 					</td>
+							 		 				</tr>
+							 		 			</tbody>
+							 		 		</table>	
+							 					<!-- <a href="/Home/index/disp/6608/en" style="color: #000;"> 
+												 Vigorous Advance and Development of Revolution in Warship-building Industry and Modernization of Naval Forces in New Era <br> Ceremony of Launching Destroyer of KPA Navy Takes Place with Splendour 
+												</a>
+														
+												    <i class="mr-2 fa fa-camera"></i>
+																								<font  style="float: right;">[2025.6.13.]</font>	
+										 				  -->
+										 	</div>
+									 												<div style="font-size: 16px;font-family: 'KPCheonRiMaChe';border-bottom:1px dashed #c1c1c1; line-height: 16px;">
+							 		 		<table class="table " style="margin-bottom: 0px;">
+							 		 			<tbody >
+							 		 				<tr >
+							 		 					<td style="border-top:0px; padding: 10px!important;">
+							 		 						<a href="/Home/index/disp/6609/en" style="font-family: KPCheonRiMa; color: #000;"> 
+																 Respected Comrade <nobr><b style=font-size:1.11em>Kim Jong Un</b></nobr> Makes Speech at Ceremony of Launching Destroyer of Navy of Korean People's Army 
+																</a>
+																		
+																    <i class="mr-2 fa fa-camera"></i>
+																																							 		 					</td>
+							 		 					<td style="border-top:0px; padding: 10px!important;vertical-align: bottom;">
+							 		 						<span style="float: right;">
+							 		 						<font size="2.4">
+							 		 							[2025.6.13.]</font>	
+							 		 						</span>
+							 		 					</td>
+							 		 				</tr>
+							 		 			</tbody>
+							 		 		</table>	
+							 					<!-- <a href="/Home/index/disp/6609/en" style="color: #000;"> 
+												 Respected Comrade <nobr><b style=font-size:1.11em>Kim Jong Un</b></nobr> Makes Speech at Ceremony of Launching Destroyer of Navy of Korean People's Army 
+												</a>
+														
+												    <i class="mr-2 fa fa-camera"></i>
+																								<font  style="float: right;">[2025.6.13.]</font>	
+										 				  -->
+										 	</div>
+									 												<div style="font-size: 16px;font-family: 'KPCheonRiMaChe';border-bottom:1px dashed #c1c1c1; line-height: 16px;">
+							 		 		<table class="table " style="margin-bottom: 0px;">
+							 		 			<tbody >
+							 		 				<tr >
+							 		 					<td style="border-top:0px; padding: 10px!important;">
+							 		 						<a href="/Home/index/disp/6598/en" style="font-family: KPCheonRiMa; color: #000;"> 
+																 Respected Comrade <nobr><b style=font-size:1.11em>Kim Jong Un</b></nobr> Sends Greetings to Russian President 
+																</a>
+																																							 		 					</td>
+							 		 					<td style="border-top:0px; padding: 10px!important;vertical-align: bottom;">
+							 		 						<span style="float: right;">
+							 		 						<font size="2.4">
+							 		 							[2025.6.12.]</font>	
+							 		 						</span>
+							 		 					</td>
+							 		 				</tr>
+							 		 			</tbody>
+							 		 		</table>	
+							 					<!-- <a href="/Home/index/disp/6598/en" style="color: #000;"> 
+												 Respected Comrade <nobr><b style=font-size:1.11em>Kim Jong Un</b></nobr> Sends Greetings to Russian President 
+												</a>
+																								<font  style="float: right;">[2025.6.12.]</font>	
+										 				  -->
+										 	</div>
+									 										</ul>
+									<div class="text-right" style="float:right;">
+					                    <a style="font-family: KPCheonRiMa" href="/home/index/revolution/0/en" class="btn btn-primary btn-raised btn-block animate-icon">Details					                      <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
+					                    </a>
+					            	</div>
+								</div> 
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">		
+				<div class="col-sm-6" style="padding-left: 3%; padding-top:2%; padding-bottom:7%;">
+					<div class="box1  box-bordered1"  >
+						<div class="box-title1" style="border-bottom-color: #9fc2e4;">
+							
+								<h3 class="right-line"><b style="font-family: KPCheonRiMa; color: #03a9f4;">News</b></h3>
+							
+						</div>
+						<div class="box-content1" style="  ">
+							 <ul  style="padding: 0px;">
+							 									 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 7px;">
+								 		<div class="row"  >
+								 			<div class="col-lg-10">
+								 				<div  >
+								 					<a href="/Home/index/disp/6408/en" style="font-family: KPCheonRiMa; color: #000;">
+													Most Important Policy of WPK and State													</a>
+																																							
+								 				</div>
+
+								 			</div>
+								 			<div class="col-lg-2">
+								 				<font  style="float: right;">[2025.5.9.]</font>
+								 			</div>
+								 		</div>
+								 		<div style=""></div>
+								 	</div>
+							 									 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 7px;">
+								 		<div class="row"  >
+								 			<div class="col-lg-10">
+								 				<div  >
+								 					<a href="/Home/index/disp/6397/en" style="font-family: KPCheonRiMa; color: #000;">
+													Great Mentor													</a>
+																																							
+								 				</div>
+
+								 			</div>
+								 			<div class="col-lg-2">
+								 				<font  style="float: right;">[2025.5.8.]</font>
+								 			</div>
+								 		</div>
+								 		<div style=""></div>
+								 	</div>
+							 									 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 7px;">
+								 		<div class="row"  >
+								 			<div class="col-lg-10">
+								 				<div  >
+								 					<a href="/Home/index/disp/6392/en" style="font-family: KPCheonRiMa; color: #000;">
+													To Make Sci-tech Learning Space Pay Off													</a>
+																																							
+								 				</div>
+
+								 			</div>
+								 			<div class="col-lg-2">
+								 				<font  style="float: right;">[2025.5.7.]</font>
+								 			</div>
+								 		</div>
+								 		<div style=""></div>
+								 	</div>
+							 									 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 7px;">
+								 		<div class="row"  >
+								 			<div class="col-lg-10">
+								 				<div  >
+								 					<a href="/Home/index/disp/6388/en" style="font-family: KPCheonRiMa; color: #000;">
+													Season of House-moving													</a>
+																																							
+								 				</div>
+
+								 			</div>
+								 			<div class="col-lg-2">
+								 				<font  style="float: right;">[2025.5.6.]</font>
+								 			</div>
+								 		</div>
+								 		<div style=""></div>
+								 	</div>
+							 									 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 7px;">
+								 		<div class="row"  >
+								 			<div class="col-lg-10">
+								 				<div  >
+								 					<a href="/Home/index/disp/6387/en" style="font-family: KPCheonRiMa; color: #000;">
+													Worth of Life													</a>
+															<i class="mr-2 fa fa-camera"></i>
+																																							
+								 				</div>
+
+								 			</div>
+								 			<div class="col-lg-2">
+								 				<font  style="float: right;">[2025.5.6.]</font>
+								 			</div>
+								 		</div>
+								 		<div style=""></div>
+								 	</div>
+							 									 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 7px;">
+								 		<div class="row"  >
+								 			<div class="col-lg-10">
+								 				<div  >
+								 					<a href="/Home/index/disp/6386/en" style="font-family: KPCheonRiMa; color: #000;">
+													Popular Movies and Ever-increasing Audience													</a>
+																																							
+								 				</div>
+
+								 			</div>
+								 			<div class="col-lg-2">
+								 				<font  style="float: right;">[2025.5.6.]</font>
+								 			</div>
+								 		</div>
+								 		<div style=""></div>
+								 	</div>
+							 									 	<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1; padding-top: 7px;">
+								 		<div class="row"  >
+								 			<div class="col-lg-10">
+								 				<div  >
+								 					<a href="/Home/index/disp/6371/en" style="font-family: KPCheonRiMa; color: #000;">
+													Daily Routine													</a>
+															<i class="mr-2 fa fa-camera"></i>
+																																							
+								 				</div>
+
+								 			</div>
+								 			<div class="col-lg-2">
+								 				<font  style="float: right;">[2025.5.2.]</font>
+								 			</div>
+								 		</div>
+								 		<div style=""></div>
+								 	</div>
+							 								 </ul>
+						</div>
+						
+					</div>
+					<div class="text-right" style="float:right;">
+		                    <a style="font-family: KPCheonRiMa" href="/home/index/all_view/0/en" class="btn btn-primary btn-raised btn-block animate-icon">Details		                      <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
+		                    </a>
+		            	</div>
+				</div> 
+				<div class="col-sm-6" style="padding-left: 3%; padding-top:2%;">
+						<div class="box1  box-bordered1" >
+							<div >
+								<h3 class="right-line"><b style="font-family: KPCheonRiMa; color: #03a9f4;">News from power organs</b></h3>
+								 
+							</div>
+							<div class="box-content1">
+								 <ul  style="padding: 0px;vertical-align: top;">
+							 										<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1;padding-top: 7px;">
+								 		<div class="row"   >
+								 			<div class="col-lg-10" >
+								 				<div >
+								 					<a href="/Home/index/disp/6623/en" style="font-family: KPCheonRiMa; color: #000;">
+													DPRK Premier Inspects Various Sectors of National Economy													</a>
+															<i class="mr-2 fa fa-camera"></i>
+																																		 				</div>
+								 			</div>
+								 			<div class="col-lg-2">
+													<font  style="float: right;">[2025.6.18.]</font>
+											</div>		
+								 		</div>
+								 	</div>
+							 										<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1;padding-top: 7px;">
+								 		<div class="row"   >
+								 			<div class="col-lg-10" >
+								 				<div >
+								 					<a href="/Home/index/disp/6616/en" style="font-family: KPCheonRiMa; color: #000;">
+													Message of Sympathy to Indian PM													</a>
+																																		 				</div>
+								 			</div>
+								 			<div class="col-lg-2">
+													<font  style="float: right;">[2025.6.17.]</font>
+											</div>		
+								 		</div>
+								 	</div>
+							 										<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1;padding-top: 7px;">
+								 		<div class="row"   >
+								 			<div class="col-lg-10" >
+								 				<div >
+								 					<a href="/Home/index/disp/6617/en" style="font-family: KPCheonRiMa; color: #000;">
+													Congratulations to Mongolian Prime Minister													</a>
+																																		 				</div>
+								 			</div>
+								 			<div class="col-lg-2">
+													<font  style="float: right;">[2025.6.17.]</font>
+											</div>		
+								 		</div>
+								 	</div>
+							 										<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1;padding-top: 7px;">
+								 		<div class="row"   >
+								 			<div class="col-lg-10" >
+								 				<div >
+								 					<a href="/Home/index/disp/6592/en" style="font-family: KPCheonRiMa; color: #000;">
+													DPRK Premier Inspects Various Sectors													</a>
+															<i class="mr-2 fa fa-camera"></i>
+																																		 				</div>
+								 			</div>
+								 			<div class="col-lg-2">
+													<font  style="float: right;">[2025.6.10.]</font>
+											</div>		
+								 		</div>
+								 	</div>
+							 										<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1;padding-top: 7px;">
+								 		<div class="row"   >
+								 			<div class="col-lg-10" >
+								 				<div >
+								 					<a href="/Home/index/disp/6590/en" style="font-family: KPCheonRiMa; color: #000;">
+													Choe Ryong Hae Inspects Various Sectors of South Hwanghae Province													</a>
+															<i class="mr-2 fa fa-camera"></i>
+																																		 				</div>
+								 			</div>
+								 			<div class="col-lg-2">
+													<font  style="float: right;">[2025.6.8.]</font>
+											</div>		
+								 		</div>
+								 	</div>
+							 										<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1;padding-top: 7px;">
+								 		<div class="row"   >
+								 			<div class="col-lg-10" >
+								 				<div >
+								 					<a href="/Home/index/disp/6561/en" style="font-family: KPCheonRiMa; color: #000;">
+													DPRK Premier Inspects Various Sectors													</a>
+															<i class="mr-2 fa fa-camera"></i>
+																																		 				</div>
+								 			</div>
+								 			<div class="col-lg-2">
+													<font  style="float: right;">[2025.6.3.]</font>
+											</div>		
+								 		</div>
+								 	</div>
+							 										<div   style="font-size: 14px;font-family: 'KPCheonRiMa';border-bottom:1px dashed #c1c1c1;padding-top: 7px;">
+								 		<div class="row"   >
+								 			<div class="col-lg-10" >
+								 				<div >
+								 					<a href="/Home/index/disp/6528/en" style="font-family: KPCheonRiMa; color: #000;">
+													Plenary Meeting of DPRK SPA Standing Committee Held													</a>
+															<i class="mr-2 fa fa-camera"></i>
+																																		 				</div>
+								 			</div>
+								 			<div class="col-lg-2">
+													<font  style="float: right;">[2025.5.30.]</font>
+											</div>		
+								 		</div>
+								 	</div>
+							 								 </ul>
+							</div>
+							<div class="text-right" style="float:right;">
+			                    <a style="font-family: KPCheonRiMa" href="/home/index/power_news/0/en" class="btn btn-primary btn-raised btn-block animate-icon">Details			                      <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
+			                    </a>
+			            	</div>
+						</div>
+					 </div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-lg-12" style=";padding-right: 5%;padding-left: 5%;">
+				<!-- <div class="col-lg-12"   > -->
+					<div class="box1 box-bordered1">
+						<div class="box-content2" style="padding-top:7px;padding-bottom: 7px; padding-left: 2%;" >
+							<div >
+								<h3 class="right-line"><b style="font-family: KPCheonRiMa; color: #03a9f4;">Photos,Videos</b></h3>
+								
+							</div>
+							<div id="wrapper">
+						        <div class="wrapper wrapper-content">
+           							<div class="row animatedParent">
+					                	<div class="row gallery-item" style="padding-left: 10px;padding-right: 10px; "  >
+				                
+	                                		<div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go"  id="media" name="media"   align="middle" style="  font-size: 14px;font-family: KPCheonRiMa;float: left; padding-right: : 1px;  ">
+													<a class="thumbnail withripple color-danger" href="/uploads/photo/2024/04/2024-04-05-005.jpg"  title="Scenery and landscaping of rural village(1/6)" data-fancybox="gallery1"   style="color: #000;"> 
+													
+														<div class=" banner0 thumbnail-container" style="background-color: rgb(60, 60, 60); border: 2px solid #f8f8f8; max-height: auto;max-width: auto;min-height: auto;min-width: auto;  position:relative;   "> 
+																														<img alt="image" 
+																id = "image0"
+		                                       					name = "image0"
+		                                       					class="img-responsive"
+		                                       					src="/uploads/photo/2024/04/2024-04-05-005.jpg"
+		                                       					data-width=""
+		                                       					data-height=""
+		                                       					style="  max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+														</div>
+														
+								                		<div style="font-family: KPCheonRiMa; color: black;">
+								                			Scenery and landscaping of rural village	
+								                			<font >[2024.4.5.]</font>
+								                		</div>
+													</a>
+													 
+												
+			                                	<!-- /uploads/photo/2024/04/2024-04-05-006.jpg	 -->
+													<a href="/uploads/photo/2024/04/2024-04-05-006.jpg" title="Scenery and landscaping of rural village(2/6)" data-fancybox="gallery1" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2024/04/2024-04-05-007.jpg	 -->
+													<a href="/uploads/photo/2024/04/2024-04-05-007.jpg" title="Scenery and landscaping of rural village(3/6)" data-fancybox="gallery1" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2024/04/2024-04-05-008.jpg	 -->
+													<a href="/uploads/photo/2024/04/2024-04-05-008.jpg" title="Scenery and landscaping of rural village(4/6)" data-fancybox="gallery1" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2024/04/2024-04-05-009.jpg	 -->
+													<a href="/uploads/photo/2024/04/2024-04-05-009.jpg" title="Scenery and landscaping of rural village(5/6)" data-fancybox="gallery1" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2024/04/2024-04-05-010.jpg	 -->
+													<a href="/uploads/photo/2024/04/2024-04-05-010.jpg" title="Scenery and landscaping of rural village(6/6)" data-fancybox="gallery1" >
+											</a>
+																						</div>
+										
+	                                		<div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go"  id="media" name="media"   align="middle" style="  font-size: 14px;font-family: KPCheonRiMa;float: left; padding-right: : 1px;  ">
+													<a class="thumbnail withripple color-danger" href="/uploads/photo/2020/03/2020-03-12-7-001.jpg"  title="Pyongyang Kim Jong Suk Textile Mill(1/8)" data-fancybox="gallery2"   style="color: #000;"> 
+													
+														<div class=" banner1 thumbnail-container" style="background-color: rgb(60, 60, 60); border: 2px solid #f8f8f8; max-height: auto;max-width: auto;min-height: auto;min-width: auto;  position:relative;   "> 
+																														<img alt="image" 
+																id = "image1"
+		                                       					name = "image1"
+		                                       					class="img-responsive"
+		                                       					src="/uploads/photo/2020/03/2020-03-12-7-001.jpg"
+		                                       					data-width=""
+		                                       					data-height=""
+		                                       					style="  max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+														</div>
+														
+								                		<div style="font-family: KPCheonRiMa; color: black;">
+								                			Pyongyang <nobr>Kim Jong Suk</nobr> Textile Mill	
+								                			<font >[2020.3.12.]</font>
+								                		</div>
+													</a>
+													 
+												
+			                                	<!-- /uploads/photo/2020/03/2020-03-12-7-002.jpg	 -->
+													<a href="/uploads/photo/2020/03/2020-03-12-7-002.jpg" title="Pyongyang Kim Jong Suk Textile Mill(2/8)" data-fancybox="gallery2" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2020/03/2020-03-12-7-003.jpg	 -->
+													<a href="/uploads/photo/2020/03/2020-03-12-7-003.jpg" title="Pyongyang Kim Jong Suk Textile Mill(3/8)" data-fancybox="gallery2" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2020/03/2020-03-12-7-004.jpg	 -->
+													<a href="/uploads/photo/2020/03/2020-03-12-7-004.jpg" title="Pyongyang Kim Jong Suk Textile Mill(4/8)" data-fancybox="gallery2" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2020/03/2020-03-12-7-005.jpg	 -->
+													<a href="/uploads/photo/2020/03/2020-03-12-7-005.jpg" title="Pyongyang Kim Jong Suk Textile Mill(5/8)" data-fancybox="gallery2" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2020/03/2020-03-12-7-006.jpg	 -->
+													<a href="/uploads/photo/2020/03/2020-03-12-7-006.jpg" title="Pyongyang Kim Jong Suk Textile Mill(6/8)" data-fancybox="gallery2" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2020/03/2020-03-12-7-007.jpg	 -->
+													<a href="/uploads/photo/2020/03/2020-03-12-7-007.jpg" title="Pyongyang Kim Jong Suk Textile Mill(7/8)" data-fancybox="gallery2" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2020/03/2020-03-12-7-008.jpg	 -->
+													<a href="/uploads/photo/2020/03/2020-03-12-7-008.jpg" title="Pyongyang Kim Jong Suk Textile Mill(8/8)" data-fancybox="gallery2" >
+											</a>
+																						</div>
+										
+	                                		<div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go"  id="media" name="media"   align="middle" style="  font-size: 14px;font-family: KPCheonRiMa;float: left; padding-right: : 1px;  ">
+													<a class="thumbnail withripple color-danger" href="/uploads/photo/2021/09/2020-03-05-07-001.jpg"  title="Mindulle Notebook Factory (1/8)" data-fancybox="gallery3"   style="color: #000;"> 
+													
+														<div class=" banner2 thumbnail-container" style="background-color: rgb(60, 60, 60); border: 2px solid #f8f8f8; max-height: auto;max-width: auto;min-height: auto;min-width: auto;  position:relative;   "> 
+																														<img alt="image" 
+																id = "image2"
+		                                       					name = "image2"
+		                                       					class="img-responsive"
+		                                       					src="/uploads/photo/2021/09/2020-03-05-07-001.jpg"
+		                                       					data-width=""
+		                                       					data-height=""
+		                                       					style="  max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+														</div>
+														
+								                		<div style="font-family: KPCheonRiMa; color: black;">
+								                			Mindulle Notebook Factory 	
+								                			<font >[2020.3.5.]</font>
+								                		</div>
+													</a>
+													 
+												
+			                                	<!-- /uploads/photo/2021/09/2020-03-05-07-002.jpg	 -->
+													<a href="/uploads/photo/2021/09/2020-03-05-07-002.jpg" title="Mindulle Notebook Factory (2/8)" data-fancybox="gallery3" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2021/09/2020-03-05-07-003.jpg	 -->
+													<a href="/uploads/photo/2021/09/2020-03-05-07-003.jpg" title="Mindulle Notebook Factory (3/8)" data-fancybox="gallery3" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2021/09/2020-03-05-07-004.jpg	 -->
+													<a href="/uploads/photo/2021/09/2020-03-05-07-004.jpg" title="Mindulle Notebook Factory (4/8)" data-fancybox="gallery3" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2021/09/2020-03-05-07-005.jpg	 -->
+													<a href="/uploads/photo/2021/09/2020-03-05-07-005.jpg" title="Mindulle Notebook Factory (5/8)" data-fancybox="gallery3" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2021/09/2020-03-05-07-006.jpg	 -->
+													<a href="/uploads/photo/2021/09/2020-03-05-07-006.jpg" title="Mindulle Notebook Factory (6/8)" data-fancybox="gallery3" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2021/09/2020-03-05-07-007.jpg	 -->
+													<a href="/uploads/photo/2021/09/2020-03-05-07-007.jpg" title="Mindulle Notebook Factory (7/8)" data-fancybox="gallery3" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2021/09/2020-03-05-07-008.jpg	 -->
+													<a href="/uploads/photo/2021/09/2020-03-05-07-008.jpg" title="Mindulle Notebook Factory (8/8)" data-fancybox="gallery3" >
+											</a>
+																						</div>
+										
+	                                		<div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go"  id="media" name="media"   align="middle" style="  font-size: 14px;font-family: KPCheonRiMa;float: left; padding-right: : 1px;  ">
+													<a class="thumbnail withripple color-danger" href="/uploads/photo/2021/09/2020-03-03-07-001.jpg"  title="Pyongyang Hosiery Factory (1/7)" data-fancybox="gallery4"   style="color: #000;"> 
+													
+														<div class=" banner3 thumbnail-container" style="background-color: rgb(60, 60, 60); border: 2px solid #f8f8f8; max-height: auto;max-width: auto;min-height: auto;min-width: auto;  position:relative;   "> 
+																														<img alt="image" 
+																id = "image3"
+		                                       					name = "image3"
+		                                       					class="img-responsive"
+		                                       					src="/uploads/photo/2021/09/2020-03-03-07-001.jpg"
+		                                       					data-width=""
+		                                       					data-height=""
+		                                       					style="  max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+														</div>
+														
+								                		<div style="font-family: KPCheonRiMa; color: black;">
+								                			Pyongyang Hosiery Factory 	
+								                			<font >[2020.3.3.]</font>
+								                		</div>
+													</a>
+													 
+												
+			                                	<!-- /uploads/photo/2021/09/2020-03-03-07-002.jpg	 -->
+													<a href="/uploads/photo/2021/09/2020-03-03-07-002.jpg" title="Pyongyang Hosiery Factory (2/7)" data-fancybox="gallery4" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2021/09/2020-03-03-07-003.jpg	 -->
+													<a href="/uploads/photo/2021/09/2020-03-03-07-003.jpg" title="Pyongyang Hosiery Factory (3/7)" data-fancybox="gallery4" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2021/09/2020-03-03-07-004.jpg	 -->
+													<a href="/uploads/photo/2021/09/2020-03-03-07-004.jpg" title="Pyongyang Hosiery Factory (4/7)" data-fancybox="gallery4" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2021/09/2020-03-03-07-005.jpg	 -->
+													<a href="/uploads/photo/2021/09/2020-03-03-07-005.jpg" title="Pyongyang Hosiery Factory (5/7)" data-fancybox="gallery4" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2021/09/2020-03-03-07-006.jpg	 -->
+													<a href="/uploads/photo/2021/09/2020-03-03-07-006.jpg" title="Pyongyang Hosiery Factory (6/7)" data-fancybox="gallery4" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2021/09/2020-03-03-07-007.jpg	 -->
+													<a href="/uploads/photo/2021/09/2020-03-03-07-007.jpg" title="Pyongyang Hosiery Factory (7/7)" data-fancybox="gallery4" >
+											</a>
+																						</div>
+										                                				<div style="clear: both;height: 9px;"></div>
+                        					
+	                                		<div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go"  id="media" name="media"   align="middle" style="  font-size: 14px;font-family: KPCheonRiMa;float: left; padding-right: : 1px;  ">
+													<a class="thumbnail withripple color-danger" href="/uploads/photo/2020/03/2020-03-02-07-01.jpg"  title="Modern Narae Ceramicware Factory (1/8)" data-fancybox="gallery5"   style="color: #000;"> 
+													
+														<div class=" banner4 thumbnail-container" style="background-color: rgb(60, 60, 60); border: 2px solid #f8f8f8; max-height: auto;max-width: auto;min-height: auto;min-width: auto;  position:relative;   "> 
+																														<img alt="image" 
+																id = "image4"
+		                                       					name = "image4"
+		                                       					class="img-responsive"
+		                                       					src="/uploads/photo/2020/03/2020-03-02-07-01.jpg"
+		                                       					data-width=""
+		                                       					data-height=""
+		                                       					style="  max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+														</div>
+														
+								                		<div style="font-family: KPCheonRiMa; color: black;">
+								                			Modern Narae Ceramicware Factory 	
+								                			<font >[2020.3.2.]</font>
+								                		</div>
+													</a>
+													 
+												
+			                                	<!-- /uploads/photo/2020/03/2020-03-02-07-02.jpg	 -->
+													<a href="/uploads/photo/2020/03/2020-03-02-07-02.jpg" title="Modern Narae Ceramicware Factory (2/8)" data-fancybox="gallery5" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2020/03/2020-03-02-07-03.jpg	 -->
+													<a href="/uploads/photo/2020/03/2020-03-02-07-03.jpg" title="Modern Narae Ceramicware Factory (3/8)" data-fancybox="gallery5" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2020/03/2020-03-02-07-04.jpg	 -->
+													<a href="/uploads/photo/2020/03/2020-03-02-07-04.jpg" title="Modern Narae Ceramicware Factory (4/8)" data-fancybox="gallery5" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2020/03/2020-03-02-07-05.jpg	 -->
+													<a href="/uploads/photo/2020/03/2020-03-02-07-05.jpg" title="Modern Narae Ceramicware Factory (5/8)" data-fancybox="gallery5" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2020/03/2020-03-02-07-06.jpg	 -->
+													<a href="/uploads/photo/2020/03/2020-03-02-07-06.jpg" title="Modern Narae Ceramicware Factory (6/8)" data-fancybox="gallery5" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2020/03/2020-03-02-07-07.jpg	 -->
+													<a href="/uploads/photo/2020/03/2020-03-02-07-07.jpg" title="Modern Narae Ceramicware Factory (7/8)" data-fancybox="gallery5" >
+											</a>
+												
+			                                	<!-- /uploads/photo/2020/03/2020-03-02-07-08.jpg	 -->
+													<a href="/uploads/photo/2020/03/2020-03-02-07-08.jpg" title="Modern Narae Ceramicware Factory (8/8)" data-fancybox="gallery5" >
+											</a>
+																						</div>
+										 
+							            </div> 
+							    	</div>  
+								</div>  
+								<div id="wrapper"> 
+							        <div class="wrapper wrapper-content" style="padding-bottom: 0px!important; "> 
+	           							<!-- <div class="row">
+						                	<div class="row" style="padding-left: 10px;padding-right: 10px; "> -->
+						               	<div class="row animatedParent">
+						                	<div class="row gallery-item" style="padding-left: 10px;padding-right: 10px; ">
+						               			      
+											        <div class="col-sm-3  col-md-3 col-lg-3 animated"  align="middle" style="font-size: 14px;font-family: KPCheonRiMa; " id="media" >
+										             <!-- <div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go" align="middle" style="font-size: 14px;font-family: KPCheonRiMa; " align="middle" id="media"> -->
+										                <a class="thumbnail withripple video_image"  data-target="#video0" data-toggle="modal" title="chilbo" style="color: #000;"> 
+														<!-- <a class="video_image"  href="javascript:news_open_video('5437')"    title="chilbo" style="color: #000;"> -->
+															<div class="thumbnail-container" style="position:relative;border: 2px solid #efebeb; max-height: 100%;max-width: 100%;min-height: auto;min-width: auto;      ">
+							                                    							                                    <img alt="image" 
+							                                        id = "image0"
+							                                        name = "image0"
+							                                        class="img-responsive"
+							                                        src="/uploads/video/2024/10/chilbo.JPG"
+							                                        data-width=""
+							                                        data-height=""
+							                                        style=" max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+							                                         
+							                                </div> 
+
+															<!-- <img src="/uploads/video/2024/10/chilbo.JPG" class="img-responsive" alt="img" style="/*width: 300px;height: 160px;*/ max-height: auto;max-width: auto;min-height: auto;min-width: auto;">	 -->
+															<div class="overlay-button"></div>	
+															<div style=" font-family: KPCheonRiMa; width: 90%; ">
+																chilbo																<font color="#121111">[2024.10.30.]</font> 
+															</div>	
+										                </a>
+											        </div>
+										            <div class="modal fade" id="video0" tabindex="-1" role="	basic" aria-hidden="true"   >
+										            	 
+										            	
+										                <div class="  modal-dialog " style="width: 80% ;margin:auto;"  >
+										                    <div class="modal-content" >
+										                        <div class="modal-header" style="padding: 5px !important">
+										                            <button  class="close" data-dismiss="modal" aria-hidden="true"  id="closevideo"  name="closevideo" onclick="pauseVid('0')" value="0">x</button>
+										                            <!-- <input type="hidden" name="closevideo" id="closevideo" value="0"> -->
+										                            <h4 class="modal-title" style="text-align: center;font-family: KPCheonRiMa;">
+										                            	chilbo										                            </h4>
+										                        </div>
+										                        <div class="modal-body">
+										                            <video  class="vd" controls  autobuffer="true" id='obj_vi0' style="width: 100%;">
+										                                <source src='/uploads/video/2024/10/chilbo.mp4' type="video/mp4">
+										                            </video>
+										                        </div>
+										                    </div>
+										                </div>
+										            </div>
+										            
+											          
+											        <div class="col-sm-3  col-md-3 col-lg-3 animated"  align="middle" style="font-size: 14px;font-family: KPCheonRiMa; " id="media" >
+										             <!-- <div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go" align="middle" style="font-size: 14px;font-family: KPCheonRiMa; " align="middle" id="media"> -->
+										                <a class="thumbnail withripple video_image"  data-target="#video1" data-toggle="modal" title="Famous Samilpho-brand specialities " style="color: #000;"> 
+														<!-- <a class="video_image"  href="javascript:news_open_video('4733')"    title="Famous Samilpho-brand specialities " style="color: #000;"> -->
+															<div class="thumbnail-container" style="position:relative;border: 2px solid #efebeb; max-height: 100%;max-width: 100%;min-height: auto;min-width: auto;      ">
+							                                    							                                    <img alt="image" 
+							                                        id = "image1"
+							                                        name = "image1"
+							                                        class="img-responsive"
+							                                        src="/uploads/video/2024/07/samilpo.JPG"
+							                                        data-width=""
+							                                        data-height=""
+							                                        style=" max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+							                                         
+							                                </div> 
+
+															<!-- <img src="/uploads/video/2024/07/samilpo.JPG" class="img-responsive" alt="img" style="/*width: 300px;height: 160px;*/ max-height: auto;max-width: auto;min-height: auto;min-width: auto;">	 -->
+															<div class="overlay-button"></div>	
+															<div style=" font-family: KPCheonRiMa; width: 90%; ">
+																Famous Samilpho-brand specialities 																<font color="#121111">[2024.7.17.]</font> 
+															</div>	
+										                </a>
+											        </div>
+										            <div class="modal fade" id="video1" tabindex="-1" role="	basic" aria-hidden="true"   >
+										            	 
+										            	
+										                <div class="  modal-dialog " style="width: 80% ;margin:auto;"  >
+										                    <div class="modal-content" >
+										                        <div class="modal-header" style="padding: 5px !important">
+										                            <button  class="close" data-dismiss="modal" aria-hidden="true"  id="closevideo"  name="closevideo" onclick="pauseVid('1')" value="1">x</button>
+										                            <!-- <input type="hidden" name="closevideo" id="closevideo" value="1"> -->
+										                            <h4 class="modal-title" style="text-align: center;font-family: KPCheonRiMa;">
+										                            	Famous Samilpho-brand specialities 										                            </h4>
+										                        </div>
+										                        <div class="modal-body">
+										                            <video  class="vd" controls  autobuffer="true" id='obj_vi1' style="width: 100%;">
+										                                <source src='/uploads/video/2024/07/2024-07-17-001.mp4' type="video/mp4">
+										                            </video>
+										                        </div>
+										                    </div>
+										                </div>
+										            </div>
+										            
+											          
+											        <div class="col-sm-3  col-md-3 col-lg-3 animated"  align="middle" style="font-size: 14px;font-family: KPCheonRiMa; " id="media" >
+										             <!-- <div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go" align="middle" style="font-size: 14px;font-family: KPCheonRiMa; " align="middle" id="media"> -->
+										                <a class="thumbnail withripple video_image"  data-target="#video2" data-toggle="modal" title="Historical relics on Moran Hill" style="color: #000;"> 
+														<!-- <a class="video_image"  href="javascript:news_open_video('4436')"    title="Historical relics on Moran Hill" style="color: #000;"> -->
+															<div class="thumbnail-container" style="position:relative;border: 2px solid #efebeb; max-height: 100%;max-width: 100%;min-height: auto;min-width: auto;      ">
+							                                    							                                    <img alt="image" 
+							                                        id = "image2"
+							                                        name = "image2"
+							                                        class="img-responsive"
+							                                        src="/uploads/video/2024/06/Moran Hill.JPG"
+							                                        data-width=""
+							                                        data-height=""
+							                                        style=" max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+							                                         
+							                                </div> 
+
+															<!-- <img src="/uploads/video/2024/06/Moran Hill.JPG" class="img-responsive" alt="img" style="/*width: 300px;height: 160px;*/ max-height: auto;max-width: auto;min-height: auto;min-width: auto;">	 -->
+															<div class="overlay-button"></div>	
+															<div style=" font-family: KPCheonRiMa; width: 90%; ">
+																Historical relics on Moran Hill																<font color="#121111">[2024.6.5.]</font> 
+															</div>	
+										                </a>
+											        </div>
+										            <div class="modal fade" id="video2" tabindex="-1" role="	basic" aria-hidden="true"   >
+										            	 
+										            	
+										                <div class="  modal-dialog " style="width: 80% ;margin:auto;"  >
+										                    <div class="modal-content" >
+										                        <div class="modal-header" style="padding: 5px !important">
+										                            <button  class="close" data-dismiss="modal" aria-hidden="true"  id="closevideo"  name="closevideo" onclick="pauseVid('2')" value="2">x</button>
+										                            <!-- <input type="hidden" name="closevideo" id="closevideo" value="2"> -->
+										                            <h4 class="modal-title" style="text-align: center;font-family: KPCheonRiMa;">
+										                            	Historical relics on Moran Hill										                            </h4>
+										                        </div>
+										                        <div class="modal-body">
+										                            <video  class="vd" controls  autobuffer="true" id='obj_vi2' style="width: 100%;">
+										                                <source src='/uploads/video/2024/06/2024-06-05-001.mp4' type="video/mp4">
+										                            </video>
+										                        </div>
+										                    </div>
+										                </div>
+										            </div>
+										            
+											          
+											        <div class="col-sm-3  col-md-3 col-lg-3 animated"  align="middle" style="font-size: 14px;font-family: KPCheonRiMa; " id="media" >
+										             <!-- <div class="col-sm-3  col-md-3 col-lg-3 animated fadeInUp go" align="middle" style="font-size: 14px;font-family: KPCheonRiMa; " align="middle" id="media"> -->
+										                <a class="thumbnail withripple video_image"  data-target="#video3" data-toggle="modal" title="To make Kumgangsan-brand cosmetics favoured by the people" style="color: #000;"> 
+														<!-- <a class="video_image"  href="javascript:news_open_video('3994')"    title="To make Kumgangsan-brand cosmetics favoured by the people" style="color: #000;"> -->
+															<div class="thumbnail-container" style="position:relative;border: 2px solid #efebeb; max-height: 100%;max-width: 100%;min-height: auto;min-width: auto;      ">
+							                                    							                                    <img alt="image" 
+							                                        id = "image3"
+							                                        name = "image3"
+							                                        class="img-responsive"
+							                                        src="/uploads/video/2024/03/2024-03-26-021.jpg"
+							                                        data-width=""
+							                                        data-height=""
+							                                        style=" max-height: auto;max-width: auto;min-height: auto;min-width: auto; ">
+							                                         
+							                                </div> 
+
+															<!-- <img src="/uploads/video/2024/03/2024-03-26-021.jpg" class="img-responsive" alt="img" style="/*width: 300px;height: 160px;*/ max-height: auto;max-width: auto;min-height: auto;min-width: auto;">	 -->
+															<div class="overlay-button"></div>	
+															<div style=" font-family: KPCheonRiMa; width: 90%; ">
+																To make Kumgangsan-brand cosmetics favoured by the people																<font color="#121111">[2024.3.27.]</font> 
+															</div>	
+										                </a>
+											        </div>
+										            <div class="modal fade" id="video3" tabindex="-1" role="	basic" aria-hidden="true"   >
+										            	 
+										            	
+										                <div class="  modal-dialog " style="width: 80% ;margin:auto;"  >
+										                    <div class="modal-content" >
+										                        <div class="modal-header" style="padding: 5px !important">
+										                            <button  class="close" data-dismiss="modal" aria-hidden="true"  id="closevideo"  name="closevideo" onclick="pauseVid('3')" value="3">x</button>
+										                            <!-- <input type="hidden" name="closevideo" id="closevideo" value="3"> -->
+										                            <h4 class="modal-title" style="text-align: center;font-family: KPCheonRiMa;">
+										                            	To make Kumgangsan-brand cosmetics favoured by the people										                            </h4>
+										                        </div>
+										                        <div class="modal-body">
+										                            <video  class="vd" controls  autobuffer="true" id='obj_vi3' style="width: 100%;">
+										                                <source src='/uploads/video/2024/03/2024-03-26-021.mp4' type="video/mp4">
+										                            </video>
+										                        </div>
+										                    </div>
+										                </div>
+										            </div>
+										            
+											    											</div>
+							            </div>
+									</div> 
+								</div> 
+							</div>
+						</div> 
+					</div>
+				<!-- </div> -->
+			 	<!-- <div style="margin-bottom: 0px!important;" >
+					<a href="/home/index/history/0/en">
+						<img src="/resource/slide1_Layer_1.png" width="100%">
+					</a>
+				</div> -->
+
+			</div>
+		</div>
+	
+	</div>
+<script type="text/javascript">
+	function news_open_video(id) {
+        var url = "/video/index/" + id;
+	    var t,l,w,h;
+	    w = screen.width * 0.7;
+	    h = screen.height * 0.7;
+	    t = (screen.height - h) / 2;
+	    l = (screen.width - w) / 2;
+	    window.open(url, '민주조선','width='+w+',height=' + h +',top=' + t +  ',left=' + l );
+	}
+
+  
+       function pauseVid(num){
+        	// var num = document.getElementById("closevideo").value;
+             // alert(num);
+            var str = "obj_vi"+num;
+            var x = document.getElementById(str);
+            x.pause();
+        }
+   
+  
+	$(document).ready(function() {
+ 		window.location.assign("/home/index/first/0/en")
+	    resizeImages();
+
+	    $(window).on('resize', function(){
+
+	        resizeImages();
+
+	    });
+
+	});
+
+	function resizeImages() {
+
+	    var windowWidth = $('#media').innerWidth();
+	    var width = windowWidth;
+	    var height = width * 0.6;
+
+	    $('.banner').css('width', width);
+	    $('.banner').css('height', height);
+	    $('.animated img').each(function() {
+	        var orig_img_width = $(this).data('width');
+	        var orig_img_height = $(this).data('height');
+	        var orig_img_rate = orig_img_width / orig_img_height;
+	        var dest_img_width = width;
+	        var dest_img_height = height;
+	        var margin_top = 0;
+				if (orig_img_rate > 1) {
+					dest_img_height =   width / orig_img_rate;
+					if (dest_img_height - height > 0) {
+						dest_img_height = height;
+						dest_img_width = height *orig_img_rate;
+					}
+				} 
+				else{
+					dest_img_width = orig_img_rate * height;
+					if (dest_img_width - width > 0 ) {
+						dest_img_height =  width * orig_img_rate;
+						dest_img_width = width;
+					}
+				} 
+				var margin_top = (height - dest_img_height ) / 2; 
+	        	$(this).css('width', dest_img_width)
+	            .css('height', dest_img_height)
+	            .css('margin-top', margin_top)
+	            .css('margin-bottom', margin_top);
+	    });
+
+	    	 
+	}	
+	
+</script>
+     
+       <style type="text/css">
+      
+       a#link :hover{
+            transition-timing-function: ease;
+            transition-duration: 1s;  
+            transform: scale(1.5,1.5);
+        }
+       
+      </style>
+      <div style="width:100%;text-align: -webkit-center; position: relative; margin-top: 170px; float: left; ">
+        <img src="/resource/images/footer.png" style="width: 100%;" alt="image">
+          <div  id="screen" style="font-family:'KPCheonRiMa'">          
+              <div class="col-md-4 col-sm-4 " style="  position: absolute;bottom:17%; z-index: 1; left: 6%;">
+                <div   > 
+                  <img src="/resource/images/footer_mark.png" style="width:60%" alt="image">
+                </div>
+                <div style="padding-top: 20px;" >
+                  <p style="padding: 0 8%;margin: 0;"> <font style="font-size:1.1vw;line-height:normal; font-family:KPCheonRiMa;" color="#f7f8f9 "  >  Minzu Joson is the organ of the Presidium of the Supreme People’s Assembly and the Cabinet of the DPRK. </font></p>
+                </div>
+                <div style="padding-top:10px;">
+                  <div style="text-align: right;padding-right: 10%;" >
+                    <a href="/home/index/history/0/en" style="color: white;"><font style="font-size:1.1vw;line-height:normal; font-family:KPCheonRiMa;" color="#f7f8f9 "  > 
+                      Details&nbsp;&nbsp;<i class="fa fa-long-arrow-right fa-2x" style="vertical-align:middle;"></i></font>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4" style="  position: absolute;bottom:20%; z-index: 1; right: 3%;">
+                <div >
+                  <div style=" text-align:left;  font-size: 1.3vw; line-height: 1.8em;color: #fff;" > 
+                    <i class="mr-1 fa fa-angle-double-right"></i>
+                    <a  href="/home/index/revolution/0/en"   style="color: #fff;"  >
+                      <font style="font-size:1.1vw;line-height:normal; font-family:KPCheonRiMa;" color="#f7f8f9 "  > WPK General Secretary <nobr><b style=font-size:1.11em>Kim Jong Un</b></nobr>’s Revolutionary Activities 
+                      </font>
+                    </a>
+                  </div>                  
+                </div>
+                <div >
+                  <div style="text-align:left;  font-size: 1.5vw; line-height: 1.8em;color: #fff;" > 
+                     <i class="mr-1 fa fa-angle-double-right"></i>
+                    <a  href="/home/index/power_news/0/en"  style="color: #fff;"  >
+                      <font style="font-size:1.1vw;line-height:normal; font-family:KPCheonRiMa;" color="#f7f8f9 ">
+                      News from power organs </font></a>
+                  </div>
+                </div>
+                <div>
+                  <div style="text-align:left;   font-size: 1.5vw; line-height: 1.8em;color: #fff;" > 
+                     <i class="mr-1 fa fa-angle-double-right"></i>
+                    <a href="/home/index/all_view/0/en"   style="color: #fff;"  >
+                       <font style="font-size:1.1vw;line-height:normal; font-family:KPCheonRiMa;" color="#f7f8f9 ">
+                      Articles</font>
+                    </a>
+                  </div>
+                </div>
+                <div>
+                  <div style="text-align:left;   font-size: 1.5vw; line-height: 1.8em;color: #fff;" > 
+                     <i class="mr-1 fa fa-angle-double-right"></i>
+                    <a  href="/home/index/media/0/en"   style="color: #fff;">
+                       <font style="font-size:1.1vw;line-height:normal; font-family:KPCheonRiMa;" color="#f7f8f9 ">
+                        Multimedia</font></a>
+                  </div>
+                </div>
+               <div>
+                   <div>
+
+                    <a id="link" onclick=window.open('http://www.dprkportal.kp/') style="margin-left: -23px;"><img alt="image" width="18%" height="18%" src="/assets/img/subsites/dprkportal.png"></a>
+                    <a id="link" onclick=window.open('http://www.rodong.rep.kp/')><img alt="image" width="18%" height="18%" src="/assets/img/subsites/rodong.png"></a>
+                    <a id="link" onclick=window.open('http://www.mediaryugyong.com.kp/')><img alt="image" width="18%" height="18%" src="/assets/img/subsites/mediaryugyong.png"></a>
+                    <a id="link" onclick=window.open('http://www.kcna.kp/')><img alt="image" width="18%" height="18%" src="/assets/img/subsites/kcna.png"></a>
+                    <a id="link" onclick=window.open('http://www.vok.rep.kp/')><img alt="image" width="18%" height="18%" src="/assets/img/subsites/vok.png"></a>
+                  </div>
+                </div>
+              </div> 
+
+          </div>   
+              <!-- <div>
+                  <div style=" position: absolute; bottom: 14%;">
+                    <a href="http://www.dprkportal.kp/"><img width="10%" height="10%" src="/assets/img/subsites/dprkportal.png"></a>
+                    <a href="http://www.rodong.rep.kp/"><img width="10%" height="10%" src="/assets/img/subsites/rodong.png"></a>
+                    <a href="http://www.mediaryugyong.com.kp/"><img width="10%" height="10%" src="/assets/img/subsites/mediaryugyong.png"></a>
+                    <a href="http://www.kcna.kp/"><img width="10%" height="10%" src="/assets/img/subsites/kcna.png"></a>
+                    <a href="http://www.vok.rep.kp/"><img width="10%" height="10%" src="/assets/img/subsites/vok.png"></a>
+                  </div>
+                </div> -->
+
+              
+
+
+          <div style="background-color: #0000003b; height: 54px; width: 100%; bottom: 0;display: block; position: absolute; ">      
+            <p class="" style=" line-height: 52px; font-size: 20px;  margin: 0;   text-align: -webkit-center;">
+              <!-- <font color="#fff" face="KPCheonRiMa"  style="  " > -->
+                  <b > <font style="font-size:1.1vw;line-height:normal; font-family:KPCheonRiMa;" color="#f7f8f9 ">
+                    Copyrights 2025 © Minzu Joson Offices of the DPRK </font>
+                  </b>
+              <!-- </font> -->
+            </p> 
+
+            
+           <div class="btn-back-top">
+              <a href="#" data-scroll id="back-top" class="btn-circle btn-circle-primary btn-circle-sm btn-circle-raised ">
+                <i class="zmdi zmdi-long-arrow-up"></i>
+              </a>
+            </div>
+            <div id="ms-preload" class="ms-preload">
+              <div id="status">
+                <div class="spinner">
+                  <div class="dot1"></div>
+                  <div class="dot2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      
+       <script type="text/javascript">
+        window.addEventListener("load", footerResponse);
+        window.addEventListener("resize", footerResponse);
+          function footerResponse() {
+            if (window.innerWidth <= 800) {  
+              document.getElementById("screen").innerHTML = "";
+            }
+          }
+          
+        </script>
+    
+    <script src="/assets/js/plugins.min.js"></script>
+    <script src="/assets/js/app.min.js"></script>
+    <script src="/assets/js/configurator.min.js"></script>
+    <script src="/assets/js/lead.js"></script>
+    <script src="/assets/js/index.js"></script>
+    <script src="/assets/js/lead-full.js"></script>
+    <script src="/assets/js/lead-cv-full.js"></script>
+     <!-- <script defer="defer" src="/js/scripts.min.js"></script> -->
+   <script  src="/vendor/fancybox/js/jquery.fancybox.min.js"></script>
+   
+     <script>
+      (function(i, s, o, g, r, a, m)
+      {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function()
+        {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '../../assets/js/analytics.js', 'ga');
+      ga('create', 'UA-90917746-1', 'auto');
+      ga('send', 'pageview');
+
+      
+    </script> 
+    
+  </body>
+</html>

@@ -36,4 +36,4 @@ Multi-layer school network bypass: DoH (encrypted DNS) + SOCKS5 + HTTP CONNECT w
 - functions: `_detect_net`, `_opener`, `_proxy_off`, `_proxy_on`, `doh_resolve`, `main`, `start_api`
 
 ---
-_Spec generated from the project's own files on 2026-09-28 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._
+_Spec generated from the project's own files on 2026-10-22 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._

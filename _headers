@@ -9,3 +9,9 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+# The mirror's guard is the one file that changes between deploys; a bare .js URL is
+# edge-cached, so a returning visitor would keep the stale copy.
+/portfolio/demos/tripo3d-uk-mirror/mirror-guard.js
+  Cache-Control: no-store, must-revalidate
+/demos/tripo3d-uk-mirror/mirror-guard.js
+  Cache-Control: no-store, must-revalidate

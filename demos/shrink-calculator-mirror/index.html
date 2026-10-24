@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shrink % — measure the part you printed</title>
+<style>
+  :root{
+    --ink:#1d1d1f; --ink-2:#5c6166; --ink-3:#8a9096;
+    --line:#e3e5e1; --line-2:#cdd2c8;
+    --bg:#f7f7f4; --card:#fff;
+    --accent:#0d6b6b; --accent-soft:rgba(13,107,107,.08);
+    --ok:#1f7a4d; --ok-soft:rgba(31,122,77,.09);
+    --warn:#8a6a12; --warn-soft:rgba(138,106,18,.10);
+    --bad:#a83232; --bad-soft:rgba(168,50,50,.09);
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);
+       -webkit-font-smoothing:antialiased;line-height:1.5;padding:28px 20px 56px}
+  .wrap{max-width:960px;margin:0 auto}
+  header{margin-bottom:22px}
+  .eyebrow{font:600 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  h1{font-size:34px;line-height:1.1;letter-spacing:-.02em;margin:10px 0 8px;font-weight:650}
+  .sub{margin:0;color:var(--ink-2);font-size:15px;max-width:58ch}
+
+  .grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:22px}
+  @media(min-width:900px){.grid{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:20px;align-items:start}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .card h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);
+           margin:0 0 14px;font-weight:600}
+
+  .f{margin-bottom:16px}
+  .f:last-child{margin-bottom:0}
+  label{display:block;font-size:13px;font-weight:550;margin-bottom:6px}
+  .hint{display:block;font-size:12px;color:var(--ink-3);font-weight:400;margin-top:5px;line-height:1.45}
+  input,select{width:100%;height:44px;padding:0 12px;border:1px solid var(--line-2);border-radius:9px;
+    background:#fff;font-size:16px;font-family:var(--sans);color:var(--ink);-webkit-appearance:none;appearance:none}
+  input[type=text]{font-family:var(--mono);font-size:15px;letter-spacing:.01em}
+  select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' fill='none' stroke='%235c6166' stroke-width='1.6' stroke-linecap='round'/></svg>");
+    background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+  input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(13,107,107,.14)}
+  .axes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  @media(max-width:520px){.axes{grid-template-columns:1fr}}
+  .axes label{font-size:12px;color:var(--ink-2)}
+
+  .hero{border:1px solid var(--line);border-radius:14px;padding:20px;background:linear-gradient(180deg,#fff, #fcfcfa)}
+  .hero .big{font:600 46px/1 var(--mono);letter-spacing:-.03em;margin:2px 0 6px}
+  .hero .big .u{font-size:20px;color:var(--ink-3);margin-left:2px}
+  .hero .cap{font-size:13px;color:var(--ink-2);margin:0}
+  .verdict{margin-top:14px;padding:11px 13px;border-radius:10px;font-size:13.5px;line-height:1.45}
+  .verdict.ok{background:var(--ok-soft);color:#14532d;border:1px solid rgba(31,122,77,.22)}
+  .verdict.warn{background:var(--warn-soft);color:#5c4708;border:1px solid rgba(138,106,18,.25)}
+  .verdict.bad{background:var(--bad-soft);color:#7c2020;border:1px solid rgba(168,50,50,.22)}
+  .verdict.idle{background:#f4f5f2;color:var(--ink-2);border:1px solid var(--line)}
+
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:16px}
+  .tile{border:1px solid var(--line);border-radius:11px;padding:12px}
+  .tile .k{font:600 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .tile .v{font:600 19px/1.25 var(--mono);margin-top:7px;letter-spacing:-.02em}
+  .tile .v small{font-size:12px;color:var(--ink-3);font-weight:500}
+  .tile .v .sub{display:block;font:500 10.5px/1.35 var(--mono);letter-spacing:0;margin-top:4px;color:var(--ink-3)}
+
+  table{width:100%;border-collapse:collapse;margin-top:4px;font-size:13px}
+  th,td{text-align:right;padding:8px 6px;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left}
+  th{font:600 10.5px/1.3 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);
+     border-bottom:1px solid var(--line-2)}
+  td{font-family:var(--mono);font-size:12.5px}
+  tbody tr:last-child td{border-bottom:0}
+  .muted{color:var(--ink-3)}
+
+  .notes{margin-top:18px;display:grid;gap:9px}
+  .note{display:flex;gap:9px;font-size:13px;line-height:1.45;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:#fff}
+  .note.ok{background:var(--ok-soft);border-color:rgba(31,122,77,.2)}
+  .note.warn{background:var(--warn-soft);border-color:rgba(138,106,18,.22)}
+  .note.bad{background:var(--bad-soft);border-color:rgba(168,50,50,.2)}
+  .note .i{flex:0 0 15px;font-weight:700;font-family:var(--mono)}
+
+  .actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px;align-items:center}
+  button.btn{height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--line-2);background:#fff;
+    font:550 14px var(--sans);color:var(--ink);cursor:pointer}
+  button.btn:hover{border-color:var(--ink-3)}
+  button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  button.primary:hover{background:#0a5757;border-color:#0a5757}
+  .note-copy{font-size:12.5px;color:var(--ink-2)}
+
+  footer{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-3);line-height:1.6}
+  code{font-family:var(--mono);font-size:12px;background:#eef0ec;padding:1px 5px;border-radius:4px;color:var(--ink)}
+  @media print{
+    body{background:#fff;padding:0}
+    .actions,footer{display:none}
+    .card,.hero{border-color:#bbb;break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Filament shrinkage</div>
+    <h1>Shrink %</h1>
+    <p class="sub">Type the readings off your calipers. You get the percentage and the slicer scale — nothing else.</p>
+  </header>
+
+  <div class="grid">
+    <div>
+      <section class="card">
+        <h2>What you measured</h2>
+
+        <div class="f">
+          <label for="mat">Filament</label>
+          <select id="mat">
+            <option value="PLA" selected>PLA — 0.30 %</option>
+            <option value="Silk PLA">Silk PLA — 0.35 %</option>
+            <option value="CF PLA">Carbon fibre PLA — 0.20 %</option>
+            <option value="PETG">PETG — 0.30 %</option>
+            <option value="ABS">ABS — 0.70 %</option>
+            <option value="ASA">ASA — 0.60 %</option>
+            <option value="Nylon">Nylon — 1.15 %</option>
+            <option value="TPU">TPU — 0.50 %</option>
+          </select>
+          <span class="hint">Only used when you haven't measured anything yet.</span>
+        </div>
+
+        <div class="f">
+          <label for="nom">Nominal size <span class="muted">mm</span></label>
+          <input id="nom" type="number" inputmode="decimal" step="0.01" min="1" value="40" autocomplete="off">
+          <span class="hint">What you modelled in CAD.</span>
+        </div>
+
+        <div class="f">
+          <label>Readings <span class="muted">mm</span></label>
+          <div class="axes">
+            <div><label for="rx">X</label><input id="rx" type="text" inputmode="decimal" placeholder="39.88 39.90" autocomplete="off"></div>
+            <div><label for="ry">Y</label><input id="ry" type="text" inputmode="decimal" placeholder="39.89 39.91" autocomplete="off"></div>
+            <div><label for="rz">Z</label><input id="rz" type="text" inputmode="decimal" placeholder="39.72 39.74" autocomplete="off"></div>
+          </div>
+          <span class="hint">Space, comma or line separated — put in every reading you took. Each axis uses its <b>smallest</b> reading (a tilted caliper only ever reads big). Leave an axis empty and it's skipped.</span>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button class="btn primary" id="copyBtn" type="button">Copy result</button>
+        <button class="btn" id="resetBtn" type="button">Reset</button>
+        <button class="btn" id="printBtn" type="button">Print</button>
+        <span class="note-copy" id="copyNote" aria-live="polite"></span>
+      </div>
+    </div>
+
+    <div>
+      <div class="hero">
+        <div class="k" style="font:600 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)">Shrinkage</div>
+        <div class="big" id="rShrink">—<span class="u">%</span></div>
+        <p class="cap" id="rCap">Enter at least one reading.</p>
+        <div class="verdict idle" id="rVerdict">Waiting for a measurement.</div>
+
+        <div class="tiles">
+          <div class="tile"><div class="k">Slicer scale</div><div class="v" id="rScale">—</div></div>
+          <div class="tile"><div class="k">Measured</div><div class="v" id="rMeas">—</div></div>
+          <div class="tile"><div class="k">Off nominal</div><div class="v" id="rDev">—</div></div>
+        </div>
+      </div>
+
+      <section class="card" style="margin-top:16px">
+        <h2>Per axis</h2>
+        <table>
+          <thead>
+            <tr><th>Axis</th><th>Readings</th><th>Min</th><th>Spread</th><th>Shrink</th></tr>
+          </thead>
+          <tbody id="axisBody">
+            <tr><td colspan="5" class="muted">No readings yet.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="notes" id="notes"></div>
+    </div>
+  </div>
+
+  <footer>
+    <code>shrink % = (nominal − measured) ÷ nominal × 100</code> ·
+    <code>scale = nominal ÷ measured</code><br>
+    Measured = the mean of the per-axis minima. Typical linear shrink: PLA 0.2–0.5 %, PETG 0.2–0.4 %,
+    ABS 0.6–0.8 %, ASA 0.5–0.7 %, Nylon 0.8–1.5 %.<br>
+    On a 40 mm part, 0.3 % shrink is 0.12 mm — the same size as the caliper error and the seam bead.
+    Need a trustworthy shrink constant? Measure a 100 mm+ test bar and scale both parts by the same factor.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var TYP={ "PLA":0.30, "Silk PLA":0.35, "CF PLA":0.20, "PETG":0.30, "ABS":0.70,
+            "ASA":0.60, "Nylon":1.15, "TPU":0.50 };
+
+  function $(id){ return document.getElementById(id); }
+  function num(v){ var n=parseFloat(v); return isFinite(n)? n : null; }
+  function f(n,d){ if(n===null||!isFinite(n)) return "—";
+    var s=Math.abs(n).toFixed(d); return (n<0?"−":"")+s; }
+
+  /* accept "39.88 39.90", "39.88,39.90", "39.88|39.90", newlines, stray units */
+  function parseReadings(raw){
+    if(!raw) return [];
+    var parts=String(raw).split(/[^0-9.\-]+/), out=[];
+    for(var i=0;i<parts.length;i++){
+      if(!parts[i]||parts[i]==="-"||parts[i]===".") continue;
+      var v=parseFloat(parts[i]);
+      if(isFinite(v)&&v>0&&v<10000) out.push(v);
+    }
+    return out;
+  }
+
+  function compute(){
+    var nom=num($("nom").value), mat=$("mat").value;
+    var d={ nom:nom, mat:mat, axes:[], readings:0, usePreset:false };
+
+    ["x","y","z"].forEach(function(a){
+      var r=parseReadings($("r"+a).value);
+      if(!r.length) return;
+      var min=Math.min.apply(null,r), max=Math.max.apply(null,r);
+      d.axes.push({ axis:a.toUpperCase(), n:r.length, min:min, max:max, spread:max-min });
+      d.readings+=r.length;
+    });
+
+    var measured=null, shrink=null, scale=null;
+    if(d.readings && nom>0){
+      var sum=0;
+      for(var i=0;i<d.axes.length;i++) sum+=d.axes[i].min;
+      measured=sum/d.axes.length;
+      shrink=(nom-measured)/nom*100;
+      scale=nom/measured*100;
+    } else if(nom>0){
+      d.usePreset=true;
+      shrink=TYP[mat];                       // assumed shrink, no measurement
+      measured=nom*(1-shrink/100);
+      scale=nom/measured*100;
+    }
+
+    var spread=0;
+    for(var j=0;j<d.axes.length;j++) spread=Math.max(spread,d.axes[j].spread);
+
+    d.measured=measured; d.shrink=shrink; d.scale=scale; d.spread=spread;
+    d.dev=measured===null?null:nom-measured;
+    d.noiseFloor=Math.max(0.05, spread/2+0.02);
+    d.measurable=measured!==null && Math.abs(d.dev)>d.noiseFloor;
+    return d;
+  }
+
+  function draw(d){
+    var measured=d.measured, shrink=d.shrink;
+
+    $("rShrink").innerHTML = (shrink===null? "—" : f(shrink,3)) + '<span class="u">%</span>';
+    if(d.scale===null){
+      $("rScale").innerHTML = "—";
+    } else if(measured!==null && !d.usePreset && !d.measurable){
+      // the arithmetic correction exists, but it is smaller than the measurement error
+      $("rScale").innerHTML = f(100,2)+'<small> %</small><span class="sub">raw '+f(d.scale,2)+
+        " % — under noise</span>";
+    } else {
+      $("rScale").innerHTML = f(d.scale,2)+"<small> %</small>";
+    }
+    $("rMeas").innerHTML   = measured===null? "—" : f(measured,3)+"<small> mm</small>";
+    $("rDev").innerHTML    = d.dev===null? "—" : f(d.dev,3)+"<small> mm</small>";
+
+    var cap, verdict, cls="idle";
+    if(d.nom===null||d.nom<=0){
+      cap="Enter the size you modelled."; verdict="No nominal size.";
+    } else if(d.usePreset){
+      cap="Assumed from the "+d.mat+" preset — no measurement entered.";
+      verdict="Estimate only: "+f(shrink,2)+" % assumed. Measure the part to replace this.";
+      cls="warn";
+    } else if(!d.measurable){
+      cap="Reads "+f(measured,3)+" mm against "+f(d.nom,2)+" nominal.";
+      verdict="No usable shrink — "+f(Math.abs(d.dev),3)+" mm is inside your "+f(d.noiseFloor,2)+
+              " mm noise floor. Leave the slicer at 100 %.";
+      cls="ok";
+    } else if(shrink>0){
+      cap="Reads "+f(measured,3)+" mm against "+f(d.nom,2)+" nominal.";
+      verdict="Real shrink of "+f(shrink,3)+" % — scale both parts to "+f(d.scale,2)+" %.";
+      cls= shrink>2? "warn":"ok";
+      if(shrink>2) verdict+=" That is large even for nylon — re-measure before you trust it.";
+    } else {
+      cap="Reads "+f(measured,3)+" mm — bigger than nominal.";
+      verdict="Oversized by "+f(Math.abs(shrink),3)+" %. That's flow, first-layer squish or jaw tilt, not shrink — "+
+              "don't scale down to hide it.";
+      cls="bad";
+    }
+    $("rCap").textContent=cap;
+    $("rVerdict").textContent=verdict;
+    $("rVerdict").className="verdict "+cls;
+
+    /* per-axis table */
+    var body=$("axisBody");
+    if(!d.axes.length){
+      body.innerHTML='<tr><td colspan="5" class="muted">'+
+        (d.usePreset? "No readings yet — the numbers above are the material preset." : "No readings yet.")+'</td></tr>';
+    } else {
+      var rows="";
+      d.axes.forEach(function(a){
+        var sh=d.nom>0? (d.nom-a.min)/d.nom*100 : null;
+        rows+="<tr><td>"+a.axis+" ("+a.n+")</td><td>"+f(a.min+(a.spread/2),3)+" ±"+f(a.spread/2,3)+
+              "</td><td>"+f(a.min,3)+"</td><td>"+f(a.spread,3)+"</td><td>"+f(sh,3)+" %</td></tr>";
+      });
+      body.innerHTML=rows;
+    }
+
+    /* notes */
+    var out=[];
+    function note(k,i,t){ out.push('<div class="note '+k+'"><span class="i">'+i+'</span><span>'+t+'</span></div>'); }
+    if(d.axes.length===1 && d.measured!==null)
+      note("warn","i","Only the "+d.axes[0].axis+" axis is measured. Shrink is usually close on X and Y, "+
+        "but check both before you scale — and Z often differs.");
+    if(d.spread>0.03 && d.measured!==null)
+      note("warn","i","Readings on one axis span "+f(d.spread,3)+" mm. That's flatness, a seam bead or caliper tilt — "+
+        "the result uses the smallest reading, which is the right datum.");
+    if(d.measured!==null && Math.abs(d.nom-d.measured)<0.13 && d.nom<=60)
+      note("warn","i","A "+f(d.nom,0)+" mm part can't resolve a 0.3 % shrink (that's only "+
+        f(d.nom*0.003,2)+" mm — barely two caliper ticks). Use a 100 mm+ bar if you need the constant.");
+    if(d.measured!==null && d.measurable && shrink>0)
+      note("ok","✓","Scale applies to <b>both</b> parts. Scaling only one changes the gaps.");
+    if(d.measured!==null && d.measurable && shrink<0)
+      note("bad","!","Printed fat. Check flow / steps-per-mm before applying a negative scale — "+
+        "most hobby printers run 0.05–0.10 mm over on a 40 mm cube.");
+    if(d.measured!==null)
+      note("ok","✓","Measure mid-height, 3 mm off the bed and 3 mm off the seam, jaws rocked to minimum.");
+    $("notes").innerHTML=out.join("");
+  }
+
+  function render(){ draw(compute()); }
+
+  /* ---- actions ---- */
+  function buildSheet(){
+    var d=compute(), L=[];
+    L.push("SHRINK % — "+d.mat+" | nominal "+f(d.nom,2)+" mm");
+    d.axes.forEach(function(a){
+      L.push("  "+a.axis+": "+a.n+" reading(s)  min "+f(a.min,3)+"  max "+f(a.max,3)+"  spread "+f(a.spread,3));
+    });
+    if(d.measured!==null){
+      L.push("  measured (mean of minima) : "+f(d.measured,3)+" mm");
+      L.push("  shrinkage                 : "+f(d.shrink,3)+" %"+(d.usePreset?"  (material preset, unmeasured)":""));
+      L.push("  slicer scale              : "+(d.measurable||d.usePreset? f(d.scale,3)+" %  (apply to BOTH parts)"
+        : "100.000 %  (no change — raw "+f(d.scale,3)+" % is under the noise floor)"));
+      if(!d.usePreset) L.push("  off nominal               : "+f(d.dev,3)+" mm  (noise floor "+f(d.noiseFloor,2)+" mm)");
+    }
+    return L.join("\n");
+  }
+
+  $("copyBtn").addEventListener("click",function(){
+    var txt=buildSheet(), note=$("copyNote");
+    function done(ok){ note.textContent= ok? "Copied." : "Select and copy from the print view."; setTimeout(function(){note.textContent="";},2600); }
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){done(true);},function(){done(false);});
+    } else {
+      var ta=document.createElement("textarea"); ta.value=txt; document.body.appendChild(ta);
+      ta.select(); var ok=false; try{ ok=document.execCommand("copy"); }catch(e){}
+      document.body.removeChild(ta); done(ok);
+    }
+  });
+  $("printBtn").addEventListener("click",function(){ window.print(); });
+  $("resetBtn").addEventListener("click",function(){
+    $("nom").value=40; $("rx").value=""; $("ry").value=""; $("rz").value=""; $("mat").value="PLA";
+    $("copyNote").textContent=""; render();
+  });
+
+  ["mat","nom","rx","ry","rz"].forEach(function(id){
+    $(id).addEventListener("input",render);
+    $(id).addEventListener("change",render);
+  });
+
+  window.__shrink={ compute:compute, buildSheet:buildSheet };
+  render();
+})();
+</script>
+</body>
+</html>

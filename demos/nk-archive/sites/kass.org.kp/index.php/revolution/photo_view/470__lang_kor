@@ -1,0 +1,330 @@
+﻿
+
+<!DOCTYPE html>
+<html class="leader_photo-html">
+<head>
+	<title>주체</title>
+	
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="keywords" content="김일성,김정일,김정은,사회과학원,주체사상연구원" />
+<meta name="description" content="" />
+<meta name="author" content="Completed by YH.P and Kanegin at 2024-10-05" />
+<!-- css -->
+<link href="//www.kass.org.kp/assets/css/bootstrap.ex.min.css" rel="stylesheet" />
+<link href="//www.kass.org.kp/assets/css/bootstrap.min.css" rel="stylesheet" />
+<link href="//www.kass.org.kp/assets/css/jquery.fancybox-thumbs.min.css" rel="stylesheet" />
+<link href="//www.kass.org.kp/assets/4fp/libs/font-awesome.v6.1.2/css/all.min.css" rel="stylesheet" />
+<link href="//www.kass.org.kp/assets/css/style.min.css" rel="stylesheet" />
+<link href="//www.kass.org.kp/assets/4fp/css/font-family_kor.css?20241016.2.x.0" rel="stylesheet" />
+
+<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<link rel="shortcut icon" href="//www.kass.org.kp/assets/4fp/favicon.ico" />
+<link rel="manifest" href="//www.kass.org.kp/assets/4fp/manifest.json" />
+<!-- link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet" / -->
+<!-- link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet" / -->
+<style type="text/css">
+	/*Style Switcher
+------------------------------------*/
+i.style-switcher-btn {
+   right: 0;
+   top: 37px;
+   color: #fff;
+   font-size: 18px;
+   cursor: pointer;
+   z-index: 555555;
+   position: fixed;
+   padding: 7px 9px;
+   background: #585f69;
+   border-radius: 6px 0 0 6px !important;   
+}
+
+i.style-switcher-btn:hover {
+   background:#707985;
+}
+
+i.style-switcher-btn-option {
+   top: 38px;
+   background: #9097a0;
+}
+
+i.style-switcher-btn-option:hover {
+   background: #707985;
+}
+
+.style-switcher {
+   right: 0;
+   top: 37px;
+   width: 205px;
+   display: none;
+   z-index: 555555;
+   position: fixed;
+   background: #585f69;
+   border: solid 1px #666d76;
+   padding: 15px 15px 15px 20px;
+   border-radius: 6px 0 0 6px !important;
+}
+
+.style-switcher-inner {
+   background: #9097a0;
+}
+
+.style-switcher .theme-close {
+   top: 10px;
+   right: 6px;
+   position: absolute;
+}
+
+.style-switcher .theme-close i {
+   color: #fff;
+   cursor: pointer;
+   font-size: 18px;
+   padding: 5px 7px;
+   background: #464e5b;
+}
+
+.style-switcher .theme-close i:hover {
+   color: #464e5b;
+   background: #fff;
+ }
+
+.style-switcher .theme-heading {
+   color: #fff;
+   font-size: 16px;
+   margin-bottom: 10px;
+   text-transform: uppercase;
+}
+
+.style-switcher-logo  {
+   margin-top: 10px;
+   padding-top: 15px;
+   border-top: solid 1px #4c5159;
+}
+
+.style-switcher-logo a {
+   display: block;
+   text-align: center;
+}
+
+.style-switcher ul {
+   margin-bottom: 0;
+}
+
+.style-switcher li {
+   width: 26px;
+   height: 26px;
+   cursor: pointer;
+   background: #c00;
+   margin: 0 5px 5px 0;
+   display: inline-block;
+}
+
+.style-switcher li.last {
+   margin-right: 0;
+}
+
+.style-switcher li:hover,
+.style-switcher li.theme-active {
+   border: solid 2px #fff;
+}
+
+.style-switcher a.btn-u-green.active-switcher-btn {
+   border: solid 1px #eee;
+   background: #2ecc71 !important;
+}
+
+.style-switcher a.btn-u-sea.active-switcher-btn {
+   border: solid 1px #eee;
+   background: #1abc9c !important;
+}
+
+.style-switcher li.theme-default {
+   background: #72c02c;
+}
+.style-switcher li.theme-blue {
+   background: #3498db;
+}
+.style-switcher li.theme-orange {
+   background: #e67e22;
+}
+.style-switcher li.theme-red {
+   background: #e74c3c;
+}
+.style-switcher li.theme-light {
+   background: #ecf0f1;
+}
+</style>
+<link rel="stylesheet" href="//www.kass.org.kp/assets/css/color/default.css" id="style_color">
+
+<!-- importamt jss -->
+<script src="//www.kass.org.kp/assets/4fp/libs/jquery/jquery-3.4.1.ex.min.js"></script>
+<script src="//www.kass.org.kp/assets/4fp/js/jquery.1.10.2.js"></script>
+<script src="//www.kass.org.kp/assets/4fp/js/jquery.easing.1.3.js"></script>
+<script src="//www.kass.org.kp/assets/4fp/libs/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<link rel="stylesheet" href="//www.kass.org.kp/assets/css/leader.min.css?20241016.2.x.0">
+<body class="m-0 p-0" oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;">
+	<h1 class="border-bottom-0 leader_activity_title d-none">
+		﻿정평군 지방공업공장,종합봉사소 준공식 성대히 진행	</h1>
+</body>
+
+<script type="text/javascript">
+    let base_url = '//www.kass.org.kp/';
+    let site_url = '//www.kass.org.kp/index.php';
+    let _token   = 'd06b066da96197fe38f8a260e8962885';
+    let datapath = 'public/';
+    let DATAPATH = 'public/';
+    let lang = 'kor';
+    let select_page = '페지선택';
+    let message_empty = '자료가 존재하지 않습니다.';
+</script>
+
+<script src="//www.kass.org.kp/assets/js/fancy/custom.min.js?20241016.2.x.0"></script>
+<script src="//www.kass.org.kp/assets/js/fancy/jquery.fancybox-thumbs.min.js"></script>
+<script src="//www.kass.org.kp/assets/js/leader.min.js?20241016.2.x.0"></script>
+<script src="//www.kass.org.kp/assets/js/global.min.js?20241016.2.x.0"></script>
+<script type="text/javascript">
+
+function handleSwitcher() {    
+        var panel = jQuery('.style-switcher');
+
+        jQuery('.style-switcher-btn').click(function () {
+            jQuery('.style-switcher').show();
+        });
+
+        jQuery('.theme-close').click(function () {
+            jQuery('.style-switcher').hide();
+        });
+        
+        jQuery('li', panel).click(function () {
+            var color = jQuery(this).attr("data-style");
+            var data_header = jQuery(this).attr("data-header");
+            setColor(color, data_header);
+            jQuery('.list-unstyled li', panel).removeClass("theme-active");
+            jQuery(this).addClass("theme-active");
+        });
+
+        var setColor = function (color, data_header) {
+            jQuery('#style_color').attr("href", "//www.kass.org.kp/assets/css/color/" + color + ".css");
+            if(data_header == 'light'){
+                jQuery('#style_color-header-1').attr("href", "assets/css/themes/headers/header1-" + color + ".css");
+                jQuery('#logo-header').attr("src", "assets/img/logo1-" + color + ".png");
+                jQuery('#logo-footer').attr("src", "assets/img/logo2-" + color + ".png");
+            } else if(data_header == 'dark'){
+                jQuery('#style_color-header-2').attr("href", "assets/css/themes/headers/header2-" + color + ".css");
+                jQuery('#logo-header').attr("src", "assets/img/logo1-" + color + ".png");
+                jQuery('#logo-footer').attr("src", "assets/img/logo2-" + color + ".png");
+            }
+        }
+    }
+
+jQuery(document).ready(function(){
+	jQuery(".style-switcher").bind("click", handleSwitcher());	
+});
+</script><script>
+	$(document).ready(function() {
+		$.leader_photo.open([{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (1).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (2).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (3).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (4).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (5).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (6).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (7).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (8).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (9).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (10).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (11).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (12).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (13).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (14).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (15).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (16).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (17).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (18).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (19).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (20).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (21).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (22).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (23).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (24).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (25).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (26).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (27).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (28).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (29).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (30).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (31).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (32).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (33).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (34).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (35).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (36).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (37).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (38).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (39).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (40).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (41).jpg"
+		},{
+			href: "//www.kass.org.kp/public/media/revolution_news/img/-r470_ (42).jpg"
+		},], {
+			openEffect: "none",
+			helpers: {
+				title: {
+					type: "inside"
+				},
+				overlay: {
+					css: {
+						"background-color": "rgba(0,0,0,0)"
+					}
+				},
+			},
+					autoPlay: true,
+			playSpeed: 5000,
+					prevTitle: '이전',
+			nextTitle: '다음'
+		});
+	});
+</script>
+</html>

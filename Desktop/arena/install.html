@@ -51,9 +51,9 @@
 else opens a link and plays — no internet, no account, no cloud. Real players, real time.</p>
 
 <div class="hero">
-  <a class="btn" href="https://isaac1804.com/files/installers/Arena-Join-1.0.1.pkg">⬇︎&nbsp; Download — join a game</a>
-  <a class="btn ghost" href="https://isaac1804.com/files/installers/Arena-Server-1.0.1.pkg">Host a game (27 MB)</a>
-  <span class="meta">macOS 11+ · Apple silicon<br>Join app 512 KB · Server 27 MB · both install into Applications</span>
+  <a class="btn" href="https://isaac1804.com/files/installers/Arena-Join-1.0.2.pkg">⬇︎&nbsp; Download — join a game</a>
+  <a class="btn ghost" href="https://isaac1804.com/files/installers/Arena-Server-1.0.2.pkg">Host a game (27 MB)</a>
+  <span class="meta">macOS 11+ · Apple silicon<br>Join app 513 KB · Server 27 MB · both install into Applications</span>
 </div>
 
 <div class="card">
@@ -70,6 +70,7 @@ else opens a link and plays — no internet, no account, no cloud. Real players,
   <div class="feat"><b>Twin-stick combat</b><span>Mouse and keyboard on a Mac, touch joysticks on a phone. Move and aim independently, health bar, scoreboard, kill feed.</span></div>
   <div class="feat"><b>Live match HUD</b><span>Health bar, player list with live scores, damage flashes and a kill feed of who got whom.</span></div>
   <div class="feat"><b>Phones play too</b><span>On a phone the left thumb moves and the right thumb aims and fires — two separate sticks, so you can run one way and shoot the other.</span></div>
+  <div class="feat"><b>Host console — remove anyone</b><span>The host gets a ⚔ Host button: a roster of everyone connected with HP and score, and a Kill button on each row that drops that player instantly. Only your Mac can open it — friends on the Wi-Fi get refused.</span></div>
   <div class="feat"><b>Works offline</b><span>The whole game is on your Mac. No internet needed once the files are installed — only the local network.</span></div>
 </div>
 
@@ -86,7 +87,7 @@ else opens a link and plays — no internet, no account, no cloud. Real players,
 <div>
 <p><b>On every other Mac or phone</b></p>
 <ol>
-  <li>Download <b>Arena Join (512 KB)</b> above (Macs), or just scan the host's QR code with a phone camera.</li>
+  <li>Download <b>Arena Join (513 KB)</b> above (Macs), or just scan the host's QR code with a phone camera.</li>
   <li>Double-click the <code>.pkg</code> and install it.</li>
   <li>Open <b>Arena Join</b> — it finds the host and opens the game. Or type the address from the host's screen into any browser.</li>
 </ol>
@@ -103,11 +104,11 @@ else opens a link and plays — no internet, no account, no cloud. Real players,
 <h2>Prefer the terminal?</h2>
 <p>Terminal-downloaded files skip the warning entirely:</p>
 <pre># host machine
-curl -L https://isaac1804.com/files/installers/Arena-Server-1.0.1.pkg -o /tmp/ArenaServer.pkg
+curl -L https://isaac1804.com/files/installers/Arena-Server-1.0.2.pkg -o /tmp/ArenaServer.pkg
 sudo installer -pkg /tmp/ArenaServer.pkg -target /
 
 # everyone else
-curl -L https://isaac1804.com/files/installers/Arena-Join-1.0.1.pkg -o /tmp/ArenaJoin.pkg
+curl -L https://isaac1804.com/files/installers/Arena-Join-1.0.2.pkg -o /tmp/ArenaJoin.pkg
 sudo installer -pkg /tmp/ArenaJoin.pkg -target /</pre>
 
 <h2>Play</h2>
@@ -118,6 +119,7 @@ sudo installer -pkg /tmp/ArenaJoin.pkg -target /</pre>
   <tr><td>click / Space</td><td>fire</td></tr>
   <tr><td>left stick + fire button</td><td>move and shoot on a phone or tablet</td></tr>
   <tr><td>right-side drag</td><td>aim on a phone — separate from the stick, so you can move one way and shoot another</td></tr>
+  <tr><td>⚔ Host (host only)</td><td>open the host console and kill any player instantly</td></tr>
 </table>
 
 <h2>If nobody can join</h2>
@@ -134,8 +136,8 @@ rm -f ~/Library/Logs/ArenaServer.log</pre>
 <div class="foot">
   Built by Isaac Chan · Two self-contained installer packages — the game, its Python runtime and its
   client are all inside them, so there is nothing else to install.<br><br>
-  <b>Arena Server 1.0.1</b> — SHA-256<br><span class="hash">f37791b135e76f9f03e644433a0b891c82519113d4e29c56e5001d66a5234fb4</span><br><br>
-  <b>Arena Join 1.0.1</b> — SHA-256<br><span class="hash">39a65b8cbf15563f66b85d45f71470d66746b1528ff9ade70b92e84437a2913a</span>
+  <b>Arena Server 1.0.2</b> — SHA-256<br><span class="hash">cc358cd6c437e6059ccf221049f0864926dc67588b2fbf4ca517ed66c43e4e1e</span><br><br>
+  <b>Arena Join 1.0.2</b> — SHA-256<br><span class="hash">f009c3d4b034df4f9751c0cecaf2c81df022e727466a4f5e394d2aa5afec23e3</span>
 </div>
 
 </div></body></html>

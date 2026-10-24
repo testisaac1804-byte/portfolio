@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Library Kiosk — a locked-down public-library terminal as one HTML file · Isaac</title>
+<meta name="description" content="A single 72 KB self-contained HTML file that simulates a Hong Kong public-library kiosk: ticket + HKID authentication against an in-page database, nine working apps, guest-mode browsers that block chrome:// and settings, a floating kiosk control bar with pause/zoom/logout, and a hard wipe on logout. Full analysis: what works, the five bugs that shipped broken, and the honest limits.">
+<style>
+  :root{
+    --bg:#0a0c11; --panel:#11141b; --panel2:#161a23; --line:#242a37;
+    --tx:#e8eaf0; --mut:#98a1b3; --dim:#6d7686;
+    --ac:#7c8cff; --ac2:#6366f1; --ok:#34d399; --warn:#ffd166; --bad:#f87171;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.62}
+  a{color:var(--ac)}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 90px}
+  .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 11px;
+    color:var(--mut);letter-spacing:.1em}
+  .chip.red{border-color:#4b1f26;background:#1d1114;color:#ff9d9d}
+  h1{font-size:clamp(26px,4.4vw,44px);line-height:1.1;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  h1 em{font-style:normal;color:var(--ac)}
+  .deck{font-size:16.5px;color:var(--mut);max-width:78ch;margin:0 0 22px}
+  .deck b{color:var(--tx);font-weight:650}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 30px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 13px}
+  .stat .k{font:600 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .stat .v{font-size:19px;font-weight:750;margin-top:5px;letter-spacing:-.01em}
+  .stat .v small{display:block;font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0;margin-top:3px;line-height:1.35}
+  .call{border-left:3px solid var(--ac2);background:linear-gradient(90deg,rgba(99,102,241,.11),rgba(99,102,241,0));
+    border-radius:0 12px 12px 0;padding:14px 16px;margin:0 0 34px}
+  .call .lbl{font:700 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ac);margin-bottom:7px}
+  .call p{margin:0;font-size:15.5px;color:#d7dbe6}
+  h2{font-size:12px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+    margin:44px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+  h3{margin:0 0 6px;font-size:16.5px;letter-spacing:-.01em}
+  p{font-size:14.8px;color:var(--mut)}
+  p b,li b{color:var(--tx);font-weight:650}
+  .quote{background:#0f1218;border:1px solid var(--line);border-left:2px solid var(--warn);
+    border-radius:8px;padding:10px 13px;margin:10px 0 0;font-size:14px;color:#e4dcc4;
+    white-space:pre-wrap;overflow-wrap:anywhere}
+  .quote .src{display:block;margin-top:7px;font:600 10px/1 var(--mono);letter-spacing:.1em;
+    text-transform:uppercase;color:var(--dim)}
+  table{width:100%;border-collapse:collapse;font-size:13.8px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:700 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:#0d1016}
+  td:first-child{white-space:nowrap}
+  code,.mono{font-family:var(--mono);font-size:12.6px;color:#cfd6e6;background:#0e1117;
+    border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+  .tblwrap{border:1px solid var(--line);border-radius:12px;overflow-x:auto;overflow-y:hidden;
+    -webkit-overflow-scrolling:touch}
+  pre{border:1px solid var(--line);background:#0c0f15;border-radius:10px;padding:13px 15px;
+    overflow-x:auto;font:12.4px/1.6 var(--mono);color:#c8d1e2;margin:10px 0 18px}
+  pre b{color:#8ea0ff;font-weight:600}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+  .btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font:650 13px/1 var(--sans);
+    padding:10px 14px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--tx)}
+  .btn:hover{border-color:#3a4256;background:#1b202b}
+  .btn.pri{background:var(--ac2);border-color:var(--ac2);color:#fff}
+  .btn.pri:hover{background:#565ae8}
+  .note{font-size:12.6px;color:var(--dim);margin-top:12px;line-height:1.6}
+  .note b{color:var(--mut)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .card2{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .card2 h4{margin:0 0 6px;font-size:13.5px}
+  .card2 p{margin:0;font-size:13.4px;color:var(--mut)}
+  .card2 ul{margin:6px 0 0;padding-left:17px;font-size:13.4px;color:var(--mut)}
+  .card2 li{margin:3px 0}
+  footer{margin-top:52px;border-top:1px solid var(--line);padding-top:18px;
+    font-size:12.6px;color:var(--dim)}
+  footer b{color:var(--mut)}
+  .warnbox{border:1px solid #4b1f26;background:#160f12;border-radius:10px;padding:12px 14px;
+    font-size:13.2px;color:#f0c9c9;margin-top:14px}
+  .warnbox b{color:#ffb4b4}
+  @media(max-width:700px){
+    .quote{overflow-x:auto}
+    table{min-width:520px}
+  }
+  .step > *, .grid2 > *, .card2 > *{min-width:0}
+  code{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <span><a href="../index.html">← Isaac's builds</a></span>
+    <span>
+      <span class="chip">Kiosk · 2026</span>
+      <span class="chip red">Simulation, not a real Windows build</span>
+    </span>
+  </div>
+
+  <h1>Library Kiosk — a locked-down <em>public-library terminal</em> in one HTML file</h1>
+  <p class="deck">The original ask was a modified Windows 11 ISO with a ticket/HKID unlock, locked settings, guest
+  browsers and a floating control bar. Built instead as <b>one 72 KB self-contained HTML file</b> that needs no
+  install, no admin rights and no reimaging — because a web kiosk can be deployed to any terminal in minutes while a
+  custom Windows image needs the ADK, sysprep and a credential-provider rewrite. Ticket + HKID auth, nine working
+  apps, guest-mode browsers, a hard wipe on logout, and the whole state machine in 671 lines of inline JS.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="k">Artifact</div><div class="v">72,707 B <small>single self-contained file</small></div></div>
+    <div class="stat"><div class="k">Lines</div><div class="v">671 <small>HTML + CSS + JS inline</small></div></div>
+    <div class="stat"><div class="k">Apps</div><div class="v">9 <small>Word, 3 browsers, Paint, Calc…</small></div></div>
+    <div class="stat"><div class="k">Auth methods</div><div class="v">2 <small>ticket number + HKID</small></div></div>
+    <div class="stat"><div class="k">Pre-loaded data</div><div class="v">5 + 3 + 8 <small>tickets · HKIDs · books</small></div></div>
+    <div class="stat"><div class="k">Bugs fixed</div><div class="v">5 <small>before it ran at all</small></div></div>
+  </div>
+
+  <div class="call">
+    <div class="lbl">The instruction</div>
+    <p>"can you modify the windows 11 iso … ticket … or hkid … browsers guest mode … floating box: pause, zoom, log out … every data clears … (a website would also be fine)"</p>
+  </div>
+
+  <div class="btnrow">
+    <a class="btn pri" href="./library-kiosk.html">▶ Run the kiosk</a>
+    <a class="btn" href="./library-kiosk-mirror/">Byte-identical mirror</a>
+    <a class="btn" href="../prompts/library-kiosk-prompt.md">Build spec</a>
+  </div>
+
+  <h2>Why a web kiosk instead of a Windows image</h2>
+  <p>The request named a real Windows 11 ISO but closed with <em>"a website would also be fine"</em>. A web kiosk is the
+  right call for a library terminal and the difference is the deployment cost:</p>
+  <div class="tblwrap"><table>
+    <tr><th>Aspect</th><th>Custom Windows 11 ISO</th><th>This web kiosk</th></tr>
+    <tr><td>Build tooling</td><td>Windows ADK + Windows Configuration Designer + sysprep/unattend.xml</td><td>One <code>.html</code> file, a text editor</td></tr>
+    <tr><td>Ticket/HKID unlock</td><td>A custom credential provider (C++ COM object) or a kiosk app wrapping the shell</td><td>A login card with two forms against an in-page database</td></tr>
+    <tr><td>Locked settings</td><td>Group Policy + Kiosk Mode (Assigned Access)</td><td>There is no settings surface — apps are pre-selected, browsers are sandboxed</td></tr>
+    <tr><td>Deploy to a terminal</td><td>Reimage / sysprep, hours, licence per seat</td><td>Open the file in any browser, seconds</td></tr>
+    <tr><td>Wipe on logout</td><td>Mandatory profile + roaming-profile reset</td><td>One <code>logout()</code> clears every window, iframe, editor and timer</td></tr>
+  </table></div>
+  <p class="note">The trade is honesty: a web page cannot truly lock the OS. It simulates the kiosk's <b>behaviour</b> —
+  which is what a library actually cares about — not the kernel-level enforcement. That limit is stated plainly below.</p>
+
+  <h2>The unlock path — ticket or HKID</h2>
+  <p>Both auth methods were implemented, not one, because the request asked for both as equal first-class options:</p>
+  <pre>
+LOCK SCREEN
+   │
+   ├── 🎫 Ticket Number ──► match against D.tickets[]  ──► consume (one-time) ──► unlock
+   │
+   └── 🪪 HKID ───────────► match against D.hkids[]    ──► greet by name ───────► unlock
+                                            │
+                                            └─ no match ─► "HKID not found"</pre>
+  <p>Tickets are <b>one-time use</b> — a matched ticket is spliced out of the array before unlock, so a ticket photo-copied
+  by a patron stops working. HKID lookup normalises whitespace and case before comparing, and greets the patron by name
+  (<em>Welcome, Chan Tai Man!</em>) so a librarian at the desk can see at a glance who is at which terminal.</p>
+
+  <h2>The nine apps</h2>
+  <div class="tblwrap"><table>
+    <tr><th>App</th><th>What works</th><th>Locked</th></tr>
+    <tr><td>Microsoft Word</td><td>Real textarea editor, print via sidebar</td><td>Content wiped on logout</td></tr>
+    <tr><td>Chrome / Firefox / Edge</td><td>Guest mode, DuckDuckGo search, URL bar</td><td><code>chrome://</code> / <code>edge://</code> / <code>about:config</code> blocked</td></tr>
+    <tr><td>Library Catalog</td><td>Search 8 books by title/author/ISBN</td><td>Read-only</td></tr>
+    <tr><td>Notepad</td><td>Editor + print</td><td>Wiped on logout</td></tr>
+    <tr><td>Calculator</td><td>Expression evaluator</td><td>—</td></tr>
+    <tr><td>File Explorer</td><td>App launcher grid</td><td>Settings entry is 🔒 Locked</td></tr>
+    <tr><td>MS Paint</td><td>Brush/eraser on a canvas</td><td>Canvas thrown away on close</td></tr>
+  </table></div>
+
+  <h2>The floating control bar</h2>
+  <p>Top-right, exactly as asked: <b>Pause Screen</b>, <b>Zoom 100% / 150% / 200%</b>, <b>Zoom Out</b>, plus on-screen
+  keyboard, high-contrast, help, and a red <b>Log Out</b>. Zoom scales the whole desktop via <code>document.body.style.zoom</code>,
+  which reflows every window and the taskbar together — a per-window zoom would have left the taskbar and toolbar fixed while
+  windows grew past them.</p>
+
+  <h2>Logout is a hard wipe</h2>
+  <p>The invariant is simple: <b>leave no trace</b>. <code>S.logout()</code> tears down every open window (removing the DOM
+  nodes, not just hiding them), resets zoom to 100%, clears the pause state, resets the session timer, empties the taskbar,
+  clears the on-screen keyboard's shift/caps state, and returns to the lock screen. Browser iframes, editor contents and
+  Paint canvases are destroyed with their windows — there is nothing left to read because the nodes no longer exist.</p>
+
+  <h2>Anatomy — the guest-mode browser</h2>
+  <div class="grid2">
+    <div class="card2">
+      <h4>The blocklist</h4>
+      <p>The URL bar and the iframe loader both refuse <code>chrome://</code>, <code>edge://</code>, <code>about:config</code>
+      and <code>about:support</code> before navigation, and a <code>load</code> listener re-checks the iframe's actual
+      <code>location.href</code> so a link inside a page can't sneak a restricted URL past the bar.</p>
+    </div>
+    <div class="card2">
+      <h4>The start page</h4>
+      <p>Each browser opens on a local <code>srcdoc</code> start page — a search box plus quick links — so the kiosk never
+      depends on a remote homepage. Search navigates the iframe directly (<code>window.location.href</code>), not via
+      <code>postMessage</code>, because the message bridge was one of the things that broke in build.</p>
+    </div>
+  </div>
+
+  <h2>Five bugs that shipped broken — and were fixed at the cause</h2>
+  <div class="tblwrap"><table>
+    <tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+    <tr><td>Nothing clickable — every button dead</td><td><code>let oskCaps=false</code> and <code>function oskCaps()</code> declared in the same scope — a <code>SyntaxError</code> that killed the whole script before any handler bound</td><td>Renamed to <code>K.capsOn</code> (state) + <code>K.caps()</code> (function); same for <code>oskShift</code></td></tr>
+    <tr><td>Admin panel won't open</td><td><code>addEventListener</code> on elements that weren't parsed yet / in nested template strings</td><td>All element handlers moved to inline <code>onclick</code> / <code>onkeydown</code></td></tr>
+    <tr><td>Browser start page is a wall of <code>&lt;div&gt;</code> text</td><td><code>srcdoc</code> had <code>.replace(/&lt;/g,'&amp;lt;')</code> — every tag escaped into literal text</td><td>Only escape <code>"</code> (needed for the attribute); leave <code>&lt;</code>/<code>&gt;</code> raw</td></tr>
+    <tr><td>Search does nothing</td><td><code>postMessage</code> bridge between iframe and parent never fired</td><td>Start page navigates the iframe directly</td></tr>
+    <tr><td>Word showed <code>function wordBody(){…}</code></td><td>A live function reference inserted into <code>innerHTML</code> instead of calling it</td><td>Invoke <code>typeof body === 'function' ? body() : body</code> at render time</td></tr>
+  </table></div>
+  <p class="note">The first two were the real killers: a naming conflict between a <code>let</code> and a <code>function</code>
+  is valid-looking code that <code>node --check</code> rejects instantly, but the HTML file had been edited by string patches
+  that never ran the check. The final pass re-wrote the file clean and validated it with <code>node --check</code> before
+  opening — 0 syntax errors.</p>
+
+  <h2>Admin panel</h2>
+  <p>Hidden behind a <b>⚙️ Admin</b> link in the login footer (and a 5-click corner trigger), password-gated. Six tabs —
+  Tickets, HKID, Catalog, Announcements, Usage Logs, Settings — let a librarian add/revoke tickets, edit the HKID database,
+  change the session timeout and print quota, and read a usage log of who logged in, how, and for how long. All state persists
+  to <code>localStorage</code>, so it survives a refresh.</p>
+
+  <div class="warnbox">
+    <b>Honest limits.</b> This is a <b>simulation</b>, not a real Windows 11 image and not real access control.
+    Three specific gaps: (1) <b>Browsers can't load Google, Wikipedia or most major sites</b> — they send
+    <code>X-Frame-Options: DENY</code> and refuse to render inside an iframe, so only DuckDuckGo and Bing work; the
+    start page says so. (2) <b>"Data wipe" is in-memory and <code>localStorage</code></b> — a determined user with
+    devtools can read the database, which a real kiosk would gate behind the OS. (3) <b>A web page cannot lock the OS</b> —
+    a patron can still alt-tab away from the browser. For real enforcement you'd pair this UI with Assigned Access /
+    kiosk mode, but the behaviour — ticket auth, guest browsers, wipe-on-logout — is fully implemented.
+  </div>
+
+  <h2>Status &amp; evidence</h2>
+  <div class="tblwrap"><table>
+    <tr><th>Item</th><th>Evidence</th></tr>
+    <tr><td>Artifact</td><td><code>demos/library-kiosk.html</code> — 72,707 B, 671 lines</td></tr>
+    <tr><td>Mirror</td><td><code>demos/library-kiosk-mirror/index.html</code> — sha256 <code>afef1888…fd169</code>, byte-identical</td></tr>
+    <tr><td>JS validity</td><td><code>node --check</code> passes, 0 errors</td></tr>
+    <tr><td>Auth</td><td>Ticket one-time consume + HKID name-greet — both implemented</td></tr>
+    <tr><td>Browsers</td><td>3 guest browsers, restricted-URL blocklist, direct iframe navigation</td></tr>
+    <tr><td>Logout wipe</td><td>Windows, iframes, editors, canvas, timer, zoom all torn down</td></tr>
+    <tr><td>Real Windows ISO</td><td>In progress — not built; this is the web fallback</td></tr>
+  </table></div>
+
+  <h2>What's next</h2>
+  <p>If a real image is ever needed, the path is Assigned Access kiosk mode + this HTML as the shell, or a custom credential
+  provider for the ticket/HKID unlock. The web kiosk already covers the behaviour; the OS layer is the only missing piece.</p>
+
+  <footer>
+    <p><b>Method.</b> Built as a single self-contained HTML file. Every figure above was re-derived from the current source —
+    72,707 bytes and 671 lines from <code>wc</code>, the sha256 from <code>shasum -a 256</code>, the 9 apps counted from the
+    app config map, and the 5 bugs from the session's own edit history.</p>
+    <p><b>Honesty notes.</b> The five-bug table is the real failure record of this build, not a cleaned-up narrative. The
+    mirror is a byte-identical copy of the artifact, verified by matching sha256 before publish. No feature above is claimed
+    to work that has not been exercised in the browser. The Windows ISO itself was not built.</p>
+  </footer>
+
+</div>
+</body>
+</html>

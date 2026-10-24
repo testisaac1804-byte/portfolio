@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>One datum, four fixtures — holding an F1 in Schools model block while it is machined</title>
+<meta name="description" content="Four parametric fixtures for the official 223 × 65 × 50 mm F1 in Schools model block — printed, machined, zero-hardware and a rotary carrier that flips the block without unloading it. Every number comes out of the CAD report files, so the guide cannot disagree with the model.">
+<style>
+  :root{
+    --bg:#0a0c11; --panel:#11141b; --panel2:#161a23; --line:#242a37;
+    --tx:#e8eaf0; --mut:#98a1b3; --dim:#6d7686;
+    --ac:#7c8cff; --ac2:#6366f1; --ok:#34d399; --warn:#ffd166; --bad:#f87171;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.62}
+  a{color:var(--ac)}
+  img{max-width:100%;height:auto;display:block;border-radius:10px;border:1px solid var(--line)}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 90px}
+
+  .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 11px;
+    color:var(--mut);letter-spacing:.1em}
+  .chip.ok{border-color:#1d4b3a;background:#0f1d18;color:#8ee6c0}
+  .chip.warn{border-color:#4b3f1d;background:#1d1a0f;color:#f0c96a}
+
+  h1{font-size:clamp(26px,4.4vw,44px);line-height:1.1;letter-spacing:-.02em;margin:0 0 14px;font-weight:800}
+  h1 em{font-style:normal;color:var(--ac)}
+  .deck{font-size:16.5px;color:var(--mut);max-width:78ch;margin:0 0 22px}
+  .deck b{color:var(--tx);font-weight:650}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0 30px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 13px;
+    display:flex;flex-direction:column;gap:4px;min-height:84px}
+  .stat .k{font:600 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .stat .v{font-size:19px;font-weight:750;margin-top:5px;letter-spacing:-.01em}
+  .stat .v small{font-size:12px;font-weight:500;color:var(--mut);letter-spacing:0}
+
+  h2{font-size:clamp(19px,2.6vw,25px);letter-spacing:-.015em;margin:44px 0 6px;font-weight:750}
+  h2 .n{font:700 12px/1 var(--mono);color:var(--ac);letter-spacing:.1em;margin-right:9px;vertical-align:2px}
+  h3{font-size:15px;margin:26px 0 6px;font-weight:700;color:var(--tx)}
+  p{color:var(--mut);margin:9px 0}
+  p b,li b{color:var(--tx);font-weight:650}
+  ul,ol{color:var(--mut);padding-left:22px;margin:10px 0}
+  li{margin:5px 0}
+  code{font:500 12.5px/1.5 var(--mono);background:#0d1017;border:1px solid var(--line);
+    border-radius:5px;padding:1px 5px;color:#c8d0e4;overflow-wrap:anywhere;word-break:break-word}
+  pre{background:#0d1017;border:1px solid var(--line);border-radius:10px;padding:13px 15px;
+    overflow-x:auto;font:500 12.5px/1.62 var(--mono);color:#c8d0e4;margin:14px 0}
+  pre b{color:var(--ok);font-weight:600}
+  pre i{color:var(--dim);font-style:normal}
+
+  .call{border-left:3px solid var(--ac2);background:#111524;border-radius:0 10px 10px 0;
+    padding:14px 17px;margin:20px 0;font-size:15px;color:#cfd6e8}
+  .call .who{display:block;font:600 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--dim);margin-bottom:8px}
+  .warnbox{border:1px solid #4b3f1d;background:#171407;border-radius:10px;padding:14px 16px;margin:20px 0}
+  .warnbox .h{font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--warn);margin-bottom:8px}
+  .warnbox p{color:#d8cfa8;margin:6px 0}
+  .goodbox{border:1px solid #1d4b3a;background:#0c1a15;border-radius:10px;padding:14px 16px;margin:20px 0}
+  .goodbox .h{font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ok);margin-bottom:8px}
+  .goodbox p{color:#bfe8d5;margin:6px 0}
+
+  .tblwrap{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;
+    border:1px solid var(--line);border-radius:10px;margin:16px 0;background:var(--panel)}
+  table{border-collapse:collapse;width:100%;min-width:620px;font-size:13px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:600 10.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+    background:var(--panel2);white-space:nowrap}
+  tr:last-child td{border-bottom:0}
+  td.num{font:600 12.5px/1.5 var(--mono);color:var(--tx);white-space:nowrap;text-align:right}
+  td.mono{font:500 12px/1.5 var(--mono);color:#c8d0e4}
+  .tag{display:inline-block;font:700 9.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+    padding:4px 6px;border-radius:999px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+  .tag.run{border-color:#1d4b3a;background:#0f1d18;color:#8ee6c0}
+  .tag.bare{border-color:#3a3f52;background:#141822;color:#98a1b3}
+  .tag.alpha{border-color:#4b3f1d;background:#1b1809;color:#f0c96a}
+
+  .card2{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin:14px 0}
+  .card2 h3{margin:0 0 4px}
+  .card2 p{margin:5px 0;font-size:14px}
+
+  .btnrow{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 6px}
+  .btn{display:inline-block;text-decoration:none;font:650 13px/1 var(--sans);
+    background:var(--ac2);color:#fff;border-radius:9px;padding:11px 16px;border:1px solid #7f7bff}
+  .btn.alt{background:transparent;color:var(--ac);border-color:var(--line)}
+  .btn small{display:block;font-weight:500;font-size:10.5px;opacity:.8;margin-top:5px;letter-spacing:.02em}
+
+  .fig{margin:18px 0}
+  .fig figcaption{font:500 11.5px/1.5 var(--mono);color:var(--dim);margin-top:8px}
+  footer{margin-top:52px;border-top:1px solid var(--line);padding-top:18px;
+    font-size:12.5px;color:var(--dim)}
+  footer b{color:var(--mut)}
+  footer p{margin:7px 0;font-size:12.5px}
+</style>
+<style>
+  /* the flow diagram is wider than a phone — it scrolls, the page does not */
+  pre.mono{overflow-x:auto;white-space:pre;max-width:100%;font-size:12.5px;line-height:1.55;
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+    color:var(--mut);-webkit-overflow-scrolling:touch}
+  @media(max-width:560px){pre.mono{font-size:10px}}
+  code{word-break:break-word}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <span>F1 in Schools · Development Class · jig design</span>
+    <span class="chip ok">4 fixtures · 1 datum</span>
+  </div>
+
+  <h1>One datum, <em>four fixtures</em></h1>
+  <p class="deck">A balsa model block is a foam brick with one accurate feature: a 6 × 6 mm tether groove
+  moulded down its whole length. Every fixture here grips <b>that</b> and nothing else — no outer face, no
+  corner, no assumption that a block is square. Four designs, from 5 printed parts to a rotary carrier
+  that indexes the block through 180° without ever taking it off the rail.</p>
+
+  <div class="stats">
+    <div class="stat"><span class="k">fixtures</span><span class="v">4</span><span class="k">one datum, four mechanisms</span></div>
+    <div class="stat"><span class="k">the guide</span><span class="v">478,737 B</span><span class="k">21 sections, offline, self-contained</span></div>
+    <div class="stat"><span class="k">interference</span><span class="v">0.000 mm³</span><span class="k">37-pose sweep, every part pair</span></div>
+    <div class="stat"><span class="k">block compliance</span><span class="v">9 / 9</span><span class="k">official dimensions, exact</span></div>
+    <div class="stat"><span class="k">mass</span><span class="v">298 g → 2.0 kg</span><span class="k">printed PLA at one end, 6061 at the other</span></div>
+    <div class="stat"><span class="k">rail sag</span><span class="v">0.61 mm</span><span class="k">printed, against 0.01 mm for bought ground bar</span></div>
+  </div>
+
+  <div class="call">
+    <div class="who">The ask, in his words</div>
+    “any method is fine as long as it's functional and machinable” — and then, later,
+    “can you make the guide be more detailed and includes all the jigs we have made”, and
+    “is there assembly guide”.
+  </div>
+
+  <h2>What this is</h2>
+  <p>The F1 in Schools model block is 223 × 65 × 50 mm of balsa with a 6 × 6 mm slot down the underside,
+  a ⌀18 × 52 mm CO₂ chamber and a no-go zone that must survive in one piece. To machine it you have to
+  hold it — and every commercial jig I could find clamps the outer faces, which are the two surfaces the
+  rules do not control. A block that measures 65.4 mm across is legal and will sit in a 65.0 mm vice either
+  sprung or crooked.</p>
+  <p>The groove is different. It is moulded, it runs the full 223 mm, and it is 6.00 mm on every block.
+  So the fixture is built around a 6 mm rail: the block hangs on the rail, the rail's top face is the
+  Z datum, and the two operations are the same setup with the block flipped over. Everything else in
+  four designs is a different answer to “how do I flip it, and how do I stop it sliding”.</p>
+
+  <h2>The datum chain, which never changes</h2>
+  <div class="tblwrap"><table><thead><tr><th>feature</th><th>value (mm)</th><th>what hangs off it</th><th>where it is proven</th></tr></thead><tbody><tr><td>groove ceiling — the seat</td><td><b>74.000</b></td><td>the block's bottom face in OP 1</td><td><code>socket_floor_z</code> / <code>seat_z</code>, identical in all four reports</td></tr><tr><td>rail top face</td><td><b>80.000</b></td><td>Z0 for the cutter, in both operations</td><td><code>rail_top_z_actual</code> = 80.0 in all four</td></tr><tr><td>mirror plane</td><td><b>77.000</b></td><td>where OP 2's machined face lands</td><td><code>mirror_plane_z</code> = 77.0 in all four</td></tr><tr><td>X stop</td><td><b>223.000</b></td><td>the block's front face</td><td><code>stop_x</code> = 223.0; jaw reaches 203 / 213 / 223</td></tr><tr><td>groove width</td><td><b>6.000</b></td><td>the rail: 5.900 printed, 6.000 bought</td><td><code>slot_w</code> 6.0 / 6.0 in the compliance check</td></tr></tbody></table></div>
+  <p>These five numbers are identical in the printed, machined, zero-hardware and rotary reports. That is
+  the point of building four: the fixture is disposable, the datum is not. A toolpath written against
+  this chain runs on any of them, which is why the CAM formula in the guide is one formula and not four.</p>
+
+  <h2>The four answers</h2>
+  <div class="tblwrap"><table><thead><tr><th></th><th>SLOTRAIL-223</th><th>−M machined</th><th>−ZH zero hardware</th><th>−X rotary carrier</th></tr></thead><tbody><tr><td>parts</td><td>5 printed</td><td>7 machined + 1 bought bar</td><td>5 printed</td><td>10 printed / 11 pieces</td></tr><tr><td>hardware</td><td>11 screws + 8 T-nuts</td><td>18 fasteners + 6 × 6 bar</td><td><b>none</b></td><td>9 fasteners</td></tr><tr><td>the flip</td><td>lift off the rail, put it back</td><td>lift off the bar</td><td>lift off, 11.5 mm clear</td><td><b>lever through 180°, indexed</b></td></tr><tr><td>block length</td><td>223 only</td><td>223 only</td><td>223 only</td><td><b>203 – 223</b> (jaw travels 20)</td></tr><tr><td>mass</td><td>298 g PLA</td><td>2.0 kg 6061</td><td>439 g PLA</td><td>448 g PLA</td></tr><tr><td>largest part</td><td>153 mm</td><td>285 mm base</td><td>188 mm</td><td>179 mm rail / 175 mm base</td></tr><tr><td>support in the slicer</td><td>94 mm²</td><td>none — it is metal</td><td>49 mm²</td><td>429 mm²</td></tr><tr><td>print time</td><td>12 – 20 h</td><td>—</td><td>18 – 24 h</td><td>18 – 24 h</td></tr></tbody></table></div>
+
+  <h2>How it was built</h2>
+  <p>No Fusion 360, no sketching by hand: parametric code (<code>build123d</code>), geometry as boolean
+  algebra over boxes and prisms in absolute coordinates. The block is modelled first, from the official
+  dimensions, and then every fixture is built around it — so the block's slot is the fixture's rail, and
+  a fixture that does not clear the block is a boolean intersection that returns a number instead of a
+  surprise on the machine.</p>
+<pre class="mono">official dimensions → block solid (703,489.6 mm³, 9/9 exact)
+        │
+        ├─ groove = datum ──→ rail 6.000 ──→ four fixture designs
+        │                                        │
+        │                                        ├─ printed      5 parts, 298 g
+        │                                        ├─ machined     7 parts, 2.0 kg
+        │                                        ├─ zero-hardware 5 parts, 439 g
+        │                                        └─ rotary      10 parts, 448 g
+        │
+        └─ every design writes report.json
+                 │
+                 ├─ interference · tool envelope · rail contact · hex-key corridors
+                 ├─ print audit: support mm², bridge mm², overhang angles, tallest part
+                 └─ guide_extra.py reads those reports → the guide's tables
+
+         no number in the guide is typed by hand</pre>
+
+  <h2>The three subsystems worth reading</h2>
+
+  <h3>1 · The groove, not the faces</h3>
+  <p>The compliance check is nine official features against the model: block length, width, height, slot
+  width, slot depth, chamber diameter, chamber depth, chamber height, and the solid's bounding box.
+  Nine out of nine exact, and the volume agrees to −0.0 %. That is not decoration — it is the reason a
+  groove depth read off a caliper can be trusted as a Z offset, and the guide spends a whole section on
+  measuring it twice instead of assuming 6.00.</p>
+
+  <h3>2 · The flip, which is where the tolerance dies</h3>
+  <p>On the first three fixtures you lift the block off the rail, roll it, and put it back. That works,
+  and it is why they all clamp the rail: the rail's height is the only thing that has to repeat. The
+  rotary variant refuses to lift at all — the rail becomes an axle, the block stays on it, and a lever
+  throws it through 180° into a detent. A pin of 5.00 mm in a 5.05 mm hole gives 0.169° of lever slop,
+  which is 0.191 mm across a 65 mm face, against a 1.0 mm rulebook tolerance.</p>
+  <p>Because the part rotates, it could not be checked at two poses. The axle group and the block are
+  rolled against every static part at 37 angles from 0° to 180°, and the worst intersection is
+  <b>0.000 mm³</b> — at 0°, where there is the most material on both sides. A fixture that clears at
+  two endpoints and hits at 90° is exactly the failure a two-pose check would have shipped.</p>
+
+  <h3>3 · A table cannot disagree with the model</h3>
+  <p>The guide's fourteen cross-variant tables are generated by a module that reads the four
+  <code>report.json</code> files at build time. It exists because hand-typed tables had already drifted:
+  the rotary BOM said its base was 170 mm wide while the solid measured 174, and a mass row read
+  <code>0.0 kg</code> because a cm³ volume met a g/mm³ density. Both are now impossible by construction,
+  which is worth more than the two fixes.</p>
+
+  <h2>Fasteners, all of them</h2>
+  <div class="tblwrap"><table><thead><tr><th>variant</th><th>fastener</th><th>qty</th><th>into what</th></tr></thead><tbody><tr><td>−223</td><td>M4 × 8 socket cap</td><td>2</td><td>the rail clamps — self-tapping into a ⌀3.3 pilot</td></tr><tr><td>−223</td><td>M4 × 16 socket cap</td><td>1</td><td>the collar</td></tr><tr><td>−223</td><td>M6 × 20 + T-nut</td><td>8</td><td>the table's T-slot</td></tr><tr><td>−M</td><td>M6 × 45 T-bolt + T-nut</td><td>8</td><td>the table, through the base's eight T-slots</td></tr><tr><td>−M</td><td>M6 × 25 socket cap</td><td>4</td><td>up from under the base into the saddle's tapped M6</td></tr><tr><td>−M</td><td>M5 × 12 socket cap</td><td>4</td><td>the clamp caps, two each</td></tr><tr><td>−M</td><td>M4 × 10 socket cap</td><td>2</td><td>the collar cap</td></tr><tr><td>−X</td><td>M4 × 12 socket cap</td><td>4</td><td>the cradle caps, two each</td></tr><tr><td>−X</td><td>M4 × 8 grub</td><td>2</td><td>the lever clamp on the left hub</td></tr><tr><td>−X</td><td>M6 × 60 grub</td><td>2</td><td>the jaw clamp through the left stand</td></tr><tr><td>−X</td><td>5 mm dowel × 30</td><td>1</td><td>the detent pin</td></tr><tr><td>−ZH</td><td>nothing</td><td>0</td><td>the dovetail, the wedge and 40 N of thumb</td></tr></tbody></table></div>
+
+  <h2>What goes wrong, and what to do</h2>
+  <div class="tblwrap"><table><thead><tr><th>symptom</th><th>cause</th><th>what to do</th></tr></thead><tbody><tr><td>the block rattles on the rail</td><td>your groove is deeper than the rail by more than 0.1 mm</td><td>one turn of masking tape on the rail — allowed to stay, it is a shim not a bodge</td></tr><tr><td>OP 2 leaves a step you can feel with a fingernail</td><td>you assumed the groove depth equals the rail height</td><td>measure both with calipers and use Z = (s − h) − z<sub>b</sub>; 0.2 mm of groove error is 0.4 mm of step</td></tr><tr><td>the first turn of an M4 is stiff and the second is easy</td><td>the pilot is ⌀3.3 because the screw cuts its own thread</td><td>keep turning. Do not drill it to 3.6 — that removes the clamp</td></tr><tr><td>the jaw binds and jumps instead of sliding</td><td>the two M6 grubs are at different depths and the jaw is being cocked</td><td>back both out two turns, push the jaw home by hand, bring them in a quarter turn at a time</td></tr><tr><td>the hub will not spin after the caps go on</td><td>the caps are torqued unevenly and have pinched the cradle</td><td>snug one, then the other, then torque in pairs — the test is a finger, not a wrench</td></tr><tr><td>the detent pin stops at the mouth of its hole</td><td>a burr in the ⌀5.05 hole</td><td>5.0 mm drill through by hand, no press</td></tr><tr><td>the wedge creeps back under load</td><td>dust on the 10° incline</td><td>wipe both faces, rub pencil graphite on the ramp</td></tr><tr><td>the dovetail will not drop together</td><td>elephant's foot — a printed vertical wall is 0.1–0.2 mm fat at the bottom</td><td>240 grit on the tongue's two flanks, four or five strokes</td></tr></tbody></table></div>
+
+  <h2>Honest limits</h2>
+  <div class="warnbox">
+    <p><b>None of these has been printed or cut.</b> Everything above is measured on the solid model,
+    which is a real and repeatable claim — it is not the same claim as “a part exists”. The first print
+    is the first physical test, and the settling tests are named in the guide: rail in the real groove,
+    straightness of the glued 277 mm rail, whether the 0.19 mm index is a measurement or arithmetic,
+    and whether the fixture survives a season.</p>
+    <p><b>0.1 mm of print tolerance decides the fit.</b> The rails are 5.9 mm in a nominally 6.0 mm
+    groove; a printer running ±0.2 mm can make that a rattle or a press fit. The guide's answer is a
+    turn of masking tape, not a redesign — and if you buy the 6.00 mm ground bar, the socket has to be
+    widened to 6.2.</p>
+    <p><b>The rotary version indexes to 0° and 180° only.</b> At 90° the block hangs sideways off the
+    rail with 0.96° of droop, which is 0.83 mm across the face. It is a two-position fixture pretending
+    to be a fourth axis, and the guide says so.</p>
+    <p><b>Four fixtures is three more than anyone needs.</b> The printed one works; the others exist
+    because each one deletes a specific failure — creep, hardware, the lift — and because comparing them
+    is how you find out which failure actually bites.</p>
+  </div>
+
+  <h2>Evidence</h2>
+  <div class="tblwrap"><table><thead><tr><th>claim</th><th>value</th><th>how it was produced</th></tr></thead><tbody><tr><td>the guide is one file</td><td>478,737 bytes · sha256 <code>7398372aaa8c5235</code>…</td><td>make_guide.py inlines every figure as base64; opens with the Wi-Fi off</td></tr><tr><td>the published copy is the artifact</td><td>byte-identical</td><td>sha256 of <code>guide.html</code> equals sha256 of <code>demos/f1-jig-mirror/index.html</code></td></tr><tr><td>the block is the official block</td><td>bbox 223 × 65 × 50 · 9/9 exact</td><td>solid volume 703,489.6 mm³ against 703,489.6 expected, error −0.0 %</td></tr><tr><td>no variant can hit the block</td><td>0.000 mm³</td><td>boolean intersection, fixture ∩ block, both operations, all four</td></tr><tr><td>the rotary variant clears itself through the whole flip</td><td>0.000 mm³ at 37 poses, 0° → 180°</td><td>axle group + block rolled against every static part at 5° steps; worst case at 0°</td></tr><tr><td>the index is inside the rulebook</td><td>0.191 mm across the face</td><td>5.00 pin in a 5.05 hole → 0.169° of lever slop; the rule allows 1.0 mm</td></tr><tr><td>every part is a legal 3-axis part</td><td>0 sloped faces</td><td>face-normal audit across all seven machined solids, 12–86 faces each</td></tr><tr><td>the guide's own layout is sound</td><td>missing [] · overflow [] · ragged [] · wide 0 · 45,521 px</td><td>verify_guide.py — anchors, column widths, table raggedness, horizontal overflow</td></tr><tr><td>it builds from scratch</td><td>8/8 scripts · 3/3 print checks</td><td>full rebuild of all four fixtures plus three slicer audits, exit 0</td></tr></tbody></table></div>
+
+  <h2>Where the files are</h2>
+  <p><code>~/Desktop/f1-jig</code> — twenty-eight STL files (twenty printed, eight machined), four STEP
+  directories, four report files plus three slicer audits, and <code>guide.html</code>.
+  <code>make_guide.py</code> and <code>guide_extra.py</code> build the guide; <code>verify_guide.py</code>
+  checks it. Rebuild everything with one loop over the eight scripts — the guide is downstream of the
+  reports, so it cannot be built before them.</p>
+
+  <div class="btnrow">
+    <a class="btn" href="./f1-jig-mirror/">Open the guide (byte-identical mirror) →</a>
+    <a class="btn alt" href="../prompts/f1-jig-prompt.md">Build spec</a>
+  </div>
+
+  <h2>Method</h2>
+  <p>Read the official dimensions and the class rules first (Development Class, 2024-25), modelled the
+  block, then designed against the groove as datum. Every fixture is parametric code; every fixture
+  writes a report; the report is the only source for the guide's numbers. Checks are adversarial —
+  interference between every pair of parts, the cutter's envelope, hex-key corridors, print overhang
+  angles, and a full rotational sweep for the one part that moves.</p>
+
+  <h2>Honesty notes</h2>
+  <p>The guide says “four fixtures” and means four designs, not four finished objects: one of them
+  (the machined version) also needs a mill and a 6 × 6 mm ground bar you have to buy. Photographs are
+  renders of the solid model, not of printed parts. Where the model and the hardware would disagree,
+  the page says which one wins — the 5.9 mm rail is a deliberate 0.1 mm undersize, and the 0.4 mm gap
+  at the rail's blind end is a designed clearance, not a mistake.</p>
+
+  <p class="mono" style="color:var(--dim);margin-top:34px;word-break:break-all">
+    artifact 478,737 bytes · sha256 7398372aaa8c52350b26c95c9ed311091d5730a7cf39df724106d3f4e070a41f · mirror byte-identical</p>
+
+</div>
+</body>
+</html>

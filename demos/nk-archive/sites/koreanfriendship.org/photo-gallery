@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta charset="utf-8" />
+	<base href="photo-gallery__format_feed_type_atom" />
+	<meta name="keywords" content="joomla, Joomla" />
+	<meta name="description" content="Joomla! - the dynamic portal engine and content management system" />
+	<meta name="generator" content="Joomla! - Open Source Content Management" />
+	<title>Photo Gallery</title>
+	<link href="/photo-gallery?format=feed&amp;type=rss" rel="alternate" type="application/rss+xml" title="RSS 2.0" />
+	<link href="/photo-gallery?format=feed&amp;type=atom" rel="alternate" type="application/atom+xml" title="Atom 1.0" />
+	<link href="/templates/protostar/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+	<link href="component/search/index__Itemid_114_format_opensearch.html" rel="search" title="Search KOREAN CULTURE FRIENDSHIP ASSOCIATION - CYPRUS" type="application/opensearchdescription+xml" />
+	<link href="/plugins/content/jw_sigpro/jw_sigpro/includes/js/jquery_fancybox/fancybox/jquery.fancybox.css?v=2.1.5" rel="stylesheet" />
+	<link href="/plugins/content/jw_sigpro/jw_sigpro/includes/js/jquery_fancybox/fancybox/helpers/jquery.fancybox-buttons.css?v=2.1.5" rel="stylesheet" />
+	<link href="/plugins/content/jw_sigpro/jw_sigpro/includes/js/jquery_fancybox/fancybox/helpers/jquery.fancybox-thumbs.css?v=2.1.5" rel="stylesheet" />
+	<link href="/plugins/content/jw_sigpro/jw_sigpro/tmpl/Classic/css/template.css" rel="stylesheet" media="screen" />
+	<link href="/plugins/content/jw_sigpro/jw_sigpro/includes/css/print.css" rel="stylesheet" media="print" />
+	<link href="/templates/protostar/css/template.css?4fcd325284b76e174e8dae9aa8fafd1f" rel="stylesheet" />
+	<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+	<link href="/modules/mod_slideshowck/themes/default/css/camera.css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" />
+	<style>
+
+	h1, h2, h3, h4, h5, h6, .site-title {
+		font-family: 'Open Sans', sans-serif;
+	}
+	body.site {
+		border-top: 3px solid #ed2405;
+		background-color: #eb7b12;
+	}
+	a {
+		color: #ed2405;
+	}
+	.nav-list > .active > a,
+	.nav-list > .active > a:hover,
+	.dropdown-menu li > a:hover,
+	.dropdown-menu .active > a,
+	.dropdown-menu .active > a:hover,
+	.nav-pills > .active > a,
+	.nav-pills > .active > a:hover,
+	.btn-primary {
+		background: #ed2405;
+	}#camera_wrap_98 .camera_pag_ul li img, #camera_wrap_98 .camera_thumbs_cont ul li > img {height:75px;}
+#camera_wrap_98 .camera_caption {
+	display: block;
+	position: absolute;
+}
+#camera_wrap_98 .camera_caption > div {
+	-moz-border-radius: 5px 5px 5px 5px;-webkit-border-radius: 5px 5px 5px 5px;border-radius: 5px 5px 5px 5px;font-family:'Droid Sans';
+}
+#camera_wrap_98 .camera_caption > div div.camera_caption_title {
+	font-size: 1.1em;
+}
+#camera_wrap_98 .camera_caption > div div.camera_caption_desc {
+	font-size: 0.8em;
+}
+
+@media screen and (max-width: 480px) {
+		#camera_wrap_98 .camera_caption {
+			font-size: 0.6em !important;
+		}
+}div.mod_search93 input[type="search"]{ width:auto; }
+	</style>
+	<script src="/media/system/js/mootools-core.js"></script>
+	<script src="/media/system/js/core.js"></script>
+	<script src="/media/jui/js/jquery.min.js"></script>
+	<script src="/media/jui/js/jquery-noconflict.js"></script>
+	<script src="/media/jui/js/jquery-migrate.min.js"></script>
+	<script src="/plugins/content/jw_sigpro/jw_sigpro/includes/js/jquery_fancybox/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+	<script src="/plugins/content/jw_sigpro/jw_sigpro/includes/js/jquery_fancybox/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+	<script src="/plugins/content/jw_sigpro/jw_sigpro/includes/js/jquery_fancybox/fancybox/helpers/jquery.fancybox-buttons.js?v=2.1.5"></script>
+	<script src="/plugins/content/jw_sigpro/jw_sigpro/includes/js/jquery_fancybox/fancybox/helpers/jquery.fancybox-thumbs.js?v=2.1.5"></script>
+	<script src="/plugins/content/jw_sigpro/jw_sigpro/includes/js/behaviour.js"></script>
+	<script src="/media/system/js/caption.js"></script>
+	<script src="/media/jui/js/bootstrap.min.js"></script>
+	<script src="/templates/protostar/js/template.js?4fcd325284b76e174e8dae9aa8fafd1f"></script>
+	<script src="/modules/mod_slideshowck/assets/jquery.easing.1.3.js"></script>
+	<script src="/modules/mod_slideshowck/assets/camera.min.js"></script>
+	<script src="/media/system/js/html5fallback.js"></script>
+	<script>
+
+		jQuery.noConflict();
+		jQuery(function($) {
+			$("a.fancybox-button").fancybox({
+				//padding: 0,
+				//fitToView	: false,
+				helpers		: {
+					title	: { type : 'inside' }, // options: over, inside, outside, float
+					buttons	: {}
+				},
+				afterLoad : function() {
+					this.title = '<b class="fancyboxCounter">Image ' + (this.index + 1) + ' of ' + this.group.length + '</b>' + (this.title ? this.title : '');
+				}
+			});
+		});
+	jQuery(window).on('load',  function() {
+				new JCaption('img.caption');
+			});jQuery(function($){ $(".hasTooltip").tooltip({"html": true,"container": "body"}); });
+	</script>
+
+	<!--[if lt IE 9]><script src="/media/jui/js/html5.js"></script><![endif]-->
+</head>
+<body class="site com_content view-category no-layout no-task itemid-112">
+	<!-- Body -->
+	<div class="body">
+		<div class="container">
+			<!-- Header -->
+			<header class="header" role="banner">
+				<div class="header-inner clearfix">
+					<a class="brand pull-left" href="/">
+						<img src="images/logo4.png" alt="KOREAN CULTURE FRIENDSHIP ASSOCIATION - CYPRUS" />											</a>
+					<div class="header-search pull-right">
+						<div class="search mod_search93">
+	<form action="/photo-gallery" method="post" class="form-inline">
+		<label for="mod-search-searchword" class="element-invisible">Search ...</label> <input name="searchword" id="mod-search-searchword" maxlength="200"  class="inputbox search-query" type="search" size="20" placeholder="Search ..." />		<input type="hidden" name="task" value="search" />
+		<input type="hidden" name="option" value="com_search" />
+		<input type="hidden" name="Itemid" value="112" />
+	</form>
+</div>
+
+					</div>
+				</div>
+			</header>
+							<nav class="navigation" role="navigation">
+					<div class="navbar pull-left">
+						<a class="btn btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</a>
+					</div>
+					<div class="nav-collapse">
+						<ul class="nav menu nav-pills">
+<li class="item-101 default"><a href="/" >Home</a></li><li class="item-108"><a href="/anecdotes-of-greate-men" >Anecdotes of Greate Men</a></li><li class="item-109"><a href="/dprk-information" >DPRK Information</a></li><li class="item-112 current active"><a href="/photo-gallery" >Photo Gallery</a></li><li class="item-113"><a href="/books" >Books</a></li><li class="item-110"><a href="/contact-us" >Contact us</a></li></ul>
+
+					</div>
+				</nav>
+						
+			<div class="row-fluid">
+								<main id="content" role="main" class="span9">
+					<!-- Begin Content -->
+							<div class="moduletable">
+						
+		<!--[if lte IE 7]>
+		<link href="/modules/mod_slideshowck/themes/default/css/camera_ie.css" rel="stylesheet" type="text/css" />
+		<![endif]-->
+		<!--[if IE 8]>
+		<link href="/modules/mod_slideshowck/themes/default/css/camera_ie8.css" rel="stylesheet" type="text/css" />
+		<![endif]--><script type="text/javascript">
+       jQuery(function(){
+        jQuery('#camera_wrap_98').camera({
+                height: '45%',
+                minHeight: '100',
+                pauseOnClick: false,
+                hover: 1,
+                fx: 'random',
+                loader: 'pie',
+                pagination: 0,
+                thumbnails: 0,
+                thumbheight: 75,
+                thumbwidth: 100,
+                time: 7000,
+                transPeriod: 1500,
+                alignment: 'center',
+                autoAdvance: 1,
+                mobileAutoAdvance: 1,
+                portrait: 0,
+                barDirection: 'leftToRight',
+                imagePath: '/modules/mod_slideshowck/images/',
+                lightbox: 'mediaboxck',
+                fullpage: 0,
+				mobileimageresolution: '0',
+                navigationHover: true,
+					mobileNavHover: true,
+					navigation: true,
+					playPause: true,
+                barPosition: 'bottom',
+                responsiveCaption: 0,
+				container: ''
+        });
+}); </script><!-- debut Slideshow CK -->
+<div class="slideshowck camera_wrap camera_amber_skin" id="camera_wrap_98">
+			<div data-thumb="/images/headers/th/The-newly-built-Natural-Science-Museum1_th.jpg" data-src="/images/headers/The-newly-built-Natural-Science-Museum1.jpg" data-link="dprk-information/31-the-newly-built-natural-science-museum" data-target="_parent">
+											<div class="camera_caption moveFromLeft">
+					<div class="camera_caption_title">
+												New!! The newly built Natural Science Museum					</div>
+										<div class="camera_caption_desc">
+												<p>
+
+<!-- JoomlaWorks "Simple Image Gallery Pro" Plugin (v3.1.0) starts here -->
+
+<ul id="sigProIdd3a146be26" class="sigProContainer...</p><a href="/dprk-information/31-the-newly-built-natural-science-museum">Read more ...</a>					</div>
+									</div>
+									</div>
+		<div data-thumb="/images/headers/th/The-newly-renovated-Central-Zoo01_th.jpg" data-src="/images/headers/The-newly-renovated-Central-Zoo01.jpg" data-link="dprk-information/32-the-newly-renovated-central-zoo" data-target="_parent">
+											<div class="camera_caption moveFromLeft">
+					<div class="camera_caption_title">
+												New!! The newly renovated Central Zoo					</div>
+										<div class="camera_caption_desc">
+												<p>
+
+<!-- JoomlaWorks "Simple Image Gallery Pro" Plugin (v3.1.0) starts here -->
+
+<ul id="sigProId7950ba5ede" class="sigProContainer...</p><a href="/dprk-information/32-the-newly-renovated-central-zoo">Read more ...</a>					</div>
+									</div>
+									</div>
+		<div data-thumb="/images/headers/th/May-Day-Stadium_th.jpg" data-src="/images/headers/May-Day-Stadium.jpg" data-link="dprk-information/33-photos-in-pyongyang" data-target="_parent">
+											<div class="camera_caption moveFromLeft">
+					<div class="camera_caption_title">
+												New!! Photos in Pyongyang					</div>
+										<div class="camera_caption_desc">
+												<p>
+
+<!-- JoomlaWorks "Simple Image Gallery Pro" Plugin (v3.1.0) starts here -->
+
+<ul id="sigProId164916b55f" class="sigProContainer...</p><a href="/dprk-information/33-photos-in-pyongyang">Read more ...</a>					</div>
+									</div>
+									</div>
+		<div data-thumb="/images/banners/th/p00102_th.jpg" data-src="/images/banners/p00102.jpg" >
+					</div>
+		<div data-thumb="/images/banners/th/p00211_th.jpg" data-src="/images/banners/p00211.jpg" >
+					</div>
+		<div data-thumb="/images/banners/th/p00303_th.jpg" data-src="/images/banners/p00303.jpg" >
+					</div>
+		<div data-thumb="/images/banners/th/p00304_th.jpg" data-src="/images/banners/p00304.jpg" >
+					</div>
+		<div data-thumb="/images/banners/th/p00308_th.jpg" data-src="/images/banners/p00308.jpg" >
+					</div>
+		<div data-thumb="/images/banners/th/p00401_th.jpg" data-src="/images/banners/p00401.jpg" >
+					</div>
+		<div data-thumb="/images/banners/th/p00501_th.jpg" data-src="/images/banners/p00501.jpg" >
+					</div>
+		<div data-thumb="/images/banners/th/p00702_th.jpg" data-src="/images/banners/p00702.jpg" >
+					</div>
+</div>
+<div style="clear:both;"></div>
+<!-- fin Slideshow CK -->
+		</div>
+	
+					<div id="system-message-container">
+	</div>
+
+					<div class="category-list">
+
+<div>
+	<div class="content-category">
+		
+					<h2>
+				Photo Gallery			</h2>
+		
+							
+				
+<form action="photo-gallery__format_feed_type_atom" method="post" name="adminForm" id="adminForm" class="form-inline">
+
+
+	<table class="category table table-striped table-bordered table-hover">
+						<tbody>
+									<tr class="cat-list-row0" >
+						<td  class="list-title">
+									<a href="/photo-gallery/21-photo-gallery">
+						Newly-built apartment houses for lecturers of Kim Chaek University of Technology					</a>
+																			</td>
+															</tr>
+									<tr class="cat-list-row1" >
+						<td  class="list-title">
+									<a href="/photo-gallery/22-newly-built-yonphung-scientists-holiday-camp">
+						Newly-built Yonphung Scientists’ Holiday Camp					</a>
+																			</td>
+															</tr>
+									<tr class="cat-list-row0" >
+						<td  class="list-title">
+									<a href="/photo-gallery/23-sci-tech-complex">
+						Sci-Tech Complex					</a>
+																			</td>
+															</tr>
+									<tr class="cat-list-row1" >
+						<td  class="list-title">
+									<a href="/photo-gallery/24-masikryong-ski-resort">
+						Masikryong Ski Resort					</a>
+																			</td>
+															</tr>
+									<tr class="cat-list-row0" >
+						<td  class="list-title">
+									<a href="/photo-gallery/25-mirae-scientists-street">
+						Mirae Scientists Street					</a>
+																			</td>
+															</tr>
+									<tr class="cat-list-row1" >
+						<td  class="list-title">
+									<a href="/photo-gallery/26-majon-hotel">
+						Majon Hotel					</a>
+																			</td>
+															</tr>
+									<tr class="cat-list-row0" >
+						<td  class="list-title">
+									<a href="/photo-gallery/27-the-rungra-water-park">
+						The Rungra Water Park					</a>
+																			</td>
+															</tr>
+									<tr class="cat-list-row1" >
+						<td  class="list-title">
+									<a href="/photo-gallery/36-farm-city">
+						FARM CITY-농장도시 					</a>
+																			</td>
+															</tr>
+									<tr class="cat-list-row0" >
+						<td  class="list-title">
+									<a href="/photo-gallery/37-mirae-scientists">
+						MIRAE SCIENTISTS STREET-미래과학자거리 					</a>
+																			</td>
+															</tr>
+									<tr class="cat-list-row1" >
+						<td  class="list-title">
+									<a href="/photo-gallery/38-pyongyang-rest-home">
+						PYONGYANG REST HOME-평양양로원					</a>
+																			</td>
+															</tr>
+									<tr class="cat-list-row0" >
+						<td  class="list-title">
+									<a href="/photo-gallery/39-taedonggang-fruit-farm">
+						TAEDONGGANG FRUIT FARM-대동강과수종합농장					</a>
+																			</td>
+															</tr>
+									<tr class="cat-list-row1" >
+						<td  class="list-title">
+									<a href="/photo-gallery/40-the-30th-april-sprig-art-festival">
+						THE 30th APRIL SPRIG ART FESTIVAL제30차 4월의 봄 친선예술축전					</a>
+																			</td>
+															</tr>
+									<tr class="cat-list-row0" >
+						<td  class="list-title">
+									<a href="/photo-gallery/41-sci-tech">
+						SCI-TECH COMPLEX-과학기술전당					</a>
+																			</td>
+															</tr>
+				</tbody>
+	</table>
+
+
+	</form>
+
+			</div>
+</div>
+
+
+</div>
+
+					
+<ul itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+			<li>
+			You are here: &#160;
+		</li>
+	
+				<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+									<a itemprop="item" href="/" class="pathway"><span itemprop="name">Home</span></a>
+				
+									<span class="divider">
+						<img src="/media/system/images/arrow.png" alt="" />					</span>
+								<meta itemprop="position" content="1">
+			</li>
+					<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="active">
+				<span itemprop="name">
+					Photo Gallery				</span>
+				<meta itemprop="position" content="2">
+			</li>
+		</ul>
+
+					<!-- End Content -->
+				</main>
+									<div id="aside" class="span3">
+						<!-- Begin Right Sidebar -->
+						<div class="well "><h3 class="page-header">Do you Know?</h3>
+
+<div class="custom"  >
+	<p style="text-align: center;"><a href="/index.php/application" rel="alternate">Application Form Pyongyang International Science &amp; Technology Book Fair</a></p>
+<p> </p></div>
+</div><div class="well "><h3 class="page-header">Links</h3>
+
+<div class="custom"  >
+	<p> </p>
+<p><a href="http://www.friend.com.kp/index.php?fid=89cabcb4db0adcb4850ab4b4cb02d4a2d4e2d514b2e2d8acf49cc4bb74dcd0300a6700b157" target="_blank"><img src="/images/friend.png" alt="" /></a></p>
+<p> </p>
+<p><a href="http://www.kcna.kp" target="_blank"><img src="/images/kcna.png" alt="" /></a></p>
+<p> </p></div>
+</div>
+						<!-- End Right Sidebar -->
+					</div>
+							</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<footer class="footer" role="contentinfo">
+		<div class="container">
+			<hr />
+			
+			<p class="pull-right">
+				<a href="#" id="back-top">
+					Back to Top				</a>
+			</p>
+			<p>
+				&copy; 2018 KOREAN CULTURE FRIENDSHIP ASSOCIATION - CYPRUS			</p>
+		</div>
+	</footer>
+	
+</body>
+</html>

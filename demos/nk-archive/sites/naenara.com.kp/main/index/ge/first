@@ -1,0 +1,372 @@
+﻿
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Naenara - Demokratische Volksrepublik Korea</title>
+	<meta charset="utf8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" >
+	<meta name="robots" content="all" >
+	<meta name="keywords" content="korea, DPRK, DPR of Korea, naenara">
+    <meta name="description" content="Articles about politics, economy, culture, history, sports, tourism in DPRK" >
+	<link rel="icon" href="/assets/favicon.ico" type="image/x-icon" >
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" >
+	<link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css" >
+	<link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/font-awesome.min.css" >
+	<link rel="stylesheet" type="text/css" href="/css/header/header.css" >
+	<link rel="stylesheet" type="text/css" href="/css/header/header_ge.css" >
+	<link rel="stylesheet" type="text/css" href="/assets/sidebar.css" >
+	<link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" >
+	<link href="/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" >
+
+	<script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/js/search/index.js" type="text/javascript"></script>
+</head> 
+<body>
+<header>
+	<div class="container">
+		<div class="firstMark text-center">
+			<div>
+				<img alt="naenara-image" src="/images/first/flag.png">
+				<a href="/main/index/ge/first"><img alt="naenara-image" src="/images/first/mark.png"></a>
+			</div>
+			<span>Demokratische Volksrepublik Korea</span>
+			<span>www.naenara.com.kp</span>
+		</div>
+		<div class="rightMenu">
+			<div class="pageSub drop">
+				<span class="dropbtn"><i class="icon-list"></i></span>
+				<div class="content">
+											<a href="/main/index/ge/first" class="page-active">Startseite</a>
+											<a href="/main/index/ge/news" class="">Nachrichten/Artikel</a>
+											<a href="/main/index/ge/politics?arg_val=leader3" class="">Über die DVR Korea</a>
+											<a href="/main/index/ge/trade" class="">Wirtschaft/Handel</a>
+											<a href="/main/index/ge/society" class="">Kultur</a>
+											<a href="/main/index/ge/history" class="">Geschichte</a>
+											<a href="/main/index/ge/tourism" class="">Tourismus</a>
+									</div>
+			</div>
+			<div class="sideSub drop">
+				<span class="dropbtn"><i class="fa icon-wallet"></i></span>
+				<div class="content">
+					<a href="/main/index/ge/photo"><span>Fotos</span></a>
+					<a href="/main/index/ge/video"><span>Videos</span></a>
+					<a href="/main/index/ge/music"><span>Musik</span></a>
+					<a href="http://www.korstamp.com.kp" target="_blank"><span>Briefmarken</span></a>
+					<a href="/main/index/ge/gallery"><span>Plakate</span></a>
+					<a href="/main/index/ge/fineart"><span>Bildende Kunst</span></a>
+				</div>
+			</div>
+
+			<div class="langSub drop" id="ge">
+								<span class="dropbtn"><i class="fa fa-language"></i>Deutsch<i class="fa fa-angle-down"></i> </span>
+				<div class="content">
+				<a href="/main/index/ko/first" class="lang-ko">조선어</a><a href="/main/index/en/first" class="lang-en">English</a><a href="/main/index/fr/first" class="lang-fr">Français</a><a href="/main/index/sp/first" class="lang-sp">Español</a><a href="/main/index/ge/first" class="lang-ge">Deutsch</a><a href="/main/index/ru/first" class="lang-ru">Русский</a><a href="/main/index/ch/first" class="lang-ch">汉语</a><a href="/main/index/ja/first" class="lang-ja">日本語</a><a href="/main/index/ar/first" class="lang-ar">العربية</a>				</div>
+			</div>
+						<!-- <a class="login_but" href="/old/users/login.php"><img alt="naenara-image"  src="/img/login.png"></a> -->
+					</div>
+		<ul class="menubar">
+							<li><a href="/main/index/ge/first" class="page-active">Startseite</a></li>
+							<li><a href="/main/index/ge/news" class="">Nachrichten/Artikel</a></li>
+							<li><a href="/main/index/ge/politics?arg_val=leader3" class="">Über die DVR Korea</a></li>
+							<li><a href="/main/index/ge/trade" class="">Wirtschaft/Handel</a></li>
+							<li><a href="/main/index/ge/society" class="">Kultur</a></li>
+							<li><a href="/main/index/ge/history" class="">Geschichte</a></li>
+							<li><a href="/main/index/ge/tourism" class="">Tourismus</a></li>
+					</ul>
+				<form class="searchbox text-center" action="/main/search_first" method="get" enctype="multipart/form-data">
+			<input type="text" placeholder="Geben Sie bitte Suchwörter ein" value="" name="sVal" class="sval" onkeydown="searchResult(event)"/>
+			<input type="hidden" name="csrf_test_name" value="67a2da53ad85dbb549cdb75eab41ede7" />
+		</form>
+
+		<h3 class="site-comma"><span>NAENARA.COM.KP</span><span>Quelle für allgemeine nützliche Informationen über Politik, Wirtschaft und Kultur der DVR Korea</span></h3> 
+	</div>
+	<div class='space1'></div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/css/news/ge/load_news.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/main/index.css">
+<link rel="stylesheet" type="text/css" href="/css/main/index_ge.css">
+<div class="first-page">
+	<aside>
+		<a href="/main/index/ge/photo"><img alt="naenara-image" src="/images/first/icon/photo.png"/><span>Fotos</span></a>
+		<a href="/main/index/ge/video"><img alt="naenara-image" src="/images/first/icon/camera.png" /><span>Videos</span></a>
+		<a href="/main/index/ge/music"><img alt="naenara-image" src="/images/first/icon/music.png" /><span>Musik</span></a>
+		<a href="http://www.korstamp.com.kp" target="_blank"><img alt="naenara-image" src="/images/first/icon/stamp.png" /><span>Briefmarken</span></a>
+		<a href="/main/index/ge/gallery"><img alt="naenara-image" src="/images/first/icon/poster.png" /><span>Plakate</span></a>
+		<a href="/main/index/ge/fineart"><img alt="naenara-image" src="/images/first/icon/fineart.png" /><span>Bildende Kunst</span></a>
+	</aside>
+	<div class="container">
+		<h5 class="news-title" onclick="javascript:location.href='/main/index/ge/news?arg_val=leader'" ><b>Revolutionäres Wirken von <nobr><FONT style='FONT-SIZE:16px;'>Kim Jong Un</FONT></nobr>, Generalsekretär der PdAK<i class="fa fa-list"></i></b></h5>
+		<section class="activitySection">
+			<div class="first-activity col-xs-12 col-md-7">
+				<div class="news_contents newsArticle" style="cursor:pointer;min-height:310px;">
+				</div>
+				<label style="cursor:pointer;color:#F2784B;" value="Feierliche Einweihung des Krankenhauses und der örtlichen Industriebetriebe, welche nach der weit reichenden „20 × 10 Politik für die Entwicklung von örtlichen Gebieten“ unserer Partei im Kreis Ryonggang in der Stadt Nampho errichtet wurden" artdate="2025-12-30" fname="g25123001">
+								<i class="fa fa-forward"></i>
+								</label>
+
+				<div class="text-center speech">
+					<p><span>﻿AUSSPRUCH DES GENOSSEN <nobr><FONT style='FONT-SIZE:13px;'>KIM JONG UN</FONT></nobr>
+</span></p>
+					<p  class="bold_blck">„Koreas Entschluss ist eben Praxis.“
+</p>
+				</div>
+
+			</div>
+			<div class="activities col-xs-12 col-md-5" style="padding-top:10px;">
+				<div class="activity_list news_list">
+												<p class="newsArticle" data-toggle="modal" data-target="#modal_view" value="Feierliche Einweihung des Krankenhauses und der örtlichen Industriebetriebe, welche nach der weit reichenden „20 × 10 Politik für die Entwicklung von örtlichen Gebieten“ unserer Partei im Kreis Ryonggang in der Stadt Nampho errichtet wurden" artdate="2025-12-30" fname="g25123001">Feierliche Einweihung des Krankenhauses und der örtlichen Industriebetriebe, welche nach der weit reichenden „20 × 10 Politik für die Entwicklung von örtlichen Gebieten“ unserer Partei im Kreis Ryonggang in der Stadt Nampho errichtet wurden <span class="datec">[2025-12-30]</span></p>
+												<p class="newsArticle" data-toggle="modal" data-target="#modal_view" value="Der verehrte Genosse <FONT style = font-size:13px><nobr><FONT style='FONT-SIZE:13px;'>Kim Jong Un</FONT></nobr></FONT> leitete einen wichtigen Rüstungsbetrieb vor Ort an" artdate="2025-12-30" fname="g25123002">Der verehrte Genosse <FONT style = font-size:13px><nobr><FONT style='FONT-SIZE:13px;'>Kim Jong Un</FONT></nobr></FONT> leitete einen wichtigen Rüstungsbetrieb vor Ort an <span class="datec">[2025-12-30]</span></p>
+												<p class="newsArticle" data-toggle="modal" data-target="#modal_view" value="Einweihung der Papierfabrik Unsan im Bezirk Süd-Phyongan" artdate="2025-12-29" fname="g25122901">Einweihung der Papierfabrik Unsan im Bezirk Süd-Phyongan <span class="datec">[2025-12-29]</span></p>
+												<p class="newsArticle" data-toggle="modal" data-target="#modal_view" value="Der verehrte Genosse <FONT style = font-size:13px><nobr><FONT style='FONT-SIZE:13px;'>Kim Jong Un</FONT></nobr></FONT> wohnte der Startübung von strategischen Langstrecken-Cruisemissiles bei" artdate="2025-12-29" fname="g25122902">Der verehrte Genosse <FONT style = font-size:13px><nobr><FONT style='FONT-SIZE:13px;'>Kim Jong Un</FONT></nobr></FONT> wohnte der Startübung von strategischen Langstrecken-Cruisemissiles bei <span class="datec">[2025-12-29]</span></p>
+												<p class="newsArticle" data-toggle="modal" data-target="#modal_view" value="Zeremonie zum Aufziehen der Staatsflagge und zum Schwören anlässlich des Tages der Verfassung der DVR Korea" artdate="2025-12-28" fname="g25122801">Zeremonie zum Aufziehen der Staatsflagge und zum Schwören anlässlich des Tages der Verfassung der DVR Korea <span class="datec">[2025-12-28]</span></p>
+												<p class="newsArticle" data-toggle="modal" data-target="#modal_view" value="Der verehrte Genosse <FONT style = font-size:13px><nobr><FONT style='FONT-SIZE:13px;'>Kim Jong Un</FONT></nobr></FONT> traf sich mit den Arbeitsaktivisten und Verdienten, die zu Festveranstaltungen zum Tag der Verfassung und zum Neujahr eingeladen wurden, und ließ sich mit ihnen zum Andenken fotografieren" artdate="2025-12-28" fname="g25122802">Der verehrte Genosse <FONT style = font-size:13px><nobr><FONT style='FONT-SIZE:13px;'>Kim Jong Un</FONT></nobr></FONT> traf sich mit den Arbeitsaktivisten und Verdienten, die zu Festveranstaltungen zum Tag der Verfassung und zum Neujahr eingeladen wurden, und ließ sich mit ihnen zum Andenken fotografieren <span class="datec">[2025-12-28]</span></p>
+												<p class="newsArticle" data-toggle="modal" data-target="#modal_view" value="Der verehrte Genosse <FONT style = font-size:13px><nobr><FONT style='FONT-SIZE:13px;'>Kim Jong Un</FONT></nobr></FONT> leitete wichtige Rüstungsbetriebe vor Ort an" artdate="2025-12-26" fname="g25122601">Der verehrte Genosse <FONT style = font-size:13px><nobr><FONT style='FONT-SIZE:13px;'>Kim Jong Un</FONT></nobr></FONT> leitete wichtige Rüstungsbetriebe vor Ort an <span class="datec">[2025-12-26]</span></p>
+												<p class="newsArticle" data-toggle="modal" data-target="#modal_view" value="Der verehrte Genosse <FONT style = font-size:13px><nobr><FONT style='FONT-SIZE:13px;'>Kim Jong Un</FONT></nobr></FONT> leitete den Bau eines atombetriebenen U-Boots mit strategischen Lenkraketen vor Ort an" artdate="2025-12-25" fname="g25122501">Der verehrte Genosse <FONT style = font-size:13px><nobr><FONT style='FONT-SIZE:13px;'>Kim Jong Un</FONT></nobr></FONT> leitete den Bau eines atombetriebenen U-Boots mit strategischen Lenkraketen vor Ort an <span class="datec">[2025-12-25]</span></p>
+												<p class="newsArticle" data-toggle="modal" data-target="#modal_view" value="Feierliche Einweihung der örtlichen Industriebetriebe und des Dienstleistungskomplexes des Kreises Jongphyong" artdate="2025-12-25" fname="g25122503">Feierliche Einweihung der örtlichen Industriebetriebe und des Dienstleistungskomplexes des Kreises Jongphyong <span class="datec">[2025-12-25]</span></p>
+												<p class="newsArticle" data-toggle="modal" data-target="#modal_view" value="Teststart von Luftabwehrraketen neuen Typs" artdate="2025-12-25" fname="g25122502">Teststart von Luftabwehrraketen neuen Typs <span class="datec">[2025-12-25]</span></p>
+							
+				</div>
+			</div>
+		</section>
+		<section class="newsSection">
+			<div class="col-xs-12 col-md-7" style="align-content: end;">
+		
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+						<li data-target="#myCarousel" data-slide-to="1"></li>
+						<li data-target="#myCarousel" data-slide-to="2"></li>
+					</ol>
+					<div class="carousel-inner">
+						<div class="item active" style="background-image: url(/images/first/1.jpg);">
+						</div>
+
+						<div class="item" style="background-image: url(/images/first/2.jpg);">
+						</div>
+
+						<div class="item" style="background-image: url(/images/first/3.jpg);">
+						</div>
+					</div>
+					<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left"><i class="fa fa-chevron-left"></i></span>
+					</a>
+					<a class="right carousel-control" href="#myCarousel" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right"><i class="fa fa-chevron-right"></i></span>
+					</a>
+				</div>
+			
+			</div>
+
+			<div class="col-xs-12 col-md-5">
+				<div class="col-xs-12 col-md-6">
+					<h5  class="news-title" onclick="javascript:location.href='/main/index/ge/news'"><b>Nachrichten/Artikel<i class="fa fa-list"></i></b></h5>
+					<ul class="recent_list news_list">
+													<li class="viewArticle" data-toggle="modal" data-target="#modal_view" value="Aufführung der Zentralen Agitproptruppe des VWL" artdate="2025-12-31" fname="g25123121">Aufführung der Zentralen Agitproptruppe des VWL <span class="datec">[2025-12-31]</span></li>
+														<li class="viewArticle" data-toggle="modal" data-target="#modal_view" value="Festtreffen der Arbeiter und Gewerkschaftler" artdate="2025-12-31" fname="g25123122">Festtreffen der Arbeiter und Gewerkschaftler <span class="datec">[2025-12-31]</span></li>
+														<li class="viewArticle" data-toggle="modal" data-target="#modal_view" value="Feiern zum Einzug in neue Wohnungen im Bezirk Jagang" artdate="2025-12-31" fname="g25123123">Feiern zum Einzug in neue Wohnungen im Bezirk Jagang <span class="datec">[2025-12-31]</span></li>
+														<li class="viewArticle" data-toggle="modal" data-target="#modal_view" value="Das koreanische Volk schreitet zum IX. Parteitag" artdate="2025-12-31" fname="g25123131">Das koreanische Volk schreitet zum IX. Parteitag <span class="datec">[2025-12-31]</span></li>
+														<li class="viewArticle" data-toggle="modal" data-target="#modal_view" value="Die neu gebaute integrierte Gesamtschule" artdate="2025-12-31" fname="g25123132">Die neu gebaute integrierte Gesamtschule <span class="datec">[2025-12-31]</span></li>
+										
+					</ul>
+				</div>
+				<div class="col-xs-12 col-md-6">
+					<img alt="naenara-image" class="recent_photo  img-thumbnail" src="/images/periodic/news_daily/2025/12/30/25123003/007.jpg" />
+					<ul class="recent_list news_list b-left">
+													<li class="viewArticle" data-toggle="modal" data-target="#modal_view" value="Wahl der Top Ten der vorbildlichen IT-Einheiten im Jahr 2025" artdate="2025-12-31" fname="g25123133">Wahl der Top Ten der vorbildlichen IT-Einheiten im Jahr 2025 <span class="datec">[2025-12-31]</span></li>
+														<li class="viewArticle" data-toggle="modal" data-target="#modal_view" value="Die Kraft für die Bildung, Wissenschaft und Forschung aufbieten" artdate="2025-12-31" fname="g25123134">Die Kraft für die Bildung, Wissenschaft und Forschung aufbieten <span class="datec">[2025-12-31]</span></li>
+														<li class="viewArticle" data-toggle="modal" data-target="#modal_view" value="Leistungsschau für Schuluniformen" artdate="2025-12-31" fname="g25123135">Leistungsschau für Schuluniformen <span class="datec">[2025-12-31]</span></li>
+										
+					</ul>
+				</div>
+			</div>
+
+		</section>
+
+		<section class="multiSection">
+			<div class="col-xs-12 col-md-7">
+				<div class="multies">
+					<!-- 사진 -->
+					<div class="contents" id="contents_photo">
+						<a style="background-image:url('/images/photo-gallery/0105.gif');" href="#"
+						photourl="/main/photoView/de/icecream" 
+						phototitle="Speiseeisfabrik Taesongsan" photoname="icecream" photodate="2025-10-16">
+							<i class="icon-camera icon"></i>
+						</a>
+					</div>
+					<!-- 동영상 -->
+					<div class="contents">
+												<a class="vid_play" href="#" value="Jeder besucht gern den Reitklub Mirim" style="background-image:url(/images/video-gallery/279.gif);" fname="MirimRiding_g" artdate="2025-12-11" >
+							<h4 style="background-image:url(/images/home/player-3.png)" class="icon"></h4>
+						</a>
+					</div>
+					<!-- 광고 -->
+					<div class="contents">
+											<a href="/main/index/ge/advert" target="_blank"  style="background-image:url('/images/trade/goods/sangul/00.jpg');"></a>
+					
+						<!-- <a href="/main/index/ge/advert" target="_blank"  style="background-image:url('/images/trade/goods/sangul/00.jpg');"></a> -->
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-5">
+				<div class="subsites">
+					<div class="mysites">
+						<a href="http://www.korean-books.com.kp/index.php/Main/periodic/de/pictorialkorea" target="_blank"><img alt="naenara-image" src="/images/first/sites/mysites/korea_e.gif"></a><a href="http://www.korean-books.com.kp/index.php/Main/periodic/de/tradekorea" target="_blank"><img alt="naenara-image" src="/images/first/sites/mysites/trade.png"></a><a href="http://www.pyongyangtimes.com.kp/" target="_blank"><img alt="naenara-image" src="/images/first/sites/mysites/times.jpg"></a><a href="http://www.korean-books.com.kp/index.php/Main/periodic/de/mountainkorea" target="_blank"><img alt="naenara-image" src="/images/first/sites/mysites/kumsu.png"></a><a href="http://www.korean-books.com.kp/index.php/Main/firstpage/de/" target="_blank"><img alt="naenara-image" src="/images/first/sites/mysites/publish.png"></a>					</div>
+	
+					<div id="myCarousel_sites" class="carousel slide wisites" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<a href="http://www.korstamp.com.kp/" target="_blank"><img alt="naenara-image" src="/images/first/sites/subsites/stamp.png"></a><a href="http://www.yongsaeng.org.kp/" target="_blank"><img alt="naenara-image" src="/images/first/sites/subsites/found-en.png"></a><a href="/sites/kfpd/" target="_blank"><img alt="naenara-image" src="/images/first/sites/subsites/hope.png"></a><a href=/sites/national/ target="_blank"><img alt="naenara-image" src="/images/first/sites/subsites/national.png"></a><a href="/main/index/ge/exhibition/" target="_blank"><img alt="naenara-image" src="/images/first/sites/subsites/exhibition.png"></a>							</div>
+	
+							<div class="item">
+								<a href="/sites/polestar/" target="_blank"><img alt="naenara-image" src="/images/first/sites/subsites/polestar.png"></a><a href="/sites/rainbow/" target="_blank"><img alt="naenara-image" src="/images/first/sites/subsites/rainbow.png"></a><a href="/sites/refuture/" target="_blank"><img alt="naenara-image" src="/images/first/sites/subsites/future.png"></a><a href="/sites/kgf/" target="_blank"><img alt="naenara-image" src="/images/first/sites/subsites/green.png"></a><a href="/sites/samhae/" target="_blank"><img alt="naenara-image" src="/images/first/sites/subsites/samhae.png"></a>	
+							</div>
+	
+							<div class="item">
+								<a href="http://www.tourismdprk.gov.kp" target="_blank"><img alt="naenara-image" src="/images/first/sites/subsites/ktour.png"></a>	
+							</div>
+						</div>
+	
+						<!-- Left and right controls -->
+						<a class="left carousel-control" href="#myCarousel_sites" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left"><i class="fa fa-chevron-left"></i></span>
+						</a>
+						<a class="right carousel-control" href="#myCarousel_sites" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right"><i class="fa fa-chevron-right"></i></span>
+						</a>
+	
+					</div>
+	
+					<div class="popsites">
+						<a href="http://www.rodong.rep.kp"  target="_blank"><img alt="naenara-image" src="/images/first/sites/popsites/rodong.png"></a><a href="http://www.kcna.kp"  target="_blank"><img alt="naenara-image" src="/images/first/sites/popsites/kcna.png"></a><a href="http://www.dprkportal.kp"  target="_blank"><img alt="naenara-image" src="/images/first/sites/popsites/dprkportal.png"></a><a href="http://www.mfa.gov.kp"  target="_blank"><img alt="naenara-image" src="/images/first/sites/popsites/mfa.png"></a>	
+					</div>				
+				</div>
+			</div>
+		</section>
+		<p class="page-info">Die Homepage „Naenara“ sieht ihre Mission darin, den Völkern der Welt die DVR Korea vorzustellen und unter dem Ideal der Souveränität, des Friedens und der Freundschaft die Bande und den Austausch mit den Völkern aller Länder zu verstärken. <br>Sie wurde im Juni 2004 eingerichtet und ist in 9 Sprachen einschließlich des Koreanisch und Deutsch verfügbar.</p>
+	</div>
+	<!-- 첫페지에서 동영상 modal -->
+	<div class="v_modal">
+		<div class="v_modal-content">
+		</div>
+		<div class="v_video_title"></div>
+	</div>
+	<!-- 혁명활동소식에서 확대사진 modal -->
+	<div class="news_modal" >
+		<div class="news_content">
+			<table>
+				<tr><td></td></tr>
+			</table>
+			<div class="news_commen" style="color:white;">
+			
+			</div>
+			<div class="news_nav">
+			
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<script type="text/javascript" src="/js/main/index.js"></script>
+
+
+<footer>
+
+	<div class="contact text-center" onclick="openModal()">
+		<span><i class="icon-pointer"></i>Straßengemeinschaft Sochon, Stadtbezirk Sosong, Pyongyang, DVR Korea</span>
+		<span><i class="icon-call-end"></i>850-2-18111(8456), 850-2-3814598</span>
+		<span><i class="icon-envelope"></i>flph@star-co.net.kp</span>
+		<!-- <span class="socicons">
+			<a href="#" target="_blank"><i class="fa fa-skype"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-google-plus"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-vimeo"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-play"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-flickr"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-pinterest"></i></a>
+		</span> -->
+		<span>Urheberrecht© Verlag für Fremdsprachige Literatur, DVR Korea<br>
+			2004 - 2026		</span>
+	</div>
+
+</footer>
+
+<div class="modal fade bs-modal-lg" id="modal_view" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg" style="max-width: 900px!important">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+
+                <h4 class="modal-title" style="font-size:14px;"></h4>
+
+            </div>
+
+            <div class="modal-body"></div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class='fa fa-remove'></i></button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<button onclick="topFunction()" id="toTop" title="Go to top">&nbsp;<i class='fa fa-chevron-up'></i>&nbsp;</button>
+
+<script type="text/javascript" src="/assets/public_code/common.js"></script>
+</body>
+
+</html>
+<!-- 0.0109 -->

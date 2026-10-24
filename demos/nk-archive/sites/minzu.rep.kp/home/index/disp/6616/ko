@@ -1,0 +1,585 @@
+
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>민주조선 | 조선민주주의인민공화국 최고인민회의 상임위원회 및 내각기관지</title>
+    <meta charset="utf8"/>
+    <link rel="icon" href="/resource/images/cholima.png" type="image/x-icon" />
+    <link href="/resource/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/skin/default.css">
+    <link rel="stylesheet" href="/css/blueimp-gallery.min.css">
+    <link href="/css/style_gallery.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resource/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/first_ko.css">
+    <script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+        <link href="/assets/css/nivo-lightbox.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/css/font.css">
+</head> 
+<body id="top" style="background-color: #fff;font-family:KPCheonRiMa; min-width: 1100px;  "> 
+    <header id="header"   >  
+        <div class="fixedMenu" style="background: url(/resource/custom/header_bg_right_1.png)  repeat-x ; " >
+            <div style="background: url(/resource/custom/header_bg_left.png) no-repeat left 0;   height: 85px; font-family: 'KPCheonRiMa';">   
+                <div class="container" style="background: url(/resource/header_back.jpg) no-repeat center top ; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; min-width:100%!important; "  >
+                    <ul class="menu_top" style="padding-right: 15px;">
+                        <form id="lang" method="post" action="/home/index">
+                            <input id="language" name="language" value="" hidden />
+                            <input id="page" name="page" value="disp" hidden />
+                            <input type="hidden" name="_csrf" value="c928d52e1857ae0c986c81d36775032e"/>
+                        </form>
+                        <li>
+                            <a style="background-color: #004df3;"  href = "/home/index/disp/0/ko">조선어                            </a>
+                        </li>
+                        <li>
+                            <a  href = " /home/index/disp/0/en">
+                                English                            </a>
+                        </li>
+                        <li>
+                            <a  href ="/home/index/disp/0/ch">
+                                 汉语                            </a>
+                        </li>
+                    </ul> 
+                    <div class="logo " style="padding-left: 10%;">
+                        <a href="/Home/index/first/0/ko" onclick="setPage('first');" style="display:block;margin-bottom:5px;"><img src="/resource/logo.png"></a>
+                    </div> 
+                </div>
+                <div class="mobile1" style="font-family:'KPCheonRiMa'; ">
+                    <div class="rightPart1" style="  font-family: 'KPCheonRiMa';  font: inherit; ">
+                        <b>  
+                            <ul class="menubar1" style="font-family:'KPCheonRiMa';font-size: 13px; " > 
+                                <li   >
+                                    <a href="/home/index/first/0/ko"  style=" /* text-shadow: 1px 1px 1px #000!important;*/font-family:'KPCheonRiMa'; " >
+                                        <b>첫페지</b>
+                                    </a>
+                                </li>
+                                <li   >
+                                    <a  href="/home/index/revolution/0/ko"     >
+                                        <b>혁명활동소식</b>
+                                    </a>
+                                </li  >
+                                <li   >
+                                    <a  href="/home/index/power_news/0/ko"    >
+                                        <b>정권기관소식</b>
+                                    </a>
+                                </li>
+                                <li class="has-dropdown"  >
+                                    <a href="/home/index/all_view/0/ko"     >
+                                     <font  ><b>분야별기사</b></font></a>
+                                     <ul class="dropdown" style="width: 200px;padding-right: 10px;padding-left: 0px;">
+                                            <li>
+                                                <a href="/home/index/politics/0/ko"  >정치 
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/home/index/economy/0/ko"  >경제                                                </a>
+                                            </li>
+                                            <li>
+                                                <a  href="/home/index/culture/0/ko"  >문화                                                </a>
+                                            </li>
+                                            <li style="padding-bottom:px;">
+                                                <a  href="/home/index/tourist/0/ko "  >관광,명승지                                                </a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="/home/index/overseas/0/ko"  >해외동포                                                </a>
+                                            </li>
+                                            <li>
+                                                <a  href="/home/index/international/0/ko"  >국제적련대성                                                </a>
+                                            </li>
+                                    </ul>
+                                </li>
+                                <li  class="has-dropdown">
+                                    <a  href="/home/index/media/0/ko"  > <font   ><b> 다매체</b></font></a>
+                                    <ul class="dropdown" style="padding-right: 10px;padding-left: 0px;">
+                                        <li><a href="/home/index/photos/0/ko"  >사진</a></li>
+                                        <li><a  href="/home/index/video/0/ko"  >동영상</a>
+                                        </li> 
+                                    </ul>
+                                </li>    
+                                <li  class=" dropdown">
+                                    <div class="btn-group pull-right">
+                                        <a  href="/home/index/search/0/ko"  class=" btn-sm btn-outline dropdown-toggle">검색</a>
+                                                                            </div> 
+                                </li>  
+                             </ul>      
+                        </b>
+                    </div>
+                </div> 
+                <div style="clear: box;height: 20px;"></div>
+            </div>       
+         </div>
+    </header> 
+    <style type="text/css">
+        .modal-backdrop{
+            z-index: 0;
+        }
+    </style>
+<link href="/resource/css/home.css" rel="stylesheet" />
+<div class="main-container container-fluid">
+    <!-- Page Container -->
+    <div class="page-container" style="position: absolute;top: 85px;width: 100%;">
+        <div class="row"  style=" ">
+            <div class="powerheader" style="background: linear-gradient(5deg, #4b16cc ,#bea1f7 );border-bottom:5px solid #784ce2 ; " >
+                <h1 >
+                    <a href="/home/index/disp/0/ko">
+                        <font style="font-size: 28px;font-family: 'KPCheonRiMa';" color="#fff" >
+                            <b>
+                                정  치
+                                
+                            </b>
+                        </font>
+                    </a>
+                </h1>
+            </div>
+            <div class="col-sm-3">
+                <style type="text/css">
+                    a.list-group-item:hover, a.list-group-item:focus{
+                        background-color: #d2cdce;
+                    }
+                    a>span:hover{
+                        color: blue;
+                    }
+                    a>span.active{
+                        color: red;
+                    }
+
+                </style>
+                <div class="list-group" id="sidebar" style="font-color:#000; position: relative;width: 280px;height: 700px; box-shadow: 5px 1px 20px rgba(195, 205, 218, 1);">                    
+                        <div style="height: 10px;"></div>
+                            <li style="text-align: center; " >
+                                <i class="menu-icon"></i>
+                                <a  style="border: 0px;" class="list-group-item" href='/home/index/all_view/0/ko' style="border-top: 0px;border: 0px;">
+                                    <span style="font-size: 17px;font-weight: bold;" class=" ">
+                                        전체보기
+                                    </span>
+                                </a>
+                            </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/politics/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="active" style="font-size: 17px;font-weight: bold;">정  치</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/economy/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">경  제</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/culture/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">문  화</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/tourist/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">관광,명승지</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/overseas/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">해 외 동 포</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/international/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">국제적련대성</span>
+                                    </a>
+                                </li>
+                                              
+                </div>
+            </div>
+
+        
+         
+
+
+
+<style type="text/css"> 
+
+	.search-result-counter
+
+	 {
+
+	 	box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);height: 44px;line-height: 24px;padding: 10px;text-align: center;border-radius: 100px;width: 44px;
+
+	 }
+
+	 div p{
+
+	 	margin: 0 0 0px;
+
+	 }
+
+</style>
+
+<div class="col-sm-9" >
+
+	<div style="height: 0px;"></div>
+
+
+
+	<div class="widget"  >			                
+
+	    <div class="widget-body" style=" margin-right: 0%;margin-left: 0%;">
+
+	        <form id="myform" method="get">
+
+
+	            <div class="row" id="img_content" name="img_content" style="margin-bottom: 35px; ">
+
+	            	 
+                    <table id="simple-table" style="width: 100%;" > 
+					    <tbody >
+					    	<tr>
+						    	<td align="center" style="padding-left: 10%;padding-right: 10%; text-align: center;font-size: 24px; font-family: KPCheonRiMa; line-height: 1.3;color: black;padding-bottom:15px ">
+									  우리의 힘과 기술로 우리의것을 창조하도록 현명하게 이끌어주시여  
+								</td>
+							</tr>
+				    	
+							<tr>
+
+								<td  > 
+
+                                    <div class="panel panel-primary" style=" border-width: 0px;border-right:0px;border-left: 0px;text-indent: 12px;">
+
+                                        <div class="panel-body" style=" text-indent: 12px;text-align: justify;letter-spacing: 1px;font-size: 16px;font-family:KPCheonRiMa;line-height: 20px;     color: #000; line-height: 1.5; " >
+
+                                        	<style type="text/css">
+
+                                        		p{
+
+                                        			line-height: 22px;
+
+                                        			margin-top: 0px;
+
+                                        			font-family: KPCheonRiMa;
+
+                                        			font-size: 16px;
+
+                                        			color: #000;
+
+                                        			text-align: justify;
+
+                                        			text-indent: 12px;
+
+                                        			                                         		}
+
+                                        	</style>
+
+                                            <p><nobr>위대한</nobr> 당중앙의 <nobr>향도따라</nobr> 우리식 사회주의의 전면적부흥，전면적발전을 당겨오기 위한 투쟁이 날이 갈수록 고조되고있다．<p/>
+사회주의건설의 일대 상승기를 열어나가기 위한 오늘의 투쟁은 존엄높고 강대한 우리 조국에서 우리의 힘，우리의 지혜，우리의것을 가지고 못할것이란 없다는 든든한 배심과 자신심을 가지고 떨쳐나선 자력갱생강자들의 대진군이다．<p/>
+<nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서는</nobr> 다음과 같이 말씀하시였다．<p/>
+<strong><font face='KPCheonRiMa'><b>《우리는 자기의것에 대한 믿음과 애착，자기의것에 대한 긍지와 자부심을 가지고 강성국가건설대업과 인민의 아름다운 꿈과 리상을 반드시 우리의 힘，우리의 기술，우리의 자원으로 이룩하여야 합니다．》</b></font></strong><p/>
+자력갱생， 간고분투를 유일한 투쟁방식으로 삼고 모든것을 제손으로 창조해나갈 때 사회주의강국을 일떠세울수 있으며 우리의 모든 꿈과 리상을 현실로 꽃피울수 있다．<p/>
+하기에 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서는</nobr> 사대와 외세의존은 망국의 길이고 자강의 길만이 우리 조국，우리 민족의 존엄을 살리고 혁명과 건설의 활로를 열어나가는 길이라고 하시며 천만대중이 자력갱생의 혁명정신으로 새로운 승리를 쟁취해나가도록 정력적으로 이끌어주시였다．<p/>
+언제인가 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서</nobr> 락랑영예군인수지일용품공장을 찾으시였을 때이다．<p/>
+이날 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서는</nobr> 공장의 여러 현장을 돌아보시며 공장에서 자체로 설비들을 만들어 여러가지 제품을 꽝꽝 생산하고있는데 대하여 커다란 만족을 표시하시였다．<p/>
+<nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서</nobr> 필접이기앞에 이르시였을 때였다．<p/>
+공장일군이 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께</nobr> 이 설비는 공장의 로동계급이 자체로 만든것이라고 자랑을 담아 말씀드리였다．<p/>
+한동안 필접이기의 작업모습을 보아주시던 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서는</nobr> 필접이기가 공장에서 자체로 만든 설비이면 좋다고，이 공장에서는 공장건물들도 자체로 건설하고 설비도 자체로 만들어쓰고있다고 하시며 치하해주시였다．그러시고는 공장의 생산공정을 기쁨속에 둘러보시며 락랑영예군인수지일용품공장은 자력갱생의 기치를 들고나가는 공장이라는 값높은 평가를 안겨주시였다．<p/>
+<nobr>경애하는</nobr> <nobr>그이의</nobr> 값높은 평가를 받아안은 공장일군들은 격정을 금할수 없었다．<p/>
+사회주의강국건설에 조금이나마 기여할 마음으로 일하였을뿐인데 자력갱생의 기치를 들고나가는 공장이라고 높이 내세워주시는 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지</nobr>．<p/>
+그 어디를 찾으시여도，하나의 창조물을 대하시여도 우리의 원료，우리의 힘과 기술로 해낸것이라면 그토록 귀중히 여기시며 값높이 내세워주시는분이 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지</nobr>이시다．<p/>
+경애하는 <nobr><b style=font-size:1.11em>김정은</b>동지께서</nobr> 수많은 경공업공장들을 현지지도하실 때마다 경공업부문앞에 제시하시는 중요한 과업이 있다．<p/>
+생산공정을 끊임없이 현대화하는것과 함께 원료，자재，설비의 국산화를 중핵으로 틀어쥐고나갈데 대한 문제이다.<p/>
+우리의 소비품을 더 많이 만들어 인민들이 경공업의 덕을 보게 하자면 발전하는 시대의 요구에 맞게 생산공정의 현대화수준을 계속 높여야 하며 어떻게 하나 원료，자재，설비의 국산화비중을 높여야 한다는것이 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서</nobr> 중시하시는 경공업발전원칙의 하나이다．<p/>
+하기에 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서는</nobr> 원산구두공장을 찾으시여서는 손로동이 많이 드는 신발생산에서 부분별공정들의 현대화만으로 만족했던 공장일군들의 안목을 틔워주시고 신발생산의 전 과정을 자동화하여야 한다고 하시며 현대화의 목표도 제시해주시였고 평양어린이식료품공장을 찾으시여서는 설비현대화에서 국산화비중을 높이도록 이끌어주시여 우리식 현대화의 본보기를 창조해주시였다．<p/>
+언제인가 제품생산，품질관리，업무활동 등 생산과 경영활동에 대한 통합생산관리체계를 완벽하게 구축한 어느한 식료공장을 찾으시였을 때에도 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서는</nobr> 다른 식료공장들에서도 기술개건을 할 때 이 공장을 본보기，표준으로 삼아야 한다고，현대화기준을 바로 정하는것이 중요하다고 하시면서 우리 당이 바라는 현대화란 남의 힘과 기술을 도입한 현대화，다른 나라 설비들을 그대로 가져다놓은 현대화가 아니라 우리의 주체적인 력량과 우리의 기술에 의거한 현대화이라고 가르쳐주시였다．<p/>
+우리의 주체적인 력량과 우리의 기술에 의거한 현대화！<p/>
+바로 그것이였다．<p/>
+언제나 우리의것이 세계를 앞서나가야 한다는 높은 목표를 제기하시고 그 실현에로 떠밀어주시는 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지이시기에</nobr> 현대화의 기준도 우리의 력량과 우리의 기술에 의거한 현대화로 되여야 한다는 귀중한 가르치심을 주신것이다．<p/>
+자력갱생의 기치를 더욱 높이 추켜들고 우리의 힘과 기술로 우리의것을 창조할데 대한 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지의</nobr> <nobr>위대한</nobr> 호소는 거창한 창조와 혁신으로 들끓는 사회주의건설전역에 세차게 메아리쳤다．<p/>
+세계를 앞서나가려는 인민의 포부와 신심은 하늘에 닿고 우리식 사회주의의 전진을 힘있게 추동하는 자력자강의 동력은 더욱 줄기차게 강화되고있다．<p/>
+얼마전에도 나라의 화학공업을 우리의 원료에 의거하는 주체공업으로 확고히 전환시킬데 대한 당의 뜻을 높이 받들고 흥남비료련합기업소의 로동계급과 과학자，기술자，일군들은 당정책결사관철의 투쟁정신과 창조본때로 우리의 자원，우리의 기술에 의한 멜라민수지생산공정을 훌륭히 일떠세웠다．<p/>
+멜라민수지는 열견딜성과 제품의 정결도，안정성이 좋고 항균성도 강하여 세계적으로도 기계공업과 경공업을 비롯한 경제건설과 사회생활분야에서 리용범위가 부단히 확대되고있으며 그 수요는 날로 커가고있다．<p/>
+우리 인민들의 문명과 복리증진을 위하여 크나큰 로고와 심혈을 바쳐가시는 <nobr>경애하는</nobr> <nobr><b style=font-size:1.11em>김정은</b>동지께서는</nobr> 경제발전과 인민생활향상에 긴절한 멜라민수지를 국산화할데 대한 귀중한 가르치심을 주시고 그 실행을 강력히 추진하기 위한 방향과 방도를 환히 밝혀주시였다．<p/>
+현행비료생산을 중단없이 내밀면서도 고도로 정밀하고 복잡한 수십종의 설비장치물을 일떠세우는 멜라민수지생산공정건설은 방대하고 생소한 공사였지만 흥남비료련합기업소 로동자들과 과학자，기술자들은 우리 땅에서 우리의 힘과 기술로 못해낼 일이 없다는 든든한 배심으로 한사람같이 떨쳐나섰다．자기 힘에 대한 굳건한 믿음으로 이들은 끝끝내 우리 식의 선진적인 멜라민수지생산공정을 훌륭히 일떠세웠다．<p/>
+우리의 원료，우리 기술로 만든 첫 제품이 쏟아져나올 때 기업소일군들과 로동자，과학자，기술자들은 우리의 힘으로 우리의것을 창조하는데 번영이 있고 승리가 있으며 우리 식대로 살며 투쟁해나갈 때 오늘의 총진군에서 영예로운 승리자가 될수 있다는 철리를 다시금 심장깊이 새기였다．<p/>
+이것은 결코 흥남의 일군들과 로동계급，과학자，기술자들만이 새긴 철리가&nbsp; 아니다．당당한 우리의것이라고 자부할수 있는 창조물들을 내놓는 그 어느 일터들에 가보아도 든든한 배심과 자신심을 가질 때 우리의 힘，우리의 지혜，우리의것을 가지고 못할것이란 없다는 이야기를 들을수 있다．<p/>
+우리 땅에서 우리의것을 가지고 못해낼 일이 없다！<p/>
+이것이야말로 어제와 오늘은 물론 래일에도 누구나 변함없이 간직해야 할 자신만만한 강자의 배심이다．<p/>
+모든 일군들과 근로자들이여，<p/>
+우리 땅에서 우리의것을 가지고 못해낼 일이 없다는 배짱과 자신심을 가지고 우리식 사회주의건설의 전면적부흥， 전면적발전을 힘있게 다그쳐나가자． 
+
+<p style="text-align: right;">본사기자&nbsp; 신 혁 철 
+ 
+
+                                        </div>
+
+                                    </div>
+
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+
+					 
+
+				</div>
+
+			</form>
+
+	    </div>
+
+	</div>
+
+</div> 
+
+
+  
+
+<script>
+
+$(document).ready(function() {
+
+    resizeImages1();
+    resizeImages2();
+
+
+
+    $(window).on('resize', function(){
+
+        resizeImages1();
+        resizeImages2();
+
+    });
+
+});
+
+function resizeImages1() {
+
+    var windowWidth = $('#dddd').innerWidth();
+
+    var width = windowWidth * 0.6;
+
+    var height = windowWidth * 0.4;
+    // $('.banner').css('width', width);
+
+    // $('.banner').css('height', height);
+
+    // $('.carousel-inner .item img').each(function() {
+
+    //     var orig_img_width = $(this).data('width');
+
+    //     var orig_img_height = $(this).data('height');
+
+    //     var orig_img_rate = orig_img_width / orig_img_height;
+
+    //     var dest_img_width = width;
+
+    //     var dest_img_height = height;
+
+    //     var margin_top = 0;
+
+    //     if (orig_img_rate >= 1.5) {
+
+    //         dest_img_width = width;
+
+    //         dest_img_height = width / orig_img_rate;
+
+    //         margin_top = (height - dest_img_height) / 2;
+
+    //     } else {
+
+    //         dest_img_width = height * orig_img_rate;
+
+    //         dest_img_height = height;
+
+    //     }
+    //     $(this).css('width', dest_img_width)
+
+    //         .css('height', dest_img_height)
+
+    //         .css('margin-top', margin_top);
+
+    // });
+    $('a.carousel-control span').each(function() {
+
+    	var top = (height - $(this).height()-10) / 2;
+
+    	$(this).css('top', top);
+
+    	$(this).css('font-size', top/2);
+    });
+
+}
+function resizeImages2() {
+    var windowWidth = $('#revolution').innerWidth();
+    var width = windowWidth * 0.6;
+    var height = windowWidth * 0.4;
+    // $('.banner').css('width', width);
+
+    // $('.banner').css('height', height);
+    // $('.carousel-inner .item img').each(function() {
+
+    //     var orig_img_width = $(this).data('width');
+
+    //     var orig_img_height = $(this).data('height');
+
+    //     var orig_img_rate = orig_img_width / orig_img_height;
+
+    //     var dest_img_width = width;
+
+    //     var dest_img_height = height;
+
+    //     var margin_top = 0;
+    //     if (orig_img_rate >= 1.5) {
+
+    //         dest_img_width = width;
+
+    //         dest_img_height = width / orig_img_rate;
+
+    //         margin_top = (height - dest_img_height) / 2;
+
+    //     } else {
+
+    //         dest_img_width = height * orig_img_rate;
+
+    //         dest_img_height = height;
+
+    //     }
+    //     $(this).css('width', dest_img_width)
+
+    //         .css('height', dest_img_height)
+
+    //         .css('margin-top', margin_top);
+
+    // });
+
+    $('#vector').each(function() {
+
+    	var top = (height - $(this).height()-10) / 2;
+
+    	$(this).css('top', top+50);
+
+    });
+
+    $('#vector1').each(function() {
+
+    	var top = (height - $(this).height()-10) / 2;
+
+    	$(this).css('top', top+50);
+
+    });
+ 
+  	$('#ModalHeight').each(function() {
+
+    	
+
+    	$(this).css('height', 200+height);
+
+    });
+}
+
+</script>     <div style="background: url(/resource/images/footer_left.png) repeat-x left 0 ;  
+
+      height: 54px; width: 100%; /*position: fixed;*/ bottom: 0; display: block; /*width*/: 100%; position: fixed;
+
+      z-index: 1002; ">     
+
+     <div   style="background: url(/resource/images/footer_right.png)  no-repeat right 0 ; 
+
+          /*box-sizing: border-box;*/
+
+          height: 54px;width: 100%; bottom: 0;display: block; position: absolute;z-index: 1002;" >
+
+       <div   style="background: url(/resource/images/footer_back.png) no-repeat center bottom ; height: 54px; width: 100%; bottom: 0;/*box-sizing: border-box;*/display: block; position: absolute;z-index: 1000;/*min-width:100%!important; */">      
+
+             <p class="" style="margin: 0 0 -10px;line-height: 52px; font-size: 20px;">
+
+                <font color="#0a43b6" face="KPCheonRiMa"  style="float: right;padding-right: 90px;  " >
+
+                  <strong>
+
+                    <b style="text-shadow:1px 1px 1px #0a43b6; ">
+
+                      저작권 2025 © 조선민주주의인민공화국 민주조선사  
+
+                    </b>
+
+                  </strong>
+
+                </font>
+
+            </p> 
+
+              <a href="#header" class="scrollup" style="margin-bottom: 30px;"><i class="fa fa-chevron-up"></i></a>  
+
+        </div>
+
+      </div> 
+
+      </div>   
+
+     <script src="/js/main.js"></script>
+
+     <script src="/resource/js/dropdown.js"></script>
+
+     <script src="/resource/js/custom.js"></script>
+
+
+
+     <!--gallery-->
+
+     <script src="/resource/js/jquery.min.js"></script>
+
+     <script src="/js/bootstrap.min.js"></script>  
+
+     <script src="/resource/js/jquery.sticky.js"></script>
+
+     <script src="/resource/js/nivo-lightbox.min.js"></script>
+
+     <script src="/resource/js/custom1.js"></script>
+
+     <script src="/resource/js/css3-animate-it.js"></script>
+
+    <script type="text/javascript" src="/resource/js/js/tms-0.3.js"></script>
+
+    <script type="text/javascript" src="/resource/js/js/tms_presets.js"></script> 
+
+    <script type="text/javascript" src="/resource/js/js/jquery.easing.1.3.js"></script> 
+
+    <script src="/resource/js/js1/plugins/blueimp/jquery.blueimp-gallery.min.js" ></script>
+
+    <script src="/resource/js/js1/jquery-2.1.1.js"></script>
+
+    <script src="/resource/js/js1/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <script src="/resource/js/js1/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <script src="/assets/css3-animate-it.js" type="text/javascript"></script>
+
+    <script src="/assets/nivo-lightbox.min.js" type="text/javascript"></script>
+
+    <script src="/assets/custom.js" type="text/javascript"></script>
+
+    </body>
+
+
+
+</html>

@@ -30,4 +30,4 @@ Branding/logo. 1.5 MB PNG.
 - `BBL P2S Manual.pdf` — 20.3 MB (PDF, binary — not line-counted)
 
 ---
-_Spec generated from the project's own files on 2026-09-28 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._
+_Spec generated from the project's own files on 2026-10-22 (`gen-project-specs.py`). Everything above was read from the listed files — file counts, line counts, names, routes, headings and script comments. No description was invented._

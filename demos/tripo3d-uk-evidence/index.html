@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>tripo3d.uk — evidence bundle</title>
+<style>
+  :root{--bg:#0a0c11;--panel:#11141b;--line:#242a37;--tx:#e8eaf0;--mut:#98a1b3;--dim:#6d7686;
+    --ac:#7c8cff;--ac2:#6366f1;--ok:#34d399;--warn:#ffd166;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);line-height:1.62;
+    -webkit-font-smoothing:antialiased}
+  a{color:var(--ac)}
+  .wrap{max-width:900px;margin:0 auto;padding:28px 22px 80px}
+  .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+    border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:26px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 11px;
+    color:var(--mut);letter-spacing:.1em}
+  h1{font-size:clamp(24px,4vw,36px);line-height:1.12;margin:0 0 12px;font-weight:800;letter-spacing:-.02em}
+  h1 em{font-style:normal;color:var(--ac)}
+  .deck{color:var(--mut);font-size:16px;max-width:70ch;margin:0 0 22px}
+  h2{font-size:12px;font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);
+    margin:36px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--line);font-weight:700}
+  table{width:100%;border-collapse:collapse;font-size:13.6px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font:700 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:#0d1016}
+  tr:last-child td{border-bottom:0}
+  .tblwrap{border:1px solid var(--line);border-radius:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  code{font-family:var(--mono);font-size:12.4px;color:#cfd6e6;background:#0e1117;border:1px solid var(--line);
+    border-radius:5px;padding:1px 5px;overflow-wrap:anywhere}
+  .note{font-size:13px;color:var(--dim)}
+  .note b{color:var(--mut)}
+  .warnbox{border:1px solid #4b1f26;background:#160f12;border-radius:10px;padding:12px 14px;
+    font-size:13.2px;color:#f0c9c9;margin-top:16px}
+  .warnbox b{color:#ffb4b4}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+  .btn{display:inline-flex;text-decoration:none;font:650 13px/1 var(--sans);padding:10px 14px;border-radius:9px;
+    border:1px solid var(--line);background:#161a23;color:var(--tx)}
+  .btn:hover{border-color:#3a4256;background:#1b202b}
+  .btn.pri{background:var(--ac2);border-color:var(--ac2);color:#fff}
+  pre{background:#0e1117;border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow-x:auto;
+    font-family:var(--mono);font-size:12.2px;color:#cfd6e6;margin:0}
+  footer{margin-top:44px;border-top:1px solid var(--line);padding-top:16px;font-size:12.4px;color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <span>Evidence bundle · 2026-10-21</span>
+    <span><span class="chip">tripo3d.uk</span><span class="chip">captured live</span></span>
+  </div>
+
+  <h1>Raw evidence for <em>tripo3d.uk</em></h1>
+  <p class="deck">Three files, hashes recorded, nothing edited after the capture. This is what the
+  teardown's claims sit on.</p>
+
+  <h2>Files</h2>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>File</th><th>What it is</th><th>Bytes</th></tr></thead>
+      <tbody>
+        <tr><td><a href="./served-shell.html.txt">served-shell.html.txt</a></td><td>The exact 3,396-byte HTML returned by <code>GET https://tripo3d.uk/</code>, unmodified — an empty Nuxt shell, no app code, no assets. Saved as <code>.txt</code> on purpose: see <a href="#integrity">integrity</a></td><td>3,396</td></tr>
+        <tr><td><a href="./announcement.json">announcement.json</a></td><td>Byte-for-byte body of <code>GET /api/announcement</code> — the operator's own admission that the backend accounts run out of credits</td><td>555</td></tr>
+        <tr><td><a href="./bundles.sha256">bundles.sha256</a></td><td>SHA-256 of all 49 JS chunks (1,320,125 B total) as served on 2026-10-21 — the manifest that proves which build was analysed</td><td>3,827</td></tr>
+        <tr><td><a href="./MANIFEST.sha256">MANIFEST.sha256</a></td><td>Hashes of the three files above, in <code>shasum -c</code> format</td><td>253</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="integrity">Verify it yourself</h2>
+  <pre>cd tripo3d-uk-evidence
+shasum -a 256 -c MANIFEST.sha256                       # the download is intact
+curl -s https://tripo3d.uk/ | shasum -a 256             # live build — will drift, see below
+curl -s https://tripo3d.uk/api/announcement | shasum -a 256</pre>
+
+  <p class="note" style="margin-top:12px"><b>Why the shell ships as <code>.txt</code>:</b> anything served
+  with an HTML content-type gets rewritten in flight — this site's own skin injector appends a newline and a
+  <code>&lt;script&gt;</code> block to every page, and Cloudflare appends its analytics beacon. A file you
+  download as <code>.html</code> would therefore never hash to the manifest. Sent as
+  <code>text/plain</code>, the bytes arrive exactly as captured, so the hash is checkable. Rename a copy to
+  <code>.html</code> locally if you want to render the empty shell.</p>
+
+  <p class="note" style="margin-top:12px">The live shell will drift as they redeploy — the value of a
+  hash is that it pins <b>the build this analysis was written against</b> (Last-Modified
+  2026-09-14 11:43:40 GMT), not that the origin never changes.</p>
+
+  <h2>What is not here, and why</h2>
+  <p class="note">The operator's <b>backend</b> is not here — no account, no API, no way in. What the
+  teardown does publish is the front-end: <code>../tripo3d-uk-mirror/</code> runs the same 49 chunks
+  (each still matching <code>bundles.sha256</code>) with a small guard that answers
+  <code>/api/announcement</code> from the captured body and fabricates the rest locally, so the
+  workspace and the eight <code>/admin</code> screens render without a real session — any password
+  gets in, every number is a constant, and a submitted job ends in a <b>sample model</b> — the
+  Khronos duck, labelled DEMO — after seven seconds of fake progress, never something generated from
+  the picture you uploaded. The shell it boots from is the 3,396-byte document in this folder, with
+  seven documented deltas (relative asset URLs, router base, guard + cache-buster, icon link,
+  noindex) — see <code>../tripo3d-uk-mirror/MIRROR.md</code>.</p>
+
+  <div class="warnbox">
+    <b>Do not enter a password you use anywhere else.</b> The copy's login is a local stub — anything
+    typed is accepted because nothing is checked and nothing is sent, so there is no reason to type a
+    real one. This bundle never logs in, proxies or replays against the origin. If you want to look at
+    the live site yourself, treat any account you create there as public: the operator can read your
+    prompts, uploads and balance.
+  </div>
+
+  <div class="btnrow">
+    <a class="btn pri" href="../tripo3d-uk-teardown.html">← Back to the teardown</a>
+    <a class="btn" href="../../index.html">Portfolio</a>
+  </div>
+
+  <footer>Captured from the live origin on 2026-10-21 · no account created, no login attempted.</footer>
+</div>
+</body>
+</html>

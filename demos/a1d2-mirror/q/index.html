@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>a1d2.org — link compressor (private)</title>
+  <style>
+
+    :root {
+      color-scheme: light dark;
+    }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 120%;
+    }
+    * {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", system-ui, "Segoe UI", sans-serif;
+    }
+    #content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s;
+    }
+    h1 {
+      margin: 0;
+    }
+    p {
+      margin-top: 0;
+    }
+    label {
+      font-size: 0.9em;
+    }
+    span {
+      text-align: center;
+    }
+    a {
+      color: rgb(50, 100, 255);
+    }
+    .title {
+      font-size: 2.5em;
+    }
+    .subtitle {
+      font-size: 0.6em;
+      margin-top: -10px;
+      font-style: italic;
+      opacity: 0.8;
+    }
+    .source-link {
+      font-size: 0.75em;
+    }
+    #input-link, #input-reverse {
+      padding: 5px 8px;
+      border: 0;
+      outline: 0;
+      border-bottom: 2px solid light-dark(
+        rgba(0, 0, 0, 0.2),
+        rgba(255, 255, 255, 0.2)
+      );
+      border-radius: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      background-color: light-dark(
+        rgba(0, 0, 0, 0.1),
+        rgba(255, 255, 255, 0.1)
+      );
+    }
+    .divider {
+      width: 60%;
+      border: 0;
+      border-top: 1px solid light-dark(rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.15));
+      margin: 24px 0 4px;
+    }
+    #output-link-container, #output-reverse-container {
+      margin: 10px 0 0 0;
+      text-align: center;
+    }
+    #output-link, #output-reverse {
+      word-break: break-all;
+    }
+    #output-ratio {
+      transition: color 0.5s;
+      color: gray;
+      user-select: none;
+    }
+    #qrcode {
+      display: none;
+      image-rendering: pixelated;
+      padding: 16px;
+    }
+    #qr-correct-level-container {
+      display: none;
+    }
+    #query-warning {
+      display: none;
+      font-size: 1rem;
+      text-align: justify;
+      text-align-last: center;
+      max-width: 80vmin;
+      background-color: gold;
+      color: #111111;
+      padding: 5px 10px;
+      border-radius: 10px;
+      margin: 5px 0 15px 0;
+    }
+    #query-warning summary {
+      cursor: pointer;
+      color: #111111;
+    }
+    header {
+      position: absolute;
+      top: 20px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+    .credits {
+      position: absolute;
+      bottom: 16px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.72rem;
+      line-height: 1.5;
+      opacity: 0.75;
+      padding: 0 12px;
+    }
+    .credits .modified {
+      font-size: 0.92em;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="source-link" href="https://github.com/p2r3/ha.mr" target="_blank">ha.mr by p2r3 — source on GitHub</a>
+    |
+    <a class="source-link" href="https://youtu.be/TOr1Vvji6jA" target="_blank">Explanation video</a>
+  </header>
+
+  <div id="content">
+
+    <h1 class="title">a1d2.org</h1>
+    <p class="subtitle">link compressor &amp; QR optimizer</p>
+
+    <input type="text" id="input-link" placeholder="https://some-long.link/" autofocus>
+    <details id="query-warning">
+      <summary>Consider removing parameters...</summary>
+      <br>
+      Some links include data that isn't necessary for the link to function,
+      such as tracking information or page state. This data comes in the
+      form of <i>query parameters</i>, marked by "?" and "&amp;" characters.
+      <br><br>
+      Removing these segments can sometimes significantly shorten the link
+      without breaking it. For example, an Amazon product link contains a lot
+      of tracking information. Everything past the "?" symbol can be safely
+      removed, making the link much shorter.
+    </details>
+    <p id="output-link-container">
+      <a id="output-link" target="_blank">Enter a link above to compress</a>
+      <br><span id="output-ratio">&nbsp;</span>
+    </p>
+
+    <canvas id="qrcode"></canvas>
+
+    <span id="qr-correct-level-container">
+      <label>Minimum QR code error correction threshold</label>
+      <br>
+      <input type="range" name="qr-correct-level" id="qr-correct-level" autocomplete="off" min="0" max="3" value="1">
+    </span>
+
+    <span style="margin-top:20px">
+      <input type="checkbox" id="settings-emoji" name="settings-emoji" autocomplete="off">
+      <label for="settings-emoji"> Use emoji in text output</label><br>
+    </span>
+    <span>
+      <input type="checkbox" id="settings-qr" name="settings-qr" autocomplete="off">
+      <label for="settings-qr"> Output QR code</label><br>
+    </span>
+    <hr class="divider">
+    <span>
+      <label for="input-reverse">…or reverse one: paste a compressed link</label><br>
+      <input type="text" id="input-reverse" placeholder="https://a1d2.org#…" autocomplete="off">
+    </span>
+    <p id="output-reverse-container">
+      <a id="output-reverse" target="_blank">Paste a compressed link above</a>
+    </p>
+
+    <p id="stats-link"><a href="./stats">Link stats →</a></p>
+
+  </div>
+
+  <footer class="credits">
+    Link compressor and QR optimizer built by
+    <a href="https://github.com/p2r3/ha.mr" target="_blank">p2r3</a> as ha.mr, MIT licensed.
+    QR generation by <a href="https://github.com/quin/lean-qr" target="_blank">lean-qr</a>
+    (David Evans, MIT). Full license texts: <a href="./LICENSE">ha.mr</a> ·
+    <a href="./lean-qr/LICENSE">lean-qr</a>.<br>
+    <span class="modified">Modified for a1d2.org: branding, the domain links are
+    generated for, and mounting in a subdirectory instead of the domain root.</span>
+  </footer>
+
+  <script type="module" src="./main.js"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"410474eddfbb4154b2d450e8c41421e3","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

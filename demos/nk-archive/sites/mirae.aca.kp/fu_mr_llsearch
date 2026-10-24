@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>미래 | 전체검색</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+        <link href="/assets/layouts/layout5/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/layouts/layout5/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/layouts/layout5/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/layouts/layout5/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <link href="/include/style1.css" rel="stylesheet" type="text/css" />
+    <link href="/include/slippry.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="/include/css/animate.css" rel="stylesheet">
+    <link href="/include/css/dlmenu.css" rel="stylesheet">
+            <link href="/include/lib/assets/global/plugins/slider-layer-slider/css/layerslider.css" rel="stylesheet">
+            <link href="/include/new/css/bootstrap.min.css" rel="stylesheet">
+            <link href="/include/new/css/fancybox/jquery.fancybox.css" rel="stylesheet">
+            <link href="/include/new/css/jcarousel.css" rel="stylesheet">
+            <link href="/include/new/css/flexslider.css" rel="stylesheet">
+            <link href="/include/new/css/style.css" rel="stylesheet">
+            <link href="/include/new/skins/default.css" rel="stylesheet">
+            <link href="/include/css/research.css" rel="stylesheet">
+            <link href="/include/css/login.css" rel="stylesheet">
+    
+</head>
+
+<body style="min-width: 1280px; max-width: 2000px;margin: 0 auto !important;"><section id="header" style="padding:0;">
+    <div class="row" style="background-repeat:repeat-x; background-position:right top; background-image: url('include/images/bg1.jpg');">
+        <div class="col-md-4" style="height: 137px;padding: 0px;background-repeat:no-repeat;background-image: url('include/images/new_bg.png');">
+            <a href="front"><img src="include/images/mark1.png" alt="마크" style="height: 137px;" title="" /></a>
+        </div>
+        <div class="col-md-8">
+            <div>
+                <nav id="nav-menu-container" style="padding-left: 5%; padding-top:2.5%;">
+                    <nav class="nav social-nav pull-right hidden-sm-down" style="padding-right: 5%">
+                        <a href="front" style="font-family: WKGothic, WKSystem, WKRGothic; color: #ffffff; font-weight: 900; font-size: 30px;">조선어</a>
+                        <a href="front_en" style="font-family: Times New Roman; color: #dddddd; font-weight: 900; font-size: 30px;">English</a>
+                        <a href="front_ch" style="font-family: SimSun; color: #dddddd;  font-weight: 900; font-size: 30px;">汉语</a>
+                    </nav>
+                </nav>
+            </div>
+            <div style="padding-top:5%;">
+                <h2 style="color: #4db6cc; font-size: 40px; font-family: WKGothic, WKSystem, WKRGothic; text-shadow: 2px 2px 4px #b0b0b0;text-align:center;">
+
+                    자기 땅에 발을 붙이고 눈은 세계를 보라!
+                </h2>
+            </div>
+        </div>
+    </div>
+</section><nav class="quick-nav" style="top:22% !important; margin-top:0px !important;">
+    <a class="quick-nav-trigger" href="#0">
+        <span aria-hidden="true"></span>
+    </a>
+    <ul>
+        <li>
+            <a href="le_mr_aderworks" class="active">
+                <span style="font-size : 20px; font-family: WKGothic, WKSystem, WKRGothic; color: #ffffff;">불멸의 령도</span>
+                <i class="icon-calendar"></i>
+            </a>
+        </li>
+        <li>
+            <a href="le_mr_adersh" class="active">
+                <span style="font-size : 20px; font-family: WKGothic, WKSystem, WKRGothic; color: #ffffff;">과학기술강국을 위하여</span>
+                <i class="fa fa-rocket"></i>
+            </a>
+        </li>
+        <li>
+            <a href="al_mr_ertlist" class="active">
+                <span style="font-size : 20px; font-family: WKGothic, WKSystem, WKRGothic; color: #ffffff;">축전, 전시회</span>
+                <i class="fa   fa-bell-o"></i>
+            </a>
+        </li>
+        <li>
+            <a href="wo_mr_rldexchange" class="active">
+                <span style="font-size : 20px; font-family: WKGothic, WKSystem, WKRGothic; color: #ffffff;">국제적교류</span>
+                <i class="fa  fa-globe"></i>
+            </a>
+        </li>
+        <li>
+            <a href="re_mr_searchresults" class="active">
+                <span style="font-size : 20px; font-family: WKGothic, WKSystem, WKRGothic; color: #ffffff;">과학기술성과</span>
+                <i class="fa fa-trophy"></i>
+            </a>
+        </li>
+        <li>
+            <a href="re_mr_searchwork" class="active">
+                <span style="font-size : 20px; font-family: WKGothic, WKSystem, WKRGothic; color: #ffffff;">론문소개</span>
+                <i class="fa  fa-book"></i>
+            </a>
+        </li>
+        <li>
+            <a href="re_mr_scientist" class="active">
+                <span style="font-size : 20px; font-family: WKGothic, WKSystem, WKRGothic; color: #ffffff;">과학자소개</span>
+                <i class="fa  fa-user"></i>
+            </a>
+        </li>
+        <li>
+            <a href="fu_mr_llsearch" class="active">
+                <span style="font-size : 20px; font-family: WKGothic, WKSystem, WKRGothic; color: #ffffff;">전체검색</span>
+                <i class="fa  fa-search"></i>
+            </a>
+        </li>
+    </ul>
+    <span aria-hidden="true" class="quick-nav-bg"></span>
+</nav>
+<div class="quick-nav-overlay" style="background: rgba(0,0,0,0.4) !important;"></div>
+<a href="#index" class="go2top">
+    <i class="icon-arrow-up"></i>
+</a><div class="container" style="padding-top:7%;">
+    <div style="color: red; font-size: 30px; font-family: WKGothic, WKSystem, WKRGothic; text-shadow: 2px 2px 4px #b0b0b0;text-align:center;">
+        전체검색
+    </div>
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-md-offset-2 col-xs-offset-2 col-md-8 col-xs-8">
+            <div class="input-group">
+                <div class="input-cont">
+                    <input type="text" id="searchField" placeholder="검색어 " style="font-size: 20px;" class="form-control ClsFontKo " />
+                </div>
+                <div class="input-group-btn">
+                    <button type="button" id="searchBtn" class="btn ClsFontKo " style="background-color: #5d8d9f; color: #ffffff; font-size: 15px;">
+                        <i class="fa fa-search"></i> 검색
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="margin-top-10" style="padding-top: 15px;">
+        <table class="ClsFontKo table table-hover table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th width="60">번호</th>
+                    <!-- <th width="100">분류</th> -->
+                    <th width="350">제목</th>
+                    <th width="100">날자</th>
+                </tr>
+            </thead>
+            <tbody id="rbody"></tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-5 col-xs-offset-5 col-md-7 col-xs-7">
+            <div class="dataTables_paginate paging_simple_numbers">
+                <ul class="pagination">
+                    <li class="paginate_button first disabled">
+                        <a href="#">
+                            <i class="fa fa-step-backward"></i>
+                        </a>
+                    </li>
+                    <li class="paginate_button previous disabled">
+                        <a href="#"><i class="fa fa-chevron-left"></i></a>
+                    </li>
+                    <li class="paginate_button page_num"><a href="#" offset="0">1</a></li>
+                    <li class="paginate_button page_num"><a href="#" offset="1">2</a></li>
+                    <li class="paginate_button page_num"><a href="#" offset="2">3</a></li>
+                    <li class="paginate_button page_num"><a href="#" offset="3">4</a></li>
+                    <li class="paginate_button page_num"><a href="#" offset="4">5</a></li>
+                    <li class="paginate_button next">
+                        <a href="#"><i class="fa fa-chevron-right"></i></a>
+                    </li>
+                    <li class="paginate_button last">
+                        <a href="#">
+                            <i class="fa fa-step-forward"></i>
+                        </a>
+                    </li>
+                    <input type="hidden" id="curpage" value="1" />
+                    <input type="hidden" id="tpage" value="1" />
+                </ul>
+            </div>
+        </div>
+    </div>
+</div><div class="site-footer">
+    <div style="background-color: #2a5b82;">
+        <div class="container" style="width: 95%; padding-top: 5px; padding: 20px;">
+            <div class="row">
+               <div class="footer_cell" style="text-align: center;">
+                    <span class="site_info font-grey-cascade" style="font-size : 11pt;line-height: 2em; font-family: WKGothic, WKSystem, WKRGothic !important;">&copy;  조선민주주의인민공화국 국가과학기술위원회<br/>
+                    주소: 평양시 모란봉구역 긴마을1동 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    전화: 00850-2-18111(Ext.431-8625) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;전자우편: pptayang<span>＠</span>star-co.net.kp 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;확스: 00850-2-381-1200    </span>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- BEGIN Portlet PORTLET--><script>
+        var site_url = '/';
+</script>
+<script src="/include/lib/assets/global/plugins/jquery.min.js" type="text/javascript"></script>	
+<script src="/include/lib/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/include/lib/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="/include/lib/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" type="text/javascript"></script>
+<script src="/include/lib/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js" type="text/javascript"></script>
+<script src="/include/lib/assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+<script src="/include/lib/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="/include/lib/assets/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="/include/lib/ext-core.js" type="text/javascript"></script>
+
+<script src="/include/lib/assets/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="/assets/lib/counterup/counterup.min.js"></script>
+<script src="/assets/superfish/superfish.min.js"></script>
+<script src="/assets/stickyjs/sticky.js"></script>
+<script src="/assets/global/scripts/app.min.js" type="text/javascript"></script>
+<script src="/include/js/jquery.dlmenu.js"></script>
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN THEME LAYOUT SCRIPTS -->
+<script src="/assets/layouts/layout5/scripts/layout.min.js" type="text/javascript"></script>
+<script src="/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+<script src="/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+<script src="/include/js/wow.js"></script>
+<script src="/include/my.js"></script>
+<script src="/include/slippry.min.js"></script>
+<script src="/include/custom.js" type="text/javascript"></script>
+    <script src="/include/js/tune.js" type="text/javascript"></script>
+    <script src="/include/js/fullsearch.js" type="text/javascript"></script>
+</body>
+</html>

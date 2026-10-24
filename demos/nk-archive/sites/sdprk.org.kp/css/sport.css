@@ -1,0 +1,27 @@
+@keyframes marquee {
+    0% {
+      transform: translate(0, 0);
+    }
+
+    100% {
+      transform: translate(-100%, 0);
+    }
+  }
+.marquee{
+    padding-bottom: 20px;
+    cursor: pointer;
+    animation-duration: 20000ms;
+  /* color: red !important; */
+    white-space: nowrap;
+    -webkit-animation-name: marquee;
+    animation-name: marquee;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+}
+.marquee img{
+    height: 45px;
+}
+    
+  

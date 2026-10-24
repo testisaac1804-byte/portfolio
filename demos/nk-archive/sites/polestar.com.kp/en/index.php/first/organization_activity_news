@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="author" content="Korean Cooks" />
+	<link rel="shortcut icon" href="../../assets/images/favicon.png" />
+	<!-- Stylesheets
+	============================================= -->
+	<link rel="stylesheet" href="../../assets/css/bootstrap.css" type="text/css" />
+
+	<link rel="stylesheet" href="../../assets/css/style.css" type="text/css" />
+	<link rel="stylesheet" href="../../assets/css/swiper.css" type="text/css" />
+	<link rel="stylesheet" href="../../assets/css/dark.css" type="text/css" />
+	<link rel="stylesheet" href="../../assets/css/font-icons.css" type="text/css" />
+	<link rel="stylesheet" href="../../assets/css/animate.css" type="text/css" />
+	<link rel="stylesheet" href="../../assets/css/magnific-popup.css" type="text/css" />
+	<link rel="stylesheet" href="../../assets/css/responsive.css" type="text/css" />
+
+   	<script type="text/javascript" src="../../assets/js/search.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--[if lt IE 9]>
+		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+
+	<!-- Document Title
+	============================================= -->
+	<title>Korean Dishes</title>
+	<style>
+		#primary-menu.sub-title > ul > li, #primary-menu.sub-title.style-2 > div > ul > li {
+			background: url("https://web.archive.org/web/20260101im_/http://polestar.com.kp/en/assets/images/icons/menu-divider.png") no-repeat right center !important;
+			margin-left: 1px !important;
+		}
+	</style>
+        
+</head>
+
+<body class="stretched no-transition">
+
+	
+	<!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper" class="clearfix">
+
+		<!-- Header
+		============================================= -->
+		<header id="header">
+
+			<div id="header-wrap">
+
+				<div class="container clearfix">
+
+					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+					<!-- Logo
+					============================================= -->
+					<div id="logo">
+						<a href="index" class="standard-logo" data-dark-logo="https://web.archive.org/web/20260101im_/http://polestar.com.kp/en/assets/images/logo-dark.png"><img src="../../assets/images/logo.png" alt="Korean Cooks"></a>
+						<a href="index" class="retina-logo" data-dark-logo="https://web.archive.org/web/20260101im_/http://polestar.com.kp/en/assets/images/logo-dark@2x.png"><img src="../../assets/images/logo@2x.png" alt="Korean Cooks"></a>
+					</div><!-- #logo end -->
+
+					<!-- Language
+					============================================= -->
+                    <div style="float:right; margin-top:10px;">	
+                        <a onClick="setlang('kp')" style="color:white; font:bold; cursor:pointer;">조선어 |</a>
+                        <a onClick="setlang('en')" style="color:white; font:bold; cursor:pointer;">English</a>
+                    </div><!-- language end -->
+
+					<!-- Primary Navigation
+					============================================= -->
+					<nav id="primary-menu" class="sub-title">
+
+						<ul>
+							<li><a href="cooking_introduction"><div>Introduction</div><span>료리소개</span></a></li><li><a href="books_magazine"><div>Publications</div><span>도서, 잡지</span></a></li><li><a href="cooking_culture"><div>Food Culture</div><span>음식문화</span></a></li><li class="current"><a href="organization_activity_news"><div>Association’s Activities</div><span>협회활동소식</span></a></li>						</ul>
+
+						<!-- Top Search
+						============================================= -->
+						<div id="top-search">
+							<a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
+							<!--<form action="search.php" method="get">-->
+								<form action="https://web.archive.org/web/20260101im_/http://polestar.com.kp/en/index.php/first/search" id="search-form" name="search-form" method="get" accept-charset="utf-8">
+<input type="hidden" name="csrf_test_name" value="9f00960fd5c1accc9cdb609219e9e5f7" style="display:none;" />
+ 
+								<input type="text" name="search_str" class="form-control" value="" placeholder="Search..." onKeyUp="javascript:gf_func_keydown(event, 'search_btn');">
+															<!--/form-->
+						</div><!-- #top-search end -->
+
+					</nav><!-- #primary-menu end -->
+
+
+				</div>
+
+			</div>
+
+		</header><!-- #header end -->
+<script>
+	var url = 'organization_activity_news';
+	function setlang(lang){
+		if(lang=='kp'){
+			var newUrl = url.replace('/en/', '/kp/');
+			document.location.href = newUrl;
+		}
+		if(lang=='en'){
+			var newUrl = url.replace('/kp/', '/en/');
+			document.location.href = newUrl;
+		}
+	}
+</script>	
+		<section class="clearfix">
+
+		</section>		
+		<!-- Content
+		============================================= -->
+		<section id="content">
+
+			<div class="content-wrap">
+				<div class="container clearfix">
+					<div class="postcontent nobottommargin col_last clearfix">
+												
+					</div>
+					<div class="sidebar nobottommargin clearfix">
+						<div class="sidebar-widgets-wrap">
+							<div class="widget clearfix">
+								<div class="panel-group nobottommargin" id="accordion">
+								  								  
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</section><!-- #content end -->
+
+		<!-- Footer
+		============================================= -->
+		<footer id="footer" class="dark">
+
+			<!-- Copyrights
+			============================================= -->
+			<div id="copyrights">
+
+				<div class="container clearfix">
+
+					<div class="col_half">
+						<img src="../../assets/images/footer-logo.png" alt="Footer Logo" class="footer-logo">
+
+						Add: Ragwon-dong, Pothonggang District, Pyongyang, DPR Korea<br/>
+						Fax: 0085023814410 / Tel: 0850-2-381-8359 / <img src="../../assets/images/mail.png">
+					</div>
+
+					<div class="col_half col_last tright">
+						<div class="copyrights-menu copyright-links fright clearfix">
+							<a href="cooking_introduction">Introduction</a>/<a href="books_magazine">Publications</a>/<a href="cooking_culture">Food Culture</a>/<a href="organization_activity_news">Association’s Activities</a>						</div>
+						
+					</div>
+
+				</div>
+
+			</div><!-- #copyrights end -->
+
+		</footer><!-- #footer end -->
+
+	</div><!-- #wrapper end -->
+
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop" class="icon-angle-up"></div>
+
+	<!-- External JavaScripts
+	============================================= -->
+	<script type="text/javascript" src="../../assets/js/jquery.js"></script>
+	<script type="text/javascript" src="../../assets/js/plugins.js"></script>
+	<!-- Footer Scripts
+	============================================= -->
+	<script type="text/javascript" src="../../assets/js/functions.js"></script>
+
+</body>
+</html>

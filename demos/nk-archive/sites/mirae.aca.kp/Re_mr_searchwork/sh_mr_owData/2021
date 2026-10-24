@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>기사</title>     
+	<link href="/include/new/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/include/style1.css" rel="stylesheet" type="text/css" />  
+	<script src="/include/lib/assets/global/plugins/jquery.min.js" type="text/javascript"></script>	
+	<script src="/include/lib/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<style>   
+		html , body{
+			text-align:center;
+		}         
+		h3{
+			font-size:20pt;
+			margin:20px 50px;
+			padding:0px auto;
+			text-align:center;
+			font-weight: normal;
+			line-height: 1.5;
+			font-family: PRK P Chongbong, WKRGothic;
+			color:red;
+		}
+		.vcontent{
+			font-size: 15px;
+			margin:0px 50px;
+			padding:0px auto;
+			line-height: 1.9;
+			overflow: auto;
+			font-family: PRK P Chongbong, WKRGothic;
+			text-indent: 18px;
+
+		}
+		.name-nowrap {
+			white-space: nowrap;
+		}
+		strong.name-nowrap {
+			font-size: larger !important;
+		}
+	</style>
+</head>
+
+<body style="height:100%;">       
+	<h3 class=' ClsFontKo '>가금연구원 본원지구가 새롭게 꾸려졌다</h3>
+			<div class="vcontent  ClsFontKo " style="text-align: justify !important;">
+			가금연구원 본원지구가 새롭게 꾸려졌다.
+가금업발전에 언제나 깊은 관심을 돌리고계시는 <span class="name-nowrap">경애하는</span> <strong class="name-nowrap">김정은</strong><span class="name-nowrap">동지</span>의 정력적인 령도에 의하여 전자도서실, 토론회장, 사무실, 실험실, 연구실, 강의실을 비롯하여 연구사업에 필요한 모든 조건들과 첨단설비가 완벽하게 갖추어진 가금과학연구기지, 가금과학기술인재후비육성의 원종장이 마련되였다.		</div>
+	</body>
+</html>

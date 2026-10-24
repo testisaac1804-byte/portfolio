@@ -1,0 +1,819 @@
+
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>민주조선 | 조선민주주의인민공화국 최고인민회의 상임위원회 및 내각기관지</title>
+    <meta charset="utf8"/>
+    <link rel="icon" href="/resource/images/cholima.png" type="image/x-icon" />
+    <link href="/resource/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/skin/default.css">
+    <link rel="stylesheet" href="/css/blueimp-gallery.min.css">
+    <link href="/css/style_gallery.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resource/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/resource/css/first_ko.css">
+    <script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+        <link href="/assets/css/nivo-lightbox.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/css/font.css">
+</head> 
+<body id="top" style="background-color: #fff;font-family:KPCheonRiMa; min-width: 1100px;  "> 
+    <header id="header"   >  
+        <div class="fixedMenu" style="background: url(/resource/custom/header_bg_right_1.png)  repeat-x ; " >
+            <div style="background: url(/resource/custom/header_bg_left.png) no-repeat left 0;   height: 85px; font-family: 'KPCheonRiMa';">   
+                <div class="container" style="background: url(/resource/header_back.jpg) no-repeat center top ; margin-top: 0; margin-bottom: 0; margin-left: auto; margin-right: auto; min-width:100%!important; "  >
+                    <ul class="menu_top" style="padding-right: 15px;">
+                        <form id="lang" method="post" action="/home/index">
+                            <input id="language" name="language" value="" hidden />
+                            <input id="page" name="page" value="all_view" hidden />
+                            <input type="hidden" name="_csrf" value="1f486e4da30156461bf3c1202011c549"/>
+                        </form>
+                        <li>
+                            <a style="background-color: #004df3;"  href = "/home/index/all_view/0/ko">조선어                            </a>
+                        </li>
+                        <li>
+                            <a  href = " /home/index/all_view/0/en">
+                                English                            </a>
+                        </li>
+                        <li>
+                            <a  href ="/home/index/all_view/0/ch">
+                                 汉语                            </a>
+                        </li>
+                    </ul> 
+                    <div class="logo " style="padding-left: 10%;">
+                        <a href="/Home/index/first/0/ko" onclick="setPage('first');" style="display:block;margin-bottom:5px;"><img src="/resource/logo.png"></a>
+                    </div> 
+                </div>
+                <div class="mobile1" style="font-family:'KPCheonRiMa'; ">
+                    <div class="rightPart1" style="  font-family: 'KPCheonRiMa';  font: inherit; ">
+                        <b>  
+                            <ul class="menubar1" style="font-family:'KPCheonRiMa';font-size: 13px; " > 
+                                <li   >
+                                    <a href="/home/index/first/0/ko"  style=" /* text-shadow: 1px 1px 1px #000!important;*/font-family:'KPCheonRiMa'; " >
+                                        <b>첫페지</b>
+                                    </a>
+                                </li>
+                                <li   >
+                                    <a  href="/home/index/revolution/0/ko"     >
+                                        <b>혁명활동소식</b>
+                                    </a>
+                                </li  >
+                                <li   >
+                                    <a  href="/home/index/power_news/0/ko"    >
+                                        <b>정권기관소식</b>
+                                    </a>
+                                </li>
+                                <li class="has-dropdown"  >
+                                    <a href="/home/index/all_view/0/ko" class="active1"    >
+                                     <font  ><b>분야별기사</b></font></a>
+                                     <ul class="dropdown" style="width: 200px;padding-right: 10px;padding-left: 0px;">
+                                            <li>
+                                                <a href="/home/index/politics/0/ko"  >정치 
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/home/index/economy/0/ko"  >경제                                                </a>
+                                            </li>
+                                            <li>
+                                                <a  href="/home/index/culture/0/ko"  >문화                                                </a>
+                                            </li>
+                                            <li style="padding-bottom:px;">
+                                                <a  href="/home/index/tourist/0/ko "  >관광,명승지                                                </a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="/home/index/overseas/0/ko"  >해외동포                                                </a>
+                                            </li>
+                                            <li>
+                                                <a  href="/home/index/international/0/ko"  >국제적련대성                                                </a>
+                                            </li>
+                                    </ul>
+                                </li>
+                                <li  class="has-dropdown">
+                                    <a  href="/home/index/media/0/ko"  > <font   ><b> 다매체</b></font></a>
+                                    <ul class="dropdown" style="padding-right: 10px;padding-left: 0px;">
+                                        <li><a href="/home/index/photos/0/ko"  >사진</a></li>
+                                        <li><a  href="/home/index/video/0/ko"  >동영상</a>
+                                        </li> 
+                                    </ul>
+                                </li>    
+                                <li  class=" dropdown">
+                                    <div class="btn-group pull-right">
+                                        <a  href="/home/index/search/0/ko"  class=" btn-sm btn-outline dropdown-toggle">검색</a>
+                                                                            </div> 
+                                </li>  
+                             </ul>      
+                        </b>
+                    </div>
+                </div> 
+                <div style="clear: box;height: 20px;"></div>
+            </div>       
+         </div>
+    </header> 
+    <style type="text/css">
+        .modal-backdrop{
+            z-index: 0;
+        }
+    </style>
+<link href="/resource/css/home.css" rel="stylesheet" />
+<div class="main-container container-fluid">
+    <!-- Page Container -->
+    <div class="page-container" style="position: absolute;top: 85px;width: 100%;">
+        <div class="row"  style="background:url(/resource/images/all_view.png) no-repeat right 0 top;background-color: #f7f2f9; ">
+            <div class="powerheader" style="background: linear-gradient(5deg, #4b16cc ,#bea1f7 );border-bottom:5px solid #784ce2 ; " >
+                <h1 >
+                    <a href="/home/index/all_view/0/ko">
+                        <font style="font-size: 28px;font-family: 'KPCheonRiMa';" color="#fff" >
+                            <b>
+                                분 야 별 기 사
+                                
+                            </b>
+                        </font>
+                    </a>
+                </h1>
+            </div>
+            <div class="col-sm-3">
+                <style type="text/css">
+                    a.list-group-item:hover, a.list-group-item:focus{
+                        background-color: #d2cdce;
+                    }
+                    a>span:hover{
+                        color: blue;
+                    }
+                    a>span.active{
+                        color: red;
+                    }
+
+                </style>
+                <div class="list-group" id="sidebar" style="font-color:#000; position: relative;width: 280px;height: 700px; box-shadow: 5px 1px 20px rgba(195, 205, 218, 1);">                    
+                        <div style="height: 10px;"></div>
+                            <li style="text-align: center; " >
+                                <i class="menu-icon"></i>
+                                <a  style="border: 0px;" class="list-group-item" href='/home/index/all_view/0/ko' style="border-top: 0px;border: 0px;">
+                                    <span style="font-size: 17px;font-weight: bold;" class="active ">
+                                        전체보기
+                                    </span>
+                                </a>
+                            </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/politics/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">정  치</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/economy/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">경  제</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/culture/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">문  화</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/tourist/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">관광,명승지</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/overseas/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">해 외 동 포</span>
+                                    </a>
+                                </li>
+                        
+                                <li  style="text-align: center;  " class="active">
+                                        <i class='menu-icon'></i>                                    
+                                        <a  style="border: 0px;" class="list-group-item" href='/home/index/international/0/ko' style="border-top: 0px; border: 0px;">
+                                        
+                                        <span class="" style="font-size: 17px;font-weight: bold;">국제적련대성</span>
+                                    </a>
+                                </li>
+                                              
+                </div>
+            </div>
+
+        
+        <div class="col-sm-9"  >
+	<div class="page-content" style="margin-top: 0px; position: relative;margin-left:0px;">
+	<link href="/resource/css/dataTables.bootstrap.css" rel="stylesheet" />
+	<div class="page-body" style="padding-top: 0px;padding-bottom: 0px;">
+	    <div class="row">
+	        <div class="col-lg-12 col-sm-12 col-xs-12">
+	            <div class="widget" style="padding-bottom: 0px;position: relative;margin-top: 0px;padding-top: 0px;">
+	                <div class="widget-body" style="padding-right: 0px;padding-bottom: 0px;">
+                         <form id="myform" method="get">
+                            <div class="row" style="margin-bottom: 15px;margin-top: 10px;margin-left: 2px;margin-right: 2px;">
+	                            <div class="widget-main" style="margin-top:0px;height: 630px;position: relative;">
+	                            	<table id="simple-table" class="table table-striped table-bordered table-hover" style="border:0px solid black;">
+
+    							<style type="text/css">
+    								
+    								.search-result-counter
+    								 {
+    								 	box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);height: 44px;line-height: 24px;padding: 10px;text-align: center;border-radius: 100px;width: 44px;
+    								 }
+    							</style>
+
+    							<tbody>
+    									
+    									<tr style="vertical-align: bottom;">
+    									<td style="border: 0px;padding-bottom: 0px;width: 60px;">
+    										<div class="search-result-counter">
+    											1
+    										</div>
+    									</td>
+    									<td style="border:0px; border-bottom: 1px dashed #c1c1c1; text-align: left;font-size: 16px;vertical-align: bottom;" >
+
+	        								<a href="/Home/index/disp/6530/ko" rol="button">
+        										총련결성 ７０돐경축 음악무용종합공연 《언제나 빛나라 우리의 총련》 진행
+        										
+        										</a>
+        										
+        										&nbsp&nbsp
+        										<font size="3" color="#173ae8">
+													[2025.5.30.]
+												</font>
+    									</td>
+    									
+    									<tr style="vertical-align: bottom;">
+    									<td style="border: 0px;padding-bottom: 0px;width: 60px;">
+    										<div class="search-result-counter">
+    											2
+    										</div>
+    									</td>
+    									<td style="border:0px; border-bottom: 1px dashed #c1c1c1; text-align: left;font-size: 16px;vertical-align: bottom;" >
+
+	        								<a href="/Home/index/disp/6532/ko" rol="button">
+        										총련결성 ７０돐 재일본조선인감사단 여러곳 참관
+        										
+        										</a>
+        												<img src="/./resource/images/camera.png">
+												
+        										&nbsp&nbsp
+        										<font size="3" color="#173ae8">
+													[2025.5.30.]
+												</font>
+    									</td>
+    									
+    									<tr style="vertical-align: bottom;">
+    									<td style="border: 0px;padding-bottom: 0px;width: 60px;">
+    										<div class="search-result-counter">
+    											3
+    										</div>
+    									</td>
+    									<td style="border:0px; border-bottom: 1px dashed #c1c1c1; text-align: left;font-size: 16px;vertical-align: bottom;" >
+
+	        								<a href="/Home/index/disp/6533/ko" rol="button">
+        										황해남도에서 해주농업제품생산사업소 새로 건설
+        										
+        										</a>
+        										
+        										&nbsp&nbsp
+        										<font size="3" color="#173ae8">
+													[2025.5.30.]
+												</font>
+    									</td>
+    									
+    									<tr style="vertical-align: bottom;">
+    									<td style="border: 0px;padding-bottom: 0px;width: 60px;">
+    										<div class="search-result-counter">
+    											4
+    										</div>
+    									</td>
+    									<td style="border:0px; border-bottom: 1px dashed #c1c1c1; text-align: left;font-size: 16px;vertical-align: bottom;" >
+
+	        								<a href="/Home/index/disp/6534/ko" rol="button">
+        										로씨야내무성대표단 귀국
+        										
+        										</a>
+        										
+        										&nbsp&nbsp
+        										<font size="3" color="#173ae8">
+													[2025.5.30.]
+												</font>
+    									</td>
+    									
+    									<tr style="vertical-align: bottom;">
+    									<td style="border: 0px;padding-bottom: 0px;width: 60px;">
+    										<div class="search-result-counter">
+    											5
+    										</div>
+    									</td>
+    									<td style="border:0px; border-bottom: 1px dashed #c1c1c1; text-align: left;font-size: 16px;vertical-align: bottom;" >
+
+	        								<a href="/Home/index/disp/6535/ko" rol="button">
+        										조선민주주의인민공화국 국가보위상이 제１３차 안전문제담당 고위대표들의 국제상봉에서 연설
+        										
+        										</a>
+        										
+        										&nbsp&nbsp
+        										<font size="3" color="#173ae8">
+													[2025.5.30.]
+												</font>
+    									</td>
+    									
+    									<tr style="vertical-align: bottom;">
+    									<td style="border: 0px;padding-bottom: 0px;width: 60px;">
+    										<div class="search-result-counter">
+    											6
+    										</div>
+    									</td>
+    									<td style="border:0px; border-bottom: 1px dashed #c1c1c1; text-align: left;font-size: 16px;vertical-align: bottom;" >
+
+	        								<a href="/Home/index/disp/6536/ko" rol="button">
+        										높이 평가해주신 애국심
+        										
+        										</a>
+        										
+        										&nbsp&nbsp
+        										<font size="3" color="#173ae8">
+													[2025.5.30.]
+												</font>
+    									</td>
+    									
+    									<tr style="vertical-align: bottom;">
+    									<td style="border: 0px;padding-bottom: 0px;width: 60px;">
+    										<div class="search-result-counter">
+    											7
+    										</div>
+    									</td>
+    									<td style="border:0px; border-bottom: 1px dashed #c1c1c1; text-align: left;font-size: 16px;vertical-align: bottom;" >
+
+	        								<a href="/Home/index/disp/6537/ko" rol="button">
+        										따뜻한 축복
+        										
+        										</a>
+        										
+        										&nbsp&nbsp
+        										<font size="3" color="#173ae8">
+													[2025.5.30.]
+												</font>
+    									</td>
+    									
+    									<tr style="vertical-align: bottom;">
+    									<td style="border: 0px;padding-bottom: 0px;width: 60px;">
+    										<div class="search-result-counter">
+    											8
+    										</div>
+    									</td>
+    									<td style="border:0px; border-bottom: 1px dashed #c1c1c1; text-align: left;font-size: 16px;vertical-align: bottom;" >
+
+	        								<a href="/Home/index/disp/6520/ko" rol="button">
+        										로씨야내무성대표단 여러곳 참관
+        										
+        										</a>
+        												<img src="/./resource/images/camera.png">
+												
+        										&nbsp&nbsp
+        										<font size="3" color="#173ae8">
+													[2025.5.29.]
+												</font>
+    									</td>
+    									
+    									<tr style="vertical-align: bottom;">
+    									<td style="border: 0px;padding-bottom: 0px;width: 60px;">
+    										<div class="search-result-counter">
+    											9
+    										</div>
+    									</td>
+    									<td style="border:0px; border-bottom: 1px dashed #c1c1c1; text-align: left;font-size: 16px;vertical-align: bottom;" >
+
+	        								<a href="/Home/index/disp/6521/ko" rol="button">
+        										개건된 두만강역 준공식 진행
+        										
+        										</a>
+        												<img src="/./resource/images/camera.png">
+												
+        										&nbsp&nbsp
+        										<font size="3" color="#173ae8">
+													[2025.5.29.]
+												</font>
+    									</td>
+    									
+    									<tr style="vertical-align: bottom;">
+    									<td style="border: 0px;padding-bottom: 0px;width: 60px;">
+    										<div class="search-result-counter">
+    											10
+    										</div>
+    									</td>
+    									<td style="border:0px; border-bottom: 1px dashed #c1c1c1; text-align: left;font-size: 16px;vertical-align: bottom;" >
+
+	        								<a href="/Home/index/disp/6522/ko" rol="button">
+        										개건된 수양산종합식료공장 준공식 진행
+        										
+        										</a>
+        										
+        										&nbsp&nbsp
+        										<font size="3" color="#173ae8">
+													[2025.5.29.]
+												</font>
+    									</td>
+    								
+    								</tr>
+    							</tbody>
+    						</table>
+							<div class="col-md-6 col-sm-6">
+    									<ul class="pagination pagination-sm no-margin pull-right" id="pagenation_wrapper" style="padding-bottom: 50px;">
+    									   <li class="active"><a href="#"><b>1</b></a></li><li><a href="/home/index/all_view?&pageStep=10&amp;per_page=10" data-ci-pagination-page="2">2</a></li><li><a href="/home/index/all_view?&pageStep=10&amp;per_page=20" data-ci-pagination-page="3">3</a></li><li><a href="/home/index/all_view?&pageStep=10&amp;per_page=10" data-ci-pagination-page="2" rel="next">&gt;</a></li><li><a href="/home/index/all_view?&pageStep=10&amp;per_page=3090" data-ci-pagination-page="310">>></a></li>
+    								    </ul>
+    								</div>
+
+	    							<div style="clear:both;"></div>
+	        					</div>
+	        				</div>
+        				</form>
+	                </div>
+	            </div>
+	        </div>
+        	<div class="horizontal-space"></div>
+    	</div>
+	</div>
+	
+			<div class="modal fade" id="Modal6530">
+				<div class="modal-dialog" style="margin-top: 1%;width: 800px;">
+					<div class="modal-content">
+					  	<div class="modal-header" style="border-bottom: 3px solid #ed4e2a;">
+					    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 align=center style="color:#4374e0;font-size: 26px;margin-top: 45px;">총련결성 ７０돐경축 음악무용종합공연 《언제나 빛나라 우리의 총련》 진행</h4>
+							<small class="text-muted" style="text-indent: 5px;font-size: 16px;">
+								<i class="fa fa-clock-o"></i> 2025-05-30
+							</small>
+					  	</div>
+						<div class="modal-body" style="color: #000;font-size: 15px;" align="justify">
+							<p>재일본조선인총련합회결성 ７０돐경축 음악무용종합공연 《언제나 빛나라 우리의 총련》이 ２７일 일본 도꾜도내 극장에서 성황리에 진행되였다．<br />
+허종만 총련중앙상임위원회 의장과 박구호제１부의장 겸 조직국장，부의장들과 국장들，간또지방 총련본부위원장들，중앙단체，사업체 책임일군들，각지 동포들，학생들이 공연을 관람하였다．<br />
+총련중앙과 본부，중앙단체，사업체의 고문들，명예칭호소유자를 비롯한 공로자들，애국적상공인들이 공연에 초대되였다．<br />
+또한 일본주재 로씨야，중국을 비롯한 여러 나라 외교대표부 성원들，주체사상국제연구소 사무국장，일조련대전국네트워크 공동대표들과 일본 립헌민주당소속 중의원의원 등 일본의 정계，문화계，언론계 인사들이 초대되였다．<br />
+공연에는 금강산가극단과 지방가무단 단원들，재일본조선문학예술가동맹 동맹원들，각계각층 동포들과 학생들이 출연하였다．<br />
+강대하고 존엄높은 공화국의 해외공민된 재일동포들의 기쁨과 환희가 장내에 차넘치는 가운데 조선민주주의인민공화국 국가가 숭엄하게 주악되였다．<br />
+총련의 빛나는 력사를 형상한 관현악 《언제나 빛나라 우리의 총련》으로 시작된 공연무대에는 합창과 무용 《우리 자랑 이만저만 아니라오》，가야금병창 《이국의 하늘아래》，민족무용 《장고춤》 등의 종목들이 올랐다．<br />
+출연자들은 총련의 결성과 강화발전에 불멸의 공헌을 하신 위대한 수령 김일성대원수님과 위대한 령도자 김정일대원수님，경애하는 김정은원수님의 령도업적과 총련결성 ７０돐을 맞이한 총련일군들과 재일동포들의 한없는 감격을 격조높이 구가하였다．<br />
+２０２５년 설맞이공연에 참가하여 특대의 배려를 받아안은 재일조선학생소년예술단 성원들의 격정을 보여주는 설화 《한품에 안기여》가 무대에 오르고 재일조선학생소년예술단을 만나주시는 경애하는 원수님의 자애로운 영상이 정중히 모셔지자 장내는 격정으로 끓어번졌다．<br />
+총련의 기둥감들로 억세게 자라는 조선학교 학생들의 활기있고 명랑한 모습을 담은 노래와 무용 《대를 이어 지키리 공화국기발》은 총련애국위업의 바통을 이어나가려는 새세대들의 의지를 잘 보여주었다．<br />
+노래련곡 《청춘의 나래》，혼성중창 《우리 학교，우리 미래》，남성독창 《열망》，혼성중창 《가리라 백두산으로》 등 다채로운 종목으로 고조를 이룬 공연은 합창과 무용 《친근한 어버이》로 최절정을 이루었다．<br />
+결성세대의 애국정신을 꿋꿋이 이어나갈 재일동포들의 불같은 열의를 더해준 공연은 전체 출연자와 관람자들이 함께 부른 인민상계관작품 《조국의 사랑은 따사로워라》의 대합창으로 끝났다．<br />
+절세위인들에 대한 열화같은 흠모와 조국에 대한 열렬한 사랑이 맥박치고 민족적정서가 차넘친 공연은 관람자들의 절찬을 받았다．<br />
+공연을 관람한 일본주재 여러 나라 외교대표부 성원들과 일본인사들은 크게 감동되였다고 하면서 모국을 떠나 해외에서 장장 ７０년 위대한 수령을 대를 이어 충성으로 모시고 공화국기를 휘날리며 애국운동을 하는 교포조직은 오직 총련뿐이라고 격찬하였다．<br />
+총련결성 ７０돐경축 음악무용종합공연은 경애하는 김정은원수님의 강령적서한을 높이 받들고 영광넘친 애국사를 백년，천년으로 이어나가기 위한 새로운 투쟁기에 떨쳐나선 총련일군들과 재일동포들에게 커다란 고무를 안겨주었다．</p>
+
+<p style="text-align: right;">【조선중앙통신】</p>
+
+						</div>
+								    
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div>
+	
+			<div class="modal fade" id="Modal6532">
+				<div class="modal-dialog" style="margin-top: 1%;width: 800px;">
+					<div class="modal-content">
+					  	<div class="modal-header" style="border-bottom: 3px solid #ed4e2a;">
+					    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 align=center style="color:#4374e0;font-size: 26px;margin-top: 45px;">총련결성 ７０돐 재일본조선인감사단 여러곳 참관</h4>
+							<small class="text-muted" style="text-indent: 5px;font-size: 16px;">
+								<i class="fa fa-clock-o"></i> 2025-05-30
+							</small>
+					  	</div>
+						<div class="modal-body" style="color: #000;font-size: 15px;" align="justify">
+							<p>총련 혹가이도본부 위원장 정성한동지를 단장으로 하는 총련결성 ７０돐 재일본조선인감사단이 조선혁명박물관을 참관하였다．<br />
+감사단 성원들은 이 땅우에 인민이 주인된 사회주의조국을 일떠세워주시고 후손만대의 번영을 위한 굳건한 토대를 마련해주신 절세위인들의 혁명력사와 불멸의 업적이 전면적으로 집대성되여있는 박물관의 여러 호실을 깊은 감동속에 돌아보았다．<br />
+그들은 또한 조선로동당 중앙간부학교와 주체음악예술발전관，강동종합온실농장 등을 참관하였으며 대성산혁명렬사릉，신미리애국렬사릉을 찾아 혁명선렬들에게 숭고한 경의를 표시하였다．</p>
+
+<p style="text-align: right;">【조선중앙통신】</p>
+
+						</div>
+								    
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div>
+	
+			<div class="modal fade" id="Modal6533">
+				<div class="modal-dialog" style="margin-top: 1%;width: 800px;">
+					<div class="modal-content">
+					  	<div class="modal-header" style="border-bottom: 3px solid #ed4e2a;">
+					    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 align=center style="color:#4374e0;font-size: 26px;margin-top: 45px;">황해남도에서 해주농업제품생산사업소 새로 건설</h4>
+							<small class="text-muted" style="text-indent: 5px;font-size: 16px;">
+								<i class="fa fa-clock-o"></i> 2025-05-30
+							</small>
+					  	</div>
+						<div class="modal-body" style="color: #000;font-size: 15px;" align="justify">
+							<p>해주농업제품생산사업소가 번듯하게 일떠서 준공하였다．<br />
+나라의 알곡생산에서 황해남도가 기치를 들고나가기를 바라는 당중앙의 숭고한 뜻을 받들고 도에서는 벼모판종합영양제와 효능높은 농약들을 만들어내는 생산기지건설을 계획하고 그를 적극 추진하였다．<br />
+당창건 ８０돐이 되는 뜻깊은 올해를 자랑찬 로력적성과로 빛내일 일념 안고 건설자들은 앞선 작업방법들을 활용하여 건축공사를 질적으로 결속하였으며 련관단위 기술자들과 사업소의 종업원들도 자체의 힘과 기술로 설비조립과 설치를 립체적으로 다그쳤다．<br />
+설비의 국산화비중이 높은 수준에서 보장되고 자동화，흐름선화된 생산공정들이 구축된 사업소가 건설됨으로써 도안의 농장들에 벼모판종합영양제와 농약을 충분히 보장할수 있는 물질기술적토대가 마련되게 되였다．<br />
+２９일 현지에서 진행된 준공식에는 황해남도당위원회 책임비서 박태덕동지，관계부문 일군들, 건설자들，사업소종업원들이 참가하였다．<br />
+도농촌경리위원회 위원장 원경모동지가 준공사를 하였다．<br />
+연설자는 농업생산의 장성과 지속적이고 안정적인 발전에 이바지할수 있게 훌륭히 건설된 해주농업제품생산사업소는 나라의 농사문제를 풀기 위해 끝없는 심혈과 로고를 바쳐가시는 경애하는 김정은동지의 정력적인 령도가 안아온 빛나는 결실이라고 말하였다．<br />
+그는 사업소의 일군들과 종업원들이 과학기술을 단위발전의 생명선으로 틀어쥐고 기술기능제고사업에 힘을 넣어 농촌에 더 많은 영양제와 농약을 생산보장할데 대하여 강조하였다．<br />
+준공식이 끝난 다음 참가자들은 사업소를 돌아보았다．</p>
+
+<p style="text-align: right;">【조선중앙통신】</p>
+
+						</div>
+								    
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div>
+	
+			<div class="modal fade" id="Modal6534">
+				<div class="modal-dialog" style="margin-top: 1%;width: 800px;">
+					<div class="modal-content">
+					  	<div class="modal-header" style="border-bottom: 3px solid #ed4e2a;">
+					    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 align=center style="color:#4374e0;font-size: 26px;margin-top: 45px;">로씨야내무성대표단 귀국</h4>
+							<small class="text-muted" style="text-indent: 5px;font-size: 16px;">
+								<i class="fa fa-clock-o"></i> 2025-05-30
+							</small>
+					  	</div>
+						<div class="modal-body" style="color: #000;font-size: 15px;" align="justify">
+							<p>내무성 부상 위딸리 슐리까동지를 단장으로 하는 로씨야내무성대표단이 ２９일 귀국하였다．<br />
+평양국제비행장에서 사회안전성 부상 리성철동지와 우리 나라 주재 로씨야련방 특명전권대사 알렉싼드르 마쩨고라동지가 전송하였다．</p>
+
+<p style="text-align: right;">【조선중앙통신】</p>
+
+						</div>
+								    
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div>
+	
+			<div class="modal fade" id="Modal6535">
+				<div class="modal-dialog" style="margin-top: 1%;width: 800px;">
+					<div class="modal-content">
+					  	<div class="modal-header" style="border-bottom: 3px solid #ed4e2a;">
+					    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 align=center style="color:#4374e0;font-size: 26px;margin-top: 45px;">조선민주주의인민공화국 국가보위상이 제１３차 안전문제담당 고위대표들의 국제상봉에서 연설</h4>
+							<small class="text-muted" style="text-indent: 5px;font-size: 16px;">
+								<i class="fa fa-clock-o"></i> 2025-05-30
+							</small>
+					  	</div>
+						<div class="modal-body" style="color: #000;font-size: 15px;" align="justify">
+							<p>제１３차 안전문제담당 고위대표들의 국제상봉이 ２７일부터 ２９일까지 로씨야의 모스크바에서 진행되였다．<br />
+우리 나라를 포함하여 １００여개 나라와 국제기구들에서 온 １２０여개 대표단들이 참가하였다．<br />
+２８일 《평등하고 불가분리적인 안보구조창설： 세계의 남부 및 동부국가들의 도전과 가능성》이라는 주제로 전원회의가 있었다．<br />
+회의에서 리창대 조선민주주의인민공화국 국가보위상이 연설하였다．<br />
+그는 지금 국제무대에서 특정한 세력의 독단과 전횡으로 말미암아 세계적으로 공인된 국제관계의 기본원칙들이 공공연하게 무시되고있으며 그로 인하여 세계의 안전환경은 엄중히 파괴되고 이 행성의 곳곳마다에서는 대립과 충돌의 악순환이 계속되고있다고 언급하였다．<br />
+국제사회의 념원과 배치되게 패권과 사리를 추구하면서 다른 나라들을 제멋대로 평가하고 진영대결을 강요하는 미국의 일방주의적이며 군사패권주의적인 정책은 국제평화와 안전의 근간을 허물고있는 항시적인 요인으로 된다고 그는 강조하였다．<br />
+그는 미국과 그 추종국가들의 패권정책，대결정책에 대한 조선민주주의인민공화국의 립장은 명백하며 우리는 국가의 자주권과 존엄，인민의 안녕을 위협하는 그 어떤 적대적행위에 대해서도 추호도 묵과하지 않고 정의로운 투쟁과 강력한 힘으로 대응해나갈것이라고 언명하였다．<br />
+조선민주주의인민공화국은 자주，평화，친선의 기치아래 정의와 자주성을 지향하는 세계의 모든 나라들과의 선린우호관계를 발전시켜나갈것이며 평등한 다극세계건설과 세계의 평화와 안전보장을 위하여 자기의 책임적인 사명을 다해나갈것이라고 그는 확언하였다．</p>
+
+<p style="text-align: right;">【조선중앙통신】</p>
+
+						</div>
+								    
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div>
+	
+			<div class="modal fade" id="Modal6536">
+				<div class="modal-dialog" style="margin-top: 1%;width: 800px;">
+					<div class="modal-content">
+					  	<div class="modal-header" style="border-bottom: 3px solid #ed4e2a;">
+					    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 align=center style="color:#4374e0;font-size: 26px;margin-top: 45px;">높이 평가해주신 애국심</h4>
+							<small class="text-muted" style="text-indent: 5px;font-size: 16px;">
+								<i class="fa fa-clock-o"></i> 2025-05-30
+							</small>
+					  	</div>
+						<div class="modal-body" style="color: #000;font-size: 15px;" align="justify">
+							<p>어느해인가 경애하는 총비서동지께서 천리마타일공장을 찾으시였을 때이다.<br />
+우리 나라에 흔한 원료와 연료에 의거하여 질좋은 타일들을 생산하고있는 공장의 실태를 료해하신 경애하는 총비서동지께서는 이 공장은 우리 나라의 원료와 연료로 돌아가는 공장이라고 말씀하시였다.<br />
+공장일군들은 자체의 힘으로 현대적이며 종합적인 마감건재생산기지를 꾸려놓고 마음먹은대로 생산을 내밀고있는 흐뭇한 현실을 경애하는 그이께 보여드리게 된 기쁨으로 하여 가슴이 벅차올랐다.<br />
+공장을 만족속에 돌아보시며 경애하는 총비서동지께서는 모든것이 부족하고 어려운 조건에서도 사업을 연구하고 설계하면서 아글타글 노력하여 하나하나 열매를 맺고있는 공장일군들의 수고를 헤아려주시였다.그러시고는 우리는 이곳 일군들의 자기 사업에 대한 긍지감과 일욕심, 진취적인 사업태도, 애국심을 보아야 한다고 하시면서 공장의 일군들과 종업원들이 애국주의를 말로써가 아니라 실천으로 구현해나가고있는데 대하여 높이 평가하시였다.<br />
+무에서 유를 창조하고 불가능을 가능으로 전환시킨 공장의 일군들과 종업원들이 발휘한 혁명정신을 애국의 정신으로 빛내여주시며 경애하는 총비서동지께서는 앞으로도 불타는 애국심을 지니고 나라의 부강발전을 위한 사업에 지혜와 정열을 다 바쳐가리라고 믿는다고 뜨겁게 말씀하시였다.<br />
+참된 애국의 길은 자력갱생에 있다는 경애하는 총비서동지의 숭고한 뜻을 가슴깊이 새기며 공장의 일군들은 자력갱생의 정신을 더 높이 발휘해나갈 결의를 굳게 다지였다.</p>
+
+<p style="text-align: right;">본사기자 리 철 민</p>
+
+						</div>
+								    
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div>
+	
+			<div class="modal fade" id="Modal6537">
+				<div class="modal-dialog" style="margin-top: 1%;width: 800px;">
+					<div class="modal-content">
+					  	<div class="modal-header" style="border-bottom: 3px solid #ed4e2a;">
+					    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 align=center style="color:#4374e0;font-size: 26px;margin-top: 45px;">따뜻한 축복</h4>
+							<small class="text-muted" style="text-indent: 5px;font-size: 16px;">
+								<i class="fa fa-clock-o"></i> 2025-05-30
+							</small>
+					  	</div>
+						<div class="modal-body" style="color: #000;font-size: 15px;" align="justify">
+							<p>오늘 이 땅에 일떠서는 행복의 창조물들마다에는 인민을 제일로 위하시는 경애하는 총비서동지의 자애로운 어버이사랑이 뜨겁게 깃들어있다.<br />
+그 가운데는 새집에 입사한 삼지연시의 포태동인민들이 경애하는 총비서동지의 따뜻한 축복을 받아안은 이야기도 있다.<br />
+２０２１년 １１월 어느날 삼지연시건설사업이 결속되는것과 관련하여 현지를 찾으신 경애하는 총비서동지께서는 삼지연시의 포태동에도 들리시였다.<br />
+포태산을 배경으로 새로 일떠선 살림집들과 공공건물들은 주변경치와 한데 어울려 그야말로 절경을 이루고있었다.<br />
+부감터에 오르신 경애하는 총비서동지께서는 삼지연시 포태동에 새로 건설한 살림집들이 멋있다고 커다란 만족을 표시하시였다.<br />
+잠시후 경애하는 총비서동지께서는 오늘 정말 기분이 좋다고 하시면서 한 일군에게 이전에 있던 살림집들은 다 허물었는가고 물으시였다.<br />
+동행한 일군이 그이께 １００％ 허물고 다시 지어 새로 건설한 살림집들에 주민들을 다 입사시키였다는것과 새집에 입사한 인민들속에서 좋은 반영들이 수많이 제기되고있는데 대하여 말씀드리였다.<br />
+그러자 경애하는 총비서동지께서는 이런것을 보고 천지개벽이라고 한다고, 삼지연시주민들이 이번에 천지개벽이라는 말의 뜻을 잘 알게 되였다고 하면서 좋아한다는데 그것이 바로 삼지연시꾸리기에 대한 총평이라고 만족한 어조로 말씀하시였다．계속하여 그이께서는 인민들이 좋아하면 합격이고 싫어하면 불합격이라고, 세상을 이렇게 천지개벽하는것이 혁명이라고 하시면서 낮과 밤을 이어가며 투쟁하는 보람, 혁명하는 보람이 바로 이런것이라고, 자신께서는 인민들이 좋아할 때가 제일 기쁘다고, 정말 만족하다고 거듭 말씀하시였다.<br />
+경애하는 총비서동지의 자애로운 영상을 우러르며 일군들은 북받치는 격정을 금치 못하였다.<br />
+백두산아래 동네인 삼지연시를 산간문화도시의 본보기，표준으로 꾸려주시기 위해 바쳐오신 경애하는 총비서동지의 로고와 심혈이 어려와서였다．&nbsp;<br />
+경애하는 총비서동지께서는 만시름을 잊으신듯 포태동에 일떠선 살림집들을 바라보시면서 지금 포태동주민들이 모두 거리에 떨쳐나와 우리가 있는 곳을 바라보고있는데 자신께서는 여기에서 새집들이를 한 포태동주민들을 축복해주겠다고 정을 담아 말씀하시였다.<br />
+삼지연시의 포태동인민들이 받아안은 축복은 인민을 사랑의 한품에 안으시고 인민을 위해 열과 정을 다 바쳐가시는 자애로운 어버이의 따뜻한 축복이였다．</p>
+
+<p style="text-align: right;">본사기자 엄 영 철</p>
+
+						</div>
+								    
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div>
+	
+			<div class="modal fade" id="Modal6520">
+				<div class="modal-dialog" style="margin-top: 1%;width: 800px;">
+					<div class="modal-content">
+					  	<div class="modal-header" style="border-bottom: 3px solid #ed4e2a;">
+					    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 align=center style="color:#4374e0;font-size: 26px;margin-top: 45px;">로씨야내무성대표단 여러곳 참관</h4>
+							<small class="text-muted" style="text-indent: 5px;font-size: 16px;">
+								<i class="fa fa-clock-o"></i> 2025-05-29
+							</small>
+					  	</div>
+						<div class="modal-body" style="color: #000;font-size: 15px;" align="justify">
+							<p>내무성 부상 위딸리 슐리까동지를 단장으로 하는 로씨야내무성대표단이 조국해방전쟁승리기념관을 참관하였다．<br />
+대표단 성원들은 백전백승의 강철의 령장이시며 천재적인 군사전략가이신 위대한 수령 김일성동지의 불멸의 전승업적과 조국의 존엄과 자주권을 영예롭게 수호한 우리 인민의 영웅적투쟁에 대한 해설을 들으며 여러 관을 돌아보았다．<br />
+대표단은 또한 주체사상탑，평양지하철도와 사회안전부문의 여러 단위를 참관하였으며 사동구역에 있는 쏘련군렬사들의 묘에 화환을 진정하였다．</p>
+
+<p style="text-align: right;">【조선중앙통신】</p>
+
+						</div>
+								    
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div>
+	
+			<div class="modal fade" id="Modal6521">
+				<div class="modal-dialog" style="margin-top: 1%;width: 800px;">
+					<div class="modal-content">
+					  	<div class="modal-header" style="border-bottom: 3px solid #ed4e2a;">
+					    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 align=center style="color:#4374e0;font-size: 26px;margin-top: 45px;">개건된 두만강역 준공식 진행</h4>
+							<small class="text-muted" style="text-indent: 5px;font-size: 16px;">
+								<i class="fa fa-clock-o"></i> 2025-05-29
+							</small>
+					  	</div>
+						<div class="modal-body" style="color: #000;font-size: 15px;" align="justify">
+							<p>두만강역이 개건되여 준공하였다．<br />
+절세위인들의 불멸의 령도업적이 깃들어있는 두만강역이 국경관문역으로서의 사명에 맞게 특색있게 건설됨으로써 려객들의 편의를 높은 수준에서 보장하고 철도의 현대화에 이바지할수 있게 되였다．<br />
+라선시와 라선철도국의 일군들과 건설자들，종업원들은 설계와 시공의 요구를 철저히 준수하면서 공사를 힘있게 내밀었다．<br />
+대기홀들과 물음，안내실，청량음료실，기념품상점을 비롯한 역시설들을 려행자들의 편의를 최대한 도모하고 관리운영을 합리적으로 할수 있게 꾸리였으며 １０여종에 수천그루의 나무와 꽃관목들을 심어 역주변의 풍치를 돋구었다．<br />
+준공식이 ２８일 현지에서 진행되였다．<br />
+라선시당위원회 책임비서 신영철동지，시인민위원회 위원장 신창일동지，철도운수부문 일군들，두만강역 종업원들，건설자들，시안의 근로자들이 참가하였다．<br />
+철도상 국명호동지가 준공사를 하였다．<br />
+연설자는 온 나라에 철도현대화의 불길을 지펴주신 경애하는 김정은동지께서 두만강역을 현대적으로 일떠세우기 위한 방향과 방도들을 환히 밝혀주시고 건설에서 나서는 문제들을 모두 풀어주신데 대하여 언급하였다．<br />
+그는 철도운수부문의 일군들과 수송전사들이 유일사령지휘체계를 엄격히 세우고 수송조직과 지휘를 과학화，합리화하여 현존수송능력을 효과있게 리용하면서 철도의 물질기술적토대를 더욱 튼튼히 다져 렬차의 무사고정시운행을 보장하여야 할것이라고 말하였다．<br />
+두만강역의 종업원들은 역사와 철길관리를 책임적으로 하고 려행자들에 대한 안내봉사를 잘하여 화물수송과 려객수송에서 새로운 혁신을 일으킬데 대하여 그는 언급하였다．<br />
+연설자는 모두가 당창건 ８０돐이 되는 뜻깊은 올해의 진군길에서 과감한 용기와 분발력，진함없는 열정과 투신력을 남김없이 발휘함으로써 당 제９차대회를 자랑찬 로력적성과로 맞이하여야 할것이라고 강조하였다．<br />
+준공식이 끝난 다음 참가자들은 역사를 돌아보았다．</p>
+
+<p style="text-align: right;">【조선중앙통신】</p>
+
+						</div>
+								    
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div>
+	
+			<div class="modal fade" id="Modal6522">
+				<div class="modal-dialog" style="margin-top: 1%;width: 800px;">
+					<div class="modal-content">
+					  	<div class="modal-header" style="border-bottom: 3px solid #ed4e2a;">
+					    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 align=center style="color:#4374e0;font-size: 26px;margin-top: 45px;">개건된 수양산종합식료공장 준공식 진행</h4>
+							<small class="text-muted" style="text-indent: 5px;font-size: 16px;">
+								<i class="fa fa-clock-o"></i> 2025-05-29
+							</small>
+					  	</div>
+						<div class="modal-body" style="color: #000;font-size: 15px;" align="justify">
+							<p>수양산종합식료공장이 훌륭히 개건되였다．<br />
+지방인민들의 생활향상을 중대한 정책적문제로 제시한 당중앙의 숭고한 뜻을 받들어 황해남도안의 일군들과 근로자들은 공장을 무균화，무진화가 실현되고 각종 설비들을 그쯘하게 갖춘 생산실들과 과학기술보급실，기술준비실，문화후생시설 등이 꾸려진 종합적인 식료품생산기지로 일신시켰다．<br />
+맛좋고 영양가높은 당과류와 음료，어린이영양식품，즉석국수를 비롯한 １０여종의 식료품들을 대량생산하는 공장이 일떠섬으로써 황남인민들의 식생활향상을 위한 또 하나의 튼튼한 물질기술적토대가 마련되였다．<br />
+준공식이 ２８일 현지에서 진행되였다．<br />
+황해남도당위원회 책임비서 박태덕동지，관계부문，공장일군들，종업원들，해주시안의 근로자들이 참가하였다．<br />
+도인민위원회 위원장 김철범동지가 준공사를 하였다．<br />
+연설자는 경애하는 김정은동지께서 수양산종합식료공장의 개건과 관련한 구체적인 과업을 제시하시고 공사를 질적으로 끝내기 위한 방향과 방도들을 환히 밝혀주신데 대하여 언급하였다．<br />
+당의 의도를 명심하고 도안의 일군들과 건설자들，공장종업원들이 자력갱생，견인불발의 투쟁기풍으로 기초 및 골조공사를 짧은 기간에 끝내였으며 건축마감공사와 설비조립에서 높은 책임성을 발휘하였다고 그는 말하였다．<br />
+그는 공장일군들과 종업원들이 당의 은정이 어려있는 설비들을 애호관리하며 제품의 질제고를 틀어쥐고 인민들이 선호하는 식료품들을 더 많이 생산할데 대하여 언급하였다．<br />
+연설자는 모든 일군들과 근로자들이 당중앙위원회 제８기 제１１차전원회의 결정을 높이 받들고 지방중흥의 새시대를 열어나가기 위한 투쟁에 매진함으로써 당 제９차대회를 승리자들의 대회로 맞이하여야 할것이라고 강조하였다．<br />
+준공식이 끝난 다음 참가자들은 공장을 돌아보았다．</p>
+
+<p style="text-align: right;">【조선중앙통신】</p>
+
+						</div>
+								    
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div>
+	
+	</div>
+</div>     <div style="background: url(/resource/images/footer_left.png) repeat-x left 0 ;  
+
+      height: 54px; width: 100%; /*position: fixed;*/ bottom: 0; display: block; /*width*/: 100%; position: fixed;
+
+      z-index: 1002; ">     
+
+     <div   style="background: url(/resource/images/footer_right.png)  no-repeat right 0 ; 
+
+          /*box-sizing: border-box;*/
+
+          height: 54px;width: 100%; bottom: 0;display: block; position: absolute;z-index: 1002;" >
+
+       <div   style="background: url(/resource/images/footer_back.png) no-repeat center bottom ; height: 54px; width: 100%; bottom: 0;/*box-sizing: border-box;*/display: block; position: absolute;z-index: 1000;/*min-width:100%!important; */">      
+
+             <p class="" style="margin: 0 0 -10px;line-height: 52px; font-size: 20px;">
+
+                <font color="#0a43b6" face="KPCheonRiMa"  style="float: right;padding-right: 90px;  " >
+
+                  <strong>
+
+                    <b style="text-shadow:1px 1px 1px #0a43b6; ">
+
+                      저작권 2025 © 조선민주주의인민공화국 민주조선사  
+
+                    </b>
+
+                  </strong>
+
+                </font>
+
+            </p> 
+
+              <a href="#header" class="scrollup" style="margin-bottom: 30px;"><i class="fa fa-chevron-up"></i></a>  
+
+        </div>
+
+      </div> 
+
+      </div>   
+
+     <script src="/js/main.js"></script>
+
+     <script src="/resource/js/dropdown.js"></script>
+
+     <script src="/resource/js/custom.js"></script>
+
+
+
+     <!--gallery-->
+
+     <script src="/resource/js/jquery.min.js"></script>
+
+     <script src="/js/bootstrap.min.js"></script>  
+
+     <script src="/resource/js/jquery.sticky.js"></script>
+
+     <script src="/resource/js/nivo-lightbox.min.js"></script>
+
+     <script src="/resource/js/custom1.js"></script>
+
+     <script src="/resource/js/css3-animate-it.js"></script>
+
+    <script type="text/javascript" src="/resource/js/js/tms-0.3.js"></script>
+
+    <script type="text/javascript" src="/resource/js/js/tms_presets.js"></script> 
+
+    <script type="text/javascript" src="/resource/js/js/jquery.easing.1.3.js"></script> 
+
+    <script src="/resource/js/js1/plugins/blueimp/jquery.blueimp-gallery.min.js" ></script>
+
+    <script src="/resource/js/js1/jquery-2.1.1.js"></script>
+
+    <script src="/resource/js/js1/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <script src="/resource/js/js1/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <script src="/assets/css3-animate-it.js" type="text/javascript"></script>
+
+    <script src="/assets/nivo-lightbox.min.js" type="text/javascript"></script>
+
+    <script src="/assets/custom.js" type="text/javascript"></script>
+
+    </body>
+
+
+
+</html>

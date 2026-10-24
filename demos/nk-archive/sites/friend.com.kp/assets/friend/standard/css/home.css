@@ -1,0 +1,99 @@
+/*
+/*     첫페지      
+*/
+
+/*	.container-fluid{padding: 0!important;}
+	.home ul{list-style: none; padding: 0}
+*/
+
+h1, h2, h3, h4, h5, h6{ margin-top: 10px!important;}
+
+/**************************************************
+/*광고구역
+*/
+#news-bar{ padding: 0 0 12px 0;}
+#news-bar li{text-align: center; height: 40px; overflow: hidden;}
+#news-bar a{text-decoration: none;vertical-align: bottom;}
+
+
+#revs-home{width: 50%; padding: 30px 2% 0 30px; display: inline-block; vertical-align: top;}
+#revs-home-copy{display:none!important; width: 100%; padding:0; display:block;}
+#revs-home h3, #revs-home-copy h3 {cursor: pointer;}
+#revs-home-wrapper{background: url('../img/revs-back-home.png') no-repeat 20px 25px;}
+#org-banner-home{width: 48%; display: inline-block; margin: 70px 0 0 -2%;}
+#org-banner-home img{width: 100%; border: 1px solid #fdd;}
+@media (max-width: 991px) {
+	#news-bar li{ height: 60px; overflow: hidden;}
+	#revs-home{display:none!important;}
+	#revs-home-copy{display:block!important;}
+	#revs-home-wrapper{background: none;}
+	#org-banner-home{width: 100%; display:block; margin:0;padding:8px!important;}
+	#org-banner-home img{width: 100%; border: 1px solid #ddd;}
+}
+#revs-home-wrapper{padding-bottom: 1em;}
+
+/**************************************************
+/*사진구역
+*/
+#photos-home-wrapper{padding-bottom: 1em;background: gray;padding: 1%; position: relative;}
+#photos-home-wrapper h3{font-size: 14px; color:#aaa; padding: 0 0 10px 7px; margin: 0;}
+
+#photos-home-wrapper #main-board{background: black; padding: 1.5%;margin:.5% 0;/*display:inline-block; width: 30%*/; background: black; list-style: none;vertical-align: top;}
+#photos-home-wrapper #main-board a{text-decoration: none;}
+#photos-home-wrapper #main-board .board-item{padding: 0;}
+#photos-home-wrapper #main-board .board-item .photos-board-title{color: white;}
+#photos-home-wrapper #main-board .board-item .photos-board-read-count{border: 1px solid #4C87B9; color: #4C87B9; padding: 1px 0 0 4px;}
+#photos-home-wrapper #main-board .board-item .photos-board-rec-date{color: #26C281; font-size: smaller;}
+#photos-home-wrapper #main-board .board-item  img{width: 100%; padding: 10px 0 ;}
+#photos-home-wrapper #main-board .board-item .photos-board-sel-count{border: 1px solid #E87E04; color: #E87E04; padding: 1px 0 0 4px;}
+
+#photos-home-wrapper #list-board{/*width: 68%; display: inline-block;*/ vertical-align: top; list-style: none; padding: .5%;}
+#photos-home-wrapper #list-board li{background: black; padding: 1%; margin-bottom: 1%;}
+@media (max-width: 480px) {
+	#photos-home-wrapper #main-board,#photos-home-wrapper #list-board{width:100%!important;}
+	#photos-home-wrapper #list-board{margin: 0!important;}
+	#photos-home-wrapper .cbp-item-wrapper{width: 47%!important; text-align: center;}
+}
+
+	/*기사구역*/
+#articles-home{padding: 20px 0 20px 2%; margin-top: 20px;}
+#articles-home>h3{font-size: 28px;color: #c838f8;padding-left: 40px; cursor: pointer;}
+
+#articles-home>.block{width: 48%; display: inline-block;}
+#articles-home>.block h3{font-size: 20px; font-weight: bold;}
+/*#articles-home>.block ul{padding-left: 20px;border:1px solid #eee; height: 400px; overflow: auto; }
+*/
+
+@media (max-width: 480px) {
+#articles-home{padding: 0; margin-top: 40px;}
+	#articles-home>h3{padding-left: 10px;font-size: 20px;}
+	#articles-home .col-md-6{padding:0;}
+	#articles-home{padding: 5px 0;}
+	#articles-home .list{width:100%!important;}
+}
+.detail-articles .detail-td-content img{cursor:pointer;}
+
+#elibs-home .block h3,#articles-home .block h3{display:inline-block;font-size: 20px; font-weight: bold; padding: 0 10px 10px 0;  padding-top: 20px;background: url('../img/article_bg_home.png') repeat-x 0 30px; margin-left:10px; }
+@media (max-width: 767px) {
+	#elibs-home .block h3,#articles-home .block h3{font-size: 16px;background: url('../img/article_bg_home.png') repeat-x 0 27px;  padding-top: 20px;}
+}
+
+/*도서구역*/
+}
+#elibs-home{padding: 0 0 20px 2%; margin-top: 20px!important;}
+#elibs-home>h3{font-size: 28px;color: #c838f8;padding:40px 0 0 40px; cursor: pointer;}
+/*#elibs-home #book-home{width: 58%!important; display: inline-block;}
+#elibs-home #poem-home{width: 38%!important; display: inline-block; padding-left: 30px;}
+*/#elibs-home ul{padding-left: 5px;}
+#elibs-home .book-cover-home{background: gray; padding: 2%;text-align: center; margin-top: 30px;}
+#elibs-home .book-cover-home img{width: 23%;cursor: pointer;display: inline-block;padding: 1%;}
+
+@media (max-width: 480px) {
+	#elibs-home{padding: 0; margin-top: 40px!important;}
+	#elibs-home>h3{padding:20px 0 0 10px;font-size: 20px;}
+	#elibs-home .col-md-5,#elibs-home .col-md-7{padding:0;}
+	#elibs-home .list{width:100%!important;}
+	#elibs-home #book-home{width: 100%;}
+	#elibs-home #poem-home{width: 100%;}
+}
+
